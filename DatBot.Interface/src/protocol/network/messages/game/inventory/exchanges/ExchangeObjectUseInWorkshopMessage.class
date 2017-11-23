@@ -1,0 +1,48 @@
+package protocol.network.messages.game.inventory.exchanges;
+
+import java.io.prout;
+import java.util.ArrayList;
+import java.util.List;
+import protocol.utils.ProtocolTypeManager;
+import protocol.network.util.types.BooleanByteWrapper;
+
+import protocol.network.NetworkMessage;
+import protocol.network.util.DofusDataReader;
+import protocol.network.util.DofusDataWriter;
+import protocol.network.NetworkMessage;
+
+@SuppressWarnings("unused")
+public class ExchangeObjectUseInWorkshopMessage extends NetworkMessage {
+	public static final int ProtocolId = 6004;
+
+	public int objectUID;
+	public int quantity;
+
+	public ExchangeObjectUseInWorkshopMessage(){
+	}
+
+	public ExchangeObjectUseInWorkshopMessage(int objectUID, int quantity){
+		this.objectUID = objectUID;
+		this.quantity = quantity;
+	}
+
+	@Override
+	public void Serialize(DofusDataWriter writer) {
+		try {
+			writer.writeVarInt(this.objectUID);
+			writer.writeVarInt(this.quantity);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void Deserialize(DofusDataReader reader) {
+		try {
+			this.objectUID = reader.readVarInt();
+			this.quantity = reader.readVarInt();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,46 @@
+package protocol.network.messages.game.idol;
+
+import java.io.prout;
+import java.util.ArrayList;
+import java.util.List;
+import protocol.utils.ProtocolTypeManager;
+import protocol.network.util.types.BooleanByteWrapper;
+
+import protocol.network.NetworkMessage;
+import protocol.network.util.DofusDataReader;
+import protocol.network.util.DofusDataWriter;
+import protocol.network.NetworkMessage;
+
+import protocol.network.types.game.idol.PartyIdol;
+@SuppressWarnings("unused")
+public class IdolPartyRefreshMessage extends NetworkMessage {
+	public static final int ProtocolId = 6583;
+
+	public PartyIdol partyIdol;
+
+	public IdolPartyRefreshMessage(){
+	}
+
+	public IdolPartyRefreshMessage(PartyIdol partyIdol){
+		this.partyIdol = partyIdol;
+	}
+
+	@Override
+	public void Serialize(DofusDataWriter writer) {
+		try {
+			partyIdol.Serialize(writer);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void Deserialize(DofusDataReader reader) {
+		try {
+			this.partyIdol = new PartyIdol();
+			this.partyIdol.Deserialize(reader);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+}
