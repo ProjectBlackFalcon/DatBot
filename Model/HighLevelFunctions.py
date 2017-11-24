@@ -24,4 +24,5 @@ class HighLevelFunctions:
         if target_cell is not None:
             self.interface.move(target_cell)
 
+
 __author__ = 'Alexis'
