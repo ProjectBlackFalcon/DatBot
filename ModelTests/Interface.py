@@ -1,6 +1,7 @@
 from Model.Interface import Interface
+import time
 
 i = Interface(0)
-i.connect('lel', 'wub')
+print(i.connect('lelel', 'wub'))
 
 __author__ = 'Alexis'

@@ -1,6 +1,0 @@
-1;i;cmd;connect;['lel', 'wub']
-1;m;rtn;connect;[False]
-2;i;cmd;getMap;[None]
-2;m;rtn;getMap;[(0;0)]
-3;i;cmd;move;[13]
-3;m;rtn;move;[True]
