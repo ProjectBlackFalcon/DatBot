@@ -26,7 +26,7 @@ class PathFinder:
         self.map_change_cells = []
 
     def load_map_info(self):
-        with open('MapInfo.json', 'r') as f:
+        with open('..//MapInfo.json', 'r') as f:
             mapinfo = json.load(f)
         return mapinfo
 
@@ -38,7 +38,6 @@ class PathFinder:
             for x in range(xn):
                 maps.append('{};{}'.format(self.bbox[0]+x, self.bbox[1]+y))
         sorted(maps, key=lambda p: [p[1], p[0]])
-        print(maps)
         self.maps_coords = maps[:]
         return maps[:]
 
@@ -48,9 +47,9 @@ class PathFinder:
                 return map
 
     def coord_fetch_map(self, coord):
-        print('Fetching : {}'.format(coord))
+        # print('Fetching : {}'.format(coord))
         for map in self.mapinfo:
-            if map['coord'] == coord and map['worldMap'] == self.worldmap:
+            if map['coord'] == coord and map['worldMap'] == self.worldmap and map['hasPriorityOnWorldMap']:
                 return map
 
     def glue_maps(self, maps_as_arrays, shape):
@@ -68,9 +67,9 @@ class PathFinder:
         map_as_array[map_as_array == 0] = 0
         # map_as_array[map_as_array != 0] = 1
         a = np.kron(map_as_array, np.ones((scaling_factor, scaling_factor))).astype(int)
-        a[a == 0] = 255*128
-        a[a == 2] = 255*64
-        a[a == 3] = 255*192
+        a[a == 0] = 255*64
+        a[a == 2] = 255*32
+        a[a == 3] = 255*128
         a[a == 4] = 255*255
         Image.fromarray(a).save('Out.png')
         print('Done')
@@ -85,7 +84,7 @@ class PathFinder:
         start_pos = start_pos[1], start_pos[0]
         goal_pos = goal_pos[1], goal_pos[0]
 
-        print(self.glued_maps.shape)
+        # print(self.glued_maps.shape)
 
         neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
@@ -160,7 +159,7 @@ class PathFinder:
             self.cell2coord(self.end_cell)[1]+40*(self.end[1]-self.bbox[1])
         )
 
-        print(start_pos, goal_pos, self.shape)
+        # print(start_pos, goal_pos, self.shape)
         self.astar(start_pos, goal_pos)
 
     def get_map_change_coords(self):
@@ -170,20 +169,27 @@ class PathFinder:
         for x, y in self.path:
             # Going SE
             if self.start[0] < self.end[0] and self.start[1] < self.end[1]:
-                if not y % 13 or not x % 39:
+                if not (y+1) % 14 or not (x+1) % 40:
                     out.append((x, y))
             # Going SW
             if self.start[0] < self.end[0] and self.start[1] > self.end[1]:
-                if not x % 14 or not x % 39:
+                if not x % 14 or not (x+1) % 40:
                     out.append((x, y))
             # Going NE
             if self.start[0] > self.end[0] and self.start[1] < self.end[1]:
-                if not y % 13 or not x % 40:
+                if not (y+1) % 14 or not x % 40:
                     out.append((x, y))
             # Going NW
             if self.start[0] > self.end[0] and self.start[1] > self.end[1]:
                 if not y % 14 or not x % 40:
                     out.append((x, y))
+
+        marked = []
+        for i in range(len(out)-2, -1, -1):
+            if abs(out[i][0]-out[i-1][0])+abs(out[i][1]-out[i-1][1]) <= 1:
+                marked.append(i)
+        for ind in marked:
+            del out[ind]
         self.map_change_coords = out[:]
         return out[:]
 
@@ -198,8 +204,7 @@ class PathFinder:
         return (cell % 14), cell//14
 
     def coord2cell(self, coord):
-        coord = coord[0] % 14, coord[1] % 40
+        coord = coord[1] % 14, coord[0] % 40
         return coord[1]*14+coord[0]
-
 
 __author__ = 'Alexis'
