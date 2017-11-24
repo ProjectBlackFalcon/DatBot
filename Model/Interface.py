@@ -2,6 +2,7 @@ import time
 import ast
 import mysql.connector
 
+
 class Interface:
     def __init__(self, bot_instance):
         self.file_name = 'Interfile{}'.format(bot_instance)
@@ -26,18 +27,41 @@ class Interface:
             row = cursor.fetchall()[0]
             if row[1] == 'rtn' and row[0] == 'm':
                 ret_val = ast.literal_eval(row[3])
-        return ret_val
+
+        if len(ret_val) > 1:
+            return tuple(ret_val)
+        else:
+            return ret_val[0]
 
     def connect(self, account, password):
+        """
+        Connects a bot instance
+        :param account: bot account name
+        :param password: bot account password
+        :return: Boolean
+        """
         self.add_command('connect', [account, password])
         return self.wait_for_return()
 
     def get_map(self):
+        """
+        Gets the map the player is on
+        :return: coords, cell, worldmap, mapID
+        """
         self.add_command('getMap')
         return self.wait_for_return()
 
     def move(self, cell):
+        """
+        Moves the bot on a map
+        :param cell: target cell number
+        :return: Boolean
+        """
         self.add_command('move', [cell])
+        return self.wait_for_return()
+
+    def change_map(self, cell):
+        self.add_command('changeMap', [cell])
         return self.wait_for_return()
 
 __author__ = 'Alexis'

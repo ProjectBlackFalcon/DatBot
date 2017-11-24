@@ -3,6 +3,8 @@ import numpy as np
 from PIL import Image
 from heapq import *
 import time
+from random import randint
+
 
 class PathFinder:
     def __init__(self, start_map, end_map, start_cell, end_cell, worldmap):
@@ -149,6 +151,16 @@ class PathFinder:
         for coord in self.maps_coords:
             maps_list.append(self.coord_fetch_map(coord)['cells'])
         self.glue_maps(maps_list, self.shape)
+
+        if self.end_cell is None:
+            end_map_cells = self.coord_fetch_map('{};{}'.format(self.end[0], self.end[1]))['cells']
+            found_walkable = False
+            while not found_walkable:
+                x = randint(0, 13)
+                y = randint(0, 39)
+                if end_map_cells[x][y] == 0:
+                    found_walkable = True
+            self.end_cell = self.coord2cell((x, y))
 
         start_pos = (
             self.cell2coord(self.start_cell)[0]+14*(self.start[0]-self.bbox[0]),
