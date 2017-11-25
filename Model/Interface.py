@@ -12,7 +12,7 @@ class Interface:
         self.current_id = 0
 
         ON_POSIX = 'posix' in sys.builtin_module_names
-        self.p = Popen(['java', '-jar', 'test.jar'], stdin=PIPE, stdout=PIPE, bufsize=2, close_fds=ON_POSIX)
+        self.p = Popen(['java', '-jar', 'test.jar'], stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=ON_POSIX)
         self.q = Queue()
         t = Thread(target=self.enqueue_output, args=(self.p.stdout, self.q))
         t.daemon = True  # thread dies with the program
@@ -24,6 +24,7 @@ class Interface:
         out.close()
 
     def add_command(self, command, parameters=None):
+        # <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
         message = '{};{};i;cmd;{};{}\r\n'.format(self.bot_instance, self.current_id, command, parameters)
         self.current_id += 1
         self.p.stdin.write(bytes(message, 'utf-8'))
@@ -51,14 +52,14 @@ class Interface:
         else:
             return ret_val[0]
 
-    def connect(self, account, password):
+    def connect(self, account, password, ig_name, server):
         """
         Connects a bot instance
         :param account: bot account name
         :param password: bot account password
         :return: Boolean
         """
-        msg_id = self.add_command('connect', [account, password])
+        msg_id = self.add_command('connect', [account, password, ig_name, server])
         return self.wait_for_return(msg_id)
 
     def get_map(self):
