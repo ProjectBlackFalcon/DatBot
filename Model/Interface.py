@@ -3,6 +3,7 @@ from threading import Thread
 import sys
 from queue import Queue, Empty
 from subprocess import Popen, PIPE
+import time
 
 
 class Interface:
@@ -11,8 +12,10 @@ class Interface:
         self.bot_instance = bot_instance
         self.current_id = 0
 
+        self.connected = False
+
         ON_POSIX = 'posix' in sys.builtin_module_names
-        self.p = Popen(['java', '-jar', 'test.jar'], stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=ON_POSIX)
+        self.p = Popen(['java', '-jar', '..//BotTest.jar'], stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=ON_POSIX)
         self.q = Queue()
         t = Thread(target=self.enqueue_output, args=(self.p.stdout, self.q))
         t.daemon = True  # thread dies with the program
@@ -26,12 +29,14 @@ class Interface:
     def add_command(self, command, parameters=None):
         # <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
         message = '{};{};i;cmd;{};{}\r\n'.format(self.bot_instance, self.current_id, command, parameters)
+        print('[Interface] Sending : ', message)
         self.current_id += 1
         self.p.stdin.write(bytes(message, 'utf-8'))
         self.p.stdin.flush()
-        return self.current_id
+        return self.current_id-1
 
     def wait_for_return(self, message_id):
+        print('[Interface] Waiting for response...')
         ret_val = None
         while ret_val is None:
             messages = []
@@ -45,14 +50,17 @@ class Interface:
             partial_message = '{};{};m;rtn'.format(self.bot_instance, message_id)
             for message in messages:
                 if partial_message in message:
+                    print(message)
                     ret_val = ast.literal_eval(message.split(';')[-1])
+            time.sleep(0.1)
 
+        print('[Interface] Recieved : ', ret_val)
         if len(ret_val) > 1:
             return tuple(ret_val)
         else:
             return ret_val[0]
 
-    def connect(self, account, password, ig_name, server):
+    def connect(self, account, password, ig_name, server='Julith'):
         """
         Connects a bot instance
         :param account: bot account name
@@ -60,7 +68,18 @@ class Interface:
         :return: Boolean
         """
         msg_id = self.add_command('connect', [account, password, ig_name, server])
-        return self.wait_for_return(msg_id)
+        sucess = self.wait_for_return(msg_id)
+        self.connected = sucess
+        return sucess
+
+    def disconnect(self):
+        """
+        Disconnects the bot instance
+        :return:
+        """
+        if self.connected:
+            msg_id = self.add_command('disconnect')
+            return self.wait_for_return(msg_id)
 
     def get_map(self):
         """
@@ -101,7 +120,7 @@ class Interface:
         Get the bot player stats
         :return: TODO
         """
-        msg_id = self.add_command('getResources')
+        msg_id = self.add_command('getStats')
         return self.wait_for_return(msg_id)
 
 __author__ = 'Alexis'
