@@ -79,7 +79,28 @@ class Interface:
         return self.wait_for_return(msg_id)
 
     def change_map(self, cell):
+        """
+        Moves the bot to an adjacent map
+        :param cell: target cell number for map change
+        :return: Boolean
+        """
         msg_id = self.add_command('changeMap', [cell])
+        return self.wait_for_return(msg_id)
+
+    def get_map_resources(self):
+        """
+        Gets the resources and their info for the map the player is on
+        :return: TODO
+        """
+        msg_id = self.add_command('getResources')
+        return self.wait_for_return(msg_id)
+
+    def get_player_stats(self):
+        """
+        Get the bot player stats
+        :return: TODO
+        """
+        msg_id = self.add_command('getResources')
         return self.wait_for_return(msg_id)
 
 __author__ = 'Alexis'
