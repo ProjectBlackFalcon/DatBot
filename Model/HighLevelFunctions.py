@@ -24,5 +24,6 @@ class HighLevelFunctions:
         if target_cell is not None:
             self.interface.move(target_cell)
 
-
+    def harvest_map(self, harvest_only=None, do_not_harvest=None):
+        map_resources = self.interface.get_map_resources()
 __author__ = 'Alexis'

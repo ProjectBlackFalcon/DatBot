@@ -12,7 +12,7 @@ def enqueue_output(out, queue):
         queue.put(line)
     out.close()
 
-p = Popen(['java', '-jar', 'test.jar'], stdin=PIPE, stdout=PIPE, bufsize=2, close_fds=ON_POSIX)
+p = Popen(['java', '-jar', '..//BotTest.jar'], stdin=PIPE, stdout=PIPE, bufsize=2, close_fds=ON_POSIX)
 q = Queue()
 t = Thread(target=enqueue_output, args=(p.stdout, q))
 t.daemon = True  # thread dies with the program
@@ -20,7 +20,8 @@ t.start()
 
 print('Started')
 time.sleep(1)
-i = 0
+sent = 0
+
 while 1:
     try:
         while 1:
@@ -29,15 +30,12 @@ while 1:
     except Empty:
         read = []
 
-    if i < 10:
-        message = str(i)+'\r\n'
+    if sent < 3:
+        message = '{};{};i;cmd;{};{}\r\n'.format(0, 0, 'getMap', None)
+        print('[Interface] Sending : ', message)
         p.stdin.write(bytes(message, 'utf-8'))
         p.stdin.flush()
-        i += 1
-        message = str(i)+'\r\n'
-        p.stdin.write(bytes(message, 'utf-8'))
-        p.stdin.flush()
-        print("Written")
-        i += 1
+        sent += 1
+
     time.sleep(0.5)
 __author__ = 'Alexis'
