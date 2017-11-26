@@ -14,7 +14,7 @@ public class CellMovement {
 
 	public int startCell;
 	public int endCell;
-	private MovementPath path;
+	public MovementPath path;
 
 	public CellMovement(MovementPath path) {
 		// Movement
@@ -25,7 +25,9 @@ public class CellMovement {
 
 	public void performMovement() throws Exception {
 		if (path == null)
-			throw new Error("No path");
+			return;
+		
+		InfoAccount.waitForMov = false;
 		
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path); 
 		Network.sendToServer(new GameMapMovementRequestMessage(keys, InfoAccount.mapId), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
@@ -36,6 +38,7 @@ public class CellMovement {
 			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
 			Thread.sleep(time);
 		}
+		InfoAccount.waitForMov = true;
 		Network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
 	}
 }

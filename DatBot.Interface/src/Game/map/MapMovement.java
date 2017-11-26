@@ -20,8 +20,8 @@ public class MapMovement {
 	
     public void PerformChangement() throws Exception
     {
-		InfoAccount.waitForMov = false;
     	this.cellMovement.performMovement();
+		InfoAccount.waitForMov = false;
 		MainPlugin.frame.append("Changement de map...");
 		Network.sendToServer(new ChangeMapMessage(newId), ChangeMapMessage.ProtocolId, "Changement de map...");
     }

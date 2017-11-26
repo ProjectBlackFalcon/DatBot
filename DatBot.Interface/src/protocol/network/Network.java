@@ -316,7 +316,6 @@ public class Network implements Runnable {
 			}
 			break;
 		case 226:
-			InfoAccount.isConnected = true;
 			MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 			complementaryInformationsDataMessage.Deserialize(dataReader);
 			if(!connectionToKoli){
@@ -614,21 +613,22 @@ public class Network implements Runnable {
 	}
 
 	private static void HandleMapComplementaryInformationsDataMessage() throws InterruptedException {
-					Process p;
-					try {
-						String s = Paths.get("").toAbsolutePath().toString();
-						int i = s.indexOf("DatBot");
-						s = s.substring(0, i + 7);
-						p = new ProcessBuilder(s + "\\DatBot.Interface\\utils\\maps\\MapManager\\MapManager.exe",String.valueOf((int) InfoAccount.mapId)).start();
-						p.waitFor();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					new JSON("MapInfo",InfoAccount.mapId);
-					new JSON("MapInfoComplete", InfoAccount.mapId);
-					MainPlugin.frame.append("Map : [" + InfoAccount.coords[0] + ";" + InfoAccount.coords[1] +  "]");	
-					MainPlugin.frame.append("CellId : " + InfoAccount.cellId);
-					InfoAccount.waitForMov = true;
+		Process p;
+		try {
+			String s = Paths.get("").toAbsolutePath().toString();
+			int i = s.indexOf("DatBot");
+			s = s.substring(0, i + 7);
+			p = new ProcessBuilder(s + "\\DatBot.Interface\\utils\\maps\\MapManager\\MapManager.exe",String.valueOf((int) InfoAccount.mapId)).start();
+			p.waitFor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		new JSON("MapInfo",InfoAccount.mapId);
+		new JSON("MapInfoComplete", InfoAccount.mapId);
+		MainPlugin.frame.append("Map : [" + InfoAccount.coords[0] + ";" + InfoAccount.coords[1] +  "]");	
+		MainPlugin.frame.append("CellId : " + InfoAccount.cellId);
+		InfoAccount.waitForMov = true;
+		InfoAccount.isConnected = true;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {
