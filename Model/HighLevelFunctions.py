@@ -1,5 +1,6 @@
 from Model.Pathfinder import PathFinder
 from Model.Interface import Interface
+from Model.LowLevelFunctions import LowLevelFunctions
 
 
 class HighLevelFunctions:
@@ -15,8 +16,9 @@ class HighLevelFunctions:
 
         pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
         path = pf.get_map_change_cells()
-        for cell in path:
-            if self.interface.move(cell):
+        directions = pf.get_directions()
+        for i in range(len(path)):
+            if self.interface.change_map(path[i], directions[i]):
                 continue
             else:
                 raise Exception('Interface returned false on move command')
@@ -26,4 +28,20 @@ class HighLevelFunctions:
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
         map_resources = self.interface.get_map_resources()
+
+        if harvest_only is not None:
+            filtered_map_resources = {}
+            for resource in harvest_only:
+                if resource in map_resources.keys():
+                    filtered_map_resources[resource] = map_resources[resource]
+        else:
+            filtered_map_resources = map_resources
+
+        if do_not_harvest is not None:
+            for resource in filtered_map_resources.keys():
+                if resource in do_not_harvest:
+                    del filtered_map_resources[resource]
+
+
+
 __author__ = 'Alexis'

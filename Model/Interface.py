@@ -98,13 +98,13 @@ class Interface:
         msg_id = self.add_command('move', [cell])
         return self.wait_for_return(msg_id)
 
-    def change_map(self, cell):
+    def change_map(self, cell, direction):
         """
         Moves the bot to an adjacent map
         :param cell: target cell number for map change
         :return: Boolean
         """
-        msg_id = self.add_command('changeMap', [cell])
+        msg_id = self.add_command('changeMap', [cell, direction])
         return self.wait_for_return(msg_id)
 
     def get_map_resources(self):
@@ -123,4 +123,12 @@ class Interface:
         msg_id = self.add_command('getStats')
         return self.wait_for_return(msg_id)
 
+    def harvest_resource(self, cell):
+        """
+        Harvests the resource on the cell given
+        :param cell: cell number
+        :return: number_harvested or combat or false
+        """
+        msg_id = self.add_command('harvest', cell)
+        return self.wait_for_return(msg_id)
 __author__ = 'Alexis'

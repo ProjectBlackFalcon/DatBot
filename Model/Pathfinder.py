@@ -23,9 +23,10 @@ class PathFinder:
         self.mapinfo = self.load_map_info()
         self.maps_coords = []
         self.glued_maps = []
-        self.path = []
+        self.path_cells = []
         self.map_change_coords = []
         self.map_change_cells = []
+        self.map_change_directions = []
 
     def load_map_info(self):
         with open('..//MapInfo.json', 'r') as f:
@@ -107,7 +108,7 @@ class PathFinder:
                 while current in came_from:
                     data.append(current)
                     current = came_from[current]
-                self.path = data[:]
+                self.path_cells = data[:]
 
             close_set.add(current)
             for i, j in neighbors:
@@ -136,7 +137,7 @@ class PathFinder:
         return False
 
     def add_path_to_glued_maps(self):
-        for x, y in self.path:
+        for x, y in self.path_cells:
             self.glued_maps[x][y] = 3
 
     def add_map_change_ccords_to_glued_maps(self):
@@ -172,13 +173,13 @@ class PathFinder:
         )
 
         # print(start_pos, goal_pos, self.shape)
-        self.astar(start_pos, goal_pos)
+        self.astar(goal_pos, start_pos)
 
     def get_map_change_coords(self):
-        if not self.path:
+        if not self.path_cells:
             self.get_path()
         out = []
-        for x, y in self.path:
+        for x, y in self.path_cells:
             # Going SE
             if self.start[0] < self.end[0] and self.start[1] < self.end[1]:
                 if not (y+1) % 14 or not (x+1) % 40:
@@ -198,7 +199,7 @@ class PathFinder:
 
         marked = []
         for i in range(len(out)-2, -1, -1):
-            if abs(out[i][0]-out[i-1][0])+abs(out[i][1]-out[i-1][1]) <= 1:
+            if abs(out[i][0]-out[i+1][0])+abs(out[i][1]-out[i+1][1]) <= 1:
                 marked.append(i)
         for ind in marked:
             del out[ind]
@@ -211,6 +212,15 @@ class PathFinder:
         out = [self.coord2cell(coord) for coord in self.get_map_change_coords()]
         self.map_change_cells = out[:]
         return out[:]
+
+    def get_directions(self):
+        directions = []
+        for change_map_cell in self.map_change_coords:
+            current = change_map_cell
+            nxt = self.path_cells[self.path_cells.index(change_map_cell)+1]
+            directions.append(['e', 'w', 's', 'w'][[(0, 1), (0, -1), (1, 0), (-1, 0)].index((nxt[0]-current[0], nxt[1]-current[1]))])
+        self.map_change_directions = directions[:]
+        return directions[:]
 
     def cell2coord(self, cell):
         return (cell % 14), cell//14
