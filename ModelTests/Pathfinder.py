@@ -1,6 +1,6 @@
 from Model.Pathfinder import PathFinder
 
-pf = PathFinder((-2, -23), (8, -13), 15, 500, 1)
+pf = PathFinder((6, -21), (-2, -24), 15, None, 1)
 pf.get_path()
 pf.get_map_change_coords()
 pf.get_directions()
