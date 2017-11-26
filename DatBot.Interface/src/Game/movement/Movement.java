@@ -86,13 +86,17 @@ public class Movement{
                 break;
         }
         if (num2 == -1 || neighbourId < 0) return null;
-        
+        System.out.println("0");
+        System.out.println((Map.Cells.get(cellId).MapChangeData & num2) > 0);
+        System.out.println(Map.NothingOnCell(cellId));
+        System.out.println(noObstacle(cellId));
         if ((Map.Cells.get(cellId).MapChangeData & num2) > 0 && Map.NothingOnCell(cellId) && noObstacle(cellId)){
     		MainPlugin.frame.append("Déplacement...");	
     		MainPlugin.frame.append("Direction : " + direction);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId);
         } else {
+            System.out.println("1");
         	return null;
         }
 	}

@@ -83,9 +83,9 @@ public class ModelConnexion implements Runnable {
 					else {
 						mapMovement.PerformChangement();
 						if(Movement.moveOver()){
-							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
-						} else {
 							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+						} else {
+							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 						}
 					}
 					break;

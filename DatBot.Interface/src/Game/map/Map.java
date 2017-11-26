@@ -264,7 +264,8 @@ public class Map {
 	
     public static boolean NothingOnCell(int cellId)
     {
-        return IsWalkable(cellId) && NoEntitiesOnCell(cellId);
+//    	&& NoEntitiesOnCell(cellId) 
+        return IsWalkable(cellId);
     }
     
     public static boolean IsLineOfSight(int cellId)

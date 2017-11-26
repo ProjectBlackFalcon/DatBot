@@ -47,8 +47,8 @@ public class Main {
 //				}
 //    		}
 //    		
-//    		if(index == 25){
-//				MapMovement mapMovement = Movement.ChangeMap(1,"n");
+//    		if(index == 15){
+//				MapMovement mapMovement = Movement.ChangeMap(448,"w");
 //				if (mapMovement == null) {
 //					System.out.println(false);
 //					MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
@@ -56,9 +56,9 @@ public class Main {
 //				else {
 //					mapMovement.PerformChangement();
 //					if(Movement.moveOver()){
-//						System.out.println(false);
-//					} else {
 //						System.out.println(true);
+//					} else {
+//						System.out.println(false);
 //					}
 //				}
 //    		}
