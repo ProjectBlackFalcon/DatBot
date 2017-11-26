@@ -408,7 +408,7 @@ public class Pathfinder {
             cost += 0.3;
 
         // todo
-        //            if (m_context.IsCellMarked(cell))
+        // if (m_context.IsCellMarked(cell))
         //                cost += 0.2;
 
         return cost;

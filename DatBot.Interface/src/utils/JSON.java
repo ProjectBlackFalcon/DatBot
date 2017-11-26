@@ -2,6 +2,8 @@ package utils;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,12 +37,14 @@ public class JSON implements Runnable{
         JSONParser parser = new JSONParser();
         try {
 			JSONArray a;
+			String s = Paths.get("").toAbsolutePath().toString();
+			int i = s.indexOf("DatBot");
+			s = s.substring(0, i + 7);
 
 			switch(file){
 			
 			case "MapInfo" :
-
-				a = (JSONArray) parser.parse(new FileReader("C:\\Users\\baptiste\\Documents\\Dofus Bot\\MapInfo.json"));
+				a = (JSONArray) parser.parse(new FileReader(s + "\\MapInfo.json"));
 		        for (Object o : a)
 		        {
 		          JSONObject person = (JSONObject) o;
@@ -49,13 +53,13 @@ public class JSON implements Runnable{
 		        	  InfoAccount.coords[0] = Integer.parseInt(temp[0]);
 		        	  InfoAccount.coords[1] = Integer.parseInt(temp[1]);
 		        	  InfoAccount.cells = (ArrayList<ArrayList<Integer>>) person.get("cells");
+		        	  InfoAccount.worldmap = (long) person.get("worldMap");
 		        	  cells = (ArrayList<ArrayList<Integer>>) person.get("cells");
-
 		          }
 		        }
 				break;
-			case "MapInfo2" :
-				parseMapArray((JSONArray) parser.parse(new FileReader("C:\\Users\\baptiste\\Documents\\Dofus Bot\\MapInfo2.json")));
+			case "MapInfoComplete" :
+				parseMapArray((JSONArray) parser.parse(new FileReader(s + "\\DatBot.Interface\\utils\\maps\\MapInfoComplete.json")));
 				break;
 		}
 		} catch (IOException | ParseException e) {

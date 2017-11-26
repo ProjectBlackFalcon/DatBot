@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -81,7 +82,6 @@ import utils.JSON;
 
 public class Network implements Runnable {
 
-	AtomicInteger at;
 	public static Socket socket;
 	private static String ip;
 	private Message message;
@@ -105,8 +105,7 @@ public class Network implements Runnable {
 	public static MapRunningFightListMessage fight;
 	public static MapRunningFightDetailsMessage fightDetail;
 
-	public Network(AtomicInteger at) {
-		this.at = at;
+	public Network() {
 		ip = "213.248.126.40";
 		int port = 5555;
 		try {
@@ -181,7 +180,6 @@ public class Network implements Runnable {
 
 	public void reception() throws Exception {
 		while (!Network.socket.isClosed()) {
-
 			InputStream data = socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
@@ -258,7 +256,7 @@ public class Network implements Runnable {
 				if(b.charactersCount > 0)
 					serverId = b.id;
 			}
-			HandleServersListMessage(serverId);
+			HandleServersListMessage(208);
 			break;
 		case 42:
 			SelectedServerDataMessage selectServer = new SelectedServerDataMessage();
@@ -285,21 +283,17 @@ public class Network implements Runnable {
 		case 151:
 			CharactersListMessage charactersListMessage = new CharactersListMessage();
 			charactersListMessage.Deserialize(dataReader);
-//			int j = 0;
-//			for (int i = 0 ; i < charactersListMessage.characters.size() ; i++) {
-//				if(charactersListMessage.characters.get(i).name.equals(InfoAccount.name)){
-//					HandleCharacterSelectionMessage(charactersListMessage.characters.get(i).id);
-//					InfoAccount.actorId = charactersListMessage.characters.get(i).id;
-//					InfoAccount.lvl = charactersListMessage.characters.get(i).level;
-//					j = 1;
-//					break;
-//				} 
-//			}
-//			if(j==0) throw new Error("Wrong character name !");
-			HandleCharacterSelectionMessage(charactersListMessage.characters.get(0).id);
-			InfoAccount.name = charactersListMessage.characters.get(0).name;
-			InfoAccount.actorId = charactersListMessage.characters.get(0).id;
-			InfoAccount.lvl = charactersListMessage.characters.get(0).level;
+			int j = 0;
+			for (int i = 0 ; i < charactersListMessage.characters.size() ; i++) {
+				if(charactersListMessage.characters.get(i).name.equals(InfoAccount.name)){
+					HandleCharacterSelectionMessage(charactersListMessage.characters.get(i).id);
+					InfoAccount.actorId = charactersListMessage.characters.get(i).id;
+					InfoAccount.lvl = charactersListMessage.characters.get(i).level;
+					j = 1;
+					break;
+				} 
+			}
+			if(j==0) throw new Error("Wrong character name !");
 			break;
 		case 1301:
 			HandleFriendIgnoreSpouseMessages();
@@ -322,7 +316,7 @@ public class Network implements Runnable {
 			}
 			break;
 		case 226:
-			at.set(1);
+			InfoAccount.isConnected = true;
 			MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 			complementaryInformationsDataMessage.Deserialize(dataReader);
 			if(!connectionToKoli){
@@ -335,7 +329,6 @@ public class Network implements Runnable {
 			}
 			break;
 		case 891:
-			at.set(1);
 			break;
 		case 951:
 			GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
@@ -397,6 +390,7 @@ public class Network implements Runnable {
 		if (reader.available() <= 0) {
 			return;
 		}
+		
 
 		// Packet split
 		if (bigPacketLengthToFull != 0) {
@@ -527,8 +521,8 @@ public class Network implements Runnable {
 
 	private static void HandleHelloConnectMessage(byte[] key, String salt) throws Exception {
 		VersionExtended versionExtended = new VersionExtended(2, 44, 7, 3, 0, 0, 1, 1);
-		String login = "ceciestuntest";
-		String password = "ceciestlemdp1";
+		String login = "wublel7";
+		String password = "wubwublel7";
 		byte[] credentials = Crypto.encrypt(key, login, password, salt);
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -619,20 +613,22 @@ public class Network implements Runnable {
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
-	private static void HandleMapComplementaryInformationsDataMessage() {
-		try {
-			Process p = new ProcessBuilder("C:\\Users\\baptiste\\Documents\\Dofus Bot\\CookieMapManager\\Cookie\\bin\\Debug\\Cookie.exe",String.valueOf((int) InfoAccount.mapId)).start();
-			p.waitFor();
-			new JSON("MapInfo",InfoAccount.mapId);
-			new JSON("MapInfo2", InfoAccount.mapId);
-			MainPlugin.frame.append("Map : [" + InfoAccount.coords[0] + ";" + InfoAccount.coords[1] +  "]");	
-			MainPlugin.frame.append("CellId : " + InfoAccount.cellId);
-			InfoAccount.waitForMov = true;
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	private static void HandleMapComplementaryInformationsDataMessage() throws InterruptedException {
+					Process p;
+					try {
+						String s = Paths.get("").toAbsolutePath().toString();
+						int i = s.indexOf("DatBot");
+						s = s.substring(0, i + 7);
+						p = new ProcessBuilder(s + "\\DatBot.Interface\\utils\\maps\\MapManager\\MapManager.exe",String.valueOf((int) InfoAccount.mapId)).start();
+						p.waitFor();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					new JSON("MapInfo",InfoAccount.mapId);
+					new JSON("MapInfoComplete", InfoAccount.mapId);
+					MainPlugin.frame.append("Map : [" + InfoAccount.coords[0] + ";" + InfoAccount.coords[1] +  "]");	
+					MainPlugin.frame.append("CellId : " + InfoAccount.cellId);
+					InfoAccount.waitForMov = true;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {
