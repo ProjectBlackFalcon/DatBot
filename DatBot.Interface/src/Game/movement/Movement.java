@@ -88,9 +88,10 @@ public class Movement{
         if (num2 == -1 || neighbourId < 0) return null;
         System.out.println("0");
         System.out.println((Map.Cells.get(cellId).MapChangeData & num2) > 0);
+        System.out.println(Map.Cells.get(cellId).MapChangeData);
         System.out.println(Map.NothingOnCell(cellId));
         System.out.println(noObstacle(cellId));
-        if ((Map.Cells.get(cellId).MapChangeData & num2) > 0 && Map.NothingOnCell(cellId) && noObstacle(cellId)){
+        if (Map.NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
     		MainPlugin.frame.append("Déplacement...");	
     		MainPlugin.frame.append("Direction : " + direction);
             CellMovement move = MoveToCell(cellId);
