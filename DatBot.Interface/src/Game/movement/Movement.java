@@ -16,8 +16,12 @@ import utils.JSON;
 public class Movement{
 	
 	public static CellMovement MoveToCell(int cellId) throws Exception{
-		CellMovement mov = new CellMovement(new Pathfinder().findPath(InfoAccount.cellId,cellId));
-		return mov;
+		if(Map.getCells().get(cellId).Mov){
+			CellMovement mov = new CellMovement(new Pathfinder().findPath(InfoAccount.cellId,cellId));
+			return mov;
+		} else {
+			return null;
+		}
 	}
 	
 	public static MapMovement ChangeMap(String direction) throws Exception{
@@ -59,8 +63,50 @@ public class Movement{
         return new MapMovement(move, neighbourId);
 	}
 	
-	public static void goToMap(List<String> path){
-		
+	public static MapMovement ChangeMap(int cellId, String direction) throws Exception{
+        int neighbourId = -1;
+        int num2 = -1;
+        switch (direction)
+        {
+            case "n":
+                neighbourId = (int) Map.TopNeighbourId;
+                num2 = 64;
+                break;
+            case "s":
+                neighbourId = (int) Map.BottomNeighbourId;
+                num2 = 4;
+                break;
+            case "e":
+                neighbourId = (int) Map.RightNeighbourId;
+                num2 = 1;
+                break;
+            case "w":
+                neighbourId = (int) Map.LeftNeighbourId;
+                num2 = 16;
+                break;
+        }
+        if (num2 == -1 || neighbourId < 0) return null;
+        
+        if ((Map.Cells.get(cellId).MapChangeData & num2) > 0 && Map.NothingOnCell(cellId) && noObstacle(cellId)){
+    		MainPlugin.frame.append("Déplacement...");	
+    		MainPlugin.frame.append("Direction : " + direction);
+            CellMovement move = MoveToCell(cellId);
+            return new MapMovement(move, neighbourId);
+        } else {
+        	return null;
+        }
+	}
+	
+	public static boolean moveOver() throws InterruptedException{
+		int indexTimeout = 0;
+		while(!InfoAccount.waitForMov){
+			Thread.sleep(1000);
+			indexTimeout++;
+			if(indexTimeout == 30){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	

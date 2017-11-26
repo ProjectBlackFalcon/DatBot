@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Game.InfoAccount;
+import Game.map.MapMovement;
+import Game.movement.CellMovement;
+import Game.movement.Movement;
 import protocol.network.Network;
 
 public class ModelConnexion implements Runnable {
@@ -52,10 +55,39 @@ public class ModelConnexion implements Runnable {
 							String.valueOf("(" + InfoAccount.coords[0]) + "," + String.valueOf(InfoAccount.coords[1]) + ")" ,InfoAccount.cellId,InfoAccount.worldmap,Integer.valueOf((int) InfoAccount.mapId)});
 					break;
 				case "move":
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					CellMovement mov = Movement.MoveToCell(Integer.parseInt(message[5]));
+					if(mov == null || mov.path == null){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					} else if (InfoAccount.cellId == Integer.parseInt(message[5])) {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						mov.performMovement();
+						if(Movement.moveOver()){
+							if(InfoAccount.cellId == Integer.parseInt(message[5])){
+								sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+							} else {
+								sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+							}						
+						} else {
+							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						}							
+					}
 					break;
 				case "changeMap":
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					String [] infoMov = message[5].split(",");
+					MapMovement mapMovement = Movement.ChangeMap(Integer.parseInt(infoMov[1]),infoMov[1].substring(2, infoMov[1].length()-1));
+					if (mapMovement == null) {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+					}
+					else {
+						mapMovement.PerformChangement();
+						if(Movement.moveOver()){
+							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						} else {
+							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+						}
+					}
 					break;
 				case "getRessources":
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
@@ -86,5 +118,4 @@ public class ModelConnexion implements Runnable {
 		}
 		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]",botInstance,msgId,dest,msgType,command,newParam));
 	}
-
 }

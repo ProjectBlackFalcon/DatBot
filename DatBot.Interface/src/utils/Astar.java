@@ -406,7 +406,7 @@ public class Astar {
          }
          
          AStarDiag();
-         
+       
          if(grid[ei][ej].finalCost == 0){
         	 path = null;
         	 return;
