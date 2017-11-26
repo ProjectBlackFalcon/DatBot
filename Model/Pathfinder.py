@@ -159,7 +159,7 @@ class PathFinder:
             while not found_walkable:
                 x = randint(0, 13)
                 y = randint(0, 39)
-                if end_map_cells[x][y] == 0:
+                if end_map_cells[y][x] == 0:
                     found_walkable = True
             self.end_cell = self.coord2cell((x, y))
 
@@ -218,7 +218,7 @@ class PathFinder:
         for change_map_cell in self.map_change_coords:
             current = change_map_cell
             nxt = self.path_cells[self.path_cells.index(change_map_cell)+1]
-            directions.append(['e', 'w', 's', 'w'][[(0, 1), (0, -1), (1, 0), (-1, 0)].index((nxt[0]-current[0], nxt[1]-current[1]))])
+            directions.append(['e', 'w', 's', 'n'][[(0, 1), (0, -1), (1, 0), (-1, 0)].index((nxt[0]-current[0], nxt[1]-current[1]))])
         self.map_change_directions = directions[:]
         return directions[:]
 
