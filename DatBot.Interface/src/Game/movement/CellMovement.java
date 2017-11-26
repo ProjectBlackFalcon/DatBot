@@ -32,10 +32,10 @@ public class CellMovement {
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path); 
 		Network.sendToServer(new GameMapMovementRequestMessage(keys, InfoAccount.mapId), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
 		if(path.Cells.size() >= 4 ){
-			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
+			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING)*2;
 			Thread.sleep(time);
 		} else {
-			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
+			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING)*2;
 			Thread.sleep(time);
 		}
 		InfoAccount.waitForMov = true;
