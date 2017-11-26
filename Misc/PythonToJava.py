@@ -31,7 +31,7 @@ while 1:
         read = []
 
     if sent < 3:
-        message = '{};{};i;cmd;{};{}\r\n'.format(0, 0, 'getMap', None)
+        message = '{}|{}|i|cmd|{}|{}\r\n'.format(0, 0, 'getMap', None)
         print('[Interface] Sending : ', message)
         p.stdin.write(bytes(message, 'utf-8'))
         p.stdin.flush()

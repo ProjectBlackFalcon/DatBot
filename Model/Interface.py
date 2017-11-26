@@ -50,7 +50,7 @@ class Interface:
             partial_message = '{};{};m;rtn'.format(self.bot_instance, message_id)
             for message in messages:
                 if partial_message in message:
-                    print(message)
+                    # print(message)
                     ret_val = ast.literal_eval(message.split(';')[-1])
             time.sleep(0.1)
 
