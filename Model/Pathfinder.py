@@ -20,6 +20,24 @@ class PathFinder:
         self.end_cell = end_cell
         self.worldmap = worldmap
         self.shape = (abs(self.end[1]-self.start[1])+1, abs(self.end[0]-self.start[0])+1)
+        self.shape = (abs(self.bbox[1]-self.bbox[3])+1, abs(self.bbox[0]-self.bbox[2])+1)
+        self.mapinfo = self.load_map_info()
+        self.maps_coords = []
+        self.glued_maps = []
+        self.path_cells = []
+        self.map_change_coords = []
+        self.map_change_cells = []
+        self.map_change_directions = []
+
+    def enlarge(self):
+        print('[Pathfinder] Enlarging')
+        self.bbox = (
+            min(self.start[0], self.end[0])-1,
+            min(self.start[1], self.end[1])-1,
+            max(self.start[0], self.end[0])+1,
+            max(self.start[1], self.end[1])+1
+        )
+        self.shape = (abs(self.bbox[1]-self.bbox[3])+1, abs(self.bbox[0]-self.bbox[2])+1)
         self.mapinfo = self.load_map_info()
         self.maps_coords = []
         self.glued_maps = []
@@ -34,8 +52,8 @@ class PathFinder:
         return mapinfo
 
     def get_maps_coords(self):
-        xn = abs(self.end[0]-self.start[0])+1
-        yn = abs(self.end[1]-self.start[1])+1
+        xn = abs(self.bbox[0]-self.bbox[2])+1
+        yn = abs(self.bbox[1]-self.bbox[3])+1
         maps = []
         for y in range(yn):
             for x in range(xn):
@@ -65,7 +83,7 @@ class PathFinder:
             self.glued_maps = out
 
     def map_to_image(self, map_as_array, scaling_factor):
-        print('generating image...')
+        print('[Pathfinder] Generating image...')
         map_as_array = np.array(map_as_array)
         map_as_array[map_as_array == 0] = 0
         # map_as_array[map_as_array != 0] = 1
@@ -75,14 +93,14 @@ class PathFinder:
         a[a == 3] = 255*128
         a[a == 4] = 255*255
         Image.fromarray(a).save('Out.png')
-        print('Done')
+        print('[Pathfinder] Done')
 
     def heuristic(self, a, b):
         return (b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2
 
     def astar(self, start_pos, goal_pos):
         start = time.time()
-        print('generating path...')
+        print('[Pathfinder] Generating path...')
 
         start_pos = start_pos[1], start_pos[0]
         goal_pos = goal_pos[1], goal_pos[0]
@@ -133,7 +151,10 @@ class PathFinder:
                     gscore[neighbor] = tentative_g_score
                     fscore[neighbor] = tentative_g_score + self.heuristic(neighbor, goal_pos)
                     heappush(oheap, (fscore[neighbor], neighbor))
-        print('Done in {}s'.format(round(time.time()-start, 1)))
+        if self.path_cells:
+            print('[Pathfinder] Done in {}s'.format(round(time.time()-start, 1)))
+        else:
+            print('[Pathfinder] Unable to get path')
         return False
 
     def add_path_to_glued_maps(self):
@@ -144,7 +165,7 @@ class PathFinder:
         for x, y in self.map_change_coords:
             self.glued_maps[x][y] = 4
 
-    def get_path(self):
+    def get_path_try(self):
         if not self.maps_coords:
             self.get_maps_coords()
 
@@ -172,37 +193,37 @@ class PathFinder:
             self.cell2coord(self.end_cell)[1]+40*(self.end[1]-self.bbox[1])
         )
 
-        # print(start_pos, goal_pos, self.shape)
+        # print(start_pos, goal_pos)
         self.astar(goal_pos, start_pos)
+
+    def get_path(self):
+        self.get_path_try()
+        print(self.path_cells)
+        while not self.path_cells:
+            self.enlarge()
+            self.get_path_try()
 
     def get_map_change_coords(self):
         if not self.path_cells:
             self.get_path()
+
         out = []
-        for x, y in self.path_cells:
-            # Going SE
-            if self.start[0] < self.end[0] and self.start[1] < self.end[1]:
-                if not (y+1) % 14 or not (x+1) % 40:
-                    out.append((x, y))
-            # Going SW
-            if self.start[0] < self.end[0] and self.start[1] > self.end[1]:
-                if not x % 14 or not (x+1) % 40:
-                    out.append((x, y))
-            # Going NE
-            if self.start[0] > self.end[0] and self.start[1] < self.end[1]:
-                if not (y+1) % 14 or not x % 40:
-                    out.append((x, y))
-            # Going NW
-            if self.start[0] > self.end[0] and self.start[1] > self.end[1]:
-                if not y % 14 or not x % 40:
-                    out.append((x, y))
+        for i in range(len(self.path_cells)-1):
+            this_step = self.path_cells[i]
+            next_step = self.path_cells[i+1]
+            if (this_step[1]+1) % 14 == 0 and next_step[1] % 14 == 0 or\
+                this_step[1] % 14 == 0 and (next_step[1]+1) % 14 == 0 or \
+                (this_step[0]+1) % 40 == 0 and next_step[0] % 40 == 0 or \
+                this_step[0] % 40 == 0 and (next_step[0]+1) % 40 == 0:
+                out.append((this_step[0], this_step[1]))
 
         marked = []
         for i in range(len(out)-2, -1, -1):
             if abs(out[i][0]-out[i+1][0])+abs(out[i][1]-out[i+1][1]) <= 1:
                 marked.append(i)
         for ind in marked:
-            del out[ind]
+            # del out[ind]
+            pass
         self.map_change_coords = out[:]
         return out[:]
 

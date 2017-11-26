@@ -29,7 +29,7 @@ class Interface:
     def add_command(self, command, parameters=None):
         # <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
         message = '{};{};i;cmd;{};{}\r\n'.format(self.bot_instance, self.current_id, command, parameters)
-        print('[Interface] Sending : ', message)
+        print('[Interface] Sending : ', message.strip())
         self.current_id += 1
         self.p.stdin.write(bytes(message, 'utf-8'))
         self.p.stdin.flush()
