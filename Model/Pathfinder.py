@@ -32,10 +32,10 @@ class PathFinder:
     def enlarge(self):
         print('[Pathfinder] Enlarging')
         self.bbox = (
-            min(self.start[0], self.end[0])-1,
-            min(self.start[1], self.end[1])-1,
-            max(self.start[0], self.end[0])+1,
-            max(self.start[1], self.end[1])+1
+            self.bbox[0]-1,
+            self.bbox[1]-1,
+            self.bbox[2]+1,
+            self.bbox[3]+1
         )
         self.shape = (abs(self.bbox[1]-self.bbox[3])+1, abs(self.bbox[0]-self.bbox[2])+1)
         self.mapinfo = self.load_map_info()
