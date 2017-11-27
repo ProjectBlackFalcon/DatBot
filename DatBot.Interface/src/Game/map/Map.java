@@ -60,7 +60,7 @@ public class Map {
 	public void setIsUsingNewMovementSystem(boolean isUsingNewMovementSystem) {
 		IsUsingNewMovementSystem = isUsingNewMovementSystem;
 	}
-	public void setLayers(ArrayList<Layer> layers) {
+	public void setLayers(List<Layer> layers) {
 		Layers = layers;
 	}
 	public void setLayersCount(long layersCount) {
@@ -118,7 +118,7 @@ public class Map {
 	public static long getBackgroundBlue() {
 		return BackgroundBlue;
 	}
-	public static ArrayList<Fixture> getBackgroundFixtures() {
+	public static List<Fixture> getBackgroundFixtures() {
 		return BackgroundFixtures;
 	}
 	public static long getBackgroundGreen() {
@@ -139,7 +139,7 @@ public class Map {
 	public static long getEncryptedVersion() {
 		return EncryptedVersion;
 	}
-	public static ArrayList<Fixture> getForegroundFixtures() {
+	public static List<Fixture> getForegroundFixtures() {
 		return ForegroundFixtures;
 	}
 	public static long getForegroundsCount() {
@@ -166,7 +166,7 @@ public class Map {
 	public static boolean isIsUsingNewMovementSystem() {
 		return IsUsingNewMovementSystem;
 	}
-	public static ArrayList<Layer> getLayers() {
+	public static List<Layer> getLayers() {
 		return Layers;
 	}
 	public static long getLayersCount() {
@@ -219,14 +219,14 @@ public class Map {
 	}
 	public static long BackgroundAlpha;
     public static long BackgroundBlue;
-    public static ArrayList<Fixture> BackgroundFixtures;
+    public static List<Fixture> BackgroundFixtures;
     public static long BackgroundGreen;
     public static long BackgroundRed;
     public static long BackgroundsCount;
     public static long BottomNeighbourId;
     public static boolean Encrypted;
     public static long EncryptedVersion;
-    public static ArrayList<Fixture> ForegroundFixtures;
+    public static List<Fixture> ForegroundFixtures;
     public static long ForegroundsCount;
     public static long GridAlpha;
     public static long GridBlue;
@@ -235,7 +235,7 @@ public class Map {
     public static String GroundCRC;
     public static long Id;
     public static boolean IsUsingNewMovementSystem;
-    public static ArrayList<Layer> Layers;
+    public static List<Layer> Layers;
     public static long LayersCount;
     public static long LeftNeighbourId;
     public static long MapType;

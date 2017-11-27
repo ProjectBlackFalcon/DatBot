@@ -1,6 +1,6 @@
 package Game.map;
 
-import Game.InfoAccount;
+import Game.Info;
 import Game.movement.CellMovement;
 import Main.MainPlugin;
 import protocol.network.Network;
@@ -20,8 +20,9 @@ public class MapMovement {
 	
     public void PerformChangement() throws Exception
     {
-    	this.cellMovement.performMovement();
-		InfoAccount.waitForMov = false;
+    	if(cellMovement != null)
+    		this.cellMovement.performMovement();
+		Info.waitForMov = false;
 		MainPlugin.frame.append("Changement de map...");
 		Network.sendToServer(new ChangeMapMessage(newId), ChangeMapMessage.ProtocolId, "Changement de map...");
     }

@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import Game.InfoAccount;
+import Game.Info;
 import Main.Frame.TextComponentFrame;
 
 public class MainPlugin extends JPanel implements Runnable {
@@ -27,7 +27,7 @@ public class MainPlugin extends JPanel implements Runnable {
 		frame.setVisible(true);
 		frame.append("Connection...");
 
-		while (!InfoAccount.isConnected) {
+		while (!Info.isConnected) {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -35,7 +35,7 @@ public class MainPlugin extends JPanel implements Runnable {
 			}
 		}
 		frame.append("Connecté !");
-		frame.append("Name : " + InfoAccount.name);
-		frame.append("Niveau : " + InfoAccount.lvl);
+		frame.append("Name : " + Info.name);
+		frame.append("Niveau : " + Info.lvl);
 	}
 }

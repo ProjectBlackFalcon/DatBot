@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
-import Game.InfoAccount;
+import Game.Info;
 import Game.map.Map;
 import Game.map.MapMovement;
 import Main.MainPlugin;
@@ -17,7 +17,7 @@ public class Movement{
 	
 	public static CellMovement MoveToCell(int cellId) throws Exception{
 		if(Map.getCells().get(cellId).Mov){
-			CellMovement mov = new CellMovement(new Pathfinder().findPath(InfoAccount.cellId,cellId));
+			CellMovement mov = new CellMovement(new Pathfinder().findPath(Info.cellId,cellId));
 			return mov;
 		} else {
 			return null;
@@ -86,9 +86,7 @@ public class Movement{
                 break;
         }
         if (num2 == -1 || neighbourId < 0) return null;
-        System.out.println("0");
         System.out.println((Map.Cells.get(cellId).MapChangeData & num2) > 0);
-        System.out.println(Map.Cells.get(cellId).MapChangeData);
         System.out.println(Map.NothingOnCell(cellId));
         System.out.println(noObstacle(cellId));
         if (Map.NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
@@ -96,15 +94,16 @@ public class Movement{
     		MainPlugin.frame.append("Direction : " + direction);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId);
+        } else if (Info.cellId == cellId){
+            return new MapMovement(null, neighbourId);
         } else {
-            System.out.println("1");
         	return null;
         }
 	}
 	
 	public static boolean moveOver() throws InterruptedException{
 		int indexTimeout = 0;
-		while(!InfoAccount.waitForMov){
+		while(!Info.waitForMov){
 			Thread.sleep(1000);
 			indexTimeout++;
 			if(indexTimeout == 30){
@@ -117,16 +116,16 @@ public class Movement{
 	
 // TRIED TO GET THE WAY BUT NOT WORKING
 	public static void goToMap(int xStart, int yStart, int x, int y, List<int[]> blocked) throws Exception{
-    	while(!InfoAccount.waitForMov){
+    	while(!Info.waitForMov){
     		Thread.sleep(500);
 		}
-		if(x == InfoAccount.coords[0] && y == InfoAccount.coords[1]){
+		if(x == Info.coords[0] && y == Info.coords[1]){
 			MainPlugin.frame.append("Vous êtes arrivé !");
 			return;
 		}
 		
-		int xCurrentMap = InfoAccount.coords[0] + 95; 
-		int yCurrentMap = InfoAccount.coords[1] + 100;
+		int xCurrentMap = Info.coords[0] + 95; 
+		int yCurrentMap = Info.coords[1] + 100;
 //		int xNew = 0; int yNew = 0; int xStartNew = 0; int yStartNew = 0;
 //		
 //		// Need only positiv values
@@ -201,15 +200,15 @@ public class Movement{
 //		}
 		        
         for (int i = 0; i < Astar.pathString.size() ; i++) {
-        	while(!InfoAccount.waitForMov){
+        	while(!Info.waitForMov){
         		Thread.sleep(500);
     		}
-    		if(x == InfoAccount.coords[0] && y == InfoAccount.coords[1]){
+    		if(x == Info.coords[0] && y == Info.coords[1]){
     			MainPlugin.frame.append("Vous êtes arrivé !");
     			return;
     		}
-    		xCurrentMap = InfoAccount.coords[0] + 95; 
-    		yCurrentMap = InfoAccount.coords[1] + 100;
+    		xCurrentMap = Info.coords[0] + 95; 
+    		yCurrentMap = Info.coords[1] + 100;
 			MapMovement mov = Movement.ChangeMap(Astar.pathString.get(i));
 			if (mov == null) {
 				MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
@@ -255,10 +254,10 @@ public class Movement{
 				mov.PerformChangement();
 			}			
 		}
-    	while(!InfoAccount.waitForMov){
+    	while(!Info.waitForMov){
     		Thread.sleep(500);
 		}
-		if(x == InfoAccount.coords[0] && y == InfoAccount.coords[1]){
+		if(x == Info.coords[0] && y == Info.coords[1]){
 			MainPlugin.frame.append("Vous êtes arrivé !");
 			return;
 		}
@@ -266,14 +265,14 @@ public class Movement{
 	
 	private static boolean noObstacle(int random){
         List<int[]> blocked = new ArrayList<int[]>();
-        for (int i = 0; i < InfoAccount.cells.size(); i++){
-        	for (int j = 0; j < InfoAccount.cells.get(0).size() ; j++){
-        		if (((Number) InfoAccount.cells.get(i).get(j)).intValue() == 1  || ((Number) InfoAccount.cells.get(i).get(j)).intValue() == 2  ){
+        for (int i = 0; i < Info.cells.size(); i++){
+        	for (int j = 0; j < Info.cells.get(0).size() ; j++){
+        		if (((Number) Info.cells.get(i).get(j)).intValue() == 1  || ((Number) Info.cells.get(i).get(j)).intValue() == 2  ){
         			blocked.add(new int[]{j,i});
         		}
         	}
         }    
-        new Astar(InfoAccount.cellId%14, InfoAccount.cellId/14, random%14, random/14, blocked,false);
+        new Astar(Info.cellId%14, Info.cellId/14, random%14, random/14, blocked,false);
         if(Astar.path == null) 
         	return false; // Can't go in this direction (Obstacles)
         else 

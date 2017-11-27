@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import Game.InfoAccount;
+import Game.Info;
 import Game.movement.CellMovement;
 import Game.movement.Movement;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;

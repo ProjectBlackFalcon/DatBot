@@ -2,7 +2,7 @@ package utils;
 
 import java.util.*;
 
-import Game.InfoAccount;
+import Game.Info;
 import Main.MainPlugin;
 
 /*
@@ -476,9 +476,9 @@ public class Astar {
     	
         else{
 //        	blocked = new ArrayList<int[]>();
-//            for (int i = 0; i < InfoAccount.cells.size(); i++){
-//            	for (int j = 0; j < InfoAccount.cells.get(0).size() ; j++){
-//            		if (((Number) InfoAccount.cells.get(i).get(j)).intValue() == 1  || ((Number) InfoAccount.cells.get(i).get(j)).intValue() == 2  ){
+//            for (int i = 0; i < Info.cells.size(); i++){
+//            	for (int j = 0; j < Info.cells.get(0).size() ; j++){
+//            		if (((Number) Info.cells.get(i).get(j)).intValue() == 1  || ((Number) Info.cells.get(i).get(j)).intValue() == 2  ){
 //            			blocked.add(new int[]{j,i});
 //            		}
 //            	}

@@ -18,6 +18,7 @@ public class MovementVelocity {
         for (PathElement cell : cells.Cells) {
 			velocity += GetVelocity(cell, moveType);
 		}
+        velocity *= 2;
 		MainPlugin.frame.append("Durée : " + velocity + "ms");
         return velocity;
     }
