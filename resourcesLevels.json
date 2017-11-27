@@ -67,7 +67,7 @@
         "Bois de Chatainier",
         "Cuivre",
         "Orge",
-        "Greuvette"
+        "Truite"
     ],
     "200": [
         "Perce-Neige",
@@ -110,5 +110,8 @@
     "70": [
         "Bois de Bombu",
         "Sadrdine Brillante"
+    ],
+    "10": [
+        "Greuvette"
     ]
 }
