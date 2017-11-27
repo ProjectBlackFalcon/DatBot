@@ -183,6 +183,7 @@ public class Game {
 		int id = Integer.parseInt(command[0]);
 		System.out.println("Getting best turn for "+getPlayingEntityFromID(id));
 		System.out.println("Testing github webhook");
+		System.out.println("Pls work");
 	}
 	
 	
