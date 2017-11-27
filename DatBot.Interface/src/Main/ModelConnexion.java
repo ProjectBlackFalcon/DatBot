@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Game.Info;
+import Game.Plugin.Farm;
 import Game.map.MapMovement;
 import Game.movement.CellMovement;
 import Game.movement.Movement;
@@ -90,7 +91,7 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "getRessources":
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.farmCell});
 					break;
 				case "getStats":
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
