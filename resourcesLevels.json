@@ -1,12 +1,14 @@
 {
     "110": [
-        "Bois de Bambou"
+        "Bois de Bambou",
+        "Dorade Grise"
     ],
     "160": [
         "Belladone",
         "Bois de Charme",
         "Or",
-        "Mais"
+        "Mais",
+        "Bar Rikain"
     ],
     "100": [
         "Edelweiss",
@@ -14,49 +16,58 @@
         "Etain",
         "Silicate",
         "Seigle",
-        "Riz"
+        "Riz",
+        "Anguille"
     ],
     "120": [
         "Graine de Pandouille",
         "Bois de Merisier",
         "Argent",
-        "Malt"
+        "Malt",
+        "Perche"
     ],
     "60": [
         "Menthe sauvage",
         "Bois de Chene",
         "Kobalte",
-        "Houblon"
+        "Houblon",
+        "Carpe d'Iem"
     ],
     "140": [
         "Ginseng",
         "Bois d'Ebene",
         "Bauxite",
-        "Chanvre"
+        "Chanvre",
+        "Lotte"
     ],
     "190": [
-        "Bois de Bambou Sacre"
+        "Bois de Bambou Sacre",
+        "Espadon"
     ],
     "40": [
         "Trefle a 5 feuilles",
         "Bois de Noyer",
         "Bronze",
-        "Avoine"
+        "Avoine",
+        "Poisson-Chaton"
     ],
     "90": [
-        "Bois d'Oliviolet"
+        "Bois d'Oliviolet",
+        "Kralamoure"
     ],
     "80": [
         "Orchidee frayesque",
         "Bois d'Erable",
         "Manganese",
-        "Lin"
+        "Lin",
+        "Brochet"
     ],
     "20": [
         "Sauge",
         "Bois de Chatainier",
         "Cuivre",
-        "Orge"
+        "Orge",
+        "Truite"
     ],
     "200": [
         "Perce-Neige",
@@ -66,30 +77,41 @@
         "Obsidienne",
         "Ecume de mer",
         "Frostiz",
-        "Quisnoa"
+        "Quisnoa",
+        "Poiskaille",
+        "Patelle"
     ],
     "1": [
         "Ortie",
         "Bois de Frene",
         "Fer",
-        "Ble"
+        "Ble",
+        "Goujon"
     ],
     "180": [
         "Mandragore",
         "Bois d'Orme",
         "Dolomite",
-        "Millet"
+        "Millet",
+        "Tanche"
     ],
     "150": [
-        "Bois de Kaliptus"
+        "Bois de Kaliptus",
+        "Requin Marteau-Faucille"
     ],
     "170": [
-        "Bois de Bambou Sombre"
+        "Bois de Bambou Sombre",
+        "Morue"
     ],
     "130": [
-        "Bois de Noisetier"
+        "Bois de Noisetier",
+        "Raie Bleue"
     ],
     "70": [
-        "Bois de Bombu"
+        "Bois de Bombu",
+        "Sadrdine Brillante"
+    ],
+    "10": [
+        "Greuvette"
     ]
 }
