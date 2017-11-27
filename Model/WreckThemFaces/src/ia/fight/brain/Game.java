@@ -182,6 +182,7 @@ public class Game {
 	private void getBestTurn(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		System.out.println("Getting best turn for "+getPlayingEntityFromID(id));
+		System.out.println("Testing github webhook");
 	}
 	
 	
