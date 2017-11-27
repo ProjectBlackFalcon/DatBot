@@ -4,9 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Game.map.elements.BasicElement;
+import Game.map.elements.GraphicalElement;
 
 public class Cell {
-    public int CellId;
-    public List<BasicElement> Elements = new ArrayList<BasicElement>();
-    public int ElementsCount;
+    public List<GraphicalElement> Elements = new ArrayList<GraphicalElement>();
+    public long CellId;
+    public long ElementsCount;
+    
+	public List<GraphicalElement> getElements() {
+		return Elements;
+	}
+	public void setElements(List<GraphicalElement> elements) {
+		Elements = elements;
+	}
+	public long getCellId() {
+		return CellId;
+	}
+	public void setCellId(long cellId) {
+		CellId = cellId;
+	}
+	public long getElementsCount() {
+		return ElementsCount;
+	}
+	public void setElementsCount(long elementsCount) {
+		ElementsCount = elementsCount;
+	}
+
 }

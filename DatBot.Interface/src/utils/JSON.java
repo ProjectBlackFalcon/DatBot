@@ -13,11 +13,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import Game.InfoAccount;
+import Game.Info;
+import Game.map.Cell;
 import Game.map.CellData;
+import Game.map.ColorMultiplicator;
 import Game.map.Fixture;
 import Game.map.Layer;
 import Game.map.Map;
+import Game.map.elements.GraphicalElement;
 
 public class JSON implements Runnable{
 	private String file;
@@ -50,10 +53,10 @@ public class JSON implements Runnable{
 		          JSONObject person = (JSONObject) o;
 		          if((long) person.get("id") == id){
 		        	  String [] temp = ((String) person.get("coord")).split(";");
-		        	  InfoAccount.coords[0] = Integer.parseInt(temp[0]);
-		        	  InfoAccount.coords[1] = Integer.parseInt(temp[1]);
-		        	  InfoAccount.cells = (ArrayList<ArrayList<Integer>>) person.get("cells");
-		        	  InfoAccount.worldmap = (long) person.get("worldMap");
+		        	  Info.coords[0] = Integer.parseInt(temp[0]);
+		        	  Info.coords[1] = Integer.parseInt(temp[1]);
+		        	  Info.cells = (ArrayList<ArrayList<Integer>>) person.get("cells");
+		        	  Info.worldmap = (long) person.get("worldMap");
 		        	  cells = (ArrayList<ArrayList<Integer>>) person.get("cells");
 		          }
 		        }
@@ -84,6 +87,8 @@ public class JSON implements Runnable{
 	        foo.setUseLowPassFilter((boolean) object.get("UseLowPassFilter"));
 	        foo.setUseReverb((boolean) object.get("UseReverb"));
 	        foo.setCells(parseCellDataArray((JSONArray) object.get("Cells")));
+	        foo.setLayers(parseLayersArray((JSONArray) object.get("Layers")));
+	        foo.setLayersCount((long) object.get("LayersCount"));
 	        list.add(foo);
 	    }
 
@@ -92,7 +97,7 @@ public class JSON implements Runnable{
 	
 	private List<CellData> parseCellDataArray(JSONArray array) {
 
-	    List<CellData> list = new ArrayList<>();
+	    List<CellData> list = new ArrayList<CellData>();
 
 	    for (Object item : array) {
 	        JSONObject object = (JSONObject) item;
@@ -118,7 +123,58 @@ public class JSON implements Runnable{
 	    return list;
 	}
 	
+	private List<Layer> parseLayersArray(JSONArray array) {
+
+	    List<Layer> list = new ArrayList<Layer>();
+
+	    for (Object item : array) {
+	        JSONObject object = (JSONObject) item;
+	        Layer obj = new Layer();
+	        obj.setCellsCount((long) object.get("CellsCount"));
+	        obj.setLayerId((long) object.get("LayerId"));
+	        obj.setCells(parseCellArray((JSONArray) object.get("Cells")));
+	        list.add(obj);
+	    }
+	    return list;
+	}
 	
+	private List<Cell> parseCellArray(JSONArray array) {
+
+	    List<Cell> list = new ArrayList<Cell>();
+
+	    for (Object item : array) {
+	        JSONObject object = (JSONObject) item;
+	        Cell obj = new Cell();
+	        obj.setCellId((long) object.get("CellId"));
+	        obj.setElementsCount((long) object.get("ElementsCount"));
+	        obj.setElements(parseElementArray((JSONArray) object.get("Elements")));
+	        list.add(obj);
+	    }
+	    return list;
+	}
+	
+	
+	private List<GraphicalElement> parseElementArray(JSONArray array) {
+		
+	    List<GraphicalElement> list = new ArrayList<GraphicalElement>();
+
+	    for (Object item : array) {
+	        JSONObject object = (JSONObject) item;
+	        GraphicalElement obj = new GraphicalElement();
+	        obj.setAltitude((long) object.get("Altitude"));
+	        obj.setElementId((long) object.get("ElementId"));
+//	        obj.setFinalTeint((ColorMultiplicator) object.get("FinalTeint"));
+//	        obj.setHue((ColorMultiplicator) object.get("Hue"));
+	        obj.setIdentifier((long) object.get("Identifier"));
+	        obj.setOffsetX((double) object.get("OffsetX"));
+	        obj.setOffsetY((double) object.get("OffsetY"));
+	        obj.setPixelOffsetX((double) object.get("PixelOffsetX"));
+	        obj.setPixelOffsetY((double) object.get("PixelOffsetY"));
+//	        obj.setShadow((ColorMultiplicator) object.get("Shadow"));
+	        list.add(obj);
+	    }
+	    return list;	}
+
 	public JSON(String file,double mapId){
 		this.file = file;
 		this.id = (long) mapId;

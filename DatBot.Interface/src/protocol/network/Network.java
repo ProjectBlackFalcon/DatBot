@@ -32,7 +32,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import Game.Entity;
-import Game.InfoAccount;
+import Game.Info;
 import Game.map.Map;
 import Game.movement.Movement;
 import Main.MainPlugin;
@@ -78,6 +78,8 @@ import protocol.network.util.DofusDataWriter;
 import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
+import Game.Servers;
+import Game.Plugin.Farm;
 import utils.JSON;
 
 public class Network implements Runnable {
@@ -251,12 +253,7 @@ public class Network implements Runnable {
 		case 30:
 			ServersListMessage servers = new ServersListMessage();
 			servers.Deserialize(dataReader);
-			int serverId = 0;
-			for (GameServerInformations b : servers.servers) {
-				if(b.charactersCount > 0)
-					serverId = b.id;
-			}
-			HandleServersListMessage(208);
+			HandleServersListMessage(Servers.getServerId(Info.server));
 			break;
 		case 42:
 			SelectedServerDataMessage selectServer = new SelectedServerDataMessage();
@@ -285,10 +282,10 @@ public class Network implements Runnable {
 			charactersListMessage.Deserialize(dataReader);
 			int j = 0;
 			for (int i = 0 ; i < charactersListMessage.characters.size() ; i++) {
-				if(charactersListMessage.characters.get(i).name.equals(InfoAccount.name)){
+				if(charactersListMessage.characters.get(i).name.equals(Info.name)){
 					HandleCharacterSelectionMessage(charactersListMessage.characters.get(i).id);
-					InfoAccount.actorId = charactersListMessage.characters.get(i).id;
-					InfoAccount.lvl = charactersListMessage.characters.get(i).level;
+					Info.actorId = charactersListMessage.characters.get(i).id;
+					Info.lvl = charactersListMessage.characters.get(i).level;
 					j = 1;
 					break;
 				} 
@@ -299,7 +296,7 @@ public class Network implements Runnable {
 			HandleFriendIgnoreSpouseMessages();
 			break;
 		case 4002:
-			HandleClientKeyMessage(FlashKeyGenerator.GetRandomFlashKey(InfoAccount.name));
+			HandleClientKeyMessage(FlashKeyGenerator.GetRandomFlashKey(Info.name));
 			HandleGameContextCreateMessage();
 			break;
 		case 500:
@@ -308,7 +305,7 @@ public class Network implements Runnable {
 		case 220:
 			CurrentMapMessage currentMapMessage = new CurrentMapMessage();
 			currentMapMessage.Deserialize(dataReader);
-			InfoAccount.mapId = currentMapMessage.mapId;
+			Info.mapId = currentMapMessage.mapId;
 			if(connectionToKoli){
 				sendToServer(new GameContextReadyMessage(currentMapMessage.mapId), GameContextReadyMessage.ProtocolId, "Context ready");
 			} else {
@@ -320,11 +317,13 @@ public class Network implements Runnable {
 			complementaryInformationsDataMessage.Deserialize(dataReader);
 			if(!connectionToKoli){
 				for (int i = 0; i < complementaryInformationsDataMessage.actors.size(); i++)
-					if (complementaryInformationsDataMessage.actors.get(i).contextualId == InfoAccount.actorId)
-						InfoAccount.cellId = complementaryInformationsDataMessage.actors.get(i).disposition.cellId;
+					if (complementaryInformationsDataMessage.actors.get(i).contextualId == Info.actorId)
+						Info.cellId = complementaryInformationsDataMessage.actors.get(i).disposition.cellId;
 					else
 						Map.Entities.add(new Entity(complementaryInformationsDataMessage.actors.get(i).disposition.cellId, complementaryInformationsDataMessage.actors.get(i).contextualId));
 				HandleMapComplementaryInformationsDataMessage();
+				Farm.statedElements = complementaryInformationsDataMessage.statedElements;
+				Farm.getFarmCell();
 			}
 			break;
 		case 891:
@@ -332,10 +331,10 @@ public class Network implements Runnable {
 		case 951:
 			GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
 			gameMapMovementMessage.Deserialize(dataReader);
-			if(gameMapMovementMessage.actorId == InfoAccount.actorId){
-				InfoAccount.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
+			if(gameMapMovementMessage.actorId == Info.actorId){
+				Info.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
 				MainPlugin.frame.append("Déplacement réussi !");
-				MainPlugin.frame.append("CellId : " + InfoAccount.cellId);
+				MainPlugin.frame.append("CellId : " + Info.cellId);
 			}
 			break;
 		case 6316 :
@@ -520,9 +519,7 @@ public class Network implements Runnable {
 
 	private static void HandleHelloConnectMessage(byte[] key, String salt) throws Exception {
 		VersionExtended versionExtended = new VersionExtended(2, 44, 7, 3, 0, 0, 1, 1);
-		String login = "wublel7";
-		String password = "wubwublel7";
-		byte[] credentials = Crypto.encrypt(key, login, password, salt);
+		byte[] credentials = Crypto.encrypt(key, Info.nameAccount, Info.password, salt);
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
 			credentialsArray.add((int) b);
@@ -618,17 +615,17 @@ public class Network implements Runnable {
 			String s = Paths.get("").toAbsolutePath().toString();
 			int i = s.indexOf("DatBot");
 			s = s.substring(0, i + 7);
-			p = new ProcessBuilder(s + "\\DatBot.Interface\\utils\\maps\\MapManager\\MapManager.exe",String.valueOf((int) InfoAccount.mapId)).start();
+			p = new ProcessBuilder(s + "\\DatBot.Interface\\utils\\maps\\MapManager\\MapManager.exe",String.valueOf((int) Info.mapId)).start();
 			p.waitFor();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		new JSON("MapInfo",InfoAccount.mapId);
-		new JSON("MapInfoComplete", InfoAccount.mapId);
-		MainPlugin.frame.append("Map : [" + InfoAccount.coords[0] + ";" + InfoAccount.coords[1] +  "]");	
-		MainPlugin.frame.append("CellId : " + InfoAccount.cellId);
-		InfoAccount.waitForMov = true;
-		InfoAccount.isConnected = true;
+		new JSON("MapInfo",Info.mapId);
+		new JSON("MapInfoComplete", Info.mapId);
+		MainPlugin.frame.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] +  "]");	
+		MainPlugin.frame.append("CellId : " + Info.cellId);
+		Info.waitForMov = true;
+		Info.isConnected = true;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {

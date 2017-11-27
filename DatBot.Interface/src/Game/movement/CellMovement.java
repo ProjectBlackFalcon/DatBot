@@ -1,7 +1,7 @@
 package Game.movement;
 
 import java.util.List;
-import Game.InfoAccount;
+import Game.Info;
 import Game.map.MapMovementAdapter;
 import Game.movement.MovementVelocity.MovementTypeEnum;
 import Main.MainPlugin;
@@ -27,18 +27,18 @@ public class CellMovement {
 		if (path == null)
 			return;
 		
-		InfoAccount.waitForMov = false;
+		Info.waitForMov = false;
 		
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path); 
-		Network.sendToServer(new GameMapMovementRequestMessage(keys, InfoAccount.mapId), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
+		Network.sendToServer(new GameMapMovementRequestMessage(keys, Info.mapId), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
 		if(path.Cells.size() >= 4 ){
-			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING)*2;
+			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
 			Thread.sleep(time);
 		} else {
-			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING)*2;
+			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
 			Thread.sleep(time);
 		}
-		InfoAccount.waitForMov = true;
+		Info.waitForMov = true;
 		Network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
 	}
 }

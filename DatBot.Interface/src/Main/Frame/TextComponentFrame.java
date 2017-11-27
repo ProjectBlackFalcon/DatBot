@@ -17,8 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
-import Game.InfoAccount;
-import Game.Spectate.specBot;
+import Game.Info;
+import Game.Plugin.specBot;
 import Game.map.Map;
 import Game.map.MapMovement;
 import Game.movement.CellMovement;
@@ -81,7 +81,7 @@ public class TextComponentFrame extends JFrame {
 							cellId = -1;
 
 						if (cellId != -1) {
-							if (Map.Cells.get(cellId).Mov == false || InfoAccount.cellId == cellId) {
+							if (Map.Cells.get(cellId).Mov == false || Info.cellId == cellId) {
 								MainPlugin.frame.append("Cette case est inaccessible");
 								return;
 							} else {
@@ -141,7 +141,7 @@ public class TextComponentFrame extends JFrame {
 				
 				else if (textField.getText().contains("goToMap")){
 					try {
-						Movement.goToMap(InfoAccount.coords[0],InfoAccount.coords[1],-13, -28,null);
+						Movement.goToMap(Info.coords[0],Info.coords[1],-13, -28,null);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
