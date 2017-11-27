@@ -4,10 +4,12 @@ from PIL import Image
 from heapq import *
 import time
 from random import randint
+from Model.LowLevelFunctions import LowLevelFunctions
 
 
 class PathFinder:
     def __init__(self, start_map, end_map, start_cell, end_cell, worldmap):
+        self.llf = LowLevelFunctions()
         self.start = start_map
         self.end = end_map
         self.bbox = (
@@ -21,15 +23,17 @@ class PathFinder:
         self.worldmap = worldmap
         self.shape = (abs(self.end[1]-self.start[1])+1, abs(self.end[0]-self.start[0])+1)
         self.shape = (abs(self.bbox[1]-self.bbox[3])+1, abs(self.bbox[0]-self.bbox[2])+1)
-        self.mapinfo = self.load_map_info()
+        self.mapinfo = self.llf.load_map_info()
         self.maps_coords = []
         self.glued_maps = []
         self.path_cells = []
         self.map_change_coords = []
         self.map_change_cells = []
         self.map_change_directions = []
+        self.enlargement_n = 0
 
     def enlarge(self):
+        self.enlargement_n += 1
         print('[Pathfinder] Enlarging')
         self.bbox = (
             self.bbox[0]-1,
@@ -46,11 +50,6 @@ class PathFinder:
         self.map_change_cells = []
         self.map_change_directions = []
 
-    def load_map_info(self):
-        with open('..//MapInfo.json', 'r') as f:
-            mapinfo = json.load(f)
-        return mapinfo
-
     def get_maps_coords(self):
         xn = abs(self.bbox[0]-self.bbox[2])+1
         yn = abs(self.bbox[1]-self.bbox[3])+1
@@ -65,12 +64,6 @@ class PathFinder:
     def id_fetch_map(self, id):
         for map in self.mapinfo:
             if map['id'] == id:
-                return map
-
-    def coord_fetch_map(self, coord):
-        # print('Fetching : {}'.format(coord))
-        for map in self.mapinfo:
-            if map['coord'] == coord and map['worldMap'] == self.worldmap and map['hasPriorityOnWorldMap']:
                 return map
 
     def glue_maps(self, maps_as_arrays, shape):
@@ -107,7 +100,7 @@ class PathFinder:
 
         # print(self.glued_maps.shape)
 
-        neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0), (2, 0), (-2, 0)]
 
         close_set = set()
         came_from = {}
@@ -171,11 +164,16 @@ class PathFinder:
 
         maps_list = []
         for coord in self.maps_coords:
-            maps_list.append(self.coord_fetch_map(coord)['cells'])
+            map_infos = self.llf.coord_fetch_map(coord, self.worldmap)
+            if map_infos is not None:
+                maps_list.append(map_infos)
+            else:
+                maps_list.append([[1 for i in range(14)] for j in range(40)])
         self.glue_maps(maps_list, self.shape)
+        self.map_to_image(self.glued_maps, 10)
 
         if self.end_cell is None:
-            end_map_cells = self.coord_fetch_map('{};{}'.format(self.end[0], self.end[1]))['cells']
+            end_map_cells = self.llf.coord_fetch_map('{};{}'.format(self.end[0], self.end[1]), self.worldmap)
             found_walkable = False
             while not found_walkable:
                 x = randint(0, 13)
@@ -199,9 +197,11 @@ class PathFinder:
     def get_path(self):
         self.get_path_try()
         print(self.path_cells)
-        while not self.path_cells:
+        while not self.path_cells and self.enlargement_n < 9:
             self.enlarge()
             self.get_path_try()
+        if not self.path_cells:
+            raise Exception('Could not generate path')
 
     def get_map_change_coords(self):
         if not self.path_cells:
