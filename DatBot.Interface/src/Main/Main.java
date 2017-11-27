@@ -18,12 +18,12 @@ public class Main {
     		System.out.println("Waiting for connection...");
     		Thread.sleep(1000);
     		index++;
-    		if(index == 2){
-    			Info.nameAccount = "wublel7";
-    			Info.password = "wubwublel7";
-    			Info.name = "Dihydroquerina";
-    			Info.server = "Julith";
-    		}
+//    		if(index == 2){
+//    			Info.nameAccount = "wublel7";
+//    			Info.password = "wubwublel7";
+//    			Info.name = "Dihydroquerina";
+//    			Info.server = "Julith";
+//    		}
 //    		if(index == 2){
 //    			Info.nameAccount = "ceciestuntest";
 //    			Info.password = "ceciestlemdp1";
@@ -39,21 +39,21 @@ public class Main {
     	while(true){
     		index++;
     		Thread.sleep(1000);
-    		if(index == 15){
-				MapMovement mapMovement = Movement.ChangeMap(55,"e");
-				if (mapMovement == null) {
-					System.out.println(false);
-					MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
-				}
-				else {
-					mapMovement.PerformChangement();
-					if(Movement.moveOver()){
-						System.out.println(true);
-					} else {
-						System.out.println(false);
-					}
-				}
-    		}
+//    		if(index == 15){
+//				MapMovement mapMovement = Movement.ChangeMap(55,"e");
+//				if (mapMovement == null) {
+//					System.out.println(false);
+//					MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+//				}
+//				else {
+//					mapMovement.PerformChangement();
+//					if(Movement.moveOver()){
+//						System.out.println(true);
+//					} else {
+//						System.out.println(false);
+//					}
+//				}
+//    		}
     	}
     }
 }
