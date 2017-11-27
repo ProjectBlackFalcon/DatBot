@@ -1,6 +1,7 @@
 from Model.Pathfinder import PathFinder
 from Model.Interface import Interface
 from Model.LowLevelFunctions import LowLevelFunctions
+import json
 
 
 class HighLevelFunctions:
@@ -27,7 +28,19 @@ class HighLevelFunctions:
             self.interface.move(target_cell)
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
-        map_resources = self.interface.get_map_resources()
+        with open('..//resourcesIDs.json', 'r') as f:
+            resources_ids = json.load(f)
+
+        with open('..//resourcesLevels.json', 'r') as f:
+            resources_levels = json.load(f)
+
+        map_resources_ids = self.interface.get_map_resources()
+        map_resources = {}
+        for cell_id, res_id, status in map_resources_ids.items():
+            if resources_ids[str(res_id)] in map_resources.keys():
+                map_resources[resources_ids[str(res_id)]].append((cell_id, status))
+            else:
+                map_resources[resources_ids[str(res_id)]] = [(cell_id, status)]
 
         if harvest_only is not None:
             filtered_map_resources = {}
@@ -42,6 +55,11 @@ class HighLevelFunctions:
                 if resource in do_not_harvest:
                     del filtered_map_resources[resource]
 
+        for resource, values in filtered_map_resources.items():
+            if values[1] != 0:
+                del filtered_map_resources[resource]
+
+        # TODO level filtering
 
 
 __author__ = 'Alexis'
