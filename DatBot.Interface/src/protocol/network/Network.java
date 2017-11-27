@@ -65,12 +65,14 @@ import protocol.network.messages.game.context.roleplay.MapRunningFightDetailsMes
 import protocol.network.messages.game.context.roleplay.MapRunningFightListMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
+import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
 import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.character.choice.CharacterBaseInformations;
+import protocol.network.types.game.interactive.StatedElement;
 import protocol.network.types.version.Version;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
@@ -323,6 +325,7 @@ public class Network implements Runnable {
 						Map.Entities.add(new Entity(complementaryInformationsDataMessage.actors.get(i).disposition.cellId, complementaryInformationsDataMessage.actors.get(i).contextualId));
 				HandleMapComplementaryInformationsDataMessage();
 				Farm.statedElements = complementaryInformationsDataMessage.statedElements;
+				Farm.interactiveElements = complementaryInformationsDataMessage.interactiveElements;
 				Farm.getFarmCell();
 			}
 			break;
@@ -380,6 +383,18 @@ public class Network implements Runnable {
 			break;
 		case 5864:
 			new GameFightShowFighterMessage().Deserialize(dataReader);
+			break;
+		case 5709:
+			if(Info.isConnected){
+				StatedElementUpdatedMessage elementUpdatedMessage = new StatedElementUpdatedMessage();
+				elementUpdatedMessage.Deserialize(dataReader);
+				for (int i = 0; i < Farm.statedElements.size() ; i++) {
+					if(elementUpdatedMessage.statedElement.elementCellId == Farm.statedElements.get(i).elementCellId){
+						Farm.statedElements.set(i, elementUpdatedMessage.statedElement);
+					}
+				}
+				Farm.getFarmCell();
+			}
 			break;
 		}
 	}

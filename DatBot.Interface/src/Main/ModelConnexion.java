@@ -90,7 +90,7 @@ public class ModelConnexion implements Runnable {
 						}
 					}
 					break;
-				case "getRessources":
+				case "getResources":
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.farmCell});
 					break;
 				case "getStats":
