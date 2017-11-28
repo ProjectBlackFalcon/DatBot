@@ -1,12 +1,6 @@
 package Main;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import Game.Info;
-import Game.Plugin.Farm;
-import Game.map.MapMovement;
-import Game.movement.CellMovement;
-import Game.movement.Movement;
 import protocol.network.Network;
 
 public class Main {
@@ -15,10 +9,10 @@ public class Main {
 //    	Thread modelConnexion = new Thread(new ModelConnexion());
 //    	modelConnexion.start();
     	int index = 0;
-//    	Info.nameAccount = args[0];
-//    	Info.password = args[1];
-//    	Info.name = args[2];
-//    	Info.server = args[3];
+    	Info.nameAccount = args[0];
+    	Info.password = args[1];
+    	Info.name = args[2];
+    	Info.server = args[3];
     	while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals("")){
     		System.out.println("Waiting for connection...");
     		Thread.sleep(1000);
@@ -29,12 +23,12 @@ public class Main {
 //    			Info.name = "Dihydroquerina";
 //    			Info.server = "Julith";
 //    		}
-    		if(index == 2){
-    			Info.nameAccount = "ceciestuntest";
-    			Info.password = "ceciestlemdp1";
-    			Info.name = "Gladiatonme";
-    			Info.server = "Echo";
-    		}
+//    		if(index == 2){
+//    			Info.nameAccount = "ceciestuntest";
+//    			Info.password = "ceciestlemdp1";
+//    			Info.name = "Gladiatonme";
+//    			Info.server = "Echo";
+//    		}
     	}    	
     	Thread thread = new Thread(new Network());
     	Thread thread2 = new Thread(new MainPlugin());

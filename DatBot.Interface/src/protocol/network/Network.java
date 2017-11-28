@@ -209,7 +209,7 @@ public class Network implements Runnable {
 				// Sometime there is so many pc that the PC can't keep up
 				// Need to try with a better one
 				// Packet seems to be split if to fast
-				Thread.sleep(200);
+				Thread.sleep(750);
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
 			}
@@ -513,7 +513,7 @@ public class Network implements Runnable {
 			if (bigPacketLengthToFull == 0) {
 				// System.out.println("\n----------------------------------");
 //				System.out.println("[Reçu] ID = " + bigPacketId);
-				 System.out.println("[Reçu] ID = " + bigPacketId + " | Taille du contenu = " + bigPacketData.length + "\n[Data] : " + bytesToString(bigPacketData, "%02X", false));
+				 System.out.println("[Reçu] ID = " + bigPacketId + " | Taille du contenu = " + bigPacketData.length ); // + "\n[Data] : " + bytesToString(bigPacketData, "%02X", false)
 				TreatPacket(bigPacketId, bigPacketData);
 				// System.out.println("\n----------------------------------");
 				bigPacketData = null;
@@ -528,7 +528,7 @@ public class Network implements Runnable {
 				//
 				// System.out.println("\n----------------------------------");
 //				System.out.println("[Reçu] ID = " + message.getId());
-				 System.out.println("[Reçu] ID = " + message.getId() + " | Taille du contenu = " + message.getLength() + "\n[Data] : " + bytesToString(message.getData(), "%02X", false));
+				 System.out.println("[Reçu] ID = " + message.getId() + " | Taille du contenu = " + message.getLength() ); // + "\n[Data] : " + bytesToString(message.getData(), "%02X", false)
 				TreatPacket(message.getId(), message.getData());
 				// System.out.println("\n----------------------------------");
 			} else if (message.getId() != 0 && message.bigPacketLength != 0) {
