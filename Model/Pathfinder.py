@@ -42,7 +42,7 @@ class PathFinder:
             self.bbox[3]+1
         )
         self.shape = (abs(self.bbox[1]-self.bbox[3])+1, abs(self.bbox[0]-self.bbox[2])+1)
-        self.mapinfo = self.load_map_info()
+        self.mapinfo = self.llf.load_map_info()
         self.maps_coords = []
         self.glued_maps = []
         self.path_cells = []
@@ -74,9 +74,22 @@ class PathFinder:
             arr = maps_as_arrays.reshape(shape[0], shape[1], 40, 14)
             out = np.concatenate([np.concatenate([map for map in arr[i]], axis=1) for i in range(shape[0])], axis=0)
             self.glued_maps = out
+            print(self.glued_maps.shape)
+
+    def adapt_shape_maps(self, maps):
+        shape = maps.shape
+        print(shape)
+        flattened = maps.flatten()
+        new_base = np.zeros((14*shape[1]//14 + 20*shape[0]//40-1, 14*shape[1]//14 + 20*shape[0]//40))
+        new_base[new_base == 0] = -1
+        for i in range(len(flattened)):
+            coord = i % shape[1] + int((i//shape[1])/2+0.5), (shape[1]-1 - i % shape[1] + int((i//shape[1])/2))
+            new_base[coord[1]][coord[0]] = flattened[i]
+        self.map_to_image(new_base, 10)
+
 
     def map_to_image(self, map_as_array, scaling_factor):
-        print('[Pathfinder] Generating image...')
+        # print('[Pathfinder] Generating image...')
         map_as_array = np.array(map_as_array)
         map_as_array[map_as_array == 0] = 0
         # map_as_array[map_as_array != 0] = 1
@@ -86,7 +99,7 @@ class PathFinder:
         a[a == 3] = 255*128
         a[a == 4] = 255*255
         Image.fromarray(a).save('Out.png')
-        print('[Pathfinder] Done')
+        # print('[Pathfinder] Done')
 
     def heuristic(self, a, b):
         return (b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2
@@ -100,7 +113,7 @@ class PathFinder:
 
         # print(self.glued_maps.shape)
 
-        neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0), (2, 0), (-2, 0)]
+        neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
         close_set = set()
         came_from = {}
@@ -196,7 +209,7 @@ class PathFinder:
 
     def get_path(self):
         self.get_path_try()
-        print(self.path_cells)
+        # print(self.path_cells)
         while not self.path_cells and self.enlargement_n < 9:
             self.enlarge()
             self.get_path_try()
