@@ -72,13 +72,13 @@ public abstract class Player {
 	public SpellObject[] getSpells(){
 		return spells;
 	}
-	
+
 	public ArrayList<SpellObject> getAvailableSpells(){
 		ArrayList<SpellObject> spells = new ArrayList<>();
 		
-		for(int i = 0; i < this.spells.length; i++){
-			if(this.spells[i].getCost() <= this.AP){
-				spells.add(this.spells[i]);
+		for(int i = 0; i < this.getSpells().length; i++){
+			if(this.getSpells()[i].getCost() <= this.AP && this.getSpells()[i].isAvailable()){
+				spells.add(this.getSpells()[i]);
 			}
 		}
 		
@@ -103,6 +103,12 @@ public abstract class Player {
 		
 		for(int i = buffsToRemove.size()-1; i >= 0; i--){
 			this.buffs.remove(buffsToRemove.get(i).intValue());
+		}
+	}
+	
+	public void updateSpellsStatus() {
+		for(int i = 0; i < this.getSpells().length; i++) {
+			this.getSpells()[i].passTurn();
 		}
 	}
 	

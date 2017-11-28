@@ -93,7 +93,7 @@ public class Damage extends Spell{
 		int prcntReduction = outputDamage / (100/pe.getModel().getResPrcnt()[this.getType()]);
 		
 		int finalDamage = outputDamage - fixedReduction - prcntReduction;
-		
+		/*
 		System.out.println("Casting spell : "+superSpell.getName());
 		System.out.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
 		System.out.println("Chosen damage : "+baseDamage);
@@ -102,8 +102,46 @@ public class Damage extends Spell{
 		System.out.println("Output damage : "+outputDamage);
 		System.out.println("Fixed reduction : "+fixedReduction);
 		System.out.println("Final damage : "+finalDamage);
-		
+		*/
 		return finalDamage;
+	}
+	
+	public int previz(PlayingEntity pe, PlayingEntity caster) {
+		Random rand = new Random();
+
+		int baseDamage = (this.getLowDamage()+this.getHighDamage())/2;
+		int baseDamageCrit = (this.getCriticalLowDamage()+this.getCriticalHighDamage())/2;
+
+		baseDamageCrit = this.getCriticalLowDamage()+rand.nextInt(this.getCriticalHighDamage()-this.getCriticalLowDamage());
+		baseDamage = this.getLowDamage()+rand.nextInt(this.getHighDamage()-this.getLowDamage());
+		
+		int addedDamage = baseDamage*((caster.getModel().getStats()[this.getType()] + caster.getModel().getPower())/100);
+		int fixedDamage = caster.getModel().getFixedDamages() + caster.getModel().getElementaryDamage()[this.getType()];
+		int	fixedDamageCrit = caster.getModel().getCriticalDamage();
+		
+		int outputDamage = baseDamage + addedDamage + fixedDamage;
+		int outputDamageCrit = baseDamage + addedDamage + fixedDamage + fixedDamageCrit;
+		
+		int fixedReduction = pe.getModel().getResFixed()[this.getType()];
+		int fixedReductionCrit = pe.getModel().getCriticalResistance();
+		
+		int prcntReduction = outputDamage / (100/pe.getModel().getResPrcnt()[this.getType()]);
+		int prcntReductionCrit = outputDamageCrit / (100/pe.getModel().getResPrcnt()[this.getType()]);
+		
+		int finalDamage = outputDamage - fixedReduction - prcntReduction;
+		int finalDamageCrit = outputDamageCrit - fixedReduction - fixedReductionCrit - prcntReductionCrit;
+		
+		/*
+		System.out.println("Casting spell : "+superSpell.getName());
+		System.out.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
+		System.out.println("Chosen damage : "+baseDamage);
+		System.out.println("Added damage : "+addedDamage);
+		System.out.println("Fixed damage : "+fixedDamage);
+		System.out.println("Output damage : "+outputDamage);
+		System.out.println("Fixed reduction : "+fixedReduction);
+		System.out.println("Final damage : "+finalDamage);
+		*/
+		return (finalDamage+finalDamageCrit)/2;
 	}
 	
 	@Override
@@ -116,10 +154,8 @@ public class Damage extends Spell{
 		}else {
 			finalDamage = this.chosenDamage(caster, target);
 		}
-		
-		System.out.println(target);
+
 		target.getModel().removeLP(finalDamage);
-		System.out.println("Removed LP : "+target);
 	}
 	
 }

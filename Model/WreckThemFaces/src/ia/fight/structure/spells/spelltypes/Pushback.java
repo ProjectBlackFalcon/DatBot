@@ -31,9 +31,7 @@ public class Pushback extends Spell{
 		
 		int x2 = victim.getX();
 		int y2 = victim.getY();
-		
-		System.out.println(x1+" "+y1+" "+x2+" "+y2);
-		
+
 		int xDist = 0;
 		int yDist = 0;
 		
@@ -52,8 +50,6 @@ public class Pushback extends Spell{
 		}else if(y2-y1 < 0){
 			yDist = -this.cellAmount;
 		}
-		
-		System.out.println(xDist+" "+yDist);
 		
 		ArrayList<Position> concernedPositions = new ArrayList<>();
 		
@@ -110,21 +106,16 @@ public class Pushback extends Spell{
 			}
 			
 		});
-		
-		System.out.println(concernedPositions);
-		
+
 		for(int i = 0; i < concernedPositions.size(); i++){
 			if(Game.map.isPositionWalkable(concernedPositions.get(i))){
 				target.setPosition(concernedPositions.get(i));
-				System.out.println("Set position to "+concernedPositions.get(i));
 			}else{
 				target.getModel().removeLP((concernedPositions.size()-i)*50);
 				//System.out.println("Got squished against a wall with "+(concernedPositions.size()-i)+" remaining.");
 				break;
 			}
 		}
-		
-		System.out.println("Moved some people maboi");
 	}
 
 	@Override

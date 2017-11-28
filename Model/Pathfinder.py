@@ -26,6 +26,7 @@ class PathFinder:
         self.mapinfo = self.llf.load_map_info()
         self.maps_coords = []
         self.glued_maps = []
+        self.adapted_maps = []
         self.path_cells = []
         self.map_change_coords = []
         self.map_change_cells = []
@@ -45,6 +46,7 @@ class PathFinder:
         self.mapinfo = self.llf.load_map_info()
         self.maps_coords = []
         self.glued_maps = []
+        self.adapted_maps = []
         self.path_cells = []
         self.map_change_coords = []
         self.map_change_cells = []
@@ -73,20 +75,30 @@ class PathFinder:
             maps_as_arrays = np.array(maps_as_arrays)
             arr = maps_as_arrays.reshape(shape[0], shape[1], 40, 14)
             out = np.concatenate([np.concatenate([map for map in arr[i]], axis=1) for i in range(shape[0])], axis=0)
+            self.pick_end_cell()
+            start_pos = (
+                self.cell2coord(self.start_cell)[0]+14*(self.start[0]-self.bbox[0]),
+                self.cell2coord(self.start_cell)[1]+40*(self.start[1]-self.bbox[1])
+            )
+            goal_pos = (
+                self.cell2coord(self.end_cell)[0]+14*(self.end[0]-self.bbox[0]),
+                self.cell2coord(self.end_cell)[1]+40*(self.end[1]-self.bbox[1])
+            )
+            out[start_pos[1]][start_pos[0]] = -2
+            out[goal_pos[1]][goal_pos[0]] = -3
             self.glued_maps = out
-            print(self.glued_maps.shape)
 
     def adapt_shape_maps(self, maps):
+        maps = np.array(maps)
         shape = maps.shape
-        print(shape)
         flattened = maps.flatten()
         new_base = np.zeros((14*shape[1]//14 + 20*shape[0]//40-1, 14*shape[1]//14 + 20*shape[0]//40))
         new_base[new_base == 0] = -1
         for i in range(len(flattened)):
             coord = i % shape[1] + int((i//shape[1])/2+0.5), (shape[1]-1 - i % shape[1] + int((i//shape[1])/2))
             new_base[coord[1]][coord[0]] = flattened[i]
-        self.map_to_image(new_base, 10)
-
+        self.adapted_maps = new_base[:]
+        return new_base[:]
 
     def map_to_image(self, map_as_array, scaling_factor):
         # print('[Pathfinder] Generating image...')
@@ -97,6 +109,8 @@ class PathFinder:
         a[a == 0] = 255*64
         a[a == 2] = 255*32
         a[a == 3] = 255*128
+        a[a == -2] = 255*128
+        a[a == -3] = 255*128
         a[a == 4] = 255*255
         Image.fromarray(a).save('Out.png')
         # print('[Pathfinder] Done')
@@ -113,7 +127,7 @@ class PathFinder:
 
         # print(self.glued_maps.shape)
 
-        neighbors = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        neighbors = [(1, 1), (-1, -1), (1, -1), (-1, 1), (1, 0), (0, 1), (-1, 0), (0, -1)]
 
         close_set = set()
         came_from = {}
@@ -138,9 +152,9 @@ class PathFinder:
             for i, j in neighbors:
                 neighbor = current[0] + i, current[1] + j
                 tentative_g_score = gscore[current] + self.heuristic(current, neighbor)
-                if 0 <= neighbor[0] < self.glued_maps.shape[0]:
-                    if 0 <= neighbor[1] < self.glued_maps.shape[1]:
-                        if self.glued_maps[neighbor[0]][neighbor[1]] != 0:
+                if 0 <= neighbor[0] < self.adapted_maps.shape[0]:
+                    if 0 <= neighbor[1] < self.adapted_maps.shape[1]:
+                        if self.adapted_maps[neighbor[0]][neighbor[1]] not in [0, -2, -3]:
                             continue
                     else:
                         # array bound y walls
@@ -163,13 +177,13 @@ class PathFinder:
             print('[Pathfinder] Unable to get path')
         return False
 
-    def add_path_to_glued_maps(self):
+    def add_path_to_adapted_maps(self):
         for x, y in self.path_cells:
-            self.glued_maps[x][y] = 3
+            self.adapted_maps[x][y] = 3
 
-    def add_map_change_ccords_to_glued_maps(self):
+    def add_map_change_coords_to_adapted_maps(self):
         for x, y in self.map_change_coords:
-            self.glued_maps[x][y] = 4
+            self.adapted_maps[x][y] = 4
 
     def get_path_try(self):
         if not self.maps_coords:
@@ -183,28 +197,12 @@ class PathFinder:
             else:
                 maps_list.append([[1 for i in range(14)] for j in range(40)])
         self.glue_maps(maps_list, self.shape)
-        self.map_to_image(self.glued_maps, 10)
+        self.adapt_shape_maps(self.glued_maps)
+        # self.map_to_image(self.glued_maps, 10)
 
-        if self.end_cell is None:
-            end_map_cells = self.llf.coord_fetch_map('{};{}'.format(self.end[0], self.end[1]), self.worldmap)
-            found_walkable = False
-            while not found_walkable:
-                x = randint(0, 13)
-                y = randint(0, 39)
-                if end_map_cells[y][x] == 0:
-                    found_walkable = True
-            self.end_cell = self.coord2cell((x, y))
+        start_pos = (np.where(self.adapted_maps == -2)[1][0], np.where(self.adapted_maps == -2)[0][0])
+        goal_pos = (np.where(self.adapted_maps == -3)[1][0], np.where(self.adapted_maps == -3)[0][0])
 
-        start_pos = (
-            self.cell2coord(self.start_cell)[0]+14*(self.start[0]-self.bbox[0]),
-            self.cell2coord(self.start_cell)[1]+40*(self.start[1]-self.bbox[1])
-        )
-        goal_pos = (
-            self.cell2coord(self.end_cell)[0]+14*(self.end[0]-self.bbox[0]),
-            self.cell2coord(self.end_cell)[1]+40*(self.end[1]-self.bbox[1])
-        )
-
-        # print(start_pos, goal_pos)
         self.astar(goal_pos, start_pos)
 
     def get_path(self):
@@ -216,45 +214,41 @@ class PathFinder:
         if not self.path_cells:
             raise Exception('Could not generate path')
 
-    def get_map_change_coords(self):
+    def get_map_change_cells(self):
         if not self.path_cells:
             self.get_path()
 
-        out = []
-        for i in range(len(self.path_cells)-1):
-            this_step = self.path_cells[i]
-            next_step = self.path_cells[i+1]
-            if (this_step[1]+1) % 14 == 0 and next_step[1] % 14 == 0 or\
-                this_step[1] % 14 == 0 and (next_step[1]+1) % 14 == 0 or \
-                (this_step[0]+1) % 40 == 0 and next_step[0] % 40 == 0 or \
-                this_step[0] % 40 == 0 and (next_step[0]+1) % 40 == 0:
-                out.append((this_step[0], this_step[1]))
+        # print(self.path_cells)
+        total_width = len(self.glued_maps[1])
+        width = 14
+        path_map_change_cells = []
+        path_cells = []
+        top_map_change_cells = [i for i in range(28)]
+        left_map_change_cells = [i for i in range(560) if i % 14 == 0]
+        right_map_change_cells = [i for i in range(560) if i % 14 == 13]
+        bottom_map_change_cells = [i for i in range(532, 560)]
+        for x, y in self.path_cells:
+            cell = self.coord2cell_diag((y, x))
+            path_cells.append(cell)
 
-        marked = []
-        for i in range(len(out)-2, -1, -1):
-            if abs(out[i][0]-out[i+1][0])+abs(out[i][1]-out[i+1][1]) <= 1:
-                marked.append(i)
-        for ind in marked:
-            # del out[ind]
-            pass
-        self.map_change_coords = out[:]
+        for i in range(len(path_cells)-1):
+            current = (path_cells[i] - width*((path_cells[i] // width) % (total_width//width)) - (total_width-width)*(path_cells[i]//total_width)) % 560
+            nxt = (path_cells[i+1] - width*((path_cells[i+1] // width) % (total_width//width)) - (total_width-width)*(path_cells[i+1]//total_width)) % 560
+            if current in top_map_change_cells and nxt in bottom_map_change_cells:
+                path_map_change_cells.append(current)
+                self.map_change_directions.append('n')
+            if current in bottom_map_change_cells and nxt in top_map_change_cells:
+                path_map_change_cells.append(current)
+                self.map_change_directions.append('s')
+            if current in left_map_change_cells and nxt in right_map_change_cells:
+                path_map_change_cells.append(current)
+                self.map_change_directions.append('w')
+            if current in right_map_change_cells and nxt in left_map_change_cells:
+                path_map_change_cells.append(current)
+                self.map_change_directions.append('e')
+
+        out = [(path_map_change_cells[i], self.map_change_directions[i]) for i in range(len(path_map_change_cells))]
         return out[:]
-
-    def get_map_change_cells(self):
-        if not self.map_change_coords:
-            self.get_map_change_coords()
-        out = [self.coord2cell(coord) for coord in self.get_map_change_coords()]
-        self.map_change_cells = out[:]
-        return out[:]
-
-    def get_directions(self):
-        directions = []
-        for change_map_cell in self.map_change_coords:
-            current = change_map_cell
-            nxt = self.path_cells[self.path_cells.index(change_map_cell)+1]
-            directions.append(['e', 'w', 's', 'n'][[(0, 1), (0, -1), (1, 0), (-1, 0)].index((nxt[0]-current[0], nxt[1]-current[1]))])
-        self.map_change_directions = directions[:]
-        return directions[:]
 
     def cell2coord(self, cell):
         return (cell % 14), cell//14
@@ -262,5 +256,31 @@ class PathFinder:
     def coord2cell(self, coord):
         coord = coord[1] % 14, coord[0] % 40
         return coord[1]*14+coord[0]
+
+    def coord2cell_diag(self, coord):
+        width = len(self.glued_maps[0])
+        i = 0
+        result = i % width + int((i//width)/2+0.5), (width-1 - i % width + int((i//width)/2))
+        while result != coord:
+            i += 1
+            result = i % width + int((i//width)/2+0.5), (width-1 - i % width + int((i//width)/2))
+        return i
+
+    def cell2coord_diag(self, cell):
+        width = len(self.glued_maps[0])
+        return cell % width + int((cell//width)/2+0.5), (width-1 - cell % width + int((cell//width)/2))
+
+    def pick_end_cell(self):
+        if self.end_cell is None:
+            end_map_cells = self.llf.coord_fetch_map('{};{}'.format(self.end[0], self.end[1]), self.worldmap)
+            found_walkable = False
+            while not found_walkable:
+                x = randint(0, 13)
+                y = randint(0, 39)
+                # print(self.coord2cell((x, y)), end_map_cells[y][x])
+                if end_map_cells[y][x] == 0:
+                    found_walkable = True
+                self.end_cell = self.coord2cell((y, x))
+        return self.end_cell
 
 __author__ = 'Alexis'
