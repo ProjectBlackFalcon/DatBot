@@ -105,6 +105,7 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "getStats":
+					
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					break;
 				}

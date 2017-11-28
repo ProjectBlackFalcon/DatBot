@@ -52,6 +52,8 @@ import protocol.network.messages.game.basic.SequenceNumberMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectionMessage;
 import protocol.network.messages.game.character.choice.CharactersListMessage;
+import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
+import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.chat.channel.ChannelEnablingMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
 import protocol.network.messages.game.context.GameContextReadyMessage;
@@ -309,6 +311,9 @@ public class Network implements Runnable {
 			break;
 		case 500:
 			HandleObjectAveragePricesGetMessage();
+			CharacterStatsListMessage characterStatsListMessage = new CharacterStatsListMessage();
+			characterStatsListMessage.Deserialize(dataReader);
+			Info.stats = characterStatsListMessage;
 			break;
 		case 220:
 			CurrentMapMessage currentMapMessage = new CurrentMapMessage();
@@ -446,6 +451,11 @@ public class Network implements Runnable {
 					Info.job.set(i, experienceUpdateMessage.experiencesUpdate);
 				}
 			}
+			break;
+		case 5670:
+			CharacterLevelUpMessage characterLevelUpMessage = new CharacterLevelUpMessage();
+			characterLevelUpMessage.Deserialize(dataReader);
+			Info.lvl = characterLevelUpMessage.newLevel;
 			break;
 		}
 	}
