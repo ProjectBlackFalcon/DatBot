@@ -226,6 +226,7 @@ public class Game {
 		}
 		
 		System.out.println("Ennemy is "+Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition())+" cases away.");
+		
 	}
 	
 	
