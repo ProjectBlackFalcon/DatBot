@@ -47,7 +47,7 @@ public class JSON implements Runnable{
 			switch(file){
 			
 			case "MapInfo" :
-				a = (JSONArray) parser.parse(new FileReader(s + "\\MapInfo.json"));
+				a = (JSONArray) parser.parse(new FileReader(s + "\\Utils\\MapInfo.json"));
 		        for (Object o : a)
 		        {
 		          JSONObject person = (JSONObject) o;

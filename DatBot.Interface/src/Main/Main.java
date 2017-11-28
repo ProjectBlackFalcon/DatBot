@@ -3,6 +3,7 @@ package Main;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import Game.Info;
+import Game.Plugin.Farm;
 import Game.map.MapMovement;
 import Game.movement.CellMovement;
 import Game.movement.Movement;
@@ -24,12 +25,12 @@ public class Main {
 //    			Info.name = "Dihydroquerina";
 //    			Info.server = "Julith";
 //    		}
-//    		if(index == 2){
-//    			Info.nameAccount = "ceciestuntest";
-//    			Info.password = "ceciestlemdp1";
-//    			Info.name = "Gladiatonme";
-//    			Info.server = "Echo";
-//    		}
+    		if(index == 2){
+    			Info.nameAccount = "ceciestuntest";
+    			Info.password = "ceciestlemdp1";
+    			Info.name = "Gladiatonme";
+    			Info.server = "Echo";
+    		}
     	}    	
     	Thread thread = new Thread(new Network());
     	Thread thread2 = new Thread(new MainPlugin());
@@ -39,8 +40,21 @@ public class Main {
     	while(true){
     		index++;
     		Thread.sleep(1000);
+
 //    		if(index == 15){
-//				MapMovement mapMovement = Movement.ChangeMap(55,"e");
+//    			if(Farm.harvestCell(Integer.parseInt("303"))){
+//        			System.out.println(Farm.lastItemHarvested);
+//        			System.out.println(Farm.quantityLastItemHarvested);
+//        		} 
+////    			else if (){
+////    				TODO AGGRO
+////    			}					
+//    			else {
+//    				System.out.println(false);
+//    			}
+//    		}
+//    		if(index == 15){
+//				MapMovement mapMovement = Movement.ChangeMap(112,"w");
 //				if (mapMovement == null) {
 //					System.out.println(false);
 //					MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
@@ -53,7 +67,7 @@ public class Main {
 //						System.out.println(false);
 //					}
 //				}
-//    		}
+//    		}    		
     	}
     }
 }

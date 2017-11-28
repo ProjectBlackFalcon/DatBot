@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
 import Game.Info;
+import Game.Plugin.Farm;
 import Game.Plugin.specBot;
 import Game.map.Map;
 import Game.map.MapMovement;
@@ -161,6 +162,23 @@ public class TextComponentFrame extends JFrame {
 					try {
 						Network.socket.close();
 					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else if (textField.getText().contains("getR")){
+					try {
+						int length = textField.getText().length();
+						
+						if (length == 6) {
+							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 1))));
+						} else if (length == 7) {
+							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 2))));
+						} else if (length == 8) {
+							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 3))));
+						} 
+						System.out.println("Id : " + Farm.lastItemHarvested + " Quantity : " + Farm.quantityLastItemHarvested);
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
