@@ -19,6 +19,6 @@ public class Cra extends Player{
 	
 	@Override
 	public String toString() {
-		return "Cra player with base LP/AP/MP : "+this.getBaseLP()+"/"+this.getBaseAP()+"/"+this.getBaseMP();
+		return "Cra player with base LP/AP/MP : "+this.getLP()+"/"+this.getAP()+"/"+this.getMP();
 	}
 }

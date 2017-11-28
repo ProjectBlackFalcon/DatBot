@@ -30,14 +30,11 @@ public class Game {
 		refreshMessage.add("0;p");
 		refreshMessage.add("1;m;9;12");
 		refreshMessage.add("1;p");
-		refreshMessage.add("0;s;9;12;Magic arrow;300;false");
+		refreshMessage.add("0;s;9;12;Magic arrow;150;false");
 		refreshMessage.add("0;s;10;12;Dispersing arrow;0;false");
 		refreshMessage.add("0;p");
+		refreshMessage.add("1;s;13;12;Magic arrow;150;false");
 		refreshMessage.add("1;g");
-		//refreshMessage.add("1;m;10;12");
-		//refreshMessage.add("0;m;13;12");
-		//refreshMessage.add("1;m;11;12");
-		
 		initGame(map);
 		initEntities(entities);
 
@@ -92,6 +89,7 @@ public class Game {
 			System.out.println("Created a playing entity in position "+playingEntity.getPosition());
 			System.out.println(playingEntity.getModel() == null ? "No model currently selected." : playingEntity.getModel());
 		}
+
 		
 		los.update(playingEntities);
 		
@@ -100,6 +98,13 @@ public class Game {
 	
 	public void refresh(String commandString) {
 		String[] command = commandString.split(";");
+		int id = Integer.parseInt(command[0]);
+		
+		if(this.getPlayingEntityFromID(id) == null) {
+			System.err.println("Entity with id "+id+" is dead !");
+			return;
+		}
+		
 		String actionType = command[1];
 
 		//RECEIVED A MOVEMENT COMMAND
@@ -118,7 +123,7 @@ public class Game {
 		else if(actionType.equals("g")) {
 			getBestTurn(command);
 		}
-		
+			 
 		los.update(playingEntities);
 		
 		if(DISPLAY_GUI)
@@ -177,12 +182,50 @@ public class Game {
 		castingEntity.getModel().resetAP();
 		castingEntity.getModel().resetMP();
 		castingEntity.getModel().removeOneBuffTurn();
+		castingEntity.getModel().updateSpellsStatus();
 	}
-	
+		
 	private void getBestTurn(String[] command) {
 		int id = Integer.parseInt(command[0]);
-		System.out.println("Getting best turn for "+getPlayingEntityFromID(id));
-		System.out.println("Commit");
+		PlayingEntity playingEntity = getPlayingEntityFromID(id);
+		
+		System.out.println("Getting best turn for "+ playingEntity);
+
+		ArrayList<PlayingEntity> ennemies = new ArrayList<>();
+		
+		for(int i = 0; i < playingEntities.size(); i++) {
+			if(!playingEntities.get(i).getTeam().equals(playingEntity.getTeam())) {
+				ennemies.add(playingEntities.get(i));
+			}
+		}
+		
+		System.out.println("Ennemies : "+ennemies);
+		
+		ArrayList<SpellObject> spells = playingEntity.getModel().getAvailableSpells();
+		
+		System.out.println("Available spells : ");
+		
+		for(int i = 0; i < spells.size(); i++) {
+			System.out.println("    "+spells.get(i));
+		}
+		
+		System.out.println("Selected ennemy : "+ennemies.get(0));
+		
+		System.out.println("Available spells for this ennemy : ");
+		
+		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
+		
+		for(int i = 0; i < spells.size(); i++) {
+			if(spells.get(i).isEntityTargetableBySpell(ennemies.get(0))) {
+				spellsForEnnemy.add(spells.get(i));
+			}
+		}
+		
+		for(int i = 0; i < spellsForEnnemy.size(); i++) {
+			System.out.println("    "+spellsForEnnemy.get(i));
+		}
+		
+		System.out.println("Ennemy is "+Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition())+" cases away.");
 	}
 	
 	

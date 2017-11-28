@@ -116,10 +116,8 @@ public class Damage extends Spell{
 		}else {
 			finalDamage = this.chosenDamage(caster, target);
 		}
-		
-		System.out.println(target);
+
 		target.getModel().removeLP(finalDamage);
-		System.out.println("Removed LP : "+target);
 	}
 	
 }

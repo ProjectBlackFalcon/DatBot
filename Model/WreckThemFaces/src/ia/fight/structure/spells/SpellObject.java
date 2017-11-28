@@ -13,10 +13,68 @@ import ia.fight.structure.spells.spelltypes.Pushback;
 public class SpellObject {
 
 	private ArrayList<Spell> spells;
+	private int cooldown = 0;
+	private int spellCounter = 0;
+	private ArrayList<int[]> spellPerEntityCounter;
+
+	private int recastInterval = 0;
+	private int criticalChance = 0;
+	
+	private int minimumRange = 0;
+	private int maximumRange = 0;
+	private boolean modifiableRange = false;
+	
+	private int numberOfCastsPerTarget = 10;
+	private int numberOfCastsPerTurn = 10;
+	private int maxEffectAccumulation = 10;
+	
+	private boolean straightLineCast = false;
+	private AreaOfEffect aoe = new AreaOfEffect("cell", 0);
+	
+	private int cost = 4;
+	private boolean requireLineOfSight = true;
+	private String name;
+	
 	
 	public SpellObject(String name) {
 		spells = new ArrayList<>();
 		this.name = name;
+		spellPerEntityCounter = new ArrayList<>();
+	}
+	
+	public boolean isAvailable() {
+		boolean cd = cooldown >= 0;
+		boolean sc = spellCounter < numberOfCastsPerTurn;
+
+		return cd && sc;
+	}
+	
+	public int[] getDamagePreviz(PlayingEntity caster, PlayingEntity target) {
+		
+		
+		return null;
+	}
+	
+	public boolean isEntityTargetableBySpell(PlayingEntity entity) {
+		for(int i = 0; i < this.spellPerEntityCounter.size(); i++) {
+			if(this.spellPerEntityCounter.get(i)[0] == entity.getID()) {
+				if(this.spellPerEntityCounter.get(i)[1] < this.numberOfCastsPerTarget) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public void passTurn() {
+		spellPerEntityCounter.clear();
+		spellCounter = 0;
+		if(cooldown > 0) {
+			cooldown--;
+		}
 	}
 	
 	public void addSpell(Spell spell){
@@ -41,30 +99,9 @@ public class SpellObject {
 	
 	@Override
 	public String toString() {
-		return this.getName();
+		return this.getName()+" ("+this.getMinimumRange()+" - "+this.getMaximumRange()+")";
 	}
-	
 
-	private int recastInterval = 0;
-	private int criticalChance = 0;
-	
-	private int minimumRange = 0;
-	private int maximumRange = 0;
-	private boolean modifiableRange = false;
-	
-	private int numberOfCastsPerTarget = 10;
-	private int numberOfCastsPerTurn = 10;
-	private int maxEffectAccumulation = 10;
-	
-	private boolean straightLineCast = false;
-	private AreaOfEffect aoe = new AreaOfEffect("cell", 0);
-	
-	private int cost = 4;
-	private boolean requireLineOfSight = true;
-	private String name;
-	
-	
-	
 	public String getName(){
 		return this.name;
 	}
@@ -188,11 +225,41 @@ public class SpellObject {
 					this.getSpells().get(i).applySpell(caster, touchedEntities.get(j), trueDamage, intensity);
 				}
 				
+				for(int k = 0; k < Game.playingEntities.size(); k++) {
+					if(Game.playingEntities.get(k).getModel().getLP() <= 0) {
+						System.out.println(Game.playingEntities.get(k)+" died !");
+						Game.playingEntities.remove(k);
+					}
+				}
+				
+			}
+		}
+
+		this.spellCounter++;
+		
+		for(int i = 0; i < Game.playingEntities.size(); i++) {
+			if(Game.playingEntities.get(i).getPosition().deepEquals(pos)) {
+				
+				System.out.println("Casting spell directly onto : "+Game.playingEntities.get(i));
+				
+				boolean found = false;
+				for(int j = 0; j < this.spellPerEntityCounter.size(); j++) {
+					if(this.spellPerEntityCounter.get(j)[0] == Game.playingEntities.get(i).getID()) {
+						found = true;
+						this.spellPerEntityCounter.get(j)[1]++;
+					}
+				}
+				
+				if(!found) {
+					this.spellPerEntityCounter.add(new int[] {Game.playingEntities.get(i).getID(), 1});
+				}
 			}
 		}
 		
-		System.out.println(caster);
+		for(int i = 0; i < this.spellPerEntityCounter.size(); i++) {
+			System.out.println("    "+this.spellPerEntityCounter.get(i)[0]+" "+this.spellPerEntityCounter.get(i)[1]);
+		}
+		this.cooldown = this.getRecastInterval();
 		caster.getModel().removeAP(this.getCost());
-		System.out.println("Removed AP from caster "+caster);
 	}	
 }
