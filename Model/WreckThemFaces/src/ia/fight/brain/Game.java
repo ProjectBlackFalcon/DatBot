@@ -222,7 +222,7 @@ public class Game {
 		}
 		
 		for(int i = 0; i < spellsForEnnemy.size(); i++) {
-			System.out.println("    "+spellsForEnnemy.get(i));
+			System.out.println("    "+spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(playingEntity, ennemies.get(0)));
 		}
 		
 		System.out.println("Ennemy is "+Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition())+" cases away.");

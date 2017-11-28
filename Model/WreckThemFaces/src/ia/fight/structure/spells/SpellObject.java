@@ -8,7 +8,7 @@ import ia.fight.brain.Game;
 import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.Position;
 import ia.fight.map.Map;
-import ia.fight.structure.spells.spelltypes.Pushback;
+import ia.fight.structure.spells.spelltypes.*;
 
 public class SpellObject {
 
@@ -49,10 +49,16 @@ public class SpellObject {
 		return cd && sc;
 	}
 	
-	public int[] getDamagePreviz(PlayingEntity caster, PlayingEntity target) {
+	public int getDamagePreviz(PlayingEntity caster, PlayingEntity target) {
+		int damagePreviz = 0;
 		
+		for(int i = 0; i < this.spells.size(); i++) {
+			if(this.spells.get(i).getClass().getSimpleName().equals("Damage")) {
+				damagePreviz += ((Damage)spells.get(i)).previz(caster, target);
+			}
+		}
 		
-		return null;
+		return damagePreviz;
 	}
 	
 	public boolean isEntityTargetableBySpell(PlayingEntity entity) {
