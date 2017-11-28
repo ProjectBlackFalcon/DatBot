@@ -37,7 +37,8 @@ public class Farm {
 				}
 			}
 		}
-		farmCell = farmCell.substring(0,farmCell.length()-2);
+		if(farmCell.length() > 2)
+			farmCell = farmCell.substring(0,farmCell.length()-2);
 		System.out.println(farmCell);
 		System.out.println("Compteur : "+ count);
 		return farmCell;
