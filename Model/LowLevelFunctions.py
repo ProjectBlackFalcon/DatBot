@@ -3,7 +3,7 @@ import json
 
 class LowLevelFunctions:
     def __init__(self):
-        pass
+        self.map_info = []
 
     def cell2coord(self, cell):
         return cell % 14 + int((cell//14)/2+0.5), (13 - cell % 14 + int((cell//14)/2))
@@ -66,8 +66,10 @@ class LowLevelFunctions:
 
     def coord_fetch_map(self, coord, worldmap):
         # print('Fetching : {}'.format(coord))
+        if not self.map_info:
+            self.map_info = self.load_map_info()
         maps = []
-        for map in self.load_map_info():
+        for map in self.map_info:
             if map['coord'] == coord and map['worldMap'] == worldmap:
                 maps.append(map)
         if len(maps) == 1 and maps[0] is not None:
