@@ -16,10 +16,9 @@ class HighLevelFunctions:
             raise Exception('Not in targeted worldmap')
 
         pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
-        path = pf.get_map_change_cells()
-        directions = pf.get_directions()
-        for i in range(len(path)):
-            if self.interface.change_map(path[i], directions[i]):
+        path_directions = pf.get_map_change_cells()
+        for i in range(len(path_directions)):
+            if self.interface.change_map(path_directions[i][0], path_directions[i][1]):
                 continue
             else:
                 raise Exception('Interface returned false on move command')

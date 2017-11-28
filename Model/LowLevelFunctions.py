@@ -60,7 +60,7 @@ class LowLevelFunctions:
         return closest[0]
 
     def load_map_info(self):
-        with open('..//MapInfo.json', 'r') as f:
+        with open('..//Utils//MapInfo.json', 'r') as f:
             mapinfo = json.load(f)
         return mapinfo
 
