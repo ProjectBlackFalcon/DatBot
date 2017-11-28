@@ -90,8 +90,19 @@ public class ModelConnexion implements Runnable {
 						}
 					}
 					break;
-				case "getRessources":
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.farmCell});
+				case "getResources":
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.getFarmCell()});
+					break;
+				case "harvest":
+					if(Farm.harvestCell(Integer.parseInt(message[5]))){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvested,Farm.quantityLastItemHarvested});
+					} 
+//					else if (){
+//						TODO AGGRO
+//					}					
+					else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
 					break;
 				case "getStats":
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
