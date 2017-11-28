@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
@@ -64,6 +67,7 @@ import protocol.network.messages.game.context.roleplay.MapComplementaryInformati
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
 import protocol.network.messages.game.context.roleplay.MapRunningFightDetailsMessage;
 import protocol.network.messages.game.context.roleplay.MapRunningFightListMessage;
+import protocol.network.messages.game.context.roleplay.emote.EmotePlayMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
@@ -116,6 +120,7 @@ public class Network implements Runnable {
 	public static boolean connectionToKoli = false;
 	public static MapRunningFightListMessage fight;
 	public static MapRunningFightDetailsMessage fightDetail;
+	public static Writer output;
 
 	public Network() {
 		ip = "213.248.126.40";
@@ -459,12 +464,26 @@ public class Network implements Runnable {
 			ChatServerMessage chatServerMessage = new ChatServerMessage();
 			chatServerMessage.Deserialize(dataReader);
 			if(chatServerMessage.channel == 0){			// Général
-				
+				output = new BufferedWriter(new FileWriter(Info.server + "General.txt", true));
+				output.append(System.lineSeparator() + "["+ chatServerMessage.senderName+"]" + "["+ (int)chatServerMessage.senderAccountId+"] " + chatServerMessage.content);
+				output.close();
 			} else if(chatServerMessage.channel == 5){  // Commerce
-				
+				output = new BufferedWriter(new FileWriter(Info.server + "Commerce.txt", true));
+				output.append(System.lineSeparator() + "["+ chatServerMessage.senderName+"]" + "["+ (int)chatServerMessage.senderAccountId+"] " + chatServerMessage.content);
+				output.close();
 			} else if(chatServerMessage.channel == 6){ // Recrutement
-				
+				output = new BufferedWriter(new FileWriter(Info.server + "Recrutement.txt", true));
+				output.append(System.lineSeparator() + "["+ chatServerMessage.senderName+"]" + "["+ (int)chatServerMessage.senderAccountId+"] " + chatServerMessage.content);
+				output.close();
 			}
+			break;
+		case 5683:
+			EmotePlayMessage emotePlayMessage = new EmotePlayMessage();
+			emotePlayMessage.Deserialize(dataReader);
+			output = new BufferedWriter(new FileWriter(Info.server + "General.txt", true));
+			output.append(System.lineSeparator() + "[" + (int)emotePlayMessage.accountId + "] EmoteId : " + emotePlayMessage.emoteId);
+			output.close();
+			break;
 		}
 	}
 
@@ -698,7 +717,7 @@ public class Network implements Runnable {
 		try {
 			String s = Paths.get("").toAbsolutePath().toString();
 			int i = s.indexOf("DatBot");
-			s = s.substring(0, i + 7);
+			s = s.substring(0, i + 6);
 			p = new ProcessBuilder(s + "\\DatBot.Interface\\utils\\maps\\MapManager\\MapManager.exe",String.valueOf((int) Info.mapId)).start();
 			p.waitFor();
 		} catch (IOException e) {

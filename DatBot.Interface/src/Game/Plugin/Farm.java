@@ -30,16 +30,15 @@ public class Farm {
 							if (Map.Layers.get(i).getCells().get(j).Elements.get(k).Identifier == element.elementId) {
 								count++;
 								farmCell += "("+element.elementCellId+","+Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId+","+element.elementState+"), ";
-								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
+//								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
 							}
 						}
 					}
 				}
 			}
 		}
-		farmCell = farmCell.substring(0,farmCell.length()-2);
-		System.out.println(farmCell);
-		System.out.println("Compteur : "+ count);
+		if(farmCell.length() > 2)
+			farmCell = farmCell.substring(0,farmCell.length()-2);
 		return farmCell;
 	}
 	
