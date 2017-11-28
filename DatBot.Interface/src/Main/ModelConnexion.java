@@ -97,9 +97,9 @@ public class ModelConnexion implements Runnable {
 					if(Farm.harvestCell(Integer.parseInt(message[5]))){
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvested,Farm.quantityLastItemHarvested});
 					} 
-//					else if (){
-//						TODO AGGRO
-//					}					
+					else if (false){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvested,Farm.quantityLastItemHarvested,"c"});
+					}					
 					else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}

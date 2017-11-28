@@ -71,6 +71,7 @@ import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessa
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
 import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
+import protocol.network.messages.game.inventory.items.ObtainedItemWithBonusMessage;
 import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
@@ -430,6 +431,12 @@ public class Network implements Runnable {
 			itemMessage.Deserialize(dataReader);
 			Farm.lastItemHarvested = itemMessage.genericId;
 			Farm.quantityLastItemHarvested = itemMessage.baseQuantity;
+			break;
+		case 6520:
+			ObtainedItemWithBonusMessage bonusMessage  = new ObtainedItemWithBonusMessage();
+			bonusMessage.Deserialize(dataReader);
+			Farm.lastItemHarvested = bonusMessage.genericId;
+			Farm.quantityLastItemHarvested = bonusMessage.baseQuantity + bonusMessage.bonusQuantity;
 			break;
 		case 5809:
 			JobExperienceMultiUpdateMessage experienceMultiUpdateMessage = new JobExperienceMultiUpdateMessage();
