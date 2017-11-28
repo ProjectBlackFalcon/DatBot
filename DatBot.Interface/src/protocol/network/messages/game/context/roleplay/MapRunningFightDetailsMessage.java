@@ -82,22 +82,22 @@ public class MapRunningFightDetailsMessage extends NetworkMessage {
 	}
 
 	private void append(){
-		Network.appendDebug("fightId : " + this.fightId);
+		Network.append("fightId : " + this.fightId);
 		for(GameFightFighterLightInformations a : attackers) {
-			Network.appendDebug("\tid : " + a.id);
-			Network.appendDebug("\tbreed : " + a.breed);
-			Network.appendDebug("\tlevel : " + a.level);
-			Network.appendDebug("\twave : " + a.wave);
-			Network.appendDebug("\talive : " + a.alive);
-			Network.appendDebug("\tsex : " + a.sex);
+			Network.append("\tid : " + a.id);
+			Network.append("\tbreed : " + a.breed);
+			Network.append("\tlevel : " + a.level);
+			Network.append("\twave : " + a.wave);
+			Network.append("\talive : " + a.alive);
+			Network.append("\tsex : " + a.sex);
 		}
 		for(GameFightFighterLightInformations a : defenders) {
-			Network.appendDebug("\tid : " + a.id);
-			Network.appendDebug("\tbreed : " + a.breed);
-			Network.appendDebug("\tlevel : " + a.level);
-			Network.appendDebug("\twave : " + a.wave);
-			Network.appendDebug("\talive : " + a.alive);
-			Network.appendDebug("\tsex : " + a.sex);
+			Network.append("\tid : " + a.id);
+			Network.append("\tbreed : " + a.breed);
+			Network.append("\tlevel : " + a.level);
+			Network.append("\twave : " + a.wave);
+			Network.append("\talive : " + a.alive);
+			Network.append("\tsex : " + a.sex);
 		}
 	}
 }

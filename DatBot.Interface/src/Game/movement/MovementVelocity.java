@@ -1,6 +1,6 @@
 package Game.movement;
 
-import Main.MainPlugin;
+import protocol.network.Network;
 
 public class MovementVelocity {
     public enum MovementTypeEnum
@@ -19,7 +19,7 @@ public class MovementVelocity {
 			velocity += GetVelocity(cell, moveType);
 		}
         velocity *= 2;
-		MainPlugin.frame.append("Durée : " + velocity + "ms");
+		Network.append("Durée : " + velocity + "ms");
         return velocity;
     }
 

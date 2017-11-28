@@ -79,7 +79,7 @@ public class ModelConnexion implements Runnable {
 					MapMovement mapMovement = Movement.ChangeMap(Integer.parseInt(infoMov[0]),infoMov[1].substring(2, infoMov[1].length()-1));
 					if (mapMovement == null) {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
-						MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+						Network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 					}
 					else {
 						mapMovement.PerformChangement();

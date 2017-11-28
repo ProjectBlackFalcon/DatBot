@@ -62,29 +62,29 @@ public class MapRunningFightListMessage extends NetworkMessage {
 
 	private void append(){
 		for(FightExternalInformations a : fights) {
-			Network.appendDebug("fights : " + a.fightId);
-			Network.appendDebug("fightStart : " + a.fightStart);
-			Network.appendDebug("fightType : " + a.fightType);
-			Network.appendDebug("fightSpectatorLocked : " + a.fightSpectatorLocked);
+			Network.append("fights : " + a.fightId);
+			Network.append("fightStart : " + a.fightStart);
+			Network.append("fightType : " + a.fightType);
+			Network.append("fightSpectatorLocked : " + a.fightSpectatorLocked);
 			for (FightTeamLightInformations b : a.fightTeams) {
-				Network.appendDebug("\tleaderId : " + b.leaderId);
-				Network.appendDebug("\tmeanLevel : " + b.meanLevel);
-				Network.appendDebug("\tnbWaves : " + b.nbWaves);
-				Network.appendDebug("\tteamId : " + b.teamId);
-				Network.appendDebug("\tteamMembersCount : " + b.teamMembersCount);
-				Network.appendDebug("\tteamSide : " + b.teamSide);
-				Network.appendDebug("\tteamTypeId : " + b.teamTypeId);
-				Network.appendDebug("\thasAllianceMember : " + b.hasAllianceMember);
-				Network.appendDebug("\thasFriend : " + b.hasFriend);
-				Network.appendDebug("\thasGroupMember : " + b.hasGroupMember);
-				Network.appendDebug("\thasGuildMember : " + b.hasGuildMember);
-				Network.appendDebug("\thasMyTaxCollector : " + b.hasMyTaxCollector);
+				Network.append("\tleaderId : " + b.leaderId);
+				Network.append("\tmeanLevel : " + b.meanLevel);
+				Network.append("\tnbWaves : " + b.nbWaves);
+				Network.append("\tteamId : " + b.teamId);
+				Network.append("\tteamMembersCount : " + b.teamMembersCount);
+				Network.append("\tteamSide : " + b.teamSide);
+				Network.append("\tteamTypeId : " + b.teamTypeId);
+				Network.append("\thasAllianceMember : " + b.hasAllianceMember);
+				Network.append("\thasFriend : " + b.hasFriend);
+				Network.append("\thasGroupMember : " + b.hasGroupMember);
+				Network.append("\thasGuildMember : " + b.hasGuildMember);
+				Network.append("\thasMyTaxCollector : " + b.hasMyTaxCollector);
 			}
 			for (FightOptionsInformations c : a.fightTeamsOptions) {
-				Network.appendDebug("\tisAskingForHelp : " + c.isAskingForHelp);
-				Network.appendDebug("\tisClosed : " + c.isClosed);
-				Network.appendDebug("\tisRestrictedToPartyOnly : " + c.isRestrictedToPartyOnly);
-				Network.appendDebug("\tisSecret : " + c.isSecret);
+				Network.append("\tisAskingForHelp : " + c.isAskingForHelp);
+				Network.append("\tisClosed : " + c.isClosed);
+				Network.append("\tisRestrictedToPartyOnly : " + c.isRestrictedToPartyOnly);
+				Network.append("\tisSecret : " + c.isSecret);
 			}
 		}
 	}

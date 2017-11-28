@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import Game.Info;
 import Main.Frame.TextComponentFrame;
+import protocol.network.Network;
 
 public class MainPlugin extends JPanel implements Runnable {
 	/**
@@ -25,7 +26,7 @@ public class MainPlugin extends JPanel implements Runnable {
 		frame.setPreferredSize(new Dimension(450, 300));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.append("Connection...");
+		Network.append("Connection...");
 
 		while (!Info.isConnected) {
 			try {
@@ -34,8 +35,8 @@ public class MainPlugin extends JPanel implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		frame.append("Connecté !");
-		frame.append("Name : " + Info.name);
-		frame.append("Niveau : " + Info.lvl);
+		Network.append("Connecté !");
+		Network.append("Name : " + Info.name);
+		Network.append("Niveau : " + Info.lvl);
 	}
 }

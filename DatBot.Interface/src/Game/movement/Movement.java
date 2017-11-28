@@ -10,6 +10,7 @@ import Game.Info;
 import Game.map.Map;
 import Game.map.MapMovement;
 import Main.MainPlugin;
+import protocol.network.Network;
 import utils.Astar;
 import utils.JSON;
 
@@ -57,8 +58,8 @@ public class Movement{
         if(list.size() == 0) return null; // Can't go in this direction (Obstacles)
         Random r = new Random();
         int randomCellId = list.get(r.nextInt(list.size()));
-		MainPlugin.frame.append("Déplacement...");	
-		MainPlugin.frame.append("Direction : " + direction);
+		Network.append("Déplacement...");	
+		Network.append("Direction : " + direction);
         CellMovement move = MoveToCell(randomCellId);
         return new MapMovement(move, neighbourId);
 	}
@@ -90,8 +91,8 @@ public class Movement{
         System.out.println(Map.NothingOnCell(cellId));
         System.out.println(noObstacle(cellId));
         if (Map.NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
-    		MainPlugin.frame.append("Déplacement...");	
-    		MainPlugin.frame.append("Direction : " + direction);
+    		Network.append("Déplacement...");	
+    		Network.append("Direction : " + direction);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId);
         } else if (Info.cellId == cellId){
@@ -120,7 +121,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == Info.coords[0] && y == Info.coords[1]){
-			MainPlugin.frame.append("Vous êtes arrivé !");
+			Network.append("Vous êtes arrivé !");
 			return;
 		}
 		
@@ -204,15 +205,15 @@ public class Movement{
         		Thread.sleep(500);
     		}
     		if(x == Info.coords[0] && y == Info.coords[1]){
-    			MainPlugin.frame.append("Vous êtes arrivé !");
+    			Network.append("Vous êtes arrivé !");
     			return;
     		}
     		xCurrentMap = Info.coords[0] + 95; 
     		yCurrentMap = Info.coords[1] + 100;
 			MapMovement mov = Movement.ChangeMap(Astar.pathString.get(i));
 			if (mov == null) {
-				MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
-				MainPlugin.frame.append("Création d'un nouveau chemin...");
+				Network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+				Network.append("Création d'un nouveau chemin...");
 				if(Astar.pathString.get(i).equals("North")){
 					if(x+95 == xCurrentMap && y+100 == yCurrentMap-1){
 						blocked.add(new int[] {xCurrentMap, yCurrentMap});
@@ -258,7 +259,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == Info.coords[0] && y == Info.coords[1]){
-			MainPlugin.frame.append("Vous êtes arrivé !");
+			Network.append("Vous êtes arrivé !");
 			return;
 		}
 	}
