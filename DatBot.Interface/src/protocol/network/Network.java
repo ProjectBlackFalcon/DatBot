@@ -143,9 +143,9 @@ public class Network implements Runnable {
 	@Override
 	public void run() {
 		try {
-			initComponent();
-			f.pack();
-			f.setVisible(true);
+//			initComponent();
+//			f.pack();
+//			f.setVisible(true);
 			reception();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -174,16 +174,17 @@ public class Network implements Runnable {
 	}
 
 	private static void appendToPane(JTextPane tp, String msg, Color c) {
-		StyleContext sc = StyleContext.getDefaultStyleContext();
-		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
-
-		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-
-		int len = tp.getDocument().getLength();
-		tp.setCaretPosition(len);
-		tp.setCharacterAttributes(aset, false);
-		tp.replaceSelection(msg);
+//		StyleContext sc = StyleContext.getDefaultStyleContext();
+//		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+//
+//		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+//		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+//
+//		int len = tp.getDocument().getLength();
+//		tp.setCaretPosition(len);
+//		tp.setCharacterAttributes(aset, false);
+//		tp.replaceSelection(msg);
+//		System.out.println(msg);
 	}
 	
 	public static void appendDebug(String str) {
@@ -192,7 +193,7 @@ public class Network implements Runnable {
 		timing = formatter.format(time);
 		String newSt = "[" + timing + "] " + str + "\n";
 //		appendToPane(text, newSt, Color.BLACK);
-		MainPlugin.frame.appendDebug(str);
+//		MainPlugin.frame.appendDebug(str);
 	}
 
 	public void reception() throws Exception {
@@ -640,7 +641,6 @@ public class Network implements Runnable {
 			tt.add(rand);
 		}
 		CheckIntegrityMessage RDM = new CheckIntegrityMessage(tt);
-		System.out.println("Size RDM :  " + RDM.data.size());
 		sendToServer(RDM, CheckIntegrityMessage.ProtocolId, "Check Integrity Message...");
 	}
 

@@ -21,11 +21,11 @@ public class MainPlugin extends JPanel implements Runnable {
 	@Override
 	public void run() {
 		frame = new TextComponentFrame();
-		frame.setLocation(50, 25);
-		frame.setPreferredSize(new Dimension(450, 300));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		frame.append("Connection...");
+//		frame.setLocation(50, 25);
+//		frame.setPreferredSize(new Dimension(450, 300));
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setVisible(true);
+//		frame.append("Connection...");
 
 		while (!Info.isConnected) {
 			try {
