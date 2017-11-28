@@ -513,9 +513,7 @@ public class Network implements Runnable {
 			if (bigPacketLengthToFull == 0) {
 				// System.out.println("\n----------------------------------");
 //				System.out.println("[Reçu] ID = " + bigPacketId);
-				// System.out.println("[Reçu] ID = " + bigPacketId + " | Taille
-				// du contenu = " + bigPacketData.length + "\n[Data] : " +
-				// bytesToString(bigPacketData, "%02X", false));
+				 System.out.println("[Reçu] ID = " + bigPacketId + " | Taille du contenu = " + bigPacketData.length + "\n[Data] : " + bytesToString(bigPacketData, "%02X", false));
 				TreatPacket(bigPacketId, bigPacketData);
 				// System.out.println("\n----------------------------------");
 				bigPacketData = null;
@@ -530,9 +528,7 @@ public class Network implements Runnable {
 				//
 				// System.out.println("\n----------------------------------");
 //				System.out.println("[Reçu] ID = " + message.getId());
-				// System.out.println("[Reçu] ID = " + message.getId() + " |
-				// Taille du contenu = " + message.getLength() + "\n[Data] : " +
-				// bytesToString(message.getData(), "%02X", false));
+				 System.out.println("[Reçu] ID = " + message.getId() + " | Taille du contenu = " + message.getLength() + "\n[Data] : " + bytesToString(message.getData(), "%02X", false));
 				TreatPacket(message.getId(), message.getData());
 				// System.out.println("\n----------------------------------");
 			} else if (message.getId() != 0 && message.bigPacketLength != 0) {
@@ -644,6 +640,7 @@ public class Network implements Runnable {
 			tt.add(rand);
 		}
 		CheckIntegrityMessage RDM = new CheckIntegrityMessage(tt);
+		System.out.println("Size RDM :  " + RDM.data.size());
 		sendToServer(RDM, CheckIntegrityMessage.ProtocolId, "Check Integrity Message...");
 	}
 

@@ -14,27 +14,27 @@ public class Main {
     public static void main(String[] args) throws Exception {
 //    	Thread modelConnexion = new Thread(new ModelConnexion());
 //    	modelConnexion.start();
-//    	int index = 0;
-    	Info.nameAccount = args[0];
-    	Info.password = args[1];
-    	Info.name = args[2];
-    	Info.server = args[3];
+    	int index = 0;
+//    	Info.nameAccount = args[0];
+//    	Info.password = args[1];
+//    	Info.name = args[2];
+//    	Info.server = args[3];
     	while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals("")){
     		System.out.println("Waiting for connection...");
     		Thread.sleep(1000);
-//    		index++;
+    		index++;
 //    		if(index == 2){
 //    			Info.nameAccount = "wublel7";
 //    			Info.password = "wubwublel7";
 //    			Info.name = "Dihydroquerina";
 //    			Info.server = "Julith";
 //    		}
-//    		if(index == 2){
-//    			Info.nameAccount = "ceciestuntest";
-//    			Info.password = "ceciestlemdp1";
-//    			Info.name = "Gladiatonme";
-//    			Info.server = "Echo";
-//    		}
+    		if(index == 2){
+    			Info.nameAccount = "ceciestuntest";
+    			Info.password = "ceciestlemdp1";
+    			Info.name = "Gladiatonme";
+    			Info.server = "Echo";
+    		}
     	}    	
     	Thread thread = new Thread(new Network());
     	Thread thread2 = new Thread(new MainPlugin());
