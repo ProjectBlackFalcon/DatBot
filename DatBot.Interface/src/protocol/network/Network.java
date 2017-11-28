@@ -65,13 +65,19 @@ import protocol.network.messages.game.context.roleplay.MapRunningFightDetailsMes
 import protocol.network.messages.game.context.roleplay.MapRunningFightListMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
+import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
+import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
+import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
+import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
+import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
 import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
 import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.character.choice.CharacterBaseInformations;
+import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.interactive.StatedElement;
 import protocol.network.types.version.Version;
 import protocol.network.types.version.VersionExtended;
@@ -394,6 +400,51 @@ public class Network implements Runnable {
 					}
 				}
 				Farm.getFarmCell();
+			}
+			break;
+		case 5708:
+			if(Info.isConnected){
+				InteractiveElementUpdatedMessage interactiveElementUpdatedMessage = new InteractiveElementUpdatedMessage();
+				interactiveElementUpdatedMessage.Deserialize(dataReader);
+				for (int i = 0; i < Farm.interactiveElements.size() ; i++) {
+					if(interactiveElementUpdatedMessage.interactiveElement.elementId == Farm.interactiveElements.get(i).elementId){
+						Farm.interactiveElements.set(i, interactiveElementUpdatedMessage.interactiveElement);
+					}
+				}
+			}
+			break;
+		case 6112:
+			Info.waitForHarvestSuccess = true;
+			break;
+		case 6384:
+			Info.waitForHarvestFailure = true;
+			break;
+		case 3009:
+			InventoryWeightMessage weight = new InventoryWeightMessage();
+			weight.Deserialize(dataReader);
+			Info.weight = weight.weight;
+			Info.weigthMax = weight.weightMax;
+			break;
+		case 6519:
+			ObtainedItemMessage itemMessage = new ObtainedItemMessage();
+			itemMessage.Deserialize(dataReader);
+			Farm.lastItemHarvested = itemMessage.genericId;
+			Farm.quantityLastItemHarvested = itemMessage.baseQuantity;
+			break;
+		case 5809:
+			JobExperienceMultiUpdateMessage experienceMultiUpdateMessage = new JobExperienceMultiUpdateMessage();
+			experienceMultiUpdateMessage.Deserialize(dataReader);
+			for (JobExperience b : experienceMultiUpdateMessage.experiencesUpdate) {
+				Info.job.add(new JobExperience(b.jobId, b.jobLevel, b.jobXP, b.jobXpLevelFloor, b.jobXpNextLevelFloor));
+			}
+			break;
+		case 5654:
+			JobExperienceUpdateMessage experienceUpdateMessage = new JobExperienceUpdateMessage();
+			experienceUpdateMessage.Deserialize(dataReader);
+			for (int i = 0; i < Info.job.size() ; i++) {
+				if(experienceUpdateMessage.experiencesUpdate.jobId == Info.job.get(i).jobId){
+					Info.job.set(i, experienceUpdateMessage.experiencesUpdate);
+				}
 			}
 			break;
 		}
