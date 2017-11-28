@@ -15,7 +15,7 @@ public class Main {
     	Info.server = args[3];
     	while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals("")){
     		System.out.println("Waiting for connection...");
-    		Thread.sleep(1000);
+    		Thread.sleep(250);
     		index++;
 //    		if(index == 2){
 //    			Info.nameAccount = "wublel7";
