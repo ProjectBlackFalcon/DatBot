@@ -52,6 +52,7 @@ import protocol.network.messages.game.basic.SequenceNumberMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectionMessage;
 import protocol.network.messages.game.character.choice.CharactersListMessage;
+import protocol.network.messages.game.chat.ChatServerMessage;
 import protocol.network.messages.game.chat.channel.ChannelEnablingMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
 import protocol.network.messages.game.context.GameContextReadyMessage;
@@ -454,6 +455,16 @@ public class Network implements Runnable {
 				}
 			}
 			break;
+		case 881:
+			ChatServerMessage chatServerMessage = new ChatServerMessage();
+			chatServerMessage.Deserialize(dataReader);
+			if(chatServerMessage.channel == 0){			// Général
+				
+			} else if(chatServerMessage.channel == 5){  // Commerce
+				
+			} else if(chatServerMessage.channel == 6){ // Recrutement
+				
+			}
 		}
 	}
 
