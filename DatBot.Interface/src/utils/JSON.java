@@ -30,6 +30,9 @@ public class JSON implements Runnable{
 	// Map info
 	public ArrayList<ArrayList<Integer>> cells = new ArrayList<ArrayList<Integer>>();
 	
+	// Name
+	public static String name;
+	
 	public JSON(String file,long id){
 		this.file = file;
 		this.id = id;
@@ -75,11 +78,27 @@ public class JSON implements Runnable{
 			case "MapInfoComplete" :
 				parseMapArray((JSONArray) parser.parse(new FileReader(s + "\\DatBot.Interface\\utils\\maps\\MapInfoComplete.json")));
 				break;
+			case "Name" :
+				Object obj = parser.parse(new FileReader(s + "\\Utils\\Names.json"));
+	            JSONArray texts = (JSONArray) obj;
+	            texts.forEach( emp -> parseEmployeeObject( (JSONObject) emp ) );
+	            System.out.println("\"" + 1 + "\"");
+				break;
 		}
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
 	}
+	
+    private static void parseEmployeeObject(JSONObject employee)
+    {
+        //Get employee object within list
+        JSONObject employeeObject = (JSONObject) employee.get("texts");
+         
+        //Get employee first name
+        name = (String) employeeObject.get("1");   
+        System.out.println(name);
+    }
 	
 	private List<Map> parseMapArray(JSONArray array) {
 

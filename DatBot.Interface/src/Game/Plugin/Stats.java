@@ -18,7 +18,7 @@ public class Stats {
 		str += "\"Job\" : {";
 		for(int i = 0; i< Info.job.size() ; i++){
 			if(i == Info.job.size()-1){
-				str += "\"" + Info.job.get(i).jobId  +"\" : [" + Info.job.get(i).jobLevel + "," +  Info.job.get(i).jobXP + "," + Info.job.get(i).jobXpLevelFloor +  "," + Info.job.get(i).jobXpNextLevelFloor + "]";
+				str += "\"" + Info.job.get(i).jobId  +"\" : [" + Info.job.get(i).jobLevel + "," +  Info.job.get(i).jobXP + "," + Info.job.get(i).jobXpLevelFloor +  "," + Info.job.get(i).jobXpNextLevelFloor + "]}";
 			} else {
 				str += "\"" + Info.job.get(i).jobId  +"\" : [" + Info.job.get(i).jobLevel + "," +  Info.job.get(i).jobXP + "," + Info.job.get(i).jobXpLevelFloor +  "," + Info.job.get(i).jobXpNextLevelFloor + "],";
 			}

@@ -20,7 +20,8 @@ import utils.JSON;
 public class Test {
 
 	public static void main(String[] args) throws NumberFormatException, Exception {
-		System.out.println(32 & 16);
+		new JSON("Name", 1);
+		System.out.println(JSON.name);
 	}
 	
 	private static void sendToModel(String botInstance, String msgId,String dest, String msgType, String command, Object [] param){
