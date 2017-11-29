@@ -177,7 +177,7 @@ public class TextComponentFrame extends JFrame {
 						} else if (length == 8) {
 							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 3))));
 						} 
-						System.out.println("Id : " + Farm.lastItemHarvested + " Quantity : " + Farm.quantityLastItemHarvested);
+						System.out.println("Id : " + Farm.lastItemHarvestedId + " Quantity : " + Farm.quantityLastItemHarvested);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

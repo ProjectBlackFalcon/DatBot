@@ -16,7 +16,8 @@ public class Farm {
 	public static String farmCell;
 	public static List<StatedElement> statedElements;
 	public static List<InteractiveElement> interactiveElements;
-	public static int lastItemHarvested;
+	public static int lastItemHarvestedId;
+	public static String lastItemHarvestedString;
 	public static int quantityLastItemHarvested;
 
 	public static String getFarmCell() {
@@ -30,7 +31,7 @@ public class Farm {
 							if (Map.Layers.get(i).getCells().get(j).Elements.get(k).Identifier == element.elementId) {
 								count++;
 								farmCell += "("+element.elementCellId+","+Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId+","+element.elementState+"), ";
-//								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
+								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
 							}
 						}
 					}
@@ -46,19 +47,22 @@ public class Farm {
 		InteractiveUseRequestMessage interactiveUseRequestMessage = null; 
 		for (int i = 0; i < statedElements.size() ; i++) {
 			if(cellId == statedElements.get(i).elementCellId){
+				System.out.println(1);
 				if(statedElements.get(i).elementState == 0){
+					System.out.println(2);
 					for(int j = 0 ; j < interactiveElements.size() ; j++){
 						if(statedElements.get(i).elementId == interactiveElements.get(j).elementId){
+							System.out.println(3);
 							interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveElements.get(j).elementId, interactiveElements.get(j).enabledSkills.get(0).skillInstanceUid);
 							break;
 						}
 					}
 				} else {
-					System.out.println(1);
 					return false;
 				}
 			}
 		}
+		System.out.println(interactiveUseRequestMessage);
 		Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting resource cell " + cellId);	
 		Info.waitForHarvestFailure = false;
 		Info.waitForHarvestSuccess = false;

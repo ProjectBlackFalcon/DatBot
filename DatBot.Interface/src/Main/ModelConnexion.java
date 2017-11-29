@@ -94,8 +94,10 @@ public class ModelConnexion implements Runnable {
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.getFarmCell()});
 					break;
 				case "harvest":
+					System.out.println("Cellid : " + Integer.parseInt(message[5]));
 					if(Farm.harvestCell(Integer.parseInt(message[5]))){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvested,Farm.quantityLastItemHarvested});
+						
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvestedId,Farm.quantityLastItemHarvested});
 					} 
 //					else if (){
 //						TODO AGGRO

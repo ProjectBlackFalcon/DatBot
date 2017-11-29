@@ -14,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Game.Info;
+import Game.Plugin.Farm;
 import Game.map.Cell;
 import Game.map.CellData;
 import Game.map.ColorMultiplicator;
@@ -23,16 +24,26 @@ import Game.map.Map;
 import Game.map.elements.GraphicalElement;
 
 public class JSON implements Runnable{
-	private String file;
-	
-	// Map position
+	private String file;	
 	private long id;
 	
 	// Map info
 	public ArrayList<ArrayList<Integer>> cells = new ArrayList<ArrayList<Integer>>();
 	
+	public JSON(String file,long id){
+		this.file = file;
+		this.id = id;
+		run();
+	}
 
 	
+	public JSON(String file, double id) {
+		this.file = file;
+		this.id = (long) id;
+		run();
+	}
+
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
@@ -173,12 +184,5 @@ public class JSON implements Runnable{
 //	        obj.setShadow((ColorMultiplicator) object.get("Shadow"));
 	        list.add(obj);
 	    }
-	    return list;	}
-
-	public JSON(String file,double mapId){
-		this.file = file;
-		this.id = (long) mapId;
-		run();
-	}
-	
+	    return list;	}	
 }

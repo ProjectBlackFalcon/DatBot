@@ -416,7 +416,7 @@ public class Network implements Runnable {
 		case 6519:
 			ObtainedItemMessage itemMessage = new ObtainedItemMessage();
 			itemMessage.Deserialize(dataReader);
-			Farm.lastItemHarvested = itemMessage.genericId;
+			Farm.lastItemHarvestedId = itemMessage.genericId;
 			Farm.quantityLastItemHarvested = itemMessage.baseQuantity;
 			break;
 		case 5809:

@@ -1,6 +1,7 @@
 package Main;
 
 import Game.Info;
+import Game.Plugin.Farm;
 import protocol.network.Network;
 
 public class Main {
@@ -19,12 +20,12 @@ public class Main {
 //    			Info.name = "Dihydroquerina";
 //    			Info.server = "Julith";
 //    		}
-    		if(index == 2){
-    			Info.nameAccount = "ceciestuntest";
-    			Info.password = "ceciestlemdp1";
-    			Info.name = "Gladiatonme";
-    			Info.server = "Echo";
-    		}
+//    		if(index == 2){
+//    			Info.nameAccount = "ceciestuntest";
+//    			Info.password = "ceciestlemdp1";
+//    			Info.name = "Gladiatonme";
+//    			Info.server = "Echo";
+//    		}
     	}  
     	boolean arg = false;
     	if(args.length != 0){
@@ -46,6 +47,14 @@ public class Main {
 		Network.append("Connecté !");
 		Network.append("Name : " + Info.name);
 		Network.append("Niveau : " + Info.lvl); 		
+		
+//		while(true){
+//			index++;				
+//			Thread.sleep(1000);
+//			if(index ==15){	
+//				Farm.harvestCell(Integer.parseInt("452"));
+//			}
+//		}
     }
 }
 
