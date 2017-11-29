@@ -7,7 +7,7 @@ import time
 
 
 class Interface:
-    def __init__(self, bot_instance):
+    def __init__(self, bot_instance, headless=True):
         self.file_name = 'Interfile{}'.format(bot_instance)
         self.bot_instance = bot_instance
         self.current_id = 0
@@ -15,7 +15,12 @@ class Interface:
         self.connected = False
 
         ON_POSIX = 'posix' in sys.builtin_module_names
-        self.p = Popen(['java', '-jar', '..//BotTest.jar'], stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=ON_POSIX)
+
+        args = ['java', '-jar', '..//BotTest.jar']
+        if not headless:
+            args.append('true')
+
+        self.p = Popen(args, stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=ON_POSIX)
         self.q = Queue()
         t = Thread(target=self.enqueue_output, args=(self.p.stdout, self.q))
         t.daemon = True  # thread dies with the program
@@ -49,16 +54,14 @@ class Interface:
 
             partial_message = '{};{};m;rtn'.format(self.bot_instance, message_id)
             for message in messages:
+                # print(message)
                 if partial_message in message:
                     # print(message)
                     ret_val = ast.literal_eval(message.split(';')[-1])
             time.sleep(0.1)
 
         print('[Interface] Recieved : ', ret_val)
-        if len(ret_val) > 1:
-            return tuple(ret_val)
-        else:
-            return ret_val[0]
+        return tuple(ret_val)
 
     def connect(self, account, password, ig_name, server='Julith'):
         """
@@ -118,7 +121,7 @@ class Interface:
     def get_player_stats(self):
         """
         Get the bot player stats
-        :return: TODO
+        :return: {"current_pods": <>, "max_pods": <>, "level": <>, "job_levels": {"job_id": level, ...}}
         """
         msg_id = self.add_command('getStats')
         return self.wait_for_return(msg_id)
@@ -127,8 +130,8 @@ class Interface:
         """
         Harvests the resource on the cell given
         :param cell: cell number
-        :return: number_harvested or combat or false
+        :return: [id, name, number_harvested, new_pods, max_pods], or combat or false
         """
-        msg_id = self.add_command('harvest', cell)
+        msg_id = self.add_command('harvest', [cell])
         return self.wait_for_return(msg_id)
 __author__ = 'Alexis'

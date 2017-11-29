@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ia.fight.brain.classes.Cra;
 import ia.fight.map.CreateMap;
 import ia.fight.map.GameViz;
+import ia.fight.map.LineOfSight;
 import ia.fight.map.Map;
 import ia.fight.structure.Player;
 import ia.fight.structure.classes.CraModel;
@@ -23,17 +24,17 @@ public class Game {
 		String[] entities = new String[2];
 		// Player ID / posX / posY / Player or Monster / Player type (0:cra, 1:Enu, ...) / Team / HP Max / AP Max / MP Max
 		entities[0] = "0;10;12;p;0;1;2020;11;4";
-		entities[1] = "1;6;12;m;0;0;200;8;5";
+		entities[1] = "1;6;12;m;0;0;200;15;5";
 		ArrayList<String> refreshMessage = new ArrayList<>();
 
 		refreshMessage.add("0;m;11;12");
 		refreshMessage.add("0;p");
-		refreshMessage.add("1;m;9;12");
+		refreshMessage.add("1;m;12;12");
 		refreshMessage.add("1;p");
 		refreshMessage.add("0;s;9;12;Magic arrow;150;false");
-		refreshMessage.add("0;s;10;12;Dispersing arrow;0;false");
+		//refreshMessage.add("0;s;10;12;Dispersing arrow;0;false");
 		refreshMessage.add("0;p");
-		refreshMessage.add("1;s;13;12;Magic arrow;150;false");
+		//refreshMessage.add("1;s;13;12;Magic arrow;150;false");
 		refreshMessage.add("1;g");
 		initGame(map);
 		initEntities(entities);
@@ -189,8 +190,6 @@ public class Game {
 		int id = Integer.parseInt(command[0]);
 		PlayingEntity playingEntity = getPlayingEntityFromID(id);
 		
-		System.out.println("Getting best turn for "+ playingEntity);
-
 		ArrayList<PlayingEntity> ennemies = new ArrayList<>();
 		
 		for(int i = 0; i < playingEntities.size(); i++) {
@@ -198,35 +197,85 @@ public class Game {
 				ennemies.add(playingEntities.get(i));
 			}
 		}
+
 		
-		System.out.println("Ennemies : "+ennemies);
+		String action = command[0]+";";
 		
-		ArrayList<SpellObject> spells = playingEntity.getModel().getAvailableSpells();
+		int range[] = playingEntity.getOptimalRangeForMaximumDamageOutput(ennemies.get(0));
+		ArrayList<Position> path = map.getShortestPath(ennemies.get(0).getTeam(), playingEntity.getPosition(), ennemies.get(0).getPosition());
+		boolean startCellIsOk = false;
+		boolean foundPath = false;
+		boolean castFromStartCell = false;
+		int damage = 0;
+		int selected = 0;
 		
-		System.out.println("Available spells : ");
+		System.out.println(Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition()));
 		
-		for(int i = 0; i < spells.size(); i++) {
-			System.out.println("    "+spells.get(i));
+		if(Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition()) <= 2) {
+			System.out.println("Done from close combat");
+			ArrayList<SpellObject> spells = playingEntity.getOptimalTurnFrom(playingEntity.getPosition(), ennemies.get(0));
+			for(int i = 0; i < spells.size()-1; i++) {
+				action += "s;"+spells.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+			}
+			
+			action += "s;"+spells.get(spells.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
+		}else {
+			System.out.println("Done from far away");
+			for(int i = 0; i < path.size(); i++) {
+				ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(path.get(i), ennemies.get(0));
+				int tempDamage = 0;
+				for(int j = 0; j < turn.size(); j++) {
+					tempDamage += turn.get(j).getDamagePreviz(playingEntity, ennemies.get(0));
+				}
+				
+				if(tempDamage > damage) {
+					damage = tempDamage;
+					selected = i;
+				}
+			}
+			
+			System.out.println(path.get(selected));
+			System.out.println(ennemies.get(0));
+			ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(path.get(selected), ennemies.get(0));
+			
+			for(int i = 0; i < turn.size()-1; i++) {
+				action += "s;"+turn.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+			}
+			action += "s;"+turn.get(turn.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
 		}
 		
-		System.out.println("Selected ennemy : "+ennemies.get(0));
+		System.out.println(action);
 		
-		System.out.println("Available spells for this ennemy : ");
+	}
+	
+	void castSpell(ArrayList<SpellObject> spell) {
 		
-		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
+	}
+	
+	boolean isCellTargetableBySpell(PlayingEntity caster, SpellObject spell, Position cell){
 		
-		for(int i = 0; i < spells.size(); i++) {
-			if(spells.get(i).isEntityTargetableBySpell(ennemies.get(0))) {
-				spellsForEnnemy.add(spells.get(i));
+		int distance = Position.distance(caster.getPosition(), cell);
+		
+		if(spell.isModifiableRange()) {
+			if(distance < spell.getMinimumRange() || distance > spell.getMaximumRange() + caster.getModel().getRange()) {
+				return false;
+			}
+		}else {
+			if(distance < spell.getMinimumRange() || distance > spell.getMaximumRange()) {
+				return false;
 			}
 		}
 		
-		for(int i = 0; i < spellsForEnnemy.size(); i++) {
-			System.out.println("    "+spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(playingEntity, ennemies.get(0)));
+		
+		if(spell.isStraightLineCast() && caster.getPosition().getX() != cell.getX() && caster.getPosition().getY() != cell.getY()){
+			return false;
 		}
 		
-		System.out.println("Ennemy is "+Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition())+" cases away.");
-		
+		if(spell.requiresLineOfSight()) {
+			return LineOfSight.visibility(caster.getPosition(), cell, map.getBlocks());
+		}else {
+			return true;
+		}
 	}
 	
 	

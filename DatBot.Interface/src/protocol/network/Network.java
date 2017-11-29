@@ -18,24 +18,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import org.omg.PortableInterceptor.DISCARDING;
+
 import Game.Entity;
 import Game.Info;
 import Game.map.Map;
-import Game.movement.Movement;
-import Main.MainPlugin;
 import io.netty.util.internal.ThreadLocalRandom;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
@@ -47,16 +44,15 @@ import protocol.network.messages.connection.ServerSelectionMessage;
 import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
-import protocol.network.messages.game.basic.BasicLatencyStatsRequestMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectionMessage;
 import protocol.network.messages.game.character.choice.CharactersListMessage;
-import protocol.network.messages.game.chat.channel.ChannelEnablingMessage;
+import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
+import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
 import protocol.network.messages.game.context.GameContextReadyMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
-import protocol.network.messages.game.context.GameMapMovementRequestMessage;
 import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
@@ -75,11 +71,7 @@ import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
-import protocol.network.types.connection.GameServerInformations;
-import protocol.network.types.game.character.choice.CharacterBaseInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
-import protocol.network.types.game.interactive.StatedElement;
-import protocol.network.types.version.Version;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
@@ -97,6 +89,7 @@ public class Network implements Runnable {
 	private Message message;
 	private static List<Integer> Ticket;
 	// Log window
+	public static boolean displayPacket;
 	private JFrame f;
 	private JPanel panel;
 	private static JTextPane text;
@@ -115,16 +108,15 @@ public class Network implements Runnable {
 	public static MapRunningFightListMessage fight;
 	public static MapRunningFightDetailsMessage fightDetail;
 
-	public Network() {
+	public Network(boolean displayPacket) {
+		this.displayPacket = displayPacket;
 		ip = "213.248.126.40";
 		int port = 5555;
 		try {
 			socket = new Socket(ip, port);
 			if (socket.isConnected()) {
-				System.out.println("La connexion au serveur d'authentification est réussie.");
+				Network.append("Connection...");
 				new LatencyFrame();
-			} else {
-				System.out.println("La connexion au serveur d'authentification a échouée.");
 			}
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -136,9 +128,11 @@ public class Network implements Runnable {
 	@Override
 	public void run() {
 		try {
-			initComponent();
-			f.pack();
-			f.setVisible(true);
+			if(displayPacket){
+				initComponent();
+				f.pack();
+				f.setVisible(true);
+			}
 			reception();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,29 +161,21 @@ public class Network implements Runnable {
 	}
 
 	private static void appendToPane(JTextPane tp, String msg, Color c) {
-		StyleContext sc = StyleContext.getDefaultStyleContext();
-		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
-
-		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-
-		int len = tp.getDocument().getLength();
-		tp.setCaretPosition(len);
-		tp.setCharacterAttributes(aset, false);
-		tp.replaceSelection(msg);
-	}
-	
-	public static void appendDebug(String str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		timing = formatter.format(time);
-		String newSt = "[" + timing + "] " + str + "\n";
-//		appendToPane(text, newSt, Color.BLACK);
-		MainPlugin.frame.appendDebug(str);
+		if(displayPacket){
+			StyleContext sc = StyleContext.getDefaultStyleContext();
+			AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+			aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+			aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+			int len = tp.getDocument().getLength();
+			tp.setCaretPosition(len);
+			tp.setCharacterAttributes(aset, false);
+			tp.replaceSelection(msg);
+		}
 	}
 
 	public void reception() throws Exception {
 		while (!Network.socket.isClosed()) {
+			Thread.sleep(200);
 			InputStream data = socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
@@ -202,7 +188,6 @@ public class Network implements Runnable {
 				// Sometime there is so many pc that the PC can't keep up
 				// Need to try with a better one
 				// Packet seems to be split if to fast
-				Thread.sleep(200);
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
 			}
@@ -231,7 +216,7 @@ public class Network implements Runnable {
 		} else {
 			appendToPane(text, "\t\t" + name.name + "\n", new Color(0, 110, 0));
 		}
-		MainPlugin.frame.appendDebug("[" + timing + "] [" + packet_id + "] - " + name.name);
+//		MainPlugin.frame.appendDebug("[" + timing + "] [" + packet_id + "] - " + name.name);
 		switch (packet_id) {
 		case 1:
 			ProtocolRequired protoc = new ProtocolRequired();
@@ -309,6 +294,9 @@ public class Network implements Runnable {
 			break;
 		case 500:
 			HandleObjectAveragePricesGetMessage();
+			CharacterStatsListMessage characterStatsListMessage = new CharacterStatsListMessage();
+			characterStatsListMessage.Deserialize(dataReader);
+			Info.stats = characterStatsListMessage;
 			break;
 		case 220:
 			CurrentMapMessage currentMapMessage = new CurrentMapMessage();
@@ -342,8 +330,8 @@ public class Network implements Runnable {
 			gameMapMovementMessage.Deserialize(dataReader);
 			if(gameMapMovementMessage.actorId == Info.actorId){
 				Info.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
-				MainPlugin.frame.append("Déplacement réussi !");
-				MainPlugin.frame.append("CellId : " + Info.cellId);
+				Network.append("Déplacement réussi !");
+				Network.append("CellId : " + Info.cellId);
 			}
 			break;
 		case 6316 :
@@ -428,7 +416,7 @@ public class Network implements Runnable {
 		case 6519:
 			ObtainedItemMessage itemMessage = new ObtainedItemMessage();
 			itemMessage.Deserialize(dataReader);
-			Farm.lastItemHarvested = itemMessage.genericId;
+			Farm.lastItemHarvestedId = itemMessage.genericId;
 			Farm.quantityLastItemHarvested = itemMessage.baseQuantity;
 			break;
 		case 5809:
@@ -446,6 +434,11 @@ public class Network implements Runnable {
 					Info.job.set(i, experienceUpdateMessage.experiencesUpdate);
 				}
 			}
+			break;
+		case 5670:
+			CharacterLevelUpMessage characterLevelUpMessage = new CharacterLevelUpMessage();
+			characterLevelUpMessage.Deserialize(dataReader);
+			Info.lvl = characterLevelUpMessage.newLevel;
 			break;
 		}
 	}
@@ -568,9 +561,13 @@ public class Network implements Runnable {
 	private static int SubComputeStaticHeader(int id, byte typeLen) {
 		return (id << 2) | typeLen;
 	}
-
-	public static void print(byte[] byteArray) {
-		System.out.println(bytesToString(byteArray, "%X", false));
+	
+	public static void append(String str) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		timing = formatter.format(time);
+		String newSt = "[" + timing + "] " + str;
+		System.out.println(newSt);
 	}
 
 	public static String bytesToString(byte[] bytes, String format, boolean spacer) {
@@ -687,11 +684,11 @@ public class Network implements Runnable {
 			e.printStackTrace();
 		}
 		new JSON("MapInfo",Info.mapId);
-		new JSON("MapInfoComplete", Info.mapId);
-		MainPlugin.frame.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] +  "]");	
-		MainPlugin.frame.append("CellId : " + Info.cellId);
-		Info.waitForMov = true;
+		new JSON("MapInfoComplete", Info.mapId);		
 		Info.isConnected = true;
+		Network.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] +  "]");	
+		Network.append("CellId : " + Info.cellId);
+		Info.waitForMov = true;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {

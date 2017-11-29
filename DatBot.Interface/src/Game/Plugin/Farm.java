@@ -10,13 +10,15 @@ import protocol.network.Network;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.StatedElement;
+import utils.JSON;
 
 public class Farm {
 
 	public static String farmCell;
 	public static List<StatedElement> statedElements;
 	public static List<InteractiveElement> interactiveElements;
-	public static int lastItemHarvested;
+	public static int lastItemHarvestedId;
+	public static String lastItemHarvestedString;
 	public static int quantityLastItemHarvested;
 
 	public static String getFarmCell() {
@@ -37,9 +39,8 @@ public class Farm {
 				}
 			}
 		}
-		farmCell = farmCell.substring(0,farmCell.length()-2);
-		System.out.println(farmCell);
-		System.out.println("Compteur : "+ count);
+		if(farmCell.length() > 2)
+			farmCell = farmCell.substring(0,farmCell.length()-2);
 		return farmCell;
 	}
 	
@@ -47,19 +48,22 @@ public class Farm {
 		InteractiveUseRequestMessage interactiveUseRequestMessage = null; 
 		for (int i = 0; i < statedElements.size() ; i++) {
 			if(cellId == statedElements.get(i).elementCellId){
+				System.out.println(1);
 				if(statedElements.get(i).elementState == 0){
+					System.out.println(2);
 					for(int j = 0 ; j < interactiveElements.size() ; j++){
 						if(statedElements.get(i).elementId == interactiveElements.get(j).elementId){
+							System.out.println(3);
 							interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveElements.get(j).elementId, interactiveElements.get(j).enabledSkills.get(0).skillInstanceUid);
 							break;
 						}
 					}
 				} else {
-					System.out.println(1);
 					return false;
 				}
 			}
 		}
+		System.out.println(interactiveUseRequestMessage);
 		Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting resource cell " + cellId);	
 		Info.waitForHarvestFailure = false;
 		Info.waitForHarvestSuccess = false;
@@ -70,6 +74,8 @@ public class Farm {
 			System.out.println(2);
 			return false;
 		} else if (Info.waitForHarvestSuccess){
+			new JSON("Item", Farm.lastItemHarvestedId);
+			lastItemHarvestedString = new JSON("Name", JSON.nameId).name;
 			return true;
 		}
 		System.out.println(3);
@@ -81,9 +87,9 @@ public class Farm {
 		switch ((int) element.ElementId) {
 
 		case 29828:
-			return "Blé";
+			return "BlÃ©";
 		case 34008:
-			return "Blé";
+			return "BlÃ©";
 		case 34013:
 			return "Avoine";
 		case 67475:
@@ -91,15 +97,15 @@ public class Farm {
 		case 69026:
 			return "Bois de charme";
 		case 18686:
-			return "Frêne";
+			return "FrÃªne";
 		case 30738:
-			return "Orchidée freyesque";
+			return "OrchidÃ©e freyesque";
 		case 30735:
-			return "Trèfle à 5 feuilles";
+			return "TrÃ¨fle Ã  5 feuilles";
 		case 30739:
 			return "Menthe sauvage";
 		case 18689:
-			return "Bois de chêne";
+			return "Bois de chÃªne";
 		case 34660:
 			return "Fer";
 		case 33963:

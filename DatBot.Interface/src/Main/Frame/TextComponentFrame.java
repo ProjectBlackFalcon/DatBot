@@ -83,14 +83,14 @@ public class TextComponentFrame extends JFrame {
 
 						if (cellId != -1) {
 							if (Map.Cells.get(cellId).Mov == false || Info.cellId == cellId) {
-								MainPlugin.frame.append("Cette case est inaccessible");
+								Network.append("Cette case est inaccessible");
 								return;
 							} else {
 								CellMovement mov = Movement.MoveToCell(cellId);
 								mov.performMovement();
 							}
 						} else
-							MainPlugin.frame.append("CellId out of bound");
+							Network.append("CellId out of bound");
 					} catch (NumberFormatException | BadLocationException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
@@ -127,7 +127,7 @@ public class TextComponentFrame extends JFrame {
 							try {
 								MapMovement mov = Movement.ChangeMap(direction);
 								if (mov == null) {
-									MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+									Network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 								}
 								else {
 									mov.PerformChangement();
@@ -177,7 +177,7 @@ public class TextComponentFrame extends JFrame {
 						} else if (length == 8) {
 							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 3))));
 						} 
-						System.out.println("Id : " + Farm.lastItemHarvested + " Quantity : " + Farm.quantityLastItemHarvested);
+						System.out.println("Id : " + Farm.lastItemHarvestedId + " Quantity : " + Farm.quantityLastItemHarvested);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -185,33 +185,8 @@ public class TextComponentFrame extends JFrame {
 				}
 			}
 		});
-
-		// Timing
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		timing = formatter.format(time);
-
-	}
-
-	public void append(String str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		timing = formatter.format(time);
-		String newSt = "[" + timing + "] " + str;
-		System.out.println(newSt);
-//		textArea.append(newSt);
-//		textArea.setCaretPosition(textArea.getText().length());
 	}
 	
-	public void appendDebug(String str) {
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-//		LocalTime time = LocalTime.now();
-//		timing = formatter.format(time);
-//		String newSt = "[" + timing + "] " + str + "\n";
-		textArea.append(str +"\n");
-//		textArea.setCaretPosition(textArea.getText().length());
-	}
-
 	public static final int DEFAULT_WIDTH = 600;
 	public static final int DEFAULT_HEIGHT = 900;
 }

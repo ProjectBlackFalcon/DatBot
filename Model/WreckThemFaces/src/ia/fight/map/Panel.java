@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import ia.fight.brain.Game;
 import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.Position;
 
@@ -86,7 +87,7 @@ public class Panel extends JPanel{
 				if(LineOfSight.visibility(new Position(selectedCase[0], selectedCase[1]), new Position(i, j), map))
 					g.setColor(Color.white);
 				else
-					g.setColor(Color.lightGray);
+					g.setColor(new Color(200, 255, 255));
 				
 				g.fillRect(1+i*20, 1+j*20, 20, 20);
 			}	
@@ -116,6 +117,17 @@ public class Panel extends JPanel{
 		
 		g.setColor(Color.green);
 		g.fillRect(1+selectedCase[0]*20, 1+selectedCase[1]*20, 20, 20);
+		
+		for(int i = 0; i < 33; i++) {
+			for(int j = 0; j < 33; j++) {
+				if(Game.map.isPositionAccessible(new Position(selectedCase[0], selectedCase[1]), new Position(i, j), 6)) {
+					g.setColor(Color.green);
+				}else {
+					g.setColor(Color.black);
+				}
+				g.drawRect(5+i*20, 5+j*20, 11, 11);
+			}
+		}
 		g.setColor(Color.black);
 		
 		for(int i = 0; i < 33; i++) {

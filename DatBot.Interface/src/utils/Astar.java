@@ -4,6 +4,7 @@ import java.util.*;
 
 import Game.Info;
 import Main.MainPlugin;
+import protocol.network.Network;
 
 /*
  * WITHOUT DIAGONAL FOR MAP CHANGE
@@ -530,7 +531,7 @@ public class Astar {
             for (String is : Astar.pathString) {
             	paths += new String("->[" + is + "]");
     		}
-			MainPlugin.frame.append(paths);
+			Network.append(paths);
             
         	for(int k = 0; k < blocked.size(); k++){
         		int tempx = blocked.get(k)[0];

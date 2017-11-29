@@ -6,10 +6,12 @@ import java.io.InputStreamReader;
 
 import Game.Info;
 import Game.Plugin.Farm;
+import Game.Plugin.Stats;
 import Game.map.MapMovement;
 import Game.movement.CellMovement;
 import Game.movement.Movement;
 import protocol.network.Network;
+import utils.JSON;
 
 public class ModelConnexion implements Runnable {
 	
@@ -79,7 +81,7 @@ public class ModelConnexion implements Runnable {
 					MapMovement mapMovement = Movement.ChangeMap(Integer.parseInt(infoMov[0]),infoMov[1].substring(2, infoMov[1].length()-1));
 					if (mapMovement == null) {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
-						MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+						Network.append("Dï¿½placement impossible ! Un obstacle bloque le chemin !");
 					}
 					else {
 						mapMovement.PerformChangement();
@@ -95,7 +97,7 @@ public class ModelConnexion implements Runnable {
 					break;
 				case "harvest":
 					if(Farm.harvestCell(Integer.parseInt(message[5]))){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvested,Farm.quantityLastItemHarvested});
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvestedId,Farm.lastItemHarvestedString,Farm.quantityLastItemHarvested,Info.weight,Info.weigthMax});
 					} 
 //					else if (){
 //						TODO AGGRO
@@ -105,7 +107,7 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "getStats":
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()});
 					break;
 				}
 			}

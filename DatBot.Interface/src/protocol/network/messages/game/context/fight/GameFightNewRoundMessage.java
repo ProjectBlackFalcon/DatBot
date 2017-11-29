@@ -45,6 +45,6 @@ public class GameFightNewRoundMessage extends NetworkMessage {
 	}
 
 	private void append(){
-		Network.appendDebug("roundNumber : " + this.roundNumber);
+		Network.append("roundNumber : " + this.roundNumber);
 	}
 }

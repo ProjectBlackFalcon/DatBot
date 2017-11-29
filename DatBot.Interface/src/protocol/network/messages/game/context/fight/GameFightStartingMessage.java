@@ -53,8 +53,8 @@ public class GameFightStartingMessage extends NetworkMessage {
 	}
 
 	private void append(){
-		Network.appendDebug("fightType : " + this.fightType);
-		Network.appendDebug("attackerId : " + this.attackerId);
-		Network.appendDebug("defenderId : " + this.defenderId);
+		Network.append("fightType : " + this.fightType);
+		Network.append("attackerId : " + this.attackerId);
+		Network.append("defenderId : " + this.defenderId);
 	}
 }

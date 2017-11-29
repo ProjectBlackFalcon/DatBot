@@ -39,23 +39,29 @@ class LowLevelFunctions:
     def get_walkable_neighbour_cells(self, cell, map_coords, worldmap):
         walkable_neighbours = []
         for neighbour in self.get_neighbour_cells(cell):
-            if self.flatten_map(self.coord_fetch_map(map_coords, worldmap))[neighbour] == 0:
+            if self.flatten_map(self.coord_fetch_map('{};{}'.format(map_coords[0], map_coords[1]), worldmap))[neighbour] == 0:
                 walkable_neighbours.append(neighbour)
         return walkable_neighbours[:]
 
-    def get_closest_walkable_neighbour_cells(self, target_cell, player_cell, map_coords, worldmap):
+    def get_closest_walkable_neighbour_cell(self, target_cell, player_cell, map_coords, worldmap):
         walkable_neighbours = self.get_walkable_neighbour_cells(target_cell, map_coords, worldmap)
-        closest = walkable_neighbours[0], self.distance_cell(walkable_neighbours[0], player_cell)
+        if walkable_neighbours:
+            closest = walkable_neighbours[0], 10000
+        else:
+            return False
         for walkable_neighbour in walkable_neighbours:
             if self.distance_cell(walkable_neighbour, player_cell) < closest[1]:
                 closest = walkable_neighbour, self.distance_cell(walkable_neighbour, player_cell)
-        return closest[0]
+
+        if closest[1] < 10000:
+            return closest[0]
+        return False
 
     def get_closest_walkable_cell(self, target_cell, map_coords, worldmap):
-        map_info = self.flatten_map(self.coord_fetch_map(map_coords, worldmap))
+        map_info = self.flatten_map(self.coord_fetch_map('{};{}'.format(map_coords[0], map_coords[1]), worldmap))
         closest = None, 2000
         for n_tile in range(len(map_info)):
-            if self.distance_cell(target_cell, n_tile) < closest[1] and map_info[n_tile] == 0:
+            if (0 < self.distance_cell(target_cell, n_tile) < closest[1]) and map_info[n_tile] == 0:
                 closest = n_tile, self.distance_cell(target_cell, n_tile)
         return closest[0]
 

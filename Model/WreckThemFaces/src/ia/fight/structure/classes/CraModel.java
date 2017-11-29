@@ -90,6 +90,7 @@ public class CraModel{
 		distantShooting.setCriticalChance(29);
 		distantShooting.setAreaOfEffect(new AreaOfEffect("circle", 3));
 		distantShooting.setMaxEffectAccumulation(1);
+		distantShooting.setRecastInterval(5);
 		
 	}
 	

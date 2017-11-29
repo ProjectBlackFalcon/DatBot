@@ -15,7 +15,6 @@ public class Servers {
 	public static int Ombre = 50;
 	public static int Padgref = 5001;
 	public static int Beldarion = 220;
-	public static int Ganymède = 218;
 	public static int Oto_Mustam = 22;
 	public static int Dramak = 215;
 	public static int Fraktale = 214;

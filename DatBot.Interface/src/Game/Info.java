@@ -3,6 +3,7 @@ package Game;
 import java.util.ArrayList;
 import java.util.List;
 
+import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
 
 public class Info {
@@ -30,6 +31,7 @@ public class Info {
 	public static int lvl = -1;
 	public static int weigthMax;
 	public static int weight;
+	public static CharacterStatsListMessage stats;
 	public static List<JobExperience> job = new ArrayList<JobExperience>();
 
 	
