@@ -6,11 +6,19 @@ import json
 
 class HighLevelFunctions:
     def __init__(self, bot_instance):
+        self.bot_instance = bot_instance
         self.interface = Interface(bot_instance, headless=True)
         self.llf = LowLevelFunctions()
 
     def goto(self, target_coord, target_cell=None, worldmap=1):
         current_map, current_cell, current_worldmap, map_id = self.interface.get_map()
+
+        if current_map == target_coord and current_cell == target_cell and worldmap == current_worldmap:
+            return
+
+        if current_map == target_coord and worldmap == current_worldmap and target_cell is not None:
+            if self.interface.move(target_cell):
+                return
 
         if current_worldmap != worldmap:
             # TODO manage worldmap changing
@@ -19,7 +27,7 @@ class HighLevelFunctions:
         pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
         path_directions = pf.get_map_change_cells()
         for i in range(len(path_directions)):
-            if self.interface.change_map(path_directions[i][0], path_directions[i][1]):
+            if self.interface.change_map(path_directions[i][0], path_directions[i][1])[0]:
                 continue
             else:
                 raise Exception('Interface returned false on move command')
@@ -34,6 +42,8 @@ class HighLevelFunctions:
         with open('..//Utils//resourcesLevels.json', 'r') as f:
             resources_levels = json.load(f)
 
+        local_blacklist = []
+
         def harvest_one():
             map_resources_ids = self.interface.get_map_resources()
             map_coords, player_pos, worldmap, _ = self.interface.get_map()
@@ -45,8 +55,8 @@ class HighLevelFunctions:
                     else:
                         map_resources[resources_ids[str(res_id)]] = [(cell_id, status)]
                 else:
-                    with open('..//Utils//unknownResourseID.txt', 'a') as f:
-                        f.write('Map : {}, ID : {}, Cell : {}'.format(player_pos, res_id, cell_id))
+                    with open('..//Utils//unknownResourceID.txt', 'a') as f:
+                        f.write('Map : {}, ID : {}, Cell : {}\n'.format(map_coords, res_id, cell_id))
             print('[Harvest] map_resources : {}'.format(map_resources))
 
             if harvest_only is not None:
@@ -66,14 +76,21 @@ class HighLevelFunctions:
                 filtered_map_resources2 = filtered_map_resources
             print('[Harvest] filtered_map_resources2 : {}'.format(filtered_map_resources2))
 
-            harvestable = []
+            filtered_map_resources3 = {}
+            job_levels = self.interface.get_player_stats()['job_levels']
             for resource, spots in filtered_map_resources2.items():
+                if resources_levels[resource][0] <= job_levels[resources_levels[resource][0]][0]:
+                    filtered_map_resources3[resource] = spots
+
+            harvestable = []
+            for resource, spots in filtered_map_resources3.items():
                 for spot in spots:
                     if spot[1] == 0:
                         harvestable.append(spot[0])
             print('[Harvest] harvestable : {}'.format(harvestable))
 
-            # TODO level filtering
+            harvestable = list(set(harvestable)-set(local_blacklist))
+            print('Harvestable :', harvestable)
 
             if not harvestable:
                 return False
@@ -88,14 +105,38 @@ class HighLevelFunctions:
             print('[Harvest] harvest spot : {}'.format(harvest_spots))
 
             if harvest_spots:
+                success = True
                 selected_cell = self.llf.closest_cell(player_pos, [spot[0] for spot in harvest_spots])
-                self.interface.move(selected_cell)
+                if not self.interface.move(selected_cell)[0]:
+                    success = False
                 ret_val = self.interface.harvest_resource(self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots]))
-            return ret_val
+                if not ret_val[0]:
+                    success = False
 
+                if not success:
+                    inacessible_res = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
+                    local_blacklist.append(inacessible_res)
+                    print('Black List : ', local_blacklist)
+                    return -1
+                return ret_val
+            return False
+
+        harvest = []
         ret_val = harvest_one()
+        if type(ret_val) is list:
+            harvest.append(ret_val)
         while ret_val:
             ret_val = harvest_one()
+            if type(ret_val) is list:
+                harvest.append(ret_val)
+
+        with open('..//Misc//HarvestLogs//HarvestLog_{}.txt'.format(self.bot_instance), 'a') as f:
+            for item in harvest:
+                # f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], round(item[3]*100/item[4], 0)))
+                f.write('ID : {}, Item : {}, Number : {}\n'.format(item[0], 'Unk', item[1]))
         print('[Harvest] Done')
+
+    def get_inventory(self):
+        pass
 
 __author__ = 'Alexis'

@@ -4,15 +4,30 @@ import time
 hf = HighLevelFunctions(0)
 hf.interface.connect('wublel7', 'wubwublel7', 'Dihydroquerina')
 
-'''
-for i in range(7):
-    hf.goto((6-1-i, -24))
-    with open('res_log.text', 'a') as f:
-        f.write(str(hf.interface.get_map_resources())+'\n')
-'''
-hf.goto((-1, -2), worldmap=2)
-hf.harvest_map()
 
+path = (
+    ((1, -2), None),
+    ((2, -2), None),
+    ((3, -2), None),
+    ((3, -1), None),
+    ((2, -1), None),
+    ((2, -0), None),
+    ((1, 0), None),
+    ((1, -1), None),
+    ((0, -1), 516),
+    ((0, -1), 139),
+    ((0, -2), None),
+    ((-1, -2), None),
+    ((-1, -1), 8),
+    ((-2, -1), None),
+    ((-2, -0), None),
+    ((-1, 0), None),
+    ((0, 0), None),
+)
+
+for tile in path:
+    hf.goto(tile[0], target_cell=tile[1], worldmap=2)
+    hf.harvest_map()
 
 while 1:
     time.sleep(1)

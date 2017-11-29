@@ -121,7 +121,7 @@ class Interface:
     def get_player_stats(self):
         """
         Get the bot player stats
-        :return: TODO
+        :return: {"current_pods": <>, "max_pods": <>, "level": <>, "job_levels": {"job_id": level, ...}}
         """
         msg_id = self.add_command('getStats')
         return self.wait_for_return(msg_id)
@@ -130,7 +130,7 @@ class Interface:
         """
         Harvests the resource on the cell given
         :param cell: cell number
-        :return: number_harvested or combat or false
+        :return: [id, name, number_harvested, new_pods, max_pods], or combat or false
         """
         msg_id = self.add_command('harvest', [cell])
         return self.wait_for_return(msg_id)
