@@ -9,6 +9,7 @@ from Model.LowLevelFunctions import LowLevelFunctions
 
 class PathFinder:
     def __init__(self, start_map, end_map, start_cell, end_cell, worldmap):
+        print('[Pathfinder] Going from map {}, cell {} to map {}, cell {}'.format(start_map, start_cell, end_map, end_cell))
         self.llf = LowLevelFunctions()
         self.start = start_map
         self.end = end_map
@@ -86,7 +87,8 @@ class PathFinder:
             )
             out[start_pos[1]][start_pos[0]] = -2
             out[goal_pos[1]][goal_pos[0]] = -3
-            self.glued_maps = out
+            self.glued_maps = out[:]
+            return out[:]
 
     def adapt_shape_maps(self, maps):
         maps = np.array(maps)
@@ -108,10 +110,11 @@ class PathFinder:
         a = np.kron(map_as_array, np.ones((scaling_factor, scaling_factor))).astype(int)
         a[a == 0] = 255*64
         a[a == 2] = 255*32
-        a[a == 3] = 255*128
+        a[a == 4] = 255*16
+        a[a == 4] = 255*128
         a[a == -2] = 255*128
         a[a == -3] = 255*128
-        a[a == 4] = 255*255
+        a[a == 5] = 255*255
         Image.fromarray(a).save('Out.png')
         # print('[Pathfinder] Done')
 
@@ -179,11 +182,11 @@ class PathFinder:
 
     def add_path_to_adapted_maps(self):
         for x, y in self.path_cells:
-            self.adapted_maps[x][y] = 3
+            self.adapted_maps[x][y] = 4
 
     def add_map_change_coords_to_adapted_maps(self):
         for x, y in self.map_change_coords:
-            self.adapted_maps[x][y] = 4
+            self.adapted_maps[x][y] = 5
 
     def get_path_try(self):
         if not self.maps_coords:
@@ -200,7 +203,9 @@ class PathFinder:
         self.adapt_shape_maps(self.glued_maps)
         # self.map_to_image(self.glued_maps, 10)
 
+        # IndexError: index 0 is out of bounds for axis 0 with size 0
         start_pos = (np.where(self.adapted_maps == -2)[1][0], np.where(self.adapted_maps == -2)[0][0])
+
         goal_pos = (np.where(self.adapted_maps == -3)[1][0], np.where(self.adapted_maps == -3)[0][0])
 
         self.astar(goal_pos, start_pos)
