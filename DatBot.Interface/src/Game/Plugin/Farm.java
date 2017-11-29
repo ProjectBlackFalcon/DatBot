@@ -10,6 +10,7 @@ import protocol.network.Network;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.StatedElement;
+import utils.JSON;
 
 public class Farm {
 
@@ -73,6 +74,8 @@ public class Farm {
 			System.out.println(2);
 			return false;
 		} else if (Info.waitForHarvestSuccess){
+			new JSON("Item", Farm.lastItemHarvestedId);
+			lastItemHarvestedString = new JSON("Name", JSON.nameId).name;
 			return true;
 		}
 		System.out.println(3);
@@ -84,9 +87,9 @@ public class Farm {
 		switch ((int) element.ElementId) {
 
 		case 29828:
-			return "Blé";
+			return "BlÃ©";
 		case 34008:
-			return "Blé";
+			return "BlÃ©";
 		case 34013:
 			return "Avoine";
 		case 67475:
@@ -94,15 +97,15 @@ public class Farm {
 		case 69026:
 			return "Bois de charme";
 		case 18686:
-			return "Frêne";
+			return "FrÃªne";
 		case 30738:
-			return "Orchidée freyesque";
+			return "OrchidÃ©e freyesque";
 		case 30735:
-			return "Trèfle à 5 feuilles";
+			return "TrÃ¨fle Ã  5 feuilles";
 		case 30739:
 			return "Menthe sauvage";
 		case 18689:
-			return "Bois de chêne";
+			return "Bois de chÃªne";
 		case 34660:
 			return "Fer";
 		case 33963:

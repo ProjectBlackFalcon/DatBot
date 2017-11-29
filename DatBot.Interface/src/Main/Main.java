@@ -10,23 +10,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
     	Thread modelConnexion = new Thread(new ModelConnexion());
     	modelConnexion.start();
-    	int index = 0;
     	while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals("")){
     		System.out.println("Waiting for connection...");
     		Thread.sleep(1000);
-    		index++;
-//    		if(index == 2){
-//    			Info.nameAccount = "wublel7";
-//    			Info.password = "wubwublel7";
-//    			Info.name = "Dihydroquerina";
-//    			Info.server = "Julith";
-//    		}
-//    		if(index == 2){
-//    			Info.nameAccount = "ceciestuntest";
-//    			Info.password = "ceciestlemdp1";
-//    			Info.name = "Gladiatonme";
-//    			Info.server = "Echo";
-//    		}
     	}  
     	boolean arg = false;
     	if(args.length != 0){
@@ -45,17 +31,9 @@ public class Main {
 			}
 		}
 		
-		Network.append("Connecté !");
+		Network.append("ConnectÃ© !");
 		Network.append("Name : " + Info.name);
 		Network.append("Niveau : " + Info.lvl); 		
-		
-//		while(true){
-//			index++;				
-//			Thread.sleep(1000);
-//			if(index ==15){	
-//				System.out.println(Stats.getStats());
-//			}
-//		}
     }
 }
 

@@ -31,6 +31,7 @@ public class JSON implements Runnable{
 	public ArrayList<ArrayList<Integer>> cells = new ArrayList<ArrayList<Integer>>();
 	
 	// Name
+	public static long nameId;
 	public static String name;
 	
 	public JSON(String file,long id){
@@ -80,25 +81,25 @@ public class JSON implements Runnable{
 				break;
 			case "Name" :
 				Object obj = parser.parse(new FileReader(s + "\\Utils\\Names.json"));
-	            JSONArray texts = (JSONArray) obj;
-	            texts.forEach( emp -> parseEmployeeObject( (JSONObject) emp ) );
-	            System.out.println("\"" + 1 + "\"");
+				JSONObject jsonObject =  (JSONObject) obj;
+				JSONObject texts =  (JSONObject) jsonObject.get("texts");
+	            name = (String) texts.get(String.valueOf(id));
+	            break;
+			case "Item" :
+				a = (JSONArray) parser.parse(new FileReader(s + "\\Utils\\Items.json"));
+		        for (Object o : a)
+		        {
+		          JSONObject person = (JSONObject) o;
+		          if((long) person.get("id") == id){
+		        	  nameId = (long) person.get("nameId");
+		          }
+		        }
 				break;
 		}
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
 	}
-	
-    private static void parseEmployeeObject(JSONObject employee)
-    {
-        //Get employee object within list
-        JSONObject employeeObject = (JSONObject) employee.get("texts");
-         
-        //Get employee first name
-        name = (String) employeeObject.get("1");   
-        System.out.println(name);
-    }
 	
 	private List<Map> parseMapArray(JSONArray array) {
 

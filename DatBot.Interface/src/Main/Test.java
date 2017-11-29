@@ -1,39 +1,63 @@
 package Main;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 import Game.Info;
-import Game.movement.CellMovement;
-import Game.movement.Movement;
-import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
-import protocol.network.util.DofusDataReader;
-import utils.Astar;
-import utils.JSON;
+import Game.Plugin.Farm;
+import Game.Plugin.Stats;
+import protocol.network.Network;
 
 public class Test {
-
-	public static void main(String[] args) throws NumberFormatException, Exception {
-		new JSON("Name", 1);
-		System.out.println(JSON.name);
-	}
 	
-	private static void sendToModel(String botInstance, String msgId,String dest, String msgType, String command, Object [] param){
-		String newParam = "";
-		for(int i = 0 ; i < param.length ; i++){
-			if(i == param.length - 1){
-				newParam += param[i];
-			} else {
-				newParam += param[i] + ",";
+    public static void main(String[] args) throws Exception {
+    	Thread modelConnexion = new Thread(new ModelConnexion());
+    	modelConnexion.start();
+    	int index = 0;
+    	while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals("")){
+    		System.out.println("Waiting for connection...");
+    		Thread.sleep(1000);
+    		index++;
+//    		if(index == 2){
+//    			Info.nameAccount = "wublel7";
+//    			Info.password = "wubwublel7";
+//    			Info.name = "Dihydroquerina";
+//    			Info.server = "Julith";
+//    		}
+    		if(index == 2){
+    			Info.nameAccount = "ceciestuntest";
+    			Info.password = "ceciestlemdp1";
+    			Info.name = "Gladiatonme";
+    			Info.server = "Echo";
+    		}
+    	}  
+    	boolean arg = false;
+    	if(args.length != 0){
+    		if((args[0].equals("true") || args[0].equals("True"))){
+        		arg = true;
+    		}
+    	}
+    	Thread thread = new Thread(new Network(arg));
+		thread.start();
+    	
+		while (!Info.isConnected) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
-		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]",botInstance,msgId,dest,msgType,command,newParam));
-	}
-
+		
+		Network.append("Connecté !");
+		Network.append("Name : " + Info.name);
+		Network.append("Niveau : " + Info.lvl); 		
+		
+		while(true){
+			index++;				
+			Thread.sleep(1000);
+			if(index ==15){	
+				if(Farm.harvestCell(275)){
+					System.out.println(Farm.lastItemHarvestedString);
+				} 			
+			}
+		}
+    }
 }
+
