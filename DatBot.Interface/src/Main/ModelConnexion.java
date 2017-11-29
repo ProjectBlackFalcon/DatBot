@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import Game.Info;
 import Game.Plugin.Farm;
+import Game.Plugin.Stats;
 import Game.map.MapMovement;
 import Game.movement.CellMovement;
 import Game.movement.Movement;
@@ -97,7 +98,7 @@ public class ModelConnexion implements Runnable {
 					System.out.println("Cellid : " + Integer.parseInt(message[5]));
 					if(Farm.harvestCell(Integer.parseInt(message[5]))){
 						
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvestedId,Farm.quantityLastItemHarvested});
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvestedId,Farm.lastItemHarvestedString,Farm.quantityLastItemHarvested,Info.weight,Info.weigthMax});
 					} 
 //					else if (){
 //						TODO AGGRO
@@ -107,8 +108,7 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "getStats":
-					
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()});
 					break;
 				}
 			}

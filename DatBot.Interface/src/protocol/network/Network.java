@@ -175,6 +175,7 @@ public class Network implements Runnable {
 
 	public void reception() throws Exception {
 		while (!Network.socket.isClosed()) {
+			Thread.sleep(200);
 			InputStream data = socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
@@ -187,7 +188,6 @@ public class Network implements Runnable {
 				// Sometime there is so many pc that the PC can't keep up
 				// Need to try with a better one
 				// Packet seems to be split if to fast
-				Thread.sleep(200);
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
 			}

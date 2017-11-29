@@ -2,6 +2,7 @@ package Main;
 
 import Game.Info;
 import Game.Plugin.Farm;
+import Game.Plugin.Stats;
 import protocol.network.Network;
 
 public class Main {
@@ -52,7 +53,7 @@ public class Main {
 //			index++;				
 //			Thread.sleep(1000);
 //			if(index ==15){	
-//				Farm.harvestCell(Integer.parseInt("452"));
+//				System.out.println(Stats.getStats());
 //			}
 //		}
     }
