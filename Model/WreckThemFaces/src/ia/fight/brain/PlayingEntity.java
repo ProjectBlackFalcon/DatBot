@@ -1,6 +1,13 @@
 package ia.fight.brain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+import ia.fight.map.LineOfSight;
 import ia.fight.structure.Player;
+import ia.fight.structure.spells.SpellObject;
 
 public class PlayingEntity {
 
@@ -67,6 +74,145 @@ public class PlayingEntity {
 		return model.getName()+" "+model.getLP()+"/"+model.getAP()+"/"+model.getMP();
 	}
 
+	public int[] getOptimalRangeForMaximumDamageOutput(PlayingEntity victim) {
+		ArrayList<SpellObject> optimalTurn = getOptimalTurn(victim);
+		System.out.println(optimalTurn);
+		int min = optimalTurn.get(0).getMinimumRange();
+		int max = optimalTurn.get(0).getMaximumRange();
+		
+		if(optimalTurn.get(0).isModifiableRange()) {
+			max += this.getModel().getRange();
+		}
+		
+		for(int i = 1; i < optimalTurn.size(); i++) {
+			if(optimalTurn.get(i).getMinimumRange() > min) {
+				min = optimalTurn.get(i).getMinimumRange();
+			}
+			
+			if(optimalTurn.get(0).isModifiableRange()) {
+				if(optimalTurn.get(i).getMaximumRange()+this.getModel().getRange() < max) {
+					max = optimalTurn.get(i).getMaximumRange()+this.getModel().getRange();
+				}
+			}else {
+				if(optimalTurn.get(i).getMaximumRange() < max) {
+					max = optimalTurn.get(i).getMaximumRange();
+				}
+			}
+			
+		}
+
+		return new int[] {min, max};
+	}
 	
+	public ArrayList<SpellObject> getOptimalTurn(PlayingEntity victim){
+		long start = System.currentTimeMillis();
+		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
+		for(int i = 0; i < getModel().getAvailableSpells().size(); i++) {
+			if(getModel().getAvailableSpells().get(i).isEntityTargetableBySpell(victim)) {
+				spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
+			}
+		}
+		
+		PlayingEntity caster = this;
+		
+		Collections.sort(spellsForEnnemy, new Comparator<SpellObject>() {
+			@Override
+			public int compare(SpellObject arg0, SpellObject arg1) {
+				if(arg0.getDamagePreviz(caster, victim) < arg1.getDamagePreviz(caster, victim)) {
+					return 1;
+				}else {
+					return -1;
+				}
+			}
+		});
+		
+		ArrayList<SpellObject> optimalTurn = new ArrayList<>();
+		int tempAP = this.getModel().getAP();
+		System.out.println("AP available : "+tempAP);
+		
+		for(int i = 0; i < spellsForEnnemy.size(); i++) {
+			System.out.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+			System.out.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
+			
+			for(int j = 0; j < spellsForEnnemy.get(i).remainingCastsForThisEntity(victim); j++) {
+				if(tempAP >= spellsForEnnemy.get(i).getCost()) {
+					optimalTurn.add(spellsForEnnemy.get(i));
+					tempAP -= spellsForEnnemy.get(i).getCost();
+				}
+			}
+		}
+		
+		long stop = System.currentTimeMillis();
+		
+		System.out.println(stop-start+" ms");
+		return optimalTurn;
+	}
+	
+	public ArrayList<SpellObject> getOptimalTurnFrom(Position position, PlayingEntity victim){
+		long start = System.currentTimeMillis();
+		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
+		for(int i = 0; i < getModel().getAvailableSpells().size(); i++) {
+			if(getModel().getAvailableSpells().get(i).isEntityTargetableBySpell(victim) && (LineOfSight.visibility(position, victim.getPosition(), Game.map.getBlocks()) || !getModel().getAvailableSpells().get(i).requiresLineOfSight())) {
+				if(getModel().getAvailableSpells().get(i).getMinimumRange() <= Position.distance(position, victim.getPosition())) {
+					if(getModel().getAvailableSpells().get(i).isModifiableRange()) {
+						if(getModel().getAvailableSpells().get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition())) {
+							if(getModel().getAvailableSpells().get(i).isStraightLineCast()) {
+								if(!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY())) {
+									spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
+								}
+							}else {
+								spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
+							}
+							
+						}
+					}else {
+						if(getModel().getAvailableSpells().get(i).getMaximumRange() <= Position.distance(position, victim.getPosition())) {
+							if(getModel().getAvailableSpells().get(i).isStraightLineCast()) {
+								if(!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY())) {
+									spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
+								}
+							}else {
+								spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		PlayingEntity caster = this;
+		
+		Collections.sort(spellsForEnnemy, new Comparator<SpellObject>() {
+			@Override
+			public int compare(SpellObject arg0, SpellObject arg1) {
+				if(arg0.getDamagePreviz(caster, victim) < arg1.getDamagePreviz(caster, victim)) {
+					return 1;
+				}else {
+					return -1;
+				}
+			}
+		});
+		
+		ArrayList<SpellObject> optimalTurn = new ArrayList<>();
+		int tempAP = this.getModel().getAP();
+		System.out.println("AP available : "+tempAP);
+		
+		for(int i = 0; i < spellsForEnnemy.size(); i++) {
+			System.out.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+			System.out.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
+			
+			for(int j = 0; j < spellsForEnnemy.get(i).remainingCastsForThisEntity(victim); j++) {
+				if(tempAP >= spellsForEnnemy.get(i).getCost()) {
+					optimalTurn.add(spellsForEnnemy.get(i));
+					tempAP -= spellsForEnnemy.get(i).getCost();
+				}
+			}
+		}
+		
+		long stop = System.currentTimeMillis();
+		
+		System.out.println(stop-start+" ms");
+		return optimalTurn;
+	}
 	
 }

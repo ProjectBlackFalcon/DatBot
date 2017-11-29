@@ -1,7 +1,11 @@
 package ia.fight.map;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import ia.fight.astar.AStarMap;
+import ia.fight.astar.ExampleFactory;
+import ia.fight.astar.ExampleNode;
 import ia.fight.brain.Position;
 
 public class Map {
@@ -171,8 +175,97 @@ public class Map {
 		return walkablePositions;
 	}
 	
+	public boolean isPositionAccessible(Position actualPosition, Position desiredPosition, int MP){
+		int xDist = Math.abs(actualPosition.getX()-desiredPosition.getX());
+		int yDist = Math.abs(actualPosition.getY()-desiredPosition.getY());
+		
+		Map map = this;
+
+		if(xDist+yDist > MP || xDist+yDist == 0){
+			return false;
+		}
+		
+        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+        for(int i = 0; i < 33; i++){
+        	for(int j = 0; j < 33; j++){
+        		myMap.setWalkable(i, j, map.isPositionWalkable(new Position(i, j)));
+        	}
+        }
+
+        List<ExampleNode> path = myMap.findPath(actualPosition.getX(),actualPosition.getY(),desiredPosition.getX(),desiredPosition.getY());
+    
+        if(path.size() < 1 || path.size() > MP){
+        	return false;
+        }else{
+        	return true;
+        }
+	}
+	
+	public ArrayList<Position> getShortestPath(String team, Position p1, Position p2){
+		int xDist = Math.abs(p1.getX()-p2.getX());
+		int yDist = Math.abs(p1.getY()-p2.getY());
+
+		Map map = this;
+
+		if(xDist+yDist == 0){
+			return null;
+		}
+		
+        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+        for(int i = 0; i < 33; i++){
+        	for(int j = 0; j < 33; j++){
+        		myMap.setWalkable(i, j, map.isPositionWalkable(team, new Position(i, j)));
+        	}
+        }
+        
+        myMap.setWalkable(p2.getX(), p2.getY(), true);
+
+        List<ExampleNode> path = myMap.findPath(p1.getX(),p1.getY(),p2.getX(),p2.getY());
+        ArrayList<Position> positionPath = new ArrayList<>();
+        
+        for(int i = 0; i < path.size(); i++) {
+        	positionPath.add(new Position(path.get(i).getxPosition(), path.get(i).getyPosition()));
+        }
+        
+		return positionPath;
+	}
+	
 	public boolean isPositionWalkable(Position position) {
-		return this.blocks.get(position.getX()).get(position.getY()) == 0;
+		return this.blocks.get(position.getY()).get(position.getX()) == 0;
+	}
+	
+	public boolean isPositionWalkable(String team, Position position) {
+		int teamNumber = team.equals("red") ? 3 : 4;
+		
+		try {
+			if(this.blocks.get(position.getY()-1).get(position.getX()) == teamNumber) {
+				return false;
+			}
+		}catch(Exception e) {}
+		
+		
+		try {
+			if(this.blocks.get(position.getY()+1).get(position.getX()) == teamNumber) {
+				return false;
+			}
+		}catch(Exception e) {}
+		
+		
+		try {
+			if(this.blocks.get(position.getY()).get(position.getX()-1) == teamNumber) {
+				return false;
+			}
+		}catch(Exception e) {}
+		
+		
+		try {
+			if(this.blocks.get(position.getY()).get(position.getX()+1) == teamNumber) {
+				return false;
+			}
+		}catch(Exception e) {}
+		
+		
+		return this.blocks.get(position.getY()).get(position.getX()) == 0;
 	}
 	
 	public void setBlocks(ArrayList<ArrayList<Integer>> blocks) {

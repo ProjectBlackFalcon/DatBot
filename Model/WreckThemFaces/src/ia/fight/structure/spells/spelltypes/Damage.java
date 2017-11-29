@@ -107,13 +107,12 @@ public class Damage extends Spell{
 	}
 	
 	public int previz(PlayingEntity pe, PlayingEntity caster) {
-		Random rand = new Random();
 
 		int baseDamage = (this.getLowDamage()+this.getHighDamage())/2;
 		int baseDamageCrit = (this.getCriticalLowDamage()+this.getCriticalHighDamage())/2;
 
-		baseDamageCrit = this.getCriticalLowDamage()+rand.nextInt(this.getCriticalHighDamage()-this.getCriticalLowDamage());
-		baseDamage = this.getLowDamage()+rand.nextInt(this.getHighDamage()-this.getLowDamage());
+		baseDamageCrit = this.getCriticalHighDamage();
+		baseDamage = this.getLowDamage();
 		
 		int addedDamage = baseDamage*((caster.getModel().getStats()[this.getType()] + caster.getModel().getPower())/100);
 		int fixedDamage = caster.getModel().getFixedDamages() + caster.getModel().getElementaryDamage()[this.getType()];

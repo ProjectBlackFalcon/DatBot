@@ -75,6 +75,24 @@ public class SpellObject {
 		return true;
 	}
 	
+	public int remainingCastsForThisEntity(PlayingEntity entity) {
+		if(!isAvailable()) {
+			return 0;
+		}
+		
+		for(int i = 0; i < this.spellPerEntityCounter.size(); i++) {
+			if(this.spellPerEntityCounter.get(i)[0] == entity.getID()) {
+				return this.numberOfCastsPerTarget - this.spellPerEntityCounter.get(i)[1];
+			}
+		}
+		
+		if(this.getRecastInterval() > 0 && spellCounter < 1) {
+			return 1;
+		}
+		
+		return Math.min(this.numberOfCastsPerTurn - spellCounter, this.numberOfCastsPerTarget); 
+	}
+	
 	public void passTurn() {
 		spellPerEntityCounter.clear();
 		spellCounter = 0;
