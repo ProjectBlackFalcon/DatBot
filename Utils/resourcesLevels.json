@@ -1,310 +1,310 @@
 {
   "Or": [
     160,
-    "m"
+    "24"
   ],
   "Lotte": [
     140,
-    "pe"
+    "36"
   ],
   "Bois d'Ebene": [
     140,
-    "b"
+    "2"
   ],
   "Sadrdine Brillante": [
     70,
-    "pe"
+    "36"
   ],
   "Bois d'Orme": [
     180,
-    "b"
+    "2"
   ],
   "Chanvre": [
     140,
-    "a"
+    "26"
   ],
   "Bois de Charme": [
     160,
-    "b"
+    "2"
   ],
   "Bois de Bombu": [
     70,
-    "b"
+    "2"
   ],
   "Kobalte": [
     60,
-    "m"
+    "24"
   ],
   "Anguille": [
     100,
-    "pe"
+    "36"
   ],
   "Bois de Merisier": [
     120,
-    "b"
+    "2"
   ],
   "Brochet": [
     80,
-    "pe"
+    "36"
   ],
   "Graine de Pandouille": [
     120,
-    "a"
+    "26"
   ],
   "Riz": [
     100,
-    "p"
+    "28"
   ],
   "Mandragore": [
     180,
-    "a"
+    "26"
   ],
   "Ortie": [
     1,
-    "a"
+    "26"
   ],
   "Bois d'Acajou": [
     200,
-    "b"
+    "2"
   ],
   "Perce-Neige": [
     200,
-    "a"
+    "26"
   ],
   "Bois de Kaliptus": [
     150,
-    "b"
+    "2"
   ],
   "Dorade Grise": [
     110,
-    "pe"
+    "36"
   ],
   "Bois de Bambou Sombre": [
     170,
-    "b"
+    "2"
   ],
   "Perche": [
     120,
-    "pe"
+    "36"
   ],
   "Morue": [
     170,
-    "pe"
+    "36"
   ],
   "Bauxite": [
     140,
-    "m"
+    "24"
   ],
   "Orge": [
     20,
-    "p"
+    "28"
   ],
   "Raie Bleue": [
     130,
-    "pe"
+    "36"
   ],
   "Fer": [
     1,
-    "m"
+    "24"
   ],
   "Ginseng": [
     140,
-    "a"
+    "26"
   ],
   "Greuvette": [
     10,
-    "pe"
+    "36"
   ],
   "Bois de Tremble": [
     200,
-    "b"
+    "2"
   ],
   "Ble": [
     1,
-    "p"
+    "28"
   ],
   "Kralamoure": [
     90,
-    "pe"
+    "36"
   ],
   "Bronze": [
     40,
-    "m"
+    "24"
   ],
   "Orchidee frayesque": [
     80,
-    "a"
+    "26"
   ],
   "Manganese": [
     80,
-    "m"
+    "24"
   ],
   "Etain": [
     100,
-    "m"
+    "24"
   ],
   "Bois de Bambou": [
     110,
-    "b"
+    "2"
   ],
   "Frostiz": [
     200,
-    "p"
+    "28"
   ],
   "Obsidienne": [
     200,
-    "m"
+    "24"
   ],
   "Espadon": [
     190,
-    "pe"
+    "36"
   ],
   "Bois d'If": [
     100,
-    "b"
+    "2"
   ],
   "Houblon": [
     60,
-    "p"
+    "28"
   ],
   "Sauge": [
     20,
-    "p"
+    "28"
   ],
   "Bois de Noyer": [
     40,
-    "b"
+    "2"
   ],
   "Poiskaille": [
     200,
-    "pe"
+    "36"
   ],
   "Dolomite": [
     180,
-    "m"
+    "24"
   ],
   "Quisnoa": [
     200,
-    "p"
+    "28"
   ],
   "Lin": [
     80,
-    "p"
+    "28"
   ],
   "Trefle a 5 feuilles": [
     40,
-    "a"
+    "26"
   ],
   "Patelle": [
     200,
-    "pe"
+    "36"
   ],
   "Bois de Chatainier": [
     20,
-    "b"
+    "2"
   ],
   "Poisson-Chaton": [
     40,
-    "pe"
+    "36"
   ],
   "Avoine": [
     40,
-    "p"
+    "28"
   ],
   "Silicate": [
     100,
-    "m"
+    "24"
   ],
   "Mais": [
     160,
-    "p"
+    "28"
   ],
   "Bois d'Oliviolet": [
     90,
-    "b"
+    "2"
   ],
   "Carpe d'Iem": [
     60,
-    "pe"
+    "36"
   ],
   "Salikrone": [
     200,
-    "a"
+    "26"
   ],
   "Seigle": [
     100,
-    "p"
+    "28"
   ],
   "Goujon": [
     1,
-    "pe"
+    "36"
   ],
   "Cuivre": [
     20,
-    "m"
+    "24"
   ],
   "Bois de Chene": [
     60,
-    "b"
+    "2"
   ],
   "Bois de Frene": [
     1,
-    "b"
+    "2"
   ],
   "Bois de Noisetier": [
     130,
-    "b"
+    "2"
   ],
   "Menthe sauvage": [
     60,
-    "a"
+    "26"
   ],
   "Edelweiss": [
     100,
-    "a"
+    "26"
   ],
   "Ecume de mer": [
     200,
-    "m"
+    "24"
   ],
   "Millet": [
     180,
-    "p"
+    "28"
   ],
   "Bois de Bambou Sacre": [
     190,
-    "b"
+    "2"
   ],
   "Truite": [
     20,
-    "pe"
+    "36"
   ],
   "Requin Marteau-Faucille": [
     150,
-    "pe"
+    "36"
   ],
   "Bar Rikain": [
     160,
-    "pe"
+    "36"
   ],
   "Tanche": [
     180,
-    "pe"
+    "36"
   ],
   "Belladone": [
     160,
-    "a"
+    "26"
   ],
   "Bois d'Erable": [
     80,
-    "b"
+    "2"
   ],
   "Argent": [
     120,
-    "m"
+    "24"
   ],
   "Malt": [
     120,
-    "p"
+    "28"
   ]
 }
