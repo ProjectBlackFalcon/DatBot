@@ -315,8 +315,6 @@ public class Game {
 	
 	public static void main(String[] args) {
 
-		
-		
 		try {
 			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
