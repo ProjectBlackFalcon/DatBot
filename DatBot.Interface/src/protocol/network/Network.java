@@ -556,6 +556,7 @@ public class Network implements Runnable {
 		byte[] wrote = WritePacket(writer, bous, id);
 		dout.write(wrote);
 		dout.flush();
+		System.out.println(message);
 		appendToPane(text, "[" + timing + "] ", Color.black);
 		appendToPane(text, "[" + id + "]	[Envoi] " + s + " \n", new Color(0, 0, 140));
 	}
@@ -639,6 +640,8 @@ public class Network implements Runnable {
 			int rand = ThreadLocalRandom.current().nextInt(-127, 127);
 			tt.add(rand);
 		}
+		
+		System.out.println(tt);
 		CheckIntegrityMessage RDM = new CheckIntegrityMessage(tt);
 		sendToServer(RDM, CheckIntegrityMessage.ProtocolId, "Check Integrity Message...");
 		System.out.println("Finished checking integrity");
