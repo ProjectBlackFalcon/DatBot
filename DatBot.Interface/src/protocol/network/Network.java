@@ -514,7 +514,7 @@ public class Network implements Runnable {
 			}
 			if (bigPacketLengthToFull == 0) {
 				// System.out.println("\n----------------------------------");
-//				System.out.println("[Reçu] ID = " + bigPacketId);
+				System.out.println("[Reçu] ID = " + bigPacketId);
 //				 System.out.println("[Reçu] ID = " + bigPacketId + " | Taille du contenu = " + bigPacketData.length ); // + "\n[Data] : " + bytesToString(bigPacketData, "%02X", false)
 				TreatPacket(bigPacketId, bigPacketData);
 				// System.out.println("\n----------------------------------");
