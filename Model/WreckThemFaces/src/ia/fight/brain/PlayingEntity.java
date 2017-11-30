@@ -76,7 +76,7 @@ public class PlayingEntity {
 
 	public int[] getOptimalRangeForMaximumDamageOutput(PlayingEntity victim) {
 		ArrayList<SpellObject> optimalTurn = getOptimalTurn(victim);
-		System.out.println(optimalTurn);
+		Game.log.println(optimalTurn);
 		int min = optimalTurn.get(0).getMinimumRange();
 		int max = optimalTurn.get(0).getMaximumRange();
 		
@@ -128,11 +128,11 @@ public class PlayingEntity {
 		
 		ArrayList<SpellObject> optimalTurn = new ArrayList<>();
 		int tempAP = this.getModel().getAP();
-		System.out.println("AP available : "+tempAP);
+		Game.log.println("AP available : "+tempAP);
 		
 		for(int i = 0; i < spellsForEnnemy.size(); i++) {
-			System.out.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
-			System.out.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
+			Game.log.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+			Game.log.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
 			
 			for(int j = 0; j < spellsForEnnemy.get(i).remainingCastsForThisEntity(victim); j++) {
 				if(tempAP >= spellsForEnnemy.get(i).getCost()) {
@@ -144,7 +144,7 @@ public class PlayingEntity {
 		
 		long stop = System.currentTimeMillis();
 		
-		System.out.println(stop-start+" ms");
+		Game.log.println(stop-start+" ms");
 		return optimalTurn;
 	}
 	
@@ -195,11 +195,11 @@ public class PlayingEntity {
 		
 		ArrayList<SpellObject> optimalTurn = new ArrayList<>();
 		int tempAP = this.getModel().getAP();
-		System.out.println("AP available : "+tempAP);
+		Game.log.println("AP available : "+tempAP);
 		
 		for(int i = 0; i < spellsForEnnemy.size(); i++) {
-			System.out.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
-			System.out.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
+			Game.log.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+			Game.log.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
 			
 			for(int j = 0; j < spellsForEnnemy.get(i).remainingCastsForThisEntity(victim); j++) {
 				if(tempAP >= spellsForEnnemy.get(i).getCost()) {
@@ -211,7 +211,7 @@ public class PlayingEntity {
 		
 		long stop = System.currentTimeMillis();
 		
-		System.out.println(stop-start+" ms");
+		Game.log.println(stop-start+" ms");
 		return optimalTurn;
 	}
 	

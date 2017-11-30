@@ -19,6 +19,8 @@ package ia.fight.astar;
 
 import java.util.List;
 
+import ia.fight.brain.Game;
+
 /**
  * A simple example for the usage of this package.
  * 
@@ -38,13 +40,13 @@ public class ExampleUsage {
         List<ExampleNode> path = myMap.findPath(0, 0, 40, 40);
         
         if(path.size() < 1){
-        	System.out.println("Not accessible");
+        	Game.log.println("Not accessible");
         }else{
-        	System.out.println("Accessible");
+        	Game.log.println("Accessible");
         }
 
         for (int i = 0; i < path.size(); i++) {
-            System.out.print("(" + path.get(i).getxPosition() + ", " + path.get(i).getyPosition() + ") -> ");
+            Game.log.print("(" + path.get(i).getxPosition() + ", " + path.get(i).getyPosition() + ") -> ");
         }
     }
 

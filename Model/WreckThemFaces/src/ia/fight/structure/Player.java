@@ -90,7 +90,7 @@ public abstract class Player {
 	}
 	
 	public void removeOneBuffTurn(){
-		//System.out.println("REMOVING OBT");
+		//Game.log.println("REMOVING OBT");
 		ArrayList<Integer> buffsToRemove = new ArrayList<>();
 		for(int i = 0; i < this.buffs.size(); i++){
 			this.buffs.get(i).removeTurnDurationQuantity(1);
