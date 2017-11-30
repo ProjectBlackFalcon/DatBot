@@ -34,9 +34,14 @@ path = (
     ((0, 0), None),
 )
 
+full = False
 for tile in path:
-    hf.goto(tile[0], target_cell=tile[1], worldmap=2)
-    hf.harvest_map()
+    if not full:
+        hf.goto(tile[0], target_cell=tile[1], worldmap=2)
+        full = not hf.harvest_map()
+
+if full:
+    hf.goto((4, -16))
 
 while 1:
     time.sleep(1)
