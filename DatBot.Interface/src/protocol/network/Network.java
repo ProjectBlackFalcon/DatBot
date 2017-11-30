@@ -229,7 +229,6 @@ public class Network implements Runnable {
 	}
 
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
-		System.out.println("Treating packet ..." + packet_id);
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
 		// M‡J timing
@@ -491,7 +490,6 @@ public class Network implements Runnable {
 			break;
 		}
 		
-		System.out.println("Treated packet " + packet_id+" .");
 	}
 
 	public void buildMessage(DofusDataReader reader) throws Exception {
