@@ -556,7 +556,7 @@ public class Network implements Runnable {
 		byte[] wrote = WritePacket(writer, bous, id);
 		dout.write(wrote);
 		dout.flush();
-		System.out.println(message);
+		System.out.println(bytesToString(wrote, "%02X", false));
 		appendToPane(text, "[" + timing + "] ", Color.black);
 		appendToPane(text, "[" + id + "]	[Envoi] " + s + " \n", new Color(0, 0, 140));
 	}
