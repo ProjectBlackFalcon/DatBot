@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="DatBot.Interface/src"/>
+	<classpathentry kind="src" path="DatBot.ProtocolBuilder/src"/>
+	<classpathentry kind="src" path="Model/WreckThemFaces/src"/>
+	<classpathentry kind="lib" path="DatBot.Interface/utils/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="DatBot.Interface/utils/netty-all-4.1.15.jar"/>
+	<classpathentry kind="lib" path="DatBot.Interface/utils/UnlimitedJCEPolicyJDK8/local_policy.jar"/>
+	<classpathentry kind="lib" path="DatBot.Interface/utils/UnlimitedJCEPolicyJDK8/US_export_policy.jar"/>
+	<classpathentry kind="lib" path="Model/WreckThemFaces/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="SaveTheChat.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="output" path="DatBot.Interface/bin"/>
+</classpath>

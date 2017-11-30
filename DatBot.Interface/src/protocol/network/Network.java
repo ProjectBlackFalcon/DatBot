@@ -634,6 +634,7 @@ public class Network implements Runnable {
 	}
 
 	private static void HandleRawDataMessage() throws Exception {
+		appendToPane(text, "flag 1", Color.black);
 		List<Integer> tt = new ArrayList<>();
 		for (int i = 0; i <= 255; i++) {
 			int rand = ThreadLocalRandom.current().nextInt(-127, 127);
