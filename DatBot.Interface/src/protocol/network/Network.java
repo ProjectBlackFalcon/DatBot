@@ -634,17 +634,14 @@ public class Network implements Runnable {
 	}
 
 	private static void HandleRawDataMessage() throws Exception {
-		System.out.println("flag 1");
 		List<Integer> tt = new ArrayList<>();
 		for (int i = 0; i <= 255; i++) {
-			System.out.println("flag "+(i+1));
 			int rand = ThreadLocalRandom.current().nextInt(-127, 127);
 			tt.add(rand);
 		}
-		System.out.println("flag 257");
 		CheckIntegrityMessage RDM = new CheckIntegrityMessage(tt);
-		System.out.println("flag 258");
 		sendToServer(RDM, CheckIntegrityMessage.ProtocolId, "Check Integrity Message...");
+		System.out.println("Finished checking integrity");
 	}
 
 	private static void HandleSelectedDataServer(String address, int port, List<Integer> ticket) throws IOException {
