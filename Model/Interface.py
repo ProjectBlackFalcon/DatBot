@@ -130,7 +130,7 @@ class Interface:
         """
         Harvests the resource on the cell given
         :param cell: cell number
-        :return: [id, name, number_harvested, new_pods, max_pods], or combat or false
+        :return: [id, number_harvested, new_pods, max_pods], or combat or false
         """
         msg_id = self.add_command('harvest', [cell])
         return self.wait_for_return(msg_id)
