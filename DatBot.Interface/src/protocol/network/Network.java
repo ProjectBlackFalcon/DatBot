@@ -63,6 +63,8 @@ import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayA
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
+import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
+import protocol.network.messages.game.dialog.LeaveDialogMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
@@ -80,6 +82,7 @@ import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
 import Game.Servers;
 import Game.Plugin.Farm;
+import Game.Plugin.NPC;
 import utils.JSON;
 
 public class Network implements Runnable {
@@ -205,7 +208,7 @@ public class Network implements Runnable {
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
-		// MàJ timing
+		// Mï¿½J timing
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		timing = formatter.format(time);
@@ -330,7 +333,7 @@ public class Network implements Runnable {
 			gameMapMovementMessage.Deserialize(dataReader);
 			if(gameMapMovementMessage.actorId == Info.actorId){
 				Info.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
-				Network.append("Déplacement réussi !");
+				Network.append("Dï¿½placement rï¿½ussi !");
 				Network.append("CellId : " + Info.cellId);
 			}
 			break;
@@ -440,6 +443,13 @@ public class Network implements Runnable {
 			characterLevelUpMessage.Deserialize(dataReader);
 			Info.lvl = characterLevelUpMessage.newLevel;
 			break;
+		case 5617:
+			NpcDialogQuestionMessage dialogQuestionMessage = new NpcDialogQuestionMessage();
+			dialogQuestionMessage.Deserialize(dataReader);
+			new NPC(dialogQuestionMessage.messageId);
+			break;
+		case 5502 :
+			NPC.dialogOver = true;
 		}
 	}
 
@@ -468,8 +478,8 @@ public class Network implements Runnable {
 			}
 			if (bigPacketLengthToFull == 0) {
 				// System.out.println("\n----------------------------------");
-//				System.out.println("[Reçu] ID = " + bigPacketId);
-				// System.out.println("[Reçu] ID = " + bigPacketId + " | Taille
+//				System.out.println("[Reï¿½u] ID = " + bigPacketId);
+				// System.out.println("[Reï¿½u] ID = " + bigPacketId + " | Taille
 				// du contenu = " + bigPacketData.length + "\n[Data] : " +
 				// bytesToString(bigPacketData, "%02X", false));
 				TreatPacket(bigPacketId, bigPacketData);
@@ -485,8 +495,8 @@ public class Network implements Runnable {
 			if (message.getId() != 0 && message.bigPacketLength == 0) {
 				//
 				// System.out.println("\n----------------------------------");
-//				System.out.println("[Reçu] ID = " + message.getId());
-				// System.out.println("[Reçu] ID = " + message.getId() + " |
+//				System.out.println("[Reï¿½u] ID = " + message.getId());
+				// System.out.println("[Reï¿½u] ID = " + message.getId() + " |
 				// Taille du contenu = " + message.getLength() + "\n[Data] : " +
 				// bytesToString(message.getData(), "%02X", false));
 				TreatPacket(message.getId(), message.getData());
@@ -508,6 +518,9 @@ public class Network implements Runnable {
 	 * String s = String displayed on log
 	 */
 	public static void sendToServer(NetworkMessage message, int id, String s) throws Exception {
+		if(id == 5898){
+			NPC.dialogOver = false;
+		}
 		LatencyFrame.latestSent();
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DofusDataWriter writer = new DofusDataWriter(bous);

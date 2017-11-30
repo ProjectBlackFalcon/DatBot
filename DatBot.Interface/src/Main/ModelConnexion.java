@@ -6,11 +6,14 @@ import java.io.InputStreamReader;
 
 import Game.Info;
 import Game.Plugin.Farm;
+import Game.Plugin.NPC;
 import Game.Plugin.Stats;
+import Game.map.Map;
 import Game.map.MapMovement;
 import Game.movement.CellMovement;
 import Game.movement.Movement;
 import protocol.network.Network;
+import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
 import utils.JSON;
 
 public class ModelConnexion implements Runnable {
@@ -24,6 +27,7 @@ public class ModelConnexion implements Runnable {
 		try {
 			String s;
 			while(true){
+				Thread.sleep(200);
 				s = bufferRead.readLine();
 				String [] message = s.split(";");
 				message[5] = message[5].substring(1, message[5].length()-1);
@@ -108,6 +112,18 @@ public class ModelConnexion implements Runnable {
 					break;
 				case "getStats":
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()});
+					break;
+				case "GoAstrub":
+					if(Map.Id == 153880835){
+						NpcGenericActionRequestMessage actionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
+						Network.sendToServer(actionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
+						while(!NPC.dialogOver){
+							Thread.sleep(1000);
+						}
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
 					break;
 				}
 			}

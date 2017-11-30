@@ -2,8 +2,11 @@ package Main;
 
 import Game.Info;
 import Game.Plugin.Farm;
+import Game.Plugin.NPC;
 import Game.Plugin.Stats;
+import Game.map.Map;
 import protocol.network.Network;
+import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
 
 public class Test {
 	
@@ -53,9 +56,16 @@ public class Test {
 			index++;				
 			Thread.sleep(1000);
 			if(index ==15){	
-				if(Farm.harvestCell(275)){
-					System.out.println(Farm.lastItemHarvestedString);
-				} 			
+//				if(Map.Id == 153880835){
+//					NpcGenericActionRequestMessage actionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
+//					Network.sendToServer(actionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
+//					while(!NPC.dialogOver){
+//						Thread.sleep(1000);
+//					}
+//				System.out.println(true);
+//				} else {
+//					System.out.println(false);
+//				}
 			}
 		}
     }
