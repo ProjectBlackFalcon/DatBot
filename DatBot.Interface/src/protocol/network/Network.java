@@ -213,6 +213,8 @@ public class Network implements Runnable {
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
 			}
+			
+			System.out.println(available);
 		}
 		socket.close();
 	}
