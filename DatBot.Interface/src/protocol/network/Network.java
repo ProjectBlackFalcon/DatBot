@@ -202,6 +202,8 @@ public class Network implements Runnable {
 			int available = data.available();
 			byte[] buffer = new byte[available];
 			
+			System.out.println(available);
+			
 			if (available > 0) {
 				//Latency
 				LatencyFrame.updateLatency();
@@ -214,7 +216,7 @@ public class Network implements Runnable {
 				buildMessage(reader);
 			}
 			
-			System.out.println(available);
+			
 		}
 		socket.close();
 	}
