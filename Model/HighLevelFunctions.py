@@ -22,9 +22,11 @@ class HighLevelFunctions:
             # Astrub to Incarnam
             elif current_worldmap == 1 and worldmap == 2:
                 statue_map = self.llf.get_closest_statue(current_map)
+                statue_map = [5, -21]
                 self.goto(statue_map)
-                statue_cell = self.interface.get_class_statue_cell()
-                self.interface.move(statue_cell)
+                statue_cell = self.interface.get_class_statue_cell()[0]
+                teleport_cell = self.llf.get_closest_walkable_neighbour_cell(statue_cell, current_cell, current_map, current_worldmap)
+                self.interface.move(teleport_cell)
                 self.interface.go_to_incarnam()
                 current_map, current_cell, current_worldmap, map_id = self.interface.get_map()
 
@@ -98,10 +100,12 @@ class HighLevelFunctions:
                     filtered_map_resources3[resource] = spots
 
             harvestable = []
+            harvestable_match_res_name = []
             for resource, spots in filtered_map_resources3.items():
                 for spot in spots:
                     if spot[1] == 0:
                         harvestable.append(spot[0])
+                        harvestable_match_res_name.append(resource)
             print('[Harvest] harvestable : {}'.format(harvestable))
 
             harvestable = list(set(harvestable)-set(local_blacklist))
@@ -124,9 +128,13 @@ class HighLevelFunctions:
                 selected_cell = self.llf.closest_cell(player_pos, [spot[0] for spot in harvest_spots])
                 if not self.interface.move(selected_cell)[0]:
                     success = False
-                ret_val = self.interface.harvest_resource(self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots]))
+                resource_cell = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
+                resource_name = harvestable_match_res_name[harvestable.index(resource_cell)]
+                ret_val = self.interface.harvest_resource(resource_cell)
                 if not ret_val[0]:
                     success = False
+                else:
+                    ret_val = ret_val[0], resource_name, ret_val[1], ret_val[2], ret_val[3]
 
                 if not success:
                     inacessible_res = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
@@ -154,8 +162,10 @@ class HighLevelFunctions:
                 f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
         if type(ret_val) is tuple and ret_val[3] == ret_val[4]:
             print('[Harvest] Full')
+            return False
         else:
             print('[Harvest] Done')
+            return True
 
     def get_inventory(self):
         pass
