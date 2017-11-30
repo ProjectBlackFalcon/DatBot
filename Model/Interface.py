@@ -151,6 +151,14 @@ class Interface:
         msg_id = self.add_command('goIncarnam')
         return self.wait_for_return(msg_id)
 
+    def get_class_statue_cell(self):
+        """
+        Returns the cell id of the current map class statue, or False if there is none
+        :return: [cell] or [False]
+        """
+        msg_id = self.add_command('getStatue')
+        return self.wait_for_return(msg_id)
+
     def open_bank(self):
         """
         Opens bank
