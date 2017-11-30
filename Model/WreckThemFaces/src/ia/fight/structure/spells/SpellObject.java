@@ -239,7 +239,7 @@ public class SpellObject {
 			}
 		}
 		
-		System.out.println("Touched entities : "+touchedEntities);
+		Game.log.println("Touched entities : "+touchedEntities);
 		
 		for(int j = 0; j < touchedEntities.size(); j++) {
 			for(int i = 0; i < this.getSpells().size(); i++){
@@ -251,7 +251,7 @@ public class SpellObject {
 				
 				for(int k = 0; k < Game.playingEntities.size(); k++) {
 					if(Game.playingEntities.get(k).getModel().getLP() <= 0) {
-						System.out.println(Game.playingEntities.get(k)+" died !");
+						Game.log.println(Game.playingEntities.get(k)+" died !");
 						Game.playingEntities.remove(k);
 					}
 				}
@@ -264,7 +264,7 @@ public class SpellObject {
 		for(int i = 0; i < Game.playingEntities.size(); i++) {
 			if(Game.playingEntities.get(i).getPosition().deepEquals(pos)) {
 				
-				System.out.println("Casting spell directly onto : "+Game.playingEntities.get(i));
+				Game.log.println("Casting spell directly onto : "+Game.playingEntities.get(i));
 				
 				boolean found = false;
 				for(int j = 0; j < this.spellPerEntityCounter.size(); j++) {
@@ -281,7 +281,7 @@ public class SpellObject {
 		}
 		
 		for(int i = 0; i < this.spellPerEntityCounter.size(); i++) {
-			System.out.println("    "+this.spellPerEntityCounter.get(i)[0]+" "+this.spellPerEntityCounter.get(i)[1]);
+			Game.log.println("    "+this.spellPerEntityCounter.get(i)[0]+" "+this.spellPerEntityCounter.get(i)[1]);
 		}
 		this.cooldown = this.getRecastInterval();
 		caster.getModel().removeAP(this.getCost());

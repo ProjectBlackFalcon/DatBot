@@ -1,5 +1,12 @@
 package ia.fight.brain;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import ia.fight.brain.classes.Cra;
@@ -20,6 +27,10 @@ public class Game {
 	static public ArrayList<PlayingEntity> playingEntities;
 	private GameViz los;
 	
+	public Game() {
+		
+	}
+	
 	public Game(int map) {
 		String[] entities = new String[2];
 		// Player ID / posX / posY / Player or Monster / Player type (0:cra, 1:Enu, ...) / Team / HP Max / AP Max / MP Max
@@ -31,17 +42,17 @@ public class Game {
 		refreshMessage.add("0;p");
 		refreshMessage.add("1;m;12;12");
 		refreshMessage.add("1;p");
-		refreshMessage.add("0;s;9;12;Magic arrow;150;false");
-		//refreshMessage.add("0;s;10;12;Dispersing arrow;0;false");
+		refreshMessage.add("0;c;9;12;Magic arrow;150;false");
+		//refreshMessage.add("0;c;10;12;Dispersing arrow;0;false");
 		refreshMessage.add("0;p");
-		//refreshMessage.add("1;s;13;12;Magic arrow;150;false");
+		//refreshMessage.add("1;c;13;12;Magic arrow;150;false");
 		refreshMessage.add("1;g");
 		initGame(map);
 		initEntities(entities);
 
 		try {
 			Thread.sleep(500);
-			System.out.println("Starting in 1 second ...");
+			Game.log.println("Starting in 1 second ...");
 			Thread.sleep(1000);
 			for(int i = 0; i < refreshMessage.size(); i++) {
 				refresh(refreshMessage.get(i));
@@ -57,6 +68,8 @@ public class Game {
 		Map mapObject = CreateMap.getMapById(map);
 		this.map = mapObject;
 		los = new GameViz(mapObject);
+		
+		com.println("S;success");
 	}
 	
 	public void initEntities(String[] entities) {
@@ -87,17 +100,20 @@ public class Game {
 			PlayingEntity playingEntity = new PlayingEntity(id, npc, new Position(posX, posY), team, player);
 			playingEntities.add(playingEntity);
 			
-			System.out.println("Created a playing entity in position "+playingEntity.getPosition());
-			System.out.println(playingEntity.getModel() == null ? "No model currently selected." : playingEntity.getModel());
+			Game.log.println("Created a playing entity in position "+playingEntity.getPosition());
+			Game.log.println(playingEntity.getModel() == null ? "No model currently selected." : playingEntity.getModel());
 		}
 
 		
 		los.update(playingEntities);
 		
 		this.playingEntities = playingEntities;
+		
+		com.println("S;success");
 	}
 	
 	public void refresh(String commandString) {
+		log.println("R;"+commandString);
 		String[] command = commandString.split(";");
 		int id = Integer.parseInt(command[0]);
 		
@@ -113,7 +129,7 @@ public class Game {
 			executeMovementCommand(command);
 		}
 		//RECEIVED A MOVEMENT COMMAND
-		else if(actionType.equals("s")) {
+		else if(actionType.equals("c")) {
 			executeSpellCommand(command);
 		}
 		//RECEIVED A PASS TURN COMMAND
@@ -129,6 +145,8 @@ public class Game {
 		
 		if(DISPLAY_GUI)
 			los.repaint();
+		
+		com.println("S;success");
 	}
 	
 	private PlayingEntity getPlayingEntityFromID(int id) {
@@ -157,7 +175,7 @@ public class Game {
 		PlayingEntity playingEntity = getPlayingEntityFromID(id);
 		playingEntity.getModel().removeMP(Position.distance(new Position(posX, posY), playingEntity.getPosition()));
 		playingEntity.setPosition(new Position(posX, posY));
-		System.out.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
+		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
 	}
 	
 	private void executeSpellCommand(String[] command) {
@@ -171,8 +189,10 @@ public class Game {
 		int damage = Integer.parseInt(command[5]);
 		boolean crit = Boolean.parseBoolean(command[6]);
 
-		System.out.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
+		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
 		SpellObject spellCast = this.getSpellFromName(spellname, "cra");
+		
+		Game.log.println(spellCast);
 		
 		spellCast.applySpells(castingEntity, new Position(posX, posY), true, damage);
 	}
@@ -184,10 +204,13 @@ public class Game {
 		castingEntity.getModel().resetMP();
 		castingEntity.getModel().removeOneBuffTurn();
 		castingEntity.getModel().updateSpellsStatus();
+		
+		log.println("Entity "+id+" passing turn.");
 	}
 		
-	private void getBestTurn(String[] command) {
+	private String getBestTurn(String[] command) {
 		int id = Integer.parseInt(command[0]);
+		boolean fullTurn = Boolean.parseBoolean(command[2]);
 		PlayingEntity playingEntity = getPlayingEntityFromID(id);
 		
 		ArrayList<PlayingEntity> ennemies = new ArrayList<>();
@@ -209,18 +232,23 @@ public class Game {
 		int damage = 0;
 		int selected = 0;
 		
-		System.out.println(Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition()));
+		Game.log.println(Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition()));
 		
 		if(Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition()) <= 2) {
-			System.out.println("Done from close combat");
+			Game.log.println("Done from close combat");
 			ArrayList<SpellObject> spells = playingEntity.getOptimalTurnFrom(playingEntity.getPosition(), ennemies.get(0));
-			for(int i = 0; i < spells.size()-1; i++) {
-				action += "s;"+spells.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
-			}
 			
-			action += "s;"+spells.get(spells.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
-		}else {
-			System.out.println("Done from far away");
+			if(fullTurn) {
+				for(int i = 0; i < spells.size()-1; i++) {
+					action += "s;"+spells.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+				}
+				
+				action += "s;"+spells.get(spells.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
+			}else {
+				action += "s;"+spells.get(0).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+			}
+		}else{
+			Game.log.println("Done from far away");
 			for(int i = 0; i < path.size(); i++) {
 				ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(path.get(i), ennemies.get(0));
 				int tempDamage = 0;
@@ -234,17 +262,21 @@ public class Game {
 				}
 			}
 			
-			System.out.println(path.get(selected));
-			System.out.println(ennemies.get(0));
+			Game.log.println(path.get(selected));
+			Game.log.println(ennemies.get(0));
 			ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(path.get(selected), ennemies.get(0));
 			
-			for(int i = 0; i < turn.size()-1; i++) {
-				action += "s;"+turn.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+			if(fullTurn) {
+				for(int i = 0; i < turn.size()-1; i++) {
+					action += "s;"+turn.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+				}
+				action += "s;"+turn.get(turn.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
+			
+			}else {
+				action += "s;"+turn.get(0).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
 			}
-			action += "s;"+turn.get(turn.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
 		}
-		
-		System.out.println(action);
+		return action;
 		
 	}
 	
@@ -278,9 +310,96 @@ public class Game {
 		}
 	}
 	
+	public static PrintStream log;
+	public static PrintStream com;
 	
 	public static void main(String[] args) {
-		new Game(84675595);
+
+		
+		
+		try {
+			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
+			System.setErr(log);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		Game.log.println("Started fight !");
+		Game game = new Game();
+		
+		try {
+			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+			String s = bufferRead.readLine();
+			while(s.equals("x")==false) {
+				com.println("R;"+s);
+				
+				String[] command = s.split(";");
+				if(command.length > 2) {
+					if(!command[2].equals("f")) {
+						log.println("Broke out of loop");
+						break;
+					}
+					
+					if(command[4].equals("startfight")) {
+						log.println("Starting fight");
+						try {
+							
+							game.initGame(parseStringToIntArray(command[5])[0]);
+							com.println("S;success");
+						}catch(Exception e) {
+							com.println("S;failure;"+e.getMessage());
+						}
+					}else if(command[4].equals("s")){
+						String entities[] = command[5].split(":");
+						for(int i = 0; i < entities.length; i++) {
+							entities[i] = entities[i].replace("[", "").
+									replace("]", "").
+									replace("'", "").
+									replace(","	, ";");
+						}
+						
+						game.initEntities(entities);
+					}else if(command[4].equals("m")) {
+						String refreshMessage = "";
+						refreshMessage += command[5] +";" + command[4] + ";" + command[6] + ";" + command[7];
+						game.refresh(refreshMessage);
+					}else if(command[4].equals("p")) {
+						String refreshMessage = "";
+						refreshMessage += command[5] +";" + command[4];
+						game.refresh(refreshMessage);
+					}else if(command[4].equals("c")) {
+						String refreshMessage = "";
+						refreshMessage += command[5] +";" + command[4] + ";" + command[6] + ";" + command[7] + 
+								";" + command[8].replace("'", "") + ";" + command[9] + ";" + command[10];
+						game.refresh(refreshMessage);
+					}else if(command[4].equals("g")) {
+						com.println("S;"+game.getBestTurn(new String[] {command[5], "g", "false"}));
+					}
+				}
+				
+				s = bufferRead.readLine();
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	static int[] parseStringToIntArray(String arr) {
+		String[] items = arr.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
+
+		int[] results = new int[items.length];
+
+		for (int i = 0; i < items.length; i++) {
+		    try {
+		        results[i] = Integer.parseInt(items[i]);
+		    } catch (NumberFormatException nfe) {
+		        log.println("Parse string "+arr+" failed. "+nfe);
+		    };
+		}
+		
+		return results;
 	}
 
 }

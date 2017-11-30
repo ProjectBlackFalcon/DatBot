@@ -6,6 +6,7 @@ import java.util.List;
 import ia.fight.astar.AStarMap;
 import ia.fight.astar.ExampleFactory;
 import ia.fight.astar.ExampleNode;
+import ia.fight.brain.Game;
 import ia.fight.brain.Position;
 
 public class Map {
@@ -274,7 +275,7 @@ public class Map {
 	
 	public void printObstacles() {
 		for(int i = 0; i < this.obstacles.size(); i++) {
-			System.out.println("["+this.obstacles.get(i)[0]+";"+this.obstacles.get(i)[1]+"] "+this.obstacles.get(i)[2]);
+			Game.log.println("["+this.obstacles.get(i)[0]+";"+this.obstacles.get(i)[1]+"] "+this.obstacles.get(i)[2]);
 		}
 	}
 }

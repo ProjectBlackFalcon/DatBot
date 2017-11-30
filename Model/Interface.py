@@ -134,4 +134,62 @@ class Interface:
         """
         msg_id = self.add_command('harvest', [cell])
         return self.wait_for_return(msg_id)
+
+    def go_to_astrub(self):
+        """
+        Talks to the PNJ to go to Astrub
+        :return: Boolean
+        """
+        msg_id = self.add_command('goAstrub')
+        return self.wait_for_return(msg_id)
+
+    def go_to_incarnam(self):
+        """
+        Uses a statue to go to Incarnam
+        :return: Boolean
+        """
+        msg_id = self.add_command('goIncarnam')
+        return self.wait_for_return(msg_id)
+
+    def get_class_statue_cell(self):
+        """
+        Returns the cell id of the current map class statue, or False if there is none
+        :return: [cell] or [False]
+        """
+        msg_id = self.add_command('getStatue')
+        return self.wait_for_return(msg_id)
+
+    def open_bank(self):
+        """
+        Opens bank
+        :return: items in bank ? / False
+        """
+        msg_id = self.add_command('openBank')
+        return self.wait_for_return(msg_id)
+
+    def close_bank(self):
+        """
+        Closes Bank
+        :return: Boolean
+        """
+        msg_id = self.add_command('closeBank')
+        return self.wait_for_return(msg_id)
+
+    def drop_in_bank(self, item_list):
+        """
+        Drops some items in bank
+        :param item_list: [ItemID1, ItemID2...] / ['All']
+        :return:
+        """
+        msg_id = self.add_command('dropBank', item_list)
+        return self.wait_for_return(msg_id)
+
+    def get_from_bank(self, item_list):
+        """
+        Gets some items in bank
+        :param item_list: [ItemID1, ItemID2...] / ['All']
+        :return: Same as Harvest ?
+        """
+        msg_id = self.add_command('getBank', item_list)
+        return self.wait_for_return(msg_id)
 __author__ = 'Alexis'

@@ -28,6 +28,8 @@ package ia.fight.astar;
 import java.util.LinkedList;
 import java.util.List;
 
+import ia.fight.brain.Game;
+
 /**
  * This class represents a simple map.
  * <p>
@@ -156,7 +158,7 @@ public class AStarMap<T extends AbstractNode> {
      * prints something to sto.
      */
     private void print(String s) {
-        System.out.print(s);
+        Game.log.print(s);
     }
 
 

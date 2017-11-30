@@ -10,6 +10,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import ia.fight.brain.Game;
+
 public class CreateMap {
 
 	public static Map getMapById(int map_id){
@@ -44,7 +46,7 @@ public class CreateMap {
 
 			long id = (java.lang.Long) map.get("id");
 			String coords = (String) map.get("coord");
-			System.out.println("Map id : "+id+", loc : "+coords);
+			Game.log.println("Map id : "+id+", loc : "+coords);
 			JSONArray cells = (JSONArray) map.get("cells");
 
 			for(int i = 0; i < cells.size(); i++){

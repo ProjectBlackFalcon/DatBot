@@ -94,14 +94,14 @@ public class Damage extends Spell{
 		
 		int finalDamage = outputDamage - fixedReduction - prcntReduction;
 		/*
-		System.out.println("Casting spell : "+superSpell.getName());
-		System.out.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
-		System.out.println("Chosen damage : "+baseDamage);
-		System.out.println("Added damage : "+addedDamage);
-		System.out.println("Fixed damage : "+fixedDamage);
-		System.out.println("Output damage : "+outputDamage);
-		System.out.println("Fixed reduction : "+fixedReduction);
-		System.out.println("Final damage : "+finalDamage);
+		Game.log.println("Casting spell : "+superSpell.getName());
+		Game.log.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
+		Game.log.println("Chosen damage : "+baseDamage);
+		Game.log.println("Added damage : "+addedDamage);
+		Game.log.println("Fixed damage : "+fixedDamage);
+		Game.log.println("Output damage : "+outputDamage);
+		Game.log.println("Fixed reduction : "+fixedReduction);
+		Game.log.println("Final damage : "+finalDamage);
 		*/
 		return finalDamage;
 	}
@@ -131,14 +131,14 @@ public class Damage extends Spell{
 		int finalDamageCrit = outputDamageCrit - fixedReduction - fixedReductionCrit - prcntReductionCrit;
 		
 		/*
-		System.out.println("Casting spell : "+superSpell.getName());
-		System.out.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
-		System.out.println("Chosen damage : "+baseDamage);
-		System.out.println("Added damage : "+addedDamage);
-		System.out.println("Fixed damage : "+fixedDamage);
-		System.out.println("Output damage : "+outputDamage);
-		System.out.println("Fixed reduction : "+fixedReduction);
-		System.out.println("Final damage : "+finalDamage);
+		Game.log.println("Casting spell : "+superSpell.getName());
+		Game.log.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
+		Game.log.println("Chosen damage : "+baseDamage);
+		Game.log.println("Added damage : "+addedDamage);
+		Game.log.println("Fixed damage : "+fixedDamage);
+		Game.log.println("Output damage : "+outputDamage);
+		Game.log.println("Fixed reduction : "+fixedReduction);
+		Game.log.println("Final damage : "+finalDamage);
 		*/
 		return (finalDamage+finalDamageCrit)/2;
 	}

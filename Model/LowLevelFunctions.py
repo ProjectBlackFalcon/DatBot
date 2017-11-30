@@ -91,4 +91,13 @@ class LowLevelFunctions:
             flattened += line
         return flattened
 
+    def get_closest_statue(self, pos):
+        with open('..//Utils//classStatues.json', 'r') as f:
+            class_statues = json.load(f)
+        closest = None, 100000
+        for class_name, statue_pos in class_statues.items():
+            if self.distance_coords(pos, statue_pos) < closest[1]:
+                closest = pos, self.distance_coords(pos, statue_pos)
+        return closest[0]
+
 __author__ = 'Alexis'

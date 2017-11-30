@@ -4,8 +4,17 @@ import time
 hf = HighLevelFunctions(0)
 hf.interface.connect('wublel7', 'wubwublel7', 'Dihydroquerina')
 
-
 path = (
+    ((-2, -4), None),
+    ((-2, -5), None),
+    ((-3, -5), None),
+    ((-3, -6), None),
+    ((-2, -6), None),
+    ((-1, -6), None),
+    ((-1, -5), None),
+    ((0, -5), None),
+    ((0, -4), None),
+    ((-1, -4), None),
     ((1, -2), None),
     ((2, -2), None),
     ((3, -2), None),
