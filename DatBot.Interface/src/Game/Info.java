@@ -38,4 +38,5 @@ public class Info {
 	public volatile static boolean waitForHarvestSuccess = false;
 	public volatile static boolean waitForHarvestFailure = false;
 	public volatile static boolean interactiveUsed = false;
+	public volatile static boolean newMap = false;
 }

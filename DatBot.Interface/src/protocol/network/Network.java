@@ -703,9 +703,15 @@ public class Network implements Runnable {
 		new JSON("MapInfo",Info.mapId);
 		new JSON("MapInfoComplete", Info.mapId);		
 		Info.isConnected = true;
+		Info.newMap = true;
 		Network.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] +  "]");	
 		Network.append("CellId : " + Info.cellId);
 		Info.waitForMov = true;
+	}
+	
+	public static boolean waitForNewMap(){
+		
+		return false;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {
