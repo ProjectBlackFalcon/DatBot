@@ -9,10 +9,10 @@ public class Main {
 //    	Thread modelConnexion = new Thread(new ModelConnexion());
 //    	modelConnexion.start();
     	int index = 0;
-//    	Info.nameAccount = args[0];
-//    	Info.password = args[1];
-//    	Info.name = args[2];
-//    	Info.server = args[3];
+    	Info.nameAccount = args[0];
+    	Info.password = args[1];
+    	Info.name = args[2];
+    	Info.server = args[3];
 //    	
 //    	boolean arg = false;
 //    	if(args.length != 0){
@@ -31,12 +31,12 @@ public class Main {
 //    			Info.name = "Dihydroquerina";
 //    			Info.server = "Julith";
 //    		}
-    		if(index == 2){
-    			Info.nameAccount = "ceciestuntest";
-    			Info.password = "ceciestlemdp1";
-    			Info.name = "Gladiatonme";
-    			Info.server = "Echo";
-    		}
+//    		if(index == 2){
+//    			Info.nameAccount = "ceciestuntest";
+//    			Info.password = "ceciestlemdp1";
+//    			Info.name = "Gladiatonme";
+//    			Info.server = "Echo";
+//    		}
     	}    	
     	Thread thread = new Thread(new Network());
     	Thread thread2 = new Thread(new MainPlugin());
