@@ -13,16 +13,31 @@ class HighLevelFunctions:
     def goto(self, target_coord, target_cell=None, worldmap=1):
         current_map, current_cell, current_worldmap, map_id = self.interface.get_map()
 
+        if current_worldmap != worldmap:
+            # Incarnam to Astrub
+            if current_worldmap == 2 and worldmap == 1:
+                self.goto((4, -3), worldmap=2)
+                self.interface.go_to_astrub()
+                current_map, current_cell, current_worldmap, map_id = self.interface.get_map()
+            # Astrub to Incarnam
+            elif current_worldmap == 1 and worldmap == 2:
+                statue_map = self.llf.get_closest_statue(current_map)
+                self.goto(statue_map)
+                statue_cell = self.interface.get_class_statue_cell()
+                self.interface.move(statue_cell)
+                self.interface.go_to_incarnam()
+                current_map, current_cell, current_worldmap, map_id = self.interface.get_map()
+
+            # TODO manage worldmap changing
+            else:
+                raise Exception('Worldmap change not supported')
+
         if current_map == target_coord and current_cell == target_cell and worldmap == current_worldmap:
             return
 
         if current_map == target_coord and worldmap == current_worldmap and target_cell is not None:
             if self.interface.move(target_cell):
                 return
-
-        if current_worldmap != worldmap:
-            # TODO manage worldmap changing
-            raise Exception('Not in targeted worldmap')
 
         pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
         path_directions = pf.get_map_change_cells()
@@ -77,9 +92,9 @@ class HighLevelFunctions:
             print('[Harvest] filtered_map_resources2 : {}'.format(filtered_map_resources2))
 
             filtered_map_resources3 = {}
-            job_levels = self.interface.get_player_stats()['job_levels']
+            job_levels = self.interface.get_player_stats()[0]['Job']
             for resource, spots in filtered_map_resources2.items():
-                if resources_levels[resource][0] <= job_levels[resources_levels[resource][0]][0]:
+                if resource == "Eau" or resources_levels[resource][0] <= job_levels[resources_levels[resource][1]][0]:
                     filtered_map_resources3[resource] = spots
 
             harvestable = []
@@ -122,19 +137,25 @@ class HighLevelFunctions:
             return False
 
         harvest = []
+        full = False
         ret_val = harvest_one()
-        if type(ret_val) is list:
+        if type(ret_val) is tuple:
             harvest.append(ret_val)
-        while ret_val:
+            full = False if ret_val[3] < ret_val[4] else True
+
+        while ret_val and not full:
             ret_val = harvest_one()
-            if type(ret_val) is list:
+            if type(ret_val) is tuple:
+                full = False if ret_val[3] < ret_val[4] else True
                 harvest.append(ret_val)
 
         with open('..//Misc//HarvestLogs//HarvestLog_{}.txt'.format(self.bot_instance), 'a') as f:
             for item in harvest:
-                # f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], round(item[3]*100/item[4], 0)))
-                f.write('ID : {}, Item : {}, Number : {}\n'.format(item[0], 'Unk', item[1]))
-        print('[Harvest] Done')
+                f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
+        if type(ret_val) is tuple and ret_val[3] == ret_val[4]:
+            print('[Harvest] Full')
+        else:
+            print('[Harvest] Done')
 
     def get_inventory(self):
         pass
