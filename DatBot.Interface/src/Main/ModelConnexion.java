@@ -115,25 +115,23 @@ public class ModelConnexion implements Runnable {
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()});
 					break;
 				case "goAstrub":
+					Info.newMap = false;
 					if(Map.Id == 153880835){
 						NpcGenericActionRequestMessage actionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
 						Network.sendToServer(actionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
-						while(!NPC.dialogOver){
-							Thread.sleep(1000);
-						}
+						Network.waitForNewMap();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
 					break;
 				case "goIncarnam":
+					Info.newMap = false;
 					int r = Interactive.getStatue();
 					if(r != -1){
 						InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
-						while(!Info.interactiveUsed){
-							Thread.sleep(1000);
-						}
+						Network.waitForNewMap();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});

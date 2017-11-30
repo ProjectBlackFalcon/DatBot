@@ -61,17 +61,15 @@ public class Test {
 			index++;				
 			Thread.sleep(1000);
 			if(index ==15){	
-//				int r = Interactive.getStatue();
-//				if(r != -1){
-//					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
-//					Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
-//					while(!Info.interactiveUsed){
-//						Thread.sleep(1000);
-//					}
-//					System.out.println(true);
-//				} else {
-//					System.out.println(false);
-//				}
+				if(Map.Id == 153880835){
+					Info.newMap = false;
+					NpcGenericActionRequestMessage actionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
+					Network.sendToServer(actionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
+					Network.waitForNewMap();
+					System.out.println(true);
+				} else {
+					System.out.println(false);
+				}
 			}
 		}
     }

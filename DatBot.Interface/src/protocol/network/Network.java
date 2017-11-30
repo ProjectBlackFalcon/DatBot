@@ -183,7 +183,6 @@ public class Network implements Runnable {
 			InputStream data = socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
-			
 			if (available > 0) {
 				//Latency
 				LatencyFrame.updateLatency();
@@ -456,13 +455,18 @@ public class Network implements Runnable {
 			Info.interactiveUsed = true;
 		}
 	}
+	
+	private void waitForPacketSplit() throws InterruptedException{
+		while(bigPacketLengthToFull != 0){
+			Thread.sleep(1000);
+		}
+	}
 
 	public void buildMessage(DofusDataReader reader) throws Exception {
 		if (reader.available() <= 0) {
 			return;
 		}
 		
-
 		// Packet split
 		if (bigPacketLengthToFull != 0) {
 			if (reader.available() <= bigPacketLengthToFull) {
@@ -709,9 +713,11 @@ public class Network implements Runnable {
 		Info.waitForMov = true;
 	}
 	
-	public static boolean waitForNewMap(){
-		
-		return false;
+	public static void waitForNewMap() throws InterruptedException{
+		while(!Info.newMap){
+			Thread.sleep(500);
+		}
+		Info.newMap = false;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {
