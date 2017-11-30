@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Game.Info;
-import Game.Plugin.Farm;
+import Game.Plugin.Interactive;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
 import Game.map.Map;
@@ -14,6 +14,7 @@ import Game.movement.CellMovement;
 import Game.movement.Movement;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
+import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import utils.JSON;
 
 public class ModelConnexion implements Runnable {
@@ -97,11 +98,11 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "getResources":
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.getFarmCell()});
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Interactive.getFarmCell()});
 					break;
 				case "harvest":
-					if(Farm.harvestCell(Integer.parseInt(message[5]))){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Farm.lastItemHarvestedId,"\"" + Farm.lastItemHarvestedString + "\"",Farm.quantityLastItemHarvested,Info.weight,Info.weigthMax});
+					if(Interactive.harvestCell(Integer.parseInt(message[5]))){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Interactive.lastItemHarvestedId,Interactive.quantityLastItemHarvested,Info.weight,Info.weigthMax});
 					} 
 //					else if (){
 //						TODO AGGRO
@@ -113,7 +114,7 @@ public class ModelConnexion implements Runnable {
 				case "getStats":
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()});
 					break;
-				case "GoAstrub":
+				case "goAstrub":
 					if(Map.Id == 153880835){
 						NpcGenericActionRequestMessage actionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
 						Network.sendToServer(actionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
@@ -121,6 +122,27 @@ public class ModelConnexion implements Runnable {
 							Thread.sleep(1000);
 						}
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					break;
+				case "goIncarnam":
+					int r = Interactive.getStatue();
+					if(r != -1){
+						InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
+						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
+						while(!Info.interactiveUsed){
+							Thread.sleep(1000);
+						}
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					break;
+				case "getStatue":
+					int statueCellId = Interactive.getStatue();
+					if (statueCellId != -1){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{statueCellId});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}

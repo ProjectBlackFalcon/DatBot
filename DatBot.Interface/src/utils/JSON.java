@@ -14,7 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Game.Info;
-import Game.Plugin.Farm;
+import Game.Plugin.Interactive;
 import Game.map.Cell;
 import Game.map.CellData;
 import Game.map.ColorMultiplicator;

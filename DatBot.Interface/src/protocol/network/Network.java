@@ -66,6 +66,7 @@ import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMe
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
 import protocol.network.messages.game.dialog.LeaveDialogMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
+import protocol.network.messages.game.interactive.InteractiveUsedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
 import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
@@ -81,7 +82,7 @@ import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
 import Game.Servers;
-import Game.Plugin.Farm;
+import Game.Plugin.Interactive;
 import Game.Plugin.NPC;
 import utils.JSON;
 
@@ -321,9 +322,9 @@ public class Network implements Runnable {
 					else
 						Map.Entities.add(new Entity(complementaryInformationsDataMessage.actors.get(i).disposition.cellId, complementaryInformationsDataMessage.actors.get(i).contextualId));
 				HandleMapComplementaryInformationsDataMessage();
-				Farm.statedElements = complementaryInformationsDataMessage.statedElements;
-				Farm.interactiveElements = complementaryInformationsDataMessage.interactiveElements;
-				Farm.getFarmCell();
+				Interactive.statedElements = complementaryInformationsDataMessage.statedElements;
+				Interactive.interactiveElements = complementaryInformationsDataMessage.interactiveElements;
+				Interactive.getFarmCell();
 			}
 			break;
 		case 891:
@@ -385,21 +386,21 @@ public class Network implements Runnable {
 			if(Info.isConnected){
 				StatedElementUpdatedMessage elementUpdatedMessage = new StatedElementUpdatedMessage();
 				elementUpdatedMessage.Deserialize(dataReader);
-				for (int i = 0; i < Farm.statedElements.size() ; i++) {
-					if(elementUpdatedMessage.statedElement.elementCellId == Farm.statedElements.get(i).elementCellId){
-						Farm.statedElements.set(i, elementUpdatedMessage.statedElement);
+				for (int i = 0; i < Interactive.statedElements.size() ; i++) {
+					if(elementUpdatedMessage.statedElement.elementCellId == Interactive.statedElements.get(i).elementCellId){
+						Interactive.statedElements.set(i, elementUpdatedMessage.statedElement);
 					}
 				}
-				Farm.getFarmCell();
+				Interactive.getFarmCell();
 			}
 			break;
 		case 5708:
 			if(Info.isConnected){
 				InteractiveElementUpdatedMessage interactiveElementUpdatedMessage = new InteractiveElementUpdatedMessage();
 				interactiveElementUpdatedMessage.Deserialize(dataReader);
-				for (int i = 0; i < Farm.interactiveElements.size() ; i++) {
-					if(interactiveElementUpdatedMessage.interactiveElement.elementId == Farm.interactiveElements.get(i).elementId){
-						Farm.interactiveElements.set(i, interactiveElementUpdatedMessage.interactiveElement);
+				for (int i = 0; i < Interactive.interactiveElements.size() ; i++) {
+					if(interactiveElementUpdatedMessage.interactiveElement.elementId == Interactive.interactiveElements.get(i).elementId){
+						Interactive.interactiveElements.set(i, interactiveElementUpdatedMessage.interactiveElement);
 					}
 				}
 			}
@@ -419,8 +420,8 @@ public class Network implements Runnable {
 		case 6519:
 			ObtainedItemMessage itemMessage = new ObtainedItemMessage();
 			itemMessage.Deserialize(dataReader);
-			Farm.lastItemHarvestedId = itemMessage.genericId;
-			Farm.quantityLastItemHarvested = itemMessage.baseQuantity;
+			Interactive.lastItemHarvestedId = itemMessage.genericId;
+			Interactive.quantityLastItemHarvested = itemMessage.baseQuantity;
 			break;
 		case 5809:
 			JobExperienceMultiUpdateMessage experienceMultiUpdateMessage = new JobExperienceMultiUpdateMessage();
@@ -450,6 +451,9 @@ public class Network implements Runnable {
 			break;
 		case 5502 :
 			NPC.dialogOver = true;
+			break;
+		case 5745:
+			Info.interactiveUsed = true;
 		}
 	}
 

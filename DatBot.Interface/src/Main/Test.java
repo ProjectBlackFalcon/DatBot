@@ -1,12 +1,17 @@
 package Main;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
+
 import Game.Info;
-import Game.Plugin.Farm;
+import Game.Plugin.Interactive;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
 import Game.map.Map;
+import Game.movement.Movement;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
+import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
+import protocol.network.messages.subscription.SubscriptionUpdateMessage;
 
 public class Test {
 	
@@ -56,13 +61,14 @@ public class Test {
 			index++;				
 			Thread.sleep(1000);
 			if(index ==15){	
-//				if(Map.Id == 153880835){
-//					NpcGenericActionRequestMessage actionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
-//					Network.sendToServer(actionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
-//					while(!NPC.dialogOver){
+//				int r = Interactive.getStatue();
+//				if(r != -1){
+//					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
+//					Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
+//					while(!Info.interactiveUsed){
 //						Thread.sleep(1000);
 //					}
-//				System.out.println(true);
+//					System.out.println(true);
 //				} else {
 //					System.out.println(false);
 //				}

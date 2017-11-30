@@ -18,7 +18,6 @@ public class Info {
 	public static ArrayList<ArrayList<Integer>> cells = new ArrayList<ArrayList<Integer>>();
 	public static long worldmap;
 	
-	
 	// Account info
 	public static String nameAccount = "";
 	public static String password = "";
@@ -34,11 +33,9 @@ public class Info {
 	public static CharacterStatsListMessage stats;
 	public static List<JobExperience> job = new ArrayList<JobExperience>();
 
-	
 	// Game utils
 	public volatile static boolean waitForMov = true;
 	public volatile static boolean waitForHarvestSuccess = false;
 	public volatile static boolean waitForHarvestFailure = false;
-	
-
+	public volatile static boolean interactiveUsed = false;
 }

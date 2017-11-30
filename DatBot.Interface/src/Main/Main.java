@@ -1,7 +1,7 @@
 package Main;
 
 import Game.Info;
-import Game.Plugin.Farm;
+import Game.Plugin.Interactive;
 import Game.Plugin.Stats;
 import protocol.network.Network;
 

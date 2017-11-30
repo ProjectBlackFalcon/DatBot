@@ -12,25 +12,44 @@ import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.StatedElement;
 import utils.JSON;
 
-public class Farm {
+public class Interactive {
 
-	public static String farmCell;
 	public static List<StatedElement> statedElements;
 	public static List<InteractiveElement> interactiveElements;
-	public static int lastItemHarvestedId;
-	public static String lastItemHarvestedString;
-	public static int quantityLastItemHarvested;
+
+	
+	
+	public static int elementIdStatue = -1;
+	public static int skillInstanceUidStatue = -1;
+	public static int getStatue(){
+		for(int i = 0 ; i < interactiveElements.size() ; i++){
+			if (interactiveElements.get(i).enabledSkills.size() != 0) {
+				if (interactiveElements.get(i).enabledSkills.get(0).skillId == 302) {
+					for (int j = 0; j < Map.LayersCount; j++) {
+						for (int k = 0; k < Map.getLayers().get(j).CellsCount; k++) {
+							for (int l = 0; l < Map.getLayers().get(j).Cells.get(k).ElementsCount; l++) {
+								if (Map.Layers.get(j).getCells().get(k).Elements.get(l).Identifier == interactiveElements.get(i).elementId) {
+									elementIdStatue = interactiveElements.get(i).elementId;
+									skillInstanceUidStatue = interactiveElements.get(i).enabledSkills.get(0).skillInstanceUid;
+									return (int) Map.Layers.get(j).getCells().get(k).CellId;
+								}
+							}
+						}
+					}
+				} 
+			}
+		}
+		return -1;
+	}
 
 	public static String getFarmCell() {
 		farmCell = ""; 
-		int count = 0;
 		for (int i = 0; i < Map.LayersCount; i++) {
 			for (int j = 0; j < Map.getLayers().get(i).CellsCount; j++) {
 				for (int k = 0; k < Map.getLayers().get(i).Cells.get(j).ElementsCount; k++) {
 					for (StatedElement element : statedElements) {
 						if (Map.Layers.get(i).getCells().get(j).CellId == element.elementCellId) {
 							if (Map.Layers.get(i).getCells().get(j).Elements.get(k).Identifier == element.elementId) {
-								count++;
 								farmCell += "("+element.elementCellId+","+Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId+","+element.elementState+"), ";
 								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
 							}
@@ -43,6 +62,11 @@ public class Farm {
 			farmCell = farmCell.substring(0,farmCell.length()-2);
 		return farmCell;
 	}
+	
+	public static String farmCell;
+	public static int lastItemHarvestedId = 0;
+	public static String lastItemHarvestedString = "";
+	public static int quantityLastItemHarvested = 0;
 	
 	public static boolean harvestCell(int cellId) throws Exception{
 		InteractiveUseRequestMessage interactiveUseRequestMessage = null; 
@@ -63,7 +87,6 @@ public class Farm {
 				}
 			}
 		}
-		System.out.println(interactiveUseRequestMessage);
 		Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting resource cell " + cellId);	
 		Info.waitForHarvestFailure = false;
 		Info.waitForHarvestSuccess = false;
@@ -74,8 +97,6 @@ public class Farm {
 			System.out.println(2);
 			return false;
 		} else if (Info.waitForHarvestSuccess){
-			new JSON("Item", Farm.lastItemHarvestedId);
-			lastItemHarvestedString = new JSON("Name", JSON.nameId).name;
 			return true;
 		}
 		System.out.println(3);
@@ -114,5 +135,7 @@ public class Farm {
 		
 		return null;
 	}
+	
+	
 
 }

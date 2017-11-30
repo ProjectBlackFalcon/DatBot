@@ -18,7 +18,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
 import Game.Info;
-import Game.Plugin.Farm;
+import Game.Plugin.Interactive;
 import Game.Plugin.specBot;
 import Game.map.Map;
 import Game.map.MapMovement;
@@ -127,7 +127,7 @@ public class TextComponentFrame extends JFrame {
 							try {
 								MapMovement mov = Movement.ChangeMap(direction);
 								if (mov == null) {
-									Network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+									Network.append("Dï¿½placement impossible ! Un obstacle bloque le chemin !");
 								}
 								else {
 									mov.PerformChangement();
@@ -171,13 +171,13 @@ public class TextComponentFrame extends JFrame {
 						int length = textField.getText().length();
 						
 						if (length == 6) {
-							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 1))));
+							System.out.println(Interactive.harvestCell(Integer.parseInt(textField.getText(5, 1))));
 						} else if (length == 7) {
-							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 2))));
+							System.out.println(Interactive.harvestCell(Integer.parseInt(textField.getText(5, 2))));
 						} else if (length == 8) {
-							System.out.println(Farm.harvestCell(Integer.parseInt(textField.getText(5, 3))));
+							System.out.println(Interactive.harvestCell(Integer.parseInt(textField.getText(5, 3))));
 						} 
-						System.out.println("Id : " + Farm.lastItemHarvestedId + " Quantity : " + Farm.quantityLastItemHarvested);
+						System.out.println("Id : " + Interactive.lastItemHarvestedId + " Quantity : " + Interactive.quantityLastItemHarvested);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

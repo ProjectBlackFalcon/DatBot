@@ -37,6 +37,7 @@ import protocol.network.types.game.context.fight.FightResultPvpData;
 import protocol.network.types.game.context.fight.FightResultTaxCollectorListEntry;
 import protocol.network.types.game.context.fight.FightTeamInformations;
 import protocol.network.types.game.context.fight.FightTeamMemberCharacterInformations;
+import protocol.network.types.game.context.fight.FightTeamMemberCompanionInformations;
 import protocol.network.types.game.context.fight.FightTeamMemberInformations;
 import protocol.network.types.game.context.fight.FightTeamMemberMonsterInformations;
 import protocol.network.types.game.context.fight.FightTeamMemberTaxCollectorInformations;
@@ -580,6 +581,9 @@ public class ProtocolTypeManager {
 	    case 429:
 	        objectValue = new ServerSessionConstantLong();
 	        break;
+	    case 451:
+	    	objectValue = new FightTeamMemberCompanionInformations();
+	    	break;
 	    default:
 	        System.out.println(("[ProtocolTypeManager] ID (" 
 	                        + (id + ") absent.")));
