@@ -9,10 +9,18 @@ public class Main {
 //    	Thread modelConnexion = new Thread(new ModelConnexion());
 //    	modelConnexion.start();
     	int index = 0;
-    	Info.nameAccount = args[0];
-    	Info.password = args[1];
-    	Info.name = args[2];
-    	Info.server = args[3];
+//    	Info.nameAccount = args[0];
+//    	Info.password = args[1];
+//    	Info.name = args[2];
+//    	Info.server = args[3];
+//    	
+//    	boolean arg = false;
+//    	if(args.length != 0){
+//    		if((args[0].equals("true") || args[0].equals("True"))){
+//        		arg = true;
+//    		}
+//    	}
+    	
     	while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals("")){
     		System.out.println("Waiting for connection...");
     		Thread.sleep(250);
@@ -23,12 +31,12 @@ public class Main {
 //    			Info.name = "Dihydroquerina";
 //    			Info.server = "Julith";
 //    		}
-//    		if(index == 2){
-//    			Info.nameAccount = "ceciestuntest";
-//    			Info.password = "ceciestlemdp1";
-//    			Info.name = "Gladiatonme";
-//    			Info.server = "Echo";
-//    		}
+    		if(index == 2){
+    			Info.nameAccount = "ceciestuntest";
+    			Info.password = "ceciestlemdp1";
+    			Info.name = "Gladiatonme";
+    			Info.server = "Echo";
+    		}
     	}    	
     	Thread thread = new Thread(new Network());
     	Thread thread2 = new Thread(new MainPlugin());
@@ -55,7 +63,7 @@ public class Main {
 //				MapMovement mapMovement = Movement.ChangeMap(112,"w");
 //				if (mapMovement == null) {
 //					System.out.println(false);
-//					MainPlugin.frame.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+//					MainPlugin.frame.append("Dï¿½placement impossible ! Un obstacle bloque le chemin !");
 //				}
 //				else {
 //					mapMovement.PerformChangement();

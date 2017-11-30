@@ -143,9 +143,9 @@ public class Network implements Runnable {
 	@Override
 	public void run() {
 		try {
-//			initComponent();
-//			f.pack();
-//			f.setVisible(true);
+			initComponent();
+			f.pack();
+			f.setVisible(true);
 			reception();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -174,17 +174,16 @@ public class Network implements Runnable {
 	}
 
 	private static void appendToPane(JTextPane tp, String msg, Color c) {
-//		StyleContext sc = StyleContext.getDefaultStyleContext();
-//		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
-//
-//		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-//		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-//
-//		int len = tp.getDocument().getLength();
-//		tp.setCaretPosition(len);
-//		tp.setCharacterAttributes(aset, false);
-//		tp.replaceSelection(msg);
-//		System.out.println(msg);
+		StyleContext sc = StyleContext.getDefaultStyleContext();
+		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+
+		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+
+		int len = tp.getDocument().getLength();
+		tp.setCaretPosition(len);
+		tp.setCharacterAttributes(aset, false);
+		tp.replaceSelection(msg);
 	}
 	
 	public static void appendDebug(String str) {
@@ -198,6 +197,7 @@ public class Network implements Runnable {
 
 	public void reception() throws Exception {
 		while (!Network.socket.isClosed()) {
+			Thread.sleep(500);
 			InputStream data = socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
@@ -210,7 +210,6 @@ public class Network implements Runnable {
 				// Sometime there is so many pc that the PC can't keep up
 				// Need to try with a better one
 				// Packet seems to be split if to fast
-				Thread.sleep(750);
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
 			}
@@ -514,7 +513,7 @@ public class Network implements Runnable {
 			if (bigPacketLengthToFull == 0) {
 				// System.out.println("\n----------------------------------");
 //				System.out.println("[Reçu] ID = " + bigPacketId);
-				 System.out.println("[Reçu] ID = " + bigPacketId + " | Taille du contenu = " + bigPacketData.length ); // + "\n[Data] : " + bytesToString(bigPacketData, "%02X", false)
+//				 System.out.println("[Reçu] ID = " + bigPacketId + " | Taille du contenu = " + bigPacketData.length ); // + "\n[Data] : " + bytesToString(bigPacketData, "%02X", false)
 				TreatPacket(bigPacketId, bigPacketData);
 				// System.out.println("\n----------------------------------");
 				bigPacketData = null;
@@ -529,7 +528,7 @@ public class Network implements Runnable {
 				//
 				// System.out.println("\n----------------------------------");
 //				System.out.println("[Reçu] ID = " + message.getId());
-				 System.out.println("[Reçu] ID = " + message.getId() + " | Taille du contenu = " + message.getLength() ); // + "\n[Data] : " + bytesToString(message.getData(), "%02X", false)
+//				 System.out.println("[Reçu] ID = " + message.getId() + " | Taille du contenu = " + message.getLength() ); // + "\n[Data] : " + bytesToString(message.getData(), "%02X", false)
 				TreatPacket(message.getId(), message.getData());
 				// System.out.println("\n----------------------------------");
 			} else if (message.getId() != 0 && message.bigPacketLength != 0) {
