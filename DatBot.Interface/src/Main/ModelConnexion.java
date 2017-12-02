@@ -41,7 +41,7 @@ public class ModelConnexion implements Runnable {
 				String [] message = s.split(";");
 				message[5] = message[5].substring(1, message[5].length()-1);
 				
-				System.out.println(message[4]);
+				System.out.println("cmd : " + message[4]);
 				
 				switch(message[4]){
 				
