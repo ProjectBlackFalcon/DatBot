@@ -97,7 +97,7 @@ class LowLevelFunctions:
         closest = None, 100000
         for class_name, statue_pos in class_statues.items():
             if self.distance_coords(pos, statue_pos) < closest[1]:
-                closest = pos, self.distance_coords(pos, statue_pos)
+                closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
 
 __author__ = 'Alexis'
