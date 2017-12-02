@@ -9,19 +9,20 @@ from Model.LowLevelFunctions import LowLevelFunctions
 
 class PathFinder:
     def __init__(self, start_map, end_map, start_cell, end_cell, worldmap):
-        print('[Pathfinder] Going from map {}, cell {} to map {}, cell {}'.format(start_map, start_cell, end_map, end_cell))
         self.llf = LowLevelFunctions()
         self.start = start_map
         self.end = end_map
+        self.start_cell = start_cell
+        self.worldmap = worldmap
+        self.end_cell = end_cell
+        self.end_cell = self.pick_end_cell()
+        print('[Pathfinder] Going from map {}, cell {} to map {}, cell {}, worldmap : {}'.format(start_map, start_cell, end_map, self.end_cell, worldmap))
         self.bbox = (
             min(start_map[0], end_map[0]),
             min(start_map[1], end_map[1]),
             max(start_map[0], end_map[0]),
             max(start_map[1], end_map[1])
         )
-        self.start_cell = start_cell
-        self.end_cell = end_cell
-        self.worldmap = worldmap
         self.shape = (abs(self.end[1]-self.start[1])+1, abs(self.end[0]-self.start[0])+1)
         self.shape = (abs(self.bbox[1]-self.bbox[3])+1, abs(self.bbox[0]-self.bbox[2])+1)
         self.mapinfo = self.llf.load_map_info()
@@ -76,7 +77,6 @@ class PathFinder:
             maps_as_arrays = np.array(maps_as_arrays)
             arr = maps_as_arrays.reshape(shape[0], shape[1], 40, 14)
             out = np.concatenate([np.concatenate([map for map in arr[i]], axis=1) for i in range(shape[0])], axis=0)
-            self.pick_end_cell()
             start_pos = (
                 self.cell2coord(self.start_cell)[0]+14*(self.start[0]-self.bbox[0]),
                 self.cell2coord(self.start_cell)[1]+40*(self.start[1]-self.bbox[1])
