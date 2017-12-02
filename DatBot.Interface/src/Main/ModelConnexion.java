@@ -28,6 +28,7 @@ public class ModelConnexion implements Runnable {
 	
 	InteractiveUseRequestMessage interactiveUseRequestMessage;
 	NpcGenericActionRequestMessage npcGenericactionRequestMessage;
+	private boolean bankOppened;
 
 	@Override
 	public void run() {
@@ -189,19 +190,28 @@ public class ModelConnexion implements Runnable {
 						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
 						Network.waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.getBank()});
+						bankOppened = true;
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});	
 					}
 					break;
 				case "closeBank":
-					Network.sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					if(bankOppened){
+						Network.sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
+						Network.waitToSend();
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					bankOppened = false;
 					break;
 				case "dropBank":
 					String [] toBank = message[5].split(",");
 					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0].substring(1, toBank[0].length()-1)),Integer.parseInt(toBank[1].substring(2, toBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-
-					
+					Network.waitToSend();
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					break;
+				case "dropBankList":
 					break;
 				}
 			}

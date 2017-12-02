@@ -41,5 +41,8 @@ public class Info {
 	public volatile static boolean newMap = false;
 	public volatile static boolean leaveDialog = false;
 	public volatile static boolean Storage = false;
+	public volatile static boolean StorageUpdate = false;
+	public volatile static boolean basicNoOperationMsg = false;
+	public static boolean leaveExchange;
 
 }

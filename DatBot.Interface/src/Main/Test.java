@@ -12,6 +12,7 @@ import Game.movement.Movement;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
 import protocol.network.messages.subscription.SubscriptionUpdateMessage;
 
 public class Test {
@@ -59,7 +60,15 @@ public class Test {
 		Network.append("Niveau : " + Info.lvl); 		
 		Thread.sleep(1000);
 		Info.newMap = false;
-		System.out.println(Interactive.getStatue());
+		System.out.println(Stats.getStats());
+		
+		NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
+		Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+		Network.waitToSend();
+		System.out.println(Bank.getBank());
+		Network.sendToServer(new ExchangeObjectMoveMessage(Stats.inventoryContentMessage.objects.get(0).objectUID,Stats.inventoryContentMessage.objects.get(0).quantity), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+		Network.waitToSend();
+		System.out.println(true);
 //		NpcGenericActionRequestMessage npcGenericactionRequestMessage;
 //		if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
 //			npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);

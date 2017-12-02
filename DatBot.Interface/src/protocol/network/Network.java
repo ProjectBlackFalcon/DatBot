@@ -317,6 +317,9 @@ public class Network implements Runnable {
 				HandleMapRequestMessage(currentMapMessage.mapId);
 			}
 			break;
+		case 176:
+			Info.basicNoOperationMsg = true;
+			break;
 		case 226:
 			MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 			complementaryInformationsDataMessage.Deserialize(dataReader);
@@ -473,6 +476,7 @@ public class Network implements Runnable {
 			Bank.storage = new StorageInventoryContentMessage();
 			Bank.storage.Deserialize(dataReader);
 			Info.Storage = true;
+			System.out.println(Bank.getBank());
 			break;
 		case 6162:
 			Stats.inventoryContentMessage = new InventoryContentAndPresetMessage();
@@ -521,6 +525,7 @@ public class Network implements Runnable {
 					}
 				}
 			}
+			Info.StorageUpdate = true;
 			break;
 
 		case 5647 :
@@ -533,9 +538,22 @@ public class Network implements Runnable {
 					Bank.storage.objects.add(storageObjectUpdateMessage.object);
 				}
 			}
+			System.out.println(Bank.getBank());
+			Info.StorageUpdate = true;
 			break;
 		case 5648 :
 			StorageObjectRemoveMessage storageObjectRemoveMessage = new StorageObjectRemoveMessage();
+			storageObjectRemoveMessage.Deserialize(dataReader);
+			for(int i = 0; i < Bank.storage.objects.size() ; i++){
+				if(Bank.storage.objects.get(i).objectUID == storageObjectRemoveMessage.objectUID){
+					Bank.storage.objects.remove(i);
+				}
+			}
+			System.out.println(Bank.getBank());
+			Info.StorageUpdate = true;
+			break;
+		case 5628:
+			Info.leaveExchange = true;
 			break;
 		}
 	}
@@ -786,12 +804,21 @@ public class Network implements Runnable {
 		new JSON("MapInfoComplete", Info.mapId);		
 	}
 	
+	public static void waitForBasicNoOpe() throws InterruptedException{
+		while(!Info.basicNoOperationMsg){
+			Thread.sleep(50);
+		}
+		Info.basicNoOperationMsg = false;
+	}
+	
 	public static void waitToSend() throws InterruptedException{
-		while(!Info.newMap && !Info.Storage){
-			Thread.sleep(200);
+		while(!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange){
+			Thread.sleep(500);
 		}
 		Info.newMap = false;
-		Info.Storage = false;
+		Info.Storage = false;			
+		Info.StorageUpdate = false;
+		Info.leaveExchange = false;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {
