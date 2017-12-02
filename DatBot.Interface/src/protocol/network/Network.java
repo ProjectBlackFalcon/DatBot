@@ -68,13 +68,21 @@ import protocol.network.messages.game.dialog.LeaveDialogMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.InteractiveUsedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
+import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
+import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
+import protocol.network.messages.game.inventory.items.ObjectAddedMessage;
+import protocol.network.messages.game.inventory.items.ObjectQuantityMessage;
 import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
+import protocol.network.messages.game.inventory.storage.StorageInventoryContentMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
 import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
+import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
+import protocol.network.types.game.data.items.ObjectItem;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
@@ -82,8 +90,10 @@ import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
 import Game.Servers;
+import Game.Plugin.Bank;
 import Game.Plugin.Interactive;
 import Game.Plugin.NPC;
+import Game.Plugin.Stats;
 import utils.JSON;
 
 public class Network implements Runnable {
@@ -197,13 +207,6 @@ public class Network implements Runnable {
 		}
 		socket.close();
 	}
-	
-	public static void waitForPacket() throws InterruptedException{
-		while(!isPacketArrived){
-			Thread.sleep(500);
-		}
-		isPacketArrived = true;
-	}
 
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
@@ -297,9 +300,8 @@ public class Network implements Runnable {
 			break;
 		case 500:
 			HandleObjectAveragePricesGetMessage();
-			CharacterStatsListMessage characterStatsListMessage = new CharacterStatsListMessage();
-			characterStatsListMessage.Deserialize(dataReader);
-			Info.stats = characterStatsListMessage;
+			Info.stats = new CharacterStatsListMessage();
+			Info.stats.Deserialize(dataReader);
 			break;
 		case 220:
 			CurrentMapMessage currentMapMessage = new CurrentMapMessage();
@@ -315,15 +317,24 @@ public class Network implements Runnable {
 			MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 			complementaryInformationsDataMessage.Deserialize(dataReader);
 			if(!connectionToKoli){
-				for (int i = 0; i < complementaryInformationsDataMessage.actors.size(); i++)
+				for (int i = 0; i < complementaryInformationsDataMessage.actors.size(); i++){
+					if(complementaryInformationsDataMessage.actors.get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")){
+						NPC.npc.add((GameRolePlayNpcInformations) complementaryInformationsDataMessage.actors.get(i));
+					}
 					if (complementaryInformationsDataMessage.actors.get(i).contextualId == Info.actorId)
 						Info.cellId = complementaryInformationsDataMessage.actors.get(i).disposition.cellId;
 					else
 						Map.Entities.add(new Entity(complementaryInformationsDataMessage.actors.get(i).disposition.cellId, complementaryInformationsDataMessage.actors.get(i).contextualId));
+				}
 				HandleMapComplementaryInformationsDataMessage();
 				Interactive.statedElements = complementaryInformationsDataMessage.statedElements;
 				Interactive.interactiveElements = complementaryInformationsDataMessage.interactiveElements;
 				Interactive.getFarmCell();
+				Network.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] +  "]");	
+				Network.append("CellId : " + Info.cellId);
+				Info.waitForMov = true;
+				Info.isConnected = true;
+				Info.newMap = true;
 			}
 			break;
 		case 891:
@@ -453,15 +464,59 @@ public class Network implements Runnable {
 			break;
 		case 5745:
 			Info.interactiveUsed = true;
+			break;
+		case 5646:
+			Bank.storage = new StorageInventoryContentMessage();
+			Bank.storage.Deserialize(dataReader);
+			Info.Storage = true;
+			break;
+		case 6162:
+			Stats.inventoryContentMessage = new InventoryContentAndPresetMessage();
+			Stats.inventoryContentMessage.Deserialize(dataReader);
+			break;
+		case 3023:
+			ObjectQuantityMessage objectQuantityMessage = new ObjectQuantityMessage();
+			objectQuantityMessage.Deserialize(dataReader);
+			for(int i = 0; i < Stats.inventoryContentMessage.objects.size() ; i++){
+				if(Stats.inventoryContentMessage.objects.get(i).objectUID == objectQuantityMessage.objectUID){
+					ObjectItem object = Stats.inventoryContentMessage.objects.get(i);
+					Stats.inventoryContentMessage.objects.set(i, new ObjectItem(object.position, object.objectGID, object.effects, object.objectUID, objectQuantityMessage.quantity));
+				}
+			}
+			System.out.println(Stats.getStats());
+			break;
+		case 3025:
+			ObjectAddedMessage objectAddedMessage = new ObjectAddedMessage();
+			objectAddedMessage.Deserialize(dataReader);
+			Stats.inventoryContentMessage.objects.add(objectAddedMessage.object);
+			System.out.println(Stats.getStats());
+			break;
+		case 3024:
+//			ObjectAddedMessage objectAddedMessage = new ObjectAddedMessage();
+//			objectAddedMessage.Deserialize(dataReader);
+//			Stats.inventoryContentMessage.objects.add(objectAddedMessage.object);
+//			System.out.println(Stats.getStats());
+			break;			
+		case 3016 : 
+			Stats.inventoryContentMessage = new InventoryContentMessage();
+			Stats.inventoryContentMessage.Deserialize(dataReader);
+			break;
+		case 5647 :
+			StorageObjectsUpdateMessage storageObjectsUpdateMessage = new StorageObjectsUpdateMessage();
+			storageObjectsUpdateMessage.Deserialize(dataReader);
+			for(int i = 0; i < Bank.storage.objects.size() ; i++){
+				for(int j1 = 0 ; j1 < storageObjectsUpdateMessage.objectList.size() ; j1++){
+					if(Bank.storage.objects.get(i).objectGID == storageObjectsUpdateMessage.objectList.get(j1).objectGID || Bank.storage.objects.get(i).objectUID == storageObjectsUpdateMessage.objectList.get(j1).objectUID){
+						Bank.storage.objects.set(i, storageObjectsUpdateMessage.objectList.get(j1));
+					} else {
+						Bank.storage.objects.add(storageObjectsUpdateMessage.objectList.get(j1));
+					}
+				}
+			}
+			break;
 		}
 	}
 	
-	private void waitForPacketSplit() throws InterruptedException{
-		while(bigPacketLengthToFull != 0){
-			Thread.sleep(1000);
-		}
-	}
-
 	public void buildMessage(DofusDataReader reader) throws Exception {
 		if (reader.available() <= 0) {
 			return;
@@ -706,18 +761,14 @@ public class Network implements Runnable {
 		}
 		new JSON("MapInfo",Info.mapId);
 		new JSON("MapInfoComplete", Info.mapId);		
-		Info.isConnected = true;
-		Info.newMap = true;
-		Network.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] +  "]");	
-		Network.append("CellId : " + Info.cellId);
-		Info.waitForMov = true;
 	}
 	
-	public static void waitForNewMap() throws InterruptedException{
-		while(!Info.newMap){
-			Thread.sleep(500);
+	public static void waitToSend() throws InterruptedException{
+		while(!Info.newMap && !Info.Storage){
+			Thread.sleep(200);
 		}
 		Info.newMap = false;
+		Info.Storage = false;
 	}
 	
 	private void HandleLatencyMessage() throws Exception {

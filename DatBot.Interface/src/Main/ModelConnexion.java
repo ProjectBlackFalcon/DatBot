@@ -15,7 +15,11 @@ import Game.movement.CellMovement;
 import Game.movement.Movement;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
+import protocol.network.messages.game.dialog.LeaveDialogMessage;
+import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectAddedMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
 import utils.JSON;
 
 public class ModelConnexion implements Runnable {
@@ -31,6 +35,7 @@ public class ModelConnexion implements Runnable {
 		try {
 			String s;
 			while(true){
+				Info.newMap = false;
 				Thread.sleep(200);
 				s = bufferRead.readLine();
 				String [] message = s.split(";");
@@ -118,23 +123,21 @@ public class ModelConnexion implements Runnable {
 					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()});
 					break;
 				case "goAstrub":
-					Info.newMap = false;
 					if(Map.Id == 153880835){
 						npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
 						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
-						Network.waitForNewMap();
+						Network.waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
 					break;
 				case "goIncarnam":
-					Info.newMap = false;
 					int r = Interactive.getStatue();
 					if(r != -1){
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
-						Network.waitForNewMap();
+						Network.waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
@@ -160,25 +163,44 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "goBank":
-					Info.newMap = false;
 					if(Map.Id == 144931){ //Brakmar
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBrakmarIN,Bank.getSkill(Bank.interactiveBrakmarIN));
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-						Network.waitForNewMap();
+						Network.waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else if(Map.Id == 84674566){ //Astrub
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveAstrubIN,Bank.getSkill(Bank.interactiveAstrubIN));
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-						Network.waitForNewMap();
+						Network.waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else if(Map.Id == 147254){ //Bonta
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBontaIN,Bank.getSkill(Bank.interactiveBontaIN));
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-						Network.waitForNewMap();
+						Network.waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
+					break;
+				case "openBank":
+					if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
+						npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
+						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+						Network.waitToSend();
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.getBank()});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});	
+					}
+					break;
+				case "closeBank":
+					Network.sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					break;
+				case "dropBank":
+					String [] toBank = message[5].split(",");
+					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0].substring(1, toBank[0].length()-1)),Integer.parseInt(toBank[1].substring(2, toBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+
+					
 					break;
 				}
 			}

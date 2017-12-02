@@ -20,13 +20,13 @@ public class specBot implements Runnable  {
 	@Override
 	public void run() {
 		try {
-			LatencyFrame.Sequence = 1; 
-			Network.sendToServer(new MapRunningFightListRequestMessage(), MapRunningFightListRequestMessage.ProtocolId,"Fight list request");
-			Network.waitForPacket();
-			fightList = Network.fight.fights;
-			Network.sendToServer(new MapRunningFightDetailsRequestMessage(fightList.get(0).fightId), MapRunningFightDetailsRequestMessage.ProtocolId,"Fight detail request");
-			Network.waitForPacket();
-			Network.sendToServer(new GameFightJoinRequestMessage(0,fightList.get(0).fightId), GameFightJoinRequestMessage.ProtocolId,"Connexion au serveur de kolizeum");
+//			LatencyFrame.Sequence = 1; 
+//			Network.sendToServer(new MapRunningFightListRequestMessage(), MapRunningFightListRequestMessage.ProtocolId,"Fight list request");
+//			Network.waitForPacket();
+//			fightList = Network.fight.fights;
+//			Network.sendToServer(new MapRunningFightDetailsRequestMessage(fightList.get(0).fightId), MapRunningFightDetailsRequestMessage.ProtocolId,"Fight detail request");
+//			Network.waitForPacket();
+//			Network.sendToServer(new GameFightJoinRequestMessage(0,fightList.get(0).fightId), GameFightJoinRequestMessage.ProtocolId,"Connexion au serveur de kolizeum");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

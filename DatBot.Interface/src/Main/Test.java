@@ -57,47 +57,19 @@ public class Test {
 		Network.append("Connecté !");
 		Network.append("Name : " + Info.name);
 		Network.append("Niveau : " + Info.lvl); 		
-		InteractiveUseRequestMessage interactiveUseRequestMessage;
-		while(true){
-			index++;				
-			Thread.sleep(1000);
-			if(index ==15){	
-//				System.out.println(Map.Cells.get(396).Arrow);
-//				System.out.println(Map.Cells.get(396).Blue);
-//				System.out.println(Map.Cells.get(396).FarmCell);
-//				System.out.println(Map.Cells.get(396).Floor);
-//				System.out.println(Map.Cells.get(396).HavenbagCell);
-//				System.out.println(Map.Cells.get(396).Los);
-//				System.out.println(Map.Cells.get(396).Losmov);
-//				System.out.println(Map.Cells.get(396).MapChangeData);
-//				System.out.println(Map.Cells.get(396).Mov);
-//				System.out.println(Map.Cells.get(396).MoveZone);
-//				System.out.println(Map.Cells.get(396).NonWalkableDuringFight);
-//				System.out.println(Map.Cells.get(396).NonWalkableDuringRP);
-//				System.out.println(Map.Cells.get(396).Red);
-//				System.out.println(Map.Cells.get(396).Speed);
-//				System.out.println(Map.Cells.get(396).Visible);
-				Info.newMap = false;
-				if(Map.Id == 144931){ //Brakmar
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBrakmarIN,Bank.getSkill(Bank.interactiveBrakmarIN));
-					Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-					Network.waitForNewMap();
-					System.out.println(true);
-				} else if(Map.Id == 84674566){ //Astrub
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveAstrubIN,Bank.getSkill(Bank.interactiveAstrubIN));
-					Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-					Network.waitForNewMap();
-					System.out.println(true);
-				} else if(Map.Id == 147254){ //Bonta
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBontaIN,Bank.getSkill(Bank.interactiveBontaIN));
-					Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-					Network.waitForNewMap();
-					System.out.println(true);
-				} else {
-					System.out.println(false);
-				}
-			}
-		}
+		Thread.sleep(1000);
+		Info.newMap = false;
+		System.out.println(Stats.getStats());
+		Interactive.harvestCell(97);
+//		NpcGenericActionRequestMessage npcGenericactionRequestMessage;
+//		if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
+//			npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
+//			Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+//			Network.waitToSend();
+//			System.out.println(Bank.getBank());
+//		} else {
+//			System.out.println(false);
+//		}
     }
 }
 
