@@ -72,9 +72,13 @@ import protocol.network.messages.game.inventory.items.InventoryContentAndPresetM
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
 import protocol.network.messages.game.inventory.items.ObjectAddedMessage;
+import protocol.network.messages.game.inventory.items.ObjectDeletedMessage;
 import protocol.network.messages.game.inventory.items.ObjectQuantityMessage;
 import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
 import protocol.network.messages.game.inventory.storage.StorageInventoryContentMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectRemoveMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectUpdateMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMessage;
 import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
 import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
@@ -492,16 +496,20 @@ public class Network implements Runnable {
 			System.out.println(Stats.getStats());
 			break;
 		case 3024:
-//			ObjectAddedMessage objectAddedMessage = new ObjectAddedMessage();
-//			objectAddedMessage.Deserialize(dataReader);
-//			Stats.inventoryContentMessage.objects.add(objectAddedMessage.object);
-//			System.out.println(Stats.getStats());
+			ObjectDeletedMessage objectDeletedMessage = new ObjectDeletedMessage();
+			objectDeletedMessage.Deserialize(dataReader);
+			for(int i = 0; i < Stats.inventoryContentMessage.objects.size() ; i++){
+				if(Stats.inventoryContentMessage.objects.get(i).objectUID == objectDeletedMessage.objectUID){
+					Stats.inventoryContentMessage.objects.remove(i);
+				}
+			}
+			System.out.println(Stats.getStats());
 			break;			
 		case 3016 : 
 			Stats.inventoryContentMessage = new InventoryContentMessage();
 			Stats.inventoryContentMessage.Deserialize(dataReader);
 			break;
-		case 5647 :
+		case 6036 :
 			StorageObjectsUpdateMessage storageObjectsUpdateMessage = new StorageObjectsUpdateMessage();
 			storageObjectsUpdateMessage.Deserialize(dataReader);
 			for(int i = 0; i < Bank.storage.objects.size() ; i++){
@@ -513,6 +521,21 @@ public class Network implements Runnable {
 					}
 				}
 			}
+			break;
+
+		case 5647 :
+			StorageObjectUpdateMessage storageObjectUpdateMessage = new StorageObjectUpdateMessage();
+			storageObjectUpdateMessage.Deserialize(dataReader);
+			for(int i = 0; i < Bank.storage.objects.size() ; i++){
+				if(Bank.storage.objects.get(i).objectGID == storageObjectUpdateMessage.object.objectGID || Bank.storage.objects.get(i).objectUID == storageObjectUpdateMessage.object.objectUID){
+					Bank.storage.objects.set(i, storageObjectUpdateMessage.object);
+				} else {
+					Bank.storage.objects.add(storageObjectUpdateMessage.object);
+				}
+			}
+			break;
+		case 5648 :
+			StorageObjectRemoveMessage storageObjectRemoveMessage = new StorageObjectRemoveMessage();
 			break;
 		}
 	}

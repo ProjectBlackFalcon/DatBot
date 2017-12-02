@@ -152,6 +152,7 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "getBankDoor":
+					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"TU LE RECOIS CELUI LA ?"});
 					if(Map.Id == 144931){
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.cellIdBrakmarIN,Bank.cellIdBrakmarOUT});
 					} else if(Map.Id == 84674566){
