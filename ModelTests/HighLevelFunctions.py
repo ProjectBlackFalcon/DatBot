@@ -2,7 +2,8 @@ from Model.HighLevelFunctions import HighLevelFunctions
 import time
 
 hf = HighLevelFunctions(0)
-hf.interface.connect('wublel7', 'wubwublel7', 'Dihydroquerina')
+# hf.interface.connect('wublel7', 'wubwublel7', 'Dihydroquerina')
+hf.interface.connect('wublel6', '32407c62d2f', 'Pot-ator')
 '''
 path = (
     ((-2, -4), None),
