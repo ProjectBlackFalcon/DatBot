@@ -35,13 +35,11 @@ public class ModelConnexion implements Runnable {
 		try {
 			String s;
 			while(true){
+				
 				Info.newMap = false;
-				Thread.sleep(200);
 				s = bufferRead.readLine();
 				String [] message = s.split(";");
 				message[5] = message[5].substring(1, message[5].length()-1);
-				
-				System.out.println("cmd : " + message[4]);
 				
 				switch(message[4]){
 				
@@ -155,7 +153,6 @@ public class ModelConnexion implements Runnable {
 					}
 					break;
 				case "getBankDoor":
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"TU LE RECOIS CELUI LA ?"});
 					if(Map.Id == 144931){
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.cellIdBrakmarIN,Bank.cellIdBrakmarOUT});
 					} else if(Map.Id == 84674566){
