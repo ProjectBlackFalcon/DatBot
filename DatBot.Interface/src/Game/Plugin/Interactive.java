@@ -18,6 +18,7 @@ public class Interactive {
 	public static List<InteractiveElement> interactiveElements;
 
 	
+	// Statue 
 	
 	public static int elementIdStatue = -1;
 	public static int skillInstanceUidStatue = -1;
@@ -40,6 +41,21 @@ public class Interactive {
 			}
 		}
 		return -1;
+	}
+	
+	
+	public static List<Integer> cellsIdRosette;
+	public void getInteractive(){
+		for (int i = 0; i < Map.LayersCount; i++) {
+			for (int j = 0; j < Map.getLayers().get(i).CellsCount; j++) {
+				for (int k = 0; k < Map.getLayers().get(i).Cells.get(j).ElementsCount; k++) {
+					if(Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId == 34708){
+						cellsIdRosette.add((int) Map.Layers.get(i).getCells().get(j).CellId);
+						System.out.println("Rosace : " + Map.Layers.get(i).getCells().get(j).CellId);
+					}	
+				}
+			}
+		}
 	}
 
 	public static String getFarmCell() {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Game.Info;
+import Game.Plugin.Bank;
 import Game.Plugin.Interactive;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
@@ -21,6 +22,8 @@ public class ModelConnexion implements Runnable {
 	
 	// <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...] 
 	
+	InteractiveUseRequestMessage interactiveUseRequestMessage;
+	NpcGenericActionRequestMessage npcGenericactionRequestMessage;
 
 	@Override
 	public void run() {
@@ -117,8 +120,8 @@ public class ModelConnexion implements Runnable {
 				case "goAstrub":
 					Info.newMap = false;
 					if(Map.Id == 153880835){
-						NpcGenericActionRequestMessage actionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
-						Network.sendToServer(actionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
+						npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
+						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
 						Network.waitForNewMap();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
@@ -129,7 +132,7 @@ public class ModelConnexion implements Runnable {
 					Info.newMap = false;
 					int r = Interactive.getStatue();
 					if(r != -1){
-						InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
+						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
 						Network.waitForNewMap();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
@@ -141,6 +144,38 @@ public class ModelConnexion implements Runnable {
 					int statueCellId = Interactive.getStatue();
 					if (statueCellId != -1){
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{statueCellId});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					break;
+				case "getBankDoor":
+					if(Map.Id == 144931){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.cellIdBrakmarIN,Bank.cellIdBrakmarOUT});
+					} else if(Map.Id == 84674566){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.cellIdAstrubIN,Bank.cellIdAstrubOUT});
+					} else if(Map.Id == 147254){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.cellIdBontaIN,Bank.cellIdBontaOUT});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					break;
+				case "goBank":
+					Info.newMap = false;
+					if(Map.Id == 144931){ //Brakmar
+						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBrakmarIN,Bank.getSkill(Bank.interactiveBrakmarIN));
+						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
+						Network.waitForNewMap();
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else if(Map.Id == 84674566){ //Astrub
+						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveAstrubIN,Bank.getSkill(Bank.interactiveAstrubIN));
+						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
+						Network.waitForNewMap();
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else if(Map.Id == 147254){ //Bonta
+						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBontaIN,Bank.getSkill(Bank.interactiveBontaIN));
+						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
+						Network.waitForNewMap();
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
