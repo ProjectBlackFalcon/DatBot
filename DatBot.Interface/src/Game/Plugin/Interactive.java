@@ -25,7 +25,7 @@ public class Interactive {
 	public static int getStatue(){
 		for(int i = 0 ; i < interactiveElements.size() ; i++){
 			if (interactiveElements.get(i).enabledSkills.size() != 0) {
-				if (interactiveElements.get(i).enabledSkills.get(0).skillId == 302) {
+				if (interactiveElements.get(i).enabledSkills.get(0).skillId == 302 && interactiveElements.get(i).onCurrentMap) {
 					for (int j = 0; j < Map.LayersCount; j++) {
 						for (int k = 0; k < Map.getLayers().get(j).CellsCount; k++) {
 							for (int l = 0; l < Map.getLayers().get(j).Cells.get(k).ElementsCount; l++) {

@@ -59,8 +59,7 @@ public class Test {
 		Network.append("Niveau : " + Info.lvl); 		
 		Thread.sleep(1000);
 		Info.newMap = false;
-		System.out.println(Stats.getStats());
-		Interactive.harvestCell(97);
+		System.out.println(Interactive.getStatue());
 //		NpcGenericActionRequestMessage npcGenericactionRequestMessage;
 //		if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
 //			npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);

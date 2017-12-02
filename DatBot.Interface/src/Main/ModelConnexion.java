@@ -40,6 +40,9 @@ public class ModelConnexion implements Runnable {
 				s = bufferRead.readLine();
 				String [] message = s.split(";");
 				message[5] = message[5].substring(1, message[5].length()-1);
+				
+				System.out.println(message[4]);
+				
 				switch(message[4]){
 				
 				case "connect":
