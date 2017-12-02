@@ -159,6 +159,22 @@ class Interface:
         msg_id = self.add_command('getStatue')
         return self.wait_for_return(msg_id)
 
+    def get_bank_door_cell(self):
+        """
+        Returns the cell id of the current map bank door, or False if there is none
+        :return: [cell] or [False]
+        """
+        msg_id = self.add_command('getBankDoor')
+        return self.wait_for_return(msg_id)
+
+    def enter_bank(self):
+        """
+        Uses a door to enter bank
+        :return: Boolean
+        """
+        msg_id = self.add_command('goBank')
+        return self.wait_for_return(msg_id)
+
     def open_bank(self):
         """
         Opens bank
