@@ -2,6 +2,7 @@ from Model.Pathfinder import PathFinder
 from Model.Interface import Interface
 from Model.LowLevelFunctions import LowLevelFunctions
 import json
+import time
 
 
 class HighLevelFunctions:
@@ -22,7 +23,6 @@ class HighLevelFunctions:
             # Astrub to Incarnam
             elif current_worldmap == 1 and worldmap == 2:
                 statue_map = self.llf.get_closest_statue(current_map)
-                statue_map = [5, -21]
                 self.goto(statue_map)
                 statue_cell = self.interface.get_class_statue_cell()[0]
                 teleport_cell = self.llf.get_closest_walkable_neighbour_cell(statue_cell, current_cell, current_map, current_worldmap)
