@@ -74,6 +74,8 @@ import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
 import protocol.network.messages.game.inventory.items.ObjectAddedMessage;
 import protocol.network.messages.game.inventory.items.ObjectDeletedMessage;
 import protocol.network.messages.game.inventory.items.ObjectQuantityMessage;
+import protocol.network.messages.game.inventory.items.ObjectsAddedMessage;
+import protocol.network.messages.game.inventory.items.ObjectsDeletedMessage;
 import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
 import protocol.network.messages.game.inventory.storage.StorageInventoryContentMessage;
 import protocol.network.messages.game.inventory.storage.StorageObjectRemoveMessage;
@@ -508,7 +510,28 @@ public class Network implements Runnable {
 				}
 			}
 			System.out.println(Stats.getStats());
-			break;			
+			break;	
+		case 6034:
+			ObjectsDeletedMessage objectsDeletedMessage = new ObjectsDeletedMessage();
+			objectsDeletedMessage.Deserialize(dataReader);
+			for(int i = 0 ; i < objectsDeletedMessage.objectUID.size() ; i++){
+				for(int k = 0 ; k < Stats.inventoryContentMessage.objects.size() ; k++){
+					if(Stats.inventoryContentMessage.objects.get(k).objectUID == objectsDeletedMessage.objectUID.get(i)){
+						Stats.inventoryContentMessage.objects.remove(k);
+						break;
+					}
+				}
+			}
+			System.out.println(Stats.getStats());
+			break;
+		case 6033:
+			ObjectsAddedMessage objectsAddedMessage = new ObjectsAddedMessage();
+			objectsAddedMessage.Deserialize(dataReader);
+			for(int i = 0; i < objectsAddedMessage.object.size() ; i++){
+				Stats.inventoryContentMessage.objects.add(objectsAddedMessage.object.get(i));
+			}
+			System.out.println(Stats.getStats());
+			break;
 		case 3016 : 
 			Stats.inventoryContentMessage = new InventoryContentMessage();
 			Stats.inventoryContentMessage.Deserialize(dataReader);
@@ -516,27 +539,47 @@ public class Network implements Runnable {
 		case 6036 :
 			StorageObjectsUpdateMessage storageObjectsUpdateMessage = new StorageObjectsUpdateMessage();
 			storageObjectsUpdateMessage.Deserialize(dataReader);
-			for(int i = 0; i < Bank.storage.objects.size() ; i++){
-				for(int j1 = 0 ; j1 < storageObjectsUpdateMessage.objectList.size() ; j1++){
-					if(Bank.storage.objects.get(i).objectGID == storageObjectsUpdateMessage.objectList.get(j1).objectGID || Bank.storage.objects.get(i).objectUID == storageObjectsUpdateMessage.objectList.get(j1).objectUID){
-						Bank.storage.objects.set(i, storageObjectsUpdateMessage.objectList.get(j1));
-					} else {
-						Bank.storage.objects.add(storageObjectsUpdateMessage.objectList.get(j1));
+			for(int i = 0; i < storageObjectsUpdateMessage.objectList.size() ; i++){
+				boolean isInBank = false;
+				for(int k = 0; k < Bank.storage.objects.size() ; k++){
+					if(storageObjectsUpdateMessage.objectList.get(i).objectUID  == Bank.storage.objects.get(k).objectUID){
+						Bank.storage.objects.set(i, storageObjectsUpdateMessage.objectList.get(i));
+						isInBank = true;
+					}
+				}
+				if(!isInBank){
+					Bank.storage.objects.add(storageObjectsUpdateMessage.objectList.get(i));
+				}
+			}
+			System.out.println(Bank.getBank());
+			Info.StorageUpdate = true;
+			break;
+		case 6035:
+			StorageObjectsRemoveMessage storageObjectsRemoveMessage = new StorageObjectsRemoveMessage();
+			storageObjectsRemoveMessage.Deserialize(dataReader);
+			for(int i = 0; i < storageObjectsRemoveMessage.objectUIDList.size() ; i++){
+				for(int k = 0; k < Bank.storage.objects.size() ; k++){
+					if(storageObjectsRemoveMessage.objectUIDList.get(i) == Bank.storage.objects.get(k).objectUID){
+						Bank.storage.objects.remove(k);
+						break;
 					}
 				}
 			}
+			System.out.println(Bank.getBank());
 			Info.StorageUpdate = true;
 			break;
-
 		case 5647 :
 			StorageObjectUpdateMessage storageObjectUpdateMessage = new StorageObjectUpdateMessage();
 			storageObjectUpdateMessage.Deserialize(dataReader);
+			boolean isItem = false;
 			for(int i = 0; i < Bank.storage.objects.size() ; i++){
 				if(Bank.storage.objects.get(i).objectGID == storageObjectUpdateMessage.object.objectGID || Bank.storage.objects.get(i).objectUID == storageObjectUpdateMessage.object.objectUID){
 					Bank.storage.objects.set(i, storageObjectUpdateMessage.object);
-				} else {
-					Bank.storage.objects.add(storageObjectUpdateMessage.object);
+					isItem = true;
 				}
+			}
+			if(!isItem){
+				Bank.storage.objects.add(storageObjectUpdateMessage.object);
 			}
 			System.out.println(Bank.getBank());
 			Info.StorageUpdate = true;
@@ -622,15 +665,14 @@ public class Network implements Runnable {
 	 * String s = String displayed on log
 	 */
 	public static void sendToServer(NetworkMessage message, int id, String s) throws Exception {
-		if(id == 5898){
-			NPC.dialogOver = false;
-		}
+		Info.setBooleanToFalse();
 		LatencyFrame.latestSent();
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DofusDataWriter writer = new DofusDataWriter(bous);
 		message.Serialize(writer);
 		DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
 		byte[] wrote = WritePacket(writer, bous, id);
+//		System.out.println(bytesToString(wrote, "%02X", false));
 		dout.write(wrote);
 		dout.flush();
 		appendToPane(text, "[" + timing + "] ", Color.black);
@@ -811,14 +853,15 @@ public class Network implements Runnable {
 		Info.basicNoOperationMsg = false;
 	}
 	
-	public static void waitToSend() throws InterruptedException{
-		while(!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange){
-			Thread.sleep(500);
+	public static boolean waitToSend() throws InterruptedException{
+		while(!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange && !Info.basicNoOperationMsg){
+			Thread.sleep(50);
 		}
-		Info.newMap = false;
-		Info.Storage = false;			
-		Info.StorageUpdate = false;
-		Info.leaveExchange = false;
+		if(Info.basicNoOperationMsg && !Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange){
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	private void HandleLatencyMessage() throws Exception {
