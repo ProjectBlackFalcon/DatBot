@@ -1,19 +1,9 @@
-R;0;403;f;cmd;startfight;[84675595]
-S;success
-S;success
-R;0;404;f;cmd;s;[[0,10,12,'p',0,1,2020,11,4]]:[[1,6,12,'m',0,0,200,15,5]]
-S;success
-R;0;405;f;cmd;m;0;11;12
-S;success
-R;0;406;f;cmd;p;0
-S;success
-R;0;407;f;cmd;m;1;12;12
-S;success
-R;0;406;f;cmd;p;1;
-S;success
-R;0;408;f;cmd;c;0;9;12;'Magic arrow';150;False
-S;success
-R;0;409;f;cmd;p;0
-S;success
-R;0;410;f;cmd;g;1
-S;1;s;Burning arrow;11;12;
+0;403;f;rtn;[True]
+0;404;f;rtn;[True]
+0;405;f;rtn;[True]
+0;406;f;rtn;[True]
+0;407;f;rtn;[True]
+0;406;f;rtn;[True]
+0;408;f;rtn;[True]
+0;409;f;rtn;[True]
+0;410;f;rtn;[1,s,Burning arrow,11,12]

@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.classes.Cra;
 import ia.fight.map.CreateMap;
 import ia.fight.map.GameViz;
@@ -26,6 +27,7 @@ public class Game {
 	static public Map map;
 	static public ArrayList<PlayingEntity> playingEntities;
 	private GameViz los;
+	private static int current_command_nbr = 0;
 	
 	public Game() {
 		
@@ -68,8 +70,6 @@ public class Game {
 		Map mapObject = CreateMap.getMapById(map);
 		this.map = mapObject;
 		los = new GameViz(mapObject);
-		
-		com.println("S;success");
 	}
 	
 	public void initEntities(String[] entities) {
@@ -108,8 +108,6 @@ public class Game {
 		los.update(playingEntities);
 		
 		this.playingEntities = playingEntities;
-		
-		com.println("S;success");
 	}
 	
 	public void refresh(String commandString) {
@@ -145,8 +143,6 @@ public class Game {
 		
 		if(DISPLAY_GUI)
 			los.repaint();
-		
-		com.println("S;success");
 	}
 	
 	private PlayingEntity getPlayingEntityFromID(int id) {
@@ -222,7 +218,7 @@ public class Game {
 		}
 
 		
-		String action = command[0]+";";
+		String action = command[0]+",";
 		
 		int range[] = playingEntity.getOptimalRangeForMaximumDamageOutput(ennemies.get(0));
 		ArrayList<Position> path = map.getShortestPath(ennemies.get(0).getTeam(), playingEntity.getPosition(), ennemies.get(0).getPosition());
@@ -240,12 +236,12 @@ public class Game {
 			
 			if(fullTurn) {
 				for(int i = 0; i < spells.size()-1; i++) {
-					action += "s;"+spells.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+					action += "s,"+spells.get(i).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY()+",";
 				}
 				
-				action += "s;"+spells.get(spells.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
+				action += "s,"+spells.get(spells.size()-1).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
 			}else {
-				action += "s;"+spells.get(0).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+				action += "s,"+spells.get(0).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
 			}
 		}else{
 			Game.log.println("Done from far away");
@@ -268,12 +264,12 @@ public class Game {
 			
 			if(fullTurn) {
 				for(int i = 0; i < turn.size()-1; i++) {
-					action += "s;"+turn.get(i).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+					action += "s,"+turn.get(i).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY()+",";
 				}
-				action += "s;"+turn.get(turn.size()-1).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY();
+				action += "s,"+turn.get(turn.size()-1).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
 			
 			}else {
-				action += "s;"+turn.get(0).getName()+";"+ennemies.get(0).getPosition().getX()+";"+ennemies.get(0).getPosition().getY()+";";
+				action += "s,"+turn.get(0).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
 			}
 		}
 		return action;
@@ -331,9 +327,11 @@ public class Game {
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 			String s = bufferRead.readLine();
 			while(s.equals("x")==false) {
-				com.println("R;"+s);
-				
 				String[] command = s.split(";");
+				log.println("Received command "+command[1]);
+				log.println(s);
+				
+				current_command_nbr = Integer.parseInt(command[1]);
 				if(command.length > 2) {
 					if(!command[2].equals("f")) {
 						log.println("Broke out of loop");
@@ -345,9 +343,11 @@ public class Game {
 						try {
 							
 							game.initGame(parseStringToIntArray(command[5])[0]);
-							com.println("S;success");
+							Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+							System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+							log.println("Successfully initiated game.");
 						}catch(Exception e) {
-							com.println("S;failure;"+e.getMessage());
+							log.println("Failure to initiate game;"+e.getMessage());
 						}
 					}else if(command[4].equals("s")){
 						String entities[] = command[5].split(":");
@@ -359,26 +359,42 @@ public class Game {
 						}
 						
 						game.initEntities(entities);
+						
+						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					}else if(command[4].equals("m")) {
 						String refreshMessage = "";
 						refreshMessage += command[5] +";" + command[4] + ";" + command[6] + ";" + command[7];
 						game.refresh(refreshMessage);
+						
+						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					}else if(command[4].equals("p")) {
 						String refreshMessage = "";
 						refreshMessage += command[5] +";" + command[4];
 						game.refresh(refreshMessage);
+						
+						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					}else if(command[4].equals("c")) {
 						String refreshMessage = "";
 						refreshMessage += command[5] +";" + command[4] + ";" + command[6] + ";" + command[7] + 
 								";" + command[8].replace("'", "") + ";" + command[9] + ";" + command[10];
 						game.refresh(refreshMessage);
+						
+						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					}else if(command[4].equals("g")) {
-						com.println("S;"+game.getBestTurn(new String[] {command[5], "g", "false"}));
+						com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+game.getBestTurn(new String[] {command[5], "g", "false"})+"]");
+						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+game.getBestTurn(new String[] {command[5], "g", "false"})+"]");
 					}
 				}
 				
+				
+				
 				s = bufferRead.readLine();
 			}
+			
+			
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
