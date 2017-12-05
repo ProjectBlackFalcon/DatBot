@@ -5,7 +5,7 @@ Starting fight
 Map id : 84675595, loc : 6;-11
 Successfully initiated game.
 Received command 404
-0;404;f;cmd;s;[[0,10,12,'p',0,1,2020,11,4]]:[[1,6,12,'m',0,0,200,15,5]]
+0;404;f;cmd;s;[[0,10,12,'p',0,1,2020,11,4]],[[1,6,12,'m',0,0,200,15,5]]
 Created a playing entity in position [10;12]
 Cra player with base LP/AP/MP : 2020/11/4
 Created a playing entity in position [6;12]
@@ -54,6 +54,35 @@ Lashing arrow (1 - 4) 0
 Dispersing arrow (1 - 12) 0
 1
 1 ms
+[Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Retreat arrow (1 - 8)]
+1
+Done from close combat
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 7) 58
+1
+Distant shooting (0 - 0) 0
+1
+Lashing arrow (1 - 4) 0
+2
+1 ms
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Retreat arrow (1 - 8) 80
+2
+Magic arrow (1 - 7) 58
+1
+Frozen arrow (3 - 10) 51
+2
+Distant shooting (0 - 0) 0
+1
+Lashing arrow (1 - 4) 0
+2
+Dispersing arrow (1 - 12) 0
+1
+0 ms
 [Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Retreat arrow (1 - 8)]
 1
 Done from close combat

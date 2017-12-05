@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.classes.Cra;
@@ -350,13 +351,14 @@ public class Game {
 							log.println("Failure to initiate game;"+e.getMessage());
 						}
 					}else if(command[4].equals("s")){
-						String entities[] = command[5].split(":");
+						String entities[] = command[5].split(Pattern.quote("],["));
 						for(int i = 0; i < entities.length; i++) {
 							entities[i] = entities[i].replace("[", "").
 									replace("]", "").
 									replace("'", "").
 									replace(","	, ";");
 						}
+						
 						
 						game.initEntities(entities);
 						
