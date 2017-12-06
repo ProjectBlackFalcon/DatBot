@@ -13,17 +13,27 @@ import Utilitaires.JSON;
 
 public class Main {
 	
-	private static String pathStr = "C:\\Users\\baptiste\\Documents\\Dofus Bot\\testnamespacebuilder";
-//	private static String pathExe = "C:\\Users\\baptiste\\Documents\\Dofus Bot\\d2json.exe";
-//	private static String pathInvoker = " D:\\Ankama\\Dofus2\\app\\DofusInvoker.swf";
+	private static String pathStr = "";
+	private static String pathExe = "";
+	private static String pathInvoker = "E:\\Ankama\\Dofus\\app\\DofusInvoker.swf";
 
 
 	public static void main(String[] args) throws IOException, InterruptedException {
+//		Redirection does not work
+		String s = Paths.get("").toAbsolutePath().toString();
+		int newPath = s.indexOf("DatBot");
+		s = s.substring(0, newPath + 7);
+		
+		pathStr = s + "\\DatBot.ProtocolBuilder\\Utils";
+		pathExe = s + "\\DatBot.ProtocolBuilder\\Utils\\d2json.exe";
+
+		
 		System.out.println("Processing...");
 //		Redirection does not work
-//		Process p = new ProcessBuilder(pathExe,pathInvoker," > C:\\Users\\baptiste\\Documents\\Dofus Bot\\DofusBuilder.json").start();
-//		p.waitFor();
-		JSON json = new JSON();
+		File output = new File(pathStr + "\\d2jsonOutput.json");
+		Process p = new ProcessBuilder(pathExe,pathInvoker).redirectOutput(output).start();
+		p.waitFor();
+		JSON json = new JSON(pathStr + "\\d2jsonOutput.json");
 
 
 		for(int i = 0; i < json.Messages.size() ; i++){
@@ -1096,6 +1106,8 @@ public class Main {
 				data.set(index++, "\t\t} catch (Exception e){");
 				data.set(index++, "\t\t\te.printStackTrace();");
 				data.set(index++, "\t\t}");
+				data.set(index++, "\t}");
+
 				index++;
 				//create append
 				data.set(index++, "\t//private void append(){");
@@ -1159,8 +1171,6 @@ public class Main {
 			}
 			createBuilderFiles(msg.getNamespace(),msg.getName(), data);
 		}
-		System.out.println("done");
-			
 	}
 	
 	private static void createBuilderFiles(String s,String s2,List<String> data) throws IOException{

@@ -17,18 +17,21 @@ public class ChangeMapMessage extends NetworkMessage {
 	public static final int ProtocolId = 221;
 
 	public double mapId;
+	public boolean autopilot;
 
 	public ChangeMapMessage(){
 	}
 
-	public ChangeMapMessage(double mapId){
+	public ChangeMapMessage(double mapId, boolean autopilot){
 		this.mapId = mapId;
+		this.autopilot = autopilot;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			writer.writeDouble(this.mapId);
+			writer.writeBoolean(this.autopilot);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -38,6 +41,7 @@ public class ChangeMapMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			this.mapId = reader.readDouble();
+			this.autopilot = reader.readBoolean();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -46,5 +50,6 @@ public class ChangeMapMessage extends NetworkMessage {
 
 	//private void append(){
 		//Network.appendDebug("mapId : " + this.mapId);
+		//Network.appendDebug("autopilot : " + this.autopilot);
 	//}
 }

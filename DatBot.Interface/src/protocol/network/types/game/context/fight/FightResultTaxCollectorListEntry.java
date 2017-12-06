@@ -53,7 +53,6 @@ public class FightResultTaxCollectorListEntry extends FightResultFighterListEntr
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

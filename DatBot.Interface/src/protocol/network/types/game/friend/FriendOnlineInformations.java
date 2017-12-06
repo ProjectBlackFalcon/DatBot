@@ -55,7 +55,7 @@ public class FriendOnlineInformations extends FriendInformations {
 			writer.writeByte(flag);
 			writer.writeVarLong(this.playerId);
 			writer.writeUTF(this.playerName);
-			writer.writeByte(this.level);
+			writer.writeVarShort(this.level);
 			writer.writeByte(this.alignmentSide);
 			writer.writeByte(this.breed);
 			guildInfo.Serialize(writer);
@@ -76,7 +76,7 @@ public class FriendOnlineInformations extends FriendInformations {
 			this.havenBagShared = BooleanByteWrapper.GetFlag(flag, (byte) 1);
 			this.playerId = reader.readVarLong();
 			this.playerName = reader.readUTF();
-			this.level = reader.readByte();
+			this.level = reader.readVarShort();
 			this.alignmentSide = reader.readByte();
 			this.breed = reader.readByte();
 			this.guildInfo = new GuildInformations();
@@ -87,7 +87,6 @@ public class FriendOnlineInformations extends FriendInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -28,7 +28,7 @@ public class CharacterLevelUpMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeByte(this.newLevel);
+			writer.writeVarShort(this.newLevel);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -37,7 +37,7 @@ public class CharacterLevelUpMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.newLevel = reader.readByte();
+			this.newLevel = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

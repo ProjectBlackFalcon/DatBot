@@ -45,7 +45,6 @@ public class TreasureHuntFlag extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

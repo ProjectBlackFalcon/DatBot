@@ -58,7 +58,6 @@ public class PaddockInstancesInformations extends PaddockInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

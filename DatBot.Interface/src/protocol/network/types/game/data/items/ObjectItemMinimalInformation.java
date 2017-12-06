@@ -62,7 +62,6 @@ public class ObjectItemMinimalInformation extends Item {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

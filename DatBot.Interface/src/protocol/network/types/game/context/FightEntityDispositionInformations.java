@@ -43,7 +43,6 @@ public class FightEntityDispositionInformations extends EntityDispositionInforma
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

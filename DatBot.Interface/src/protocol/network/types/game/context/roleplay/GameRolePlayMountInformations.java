@@ -47,7 +47,6 @@ public class GameRolePlayMountInformations extends GameRolePlayNamedActorInforma
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -43,7 +43,6 @@ public class PlayerStatusExtended extends PlayerStatus {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

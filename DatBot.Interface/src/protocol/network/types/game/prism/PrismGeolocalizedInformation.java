@@ -57,7 +57,6 @@ public class PrismGeolocalizedInformation extends PrismSubareaEmptyInfo {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

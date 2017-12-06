@@ -43,7 +43,6 @@ public class GameFightMinimalStatsPreparation extends GameFightMinimalStats {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

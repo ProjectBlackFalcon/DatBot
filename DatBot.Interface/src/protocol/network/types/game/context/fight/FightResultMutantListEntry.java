@@ -43,7 +43,6 @@ public class FightResultMutantListEntry extends FightResultFighterListEntry {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

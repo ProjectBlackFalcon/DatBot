@@ -47,7 +47,6 @@ public class ObjectItemToSellInNpcShop extends ObjectItemMinimalInformation {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

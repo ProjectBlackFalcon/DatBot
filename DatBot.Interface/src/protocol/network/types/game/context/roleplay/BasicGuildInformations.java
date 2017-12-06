@@ -51,7 +51,6 @@ public class BasicGuildInformations extends AbstractSocialGroupInfos {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

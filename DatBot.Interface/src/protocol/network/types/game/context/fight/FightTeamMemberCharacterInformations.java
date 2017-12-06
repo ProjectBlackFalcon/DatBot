@@ -32,7 +32,7 @@ public class FightTeamMemberCharacterInformations extends FightTeamMemberInforma
 		try {
 			super.Serialize(writer);
 			writer.writeUTF(this.name);
-			writer.writeByte(this.level);
+			writer.writeVarShort(this.level);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -43,11 +43,10 @@ public class FightTeamMemberCharacterInformations extends FightTeamMemberInforma
 		try {
 			super.Deserialize(reader);
 			this.name = reader.readUTF();
-			this.level = reader.readByte();
+			this.level = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

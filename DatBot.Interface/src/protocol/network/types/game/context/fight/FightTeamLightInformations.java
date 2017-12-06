@@ -71,7 +71,6 @@ public class FightTeamLightInformations extends AbstractFightTeamInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

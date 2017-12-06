@@ -32,7 +32,7 @@ public class GameFightRemoveTeamMemberMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeShort(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeByte(this.teamId);
 			writer.writeDouble(this.charId);
 		} catch (Exception e){
@@ -43,7 +43,7 @@ public class GameFightRemoveTeamMemberMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readShort();
+			this.fightId = reader.readVarShort();
 			this.teamId = reader.readByte();
 			this.charId = reader.readDouble();
 		} catch (Exception e){

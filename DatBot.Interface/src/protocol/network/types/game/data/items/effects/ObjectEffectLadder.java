@@ -43,7 +43,6 @@ public class ObjectEffectLadder extends ObjectEffectCreature {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

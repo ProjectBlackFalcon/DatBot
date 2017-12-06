@@ -16,25 +16,22 @@ import protocol.network.NetworkMessage;
 public class SpellVariantActivationMessage extends NetworkMessage {
 	public static final int ProtocolId = 6705;
 
+	public int spellId;
 	public boolean result;
-	public int activatedSpellId;
-	public int deactivatedSpellId;
 
 	public SpellVariantActivationMessage(){
 	}
 
-	public SpellVariantActivationMessage(boolean result, int activatedSpellId, int deactivatedSpellId){
+	public SpellVariantActivationMessage(int spellId, boolean result){
+		this.spellId = spellId;
 		this.result = result;
-		this.activatedSpellId = activatedSpellId;
-		this.deactivatedSpellId = deactivatedSpellId;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
+			writer.writeVarShort(this.spellId);
 			writer.writeBoolean(this.result);
-			writer.writeVarShort(this.activatedSpellId);
-			writer.writeVarShort(this.deactivatedSpellId);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -43,9 +40,8 @@ public class SpellVariantActivationMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
+			this.spellId = reader.readVarShort();
 			this.result = reader.readBoolean();
-			this.activatedSpellId = reader.readVarShort();
-			this.deactivatedSpellId = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -53,8 +49,7 @@ public class SpellVariantActivationMessage extends NetworkMessage {
 	}
 
 	//private void append(){
+		//Network.appendDebug("spellId : " + this.spellId);
 		//Network.appendDebug("result : " + this.result);
-		//Network.appendDebug("activatedSpellId : " + this.activatedSpellId);
-		//Network.appendDebug("deactivatedSpellId : " + this.deactivatedSpellId);
 	//}
 }

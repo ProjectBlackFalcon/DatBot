@@ -83,7 +83,6 @@ public class JobCrafterDirectoryEntryPlayerInfo extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -34,7 +34,7 @@ public class GameFightOptionStateUpdateMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeShort(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeByte(this.teamId);
 			writer.writeByte(this.option);
 			writer.writeBoolean(this.state);
@@ -46,7 +46,7 @@ public class GameFightOptionStateUpdateMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readShort();
+			this.fightId = reader.readVarShort();
 			this.teamId = reader.readByte();
 			this.option = reader.readByte();
 			this.state = reader.readBoolean();

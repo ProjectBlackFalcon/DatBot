@@ -17,12 +17,14 @@ public class HumanOptionOrnament extends HumanOption {
 	public static final int ProtocolId = 411;
 
 	public int ornamentId;
+	public int level;
 
 	public HumanOptionOrnament(){
 	}
 
-	public HumanOptionOrnament(int ornamentId){
+	public HumanOptionOrnament(int ornamentId, int level){
 		this.ornamentId = ornamentId;
+		this.level = level;
 	}
 
 	@Override
@@ -30,6 +32,7 @@ public class HumanOptionOrnament extends HumanOption {
 		try {
 			super.Serialize(writer);
 			writer.writeVarShort(this.ornamentId);
+			writer.writeVarShort(this.level);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -40,13 +43,14 @@ public class HumanOptionOrnament extends HumanOption {
 		try {
 			super.Deserialize(reader);
 			this.ornamentId = reader.readVarShort();
+			this.level = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){
 		//Network.appendDebug("ornamentId : " + this.ornamentId);
+		//Network.appendDebug("level : " + this.level);
 	//}
 }

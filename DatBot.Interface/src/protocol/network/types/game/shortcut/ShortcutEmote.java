@@ -43,7 +43,6 @@ public class ShortcutEmote extends Shortcut {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

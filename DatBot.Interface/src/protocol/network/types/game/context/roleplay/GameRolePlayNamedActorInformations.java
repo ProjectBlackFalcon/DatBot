@@ -43,7 +43,6 @@ public class GameRolePlayNamedActorInformations extends GameRolePlayActorInforma
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

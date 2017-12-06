@@ -59,7 +59,6 @@ public class FightTeamMemberTaxCollectorInformations extends FightTeamMemberInfo
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -47,7 +47,6 @@ public class TreasureHuntStepFollowDirection extends TreasureHuntStep {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

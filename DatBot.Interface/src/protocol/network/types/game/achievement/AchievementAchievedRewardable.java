@@ -1,4 +1,4 @@
-package protocol.network.messages.game.achievement;
+package protocol.network.types.game.achievement;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,28 +10,26 @@ import protocol.network.NetworkMessage;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
 import protocol.network.Network;
-import protocol.network.NetworkMessage;
+import protocol.network.types.game.achievement.AchievementAchieved;
 
 @SuppressWarnings("unused")
-public class AchievementFinishedMessage extends NetworkMessage {
-	public static final int ProtocolId = 6208;
+public class AchievementAchievedRewardable extends AchievementAchieved {
+	public static final int ProtocolId = 515;
 
-	public int id;
 	public int finishedlevel;
 
-	public AchievementFinishedMessage(){
+	public AchievementAchievedRewardable(){
 	}
 
-	public AchievementFinishedMessage(int id, int finishedlevel){
-		this.id = id;
+	public AchievementAchievedRewardable(int finishedlevel){
 		this.finishedlevel = finishedlevel;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeVarShort(this.id);
-			writer.writeByte(this.finishedlevel);
+			super.Serialize(writer);
+			writer.writeVarShort(this.finishedlevel);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -40,16 +38,14 @@ public class AchievementFinishedMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.id = reader.readVarShort();
-			this.finishedlevel = reader.readByte();
+			super.Deserialize(reader);
+			this.finishedlevel = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){
-		//Network.appendDebug("id : " + this.id);
 		//Network.appendDebug("finishedlevel : " + this.finishedlevel);
 	//}
 }

@@ -43,7 +43,6 @@ public class FightTemporaryBoostEffect extends AbstractFightDispellableEffect {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

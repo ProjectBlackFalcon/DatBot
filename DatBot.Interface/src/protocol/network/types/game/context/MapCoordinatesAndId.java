@@ -43,7 +43,6 @@ public class MapCoordinatesAndId extends MapCoordinates {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

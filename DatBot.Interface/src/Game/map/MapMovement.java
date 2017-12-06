@@ -24,7 +24,7 @@ public class MapMovement {
     		this.cellMovement.performMovement();
 		Info.waitForMov = false;
 		Network.append("Changement de map...");
-		Network.sendToServer(new ChangeMapMessage(newId), ChangeMapMessage.ProtocolId, "Changement de map...");
+		Network.sendToServer(new ChangeMapMessage(newId,true), ChangeMapMessage.ProtocolId, "Changement de map...");
     }
 
 }

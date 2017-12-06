@@ -55,7 +55,6 @@ public class ActorExtendedAlignmentInformations extends ActorAlignmentInformatio
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

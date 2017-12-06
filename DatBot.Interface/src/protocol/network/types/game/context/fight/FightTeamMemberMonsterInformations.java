@@ -47,7 +47,6 @@ public class FightTeamMemberMonsterInformations extends FightTeamMemberInformati
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -31,7 +31,7 @@ public class GameFightJoinRequestMessage extends NetworkMessage {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			writer.writeDouble(this.fighterId);
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -41,7 +41,7 @@ public class GameFightJoinRequestMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			this.fighterId = reader.readDouble();
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

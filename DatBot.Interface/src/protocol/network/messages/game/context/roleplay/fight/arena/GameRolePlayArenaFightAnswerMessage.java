@@ -30,7 +30,7 @@ public class GameRolePlayArenaFightAnswerMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeBoolean(this.accept);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class GameRolePlayArenaFightAnswerMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			this.accept = reader.readBoolean();
 		} catch (Exception e){
 			e.printStackTrace();

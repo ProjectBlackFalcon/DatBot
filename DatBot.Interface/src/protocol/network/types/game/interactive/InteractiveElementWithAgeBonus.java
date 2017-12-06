@@ -43,7 +43,6 @@ public class InteractiveElementWithAgeBonus extends InteractiveElement {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -62,7 +62,6 @@ public class QuestActiveDetailedInformations extends QuestActiveInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

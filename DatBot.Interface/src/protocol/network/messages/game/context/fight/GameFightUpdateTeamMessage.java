@@ -31,7 +31,7 @@ public class GameFightUpdateTeamMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeShort(this.fightId);
+			writer.writeVarShort(this.fightId);
 			team.Serialize(writer);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class GameFightUpdateTeamMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readShort();
+			this.fightId = reader.readVarShort();
 			this.team = new FightTeamInformations();
 			this.team.Deserialize(reader);
 		} catch (Exception e){

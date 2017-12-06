@@ -35,7 +35,7 @@ public class CharacterHardcoreOrEpicInformations extends CharacterBaseInformatio
 			super.Serialize(writer);
 			writer.writeByte(this.deathState);
 			writer.writeVarShort(this.deathCount);
-			writer.writeByte(this.deathMaxLevel);
+			writer.writeVarShort(this.deathMaxLevel);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -47,11 +47,10 @@ public class CharacterHardcoreOrEpicInformations extends CharacterBaseInformatio
 			super.Deserialize(reader);
 			this.deathState = reader.readByte();
 			this.deathCount = reader.readVarShort();
-			this.deathMaxLevel = reader.readByte();
+			this.deathMaxLevel = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

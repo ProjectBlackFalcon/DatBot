@@ -73,7 +73,6 @@ public class AllianceInsiderPrismInformation extends PrismInformation {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

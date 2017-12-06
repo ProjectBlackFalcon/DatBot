@@ -73,7 +73,6 @@ public class HouseOnMapInformations extends HouseInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

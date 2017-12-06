@@ -62,7 +62,6 @@ public class GameRolePlayGroupMonsterWaveInformations extends GameRolePlayGroupM
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

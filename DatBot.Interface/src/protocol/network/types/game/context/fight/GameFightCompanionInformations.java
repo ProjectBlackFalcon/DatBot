@@ -34,7 +34,7 @@ public class GameFightCompanionInformations extends GameFightFighterInformations
 		try {
 			super.Serialize(writer);
 			writer.writeByte(this.companionGenericId);
-			writer.writeByte(this.level);
+			writer.writeVarShort(this.level);
 			writer.writeDouble(this.masterId);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -46,12 +46,11 @@ public class GameFightCompanionInformations extends GameFightFighterInformations
 		try {
 			super.Deserialize(reader);
 			this.companionGenericId = reader.readByte();
-			this.level = reader.readByte();
+			this.level = reader.readVarShort();
 			this.masterId = reader.readDouble();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

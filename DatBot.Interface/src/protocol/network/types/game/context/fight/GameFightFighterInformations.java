@@ -73,7 +73,6 @@ public class GameFightFighterInformations extends GameContextActorInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -45,7 +45,6 @@ public class FinishMoveInformations extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

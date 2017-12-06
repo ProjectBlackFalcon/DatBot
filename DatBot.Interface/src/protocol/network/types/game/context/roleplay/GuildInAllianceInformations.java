@@ -43,7 +43,6 @@ public class GuildInAllianceInformations extends GuildInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -45,7 +45,6 @@ public class CharacterMinimalGuildInformations extends CharacterMinimalPlusLookI
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

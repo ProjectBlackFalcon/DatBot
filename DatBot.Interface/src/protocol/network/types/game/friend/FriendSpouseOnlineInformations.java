@@ -59,7 +59,6 @@ public class FriendSpouseOnlineInformations extends FriendSpouseInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

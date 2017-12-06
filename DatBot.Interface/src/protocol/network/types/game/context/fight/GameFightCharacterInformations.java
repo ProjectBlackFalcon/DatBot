@@ -36,7 +36,7 @@ public class GameFightCharacterInformations extends GameFightFighterNamedInforma
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			super.Serialize(writer);
-			writer.writeByte(this.level);
+			writer.writeVarShort(this.level);
 			alignmentInfos.Serialize(writer);
 			writer.writeByte(this.breed);
 			writer.writeBoolean(this.sex);
@@ -49,7 +49,7 @@ public class GameFightCharacterInformations extends GameFightFighterNamedInforma
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			super.Deserialize(reader);
-			this.level = reader.readByte();
+			this.level = reader.readVarShort();
 			this.alignmentInfos = new ActorAlignmentInformations();
 			this.alignmentInfos.Deserialize(reader);
 			this.breed = reader.readByte();
@@ -57,7 +57,6 @@ public class GameFightCharacterInformations extends GameFightFighterNamedInforma
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -43,7 +43,6 @@ public class FightTemporaryBoostWeaponDamagesEffect extends FightTemporaryBoostE
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

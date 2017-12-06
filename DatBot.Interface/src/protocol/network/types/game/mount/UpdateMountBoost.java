@@ -41,7 +41,6 @@ public class UpdateMountBoost extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -18,12 +18,14 @@ public class CharacterMinimalPlusLookInformations extends CharacterMinimalInform
 	public static final int ProtocolId = 163;
 
 	public EntityLook entityLook;
+	public int breed;
 
 	public CharacterMinimalPlusLookInformations(){
 	}
 
-	public CharacterMinimalPlusLookInformations(EntityLook entityLook){
+	public CharacterMinimalPlusLookInformations(EntityLook entityLook, int breed){
 		this.entityLook = entityLook;
+		this.breed = breed;
 	}
 
 	@Override
@@ -31,6 +33,7 @@ public class CharacterMinimalPlusLookInformations extends CharacterMinimalInform
 		try {
 			super.Serialize(writer);
 			entityLook.Serialize(writer);
+			writer.writeByte(this.breed);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -42,13 +45,14 @@ public class CharacterMinimalPlusLookInformations extends CharacterMinimalInform
 			super.Deserialize(reader);
 			this.entityLook = new EntityLook();
 			this.entityLook.Deserialize(reader);
+			this.breed = reader.readByte();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){
 		//Network.appendDebug("entityLook : " + this.entityLook);
+		//Network.appendDebug("breed : " + this.breed);
 	//}
 }

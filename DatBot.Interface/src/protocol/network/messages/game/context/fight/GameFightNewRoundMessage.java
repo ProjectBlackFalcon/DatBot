@@ -41,10 +41,10 @@ public class GameFightNewRoundMessage extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		append();
+		//append();
 	}
 
-	private void append(){
-		Network.append("roundNumber : " + this.roundNumber);
-	}
+	//private void append(){
+		//Network.appendDebug("roundNumber : " + this.roundNumber);
+	//}
 }
