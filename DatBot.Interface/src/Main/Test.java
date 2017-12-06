@@ -1,5 +1,8 @@
 package Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import Game.Info;
@@ -12,6 +15,9 @@ import Game.movement.Movement;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
 import protocol.network.messages.subscription.SubscriptionUpdateMessage;
 
 public class Test {
@@ -59,16 +65,32 @@ public class Test {
 		Network.append("Niveau : " + Info.lvl); 		
 		Thread.sleep(1000);
 		Info.newMap = false;
-		System.out.println(Interactive.getStatue());
-//		NpcGenericActionRequestMessage npcGenericactionRequestMessage;
-//		if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
-//			npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
-//			Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
-//			Network.waitToSend();
-//			System.out.println(Bank.getBank());
-//		} else {
-//			System.out.println(false);
-//		}
+		System.out.println(Stats.getStats());
+		
+		NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
+		Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+		Network.waitToSend();
+		Thread.sleep(1000);
+		
+		String a = Stats.inventoryContentMessage.objects.get(6).objectUID + ", " + Stats.inventoryContentMessage.objects.get(4).objectUID + ", " + Stats.inventoryContentMessage.objects.get(5).objectUID;
+		String [] toBankList = a.split(",");
+		List<Integer> ids = new ArrayList<Integer>();
+		for (String string : toBankList) {
+			ids.add(Integer.parseInt(string.replaceAll("\\s+","")));
+		}
+		ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
+		Network.sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
+		System.out.println(Network.waitToSend());
+		Thread.sleep(3000);
+		String b = Bank.storage.objects.get(4).objectUID + ", " + Bank.storage.objects.get(6).objectUID + ", " + Bank.storage.objects.get(5).objectUID;
+		String [] fromBankList = b.split(",");
+		List<Integer> ids1 = new ArrayList<Integer>();
+		for (String string : fromBankList) {
+			ids1.add(Integer.parseInt(string.replaceAll("\\s+","")));
+		}
+		ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
+		Network.sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
+		System.out.println(Network.waitToSend());
     }
 }
 

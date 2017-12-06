@@ -16,7 +16,7 @@ entity0 = "[0,10,12,'p',0,1,2020,11,4]"
 #Stats : 200HP, 15PA, 5PM (max)
 entity1 = "[1,6,12,'m',0,0,200,15,5]"
 
-p.stdin.write(bytes("0;404;f;cmd;s;["+entity0+"]:["+entity1+"]\r\n", 'utf-8'))
+p.stdin.write(bytes("0;404;f;cmd;s;["+entity0+"],["+entity1+"]\r\n", 'utf-8'))
 
 #Moving entity 0 to cell[11,12]
 p.stdin.write(bytes("0;405;f;cmd;m;0;11;12\r\n", 'utf-8'))

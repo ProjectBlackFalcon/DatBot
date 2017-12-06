@@ -1,8 +1,11 @@
 package Main;
 
+import java.awt.geom.Area;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import Game.Info;
 import Game.Plugin.Bank;
@@ -20,6 +23,10 @@ import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectAddedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertExistingFromInvMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListWithQuantityToInvMessage;
 import utils.JSON;
 
 public class ModelConnexion implements Runnable {
@@ -28,6 +35,7 @@ public class ModelConnexion implements Runnable {
 	
 	InteractiveUseRequestMessage interactiveUseRequestMessage;
 	NpcGenericActionRequestMessage npcGenericactionRequestMessage;
+	private boolean bankOppened;
 
 	@Override
 	public void run() {
@@ -189,19 +197,66 @@ public class ModelConnexion implements Runnable {
 						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
 						Network.waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.getBank()});
+						bankOppened = true;
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});	
 					}
 					break;
 				case "closeBank":
-					Network.sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
-					sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					if(bankOppened){
+						Network.sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
+						Network.waitToSend();
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					bankOppened = false;
 					break;
 				case "dropBank":
 					String [] toBank = message[5].split(",");
 					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0].substring(1, toBank[0].length()-1)),Integer.parseInt(toBank[1].substring(2, toBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-
-					
+					if(Network.waitToSend()){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					break;
+				case "getBank":
+					String [] fromBank = message[5].split(",");
+					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0].substring(1, fromBank[0].length()-1)),-Integer.parseInt(fromBank[1].substring(2, fromBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+					if(Network.waitToSend()){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					break;
+				case "dropBankList":
+					String [] toBankList = message[5].split(",");
+					List<Integer> ids = new ArrayList<Integer>();
+					for (String string : toBankList) {
+						ids.add(Integer.parseInt(string.replaceAll("\\s+","")));
+					}
+					ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
+					Network.sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
+					if(Network.waitToSend()){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
+					break;
+				case "getBankList":
+					String [] fromBankList = message[5].split(",");
+					List<Integer> ids1 = new ArrayList<Integer>();
+					for (String string : fromBankList) {
+						ids1.add(Integer.parseInt(string.replaceAll("\\s+","")));
+					}
+					ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
+					Network.sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
+					if(Network.waitToSend()){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
 					break;
 				}
 			}

@@ -1,5 +1,6 @@
 package protocol.network.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -101,23 +102,47 @@ public class DofusDataWriter implements IDofusDataOutput{
     }
     
 	@Override
+//    public void writeVarInt(int value) throws IOException {
+//        if (value >= 0 && value <= MASK_01111111)
+//        {
+//            writeByte((byte) value);
+//            return;
+//        }
+//        int b = 0;
+//        int c = value;
+//        while (c != 0)
+//        {
+//            b = c & MASK_01111111;
+//            c = c >> CHUNCK_BIT_SIZE;
+//            if (c > 0)
+//                b = b | MASK_10000000;
+//            writeByte((byte) b);
+//        }
+//    }	
+	
     public void writeVarInt(int value) throws IOException {
-        if (value >= 0 && value <= MASK_01111111)
-        {
-            writeByte((byte) value);
+        int b = 0;
+        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+        if ((value >= 0) && (value <= MASK_01111111)) {
+            ba.write(value);
+            dous.write(ba.toByteArray());
             return;
         }
-        int b = 0;
         int c = value;
-        while (c != 0 && c != -1)
-        {
-            b = c & MASK_01111111;
-            c = c >> CHUNCK_BIT_SIZE;
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        while (c != 0) {
+            buffer.write(c & MASK_01111111);
+            int position = buffer.size() - 1;
+            ByteArrayInputStream newBuffer = new ByteArrayInputStream(buffer.toByteArray());
+            newBuffer.skip(position);
+            b = newBuffer.read();
+            c = c >>> CHUNCK_BIT_SIZE;
             if (c > 0)
                 b = b | MASK_10000000;
-            writeByte((byte) b);
+            ba.write(b);
         }
-    }	
+        dous.write(ba.toByteArray());
+    }
 
 	@Override
     public void writeVarLong(long value) throws IOException {
