@@ -32,6 +32,9 @@ public class Bank {
 	}
 	
 	public static String getBank(){
+		if(storage == null){
+			return "";
+		}
 		String str = "{";
 		str += "\"Kamas\" : " + storage.kamas + ",";
 		str += "\"Items\" : [";

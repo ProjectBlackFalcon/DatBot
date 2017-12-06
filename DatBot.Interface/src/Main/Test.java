@@ -1,5 +1,6 @@
 package Main;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +16,19 @@ import Game.movement.Movement;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
 import protocol.network.messages.subscription.SubscriptionUpdateMessage;
+import protocol.network.util.DofusDataWriter;
 
 public class Test {
 	
     public static void main(String[] args) throws Exception {
+//		ByteArrayOutputStream bous = new ByteArrayOutputStream();
+//		DofusDataWriter writer = new DofusDataWriter(bous);
+//		writer.writeVarLong(-1);
     	Thread modelConnexion = new Thread(new ModelConnexion());
     	modelConnexion.start();
     	int index = 0;
@@ -67,30 +73,19 @@ public class Test {
 		Info.newMap = false;
 		System.out.println(Stats.getStats());
 		
-//		NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
-//		Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
-//		Network.waitToSend();
-//		Thread.sleep(1000);
-//		
-//		String a = Stats.inventoryContentMessage.objects.get(6).objectUID + ", " + Stats.inventoryContentMessage.objects.get(4).objectUID + ", " + Stats.inventoryContentMessage.objects.get(5).objectUID;
-//		String [] toBankList = a.split(",");
-//		List<Integer> ids = new ArrayList<Integer>();
-//		for (String string : toBankList) {
-//			ids.add(Integer.parseInt(string.replaceAll("\\s+","")));
-//		}
-//		ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
-//		Network.sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
-//		System.out.println(Network.waitToSend());
-//		Thread.sleep(3000);
-//		String b = Bank.storage.objects.get(4).objectUID + ", " + Bank.storage.objects.get(6).objectUID + ", " + Bank.storage.objects.get(5).objectUID;
-//		String [] fromBankList = b.split(",");
-//		List<Integer> ids1 = new ArrayList<Integer>();
-//		for (String string : fromBankList) {
-//			ids1.add(Integer.parseInt(string.replaceAll("\\s+","")));
-//		}
-//		ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
-//		Network.sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
-//		System.out.println(Network.waitToSend());
+		NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
+		Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+		Network.waitToSend();
+		Thread.sleep(2000);
+		ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-1);
+		Network.sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from bank");
+		System.out.println(Network.waitToSend());
+		System.out.println(Stats.getStats()+","+Bank.getBank());
+		Thread.sleep(5000);
+		ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(5);
+		Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in bank");
+		System.out.println(Network.waitToSend());
+		System.out.println(Stats.getStats()+","+Bank.getBank());
     }
 }
 

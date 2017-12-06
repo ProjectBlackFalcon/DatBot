@@ -212,7 +212,7 @@ public class DofusDataReader implements IDofusDataInput {
         }
         if ( b >= 128) {
             b = b & 127;
-            result.low = (long) (result.low | ((b << i) & 0xFFFFFFFFL));
+            result.low = (int) (result.low | ((b << i) & 0xFFFFFFFFL));
             result.high = b >>> 4;
             i = 3;
             while (true) {

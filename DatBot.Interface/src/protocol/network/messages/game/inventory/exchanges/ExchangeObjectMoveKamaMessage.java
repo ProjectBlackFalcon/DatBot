@@ -28,6 +28,7 @@ public class ExchangeObjectMoveKamaMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
+			System.out.println(quantity);
 			writer.writeVarLong(this.quantity);
 		} catch (Exception e){
 			e.printStackTrace();

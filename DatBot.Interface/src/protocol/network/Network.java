@@ -68,6 +68,8 @@ import protocol.network.messages.game.dialog.LeaveDialogMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.InteractiveUsedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
+import protocol.network.messages.game.inventory.KamasUpdateMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
@@ -78,6 +80,7 @@ import protocol.network.messages.game.inventory.items.ObjectsAddedMessage;
 import protocol.network.messages.game.inventory.items.ObjectsDeletedMessage;
 import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
 import protocol.network.messages.game.inventory.storage.StorageInventoryContentMessage;
+import protocol.network.messages.game.inventory.storage.StorageKamasUpdateMessage;
 import protocol.network.messages.game.inventory.storage.StorageObjectRemoveMessage;
 import protocol.network.messages.game.inventory.storage.StorageObjectUpdateMessage;
 import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMessage;
@@ -598,6 +601,18 @@ public class Network implements Runnable {
 		case 5628:
 			Info.leaveExchange = true;
 			break;
+		case 5537:
+			KamasUpdateMessage kamasUpdateMessage = new KamasUpdateMessage();
+			kamasUpdateMessage.Deserialize(dataReader);
+			Stats.inventoryContentMessage.kamas = kamasUpdateMessage.kamasTotal;
+			Info.StorageUpdate = true;
+			break;
+		case 5645:
+			StorageKamasUpdateMessage storageKamasUpdateMessage = new StorageKamasUpdateMessage();
+			storageKamasUpdateMessage.Deserialize(dataReader);
+			Bank.storage.kamas = storageKamasUpdateMessage.kamasTotal;
+			Info.StorageUpdate = true;
+			break;
 		}
 	}
 	
@@ -846,15 +861,8 @@ public class Network implements Runnable {
 		new JSON("MapInfoComplete", Info.mapId);		
 	}
 	
-	public static void waitForBasicNoOpe() throws InterruptedException{
-		while(!Info.basicNoOperationMsg){
-			Thread.sleep(50);
-		}
-		Info.basicNoOperationMsg = false;
-	}
-	
 	public static boolean waitToSend() throws InterruptedException{
-		while(!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange && !Info.basicNoOperationMsg){
+		while((!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange) && !Info.basicNoOperationMsg){
 			Thread.sleep(50);
 		}
 		if(Info.basicNoOperationMsg && !Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange){

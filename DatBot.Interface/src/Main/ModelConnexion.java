@@ -22,6 +22,7 @@ import protocol.network.messages.game.dialog.LeaveDialogMessage;
 import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectAddedMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertExistingFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
@@ -258,9 +259,23 @@ public class ModelConnexion implements Runnable {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
 					break;
-				case "getKamas":
+				case "getBankKamas":
+					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(message[5]));
+					Network.sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from bank");
+					if(Network.waitToSend()){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
 					break;
-				case "dropKamas":
+				case "dropBankKamas":
+					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(message[5]));
+					Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in bank");
+					if(Network.waitToSend()){
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					} else {
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+					}
 					break;
 				}
 			}

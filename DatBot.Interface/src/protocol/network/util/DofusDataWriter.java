@@ -151,6 +151,7 @@ public class DofusDataWriter implements IDofusDataOutput{
         if (val.getHigh() == 0)
             writeint32((int)val.low);
         else {
+        	i = 0;
             while (i < 4) {
                 dous.writeByte((int)(val.low & 127 | 128));
                 val.low = val.low >>> 7;
