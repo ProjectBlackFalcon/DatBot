@@ -43,7 +43,6 @@ public class FightTemporarySpellBoostEffect extends FightTemporaryBoostEffect {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

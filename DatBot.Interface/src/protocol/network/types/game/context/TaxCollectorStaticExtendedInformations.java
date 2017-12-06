@@ -45,7 +45,6 @@ public class TaxCollectorStaticExtendedInformations extends TaxCollectorStaticIn
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

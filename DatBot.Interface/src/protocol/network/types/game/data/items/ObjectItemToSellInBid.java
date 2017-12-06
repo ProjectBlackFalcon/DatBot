@@ -43,7 +43,6 @@ public class ObjectItemToSellInBid extends ObjectItemToSell {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

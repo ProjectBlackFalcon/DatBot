@@ -17,14 +17,16 @@ public class GameActionFightTriggerGlyphTrapMessage extends AbstractGameActionMe
 	public static final int ProtocolId = 5741;
 
 	public int markId;
+	public int markImpactCell;
 	public double triggeringCharacterId;
 	public int triggeredSpellId;
 
 	public GameActionFightTriggerGlyphTrapMessage(){
 	}
 
-	public GameActionFightTriggerGlyphTrapMessage(int markId, double triggeringCharacterId, int triggeredSpellId){
+	public GameActionFightTriggerGlyphTrapMessage(int markId, int markImpactCell, double triggeringCharacterId, int triggeredSpellId){
 		this.markId = markId;
+		this.markImpactCell = markImpactCell;
 		this.triggeringCharacterId = triggeringCharacterId;
 		this.triggeredSpellId = triggeredSpellId;
 	}
@@ -34,6 +36,7 @@ public class GameActionFightTriggerGlyphTrapMessage extends AbstractGameActionMe
 		try {
 			super.Serialize(writer);
 			writer.writeShort(this.markId);
+			writer.writeVarShort(this.markImpactCell);
 			writer.writeDouble(this.triggeringCharacterId);
 			writer.writeVarShort(this.triggeredSpellId);
 		} catch (Exception e){
@@ -46,6 +49,7 @@ public class GameActionFightTriggerGlyphTrapMessage extends AbstractGameActionMe
 		try {
 			super.Deserialize(reader);
 			this.markId = reader.readShort();
+			this.markImpactCell = reader.readVarShort();
 			this.triggeringCharacterId = reader.readDouble();
 			this.triggeredSpellId = reader.readVarShort();
 		} catch (Exception e){
@@ -56,6 +60,7 @@ public class GameActionFightTriggerGlyphTrapMessage extends AbstractGameActionMe
 
 	//private void append(){
 		//Network.appendDebug("markId : " + this.markId);
+		//Network.appendDebug("markImpactCell : " + this.markImpactCell);
 		//Network.appendDebug("triggeringCharacterId : " + this.triggeringCharacterId);
 		//Network.appendDebug("triggeredSpellId : " + this.triggeredSpellId);
 	//}

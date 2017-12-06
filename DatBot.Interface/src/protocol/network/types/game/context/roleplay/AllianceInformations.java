@@ -45,7 +45,6 @@ public class AllianceInformations extends BasicNamedAllianceInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

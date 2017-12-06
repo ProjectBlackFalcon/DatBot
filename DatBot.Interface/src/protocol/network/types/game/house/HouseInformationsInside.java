@@ -53,7 +53,6 @@ public class HouseInformationsInside extends HouseInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

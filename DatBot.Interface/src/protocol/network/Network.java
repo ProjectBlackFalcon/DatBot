@@ -740,7 +740,7 @@ public class Network implements Runnable {
 	}
 
 	private static void HandleHelloConnectMessage(byte[] key, String salt) throws Exception {
-		VersionExtended versionExtended = new VersionExtended(2, 44, 7, 3, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 45, 3, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, Info.nameAccount, Info.password, salt);
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {

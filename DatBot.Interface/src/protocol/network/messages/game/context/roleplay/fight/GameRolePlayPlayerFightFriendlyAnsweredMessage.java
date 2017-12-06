@@ -34,7 +34,7 @@ public class GameRolePlayPlayerFightFriendlyAnsweredMessage extends NetworkMessa
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeVarLong(this.sourceId);
 			writer.writeVarLong(this.targetId);
 			writer.writeBoolean(this.accept);
@@ -46,7 +46,7 @@ public class GameRolePlayPlayerFightFriendlyAnsweredMessage extends NetworkMessa
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			this.sourceId = reader.readVarLong();
 			this.targetId = reader.readVarLong();
 			this.accept = reader.readBoolean();

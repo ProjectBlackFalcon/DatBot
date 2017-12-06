@@ -47,7 +47,6 @@ public class GameRolePlayMutantInformations extends GameRolePlayHumanoidInformat
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

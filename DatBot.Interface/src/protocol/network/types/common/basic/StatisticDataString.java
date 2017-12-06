@@ -43,7 +43,6 @@ public class StatisticDataString extends StatisticData {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

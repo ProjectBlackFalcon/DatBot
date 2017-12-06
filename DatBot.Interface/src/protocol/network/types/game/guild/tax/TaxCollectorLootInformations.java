@@ -55,7 +55,6 @@ public class TaxCollectorLootInformations extends TaxCollectorComplementaryInfor
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

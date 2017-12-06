@@ -32,7 +32,7 @@ public class GameRolePlayFightRequestCanceledMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeDouble(this.sourceId);
 			writer.writeDouble(this.targetId);
 		} catch (Exception e){
@@ -43,7 +43,7 @@ public class GameRolePlayFightRequestCanceledMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			this.sourceId = reader.readDouble();
 			this.targetId = reader.readDouble();
 		} catch (Exception e){

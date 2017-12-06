@@ -30,7 +30,7 @@ public class TreasureHuntRequestMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeByte(this.questLevel);
+			writer.writeVarShort(this.questLevel);
 			writer.writeByte(this.questType);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class TreasureHuntRequestMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.questLevel = reader.readByte();
+			this.questLevel = reader.readVarShort();
 			this.questType = reader.readByte();
 		} catch (Exception e){
 			e.printStackTrace();

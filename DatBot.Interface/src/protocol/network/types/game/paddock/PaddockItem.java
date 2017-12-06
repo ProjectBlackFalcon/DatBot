@@ -45,7 +45,6 @@ public class PaddockItem extends ObjectItemInRolePlay {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

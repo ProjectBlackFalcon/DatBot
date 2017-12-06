@@ -32,7 +32,7 @@ public class GameRolePlayArenaFightPropositionMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeShort(this.alliesId.size());
 			int _loc2_ = 0;
 			while( _loc2_ < this.alliesId.size()){
@@ -48,7 +48,7 @@ public class GameRolePlayArenaFightPropositionMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
 			this.alliesId = new ArrayList<Double>();

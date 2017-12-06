@@ -43,7 +43,6 @@ public class GameFightMutantInformations extends GameFightFighterNamedInformatio
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

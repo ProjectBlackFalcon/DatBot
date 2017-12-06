@@ -45,7 +45,6 @@ public class HumanOptionGuild extends HumanOption {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

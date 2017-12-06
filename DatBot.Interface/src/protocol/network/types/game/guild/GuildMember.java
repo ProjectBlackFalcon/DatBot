@@ -101,7 +101,6 @@ public class GuildMember extends CharacterMinimalInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

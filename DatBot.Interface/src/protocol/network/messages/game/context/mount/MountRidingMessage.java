@@ -17,18 +17,23 @@ public class MountRidingMessage extends NetworkMessage {
 	public static final int ProtocolId = 5967;
 
 	public boolean isRiding;
+	public boolean isAutopilot;
 
 	public MountRidingMessage(){
 	}
 
-	public MountRidingMessage(boolean isRiding){
+	public MountRidingMessage(boolean isRiding, boolean isAutopilot){
 		this.isRiding = isRiding;
+		this.isAutopilot = isAutopilot;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeBoolean(this.isRiding);
+			byte flag = 0;
+			flag = BooleanByteWrapper.SetFlag(0, flag, isRiding);
+			flag = BooleanByteWrapper.SetFlag(1, flag, isAutopilot);
+			writer.writeByte(flag);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -37,7 +42,10 @@ public class MountRidingMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.isRiding = reader.readBoolean();
+			byte flag;
+			flag = (byte) reader.readUnsignedByte();
+			this.isRiding = BooleanByteWrapper.GetFlag(flag, (byte) 0);
+			this.isAutopilot = BooleanByteWrapper.GetFlag(flag, (byte) 1);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -46,5 +54,6 @@ public class MountRidingMessage extends NetworkMessage {
 
 	//private void append(){
 		//Network.appendDebug("isRiding : " + this.isRiding);
+		//Network.appendDebug("isAutopilot : " + this.isAutopilot);
 	//}
 }

@@ -20,15 +20,17 @@ public class ArenaRankInfos extends NetworkMessage {
 	public int bestRank;
 	public int victoryCount;
 	public int fightcount;
+	public boolean validForLadder;
 
 	public ArenaRankInfos(){
 	}
 
-	public ArenaRankInfos(int rank, int bestRank, int victoryCount, int fightcount){
+	public ArenaRankInfos(int rank, int bestRank, int victoryCount, int fightcount, boolean validForLadder){
 		this.rank = rank;
 		this.bestRank = bestRank;
 		this.victoryCount = victoryCount;
 		this.fightcount = fightcount;
+		this.validForLadder = validForLadder;
 	}
 
 	@Override
@@ -38,6 +40,7 @@ public class ArenaRankInfos extends NetworkMessage {
 			writer.writeVarShort(this.bestRank);
 			writer.writeVarShort(this.victoryCount);
 			writer.writeVarShort(this.fightcount);
+			writer.writeBoolean(this.validForLadder);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -50,10 +53,10 @@ public class ArenaRankInfos extends NetworkMessage {
 			this.bestRank = reader.readVarShort();
 			this.victoryCount = reader.readVarShort();
 			this.fightcount = reader.readVarShort();
+			this.validForLadder = reader.readBoolean();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){
@@ -61,5 +64,6 @@ public class ArenaRankInfos extends NetworkMessage {
 		//Network.appendDebug("bestRank : " + this.bestRank);
 		//Network.appendDebug("victoryCount : " + this.victoryCount);
 		//Network.appendDebug("fightcount : " + this.fightcount);
+		//Network.appendDebug("validForLadder : " + this.validForLadder);
 	//}
 }

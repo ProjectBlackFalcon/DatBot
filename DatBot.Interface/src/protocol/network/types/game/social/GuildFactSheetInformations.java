@@ -47,7 +47,6 @@ public class GuildFactSheetInformations extends GuildInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

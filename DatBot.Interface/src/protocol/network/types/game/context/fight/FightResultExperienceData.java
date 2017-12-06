@@ -99,7 +99,6 @@ public class FightResultExperienceData extends FightResultAdditionalData {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

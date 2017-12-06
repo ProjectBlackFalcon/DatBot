@@ -45,7 +45,6 @@ public class TaxCollectorGuildInformations extends TaxCollectorComplementaryInfo
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

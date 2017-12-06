@@ -29,7 +29,7 @@ public class CharacterMinimalInformations extends CharacterBasicMinimalInformati
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			super.Serialize(writer);
-			writer.writeByte(this.level);
+			writer.writeVarShort(this.level);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -39,11 +39,10 @@ public class CharacterMinimalInformations extends CharacterBasicMinimalInformati
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			super.Deserialize(reader);
-			this.level = reader.readUnsignedByte();
+			this.level = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

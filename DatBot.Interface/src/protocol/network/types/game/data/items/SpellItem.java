@@ -47,7 +47,6 @@ public class SpellItem extends Item {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

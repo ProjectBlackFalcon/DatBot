@@ -22,17 +22,19 @@ public class AccountCapabilitiesMessage extends NetworkMessage {
 	public int breedsAvailable;
 	public int status;
 	public boolean canCreateNewCharacter;
+	public double unlimitedRestatEndDate;
 
 	public AccountCapabilitiesMessage(){
 	}
 
-	public AccountCapabilitiesMessage(int accountId, boolean tutorialAvailable, int breedsVisible, int breedsAvailable, int status, boolean canCreateNewCharacter){
+	public AccountCapabilitiesMessage(int accountId, boolean tutorialAvailable, int breedsVisible, int breedsAvailable, int status, boolean canCreateNewCharacter, double unlimitedRestatEndDate){
 		this.accountId = accountId;
 		this.tutorialAvailable = tutorialAvailable;
 		this.breedsVisible = breedsVisible;
 		this.breedsAvailable = breedsAvailable;
 		this.status = status;
 		this.canCreateNewCharacter = canCreateNewCharacter;
+		this.unlimitedRestatEndDate = unlimitedRestatEndDate;
 	}
 
 	@Override
@@ -46,6 +48,7 @@ public class AccountCapabilitiesMessage extends NetworkMessage {
 			writer.writeVarInt(this.breedsVisible);
 			writer.writeVarInt(this.breedsAvailable);
 			writer.writeByte(this.status);
+			writer.writeDouble(this.unlimitedRestatEndDate);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -62,6 +65,7 @@ public class AccountCapabilitiesMessage extends NetworkMessage {
 			this.breedsVisible = reader.readVarInt();
 			this.breedsAvailable = reader.readVarInt();
 			this.status = reader.readByte();
+			this.unlimitedRestatEndDate = reader.readDouble();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -75,5 +79,6 @@ public class AccountCapabilitiesMessage extends NetworkMessage {
 		//Network.appendDebug("breedsAvailable : " + this.breedsAvailable);
 		//Network.appendDebug("status : " + this.status);
 		//Network.appendDebug("canCreateNewCharacter : " + this.canCreateNewCharacter);
+		//Network.appendDebug("unlimitedRestatEndDate : " + this.unlimitedRestatEndDate);
 	//}
 }

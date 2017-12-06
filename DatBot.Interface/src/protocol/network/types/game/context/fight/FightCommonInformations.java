@@ -38,7 +38,7 @@ public class FightCommonInformations extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeByte(this.fightType);
 			writer.writeShort(this.fightTeams.size());
 			int _loc2_ = 0;
@@ -67,7 +67,7 @@ public class FightCommonInformations extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			this.fightType = reader.readByte();
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
@@ -98,7 +98,6 @@ public class FightCommonInformations extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

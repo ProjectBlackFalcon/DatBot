@@ -73,20 +73,16 @@ public class GameRolePlayArenaSwitchToFightServerMessage extends NetworkMessage 
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-//		append();
+		//append();
 	}
 
-	private void append(){
-//		Network.appendDebug("address : " + this.address);
-		System.out.println(address);
-		
-		for(Integer a : ports) {
-//			Network.appendDebug("ports : " + a);
-			System.out.println("port" + a);
-		}
-		for(Integer a : ticket) {
-			System.out.println("ticket" + a);
-//			Network.appendDebug("ticket : " + a);
-		}
-	}
+	//private void append(){
+		//Network.appendDebug("address : " + this.address);
+		//for(Integer a : ports) {
+			//Network.appendDebug("ports : " + a);
+		//}
+		//for(Integer a : ticket) {
+			//Network.appendDebug("ticket : " + a);
+		//}
+	//}
 }

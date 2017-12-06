@@ -47,7 +47,6 @@ public class CharacterToRemodelInformations extends CharacterRemodelingInformati
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

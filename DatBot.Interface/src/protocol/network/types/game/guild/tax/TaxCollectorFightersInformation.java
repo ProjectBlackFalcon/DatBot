@@ -78,7 +78,6 @@ public class TaxCollectorFightersInformation extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

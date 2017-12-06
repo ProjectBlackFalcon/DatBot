@@ -47,7 +47,6 @@ public class SkillActionDescriptionCollect extends SkillActionDescriptionTimed {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -43,7 +43,6 @@ public class CharacterBasicMinimalInformations extends AbstractCharacterInformat
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -216,7 +216,7 @@ public class ModelConnexion implements Runnable {
 					String [] toBank = message[5].split(",");
 					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0].substring(1, toBank[0].length()-1)),Integer.parseInt(toBank[1].substring(2, toBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
 					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
@@ -225,7 +225,7 @@ public class ModelConnexion implements Runnable {
 					String [] fromBank = message[5].split(",");
 					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0].substring(1, fromBank[0].length()-1)),-Integer.parseInt(fromBank[1].substring(2, fromBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
 					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
@@ -239,7 +239,7 @@ public class ModelConnexion implements Runnable {
 					ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
 					Network.sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
 					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
@@ -253,10 +253,14 @@ public class ModelConnexion implements Runnable {
 					ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
 					Network.sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
 					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 					}
+					break;
+				case "getKamas":
+					break;
+				case "dropKamas":
 					break;
 				}
 			}

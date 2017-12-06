@@ -57,7 +57,6 @@ public class GroupMonsterStaticInformationsWithAlternatives extends GroupMonster
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

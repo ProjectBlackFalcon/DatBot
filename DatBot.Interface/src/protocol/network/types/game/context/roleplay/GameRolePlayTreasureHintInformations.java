@@ -43,7 +43,6 @@ public class GameRolePlayTreasureHintInformations extends GameRolePlayActorInfor
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

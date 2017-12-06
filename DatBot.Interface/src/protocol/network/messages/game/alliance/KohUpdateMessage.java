@@ -22,7 +22,7 @@ public class KohUpdateMessage extends NetworkMessage {
 	public List<Integer> allianceNbMembers;
 	public List<Integer> allianceRoundWeigth;
 	public List<Integer> allianceMatchScore;
-	public BasicAllianceInformations allianceMapWinner;
+	public List<BasicAllianceInformations> allianceMapWinners;
 	public int allianceMapWinnerScore;
 	public int allianceMapMyAllianceScore;
 	public double nextTickTime;
@@ -30,12 +30,12 @@ public class KohUpdateMessage extends NetworkMessage {
 	public KohUpdateMessage(){
 	}
 
-	public KohUpdateMessage(List<AllianceInformations> alliances, List<Integer> allianceNbMembers, List<Integer> allianceRoundWeigth, List<Integer> allianceMatchScore, BasicAllianceInformations allianceMapWinner, int allianceMapWinnerScore, int allianceMapMyAllianceScore, double nextTickTime){
+	public KohUpdateMessage(List<AllianceInformations> alliances, List<Integer> allianceNbMembers, List<Integer> allianceRoundWeigth, List<Integer> allianceMatchScore, List<BasicAllianceInformations> allianceMapWinners, int allianceMapWinnerScore, int allianceMapMyAllianceScore, double nextTickTime){
 		this.alliances = alliances;
 		this.allianceNbMembers = allianceNbMembers;
 		this.allianceRoundWeigth = allianceRoundWeigth;
 		this.allianceMatchScore = allianceMatchScore;
-		this.allianceMapWinner = allianceMapWinner;
+		this.allianceMapWinners = allianceMapWinners;
 		this.allianceMapWinnerScore = allianceMapWinnerScore;
 		this.allianceMapMyAllianceScore = allianceMapMyAllianceScore;
 		this.nextTickTime = nextTickTime;
@@ -68,7 +68,12 @@ public class KohUpdateMessage extends NetworkMessage {
 				writer.writeByte(this.allianceMatchScore.get(_loc5_));
 				_loc5_++;
 			}
-			allianceMapWinner.Serialize(writer);
+			writer.writeShort(this.allianceMapWinners.size());
+			int _loc6_ = 0;
+			while( _loc6_ < this.allianceMapWinners.size()){
+				this.allianceMapWinners.get(_loc6_).Serialize(writer);
+				_loc6_++;
+			}
 			writer.writeVarInt(this.allianceMapWinnerScore);
 			writer.writeVarInt(this.allianceMapMyAllianceScore);
 			writer.writeDouble(this.nextTickTime);
@@ -113,8 +118,15 @@ public class KohUpdateMessage extends NetworkMessage {
 				this.allianceMatchScore.add(_loc18_);
 				_loc9_++;
 			}
-			this.allianceMapWinner = new BasicAllianceInformations();
-			this.allianceMapWinner.Deserialize(reader);
+			int _loc10_  = reader.readShort();
+			int _loc11_  = 0;
+			this.allianceMapWinners = new ArrayList<BasicAllianceInformations>();
+			while( _loc11_ <  _loc10_){
+				BasicAllianceInformations _loc19_ = new BasicAllianceInformations();
+				_loc19_.Deserialize(reader);
+				this.allianceMapWinners.add(_loc19_);
+				_loc11_++;
+			}
 			this.allianceMapWinnerScore = reader.readVarInt();
 			this.allianceMapMyAllianceScore = reader.readVarInt();
 			this.nextTickTime = reader.readDouble();
@@ -137,7 +149,9 @@ public class KohUpdateMessage extends NetworkMessage {
 		//for(Integer a : allianceMatchScore) {
 			//Network.appendDebug("allianceMatchScore : " + a);
 		//}
-		//Network.appendDebug("allianceMapWinner : " + this.allianceMapWinner);
+		//for(BasicAllianceInformations a : allianceMapWinners) {
+			//Network.appendDebug("allianceMapWinners : " + a);
+		//}
 		//Network.appendDebug("allianceMapWinnerScore : " + this.allianceMapWinnerScore);
 		//Network.appendDebug("allianceMapMyAllianceScore : " + this.allianceMapMyAllianceScore);
 		//Network.appendDebug("nextTickTime : " + this.nextTickTime);

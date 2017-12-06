@@ -45,7 +45,6 @@ public class HouseGuildedInformations extends HouseInstanceInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

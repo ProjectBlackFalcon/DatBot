@@ -45,7 +45,6 @@ public class CharacterMinimalAllianceInformations extends CharacterMinimalGuildI
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

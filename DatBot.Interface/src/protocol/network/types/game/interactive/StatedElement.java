@@ -53,7 +53,6 @@ public class StatedElement extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -71,7 +71,6 @@ public class CharacterRemodelingInformation extends AbstractCharacterInformation
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

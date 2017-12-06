@@ -32,7 +32,7 @@ public class FightResultPlayerListEntry extends FightResultFighterListEntry {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			super.Serialize(writer);
-			writer.writeByte(this.level);
+			writer.writeVarShort(this.level);
 			writer.writeShort(this.additional.size());
 			int _loc2_ = 0;
 			while( _loc2_ < this.additional.size()){
@@ -49,7 +49,7 @@ public class FightResultPlayerListEntry extends FightResultFighterListEntry {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			super.Deserialize(reader);
-			this.level = reader.readByte();
+			this.level = reader.readVarShort();
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
 			this.additional = new ArrayList<FightResultAdditionalData>();
@@ -62,7 +62,6 @@ public class FightResultPlayerListEntry extends FightResultFighterListEntry {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

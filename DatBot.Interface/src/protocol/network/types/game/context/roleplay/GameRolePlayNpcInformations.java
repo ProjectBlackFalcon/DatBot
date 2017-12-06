@@ -51,7 +51,6 @@ public class GameRolePlayNpcInformations extends GameRolePlayActorInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

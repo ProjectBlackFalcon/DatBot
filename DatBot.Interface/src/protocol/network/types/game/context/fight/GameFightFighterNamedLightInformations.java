@@ -43,7 +43,6 @@ public class GameFightFighterNamedLightInformations extends GameFightFighterLigh
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

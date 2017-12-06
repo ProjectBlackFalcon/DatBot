@@ -16,35 +16,11 @@ import protocol.network.NetworkMessage;
 public class GameRolePlayTaxCollectorFightRequestMessage extends NetworkMessage {
 	public static final int ProtocolId = 5954;
 
-	public double taxCollectorId;
-
-	public GameRolePlayTaxCollectorFightRequestMessage(){
-	}
-
-	public GameRolePlayTaxCollectorFightRequestMessage(double taxCollectorId){
-		this.taxCollectorId = taxCollectorId;
-	}
-
 	@Override
 	public void Serialize(DofusDataWriter writer) {
-		try {
-			writer.writeDouble(this.taxCollectorId);
-		} catch (Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void Deserialize(DofusDataReader reader) {
-		try {
-			this.taxCollectorId = reader.readDouble();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		//append();
 	}
-
-	//private void append(){
-		//Network.appendDebug("taxCollectorId : " + this.taxCollectorId);
-	//}
 }

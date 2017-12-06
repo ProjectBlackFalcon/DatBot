@@ -46,7 +46,7 @@ public class PartyMemberInFightMessage extends AbstractPartyMessage {
 			writer.writeVarLong(this.memberId);
 			writer.writeInt(this.memberAccountId);
 			writer.writeUTF(this.memberName);
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			fightMap.Serialize(writer);
 			writer.writeVarShort(this.timeBeforeFightStart);
 		} catch (Exception e){
@@ -62,7 +62,7 @@ public class PartyMemberInFightMessage extends AbstractPartyMessage {
 			this.memberId = reader.readVarLong();
 			this.memberAccountId = reader.readInt();
 			this.memberName = reader.readUTF();
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			this.fightMap = new MapCoordinatesExtended();
 			this.fightMap.Deserialize(reader);
 			this.timeBeforeFightStart = reader.readVarShort();

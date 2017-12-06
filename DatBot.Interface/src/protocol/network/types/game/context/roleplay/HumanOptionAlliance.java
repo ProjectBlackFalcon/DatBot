@@ -49,7 +49,6 @@ public class HumanOptionAlliance extends HumanOption {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

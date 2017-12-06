@@ -45,7 +45,6 @@ public class AlliancePrismInformation extends PrismInformation {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

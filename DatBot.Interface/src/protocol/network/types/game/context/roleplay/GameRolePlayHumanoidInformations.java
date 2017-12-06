@@ -49,7 +49,6 @@ public class GameRolePlayHumanoidInformations extends GameRolePlayNamedActorInfo
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

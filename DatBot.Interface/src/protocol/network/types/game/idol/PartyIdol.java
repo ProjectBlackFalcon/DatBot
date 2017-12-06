@@ -55,7 +55,6 @@ public class PartyIdol extends Idol {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

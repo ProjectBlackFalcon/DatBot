@@ -40,7 +40,7 @@ public class FightExternalInformations extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeByte(this.fightType);
 			writer.writeInt(this.fightStart);
 			writer.writeBoolean(this.fightSpectatorLocked);
@@ -62,7 +62,7 @@ public class FightExternalInformations extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			this.fightType = reader.readByte();
 			this.fightStart = reader.readInt();
 			this.fightSpectatorLocked = reader.readBoolean();
@@ -83,7 +83,6 @@ public class FightExternalInformations extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

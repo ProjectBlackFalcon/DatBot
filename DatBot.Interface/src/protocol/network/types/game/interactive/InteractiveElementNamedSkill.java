@@ -43,7 +43,6 @@ public class InteractiveElementNamedSkill extends InteractiveElementSkill {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

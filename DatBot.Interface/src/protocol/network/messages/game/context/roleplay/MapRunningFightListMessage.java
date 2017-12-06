@@ -12,8 +12,6 @@ import protocol.network.util.DofusDataWriter;
 import protocol.network.Network;
 import protocol.network.NetworkMessage;
 import protocol.network.types.game.context.fight.FightExternalInformations;
-import protocol.network.types.game.context.fight.FightOptionsInformations;
-import protocol.network.types.game.context.fight.FightTeamLightInformations;
 
 @SuppressWarnings("unused")
 public class MapRunningFightListMessage extends NetworkMessage {
@@ -57,35 +55,12 @@ public class MapRunningFightListMessage extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		append();
+		//append();
 	}
 
-	private void append(){
-		for(FightExternalInformations a : fights) {
-			Network.append("fights : " + a.fightId);
-			Network.append("fightStart : " + a.fightStart);
-			Network.append("fightType : " + a.fightType);
-			Network.append("fightSpectatorLocked : " + a.fightSpectatorLocked);
-			for (FightTeamLightInformations b : a.fightTeams) {
-				Network.append("\tleaderId : " + b.leaderId);
-				Network.append("\tmeanLevel : " + b.meanLevel);
-				Network.append("\tnbWaves : " + b.nbWaves);
-				Network.append("\tteamId : " + b.teamId);
-				Network.append("\tteamMembersCount : " + b.teamMembersCount);
-				Network.append("\tteamSide : " + b.teamSide);
-				Network.append("\tteamTypeId : " + b.teamTypeId);
-				Network.append("\thasAllianceMember : " + b.hasAllianceMember);
-				Network.append("\thasFriend : " + b.hasFriend);
-				Network.append("\thasGroupMember : " + b.hasGroupMember);
-				Network.append("\thasGuildMember : " + b.hasGuildMember);
-				Network.append("\thasMyTaxCollector : " + b.hasMyTaxCollector);
-			}
-			for (FightOptionsInformations c : a.fightTeamsOptions) {
-				Network.append("\tisAskingForHelp : " + c.isAskingForHelp);
-				Network.append("\tisClosed : " + c.isClosed);
-				Network.append("\tisRestrictedToPartyOnly : " + c.isRestrictedToPartyOnly);
-				Network.append("\tisSecret : " + c.isSecret);
-			}
-		}
-	}
+	//private void append(){
+		//for(FightExternalInformations a : fights) {
+			//Network.appendDebug("fights : " + a);
+		//}
+	//}
 }

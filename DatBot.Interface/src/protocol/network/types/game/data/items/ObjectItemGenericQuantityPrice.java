@@ -43,7 +43,6 @@ public class ObjectItemGenericQuantityPrice extends ObjectItemGenericQuantity {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

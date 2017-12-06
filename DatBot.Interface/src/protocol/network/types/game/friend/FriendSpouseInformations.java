@@ -49,7 +49,7 @@ public class FriendSpouseInformations extends NetworkMessage {
 			writer.writeInt(this.spouseAccountId);
 			writer.writeVarLong(this.spouseId);
 			writer.writeUTF(this.spouseName);
-			writer.writeByte(this.spouseLevel);
+			writer.writeVarShort(this.spouseLevel);
 			writer.writeByte(this.breed);
 			writer.writeByte(this.sex);
 			spouseEntityLook.Serialize(writer);
@@ -66,7 +66,7 @@ public class FriendSpouseInformations extends NetworkMessage {
 			this.spouseAccountId = reader.readInt();
 			this.spouseId = reader.readVarLong();
 			this.spouseName = reader.readUTF();
-			this.spouseLevel = reader.readByte();
+			this.spouseLevel = reader.readVarShort();
 			this.breed = reader.readByte();
 			this.sex = reader.readByte();
 			this.spouseEntityLook = new EntityLook();
@@ -77,7 +77,6 @@ public class FriendSpouseInformations extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

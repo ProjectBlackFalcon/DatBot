@@ -49,7 +49,6 @@ public class PaddockGuildedInformations extends PaddockBuyableInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

@@ -43,7 +43,6 @@ public class ObjectEffectCreature extends ObjectEffect {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

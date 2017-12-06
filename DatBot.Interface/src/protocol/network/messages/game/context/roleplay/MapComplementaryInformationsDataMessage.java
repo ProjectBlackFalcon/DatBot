@@ -116,6 +116,7 @@ public class MapComplementaryInformationsDataMessage extends NetworkMessage {
 				_loc3_++;
 			}
 			int _loc4_  = reader.readShort();
+			System.out.println("loc4 : " + _loc4_);
 			int _loc5_  = 0;
 			this.actors = new ArrayList<GameRolePlayActorInformations>();
 			while( _loc5_ <  _loc4_){

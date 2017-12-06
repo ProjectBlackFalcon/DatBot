@@ -40,7 +40,7 @@ public class DungeonPartyFinderPlayer extends NetworkMessage {
 			writer.writeUTF(this.playerName);
 			writer.writeByte(this.breed);
 			writer.writeBoolean(this.sex);
-			writer.writeByte(this.level);
+			writer.writeVarShort(this.level);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -53,11 +53,10 @@ public class DungeonPartyFinderPlayer extends NetworkMessage {
 			this.playerName = reader.readUTF();
 			this.breed = reader.readByte();
 			this.sex = reader.readBoolean();
-			this.level = reader.readByte();
+			this.level = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

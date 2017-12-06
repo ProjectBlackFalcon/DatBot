@@ -33,7 +33,7 @@ public class MapRunningFightDetailsMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 			writer.writeShort(this.attackers.size());
 			int _loc2_ = 0;
 			while( _loc2_ < this.attackers.size()){
@@ -56,7 +56,7 @@ public class MapRunningFightDetailsMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
 			this.attackers = new ArrayList<GameFightFighterLightInformations>();
@@ -78,26 +78,16 @@ public class MapRunningFightDetailsMessage extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		append();
+		//append();
 	}
 
-	private void append(){
-		Network.append("fightId : " + this.fightId);
-		for(GameFightFighterLightInformations a : attackers) {
-			Network.append("\tid : " + a.id);
-			Network.append("\tbreed : " + a.breed);
-			Network.append("\tlevel : " + a.level);
-			Network.append("\twave : " + a.wave);
-			Network.append("\talive : " + a.alive);
-			Network.append("\tsex : " + a.sex);
-		}
-		for(GameFightFighterLightInformations a : defenders) {
-			Network.append("\tid : " + a.id);
-			Network.append("\tbreed : " + a.breed);
-			Network.append("\tlevel : " + a.level);
-			Network.append("\twave : " + a.wave);
-			Network.append("\talive : " + a.alive);
-			Network.append("\tsex : " + a.sex);
-		}
-	}
+	//private void append(){
+		//Network.appendDebug("fightId : " + this.fightId);
+		//for(GameFightFighterLightInformations a : attackers) {
+			//Network.appendDebug("attackers : " + a);
+		//}
+		//for(GameFightFighterLightInformations a : defenders) {
+			//Network.appendDebug("defenders : " + a);
+		//}
+	//}
 }

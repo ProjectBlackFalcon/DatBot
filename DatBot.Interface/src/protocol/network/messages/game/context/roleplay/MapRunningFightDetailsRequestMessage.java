@@ -28,7 +28,7 @@ public class MapRunningFightDetailsRequestMessage extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.fightId);
+			writer.writeVarShort(this.fightId);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -37,7 +37,7 @@ public class MapRunningFightDetailsRequestMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.fightId = reader.readInt();
+			this.fightId = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

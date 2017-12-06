@@ -21,7 +21,7 @@ public class JSON implements Runnable{
 		
         JSONParser parser = new JSONParser();
         try {
-			JSONObject obj = (JSONObject) parser.parse(new FileReader("C:\\Users\\baptiste\\Documents\\Dofus Bot\\DofusBuilder.json"));
+			JSONObject obj = (JSONObject) parser.parse(new FileReader(file));
 			Messages = parseJsonBuilderArray((JSONArray) obj.get("Messages"));
 			Types = parseJsonBuilderArray((JSONArray) obj.get("Types"));
 			for (Object object : types) {
@@ -84,8 +84,9 @@ public class JSON implements Runnable{
 	}
 	
 	
-	
-	public JSON(){
+	String file;
+	public JSON(String string){
+		this.file = string;
 		run();
 	}
 	

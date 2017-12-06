@@ -1,4 +1,4 @@
-package protocol.network.messages.game.achievement;
+package protocol.network.messages.game.context.roleplay.fight;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,29 +10,28 @@ import protocol.network.NetworkMessage;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
 import protocol.network.Network;
-import protocol.network.messages.game.achievement.AchievementFinishedMessage;
+import protocol.network.NetworkMessage;
 
 @SuppressWarnings("unused")
-public class AchievementFinishedInformationMessage extends AchievementFinishedMessage {
-	public static final int ProtocolId = 6381;
+public class GameRolePlayMonsterNotAngryAtPlayerMessage extends NetworkMessage {
+	public static final int ProtocolId = 6742;
 
-	public String name;
 	public long playerId;
+	public double monsterGroupId;
 
-	public AchievementFinishedInformationMessage(){
+	public GameRolePlayMonsterNotAngryAtPlayerMessage(){
 	}
 
-	public AchievementFinishedInformationMessage(String name, long playerId){
-		this.name = name;
+	public GameRolePlayMonsterNotAngryAtPlayerMessage(long playerId, double monsterGroupId){
 		this.playerId = playerId;
+		this.monsterGroupId = monsterGroupId;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			super.Serialize(writer);
-			writer.writeUTF(this.name);
 			writer.writeVarLong(this.playerId);
+			writer.writeDouble(this.monsterGroupId);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -41,9 +40,8 @@ public class AchievementFinishedInformationMessage extends AchievementFinishedMe
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			super.Deserialize(reader);
-			this.name = reader.readUTF();
 			this.playerId = reader.readVarLong();
+			this.monsterGroupId = reader.readDouble();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -51,7 +49,7 @@ public class AchievementFinishedInformationMessage extends AchievementFinishedMe
 	}
 
 	//private void append(){
-		//Network.appendDebug("name : " + this.name);
 		//Network.appendDebug("playerId : " + this.playerId);
+		//Network.appendDebug("monsterGroupId : " + this.monsterGroupId);
 	//}
 }

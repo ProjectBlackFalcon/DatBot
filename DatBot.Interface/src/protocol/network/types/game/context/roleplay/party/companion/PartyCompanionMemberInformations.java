@@ -59,7 +59,6 @@ public class PartyCompanionMemberInformations extends PartyCompanionBaseInformat
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

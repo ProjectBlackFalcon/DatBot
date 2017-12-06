@@ -16,14 +16,12 @@ import protocol.network.types.game.character.CharacterMinimalPlusLookInformation
 public class CharacterBaseInformations extends CharacterMinimalPlusLookInformations {
 	public static final int ProtocolId = 45;
 
-	public int breed;
 	public boolean sex;
 
 	public CharacterBaseInformations(){
 	}
 
-	public CharacterBaseInformations(int breed, boolean sex){
-		this.breed = breed;
+	public CharacterBaseInformations(boolean sex){
 		this.sex = sex;
 	}
 
@@ -31,7 +29,6 @@ public class CharacterBaseInformations extends CharacterMinimalPlusLookInformati
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			super.Serialize(writer);
-			writer.writeByte(this.breed);
 			writer.writeBoolean(this.sex);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -42,16 +39,13 @@ public class CharacterBaseInformations extends CharacterMinimalPlusLookInformati
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			super.Deserialize(reader);
-			this.breed = reader.readByte();
 			this.sex = reader.readBoolean();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){
-		//Network.appendDebug("breed : " + this.breed);
 		//Network.appendDebug("sex : " + this.sex);
 	//}
 }

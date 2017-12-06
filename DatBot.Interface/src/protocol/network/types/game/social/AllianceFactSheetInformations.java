@@ -43,7 +43,6 @@ public class AllianceFactSheetInformations extends AllianceInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

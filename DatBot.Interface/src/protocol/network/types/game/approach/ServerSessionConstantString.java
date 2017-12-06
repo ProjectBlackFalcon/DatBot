@@ -43,7 +43,6 @@ public class ServerSessionConstantString extends ServerSessionConstant {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

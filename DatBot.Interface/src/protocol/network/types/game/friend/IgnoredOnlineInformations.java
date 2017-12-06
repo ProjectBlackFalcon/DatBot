@@ -55,7 +55,6 @@ public class IgnoredOnlineInformations extends IgnoredInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

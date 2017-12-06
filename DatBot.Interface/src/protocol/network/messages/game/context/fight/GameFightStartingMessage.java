@@ -17,14 +17,16 @@ public class GameFightStartingMessage extends NetworkMessage {
 	public static final int ProtocolId = 700;
 
 	public int fightType;
+	public int fightId;
 	public double attackerId;
 	public double defenderId;
 
 	public GameFightStartingMessage(){
 	}
 
-	public GameFightStartingMessage(int fightType, double attackerId, double defenderId){
+	public GameFightStartingMessage(int fightType, int fightId, double attackerId, double defenderId){
 		this.fightType = fightType;
+		this.fightId = fightId;
 		this.attackerId = attackerId;
 		this.defenderId = defenderId;
 	}
@@ -33,6 +35,7 @@ public class GameFightStartingMessage extends NetworkMessage {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			writer.writeByte(this.fightType);
+			writer.writeVarShort(this.fightId);
 			writer.writeDouble(this.attackerId);
 			writer.writeDouble(this.defenderId);
 		} catch (Exception e){
@@ -44,17 +47,19 @@ public class GameFightStartingMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			this.fightType = reader.readByte();
+			this.fightId = reader.readVarShort();
 			this.attackerId = reader.readDouble();
 			this.defenderId = reader.readDouble();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		append();
+		//append();
 	}
 
-	private void append(){
-		Network.append("fightType : " + this.fightType);
-		Network.append("attackerId : " + this.attackerId);
-		Network.append("defenderId : " + this.defenderId);
-	}
+	//private void append(){
+		//Network.appendDebug("fightType : " + this.fightType);
+		//Network.appendDebug("fightId : " + this.fightId);
+		//Network.appendDebug("attackerId : " + this.attackerId);
+		//Network.appendDebug("defenderId : " + this.defenderId);
+	//}
 }

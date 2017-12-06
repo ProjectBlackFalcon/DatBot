@@ -32,7 +32,6 @@ public class ExchangeObjectMoveMessage extends NetworkMessage {
 		try {
 			writer.writeVarInt(this.objectUID);
 			writer.writeVarInt(this.quantity);
-			System.out.println(quantity);
 		} catch (Exception e){
 			e.printStackTrace();
 		}

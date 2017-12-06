@@ -43,7 +43,6 @@ public class UpdateMountIntBoost extends UpdateMountBoost {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

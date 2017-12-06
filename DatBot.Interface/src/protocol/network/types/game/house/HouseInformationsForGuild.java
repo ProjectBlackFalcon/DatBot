@@ -87,7 +87,6 @@ public class HouseInformationsForGuild extends HouseInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

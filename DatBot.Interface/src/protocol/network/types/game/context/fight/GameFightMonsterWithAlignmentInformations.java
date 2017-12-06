@@ -45,7 +45,6 @@ public class GameFightMonsterWithAlignmentInformations extends GameFightMonsterI
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

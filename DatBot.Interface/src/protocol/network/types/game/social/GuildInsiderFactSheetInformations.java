@@ -55,7 +55,6 @@ public class GuildInsiderFactSheetInformations extends GuildFactSheetInformation
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){

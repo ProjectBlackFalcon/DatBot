@@ -73,7 +73,6 @@ public class PartyInvitationMemberInformations extends CharacterBaseInformations
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
 
 	//private void append(){
