@@ -862,9 +862,14 @@ public class Network implements Runnable {
 	}
 	
 	public static boolean waitToSend() throws InterruptedException{
-		while((!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange) && !Info.basicNoOperationMsg){
+		while(!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange){
 			Thread.sleep(50);
 		}
+		while(!Info.basicNoOperationMsg){
+			Thread.sleep(50);
+		}
+		System.out.println((!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange) && !Info.basicNoOperationMsg);
+		System.out.println(Info.newMap + " " + Info.Storage  + " " + Info.StorageUpdate + " " + Info.leaveExchange + " " + Info.basicNoOperationMsg);
 		if(Info.basicNoOperationMsg && !Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange){
 			return false;
 		} else {

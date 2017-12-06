@@ -12,6 +12,7 @@ import Game.Plugin.Interactive;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
 import Game.map.Map;
+import Game.map.MapMovement;
 import Game.movement.Movement;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
@@ -45,7 +46,7 @@ public class Test {
     		if(index == 2){
     			Info.nameAccount = "ceciestuntest";
     			Info.password = "ceciestlemdp1";
-    			Info.name = "Gladiatonme";
+    			Info.name = "Magulisa";
     			Info.server = "Echo";
     		}
     	}  
@@ -70,22 +71,15 @@ public class Test {
 		Network.append("Name : " + Info.name);
 		Network.append("Niveau : " + Info.lvl); 		
 		Thread.sleep(1000);
-		Info.newMap = false;
-		System.out.println(Stats.getStats());
-		
-		NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
-		Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+		MapMovement mov = Movement.ChangeMap("West");
+		if(mov !=  null){
+			mov.PerformChangement();
+		}
 		Network.waitToSend();
-		Thread.sleep(2000);
-		ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-1);
-		Network.sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from bank");
-		System.out.println(Network.waitToSend());
-		System.out.println(Stats.getStats()+","+Bank.getBank());
-		Thread.sleep(5000);
-		ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(5);
-		Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in bank");
-		System.out.println(Network.waitToSend());
-		System.out.println(Stats.getStats()+","+Bank.getBank());
+		MapMovement mov1 = Movement.ChangeMap("East");
+		if(mov1 !=  null){
+			mov1.PerformChangement();
+		}
     }
 }
 

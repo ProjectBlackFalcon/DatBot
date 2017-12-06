@@ -58,7 +58,7 @@ public class Movement{
         if(list.size() == 0) return null; // Can't go in this direction (Obstacles)
         Random r = new Random();
         int randomCellId = list.get(r.nextInt(list.size()));
-		Network.append("Déplacement...");	
+		Network.append("Dï¿½placement...");	
 		Network.append("Direction : " + direction);
         CellMovement move = MoveToCell(randomCellId);
         return new MapMovement(move, neighbourId);
@@ -91,7 +91,7 @@ public class Movement{
         System.out.println(Map.NothingOnCell(cellId));
         System.out.println(noObstacle(cellId));
         if (Map.NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
-    		Network.append("Déplacement...");	
+    		Network.append("Dï¿½placement...");	
     		Network.append("Direction : " + direction);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId);
@@ -105,7 +105,7 @@ public class Movement{
 	public static boolean moveOver() throws InterruptedException{
 		int indexTimeout = 0;
 		while(!Info.waitForMov){
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			indexTimeout++;
 			if(indexTimeout == 30){
 				return false;
@@ -121,7 +121,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == Info.coords[0] && y == Info.coords[1]){
-			Network.append("Vous êtes arrivé !");
+			Network.append("Vous ï¿½tes arrivï¿½ !");
 			return;
 		}
 		
@@ -205,15 +205,15 @@ public class Movement{
         		Thread.sleep(500);
     		}
     		if(x == Info.coords[0] && y == Info.coords[1]){
-    			Network.append("Vous êtes arrivé !");
+    			Network.append("Vous ï¿½tes arrivï¿½ !");
     			return;
     		}
     		xCurrentMap = Info.coords[0] + 95; 
     		yCurrentMap = Info.coords[1] + 100;
 			MapMovement mov = Movement.ChangeMap(Astar.pathString.get(i));
 			if (mov == null) {
-				Network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
-				Network.append("Création d'un nouveau chemin...");
+				Network.append("Dï¿½placement impossible ! Un obstacle bloque le chemin !");
+				Network.append("Crï¿½ation d'un nouveau chemin...");
 				if(Astar.pathString.get(i).equals("North")){
 					if(x+95 == xCurrentMap && y+100 == yCurrentMap-1){
 						blocked.add(new int[] {xCurrentMap, yCurrentMap});
@@ -259,7 +259,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == Info.coords[0] && y == Info.coords[1]){
-			Network.append("Vous êtes arrivé !");
+			Network.append("Vous ï¿½tes arrivï¿½ !");
 			return;
 		}
 	}
