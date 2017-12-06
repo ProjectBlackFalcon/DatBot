@@ -167,7 +167,31 @@ class HighLevelFunctions:
             print('[Harvest] Done')
             return True
 
-    def get_inventory(self):
-        pass
+    def harvest_path(self, path, number_of_loops=-1, harvest_only=None, do_not_harvest=None):
+        n_loops = 0
+        full = False
+        while number_of_loops == -1 or n_loops < number_of_loops:
+            n_loops += 1
+            for tile, target_cell, worldmap in path:
+                if not full:
+                    self.goto(tile, target_cell=target_cell, worldmap=worldmap)
+                    full = not self.harvest_map(harvest_only, do_not_harvest)
+                else:
+                    self.goto((4, -16))
+                    self.drop_to_bank('all')
+                    self.goto(tile, target_cell=target_cell, worldmap=worldmap)
+                    full = not self.harvest_map(harvest_only, do_not_harvest)
+
+    def drop_to_bank(self, item_id_list):
+        bank_entrance, bank_exit = self.interface.get_bank_door_cell()
+        if bank_entrance:
+            self.interface.move(bank_entrance)
+            self.interface.enter_bank()
+            self.interface.open_bank()
+            self.interface.drop_in_bank_list(item_id_list)
+            self.interface.close_bank()
+            self.interface.move(bank_exit)
+        else:
+            raise Exception('Not a map with a bank')
 
 __author__ = 'Alexis'
