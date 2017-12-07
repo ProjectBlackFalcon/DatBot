@@ -298,6 +298,7 @@ public class Network implements Runnable {
 			int j = 0;
 			for (int i = 0; i < charactersListMessage.characters.size(); i++) {
 				if (charactersListMessage.characters.get(i).name.equals(Info.name)) {
+					System.out.println("Character Id : " + charactersListMessage.characters.get(i).id);
 					HandleCharacterSelectionMessage(charactersListMessage.characters.get(i).id);
 					Info.actorId = charactersListMessage.characters.get(i).id;
 					Info.lvl = charactersListMessage.characters.get(i).level;
