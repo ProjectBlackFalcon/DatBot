@@ -196,8 +196,11 @@ public class ModelConnexion implements Runnable {
 					if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
 						npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
 						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
-						Network.waitToSend();
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.getBank()});
+						if(Network.waitToSend()){
+							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.getBank()});
+						} else {
+							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						}
 						bankOppened = true;
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});	

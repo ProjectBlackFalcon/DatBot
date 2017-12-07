@@ -46,7 +46,7 @@ public class Test {
     		if(index == 2){
     			Info.nameAccount = "ceciestuntest";
     			Info.password = "ceciestlemdp1";
-    			Info.name = "Magulisa";
+    			Info.name = "Gladiatonme";
     			Info.server = "Echo";
     		}
     	}  
@@ -71,14 +71,16 @@ public class Test {
 		Network.append("Name : " + Info.name);
 		Network.append("Niveau : " + Info.lvl); 		
 		Thread.sleep(1000);
-		MapMovement mov = Movement.ChangeMap("West");
-		if(mov !=  null){
-			mov.PerformChangement();
-		}
-		Network.waitToSend();
-		MapMovement mov1 = Movement.ChangeMap("East");
-		if(mov1 !=  null){
-			mov1.PerformChangement();
+		if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
+			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
+			Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+			if(Network.waitToSend()){
+				System.out.println(Bank.getBank());
+			} else {
+				System.out.println(false);
+			}
+		} else {
+			System.out.println(false);
 		}
     }
 }
