@@ -58,6 +58,7 @@ public class ModelConnexion implements Runnable {
 					Info.password = info[1].substring(2, info[1].length()-1);
 					Info.name = info[2].substring(2, info[2].length()-1);
 					Info.server = info[3].substring(2, info[3].length()-1);
+					System.out.println("NameAccount : " +  Info.nameAccount + " password : " + Info.password + " name : " + Info.name + " server : " + Info.server);
 					int index = 0;
 					while(!Info.isConnected){
 						Thread.sleep(2000);
