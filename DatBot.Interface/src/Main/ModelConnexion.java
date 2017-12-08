@@ -218,67 +218,113 @@ public class ModelConnexion implements Runnable {
 					bankOppened = false;
 					break;
 				case "dropBank":
-					String [] toBank = message[5].split(",");
-					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0].substring(1, toBank[0].length()-1)),Integer.parseInt(toBank[1].substring(2, toBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					if (bankOppened) {
+						String[] toBank = message[5].split(",");
+						Network.sendToServer(
+								new ExchangeObjectMoveMessage(
+										Integer.parseInt(toBank[0].substring(1, toBank[0].length() - 1)),
+										Integer.parseInt(toBank[1].substring(2, toBank[0].length() - 1))),
+								ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+						if (Network.waitToSend()) {
+							sendToModel(message[0], message[1], "m", "rtn", message[4],
+									new Object[] { Stats.getStats() + "," + Bank.getBank() });
+						} else {
+							sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+						} 
 					} else {
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
 					}
 					break;
 				case "getBank":
-					String [] fromBank = message[5].split(",");
-					Network.sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0].substring(1, fromBank[0].length()-1)),-Integer.parseInt(fromBank[1].substring(2, fromBank[0].length()-1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					if (bankOppened) {
+						String[] fromBank = message[5].split(",");
+						Network.sendToServer(
+								new ExchangeObjectMoveMessage(
+										Integer.parseInt(fromBank[0].substring(1, fromBank[0].length() - 1)),
+										-Integer.parseInt(fromBank[1].substring(2, fromBank[0].length() - 1))),
+								ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+						if (Network.waitToSend()) {
+							sendToModel(message[0], message[1], "m", "rtn", message[4],
+									new Object[] { Stats.getStats() + "," + Bank.getBank() });
+						} else {
+							sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+						} 
 					} else {
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
 					}
 					break;
 				case "dropBankList":
-					String [] toBankList = message[5].split(",");
-					List<Integer> ids = new ArrayList<Integer>();
-					for (String string : toBankList) {
-						ids.add(Integer.parseInt(string.replaceAll("\\s+","")));
-					}
-					ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
-					Network.sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
-					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					if (bankOppened) {
+						String[] toBankList = message[5].split(",");
+						List<Integer> ids = new ArrayList<Integer>();
+						for (String string : toBankList) {
+							ids.add(Integer.parseInt(string.replaceAll("\\s+", "")));
+						}
+						ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(
+								ids);
+						Network.sendToServer(exchangeObjectTransfertListFromInvMessage,
+								ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
+						if (Network.waitToSend()) {
+							sendToModel(message[0], message[1], "m", "rtn", message[4],
+									new Object[] { Stats.getStats() + "," + Bank.getBank() });
+						} else {
+							sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+						} 
 					} else {
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
 					}
 					break;
 				case "getBankList":
-					String [] fromBankList = message[5].split(",");
-					List<Integer> ids1 = new ArrayList<Integer>();
-					for (String string : fromBankList) {
-						ids1.add(Integer.parseInt(string.replaceAll("\\s+","")));
-					}
-					ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
-					Network.sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
-					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					if (bankOppened) {
+						String[] fromBankList = message[5].split(",");
+						List<Integer> ids1 = new ArrayList<Integer>();
+						for (String string : fromBankList) {
+							ids1.add(Integer.parseInt(string.replaceAll("\\s+", "")));
+						}
+						ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(
+								ids1);
+						Network.sendToServer(exchangeObjectTransfertListToInvMessage,
+								ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
+						if (Network.waitToSend()) {
+							sendToModel(message[0], message[1], "m", "rtn", message[4],
+									new Object[] { Stats.getStats() + "," + Bank.getBank() });
+						} else {
+							sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+						} 
 					} else {
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
 					}
 					break;
 				case "getBankKamas":
-					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(message[5]));
-					Network.sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from bank");
-					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					if (bankOppened) {
+						ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(
+								-Integer.parseInt(message[5]));
+						Network.sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId,
+								"Get kamas from bank");
+						if (Network.waitToSend()) {
+							sendToModel(message[0], message[1], "m", "rtn", message[4],
+									new Object[] { Stats.getStats() + "," + Bank.getBank() });
+						} else {
+							sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+						} 
 					} else {
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
 					}
 					break;
 				case "dropBankKamas":
-					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(message[5]));
-					Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in bank");
-					if(Network.waitToSend()){
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Stats.getStats()+","+Bank.getBank()});
+					if (bankOppened) {
+						ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(
+								Integer.parseInt(message[5]));
+						Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId,
+								"Drop kamas in bank");
+						if (Network.waitToSend()) {
+							sendToModel(message[0], message[1], "m", "rtn", message[4],
+									new Object[] { Stats.getStats() + "," + Bank.getBank() });
+						} else {
+							sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+						} 
 					} else {
-						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
+						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
 					}
 					break;
 				}

@@ -14,7 +14,7 @@ public class Binary64 {
 		this.high = high;
 	}
 	
-    public long div(int n)
+    public int div(int n)
     {
     	int modHigh = 0;
         modHigh = high % n;
