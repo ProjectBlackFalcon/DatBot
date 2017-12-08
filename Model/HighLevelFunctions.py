@@ -25,7 +25,7 @@ class HighLevelFunctions:
                 statue_map = self.llf.get_closest_statue(current_map)
                 self.goto(statue_map)
                 statue_cell = self.interface.get_class_statue_cell()[0]
-                teleport_cell = self.llf.get_closest_walkable_neighbour_cell(statue_cell, current_cell, current_map, current_worldmap)
+                teleport_cell = self.llf.get_closest_walkable_neighbour_cell(statue_cell, current_cell, statue_map, current_worldmap)
                 self.interface.move(teleport_cell)
                 self.interface.go_to_incarnam()
                 current_map, current_cell, current_worldmap, map_id = self.interface.get_map()
