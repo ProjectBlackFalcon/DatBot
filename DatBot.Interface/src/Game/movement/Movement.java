@@ -105,7 +105,7 @@ public class Movement{
 	public static boolean moveOver() throws InterruptedException{
 		int indexTimeout = 0;
 		while(!Info.waitForMov){
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			indexTimeout++;
 			if(indexTimeout == 30){
 				return false;
