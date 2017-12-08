@@ -44,7 +44,7 @@ public class ModelConnexion implements Runnable {
 		try {
 			String s;
 			while(true){
-				
+				Thread.sleep(200);
 				Info.newMap = false;
 				s = bufferRead.readLine();
 				String [] message = s.split(";");
@@ -91,7 +91,14 @@ public class ModelConnexion implements Runnable {
 						mov.performMovement();
 						if(Movement.moveOver()){
 							if(Info.cellId == Integer.parseInt(message[5])){
-								sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+								if((Map.Id == 83887104 && Info.cellId == 396) || (Map.Id == 2884617 && Info.cellId == 424) || (Map.Id == 8912911 && Info.cellId == 424)){
+									while(!Info.newMap){
+										Thread.sleep(50);
+									}
+									sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+								} else {
+									sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
+								}
 							} else {
 								sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
 							}						
@@ -137,7 +144,7 @@ public class ModelConnexion implements Runnable {
 					if(Map.Id == 153880835){
 						npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001,3,153880835);
 						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request NPC to go to Astrub");
-						Network.waitToSend();
+						waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
@@ -148,7 +155,7 @@ public class ModelConnexion implements Runnable {
 					if(r != -1){
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Interactive.elementIdStatue,Interactive.skillInstanceUidStatue);
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
-						Network.waitToSend();
+						waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
@@ -177,17 +184,17 @@ public class ModelConnexion implements Runnable {
 					if(Map.Id == 144931){ //Brakmar
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBrakmarIN,Bank.getSkill(Bank.interactiveBrakmarIN));
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-						Network.waitToSend();
+						waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else if(Map.Id == 84674566){ //Astrub
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveAstrubIN,Bank.getSkill(Bank.interactiveAstrubIN));
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-						Network.waitToSend();
+						waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else if(Map.Id == 147254){ //Bonta
 						interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveBontaIN,Bank.getSkill(Bank.interactiveBontaIN));
 						Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-						Network.waitToSend();
+						waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
@@ -197,7 +204,7 @@ public class ModelConnexion implements Runnable {
 					if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
 						npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
 						Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
-						if(Network.waitToSend()){
+						if(waitToSend()){
 							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{Bank.getBank()});
 						} else {
 							sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
@@ -210,7 +217,7 @@ public class ModelConnexion implements Runnable {
 				case "closeBank":
 					if(bankOppened){
 						Network.sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
-						Network.waitToSend();
+						waitToSend();
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"True"});
 					} else {
 						sendToModel(message[0], message[1],"m", "rtn", message[4], new Object[]{"False"});
@@ -225,7 +232,7 @@ public class ModelConnexion implements Runnable {
 										Integer.parseInt(toBank[0].substring(1, toBank[0].length() - 1)),
 										Integer.parseInt(toBank[1].substring(2, toBank[0].length() - 1))),
 								ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-						if (Network.waitToSend()) {
+						if (waitToSend()) {
 							sendToModel(message[0], message[1], "m", "rtn", message[4],
 									new Object[] { Stats.getStats() + "," + Bank.getBank() });
 						} else {
@@ -243,7 +250,7 @@ public class ModelConnexion implements Runnable {
 										Integer.parseInt(fromBank[0].substring(1, fromBank[0].length() - 1)),
 										-Integer.parseInt(fromBank[1].substring(2, fromBank[0].length() - 1))),
 								ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-						if (Network.waitToSend()) {
+						if (waitToSend()) {
 							sendToModel(message[0], message[1], "m", "rtn", message[4],
 									new Object[] { Stats.getStats() + "," + Bank.getBank() });
 						} else {
@@ -264,7 +271,7 @@ public class ModelConnexion implements Runnable {
 								ids);
 						Network.sendToServer(exchangeObjectTransfertListFromInvMessage,
 								ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
-						if (Network.waitToSend()) {
+						if (waitToSend()) {
 							sendToModel(message[0], message[1], "m", "rtn", message[4],
 									new Object[] { Stats.getStats() + "," + Bank.getBank() });
 						} else {
@@ -285,7 +292,7 @@ public class ModelConnexion implements Runnable {
 								ids1);
 						Network.sendToServer(exchangeObjectTransfertListToInvMessage,
 								ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
-						if (Network.waitToSend()) {
+						if (waitToSend()) {
 							sendToModel(message[0], message[1], "m", "rtn", message[4],
 									new Object[] { Stats.getStats() + "," + Bank.getBank() });
 						} else {
@@ -301,7 +308,7 @@ public class ModelConnexion implements Runnable {
 								-Integer.parseInt(message[5]));
 						Network.sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId,
 								"Get kamas from bank");
-						if (Network.waitToSend()) {
+						if (waitToSend()) {
 							sendToModel(message[0], message[1], "m", "rtn", message[4],
 									new Object[] { Stats.getStats() + "," + Bank.getBank() });
 						} else {
@@ -317,7 +324,7 @@ public class ModelConnexion implements Runnable {
 								Integer.parseInt(message[5]));
 						Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId,
 								"Drop kamas in bank");
-						if (Network.waitToSend()) {
+						if (waitToSend()) {
 							sendToModel(message[0], message[1], "m", "rtn", message[4],
 									new Object[] { Stats.getStats() + "," + Bank.getBank() });
 						} else {
@@ -349,5 +356,23 @@ public class ModelConnexion implements Runnable {
 			}
 		}
 		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]",botInstance,msgId,dest,msgType,command,newParam));
+	}
+	
+	public static boolean waitToSend() throws InterruptedException {
+		while (!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange) {
+			Thread.sleep(50);
+		}
+		while (!Info.basicNoOperationMsg) {
+			Thread.sleep(50);
+		}
+//		System.out.println((!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange)
+//				&& !Info.basicNoOperationMsg);
+//		System.out.println(Info.newMap + " " + Info.Storage + " " + Info.StorageUpdate + " " + Info.leaveExchange + " "
+//				+ Info.basicNoOperationMsg);
+		if (Info.basicNoOperationMsg && !Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
