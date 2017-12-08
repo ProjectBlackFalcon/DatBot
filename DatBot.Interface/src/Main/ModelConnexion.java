@@ -24,6 +24,7 @@ import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectAddedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertExistingFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
@@ -324,6 +325,21 @@ public class ModelConnexion implements Runnable {
 								Integer.parseInt(message[5]));
 						Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId,
 								"Drop kamas in bank");
+						if (waitToSend()) {
+							sendToModel(message[0], message[1], "m", "rtn", message[4],
+									new Object[] { Stats.getStats() + "," + Bank.getBank() });
+						} else {
+							sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+						} 
+					} else {
+						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
+					}
+					break;
+				case "dropBankAll":
+					if (bankOppened) {
+						ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
+						Network.sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId,
+								"Drop all items in bank");
 						if (waitToSend()) {
 							sendToModel(message[0], message[1], "m", "rtn", message[4],
 									new Object[] { Stats.getStats() + "," + Bank.getBank() });

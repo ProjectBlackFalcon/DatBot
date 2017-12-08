@@ -20,6 +20,7 @@ import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionReque
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
 import protocol.network.messages.subscription.SubscriptionUpdateMessage;
@@ -74,35 +75,33 @@ public class Test {
 		Network.append("Niveau : " + Info.lvl);
 		Thread.sleep(1000);
 		
-//		InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(Bank.interactiveAstrubIN,Bank.getSkill(Bank.interactiveAstrubIN));
-//		Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
-//		ModelConnexion.waitToSend();
-		
-		Thread.sleep(5000);
-
-		CellMovement mov = Movement.MoveToCell(Integer.parseInt("396"));
-		if(mov == null || mov.path == null){
-			System.out.println(1);
-		} else if (Info.cellId == Integer.parseInt("396")) {
-			System.out.println(2);
-		} else {
-			mov.performMovement();
-			if(Movement.moveOver()){
-				if(Info.cellId == 396){
-					if((Map.Id == 83887104 && Info.cellId == 396) || (Map.Id == 2884617 && Info.cellId == 424) || (Map.Id == 8912911 && Info.cellId == 424)){
-						while(!Info.newMap){
-							Thread.sleep(50);
-						}
-						System.out.println(3);
-					} else {
-						System.out.println(4);
-					}
-				} else {
-					System.out.println(5);
-				}						
+		boolean bankOppened = false;
+		if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
+			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
+			Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+			if(ModelConnexion.waitToSend()){
+				System.out.println(Bank.getBank());
 			} else {
-				System.out.println(6);
-			}							
+				System.out.println(false);
+			}
+			bankOppened = true;
+		} else {
+			System.out.println(false);
+		}
+		
+		Thread.sleep(2000);
+
+		if (bankOppened) {
+			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
+			Network.sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId,
+					"Drop all items in bank");
+			if (ModelConnexion.waitToSend()) {
+				System.out.println(Stats.getStats() + "," + Bank.getBank());
+			} else {
+				System.out.println(false);
+			} 
+		} else {
+			System.out.println(false);
 		}
 	}
 }
