@@ -33,12 +33,13 @@ public class Stats {
 		str += "\"Items\" : [";
 		for(int i = 0; i< inventoryContentMessage.objects.size() ; i++){
 			if(i == inventoryContentMessage.objects.size()-1){
-				str += "[" + inventoryContentMessage.objects.get(i).objectGID + "," + inventoryContentMessage.objects.get(i).objectUID + "," + inventoryContentMessage.objects.get(i).quantity + "]]}";
+				str += "[" + inventoryContentMessage.objects.get(i).objectGID + "," + inventoryContentMessage.objects.get(i).objectUID + "," + inventoryContentMessage.objects.get(i).quantity + "]";
 			} else {
 				str += "[" + inventoryContentMessage.objects.get(i).objectGID + "," + inventoryContentMessage.objects.get(i).objectUID + "," + inventoryContentMessage.objects.get(i).quantity + "],";
 			}
 		}
-		
+		str += "]}";
+
 		str += "}";
 		return str;
 		

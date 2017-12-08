@@ -40,12 +40,12 @@ public class Bank {
 		str += "\"Items\" : [";
 		for(int i = 0; i< storage.objects.size() ; i++){
 			if(i == storage.objects.size()-1){
-				str += "[" + storage.objects.get(i).objectGID + "," + storage.objects.get(i).objectUID + "," + storage.objects.get(i).quantity + "]]}";
+				str += "[" + storage.objects.get(i).objectGID + "," + storage.objects.get(i).objectUID + "," + storage.objects.get(i).quantity + "]";
 			} else {
 				str += "[" + storage.objects.get(i).objectGID + "," + storage.objects.get(i).objectUID + "," + storage.objects.get(i).quantity + "],";
 			}
 		}
-		
+		str += "]}";
 		return str;
 	}
 

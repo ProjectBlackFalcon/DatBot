@@ -85,17 +85,5 @@ public class Test {
 		} else {
 			System.out.println(false);
 		}
-		Thread.sleep(5000);
-		ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-1);
-		Network.sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId,
-				"Get kamas from bank");
-		System.out.println(Network.waitToSend());
-		System.out.println(Stats.getStats() + "," + Bank.getBank());
-		Thread.sleep(5000);
-		ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(5);
-		Network.sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId,
-				"Drop kamas in bank");
-		System.out.println(Network.waitToSend());
-		System.out.println(Stats.getStats() + "," + Bank.getBank());
 	}
 }

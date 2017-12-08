@@ -498,7 +498,6 @@ public class Network implements Runnable {
 			Bank.storage = new StorageInventoryContentMessage();
 			Bank.storage.Deserialize(dataReader);
 			Info.Storage = true;
-			System.out.println(Bank.getBank());
 			break;
 		case 6162:
 			Stats.inventoryContentMessage = new InventoryContentAndPresetMessage();
@@ -514,13 +513,11 @@ public class Network implements Runnable {
 							object.effects, object.objectUID, objectQuantityMessage.quantity));
 				}
 			}
-			System.out.println(Stats.getStats());
 			break;
 		case 3025:
 			ObjectAddedMessage objectAddedMessage = new ObjectAddedMessage();
 			objectAddedMessage.Deserialize(dataReader);
 			Stats.inventoryContentMessage.objects.add(objectAddedMessage.object);
-			System.out.println(Stats.getStats());
 			break;
 		case 3024:
 			ObjectDeletedMessage objectDeletedMessage = new ObjectDeletedMessage();
@@ -530,7 +527,6 @@ public class Network implements Runnable {
 					Stats.inventoryContentMessage.objects.remove(i);
 				}
 			}
-			System.out.println(Stats.getStats());
 			break;
 		case 6034:
 			ObjectsDeletedMessage objectsDeletedMessage = new ObjectsDeletedMessage();
@@ -544,7 +540,6 @@ public class Network implements Runnable {
 					}
 				}
 			}
-			System.out.println(Stats.getStats());
 			break;
 		case 6033:
 			ObjectsAddedMessage objectsAddedMessage = new ObjectsAddedMessage();
@@ -552,7 +547,6 @@ public class Network implements Runnable {
 			for (int i = 0; i < objectsAddedMessage.object.size(); i++) {
 				Stats.inventoryContentMessage.objects.add(objectsAddedMessage.object.get(i));
 			}
-			System.out.println(Stats.getStats());
 			break;
 		case 3016:
 			Stats.inventoryContentMessage = new InventoryContentMessage();
@@ -574,7 +568,6 @@ public class Network implements Runnable {
 					Bank.storage.objects.add(storageObjectsUpdateMessage.objectList.get(i));
 				}
 			}
-			System.out.println(Bank.getBank());
 			Info.StorageUpdate = true;
 			break;
 		case 6035:
@@ -588,7 +581,6 @@ public class Network implements Runnable {
 					}
 				}
 			}
-			System.out.println(Bank.getBank());
 			Info.StorageUpdate = true;
 			break;
 		case 5647:
@@ -605,7 +597,6 @@ public class Network implements Runnable {
 			if (!isItem) {
 				Bank.storage.objects.add(storageObjectUpdateMessage.object);
 			}
-			System.out.println(Bank.getBank());
 			Info.StorageUpdate = true;
 			break;
 		case 5648:
@@ -616,7 +607,6 @@ public class Network implements Runnable {
 					Bank.storage.objects.remove(i);
 				}
 			}
-			System.out.println(Bank.getBank());
 			Info.StorageUpdate = true;
 			break;
 		case 5628:
