@@ -201,10 +201,10 @@ class Interface:
         :param item_id_list: [ItemID1, ItemID2...] / ['all']
         :return: New bank content, new inventory content
         """
-        if item_id_list == 'all':
-            items = self.get_player_stats()[0]['Inventory']['Items']
-            item_id_list = [item[1] for item in items]
-        msg_id = self.add_command('dropBankList', item_id_list)
+        if item_id_list in ['All', 'all']:
+            msg_id = self.add_command('dropBankAll', item_id_list)
+        else:
+            msg_id = self.add_command('dropBankList', item_id_list)
         bank_content, inventory_content = self.wait_for_return(msg_id)
         self.bank_info = bank_content
         return bank_content, inventory_content
