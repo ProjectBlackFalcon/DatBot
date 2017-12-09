@@ -10,13 +10,22 @@ public class Main {
     public static void main(String[] args) throws Exception {
     	Thread modelConnexion = new Thread(new ModelConnexion());
     	modelConnexion.start();
+    	
+//    	if(args.length != 0){
+//        	Info.nameAccount = args[0];
+//        	Info.password = args[1];
+//        	Info.name = args[2];
+//        	Info.server = args[3];
+//    	}
+    	
     	while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals("")){
     		System.out.println("Waiting for connection...");
     		Thread.sleep(1000);
     	}  
+    	
     	boolean arg = false;
-    	if(args.length != 0){
-    		if((args[0].equals("true") || args[0].equals("True"))){
+    	if(args.length == 0){
+    		if((args[5].equals("true") || args[5].equals("True"))){
         		arg = true;
     		}
     	}

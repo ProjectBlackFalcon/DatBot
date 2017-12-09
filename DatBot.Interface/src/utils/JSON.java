@@ -57,12 +57,12 @@ public class JSON implements Runnable{
 			JSONArray a;
 			String s = Paths.get("").toAbsolutePath().toString();
 			int i = s.indexOf("DatBot");
-			s = s.substring(0, i + 7);
+			s = s.substring(0, i + 6);
 
 			switch(file){
 			
 			case "MapInfo" :
-				a = (JSONArray) parser.parse(new FileReader(s + "\\Utils\\MapInfo.json"));
+				a = (JSONArray) parser.parse(new FileReader(s + "/Utils/MapInfo.json"));
 		        for (Object o : a)
 		        {
 		          JSONObject person = (JSONObject) o;
@@ -77,24 +77,24 @@ public class JSON implements Runnable{
 		        }
 				break;
 			case "MapInfoComplete" :
-				parseMapArray((JSONArray) parser.parse(new FileReader(s + "\\DatBot.Interface\\utils\\maps\\MapInfoComplete.json")));
+				parseMapArray((JSONArray) parser.parse(new FileReader(s + "/DatBot.Interface/utils/maps/MapInfoComplete.json")));
 				break;
-			case "Name" :
-				Object obj = parser.parse(new FileReader(s + "\\Utils\\Names.json"));
-				JSONObject jsonObject =  (JSONObject) obj;
-				JSONObject texts =  (JSONObject) jsonObject.get("texts");
-	            name = (String) texts.get(String.valueOf(id));
-	            break;
-			case "Item" :
-				a = (JSONArray) parser.parse(new FileReader(s + "\\Utils\\Items.json"));
-		        for (Object o : a)
-		        {
-		          JSONObject person = (JSONObject) o;
-		          if((long) person.get("id") == id){
-		        	  nameId = (long) person.get("nameId");
-		          }
-		        }
-				break;
+//			case "Name" :
+//				Object obj = parser.parse(new FileReader(s + "\\Utils\\Names.json"));
+//				JSONObject jsonObject =  (JSONObject) obj;
+//				JSONObject texts =  (JSONObject) jsonObject.get("texts");
+//	            name = (String) texts.get(String.valueOf(id));
+//	            break;
+//			case "Item" :
+//				a = (JSONArray) parser.parse(new FileReader(s + "\\Utils\\Items.json"));
+//		        for (Object o : a)
+//		        {
+//		          JSONObject person = (JSONObject) o;
+//		          if((long) person.get("id") == id){
+//		        	  nameId = (long) person.get("nameId");
+//		          }
+//		        }
+//				break;
 		}
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();

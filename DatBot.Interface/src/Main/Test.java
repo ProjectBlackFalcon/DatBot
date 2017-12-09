@@ -9,6 +9,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 import Game.Info;
 import Game.Plugin.Bank;
 import Game.Plugin.Interactive;
+import Game.Plugin.Monsters;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
 import Game.map.Map;
@@ -40,18 +41,18 @@ public class Test {
 			System.out.println("Waiting for connection...");
 			Thread.sleep(1000);
 			index++;
-//			if (index == 2) {
-//				Info.nameAccount = "wublel7";
-//				Info.password = "wubwublel7";
-//				Info.name = "Dihydroquerina";
-//				Info.server = "Julith";
-//			}
-			 if(index == 2){
-			 Info.nameAccount = "ceciestuntest";
-			 Info.password = "ceciestlemdp1";
-			 Info.name = "Gladiatonme";
-			 Info.server = "Echo";
-			 }
+			if (index == 2) {
+				Info.nameAccount = "wublel7";
+				Info.password = "wubwublel7";
+				Info.name = "Dihydroquerina";
+				Info.server = "Julith";
+			}
+//			 if(index == 2){
+//			 Info.nameAccount = "Jemappellehenry2";
+//			 Info.password = "azerty123henry";
+//			 Info.name = "Baddosh";
+//			 Info.server = "Julith";
+//			 }
 		}
 		boolean arg = false;
 		if (args.length != 0) {
@@ -74,34 +75,6 @@ public class Test {
 		Network.append("Name : " + Info.name);
 		Network.append("Niveau : " + Info.lvl);
 		Thread.sleep(1000);
-		
-		boolean bankOppened = false;
-		if(Map.Id == 83887104 || Map.Id == 2884617 || Map.Id == 8912911){
-			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) NPC.npc.get(0).contextualId,3,Map.Id);
-			Network.sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
-			if(ModelConnexion.waitToSend()){
-				System.out.println(Bank.getBank());
-			} else {
-				System.out.println(false);
-			}
-			bankOppened = true;
-		} else {
-			System.out.println(false);
-		}
-		
-		Thread.sleep(2000);
-
-		if (bankOppened) {
-			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
-			Network.sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId,
-					"Drop all items in bank");
-			if (ModelConnexion.waitToSend()) {
-				System.out.println(Stats.getStats() + "," + Bank.getBank());
-			} else {
-				System.out.println(false);
-			} 
-		} else {
-			System.out.println(false);
-		}
+		System.out.println(Monsters.getMonsters());
 	}
 }

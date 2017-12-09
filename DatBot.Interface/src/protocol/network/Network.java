@@ -94,6 +94,7 @@ import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
+import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.data.items.ObjectItem;
@@ -106,6 +107,7 @@ import protocol.network.util.SwitchNameClass;
 import Game.Servers;
 import Game.Plugin.Bank;
 import Game.Plugin.Interactive;
+import Game.Plugin.Monsters;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
 import utils.JSON;
@@ -135,7 +137,6 @@ public class Network implements Runnable {
 	public static MapRunningFightListMessage fight;
 	public static MapRunningFightDetailsMessage fightDetail;
 	public static Writer output;
-
 
 	public Network(boolean displayPacket) {
 		this.displayPacket = displayPacket;
@@ -230,13 +231,18 @@ public class Network implements Runnable {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		timing = formatter.format(time);
-		appendToPane(text, "[" + timing + "] ", Color.black);
-		appendToPane(text, "[" + packet_id + "]\tTaille : " + packet_content.length, new Color(0, 110, 0));
-		if (packet_content.length > 9) {
-			appendToPane(text, "\t" + name.name + "\n", new Color(0, 110, 0));
+		if(displayPacket){
+			appendToPane(text, "[" + timing + "] ", Color.black);
+			appendToPane(text, "[" + packet_id + "]\tTaille : " + packet_content.length, new Color(0, 110, 0));
+			if (packet_content.length > 9) {
+				appendToPane(text, "\t" + name.name + "\n", new Color(0, 110, 0));
+			} else {
+				appendToPane(text, "\t\t" + name.name + "\n", new Color(0, 110, 0));
+			}
 		} else {
-			appendToPane(text, "\t\t" + name.name + "\n", new Color(0, 110, 0));
+			System.out.println("[" + timing + "] [" + packet_id + "] Taille : " + packet_content.length + "\t" + name.name);
 		}
+
 		// MainPlugin.frame.appendDebug("[" + timing + "] [" + packet_id + "] -
 		// " + name.name);
 		switch (packet_id) {
@@ -298,7 +304,6 @@ public class Network implements Runnable {
 			int j = 0;
 			for (int i = 0; i < charactersListMessage.characters.size(); i++) {
 				if (charactersListMessage.characters.get(i).name.equals(Info.name)) {
-					System.out.println("Character Id : " + charactersListMessage.characters.get(i).id);
 					HandleCharacterSelectionMessage(charactersListMessage.characters.get(i).id);
 					Info.actorId = charactersListMessage.characters.get(i).id;
 					Info.lvl = charactersListMessage.characters.get(i).level;
@@ -343,18 +348,24 @@ public class Network implements Runnable {
 					if (complementaryInformationsDataMessage.actors.get(i).getClass().getSimpleName()
 							.equals("GameRolePlayNpcInformations")) {
 						NPC.npc.add((GameRolePlayNpcInformations) complementaryInformationsDataMessage.actors.get(i));
+					} else if(complementaryInformationsDataMessage.actors.get(i).getClass().getSimpleName()
+							.equals("GameRolePlayGroupMonsterInformations")){
+						Monsters.monsters.add((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.actors.get(i));
+
 					}
 					if (complementaryInformationsDataMessage.actors.get(i).contextualId == Info.actorId)
 						Info.cellId = complementaryInformationsDataMessage.actors.get(i).disposition.cellId;
 					else
-						Map.Entities
-								.add(new Entity(complementaryInformationsDataMessage.actors.get(i).disposition.cellId,
+						Map.Entities.add(new Entity(complementaryInformationsDataMessage.actors.get(i).disposition.cellId,
 										complementaryInformationsDataMessage.actors.get(i).contextualId));
+				}
+				
+				for (GameRolePlayGroupMonsterInformations b : Monsters.monsters) {
+					System.out.println(b.disposition.cellId);
 				}
 				HandleMapComplementaryInformationsDataMessage();
 				Interactive.statedElements = complementaryInformationsDataMessage.statedElements;
 				Interactive.interactiveElements = complementaryInformationsDataMessage.interactiveElements;
-				Interactive.getFarmCell();
 				Network.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] + "]");
 				Network.append("CellId : " + Info.cellId);
 				Info.waitForMov = true;
@@ -371,6 +382,11 @@ public class Network implements Runnable {
 				Info.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
 				Network.append("D�placement r�ussi !");
 				Network.append("CellId : " + Info.cellId);
+			}
+			for(int i = 0; i < Monsters.monsters.size() ; i++){
+				if(Monsters.monsters.get(i).contextualId == gameMapMovementMessage.actorId){
+					Monsters.monsters.get(i).disposition.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size()-1);
+				}
 			}
 			break;
 		case 6316:
@@ -429,7 +445,6 @@ public class Network implements Runnable {
 						Interactive.statedElements.set(i, elementUpdatedMessage.statedElement);
 					}
 				}
-				Interactive.getFarmCell();
 			}
 			break;
 		case 5708:
@@ -893,8 +908,8 @@ public class Network implements Runnable {
 		try {
 			String s = Paths.get("").toAbsolutePath().toString();
 			int i = s.indexOf("DatBot");
-			s = s.substring(0, i + 7);
-			p = new ProcessBuilder(s + "\\DatBot.Interface\\utils\\maps\\MapManager\\MapManager.exe",
+			s = s.substring(0, i + 6);
+			p = new ProcessBuilder(s + "/DatBot.Interface/utils/maps/MapManager/MapManager.exe",
 					String.valueOf((int) Info.mapId)).start();
 			p.waitFor();
 		} catch (IOException e) {

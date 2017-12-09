@@ -10,6 +10,7 @@ import java.util.List;
 import Game.Info;
 import Game.Plugin.Bank;
 import Game.Plugin.Interactive;
+import Game.Plugin.Monsters;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
 import Game.map.Map;
@@ -349,6 +350,10 @@ public class ModelConnexion implements Runnable {
 					} else {
 						sendToModel(message[0], message[1], "m", "rtn", message[4], new Object[] { "False" });
 					}
+					break;
+				case "getMonsters":
+					sendToModel(message[0], message[1], "m", "rtn", message[4],
+							new Object[] { Monsters.getMonsters() });
 					break;
 				}
 			}
