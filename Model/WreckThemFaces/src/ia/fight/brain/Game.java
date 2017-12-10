@@ -27,7 +27,7 @@ public class Game {
 	
 	static public Map map;
 	static public ArrayList<PlayingEntity> playingEntities;
-	private GameViz los;
+	static private GameViz los;
 	private static int current_command_nbr = 0;
 	
 	public Game() {
@@ -67,13 +67,13 @@ public class Game {
 		}
 	}
 	
-	public void initGame(int map) {
+	public static void initGame(int map) {
 		Map mapObject = CreateMap.getMapById(map);
-		this.map = mapObject;
+		Game.map = mapObject;
 		los = new GameViz(mapObject);
 	}
 	
-	public void initEntities(String[] entities) {
+	static public void initEntities(String[] entities) {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		
 		for(int i = 0; i < entities.length; i++) {
@@ -108,15 +108,15 @@ public class Game {
 		
 		los.update(playingEntities);
 		
-		this.playingEntities = playingEntities;
+		Game.playingEntities = playingEntities;
 	}
 	
-	public void refresh(String commandString) {
+	static public void refresh(String commandString) {
 		log.println("R;"+commandString);
 		String[] command = commandString.split(";");
 		int id = Integer.parseInt(command[0]);
 		
-		if(this.getPlayingEntityFromID(id) == null) {
+		if(Game.getPlayingEntityFromID(id) == null) {
 			System.err.println("Entity with id "+id+" is dead !");
 			return;
 		}
@@ -146,17 +146,17 @@ public class Game {
 			los.repaint();
 	}
 	
-	private PlayingEntity getPlayingEntityFromID(int id) {
-		for(int i = 0; i < this.playingEntities.size(); i++) {
+	private static PlayingEntity getPlayingEntityFromID(int id) {
+		for(int i = 0; i < Game.playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
-				return this.playingEntities.get(i);
+				return Game.playingEntities.get(i);
 			}
 		}
 		
 		return null;
 	}
 	
-	private SpellObject getSpellFromName(String name, String playerClass) {
+	private static SpellObject getSpellFromName(String name, String playerClass) {
 		if(playerClass.equals("cra")) {
 			return CraModel.getSpellFromName(name);
 		}
@@ -164,7 +164,7 @@ public class Game {
 		return null;
 	}
 	
-	private void executeMovementCommand(String[] command){
+	static private void executeMovementCommand(String[] command){
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
 		int posY = Integer.parseInt(command[3]);
@@ -175,7 +175,7 @@ public class Game {
 		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
 	}
 	
-	private void executeSpellCommand(String[] command) {
+	static private void executeSpellCommand(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
 		int posY = Integer.parseInt(command[3]);
@@ -187,14 +187,14 @@ public class Game {
 		boolean crit = Boolean.parseBoolean(command[6]);
 
 		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
-		SpellObject spellCast = this.getSpellFromName(spellname, "cra");
+		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
 		
 		Game.log.println(spellCast);
 		
 		spellCast.applySpells(castingEntity, new Position(posX, posY), true, damage);
 	}
 	
-	private void executePassTurn(String[] command) {
+	static private void executePassTurn(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		PlayingEntity castingEntity = getPlayingEntityFromID(id);
 		castingEntity.getModel().resetAP();
@@ -205,7 +205,7 @@ public class Game {
 		log.println("Entity "+id+" passing turn.");
 	}
 		
-	private String getBestTurn(String[] command) {
+	static private String getBestTurn(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		boolean fullTurn = Boolean.parseBoolean(command[2]);
 		PlayingEntity playingEntity = getPlayingEntityFromID(id);
@@ -310,8 +310,77 @@ public class Game {
 	public static PrintStream log;
 	public static PrintStream com;
 	
-	public static void main(String[] args) {
-
+	public static String executeCommand(String s) {
+		if(Game.log == null) {
+			Game.initLogs();
+		}
+		String[] command = s.split(";");
+		log.println("Received command "+command[1]);
+		log.println(s);
+		
+		String returnInformation = "";
+		
+		current_command_nbr = Integer.parseInt(command[1]);
+		if(command.length > 2) {
+			if(!command[2].equals("f")) {
+				log.println("Broke out of loop");
+				return "that ain't for me boi.";
+			}
+			
+			if(command[4].equals("startfight")) {
+				log.println("Starting fight");
+				try {
+					
+					Game.initGame(parseStringToIntArray(command[5])[0]);
+					Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+					returnInformation = (command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+					log.println("Successfully initiated game.");
+				}catch(Exception e) {
+					log.println("Failure to initiate game;"+e.getMessage());
+				}
+			}else if(command[4].equals("s")){
+				String entities[] = command[5].split(Pattern.quote("],["));
+				for(int i = 0; i < entities.length; i++) {
+					entities[i] = entities[i].replace("[", "").
+							replace("]", "").
+							replace("'", "").
+							replace(","	, ";");
+				}
+				
+				
+				Game.initEntities(entities);
+				
+				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
+			}else if(command[4].equals("m")) {
+				String refreshMessage = command[5] +";" + command[4] + ";" + command[6] + ";" + command[7];
+				Game.refresh(refreshMessage);
+				
+				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
+			}else if(command[4].equals("p")) {
+				String refreshMessage = command[5] +";" + command[4];
+				Game.refresh(refreshMessage);
+				
+				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
+			}else if(command[4].equals("c")) {
+				String refreshMessage = command[5] +";" + command[4] + ";" + command[6] + ";" + command[7] + ";" + command[8].replace("'", "") + ";" + command[9] + ";" + command[10];
+				Game.refresh(refreshMessage);
+				
+				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
+			}else if(command[4].equals("g")) {
+				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+Game.getBestTurn(new String[] {command[5], "g", "false"})+"]");
+				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;["+Game.getBestTurn(new String[] {command[5], "g", "false"})+"]";
+			}
+		}
+		
+		return returnInformation;
+		
+	}
+	
+	public static void initLogs() {
 		try {
 			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
@@ -320,6 +389,11 @@ public class Game {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+
+		Game.initLogs();
 		
 		Game.log.println("Started fight !");
 		Game game = new Game();
@@ -328,70 +402,7 @@ public class Game {
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 			String s = bufferRead.readLine();
 			while(s.equals("x")==false) {
-				String[] command = s.split(";");
-				log.println("Received command "+command[1]);
-				log.println(s);
-				
-				current_command_nbr = Integer.parseInt(command[1]);
-				if(command.length > 2) {
-					if(!command[2].equals("f")) {
-						log.println("Broke out of loop");
-						break;
-					}
-					
-					if(command[4].equals("startfight")) {
-						log.println("Starting fight");
-						try {
-							
-							game.initGame(parseStringToIntArray(command[5])[0]);
-							Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-							System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-							log.println("Successfully initiated game.");
-						}catch(Exception e) {
-							log.println("Failure to initiate game;"+e.getMessage());
-						}
-					}else if(command[4].equals("s")){
-						String entities[] = command[5].split(Pattern.quote("],["));
-						for(int i = 0; i < entities.length; i++) {
-							entities[i] = entities[i].replace("[", "").
-									replace("]", "").
-									replace("'", "").
-									replace(","	, ";");
-						}
-						
-						
-						game.initEntities(entities);
-						
-						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-					}else if(command[4].equals("m")) {
-						String refreshMessage = "";
-						refreshMessage += command[5] +";" + command[4] + ";" + command[6] + ";" + command[7];
-						game.refresh(refreshMessage);
-						
-						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-					}else if(command[4].equals("p")) {
-						String refreshMessage = "";
-						refreshMessage += command[5] +";" + command[4];
-						game.refresh(refreshMessage);
-						
-						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-					}else if(command[4].equals("c")) {
-						String refreshMessage = "";
-						refreshMessage += command[5] +";" + command[4] + ";" + command[6] + ";" + command[7] + 
-								";" + command[8].replace("'", "") + ";" + command[9] + ";" + command[10];
-						game.refresh(refreshMessage);
-						
-						Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-					}else if(command[4].equals("g")) {
-						com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+game.getBestTurn(new String[] {command[5], "g", "false"})+"]");
-						System.out.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+game.getBestTurn(new String[] {command[5], "g", "false"})+"]");
-					}
-				}
-				
-				
+				Game.executeCommand(s);
 				
 				s = bufferRead.readLine();
 			}
