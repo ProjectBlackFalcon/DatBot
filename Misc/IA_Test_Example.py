@@ -9,12 +9,12 @@ p = Popen(args, stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=ON_POSIX)
 p.stdin.write(bytes("0;403;f;cmd;startfight;[84675595]\r\n", 'utf-8'))
 
 #Init entity 0 in cell[10,12], it's a player with ID 0 (Cra), in team 1.
-#Stats : 2020HP, 11PA, 4PM (max)
-entity0 = "[0,10,12,'p',0,1,2020,11,4]"
+#Stats : level 10, 2020HP, 11PA, 4PM (max)
+entity0 = "[0,10,12,'p',0,1,10,2020,11,4]"
 
 #Init entity 1 in cell[6,12], it's a monster with ID 0 (Cra atm, will change), in team 0.
-#Stats : 200HP, 15PA, 5PM (max)
-entity1 = "[1,6,12,'m',0,0,200,15,5]"
+#Stats : level 200, 200HP, 15PA, 5PM (max)
+entity1 = "[1,6,12,'m',0,0,200,200,15,5]"
 
 p.stdin.write(bytes("0;404;f;cmd;s;["+entity0+"],["+entity1+"]\r\n", 'utf-8'))
 

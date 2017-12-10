@@ -15,7 +15,7 @@ public class Removal extends Spell{
 
 	@Override
 	public void applySpell(PlayingEntity pe, PlayingEntity target, boolean trueDamage, int intensity) {
-		pe.getModel().addBuff(new Buff("-"+characteristic, amount, false, 1));
+		pe.getModel().addBuff(new Buff("-"+characteristic, amount, amount, false, 1));
 	}
 
 }
