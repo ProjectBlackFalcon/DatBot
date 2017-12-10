@@ -221,7 +221,6 @@ public class Game {
 		}
 
 		String action = command[0]+",";
-		System.out.println(playingEntity.getPosition());
 		
 		ArrayList<bestEnemyAndTurn> bestPositions = new ArrayList<>();
 		int maxDamage = 0;
@@ -249,9 +248,7 @@ public class Game {
 				for(int j = 0; j < turn.size(); j++) {
 					totalDamage += turn.get(i).getDamagePreviz(playingEntity, ennemies.get(i));
 				}
-				if(totalDamage > 0)
-					System.out.println(accessiblePositions.get(k)+", "+totalDamage+", "+Position.distance(playingEntity.getPosition(), accessiblePositions.get(k))+", "+turn);
-				
+
 				if(totalDamage > maxDamage) {
 					maxDamage = totalDamage;
 					bestPositions.clear();
@@ -275,14 +272,10 @@ public class Game {
 			}
 		}
 		
-		System.out.println("...");
-		
 		if(!selectedPosition.position.deepEquals(playingEntity.getPosition())) {
 			action += "m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
 		}else {
-			System.out.println("adding");
 			action += "s,"+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
-			System.out.println("added");
 		}
 		
 		
