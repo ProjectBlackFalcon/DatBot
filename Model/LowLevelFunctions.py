@@ -2,8 +2,8 @@ import json
 
 
 class LowLevelFunctions:
-    def __init__(self):
-        self.map_info = []
+    def __init__(self, map_info=None):
+        self.map_info = [] if map_info is None else map_info
 
     def cell2coord(self, cell):
         return cell % 14 + int((cell//14)/2+0.5), (13 - cell % 14 + int((cell//14)/2))
@@ -99,5 +99,6 @@ class LowLevelFunctions:
             if self.distance_coords(pos, statue_pos) < closest[1]:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
+
 
 __author__ = 'Alexis'
