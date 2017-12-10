@@ -35,11 +35,14 @@ public class SpellObject {
 	private boolean requireLineOfSight = true;
 	private String name;
 	
+	public int level;
 	
-	public SpellObject(String name) {
+	
+	public SpellObject(String name, int level) {
 		spells = new ArrayList<>();
 		this.name = name;
 		spellPerEntityCounter = new ArrayList<>();
+		this.level = level;
 	}
 	
 	public boolean isAvailable() {

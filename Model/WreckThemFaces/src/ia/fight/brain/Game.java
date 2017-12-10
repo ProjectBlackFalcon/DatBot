@@ -88,14 +88,15 @@ public class Game {
 			String team = Integer.parseInt(command[5]) == 0 ? "red" : "blue";
 			Player player = null;
 			
-			int baseLP = Integer.parseInt(command[6]);
-			int baseAP = Integer.parseInt(command[7]);
-			int baseMP = Integer.parseInt(command[8]);
+			int level = Integer.parseInt(command[6]);
+			int baseLP = Integer.parseInt(command[7]);
+			int baseAP = Integer.parseInt(command[8]);
+			int baseMP = Integer.parseInt(command[9]);
 			
 			if(!npc && playerType == 0) {
-				player = new Cra("Player "+id, baseLP, baseAP, baseMP);
+				player = new Cra("Player "+id, baseLP, baseAP, baseMP, level);
 			}else {
-				player = new Cra("Player "+id, baseLP, baseAP, baseMP);
+				player = new Cra("Player "+id, baseLP, baseAP, baseMP, level);
 			}
 			
 			PlayingEntity playingEntity = new PlayingEntity(id, npc, new Position(posX, posY), team, player);

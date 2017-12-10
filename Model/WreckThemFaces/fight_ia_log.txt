@@ -6,9 +6,9 @@ Successfully initiated game.
 Received command 404
 0;404;f;cmd;s;[[0,10,12,'p',0,1,10,2020,11,4]],[[1,6,12,'m',0,0,200,200,15,5]]
 Created a playing entity in position [10;12]
-Cra player with base LP/AP/MP : 10/2020/11
+Cra player with base LP/AP/MP : 2020/11/4
 Created a playing entity in position [6;12]
-Cra player with base LP/AP/MP : 200/200/15
+Cra player with base LP/AP/MP : 200/15/5
 Received command 405
 0;405;f;cmd;m;0;11;12
 R;0;m;11;12
@@ -37,7 +37,7 @@ R;0;p
 Entity 0 passing turn.
 Received command 410
 0;410;f;cmd;g;1
-AP available : 200
+AP available : 15
 Burning arrow (1 - 8) 98
 2
 Retreat arrow (1 - 8) 80
@@ -46,25 +46,65 @@ Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
 Distant shooting (0 - 0) 0
 1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
 Dispersing arrow (1 - 12) 0
 1
-1 ms
-[Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Magic arrow (1 - 12), Magic arrow (1 - 12), Frozen arrow (3 - 10), Frozen arrow (3 - 10), Distant shooting (0 - 0), Dispersing arrow (1 - 12)]
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+2 ms
+[Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Magic arrow (1 - 12)]
 1
 Done from close combat
-AP available : 200
+AP available : 15
 Burning arrow (1 - 8) 98
 2
 Magic arrow (1 - 12) 67
 2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
 Distant shooting (0 - 0) 0
 1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
 Dispersing arrow (1 - 12) 0
 1
-1 ms
-AP available : 200
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+3 ms
+AP available : 15
 Burning arrow (1 - 8) 98
 2
 Retreat arrow (1 - 8) 80
@@ -73,21 +113,61 @@ Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
 Distant shooting (0 - 0) 0
 1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
 Dispersing arrow (1 - 12) 0
 1
-0 ms
-[Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Magic arrow (1 - 12), Magic arrow (1 - 12), Frozen arrow (3 - 10), Frozen arrow (3 - 10), Distant shooting (0 - 0), Dispersing arrow (1 - 12)]
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+1 ms
+[Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Magic arrow (1 - 12)]
 1
 Done from close combat
-AP available : 200
+AP available : 15
 Burning arrow (1 - 8) 98
 2
 Magic arrow (1 - 12) 67
 2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
 Distant shooting (0 - 0) 0
 1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
 Dispersing arrow (1 - 12) 0
 1
-1 ms
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+2 ms

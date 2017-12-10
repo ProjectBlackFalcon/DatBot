@@ -8,9 +8,9 @@ public class Cra extends Player{
 	
 	SpellObject[] spells;
 	
-	public Cra(String name, int baseLP, int baseAP, int baseMP) {
-		super(name, baseLP, baseAP, baseMP);
-		spells = CraModel.getSpells();
+	public Cra(String name, int baseLP, int baseAP, int baseMP, int level) {
+		super(name, baseLP, baseAP, baseMP, level);
+		spells = CraModel.getSpells(level);
 	}
 	
 	public SpellObject[] getSpells(){
