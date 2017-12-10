@@ -207,10 +207,11 @@ public class Game {
 	}
 		
 	static private String getBestTurn(String[] command) {
+		long start = System.currentTimeMillis();
 		int id = Integer.parseInt(command[0]);
 		boolean fullTurn = Boolean.parseBoolean(command[2]);
-		PlayingEntity playingEntity = getPlayingEntityFromID(id);
 		
+		PlayingEntity playingEntity = getPlayingEntityFromID(id);
 		ArrayList<PlayingEntity> ennemies = new ArrayList<>();
 		
 		for(int i = 0; i < playingEntities.size(); i++) {
@@ -219,63 +220,93 @@ public class Game {
 			}
 		}
 
-		
 		String action = command[0]+",";
+		System.out.println(playingEntity.getPosition());
 		
-		int range[] = playingEntity.getOptimalRangeForMaximumDamageOutput(ennemies.get(0));
-		ArrayList<Position> path = map.getShortestPath(ennemies.get(0).getTeam(), playingEntity.getPosition(), ennemies.get(0).getPosition());
-		boolean startCellIsOk = false;
-		boolean foundPath = false;
-		boolean castFromStartCell = false;
-		int damage = 0;
-		int selected = 0;
+		ArrayList<bestEnemyAndTurn> bestPositions = new ArrayList<>();
+		int maxDamage = 0;
+		PlayingEntity selectedEntity;
+		ArrayList<SpellObject> selectedTurn;
 		
-		Game.log.println(Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition()));
-		
-		if(Position.distance(playingEntity.getPosition(), ennemies.get(0).getPosition()) <= 2) {
-			Game.log.println("Done from close combat");
-			ArrayList<SpellObject> spells = playingEntity.getOptimalTurnFrom(playingEntity.getPosition(), ennemies.get(0));
+		for(int i = 0; i < ennemies.size(); i++) {
+			ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(playingEntity.getPosition(), ennemies.get(i));
+			int totalDamage = 0;
 			
-			if(fullTurn) {
-				for(int i = 0; i < spells.size()-1; i++) {
-					action += "s,"+spells.get(i).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY()+",";
+			ArrayList<Position> accessiblePositions = new ArrayList<>();
+			accessiblePositions.add(playingEntity.getPosition());
+			
+			for(int k = playingEntity.getPosition().getX() - playingEntity.getModel().getMP(); k < playingEntity.getPosition().getX() + playingEntity.getModel().getMP()+1; k++) {
+				for(int l = playingEntity.getPosition().getX() - playingEntity.getModel().getMP(); l < playingEntity.getPosition().getX() + playingEntity.getModel().getMP()+1; l++) {
+					if(Game.map.isPositionAccessible(playingEntity.getPosition(), new Position(k,l), playingEntity.getModel().getMP())) {
+						accessiblePositions.add(new Position(k, l));
+					}
 				}
-				
-				action += "s,"+spells.get(spells.size()-1).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
-			}else {
-				action += "s,"+spells.get(0).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
 			}
-		}else{
-			Game.log.println("Done from far away");
-			for(int i = 0; i < path.size(); i++) {
-				ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(path.get(i), ennemies.get(0));
-				int tempDamage = 0;
+			
+			
+			for(int k = 0; k < accessiblePositions.size(); k++) {
+				turn = playingEntity.getOptimalTurnFrom(accessiblePositions.get(k), ennemies.get(i));
 				for(int j = 0; j < turn.size(); j++) {
-					tempDamage += turn.get(j).getDamagePreviz(playingEntity, ennemies.get(0));
+					totalDamage += turn.get(i).getDamagePreviz(playingEntity, ennemies.get(i));
+				}
+				if(totalDamage > 0)
+					System.out.println(accessiblePositions.get(k)+", "+totalDamage+", "+Position.distance(playingEntity.getPosition(), accessiblePositions.get(k))+", "+turn);
+				
+				if(totalDamage > maxDamage) {
+					maxDamage = totalDamage;
+					bestPositions.clear();
+					bestPositions.add(new bestEnemyAndTurn(ennemies.get(i), accessiblePositions.get(k), maxDamage, turn));
+				}else if(totalDamage == maxDamage) {
+					bestPositions.add(new bestEnemyAndTurn(ennemies.get(i), accessiblePositions.get(k), maxDamage, turn));
 				}
 				
-				if(tempDamage > damage) {
-					damage = tempDamage;
-					selected = i;
-				}
-			}
-			
-			Game.log.println(path.get(selected));
-			Game.log.println(ennemies.get(0));
-			ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(path.get(selected), ennemies.get(0));
-			
-			if(fullTurn) {
-				for(int i = 0; i < turn.size()-1; i++) {
-					action += "s,"+turn.get(i).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY()+",";
-				}
-				action += "s,"+turn.get(turn.size()-1).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
-			
-			}else {
-				action += "s,"+turn.get(0).getName()+","+ennemies.get(0).getPosition().getX()+","+ennemies.get(0).getPosition().getY();
+				totalDamage = 0;
 			}
 		}
+		
+		int minDistanceBetweenOptimalPositionAndEntity = 1000;
+		bestEnemyAndTurn selectedPosition = bestPositions.get(0);
+		
+		for(int i = 0; i < bestPositions.size(); i++) {
+			int distance = Position.distance(bestPositions.get(i).position, playingEntity.getPosition());
+			if(distance < minDistanceBetweenOptimalPositionAndEntity) {
+				minDistanceBetweenOptimalPositionAndEntity = distance;
+				selectedPosition = bestPositions.get(i);
+			}
+		}
+		
+		System.out.println("...");
+		
+		if(!selectedPosition.position.deepEquals(playingEntity.getPosition())) {
+			action += "m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
+		}else {
+			System.out.println("adding");
+			action += "s,"+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
+			System.out.println("added");
+		}
+		
+		
+		long stop = System.currentTimeMillis();
+		
+		System.out.println("Total time : "+(stop-start));
+		
 		return action;
 		
+	}
+	
+	static class bestEnemyAndTurn{
+		
+		PlayingEntity entity;
+		Position position;
+		int damage;
+		ArrayList<SpellObject> turn;
+		
+		public bestEnemyAndTurn(PlayingEntity entity, Position position, int damage, ArrayList<SpellObject> turn) {
+			this.entity = entity;
+			this.position = position;
+			this.damage = damage;
+			this.turn = turn;
+		}
 	}
 	
 	void castSpell(ArrayList<SpellObject> spell) {
@@ -372,8 +403,9 @@ public class Game {
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
 			}else if(command[4].equals("g")) {
-				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+Game.getBestTurn(new String[] {command[5], "g", "false"})+"]");
-				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;["+Game.getBestTurn(new String[] {command[5], "g", "false"})+"]";
+				String bestTurn = Game.getBestTurn(new String[] {command[5], "g", "false"});
+				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]");
+				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]";
 			}
 		}
 		

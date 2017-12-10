@@ -40,8 +40,62 @@ Received command 410
 AP available : 15
 Burning arrow (1 - 8) 98
 2
-Retreat arrow (1 - 8) 80
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
 1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
@@ -70,45 +124,7 @@ Erosive arrow (0 - 0) 0
 10
 Concentration arrow (0 - 0) 0
 10
-2 ms
-[Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Magic arrow (1 - 12)]
-1
-Done from close combat
 AP available : 15
-Burning arrow (1 - 8) 98
-2
-Magic arrow (1 - 12) 67
-2
-Crushing arrow (0 - 0) 0
-10
-Bat's eye (0 - 0) 0
-10
-Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
-10
-Absolute acuteness (0 - 0) 0
-10
-Distant shooting (0 - 0) 0
-1
-Repulsive arrow (0 - 0) 0
-10
-Paralyzing arrow (0 - 0) 0
-10
-Reprisal (0 - 0) 0
-10
-Dispersing arrow (1 - 12) 0
-1
-Erosive arrow (0 - 0) 0
-10
-Concentration arrow (0 - 0) 0
-10
-2 ms
-AP available : 15
-Burning arrow (1 - 8) 98
-2
-Retreat arrow (1 - 8) 80
-1
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
@@ -137,10 +153,64 @@ Erosive arrow (0 - 0) 0
 10
 Concentration arrow (0 - 0) 0
 10
-0 ms
-[Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Magic arrow (1 - 12)]
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
 1
-Done from close combat
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
 AP available : 15
 Burning arrow (1 - 8) 98
 2
@@ -170,4 +240,948 @@ Erosive arrow (0 - 0) 0
 10
 Concentration arrow (0 - 0) 0
 10
-3 ms
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Burning arrow (1 - 8) 98
+2
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15
+AP available : 15

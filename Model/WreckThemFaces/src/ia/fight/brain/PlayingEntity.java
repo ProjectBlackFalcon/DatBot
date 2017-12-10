@@ -144,7 +144,7 @@ public class PlayingEntity {
 		
 		long stop = System.currentTimeMillis();
 		
-		Game.log.println(stop-start+" ms");
+		//Game.log.println(stop-start+" ms");
 		return optimalTurn;
 	}
 	
@@ -160,30 +160,13 @@ public class PlayingEntity {
 			boolean hasModifiableRange = getModel().getAvailableSpells().get(i).isModifiableRange();
 			boolean underMaximumRange = hasModifiableRange ? getModel().getAvailableSpells().get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition()) : getModel().getAvailableSpells().get(i).getMaximumRange() <= Position.distance(position, victim.getPosition());
 			boolean entityIsWithinDistance = overMinimumRange && underMaximumRange;
+			boolean isStraightLineCastAndInLine = getModel().getAvailableSpells().get(i).isStraightLineCast() && (!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY()));
+			boolean isNotStraightLineCast = !getModel().getAvailableSpells().get(i).isStraightLineCast();
 			
 			if(entityTargetable && (hasVisibility || !requiresLineOfSight)) {
-				if(getModel().getAvailableSpells().get(i).getMinimumRange() <= Position.distance(position, victim.getPosition())) {
-					if(getModel().getAvailableSpells().get(i).isModifiableRange()) {
-						if(getModel().getAvailableSpells().get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition())) {
-							if(getModel().getAvailableSpells().get(i).isStraightLineCast()) {
-								if(!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY())) {
-									spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
-								}
-							}else {
-								spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
-							}
-							
-						}
-					}else {
-						if(getModel().getAvailableSpells().get(i).getMaximumRange() <= Position.distance(position, victim.getPosition())) {
-							if(getModel().getAvailableSpells().get(i).isStraightLineCast()) {
-								if(!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY())) {
-									spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
-								}
-							}else {
-								spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
-							}
-						}
+				if(entityIsWithinDistance) {
+					if(isStraightLineCastAndInLine || isNotStraightLineCast) {
+						spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
 					}
 				}
 			}
@@ -220,8 +203,8 @@ public class PlayingEntity {
 		
 		long stop = System.currentTimeMillis();
 		
-		Game.log.println(stop-start+" ms");
-		System.out.println(stop-start+" ms");
+		//Game.log.println(stop-start+" ms");
+		//System.out.println(stop-start+" ms");
 		return optimalTurn;
 	}
 	
