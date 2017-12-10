@@ -7,18 +7,29 @@ import json
 class HighLevelFunctions:
     def __init__(self):
         self.interfaces = []
+        self.current_positions = []
+        self.current_occupation = []
+        self.credentials = []
         self.llf = LowLevelFunctions()
         self.selected_bot = None
         
-    def new_bot(self):
+    def new_bot(self, credentials):
         new_interface = Interface(len(self.interfaces))
         self.interfaces.append(new_interface)
+        self.current_positions.append(None)
+        self.current_occupation.append(None)
+        self.credentials.append(credentials)
         if len(self.interfaces) == 1:
             self.selected_bot = 0
         return new_interface
 
     def goto(self, target_coord, target_cell=None, worldmap=1):
         current_map, current_cell, current_worldmap, map_id = self.interfaces[self.selected_bot].get_map()
+
+        if self.llf.distance_coords(current_map, target_coord) > 3:
+            self.current_positions[self.selected_bot] = (current_map, current_worldmap)
+            self.current_occupation[self.selected_bot] = 'Moving to {}, worldmap {}'.format(target_coord, worldmap)
+            self.update_db()
 
         if current_worldmap != worldmap:
             # Incarnam to Astrub
@@ -57,8 +68,11 @@ class HighLevelFunctions:
 
         if target_cell is not None:
             self.interfaces[self.selected_bot].move(target_cell)
+        self.current_positions[self.selected_bot] = (target_coord, worldmap)
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
+        self.current_occupation[self.selected_bot] = 'Harvesting map'
+        self.update_db()
         with open('..//Utils//resourcesIDs.json', 'r') as f:
             resources_ids = json.load(f)
 
@@ -189,6 +203,8 @@ class HighLevelFunctions:
                     full = not self.harvest_map(harvest_only, do_not_harvest)
 
     def drop_to_bank(self, item_id_list):
+        self.current_occupation = 'Dropping to bank'
+        self.update_db()
         bank_entrance, bank_exit = self.interfaces[self.selected_bot].get_bank_door_cell()
         if bank_entrance:
             self.interfaces[self.selected_bot].move(bank_entrance)
@@ -204,6 +220,15 @@ class HighLevelFunctions:
         # Todo get hunt
         # Todo 
         pass
+
+    def update_db(self):
+        self.llf.update_db(
+            self.selected_bot,
+            self.credentials[self.selected_bot]['name'],
+            self.current_occupation[self.selected_bot],
+            self.current_positions[self.selected_bot][0],
+            self.current_positions[self.selected_bot][1]
+        )
 
 
 __author__ = 'Alexis'
