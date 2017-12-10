@@ -10,7 +10,7 @@ public class Buff extends Spell{
 	private boolean percentage;
 	private int turnDuration;
 	
-	public Buff(String type, int value, boolean percentage, int turnDuration) {
+	public Buff(String type, int value, int critValue,  boolean percentage, int turnDuration) {
 		this.type = type;
 		this.value = value;
 		this.percentage = percentage;

@@ -53,12 +53,13 @@ public abstract class Player {
 	private int pushbackResistance =         0;
 	private int distanceResistancePrcnt =    0;
 	private int closeCombatResistancePrcnt = 0;
+	private int level = 0;
 	
 	private ArrayList<Buff> buffs;
 	
 	private static SpellObject[] spells;
 	
-	public Player(String name, int baseLP, int baseAP, int baseMP) {
+	public Player(String name, int baseLP, int baseAP, int baseMP, int level) {
 		buffs = new ArrayList<>();
 		this.name = name;
 		this.baseLP = baseLP;
@@ -67,6 +68,7 @@ public abstract class Player {
 		this.LP = baseLP;
 		this.AP = baseAP;
 		this.MP = baseMP;
+		this.level = level;
 	}
 	
 	public SpellObject[] getSpells(){
