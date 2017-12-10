@@ -103,7 +103,7 @@ Erosive arrow (0 - 0) 0
 10
 Concentration arrow (0 - 0) 0
 10
-3 ms
+2 ms
 AP available : 15
 Burning arrow (1 - 8) 98
 2
@@ -137,7 +137,7 @@ Erosive arrow (0 - 0) 0
 10
 Concentration arrow (0 - 0) 0
 10
-1 ms
+0 ms
 [Burning arrow (1 - 8), Burning arrow (1 - 8), Retreat arrow (1 - 8), Magic arrow (1 - 12)]
 1
 Done from close combat
@@ -170,4 +170,4 @@ Erosive arrow (0 - 0) 0
 10
 Concentration arrow (0 - 0) 0
 10
-2 ms
+3 ms
