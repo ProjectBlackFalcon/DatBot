@@ -26,6 +26,13 @@ public class Info {
 	public static long actorId = -1;
 	public static boolean isConnected = false;
 	
+	// Bot info
+	
+	public static int botInstance;
+	public static int msgIdModel;
+	public static int msgIdFight;
+
+	
 	// Stats info
 	public static int lvl = -1;
 	public static int weigthMax;
@@ -44,7 +51,8 @@ public class Info {
 	public volatile static boolean Storage = false;
 	public volatile static boolean StorageUpdate = false;
 	public volatile static boolean basicNoOperationMsg = false;
-	public static boolean leaveExchange;
+	public static boolean leaveExchange = false;
+	public static boolean joinedFight = false;
 	
 	
 	public static void setBooleanToFalse() {
@@ -55,6 +63,7 @@ public class Info {
 		StorageUpdate = false;
 		basicNoOperationMsg = false;
 		leaveExchange = false;
+		joinedFight = false;
 	}
 
 }

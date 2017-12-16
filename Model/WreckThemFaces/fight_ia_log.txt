@@ -1,7 +1,16 @@
 Received command 403
 0;403;f;cmd;startfight;[84675595]
 Starting fight
-Map id : 84675595, loc : 6;-11
+java.io.FileNotFoundException: C:\Users\jikiw\Documents\Workspace - Java\Wreck them faces\src\ia\fight\data\Mapinfo.json (The system cannot find the path specified)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileReader.<init>(Unknown Source)
+	at ia.fight.map.CreateMap.getMapById(CreateMap.java:21)
+	at ia.fight.brain.Game.initGame(Game.java:71)
+	at ia.fight.brain.Game.executeCommand(Game.java:359)
+	at ia.fight.test.FightTest.main(FightTest.java:9)
 Successfully initiated game.
 Received command 404
 0;404;f;cmd;s;[[0,10,12,'p',0,1,10,2020,11,4]],[[1,6,12,'m',0,0,200,200,15,5]]
@@ -1113,6 +1122,93 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 AP available : 15
 AP available : 15
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Crushing arrow (0 - 0) 0
+10
+Bat's eye (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Atonement arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
 AP available : 15
 Magic arrow (1 - 12) 67
 2
