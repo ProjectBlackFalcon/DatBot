@@ -35,6 +35,7 @@ public class Game {
 	}
 	
 	public Game(int map) {
+		/*
 		String[] entities = new String[2];
 		// Player ID / posX / posY / Player or Monster / Player type (0:cra, 1:Enu, ...) / Team / HP Max / AP Max / MP Max
 		entities[0] = "0;10;12;p;0;1;2020;11;4";
@@ -64,7 +65,7 @@ public class Game {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public static void initGame(int map) {
