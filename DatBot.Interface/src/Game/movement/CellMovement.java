@@ -2,6 +2,7 @@ package Game.movement;
 
 import java.util.List;
 import Game.Info;
+import Game.combat.Fight;
 import Game.map.MapMovementAdapter;
 import Game.movement.MovementVelocity.MovementTypeEnum;
 import Main.MainPlugin;
@@ -16,29 +17,37 @@ public class CellMovement {
 	public int endCell;
 	public MovementPath path;
 
-	public CellMovement(MovementPath path) {
+	public CellMovement(MovementPath path)
+	{
 		// Movement
 		this.startCell = path.CellStart.CellId;
 		this.endCell = path.CellEnd.CellId;
 		this.path = path;
 	}
 
-	public void performMovement() throws Exception {
-		if (path == null)
-			return;
-		
+	public void performMovement() throws Exception
+	{
+		if (path == null) return;
+
 		Info.waitForMov = false;
-		
-		List<Integer> keys = MapMovementAdapter.GetServerMovement(path); 
-		Network.sendToServer(new GameMapMovementRequestMessage(keys, Info.mapId), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
-		if(path.Cells.size() >= 4 ){
+
+		List<Integer> keys = MapMovementAdapter.GetServerMovement(path);
+		Network.sendToServer(new GameMapMovementRequestMessage(keys, Info.mapId), GameMapMovementRequestMessage.ProtocolId, "Dï¿½placement...");
+		if (path.Cells.size() >= 4)
+		{
 			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
 			Thread.sleep(time);
-		} else {
+		}
+		else
+		{
 			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
 			Thread.sleep(time);
 		}
 		Info.waitForMov = true;
-		Network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
+		
+		if (!Info.joinedFight)
+		{
+			Network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
+		}
 	}
 }

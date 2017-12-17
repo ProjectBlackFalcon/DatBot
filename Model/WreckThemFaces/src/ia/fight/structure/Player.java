@@ -11,19 +11,22 @@ public abstract class Player {
 
 	private String name;
 	private int[] stats =                    {100, 100, 100, 100, 100};
-	private int[] resPrcnt =                 {21, 22, 15, 12, 20};
-	private int[] resFixed =                 {5, 5, 5, 5, 5};
+	private int[] resPrcnt =                 {21, 22, 15, 12, 20}; // AIR, EARTH, WATER, FIRE, NEUTRAL
+	private int[] resFixed =                 {5, 5, 5, 5, 5}; // AIR, EARTH, WATER, FIRE, NEUTRAL
 	private int AP =                         12;
 	private int baseAP =                     12;
 	private int MP =                         6;
 	private int baseMP =                     6;
 	private int LP =                         200;
+	private int maxLP =						 200;	
 	private int baseLP =                     200;
+	private int shield =					 200;
 	
 	private int initiative =                 2000;
 	private int prospection =                120;
 	private int range =                      0;
 	private int summons =                    2;
+	private boolean summoned = 				 false;
 	
 	private int APReduction =                20;
 	private int MPReduction =                20;
@@ -401,8 +404,32 @@ public abstract class Player {
 	public void setCloseCombatResistancePrcnt(int closeCombatResistancePrcnt) {
 		this.closeCombatResistancePrcnt = closeCombatResistancePrcnt;
 	}
+	public int getMaxLP(){
+		return maxLP;
+	}
+	public void setMaxLP(int maxLP){
+		this.maxLP = maxLP;
+	}
+	public int getShield()	{
+		return shield;
+	}
+	public void setShield(int shield)	{
+		this.shield = shield;
+	}
+	public boolean isSummoned()	{
+		return summoned;
+	}
+	public void setSummoned(boolean summoned)	{
+		this.summoned = summoned;
+	}
 	
 	@Override
 	public abstract String toString();
+
+
+
+
+
+
 }
 	

@@ -1,7 +1,7 @@
 Received command 403
 0;403;f;cmd;startfight;[84675595]
 Starting fight
-java.io.FileNotFoundException: C:\Users\jikiw\Documents\Workspace - Java\Wreck them faces\src\ia\fight\data\Mapinfo.json (The system cannot find the path specified)
+java.io.FileNotFoundException: C:\Users\jikiw\Documents\Workspace - Java\Wreck them faces\src\ia\fight\data\Mapinfo.json (Le chemin d’accès spécifié est introuvable)
 	at java.io.FileInputStream.open0(Native Method)
 	at java.io.FileInputStream.open(Unknown Source)
 	at java.io.FileInputStream.<init>(Unknown Source)
@@ -10,5 +10,5 @@ java.io.FileNotFoundException: C:\Users\jikiw\Documents\Workspace - Java\Wreck t
 	at ia.fight.map.CreateMap.getMapById(CreateMap.java:21)
 	at ia.fight.brain.Game.initGame(Game.java:71)
 	at ia.fight.brain.Game.executeCommand(Game.java:359)
-	at Main.Test.main(Test.java:34)
+	at Main.Test.main(Test.java:37)
 Successfully initiated game.

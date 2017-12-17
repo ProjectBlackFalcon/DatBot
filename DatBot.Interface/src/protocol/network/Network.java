@@ -37,6 +37,10 @@ import Game.Entity;
 import Game.Info;
 import Game.map.Map;
 import Main.Communication.Communication;
+import ia.fight.brain.Game;
+import ia.fight.brain.classes.Cra;
+import ia.fight.brain.classes.Monster;
+import ia.fight.structure.Player;
 import io.netty.util.internal.ThreadLocalRandom;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
@@ -46,6 +50,8 @@ import protocol.network.messages.connection.IdentificationSuccessMessage;
 import protocol.network.messages.connection.SelectedServerDataMessage;
 import protocol.network.messages.connection.ServerSelectionMessage;
 import protocol.network.messages.connection.ServersListMessage;
+import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
+import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
@@ -57,8 +63,13 @@ import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.chat.ChatServerMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
 import protocol.network.messages.game.context.GameContextReadyMessage;
+import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
 import protocol.network.messages.game.context.fight.GameFightJoinMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementPossiblePositionsMessage;
+import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
 import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
@@ -96,6 +107,8 @@ import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
+import protocol.network.types.game.context.fight.GameFightCharacterInformations;
+import protocol.network.types.game.context.fight.GameFightMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
@@ -112,6 +125,7 @@ import Game.Plugin.Interactive;
 import Game.Plugin.Monsters;
 import Game.Plugin.NPC;
 import Game.Plugin.Stats;
+import Game.combat.Fight;
 import utils.JSON;
 
 public class Network implements Runnable {
@@ -423,6 +437,13 @@ public class Network implements Runnable {
 						Monsters.monsters.get(i).disposition.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
 					}
 				}
+				if (Info.joinedFight)
+				{
+					int cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
+					int x = cellId % 14;
+					int y = cellId / 14;
+					Fight.sendToFightAlgo("m", new Object[] { gameMapMovementMessage.actorId,x,y });
+				}
 			break;
 			case 6316:
 				HandleSequenceNumberMessage();
@@ -696,40 +717,95 @@ public class Network implements Runnable {
 				Bank.storage.kamas = storageKamasUpdateMessage.kamasTotal;
 				Info.StorageUpdate = true;
 			break;
-//			case 881:
-//				ChatServerMessage chatServerMessage = new ChatServerMessage();
-//				chatServerMessage.Deserialize(dataReader);
-//				if (chatServerMessage.channel == 0)
-//				{ // Général
-//					output = new BufferedWriter(new FileWriter(Info.server + "General.txt", true));
-//					output.append(System.lineSeparator() + "[" + chatServerMessage.senderName + "]" + "[" + (int) chatServerMessage.senderAccountId + "] " + chatServerMessage.content);
-//					output.close();
-//				}
-//				else if (chatServerMessage.channel == 5)
-//				{ // Commerce
-//					output = new BufferedWriter(new FileWriter(Info.server + "Commerce.txt", true));
-//					output.append(System.lineSeparator() + "[" + chatServerMessage.senderName + "]" + "[" + (int) chatServerMessage.senderAccountId + "] " + chatServerMessage.content);
-//					output.close();
-//				}
-//				else if (chatServerMessage.channel == 6)
-//				{ // Recrutement
-//					output = new BufferedWriter(new FileWriter(Info.server + "Recrutement.txt", true));
-//					output.append(System.lineSeparator() + "[" + chatServerMessage.senderName + "]" + "[" + (int) chatServerMessage.senderAccountId + "] " + chatServerMessage.content);
-//					output.close();
-//				}
-//			break;
-//			case 5683:
-//				EmotePlayMessage emotePlayMessage = new EmotePlayMessage();
-//				emotePlayMessage.Deserialize(dataReader);
-//				output = new BufferedWriter(new FileWriter(Info.server + "General.txt", true));
-//				output.append(System.lineSeparator() + "[" + (int) emotePlayMessage.accountId + "] EmoteId : " + emotePlayMessage.emoteId);
-//				output.close();
-//			break;
+			// case 881:
+			// ChatServerMessage chatServerMessage = new ChatServerMessage();
+			// chatServerMessage.Deserialize(dataReader);
+			// if (chatServerMessage.channel == 0)
+			// { // Général
+			// output = new BufferedWriter(new FileWriter(Info.server +
+			// "General.txt", true));
+			// output.append(System.lineSeparator() + "[" +
+			// chatServerMessage.senderName + "]" + "[" + (int)
+			// chatServerMessage.senderAccountId + "] " +
+			// chatServerMessage.content);
+			// output.close();
+			// }
+			// else if (chatServerMessage.channel == 5)
+			// { // Commerce
+			// output = new BufferedWriter(new FileWriter(Info.server +
+			// "Commerce.txt", true));
+			// output.append(System.lineSeparator() + "[" +
+			// chatServerMessage.senderName + "]" + "[" + (int)
+			// chatServerMessage.senderAccountId + "] " +
+			// chatServerMessage.content);
+			// output.close();
+			// }
+			// else if (chatServerMessage.channel == 6)
+			// { // Recrutement
+			// output = new BufferedWriter(new FileWriter(Info.server +
+			// "Recrutement.txt", true));
+			// output.append(System.lineSeparator() + "[" +
+			// chatServerMessage.senderName + "]" + "[" + (int)
+			// chatServerMessage.senderAccountId + "] " +
+			// chatServerMessage.content);
+			// output.close();
+			// }
+			// break;
+			// case 5683:
+			// EmotePlayMessage emotePlayMessage = new EmotePlayMessage();
+			// emotePlayMessage.Deserialize(dataReader);
+			// output = new BufferedWriter(new FileWriter(Info.server +
+			// "General.txt", true));
+			// output.append(System.lineSeparator() + "[" + (int)
+			// emotePlayMessage.accountId + "] EmoteId : " +
+			// emotePlayMessage.emoteId);
+			// output.close();
+			// break;
 			case 702:
 				GameFightJoinMessage gameFightJoinMessage = new GameFightJoinMessage();
 				gameFightJoinMessage.Deserialize(dataReader);
 				Info.joinedFight = true;
+				Info.isTurn = false;
 				Communication.sendToModel(String.valueOf(Info.botInstance), String.valueOf(++Info.msgIdModel), "m", "rtn", "startFight", null);
+				Fight.sendToFightAlgo("startfight", new Object[] { Info.mapId });
+			break;
+			case 956:
+				SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
+				sequenceEndMessage.Deserialize(dataReader);
+				if(sequenceEndMessage.authorId == Info.actorId){
+					Thread.sleep(1000);
+					sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.actionId), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
+				}	
+			break;
+			case 715:
+				sendToServer(new GameFightTurnReadyMessage(true), GameFightTurnReadyMessage.ProtocolId, "Turn ready");
+			break;
+			case 719:
+				GameFightTurnEndMessage gameFightTurnEndMessage = new GameFightTurnEndMessage();
+				gameFightTurnEndMessage.Deserialize(dataReader);
+				if (gameFightTurnEndMessage.id == Info.actorId)
+				{
+					Info.isTurn = false;
+				}
+				Fight.sendToFightAlgo("p", new Object[] { gameFightTurnEndMessage.id });
+			break;
+			case 703:
+				Fight.gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
+				Fight.gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
+			// TODO LYSANDRE
+			// Fight.setBeginingPosition();
+			break;
+			case 5696:
+				Fight.gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
+				Fight.gameEntitiesDispositionMessage.Deserialize(dataReader);
+			break;
+			case 5921:
+				Fight.gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
+				Fight.gameFightSynchronizeMessage.Deserialize(dataReader);
+				Fight.sendToFightAlgoInit("s", new Object[] { Fight.init() }, Fight.entities);
+			break;
+			case 6465:
+				Info.isTurn = true;
 			break;
 		}
 	}

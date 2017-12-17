@@ -18,6 +18,7 @@ import Game.movement.CellMovement;
 import Game.movement.Movement;
 import Main.Communication.Communication;
 import Main.Communication.ModelConnexion;
+import ia.fight.brain.Game;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;

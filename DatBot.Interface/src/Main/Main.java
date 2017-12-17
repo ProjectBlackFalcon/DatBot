@@ -1,10 +1,7 @@
 package Main;
 
 import Game.Info;
-import Game.Plugin.Interactive;
-import Game.Plugin.Stats;
 import Main.Communication.Communication;
-import Main.Communication.ModelConnexion;
 import protocol.network.Network;
 
 public class Main {

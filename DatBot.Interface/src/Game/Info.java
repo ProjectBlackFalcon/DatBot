@@ -29,8 +29,8 @@ public class Info {
 	// Bot info
 	
 	public static int botInstance;
-	public static int msgIdModel;
-	public static int msgIdFight;
+	public static int msgIdModel = -1;
+	public static int msgIdFight = -1;
 
 	
 	// Stats info
@@ -53,6 +53,7 @@ public class Info {
 	public volatile static boolean basicNoOperationMsg = false;
 	public static boolean leaveExchange = false;
 	public static boolean joinedFight = false;
+	public static boolean isTurn = false;
 	
 	
 	public static void setBooleanToFalse() {
