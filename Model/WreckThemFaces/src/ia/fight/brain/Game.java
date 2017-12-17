@@ -71,16 +71,27 @@ public class Game {
 		}*/
 	}
 	
+	/**
+	 * Initializes the game map. Creates a map and opens a JFrame.
+	 * @param map
+	 */
 	public static void initGame(int map) {
 		Map mapObject = CreateMap.getMapById(map);
 		Game.map = mapObject;
 		los = new GameViz(mapObject);
 	}
 	
+	/**
+	 * Ends the game by disposing of the window.
+	 */
 	public static void endGame() {
 		los.dispose();
 	}
 	
+	/**
+	 * Initializes entities according to the passed arrayList
+	 * @param entities Entities to be initialized.
+	 */
 	static public void initEntities(ArrayList<PlayingEntity> entities) {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		
@@ -98,6 +109,10 @@ public class Game {
 		Game.playingEntities = playingEntities;
 	}
 	
+	/**
+	 * Main method called to execute the commands.
+	 * @param commandString
+	 */
 	static public void refresh(String commandString) {
 		log.println("R;"+commandString);
 		String[] command = commandString.split(";");
@@ -133,6 +148,11 @@ public class Game {
 			los.repaint();
 	}
 	
+	/**
+	 * Returns the playingEntity corresponding to the ID passed as a parameter
+	 * @param id ID of the playingEntity seeked after
+	 * @return a PlayingEntity object
+	 */
 	private static PlayingEntity getPlayingEntityFromID(int id) {
 		for(int i = 0; i < Game.playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
@@ -143,6 +163,12 @@ public class Game {
 		return null;
 	}
 	
+	/**
+	 * Returns a spell according to the class passed as a parameter and the name of the spell.
+	 * @param name Name of the spell
+	 * @param playerClass Name of the class
+	 * @return a SpellObject object
+	 */
 	private static SpellObject getSpellFromName(String name, String playerClass) {
 		if(playerClass.equals("cra")) {
 			return CraModel.getSpellFromName(name);
@@ -155,6 +181,10 @@ public class Game {
 		return null;
 	}
 	
+	/**
+	 * Executes a movement command
+	 * @param command
+	 */
 	static private void executeMovementCommand(String[] command){
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
@@ -166,6 +196,10 @@ public class Game {
 		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
 	}
 	
+	/**
+	 * Executes a spell command
+	 * @param command
+	 */
 	static private void executeSpellCommand(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
@@ -187,12 +221,13 @@ public class Game {
 			spellCast = Game.getSpellFromName(spellname, "cra");
 			Game.log.println(spellCast);
 		}
-		
-		
-		
 		spellCast.applySpells(castingEntity, new Position(posX, posY), true, damage);
 	}
 	
+	/**
+	 * Executes a pass turn command
+	 * @param command
+	 */
 	static private void executePassTurn(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		PlayingEntity castingEntity = getPlayingEntityFromID(id);
@@ -204,6 +239,11 @@ public class Game {
 		log.println("Entity "+id+" passing turn.");
 	}
 		
+	/**
+	 * Method called to get the best turn. Returns a single action, either movement or spellcast.
+	 * @param command
+	 * @return
+	 */
 	static private String getBestTurn(String[] command) {
 		long start = System.currentTimeMillis();
 		int id = Integer.parseInt(command[0]);
