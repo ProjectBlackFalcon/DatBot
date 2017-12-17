@@ -285,6 +285,11 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Class to hold an entity, a position, damage and an arraylist of spells as a single entity.
+	 * @author jikiw
+	 *
+	 */
 	static class bestEnemyAndTurn{
 		
 		PlayingEntity entity;
@@ -300,10 +305,16 @@ public class Game {
 		}
 	}
 	
-	void castSpell(ArrayList<SpellObject> spell) {
-		
-	}
-	
+	/**
+	 * Returns true if the specified position is targetable by the caster given the spell. Takes into account the range, the line of sight
+	 * and the straight line cast.
+	 * @param caster PlayingEntity that casts the spell
+	 * @param spell Spell cast
+	 * @param cell Cell targeted
+	 * @return boolean
+	 * 
+	 * @author jikiw
+	 */
 	boolean isCellTargetableBySpell(PlayingEntity caster, SpellObject spell, Position cell){
 		
 		int distance = Position.distance(caster.getPosition(), cell);
@@ -335,9 +346,39 @@ public class Game {
 	
 	/**
 	 * Executes any command that needs some players specified. Currently the only command available is the "init entities" command.
-	 * @param s
+	 * @param s command String<br>
+	 * 
+	 * Commands are written as follows : bot_instance;action_number;bot_part;type_of_message;command;parameters<br>
+	 * 
+	 * Bot instance : Which bot is currently asking/returning the command/return. The default is 0.<br>
+	 * 
+	 * Action number : Number corresponding to the action being done right now. It increases as the bot executes commands.<br>
+	 * 
+	 * Bot part : 'f' for this bot (fight bot). Other letters can be found as 'm' for model and 'i' for interface.<br>
+	 * 
+	 * Type of message : "cmd" if the message is a command, "rtn" if the message is a return.<br><br>
+	 * 
+	 * <b>Command : Type of command to the specified bot.</b> Commands accepted : <br>
+	 * 		<b>s</b> - Spawns the entities passed as parameters at the locations specified, with given ID and team.<br>
+	 * 
+	 * Parameters : the parameters passed as a String. These vary upon the type of the command.<br><br>
+	 * 
+	 * -- Examples -- <br><br>
+	 * 
+	 * <b>Init entities</b><br>
+	 * 0;403;f;cmd;s;[[0,1,11,12],[1,0,6,12]]<br>
+	 * Bot 0, command 403, fight bot receiving a command to start init two entities. Entity 0 in team 1 at position 11,12 and
+	 * entity 1 in team 0 at position 6,12.<br>
+	 * <b>[player_ID, team_ID, posX, posY]</b><br><br>
+	 * 
 	 * @param entities
-	 * @return
+	 * @return the return String<br>
+	 * 
+	 * The return String is written according to the command String. It returns the same bot instance, action number and bot part.<br>
+	 * The type of message is switched to "rtn" as it is the return of the command. There is no command and the parameter returned is
+	 * either 'true' or 'false' according to the success of the command.
+	 * 
+	 * @author jikiw
 	 */
 	public static String executeCommand(String s, ArrayList<Player> entities) {
 		String param = s.split(";")[5];
@@ -367,9 +408,59 @@ public class Game {
 	}
 	
 	/**
-	 * Executes any command that can be displayed in a String
-	 * @param s
-	 * @return
+	 * Executes any command that can be displayed in a String. Other commands are passed through other "executeCommand" methods 
+	 * that take different parameters.<br>
+	 * 
+	 * @param s command String <br>
+	 *
+	 * Commands are written as follows : bot_instance;action_number;bot_part;type_of_message;command;parameters<br>
+	 * 
+	 * Bot instance : Which bot is currently asking/returning the command/return. The default is 0.<br>
+	 * 
+	 * Action number : Number corresponding to the action being done right now. It increases as the bot executes commands.<br>
+	 * 
+	 * Bot part : 'f' for this bot (fight bot). Other letters can be found as 'm' for model and 'i' for interface.<br>
+	 * 
+	 * Type of message : "cmd" if the message is a command, "rtn" if the message is a return.<br><br>
+	 * 
+	 * <b>Command : Type of command to the specified bot.</b> Commands accepted : <br>
+	 * 		<b>startFight</b> - Starts the fight according to the map passed as a parameter<br>
+	 * 		<b>m</b> - Moves the entity of which the ID is passed as a parameter, with the new position<br>
+	 * 		<b>p</b> - Passes the turn of the entity corresponding to the ID passed<br>
+	 * 		<b>c</b> - Casts a spell. Parameters are the caster's ID, the spell location, the spell ID, the spell name, the damage, and if it was a critical hit<br>
+	 * 		<b>g</b> - 'get' command, requests the best possible move for the entity corresponding to the ID passed<br>
+	 * 
+	 * Parameters : the parameters passed as a String. These vary upon the type of the command.<br><br>
+	 * 
+	 * -- Examples -- <br><br>
+	 * 
+	 * <b>Start a fight</b><br>
+	 * 0;403;f;cmd;startfight;[84675595]<br>
+	 * Bot 0, command 403, fight bot receiving a command to start a fight on map 84675595.<br>
+	 * <b>[map_ID]</b><br><br>
+	 * 
+	 * <b>Move entity</b><br>
+	 * 0;405;f;cmd;m;[0,11,12]<br>
+	 * Bot 0, command 405, fight bot receiving a command to move entity 0 to position 11,12<br>
+	 * <b>[entity_ID, posX, posY]</b><br><br>
+	 * 
+	 * <b>Pass turn</b><br>
+	 * 0;406;f;cmd;p;[0]<br>
+	 * Bot 0, command 406, fight bot receiving a command to pass turn of entity 0<br>
+	 * <b>[entity_ID]</b><br><br>
+	 * 
+	 * <b>Cast spell</b><br>
+	 * 0;408;f;cmd;c;[0,9,12,161,'Magic arrow',150,False]<br>
+	 * Bot 0, command 408, fight bot receiving a command to cast spell 'Magic arrow', ID:161. The caster is the entity 0 and
+	 * the spell is cast at the position 9,12. It does 150 damage and is not a critical hit. <br>
+	 * <b>[entity_ID, posX, posY, spellID, spellName, damage, crit]</b><br><br>
+	 * @return the return String<br>
+	 * 
+	 * The return String is written according to the command String. It returns the same bot instance, action number and bot part.<br>
+	 * The type of message is switched to "rtn" as it is the return of the command. There is no command and the parameter returned is
+	 * either 'true' or 'false' according to the success of the command.
+	 * 
+	 * @author jikiw
 	 */
 	public static String executeCommand(String s) {
 		if(Game.log == null) {
@@ -436,6 +527,11 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Inits all the logs.
+	 * 
+	 * @author jikiw
+	 */
 	public static void initLogs() {
 		try {
 			log = System.out;
@@ -448,6 +544,10 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Main method - only used for testing and debugging.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		Game.initLogs();
@@ -470,6 +570,11 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Method to parse string to int arrays.
+	 * @param arr String 
+	 * @return int array
+	 */
 	static int[] parseStringToIntArray(String arr) {
 		String[] items = arr.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 
