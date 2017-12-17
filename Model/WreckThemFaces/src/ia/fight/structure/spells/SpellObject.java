@@ -12,6 +12,8 @@ import ia.fight.structure.spells.spelltypes.*;
 
 public class SpellObject {
 
+	
+	private int ID;
 	private ArrayList<Spell> spells;
 	private int cooldown = 0;
 	private int spellCounter = 0;
@@ -38,11 +40,20 @@ public class SpellObject {
 	public int level;
 	
 	
-	public SpellObject(String name, int level) {
+	public SpellObject(String name, int level, int ID) {
 		spells = new ArrayList<>();
 		this.name = name;
 		spellPerEntityCounter = new ArrayList<>();
 		this.level = level;
+		this.ID = ID;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	
+	public void setID(int iD) {
+		ID = iD;
 	}
 	
 	public boolean isAvailable() {

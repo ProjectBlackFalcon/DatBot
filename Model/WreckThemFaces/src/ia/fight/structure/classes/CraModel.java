@@ -212,54 +212,54 @@ public class CraModel{
 		return null;
 	}
 	
-	public static final SpellObject magicArrow = new SpellObject("Magic arrow", 1);
-	public static final SpellObject concentrationArrow = new SpellObject("Concentration arrow", 101);
+	public static final SpellObject magicArrow = new SpellObject("Magic arrow", 1, 161);
+	public static final SpellObject concentrationArrow = new SpellObject("Concentration arrow", 101, 9301);
 
-	public static final SpellObject retreatArrow = new SpellObject("Retreat arrow", 1);
-	public static final SpellObject erosiveArrow = new SpellObject("Erosive arrow", 105);
+	public static final SpellObject retreatArrow = new SpellObject("Retreat arrow", 1, 169);
+	public static final SpellObject erosiveArrow = new SpellObject("Erosive arrow", 105, 9302);
 	
-	public static final SpellObject dispersingArrow = new SpellObject("Dispersing arrow", 1);
-	public static final SpellObject reprisal = new SpellObject("Reprisal", 110);
+	public static final SpellObject dispersingArrow = new SpellObject("Dispersing arrow", 1, 418);
+	public static final SpellObject reprisal = new SpellObject("Reprisal", 110, 9303);
 	
-	public static final SpellObject frozenArrow = new SpellObject("Frozen arrow", 3);
-	public static final SpellObject paralyzingArrow = new SpellObject("Paralyzing arrow", 115);
+	public static final SpellObject frozenArrow = new SpellObject("Frozen arrow", 3, 163);
+	public static final SpellObject paralyzingArrow = new SpellObject("Paralyzing arrow", 115, 9304);
 	
-	public static final SpellObject burningArrow = new SpellObject("Burning arrow", 6);
-	public static final SpellObject repulsiveArrow = new SpellObject("Repulsive arrow", 120);
+	public static final SpellObject burningArrow = new SpellObject("Burning arrow", 6, 165);
+	public static final SpellObject repulsiveArrow = new SpellObject("Repulsive arrow", 120, 9305);
 	
-	public static final SpellObject distantShooting = new SpellObject("Distant shooting", 9);
-	public static final SpellObject absoluteAcuteness = new SpellObject("Absolute acuteness", 125);
+	public static final SpellObject distantShooting = new SpellObject("Distant shooting", 9, 172);
+	public static final SpellObject absoluteAcuteness = new SpellObject("Absolute acuteness", 125, 9306);
 	
-	public static final SpellObject atonementArrow = new SpellObject("Atonement arrow", 13);
-	public static final SpellObject redemptionArrow = new SpellObject("Redemption arrow", 130);
+	public static final SpellObject atonementArrow = new SpellObject("Atonement arrow", 13, 167);
+	public static final SpellObject redemptionArrow = new SpellObject("Redemption arrow", 130, 9307);
 	
-	public static final SpellObject batsEye = new SpellObject("Bat's eye", 17);
-	public static final SpellObject crushingArrow = new SpellObject("Crushing arrow", 135);
+	public static final SpellObject batsEye = new SpellObject("Bat's eye", 17, 168);
+	public static final SpellObject crushingArrow = new SpellObject("Crushing arrow", 135, 9308);
 	
-	public static final SpellObject criticalShooting = new SpellObject("Critical shooting", 22);
+	public static final SpellObject criticalShooting = new SpellObject("Critical shooting", 22, 162);
 	
-	public static final SpellObject paralysingArrow = new SpellObject("Paralysing arrow", 27);
+	public static final SpellObject paralysingArrow = new SpellObject("Paralysing arrow", 27, 170);
 	
-	public static final SpellObject punitiveArrow = new SpellObject("Punitive arrow", 32);
+	public static final SpellObject punitiveArrow = new SpellObject("Punitive arrow", 32, 171);
 	
-	public static final SpellObject powerfulShooting = new SpellObject("Powerful shooting", 38);
+	public static final SpellObject powerfulShooting = new SpellObject("Powerful shooting", 38, 166);
 	
-	public static final SpellObject plaguingArrow = new SpellObject("Plaguing arrow", 44);
+	public static final SpellObject plaguingArrow = new SpellObject("Plaguing arrow", 44, 173);
 	
-	public static final SpellObject poisonedArrow = new SpellObject("Poisoned arrow", 50);
+	public static final SpellObject poisonedArrow = new SpellObject("Poisoned arrow", 50, 174);
 	
-	public static final SpellObject tormentingArrow = new SpellObject("Tormenting arrow", 56);
+	public static final SpellObject tormentingArrow = new SpellObject("Tormenting arrow", 56, 176);
 	
-	public static final SpellObject destructiveArrow = new SpellObject("Destructive arrow", 62);
+	public static final SpellObject destructiveArrow = new SpellObject("Destructive arrow", 62, 175);
 
-	public static final SpellObject absorptiveArrow = new SpellObject("Absorptive arrow", 69);
+	public static final SpellObject absorptiveArrow = new SpellObject("Absorptive arrow", 69, 178);
 	
-	public static final SpellObject lashingArrow = new SpellObject("Lashing arrow", 77);
+	public static final SpellObject lashingArrow = new SpellObject("Lashing arrow", 77, 164);
 	
-	public static final SpellObject slowDownArrow = new SpellObject("Slowdown arrow", 84);
+	public static final SpellObject slowDownArrow = new SpellObject("Slowdown arrow", 84, 177);
 	
-	public static final SpellObject explosiveArrow = new SpellObject("Explosive arrow", 98);
+	public static final SpellObject explosiveArrow = new SpellObject("Explosive arrow", 98, 179);
 	
-	public static final SpellObject bowSkill = new SpellObject("Bow skill", 100);
+	public static final SpellObject bowSkill = new SpellObject("Bow skill", 100, 180);
 	
 }
