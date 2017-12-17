@@ -74,6 +74,10 @@ public class Game {
 		los = new GameViz(mapObject);
 	}
 	
+	public static void endGame() {
+		los.dispose();
+	}
+	
 	static public void initEntities(ArrayList<PlayingEntity> entities) {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		
@@ -401,6 +405,9 @@ public class Game {
 				String bestTurn = Game.getBestTurn(new String[] {parameters[1], "g", "false"});
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]";
+			}else if(parameters[0].equals("endFight")) {
+				log.println("Ending fight");
+				Game.endGame();
 			}
 		}
 		
