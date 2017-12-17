@@ -258,7 +258,7 @@ public class Game {
 		if(!selectedPosition.position.deepEquals(playingEntity.getPosition())) {
 			action += "m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
 		}else {
-			action += "s,"+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
+			action += "c,"+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
 		}
 		
 		
