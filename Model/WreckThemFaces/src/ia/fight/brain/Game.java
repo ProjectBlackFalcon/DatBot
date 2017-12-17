@@ -18,7 +18,10 @@ import ia.fight.map.LineOfSight;
 import ia.fight.map.Map;
 import ia.fight.structure.Player;
 import ia.fight.structure.classes.CraModel;
+import ia.fight.structure.spells.Spell;
 import ia.fight.structure.spells.SpellObject;
+import ia.fight.structure.spells.Type;
+import ia.fight.structure.spells.spelltypes.Damage;
 
 public class Game {
 
@@ -35,6 +38,7 @@ public class Game {
 	}
 	
 	public Game(int map) {
+		/*
 		String[] entities = new String[2];
 		// Player ID / posX / posY / Player or Monster / Player type (0:cra, 1:Enu, ...) / Team / HP Max / AP Max / MP Max
 		entities[0] = "0;10;12;p;0;1;2020;11;4";
@@ -64,46 +68,39 @@ public class Game {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
+	/**
+	 * Initializes the game map. Creates a map and opens a JFrame.
+	 * @param map
+	 */
 	public static void initGame(int map) {
 		Map mapObject = CreateMap.getMapById(map);
 		Game.map = mapObject;
 		los = new GameViz(mapObject);
 	}
 	
-	static public void initEntities(String[] entities) {
+	/**
+	 * Ends the game by disposing of the window.
+	 */
+	public static void endGame() {
+		los.dispose();
+	}
+	
+	/**
+	 * Initializes entities according to the passed arrayList
+	 * @param entities Entities to be initialized.
+	 */
+	static public void initEntities(ArrayList<PlayingEntity> entities) {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		
-		for(int i = 0; i < entities.length; i++) {
-			String[] command = entities[i].split(";");
-	
-			int id = Integer.parseInt(command[0]);
-			int posX = Integer.parseInt(command[1]);
-			int posY = Integer.parseInt(command[2]);
-			boolean npc = !command[3].equals("p");
-			int playerType = Integer.parseInt(command[4]);
+		for(int i = 0; i < entities.size(); i++) {
+
+			playingEntities.add(entities.get(i));
 			
-			String team = Integer.parseInt(command[5]) == 0 ? "red" : "blue";
-			Player player = null;
-			
-			int level = Integer.parseInt(command[6]);
-			int baseLP = Integer.parseInt(command[7]);
-			int baseAP = Integer.parseInt(command[8]);
-			int baseMP = Integer.parseInt(command[9]);
-			
-			if(!npc && playerType == 0) {
-				player = new Cra("Player "+id, baseLP, baseAP, baseMP, level);
-			}else {
-				player = new Cra("Player "+id, baseLP, baseAP, baseMP, level);
-			}
-			
-			PlayingEntity playingEntity = new PlayingEntity(id, npc, new Position(posX, posY), team, player);
-			playingEntities.add(playingEntity);
-			
-			Game.log.println("Created a playing entity in position "+playingEntity.getPosition());
-			Game.log.println(playingEntity.getModel() == null ? "No model currently selected." : playingEntity.getModel());
+			Game.log.println("Created a playing entity in position "+entities.get(i).getPosition());
+			Game.log.println(entities.get(i).getModel() == null ? "No model currently selected." : entities.get(i).getModel());
 		}
 
 		
@@ -112,6 +109,10 @@ public class Game {
 		Game.playingEntities = playingEntities;
 	}
 	
+	/**
+	 * Main method called to execute the commands.
+	 * @param commandString
+	 */
 	static public void refresh(String commandString) {
 		log.println("R;"+commandString);
 		String[] command = commandString.split(";");
@@ -147,6 +148,11 @@ public class Game {
 			los.repaint();
 	}
 	
+	/**
+	 * Returns the playingEntity corresponding to the ID passed as a parameter
+	 * @param id ID of the playingEntity seeked after
+	 * @return a PlayingEntity object
+	 */
 	private static PlayingEntity getPlayingEntityFromID(int id) {
 		for(int i = 0; i < Game.playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
@@ -157,14 +163,28 @@ public class Game {
 		return null;
 	}
 	
+	/**
+	 * Returns a spell according to the class passed as a parameter and the name of the spell.
+	 * @param name Name of the spell
+	 * @param playerClass Name of the class
+	 * @return a SpellObject object
+	 */
 	private static SpellObject getSpellFromName(String name, String playerClass) {
 		if(playerClass.equals("cra")) {
 			return CraModel.getSpellFromName(name);
+		}else if(playerClass.equals("monster")){
+			SpellObject spell = new SpellObject("MonsterSpell", 0, 0);
+			spell.addSpell(new Damage(Type.AIR, 0, 0, 0, 0, spell));
+			return spell;
 		}
 		
 		return null;
 	}
 	
+	/**
+	 * Executes a movement command
+	 * @param command
+	 */
 	static private void executeMovementCommand(String[] command){
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
@@ -176,6 +196,10 @@ public class Game {
 		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
 	}
 	
+	/**
+	 * Executes a spell command
+	 * @param command
+	 */
 	static private void executeSpellCommand(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
@@ -189,12 +213,21 @@ public class Game {
 
 		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
-		
 		Game.log.println(spellCast);
-		
+		if(castingEntity.getClass().getSimpleName().equals("Monster")) {
+			spellCast = Game.getSpellFromName(spellname, "monster");
+			Game.log.println(spellCast);
+		}else {
+			spellCast = Game.getSpellFromName(spellname, "cra");
+			Game.log.println(spellCast);
+		}
 		spellCast.applySpells(castingEntity, new Position(posX, posY), true, damage);
 	}
 	
+	/**
+	 * Executes a pass turn command
+	 * @param command
+	 */
 	static private void executePassTurn(String[] command) {
 		int id = Integer.parseInt(command[0]);
 		PlayingEntity castingEntity = getPlayingEntityFromID(id);
@@ -206,6 +239,11 @@ public class Game {
 		log.println("Entity "+id+" passing turn.");
 	}
 		
+	/**
+	 * Method called to get the best turn. Returns a single action, either movement or spellcast.
+	 * @param command
+	 * @return
+	 */
 	static private String getBestTurn(String[] command) {
 		long start = System.currentTimeMillis();
 		int id = Integer.parseInt(command[0]);
@@ -275,7 +313,7 @@ public class Game {
 		if(!selectedPosition.position.deepEquals(playingEntity.getPosition())) {
 			action += "m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
 		}else {
-			action += "s,"+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
+			action += "c,"+selectedPosition.turn.get(0).getID()+","+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
 		}
 		
 		
@@ -287,6 +325,11 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Class to hold an entity, a position, damage and an arraylist of spells as a single entity.
+	 * @author jikiw
+	 *
+	 */
 	static class bestEnemyAndTurn{
 		
 		PlayingEntity entity;
@@ -302,10 +345,16 @@ public class Game {
 		}
 	}
 	
-	void castSpell(ArrayList<SpellObject> spell) {
-		
-	}
-	
+	/**
+	 * Returns true if the specified position is targetable by the caster given the spell. Takes into account the range, the line of sight
+	 * and the straight line cast.
+	 * @param caster PlayingEntity that casts the spell
+	 * @param spell Spell cast
+	 * @param cell Cell targeted
+	 * @return boolean
+	 * 
+	 * @author jikiw
+	 */
 	boolean isCellTargetableBySpell(PlayingEntity caster, SpellObject spell, Position cell){
 		
 		int distance = Position.distance(caster.getPosition(), cell);
@@ -335,6 +384,124 @@ public class Game {
 	public static PrintStream log;
 	public static PrintStream com;
 	
+	/**
+	 * Executes any command that needs some players specified. Currently the only command available is the "init entities" command.
+	 * @param s command String<br>
+	 * 
+	 * Commands are written as follows : bot_instance;action_number;bot_part;type_of_message;command;parameters<br>
+	 * 
+	 * Bot instance : Which bot is currently asking/returning the command/return. The default is 0.<br>
+	 * 
+	 * Action number : Number corresponding to the action being done right now. It increases as the bot executes commands.<br>
+	 * 
+	 * Bot part : 'f' for this bot (fight bot). Other letters can be found as 'm' for model and 'i' for interface.<br>
+	 * 
+	 * Type of message : "cmd" if the message is a command, "rtn" if the message is a return.<br><br>
+	 * 
+	 * <b>Command : Type of command to the specified bot.</b> Commands accepted : <br>
+	 * 		<b>s</b> - Spawns the entities passed as parameters at the locations specified, with given ID and team.<br>
+	 * 
+	 * Parameters : the parameters passed as a String. These vary upon the type of the command.<br><br>
+	 * 
+	 * -- Examples -- <br><br>
+	 * 
+	 * <b>Init entities</b><br>
+	 * 0;403;f;cmd;s;[[0,1,11,12],[1,0,6,12]]<br>
+	 * Bot 0, command 403, fight bot receiving a command to start init two entities. Entity 0 in team 1 at position 11,12 and
+	 * entity 1 in team 0 at position 6,12.<br>
+	 * <b>[player_ID, team_ID, posX, posY]</b><br><br>
+	 * 
+	 * @param entities
+	 * @return the return String<br>
+	 * 
+	 * The return String is written according to the command String. It returns the same bot instance, action number and bot part.<br>
+	 * The type of message is switched to "rtn" as it is the return of the command. There is no command and the parameter returned is
+	 * either 'true' or 'false' according to the success of the command.
+	 * 
+	 * @author jikiw
+	 */
+	public static String executeCommand(String s, ArrayList<Player> entities) {
+		String param = s.split(";")[5];
+		System.out.println(param);
+		
+		String[] strings = param.split(Pattern.quote(",["));
+		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
+		
+		for(int i = 0; i < strings.length; i++) {
+			System.out.println(strings[i]);
+		}
+		
+		for(int i = 0; i < strings.length; i++) {
+			String[] params = strings[i].replaceAll(Pattern.quote("]"), "").replaceAll(Pattern.quote("["), "").split(",");
+			int ID = Integer.parseInt(params[0]);
+			int posX = Integer.parseInt(params[2]);
+			int posY = Integer.parseInt(params[3]);
+			String team = Integer.parseInt(params[1]) == 0 ? "blue" : "red";
+			PlayingEntity playingEntity = new PlayingEntity(ID, false, new Position(posX, posY), team, entities.get(i));
+			playingEntities.add(playingEntity);
+		}
+		
+		System.out.println(playingEntities);
+		Game.initEntities(playingEntities);
+		
+		return "";
+	}
+	
+	/**
+	 * Executes any command that can be displayed in a String. Other commands are passed through other "executeCommand" methods 
+	 * that take different parameters.<br>
+	 * 
+	 * @param s command String <br>
+	 *
+	 * Commands are written as follows : bot_instance;action_number;bot_part;type_of_message;command;parameters<br>
+	 * 
+	 * Bot instance : Which bot is currently asking/returning the command/return. The default is 0.<br>
+	 * 
+	 * Action number : Number corresponding to the action being done right now. It increases as the bot executes commands.<br>
+	 * 
+	 * Bot part : 'f' for this bot (fight bot). Other letters can be found as 'm' for model and 'i' for interface.<br>
+	 * 
+	 * Type of message : "cmd" if the message is a command, "rtn" if the message is a return.<br><br>
+	 * 
+	 * <b>Command : Type of command to the specified bot.</b> Commands accepted : <br>
+	 * 		<b>startFight</b> - Starts the fight according to the map passed as a parameter<br>
+	 * 		<b>m</b> - Moves the entity of which the ID is passed as a parameter, with the new position<br>
+	 * 		<b>p</b> - Passes the turn of the entity corresponding to the ID passed<br>
+	 * 		<b>c</b> - Casts a spell. Parameters are the caster's ID, the spell location, the spell ID, the spell name, the damage, and if it was a critical hit<br>
+	 * 		<b>g</b> - 'get' command, requests the best possible move for the entity corresponding to the ID passed<br>
+	 * 
+	 * Parameters : the parameters passed as a String. These vary upon the type of the command.<br><br>
+	 * 
+	 * -- Examples -- <br><br>
+	 * 
+	 * <b>Start a fight</b><br>
+	 * 0;403;f;cmd;startfight;[84675595]<br>
+	 * Bot 0, command 403, fight bot receiving a command to start a fight on map 84675595.<br>
+	 * <b>[map_ID]</b><br><br>
+	 * 
+	 * <b>Move entity</b><br>
+	 * 0;405;f;cmd;m;[0,11,12]<br>
+	 * Bot 0, command 405, fight bot receiving a command to move entity 0 to position 11,12<br>
+	 * <b>[entity_ID, posX, posY]</b><br><br>
+	 * 
+	 * <b>Pass turn</b><br>
+	 * 0;406;f;cmd;p;[0]<br>
+	 * Bot 0, command 406, fight bot receiving a command to pass turn of entity 0<br>
+	 * <b>[entity_ID]</b><br><br>
+	 * 
+	 * <b>Cast spell</b><br>
+	 * 0;408;f;cmd;c;[0,9,12,161,'Magic arrow',150,False]<br>
+	 * Bot 0, command 408, fight bot receiving a command to cast spell 'Magic arrow', ID:161. The caster is the entity 0 and
+	 * the spell is cast at the position 9,12. It does 150 damage and is not a critical hit. <br>
+	 * <b>[entity_ID, posX, posY, spellID, spellName, damage, crit]</b><br><br>
+	 * @return the return String<br>
+	 * 
+	 * The return String is written according to the command String. It returns the same bot instance, action number and bot part.<br>
+	 * The type of message is switched to "rtn" as it is the return of the command. There is no command and the parameter returned is
+	 * either 'true' or 'false' according to the success of the command.
+	 * 
+	 * @author jikiw
+	 */
 	public static String executeCommand(String s) {
 		if(Game.log == null) {
 			Game.initLogs();
@@ -348,57 +515,51 @@ public class Game {
 		current_command_nbr = Integer.parseInt(command[1]);
 		if(command.length > 2) {
 			if(!command[2].equals("f")) {
+				System.out.println("Broke out of loop");
 				log.println("Broke out of loop");
 				return "that ain't for me boi.";
 			}
 			
-			if(command[4].equals("startfight")) {
+			String commandType = command[4];
+			String[] parameters = command[5].replaceAll(Pattern.quote("]"), "").replaceAll(Pattern.quote("["), "").split(",");
+			
+			
+			if(commandType.equals("startfight")) {
 				log.println("Starting fight");
 				try {
 					
-					Game.initGame(parseStringToIntArray(command[5])[0]);
+					Game.initGame(parseStringToIntArray(parameters[0])[0]);
 					Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					returnInformation = (command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					log.println("Successfully initiated game.");
 				}catch(Exception e) {
 					log.println("Failure to initiate game;"+e.getMessage());
 				}
-			}else if(command[4].equals("s")){
-				String entities[] = command[5].split(Pattern.quote("],["));
-				for(int i = 0; i < entities.length; i++) {
-					entities[i] = entities[i].replace("[", "").
-							replace("]", "").
-							replace("'", "").
-							replace(","	, ";");
-				}
-				
-				
-				Game.initEntities(entities);
-				
-				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("m")) {
-				String refreshMessage = command[5] +";" + command[4] + ";" + command[6] + ";" + command[7];
+			}else if(commandType.equals("m")) {
+				String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("p")) {
-				String refreshMessage = command[5] +";" + command[4];
+			}else if(commandType.equals("p")) {
+				String refreshMessage = parameters[0] +";" + commandType;
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("c")) {
-				String refreshMessage = command[5] +";" + command[4] + ";" + command[6] + ";" + command[7] + ";" + command[8].replace("'", "") + ";" + command[9] + ";" + command[10];
+			}else if(commandType.equals("c")) {
+				String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2] + ";" + parameters[3].replace("'", "") + ";" + parameters[4] + ";" + parameters[5];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("g")) {
-				String bestTurn = Game.getBestTurn(new String[] {command[5], "g", "false"});
+			}else if(commandType.equals("g")) {
+				String bestTurn = Game.getBestTurn(new String[] {parameters[0], "g", "false"});
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]";
+			}else if(commandType.equals("endFight")) {
+				log.println("Ending fight");
+				Game.endGame();
 			}
 		}
 		
@@ -406,9 +567,15 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Inits all the logs.
+	 * 
+	 * @author jikiw
+	 */
 	public static void initLogs() {
 		try {
-			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			log = System.out;
+			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
 		} catch (FileNotFoundException e1) {
@@ -417,6 +584,10 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Main method - only used for testing and debugging.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		Game.initLogs();
@@ -439,6 +610,11 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Method to parse string to int arrays.
+	 * @param arr String 
+	 * @return int array
+	 */
 	static int[] parseStringToIntArray(String arr) {
 		String[] items = arr.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 

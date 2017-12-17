@@ -60,7 +60,7 @@ public class LifeSteal extends Spell{
 	@Override
 	public void applySpell(PlayingEntity pe, PlayingEntity target, boolean trueDamage, int intensity) {
 		pe.getModel().removeLP(this.getHighDamage());
-		target.getModel().addLP(this.getHighDamage());
+		target.getModel().addLP(this.getHighDamage()/2);
 	}
 	
 	

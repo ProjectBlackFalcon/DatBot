@@ -1,5 +1,6 @@
 package ia.fight.map;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ public class CreateMap {
 		JSONParser parser = new JSONParser();
 		ArrayList<int[]> blocks = new ArrayList<>();
 		try{
-			JSONArray arr = (JSONArray) parser.parse(new FileReader("C:\\Users\\jikiw\\Documents\\Workspace - Java\\Wreck them faces\\src\\ia\\fight\\data\\Mapinfo.json"));
+			String path = new File("src/ia/fight/data/Mapinfo.json").getAbsolutePath();
+			JSONArray arr = (JSONArray) parser.parse(new FileReader(path));
 			JSONObject map;
 			
 			if(map_id == -1) {
