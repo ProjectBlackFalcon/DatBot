@@ -27,6 +27,8 @@ public class FightTest {
 		players.add(entity1);
 		
 		//Init entities
+		//[[0,0,11,12],[1,1,6,12]]
+		//[[id_entity_0, team_entity_0, posX_entity_0, posY_entity_0], [id_entity_1, team_entity_1, posX_entity_1, posY_entity_1]]
 		System.out.println(Game.executeCommand("0;404;f;cmd;s;[[0,0,11,12],[1,1,6,12]]", players));
 
 		//Moving entity 0 to cell[11,12]
@@ -37,8 +39,8 @@ public class FightTest {
 		System.out.println(Game.executeCommand("0;407;f;cmd;m;[1,12,12]"));
 		//Entity 1 passing turn
 		System.out.println(Game.executeCommand("0;406;f;cmd;p;[1]"));
-		//Entity 0 casting magic arrow to cell[9,12]. 150 damage, not a crit.
-		System.out.println(Game.executeCommand("0;408;f;cmd;c;[0,9,12,'Magic arrow',150,False]"));
+		//Entity 0 casting magic arrow (id : 161) to cell[9,12]. 150 damage, not a crit.
+		System.out.println(Game.executeCommand("0;408;f;cmd;c;[0,9,12,161,'Magic arrow',150,False]"));
 		//Entity 0 passing turn
 		System.out.println(Game.executeCommand("0;409;f;cmd;p;[0]"));
 		//Getturn request for entity 1
