@@ -5,7 +5,7 @@ import ia.fight.structure.spells.Spell;
 
 public class StateApply extends Spell{
 
-	public StateApply() {
+	public StateApply(String type, String target) {
 		// TODO Auto-generated constructor stub
 	}
 

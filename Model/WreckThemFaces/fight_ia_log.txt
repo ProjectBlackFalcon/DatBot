@@ -40,15 +40,37 @@ Received command 410
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -69,15 +91,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -96,17 +140,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -125,17 +187,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -154,17 +234,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -183,17 +281,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -214,15 +330,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -241,17 +379,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -270,17 +426,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -299,17 +473,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -328,17 +520,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -357,15 +567,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -386,15 +616,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -413,15 +665,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -440,17 +712,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -469,17 +759,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -500,17 +808,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Lashing arrow (1 - 4) 0
+2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -531,17 +859,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Lashing arrow (1 - 4) 0
+2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -562,15 +910,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -591,15 +961,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -620,15 +1012,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -649,15 +1063,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
+Lashing arrow (1 - 4) 0
 2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -678,17 +1114,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Lashing arrow (1 - 4) 0
+2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -709,17 +1165,37 @@ Concentration arrow (0 - 0) 0
 AP available : 15
 Burning arrow (1 - 8) 98
 2
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Lashing arrow (1 - 4) 0
+2
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -738,17 +1214,37 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bat's eye (5 - 6) 42
+1
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -767,17 +1263,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -796,17 +1310,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -825,17 +1357,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -854,15 +1404,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -881,15 +1451,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Critical shooting (0 - 2) 0
+1
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -908,104 +1498,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
-Magic arrow (1 - 12) 67
+Paralysing arrow (1 - 6) 74
 2
-Frozen arrow (3 - 10) 51
-2
-Crushing arrow (0 - 0) 0
-10
-Bat's eye (0 - 0) 0
-10
-Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
-10
-Absolute acuteness (0 - 0) 0
-10
-Distant shooting (0 - 0) 0
-1
-Repulsive arrow (0 - 0) 0
-10
-Paralyzing arrow (0 - 0) 0
-10
-Reprisal (0 - 0) 0
-10
-Dispersing arrow (1 - 12) 0
-1
-Erosive arrow (0 - 0) 0
-10
-Concentration arrow (0 - 0) 0
-10
-AP available : 15
-Magic arrow (1 - 12) 67
-2
-Frozen arrow (3 - 10) 51
-2
-Crushing arrow (0 - 0) 0
-10
-Bat's eye (0 - 0) 0
-10
-Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
-10
-Absolute acuteness (0 - 0) 0
-10
-Distant shooting (0 - 0) 0
-1
-Repulsive arrow (0 - 0) 0
-10
-Paralyzing arrow (0 - 0) 0
-10
-Reprisal (0 - 0) 0
-10
-Dispersing arrow (1 - 12) 0
-1
-Erosive arrow (0 - 0) 0
-10
-Concentration arrow (0 - 0) 0
-10
-AP available : 15
-Magic arrow (1 - 12) 67
-2
-Frozen arrow (3 - 10) 51
-2
-Crushing arrow (0 - 0) 0
-10
-Bat's eye (0 - 0) 0
-10
-Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
-10
-Absolute acuteness (0 - 0) 0
-10
-Distant shooting (0 - 0) 0
-1
-Repulsive arrow (0 - 0) 0
-10
-Paralyzing arrow (0 - 0) 0
-10
-Reprisal (0 - 0) 0
-10
-Dispersing arrow (1 - 12) 0
-1
-Erosive arrow (0 - 0) 0
-10
-Concentration arrow (0 - 0) 0
-10
-AP available : 15
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -1024,17 +1545,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -1053,17 +1592,35 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -1082,17 +1639,180 @@ Erosive arrow (0 - 0) 0
 Concentration arrow (0 - 0) 0
 10
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
-Crushing arrow (0 - 0) 0
+Bat's eye (5 - 6) 42
+1
+Bow skill (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Crushing arrow (0 - 0) 0
 10
 Redemption arrow (0 - 0) 0
 10
-Atonement arrow (0 - 0) 0
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Paralysing arrow (1 - 6) 74
+2
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Bat's eye (5 - 6) 42
+1
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Crushing arrow (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Paralysing arrow (1 - 6) 74
+2
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Crushing arrow (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
+10
+Absolute acuteness (0 - 0) 0
+10
+Distant shooting (0 - 0) 0
+1
+Repulsive arrow (0 - 0) 0
+10
+Paralyzing arrow (0 - 0) 0
+10
+Reprisal (0 - 0) 0
+10
+Dispersing arrow (1 - 12) 0
+1
+Erosive arrow (0 - 0) 0
+10
+Concentration arrow (0 - 0) 0
+10
+AP available : 15
+Paralysing arrow (1 - 6) 74
+2
+Magic arrow (1 - 12) 67
+2
+Frozen arrow (3 - 10) 51
+2
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
+Crushing arrow (0 - 0) 0
+10
+Redemption arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -1114,17 +1834,37 @@ AP available : 15
 AP available : 15
 AP available : 15
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bat's eye (5 - 6) 42
+1
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
@@ -1148,17 +1888,37 @@ AP available : 15
 AP available : 15
 AP available : 15
 AP available : 15
+Paralysing arrow (1 - 6) 74
+2
 Magic arrow (1 - 12) 67
 2
 Frozen arrow (3 - 10) 51
 2
+Bat's eye (5 - 6) 42
+1
+Bow skill (0 - 0) 0
+10
+Explosive arrow (0 - 0) 0
+10
+Slowdown arrow (0 - 0) 0
+10
+Absorptive arrow (0 - 0) 0
+10
+Destructive arrow (0 - 0) 0
+10
+Tormenting arrow (0 - 0) 0
+10
+Poisoned arrow (0 - 0) 0
+10
+Plaguing arrow (0 - 0) 0
+10
+Powerful shooting (0 - 0) 0
+10
+Punitive arrow (0 - 0) 0
+10
 Crushing arrow (0 - 0) 0
 10
-Bat's eye (0 - 0) 0
-10
 Redemption arrow (0 - 0) 0
-10
-Atonement arrow (0 - 0) 0
 10
 Absolute acuteness (0 - 0) 0
 10
