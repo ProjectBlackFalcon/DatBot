@@ -1,9 +1,10 @@
 import json
+import mysql.connector
 
 
 class LowLevelFunctions:
-    def __init__(self):
-        self.map_info = []
+    def __init__(self, map_info=None):
+        self.map_info = [] if map_info is None else map_info
 
     def cell2coord(self, cell):
         return cell % 14 + int((cell//14)/2+0.5), (13 - cell % 14 + int((cell//14)/2))
@@ -99,5 +100,19 @@ class LowLevelFunctions:
             if self.distance_coords(pos, statue_pos) < closest[1]:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
+
+    def update_db(self, bot_id, name, occupation, current_map, worldmap):
+        try:
+            conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                           database="wz3xj6_spec")
+            cursor = conn.cursor()
+            put = (bot_id, name, occupation, current_map, worldmap)
+            cursor.execute("""INSERT INTO Bots (BotId, Name, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s)""", put)
+            conn.commit()
+            conn.close()
+        except Exception:
+            print
+            'Could not upload'
+
 
 __author__ = 'Alexis'

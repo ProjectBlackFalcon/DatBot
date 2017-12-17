@@ -8,10 +8,10 @@ import time
 
 class Interface:
     def __init__(self, bot_instance, headless=True):
-        self.file_name = 'Interfile{}'.format(bot_instance)
         self.bot_instance = bot_instance
         self.current_id = 0
         self.bank_info = {}
+        self.in_fight = False
 
         self.connected = False
 
@@ -59,10 +59,15 @@ class Interface:
                 if partial_message in message:
                     # print(message)
                     ret_val = ast.literal_eval(message.split(';')[-1])
+                if 'info;combat;[start]' in message:
+                    self.in_fight = True
+                if 'info;combat;[end]' in message:
+                    self.in_fight = False
             time.sleep(0.1)
 
-        print('[Interface] Recieved : ', ret_val)
-        return tuple(ret_val)
+        if not self.in_fight:
+            print('[Interface] Recieved : ', ret_val)
+            return tuple(ret_val)
 
     def connect(self, account, password, ig_name, server='Julith'):
         """
@@ -271,4 +276,6 @@ class Interface:
         bank_content, inventory_content = self.wait_for_return(msg_id)
         self.bank_info = bank_content
         return bank_content, inventory_content
+
+
 __author__ = 'Alexis'
