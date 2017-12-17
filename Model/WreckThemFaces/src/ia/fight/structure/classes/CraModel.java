@@ -9,6 +9,7 @@ import ia.fight.structure.spells.Type;
 import ia.fight.structure.spells.spelltypes.Buff;
 import ia.fight.structure.spells.spelltypes.CharSteal;
 import ia.fight.structure.spells.spelltypes.Damage;
+import ia.fight.structure.spells.spelltypes.LifeSteal;
 import ia.fight.structure.spells.spelltypes.Pushback;
 import ia.fight.structure.spells.spelltypes.Removal;
 import ia.fight.structure.spells.spelltypes.StateApply;
@@ -104,7 +105,7 @@ public class CraModel{
 		batsEye.setAreaOfEffect(new AreaOfEffect("circle", 2));
 		batsEye.setMaxEffectAccumulation(1);
 		batsEye.setRecastInterval(4);
-		batsEye.addSpell(new Damage(Type.WATER, 8, 10, 11, 13, batsEye));
+		batsEye.addSpell(new LifeSteal(Type.WATER, 8, 10, 11, 13));
 		batsEye.addSpell(new Buff("-range", 2, 2, true, 3));
 		
 		criticalShooting.clearSpells();

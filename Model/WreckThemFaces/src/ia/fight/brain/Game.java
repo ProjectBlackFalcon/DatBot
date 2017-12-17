@@ -18,7 +18,10 @@ import ia.fight.map.LineOfSight;
 import ia.fight.map.Map;
 import ia.fight.structure.Player;
 import ia.fight.structure.classes.CraModel;
+import ia.fight.structure.spells.Spell;
 import ia.fight.structure.spells.SpellObject;
+import ia.fight.structure.spells.Type;
+import ia.fight.structure.spells.spelltypes.Damage;
 
 public class Game {
 
@@ -143,6 +146,10 @@ public class Game {
 	private static SpellObject getSpellFromName(String name, String playerClass) {
 		if(playerClass.equals("cra")) {
 			return CraModel.getSpellFromName(name);
+		}else if(playerClass.equals("monster")){
+			SpellObject spell = new SpellObject("MonsterSpell", 0, 0);
+			spell.addSpell(new Damage(Type.AIR, 0, 0, 0, 0, spell));
+			return spell;
 		}
 		
 		return null;
@@ -172,8 +179,16 @@ public class Game {
 
 		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
-		
 		Game.log.println(spellCast);
+		if(castingEntity.getClass().getSimpleName().equals("Monster")) {
+			spellCast = Game.getSpellFromName(spellname, "monster");
+			Game.log.println(spellCast);
+		}else {
+			spellCast = Game.getSpellFromName(spellname, "cra");
+			Game.log.println(spellCast);
+		}
+		
+		
 		
 		spellCast.applySpells(castingEntity, new Position(posX, posY), true, damage);
 	}
