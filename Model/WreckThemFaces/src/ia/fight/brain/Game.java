@@ -73,37 +73,15 @@ public class Game {
 		los = new GameViz(mapObject);
 	}
 	
-	static public void initEntities(String[] entities) {
+	static public void initEntities(ArrayList<PlayingEntity> entities) {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		
-		for(int i = 0; i < entities.length; i++) {
-			String[] command = entities[i].split(";");
-	
-			int id = Integer.parseInt(command[0]);
-			int posX = Integer.parseInt(command[1]);
-			int posY = Integer.parseInt(command[2]);
-			boolean npc = !command[3].equals("p");
-			int playerType = Integer.parseInt(command[4]);
+		for(int i = 0; i < entities.size(); i++) {
+
+			playingEntities.add(entities.get(i));
 			
-			String team = Integer.parseInt(command[5]) == 0 ? "red" : "blue";
-			Player player = null;
-			
-			int level = Integer.parseInt(command[6]);
-			int baseLP = Integer.parseInt(command[7]);
-			int baseAP = Integer.parseInt(command[8]);
-			int baseMP = Integer.parseInt(command[9]);
-			
-			if(!npc && playerType == 0) {
-				player = new Cra("Player "+id, baseLP, baseAP, baseMP, level);
-			}else {
-				player = new Cra("Player "+id, baseLP, baseAP, baseMP, level);
-			}
-			
-			PlayingEntity playingEntity = new PlayingEntity(id, npc, new Position(posX, posY), team, player);
-			playingEntities.add(playingEntity);
-			
-			Game.log.println("Created a playing entity in position "+playingEntity.getPosition());
-			Game.log.println(playingEntity.getModel() == null ? "No model currently selected." : playingEntity.getModel());
+			Game.log.println("Created a playing entity in position "+entities.get(i).getPosition());
+			Game.log.println(entities.get(i).getModel() == null ? "No model currently selected." : entities.get(i).getModel());
 		}
 
 		
@@ -335,6 +313,39 @@ public class Game {
 	public static PrintStream log;
 	public static PrintStream com;
 	
+	/**
+	 * Executes any command that needs some players specified. Currently the only command available is the "init entities" command.
+	 * @param s
+	 * @param entities
+	 * @return
+	 */
+	public static String executeCommand(String s, ArrayList<Player> entities) {
+		String param = s.split(";")[4];
+		System.out.println(param);
+		
+		String[] strings = param.split(Pattern.quote(",["));
+		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
+		
+		for(int i = 1; i < strings.length; i++) {
+			String[] params = strings[i].replaceAll(Pattern.quote("]"), "").split(",");
+			int ID = Integer.parseInt(params[0]);
+			int posX = Integer.parseInt(params[2]);
+			int posY = Integer.parseInt(params[3]);
+			String team = Integer.parseInt(params[1]) == 0 ? "blue" : "red";
+			PlayingEntity playingEntity = new PlayingEntity(ID, false, new Position(posX, posY), team, entities.get(i-1));
+			playingEntities.add(playingEntity);
+		}
+		
+		Game.initEntities(playingEntities);
+		
+		return "";
+	}
+	
+	/**
+	 * Executes any command that can be displayed in a String
+	 * @param s
+	 * @return
+	 */
 	public static String executeCommand(String s) {
 		if(Game.log == null) {
 			Game.initLogs();
@@ -348,55 +359,45 @@ public class Game {
 		current_command_nbr = Integer.parseInt(command[1]);
 		if(command.length > 2) {
 			if(!command[2].equals("f")) {
+				System.out.println("Broke out of loop");
 				log.println("Broke out of loop");
 				return "that ain't for me boi.";
 			}
 			
-			if(command[4].equals("startfight")) {
+			String[] parameters = command[4].replaceAll(Pattern.quote("]"), "").replaceAll(Pattern.quote("["), "").split(",");
+			
+			
+			if(parameters[0].equals("startfight")) {
 				log.println("Starting fight");
 				try {
 					
-					Game.initGame(parseStringToIntArray(command[5])[0]);
+					Game.initGame(parseStringToIntArray(parameters[1])[0]);
 					Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					returnInformation = (command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					log.println("Successfully initiated game.");
 				}catch(Exception e) {
 					log.println("Failure to initiate game;"+e.getMessage());
 				}
-			}else if(command[4].equals("s")){
-				String entities[] = command[5].split(Pattern.quote("],["));
-				for(int i = 0; i < entities.length; i++) {
-					entities[i] = entities[i].replace("[", "").
-							replace("]", "").
-							replace("'", "").
-							replace(","	, ";");
-				}
-				
-				
-				Game.initEntities(entities);
-				
-				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
-				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("m")) {
-				String refreshMessage = command[5] +";" + command[4] + ";" + command[6] + ";" + command[7];
+			}else if(parameters[0].equals("m")) {
+				String refreshMessage = parameters[1] +";" + parameters[0] + ";" + parameters[2] + ";" + parameters[3];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("p")) {
-				String refreshMessage = command[5] +";" + command[4];
+			}else if(parameters[0].equals("p")) {
+				String refreshMessage = parameters[1] +";" + parameters[0];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("c")) {
-				String refreshMessage = command[5] +";" + command[4] + ";" + command[6] + ";" + command[7] + ";" + command[8].replace("'", "") + ";" + command[9] + ";" + command[10];
+			}else if(parameters[0].equals("c")) {
+				String refreshMessage = parameters[1] +";" + parameters[0] + ";" + parameters[2] + ";" + parameters[3] + ";" + parameters[4].replace("'", "") + ";" + parameters[5] + ";" + parameters[6];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(command[4].equals("g")) {
-				String bestTurn = Game.getBestTurn(new String[] {command[5], "g", "false"});
+			}else if(parameters[0].equals("g")) {
+				String bestTurn = Game.getBestTurn(new String[] {parameters[1], "g", "false"});
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]";
 			}
@@ -408,7 +409,8 @@ public class Game {
 	
 	public static void initLogs() {
 		try {
-			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			log = System.out;
+			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
 		} catch (FileNotFoundException e1) {
