@@ -107,11 +107,12 @@ public class Panel extends JPanel{
 			
 			if(obstacles.get(i)[2] == 3 || obstacles.get(i)[2] == 4){
 				g.setColor(Color.white);
+				/*
 				if(obstacles.get(i)[3] == 0) {
 					g.drawString("P", 6+obstacles.get(i)[0]*20, 15+1+obstacles.get(i)[1]*20);
 				}else{
 					g.drawString("N", 6+obstacles.get(i)[0]*20, 15+1+obstacles.get(i)[1]*20);
-				}
+				}*/
 			}
 		}
 		

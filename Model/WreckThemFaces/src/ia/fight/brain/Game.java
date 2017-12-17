@@ -340,22 +340,27 @@ public class Game {
 	 * @return
 	 */
 	public static String executeCommand(String s, ArrayList<Player> entities) {
-		String param = s.split(";")[4];
+		String param = s.split(";")[5];
 		System.out.println(param);
 		
 		String[] strings = param.split(Pattern.quote(",["));
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		
-		for(int i = 1; i < strings.length; i++) {
-			String[] params = strings[i].replaceAll(Pattern.quote("]"), "").split(",");
+		for(int i = 0; i < strings.length; i++) {
+			System.out.println(strings[i]);
+		}
+		
+		for(int i = 0; i < strings.length; i++) {
+			String[] params = strings[i].replaceAll(Pattern.quote("]"), "").replaceAll(Pattern.quote("["), "").split(",");
 			int ID = Integer.parseInt(params[0]);
 			int posX = Integer.parseInt(params[2]);
 			int posY = Integer.parseInt(params[3]);
 			String team = Integer.parseInt(params[1]) == 0 ? "blue" : "red";
-			PlayingEntity playingEntity = new PlayingEntity(ID, false, new Position(posX, posY), team, entities.get(i-1));
+			PlayingEntity playingEntity = new PlayingEntity(ID, false, new Position(posX, posY), team, entities.get(i));
 			playingEntities.add(playingEntity);
 		}
 		
+		System.out.println(playingEntities);
 		Game.initEntities(playingEntities);
 		
 		return "";
@@ -384,43 +389,44 @@ public class Game {
 				return "that ain't for me boi.";
 			}
 			
-			String[] parameters = command[4].replaceAll(Pattern.quote("]"), "").replaceAll(Pattern.quote("["), "").split(",");
+			String commandType = command[4];
+			String[] parameters = command[5].replaceAll(Pattern.quote("]"), "").replaceAll(Pattern.quote("["), "").split(",");
 			
 			
-			if(parameters[0].equals("startfight")) {
+			if(commandType.equals("startfight")) {
 				log.println("Starting fight");
 				try {
 					
-					Game.initGame(parseStringToIntArray(parameters[1])[0]);
+					Game.initGame(parseStringToIntArray(parameters[0])[0]);
 					Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					returnInformation = (command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 					log.println("Successfully initiated game.");
 				}catch(Exception e) {
 					log.println("Failure to initiate game;"+e.getMessage());
 				}
-			}else if(parameters[0].equals("m")) {
-				String refreshMessage = parameters[1] +";" + parameters[0] + ";" + parameters[2] + ";" + parameters[3];
+			}else if(commandType.equals("m")) {
+				String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(parameters[0].equals("p")) {
-				String refreshMessage = parameters[1] +";" + parameters[0];
+			}else if(commandType.equals("p")) {
+				String refreshMessage = parameters[0] +";" + commandType;
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(parameters[0].equals("c")) {
-				String refreshMessage = parameters[1] +";" + parameters[0] + ";" + parameters[2] + ";" + parameters[3] + ";" + parameters[4].replace("'", "") + ";" + parameters[5] + ";" + parameters[6];
+			}else if(commandType.equals("c")) {
+				String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2] + ";" + parameters[3].replace("'", "") + ";" + parameters[4] + ";" + parameters[5];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
-			}else if(parameters[0].equals("g")) {
-				String bestTurn = Game.getBestTurn(new String[] {parameters[1], "g", "false"});
+			}else if(commandType.equals("g")) {
+				String bestTurn = Game.getBestTurn(new String[] {parameters[0], "g", "false"});
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;["+bestTurn+"]";
-			}else if(parameters[0].equals("endFight")) {
+			}else if(commandType.equals("endFight")) {
 				log.println("Ending fight");
 				Game.endGame();
 			}

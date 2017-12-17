@@ -19,7 +19,7 @@ public class CreateMap {
 		JSONParser parser = new JSONParser();
 		ArrayList<int[]> blocks = new ArrayList<>();
 		try{
-			String path = new File("../../Utils/Mapinfo.json").getAbsolutePath();
+			String path = new File("src/ia/fight/data/Mapinfo.json").getAbsolutePath();
 			JSONArray arr = (JSONArray) parser.parse(new FileReader(path));
 			JSONObject map;
 			
