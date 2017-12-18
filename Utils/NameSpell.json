@@ -1,0 +1,3847 @@
+[
+  {
+    "id": 0,
+    "name": "Punch",
+    "descName": "Inflicts Neutral-type damage."
+  },
+  {
+    "id": 1,
+    "name": "Typhoon",
+    "descName": "Causes Air-type damage and steals Agility over an area of effect."
+  },
+  {
+    "id": 2,
+    "name": "Blindness",
+    "descName": "Causes area-of-effect Neutral-type damage and reduces the target's AP.\nThe AP reduction effect cannot be stacked on the same target or unbewitched."
+  },
+  {
+    "id": 3,
+    "name": "Natural Attack",
+    "descName": "Inflicts Fire-type damage and steals Intelligence."
+  },
+  {
+    "id": 4,
+    "name": "Barricade",
+    "descName": "Reduces all close-combat damages received for 1 turn, and increases the target's MP if they receive long-rage damage. Can't be cast while in the \"Glyphorce\" state."
+  },
+  {
+    "id": 5,
+    "name": "Truce",
+    "descName": "Reduces damage taken by allies and enemies for 1 turn.\nThe caster can not cause damage during the next turn.\nCan not be cast in the Glyphorce state."
+  },
+  {
+    "id": 6,
+    "name": "Rampart",
+    "descName": "Reduces damage received.\nThe protection for allies is weaker.\nCan not be cast in the Glyphorce state."
+  },
+  {
+    "id": 7,
+    "name": "Feca Shield",
+    "descName": "Reduces damage taken.\nCan not be cast in the Glyphorce state."
+  },
+  {
+    "id": 8,
+    "name": "Backlash",
+    "descName": "Inflicts Earth-type damage and steals Strength."
+  },
+  {
+    "id": 9,
+    "name": "Cloudy Attack",
+    "descName": "Inflicts Water-type damage and steals Chance."
+  },
+  {
+    "id": 10,
+    "name": "Burning Glyph",
+    "descName": "Places a Glyph which causes Fire-type damage.\nEnemies and allies lose MP while they're in the Glyph's area of effect.\nPrevents the caster from casting other elemental Glyphs in the same turn."
+  },
+  {
+    "id": 11,
+    "name": "Teleglyph",
+    "descName": "Teleports to the targeted cell and triggers the targeted Glyphs."
+  },
+  {
+    "id": 12,
+    "name": "Glyph of Blindness",
+    "descName": "Places a Glyph which causes Earth-type damage.\nEnemies and allies lose AP while they're in the Glyph's area of effect.\nPrevents the caster from casting other elemental Glyphs in the same turn."
+  },
+  {
+    "id": 13,
+    "name": "Glyph of Repulsion",
+    "descName": "Places a Glyph which inflicts Fire-, Water-, Air- and Earth-type damage to those around the targeted cell at the end of the turn."
+  },
+  {
+    "id": 14,
+    "name": "Shiver",
+    "descName": "Attracts targets and causes Air-type damage to enemies in a cone-shaped area of effect."
+  },
+  {
+    "id": 15,
+    "name": "Paralysing Glyph",
+    "descName": "Places a Glyph which causes Water-type damage.\nAllies and enemies lose Range while they're in the Glyph's area of effect.\nPrevents the caster from casting other elemental Glyphs in the same turn."
+  },
+  {
+    "id": 16,
+    "name": "Gravitational Glyph",
+    "descName": "Places a Glyph which applies the Unshakable state, preventing the caster from being pushed and applies the Gravity state to allies and enemies.\nAffects all characters in the area of effect."
+  },
+  {
+    "id": 17,
+    "name": "Aggressive Glyph",
+    "descName": "Places a Glyph which inflicts Air-type damage and Attracts at the beginning of the turn.\nEnemies and allies cause less damage while in the Glyph's area of effect.\nPrevents the caster from casting other elemental glyphs in the same turn."
+  },
+  {
+    "id": 18,
+    "name": "Lethargy",
+    "descName": "Causes Fire-type damage and reduces MP.\nThe lost MP cannot be stacked or unbewitched."
+  },
+  {
+    "id": 19,
+    "name": "Bubble",
+    "descName": "Causes Water-type damage and reduces range."
+  },
+  {
+    "id": 20,
+    "name": "Bastion",
+    "descName": "Reduces all long-range damages received and increases the target's Power if they receive close-combat damage.\nCan not be cast in the Glyphorce state."
+  },
+  {
+    "id": 21,
+    "name": "Dragonic",
+    "descName": "Inflicts Fire-type damage; entities who attack the target are healed."
+  },
+  {
+    "id": 22,
+    "name": "Canine",
+    "descName": "Inflicts Air-type damage and reduces Lock."
+  },
+  {
+    "id": 23,
+    "name": "Takeoff",
+    "descName": "Sacrifices an allied Summons to take its place.Inflicts Air-type damage at the start and end of the teleportation."
+  },
+  {
+    "id": 24,
+    "name": "Dragon's Breath",
+    "descName": "Inflicts Fire-type damage.When a Wyrmling attacks the target, nearby allies are healed."
+  },
+  {
+    "id": 25,
+    "name": "Sacrificial Fire",
+    "descName": "Sacrifices a Summons to heal nearby.\nOnly works on the caster's Summons."
+  },
+  {
+    "id": 26,
+    "name": "Animal Link",
+    "descName": "Merges with an allied Summons to change its own appearance and to take control of Summons from the same family.\nThe targeted Summons is killed.\n\nTofu: \n• All Tofus gain 2 AP, as well as 50% of the caster's Agility and Air-type damage. \n• The caster gains 2 MP.\n\nGobball: \n• All Gobballs gain 2 AP, as well as 50% of the caster's Strength, Earth-type damage and Neutral-type damage. \n• The caster reduces damage suffered by 20%.\n\nWyrmling: \n• All Wyrmlings gain 2 AP, as well as 50% of the caster's Intelligence, Fire-type damage and heals. \n• The caster gains a healing bonus.\n\nToad:\n• All Toads gain 2 AP, as well as 50% of the caster's Chance and Water-type damage. \n• The caster gains a damage bonus."
+  },
+  {
+    "id": 27,
+    "name": "High-Energy Shot",
+    "descName": "Considerably increases Vitality, damage, MP and AP of one of the caster's Summons."
+  },
+  {
+    "id": 28,
+    "name": "Fossil",
+    "descName": "Inflicts Earth-type damage on enemies and removes MP."
+  },
+  {
+    "id": 29,
+    "name": "Symbiosa",
+    "descName": "Takes control of an allied Summons.\nTofu: unlocks a spell that lets you switch places with an ally.\nGobball: unlocks a spell that lets you attract an ally or enemy.\nWyrmling: unlocks a spell that lets you heal an ally.\nToad: unlocks a spell that repels the target to the targeted cell."
+  },
+  {
+    "id": 30,
+    "name": "Whip",
+    "descName": "On enemies: inflicts damage in the element of the caster's transformation.\n\nOn allies: applies an effect depending on the caster's transformation:\n• Tofu: +2 MP\n• Gobball: 20% reduction of damage suffered.\n• Wyrmling: Heals the target.\n• Toad: Power bonus."
+  },
+  {
+    "id": 31,
+    "name": "Red Wyrmling",
+    "descName": "Summons a Red Wyrmling that inflicts Fire-type damage in a line and unbewitches enemies.\nIf controlled by whoever summoned it, it can heal an ally.\nPrevents a Gobball, Toad or Tofu from being summoned during the same turn."
+  },
+  {
+    "id": 32,
+    "name": "Natural Defence",
+    "descName": "The targeted Summons becomes invulnerable, but only lives for one turn.\nOnly works on the caster's Summons."
+  },
+  {
+    "id": 33,
+    "name": "Duster",
+    "descName": "Inflicts Air-type damage.\nDamage is increased for each Tofu present in the area."
+  },
+  {
+    "id": 34,
+    "name": "Black Tofu",
+    "descName": "Summons a Black Tofu that reduces enemies' Lock and whose damage increases every turn. \nIf controlled by whoever summoned it, it can switch places with an ally.\nPrevents a Gobball, Toad or Wyrmling from being summoned on the same turn."
+  },
+  {
+    "id": 35,
+    "name": "Gobball",
+    "descName": "Summons a Gobball that locks enemies and reduces their Dodge.\nIf controlled by whoever summoned it, it can attract a target.\nPrevents a Wyrmling, Toad or Tofu from being summoned on the same turn."
+  },
+  {
+    "id": 36,
+    "name": "Crackler Punch",
+    "descName": "Inflicts Earth-type damage in an area of effect."
+  },
+  {
+    "id": 37,
+    "name": "Call to Order",
+    "descName": "Kills an allied Summons.\nRecovers the AP used to summon it if it was a Tofu, Gobball, Toad or Wyrmling."
+  },
+  {
+    "id": 38,
+    "name": "Podgy Tofu",
+    "descName": "Summons a Podgy Tofu that repels enemies and whose damage increases every turn.\nIf controlled by whoever summoned it, it can switch places with an ally.\nPrevents a Gobball, Toad or Wyrmling from being summoned on the same turn."
+  },
+  {
+    "id": 39,
+    "name": "Black Wyrmling",
+    "descName": "Summons a Black Wyrmling that attacks enemies in a line and heals nearby allies.\nIf controlled by whoever summoned it, it can heal an ally.\nPrevents a Gobball, Toad or Tofu from being summoned during the same turn."
+  },
+  {
+    "id": 40,
+    "name": "Black Gobball",
+    "descName": "Summons a Black Gobball that locks enemies.\nIt applies the Gravity state every other turn.\nPrevents a Wyrmling, Toad or Tofu from being summoned on the same turn."
+  },
+  {
+    "id": 41,
+    "name": "Living Bag",
+    "descName": "Summons a Living Bag that suffers damage on behalf of its allies.\nThe Living Bag dies after 4 turns.\nWhen it is attacked by an ally, the ally is healed."
+  },
+  {
+    "id": 42,
+    "name": "Fortune",
+    "descName": "Increases the target's Dodge for the current turn, then increases its Power for the following turn."
+  },
+  {
+    "id": 43,
+    "name": "Shovel Throwing",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 44,
+    "name": "Shovel Kiss",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 45,
+    "name": "Reducing Key",
+    "descName": "Reduces range."
+  },
+  {
+    "id": 46,
+    "name": "Unsummoning",
+    "descName": "Inflicts Fire-type damage.\nDamage is doubled on summons."
+  },
+  {
+    "id": 47,
+    "name": "Pandora's Box",
+    "descName": "Restores HP based on the target's maximum Vitality, but decreases the caster's ability to reduce MP for the following turn."
+  },
+  {
+    "id": 48,
+    "name": "Mound",
+    "descName": "Inflicts Earth-type damage in a cross shape."
+  },
+  {
+    "id": 49,
+    "name": "Ghostly Shovel",
+    "descName": "Ghostly Shovel inflicts Fire-type damage and can reverse the effects of spells cast on the target."
+  },
+  {
+    "id": 50,
+    "name": "Clumsiness",
+    "descName": "Subtracts MP."
+  },
+  {
+    "id": 51,
+    "name": "Coins Throwing",
+    "descName": "Inflicts long-range Water-type damage."
+  },
+  {
+    "id": 52,
+    "name": "Greed",
+    "descName": "Increases damage to allies and enemies in an area of effect."
+  },
+  {
+    "id": 53,
+    "name": "Prime of Life",
+    "descName": "Deals Earth-type damage and lowers MP Dodge at short range."
+  },
+  {
+    "id": 54,
+    "name": "Mass Clumsiness",
+    "descName": "Reduces the AP of enemies in the area of effect."
+  },
+  {
+    "id": 55,
+    "name": "Acceleration",
+    "descName": "Increases the target's MP."
+  },
+  {
+    "id": 56,
+    "name": "Shovel of Judgement",
+    "descName": "Causes Water-type damage and reduces MP."
+  },
+  {
+    "id": 57,
+    "name": "Living Shovel",
+    "descName": "This spell summons a shovel that repels enemies and reduces their resistance to MP loss.\nWhen it is attacked by an ally, the ally is healed."
+  },
+  {
+    "id": 58,
+    "name": "Slaughtering Shovel",
+    "descName": "Inflicts Water-type damage."
+  },
+  {
+    "id": 59,
+    "name": "Bribery",
+    "descName": "On allies: heals and applies the Pacifist state for 1 turn.\nOn enemies: applies the Pacifist and Invulnerable states for 1 turn.\nThe spell's effects cannot be unbewitched."
+  },
+  {
+    "id": 60,
+    "name": "Living Chest",
+    "descName": "Summons a Living Chest that locks enemies.\nIt inflicts damage in an area of effect around it and detects anyone or anything invisible. The less life it has, the greater the damage it inflicts.\nWhen it is attacked by an ally, the ally is healed."
+  },
+  {
+    "id": 61,
+    "name": "Deviousness",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 62,
+    "name": "Chakra Concentration",
+    "descName": "Steals Fire-type health from the target whenever it triggers a trap."
+  },
+  {
+    "id": 63,
+    "name": "Tricky Blow",
+    "descName": "Inflicts Fire-type damage on enemies.\nRepels the target."
+  },
+  {
+    "id": 64,
+    "name": "Furrow",
+    "descName": "Deals Fire damage in an area of effect.\nAttracts targets.\nSteals Intelligence."
+  },
+  {
+    "id": 65,
+    "name": "Tricky Trap",
+    "descName": "Causes Fire damage and attracts."
+  },
+  {
+    "id": 66,
+    "name": "Insidious Poison",
+    "descName": "Poisons the target for 2 turns and inflicts Air-type damage."
+  },
+  {
+    "id": 67,
+    "name": "Fear",
+    "descName": "Pushes an ally or an enemy onto the targeted cell."
+  },
+  {
+    "id": 68,
+    "name": "Mistake",
+    "descName": "Causes Air- and Earth-type damage.\nSteals Agility and Strength.\nApplies an unhealable health penalty."
+  },
+  {
+    "id": 69,
+    "name": "Paralysing Trap",
+    "descName": "Reduces MP."
+  },
+  {
+    "id": 70,
+    "name": "Con",
+    "descName": "Inflicts Air-type damage."
+  },
+  {
+    "id": 71,
+    "name": "Poisoned Trap",
+    "descName": "Poisons the player who sets it off with Earth-type damage for 3 turns."
+  },
+  {
+    "id": 72,
+    "name": "Invisibility",
+    "descName": "Renders invisible."
+  },
+  {
+    "id": 73,
+    "name": "Repelling Trap",
+    "descName": "Repels allies and enemies.\nCauses Air damage to enemies."
+  },
+  {
+    "id": 74,
+    "name": "Double",
+    "descName": "Summons a controllable double that has the same characteristics as the summoner.\nDoes not attack, and dies after 2 turns, switching places with its caster."
+  },
+  {
+    "id": 75,
+    "name": "Miry Trap",
+    "descName": "Places a trap that inflicts Water-type damage.\nAllies near the target are healed by up to 50% of the damage inflicted."
+  },
+  {
+    "id": 76,
+    "name": "Lethal Attack",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 77,
+    "name": "Insidious Trap",
+    "descName": "Places a trap. Once triggered, enemies who complete their turn in the area of effect suffer Air-type damage."
+  },
+  {
+    "id": 78,
+    "name": "Cruelty",
+    "descName": "Inflicts Water-type damage and increases the caster's MP."
+  },
+  {
+    "id": 79,
+    "name": "Mass Trap",
+    "descName": "Places a trap that inflicts Earth-type damage in an area of effect."
+  },
+  {
+    "id": 80,
+    "name": "Lethal Trap",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 81,
+    "name": "Slow Down",
+    "descName": "Causes Water-type damage and removes 1 AP from the target.\nTakes 1 extra AP from enemies in the Telefrag state.\nThe AP removal cannot be unbewitched."
+  },
+  {
+    "id": 82,
+    "name": "Rewind",
+    "descName": "At the end of its turn, teleports the targeted ally back to where it was at the start of the turn."
+  },
+  {
+    "id": 83,
+    "name": "Hand",
+    "descName": "Causes Fire-type damage and removes 1 AP from the target.\nTakes extra AP from enemies in the Telefrag state.\nThe AP removal cannot be unbewitched.\nRemoves the Telefrag state."
+  },
+  {
+    "id": 84,
+    "name": "Frostbite",
+    "descName": "Inflicts Air-type damage to enemies and teleports the target back to their previous position."
+  },
+  {
+    "id": 85,
+    "name": "Haziness",
+    "descName": "Reduces AP in an area of effect this turn.\nIncreases AP in an area of effect the next turn."
+  },
+  {
+    "id": 86,
+    "name": "Synchro",
+    "descName": "Summons Synchro, who gains in power and heals when a Telefrag is generated, once per turn.\nSynchro will die, causing Air-type damage in an area of effect within 3 cells, if it suffers a Telefrag.\nIt is not affected by the spell Rewind.\nStarting from the turn after it is cast, its summoner loses 1 AP."
+  },
+  {
+    "id": 87,
+    "name": "Loss of Motivation",
+    "descName": "Causes Earth-type damage to enemies along a diagonal.\nReduces the duration of the effects on targets in the Telefrag state and removes it."
+  },
+  {
+    "id": 88,
+    "name": "Teleportation",
+    "descName": "Teleports the caster symmetrically in relation to the target.\nThe caster gains 2 AP for 1 turn each time they generate a Telefrag.\nThe cool down period is removed when a Telefrag is generated or consumed.\n\nA Telefrag is generated when one entity takes the place of another."
+  },
+  {
+    "id": 89,
+    "name": "Temporal Paradox",
+    "descName": "Teleports allies and enemies (within an area of effect of 4 cells around the Dial) symmetrically in relation to the Accomplice (or the Dial).\nAt the start of the Accomplice's (or Dial's) turn: teleports the same targets again symmetrically.\nSets the cool down period of Xelor's Dial and the Accomplice to 1."
+  },
+  {
+    "id": 90,
+    "name": "Flight",
+    "descName": "At the start of caster's next turn, teleports the target to their previous position."
+  },
+  {
+    "id": 91,
+    "name": "Xelor's Punch",
+    "descName": "Inflicts Earth-type damage to enemies.\nTeleports the target symmetrically in relation to the spell's caster."
+  },
+  {
+    "id": 92,
+    "name": "Dark Ray",
+    "descName": "Causes Earth-type damage in a line.\nThe base damage of the spell is doubled against enemies in the Telefrag state.\nRemoves the Telefrag state."
+  },
+  {
+    "id": 93,
+    "name": "Shrivelling",
+    "descName": "Inflicts Air-type damage in a line.\nCauses additional damage to enemies in the Telefrag state."
+  },
+  {
+    "id": 94,
+    "name": "Counter",
+    "descName": "Reflects part of the damage taken in close-combat back at the attacker."
+  },
+  {
+    "id": 95,
+    "name": "Clock",
+    "descName": "Water-type life steal.\nThe caster gains 1 AP at the start of their next turn.\nTakes AP from enemies in the Telefrag state and removes it.\nThe AP removal can not be unbewitched."
+  },
+  {
+    "id": 96,
+    "name": "Temporal Dust",
+    "descName": "Inflicts Fire-type damage.\nIf the target is in the Telefrag state, the damage is inflicted in the area of effect and nearby enemies are teleported symmetrically relative to the centre of the area of effect."
+  },
+  {
+    "id": 97,
+    "name": "Xelor's Dial",
+    "descName": "Summons a Dial which causes Fire-type damage in an area of effect, and removes AP from enemies in the Telefrag state.\nGives AP to allies in the Telefrag state around it."
+  },
+  {
+    "id": 98,
+    "name": "Time Theft",
+    "descName": "Inflicts Water-type damage on the target.\nThe caster gains 1 AP at the start of their next turn."
+  },
+  {
+    "id": 99,
+    "name": "Mummification",
+    "descName": "The caster can no longer inflict damage with their elemental spells and gains 2 MP for 1 turn.\nGives the Telefrag state to all allies and enemies for 2 turns.\nWhen the Telefrag state is removed, the caster gains 100 Power for 2 turns."
+  },
+  {
+    "id": 100,
+    "name": "Xelor's Sandglass",
+    "descName": "Inflicts Fire-type damage and removes AP from the target in a straight line, without line of sight.\nIf the target is in the Telefrag state, the spell's effect is decided in an area of effect.\nThe AP removal cannot be unbewitched."
+  },
+  {
+    "id": 101,
+    "name": "Roulette",
+    "descName": "Summons a Roulette that provides a random bonus to everyone at the start of its turn."
+  },
+  {
+    "id": 102,
+    "name": "Heads or Tails",
+    "descName": "Inflicts Earth-type damage and increases the damage inflicted by the target for 1 turn if it is an enemy."
+  },
+  {
+    "id": 103,
+    "name": "Ecaflip's Luck",
+    "descName": "Halves damage suffered for 1 turn.\nOn the next turn, damage suffered will be increased by 50%."
+  },
+  {
+    "id": 104,
+    "name": "Clover",
+    "descName": "Applies a bonus to critical hits, but reduces damage from weapons for 2 turns.\nIf recast during the effect's duration, applies a critical hit penalty instead."
+  },
+  {
+    "id": 105,
+    "name": "Catnip",
+    "descName": "Increases the target's MP by 1 for 1 turn."
+  },
+  {
+    "id": 106,
+    "name": "Wheel of Fortune",
+    "descName": "Increases damage."
+  },
+  {
+    "id": 107,
+    "name": "Topkaj",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 108,
+    "name": "Feline Spirit",
+    "descName": "Inflicts Earth-type damage and moves the caster to the other side of the target.\nFor each time it is cast, the caster loses a bewitchment turn at the end of his next turn."
+  },
+  {
+    "id": 109,
+    "name": "Bluff",
+    "descName": "Inflicts Air-type damage.\nInflicts Water-type damage for critical hits."
+  },
+  {
+    "id": 110,
+    "name": "Playful Claw",
+    "descName": "Inflicts Earth-type damage on several cells along a straight line.\nInflicts Water-type damage for critical hits."
+  },
+  {
+    "id": 111,
+    "name": "Repercussion",
+    "descName": "Applies a shield around the target.\nThe shield's value is higher on the caster."
+  },
+  {
+    "id": 112,
+    "name": "Claw of Ceangal",
+    "descName": "Inflicts Air-type damage.\nRepels the target, then moves closer to it"
+  },
+  {
+    "id": 113,
+    "name": "Perception",
+    "descName": "The target is healed of 4% of its life per nearby enemy.\nDetects anyone or anything invisible in the area of effect."
+  },
+  {
+    "id": 114,
+    "name": "Rekop",
+    "descName": "Inflicts Air-, Water-, Earth- and Fire-type damage.\nThe spell takes effect randomly: either in 1 turn, in 2 turns or in 3 turns, and the effects can only be stacked once per target.\nThe later the damage is applied, the more significant it will be."
+  },
+  {
+    "id": 115,
+    "name": "Smell",
+    "descName": "Grants MP but removes AP for the current turn, across an area of effect. The next turn, it grants AP but removes MP.\nThe AP used to cast the spell are returned to the Ecaflip."
+  },
+  {
+    "id": 116,
+    "name": "Rough Tongue",
+    "descName": "Inflicts Fire-type damage to enemies.\nOn enemies: reduces the target's range this turn, but increases it the next turn.\nOn allies: increases the target's range this turn, but reduces it next turn.\nCan only be stacked once."
+  },
+  {
+    "id": 117,
+    "name": "Summoning Claw",
+    "descName": "Summons a Kitten that inflicts Water-type damage on enemies."
+  },
+  {
+    "id": 118,
+    "name": "Reflex",
+    "descName": "Inflicts Air-type damage in an area of effect and applies an unhealable health penalty."
+  },
+  {
+    "id": 119,
+    "name": "All or Nothing",
+    "descName": "On enemies: Immediately inflicts Water-type damage in an area of effect and heals the following turn.\nOn allies: Immediately heals in an area of effect and inflicts Water-type damage the following turn.\nThe caster is always affected first."
+  },
+  {
+    "id": 120,
+    "name": "Fate of Ecaflip",
+    "descName": "Inflicts Earth-type damage, attracts and then pushes the target back.\nIf the target receives pushback damage in the same turn, it will also suffer a 2-turn MP penalty."
+  },
+  {
+    "id": 121,
+    "name": "Thunderous Word",
+    "descName": "Inflicts Water-type damage on enemies and reduces their AP."
+  },
+  {
+    "id": 122,
+    "name": "Wounding Word",
+    "descName": "Inflicts Air-type damage.\n\nAllies near the caster (within 2 cells) are healed of up to 100% of the damage inflicted before reduction."
+  },
+  {
+    "id": 123,
+    "name": "Turbulent Word",
+    "descName": "Steals HP through Air-type damage."
+  },
+  {
+    "id": 124,
+    "name": "Alternative Word",
+    "descName": "Inflicts Fire-type damage on enemies.\nHeals allies."
+  },
+  {
+    "id": 125,
+    "name": "Forbidden Word",
+    "descName": "Inflicts Water-type damage.\n\nAllies near the target (within 2 cells) are healed of up to 100% of the damage inflicted before reduction."
+  },
+  {
+    "id": 126,
+    "name": "Stimulating Word",
+    "descName": "The target gains the Stimulated state: it gains 2 AP for 4 turns.\n\nDoesn't affect Eniripsas."
+  },
+  {
+    "id": 127,
+    "name": "Preventing Word",
+    "descName": "The target gains shield points for 2 turns."
+  },
+  {
+    "id": 128,
+    "name": "Frightening Word",
+    "descName": "Repels the target."
+  },
+  {
+    "id": 129,
+    "name": "Friendship Word",
+    "descName": "Summons a Coney that gives the caster the Stimulated state as long as it is alive: it gives 2 AP.\nThe Coney heals its allies.\n\nWhen the Coney dies, a heal glyph appears: entities who end their turn on the glyph are healed."
+  },
+  {
+    "id": 130,
+    "name": "Selective Word",
+    "descName": "Causes Fire-type damage on enemies in an area of effect.\nHeals allies."
+  },
+  {
+    "id": 131,
+    "name": "Regenerating Word",
+    "descName": "The target is healed with a delay: at the start of the caster's next turn, and the following turn."
+  },
+  {
+    "id": 132,
+    "name": "Whirling Word",
+    "descName": "Inflicts Air-type damage in an area of effect.\n\nAllies near the caster (within 2 cells) are healed of up to 100% of the damage inflicted before reduction."
+  },
+  {
+    "id": 133,
+    "name": "Word of Youth",
+    "descName": "Heals an ally and removes 1 bewitchment turn from them."
+  },
+  {
+    "id": 134,
+    "name": "Blaring Word",
+    "descName": "Causes Water-type damage in an area of effect.\n\nAllies near the targets (within 2 cells) are healed of up to 100% of the damage inflicted before reduction."
+  },
+  {
+    "id": 135,
+    "name": "Puzzling Word",
+    "descName": "Inflicts Fire-type damage on enemies and heals allies."
+  },
+  {
+    "id": 136,
+    "name": "Paralysing Word",
+    "descName": "Reduces MP for 1 turn.\nAt the end of the caster's turn, heals nearby allies (within 2 cells)."
+  },
+  {
+    "id": 137,
+    "name": "Lifting Word",
+    "descName": "Switches places with an ally (excluding Summons).\n\nRemoves the Stimulated state. Applies the Unhealable state to the caster if they ally doesn't have the Stimulated state.\nThe Coney can be targeted, but is killed."
+  },
+  {
+    "id": 138,
+    "name": "Word of Silence",
+    "descName": "Reduces AP in an area of effect, and reveals invisible allies and enemies. \nAllies who have the Stimulated state, as well as the caster, are not affected."
+  },
+  {
+    "id": 139,
+    "name": "Revitalising Word",
+    "descName": "All allies who have the Stimulated state are healed, but they lose the Stimulated state.\nKills the Coney if already summoned.\nSets the recasting delay for Stimulating Word to 1 turn."
+  },
+  {
+    "id": 140,
+    "name": "Word of Recovery",
+    "descName": "Completely heals an allied target, but then makes it Unhealable for 3 turns."
+  },
+  {
+    "id": 141,
+    "name": "Pressure",
+    "descName": "Inflicts Earth-type damage and applies an Erosion penalty."
+  },
+  {
+    "id": 142,
+    "name": "Jump",
+    "descName": "Teleports onto the targeted cell and increases damage received by enemies found on adjacent cells."
+  },
+  {
+    "id": 143,
+    "name": "Intimidation",
+    "descName": "Inflicts Neutral-type damage on enemies and repels the target."
+  },
+  {
+    "id": 144,
+    "name": "Duel",
+    "descName": "Reduces the target's and caster's MP, applies the Gravity state to them, and makes them invulnerable to long-range damage.\nOnly works if cast on an enemy."
+  },
+  {
+    "id": 145,
+    "name": "Divine Sword",
+    "descName": "Inflicts Air-type damage and increases the damage of targeted allies."
+  },
+  {
+    "id": 146,
+    "name": "Sword of Fate",
+    "descName": "Inflicts Fire-type damage.\nThe damage inflicted is increased from the second time this spell is cast."
+  },
+  {
+    "id": 147,
+    "name": "Massacre",
+    "descName": "When the enemy target suffers spell damage, it inflicts 50% of the damage on entities next to it."
+  },
+  {
+    "id": 148,
+    "name": "Friction",
+    "descName": "The target gets closer to its attacker if it receives spell damage. The caster must be in line with the target."
+  },
+  {
+    "id": 149,
+    "name": "Precipitation",
+    "descName": "Increases the target's AP for the current turn but reduces AP the following turn. Cannot be used with weapons or the spell Iop's Wrath."
+  },
+  {
+    "id": 150,
+    "name": "Cut",
+    "descName": "Inflicts Fire-type damage and reduces MP."
+  },
+  {
+    "id": 151,
+    "name": "Blow",
+    "descName": "Repels allies and enemies found around the target cell."
+  },
+  {
+    "id": 152,
+    "name": "Sword of Judgement",
+    "descName": "Inflicts Air-type damage and steals Fire HP without a line of sight."
+  },
+  {
+    "id": 153,
+    "name": "Power",
+    "descName": "Increases the target's Power."
+  },
+  {
+    "id": 154,
+    "name": "Destructive Sword",
+    "descName": "Inflicts Fire-type damage and reduces the target's Critical Hit rate."
+  },
+  {
+    "id": 155,
+    "name": "Vitality",
+    "descName": "Temporarily increases the target's percentage HP.\nThe HP bonus is less effective on allies than on the caster."
+  },
+  {
+    "id": 156,
+    "name": "Strengthstorm",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 157,
+    "name": "Celestial Sword",
+    "descName": "Inflicts Air-type damage in the area of effect."
+  },
+  {
+    "id": 158,
+    "name": "Concentration",
+    "descName": "Inflicts Earth-type damage.\nDamage is increased against summons."
+  },
+  {
+    "id": 159,
+    "name": "Iop's Wrath",
+    "descName": "Inflicts Earth-type damage.\nOn the third turn after being cast, the spell's damage is increased."
+  },
+  {
+    "id": 160,
+    "name": "Sword of Iop",
+    "descName": "Inflicts Earth-type damage in a cross-shaped AoE."
+  },
+  {
+    "id": 161,
+    "name": "Magic Arrow",
+    "descName": "Inflicts Air-type damage and steals range from the target."
+  },
+  {
+    "id": 162,
+    "name": "Critical Shooting",
+    "descName": "Increases the Critical Hit rate."
+  },
+  {
+    "id": 163,
+    "name": "Frozen Arrow",
+    "descName": "Inflicts Fire-type damage and reduces AP."
+  },
+  {
+    "id": 164,
+    "name": "Lashing Arrow",
+    "descName": "Applies Erosion to enemies and repels them by 2 cells."
+  },
+  {
+    "id": 165,
+    "name": "Burning Arrow",
+    "descName": "Burning Arrow inflicts Fire-type damage and repels targets present in the area of effect."
+  },
+  {
+    "id": 166,
+    "name": "Powerful Shooting",
+    "descName": "Increases damage caused by spells."
+  },
+  {
+    "id": 167,
+    "name": "Atonement Arrow",
+    "descName": "Inflicts Water-type damage, increase the spell's damage every 3 turns, and restricts the target's ability to use movement spells."
+  },
+  {
+    "id": 168,
+    "name": "Bat's Eye",
+    "descName": "Reduces the range of targeted characters and steals health through Water-type damage. Also detects invisible objects and fighters within the area of effect."
+  },
+  {
+    "id": 169,
+    "name": "Retreat Arrow",
+    "descName": "Inflicts Air-type damage on enemies and pushes the target."
+  },
+  {
+    "id": 170,
+    "name": "Paralysing Arrow",
+    "descName": "Inflicts Water-type damage and steals MP from the target."
+  },
+  {
+    "id": 171,
+    "name": "Punitive Arrow",
+    "descName": "Inflicts Earth-type damage and increases the spell's damage every 2 turns."
+  },
+  {
+    "id": 172,
+    "name": "Distant Shooting",
+    "descName": "Increases the range of targets present in the area of effect."
+  },
+  {
+    "id": 173,
+    "name": "Plaguing Arrow",
+    "descName": "Inflicts Air-type damage without the need for a line of sight."
+  },
+  {
+    "id": 174,
+    "name": "Poisoned Arrow",
+    "descName": "Inflicts Neutral-type damage over several turns and reduces MP."
+  },
+  {
+    "id": 175,
+    "name": "Destructive Arrow",
+    "descName": "Inflicts Earth-type damage and reduces the damage of an enemy."
+  },
+  {
+    "id": 176,
+    "name": "Tormenting Arrow",
+    "descName": "Causes Air- and Fire-type damage."
+  },
+  {
+    "id": 177,
+    "name": "Slow Down Arrow",
+    "descName": "Inflicts Water-type damage and removes AP in the area of effect."
+  },
+  {
+    "id": 178,
+    "name": "Absorptive Arrow",
+    "descName": "Steals HP through Air-type damage."
+  },
+  {
+    "id": 179,
+    "name": "Explosive Arrow",
+    "descName": "Inflicts Fire-type damage in an area of effect."
+  },
+  {
+    "id": 180,
+    "name": "Bow Skill",
+    "descName": "Increases damage."
+  },
+  {
+    "id": 181,
+    "name": "Earthquake",
+    "descName": "In an area of effect of 3 cells around each allied tree\n • Causes Fire-type damage.\n • Pulls the target toward the caster.\n• Detects invisible enemies."
+  },
+  {
+    "id": 182,
+    "name": "Transmuted Madoll",
+    "descName": "Replaces the targeted Tree with a Madoll which causes enemies to lose AP and gives them the Infected state.\n\nWhen a targeted enemy in the Infected state is hit by certain Sadida spells, all the targets in the same state are hit as well.\nThe spells which take advantage of this are: Bramble, Poisoned Wind, Tear, Dolly Sacrifice, Soothing Bramble, Aggressive Bramble, Insolent Bramble, and Bush Fire.\nUpon its death, the Madoll returns to being a Tree."
+  },
+  {
+    "id": 183,
+    "name": "Bramble",
+    "descName": "Causes Earth-type damage.\n\nCast on a Tree: allows a Blocker to switch places with the Tree. It cannot receive any damage for 1 turn.\n\nIf the target is an enemy in the Infected state, inflicts Earth-type damage on all enemies in the Infected state."
+  },
+  {
+    "id": 184,
+    "name": "Bush Fire",
+    "descName": "This spell inflicts Fire- and Water-type damage.\n\nIf the target is an enemy in the Infected state, causes Fire- and Water-type damage to all enemies in the Infected state."
+  },
+  {
+    "id": 185,
+    "name": "Wild Grass",
+    "descName": "Wild Grass inflicts Fire-type damage and removes MP in an area of effect."
+  },
+  {
+    "id": 186,
+    "name": "Tree",
+    "descName": "Summons a Tree.\nFor 1 turn, the Tree cannot be used as an intermediary for casting other spells.\nAfter 1 turn, the Tree is usable and can no longer be pushed or pulled."
+  },
+  {
+    "id": 187,
+    "name": "Transmuted Ultra-Powerful",
+    "descName": "Replaces the tree with an Ultra-Powerful doll which takes MP and MP Loss Resistance from enemies in an area of effect, as well as any enemies in contact with trees.\nUpon its death, the Ultra-Powerful doll becomes a tree again."
+  },
+  {
+    "id": 188,
+    "name": "Insolent Bramble",
+    "descName": "Reduces the duration of the target's bewitchments by 4 turns.\n\nIf the target is an enemy in the Infected state, reduces the duration of the bewitchments of all enemies with the Infected state."
+  },
+  {
+    "id": 189,
+    "name": "Transmuted Sacrificed",
+    "descName": "Replaces the targeted Tree with a Sacrificial Doll which causes Air-type damage and dies.\n\nEach turn the Sacrificial Doll remains alive increases its Vitality, as well as the damage it will cause.\nUpon its death, the Sacrificial Doll becomes a Tree again."
+  },
+  {
+    "id": 190,
+    "name": "Transmuted Inflatable",
+    "descName": "Replaces the targeted Tree with an Inflatable Doll which heals allies (within 3 cells of it).\n\nIt also heals all allies in contact with Trees.\nUpon its death, the Inflatable Doll becomes a Tree again."
+  },
+  {
+    "id": 191,
+    "name": "Manifold Bramble",
+    "descName": "Causes Earth-type damage in an area of effect."
+  },
+  {
+    "id": 192,
+    "name": "Soothing Bramble",
+    "descName": "Removes MP from enemies for 2 turns.\nHeals allies.\n\nIf the target is an enemy in the Infected state, it also causes MP loss for any enemy in the Infected state."
+  },
+  {
+    "id": 193,
+    "name": "Transmuted Block",
+    "descName": "Replaces the targeted Tree with a Block which will try to get in close to enemies to obstruct them.\n\nIf the spell Bramble has been cast on an allied Tree, the Block exchanges places with that Tree and can't be damaged for 1 turn.\nUpon its death, the Block becomes a Tree again."
+  },
+  {
+    "id": 194,
+    "name": "Aggressive Bramble",
+    "descName": "Inflicts Earth-type damage.\n\nIf the target is an enemy in the Infected state, causes Earth-type damage to all enemies in the Infected state."
+  },
+  {
+    "id": 195,
+    "name": "Tear",
+    "descName": "Inflicts Water-type damage.\n\nOn a Tree that has just appeared: causes its leaves to grow and makes it possible for a Sadida to use it as an intermediary for casting other spells.\nIf the target is in the Infected state: causes Water-type damage to all enemies in the Infected state."
+  },
+  {
+    "id": 196,
+    "name": "Poisoned Wind",
+    "descName": "Kills the targeted doll to transform it into a Leafy Tree."
+  },
+  {
+    "id": 197,
+    "name": "Sylvan Power",
+    "descName": "Replaces the targeted Tree with a controllable tree that can repel a target, reduce the duration of bewitchments, or heal in an area of effect.\nAt the end of its turn, it becomes a normal Tree again."
+  },
+  {
+    "id": 198,
+    "name": "Dolly Sacrifice",
+    "descName": "Causes Water-type damage when cast on an enemy.\nSteals Water-type health when cast on an ally or Summons.\n\nIf the target is an enemy in the Infected state: causes Water-type damage to all enemies in the Infected state."
+  },
+  {
+    "id": 199,
+    "name": "Natural Gift",
+    "descName": "Allies within 2 cells of the targeted Tree are healed.\nAllied characters within 2 cells of the targeted Tree share received damages between them for 1 turn.\nThe Tree is killed."
+  },
+  {
+    "id": 200,
+    "name": "Paralysing Poison",
+    "descName": "Inflicts Fire-type damage at the end of the turn and applies the Infected state to enemies.\n\nWhen an enemy target in the Infected state is hit by a single-target Sadida spell, all targets in the Infected state are also affected by this spell."
+  },
+  {
+    "id": 350,
+    "name": "Leek Pie",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 364,
+    "name": "Perfidious Boomerang",
+    "descName": "Steals health of a random element."
+  },
+  {
+    "id": 366,
+    "name": "Moon Hammer",
+    "descName": "Inflicts Air-type damage.\nReduces range."
+  },
+  {
+    "id": 367,
+    "name": "Cawwot",
+    "descName": "Summons a Cawwot which heals nearby allies and enemies."
+  },
+  {
+    "id": 368,
+    "name": "Release",
+    "descName": "Repels allies and enemies in the caster's vicinity."
+  },
+  {
+    "id": 369,
+    "name": "Lightning Strike",
+    "descName": "Inflicts Fire-type damage in an area of effect."
+  },
+  {
+    "id": 370,
+    "name": "Summoning of Arachnee",
+    "descName": ""
+  },
+  {
+    "id": 373,
+    "name": "Summoning of Chaferfu",
+    "descName": ""
+  },
+  {
+    "id": 410,
+    "name": "Outpouring",
+    "descName": "Inflicts Water-type damage on enemies and moves the caster closer to the target.\nThe caster gains shield points."
+  },
+  {
+    "id": 412,
+    "name": "Felintion",
+    "descName": "Steals Water-type health points from enemies.\nRepels enemies and allies."
+  },
+  {
+    "id": 413,
+    "name": "Soul Capture",
+    "descName": "Captures defeated creatures' souls at the end of a fight."
+  },
+  {
+    "id": 414,
+    "name": "Mount Taming",
+    "descName": "Applies the Taming state, enabling you to capture wild mounts.\nIncreases the experience won by the caster's mount after a fight."
+  },
+  {
+    "id": 416,
+    "name": "Jinx",
+    "descName": "Inflicts Water-type damage and reduces the chance of inflicting critical hits."
+  },
+  {
+    "id": 418,
+    "name": "Dispersing Arrow",
+    "descName": "Repels enemies and allies, even if they are blocked by other enemies or allies."
+  },
+  {
+    "id": 420,
+    "name": "Spiritual Leash",
+    "descName": "Revives the last allied character who died. If the summoner dies, the resuscitated character dies too.\nWhile the resuscitated ally is alive, other allies receive a 30% reduction to all elemental resistances."
+  },
+  {
+    "id": 422,
+    "name": "Reinforced Protection",
+    "descName": "Increases Glyphs' damage and the caster's Power.\nDeactivates the caster's protection spells."
+  },
+  {
+    "id": 423,
+    "name": "Drunkenness",
+    "descName": "Summons a Barrel that attracts enemies.\nIf carried or thrown: heals around itself."
+  },
+  {
+    "id": 424,
+    "name": "Rhol Bak",
+    "descName": "Returns all players to their previous positions."
+  },
+  {
+    "id": 425,
+    "name": "Pull Out",
+    "descName": "Prevents the use of all displacement spells and MP.\nThe spell's caster is affected the following turn.\nThe effects cannot be unbewitched."
+  },
+  {
+    "id": 426,
+    "name": "The Tree of Life",
+    "descName": "Transforms the targeted Tree into a Tree of Life.\nFor 2 turns, any damage suffered by the tree is given back to its attacker in the form of heals.\nHeals Sadida Summons each turn of the game."
+  },
+  {
+    "id": 427,
+    "name": "Brutal Word",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 430,
+    "name": "Boombot",
+    "descName": "Summons a controllable robot that can push, attract or trigger bombs.\nThe robot explodes at the end of its turn."
+  },
+  {
+    "id": 686,
+    "name": "Boozer",
+    "descName": "Applies the Drunk state and removes 1 MP.\nReduces damage suffered.\nRecasting Boozer cancels out its effects."
+  },
+  {
+    "id": 687,
+    "name": "Blazing Fist",
+    "descName": "Inflicts Fire-type damage.\nThe Drunk state is required."
+  },
+  {
+    "id": 688,
+    "name": "Schnaps",
+    "descName": "Inflicts Air-type damage in an area of effect."
+  },
+  {
+    "id": 689,
+    "name": "Terror",
+    "descName": "Repels the target and reduces the probability of inflicting critical hits on enemies."
+  },
+  {
+    "id": 690,
+    "name": "Alcoholic Breath",
+    "descName": "Inflicts Air-type damage and pushes the target back. \nThe Drunk state is required."
+  },
+  {
+    "id": 691,
+    "name": "Vulnerability",
+    "descName": "Increases the final damages received by the target for 2 turns.\nThe Drunk state is required."
+  },
+  {
+    "id": 692,
+    "name": "Debauchery",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 693,
+    "name": "Karcham",
+    "descName": "Carries the target. Throws the target when cast for the second time.\nDeactivates the carried target's lines of sight for spells."
+  },
+  {
+    "id": 694,
+    "name": "Vertigo",
+    "descName": "Throws the carried entity and increases its Lock.\nAttracts entities aligned with the targeted cell."
+  },
+  {
+    "id": 695,
+    "name": "Stabilization",
+    "descName": "Prevents the target from being moved.\nIncreases resistance to MP loss."
+  },
+  {
+    "id": 696,
+    "name": "Eviction",
+    "descName": "Inflicts Earth-type damage on enemies.\nThe target is teleported behind the caster."
+  },
+  {
+    "id": 697,
+    "name": "Tipple",
+    "descName": "Inflicts Water-type damage.\nApplies an AP withdrawal penalty."
+  },
+  {
+    "id": 698,
+    "name": "Stain",
+    "descName": "Reduces the duration of the target's effects by 1 turn.\nApplies a damage penalty. \nThe Drunk state is required."
+  },
+  {
+    "id": 699,
+    "name": "Propulsion",
+    "descName": "Throws the carried entity.\nInflicts Fire-type damage on enemies and repels around the targeted cell."
+  },
+  {
+    "id": 700,
+    "name": "Melancholy",
+    "descName": "Causes Water-type damage."
+  },
+  {
+    "id": 701,
+    "name": "Zatoishwan's Wrath",
+    "descName": "Applies the Drunk state.\nIncreases the caster's damage and AP."
+  },
+  {
+    "id": 702,
+    "name": "Explosive Flask",
+    "descName": "Inflicts Fire-type damage in the area of effect."
+  },
+  {
+    "id": 703,
+    "name": "Pandatak",
+    "descName": "Inflicts Earth-type damage for several cells along a straight line."
+  },
+  {
+    "id": 704,
+    "name": "Pandiniuras",
+    "descName": "Increases the target's MP.\nThe Drunk state is required."
+  },
+  {
+    "id": 705,
+    "name": "Spirit Bond",
+    "descName": "Summons a Pandawasta which blocks opponents' movements.\nThe Drunk state is required."
+  },
+  {
+    "id": 2763,
+    "name": "Roguery",
+    "descName": "Creates several images of the Rogue to deceive opponents, and allows the Rogue to teleport.\nThe images disappear if they receive damage.\nThis spell ends the Rogue's current turn."
+  },
+  {
+    "id": 2778,
+    "name": "Detonator",
+    "descName": "Triggers a bomb to explode from a distance."
+  },
+  {
+    "id": 2794,
+    "name": "Extraction",
+    "descName": "Linear Fire steal."
+  },
+  {
+    "id": 2795,
+    "name": "Kickback",
+    "descName": "Pushes bombs back.\nThe closer to a bomb the spell is cast, the further back it will push it.\nPushes targets that aren't bombs back one cell.\nIncreases allies' damage."
+  },
+  {
+    "id": 2796,
+    "name": "Grenado",
+    "descName": "Places a bomb that inflicts Air-type damage and takes away MP.\nExplodes automatically and does less damage if it is cast directly on a target."
+  },
+  {
+    "id": 2797,
+    "name": "Water Bomb",
+    "descName": "Places a bomb that inflicts Water-type damage and takes away AP.\nExplodes automatically and does less damage if it is cast directly on a target."
+  },
+  {
+    "id": 2801,
+    "name": "Magnet",
+    "descName": "Attracts bombs.\nAttracts allies and enemies one cell. \nCan only be cast on an occupied cell."
+  },
+  {
+    "id": 2802,
+    "name": "Boomerang Daggers",
+    "descName": "Inflicts Air damage in a circular arc."
+  },
+  {
+    "id": 2803,
+    "name": "Dirty Trick",
+    "descName": "The Rogue swaps positions with the targeted bomb."
+  },
+  {
+    "id": 2804,
+    "name": "Carbine",
+    "descName": "Inflicts Air-type damage and removes MP in a diagonal line."
+  },
+  {
+    "id": 2805,
+    "name": "Powder",
+    "descName": "Makes a bomb unmoveable and makes it explode with a combo bonus if it loses all its HP."
+  },
+  {
+    "id": 2806,
+    "name": "Pulsar",
+    "descName": "Causes Fire damage.\nThe greater the percentage of MP the character has at the time of casting, the higher the damage inflicted."
+  },
+  {
+    "id": 2807,
+    "name": "Deception",
+    "descName": "Causes Water damage in a ring around the Rogue and reduces one AP."
+  },
+  {
+    "id": 2808,
+    "name": "Explobomb",
+    "descName": "Places a bomb that inflicts Fire-type damage.\nExplodes automatically and does less damage if it is cast directly on a target."
+  },
+  {
+    "id": 2809,
+    "name": "Remission",
+    "descName": "Pushes back allies or enemies that are attacking the target from an adjacent cell.\nIf cast on a bomb: reduces damage taken from a distance."
+  },
+  {
+    "id": 2810,
+    "name": "Last Breath",
+    "descName": "Increases the combo bomb bonus and the allies' damage.\nTemporarily decreases the Rogue's maximum Vitality."
+  },
+  {
+    "id": 2811,
+    "name": "Countdown",
+    "descName": "Cast on a bomb: Automatically explodes at the end of the caster's next turn and applies Erosion in an area of effect.\nOn an ally: Increases damage."
+  },
+  {
+    "id": 2812,
+    "name": "Overload",
+    "descName": "Allows targeted bombs to reduce the length of time their targets' effects last when they explode. \nThe effect comes into play next turn and becomes more and more powerful each turn."
+  },
+  {
+    "id": 2813,
+    "name": "Blunderbuss",
+    "descName": "Causes Water damage in a cone-shaped area-of-effect.\nApplies an unhealable health penalty."
+  },
+  {
+    "id": 2815,
+    "name": "Kaboom",
+    "descName": "Renders the Rogue and its allies invulnerable to  bomb explosions and gives them a bonus."
+  },
+  {
+    "id": 2849,
+    "name": "Diffraction",
+    "descName": "Gives each ally and enemy a shield."
+  },
+  {
+    "id": 2872,
+    "name": "Intrepid Mask",
+    "descName": "Applies the Intrepid Mask.\nIncreases Lock for the caster and any allies in the area of effect."
+  },
+  {
+    "id": 2879,
+    "name": "Coward Mask",
+    "descName": "Applies the Coward Mask.\nIncrease the MP of the caster and their allies next to them."
+  },
+  {
+    "id": 2880,
+    "name": "Psychopath Mask",
+    "descName": "Applies the Psychopath Mask.\nIncreases the close-combat damage of the caster and their allies."
+  },
+  {
+    "id": 2881,
+    "name": "Martelo",
+    "descName": "Steals HP in the Earth element.\nApplies a Dodge penalty."
+  },
+  {
+    "id": 2882,
+    "name": "Retention",
+    "descName": "Steals life in the Air element.\nSubtracts MP from the target."
+  },
+  {
+    "id": 2883,
+    "name": "Decoy",
+    "descName": "Steals life in the Water element from enemies.\nAttracts the target in a straight line."
+  },
+  {
+    "id": 2885,
+    "name": "Distance",
+    "descName": "Deals Water-type damage to enemies and pushes the target back in a straight line."
+  },
+  {
+    "id": 2886,
+    "name": "Apathy",
+    "descName": "Deals Earth-type damage.\nSubtracts MP from the target."
+  },
+  {
+    "id": 2887,
+    "name": "Furia",
+    "descName": "Inflicts Earth-type damage on enemies.\nIncreases the caster's damage for 2 turns."
+  },
+  {
+    "id": 2888,
+    "name": "Capering",
+    "descName": "Teleports to the targeted cell.\nInflicts Air-type damage in a cross-shaped AoE."
+  },
+  {
+    "id": 2889,
+    "name": "Boliche",
+    "descName": "Inflicts Water-type damage on enemies.\nPushes the target back and moves the caster closer."
+  },
+  {
+    "id": 2890,
+    "name": "Plastron",
+    "descName": "Applies a shield around the caster and their allies in the area of effect."
+  },
+  {
+    "id": 2891,
+    "name": "Tortoruga",
+    "descName": "Applies a shield around the target."
+  },
+  {
+    "id": 2892,
+    "name": "Trance",
+    "descName": "Applies a shield around an allied target.\nTemporarily decreases the caster's HP."
+  },
+  {
+    "id": 2893,
+    "name": "Bling",
+    "descName": "Brings the caster closer to the target."
+  },
+  {
+    "id": 2894,
+    "name": "Stampede",
+    "descName": "Teleports over a short distance and increases MP."
+  },
+  {
+    "id": 2895,
+    "name": "Ardour",
+    "descName": "Makes the target immune to Lock, but makes it Unhealable."
+  },
+  {
+    "id": 2896,
+    "name": "Reinforcement",
+    "descName": "Inflicts Air-, Fire-, Earth- and Water-type damage on enemies.\nMoves the caster away from the target."
+  },
+  {
+    "id": 2897,
+    "name": "Masquerade",
+    "descName": "Causes Neutral-type damage to the caster and the target. \nThe higher the life of the caster, the more damage will be caused."
+  },
+  {
+    "id": 2899,
+    "name": "Picada",
+    "descName": "Inflicts Air-type damage."
+  },
+  {
+    "id": 3202,
+    "name": "Scaphander",
+    "descName": "Any AP removed will increase MP. Increases the caster's damage and pushback damage as well as that of targeted allies."
+  },
+  {
+    "id": 3203,
+    "name": "Tide",
+    "descName": "Switches places with the target in a diagonal line and inflicts damage on enemies."
+  },
+  {
+    "id": 3204,
+    "name": "Backwash",
+    "descName": "Pushes the target diagonally and inflicts Earth-type damage."
+  },
+  {
+    "id": 3205,
+    "name": "Torrent",
+    "descName": "Inflicts Water damage and attracts the target diagonally."
+  },
+  {
+    "id": 3206,
+    "name": "Pilfer",
+    "descName": "Steals Fire-type HP in a diagonal line."
+  },
+  {
+    "id": 3207,
+    "name": "Surge",
+    "descName": "Inflicts Fire-type damage and applies a damage penalty to the target."
+  },
+  {
+    "id": 3208,
+    "name": "Froth",
+    "descName": "Inflicts Water-type damage on enemies in an area of effect."
+  },
+  {
+    "id": 3209,
+    "name": "Vapour",
+    "descName": "Inflicts Fire-type damage in an area of effect and reduces the chance of inflicting critical hits."
+  },
+  {
+    "id": 3210,
+    "name": "Anchor",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 3211,
+    "name": "Trident",
+    "descName": "Inflicts Earth-type damage.\nInflicts extra Earth-type damage when the target takes pushback damage."
+  },
+  {
+    "id": 3212,
+    "name": "Harpooner",
+    "descName": "Places an attack turret which steals Water-, Earth-, Air- or Fire-type health from all enemies and allies within range."
+  },
+  {
+    "id": 3213,
+    "name": "Lifesaver",
+    "descName": "Places a defence turret which will heal all allies and enemies within its area of effect. \nHeals given are proportionate to the targets' maximum health."
+  },
+  {
+    "id": 3214,
+    "name": "Tacturret",
+    "descName": "Places a tactical turret which will push back enemies and allies."
+  },
+  {
+    "id": 3215,
+    "name": "Evolution",
+    "descName": "Unlocks new spells for the targeted turret.\nHeals the targeted turret if it receives an evolution.\nIncreases targeted allies' Power."
+  },
+  {
+    "id": 3216,
+    "name": "Dreadnaut",
+    "descName": "Immunises targeted allies against damage inflicted by the Harpooner and against movement caused by the Tacturret. \nImmunises enemies against heals from the Lifesaver."
+  },
+  {
+    "id": 3217,
+    "name": "Salt Armour",
+    "descName": "Protects turrets and allies from distance attacks.\nThe protection cast on allies is weaker.\nPuts turrets in the Unmovable state."
+  },
+  {
+    "id": 3218,
+    "name": "Ambush",
+    "descName": "Inflicts Fire-, Water-, Air- and Earth-type damage.\nApplies the Ambush state on the target so it can be targeted by the Harpooner's special spell."
+  },
+  {
+    "id": 3219,
+    "name": "First Aid",
+    "descName": "Heals the target.\nApplies the First Aid state on the targeted ally so that it can be targeted by the Lifesaver's special spell."
+  },
+  {
+    "id": 3220,
+    "name": "Periscope",
+    "descName": "Inflicts Water-type damage on enemies.\nApplies the Periscope state on the target so that it can be targeted by the Tacturret's special spell.\nIncreases the allied target's range"
+  },
+  {
+    "id": 3221,
+    "name": "Grapnel",
+    "descName": "Brings the caster closer to one of his turrets, in a straight or diagonal line."
+  },
+  {
+    "id": 3277,
+    "name": "Breakwater",
+    "descName": "Allows the targeted turret to protect targets situated nearby when the spell is cast.\nClose-combat damage taken by targets is transferred to the turret."
+  },
+  {
+    "id": 3506,
+    "name": "Weapon Skill",
+    "descName": "Increases the damage inflicted and healing caused by weapons."
+  },
+  {
+    "id": 5359,
+    "name": "Portal",
+    "descName": "Places a portal.\nWhen several portals are active, you can use them to teleport, or to project spells.\nPortals increase projected spells' damage and healing."
+  },
+  {
+    "id": 5361,
+    "name": "Insult",
+    "descName": "Inflicts Air-type damage.\nIf cast through a portal: reduces Lock."
+  },
+  {
+    "id": 5367,
+    "name": "Lightning Fist",
+    "descName": "Inflicts Water-type damage on enemies and repels the target.\nIf cast through a portal: pushes further back."
+  },
+  {
+    "id": 5368,
+    "name": "Distribution",
+    "descName": "When the target suffers spell damage, the allies near the target (within 2 cells) are healed of part of the damage inflicted."
+  },
+  {
+    "id": 5370,
+    "name": "Wakfu Ray",
+    "descName": "Inflicts Fire-type damage on enemies in a straight line.\nHeals allies."
+  },
+  {
+    "id": 5371,
+    "name": "Stretching",
+    "descName": "Temporarily reduces the caster's HP but increases the range of the target.\nIncreases the range of the Portal spell."
+  },
+  {
+    "id": 5372,
+    "name": "Therapy",
+    "descName": "Inflicts Earth-type damage on enemies.\nIf cast through a portal: attracts the target."
+  },
+  {
+    "id": 5381,
+    "name": "Neutral",
+    "descName": "Deactivates a Portal for 1 turn."
+  },
+  {
+    "id": 5382,
+    "name": "Shock",
+    "descName": "Inflicts Earth damage to enemies in a cross.\nDraws targets towards the targeted cell."
+  },
+  {
+    "id": 5383,
+    "name": "Affliction",
+    "descName": "Inflicts Water-type damage."
+  },
+  {
+    "id": 5386,
+    "name": "Stupor",
+    "descName": "Places a trap that summons a portal when triggered."
+  },
+  {
+    "id": 5388,
+    "name": "Healing",
+    "descName": "An area-of-effect heal."
+  },
+  {
+    "id": 5389,
+    "name": "Offence",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 5390,
+    "name": "Odyssey",
+    "descName": "Moves the caster away from the target and brings the target closer to the caster."
+  },
+  {
+    "id": 5391,
+    "name": "Snub",
+    "descName": "Inflicts Earth-type damage on enemies.\nIf cast through a portal: removes a turn of bewitchment."
+  },
+  {
+    "id": 5392,
+    "name": "Focus",
+    "descName": "The target gains Power when teleported through a portal."
+  },
+  {
+    "id": 5397,
+    "name": "Bullying",
+    "descName": "Inflicts Air damage and pushes targets."
+  },
+  {
+    "id": 5400,
+    "name": "Audacious",
+    "descName": "Inflicts Water damage without line of sight."
+  },
+  {
+    "id": 5401,
+    "name": "Parasite",
+    "descName": "Inflicts Fire-type damage.\nIf cast through a portal: inflicts additional damage at the end of turn."
+  },
+  {
+    "id": 5402,
+    "name": "Ridicule",
+    "descName": "Inflicts Air-type damage.\nRemoves MP if the spell is cast through a portal."
+  },
+  {
+    "id": 5403,
+    "name": "Mutual Assistance",
+    "descName": "For 2 turns, everyone in the area around the caster is healed every time an ally goes through a portal.\nThe caster gets 1 AP every time an enemy goes through a portal."
+  },
+  {
+    "id": 5829,
+    "name": "Flamethrower",
+    "descName": "Inflicts Fire-type damage and applies the Fire state. Places a Fire rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: -50 Dodge (1 turn).\n• Air: -3 AP (1 turn).\n• Earth: +20% damage suffered (1 turn)."
+  },
+  {
+    "id": 5830,
+    "name": "Stalagmite",
+    "descName": "Inflicts Water-type damage and applies the Water state. Places a Water Rune at the target's location.\n\nDepending on the target's elemental state, it will undergo the following effects:\n• Air: -25% damage (1 turn).\n• Fire: -50 Dodge (1 turn).\n• Earth: -2 MP (1 turn)."
+  },
+  {
+    "id": 5831,
+    "name": "Telluric Wave",
+    "descName": "Inflicts Earth-type damage and applies the Earth state.\nPlaces an Earth Rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: 3 Range stolen for 1 turn.\n• Water: loses 2 MP for 1 turn.\n• Fire: 20% extra damage suffered for 1 turn."
+  },
+  {
+    "id": 5832,
+    "name": "Ether",
+    "descName": "Inflicts Air-type damage and applies the Air state. Places an Air rune at the target's location.\n\nDepending on the target's elemental state, it will undergo the following effects:\nWater: inflicts 25% less damage for 1 turn.\nFire: loses 3 AP for 1 turn.\nEarth: 3 Range stolen from it for 1 turn."
+  },
+  {
+    "id": 5833,
+    "name": "Runification",
+    "descName": "Triggers all elemental runes: they inflict damage, give their elemental state and improve the caster's characteristics.\nCan generate elemental combinations."
+  },
+  {
+    "id": 5836,
+    "name": "Elemental Drain",
+    "descName": "Inflicts damage and steals characteristics in an element, depending on the target's elemental state.\n\nConsumes the target's elemental state."
+  },
+  {
+    "id": 5838,
+    "name": "Storm",
+    "descName": "Steals Earth-type health in an area of effect and applies the Earth state.\nPlaces an Earth rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: 3 Range stolen for 1 turn.\n• Water: loses 2 MP for 1 turn.\n• Fire: 20% extra damage suffered for 1 turn."
+  },
+  {
+    "id": 5839,
+    "name": "Striking Meteor",
+    "descName": "Inflicts Earth-type damage and applies the Earth state. Repels the target.\nPlaces an Earth Rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: 3 Range stolen for 1 turn.\n• Water: loses 2 MP for 1 turn.\n• Fire: 20% extra damage suffered for 1 turn."
+  },
+  {
+    "id": 5840,
+    "name": "Glacier",
+    "descName": "Inflicts Water-type area-of-effect damage and gives the Water state. Places a Water Rune at the location of targets hit.\n\nDepending on the targets' elemental states, they will undergo the following effects:\nAir: cause 25% less damage for 1 turn.\nFire: suffers a Dodge penalty of 50 for 1 turn.\nEarth: lose 2 MP for 1 turn."
+  },
+  {
+    "id": 5841,
+    "name": "Icy Shards",
+    "descName": "Inflicts Water-type damage and gives the Water state. Attracts the target by 2 cells.\nPlaces a Water Rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: 25% less damage for 1 turn.\n• Fire: Dodge penalty of 50 for 1 turn.\n• Earth: loses 2 MP for 1 turn."
+  },
+  {
+    "id": 5842,
+    "name": "Transfixing Gust",
+    "descName": "Steals Air-type health in an area of effect and applies the Air state.\nPlaces an Air Rune at the location of targets hit.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: 25% less damage for 1 turn.\n• Fire: loses 3 AP for 1 turn.\n• Earth: 3 Range stolen for 1 turn."
+  },
+  {
+    "id": 5843,
+    "name": "Astral Blade",
+    "descName": "Inflicts Air-type damage and gives the Air state.\nReduces enemies' Range, increases allies' Range.\nPlaces an Air Rune Rune at the target's location.\n\nDepending on the target's elemental state, it will undergo the following effects:\nWater: causes 25% less damage for 1 turn.\nFire: loses 3 AP for 1 turn.\nEarth: loses 3 Range for 1 turn."
+  },
+  {
+    "id": 5844,
+    "name": "Burning Stroke",
+    "descName": "Inflicts Fire-type area-of-effect damage and gives the Fire state. Places a Fire Rune at the location of targets hit.\n\nDepending on the targets' elemental states, they will undergo the following effects:\nWater: suffer a Dodge penalty of 50 for 1 turn.\nAir: lose 3 AP for 1 turn.\nEarth: suffer 20% extra damage for 1 turn."
+  },
+  {
+    "id": 5845,
+    "name": "Deflagration",
+    "descName": "Inflicts Fire-type damage and gives the Fire state. Reduces the duration of the target's effects for 1 turn.\nPlaces a Fire Rune at the target's location.\n\nThe target's elemental state modifies the effects its undergoes:\n• Water: Dodge penalty of 50 for 1 turn.\n• Air: loses 3 AP for 1 turn.\n• Earth: 20% extra damage for 1 turn."
+  },
+  {
+    "id": 5846,
+    "name": "Elemental Shield",
+    "descName": "The target gains elemental resistance.\nEvery time it suffers damage, it loses some resistance to the attack's element. But, the attacker enters their attack's elemental state.\n\nCan generate combinations of elements."
+  },
+  {
+    "id": 5847,
+    "name": "Journey",
+    "descName": ""
+  },
+  {
+    "id": 5850,
+    "name": "Runic Treatment",
+    "descName": "The allied target is healed depending on the number of runes present.\n\nConsumes all runes without activating their effects."
+  },
+  {
+    "id": 6226,
+    "name": "Propagation",
+    "descName": "Applies the target's elemental state to all the enemies within 2 cells.\nCan generate different elemental combinations.\n\nIf an elementary rune is targeted, generates an effect depending on the element within 2 cells:\nFire: Divides the heals enemies receive by 2 for 1 turn.\nEarth: Reduces enemies' active effects by 1 turn.\nWater: Applies the Gravity state to enemies, preventing them from teleporting for 1 turn.\nAir: Applies the Unable to Lock state to enemies, preventing them from Locking for 1 turn."
+  },
+  {
+    "id": 6227,
+    "name": "Polarity",
+    "descName": "Attracts enemies who have the \"Water\" state.\nRepels enemies who have the \"Earth\" state.\nSwitches places with an enemy who has the \"Fire\" state.\nMoves to the opposite side of an enemy who has the \"Air\" state.\n\nConsumes the elemental states of affected enemies."
+  },
+  {
+    "id": 6228,
+    "name": "Imprint",
+    "descName": "Places a rune for every enemy who is affected by an elemental state.\nThe power of the rune depends on the level of Imprint."
+  },
+  {
+    "id": 6413,
+    "name": "Contribution",
+    "descName": "The target gains bonuses (stackable twice) depending on the enemies' elemental states:\n• Water: 150 Power.\n• Fire: 10% of the caster's HP in shield points.\n• Air: 1 AP.\n• Earth: 1 MP.\n\nEnemies lose their elemental states."
+  },
+  {
+    "id": 8310,
+    "name": "Prey",
+    "descName": "The target becomes Prey.\nWhen they are attacked, their attacker is healed by part of the damage inflicted."
+  },
+  {
+    "id": 8311,
+    "name": "Sniff",
+    "descName": "Teleports the caster next to the Prey.\nReduces Rage."
+  },
+  {
+    "id": 8315,
+    "name": "Tetanisation",
+    "descName": "Inflicts Fire-type damage, applies the Gravity state, and reduces MP.\n\nIncreases Rage."
+  },
+  {
+    "id": 8316,
+    "name": "Cutting Down",
+    "descName": "Inflicts Fire-type damage.\nIf the target is Prey, steals MP."
+  },
+  {
+    "id": 8317,
+    "name": "Tracking",
+    "descName": "Inflicts Fire-type damage.\nGets closer to the target if it's Prey."
+  },
+  {
+    "id": 8318,
+    "name": "Watchdog",
+    "descName": "Inflicts Earth-type damage.\nDamages suffered by the caster is reduced by 15% for 1 turn.\n\nIncreases Rage."
+  },
+  {
+    "id": 8319,
+    "name": "Mastiff",
+    "descName": "Inflicts Earth-type damage.\nIf the target is Prey, steals health."
+  },
+  {
+    "id": 8320,
+    "name": "Cerberus",
+    "descName": "Inflicts Earth-type damage.\nIf the target is Prey, applies a Dodge penalty."
+  },
+  {
+    "id": 8322,
+    "name": "Ulna",
+    "descName": "Inflicts Water-type damage.\nIf the target is Prey, the caster gains 1 MP."
+  },
+  {
+    "id": 8324,
+    "name": "Marrow Bone",
+    "descName": "Inflicts Water-type damage.\nIf the target is Prey, spell damage is increased for 3 turns."
+  },
+  {
+    "id": 8325,
+    "name": "Tibia",
+    "descName": "Inflicts Water-type damage around the caster and repels.\n\nIncreases Rage."
+  },
+  {
+    "id": 8327,
+    "name": "Bloodhound",
+    "descName": "Inflicts Air-type damage.\n\nIf the target is Prey, increases the caster's Power."
+  },
+  {
+    "id": 8328,
+    "name": "Carrion",
+    "descName": "Inflicts Air-type damage and applies Erosion.\n\nIncreases Rage."
+  },
+  {
+    "id": 8330,
+    "name": "Carcass",
+    "descName": "Inflicts Air-type damage.\nIf the target is Prey, spell damage is increased for 3 turns."
+  },
+  {
+    "id": 8331,
+    "name": "Appeasement",
+    "descName": "Reduces the caster's Rage to heal them."
+  },
+  {
+    "id": 8332,
+    "name": "Convergence",
+    "descName": "On allies: gets closer to the target.\nOn enemies: attracts the target."
+  },
+  {
+    "id": 8333,
+    "name": "R-Canine",
+    "descName": "Reduces Rage and increases Power."
+  },
+  {
+    "id": 8334,
+    "name": "Protective Pelt",
+    "descName": "Applies a shield around the target.\n\nIf the target suffers pushback damage, it loses the shield, and the caster's Rage increases."
+  },
+  {
+    "id": 8335,
+    "name": "Bark",
+    "descName": "The target can no longer be pushed or attracted, and gains 2 MP for 1 turn.\n\nIf the target suffers close-combat damage, spell effects are removed and the caster's Rage increases."
+  },
+  {
+    "id": 8336,
+    "name": "Yapper Launcher",
+    "descName": "Summons a Yapper that advances toward the Prey and attacks them each time its master inflicts damage with a class spell.\nIts damage is increased on Summons."
+  },
+  {
+    "id": 8400,
+    "name": "Panic",
+    "descName": "Distances the target from the Prey.\nIf the spell is cast on the Prey, distances all entities within 2 cells off the target."
+  },
+  {
+    "id": 9301,
+    "name": "Concentration Arrow",
+    "descName": "Inflicts Air-type damage and attracts towards the target."
+  },
+  {
+    "id": 9302,
+    "name": "Erosive Arrow",
+    "descName": "Inflicts Earth-type damage and applies an Erosion penalty."
+  },
+  {
+    "id": 9303,
+    "name": "Withdrawal Arrow",
+    "descName": "The spell's caster moves back 2 cells."
+  },
+  {
+    "id": 9304,
+    "name": "Paralysing Arrow",
+    "descName": "Inflicts Fire-type damage and removes AP."
+  },
+  {
+    "id": 9305,
+    "name": "Repulsive Arrow",
+    "descName": "Inflicts Fire-type damage and repels by 1 cell."
+  },
+  {
+    "id": 9306,
+    "name": "Absolute Acuteness",
+    "descName": "All of the Cra's spells can be cast through obstacles."
+  },
+  {
+    "id": 9307,
+    "name": "Redemption Arrow",
+    "descName": "Inflicts Water-type damage, which is increased if the spell is cast again the next turn."
+  },
+  {
+    "id": 9308,
+    "name": "Crushing Arrow",
+    "descName": "Inflicts Fire-type damage and applies the Gravity state."
+  },
+  {
+    "id": 9309,
+    "name": "Recall Beacon",
+    "descName": "Summons a Beacon that switches position with the caster (at the start of the next turn)."
+  },
+  {
+    "id": 9310,
+    "name": "Assailing Arrow",
+    "descName": "Inflicts Water-type damage on enemies and the caster moves back 1 cell.\nOn an ally: moves the caster closer by 1 cell."
+  },
+  {
+    "id": 9311,
+    "name": "Arrow of Judgement",
+    "descName": "Inflicts Earth-type damage.\nThe greater the percentage of MP the character has at the time of casting, the higher the damage inflicted."
+  },
+  {
+    "id": 9312,
+    "name": "Tactical Beacon",
+    "descName": "Summons a Beacon that can serve as an obstacle and target.\nThe Beacon suffers half the damage from allies."
+  },
+  {
+    "id": 9313,
+    "name": "Slaughtering Arrow",
+    "descName": "Inflicts Air-type damage.\nThe spell's damage is increased on the next turn."
+  },
+  {
+    "id": 9314,
+    "name": "Curative Arrow",
+    "descName": "Heals and increases heals received by the target."
+  },
+  {
+    "id": 9315,
+    "name": "Tyrannical Arrow",
+    "descName": "Inflicts Air-type damage if the target is pushed.\nInflicts Fire-type damage if the target suffers pushback damage."
+  },
+  {
+    "id": 9316,
+    "name": "Barricade Shot",
+    "descName": "Inflicts Earth-type damage and repels the target."
+  },
+  {
+    "id": 9317,
+    "name": "Devouring Arrow",
+    "descName": "Inflicts Air-type damage.\nDamage is applied when the spell is cast on another target.\nMay be stacked on the same target 3 times."
+  },
+  {
+    "id": 9318,
+    "name": "Striking Arrow",
+    "descName": "Inflicts Water-type damage.\nAt the end if its turn, the target inflicts Water-type damage and removes AP in a 2-cell circle around it."
+  },
+  {
+    "id": 9319,
+    "name": "Fulminating Arrow",
+    "descName": "Inflicts Fire-type damage.\nSpreads over the nearest enemy in a radius of 2 cells. Can bounce off the Tactical Beacon.\nThe spell's damage is increased with each additional target."
+  },
+  {
+    "id": 9320,
+    "name": "Sentinel",
+    "descName": "On the next turn, the caster loses all their MP, but gains a damage bonus."
+  },
+  {
+    "id": 9321,
+    "name": "Reprisal",
+    "descName": "Immobilises the target."
+  },
+  {
+    "id": 9322,
+    "name": "Godsend",
+    "descName": "The allied target regains 25% of its HP, but suffers 25% extra damage."
+  },
+  {
+    "id": 9323,
+    "name": "Nerve",
+    "descName": "Inflicts Water-type damage for a normal hit and Air-type damage for a critical hit."
+  },
+  {
+    "id": 9324,
+    "name": "Leap",
+    "descName": "Teleports to the targeted cell."
+  },
+  {
+    "id": 9325,
+    "name": "Heads or Tails",
+    "descName": "Inflicts Earth-type damage for a normal hit.\nIncreases Strength for a critical hit."
+  },
+  {
+    "id": 9326,
+    "name": "Roar",
+    "descName": "Increases Power depending on the number of enemies present in the area of effect.\nDetects anyone who is invisible in the area of effect."
+  },
+  {
+    "id": 9327,
+    "name": "Corollary",
+    "descName": "Applies an Erosion penalty."
+  },
+  {
+    "id": 9328,
+    "name": "Summoning Stroke",
+    "descName": "Summons a Kitten that heals allies."
+  },
+  {
+    "id": 9329,
+    "name": "Peril",
+    "descName": "Inflicts Water-type damage on targets who have more than 50% of their HP.\nHeals targets who have less than 50% of their HP."
+  },
+  {
+    "id": 9330,
+    "name": "Spell Strike",
+    "descName": "Summons a Roulette that gives a random bonus to its attacker when attacked.\nGives a random bonus to its summoner when summoned."
+  },
+  {
+    "id": 9331,
+    "name": "Yowling",
+    "descName": "Inflicts Fire-type damage.\nHeals allies."
+  },
+  {
+    "id": 9332,
+    "name": "Lapping Up",
+    "descName": "Inflicts Earth-type damage on enemies and removes MP.\nThe target gains 1 MP on the next turn."
+  },
+  {
+    "id": 9333,
+    "name": "Pussycat",
+    "descName": "On allies: regain 15% of their HP per turn for 3 turns.\nOn the caster: regains 10% of their HP per turn for 3 turns."
+  },
+  {
+    "id": 9334,
+    "name": "Pawpads",
+    "descName": "Inflicts Fire-type damage on the enemy target and repels the caster from the target."
+  },
+  {
+    "id": 9335,
+    "name": "Lucky Star",
+    "descName": "If the allied target is attracted or pushed, it regains 5% of its HP."
+  },
+  {
+    "id": 9336,
+    "name": "Redistribution",
+    "descName": "Applies the Unlockable state, then the Gravity state on the next turn."
+  },
+  {
+    "id": 9337,
+    "name": "Bravado",
+    "descName": "Inflicts Air-type damage.\nThe caster gains pushback damage for each enemy hit."
+  },
+  {
+    "id": 9338,
+    "name": "Misadventure",
+    "descName": "Steals Water-type health for normal hits.\nSteals Earth-type health for critical hits.\nThe spell does not affect the caster."
+  },
+  {
+    "id": 9339,
+    "name": "Misfortune",
+    "descName": "Inflicts Water-type damage on enemies and moves the caster closer to the target."
+  },
+  {
+    "id": 9340,
+    "name": "Trickery",
+    "descName": "The damage and the attack element are modified randomly on each casting:\n• Earth: 5 AP\n• Air: 4 AP\n• Water: 3 AP\n• Fire: 2 AP"
+  },
+  {
+    "id": 9341,
+    "name": "Ecaflip's Audacity",
+    "descName": ""
+  },
+  {
+    "id": 9342,
+    "name": "Kraps",
+    "descName": "Inflicts Water-type damage on enemies and pushes the target."
+  },
+  {
+    "id": 9348,
+    "name": "Necronyx",
+    "descName": "Applies the Necronyx state to the target and ends the caster's current turn."
+  },
+  {
+    "id": 9373,
+    "name": "Contempt",
+    "descName": "Inflicts Air-type damage and attracts the target."
+  },
+  {
+    "id": 9374,
+    "name": "Tribulation",
+    "descName": "Inflicts Water-type damage."
+  },
+  {
+    "id": 9375,
+    "name": "Rigid Portal",
+    "descName": "Places a portal.\nWhen several portals are active, you can use them to teleport, or to project spells.\nPortals increase projected spells' damage."
+  },
+  {
+    "id": 9376,
+    "name": "Convulsion",
+    "descName": "Inflicts Earth-type damage and repels the target."
+  },
+  {
+    "id": 9377,
+    "name": "Lazybeam",
+    "descName": "Inflicts Fire-type damage.\nSteals Fire-type health if the spell is cast through a portal."
+  },
+  {
+    "id": 9378,
+    "name": "Interruption",
+    "descName": "Deactivates all allied portals."
+  },
+  {
+    "id": 9379,
+    "name": "Affront",
+    "descName": "Inflicts Fire-type damage if the spell is cast through a portal."
+  },
+  {
+    "id": 9380,
+    "name": "Contraction",
+    "descName": "Places and activates a portal on a cell occupied by an ally."
+  },
+  {
+    "id": 9381,
+    "name": "Sinecure",
+    "descName": "Inflicts Water-type damage.\nApplies a resistance penalty to pushback damage if the spell is cast through a portal."
+  },
+  {
+    "id": 9382,
+    "name": "Diffusion",
+    "descName": "The target reflects 35% of damage suffered in an area of effect."
+  },
+  {
+    "id": 9383,
+    "name": "Distortion",
+    "descName": "Summons a totem that places and activates a portal on cells occupied by its attackers."
+  },
+  {
+    "id": 9384,
+    "name": "Correction",
+    "descName": "Inflicts Air-type damage.\nMoves the caster closer to the target."
+  },
+  {
+    "id": 9385,
+    "name": "Conjuration",
+    "descName": "If the target goes through a portal, the next attack it suffers inflicts 25% extra damage."
+  },
+  {
+    "id": 9386,
+    "name": "Curative Palm",
+    "descName": "Heals the target."
+  },
+  {
+    "id": 9387,
+    "name": "Exodus",
+    "descName": "Teleports the caster symmetrically in relation to the target."
+  },
+  {
+    "id": 9388,
+    "name": "Cabal",
+    "descName": "Increases the target's MP.\nIf cast through a portal: the MP bonus is increased."
+  },
+  {
+    "id": 9389,
+    "name": "Composure",
+    "descName": "Inflicts Water-type damage only through a portal."
+  },
+  {
+    "id": 9390,
+    "name": "Virus",
+    "descName": "Inflicts Fire-type damage in an area of effect.\nAllies in the area of effect are healed of up to 50% of the damage inflicted on enemies.\nDoes not affect the caster."
+  },
+  {
+    "id": 9391,
+    "name": "Persiflage",
+    "descName": "Inflicts Earth-type damage.\nReduces range if the spell is cast through a portal."
+  },
+  {
+    "id": 9392,
+    "name": "Coalition",
+    "descName": "Increases an ally's AP.\nIf cast through a portal: the AP bonus is increased."
+  },
+  {
+    "id": 9393,
+    "name": "Conflagration",
+    "descName": "Heals the targeted ally.\nIf cast through a portal: heals allies in an area of effect around the target."
+  },
+  {
+    "id": 9394,
+    "name": "Affectionate Word",
+    "descName": "Summons a Coney that applies shield points to allies and applies the Stimulated state to its summoner.\nWhen the Coney dies, it places an end-of-turn glyph that applies shield points."
+  },
+  {
+    "id": 9395,
+    "name": "Striking Word",
+    "descName": ""
+  },
+  {
+    "id": 9396,
+    "name": "Slighting Word",
+    "descName": "Inflicts Air-type damage."
+  },
+  {
+    "id": 9397,
+    "name": "Taboo Word",
+    "descName": "Inflicts Water-type damage."
+  },
+  {
+    "id": 9398,
+    "name": "Seductive Word",
+    "descName": "Inflicts Earth-type damage and summons a flask.\nWhen it is attacked by an ally, it suffers twice the amount of damage and returns 100% of health points lost to its attacker.\nWhen it dies, it inflicts damage in an area of effect.\nIt dies if it enters the Stimulated state."
+  },
+  {
+    "id": 9399,
+    "name": "Self-Sacrificing Word",
+    "descName": "Increases the Power of the target, but reduces the heals it receives.\nApplies the Stimulated state."
+  },
+  {
+    "id": 9400,
+    "name": "Mischievous Word",
+    "descName": "Inflicts Air-type damage.\n\nAllies near the caster (within 2 cells) are healed of up to 100% of the damage inflicted before reduction."
+  },
+  {
+    "id": 9401,
+    "name": "Defensive Word",
+    "descName": "Inflicts Earth-type damage.\nReduces the duration of the effects on the target.\nApplies an Erosion penalty on the caster."
+  },
+  {
+    "id": 9402,
+    "name": "Impartial Word",
+    "descName": "On allies: heals the target and inflicts Fire-type damage around the target.\nOn enemies: inflicts Fire-type damage and heals around the target."
+  },
+  {
+    "id": 9403,
+    "name": "Resounding Word",
+    "descName": "Inflicts Water-type damage."
+  },
+  {
+    "id": 9404,
+    "name": "Agonising Word",
+    "descName": "Inflicts Earth-type damage on an ally.\nThe damage suffered is increased and inflicted on enemies around the target.\nEnemies affected are pushed back."
+  },
+  {
+    "id": 9405,
+    "name": "Regenerating Mark",
+    "descName": "Places an end-of-turn glyph that heals."
+  },
+  {
+    "id": 9406,
+    "name": "Life-Giving Word",
+    "descName": "Increases MP.\nRequires and consumes the Stimulated state."
+  },
+  {
+    "id": 9407,
+    "name": "Furious Word",
+    "descName": "Inflicts Earth-type damage on an ally and increases its Power depending in the number of enemies next to it.\nThe damage suffered by the target is increased and inflicted around it."
+  },
+  {
+    "id": 9408,
+    "name": "Whirling Word",
+    "descName": "Steals Air-type health."
+  },
+  {
+    "id": 9409,
+    "name": "Overwhelming Word",
+    "descName": "Inflicts Water-type damage and removes MP.\n\nAllies near the target (within 2 cells) are healed of up to 100% of the damage inflicted before reduction."
+  },
+  {
+    "id": 9410,
+    "name": "Sacrificial Word",
+    "descName": "The damage suffered by the targeted ally heals allies in the Stimulated state."
+  },
+  {
+    "id": 9411,
+    "name": "Rallying Word",
+    "descName": "Moves the caster closer to an ally, then attracts it.\nRequires and consumes the Stimulated state on the ally.\nMay be cast on the Coney without it being in the Stimulated state, but it kills the Coney."
+  },
+  {
+    "id": 9412,
+    "name": "Galvanising Word",
+    "descName": "All Stimulated allies receive the Unlockable state.\nConsumes the Stimulated state.\nKills the Coney if already summoned.\nSets the recasting delay for the Stimulating Word spell to 1 turn."
+  },
+  {
+    "id": 9413,
+    "name": "Uniting Word",
+    "descName": "On stimulated allies: all other stimulated allies give it 10% of their HP.\nOn non-stimulated allies: it gives 10% of its HP to other stimulated allies."
+  },
+  {
+    "id": 9414,
+    "name": "Pernicious Word",
+    "descName": "Inflicts Earth-type damage on an ally.\n\n300% of damage suffered is applied to enemies around the target."
+  },
+  {
+    "id": 9468,
+    "name": "Spade Throw",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 9469,
+    "name": "Hard Cash",
+    "descName": "Steals Water-type health."
+  },
+  {
+    "id": 9470,
+    "name": "Living Satchel",
+    "descName": "Summons a Living Satchel that shares damage between all allies situated in the summoning zone.\nThe Living Satchel disappears after 2 turns.\nWhen it is attacked by an ally, the ally is healed."
+  },
+  {
+    "id": 9471,
+    "name": "Ghostly Spade",
+    "descName": "Inflicts Air-type damage. Entities who attack the target are healed."
+  },
+  {
+    "id": 9472,
+    "name": "Wandering",
+    "descName": "The target switches places with the Living Bag or the Living Satchel."
+  },
+  {
+    "id": 9473,
+    "name": "Toolbox",
+    "descName": "Increases an ally's AP and MP, but applies the Pacifist state."
+  },
+  {
+    "id": 9474,
+    "name": "Peat Bog",
+    "descName": "Inflicts Earth-type damage.\nThe greater the percentage of MP the character has at the time of casting, the higher the damage inflicted."
+  },
+  {
+    "id": 9475,
+    "name": "Armlock",
+    "descName": "Heals an ally but removes 1 non-dodgeable MP."
+  },
+  {
+    "id": 9476,
+    "name": "Obsolescence",
+    "descName": "Inflicts Earth-type damage.\nThe caster gains 1 MP on each casting."
+  },
+  {
+    "id": 9477,
+    "name": "Living Spade",
+    "descName": "Summons a Living Spade that steals Air-type health.\nIt heals its summoner when it is attacked by an ally."
+  },
+  {
+    "id": 9478,
+    "name": "Miserliness",
+    "descName": "Reduces MP but increases AP.\nDoes not affect the caster."
+  },
+  {
+    "id": 9479,
+    "name": "Spade Kiss",
+    "descName": "Inflicts Fire-type damage when the target suffers MP reduction."
+  },
+  {
+    "id": 9480,
+    "name": "Vivacity",
+    "descName": "Switches places with the target and heals it if it is an ally."
+  },
+  {
+    "id": 9481,
+    "name": "Loafylactic",
+    "descName": "Inflicts Air-type damage and removes AP."
+  },
+  {
+    "id": 9482,
+    "name": "Opportuneness",
+    "descName": "Inflicts Air-type damage and increases the caster's Power."
+  },
+  {
+    "id": 9483,
+    "name": "Spade of Judgement",
+    "descName": "Inflicts Air-type damage and repels."
+  },
+  {
+    "id": 9484,
+    "name": "Carnivore Spade",
+    "descName": "Steals Water-type health if the target is healed."
+  },
+  {
+    "id": 9485,
+    "name": "Decadence",
+    "descName": "Applies a final damage bonus to an ally for 1 turn.\nOn the next turn, the target suffers more damage."
+  },
+  {
+    "id": 9486,
+    "name": "Correction",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 9487,
+    "name": "Regenerating Chest",
+    "descName": "Summons a chest that heals nearby allies.\nHeals allies that attack it.\nIf it is killed by an enemy, it heals the entire enemy team."
+  },
+  {
+    "id": 9488,
+    "name": "Last Resort",
+    "descName": ""
+  },
+  {
+    "id": 9520,
+    "name": "Natural Attraction",
+    "descName": "Inflicts Fire-type damage and attracts the target."
+  },
+  {
+    "id": 9521,
+    "name": "Dazzling",
+    "descName": "Inflicts Earth-type damage and applies a Dodge penalty."
+  },
+  {
+    "id": 9522,
+    "name": "Fortification",
+    "descName": "Reduces damage suffered."
+  },
+  {
+    "id": 9523,
+    "name": "Gust",
+    "descName": "Inflicts Air-type damage and pushes the targets."
+  },
+  {
+    "id": 9524,
+    "name": "Swelling",
+    "descName": "Inflicts Air-type damage and pushes the target."
+  },
+  {
+    "id": 9525,
+    "name": "Manoeuvre",
+    "descName": "Switches places with the target."
+  },
+  {
+    "id": 9526,
+    "name": "Fulminating Glyph",
+    "descName": "Inflicts Air-type damage and places a glyph that increases allies' close-combat damage."
+  },
+  {
+    "id": 9527,
+    "name": "Lifelessness",
+    "descName": "Inflicts Fire-type damage and steals Intelligence."
+  },
+  {
+    "id": 9528,
+    "name": "Stormy Attack",
+    "descName": "Inflicts Water-type damage without line of sight, and reduces the chance of inflicting critical hits."
+  },
+  {
+    "id": 9529,
+    "name": "Trouncer",
+    "descName": "Moves the caster closer to the target.\nIncreases the caster's Lock."
+  },
+  {
+    "id": 9530,
+    "name": "Tetany",
+    "descName": "Inflicts Neutral-type damage and removes AP."
+  },
+  {
+    "id": 9531,
+    "name": "Aegis",
+    "descName": "Summons a shield that suffers damage instead of allies present in its glyph-aura."
+  },
+  {
+    "id": 9532,
+    "name": "Barrier",
+    "descName": "Places a glyph-aura around the target at the start of the next turn.\nThe glyph inflicts damage on the target if it crosses the glyph."
+  },
+  {
+    "id": 9533,
+    "name": "Reinforcement",
+    "descName": "Teleports to the first available cell between the caster and the targeted ally."
+  },
+  {
+    "id": 9534,
+    "name": "Protective Glyph",
+    "descName": "Inflicts Earth-type damage and places a glyph-aura that reduces damage suffered by allies."
+  },
+  {
+    "id": 9535,
+    "name": "Tension",
+    "descName": "Inflicts Water-type damage and pushes the target."
+  },
+  {
+    "id": 9536,
+    "name": "Roaming Glyph",
+    "descName": "Inflicts Water-type damage.\nPlaces a glyph that increases allies' Dodge."
+  },
+  {
+    "id": 9537,
+    "name": "Excursion Glyph",
+    "descName": "Places a glyph that switches the allies' places with the caster's."
+  },
+  {
+    "id": 9538,
+    "name": "Perception Glyph",
+    "descName": "Inflicts Fire-type damage.\nPlaces a glyph around the caster that increases allies' range."
+  },
+  {
+    "id": 9539,
+    "name": "Inertia",
+    "descName": "Applies the Gravity state around the caster.\nIncreases Lock by 25 per enemy present in the area of effect."
+  },
+  {
+    "id": 9540,
+    "name": "Ataraxia",
+    "descName": "Applies a shield that reduces the damage inflicted by the next attack."
+  },
+  {
+    "id": 9577,
+    "name": "Celestial Wave",
+    "descName": "Inflicts Air-type damage and applies the Air state. Places an Air rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: -25% damage (1 turn).\n• Fire: -3 AP (1 turn).\n• Earth: steals 3 Range (1 turn)."
+  },
+  {
+    "id": 9578,
+    "name": "Stinger",
+    "descName": "Inflicts Earth-type damage and applies the Earth state. Places an Earth rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: steals 3 Range (1 turn).\n• Water: -2 MP (1 turn).\n• Fire: +20% damage suffered (1 turn)."
+  },
+  {
+    "id": 9579,
+    "name": "Manifestation",
+    "descName": "Triggers the targeted rune.\nIf the cell is empty, summons a Manifestation for 1 turn:\n• Water: the Manifestation attracts all nearby entities (within 2 cells).\n• Air: entities next to the Manifestation are teleported symmetrically.\n• Fire: the caster switches places with the Manifestation.\n• Earth: entities next to the Manifestation are repelled.\nUpon its death, applies its elemental state to nearby entities."
+  },
+  {
+    "id": 9580,
+    "name": "Cataract",
+    "descName": "Inflicts Water-type damage and applies the Water state. Places a Water Rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: -25% damage (1 turn).\n• Fire: -50 Dodge (1 turn).\n• Earth: -2 MP (1 turn)."
+  },
+  {
+    "id": 9581,
+    "name": "Ember",
+    "descName": "Inflicts Fire-type damage and applies the Fire state. Places a Fire rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: -50 Dodge (1 turn).\n• Air: -3 AP (1 turn).\n• Earth: +20% damage suffered (1 turn)."
+  },
+  {
+    "id": 9582,
+    "name": "Morph",
+    "descName": "Inflicts damage depending on the target's element.\nThe constraints for casting the spell are modified for 2 turns, depending on the element:\n• Water: reduces the AP cost of the spell.\n• Fire: increases damage.\n• Air: increases range.\n• Earth: increases the number of castings per target."
+  },
+  {
+    "id": 9583,
+    "name": "Hurricane",
+    "descName": "Steals Air-type health and applies the Air state. Places an Air rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: -25% damage (1 turn).\n• Fire: -3 AP (1 turn).\n• Earth: steals 3 Range (1 turn)."
+  },
+  {
+    "id": 9584,
+    "name": "Telluric Blade",
+    "descName": "Inflicts Earth-type damage and applies the Earth state. Places an Earth rune at the target's location.\nReduces the probability of enemies' critical hits, and increases the probability of allies' critical hits.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: steals 3 Range (1 turn).\n• Water: -2 MP (1 turn).\n• Fire: +20% damage suffered (1 turn)."
+  },
+  {
+    "id": 9585,
+    "name": "Quadramental Current",
+    "descName": "Triggers the following effects on the target, depending on its element:\n• Water: the target attracts all nearby entities (within 2 cells).\n• Air: entities near the target are teleported symmetrically.\n• Earth: the target repels all entities next to it.\n• Fire: the target switches places with the nearest entity."
+  },
+  {
+    "id": 9586,
+    "name": "Stalactite",
+    "descName": "Steals Water-type health and applies the Water state. Places a Water Rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: -25% damage (1 turn).\n• Fire: -50 Dodge (1 turn).\n• Earth: -2 MP (1 turn)."
+  },
+  {
+    "id": 9587,
+    "name": "Volcano",
+    "descName": "Steals Fire-type health and applies the Fire state. Places a Fire rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: -50 Dodge (1 turn).\n• Air: -3 AP (1 turn).\n• Earth: +20% damage suffered (1 turn)."
+  },
+  {
+    "id": 9588,
+    "name": "Elemental Trap",
+    "descName": "Places a trap that applies effects depending on the element of the target that triggers the trap:\n• Fire: the next heals received during the turn are divided by 2.\n• Air: applies the Unable to Lock state.\n• Earth: reduces the duration of active effects by 1 turn.\n• Earth: applies the Gravity state."
+  },
+  {
+    "id": 9589,
+    "name": "Elemental Guardian",
+    "descName": "Summons a static elemental whose power increases every time a different elemental combo is generated.\nIt attacks in the target's element."
+  },
+  {
+    "id": 9590,
+    "name": "Flood",
+    "descName": "Inflicts Water-type damage and applies the Water state. Moves the caster closer to the target.\nPlaces a Water Rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: -25% damage (1 turn).\n• Fire: -50 Dodge (1 turn).\n• Earth: -2 MP (1 turn)."
+  },
+  {
+    "id": 9591,
+    "name": "Elemental Cycle",
+    "descName": "Changes the target's element, depending on its element:\nEarth -> Water -> Fire -> Air -> Earth"
+  },
+  {
+    "id": 9592,
+    "name": "Sun Lance",
+    "descName": "Inflicts Fire-type damage, switches places with the target and applies the Fire state.\nPlaces a Fire rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: -50 Dodge (1 turn).\n• Air: -3 AP (1 turn).\n• Earth: +20% damage suffered (1 turn)."
+  },
+  {
+    "id": 9593,
+    "name": "Runic Overcharge",
+    "descName": "Consumes all runes without activating their effects.\nThe target suffers damage depending on the number and element of runes consumed."
+  },
+  {
+    "id": 9594,
+    "name": "Tectonic Breach",
+    "descName": "Steals Earth-type health and applies the Earth state. Places an Earth rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Air: steals 3 Range (1 turn).\n• Water: -2 MP (1 turn).\n• Fire: +20% damage suffered (1 turn)."
+  },
+  {
+    "id": 9595,
+    "name": "Comet",
+    "descName": "Inflicts Air-type damage, moves the caster away and applies the Air state.\nPlaces an Air rune at the target's location.\n\nThe target's elemental state modifies the effects it undergoes:\n• Water: -25% damage (1 turn).\n• Fire: -3 AP (1 turn).\n• Earth: steals 3 Range (1 turn)."
+  },
+  {
+    "id": 9596,
+    "name": "Elemental Loop",
+    "descName": "Inflicts damage in the target's element.\nChanges the target's element:\nWater -> Earth -> Air -> Fire -> Water"
+  },
+  {
+    "id": 9597,
+    "name": "Runic Repulsion",
+    "descName": "Repels each rune on the field in a cross-shaped AoE.\nConsumes the runes without triggering their effects."
+  },
+  {
+    "id": 9626,
+    "name": "Threat",
+    "descName": "Inflicts Water-type damage and attracts the target.\nThe caster gains shield points."
+  },
+  {
+    "id": 9627,
+    "name": "Pounding",
+    "descName": "Inflicts Air-type damage in an area of effect and removes MP."
+  },
+  {
+    "id": 9628,
+    "name": "Determination",
+    "descName": "Applies the Unmovable state and reduces damage suffered by 25% for 1 turn.\nCannot be unbewitched."
+  },
+  {
+    "id": 9629,
+    "name": "Endurance",
+    "descName": "Inflicts Water-type damage.\nApplies shield points to the caster."
+  },
+  {
+    "id": 9630,
+    "name": "Cleaver",
+    "descName": "Inflicts Water-type damage in an area of effect.\nApplies shield points for each enemy affected."
+  },
+  {
+    "id": 9631,
+    "name": "Destructive Ring",
+    "descName": "Inflicts Air-type damage in a ring, and attracts targets."
+  },
+  {
+    "id": 9632,
+    "name": "Gathering",
+    "descName": "The target attacks its nearby allies (within 2 cells) when it is attacked."
+  },
+  {
+    "id": 9633,
+    "name": "Violence",
+    "descName": "Attracts nearby entities and increases the pushback damage and Lock for each enemy in the area of effect."
+  },
+  {
+    "id": 9634,
+    "name": "Accumulation",
+    "descName": "Inflicts Earth-type damage.\nIf the spell is cast on the caster, the spell does not inflict any damage, and damage is increased for the next casters."
+  },
+  {
+    "id": 9635,
+    "name": "Fracture",
+    "descName": "Inflicts Air-type damage up to the targeted cell.\nApplies an Erosion penalty."
+  },
+  {
+    "id": 9636,
+    "name": "Fight Back",
+    "descName": "The target is repelled by 2 cells each time it attacks the caster."
+  },
+  {
+    "id": 9637,
+    "name": "Grip",
+    "descName": "Removes all MP from the targeted enemy but makes it invulnerable."
+  },
+  {
+    "id": 9639,
+    "name": "Virtue",
+    "descName": "Applies an area shield, but reduces the caster's Power."
+  },
+  {
+    "id": 9640,
+    "name": "Agitation",
+    "descName": "Increases MP and Dodge for the current turn."
+  },
+  {
+    "id": 9641,
+    "name": "Tumult",
+    "descName": "Inflicts Fire-type damage in an area of effect.\nThe higher the number of targets, the higher the damage."
+  },
+  {
+    "id": 9642,
+    "name": "Zenith",
+    "descName": "Inflicts Air-type damage in an area of effect.\nThe damage is increased for each MP available when the spell is cast."
+  },
+  {
+    "id": 9643,
+    "name": "Pygmachia",
+    "descName": "Inflicts Earth-type damage in an area of effect.\nSpell damage is increased for 1 turn when it is cast."
+  },
+  {
+    "id": 9644,
+    "name": "Sentence",
+    "descName": "Inflicts Fire-type damage.\nInflicts extra Fire-type damage in an area of effect at the end of the target's turn."
+  },
+  {
+    "id": 9645,
+    "name": "Conquest",
+    "descName": "Summons a Scarecrow, which redistributes 50% of the damage it suffers within 2 cells."
+  },
+  {
+    "id": 9651,
+    "name": "Repulsive Fang",
+    "descName": "Inflicts Air-type damage.\nIf the target finishes its turn next to an ally, it is repelled by the caster."
+  },
+  {
+    "id": 9652,
+    "name": "Aquatic Wave",
+    "descName": "Inflicts Water-type damage.\nIncreases the damage inflicted on the target by Summons."
+  },
+  {
+    "id": 9653,
+    "name": "Albino Tofu",
+    "descName": "Summons an Albino Tofu that inflicts Air-type damage and removes MP.\nThe damage it inflicts increases with every turn.\nPrevents a Gobball, Toad or Wyrmling from being summoned on the same turn."
+  },
+  {
+    "id": 9654,
+    "name": "Animal Union",
+    "descName": "Merges with an allied Summons to take control of Summons from the same family.\n\nTofu: \n• All Tofus gain 2 AP, as well as 50% of the caster's Agility and Air-type damage. \n• The caster gains 2 MP.\n\nGobball: \n• All Gobballs gain 2 AP, as well as 50% of the caster's Strength, Earth-type damage and Neutral-type damage. \n• The caster reduces damage suffered by 20%.\n\nWyrmling: \n• All Wyrmlings gain 2 AP, as well as 50% of the caster's Intelligence, Fire-type damage and heals. \n• The caster gains a healing bonus.\n\nToad:\n• All Toads gain 2 AP, as well as 50% of the caster's Chance and Water-type damage. \n• The caster gains a damage bonus."
+  },
+  {
+    "id": 9655,
+    "name": "Sedimentation",
+    "descName": "Inflicts Earth-type damage.\nReduces the target's Power."
+  },
+  {
+    "id": 9656,
+    "name": "Whirlwind",
+    "descName": "Inflicts Water-type damage.\nOn an allied Summon: inflicts Water-type damage in an area of effect and repels it."
+  },
+  {
+    "id": 9657,
+    "name": "Protective Balm",
+    "descName": "The caster loses 10% of their health points, but applies a shield to the targeted Summons."
+  },
+  {
+    "id": 9658,
+    "name": "Albino Toad",
+    "descName": "Summons an Albino Toad, which applies a Water-type poison.\nIf controlled by whoever summoned it, it can repel a target to the targeted cell."
+  },
+  {
+    "id": 9659,
+    "name": "Crop",
+    "descName": "Applies effects depending on the caster's transformation:\nToad: Moves the caster closer to the target.\nGobball: attracts the target.\nWyrmling: repels the caster.\nTofu: switches places with the target."
+  },
+  {
+    "id": 9660,
+    "name": "Plucking",
+    "descName": "The targeted Tofu inflicts Air-type damage in an area of effect, and dies at the end of its turn."
+  },
+  {
+    "id": 9661,
+    "name": "Gobbly",
+    "descName": "Summons a Gobbly, which Locks and removes AP."
+  },
+  {
+    "id": 9662,
+    "name": "Albino Wyrmling",
+    "descName": "Summons a Wyrmling that inflicts Fire-type damage.\nIf controlled by whoever summoned it, it can heal an ally.\nPrevents a Gobball, Toad or Tofu from being summoned during the same turn."
+  },
+  {
+    "id": 9663,
+    "name": "Dragon Heart",
+    "descName": "The target is healed when a Wyrmling inflicts damage."
+  },
+  {
+    "id": 9664,
+    "name": "Black Toad",
+    "descName": "Summons a Black Toad that inflicts Water-type damage on contact.\nThe more MP it uses before attacking, the less damage it inflicts.\nIf controlled by whoever summoned it, it can repel a target to the targeted cell."
+  },
+  {
+    "id": 9665,
+    "name": "Constriction",
+    "descName": "Steals Earth-type health."
+  },
+  {
+    "id": 9666,
+    "name": "Geyser",
+    "descName": "Inflicts Water-type damage.\nIncreases Power."
+  },
+  {
+    "id": 9667,
+    "name": "Slimy Toad",
+    "descName": "Summons a Slimy Toad that inflicts Water-type damage in an area of effect.\nIf controlled by whoever summoned it, it can repel a target to the targeted cell."
+  },
+  {
+    "id": 9668,
+    "name": "Relay",
+    "descName": "Gives the target 2 AP.\nIf another entity is already under the spell's effects, it loses its AP bonus, and both entities switch places."
+  },
+  {
+    "id": 9669,
+    "name": "Favouritism",
+    "descName": "Kills all of the caster's Summons except for the targeted Summons.\nIt gains 1 AP, 1 MP, 50% Vitality and 30% damage per Summons sacrificed."
+  },
+  {
+    "id": 9670,
+    "name": "Replacement",
+    "descName": "Kills the targeted Summons, and replaces it with another one (depending on the caster's transformation)."
+  },
+  {
+    "id": 9671,
+    "name": "Animal Communion",
+    "descName": "All allied Summons share the damage they suffer, but they suffer 50% more damage."
+  },
+  {
+    "id": 9672,
+    "name": "Condemnation",
+    "descName": "Inflicts Air- and Fire-type damage.\nDamage is applied when the spell is cast on another target.\nMay be stacked on the same target 2 times."
+  },
+  {
+    "id": 9675,
+    "name": "Fit of Rage",
+    "descName": "Inflicts Earth-type damage.\nThe damage is increased each time the spell is cast, but the bonus is lost if the spell is not cast again."
+  },
+  {
+    "id": 9683,
+    "name": "Venison",
+    "descName": "Temporarily applies the Prey state to the target. It is possible to have several prey at once."
+  },
+  {
+    "id": 9684,
+    "name": "Jaw",
+    "descName": "Inflicts Fire-type damage. \nIncreases the Power of allies near the target. The caster is not affected.\nIncreases Rage."
+  },
+  {
+    "id": 9685,
+    "name": "Calcaneus",
+    "descName": "Inflicts Water-type damage. \nIf the target is in the Prey state, it is attracted by one cell."
+  },
+  {
+    "id": 9686,
+    "name": "Stripping",
+    "descName": "Inflicts Air-type damage. \nIf the target is in the Prey state, spell damage is increased depending on the number of allies next to the target."
+  },
+  {
+    "id": 9687,
+    "name": "Woof",
+    "descName": "Steals Fire-type health. \nIf the target is in the Prey state, its Pushback damage resistance is reduced."
+  },
+  {
+    "id": 9689,
+    "name": "Affection",
+    "descName": "Switches places with an allied target.\nReduces Rage."
+  },
+  {
+    "id": 9690,
+    "name": "Gangrene",
+    "descName": "Applies Erosion to the target.\nIncreases Rage."
+  },
+  {
+    "id": 9691,
+    "name": "Muzzle",
+    "descName": "Inflicts Earth-type damage.\nIf the target is in the Prey state, the caster gains Lock."
+  },
+  {
+    "id": 9692,
+    "name": "Humerus",
+    "descName": "Inflicts Earth-type damage and teleports the caster behind the target.\nIncreases Rage."
+  },
+  {
+    "id": 9693,
+    "name": "Hunt",
+    "descName": "Inflicts Fire-type damage. \nIf the target is in the Prey state, it is repelled."
+  },
+  {
+    "id": 9694,
+    "name": "Beaten",
+    "descName": "Inflicts Air-type damage.\nIf the target is in the Prey state, allies next to it gain 1 MP."
+  },
+  {
+    "id": 9695,
+    "name": "Snuggletooth",
+    "descName": "Reduces the caster's Power.\nReduces Rage."
+  },
+  {
+    "id": 9696,
+    "name": "Ferocity",
+    "descName": "If the target is moved or suffers an MP reduction, it gains Power."
+  },
+  {
+    "id": 9697,
+    "name": "Radius",
+    "descName": "Inflicts Water-type damage. \nThe caster switches places with the target.\nIncreases Rage."
+  },
+  {
+    "id": 9698,
+    "name": "Vertebra",
+    "descName": "Poisons the target for 2 turns and inflicts Water-type damage."
+  },
+  {
+    "id": 9699,
+    "name": "Pursuit",
+    "descName": "Places a glyph-aura that attracts allies towards the nearest Prey when it is activated."
+  },
+  {
+    "id": 9700,
+    "name": "Amarok",
+    "descName": "Inflicts Earth-type damage.\nIf the target is in the Prey state, attracts entities aligned with the target."
+  },
+  {
+    "id": 9701,
+    "name": "Gripe",
+    "descName": "If the caster suffers long-range damage, they gain Pushback damage and Lock."
+  },
+  {
+    "id": 9702,
+    "name": "Carving Up",
+    "descName": "Inflicts Air-type damage.\nReduces the duration of active effects on the target.\nIncreases Rage."
+  },
+  {
+    "id": 9703,
+    "name": "Determination",
+    "descName": "The targeted prey suffers extra damage for 1 turn.\nIncreases Rage."
+  },
+  {
+    "id": 9704,
+    "name": "Tailing",
+    "descName": "Pushes the target back, then moves the caster closer to the target."
+  },
+  {
+    "id": 9739,
+    "name": "Hangover",
+    "descName": "Inflicts Earth-type damage.\nThe spell damage increases each time it is cast.\nThe Drunk state is required."
+  },
+  {
+    "id": 9740,
+    "name": "Blow-Out",
+    "descName": "Applies the Drunk state and grants Lock. Does not block the casting of Sober spells."
+  },
+  {
+    "id": 9741,
+    "name": "Burning Circle",
+    "descName": "Inflicts Fire-type damage in an area of effect.\nThe Sober state is required."
+  },
+  {
+    "id": 9742,
+    "name": "Consolation",
+    "descName": "Attracts the target towards the caster. Heals the target if it is an ally.\nThe Sober state is required."
+  },
+  {
+    "id": 9743,
+    "name": "Numbness",
+    "descName": "Inflicts Air-type damage and removes MP in an area of effect.\nThe Sober state is required."
+  },
+  {
+    "id": 9744,
+    "name": "Brandy",
+    "descName": "Throws the target onto the targeted cell. Heals allies in an area of effect around the point of impact.\nThe Sober state is required."
+  },
+  {
+    "id": 9745,
+    "name": "Liqueur",
+    "descName": "Steals Air-type health.\nThe Drunk state is required."
+  },
+  {
+    "id": 9746,
+    "name": "Chamrak",
+    "descName": "Carries the target. Throws the target when cast for the second time.\nDeactivates the carried target's lines of sight for spells."
+  },
+  {
+    "id": 9747,
+    "name": "Waterfall",
+    "descName": "The caster throws the target and moves closer to it.\nThe Sober state is required."
+  },
+  {
+    "id": 9748,
+    "name": "Poisoned Undergrowth",
+    "descName": "Applies an Earth poison at the start of turn."
+  },
+  {
+    "id": 9749,
+    "name": "Leafy Tree",
+    "descName": "Places a Leafy Tree."
+  },
+  {
+    "id": 9750,
+    "name": "The Block",
+    "descName": "Summons a Block."
+  },
+  {
+    "id": 9751,
+    "name": "Proximity Poison",
+    "descName": "Applies the Infected state to all enemy targets next to a doll or a Leafy Tree belonging to the caster."
+  },
+  {
+    "id": 9752,
+    "name": "Rise of Sap",
+    "descName": "Steals Water-type health in an area of effect.\n\nOn an allied Tree that has just appeared: causes its leaves to grow and makes it possible for a Sadida to use it as an intermediary for casting other spells."
+  },
+  {
+    "id": 9753,
+    "name": "The Madoll",
+    "descName": "Summon a Madoll."
+  },
+  {
+    "id": 9754,
+    "name": "Repotting",
+    "descName": "Teleports the Leafy Tree to the first cell available between it and the caster."
+  },
+  {
+    "id": 9755,
+    "name": "Vegetal Influence",
+    "descName": "Replaces the targeted tree with a controllable Tree, which can attract a target and remove MP.\nAt the end of its turn, it becomes a Tree again."
+  },
+  {
+    "id": 9756,
+    "name": "The Sacrificial Doll",
+    "descName": "Summons a Sacrificial Doll."
+  },
+  {
+    "id": 9758,
+    "name": "Shake",
+    "descName": "Inflicts Air-type damage on contact with each allied Tree.\nThe caster gains 1 MP for each enemy hit."
+  },
+  {
+    "id": 9759,
+    "name": "Inoculation",
+    "descName": "Kills the targeted Tree. Inflicts Air-type damage and applies the Infected state in an area of effect."
+  },
+  {
+    "id": 9760,
+    "name": "Force of Nature",
+    "descName": "Inflicts Earth-type damage depending on the number of Trees placed on the field by the caster."
+  },
+  {
+    "id": 9761,
+    "name": "Bane",
+    "descName": "Inflicts Water-type damage and steals Water-type life from all infected enemies."
+  },
+  {
+    "id": 9762,
+    "name": "Vegetal Altruism",
+    "descName": "Kills the targeted Tree. Gives an infinite Vitality bonus to all the caster's dolls."
+  },
+  {
+    "id": 9763,
+    "name": "The Inflatable",
+    "descName": "Summon an Inflatable."
+  },
+  {
+    "id": 9764,
+    "name": "Sherpa",
+    "descName": "If the caster suffers a close-combat attack, they carry their attacker.\nThe Sober state is required."
+  },
+  {
+    "id": 9765,
+    "name": "Plaguing Bramble",
+    "descName": "Inflicts Earth-type damage in an area of effect around an allied Tree."
+  },
+  {
+    "id": 9766,
+    "name": "Contagion",
+    "descName": "Inflicts Air-type damage and spreads the Infected state to enemies next to the target.\nIf the target is in the Infected state: inflicts Air-type damage on all enemies in the Infected state."
+  },
+  {
+    "id": 9767,
+    "name": "Voodoo Curse",
+    "descName": "The target suffers Fire-type damage if it loses MP, and Earth-type damage if it loses AP."
+  },
+  {
+    "id": 9768,
+    "name": "Paralysing Bramble",
+    "descName": "Inflicts Air-type damage and removes MP."
+  },
+  {
+    "id": 9769,
+    "name": "The Ultra-Powerful",
+    "descName": "Summons an Ultra-Powerful."
+  },
+  {
+    "id": 9770,
+    "name": "Harmony",
+    "descName": "Applies the Rooted state to the caster and removes all their MP at end of the turn.\nThe caster shares damage with their dolls."
+  },
+  {
+    "id": 9771,
+    "name": "Nausea",
+    "descName": "Inflicts Air-type damage and repels the caster from the target.\nThe Drunk state is required."
+  },
+  {
+    "id": 9772,
+    "name": "Distillation",
+    "descName": "Inflicts Water-type damage in an area of effect and reduces Range.\nThe Sober state is required."
+  },
+  {
+    "id": 9773,
+    "name": "Brewing",
+    "descName": "Applies the Gravity state.\nThe Drunk state is required."
+  },
+  {
+    "id": 9774,
+    "name": "Prohibition",
+    "descName": "Applies the Unhealable state to the target and makes it invulnerable to close-combat damage.\nThe Drunk state is required."
+  },
+  {
+    "id": 9775,
+    "name": "Hooch",
+    "descName": "Inflicts Water-type damage depending on the MP used.\nThe Drunk state is required."
+  },
+  {
+    "id": 9776,
+    "name": "Fermentation",
+    "descName": "Applies a shield for the current turn and a second shield the following turn.\nThe Drunk state is required."
+  },
+  {
+    "id": 9777,
+    "name": "Absinthe",
+    "descName": "Inflicts Fire-type damage without line of sight.\nThe Drunk state is required."
+  },
+  {
+    "id": 9778,
+    "name": "Filthipint",
+    "descName": "Inflicts Earth-type damage in an area of effect around the caster.\nThe Drunk state is required."
+  },
+  {
+    "id": 9780,
+    "name": "Stretcher",
+    "descName": "Throws the target to the targeted cell. The target is healed depending on the number of entities passed over.\nThe Sober state is required."
+  },
+  {
+    "id": 9781,
+    "name": "Bamboo",
+    "descName": "Summons a Bamboo.\nThe caster mounts the Bamboo if they are in close combat while in the Sober state.\nDeactivates the caster's lines of sight for spells if carried by a Bamboo.\nA Pandawa carried by a Bamboo cannot carry other entities."
+  },
+  {
+    "id": 9783,
+    "name": "Inebriation",
+    "descName": "Summons a Barrel that increases Power in an area of effect around it.\nWhen it is thrown, it removes MP from enemies in an area of effect around the point of impact."
+  },
+  {
+    "id": 9793,
+    "name": "Mist",
+    "descName": "Places a glyph-aura that makes allies present in the area of effect invisible."
+  },
+  {
+    "id": 9794,
+    "name": "Perfidious Trap",
+    "descName": "Places a single-cell trap that attracts in an area of effect."
+  },
+  {
+    "id": 9795,
+    "name": "Pitfall",
+    "descName": "Inflicts Earth-type damage. Each trap triggered increases the Pitfall spell's damage.\nThe damage bonus disappears when the spell is cast."
+  },
+  {
+    "id": 9796,
+    "name": "Toxines",
+    "descName": "The target suffers an Air-type poison when it is affected by a trap."
+  },
+  {
+    "id": 9797,
+    "name": "Raiding",
+    "descName": "Inflicts Water-type damage. \n50% of damage is distributed in the form of Healing to allies around the target. \nDoes not affect the caster."
+  },
+  {
+    "id": 9798,
+    "name": "Cut-Throat",
+    "descName": "Inflicts Fire-type damage and increases the Power of traps."
+  },
+  {
+    "id": 9799,
+    "name": "Plotter",
+    "descName": "Summons a controllable Double.\nEach trap triggered increases the Double's Power.\nThe Double inflicts Neutral-type damage in an area of effect around it when it dies."
+  },
+  {
+    "id": 9800,
+    "name": "Larceny",
+    "descName": "Inflicts Water-type damage and steals Chance."
+  },
+  {
+    "id": 9801,
+    "name": "Trapster",
+    "descName": "Inflicts Earth-type damage. Each trap triggered increases the Trapster spell's Range.\nThe Range bonus disappears when the spell is cast."
+  },
+  {
+    "id": 9802,
+    "name": "Ambush",
+    "descName": "Inflicts Fire-type damage and attracts the target towards the Double."
+  },
+  {
+    "id": 9803,
+    "name": "Toxic Injection",
+    "descName": "Applies an Air-type poison to the target. Each trap triggered lowers the recast time for Toxic Injection.\nThe recast time reduction disappears when the spell is cast."
+  },
+  {
+    "id": 9804,
+    "name": "Fragmentation Trap",
+    "descName": "Places a single-cell trap that inflicts Fire-type damage.\nThe damage increases depending on the distance from the centre of the area of effect."
+  },
+  {
+    "id": 9806,
+    "name": "Drift Trap",
+    "descName": "Places a trap that pushes back 2 cells."
+  },
+  {
+    "id": 9807,
+    "name": "Epidemic",
+    "descName": "Applies an Air-type poison to enemies at the end of turn.\nThe target spreads the poison around itself in an area of effect."
+  },
+  {
+    "id": 9808,
+    "name": "Repelling Trap",
+    "descName": "Single-cell trap that repels by 2 cells in an area of effect."
+  },
+  {
+    "id": 9809,
+    "name": "Contempt",
+    "descName": "The target switches places with the Double."
+  },
+  {
+    "id": 9810,
+    "name": "Proximity Trap",
+    "descName": "Places a single-cell trap that inflicts Air-type damage in an area of effect."
+  },
+  {
+    "id": 9811,
+    "name": "Perquisition",
+    "descName": "Inflicts Water-type damage and pushes the target by 2 cells.\n100% of damage is distributed in the form of Healing to allies in an area of effect around the target.\nDoes not affect the caster."
+  },
+  {
+    "id": 9812,
+    "name": "Malevolent Trap",
+    "descName": "Places a single-cell trap that inflicts Earth-type damage.\nThe damage is increased depending on the number of enemies near the trap."
+  },
+  {
+    "id": 9813,
+    "name": "Perfidy",
+    "descName": "Inflicts Earth-type damage. Each trap triggered lowers the AP Cost of the spell Perfidy.\nThe AP cost reduction disappears when the spell is cast."
+  },
+  {
+    "id": 9814,
+    "name": "Calamity",
+    "descName": "Places a single-cell trap that steals Water-type life in an area of effect and reduces Dodge."
+  },
+  {
+    "id": 9852,
+    "name": "Mooring",
+    "descName": "Inflicts Earth-type damage."
+  },
+  {
+    "id": 9853,
+    "name": "Scuttle",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 9854,
+    "name": "Trawler",
+    "descName": "Places a Turret that attracts entities in an area of effect around it and that can lock.\nIn Evolution III, it can remove MP from targets in the Spyglass state."
+  },
+  {
+    "id": 9855,
+    "name": "Transition",
+    "descName": "Makes the targeted Turret evolve.\nHeals the targeted Turret if it receives an evolution.\nIncreases targeted allies' Power."
+  },
+  {
+    "id": 9856,
+    "name": "Harmattan",
+    "descName": "Inflicts Air-type damage on the target and reduces its Pushback resistance."
+  },
+  {
+    "id": 9857,
+    "name": "Assistance",
+    "descName": "Teleports the targeted Turret to the first cell available between it and the caster."
+  },
+  {
+    "id": 9858,
+    "name": "Armour-Plating",
+    "descName": "Applies a shield around allies. The shield is bigger on Turrets."
+  },
+  {
+    "id": 9859,
+    "name": "Drill",
+    "descName": "Places a Turret that inflicts damage.\nIn Evolution III, it applies Erosion to targets in the Ambush state."
+  },
+  {
+    "id": 9860,
+    "name": "Torpedo",
+    "descName": "Inflicts Air-type damage and pushes the target by 4 cells."
+  },
+  {
+    "id": 9861,
+    "name": "Corrosion",
+    "descName": "Inflicts Air-type damage and removes MP."
+  },
+  {
+    "id": 9862,
+    "name": "Valve",
+    "descName": "Inflicts Fire-type damage on the target and increases the caster's heals."
+  },
+  {
+    "id": 9863,
+    "name": "Hypertension",
+    "descName": "Applies the Evolution III state to the targeted Turret, but kills it at the end of its turn."
+  },
+  {
+    "id": 9864,
+    "name": "Bathyscaphe",
+    "descName": "Places a Turret that gives Shield to nearby targets.\nIn Evolution III, it can give 2 AP to targets in the First Aid state."
+  },
+  {
+    "id": 9865,
+    "name": "Periscope",
+    "descName": "Inflicts Water-type damage without line of sight and applies the Spyglass state."
+  },
+  {
+    "id": 9866,
+    "name": "Rescue",
+    "descName": "Heals the target and applies the First Aid state."
+  },
+  {
+    "id": 9867,
+    "name": "Short-Circuit",
+    "descName": "Kills the targeted Turret and inflicts Air-type damage in an area of effect.\nSets the destroyed Turret's recast time to 1 turn."
+  },
+  {
+    "id": 9868,
+    "name": "Sonar",
+    "descName": "Applies the Ambush state to the target and pushes entities next to it by 2 cells."
+  },
+  {
+    "id": 9869,
+    "name": "Nautilus",
+    "descName": "Inflicts Water-type damage and removes MP."
+  },
+  {
+    "id": 9870,
+    "name": "Seizing",
+    "descName": "Inflicts Earth-type damage in an area of effect."
+  },
+  {
+    "id": 9871,
+    "name": "Recursiveness",
+    "descName": "Pushes the target by 4 cells.\nIf it ends its movement next to one of the caster's Turrets, the Turret teleports it symmetrically and reapplies the spell's effect to the target."
+  },
+  {
+    "id": 9872,
+    "name": "Compass",
+    "descName": "Swaps the positions of two entities next to each other and aligned. \nOnly functions if both are in the spell's area of effect."
+  },
+  {
+    "id": 9888,
+    "name": "Souvenir",
+    "descName": "Inflicts Earth-type damage and teleports the target back to its previous position."
+  },
+  {
+    "id": 9889,
+    "name": "Spontaneous Return",
+    "descName": "The caster returns to their previous position."
+  },
+  {
+    "id": 9890,
+    "name": "Cog",
+    "descName": "Inflicts Water-type damage. \nThe caster gains 1 AP on the following turn."
+  },
+  {
+    "id": 9891,
+    "name": "Drying Up",
+    "descName": "Inflicts Air-type damage.\nOn the caster's next turn, the target inflicts damage around itself."
+  },
+  {
+    "id": 9892,
+    "name": "Reflect",
+    "descName": "Immediately teleports the target to its start-of-turn cell."
+  },
+  {
+    "id": 9893,
+    "name": "Shadowy Beam",
+    "descName": "Inflicts Earth-type damage.\nIf the target is in the Telefrag state, inflicts Earth-type damage in an area of effect around it."
+  },
+  {
+    "id": 9894,
+    "name": "Accomplice",
+    "descName": "Summons a static Accomplice that does not have any spells.\nIt is killed if another Accomplice is summoned."
+  },
+  {
+    "id": 9895,
+    "name": "Disruption",
+    "descName": "Inflicts Fire-type damage and teleports the target symmetrically in relation to the caster."
+  },
+  {
+    "id": 9896,
+    "name": "Temporal Distortion",
+    "descName": "Inflicts Air-type damage on enemies.\nTeleports the targets to their previous positions."
+  },
+  {
+    "id": 9897,
+    "name": "Petrification",
+    "descName": "Inflicts Water-type damage and removes AP.\nIf the target is in the Telefrag state, the spell's AP cost is reduced for 2 turns."
+  },
+  {
+    "id": 9898,
+    "name": "Conservation",
+    "descName": "Increases the damage suffered by the allied target or caster by 50% for the current turn.\nOn the following turn, the target reduces damage suffered by 30%."
+  },
+  {
+    "id": 9899,
+    "name": "Temporal Suspension",
+    "descName": "Inflicts Fire-type damage on enemies.\nReduces the duration of the effects on enemy targets in the Telefrag state and removes the state."
+  },
+  {
+    "id": 9900,
+    "name": "Premonition",
+    "descName": "On the next turn, the caster teleports to the targeted cell."
+  },
+  {
+    "id": 9901,
+    "name": "Pendulum",
+    "descName": "The caster teleports symmetrically in relation to the target and inflicts Air-type damage in an area of effect on their destination cell.\nThey then return to their previous position."
+  },
+  {
+    "id": 9902,
+    "name": "Time Rift",
+    "descName": "The caster switches position with the Accomplice (or the Dial).\nAt the end of the turn, the Accomplice (or Dial) returns to its previous position.\nSynchro cannot be triggered for the duration of Time Rift."
+  },
+  {
+    "id": 9903,
+    "name": "Desynchronisation",
+    "descName": "Places a trap that teleports nearby entities symmetrically."
+  },
+  {
+    "id": 9904,
+    "name": "Temporal Oop Shield",
+    "descName": "If the target suffers damage, its attacker returns to their previous position."
+  },
+  {
+    "id": 9905,
+    "name": "Water Clock",
+    "descName": "Inflicts Water-type damage.\nIf the target is in the Telefrag state, the caster gains 2 AP on the next turn.\nRemoves the Telefrag state."
+  },
+  {
+    "id": 9906,
+    "name": "Gear",
+    "descName": "Inflicts Earth-type damage and teleports targets symmetrically in relation to the centre of the area of effect."
+  },
+  {
+    "id": 9907,
+    "name": "Knell",
+    "descName": "Inflicts Neutral-type damage on enemies around each entity in the Telefrag state.\nThe more life the caster has, the greater the damage.\nRemoves the Telefrag state."
+  },
+  {
+    "id": 9908,
+    "name": "Temporal Instability",
+    "descName": "Places a glyph that returns entities to their previous positions.\nThe effects of the glyph are also applied when the caster generates a Telefrag."
+  },
+  {
+    "id": 9920,
+    "name": "Poltroon Mask",
+    "descName": "Applies the Coward Mask.\nIncrease the long-range damage of the caster and their allies next to them."
+  },
+  {
+    "id": 9921,
+    "name": "Agular",
+    "descName": "Inflicts Air-type damage in an area of effect."
+  },
+  {
+    "id": 9922,
+    "name": "Parafuso",
+    "descName": "Steals Fire-type life and reduces the target's Power."
+  },
+  {
+    "id": 9923,
+    "name": "Tireless Mask",
+    "descName": "Applies the Intrepid Mask.\nReduces the damage suffered by the caster and allies next to them."
+  },
+  {
+    "id": 9924,
+    "name": "Pivot",
+    "descName": "Teleports to behind the target."
+  },
+  {
+    "id": 9925,
+    "name": "Armadur",
+    "descName": "Increases the target's MP and Dodge."
+  },
+  {
+    "id": 9926,
+    "name": "Scudo",
+    "descName": "Applies a shield around the target."
+  },
+  {
+    "id": 9927,
+    "name": "Estrelia",
+    "descName": "Steals Water-type health and teleports the target to behind the caster."
+  },
+  {
+    "id": 9928,
+    "name": "Hysterical Mask",
+    "descName": "Applies the Psychopath Mask.\nAt the end of their turn, the caster inflicts Neutral-type damage. The more remaining life they have, the greater the damage."
+  },
+  {
+    "id": 9929,
+    "name": "Cavalcade",
+    "descName": "Inflicts Air-type damage and moves the caster closer to the target."
+  },
+  {
+    "id": 9930,
+    "name": "Atabak",
+    "descName": "Inflicts Earth-type damage and removes AP."
+  },
+  {
+    "id": 9931,
+    "name": "Ginga",
+    "descName": "Applies the Unmovable state and increases the caster's Power."
+  },
+  {
+    "id": 9932,
+    "name": "Comedy",
+    "descName": "Repels the target 4 cells, then attracts it 2 cells."
+  },
+  {
+    "id": 9933,
+    "name": "Bocciara",
+    "descName": "Inflicts Water-type damage and increases the caster's Pushback damage."
+  },
+  {
+    "id": 9934,
+    "name": "Catalepsy",
+    "descName": "Inflicts Earth-type damage and removes MP from the target."
+  },
+  {
+    "id": 9935,
+    "name": "Apostasy",
+    "descName": "Inflicts Fire-type damage and moves the caster away from the target."
+  },
+  {
+    "id": 9936,
+    "name": "Ponteira",
+    "descName": "Inflicts Water-type damage and reduces the target's damage."
+  },
+  {
+    "id": 9937,
+    "name": "Inferno",
+    "descName": "Inflicts Fire-type damage and increases the caster's Power."
+  },
+  {
+    "id": 9938,
+    "name": "Grimace",
+    "descName": ""
+  },
+  {
+    "id": 9939,
+    "name": "Brincaderia",
+    "descName": "Inflicts Fire-type damage and reduces the target's Range."
+  },
+  {
+    "id": 9940,
+    "name": "Neurosis",
+    "descName": "Applies the Gravity state to the target and reduces its Power."
+  },
+  {
+    "id": 9948,
+    "name": "Fury",
+    "descName": "Inflicts Air-type damage.\nThe damage is increased depending on the amount of Suffering.\nIncreases Suffering by 1: the more Suffering the Sacrier has, the more damage they inflict.\nBeyond 6 Suffering, the Sacrier changes appearance and gains an additional damage bonus."
+  },
+  {
+    "id": 9956,
+    "name": "Light Speed",
+    "descName": "Teleports in a line to the first available cell and inflicts Air-type damage on the cells crossed."
+  },
+  {
+    "id": 9957,
+    "name": "Torture",
+    "descName": "Steals Air-type health.\nReduces damage by 15%.\nReduces Suffering by 1."
+  },
+  {
+    "id": 9958,
+    "name": "Projection",
+    "descName": "Inflicts Water-type damage.\nThe target is teleported behind the caster."
+  },
+  {
+    "id": 9959,
+    "name": "Nervousness",
+    "descName": "Inflicts Water-type damage.\nDamage is increased depending on the amount of Suffering.\nIncreases Suffering by 1."
+  },
+  {
+    "id": 9960,
+    "name": "Stase",
+    "descName": "Inflicts Water-type damage and removes MP.\nReduces Suffering by 1."
+  },
+  {
+    "id": 9961,
+    "name": "Influx",
+    "descName": "Inflicts Fire-type damage.\nAttracts targets."
+  },
+  {
+    "id": 9963,
+    "name": "Motivating Pain",
+    "descName": "Inflicts Fire-type damage in an area of effect.\nThe damage is increased depending on the amount of Suffering.\nIncreases Suffering by 1."
+  },
+  {
+    "id": 9964,
+    "name": "Decimation",
+    "descName": "Inflicts Earth-type damage.\nDamage is increased depending on the amount of Suffering.\nIncreases Suffering by 1."
+  },
+  {
+    "id": 9965,
+    "name": "Blood Bath",
+    "descName": "Inflicts Fire-type damage in an area of effect.\nReduces Suffering by 1 for each enemy present in the area."
+  },
+  {
+    "id": 9966,
+    "name": "Assault",
+    "descName": "Inflicts Earth-type damage on enemies.\nSwitches places with the target."
+  },
+  {
+    "id": 9967,
+    "name": "Absorption",
+    "descName": "Steals Earth-type health.\nReduces Suffering by 1.\nThe less Suffering a Sacrier has, the more Vitality they have.\nBeyond negative 6 Suffering, the Sacrier changes appearance and gains a damage reduction bonus."
+  },
+  {
+    "id": 9968,
+    "name": "Attraction",
+    "descName": "Attracts the target."
+  },
+  {
+    "id": 9969,
+    "name": "Transposition",
+    "descName": "Switches places with the target."
+  },
+  {
+    "id": 9970,
+    "name": "Mutilation",
+    "descName": "Increases Suffering by 2."
+  },
+  {
+    "id": 9971,
+    "name": "Life Transfer",
+    "descName": "Transfers part of the caster's HP to allies in the area of effect."
+  },
+  {
+    "id": 9972,
+    "name": "Sacrifice",
+    "descName": "Targets allies in an area of effect to suffer damage instead of them."
+  },
+  {
+    "id": 9973,
+    "name": "Convalescence",
+    "descName": "Reinitialises Suffering. It cannot evolve for 1 turn.\nThe caster suffers 10% extra damage for 1 turn."
+  },
+  {
+    "id": 9975,
+    "name": "Retribution",
+    "descName": "Inflicts Neutral-type damage.\nThe closer the caster is to having half HP, the more damage is inflicted."
+  },
+  {
+    "id": 9977,
+    "name": "Berserk",
+    "descName": ""
+  },
+  {
+    "id": 9978,
+    "name": "Flying Sword",
+    "descName": "Summons a sword that heals the caster when it inflicts damage."
+  },
+  {
+    "id": 9988,
+    "name": "Condensation?",
+    "descName": "Inflicts Water-type damage in an area of effect.\nAttracts the targets to the Sacrier."
+  },
+  {
+    "id": 9989,
+    "name": "Ravages",
+    "descName": "Inflicts Earth-type damage.\nMoves the caster closer to the target."
+  },
+  {
+    "id": 9990,
+    "name": "Cauterisation",
+    "descName": "Inflicts Fire-type damage on the target and the caster.\nIncreases Suffering by 2."
+  },
+  {
+    "id": 9991,
+    "name": "Ritual Bloodletting",
+    "descName": "Steals Fire-type health.\nReduces Suffering by 1."
+  },
+  {
+    "id": 9992,
+    "name": "Aversion",
+    "descName": "Inflicts Fire-type damage in an area of effect.\nRepels the targets."
+  },
+  {
+    "id": 9993,
+    "name": "Slaughter",
+    "descName": "Steals Earth-type health in an area of effect.\nReduces Suffering by 1 for each enemy hit."
+  },
+  {
+    "id": 9994,
+    "name": "Gash",
+    "descName": "Inflicts Earth-type damage.\nDamage is increased with each increase in Suffering.\nIncreases Suffering by 1."
+  },
+  {
+    "id": 9995,
+    "name": "Carnage",
+    "descName": "Inflicts Air-type damage.\nIncreases Suffering by 2."
+  },
+  {
+    "id": 9996,
+    "name": "Desolation",
+    "descName": "Inflicts Air-type damage and heals the caster.\nReduces Suffering by 1."
+  },
+  {
+    "id": 9997,
+    "name": "Riposte",
+    "descName": "Moves the caster closer to their attacker when they suffer long-range damage."
+  },
+  {
+    "id": 9998,
+    "name": "Clobbering",
+    "descName": "Inflicts Water-type damage.\nDamage is increased depending on the amount of Suffering.\nIncreases Suffering by 1."
+  },
+  {
+    "id": 9999,
+    "name": "Hostility",
+    "descName": "Inflicts Air-type damage.\nPushes the target."
+  },
+  {
+    "id": 10000,
+    "name": "Dissolution",
+    "descName": "Steals Water-type health.\nApplies a Dodge penalty.\nReduces Suffering by 1."
+  },
+  {
+    "id": 10001,
+    "name": "Perfusion",
+    "descName": "For 1 turn, the target is healed of up to 25% of the damage inflicted on the caster."
+  },
+  {
+    "id": 10002,
+    "name": "Coagulation",
+    "descName": "Reduces Suffering by 2."
+  },
+  {
+    "id": 10003,
+    "name": "Punishment",
+    "descName": "Applies the Gravity state in an area of effect.\nInflicts 2% of the caster's HP in damage for each unit of Suffering."
+  },
+  {
+    "id": 10004,
+    "name": "Bloodthirsty Madness",
+    "descName": "For 1 turn, the caster reflects 25% of damage they suffer in an area of effect around them."
+  },
+  {
+    "id": 10005,
+    "name": "Blood Pact",
+    "descName": "The damage inflicted by the target is reduced by 30%.\nThe target reflects 50% of the damage suffered by the caster."
+  },
+  {
+    "id": 10006,
+    "name": "Fluctuation",
+    "descName": "Increases MP.\nApplies the Unable to Lock and Unlockable states."
+  },
+  {
+    "id": 10007,
+    "name": "Penitence",
+    "descName": "The caster switches places with the the target when it is attacked."
+  },
+  {
+    "id": 10008,
+    "name": "Swift Sword",
+    "descName": "Summons a controllable sword that attracts."
+  },
+  {
+    "id": 10018,
+    "name": "Obliteration",
+    "descName": "Inflicts Fire-type damage."
+  },
+  {
+    "id": 10019,
+    "name": "Fuze",
+    "descName": "Makes all the caster's bombs explode."
+  },
+  {
+    "id": 10020,
+    "name": "Latent Explobomb",
+    "descName": "Places a bomb on the next turn that inflicts Fire-type damage."
+  },
+  {
+    "id": 10021,
+    "name": "Ruse",
+    "descName": "Moves the caster closer to the targeted bomb."
+  },
+  {
+    "id": 10022,
+    "name": "Musket",
+    "descName": "Inflicts Earth-type damage.\nIncreases the combo bonus of bombs next to the target."
+  },
+  {
+    "id": 10023,
+    "name": "Latent Grenado",
+    "descName": "Places a bomb on the next turn that inflicts Air-type damage."
+  },
+  {
+    "id": 10024,
+    "name": "Cadence",
+    "descName": "Inflicts Air-type damage on enemies in an area of effect.\nThe spell's effects are replayed from each bomb in the area of effect."
+  },
+  {
+    "id": 10025,
+    "name": "Strategy",
+    "descName": "The targeted bomb teleports to its previous position."
+  },
+  {
+    "id": 10026,
+    "name": "Stolen Goods",
+    "descName": "Inflicts Water-type damage on enemies.\nAttracts the target."
+  },
+  {
+    "id": 10027,
+    "name": "Latent Water Bomb",
+    "descName": "Places a bomb on the next turn that inflicts Water-type damage."
+  },
+  {
+    "id": 10028,
+    "name": "Gluing Explobomb",
+    "descName": "Places a bomb on the target. The bomb may be activated by activation spells or bomb explosions.\nWhen it is activated, it inflicts Fire-type damage in an area of effect."
+  },
+  {
+    "id": 10029,
+    "name": "Fulmination",
+    "descName": "Inflicts damage in an area of effect for each type of bomb present on the field and makes the bombs explode."
+  },
+  {
+    "id": 10031,
+    "name": "Arquebus",
+    "descName": "Inflicts Earth-type damage on enemies.\nReduces the duration of active effects by 1 turn."
+  },
+  {
+    "id": 10032,
+    "name": "Machine Gun",
+    "descName": "Inflicts Air-type damage.\nRepels the target."
+  },
+  {
+    "id": 10033,
+    "name": "Magnetic Trap",
+    "descName": "Places a trap that attracts bombs and triggers them."
+  },
+  {
+    "id": 10035,
+    "name": "Latent Seismobomb",
+    "descName": "Places a bomb on the next turn that inflicts Earth-type damage."
+  },
+  {
+    "id": 10036,
+    "name": "Walking Bomb",
+    "descName": "Summons a controllable bomb that can obtain an element by targeting an elemental bomb.\nAt the end of its turn, it dies and places a bomb in the corresponding element.\nIt dies after 2 turns if it has not obtained any elements."
+  },
+  {
+    "id": 10037,
+    "name": "Weigh Down",
+    "descName": "Inflicts Earth-type damage between aligned bombs in different elements.\nAffected bombs gain a 25% combo bonus. \nRequires targeting a bomb."
+  },
+  {
+    "id": 10038,
+    "name": "Imposture",
+    "descName": "Switches places with the target.\nIf it is a bomb, increases its combo by 40%."
+  },
+  {
+    "id": 10039,
+    "name": "Megabomb",
+    "descName": "Places a controllable Megabomb that inflicts Neutral-type damage.\nIts damage increases each time it devours a bomb.\nIt triggers the other bombs when it explodes. It loses 1 HP per bomb devoured.\nIt explodes if it dies."
+  },
+  {
+    "id": 10041,
+    "name": "Seismobomb",
+    "descName": "Places a bomb that inflicts Earth-type damage.\nExplodes automatically and inflicts less damage if it is cast directly on a target."
+  }
+]

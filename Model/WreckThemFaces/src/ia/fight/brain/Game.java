@@ -208,9 +208,9 @@ public class Game {
 		
 		PlayingEntity castingEntity = getPlayingEntityFromID(id);
 		
-		String spellname = command[4];
-		int damage = Integer.parseInt(command[5]);
-		boolean crit = Boolean.parseBoolean(command[6]);
+		String spellname = command[5].replace("'", "");
+		int damage = Integer.parseInt(command[6]);
+		boolean crit = Boolean.parseBoolean(command[7]);
 
 		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
@@ -549,7 +549,7 @@ public class Game {
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
 			}else if(commandType.equals("c")) {
-				String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2] + ";" + parameters[3].replace("'", "") + ";" + parameters[4] + ";" + parameters[5];
+				String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2] + ";" + parameters[3].replace("'", "") + ";" + parameters[4] + ";" + parameters[5]+";"+parameters[6];
 				Game.refresh(refreshMessage);
 				
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
