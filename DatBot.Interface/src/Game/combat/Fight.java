@@ -30,6 +30,7 @@ public class Fight {
 	public static GameEntitiesDispositionMessage gameEntitiesDispositionMessage; // Disposition
 	public static GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
 	public static List<Player> entities = new ArrayList<>();
+	public static String spellToSend;
 
 	
 	public static void sendToFightAlgo(String command, Object[] param)

@@ -52,7 +52,8 @@ import protocol.network.messages.connection.ServerSelectionMessage;
 import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
-import protocol.network.messages.game.approach.AuthenticationTicketMessage;
+import prot
+import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;ocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
@@ -807,6 +808,15 @@ public class Network implements Runnable {
 			case 6465:
 				Info.isTurn = true;
 			break;
+			case 955:
+				Fight.spellToSend = "";
+				break;
+			case 1010:
+				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
+				gameActionFightSpellCastMessage.Deserialize(dataReader);
+				Fight.spellToSend += gameActionFightSpellCastMessage.sourceId + "," + gameActionFightSpellCastMessage.destinationCellId%14 + "," + gameActionFightSpellCastMessage.destinationCellId/14 + "," + gameActionFightSpellCastMessage.spellId + "UN SORT QUI ROXXXX";
+				break;
+			//TODO 1030 (102 AP and 129 PM) ; 6312 ; 1099 ; Sequence end sendToFight if spellToSend != "";
 		}
 	}
 
