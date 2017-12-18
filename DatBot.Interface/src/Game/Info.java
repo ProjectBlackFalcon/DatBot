@@ -54,6 +54,7 @@ public class Info {
 	public static boolean leaveExchange = false;
 	public static boolean joinedFight = false;
 	public static boolean isTurn = false;
+	public static boolean initFight = true;
 	
 	
 	public static void setBooleanToFalse() {

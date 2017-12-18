@@ -35,7 +35,7 @@ public class MainPlugin extends JPanel implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		Network.append("Connecté !");
+		Network.append("Connectï¿½ !");
 		Network.append("Name : " + Info.name);
 		Network.append("Niveau : " + Info.lvl);
 	}

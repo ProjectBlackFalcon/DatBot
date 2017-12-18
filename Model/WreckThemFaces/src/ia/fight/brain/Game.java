@@ -154,6 +154,7 @@ public class Game {
 	 * @return a PlayingEntity object
 	 */
 	private static PlayingEntity getPlayingEntityFromID(int id) {
+		System.out.println("Entities : " + Game.playingEntities.size());
 		for(int i = 0; i < Game.playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
 				return Game.playingEntities.get(i);
@@ -246,7 +247,7 @@ public class Game {
 	 */
 	static private String getBestTurn(String[] command) {
 		long start = System.currentTimeMillis();
-		int id = Integer.parseInt(command[0]);
+		int id = (int) Long.parseLong(command[0]);
 		boolean fullTurn = Boolean.parseBoolean(command[2]);
 		
 		PlayingEntity playingEntity = getPlayingEntityFromID(id);

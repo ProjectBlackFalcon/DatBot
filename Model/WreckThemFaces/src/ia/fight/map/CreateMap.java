@@ -19,7 +19,7 @@ public class CreateMap {
 		JSONParser parser = new JSONParser();
 		ArrayList<int[]> blocks = new ArrayList<>();
 		try{
-			String path = new File("src/ia/fight/data/Mapinfo.json").getAbsolutePath();
+			String path = new File("C:\\Users\\baptiste\\Documents\\Dofus Bot\\DatBot\\Model\\WreckThemFaces\\src\\ia\\fight\\data\\MapInfo.json").getAbsolutePath();
 			JSONArray arr = (JSONArray) parser.parse(new FileReader(path));
 			JSONObject map;
 			

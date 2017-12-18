@@ -24,16 +24,22 @@ import protocol.network.types.game.context.fight.GameFightMinimalStats;
 import protocol.network.types.game.context.fight.GameFightMonsterInformations;
 
 public class Fight {
+	
+	
 
 	// Init fight
 	public static GameFightPlacementPossiblePositionsMessage gameFightPlacementPossiblePositionsMessage; // Available
 	public static GameEntitiesDispositionMessage gameEntitiesDispositionMessage; // Disposition
 	public static GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
-	public static List<Player> entities = new ArrayList<>();
+	public static ArrayList<Player> entities = new ArrayList<>();
 	public static String spellToSend;
 
+	/**
+	 * For spell casted
+	 * @return [idCaster,posX,posY,spellId,[targetId,LPlost,LPmaxLost],...,[targetId,effectId,turnDuration,dispelable],...]
+	 */
 	
-	public static void sendToFightAlgo(String command, Object[] param)
+	public static String sendToFightAlgo(String command, Object[] param)
 	{
 		String newParam = "";
 		for (int i = 0; i < param.length; i++)
@@ -47,10 +53,10 @@ public class Fight {
 				newParam += param[i] + ", ";
 			}
 		}
-		System.out.println(Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam)));
+		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam));
 	}
 	
-	public static void sendToFightAlgoInit(String command, Object[] param, List<Player> players)
+	public static void sendToFightAlgoInit(String command, Object[] param, ArrayList<Player> players)
 	{
 		String newParam = "";
 		for (int i = 0; i < param.length; i++)
@@ -64,7 +70,7 @@ public class Fight {
 				newParam += param[i] + ", ";
 			}
 		}
-		System.out.println(Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam, players)));
+		System.out.println(Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam), players));
 	}
 
 
@@ -116,7 +122,12 @@ public class Fight {
 		Network.sendToServer(gameActionFightCastRequestMessage, GameActionFightCastRequestMessage.ProtocolId, "Cast spell");
 	}
 	
-	
+	/**
+	 * Init the entities
+	 * Create List<players>
+	 * Create String [id,teamId,posX,posY]
+	 * @return
+	 */
 	public static String init(){
 		Player player = null;
 		String toSend = "";
@@ -148,9 +159,9 @@ public class Fight {
 				player.setCloseCombatResistancePrcnt(100 - stats.meleeDamageReceivedPercent);
 				player.setDistanceResistancePrcnt(100 - stats.rangedDamageReceivedPercent);
 				if(i == gameFightSynchronizeMessage.fighters.size() - 1){
-					toSend += "[" + p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "]";
+					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "]";
 				} else {
-					toSend += "[" + p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "],";
+					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "],";
 				}
 				entities.add(player);
 			} else if (gameFightSynchronizeMessage.fighters.get(i).getClass().getSimpleName().equals("GameFightMonsterInformations")){
@@ -178,13 +189,29 @@ public class Fight {
 				monster.setCloseCombatResistancePrcnt(100 - stats.meleeDamageReceivedPercent);
 				monster.setDistanceResistancePrcnt(100 - stats.rangedDamageReceivedPercent);
 				if(i == gameFightSynchronizeMessage.fighters.size() - 1){
-					toSend += "[" + p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "]";
+					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "]";
 				} else {
-					toSend += "[" + p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "],";
+					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "],";
 				}
 				entities.add(monster);	
 			}
 		}
 		return toSend;
+	}
+	
+	public static void fightTurn() throws NumberFormatException, Exception{
+		String s = Fight.sendToFightAlgo("g", new Object[] { Info.actorId });
+		String[] message = s.split(";");
+		Info.msgIdFight = Integer.parseInt(message[1]);
+		message[5] = message[5].substring(1, message[5].length() - 1);
+		if(message[5] == null){
+			endTurn();
+		}
+		String[] cmd = message[5].split(",");
+		if(cmd[0].equals("m")){
+			moveTo(Integer.parseInt(cmd[1]) + (Integer.parseInt(cmd[2])*14));
+		} else if (cmd[0].equals("c")){
+			castSpell(Integer.parseInt(cmd[0]),Integer.parseInt(cmd[2]) + (Integer.parseInt(cmd[3])*14));
+		}		
 	}
 }

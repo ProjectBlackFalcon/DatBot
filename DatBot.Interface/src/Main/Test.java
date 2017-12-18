@@ -42,19 +42,25 @@ public class Test {
 			System.out.println("Waiting for connection...");
 			Thread.sleep(1000);
 			index++;
-			if (index == 2)
-			{
-				Info.nameAccount = "wublel7";
-				Info.password = "wubwublel7";
-				Info.name = "Dihydroquerina";
-				Info.server = "Julith";
-			}
+//			if (index == 2)
+//			{
+//				Info.nameAccount = "wublel7";
+//				Info.password = "wubwublel7";
+//				Info.name = "Dihydroquerina";
+//				Info.server = "Julith";
+//			}
 			// if(index == 2){
 			// Info.nameAccount = "Jemappellehenry2";
 			// Info.password = "azerty123henry";
 			// Info.name = "Baddosh";
 			// Info.server = "Julith";
 			// }
+			 if(index == 2){
+			 Info.nameAccount = "ceciestuntest";
+			 Info.password = "ceciestlemdp1";
+			 Info.name = "Gladiatonme";
+			 Info.server = "Echo";
+			 }
 		}
 		boolean arg = false;
 		if (args.length != 0)
@@ -84,9 +90,11 @@ public class Test {
 		Network.append("Niveau : " + Info.lvl);
 		Thread.sleep(1000);
 		getReturn("0;0;i;cmd;getMonsters;[None]");
-		getReturn("0;0;i;cmd;move;[" + Monsters.monsters.get(0).disposition.cellId + "]");
-		getReturn("0;0;i;cmd;attackMonster;[" + Monsters.monsters.get(0).contextualId + "]");
-	}
+		if(Monsters.monsters != null){
+			getReturn("0;0;i;cmd;move;[" + Monsters.monsters.get(0).disposition.cellId + "]");
+			getReturn("0;0;i;cmd;attackMonster;[" + Monsters.monsters.get(0).contextualId + "]");
+		}
+ 	}
 	
 	private static void getReturn(String s) throws NumberFormatException, Exception{
 		String[] message = s.split(";");

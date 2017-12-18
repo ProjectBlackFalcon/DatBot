@@ -25,8 +25,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -36,6 +38,8 @@ import org.omg.PortableInterceptor.DISCARDING;
 import Game.Entity;
 import Game.Info;
 import Game.map.Map;
+import Game.map.MapMovement;
+import Game.movement.Movement;
 import Main.Communication.Communication;
 import ia.fight.brain.Game;
 import ia.fight.brain.classes.Cra;
@@ -52,8 +56,10 @@ import protocol.network.messages.connection.ServerSelectionMessage;
 import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
-import prot
-import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;ocol.network.messages.game.approach.AuthenticationTicketMessage;
+import protocol.network.messages.game.approach.AuthenticationTicketMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDispellableEffectMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
@@ -259,6 +265,12 @@ public class Network implements Runnable {
 		socket.close();
 	}
 
+	/**
+	 * 
+	 * @param packet_id
+	 * @param packet_content
+	 * @throws Exception
+	 */
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception
 	{
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
@@ -369,7 +381,6 @@ public class Network implements Runnable {
 				HandleGameContextCreateMessage();
 			break;
 			case 500:
-				HandleObjectAveragePricesGetMessage();
 				Info.stats = new CharacterStatsListMessage();
 				Info.stats.Deserialize(dataReader);
 			break;
@@ -767,8 +778,10 @@ public class Network implements Runnable {
 				gameFightJoinMessage.Deserialize(dataReader);
 				Info.joinedFight = true;
 				Info.isTurn = false;
-				Communication.sendToModel(String.valueOf(Info.botInstance), String.valueOf(++Info.msgIdModel), "m", "rtn", "startFight", null);
-				Fight.sendToFightAlgo("startfight", new Object[] { Info.mapId });
+				Info.initFight = false;
+				Communication.sendToModel(String.valueOf(Info.botInstance), String.valueOf(++Info.msgIdModel), "m", "rtn", "startFight", new Object[]{});
+				System.out.println("Test");
+				Fight.sendToFightAlgo("startfight", new Object[] { (int) Info.mapId });
 			break;
 			case 956:
 				SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
@@ -777,6 +790,12 @@ public class Network implements Runnable {
 					Thread.sleep(1000);
 					sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.actionId), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
 				}	
+				if(!Fight.spellToSend.equals("")){
+					Fight.sendToFightAlgo("c", new Object[] { Fight.spellToSend });
+				}
+				if(Info.isTurn){
+					Fight.fightTurn();
+				}
 			break;
 			case 715:
 				sendToServer(new GameFightTurnReadyMessage(true), GameFightTurnReadyMessage.ProtocolId, "Turn ready");
@@ -788,13 +807,32 @@ public class Network implements Runnable {
 				{
 					Info.isTurn = false;
 				}
-				Fight.sendToFightAlgo("p", new Object[] { gameFightTurnEndMessage.id });
+				Fight.sendToFightAlgo("p", new Object[] { (int) gameFightTurnEndMessage.id });
 			break;
 			case 703:
 				Fight.gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
 				Fight.gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
 			// TODO LYSANDRE
 			// Fight.setBeginingPosition();
+				SwingUtilities.invokeLater(new Runnable() {
+				    public void run() {
+						try
+						{
+							Thread.sleep(2500);
+							Fight.fightReady();
+						}
+						catch (InterruptedException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						catch (Exception e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				    }
+				});
 			break;
 			case 5696:
 				Fight.gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
@@ -803,10 +841,16 @@ public class Network implements Runnable {
 			case 5921:
 				Fight.gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
 				Fight.gameFightSynchronizeMessage.Deserialize(dataReader);
-				Fight.sendToFightAlgoInit("s", new Object[] { Fight.init() }, Fight.entities);
+				if(!Info.initFight){
+					String init = Fight.init();
+					System.out.println("Fight size : " + Fight.entities.size());
+					Fight.sendToFightAlgoInit("s", new Object[] { init }, Fight.entities);
+					Info.initFight = true;
+				}
 			break;
 			case 6465:
 				Info.isTurn = true;
+				Fight.fightTurn();
 			break;
 			case 955:
 				Fight.spellToSend = "";
@@ -814,9 +858,18 @@ public class Network implements Runnable {
 			case 1010:
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
-				Fight.spellToSend += gameActionFightSpellCastMessage.sourceId + "," + gameActionFightSpellCastMessage.destinationCellId%14 + "," + gameActionFightSpellCastMessage.destinationCellId/14 + "," + gameActionFightSpellCastMessage.spellId + "UN SORT QUI ROXXXX";
+				Fight.spellToSend += (int) gameActionFightSpellCastMessage.sourceId + "," + gameActionFightSpellCastMessage.destinationCellId%14 + "," + gameActionFightSpellCastMessage.destinationCellId/14 + "," + gameActionFightSpellCastMessage.spellId;
 				break;
-			//TODO 1030 (102 AP and 129 PM) ; 6312 ; 1099 ; Sequence end sendToFight if spellToSend != "";
+			case 6312:
+				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
+				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
+				Fight.spellToSend += ",[" + (int) gameActionFightLifePointsLostMessage.targetId + "," + gameActionFightLifePointsLostMessage.loss + "," + gameActionFightLifePointsLostMessage.permanentDamages + "]";
+				break;
+			case 6070:
+				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
+				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
+				Fight.spellToSend += ",[" + (int) gameActionFightDispellableEffectMessage.effect.targetId + "," + gameActionFightDispellableEffectMessage.effect.effectId + "," + gameActionFightDispellableEffectMessage.effect.turnDuration + "," + gameActionFightDispellableEffectMessage.effect.dispelable + "]";
+				break;
 		}
 	}
 
@@ -1061,19 +1114,19 @@ public class Network implements Runnable {
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
 	}
 
-	private static void HandleObjectAveragePricesGetMessage() throws Exception
-	{
-		// Send object average price request
-		// sendToServer(new NetworkMessageEmpty(), 6334, "Object average price
-		// request");
-		// Send Quest List Request
-		sendToServer(new NetworkMessageEmpty(), 5623, "Quest list request");
-		// Send Channel enabling message
-		// ChannelEnablingMessage channelEnablingMessage = new
-		// ChannelEnablingMessage((byte) 7, false);
-		// sendToServer(channelEnablingMessage,
-		// ChannelEnablingMessage.ProtocolId, "Channel enabling");
-	}
+//	private static void HandleObjectAveragePricesGetMessage() throws Exception
+//	{
+//		// Send object average price request
+//		// sendToServer(new NetworkMessageEmpty(), 6334, "Object average price
+//		// request");
+//		// Send Quest List Request
+//		// sendToServer(new NetworkMessageEmpty(), 5623, "Quest list request");
+//		// Send Channel enabling message
+//		// ChannelEnablingMessage channelEnablingMessage = new
+//		// ChannelEnablingMessage((byte) 7, false);
+//		// sendToServer(channelEnablingMessage,
+//		// ChannelEnablingMessage.ProtocolId, "Channel enabling");
+//	}
 
 	private static void HandleMapRequestMessage(double mapId) throws Exception
 	{
