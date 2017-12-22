@@ -3,7 +3,6 @@ package utils;
 import java.util.*;
 
 import Game.Info;
-import Main.MainPlugin;
 import protocol.network.Network;
 
 /*
@@ -531,7 +530,6 @@ public class Astar {
             for (String is : Astar.pathString) {
             	paths += new String("->[" + is + "]");
     		}
-			Network.append(paths);
             
         	for(int k = 0; k < blocked.size(); k++){
         		int tempx = blocked.get(k)[0];

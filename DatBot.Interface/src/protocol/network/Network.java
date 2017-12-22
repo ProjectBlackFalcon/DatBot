@@ -4,14 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Writer;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
@@ -28,23 +25,16 @@ import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
-import org.omg.PortableInterceptor.DISCARDING;
-
 import Game.Entity;
 import Game.Info;
 import Game.map.Map;
-import Game.map.MapMovement;
 import Game.movement.Movement;
 import Main.Communication.Communication;
-import ia.fight.brain.Game;
-import ia.fight.brain.classes.Cra;
-import ia.fight.brain.classes.Monster;
-import ia.fight.structure.Player;
+import ia.fight.map.CreateMap;
 import io.netty.util.internal.ThreadLocalRandom;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
@@ -67,7 +57,6 @@ import protocol.network.messages.game.character.choice.CharacterSelectionMessage
 import protocol.network.messages.game.character.choice.CharactersListMessage;
 import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
-import protocol.network.messages.game.chat.ChatServerMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
 import protocol.network.messages.game.context.GameContextReadyMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
@@ -76,25 +65,20 @@ import protocol.network.messages.game.context.fight.GameFightJoinMessage;
 import protocol.network.messages.game.context.fight.GameFightPlacementPossiblePositionsMessage;
 import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
 import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
-import protocol.network.messages.game.context.roleplay.MapRunningFightDetailsMessage;
-import protocol.network.messages.game.context.roleplay.MapRunningFightListMessage;
-import protocol.network.messages.game.context.roleplay.emote.EmotePlayMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
-import protocol.network.messages.game.dialog.LeaveDialogMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
-import protocol.network.messages.game.interactive.InteractiveUsedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
@@ -114,8 +98,6 @@ import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
-import protocol.network.types.game.context.fight.GameFightCharacterInformations;
-import protocol.network.types.game.context.fight.GameFightMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
@@ -137,41 +119,39 @@ import utils.JSON;
 
 public class Network implements Runnable {
 
-	public static Socket socket;
-	private static String ip;
+	private Socket socket;
+	private String ip;
 	private Message message;
-	private static List<Integer> Ticket;
+	private List<Integer> Ticket;
 	// Log window
-	public static boolean displayPacket;
+	public boolean displayPacket;
 	private JFrame f;
 	private JPanel panel;
-	private static JTextPane text;
+	private JTextPane text;
 	// Big packet split
 	private int bigPacketLengthToFull;// Length needed to finish the packet
 	private int bigPacketId;
 	private byte[] bigPacketData;
 	// Timing
-	private static String timing;
 	private Random r = new Random(); // Random for thread sleep
 
 	// Plugin
-	public static boolean isPacketArrived = false;
-	public static boolean connectionToKoli = false;
-	public static MapRunningFightListMessage fight;
-	public static MapRunningFightDetailsMessage fightDetail;
-	public static Writer output;
+	public boolean connectionToKoli = false;
+	private Fight fight = new Fight(this);
+	private Interactive interactive = new Interactive(this);
+	private Bank bank = new Bank();
+	private NPC npc = new NPC();
+	private Movement movement = new Movement(this);
 
-	public Network(boolean displayPacket)
+	public Network(boolean displayPacket, String ip, int port)
 	{
 		this.displayPacket = displayPacket;
-		ip = "213.248.126.40";
-		int port = 5555;
+		this.ip = ip;
 		try
 		{
 			socket = new Socket(ip, port);
 			if (socket.isConnected())
 			{
-				Network.append("Connection...");
 				new LatencyFrame();
 			}
 		}
@@ -190,6 +170,7 @@ public class Network implements Runnable {
 	{
 		try
 		{
+			append("Connection...", false);
 			if (displayPacket)
 			{
 				initComponent();
@@ -226,79 +207,82 @@ public class Network implements Runnable {
 		f.add(scroll);
 	}
 
-	private static void appendToPane(JTextPane tp, String msg, Color c)
+	/**
+	 * Append the text on the panel depending on the String
+	 * @param JtextPane tp
+	 * @param String msg
+	 * @param Color c
+	 */
+	private void appendToPane(JTextPane tp, String msg, Color c)
 	{
-		if (displayPacket)
+		StyleContext sc = StyleContext.getDefaultStyleContext();
+		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+		int len = tp.getDocument().getLength();
+		tp.setCaretPosition(len);
+		tp.setCharacterAttributes(aset, false);
+		tp.replaceSelection(msg);
+	}
+
+	/**
+	 * Append the text eiher on the panel or System.out
+	 * @param String str
+	 * @param boolean b ; True:panel ; False:System.out
+	 */
+	public void append(String str, boolean b)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		if (displayPacket && b)
 		{
-			StyleContext sc = StyleContext.getDefaultStyleContext();
-			AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
-			aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-			aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-			int len = tp.getDocument().getLength();
-			tp.setCaretPosition(len);
-			tp.setCharacterAttributes(aset, false);
-			tp.replaceSelection(msg);
+			appendToPane(text, "[" + timing + "] ", Color.black);
+			if (str.contains("Envoi"))
+			{
+				appendToPane(text, str + "\n", new Color(0, 0, 140));
+			}
+			else
+			{
+				appendToPane(text, str + "\n", new Color(0, 110, 0));
+			}
+		}
+		else
+		{
+			String newSt = "[" + timing + "] " + str;
+			System.out.println(newSt);
 		}
 	}
 
 	public void reception() throws Exception
 	{
-		while (!Network.socket.isClosed())
+		while (!this.socket.isClosed())
 		{
 			Thread.sleep(200);
-			InputStream data = socket.getInputStream();
+			InputStream data = this.socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
 			if (available > 0)
 			{
-				// Latency
 				LatencyFrame.updateLatency();
-				// System.out.println("Available : " + available);
 				data.read(buffer, 0, available);
-				// Sometime there is so many pc that the PC can't keep up
-				// Need to try with a better one
-				// Packet seems to be split if to fast
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
 			}
 		}
-		socket.close();
+		this.socket.close();
 	}
 
 	/**
-	 * 
-	 * @param packet_id
-	 * @param packet_content
-	 * @throws Exception
+	 * Packet manager
+	 * @param int packet_id
+	 * @param byte[] packet_content
 	 */
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception
 	{
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
-		// Mï¿½J timing
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		timing = formatter.format(time);
-		if (displayPacket)
-		{
-			appendToPane(text, "[" + timing + "] ", Color.black);
-			appendToPane(text, "[" + packet_id + "]\tTaille : " + packet_content.length, new Color(0, 110, 0));
-			if (packet_content.length > 9)
-			{
-				appendToPane(text, "\t" + name.name + "\n", new Color(0, 110, 0));
-			}
-			else
-			{
-				appendToPane(text, "\t\t" + name.name + "\n", new Color(0, 110, 0));
-			}
-		}
-		else
-		{
-			System.out.println("[" + timing + "] [" + packet_id + "] Taille : " + packet_content.length + "\t" + name.name);
-		}
-
-		// MainPlugin.frame.appendDebug("[" + timing + "] [" + packet_id + "] -
-		// " + name.name);
+		append("[" + packet_id + "]\tTaille : " + packet_content.length + "  -  " + name.name, true);
 		switch (packet_id)
 		{
 			case 1:
@@ -409,7 +393,7 @@ public class Network implements Runnable {
 					{
 						if (complementaryInformationsDataMessage.actors.get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations"))
 						{
-							NPC.npc.add((GameRolePlayNpcInformations) complementaryInformationsDataMessage.actors.get(i));
+							npc.getNpc().add((GameRolePlayNpcInformations) complementaryInformationsDataMessage.actors.get(i));
 						}
 						else if (complementaryInformationsDataMessage.actors.get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations"))
 						{
@@ -422,10 +406,10 @@ public class Network implements Runnable {
 							Map.Entities.add(new Entity(complementaryInformationsDataMessage.actors.get(i).disposition.cellId, complementaryInformationsDataMessage.actors.get(i).contextualId));
 					}
 					HandleMapComplementaryInformationsDataMessage();
-					Interactive.statedElements = complementaryInformationsDataMessage.statedElements;
-					Interactive.interactiveElements = complementaryInformationsDataMessage.interactiveElements;
-					Network.append("Map : [" + Info.coords[0] + ";" + Info.coords[1] + "]");
-					Network.append("CellId : " + Info.cellId);
+					getInteractive().setStatedElements(complementaryInformationsDataMessage.statedElements);
+					getInteractive().setInteractiveElements(complementaryInformationsDataMessage.interactiveElements);
+					append("Map : [" + Info.coords[0] + ";" + Info.coords[1] + "]", false);
+					append("CellId : " + Info.cellId, false);
 					Info.waitForMov = true;
 					Info.isConnected = true;
 					Info.newMap = true;
@@ -439,8 +423,8 @@ public class Network implements Runnable {
 				if (gameMapMovementMessage.actorId == Info.actorId)
 				{
 					Info.cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
-					Network.append("Dï¿½placement rï¿½ussi !");
-					Network.append("CellId : " + Info.cellId);
+					append("Déplacement réussi !", false);
+					append("CellId : " + Info.cellId, false);
 				}
 				for (int i = 0; i < Monsters.monsters.size(); i++)
 				{
@@ -452,9 +436,9 @@ public class Network implements Runnable {
 				if (Info.joinedFight)
 				{
 					int cellId = gameMapMovementMessage.keyMovements.get(gameMapMovementMessage.keyMovements.size() - 1);
-					int x = cellId % 14;
-					int y = cellId / 14;
-					Fight.sendToFightAlgo("m", new Object[] { gameMapMovementMessage.actorId,x,y });
+					int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
+					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
+					fight.sendToFightAlgo("m", new Object[] { gameMapMovementMessage.actorId, x, y });
 				}
 			break;
 			case 6316:
@@ -463,23 +447,13 @@ public class Network implements Runnable {
 			case 5816:
 				HandleLatencyMessage();
 			break;
-			case 5743:
-				fight = new MapRunningFightListMessage();
-				fight.Deserialize(dataReader);
-				isPacketArrived = true;
-			break;
-			case 5751:
-				fightDetail = new MapRunningFightDetailsMessage();
-				fightDetail.Deserialize(dataReader);
-				isPacketArrived = true;
-			break;
 			case 6575:
 				connectionToKoli = true;
 				GameRolePlayArenaSwitchToFightServerMessage arenaSwitchToFightServerMessage = new GameRolePlayArenaSwitchToFightServerMessage();
 				arenaSwitchToFightServerMessage.Deserialize(dataReader);
 				Ticket = arenaSwitchToFightServerMessage.ticket;
-				Network.socket.close();
-				Network.socket = new Socket(arenaSwitchToFightServerMessage.address, 5555);
+				this.socket.close();
+				this.socket = new Socket(arenaSwitchToFightServerMessage.address, 5555);
 			break;
 			case 6574:
 				connectionToKoli = false;
@@ -487,8 +461,8 @@ public class Network implements Runnable {
 				GameRolePlayArenaSwitchToGameServerMessage arenaSwitchToGameServerMessage = new GameRolePlayArenaSwitchToGameServerMessage();
 				arenaSwitchToGameServerMessage.Deserialize(dataReader);
 				Ticket = arenaSwitchToGameServerMessage.ticket;
-				Network.socket.close();
-				Network.socket = new Socket(ip, 5555);
+				this.socket.close();
+				this.socket = new Socket(ip, 5555);
 			break;
 			case 6068:
 				sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Character force selection");
@@ -507,11 +481,11 @@ public class Network implements Runnable {
 				{
 					StatedElementUpdatedMessage elementUpdatedMessage = new StatedElementUpdatedMessage();
 					elementUpdatedMessage.Deserialize(dataReader);
-					for (int i = 0; i < Interactive.statedElements.size(); i++)
+					for (int i = 0; i < getInteractive().getStatedElements().size(); i++)
 					{
-						if (elementUpdatedMessage.statedElement.elementCellId == Interactive.statedElements.get(i).elementCellId)
+						if (elementUpdatedMessage.statedElement.elementCellId == getInteractive().getStatedElements().get(i).elementCellId)
 						{
-							Interactive.statedElements.set(i, elementUpdatedMessage.statedElement);
+							getInteractive().getStatedElements().set(i, elementUpdatedMessage.statedElement);
 						}
 					}
 				}
@@ -521,11 +495,11 @@ public class Network implements Runnable {
 				{
 					InteractiveElementUpdatedMessage interactiveElementUpdatedMessage = new InteractiveElementUpdatedMessage();
 					interactiveElementUpdatedMessage.Deserialize(dataReader);
-					for (int i = 0; i < Interactive.interactiveElements.size(); i++)
+					for (int i = 0; i < getInteractive().getInteractiveElements().size(); i++)
 					{
-						if (interactiveElementUpdatedMessage.interactiveElement.elementId == Interactive.interactiveElements.get(i).elementId)
+						if (interactiveElementUpdatedMessage.interactiveElement.elementId == getInteractive().getInteractiveElements().get(i).elementId)
 						{
-							Interactive.interactiveElements.set(i, interactiveElementUpdatedMessage.interactiveElement);
+							getInteractive().getInteractiveElements().set(i, interactiveElementUpdatedMessage.interactiveElement);
 						}
 					}
 				}
@@ -545,8 +519,8 @@ public class Network implements Runnable {
 			case 6519:
 				ObtainedItemMessage itemMessage = new ObtainedItemMessage();
 				itemMessage.Deserialize(dataReader);
-				Interactive.lastItemHarvestedId = itemMessage.genericId;
-				Interactive.quantityLastItemHarvested = itemMessage.baseQuantity;
+				getInteractive().setLastItemHarvestedId(itemMessage.genericId);
+				getInteractive().setQuantityLastItemHarvested(itemMessage.baseQuantity);
 			break;
 			case 5809:
 				JobExperienceMultiUpdateMessage experienceMultiUpdateMessage = new JobExperienceMultiUpdateMessage();
@@ -575,17 +549,17 @@ public class Network implements Runnable {
 			case 5617:
 				NpcDialogQuestionMessage dialogQuestionMessage = new NpcDialogQuestionMessage();
 				dialogQuestionMessage.Deserialize(dataReader);
-				new NPC(dialogQuestionMessage.messageId);
+				this.npc.reply(this.npc.getReplyId(dialogQuestionMessage.messageId));
 			break;
 			case 5502:
-				NPC.dialogOver = true;
+				this.npc.setDialogOver(true);
 			break;
 			case 5745:
 				Info.interactiveUsed = true;
 			break;
 			case 5646:
-				Bank.storage = new StorageInventoryContentMessage();
-				Bank.storage.Deserialize(dataReader);
+				getBank().storage = new StorageInventoryContentMessage();
+				getBank().storage.Deserialize(dataReader);
 				Info.Storage = true;
 			break;
 			case 6162:
@@ -653,17 +627,17 @@ public class Network implements Runnable {
 				for (int i = 0; i < storageObjectsUpdateMessage.objectList.size(); i++)
 				{
 					boolean isInBank = false;
-					for (int k = 0; k < Bank.storage.objects.size(); k++)
+					for (int k = 0; k < getBank().storage.objects.size(); k++)
 					{
-						if (storageObjectsUpdateMessage.objectList.get(i).objectUID == Bank.storage.objects.get(k).objectUID)
+						if (storageObjectsUpdateMessage.objectList.get(i).objectUID == getBank().storage.objects.get(k).objectUID)
 						{
-							Bank.storage.objects.set(i, storageObjectsUpdateMessage.objectList.get(i));
+							getBank().storage.objects.set(i, storageObjectsUpdateMessage.objectList.get(i));
 							isInBank = true;
 						}
 					}
 					if (!isInBank)
 					{
-						Bank.storage.objects.add(storageObjectsUpdateMessage.objectList.get(i));
+						getBank().storage.objects.add(storageObjectsUpdateMessage.objectList.get(i));
 					}
 				}
 				Info.StorageUpdate = true;
@@ -673,11 +647,11 @@ public class Network implements Runnable {
 				storageObjectsRemoveMessage.Deserialize(dataReader);
 				for (int i = 0; i < storageObjectsRemoveMessage.objectUIDList.size(); i++)
 				{
-					for (int k = 0; k < Bank.storage.objects.size(); k++)
+					for (int k = 0; k < getBank().storage.objects.size(); k++)
 					{
-						if (storageObjectsRemoveMessage.objectUIDList.get(i) == Bank.storage.objects.get(k).objectUID)
+						if (storageObjectsRemoveMessage.objectUIDList.get(i) == getBank().storage.objects.get(k).objectUID)
 						{
-							Bank.storage.objects.remove(k);
+							getBank().storage.objects.remove(k);
 							break;
 						}
 					}
@@ -688,28 +662,28 @@ public class Network implements Runnable {
 				StorageObjectUpdateMessage storageObjectUpdateMessage = new StorageObjectUpdateMessage();
 				storageObjectUpdateMessage.Deserialize(dataReader);
 				boolean isItem = false;
-				for (int i = 0; i < Bank.storage.objects.size(); i++)
+				for (int i = 0; i < getBank().storage.objects.size(); i++)
 				{
-					if (Bank.storage.objects.get(i).objectGID == storageObjectUpdateMessage.object.objectGID || Bank.storage.objects.get(i).objectUID == storageObjectUpdateMessage.object.objectUID)
+					if (getBank().storage.objects.get(i).objectGID == storageObjectUpdateMessage.object.objectGID || getBank().storage.objects.get(i).objectUID == storageObjectUpdateMessage.object.objectUID)
 					{
-						Bank.storage.objects.set(i, storageObjectUpdateMessage.object);
+						getBank().storage.objects.set(i, storageObjectUpdateMessage.object);
 						isItem = true;
 					}
 				}
 				if (!isItem)
 				{
-					Bank.storage.objects.add(storageObjectUpdateMessage.object);
+					getBank().storage.objects.add(storageObjectUpdateMessage.object);
 				}
 				Info.StorageUpdate = true;
 			break;
 			case 5648:
 				StorageObjectRemoveMessage storageObjectRemoveMessage = new StorageObjectRemoveMessage();
 				storageObjectRemoveMessage.Deserialize(dataReader);
-				for (int i = 0; i < Bank.storage.objects.size(); i++)
+				for (int i = 0; i < getBank().storage.objects.size(); i++)
 				{
-					if (Bank.storage.objects.get(i).objectUID == storageObjectRemoveMessage.objectUID)
+					if (getBank().storage.objects.get(i).objectUID == storageObjectRemoveMessage.objectUID)
 					{
-						Bank.storage.objects.remove(i);
+						getBank().storage.objects.remove(i);
 					}
 				}
 				Info.StorageUpdate = true;
@@ -726,7 +700,7 @@ public class Network implements Runnable {
 			case 5645:
 				StorageKamasUpdateMessage storageKamasUpdateMessage = new StorageKamasUpdateMessage();
 				storageKamasUpdateMessage.Deserialize(dataReader);
-				Bank.storage.kamas = storageKamasUpdateMessage.kamasTotal;
+				getBank().storage.kamas = storageKamasUpdateMessage.kamasTotal;
 				Info.StorageUpdate = true;
 			break;
 			// case 881:
@@ -779,22 +753,24 @@ public class Network implements Runnable {
 				Info.joinedFight = true;
 				Info.isTurn = false;
 				Info.initFight = false;
-				Communication.sendToModel(String.valueOf(Info.botInstance), String.valueOf(++Info.msgIdModel), "m", "rtn", "startFight", new Object[]{});
-				System.out.println("Test");
-				Fight.sendToFightAlgo("startfight", new Object[] { (int) Info.mapId });
+				Communication.sendToModel(String.valueOf(Info.botInstance), String.valueOf(++Info.msgIdModel), "m", "rtn", "startFight", new Object[] {});
+				fight.sendToFightAlgo("startfight", new Object[] { (int) Info.mapId });
 			break;
 			case 956:
 				SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
 				sequenceEndMessage.Deserialize(dataReader);
-				if(sequenceEndMessage.authorId == Info.actorId){
+				if (sequenceEndMessage.authorId == Info.actorId)
+				{
 					Thread.sleep(1000);
 					sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.actionId), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
-				}	
-				if(!Fight.spellToSend.equals("")){
-					Fight.sendToFightAlgo("c", new Object[] { Fight.spellToSend });
 				}
-				if(Info.isTurn){
-					Fight.fightTurn();
+				if (!fight.getSpellToSend().equals(""))
+				{
+					fight.sendToFightAlgo("c", new Object[] { fight.getSpellToSend() });
+				}
+				if (Info.isTurn)
+				{
+					fight.fightTurn();
 				}
 			break;
 			case 715:
@@ -807,19 +783,20 @@ public class Network implements Runnable {
 				{
 					Info.isTurn = false;
 				}
-				Fight.sendToFightAlgo("p", new Object[] { (int) gameFightTurnEndMessage.id });
+				fight.sendToFightAlgo("p", new Object[] { fight.getId(gameFightTurnEndMessage.id) });
 			break;
 			case 703:
-				Fight.gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
-				Fight.gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
-			// TODO LYSANDRE
-			// Fight.setBeginingPosition();
+				fight.gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
+				fight.gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
+				// TODO LYSANDRE
+				// Fight.setBeginingPosition();
 				SwingUtilities.invokeLater(new Runnable() {
-				    public void run() {
+					public void run()
+					{
 						try
 						{
 							Thread.sleep(2500);
-							Fight.fightReady();
+							fight.fightReady();
 						}
 						catch (InterruptedException e)
 						{
@@ -831,45 +808,52 @@ public class Network implements Runnable {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-				    }
+					}
 				});
 			break;
 			case 5696:
-				Fight.gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
-				Fight.gameEntitiesDispositionMessage.Deserialize(dataReader);
+				fight.gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
+				fight.gameEntitiesDispositionMessage.Deserialize(dataReader);
 			break;
 			case 5921:
-				Fight.gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
-				Fight.gameFightSynchronizeMessage.Deserialize(dataReader);
-				if(!Info.initFight){
-					String init = Fight.init();
-					System.out.println("Fight size : " + Fight.entities.size());
-					Fight.sendToFightAlgoInit("s", new Object[] { init }, Fight.entities);
+				fight.gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
+				fight.gameFightSynchronizeMessage.Deserialize(dataReader);
+				if (!Info.initFight)
+				{
+					fight.sendToFightAlgo("s", new Object[] { fight.init() }, fight.entities);
 					Info.initFight = true;
 				}
 			break;
 			case 6465:
 				Info.isTurn = true;
-				Fight.fightTurn();
+				fight.fightTurn();
 			break;
 			case 955:
-				Fight.spellToSend = "";
-				break;
+				fight.spellToSend = "";
+			break;
 			case 1010:
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
-				Fight.spellToSend += (int) gameActionFightSpellCastMessage.sourceId + "," + gameActionFightSpellCastMessage.destinationCellId%14 + "," + gameActionFightSpellCastMessage.destinationCellId/14 + "," + gameActionFightSpellCastMessage.spellId;
-				break;
+				fight.spellToSend += fight.getId(gameActionFightSpellCastMessage.sourceId) + "," + CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.destinationCellId % 14, gameActionFightSpellCastMessage.destinationCellId / 14 })[0] + ","
+					+ CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.destinationCellId % 14, gameActionFightSpellCastMessage.destinationCellId / 14 })[1] + "," + gameActionFightSpellCastMessage.spellId;
+			break;
 			case 6312:
 				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
-				Fight.spellToSend += ",[" + (int) gameActionFightLifePointsLostMessage.targetId + "," + gameActionFightLifePointsLostMessage.loss + "," + gameActionFightLifePointsLostMessage.permanentDamages + "]";
-				break;
+				fight.spellToSend += ",[" + fight.getId(gameActionFightLifePointsLostMessage.targetId) + "," + gameActionFightLifePointsLostMessage.loss + "," + gameActionFightLifePointsLostMessage.permanentDamages + "]";
+			break;
 			case 6070:
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
-				Fight.spellToSend += ",[" + (int) gameActionFightDispellableEffectMessage.effect.targetId + "," + gameActionFightDispellableEffectMessage.effect.effectId + "," + gameActionFightDispellableEffectMessage.effect.turnDuration + "," + gameActionFightDispellableEffectMessage.effect.dispelable + "]";
-				break;
+				fight.spellToSend += ",[" + fight.getId(gameActionFightDispellableEffectMessage.effect.targetId) + "," + gameActionFightDispellableEffectMessage.effect.effectId + "," + gameActionFightDispellableEffectMessage.effect.turnDuration + "," + gameActionFightDispellableEffectMessage.effect.dispelable + "]";
+			break;
+			case 713:
+				GameFightTurnListMessage gameFightTurnListMessage = new GameFightTurnListMessage();
+				gameFightTurnListMessage.Deserialize(dataReader);
+				if (!Info.initFight)
+				{
+					fight.turnListId = gameFightTurnListMessage.ids;
+				}
 		}
 	}
 
@@ -900,7 +884,8 @@ public class Network implements Runnable {
 			{
 				// System.out.println("\n----------------------------------");
 				// System.out.println("[Reï¿½u] ID = " + bigPacketId);
-				// System.out.println("[Reï¿½u] ID = " + bigPacketId + " | Taille
+				// System.out.println("[Reï¿½u] ID = " + bigPacketId + " |
+				// Taille
 				// du contenu = " + bigPacketData.length + "\n[Data] : " +
 				// bytesToString(bigPacketData, "%02X", false));
 				TreatPacket(bigPacketId, bigPacketData);
@@ -942,7 +927,7 @@ public class Network implements Runnable {
 	 * Send packet to server message = type; id = id packet; String s = String
 	 * displayed on log
 	 */
-	public static void sendToServer(NetworkMessage message, int id, String s) throws Exception
+	public void sendToServer(NetworkMessage message, int id, String s) throws Exception
 	{
 		Info.setBooleanToFalse();
 		LatencyFrame.latestSent();
@@ -951,14 +936,12 @@ public class Network implements Runnable {
 		message.Serialize(writer);
 		DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
 		byte[] wrote = WritePacket(writer, bous, id);
-		// System.out.println(bytesToString(wrote, "%02X", false));
 		dout.write(wrote);
 		dout.flush();
-		appendToPane(text, "[" + timing + "] ", Color.black);
-		appendToPane(text, "[" + id + "]	[Envoi] " + s + " \n", new Color(0, 0, 140));
+		append("[" + id + "]	[Envoi] " + s, true);
 	}
 
-	private static byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception
+	private byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception
 	{
 		byte[] data = bous.toByteArray();
 		writer.Clear();
@@ -987,7 +970,7 @@ public class Network implements Runnable {
 		return writer.bous.toByteArray();
 	}
 
-	private static byte ComputeTypeLen(int param1)
+	private byte ComputeTypeLen(int param1)
 	{
 		byte num;
 		if (param1 > 65535)
@@ -999,21 +982,12 @@ public class Network implements Runnable {
 		return num;
 	}
 
-	private static int SubComputeStaticHeader(int id, byte typeLen)
+	private int SubComputeStaticHeader(int id, byte typeLen)
 	{
 		return (id << 2) | typeLen;
 	}
 
-	public static void append(String str)
-	{
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		timing = formatter.format(time);
-		String newSt = "[" + timing + "] " + str;
-		System.out.println(newSt);
-	}
-
-	public static String bytesToString(byte[] bytes, String format, boolean spacer)
+	public String bytesToString(byte[] bytes, String format, boolean spacer)
 	{
 		StringBuilder sb = new StringBuilder(bytes.length * 2);
 		for (byte b : bytes)
@@ -1024,7 +998,7 @@ public class Network implements Runnable {
 		return sb.toString();
 	}
 
-	private static void HandleHelloConnectMessage(byte[] key, String salt) throws Exception
+	private void HandleHelloConnectMessage(byte[] key, String salt) throws Exception
 	{
 		VersionExtended versionExtended = new VersionExtended(2, 45, 3, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, Info.nameAccount, Info.password, salt);
@@ -1038,13 +1012,13 @@ public class Network implements Runnable {
 		sendToServer(identification, IdentificationMessage.ProtocolId, "Identification...");
 	}
 
-	private static void HandleServersListMessage(int i) throws Exception
+	private void HandleServersListMessage(int i) throws Exception
 	{
 		ServerSelectionMessage select = new ServerSelectionMessage(i);
 		sendToServer(select, ServerSelectionMessage.ProtocolId, "Selection du serveur...");
 	}
 
-	private static void HandleRawDataMessage() throws Exception
+	private void HandleRawDataMessage() throws Exception
 	{
 		List<Integer> tt = new ArrayList<>();
 		for (int i = 0; i <= 255; i++)
@@ -1056,15 +1030,14 @@ public class Network implements Runnable {
 		sendToServer(RDM, CheckIntegrityMessage.ProtocolId, "Check Integrity Message...");
 	}
 
-	private static void HandleSelectedDataServer(String address, int port, List<Integer> ticket) throws IOException
+	private void HandleSelectedDataServer(String address, int port, List<Integer> ticket) throws IOException
 	{
 		Ticket = ticket;
-		// ip = address;
-		Network.socket.close();
-		Network.socket = new Socket(address, port);
+		this.socket.close();
+		this.socket = new Socket(address, port);
 	}
 
-	private static void HandleAuthentificationTicketMessage() throws Exception
+	private void HandleAuthentificationTicketMessage() throws Exception
 	{
 		byte[] encryptedTicket = new byte[Ticket.size()];
 		for (int i = 0; i < Ticket.size(); i++)
@@ -1076,18 +1049,18 @@ public class Network implements Runnable {
 		sendToServer(authenticationTicketMessage, AuthenticationTicketMessage.ProtocolId, "Authentification du ticket...");
 	}
 
-	private static void HandleCharacterListRequestMessage() throws Exception
+	private void HandleCharacterListRequestMessage() throws Exception
 	{
 		sendToServer(new NetworkMessageEmpty(), 150, "Character list request");
 	}
 
-	private static void HandleCharacterSelectionMessage(long id) throws Exception
+	private void HandleCharacterSelectionMessage(long id) throws Exception
 	{
 		CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(id);
 		sendToServer(characterSelectionMessage, CharacterSelectionMessage.ProtocolId, "Selection du personnage...");
 	}
 
-	private static void HandleFriendIgnoreSpouseMessages() throws Exception
+	private void HandleFriendIgnoreSpouseMessages() throws Exception
 	{
 		// Send friend list request
 		sendToServer(new NetworkMessageEmpty(), 4001, "Friend list request");
@@ -1097,44 +1070,45 @@ public class Network implements Runnable {
 		sendToServer(new NetworkMessageEmpty(), 6355, "Spouse list request");
 	}
 
-	private static void HandleClientKeyMessage(String key) throws Exception
+	private void HandleClientKeyMessage(String key) throws Exception
 	{
 		ClientKeyMessage clientKeyMessage = new ClientKeyMessage(key);
 		sendToServer(clientKeyMessage, ClientKeyMessage.ProtocolId, "Client key");
 	}
 
-	private static void HandleGameContextCreateMessage() throws Exception
+	private void HandleGameContextCreateMessage() throws Exception
 	{
 		sendToServer(new NetworkMessageEmpty(), 250, "Game context create request");
 	}
 
-	private static void HandleSequenceNumberMessage() throws Exception
+	private void HandleSequenceNumberMessage() throws Exception
 	{
 		SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage(LatencyFrame.Sequence++);
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
 	}
 
-//	private static void HandleObjectAveragePricesGetMessage() throws Exception
-//	{
-//		// Send object average price request
-//		// sendToServer(new NetworkMessageEmpty(), 6334, "Object average price
-//		// request");
-//		// Send Quest List Request
-//		// sendToServer(new NetworkMessageEmpty(), 5623, "Quest list request");
-//		// Send Channel enabling message
-//		// ChannelEnablingMessage channelEnablingMessage = new
-//		// ChannelEnablingMessage((byte) 7, false);
-//		// sendToServer(channelEnablingMessage,
-//		// ChannelEnablingMessage.ProtocolId, "Channel enabling");
-//	}
+	// private static void HandleObjectAveragePricesGetMessage() throws
+	// Exception
+	// {
+	// // Send object average price request
+	// // sendToServer(new NetworkMessageEmpty(), 6334, "Object average price
+	// // request");
+	// // Send Quest List Request
+	// // sendToServer(new NetworkMessageEmpty(), 5623, "Quest list request");
+	// // Send Channel enabling message
+	// // ChannelEnablingMessage channelEnablingMessage = new
+	// // ChannelEnablingMessage((byte) 7, false);
+	// // sendToServer(channelEnablingMessage,
+	// // ChannelEnablingMessage.ProtocolId, "Channel enabling");
+	// }
 
-	private static void HandleMapRequestMessage(double mapId) throws Exception
+	private void HandleMapRequestMessage(double mapId) throws Exception
 	{
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
-	private static void HandleMapComplementaryInformationsDataMessage() throws InterruptedException
+	private void HandleMapComplementaryInformationsDataMessage() throws InterruptedException
 	{
 		Process p;
 		try
@@ -1159,4 +1133,33 @@ public class Network implements Runnable {
 		sendToServer(basicLatencyStatsMessage, BasicLatencyStatsMessage.ProtocolId, "Latency message");
 	}
 
+	public Interactive getInteractive()
+	{
+		return interactive;
+	}
+
+	public void setInteractive(Interactive interactive)
+	{
+		this.interactive = interactive;
+	}
+
+	public Bank getBank()
+	{
+		return bank;
+	}
+
+	public void setBank(Bank bank)
+	{
+		this.bank = bank;
+	}
+
+	public Movement getMovement()
+	{
+		return movement;
+	}
+
+	public void setMovement(Movement movement)
+	{
+		this.movement = movement;
+	}
 }

@@ -9,23 +9,28 @@ import javax.swing.SwingUtilities;
 import Game.Info;
 import Game.map.Map;
 import Game.map.MapMovement;
-import Main.MainPlugin;
 import protocol.network.Network;
 import utils.Astar;
 import utils.JSON;
 
 public class Movement{
 	
-	public static CellMovement MoveToCell(int cellId) throws Exception{
+	private Network network;
+	
+	public Movement(Network network){
+		this.network = network;
+	}
+	
+	public CellMovement MoveToCell(int cellId) throws Exception{
 		if(Map.getCells().get(cellId).Mov){
-			CellMovement mov = new CellMovement(new Pathfinder().findPath(Info.cellId,cellId));
+			CellMovement mov = new CellMovement(new Pathfinder().findPath(Info.cellId,cellId), this.getNetwork());
 			return mov;
 		} else {
 			return null;
 		}
 	}
 	
-	public static MapMovement ChangeMap(String direction) throws Exception{
+	public MapMovement ChangeMap(String direction) throws Exception{
         int neighbourId = -1;
         int num2 = -1;
         switch (direction)
@@ -58,13 +63,13 @@ public class Movement{
         if(list.size() == 0) return null; // Can't go in this direction (Obstacles)
         Random r = new Random();
         int randomCellId = list.get(r.nextInt(list.size()));
-		Network.append("Dï¿½placement...");	
-		Network.append("Direction : " + direction);
+		this.getNetwork().append("Déplacement...",false);	
+		this.getNetwork().append("Direction : " + direction,false);
         CellMovement move = MoveToCell(randomCellId);
-        return new MapMovement(move, neighbourId);
+        return new MapMovement(move, neighbourId,this.getNetwork());
 	}
 	
-	public static MapMovement ChangeMap(int cellId, String direction) throws Exception{
+	public MapMovement ChangeMap(int cellId, String direction) throws Exception{
         int neighbourId = -1;
         int num2 = -1;
         switch (direction)
@@ -91,12 +96,12 @@ public class Movement{
         System.out.println(Map.NothingOnCell(cellId));
         System.out.println(noObstacle(cellId));
         if (Map.NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
-    		Network.append("Dï¿½placement...");	
-    		Network.append("Direction : " + direction);
+        	this.getNetwork().append("Déplacement...",false);	
+        	this.getNetwork().append("Direction : " + direction,false);
             CellMovement move = MoveToCell(cellId);
-            return new MapMovement(move, neighbourId);
+            return new MapMovement(move, neighbourId,this.getNetwork());
         } else if (Info.cellId == cellId){
-            return new MapMovement(null, neighbourId);
+            return new MapMovement(null, neighbourId,this.getNetwork());
         } else {
         	return null;
         }
@@ -116,12 +121,12 @@ public class Movement{
 	
 	
 // TRIED TO GET THE WAY BUT NOT WORKING
-	public static void goToMap(int xStart, int yStart, int x, int y, List<int[]> blocked) throws Exception{
+	public void goToMap(int xStart, int yStart, int x, int y, List<int[]> blocked) throws Exception{
     	while(!Info.waitForMov){
     		Thread.sleep(500);
 		}
 		if(x == Info.coords[0] && y == Info.coords[1]){
-			Network.append("Vous ï¿½tes arrivï¿½ !");
+			this.getNetwork().append("Vous êtes arrivé !",false);
 			return;
 		}
 		
@@ -189,7 +194,7 @@ public class Movement{
 				way = "West";
 				xCurrentMap--;
 			}
-			MapMovement mov = Movement.ChangeMap(way);
+			MapMovement mov = ChangeMap(way);
 			mov.PerformChangement();
 			goToMap(xCurrentMap, yCurrentMap, x, y, blocked);
 		}
@@ -205,15 +210,15 @@ public class Movement{
         		Thread.sleep(500);
     		}
     		if(x == Info.coords[0] && y == Info.coords[1]){
-    			Network.append("Vous ï¿½tes arrivï¿½ !");
+    			this.getNetwork().append("Vous êtes arrivé !",false);
     			return;
     		}
     		xCurrentMap = Info.coords[0] + 95; 
     		yCurrentMap = Info.coords[1] + 100;
-			MapMovement mov = Movement.ChangeMap(Astar.pathString.get(i));
+			MapMovement mov = ChangeMap(Astar.pathString.get(i));
 			if (mov == null) {
-				Network.append("Dï¿½placement impossible ! Un obstacle bloque le chemin !");
-				Network.append("Crï¿½ation d'un nouveau chemin...");
+				this.getNetwork().append("Dï¿½placement impossible ! Un obstacle bloque le chemin !",false);
+				this.getNetwork().append("Crï¿½ation d'un nouveau chemin...",false);
 				if(Astar.pathString.get(i).equals("North")){
 					if(x+95 == xCurrentMap && y+100 == yCurrentMap-1){
 						blocked.add(new int[] {xCurrentMap, yCurrentMap});
@@ -259,12 +264,12 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == Info.coords[0] && y == Info.coords[1]){
-			Network.append("Vous ï¿½tes arrivï¿½ !");
+			this.getNetwork().append("Vous êtes arrivé !",false);
 			return;
 		}
 	}
 	
-	private static boolean noObstacle(int random){
+	private boolean noObstacle(int random){
         List<int[]> blocked = new ArrayList<int[]>();
         for (int i = 0; i < Info.cells.size(); i++){
         	for (int j = 0; j < Info.cells.get(0).size() ; j++){
@@ -280,23 +285,33 @@ public class Movement{
         	return true;
 	}
 	
-	private static void goToOtherAvailableDirection(int xCurrentMap, int yCurrentMap, int x, int y, List<int[]> blocked) throws Exception{
+	private void goToOtherAvailableDirection(int xCurrentMap, int yCurrentMap, int x, int y, List<int[]> blocked) throws Exception{
 		MapMovement mov;
-		if((mov = Movement.ChangeMap("North"))!=null){
+		if((mov = ChangeMap("North"))!=null){
 			mov.PerformChangement();
 			goToMap(xCurrentMap, --yCurrentMap, x, y, blocked);
 		}
-		else if((mov = Movement.ChangeMap("South"))!=null){
+		else if((mov = ChangeMap("South"))!=null){
 			mov.PerformChangement();
 			goToMap(xCurrentMap, ++yCurrentMap, x, y, blocked);
 		}
-		else if((mov = Movement.ChangeMap("East"))!=null){
+		else if((mov = ChangeMap("East"))!=null){
 			mov.PerformChangement();
 			goToMap(++xCurrentMap, yCurrentMap, x, y, blocked);
 		}
-		else if((mov = Movement.ChangeMap("West"))!=null){
+		else if((mov = ChangeMap("West"))!=null){
 			mov.PerformChangement();
 			goToMap(--xCurrentMap, yCurrentMap, x, y, blocked);
 		}
+	}
+
+	public Network getNetwork()
+	{
+		return network;
+	}
+
+	public void setNetwork(Network network)
+	{
+		this.network = network;
 	}
 }

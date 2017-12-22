@@ -1,35 +1,22 @@
 package Main.Communication;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import Game.Info;
-import Game.Plugin.Bank;
-import Game.Plugin.Interactive;
-import Game.Plugin.Monsters;
-import Game.Plugin.NPC;
-import Game.Plugin.Stats;
-import Game.map.Map;
-import Game.map.MapMovement;
-import Game.movement.CellMovement;
-import Game.movement.Movement;
 import protocol.network.Network;
-import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
-import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
-import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
-import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
 
 public class Communication implements Runnable {
 
 	// <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
+	
+	protected Network network;
+	private ModelConnexion connexion;
+	
+	public Communication(Network network)
+	{
+		this.setNetwork(network);
+		connexion = new ModelConnexion(this.getNetwork());
+	}
 
 	public void run()
 	{
@@ -50,7 +37,7 @@ public class Communication implements Runnable {
 				{
 					case "i":
 						Info.msgIdModel = Integer.parseInt(message[1]);
-						sendToModel(message[0], message[1], "m", "rtn", message[4], ModelConnexion.getReturn(message[4], message[5]));
+						sendToModel(message[0], message[1], "m", "rtn", message[4], this.connexion.getReturn(message[4], message[5]));
 					break;
 				}
 			}
@@ -103,6 +90,23 @@ public class Communication implements Runnable {
 		{
 			return true;
 		}
+	}
+	
+	public void getReturn(String s) throws NumberFormatException, Exception
+	{
+		String[] message = s.split(";");
+		message[5] = message[5].substring(1, message[5].length() - 1);
+		Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], connexion.getReturn(message[4], message[5]));
+	}
+
+	public Network getNetwork()
+	{
+		return network;
+	}
+
+	public void setNetwork(Network network)
+	{
+		this.network = network;
 	}
 
 }

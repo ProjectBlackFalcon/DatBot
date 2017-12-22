@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Game.Info;
-import Game.map.Map;
 import Game.movement.CellMovement;
-import Game.movement.Movement;
 import ia.fight.brain.Game;
 import ia.fight.brain.classes.Cra;
 import ia.fight.brain.classes.Monster;
+import ia.fight.map.CreateMap;
 import ia.fight.structure.Player;
 import protocol.network.Network;
 import protocol.network.messages.game.actions.fight.GameActionFightCastRequestMessage;
@@ -25,21 +24,31 @@ import protocol.network.types.game.context.fight.GameFightMonsterInformations;
 
 public class Fight {
 	
-	
-
 	// Init fight
-	public static GameFightPlacementPossiblePositionsMessage gameFightPlacementPossiblePositionsMessage; // Available
-	public static GameEntitiesDispositionMessage gameEntitiesDispositionMessage; // Disposition
-	public static GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
-	public static ArrayList<Player> entities = new ArrayList<>();
-	public static String spellToSend;
+	public GameFightPlacementPossiblePositionsMessage gameFightPlacementPossiblePositionsMessage; // Available
+	public GameEntitiesDispositionMessage gameEntitiesDispositionMessage; // Disposition
+	public GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
+	public ArrayList<Player> entities = new ArrayList<>();
+	public List<Double> turnListId;
+	public String spellToSend;
+	private Network network;
+	
+	public Fight(Network network){
+		this.network = network;
+	}
 
 	/**
 	 * For spell casted
 	 * @return [idCaster,posX,posY,spellId,[targetId,LPlost,LPmaxLost],...,[targetId,effectId,turnDuration,dispelable],...]
 	 */
 	
-	public static String sendToFightAlgo(String command, Object[] param)
+	/**
+	 * Communicate with the fight algo and the results 
+	 * @param String command, Ojbect [] parameters
+	 * @return String results 
+	 * @author baptiste
+	 */
+	public String sendToFightAlgo(String command, Object[] param)
 	{
 		String newParam = "";
 		for (int i = 0; i < param.length; i++)
@@ -56,7 +65,13 @@ public class Fight {
 		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam));
 	}
 	
-	public static void sendToFightAlgoInit(String command, Object[] param, ArrayList<Player> players)
+	/**
+	 * Init the entities to the fight algo
+	 * @param String command, Ojbect [] parameters, ArrayList<Players> players
+	 * @return String results 
+	 * @author baptiste
+	 */
+	public String sendToFightAlgo(String command, Object[] param, ArrayList<Player> players)
 	{
 		String newParam = "";
 		for (int i = 0; i < param.length; i++)
@@ -70,31 +85,48 @@ public class Fight {
 				newParam += param[i] + ", ";
 			}
 		}
-		System.out.println(Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam), players));
+		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam), players);
 	}
 
-
-	public static void setBeginingPosition() throws Exception
+	/**
+	 * Set the position of the player at the begining of the fight
+	 * @author baptiste
+	 */
+	public void setBeginingPosition() throws Exception
 	{
 		// TODO LYSANDRE
 		int cellId = 0;
 		GameFightPlacementPositionRequestMessage gameFightPlacementPositionRequestMessage = new GameFightPlacementPositionRequestMessage(cellId);
-		Network.sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Placement position : " + cellId);
+		network.sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Placement position : " + cellId);
 	}
 
-	public static void fightReady() throws Exception
+	/**
+	 * Start the fight
+	 * @author baptiste
+	 */
+	public void fightReady() throws Exception
 	{
-		Network.sendToServer(new GameFightReadyMessage(true), GameFightReadyMessage.ProtocolId, "Ready");
+		network.sendToServer(new GameFightReadyMessage(true), GameFightReadyMessage.ProtocolId, "Ready");
 	}
 
-	public static void endTurn() throws Exception
+	/**
+	 * End the turn
+	 * @author baptiste
+	 */
+	public void endTurn() throws Exception
 	{
-		Network.sendToServer(new GameFightTurnFinishMessage(false), GameFightTurnFinishMessage.ProtocolId, "End turn");
+		network.sendToServer(new GameFightTurnFinishMessage(false), GameFightTurnFinishMessage.ProtocolId, "End turn");
 	}
 
-	public static boolean moveTo(int cellId) throws Exception
+	/**
+	 * Move the player during fight using MP
+	 * @param int cellId
+	 * @return boolean moved
+	 * @author baptiste
+	 */
+	public boolean moveTo(int cellId) throws Exception
 	{
-		CellMovement mov = Movement.MoveToCell(cellId);
+		CellMovement mov = this.getNetwork().getMovement().MoveToCell(cellId);
 		if (mov == null || mov.path == null)
 		{
 			return false;
@@ -117,22 +149,26 @@ public class Fight {
 		}
 	}
 	
-	public static void castSpell(int id, int cellId) throws Exception{
+	/**
+	 * Cast spell
+	 * @param int id, int cellId
+	 * @author baptiste
+	 */
+	public void castSpell(int id, int cellId) throws Exception{
 		GameActionFightCastRequestMessage gameActionFightCastRequestMessage = new GameActionFightCastRequestMessage(id, cellId);
-		Network.sendToServer(gameActionFightCastRequestMessage, GameActionFightCastRequestMessage.ProtocolId, "Cast spell");
+		network.sendToServer(gameActionFightCastRequestMessage, GameActionFightCastRequestMessage.ProtocolId, "Cast spell");
 	}
 	
 	/**
 	 * Init the entities
-	 * Create List<players>
-	 * Create String [id,teamId,posX,posY]
-	 * @return
+	 * Init List<players> entities
+	 * @return String [id,teamId,posX,posY],...
 	 */
-	public static String init(){
+	public String init(){
 		Player player = null;
 		String toSend = "";
 		for(int i = 0; i < gameFightSynchronizeMessage.fighters.size() ; i++){
-			if (gameFightSynchronizeMessage.fighters.get(i).getClass().getSimpleName().equals("GameFightCharacterInformations")){
+			if (this.getGameFightSynchronizeMessage().fighters.get(i).getClass().getSimpleName().equals("GameFightCharacterInformations")){
 				GameFightCharacterInformations p = (GameFightCharacterInformations) gameFightSynchronizeMessage.fighters.get(i);
 				GameFightMinimalStats stats = p.stats;
 				if(p.breed == 9){
@@ -158,13 +194,13 @@ public class Fight {
 				player.setDodge(stats.tackleEvade);
 				player.setCloseCombatResistancePrcnt(100 - stats.meleeDamageReceivedPercent);
 				player.setDistanceResistancePrcnt(100 - stats.rangedDamageReceivedPercent);
-				if(i == gameFightSynchronizeMessage.fighters.size() - 1){
-					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "]";
+				if(i == this.getGameFightSynchronizeMessage().fighters.size() - 1){
+					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "]";
 				} else {
-					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "],";
+					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "],";
 				}
-				entities.add(player);
-			} else if (gameFightSynchronizeMessage.fighters.get(i).getClass().getSimpleName().equals("GameFightMonsterInformations")){
+				this.entities.add(player);
+			} else if (this.getGameFightSynchronizeMessage().fighters.get(i).getClass().getSimpleName().equals("GameFightMonsterInformations")){
 				GameFightMonsterInformations p = (GameFightMonsterInformations) gameFightSynchronizeMessage.fighters.get(i);
 				GameFightMinimalStats stats = p.stats;
 				Monster monster = new Monster(String.valueOf(p.creatureGenericId),p.stats.lifePoints,p.stats.actionPoints,p.stats.movementPoints,p.creatureGrade);
@@ -188,19 +224,29 @@ public class Fight {
 				monster.setDodge(stats.tackleEvade);
 				monster.setCloseCombatResistancePrcnt(100 - stats.meleeDamageReceivedPercent);
 				monster.setDistanceResistancePrcnt(100 - stats.rangedDamageReceivedPercent);
-				if(i == gameFightSynchronizeMessage.fighters.size() - 1){
-					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "]";
+				if(i == this.getGameFightSynchronizeMessage().fighters.size() - 1){
+					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "]";
 				} else {
-					toSend += "[" + (int) p.contextualId + "," + p.teamId + "," + p.disposition.cellId % 14 + "," + p.disposition.cellId / 14 + "],";
+					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "],";
 				}
-				entities.add(monster);	
+				this.entities.add(monster);	
 			}
 		}
 		return toSend;
 	}
 	
-	public static void fightTurn() throws NumberFormatException, Exception{
-		String s = Fight.sendToFightAlgo("g", new Object[] { Info.actorId });
+	
+	/**
+	 * Id position of the entity
+	 * @param Id of the entity
+	 * @return Fight position of the entity
+	 */
+	public int getId(double id){
+		return this.turnListId.indexOf(id);
+	}
+	
+	public void fightTurn() throws NumberFormatException, Exception{
+		String s = sendToFightAlgo("g", new Object[] { getId(Info.actorId) });
 		String[] message = s.split(";");
 		Info.msgIdFight = Integer.parseInt(message[1]);
 		message[5] = message[5].substring(1, message[5].length() - 1);
@@ -213,5 +259,89 @@ public class Fight {
 		} else if (cmd[0].equals("c")){
 			castSpell(Integer.parseInt(cmd[0]),Integer.parseInt(cmd[2]) + (Integer.parseInt(cmd[3])*14));
 		}		
+	}
+	
+	public static int[] rotateToCellId(int [] val){
+		int input_i = val[0];
+		int input_j = val[1];
+		int output_i, output_j;
+
+		if (input_j % 2 == 0)
+		{
+			output_i = input_i + input_j / 2;
+			output_j = 13 + (input_j / 2) - input_i;
+		}
+		else
+		{
+			output_i = 1 + input_i + input_j / 2;
+			output_j = 13 + input_j / 2 - input_i;
+		}
+		
+		return new int[] { output_i, output_j };
+	}
+
+	public GameFightPlacementPossiblePositionsMessage getGameFightPlacementPossiblePositionsMessage()
+	{
+		return gameFightPlacementPossiblePositionsMessage;
+	}
+
+	public void setGameFightPlacementPossiblePositionsMessage(GameFightPlacementPossiblePositionsMessage gameFightPlacementPossiblePositionsMessage)
+	{
+		this.gameFightPlacementPossiblePositionsMessage = gameFightPlacementPossiblePositionsMessage;
+	}
+
+	public GameEntitiesDispositionMessage getGameEntitiesDispositionMessage()
+	{
+		return gameEntitiesDispositionMessage;
+	}
+
+	public void setGameEntitiesDispositionMessage(GameEntitiesDispositionMessage gameEntitiesDispositionMessage)
+	{
+		this.gameEntitiesDispositionMessage = gameEntitiesDispositionMessage;
+	}
+
+	public GameFightSynchronizeMessage getGameFightSynchronizeMessage()
+	{
+		return gameFightSynchronizeMessage;
+	}
+
+	public void setGameFightSynchronizeMessage(GameFightSynchronizeMessage gameFightSynchronizeMessage)
+	{
+		this.gameFightSynchronizeMessage = gameFightSynchronizeMessage;
+	}
+
+	public ArrayList<Player> getEntities()
+	{
+		return entities;
+	}
+
+	public void setEntities(ArrayList<Player> entities)
+	{
+		this.entities = entities;
+	}
+
+	public List<Double> getTurnListId()
+	{
+		return turnListId;
+	}
+
+	public void setTurnListId(List<Double> turnListId)
+	{
+		this.turnListId = turnListId;
+	}
+
+	public String getSpellToSend()
+	{
+		return spellToSend;
+	}
+
+	public void setSpellToSend(String spellToSend)
+	{
+		this.spellToSend = spellToSend;
+	}
+
+	protected Network getNetwork()
+	{
+		return network;
 	}
 }

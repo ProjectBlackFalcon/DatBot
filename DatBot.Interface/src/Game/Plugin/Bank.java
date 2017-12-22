@@ -8,30 +8,21 @@ import protocol.network.types.game.interactive.InteractiveElementSkill;
 
 public class Bank {
 
-	public static int cellIdAstrubIN = 317;
-	public static int interactiveAstrubIN = 465440;
-	public static int cellIdAstrubOUT = 396;
+	public int cellIdAstrubIN = 317;
+	public int interactiveAstrubIN = 465440;
+	public int cellIdAstrubOUT = 396;
 
-	public static int cellIdBontaIN = 353;
-	public static int interactiveBontaIN = 433934;
-	public static int cellIdBontaOUT = 424;
+	public int cellIdBontaIN = 353;
+	public int interactiveBontaIN = 433934;
+	public int cellIdBontaOUT = 424;
 
-	public static int cellIdBrakmarIN = 246;
-	public static int interactiveBrakmarIN = 415350;
-	public static int cellIdBrakmarOUT = 424;
+	public int cellIdBrakmarIN = 246;
+	public int interactiveBrakmarIN = 415350;
+	public int cellIdBrakmarOUT = 424;
 
-	public static StorageInventoryContentMessage storage;
+	public StorageInventoryContentMessage storage;
 
-	public static int getSkill(int interactive) {
-		for (InteractiveElement i : Interactive.interactiveElements) {
-			if (i.elementId == interactive) {
-				return i.enabledSkills.get(0).skillInstanceUid;
-			}
-		}
-		return -1;
-	}
-
-	public static String getBank() {
+	public String getBank() {
 		if (storage == null) {
 			return "";
 		}

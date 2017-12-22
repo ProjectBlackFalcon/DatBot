@@ -1,6 +1,5 @@
 package Game.Plugin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Game.Info;
@@ -10,28 +9,33 @@ import protocol.network.Network;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.StatedElement;
-import utils.JSON;
 
 public class Interactive {
+	
+	private Network network;
+	
+	public Interactive(Network network){
+		this.network = network;		
+	}
 
-	public static List<StatedElement> statedElements;
-	public static List<InteractiveElement> interactiveElements;
+	private List<StatedElement> statedElements;
+	private List<InteractiveElement> interactiveElements;
 
 	
 	// Statue 
 	
-	public static int elementIdStatue = -1;
-	public static int skillInstanceUidStatue = -1;
-	public static int getStatue(){
-		for(int i = 0 ; i < interactiveElements.size() ; i++){
-			if (interactiveElements.get(i).enabledSkills.size() != 0) {
-				if (interactiveElements.get(i).enabledSkills.get(0).skillId == 302 && interactiveElements.get(i).onCurrentMap) {
+	private int elementIdStatue = -1;
+	private int skillInstanceUidStatue = -1;
+	public int getStatue(){
+		for(int i = 0 ; i < getInteractiveElements().size() ; i++){
+			if (getInteractiveElements().get(i).enabledSkills.size() != 0) {
+				if (getInteractiveElements().get(i).enabledSkills.get(0).skillId == 302 && getInteractiveElements().get(i).onCurrentMap) {
 					for (int j = 0; j < Map.LayersCount; j++) {
 						for (int k = 0; k < Map.getLayers().get(j).CellsCount; k++) {
 							for (int l = 0; l < Map.getLayers().get(j).Cells.get(k).ElementsCount; l++) {
-								if (Map.Layers.get(j).getCells().get(k).Elements.get(l).Identifier == interactiveElements.get(i).elementId) {
-									elementIdStatue = interactiveElements.get(i).elementId;
-									skillInstanceUidStatue = interactiveElements.get(i).enabledSkills.get(0).skillInstanceUid;
+								if (Map.Layers.get(j).getCells().get(k).Elements.get(l).Identifier == getInteractiveElements().get(i).elementId) {
+									setElementIdStatue(getInteractiveElements().get(i).elementId);
+									setSkillInstanceUidStatue(getInteractiveElements().get(i).enabledSkills.get(0).skillInstanceUid);
 									return (int) Map.Layers.get(j).getCells().get(k).CellId;
 								}
 							}
@@ -44,7 +48,7 @@ public class Interactive {
 	}
 	
 	
-	public static List<Integer> cellsIdRosette;
+	private List<Integer> cellsIdRosette;
 	public void getInteractive(){
 		for (int i = 0; i < Map.LayersCount; i++) {
 			for (int j = 0; j < Map.getLayers().get(i).CellsCount; j++) {
@@ -58,12 +62,12 @@ public class Interactive {
 		}
 	}
 
-	public static String getFarmCell() {
+	public String getFarmCell() {
 		farmCell = ""; 
 		for (int i = 0; i < Map.LayersCount; i++) {
 			for (int j = 0; j < Map.getLayers().get(i).CellsCount; j++) {
 				for (int k = 0; k < Map.getLayers().get(i).Cells.get(j).ElementsCount; k++) {
-					for (StatedElement element : statedElements) {
+					for (StatedElement element : getStatedElements()) {
 						if (Map.Layers.get(i).getCells().get(j).CellId == element.elementCellId) {
 							if (Map.Layers.get(i).getCells().get(j).Elements.get(k).Identifier == element.elementId) {
 								farmCell += "("+element.elementCellId+","+Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId+","+element.elementState+"), ";
@@ -79,22 +83,18 @@ public class Interactive {
 		return farmCell;
 	}
 	
-	public static String farmCell;
-	public static int lastItemHarvestedId = 0;
-	public static String lastItemHarvestedString = "";
-	public static int quantityLastItemHarvested = 0;
+	private String farmCell;
+	private int lastItemHarvestedId = 0;
+	private int quantityLastItemHarvested = 0;
 	
-	public static boolean harvestCell(int cellId) throws Exception{
+	public boolean harvestCell(int cellId) throws Exception{
 		InteractiveUseRequestMessage interactiveUseRequestMessage = null; 
-		for (int i = 0; i < statedElements.size() ; i++) {
-			if(cellId == statedElements.get(i).elementCellId){
-				System.out.println(1);
-				if(statedElements.get(i).elementState == 0){
-					System.out.println(2);
-					for(int j = 0 ; j < interactiveElements.size() ; j++){
-						if(statedElements.get(i).elementId == interactiveElements.get(j).elementId){
-							System.out.println(3);
-							interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveElements.get(j).elementId, interactiveElements.get(j).enabledSkills.get(0).skillInstanceUid);
+		for (int i = 0; i < getStatedElements().size() ; i++) {
+			if(cellId == getStatedElements().get(i).elementCellId){
+				if(getStatedElements().get(i).elementState == 0){
+					for(int j = 0 ; j < getInteractiveElements().size() ; j++){
+						if(getStatedElements().get(i).elementId == getInteractiveElements().get(j).elementId){
+							interactiveUseRequestMessage = new InteractiveUseRequestMessage(getInteractiveElements().get(j).elementId, getInteractiveElements().get(j).enabledSkills.get(0).skillInstanceUid);
 							break;
 						}
 					}
@@ -103,23 +103,37 @@ public class Interactive {
 				}
 			}
 		}
-		Network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting resource cell " + cellId);	
+		this.network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting resource cell " + cellId);	
 		Info.waitForHarvestFailure = false;
 		Info.waitForHarvestSuccess = false;
 		while(!Info.waitForHarvestFailure && !Info.waitForHarvestSuccess){
 			Thread.sleep(1000);
 		}
 		if(Info.waitForHarvestFailure){
-			System.out.println(2);
 			return false;
 		} else if (Info.waitForHarvestSuccess){
 			return true;
 		}
-		System.out.println(3);
 		return false;
 	}
+	
+	
+	/**
+	 * Get the skillUid for the interactive 
+	 * @param int idInteractive
+	 * @return int skillUid
+	 * @return -1 else 
+	 */
+	public int getSkill(int idInteractive) {
+		for (InteractiveElement i : this.getInteractiveElements()) {
+			if (i.elementId == idInteractive) {
+				return i.enabledSkills.get(0).skillInstanceUid;
+			}
+		}
+		return -1;
+	}
 
-	private static String getRessourceName(GraphicalElement element) {
+	private String getRessourceName(GraphicalElement element) {
 		
 		switch ((int) element.ElementId) {
 
@@ -150,6 +164,66 @@ public class Interactive {
 		}
 		
 		return null;
+	}
+
+	public List<StatedElement> getStatedElements()
+	{
+		return statedElements;
+	}
+
+	public void setStatedElements(List<StatedElement> statedElements)
+	{
+		this.statedElements = statedElements;
+	}
+
+	public List<InteractiveElement> getInteractiveElements()
+	{
+		return interactiveElements;
+	}
+
+	public void setInteractiveElements(List<InteractiveElement> interactiveElements)
+	{
+		this.interactiveElements = interactiveElements;
+	}
+
+	public int getLastItemHarvestedId()
+	{
+		return lastItemHarvestedId;
+	}
+
+	public void setLastItemHarvestedId(int lastItemHarvestedId)
+	{
+		this.lastItemHarvestedId = lastItemHarvestedId;
+	}
+
+	public int getQuantityLastItemHarvested()
+	{
+		return quantityLastItemHarvested;
+	}
+
+	public void setQuantityLastItemHarvested(int quantityLastItemHarvested)
+	{
+		this.quantityLastItemHarvested = quantityLastItemHarvested;
+	}
+
+	public int getElementIdStatue()
+	{
+		return elementIdStatue;
+	}
+
+	public void setElementIdStatue(int elementIdStatue)
+	{
+		this.elementIdStatue = elementIdStatue;
+	}
+
+	public int getSkillInstanceUidStatue()
+	{
+		return skillInstanceUidStatue;
+	}
+
+	public void setSkillInstanceUidStatue(int skillInstanceUidStatue)
+	{
+		this.skillInstanceUidStatue = skillInstanceUidStatue;
 	}
 	
 	
