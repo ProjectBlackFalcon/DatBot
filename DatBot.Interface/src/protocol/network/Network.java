@@ -29,13 +29,20 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
-import Game.Entity;
-import Game.Info;
-import Game.map.Map;
-import Game.movement.Movement;
-import Main.Communication.Communication;
+import game.Entity;
+import game.Info;
+import game.Servers;
+import game.combat.Fight;
+import game.map.Map;
+import game.movement.Movement;
+import game.plugin.Bank;
+import game.plugin.Interactive;
+import game.plugin.Monsters;
+import game.plugin.Npc;
+import game.plugin.Stats;
 import ia.fight.map.CreateMap;
 import io.netty.util.internal.ThreadLocalRandom;
+import main.communication.Communication;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
 import protocol.network.messages.connection.IdentificationFailedMessage;
@@ -108,13 +115,6 @@ import protocol.network.util.DofusDataWriter;
 import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
-import Game.Servers;
-import Game.Plugin.Bank;
-import Game.Plugin.Interactive;
-import Game.Plugin.Monsters;
-import Game.Plugin.NPC;
-import Game.Plugin.Stats;
-import Game.combat.Fight;
 import utils.JSON;
 
 public class Network implements Runnable {
@@ -140,7 +140,7 @@ public class Network implements Runnable {
 	private Fight fight;
 	private Interactive interactive;
 	private Bank bank;
-	private NPC npc;
+	private Npc npc;
 	private Movement movement;
 	private Stats stats;
 	private Info info;
@@ -155,7 +155,7 @@ public class Network implements Runnable {
 		this.fight = new Fight(this);
 		this.interactive = new Interactive(this);
 		this.bank = new Bank();
-		this.npc = new NPC();
+		this.npc = new Npc();
 		this.movement = new Movement(this);
 		this.setMonsters(new Monsters());
 		try

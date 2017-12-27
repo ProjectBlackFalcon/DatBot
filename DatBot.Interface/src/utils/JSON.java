@@ -13,15 +13,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import Game.Info;
-import Game.Plugin.Interactive;
-import Game.map.Cell;
-import Game.map.CellData;
-import Game.map.ColorMultiplicator;
-import Game.map.Fixture;
-import Game.map.Layer;
-import Game.map.Map;
-import Game.map.elements.GraphicalElement;
+import game.Info;
+import game.map.Cell;
+import game.map.CellData;
+import game.map.ColorMultiplicator;
+import game.map.Fixture;
+import game.map.Layer;
+import game.map.Map;
+import game.map.elements.GraphicalElement;
+import game.plugin.Interactive;
 import protocol.network.Network;
 
 public class JSON implements Runnable{

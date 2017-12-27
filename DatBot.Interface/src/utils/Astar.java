@@ -2,7 +2,7 @@ package utils;
 
 import java.util.*;
 
-import Game.Info;
+import game.Info;
 import protocol.network.Network;
 
 /*

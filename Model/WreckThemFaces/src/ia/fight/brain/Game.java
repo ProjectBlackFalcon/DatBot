@@ -110,7 +110,7 @@ public class Game {
 	}
 	
 	/**
-	 * Main method called to execute the commands.
+	 * main method called to execute the commands.
 	 * @param commandString
 	 */
 	static public void refresh(String commandString) {
@@ -586,7 +586,7 @@ public class Game {
 	}
 	
 	/**
-	 * Main method - only used for testing and debugging.
+	 * main method - only used for testing and debugging.
 	 * @param args
 	 */
 	public static void main(String[] args) {
