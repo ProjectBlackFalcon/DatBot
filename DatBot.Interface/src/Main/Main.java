@@ -8,45 +8,53 @@ public class Main {
 
 	public static void main(String[] args) throws Exception
 	{
+		Info info = new Info();
+
 		boolean arg = false;
 		if (args.length != 0)
 		{
-			if(args.length == 1){
+			if (args.length == 1)
+			{
 				if ((args[0].equals("true") || args[0].equals("True")))
 				{
 					arg = true;
 				}
-			} else if (args.length == 4){
-				 Info.nameAccount = args[0];
-				 Info.password = args[1];
-				 Info.name = args[2];
-				 Info.server = args[3];
-			} else if (args.length == 5){
-				 Info.nameAccount = args[0];
-				 Info.password = args[1];
-				 Info.name = args[2];
-				 Info.server = args[3];
-				 if ((args[0].equals("true") || args[0].equals("True")))
-				 {
-					 arg = true;
-				 }
+			}
+			else if (args.length == 4)
+			{
+				info.setNameAccount(args[0]);
+				info.setPassword(args[1]);
+				info.setName(args[2]);
+				info.setServer(args[3]);
+			}
+			else if (args.length == 5)
+			{
+				info.setNameAccount(args[0]);
+				info.setPassword(args[1]);
+				info.setName(args[2]);
+				info.setServer(args[3]);
+				if ((args[4].equals("true") || args[4].equals("True")))
+				{
+					arg = true;
+				}
 			}
 		}
-		
-		Network network = new Network(arg,"213.248.126.40",5555);
-		Thread communication = new Thread(new Communication(network));
-		communication.start();
 
-		while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals(""))
+		Network network = new Network(arg, info, "213.248.126.40", 5555);
+		Communication communication = new Communication(network);
+		Thread communication2 = new Thread(communication);
+		communication2.start();
+
+		while (info.getNameAccount().equals("") || info.getPassword().equals("") || info.getName().equals("") || info.getServer().equals(""))
 		{
 			System.out.println("Waiting for connection...");
 			Thread.sleep(1000);
 		}
-		
+
 		Thread thread = new Thread(network);
 		thread.start();
 
-		while (!Info.isConnected)
+		while (!info.isConnected())
 		{
 			try
 			{
@@ -58,8 +66,8 @@ public class Main {
 			}
 		}
 
-		network.append("Connecté !",false);
-		network.append("Name : " + Info.name,false);
-		network.append("Niveau : " + Info.lvl,false);
+		network.append("Connecté !", false);
+		network.append("Name : " + info.getName(), false);
+		network.append("Niveau : " + info.getLvl(), false);
 	}
 }

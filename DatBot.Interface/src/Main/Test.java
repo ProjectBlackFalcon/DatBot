@@ -17,13 +17,14 @@ public class Test {
 			}
 		}
 		
-		Network network = new Network(arg,"213.248.126.40",5555);
+		Info info = new Info();
+		Network network = new Network(arg,info,"213.248.126.40",5555);
 		Communication communication = new Communication(network);
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 		
 		int index = 0;
-		while (Info.nameAccount.equals("") || Info.password.equals("") || Info.name.equals("") || Info.server.equals(""))
+		while (info.getNameAccount().equals("") || info.getPassword().equals("") || info.getName().equals("") || info.getServer().equals(""))
 		{
 			System.out.println("Waiting for connection...");
 			Thread.sleep(1000);
@@ -42,17 +43,17 @@ public class Test {
 			// Info.server = "Julith";
 			// }
 			 if(index == 2){
-			 Info.nameAccount = "ceciestuntest";
-			 Info.password = "ceciestlemdp1";
-			 Info.name = "Gladiatonme";
-			 Info.server = "Echo";
+				 info.setNameAccount("ceciestuntest");
+				 info.setPassword("ceciestlemdp1");
+				 info.setName("Gladiatonme");
+				 info.setServer("Echo");
 			 }
 		}
 
 		Thread thread = new Thread(network);
 		thread.start();
 
-		while (!Info.isConnected)
+		while (!info.isConnected())
 		{
 			try
 			{
@@ -65,8 +66,9 @@ public class Test {
 		}
 
 		network.append("Connecté !",false);
-		network.append("Name : " + Info.name,false);
-		network.append("Niveau : " + Info.lvl,false);
+		network.append("Name : " + info.getName(),false);
+		network.append("Niveau : " + info.getLvl(),false);
 		communication.getReturn("0;0;i;cmd;getMonsters;[None]");
+		communication.getReturn("0;0;i;cmd;getStats;[None]");
  	}
 }

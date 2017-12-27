@@ -1,49 +1,58 @@
 package Game.Plugin;
 
 import Game.Info;
+import protocol.network.Network;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 
 public class Stats {
 
-	public static InventoryContentMessage inventoryContentMessage;
+	private InventoryContentMessage inventoryContentMessage;
+	private Network network;
+	private Info info;
 
-	public static String getStats() {
+	public Stats(Network network)
+	{
+		this.network = network;
+		this.info = network.getInfo();
+	}
+
+	public String getStats() {
 		String str = "{";
 		// Add weight
-		str += "\"Lvl\" : " + Info.lvl + ",";
-		str += "\"Xp\" : " + Info.stats.stats.experience + ",";
-		str += "\"XpNextLevelFloor\" : " + Info.stats.stats.experienceNextLevelFloor + ",";
-		str += "\"Weigth\" : " + Info.weight + ",";
-		str += "\"WeigthMax\" : " + Info.weigthMax + ",";
+		str += "\"Lvl\" : " + this.info.getLvl() + ",";
+		str += "\"Xp\" : " + this.info.getStats().getStats().getExperience() + ",";
+		str += "\"XpNextLevelFloor\" : " + this.info.getStats().getStats().getExperienceNextLevelFloor() + ",";
+		str += "\"Weigth\" : " + this.info.getWeight() + ",";
+		str += "\"WeigthMax\" : " + this.info.getWeigthMax() + ",";
 
 		// Job
 		str += "\"Job\" : {";
-		for (int i = 0; i < Info.job.size(); i++) {
-			if (i == Info.job.size() - 1) {
-				str += "\"" + Info.job.get(i).jobId + "\" : [" + Info.job.get(i).jobLevel + "," + Info.job.get(i).jobXP
-						+ "," + Info.job.get(i).jobXpLevelFloor + "," + Info.job.get(i).jobXpNextLevelFloor + "]}";
+		for (int i = 0; i < this.info.getJob().size(); i++) {
+			if (i == this.info.getJob().size() - 1) {
+				str += "\"" + this.info.getJob().get(i).getJobId() + "\" : [" + this.info.getJob().get(i).getJobLevel() + "," + this.info.getJob().get(i).getJobXP()
+						+ "," + this.info.getJob().get(i).getJobXpLevelFloor() + "," + this.info.getJob().get(i).getJobXpNextLevelFloor() + "]}";
 			} else {
-				str += "\"" + Info.job.get(i).jobId + "\" : [" + Info.job.get(i).jobLevel + "," + Info.job.get(i).jobXP
-						+ "," + Info.job.get(i).jobXpLevelFloor + "," + Info.job.get(i).jobXpNextLevelFloor + "],";
+				str += "\"" + this.info.getJob().get(i).getJobId() + "\" : [" + this.info.getJob().get(i).getJobLevel() + "," + this.info.getJob().get(i).getJobXP()
+						+ "," + this.info.getJob().get(i).getJobXpLevelFloor() + "," + this.info.getJob().get(i).getJobXpNextLevelFloor() + "],";
 			}
 		}
 
 		// Inventory
 
 		str += ",\"Inventory\" : {";
-		str += "\"Kamas\" : " + inventoryContentMessage.kamas + ",";
+		str += "\"Kamas\" : " + this.getInventoryContentMessage().getKamas() + ",";
 		str += "\"Items\" : [";
-		for (int i = 0; i < inventoryContentMessage.objects.size(); i++) {
-			if (i == inventoryContentMessage.objects.size() - 1) {
-				str += "[" + inventoryContentMessage.objects.get(i).objectGID + ","
-						+ inventoryContentMessage.objects.get(i).objectUID + ","
-						+ inventoryContentMessage.objects.get(i).quantity + ","
-						+ inventoryContentMessage.objects.get(i).position + "]";
+		for (int i = 0; i < this.getInventoryContentMessage().getObjects().size(); i++) {
+			if (i == this.getInventoryContentMessage().getObjects().size() - 1) {
+				str += "[" + this.getInventoryContentMessage().getObjects().get(i).getObjectGID() + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getObjectUID() + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getQuantity() + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getPosition() + "]";
 			} else {
-				str += "[" + inventoryContentMessage.objects.get(i).objectGID + ","
-						+ inventoryContentMessage.objects.get(i).objectUID + ","
-						+ inventoryContentMessage.objects.get(i).quantity + ","
-						+ inventoryContentMessage.objects.get(i).position + "],";
+				str += "[" + this.getInventoryContentMessage().getObjects().get(i).getObjectGID() + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getObjectUID() + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getQuantity() + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getPosition() + "],";
 			}
 		}
 		str += "]}";
@@ -51,6 +60,16 @@ public class Stats {
 		str += "}";
 		return str;
 
+	}
+
+	public InventoryContentMessage getInventoryContentMessage()
+	{
+		return inventoryContentMessage;
+	}
+
+	public void setInventoryContentMessage(InventoryContentMessage inventoryContentMessage)
+	{
+		this.inventoryContentMessage = inventoryContentMessage;
 	}
 
 }

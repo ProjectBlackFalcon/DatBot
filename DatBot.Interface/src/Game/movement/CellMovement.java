@@ -28,10 +28,10 @@ public class CellMovement {
 	{
 		if (path == null) return;
 
-		Info.waitForMov = false;
+		this.network.getInfo().setWaitForMov(false);
 
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path);
-		this.network.sendToServer(new GameMapMovementRequestMessage(keys, Info.mapId), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
+		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
 		if (path.Cells.size() >= 4)
 		{
 			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
@@ -42,9 +42,9 @@ public class CellMovement {
 			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
 			Thread.sleep(time);
 		}
-		Info.waitForMov = true;
+		this.network.getInfo().setWaitForMov(true);
 		
-		if (!Info.joinedFight)
+		if (!this.network.getInfo().isJoinedFight())
 		{
 			this.network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
 		}

@@ -62,7 +62,7 @@ public class Fight {
 				newParam += param[i] + ", ";
 			}
 		}
-		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam));
+		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", this.network.getInfo().getBotInstance(), this.network.getInfo().addAndGetMsgIdFight(), "f", "cmd", command, newParam));
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class Fight {
 				newParam += param[i] + ", ";
 			}
 		}
-		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", Info.botInstance, ++Info.msgIdFight, "f", "cmd", command, newParam), players);
+		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", this.network.getInfo().getBotInstance(), this.network.getInfo().addAndGetMsgIdFight(), "f", "cmd", command, newParam), players);
 	}
 
 	/**
@@ -131,14 +131,14 @@ public class Fight {
 		{
 			return false;
 		}
-		else if (Info.cellId == cellId)
+		else if (this.network.getInfo().getCellId() == cellId)
 		{
 			return true;
 		}
 		else
 		{
 			mov.performMovement();
-			if (Info.cellId == cellId)
+			if (this.network.getInfo().getCellId() == cellId)
 			{
 				return true;
 			}
@@ -167,67 +167,67 @@ public class Fight {
 	public String init(){
 		Player player = null;
 		String toSend = "";
-		for(int i = 0; i < gameFightSynchronizeMessage.fighters.size() ; i++){
-			if (this.getGameFightSynchronizeMessage().fighters.get(i).getClass().getSimpleName().equals("GameFightCharacterInformations")){
-				GameFightCharacterInformations p = (GameFightCharacterInformations) gameFightSynchronizeMessage.fighters.get(i);
-				GameFightMinimalStats stats = p.stats;
-				if(p.breed == 9){
-					player = new Cra(p.name,p.stats.lifePoints,p.stats.actionPoints,p.stats.movementPoints,p.level);
+		for(int i = 0; i < gameFightSynchronizeMessage.getFighters().size() ; i++){
+			if (this.getGameFightSynchronizeMessage().getFighters().get(i).getClass().getSimpleName().equals("GameFightCharacterInformations")){
+				GameFightCharacterInformations p = (GameFightCharacterInformations) gameFightSynchronizeMessage.getFighters().get(i);
+				GameFightMinimalStats stats = p.getStats();
+				if(p.getBreed() == 9){
+					player = new Cra(p.getName(),p.getStats().getLifePoints(),p.getStats().getActionPoints(),p.getStats().getMovementPoints(),p.getLevel());
 				}
-				player.setLP(stats.lifePoints);
-				player.setBaseLP(stats.baseMaxLifePoints);
-				player.setMaxLP(stats.maxLifePoints);
-				player.setShield(stats.shieldPoints);
-				player.setAP(stats.actionPoints);
-				player.setBaseAP(stats.maxActionPoints);
-				player.setMP(stats.movementPoints);
-				player.setBaseMP(stats.maxMovementPoints);
-				player.setSummons((int) stats.summoner);
-				player.setSummoned(stats.summoned);
-				player.setResPrcnt(new int[]{stats.airElementResistPercent,stats.earthElementResistPercent,stats.waterElementResistPercent,stats.fireElementResistPercent,stats.neutralElementResistPercent});
-				player.setResFixed(new int[]{stats.airElementReduction,stats.earthElementReduction,stats.waterElementReduction,stats.fireElementReduction,stats.neutralElementReduction});
-				player.setCriticalResistance(stats.criticalDamageFixedResist);
-				player.setPushbackResistance(stats.pushDamageFixedResist);
-				player.setAPLossReduction(stats.dodgePALostProbability);
-				player.setMPLossReduction(stats.dodgePMLostProbability);
-				player.setLock(stats.tackleBlock);
-				player.setDodge(stats.tackleEvade);
-				player.setCloseCombatResistancePrcnt(100 - stats.meleeDamageReceivedPercent);
-				player.setDistanceResistancePrcnt(100 - stats.rangedDamageReceivedPercent);
-				if(i == this.getGameFightSynchronizeMessage().fighters.size() - 1){
-					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "]";
+				player.setLP(stats.getLifePoints());
+				player.setBaseLP(stats.getBaseMaxLifePoints());
+				player.setMaxLP(stats.getMaxLifePoints());
+				player.setShield(stats.getShieldPoints());
+				player.setAP(stats.getActionPoints());
+				player.setBaseAP(stats.getMaxActionPoints());
+				player.setMP(stats.getMovementPoints());
+				player.setBaseMP(stats.getMaxMovementPoints());
+				player.setSummons((int) stats.getSummoner());
+				player.setSummoned(stats.isSummoned());
+				player.setResPrcnt(new int[]{stats.getAirElementResistPercent(),stats.getEarthElementResistPercent(),stats.getWaterElementResistPercent(),stats.getFireElementResistPercent(),stats.getNeutralElementResistPercent()});
+				player.setResFixed(new int[]{stats.getAirElementReduction(),stats.getEarthElementReduction(),stats.getWaterElementReduction(),stats.getFireElementReduction(),stats.getNeutralElementReduction()});
+				player.setCriticalResistance(stats.getCriticalDamageFixedResist());
+				player.setPushbackResistance(stats.getPushDamageFixedResist());
+				player.setAPLossReduction(stats.getDodgePALostProbability());
+				player.setMPLossReduction(stats.getDodgePMLostProbability());
+				player.setLock(stats.getTackleBlock());
+				player.setDodge(stats.getTackleEvade());
+				player.setCloseCombatResistancePrcnt(100 - stats.getMeleeDamageReceivedPercent());
+				player.setDistanceResistancePrcnt(100 - stats.getRangedDamageReceivedPercent());
+				if(i == this.getGameFightSynchronizeMessage().getFighters().size() - 1){
+					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "]";
 				} else {
-					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "],";
+					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "],";
 				}
 				this.entities.add(player);
-			} else if (this.getGameFightSynchronizeMessage().fighters.get(i).getClass().getSimpleName().equals("GameFightMonsterInformations")){
-				GameFightMonsterInformations p = (GameFightMonsterInformations) gameFightSynchronizeMessage.fighters.get(i);
-				GameFightMinimalStats stats = p.stats;
-				Monster monster = new Monster(String.valueOf(p.creatureGenericId),p.stats.lifePoints,p.stats.actionPoints,p.stats.movementPoints,p.creatureGrade);
-				monster.setLP(stats.lifePoints);
-				monster.setBaseLP(stats.baseMaxLifePoints);
-				monster.setMaxLP(stats.maxLifePoints);
-				monster.setShield(stats.shieldPoints);
-				monster.setAP(stats.actionPoints);
-				monster.setBaseAP(stats.maxActionPoints);
-				monster.setMP(stats.movementPoints);
-				monster.setBaseMP(stats.maxMovementPoints);
-				monster.setSummons((int) stats.summoner);
-				monster.setSummoned(stats.summoned);
-				monster.setResPrcnt(new int[]{stats.airElementResistPercent,stats.earthElementResistPercent,stats.waterElementResistPercent,stats.fireElementResistPercent,stats.neutralElementResistPercent});
-				monster.setResFixed(new int[]{stats.airElementReduction,stats.earthElementReduction,stats.waterElementReduction,stats.fireElementReduction,stats.neutralElementReduction});
-				monster.setCriticalResistance(stats.criticalDamageFixedResist);
-				monster.setPushbackResistance(stats.pushDamageFixedResist);
-				monster.setAPLossReduction(stats.dodgePALostProbability);
-				monster.setMPLossReduction(stats.dodgePMLostProbability);
-				monster.setLock(stats.tackleBlock);
-				monster.setDodge(stats.tackleEvade);
-				monster.setCloseCombatResistancePrcnt(100 - stats.meleeDamageReceivedPercent);
-				monster.setDistanceResistancePrcnt(100 - stats.rangedDamageReceivedPercent);
-				if(i == this.getGameFightSynchronizeMessage().fighters.size() - 1){
-					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "]";
+			} else if (this.getGameFightSynchronizeMessage().getFighters().get(i).getClass().getSimpleName().equals("GameFightMonsterInformations")){
+				GameFightMonsterInformations p = (GameFightMonsterInformations) gameFightSynchronizeMessage.getFighters().get(i);
+				GameFightMinimalStats stats = p.getStats();
+				Monster monster = new Monster(String.valueOf(p.getCreatureGenericId()),p.getStats().getLifePoints(),p.getStats().getActionPoints(),p.getStats().getMovementPoints(),p.getCreatureGrade());
+				monster.setLP(stats.getLifePoints());
+				monster.setBaseLP(stats.getBaseMaxLifePoints());
+				monster.setMaxLP(stats.getMaxLifePoints());
+				monster.setShield(stats.getShieldPoints());
+				monster.setAP(stats.getActionPoints());
+				monster.setBaseAP(stats.getMaxActionPoints());
+				monster.setMP(stats.getMovementPoints());
+				monster.setBaseMP(stats.getMaxMovementPoints());
+				monster.setSummons((int) stats.getSummoner());
+				monster.setSummoned(stats.isSummoned());
+				monster.setResPrcnt(new int[]{stats.getAirElementResistPercent(),stats.getEarthElementResistPercent(),stats.getWaterElementResistPercent(),stats.getFireElementResistPercent(),stats.getNeutralElementResistPercent()});
+				monster.setResFixed(new int[]{stats.getAirElementReduction(),stats.getEarthElementReduction(),stats.getWaterElementReduction(),stats.getFireElementReduction(),stats.getNeutralElementReduction()});
+				monster.setCriticalResistance(stats.getCriticalDamageFixedResist());
+				monster.setPushbackResistance(stats.getPushDamageFixedResist());
+				monster.setAPLossReduction(stats.getDodgePALostProbability());
+				monster.setMPLossReduction(stats.getDodgePMLostProbability());
+				monster.setLock(stats.getTackleBlock());
+				monster.setDodge(stats.getTackleEvade());
+				monster.setCloseCombatResistancePrcnt(100 - stats.getMeleeDamageReceivedPercent());
+				monster.setDistanceResistancePrcnt(100 - stats.getRangedDamageReceivedPercent());
+				if(i == this.getGameFightSynchronizeMessage().getFighters().size() - 1){
+					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "]";
 				} else {
-					toSend += "[" + getId(p.contextualId) + "," + p.teamId + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[0] + "," + CreateMap.rotate(new int[]{ p.disposition.cellId % 14, p.disposition.cellId / 14})[1] + "],";
+					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "],";
 				}
 				this.entities.add(monster);	
 			}
@@ -246,9 +246,9 @@ public class Fight {
 	}
 	
 	public void fightTurn() throws NumberFormatException, Exception{
-		String s = sendToFightAlgo("g", new Object[] { getId(Info.actorId) });
+		String s = sendToFightAlgo("g", new Object[] { getId(this.network.getInfo().getActorId()) });
 		String[] message = s.split(";");
-		Info.msgIdFight = Integer.parseInt(message[1]);
+		this.network.getInfo().setMsgIdFight(Integer.parseInt(message[1]));
 		message[5] = message[5].substring(1, message[5].length() - 1);
 		if(message[5] == null){
 			endTurn();
@@ -259,25 +259,6 @@ public class Fight {
 		} else if (cmd[0].equals("c")){
 			castSpell(Integer.parseInt(cmd[0]),Integer.parseInt(cmd[2]) + (Integer.parseInt(cmd[3])*14));
 		}		
-	}
-	
-	public static int[] rotateToCellId(int [] val){
-		int input_i = val[0];
-		int input_j = val[1];
-		int output_i, output_j;
-
-		if (input_j % 2 == 0)
-		{
-			output_i = input_i + input_j / 2;
-			output_j = 13 + (input_j / 2) - input_i;
-		}
-		else
-		{
-			output_i = 1 + input_i + input_j / 2;
-			output_j = 13 + input_j / 2 - input_i;
-		}
-		
-		return new int[] { output_i, output_j };
 	}
 
 	public GameFightPlacementPossiblePositionsMessage getGameFightPlacementPossiblePositionsMessage()

@@ -15,8 +15,11 @@ import protocol.network.types.version.Version;
 public class VersionExtended extends Version {
 	public static final int ProtocolId = 393;
 
-	public int install;
-	public int technology;
+	private int install;
+	private int technology;
+	
+	public int getInstall(){ return this.install; };
+	public int getTechnology(){ return this.technology; };
 
 	public VersionExtended(){
 	}

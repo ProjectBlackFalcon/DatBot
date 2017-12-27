@@ -22,8 +22,10 @@ import Game.map.Fixture;
 import Game.map.Layer;
 import Game.map.Map;
 import Game.map.elements.GraphicalElement;
+import protocol.network.Network;
 
 public class JSON implements Runnable{
+	private Network network;
 	private String file;	
 	private long id;
 	
@@ -34,16 +36,18 @@ public class JSON implements Runnable{
 	public static long nameId;
 	public static String name;
 	
-	public JSON(String file,long id){
+	public JSON(String file,long id,Network network){
 		this.file = file;
 		this.id = id;
+		this.network = network;
 		run();
 	}
 
 	
-	public JSON(String file, double id) {
+	public JSON(String file, double id,Network network) {
 		this.file = file;
 		this.id = (long) id;
+		this.network = network;
 		run();
 	}
 
@@ -68,10 +72,9 @@ public class JSON implements Runnable{
 		          JSONObject person = (JSONObject) o;
 		          if((long) person.get("id") == id){
 		        	  String [] temp = ((String) person.get("coord")).split(";");
-		        	  Info.coords[0] = Integer.parseInt(temp[0]);
-		        	  Info.coords[1] = Integer.parseInt(temp[1]);
-		        	  Info.cells = (ArrayList<ArrayList<Integer>>) person.get("cells");
-		        	  Info.worldmap = (long) person.get("worldMap");
+		        	  this.network.getInfo().setCoords(new int[] {Integer.parseInt(temp[0]),Integer.parseInt(temp[1])});
+		        	  this.network.getInfo().setCells((ArrayList<ArrayList<Integer>>) person.get("cells"));
+		        	  this.network.getInfo().setWorldmap((long) person.get("worldMap"));
 		        	  cells = (ArrayList<ArrayList<Integer>>) person.get("cells");
 		          }
 		        }

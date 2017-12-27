@@ -28,14 +28,14 @@ public class Interactive {
 	private int skillInstanceUidStatue = -1;
 	public int getStatue(){
 		for(int i = 0 ; i < getInteractiveElements().size() ; i++){
-			if (getInteractiveElements().get(i).enabledSkills.size() != 0) {
-				if (getInteractiveElements().get(i).enabledSkills.get(0).skillId == 302 && getInteractiveElements().get(i).onCurrentMap) {
+			if (getInteractiveElements().get(i).getEnabledSkills().size() != 0) {
+				if (getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillId() == 302 && getInteractiveElements().get(i).isOnCurrentMap()) {
 					for (int j = 0; j < Map.LayersCount; j++) {
 						for (int k = 0; k < Map.getLayers().get(j).CellsCount; k++) {
 							for (int l = 0; l < Map.getLayers().get(j).Cells.get(k).ElementsCount; l++) {
-								if (Map.Layers.get(j).getCells().get(k).Elements.get(l).Identifier == getInteractiveElements().get(i).elementId) {
-									setElementIdStatue(getInteractiveElements().get(i).elementId);
-									setSkillInstanceUidStatue(getInteractiveElements().get(i).enabledSkills.get(0).skillInstanceUid);
+								if (Map.Layers.get(j).getCells().get(k).Elements.get(l).Identifier == getInteractiveElements().get(i).getElementId()) {
+									setElementIdStatue(getInteractiveElements().get(i).getElementId());
+									setSkillInstanceUidStatue(getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillInstanceUid());
 									return (int) Map.Layers.get(j).getCells().get(k).CellId;
 								}
 							}
@@ -68,9 +68,9 @@ public class Interactive {
 			for (int j = 0; j < Map.getLayers().get(i).CellsCount; j++) {
 				for (int k = 0; k < Map.getLayers().get(i).Cells.get(j).ElementsCount; k++) {
 					for (StatedElement element : getStatedElements()) {
-						if (Map.Layers.get(i).getCells().get(j).CellId == element.elementCellId) {
-							if (Map.Layers.get(i).getCells().get(j).Elements.get(k).Identifier == element.elementId) {
-								farmCell += "("+element.elementCellId+","+Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId+","+element.elementState+"), ";
+						if (Map.Layers.get(i).getCells().get(j).CellId == element.getElementCellId()) {
+							if (Map.Layers.get(i).getCells().get(j).Elements.get(k).Identifier == element.getElementId()) {
+								farmCell += "("+element.getElementCellId()+","+Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId+","+element.getElementState()+"), ";
 //								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
 							}
 						}
@@ -90,11 +90,11 @@ public class Interactive {
 	public boolean harvestCell(int cellId) throws Exception{
 		InteractiveUseRequestMessage interactiveUseRequestMessage = null; 
 		for (int i = 0; i < getStatedElements().size() ; i++) {
-			if(cellId == getStatedElements().get(i).elementCellId){
-				if(getStatedElements().get(i).elementState == 0){
+			if(cellId == getStatedElements().get(i).getElementCellId()){
+				if(getStatedElements().get(i).getElementState() == 0){
 					for(int j = 0 ; j < getInteractiveElements().size() ; j++){
-						if(getStatedElements().get(i).elementId == getInteractiveElements().get(j).elementId){
-							interactiveUseRequestMessage = new InteractiveUseRequestMessage(getInteractiveElements().get(j).elementId, getInteractiveElements().get(j).enabledSkills.get(0).skillInstanceUid);
+						if(getStatedElements().get(i).getElementId() == getInteractiveElements().get(j).getElementId()){
+							interactiveUseRequestMessage = new InteractiveUseRequestMessage(getInteractiveElements().get(j).getElementId(), getInteractiveElements().get(j).getEnabledSkills().get(0).getSkillInstanceUid());
 							break;
 						}
 					}
@@ -104,14 +104,14 @@ public class Interactive {
 			}
 		}
 		this.network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting resource cell " + cellId);	
-		Info.waitForHarvestFailure = false;
-		Info.waitForHarvestSuccess = false;
-		while(!Info.waitForHarvestFailure && !Info.waitForHarvestSuccess){
+		this.network.getInfo().setWaitForHarvestFailure(false);
+		this.network.getInfo().setWaitForHarvestSuccess(false);
+		while(!this.network.getInfo().isWaitForHarvestFailure() && !this.network.getInfo().isWaitForHarvestSuccess()){
 			Thread.sleep(1000);
 		}
-		if(Info.waitForHarvestFailure){
+		if(this.network.getInfo().isWaitForHarvestFailure()){
 			return false;
-		} else if (Info.waitForHarvestSuccess){
+		} else if (this.network.getInfo().isWaitForHarvestSuccess()){
 			return true;
 		}
 		return false;
@@ -126,8 +126,8 @@ public class Interactive {
 	 */
 	public int getSkill(int idInteractive) {
 		for (InteractiveElement i : this.getInteractiveElements()) {
-			if (i.elementId == idInteractive) {
-				return i.enabledSkills.get(0).skillInstanceUid;
+			if (i.getElementId() == idInteractive) {
+				return i.getEnabledSkills().get(0).getSkillInstanceUid();
 			}
 		}
 		return -1;

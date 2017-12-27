@@ -16,7 +16,9 @@ import protocol.network.NetworkMessage;
 public class AbstractCharacterInformation extends NetworkMessage {
 	public static final int ProtocolId = 400;
 
-	public long id;
+	private long id;
+	
+	public long getId(){ return this.id; };
 
 	public AbstractCharacterInformation(){
 	}
@@ -41,10 +43,5 @@ public class AbstractCharacterInformation extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		//append();
 	}
-
-	//private void append(){
-		//Network.appendDebug("id : " + this.id);
-	//}
 }

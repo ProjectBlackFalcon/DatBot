@@ -23,7 +23,7 @@ public class Movement{
 	
 	public CellMovement MoveToCell(int cellId) throws Exception{
 		if(Map.getCells().get(cellId).Mov){
-			CellMovement mov = new CellMovement(new Pathfinder().findPath(Info.cellId,cellId), this.getNetwork());
+			CellMovement mov = new CellMovement(new Pathfinder().findPath(this.network.getInfo().getCellId(),cellId), this.getNetwork());
 			return mov;
 		} else {
 			return null;
@@ -100,16 +100,16 @@ public class Movement{
         	this.getNetwork().append("Direction : " + direction,false);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId,this.getNetwork());
-        } else if (Info.cellId == cellId){
+        } else if (this.network.getInfo().getCellId() == cellId){
             return new MapMovement(null, neighbourId,this.getNetwork());
         } else {
         	return null;
         }
 	}
 	
-	public static boolean moveOver() throws InterruptedException{
+	public boolean moveOver() throws InterruptedException{
 		int indexTimeout = 0;
-		while(!Info.waitForMov){
+		while(!this.network.getInfo().isWaitForMov()){
 			Thread.sleep(1000);
 			indexTimeout++;
 			if(indexTimeout == 30){
@@ -122,16 +122,16 @@ public class Movement{
 	
 // TRIED TO GET THE WAY BUT NOT WORKING
 	public void goToMap(int xStart, int yStart, int x, int y, List<int[]> blocked) throws Exception{
-    	while(!Info.waitForMov){
+    	while(!this.network.getInfo().isWaitForMov()){
     		Thread.sleep(500);
 		}
-		if(x == Info.coords[0] && y == Info.coords[1]){
+		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
 			this.getNetwork().append("Vous êtes arrivé !",false);
 			return;
 		}
 		
-		int xCurrentMap = Info.coords[0] + 95; 
-		int yCurrentMap = Info.coords[1] + 100;
+		int xCurrentMap = this.network.getInfo().getCoords()[0] + 95; 
+		int yCurrentMap = this.network.getInfo().getCoords()[1] + 100;
 //		int xNew = 0; int yNew = 0; int xStartNew = 0; int yStartNew = 0;
 //		
 //		// Need only positiv values
@@ -206,15 +206,15 @@ public class Movement{
 //		}
 		        
         for (int i = 0; i < Astar.pathString.size() ; i++) {
-        	while(!Info.waitForMov){
+        	while(!this.network.getInfo().isWaitForMov()){
         		Thread.sleep(500);
     		}
-    		if(x == Info.coords[0] && y == Info.coords[1]){
+    		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
     			this.getNetwork().append("Vous êtes arrivé !",false);
     			return;
     		}
-    		xCurrentMap = Info.coords[0] + 95; 
-    		yCurrentMap = Info.coords[1] + 100;
+    		xCurrentMap = this.network.getInfo().getCoords()[0] + 95; 
+    		yCurrentMap = this.network.getInfo().getCoords()[1] + 100;
 			MapMovement mov = ChangeMap(Astar.pathString.get(i));
 			if (mov == null) {
 				this.getNetwork().append("Dï¿½placement impossible ! Un obstacle bloque le chemin !",false);
@@ -260,10 +260,10 @@ public class Movement{
 				mov.PerformChangement();
 			}			
 		}
-    	while(!Info.waitForMov){
+    	while(!this.network.getInfo().isWaitForMov()){
     		Thread.sleep(500);
 		}
-		if(x == Info.coords[0] && y == Info.coords[1]){
+		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
 			this.getNetwork().append("Vous êtes arrivé !",false);
 			return;
 		}
@@ -271,14 +271,14 @@ public class Movement{
 	
 	private boolean noObstacle(int random){
         List<int[]> blocked = new ArrayList<int[]>();
-        for (int i = 0; i < Info.cells.size(); i++){
-        	for (int j = 0; j < Info.cells.get(0).size() ; j++){
-        		if (((Number) Info.cells.get(i).get(j)).intValue() == 1  || ((Number) Info.cells.get(i).get(j)).intValue() == 2  ){
+        for (int i = 0; i < this.network.getInfo().getCells().size(); i++){
+        	for (int j = 0; j < this.network.getInfo().getCells().get(0).size() ; j++){
+        		if (((Number) this.network.getInfo().getCells().get(i).get(j)).intValue() == 1  || ((Number) this.network.getInfo().getCells().get(i).get(j)).intValue() == 2  ){
         			blocked.add(new int[]{j,i});
         		}
         	}
         }    
-        new Astar(Info.cellId%14, Info.cellId/14, random%14, random/14, blocked,false);
+        new Astar(this.network.getInfo().getCellId()%14,this.network.getInfo().getCellId()/14, random%14, random/14, blocked,false);
         if(Astar.path == null) 
         	return false; // Can't go in this direction (Obstacles)
         else 

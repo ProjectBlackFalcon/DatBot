@@ -20,26 +20,36 @@ public class Bank {
 	public int interactiveBrakmarIN = 415350;
 	public int cellIdBrakmarOUT = 424;
 
-	public StorageInventoryContentMessage storage;
+	private StorageInventoryContentMessage storage;
 
 	public String getBank() {
 		if (storage == null) {
 			return "";
 		}
 		String str = "{";
-		str += "\"Kamas\" : " + storage.kamas + ",";
+		str += "\"Kamas\" : " + storage.getKamas() + ",";
 		str += "\"Items\" : [";
-		for (int i = 0; i < storage.objects.size(); i++) {
-			if (i == storage.objects.size() - 1) {
-				str += "[" + storage.objects.get(i).objectGID + "," + storage.objects.get(i).objectUID + ","
-						+ storage.objects.get(i).quantity + "," + storage.objects.get(i).position + "]";
+		for (int i = 0; i < storage.getObjects().size(); i++) {
+			if (i == storage.getObjects().size() - 1) {
+				str += "[" + storage.getObjects().get(i).getObjectGID() + "," + storage.getObjects().get(i).getObjectUID() + ","
+						+ storage.getObjects().get(i).getQuantity() + "," + storage.getObjects().get(i).getPosition() + "]";
 			} else {
-				str += "[" + storage.objects.get(i).objectGID + "," + storage.objects.get(i).objectUID + ","
-						+ storage.objects.get(i).quantity + "," + storage.objects.get(i).position + "],";
+				str += "[" + storage.getObjects().get(i).getObjectGID() + "," + storage.getObjects().get(i).getObjectUID() + ","
+						+ storage.getObjects().get(i).getQuantity() + "," + storage.getObjects().get(i).getPosition() + "],";
 			}
 		}
 		str += "]}";
 		return str;
+	}
+
+	public StorageInventoryContentMessage getStorage()
+	{
+		return storage;
+	}
+
+	public void setStorage(StorageInventoryContentMessage storage)
+	{
+		this.storage = storage;
 	}
 
 }

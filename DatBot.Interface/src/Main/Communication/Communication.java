@@ -11,11 +11,13 @@ public class Communication implements Runnable {
 	
 	protected Network network;
 	private ModelConnexion connexion;
+	private Info info;
 	
 	public Communication(Network network)
 	{
 		this.setNetwork(network);
-		connexion = new ModelConnexion(this.getNetwork());
+		this.setInfo(network.getInfo());
+		connexion = new ModelConnexion(this.getNetwork(),this);
 	}
 
 	public void run()
@@ -27,16 +29,16 @@ public class Communication implements Runnable {
 			while (true)
 			{
 				Thread.sleep(200);
-				Info.newMap = false;
+				info.setNewMap(false);
 				s = bufferRead.readLine();
 				String[] message = s.split(";");
-				Info.botInstance = Integer.parseInt(message[0]);
+				info.setBotInstance(Integer.parseInt(message[0]));
 				message[5] = message[5].substring(1, message[5].length() - 1);
 
 				switch (message[2])
 				{
 					case "i":
-						Info.msgIdModel = Integer.parseInt(message[1]);
+						info.setMsgIdModel(Integer.parseInt(message[1]));
 						sendToModel(message[0], message[1], "m", "rtn", message[4], this.connexion.getReturn(message[4], message[5]));
 					break;
 				}
@@ -66,13 +68,13 @@ public class Communication implements Runnable {
 		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
 	}
 
-	public static boolean waitToSend() throws InterruptedException
+	public boolean waitToSend() throws InterruptedException
 	{
-		while (!Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange && !Info.joinedFight)
+		while (!info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
 		{
 			Thread.sleep(50);
 		}
-		while (!Info.basicNoOperationMsg)
+		while (!info.isBasicNoOperationMsg())
 		{
 			Thread.sleep(50);
 		}
@@ -82,7 +84,7 @@ public class Communication implements Runnable {
 		// System.out.println(Info.newMap + " " + Info.Storage + " " +
 		// Info.StorageUpdate + " " + Info.leaveExchange + " "
 		// + Info.basicNoOperationMsg);
-		if (Info.basicNoOperationMsg && !Info.newMap && !Info.Storage && !Info.StorageUpdate && !Info.leaveExchange && !Info.joinedFight)
+		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
 		{
 			return false;
 		}
@@ -107,6 +109,16 @@ public class Communication implements Runnable {
 	public void setNetwork(Network network)
 	{
 		this.network = network;
+	}
+
+	public Info getInfo()
+	{
+		return info;
+	}
+
+	public void setInfo(Info info)
+	{
+		this.info = info;
 	}
 
 }
