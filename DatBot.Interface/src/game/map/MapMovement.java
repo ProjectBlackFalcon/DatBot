@@ -14,7 +14,7 @@ public class MapMovement {
 
 	public MapMovement(CellMovement move, int neighbourId, Network network) {
 		this.cellMovement = move;
-		this.oldId = (double) Map.Id;
+		this.oldId = (double) this.network.getMap().getId();
 		this.newId = neighbourId;
 		this.network = network;
 	}
@@ -24,8 +24,8 @@ public class MapMovement {
     	if(cellMovement != null)
     		this.cellMovement.performMovement();
 		this.network.getInfo().setWaitForMov(false);
-		this.network.append("Changement de map...",false);
-		this.network.sendToServer(new ChangeMapMessage(newId,false), ChangeMapMessage.ProtocolId, "Changement de map...");
+		this.network.append("Changing map...",false);
+		this.network.sendToServer(new ChangeMapMessage(newId,false), ChangeMapMessage.ProtocolId, "Changing map...");
     }
 
 }

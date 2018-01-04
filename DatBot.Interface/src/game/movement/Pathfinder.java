@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import game.map.CellData;
-import game.map.Map;
 import game.map.MapPoint;
+import protocol.network.Network;
+import utils.d2p.map.CellData;
 
 public class Pathfinder {
+	
+	private Network network;
 
 	private int DCost = 15;
 	private int HeuristicCost = 10;
@@ -43,6 +45,11 @@ public class Pathfinder {
 
 	private int StartX;
 	private int StartY;
+
+	public Pathfinder(Network network)
+	{
+		this.network = network;
+	}
 
 	public MovementPath findPath(int FromCell, int ToCell, boolean ate) {
 		return findPath(FromCell, ToCell, ate, true);
@@ -340,7 +347,7 @@ public class Pathfinder {
     }
 
 	public boolean PointMov(int x, int y, int cellId, boolean troughtEntities) {
-		boolean isNewSystem = Map.IsUsingNewMovementSystem;
+		boolean isNewSystem = this.network.getMap().isIsUsingNewMovementSystem();
 		MapPoint actualPoint = new MapPoint(x, y);
 		CellData fCellData = null;
 		CellData sCellData = null;
@@ -348,14 +355,14 @@ public class Pathfinder {
 		int floor = 0;
 
 		if (actualPoint.IsInMap()) {
-			fCellData = Map.Cells.get(actualPoint.CellId);
-			mov = fCellData.Mov && (!IsFighting || !fCellData.NonWalkableDuringFight);
+			fCellData = this.network.getMap().getCells().get(actualPoint.CellId);
+			mov = fCellData.isMov() && (!IsFighting || !fCellData.isNonWalkableDuringFight());
 
 			if (!(mov == false) && isNewSystem && cellId != -1 && cellId != actualPoint.CellId) {
-				sCellData = Map.Cells.get(cellId);
-				floor = (int) Math.abs(Math.abs(fCellData.Floor) - Math.abs(sCellData.Floor));
-				if (!(sCellData.MoveZone == fCellData.MoveZone) && floor > 0 && sCellData.MoveZone == fCellData.MoveZone
-						&& fCellData.MoveZone == 0 && floor > 11)
+				sCellData = this.network.getMap().getCells().get(cellId);
+				floor = (int) Math.abs(Math.abs(fCellData.getFloor()) - Math.abs(sCellData.getFloor()));
+				if (!(sCellData.getMoveZone() == fCellData.getMoveZone()) && floor > 0 && sCellData.getMoveZone() == fCellData.getMoveZone()
+						&& fCellData.getMoveZone() == 0 && floor > 11)
 					mov = false;
 			}
 		} else {
@@ -371,12 +378,12 @@ public class Pathfinder {
 	
     private double GetCellSpeed(int cellId, boolean throughEntities)
     {
-        int speed = (int) Map.Cells.get(cellId).Speed;
+        int speed = (int) this.network.getMap().getCells().get(cellId).getSpeed();
         MapPoint cell = new MapPoint(cellId);
 
         if (throughEntities)
         {
-            if (!Map.NoEntitiesOnCell(cellId))
+            if (!this.network.getMap().NoEntitiesOnCell(cellId))
                 return 20;
 
             if (speed >= 0)
@@ -388,23 +395,23 @@ public class Pathfinder {
         double cost = 1.0D;
         MapPoint adjCell = null;
 
-        if (!Map.NoEntitiesOnCell(cellId))
+        if (!this.network.getMap().NoEntitiesOnCell(cellId))
             cost += 0.3;
 
         adjCell = new MapPoint(cell.X + 1, cell.Y);
-        if (adjCell != null && !Map.NoEntitiesOnCell(adjCell.CellId))
+        if (adjCell != null && !this.network.getMap().NoEntitiesOnCell(adjCell.CellId))
             cost += 0.3;
 
         adjCell = new MapPoint(cell.X, cell.Y + 1);
-        if (adjCell != null && !Map.NoEntitiesOnCell(adjCell.CellId))
+        if (adjCell != null && !this.network.getMap().NoEntitiesOnCell(adjCell.CellId))
             cost += 0.3;
 
         adjCell = new MapPoint(cell.X - 1, cell.Y);
-        if (adjCell != null && !Map.NoEntitiesOnCell(adjCell.CellId))
+        if (adjCell != null && !this.network.getMap().NoEntitiesOnCell(adjCell.CellId))
             cost += 0.3;
 
         adjCell = new MapPoint(cell.X, cell.Y - 1);
-        if (adjCell != null && !Map.NoEntitiesOnCell(adjCell.CellId))
+        if (adjCell != null && !this.network.getMap().NoEntitiesOnCell(adjCell.CellId))
             cost += 0.3;
 
         // todo
@@ -432,8 +439,8 @@ public class Pathfinder {
 	
     public boolean IsChangeZone(int fCell, int sCell)
     {
-        return Map.Cells.get(fCell).MoveZone != Map.Cells.get(sCell).MoveZone &&
-               Math.abs(Map.Cells.get(fCell).Floor) == Math.abs(Map.Cells.get(sCell).Floor);
+        return this.network.getMap().getCells().get(fCell).getMoveZone() != this.network.getMap().getCells().get(sCell).getMoveZone() &&
+               Math.abs(this.network.getMap().getCells().get(fCell).getFloor()) == Math.abs(this.network.getMap().getCells().get(sCell).getFloor());
     }
 
 	public void CloseSquare(int y, int x) {

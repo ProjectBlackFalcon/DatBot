@@ -1,11 +1,14 @@
 package main;
 
-import game.Info;
+import java.util.Scanner;
+
 import main.communication.Communication;
-import protocol.network.Network;
+import utils.d2p.MapManager;
+import utils.d2p.map.Map;
 
 public class Test {
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception
 	{
 		boolean arg = false;
@@ -17,58 +20,23 @@ public class Test {
 			}
 		}
 		
-		Info info = new Info();
-		Network network = new Network(arg,info,"213.248.126.40",5555);
-		Communication communication = new Communication(network);
+		Communication communication = new Communication(arg);
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 		
-		int index = 0;
-		while (info.getNameAccount().equals("") || info.getPassword().equals("") || info.getName().equals("") || info.getServer().equals(""))
-		{
-			System.out.println("Waiting for connection...");
+		while(true){
 			Thread.sleep(1000);
-			index++;
-//			if (index == 2)
-//			{
-//				Info.nameAccount = "wublel7";
-//				Info.password = "wubwublel7";
-//				Info.name = "Dihydroquerina";
-//				Info.server = "Julith";
-//			}
-			// if(index == 2){
-			// Info.nameAccount = "Jemappellehenry2";
-			// Info.password = "azerty123henry";
-			// Info.name = "Baddosh";
-			// Info.server = "Julith";
-			// }
-			 if(index == 2){
-				 info.setNameAccount("ceciestuntest");
-				 info.setPassword("ceciestlemdp1");
-				 info.setName("Gladiatonme");
-				 info.setServer("Echo");
-			 }
+			new Scanner(System.in);
 		}
-
-		Thread thread = new Thread(network);
-		thread.start();
-
-		while (!info.isConnected())
-		{
-			try
-			{
-				Thread.sleep(1000);
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
-		network.append("Connecté !",false);
-		network.append("Name : " + info.getName(),false);
-		network.append("Niveau : " + info.getLvl(),false);
-		communication.getReturn("0;0;i;cmd;getMonsters;[None]");
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
+		
+//		TESTS FOR INPUTS
+		
+//		0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]
+//		1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]
+//		2;0;i;cmd;connect;[wublel7,wubwublel7,Dihydroquerina,Julith]
+//		0;0;i;cmd;getMonsters;[None]
+//		0;0;i;cmd;getStats;[None]
+//		0;0;i;cmd;getMap;[None]
+//		0;0;i;cmd;move;[255]
  	}
 }

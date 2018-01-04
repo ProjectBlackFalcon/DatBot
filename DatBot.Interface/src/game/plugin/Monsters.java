@@ -15,7 +15,7 @@ public class Monsters {
 	
 	public String getStringMonsters(){
 		String str = "";
-		str += "\"this.monsters\" : [";
+		str += "\"monsters\" : [";
 		for (int i = 0; i < this.getMonsters().size(); i++) {
 			if (i == this.getMonsters().size() - 1) {
 				str += "[" + this.getMonsters().get(i).getContextualId() + "," + this.getMonsters().get(i).getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId() + "," + this.getMonsters().get(i).getDisposition().getCellId() + "]";

@@ -3,19 +3,21 @@ package game.plugin;
 import java.util.List;
 
 import game.Info;
-import game.map.Map;
-import game.map.elements.GraphicalElement;
 import protocol.network.Network;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.StatedElement;
+import utils.d2p.map.Map;
+import utils.d2p.map.elements.GraphicalElement;
 
 public class Interactive {
 	
 	private Network network;
+	private Map map;
 	
 	public Interactive(Network network){
-		this.network = network;		
+		this.network = network;	
+		this.map = network.getMap();
 	}
 
 	private List<StatedElement> statedElements;
@@ -30,13 +32,13 @@ public class Interactive {
 		for(int i = 0 ; i < getInteractiveElements().size() ; i++){
 			if (getInteractiveElements().get(i).getEnabledSkills().size() != 0) {
 				if (getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillId() == 302 && getInteractiveElements().get(i).isOnCurrentMap()) {
-					for (int j = 0; j < Map.LayersCount; j++) {
-						for (int k = 0; k < Map.getLayers().get(j).CellsCount; k++) {
-							for (int l = 0; l < Map.getLayers().get(j).Cells.get(k).ElementsCount; l++) {
-								if (Map.Layers.get(j).getCells().get(k).Elements.get(l).Identifier == getInteractiveElements().get(i).getElementId()) {
+					for (int j = 0; j < this.map.getLayersCount(); j++) {
+						for (int k = 0; k < this.map.getLayers().get(j).getCellsCount(); k++) {
+							for (int l = 0; l < this.map.getLayers().get(j).getCells().get(k).getElementsCount(); l++) {
+								if (((GraphicalElement) this.map.getLayers().get(j).getCells().get(k).getElements().get(l)).getIdentifier() == getInteractiveElements().get(i).getElementId()) {
 									setElementIdStatue(getInteractiveElements().get(i).getElementId());
 									setSkillInstanceUidStatue(getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillInstanceUid());
-									return (int) Map.Layers.get(j).getCells().get(k).CellId;
+									return (int) this.map.getLayers().get(j).getCells().get(k).getCellId();
 								}
 							}
 						}
@@ -50,12 +52,12 @@ public class Interactive {
 	
 	private List<Integer> cellsIdRosette;
 	public void getInteractive(){
-		for (int i = 0; i < Map.LayersCount; i++) {
-			for (int j = 0; j < Map.getLayers().get(i).CellsCount; j++) {
-				for (int k = 0; k < Map.getLayers().get(i).Cells.get(j).ElementsCount; k++) {
-					if(Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId == 34708){
-						cellsIdRosette.add((int) Map.Layers.get(i).getCells().get(j).CellId);
-						System.out.println("Rosace : " + Map.Layers.get(i).getCells().get(j).CellId);
+		for (int i = 0; i < this.map.getLayersCount(); i++) {
+			for (int j = 0; j < this.map.getLayers().get(i).getCellsCount(); j++) {
+				for (int k = 0; k < this.map.getLayers().get(i).getCells().get(j).getElementsCount(); k++) {
+					if(((GraphicalElement) this.map.getLayers().get(i).getCells().get(j).getElements().get(k)).getElementId() == 34708){
+						cellsIdRosette.add((int) this.map.getLayers().get(i).getCells().get(j).getCellId());
+						System.out.println("Rosace : " + this.map.getLayers().get(i).getCells().get(j).getCellId());
 					}	
 				}
 			}
@@ -64,13 +66,13 @@ public class Interactive {
 
 	public String getFarmCell() {
 		farmCell = ""; 
-		for (int i = 0; i < Map.LayersCount; i++) {
-			for (int j = 0; j < Map.getLayers().get(i).CellsCount; j++) {
-				for (int k = 0; k < Map.getLayers().get(i).Cells.get(j).ElementsCount; k++) {
+		for (int i = 0; i < this.map.getLayersCount(); i++) {
+			for (int j = 0; j < this.map.getLayers().get(i).getCellsCount(); j++) {
+				for (int k = 0; k < this.map.getLayers().get(i).getCells().get(j).getElementsCount(); k++) {
 					for (StatedElement element : getStatedElements()) {
-						if (Map.Layers.get(i).getCells().get(j).CellId == element.getElementCellId()) {
-							if (Map.Layers.get(i).getCells().get(j).Elements.get(k).Identifier == element.getElementId()) {
-								farmCell += "("+element.getElementCellId()+","+Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId+","+element.getElementState()+"), ";
+						if (this.map.getLayers().get(i).getCells().get(j).getCellId() == element.getElementCellId()) {
+							if (((GraphicalElement) this.map.getLayers().get(i).getCells().get(j).getElements().get(k)).getIdentifier() == element.getElementId()) {
+								farmCell += "("+element.getElementCellId()+","+((GraphicalElement) this.map.getLayers().get(i).getCells().get(j).getElements().get(k)).getElementId() +","+element.getElementState()+"), ";
 //								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
 							}
 						}
@@ -135,7 +137,7 @@ public class Interactive {
 
 	private String getRessourceName(GraphicalElement element) {
 		
-		switch ((int) element.ElementId) {
+		switch ((int) element.getElementId()) {
 
 		case 29828:
 			return "Blé";

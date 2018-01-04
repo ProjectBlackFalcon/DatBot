@@ -11,8 +11,12 @@ public class Info {
 	 * Game Info
 	 */
 
-	public Info()
+	public Info(String nameAccount, String password, String name, String server)
 	{
+		this.nameAccount = nameAccount;
+		this.password = password;
+		this.name = name;
+		this.server = server;
 	}
 
 	// Map info

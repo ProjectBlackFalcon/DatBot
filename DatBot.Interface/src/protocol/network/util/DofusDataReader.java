@@ -21,17 +21,31 @@ public class DofusDataReader implements IDofusDataInput {
     private final int SHORT_MAX_VALUE = 32767;
     private final int UNSIGNED_SHORT_MAX_VALUE = 65536;
     private final int CHUNCK_BIT_SIZE = 7;
-    private final int MAX_ENCODING_LENGTH = (int)Math.ceil(INT_SIZE / CHUNCK_BIT_SIZE);
+    private final int MAX_ENCODING_LENGTH = (int) Math.ceil(INT_SIZE / CHUNCK_BIT_SIZE);
     private final int MASK_10000000 = 128;
     private final int MASK_01111111 = 127;
 
     public DofusDataReader(ByteArrayInputStream bis) {
     	this.bis = bis;
-        this.dis = new DataInputStream(bis);
+        this.dis = new DataInputStream(this.bis);
+        this.dis.mark(0);
     }
     
     public void Dispose(){
         this.dis = new DataInputStream(bis);
+    }
+    
+    public void setPosition(int n){
+        try
+		{
+        	this.dis.reset();
+            this.dis.mark(0);
+            this.dis.readFully(new byte[n],0,n);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
     }
     
     public int readVarInt() throws IOException {

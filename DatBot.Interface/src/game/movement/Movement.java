@@ -7,11 +7,9 @@ import java.util.Random;
 import javax.swing.SwingUtilities;
 
 import game.Info;
-import game.map.Map;
 import game.map.MapMovement;
 import protocol.network.Network;
 import utils.Astar;
-import utils.JSON;
 
 public class Movement{
 	
@@ -22,8 +20,8 @@ public class Movement{
 	}
 	
 	public CellMovement MoveToCell(int cellId) throws Exception{
-		if(Map.getCells().get(cellId).Mov){
-			CellMovement mov = new CellMovement(new Pathfinder().findPath(this.network.getInfo().getCellId(),cellId), this.getNetwork());
+		if(this.network.getMap().getCells().get(cellId).isMov()){
+			CellMovement mov = new CellMovement(new Pathfinder(this.network).findPath(this.network.getInfo().getCellId(),cellId), this.getNetwork());
 			return mov;
 		} else {
 			return null;
@@ -36,34 +34,34 @@ public class Movement{
         switch (direction)
         {
             case "North":
-                neighbourId = (int) Map.TopNeighbourId;
+                neighbourId = (int) this.network.getMap().getTopNeighbourId();
                 num2 = 64;
                 break;
             case "South":
-                neighbourId = (int) Map.BottomNeighbourId;
+                neighbourId = (int) this.network.getMap().getBottomNeighbourId();
                 num2 = 4;
                 break;
             case "East":
-                neighbourId = (int) Map.RightNeighbourId;
+                neighbourId = (int) this.network.getMap().getRightNeighbourId();
                 num2 = 1;
                 break;
             case "West":
-                neighbourId = (int) Map.LeftNeighbourId;
+                neighbourId = (int) this.network.getMap().getLeftNeighbourId();
                 num2 = 16;
                 break;
         }
         if (num2 == -1 || neighbourId < 0) return null;
 
         List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < Map.Cells.size() - 1; i++){
-            if ((Map.Cells.get(i).MapChangeData & num2) > 0 && Map.NothingOnCell(i) && noObstacle(i)){
+        for (int i = 0; i < this.network.getMap().getCells().size() - 1; i++){
+            if ((this.network.getMap().getCells().get(i).getMapChangeData() & num2) > 0 && this.network.getMap().NothingOnCell(i) && noObstacle(i)){
             	list.add(i);
             }
         }
         if(list.size() == 0) return null; // Can't go in this direction (Obstacles)
         Random r = new Random();
         int randomCellId = list.get(r.nextInt(list.size()));
-		this.getNetwork().append("Déplacement...",false);	
+		this.getNetwork().append("Moving...",false);	
 		this.getNetwork().append("Direction : " + direction,false);
         CellMovement move = MoveToCell(randomCellId);
         return new MapMovement(move, neighbourId,this.getNetwork());
@@ -75,28 +73,28 @@ public class Movement{
         switch (direction)
         {
             case "n":
-                neighbourId = (int) Map.TopNeighbourId;
+                neighbourId = (int) this.network.getMap().getTopNeighbourId();
                 num2 = 64;
                 break;
             case "s":
-                neighbourId = (int) Map.BottomNeighbourId;
+                neighbourId = (int) this.network.getMap().getBottomNeighbourId();
                 num2 = 4;
                 break;
             case "e":
-                neighbourId = (int) Map.RightNeighbourId;
+                neighbourId = (int) this.network.getMap().getRightNeighbourId();
                 num2 = 1;
                 break;
             case "w":
-                neighbourId = (int) Map.LeftNeighbourId;
+                neighbourId = (int) this.network.getMap().getLeftNeighbourId();
                 num2 = 16;
                 break;
         }
         if (num2 == -1 || neighbourId < 0) return null;
-        System.out.println((Map.Cells.get(cellId).MapChangeData & num2) > 0);
-        System.out.println(Map.NothingOnCell(cellId));
+        System.out.println((this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0);
+        System.out.println(this.network.getMap().NothingOnCell(cellId));
         System.out.println(noObstacle(cellId));
-        if (Map.NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
-        	this.getNetwork().append("Déplacement...",false);	
+        if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
+        	this.getNetwork().append("Moving...",false);	
         	this.getNetwork().append("Direction : " + direction,false);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId,this.getNetwork());
@@ -126,7 +124,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-			this.getNetwork().append("Vous êtes arrivé !",false);
+			this.getNetwork().append("Vous ï¿½tes arrivï¿½ !",false);
 			return;
 		}
 		
@@ -210,7 +208,7 @@ public class Movement{
         		Thread.sleep(500);
     		}
     		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-    			this.getNetwork().append("Vous êtes arrivé !",false);
+    			this.getNetwork().append("Vous ï¿½tes arrivï¿½ !",false);
     			return;
     		}
     		xCurrentMap = this.network.getInfo().getCoords()[0] + 95; 
@@ -264,7 +262,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-			this.getNetwork().append("Vous êtes arrivé !",false);
+			this.getNetwork().append("Vous ï¿½tes arrivï¿½ !",false);
 			return;
 		}
 	}

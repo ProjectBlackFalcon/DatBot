@@ -29,11 +29,12 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import org.json.simple.JSONArray;
+
 import game.Entity;
 import game.Info;
 import game.Servers;
 import game.combat.Fight;
-import game.map.Map;
 import game.movement.Movement;
 import game.plugin.Bank;
 import game.plugin.Interactive;
@@ -115,12 +116,14 @@ import protocol.network.util.DofusDataWriter;
 import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
-import utils.JSON;
+import utils.d2p.MapManager;
+import utils.d2p.map.Map;
 
 public class Network implements Runnable {
 
 	private Socket socket;
-	private String ip;
+	private String ip = "213.248.126.40";
+	private int port = 5555;
 	private Message message;
 	private List<Integer> Ticket;
 	// Log window
@@ -145,11 +148,21 @@ public class Network implements Runnable {
 	private Stats stats;
 	private Info info;
 	private Monsters monsters;
+	private MapManager mapManager;
+	private Map map;
 
-	public Network(boolean displayPacket, Info info, String ip, int port)
+	public Network(boolean displayPacket, Info info)
 	{
 		this.displayPacket = displayPacket;
-		this.ip = ip;
+		try
+		{
+			this.mapManager = new MapManager(getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		} 
+		this.map = new Map();
 		this.info = info;
 		this.stats = new Stats(this);
 		this.fight = new Fight(this);
@@ -160,7 +173,7 @@ public class Network implements Runnable {
 		this.setMonsters(new Monsters());
 		try
 		{
-			socket = new Socket(ip, port);
+			socket = new Socket(this.ip, this.port);
 			if (socket.isConnected())
 			{
 				new LatencyFrame();
@@ -174,6 +187,14 @@ public class Network implements Runnable {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public String getPathDatBot(){
+		JSONArray a;
+		String s = Paths.get("").toAbsolutePath().toString();
+		int i = s.indexOf("DatBot");
+		s = s.substring(0, i + 6);
+		return s;
 	}
 
 	@Override
@@ -243,8 +264,7 @@ public class Network implements Runnable {
 	/**
 	 * Append the text eiher on the panel or System.out
 	 * 
-	 * @param String
-	 *            str
+	 * @param String str
 	 * @param boolean
 	 *            b ; True:panel ; False:System.out
 	 */
@@ -423,10 +443,7 @@ public class Network implements Runnable {
 						}
 						if (complementaryInformationsDataMessage.getActors().get(i).getContextualId() == info.getActorId())
 							info.setCellId(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId());
-						else
-							Map.Entities.add(new Entity(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId(), complementaryInformationsDataMessage.getActors().get(i).getContextualId()));
 					}
-					HandleMapComplementaryInformationsDataMessage();
 					getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 					getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
 					append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]", false);
@@ -444,7 +461,7 @@ public class Network implements Runnable {
 				if (gameMapMovementMessage.getActorId() == info.getActorId())
 				{
 					info.setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-					append("Déplacement réussi !", false);
+					append("Dï¿½placement rï¿½ussi !", false);
 					append("CellId : " + info.getCellId(), false);
 				}
 				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++)
@@ -866,7 +883,8 @@ public class Network implements Runnable {
 			case 6070:
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
-				fight.spellToSend += ",[" + fight.getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable() + "]";
+				fight.spellToSend += ",[" + fight.getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable()
+					+ "]";
 			break;
 			case 713:
 				GameFightTurnListMessage gameFightTurnListMessage = new GameFightTurnListMessage();
@@ -1126,26 +1144,11 @@ public class Network implements Runnable {
 	private void HandleMapRequestMessage(double mapId) throws Exception
 	{
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
+		Map map = this.mapManager.FromId((int) mapId);
+		this.map = map;
+		this.info.setCoords(new int[]{map.getPosition().getX(), map.getPosition().getY()});
+		this.info.setWorldmap(map.getPosition().getWorldId());
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
-	}
-
-	private void HandleMapComplementaryInformationsDataMessage() throws InterruptedException
-	{
-		Process p;
-		try
-		{
-			String s = Paths.get("").toAbsolutePath().toString();
-			int i = s.indexOf("DatBot");
-			s = s.substring(0, i + 6);
-			p = new ProcessBuilder(s + "/DatBot.Interface/utils/maps/MapManager/MapManager.exe", String.valueOf((int) info.getMapId())).start();
-			p.waitFor();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		new JSON("MapInfo", info.getMapId(), this);
-		new JSON("MapInfoComplete", info.getMapId(), this);
 	}
 
 	private void HandleLatencyMessage() throws Exception
@@ -1212,5 +1215,15 @@ public class Network implements Runnable {
 	public void setMonsters(Monsters monsters)
 	{
 		this.monsters = monsters;
+	}
+
+	public Map getMap()
+	{
+		return map;
+	}
+
+	public void setMap(Map map)
+	{
+		this.map = map;
 	}
 }
