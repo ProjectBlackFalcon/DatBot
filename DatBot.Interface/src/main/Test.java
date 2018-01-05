@@ -3,6 +3,8 @@ package main;
 import java.util.Scanner;
 
 import main.communication.Communication;
+import utils.d2o.D2oManager;
+import utils.d2o.GameDataTypeEnum;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 
@@ -11,23 +13,30 @@ public class Test {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception
 	{
-		boolean arg = false;
-		if (args.length != 0)
-		{
-			if ((args[0].equals("true") || args[0].equals("True")))
-			{
-				arg = true;
-			}
-		}
-		
-		Communication communication = new Communication(arg);
-		Thread communication2 = new Thread(communication);
-		communication2.start();
-		
-		while(true){
-			Thread.sleep(1000);
-			new Scanner(System.in);
-		}
+		D2oManager d2oManager = new D2oManager("E:\\Ankama\\Dofus\\app\\data\\common\\MapPositions.d2o");
+//		long time = System.currentTimeMillis();
+//		MapManager manager = new MapManager("C:\\Users\\baptiste\\Documents\\DofusBot\\DatBot\\DatBot.Interface\\utils\\maps");
+//		Map map = manager.FromId(84673538);
+//		System.out.println(map.toString());
+//		System.out.println(System.currentTimeMillis()  - time);
+
+//		boolean arg = false;
+//		if (args.length != 0)
+//		{
+//			if ((args[0].equals("true") || args[0].equals("True")))
+//			{
+//				arg = true;
+//			}
+//		}
+//		
+//		Communication communication = new Communication(arg);
+//		Thread communication2 = new Thread(communication);
+//		communication2.start();
+//		
+//		while(true){
+//			Thread.sleep(1000);
+//			new Scanner(System.in);
+//		}
 		
 //		TESTS FOR INPUTS
 		

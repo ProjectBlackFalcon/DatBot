@@ -15,6 +15,7 @@ import protocol.network.util.types.UInt64;
 public class DofusDataReader implements IDofusDataInput {
     public DataInputStream dis;
     public ByteArrayInputStream bis;
+    private int lengthStream;
     private final int INT_SIZE = 32;
     private final int SHORT_SIZE = 16;
 	private final int SHORT_MIN_VALUE = -32768;
@@ -27,12 +28,17 @@ public class DofusDataReader implements IDofusDataInput {
 
     public DofusDataReader(ByteArrayInputStream bis) {
     	this.bis = bis;
+    	this.lengthStream = bis.available();
         this.dis = new DataInputStream(this.bis);
         this.dis.mark(0);
     }
     
     public void Dispose(){
         this.dis = new DataInputStream(bis);
+    }
+    
+    public int getPosition() throws IOException{
+    	return this.lengthStream - this.available();
     }
     
     public void setPosition(int n){
@@ -312,6 +318,12 @@ public class DofusDataReader implements IDofusDataInput {
 
     public int readUShort() throws IOException {
         return dis.readUnsignedShort();
+    }
+    
+    public String ReadAscii(int bytesAmount) throws IOException
+    {
+        byte[] buffer = this.readBytes(bytesAmount);
+        return new String(buffer, StandardCharsets.US_ASCII);
     }
 
     public String readUTF() throws IOException {
