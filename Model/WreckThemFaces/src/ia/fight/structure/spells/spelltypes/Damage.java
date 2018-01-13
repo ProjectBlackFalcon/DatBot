@@ -124,8 +124,24 @@ public class Damage extends Spell{
 		int fixedReduction = pe.getModel().getResFixed()[this.getType()];
 		int fixedReductionCrit = pe.getModel().getCriticalResistance();
 		
-		int prcntReduction =  pe.getModel().getResPrcnt()[this.getType()] != 0 ? outputDamage / (100/pe.getModel().getResPrcnt()[this.getType()]) : 0;
-		int prcntReductionCrit = pe.getModel().getResPrcnt()[this.getType()] != 0 ? outputDamageCrit / (100/pe.getModel().getResPrcnt()[this.getType()]) : 0;
+		int prcntReduction;
+		
+		if(pe.getModel().getResPrcnt()[this.getType()] == 0) {
+			prcntReduction = 0;
+		}else {
+			System.out.println(100/pe.getModel().getResPrcnt()[this.getType()]);
+			prcntReduction = outputDamage / (100/pe.getModel().getResPrcnt()[this.getType()]);
+		}
+		
+		int prcntReductionCrit;
+		
+		if(pe.getModel().getResPrcnt()[this.getType()] == 0) {
+			prcntReductionCrit = 0;
+		}else {
+			System.out.println(100/pe.getModel().getResPrcnt()[this.getType()]);
+			prcntReductionCrit = outputDamageCrit / (100/pe.getModel().getResPrcnt()[this.getType()]);
+		}
+		
 		
 		int finalDamage = outputDamage - fixedReduction - prcntReduction;
 		int finalDamageCrit = outputDamageCrit - fixedReduction - fixedReductionCrit - prcntReductionCrit;
