@@ -476,7 +476,7 @@ public class Network implements Runnable {
 					int cellId = gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1);
 					int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
 					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
-					fight.sendToFightAlgo("m", new Object[] { gameMapMovementMessage.getActorId(), x, y });
+					fight.sendToFightAlgo("m", new Object[] { this.fight.getId(gameMapMovementMessage.getActorId()), x, y });
 				}
 			break;
 			case 6316:

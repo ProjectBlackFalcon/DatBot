@@ -68,6 +68,13 @@ public class Communication implements Runnable {
 				network.append("Name : " + info.getName(), false);
 				network.append("Level : " + info.getLvl(), false);
 				toSend = new Object[] { "true" };
+				//Tests
+				modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
+				modelConnexion.getReturn("0;0;i;cmd;move;[" + modelConnexion.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
+				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + modelConnexion.getMonsters().getMonsters().get(0).getContextualId() +"]");
+
+
+				Thread.sleep(1000);
 			break;
 		}
 

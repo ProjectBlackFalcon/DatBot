@@ -24,11 +24,11 @@ public class MapManager {
         if (this.MapId_Map.size() > 20)
             this.MapId_Map.remove(0);
 
-        for (int i = 0; i < this.MapId_Map.size() ; i++){
-        	if(this.MapId_Map.get(i).getId() == id){
-        		return this.MapId_Map.get(i);
-        	}
-        }
+//        for (int i = 0; i < this.MapId_Map.size() ; i++){
+//        	if(this.MapId_Map.get(i).getId() == id){
+//        		return this.MapId_Map.get(i);
+//        	}
+//        }
 
 
         String str = id % 10 + "/" + id + ".dlm";

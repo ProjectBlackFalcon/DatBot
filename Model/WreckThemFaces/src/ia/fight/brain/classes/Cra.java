@@ -21,4 +21,8 @@ public class Cra extends Player{
 	public String toString() {
 		return "Cra player with base LP/AP/MP : "+this.getLP()+"/"+this.getAP()+"/"+this.getMP();
 	}
+	
+	public String getType(){
+		return "cra";
+	}
 }

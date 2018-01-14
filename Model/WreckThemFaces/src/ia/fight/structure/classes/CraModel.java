@@ -24,7 +24,7 @@ public class CraModel{
 		magicArrow.addSpell(new CharSteal("range", 2));
 		magicArrow.setAreaOfEffect(new AreaOfEffect("cell", 1));
 		magicArrow.setMinimumRange(1);
-		magicArrow.setMaximumRange(12);
+		magicArrow.setMaximumRange(8);
 		magicArrow.setModifiableRange(true);
 		magicArrow.setCriticalChance(15);
 		magicArrow.setNumberOfCastsPerTarget(2);
@@ -38,7 +38,7 @@ public class CraModel{
 		retreatArrow.setAreaOfEffect(new AreaOfEffect("cell", 2));
 		retreatArrow.setCost(3);
 		retreatArrow.setMinimumRange(1);
-		retreatArrow.setMaximumRange(8);
+		retreatArrow.setMaximumRange(4);
 		retreatArrow.setCriticalChance(25);
 		retreatArrow.setStraightLineCast(true);
 		retreatArrow.setNumberOfCastsPerTurn(2);
@@ -49,7 +49,7 @@ public class CraModel{
 		dispersingArrow.setAreaOfEffect(new AreaOfEffect("centerless cross", 2));
 		dispersingArrow.setCost(3);
 		dispersingArrow.setMinimumRange(1);
-		dispersingArrow.setMaximumRange(12);
+		dispersingArrow.setMaximumRange(6);
 		dispersingArrow.setRecastInterval(2);
 		dispersingArrow.setModifiableRange(true);
 		
@@ -59,7 +59,7 @@ public class CraModel{
 		frozenArrow.addSpell(new Removal("AP", 2));
 		frozenArrow.setCost(3);
 		frozenArrow.setMinimumRange(3);
-		frozenArrow.setMaximumRange(10);
+		frozenArrow.setMaximumRange(6);
 		frozenArrow.setModifiableRange(true);
 		frozenArrow.setNumberOfCastsPerTarget(2);
 		frozenArrow.setCriticalChance(5);
@@ -70,7 +70,7 @@ public class CraModel{
 		burningArrow.setAreaOfEffect(new AreaOfEffect("line", 5));
 		burningArrow.setCost(4);
 		burningArrow.setMinimumRange(1);
-		burningArrow.setMaximumRange(8);
+		burningArrow.setMaximumRange(4);
 		burningArrow.setCriticalChance(25);
 		burningArrow.setStraightLineCast(true);
 		burningArrow.setModifiableRange(true);
@@ -184,15 +184,17 @@ public class CraModel{
 		
 		int counter = 0;
 		
+		ArrayList<SpellObject> availableSpellsTemp = new ArrayList<>();
+		
 		for(int i = 0; i < allSpells.size(); i++) {
 			if(allSpells.get(i).level <= level) {
-				counter ++;
+				availableSpellsTemp.add(allSpells.get(i));
 			}
 		}
 		
-		SpellObject[] spells = new SpellObject[counter];
-		for(int i = 0; i < counter; i++) {
-			spells[i] = allSpells.get(i);
+		SpellObject[] spells = new SpellObject[availableSpellsTemp.size()];
+		for(int i = 0; i < availableSpellsTemp.size(); i++) {
+			spells[i] = availableSpellsTemp.get(i);
 		}
 		
 		CraModel.spells = spells;

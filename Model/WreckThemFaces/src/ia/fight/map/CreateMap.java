@@ -73,8 +73,8 @@ public class CreateMap {
 				}
 			}
 			
-			for(int i = 32; i >= 14; i--) {
-				for(int j = 0; j <= 18-(32-i); j++) {
+			for(int i = 32; i >= 13; i--) {
+				for(int j = 0; j <= 17-(32-i); j++) {
 					blocks.add(new int[] {i, j, 2});
 				}
 			}

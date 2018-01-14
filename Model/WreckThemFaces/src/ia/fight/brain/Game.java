@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 import ia.fight.brain.PlayingEntity;
@@ -99,8 +101,7 @@ public class Game {
 
 			playingEntities.add(entities.get(i));
 			
-			Game.log.println("Created a playing entity in position "+entities.get(i).getPosition());
-			Game.log.println(entities.get(i).getModel() == null ? "No model currently selected." : entities.get(i).getModel());
+			Game.log.println(entities.get(i).getModel() == null ? "No model currently selected." : entities.get(i).getModel()+" in pos "+entities.get(i).getPosition());
 		}
 
 		
@@ -215,7 +216,8 @@ public class Game {
 		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
 		Game.log.println(spellCast);
-		if(castingEntity.getClass().getSimpleName().equals("Monster")) {
+		System.out.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
+		if(castingEntity.getModel().getType().equals("monster")) {
 			spellCast = Game.getSpellFromName(spellname, "monster");
 			Game.log.println(spellCast);
 		}else {
@@ -285,7 +287,7 @@ public class Game {
 			for(int k = 0; k < accessiblePositions.size(); k++) {
 				turn = playingEntity.getOptimalTurnFrom(accessiblePositions.get(k), ennemies.get(i));
 				for(int j = 0; j < turn.size(); j++) {
-					totalDamage += turn.get(i).getDamagePreviz(playingEntity, ennemies.get(i));
+					totalDamage += turn.get(j).getDamagePreviz(playingEntity, ennemies.get(i));
 				}
 
 				if(totalDamage > maxDamage) {
@@ -314,7 +316,12 @@ public class Game {
 		if(!selectedPosition.position.deepEquals(playingEntity.getPosition())) {
 			action += "m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
 		}else {
-			action += "c,"+selectedPosition.turn.get(0).getID()+","+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
+			if(selectedPosition.turn.size() < 1){
+				action += "None";
+			}else{
+				action += "c,"+selectedPosition.turn.get(0).getID()+","+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
+			}
+			
 		}
 		
 		
@@ -441,6 +448,19 @@ public class Game {
 			PlayingEntity playingEntity = new PlayingEntity(ID, false, new Position(posX, posY), team, entities.get(i));
 			playingEntities.add(playingEntity);
 		}
+		
+		System.out.println(playingEntities);
+		
+		Collections.sort(playingEntities, new Comparator<PlayingEntity>() {
+			@Override
+			public int compare(PlayingEntity arg0, PlayingEntity arg1) {
+				if(arg0.getID() > arg1.getID()) {
+					return 1;
+				}else {
+					return -1;
+				}
+			}
+		});
 		
 		System.out.println(playingEntities);
 		Game.initEntities(playingEntities);

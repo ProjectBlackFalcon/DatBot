@@ -77,6 +77,11 @@ public abstract class Player {
 	public SpellObject[] getSpells(){
 		return spells;
 	}
+	
+	public int getLevel()
+	{
+		return level;
+	}
 
 	public ArrayList<SpellObject> getAvailableSpells(){
 		ArrayList<SpellObject> spells = new ArrayList<>();
@@ -426,7 +431,7 @@ public abstract class Player {
 	@Override
 	public abstract String toString();
 
-
+	public abstract String getType();
 
 
 

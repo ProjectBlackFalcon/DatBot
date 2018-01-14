@@ -72,7 +72,6 @@ public class Info {
 		StorageUpdate = false;
 		basicNoOperationMsg = false;
 		leaveExchange = false;
-		joinedFight = false;
 	}
 
 	public double getMapId()

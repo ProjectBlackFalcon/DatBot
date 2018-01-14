@@ -152,7 +152,6 @@ public class PlayingEntity {
 		long start = System.currentTimeMillis();
 		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
 		for(int i = 0; i < getModel().getAvailableSpells().size(); i++) {
-			
 			boolean entityTargetable = getModel().getAvailableSpells().get(i).isEntityTargetableBySpell(victim);
 			boolean hasVisibility = LineOfSight.visibility(position, victim.getPosition(), Game.map.getBlocks());
 			boolean requiresLineOfSight = getModel().getAvailableSpells().get(i).requiresLineOfSight();
@@ -187,11 +186,11 @@ public class PlayingEntity {
 		
 		ArrayList<SpellObject> optimalTurn = new ArrayList<>();
 		int tempAP = this.getModel().getAP();
-		Game.log.println("AP available : "+tempAP);
+//		Game.log.println("AP available : "+tempAP);
 		
 		for(int i = 0; i < spellsForEnnemy.size(); i++) {
-			Game.log.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
-			Game.log.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
+//			Game.log.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+//			Game.log.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
 			
 			for(int j = 0; j < spellsForEnnemy.get(i).remainingCastsForThisEntity(victim); j++) {
 				if(tempAP >= spellsForEnnemy.get(i).getCost()) {

@@ -4,7 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -49,8 +51,17 @@ public class D2oManager {
 		// readGameDataProcessor(); //TODO: implement
 		unpackObjectsAsJson();
 		// writeJsonFile(true);
-		printAllObjects(); // call after unpackObjectsAsJson();
+//		printAllObjects(); // call after unpackObjectsAsJson();
 		// searchObjectById(); //call after unpackObjectsAsJson();
+	}
+	
+	public List<String> returnJsonString(){
+		List<String> s = new ArrayList<String>();
+		for (Entry<Integer, Integer> objectPointer : this.objectPointerTable.entrySet())
+		{
+			s.add(unpacker.getObjectJsonString(objectPointer.getKey()));
+		}
+		return s;
 	}
 
 	private void readObjectPointerTable() throws IOException

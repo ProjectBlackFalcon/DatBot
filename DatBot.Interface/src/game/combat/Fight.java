@@ -59,7 +59,7 @@ public class Fight {
 			}
 			else
 			{
-				newParam += param[i] + ", ";
+				newParam += param[i] + ",";
 			}
 		}
 		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", this.network.getInfo().getBotInstance(), this.network.getInfo().addAndGetMsgIdFight(), "f", "cmd", command, newParam));
@@ -115,6 +115,7 @@ public class Fight {
 	 */
 	public void endTurn() throws Exception
 	{
+		System.out.println("Ending turn");
 		network.sendToServer(new GameFightTurnFinishMessage(false), GameFightTurnFinishMessage.ProtocolId, "End turn");
 	}
 
@@ -126,6 +127,7 @@ public class Fight {
 	 */
 	public boolean moveTo(int cellId) throws Exception
 	{
+		System.out.println("Moving to " + cellId);
 		CellMovement mov = this.getNetwork().getMovement().MoveToCell(cellId);
 		if (mov == null || mov.path == null)
 		{
@@ -155,6 +157,7 @@ public class Fight {
 	 * @author baptiste
 	 */
 	public void castSpell(int id, int cellId) throws Exception{
+		System.out.println("Casting " + id + " to " + cellId);
 		GameActionFightCastRequestMessage gameActionFightCastRequestMessage = new GameActionFightCastRequestMessage(id, cellId);
 		network.sendToServer(gameActionFightCastRequestMessage, GameActionFightCastRequestMessage.ProtocolId, "Cast spell");
 	}
@@ -245,20 +248,34 @@ public class Fight {
 		return this.turnListId.indexOf(id);
 	}
 	
+	/**
+	 * Rotate from 
+	 * @param i : int 
+	 * @param j : int
+	 * @return cellid : int
+	 * @author baptiste
+	 */
+	public int rotateToCellId(int i, int j){
+		return i + 13*(i+j-13);
+	}
+	
 	public void fightTurn() throws NumberFormatException, Exception{
 		String s = sendToFightAlgo("g", new Object[] { getId(this.network.getInfo().getActorId()) });
+		System.out.println("fight msg : " + s);
 		String[] message = s.split(";");
 		this.network.getInfo().setMsgIdFight(Integer.parseInt(message[1]));
-		message[5] = message[5].substring(1, message[5].length() - 1);
-		if(message[5] == null){
+		message[4] = message[4].substring(1, message[4].length() - 1);
+		if(message[4] == null){
 			endTurn();
 		}
-		String[] cmd = message[5].split(",");
-		if(cmd[0].equals("m")){
-			moveTo(Integer.parseInt(cmd[1]) + (Integer.parseInt(cmd[2])*14));
-		} else if (cmd[0].equals("c")){
-			castSpell(Integer.parseInt(cmd[0]),Integer.parseInt(cmd[2]) + (Integer.parseInt(cmd[3])*14));
-		}		
+		String[] cmd = message[4].split(",");
+		if(cmd[1].equals("m")){
+			moveTo(rotateToCellId(Integer.parseInt(cmd[2]),(Integer.parseInt(cmd[3]))));
+		} else if (cmd[1].equals("c")){
+			castSpell(Integer.parseInt(cmd[0]),rotateToCellId(Integer.parseInt(cmd[4]),(Integer.parseInt(cmd[5]))));
+		} else if (cmd[1].equals("None")){
+			endTurn();
+		}
 	}
 
 	public GameFightPlacementPossiblePositionsMessage getGameFightPlacementPossiblePositionsMessage()
