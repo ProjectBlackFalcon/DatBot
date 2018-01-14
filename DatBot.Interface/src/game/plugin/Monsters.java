@@ -13,7 +13,7 @@ public class Monsters {
 		
 	}
 	
-	public String getStringMonsters(){
+	public String toString(){
 		String str = "";
 		str += "\"monsters\" : [";
 		for (int i = 0; i < this.getMonsters().size(); i++) {

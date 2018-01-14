@@ -21,8 +21,13 @@ public class Movement{
 	
 	public CellMovement MoveToCell(int cellId) throws Exception{
 		if(this.network.getMap().getCells().get(cellId).isMov()){
-			CellMovement mov = new CellMovement(new Pathfinder(this.network).findPath(this.network.getInfo().getCellId(),cellId), this.getNetwork());
-			return mov;
+			if(this.network.getInfo().isJoinedFight()){
+				CellMovement mov = new CellMovement(new Pathfinder(this.network).findPath(this.network.getInfo().getCellId(),cellId,false,false), this.getNetwork());
+				return mov;
+			} else {
+				CellMovement mov = new CellMovement(new Pathfinder(this.network).findPath(this.network.getInfo().getCellId(),cellId), this.getNetwork());
+				return mov;
+			}
 		} else {
 			return null;
 		}
@@ -275,7 +280,13 @@ public class Movement{
         			blocked.add(new int[]{j,i});
         		}
         	}
-        }    
+        }
+        if(this.network.getInfo().isJoinedFight()){
+            for(int i = 0 ; i < this.network.getMonsters().getMonsters().size() ; i++){
+            	int cellId = this.network.getMonsters().getMonsters().get(i).getDisposition().getCellId();
+            	blocked.add(new int[]{cellId/14,cellId%14});
+            }
+        }
         new Astar(this.network.getInfo().getCellId()%14,this.network.getInfo().getCellId()/14, random%14, random/14, blocked,false);
         if(Astar.path == null) 
         	return false; // Can't go in this direction (Obstacles)

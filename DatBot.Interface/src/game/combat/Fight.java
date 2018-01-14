@@ -3,6 +3,8 @@ package game.combat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import game.Info;
 import game.movement.CellMovement;
 import ia.fight.brain.Game;
@@ -29,12 +31,16 @@ public class Fight {
 	public GameEntitiesDispositionMessage gameEntitiesDispositionMessage; // Disposition
 	public GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
 	public ArrayList<Player> entities = new ArrayList<>();
+	public List<GameFightMonsterInformations> monsters = new ArrayList<>();
+
 	public List<Double> turnListId;
 	public String spellToSend;
 	private Network network;
+	private Info info;
 	
 	public Fight(Network network){
 		this.network = network;
+		this.info = network.getInfo();
 	}
 
 	/**
@@ -177,6 +183,9 @@ public class Fight {
 				if(p.getBreed() == 9){
 					player = new Cra(p.getName(),p.getStats().getLifePoints(),p.getStats().getActionPoints(),p.getStats().getMovementPoints(),p.getLevel());
 				}
+				if(p.getContextualId() == this.network.getInfo().getActorId()){
+					this.network.getInfo().setCellId(p.getDisposition().getCellId());
+				}
 				player.setLP(stats.getLifePoints());
 				player.setBaseLP(stats.getBaseMaxLifePoints());
 				player.setMaxLP(stats.getMaxLifePoints());
@@ -205,6 +214,7 @@ public class Fight {
 				this.entities.add(player);
 			} else if (this.getGameFightSynchronizeMessage().getFighters().get(i).getClass().getSimpleName().equals("GameFightMonsterInformations")){
 				GameFightMonsterInformations p = (GameFightMonsterInformations) gameFightSynchronizeMessage.getFighters().get(i);
+				this.monsters.add(p);
 				GameFightMinimalStats stats = p.getStats();
 				Monster monster = new Monster(String.valueOf(p.getCreatureGenericId()),p.getStats().getLifePoints(),p.getStats().getActionPoints(),p.getStats().getMovementPoints(),p.getCreatureGrade());
 				monster.setLP(stats.getLifePoints());
@@ -269,12 +279,53 @@ public class Fight {
 			endTurn();
 		}
 		String[] cmd = message[4].split(",");
-		if(cmd[1].equals("m")){
-			moveTo(rotateToCellId(Integer.parseInt(cmd[2]),(Integer.parseInt(cmd[3]))));
-		} else if (cmd[1].equals("c")){
-			castSpell(Integer.parseInt(cmd[0]),rotateToCellId(Integer.parseInt(cmd[4]),(Integer.parseInt(cmd[5]))));
-		} else if (cmd[1].equals("None")){
-			endTurn();
+		new Thread(new Runnable() {
+            public void run() {
+        		try
+				{
+        			Thread.sleep(2000);
+        			if(cmd[1].equals("m")){
+        				moveTo(rotateToCellId(Integer.parseInt(cmd[2]),(Integer.parseInt(cmd[3]))));
+        			} else if (cmd[1].equals("c")){
+        				castSpell(Integer.parseInt(cmd[0]),rotateToCellId(Integer.parseInt(cmd[4]),(Integer.parseInt(cmd[5]))));
+        			} else if (cmd[1].equals("None")){
+        				endTurn();
+        			}
+        			waitToSend();
+        			return;
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+
+               }
+            }).start();;
+	}
+	
+	public boolean waitToSend() throws InterruptedException
+	{
+		while (!info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
+		{
+			Thread.sleep(50);
+		}
+		while (!info.isBasicNoOperationMsg())
+		{
+			Thread.sleep(50);
+		}
+		// System.out.println((!Info.newMap && !Info.Storage &&
+		// !Info.StorageUpdate && !Info.leaveExchange)
+		// && !Info.basicNoOperationMsg);
+		// System.out.println(Info.newMap + " " + Info.Storage + " " +
+		// Info.StorageUpdate + " " + Info.leaveExchange + " "
+		// + Info.basicNoOperationMsg);
+		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
+		{
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 
@@ -338,7 +389,7 @@ public class Fight {
 		this.spellToSend = spellToSend;
 	}
 
-	protected Network getNetwork()
+	private Network getNetwork()
 	{
 		return network;
 	}

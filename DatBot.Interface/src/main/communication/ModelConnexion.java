@@ -176,7 +176,7 @@ public class ModelConnexion implements Runnable {
 				}
 			break;
 			case "getStats":
-				toSend = new Object[] { this.stats.getStats() };
+				toSend = new Object[] { this.stats };
 			break;
 			case "goAstrub":
 				if (this.map.getId() == 153880835)
@@ -268,7 +268,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { bank.getBank() };
+						toSend = new Object[] { bank };
 					}
 					else
 					{
@@ -301,7 +301,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0].substring(1, toBank[0].length() - 1)), Integer.parseInt(toBank[1].substring(2, toBank[0].length() - 1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats.getStats(), bank.getBank() };
+						toSend = new Object[] { this.stats, bank };
 					}
 					else
 					{
@@ -320,7 +320,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0].substring(1, fromBank[0].length() - 1)), -Integer.parseInt(fromBank[1].substring(2, fromBank[0].length() - 1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats.getStats(), bank.getBank() };
+						toSend = new Object[] { this.stats, bank };
 					}
 					else
 					{
@@ -345,7 +345,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats.getStats(), bank.getBank() };
+						toSend = new Object[] { this.stats, bank};
 					}
 					else
 					{
@@ -370,7 +370,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats.getStats(), bank.getBank() };
+						toSend = new Object[] { this.stats, bank };
 					}
 					else
 					{
@@ -389,7 +389,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats.getStats(), bank.getBank() };
+						toSend = new Object[] { this.stats, bank };
 					}
 					else
 					{
@@ -408,7 +408,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats.getStats(), bank.getBank() };
+						toSend = new Object[] { this.stats, bank };
 					}
 					else
 					{
@@ -427,7 +427,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats.getStats(), bank.getBank() };
+						toSend = new Object[] { this.stats, bank };
 					}
 					else
 					{
@@ -440,7 +440,7 @@ public class ModelConnexion implements Runnable {
 				}
 			break;
 			case "getMonsters":
-				toSend = new Object[] { this.getMonsters().getStringMonsters() };
+				toSend = new Object[] { this.getMonsters() };
 			break;
 			case "attackMonster":
 				int id = (int) Double.parseDouble(param);
@@ -470,7 +470,7 @@ public class ModelConnexion implements Runnable {
 				}
 				else
 				{
-					toSend = new Object[] { this.getMonsters().getStringMonsters() };
+					toSend = new Object[] { this.getMonsters() };
 				}
 			break;
 		}

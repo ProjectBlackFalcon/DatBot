@@ -55,6 +55,7 @@ import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDeathMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightDispellableEffectMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
@@ -408,6 +409,7 @@ public class Network implements Runnable {
 			case 500:
 				info.setStats(new CharacterStatsListMessage());
 				info.getStats().Deserialize(dataReader);
+				System.out.println(this.getStats());
 			break;
 			case 220:
 				CurrentMapMessage currentMapMessage = new CurrentMapMessage();
@@ -451,6 +453,7 @@ public class Network implements Runnable {
 					info.setWaitForMov(true);
 					info.setConnected(true);
 					info.setNewMap(true);
+					System.out.println(getInteractive().getFarmCell());
 				}
 			break;
 			case 891:
@@ -473,11 +476,19 @@ public class Network implements Runnable {
 				}
 				if (info.isJoinedFight())
 				{
+					for (int i = 0; i < this.getFight().monsters.size(); i++)
+					{
+						if (this.getFight().monsters.get(i).getContextualId() == gameMapMovementMessage.getActorId())
+						{
+							this.getFight().monsters.get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
+						}
+					} 
 					int cellId = gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1);
 					int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
 					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
-					fight.sendToFightAlgo("m", new Object[] { this.fight.getId(gameMapMovementMessage.getActorId()), x, y });
+					getFight().sendToFightAlgo("m", new Object[] { this.getFight().getId(gameMapMovementMessage.getActorId()), x, y });
 				}
+				System.out.println(this.getMonsters());
 			break;
 			case 6316:
 				HandleSequenceNumberMessage();
@@ -792,7 +803,7 @@ public class Network implements Runnable {
 				info.setTurn(false);
 				info.setInitFight(false);
 				Communication.sendToModel(String.valueOf(info.getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] {});
-				fight.sendToFightAlgo("startfight", new Object[] { (int) info.getMapId() });
+				getFight().sendToFightAlgo("startfight", new Object[] { (int) info.getMapId() });
 			break;
 			case 956:
 				SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
@@ -801,14 +812,15 @@ public class Network implements Runnable {
 				{
 					Thread.sleep(1000);
 					sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.getActionId()), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
+					this.getInfo().setAcknowledged(true);
 				}
-				if (!fight.getSpellToSend().equals(""))
+				if (!getFight().getSpellToSend().equals(""))
 				{
-					fight.sendToFightAlgo("c", new Object[] { fight.getSpellToSend() });
+					getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellToSend() });
 				}
 				if (info.isTurn())
 				{
-					fight.fightTurn();
+					getFight().fightTurn();
 				}
 			break;
 			case 715:
@@ -821,11 +833,16 @@ public class Network implements Runnable {
 				{
 					info.setTurn(false);
 				}
-				fight.sendToFightAlgo("p", new Object[] { fight.getId(gameFightTurnEndMessage.getId()) });
+				getFight().sendToFightAlgo("p", new Object[] { getFight().getId(gameFightTurnEndMessage.getId()) });
 			break;
+			case 720:
+				info.setJoinedFight(false);
+				info.setTurn(false);
+				getFight().sendToFightAlgo("endFight", new Object[] { "None" });
+				break;
 			case 703:
-				fight.gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
-				fight.gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
+				getFight().gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
+				getFight().gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
 				// TODO LYSANDRE
 				// Fight.setBeginingPosition();
 				SwingUtilities.invokeLater(new Runnable() {
@@ -833,8 +850,8 @@ public class Network implements Runnable {
 					{
 						try
 						{
-							Thread.sleep(2500);
-							fight.fightReady();
+							Thread.sleep(1000);
+							getFight().fightReady();
 						}
 						catch (InterruptedException e)
 						{
@@ -850,40 +867,40 @@ public class Network implements Runnable {
 				});
 			break;
 			case 5696:
-				fight.gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
-				fight.gameEntitiesDispositionMessage.Deserialize(dataReader);
+				getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
+				getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
 			break;
 			case 5921:
-				fight.gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
-				fight.gameFightSynchronizeMessage.Deserialize(dataReader);
+				getFight().gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
+				getFight().gameFightSynchronizeMessage.Deserialize(dataReader);
 				if (!info.isInitFight())
 				{
-					fight.sendToFightAlgo("s", new Object[] { fight.init() }, fight.entities);
+					getFight().sendToFightAlgo("s", new Object[] { getFight().init() }, getFight().entities);
 					info.setInitFight(true);
 				}
 			break;
 			case 6465:
 				info.setTurn(true);
-				fight.fightTurn();
+				getFight().fightTurn();
 			break;
 			case 955:
-				fight.spellToSend = "";
+				getFight().spellToSend = "";
 			break;
 			case 1010:
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
-				fight.spellToSend += fight.getId(gameActionFightSpellCastMessage.getSourceId()) + "," + CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.getDestinationCellId() % 14, gameActionFightSpellCastMessage.getDestinationCellId() / 14 })[0] + ","
+				getFight().spellToSend += getFight().getId(gameActionFightSpellCastMessage.getSourceId()) + "," + CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.getDestinationCellId() % 14, gameActionFightSpellCastMessage.getDestinationCellId() / 14 })[0] + ","
 					+ CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.getDestinationCellId() % 14, gameActionFightSpellCastMessage.getDestinationCellId() / 14 })[1] + "," + gameActionFightSpellCastMessage.getSpellId();
 			break;
 			case 6312:
 				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
-				fight.spellToSend += ",[" + fight.getId(gameActionFightLifePointsLostMessage.getTargetId()) + "," + gameActionFightLifePointsLostMessage.getLoss() + "," + gameActionFightLifePointsLostMessage.getPermanentDamages() + "]";
+				getFight().spellToSend += ",[" + getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()) + "," + gameActionFightLifePointsLostMessage.getLoss() + "," + gameActionFightLifePointsLostMessage.getPermanentDamages() + "]";
 			break;
 			case 6070:
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
-				fight.spellToSend += ",[" + fight.getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable()
+				getFight().spellToSend += ",[" + getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable()
 					+ "]";
 			break;
 			case 713:
@@ -891,8 +908,20 @@ public class Network implements Runnable {
 				gameFightTurnListMessage.Deserialize(dataReader);
 				if (!info.isInitFight())
 				{
-					fight.turnListId = gameFightTurnListMessage.getIds();
+					getFight().turnListId = gameFightTurnListMessage.getIds();
 				}
+			break;
+			case 1099:
+				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
+				gameActionFightDeathMessage.Deserialize(dataReader);
+				for (int i = 0; i < this.getFight().monsters.size(); i++)
+				{
+					if (this.getFight().monsters.get(i).getContextualId() == gameActionFightDeathMessage.getTargetId())
+					{
+						this.getFight().monsters.get(i).setAlive(false);
+					}
+				} 
+			break;
 		}
 	}
 
@@ -1225,5 +1254,15 @@ public class Network implements Runnable {
 	public void setMap(Map map)
 	{
 		this.map = map;
+	}
+
+	public Fight getFight()
+	{
+		return fight;
+	}
+
+	public void setFight(Fight fight)
+	{
+		this.fight = fight;
 	}
 }

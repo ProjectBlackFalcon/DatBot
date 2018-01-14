@@ -16,7 +16,7 @@ public class Stats {
 		this.info = network.getInfo();
 	}
 
-	public String getStats() {
+	public String toString() {
 		String str = "{";
 		// Add weight
 		str += "\"Lvl\" : " + this.info.getLvl() + ",";

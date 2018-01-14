@@ -32,22 +32,32 @@ public class CellMovement {
 		this.network.getInfo().setWaitForMov(false);
 
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path);
-		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "Déplacement...");
-		if (path.Cells.size() >= 4)
-		{
-			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
-			Thread.sleep(time);
-		}
-		else
-		{
-			int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
-			Thread.sleep(time);
-		}
-		this.network.getInfo().setWaitForMov(true);
-		
-		if (!this.network.getInfo().isJoinedFight())
-		{
+		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "Dï¿½placement...");
+		if (!this.network.getInfo().isJoinedFight()){
+			if (path.Cells.size() >= 4)
+			{
+				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
+				Thread.sleep(time);
+			}
+			else
+			{
+				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
+				Thread.sleep(time);
+			}
+			this.network.getInfo().setWaitForMov(true);
 			this.network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
+		} else {
+			if (path.Cells.size() >= 3)
+			{
+				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
+				Thread.sleep(time);
+			}
+			else
+			{
+				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
+				Thread.sleep(time);
+			}
+			this.network.getInfo().setWaitForMov(true);
 		}
 	}
 }

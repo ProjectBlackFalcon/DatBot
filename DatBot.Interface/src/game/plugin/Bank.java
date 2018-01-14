@@ -22,7 +22,7 @@ public class Bank {
 
 	private StorageInventoryContentMessage storage;
 
-	public String getBank() {
+	public String toString() {
 		if (storage == null) {
 			return "";
 		}

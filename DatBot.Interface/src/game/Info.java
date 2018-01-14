@@ -62,6 +62,7 @@ public class Info {
 	private boolean joinedFight = false;
 	private boolean isTurn = false;
 	private boolean initFight = true;
+	private boolean acknowledged = false;
 
 	public void setBooleanToFalse()
 	{
@@ -72,6 +73,7 @@ public class Info {
 		StorageUpdate = false;
 		basicNoOperationMsg = false;
 		leaveExchange = false;
+		acknowledged = false;
 	}
 
 	public double getMapId()
@@ -400,6 +402,16 @@ public class Info {
 	public void setInitFight(boolean initFight)
 	{
 		this.initFight = initFight;
+	}
+
+	public boolean isAcknowledged()
+	{
+		return acknowledged;
+	}
+
+	public void setAcknowledged(boolean acknowledged)
+	{
+		this.acknowledged = acknowledged;
 	}
 
 }
