@@ -1,17 +1,8 @@
 package main;
 
-import java.util.List;
 import java.util.Scanner;
 
-import game.combat.Fight;
-import ia.fight.brain.Game;
 import main.communication.Communication;
-import main.communication.ModelConnexion;
-import utils.GameData;
-import utils.d2o.D2oManager;
-import utils.d2o.GameDataTypeEnum;
-import utils.d2p.MapManager;
-import utils.d2p.map.Map;
 
 public class Test {
 	
@@ -40,8 +31,7 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
-
-		
+	
 		while(true){
 			Thread.sleep(1000);
 			new Scanner(System.in);

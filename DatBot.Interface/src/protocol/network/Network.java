@@ -35,6 +35,7 @@ import game.Entity;
 import game.Info;
 import game.Servers;
 import game.combat.Fight;
+import game.movement.CellMovement;
 import game.movement.Movement;
 import game.plugin.Bank;
 import game.plugin.Interactive;
@@ -80,6 +81,7 @@ import protocol.network.messages.game.context.fight.character.GameFightShowFight
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
+import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
@@ -428,6 +430,7 @@ public class Network implements Runnable {
 				info.setBasicNoOperationMsg(true);
 			break;
 			case 226:
+				this.monsters.setMonsters(new ArrayList<>());
 				MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 				complementaryInformationsDataMessage.Deserialize(dataReader);
 				if (!connectionToKoli)
@@ -453,7 +456,6 @@ public class Network implements Runnable {
 					info.setWaitForMov(true);
 					info.setConnected(true);
 					info.setNewMap(true);
-					System.out.println(getInteractive().getFarmCell());
 				}
 			break;
 			case 891:
@@ -488,7 +490,6 @@ public class Network implements Runnable {
 					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
 					getFight().sendToFightAlgo("m", new Object[] { this.getFight().getId(gameMapMovementMessage.getActorId()), x, y });
 				}
-				System.out.println(this.getMonsters());
 			break;
 			case 6316:
 				HandleSequenceNumberMessage();
@@ -816,6 +817,7 @@ public class Network implements Runnable {
 				}
 				if (!getFight().getSpellToSend().equals(""))
 				{
+					System.out.println("Spell send : " + getFight().getSpellToSend());
 					getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellToSend() });
 				}
 				if (info.isTurn())
@@ -1173,7 +1175,6 @@ public class Network implements Runnable {
 
 	private void HandleMapRequestMessage(double mapId) throws Exception
 	{
-		System.out.println("Mapid : "  + mapId);
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
 		Map map = this.mapManager.FromId((int) mapId);
 		this.map = map;

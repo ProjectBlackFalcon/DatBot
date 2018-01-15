@@ -204,12 +204,6 @@ public class Game {
 	 */
 	static private void executeSpellCommand(String[] command) {
 		
-		System.out.println("COMMANDE RECU PAR LYS LE BEST");
-		
-		for(String s : command){
-			System.out.println(s);
-		}
-		
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
 		int posY = Integer.parseInt(command[3]);
@@ -222,9 +216,7 @@ public class Game {
 
 		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
-		Game.log.println(spellCast);
-		System.out.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
-		
+		Game.log.println(spellCast);		
 		spellCast = Game.getSpellFromName(spellname, "monster");
 		Game.log.println(spellCast);
 		
@@ -609,8 +601,8 @@ public class Game {
 	 */
 	public static void initLogs() {
 		try {
-			//log = System.out;
-			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			log = System.out;
+//			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
 		} catch (FileNotFoundException e1) {

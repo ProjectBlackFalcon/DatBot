@@ -3,249 +3,500 @@ Received command 1
 Starting fight
 Map id : 154010883, loc : -2;-3
 Successfully initiated game.
-Cra player with base LP/AP/MP : 105/6/3 in pos [23;22]
-Monster 3273 with base LP/AP/MP : 15/2/3 in pos [28;22]
-Monster 3273 with base LP/AP/MP : 18/2/3 in pos [24;18]
-Monster 3271 with base LP/AP/MP : 21/2/3 in pos [22;17]
+Cra player with base LP/AP/MP : 48/6/3 in pos [26;21]
+Monster 3272 with base LP/AP/MP : 18/2/4 in pos [14;6]
+Monster 3270 with base LP/AP/MP : 18/2/3 in pos [17;6]
 Received command 3
 0;3;f;cmd;g;[0]
 Received command 4
-0;4;f;cmd;m;[0,24,22]
-R;0;m;24;22
-Moving entity 0 to : [24;22]
-Received command 5
-0;5;f;cmd;g;[0]
-Received command 6
-0;6;f;cmd;c;[0,28,22,165,[1,12,1]]
-R;0;c;28;22;165;1;12;1
-Casting 1 to : [28;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [3273 15/2/3]
-Casting spell directly onto : 3273 3/2/3
-    1 1
-Exception in thread "AWT-EventQueue-0" java.lang.IndexOutOfBoundsException: Index: 23, Size: 33
-	at java.util.ArrayList.rangeCheck(ArrayList.java:653)
-	at java.util.ArrayList.get(ArrayList.java:429)
-	at ia.fight.map.Map.isPositionWalkable(Map.java:235)
-	at ia.fight.map.Map.isPositionAccessible(Map.java:192)
-	at ia.fight.map.Panel.paint(Panel.java:124)
-	at javax.swing.JComponent.paintToOffscreen(JComponent.java:5210)
-	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1579)
-	at javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1502)
-	at javax.swing.RepaintManager.paint(RepaintManager.java:1272)
-	at javax.swing.JComponent._paintImmediately(JComponent.java:5158)
-	at javax.swing.JComponent.paintImmediately(JComponent.java:4969)
-	at javax.swing.RepaintManager$4.run(RepaintManager.java:831)
-	at javax.swing.RepaintManager$4.run(RepaintManager.java:814)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
-	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:814)
-	at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:789)
-	at javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
-	at javax.swing.RepaintManager.access$1200(RepaintManager.java:64)
-	at javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1732)
-	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-Received command 7
-0;7;f;cmd;g;[0]
-Received command 8
-0;8;f;cmd;p;[0]
+0;4;f;cmd;p;[0]
 R;0;p
 Entity 0 passing turn.
-Received command 9
-0;9;f;cmd;m;[1,26,22]
-R;1;m;26;22
-Moving entity 1 to : [26;22]
-Received command 10
-0;10;f;cmd;p;[1]
+Received command 5
+0;5;f;cmd;m;[1,17,7]
+R;1;m;17;7
+Moving entity 1 to : [17;7]
+Received command 6
+0;6;f;cmd;p;[1]
 R;1;p
 Entity 1 passing turn.
+Received command 7
+0;7;f;cmd;m;[2,20,6]
+R;2;m;20;6
+Moving entity 2 to : [20;6]
+Received command 8
+0;8;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 9
+0;9;f;cmd;g;[0]
+Received command 10
+0;10;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
 Received command 11
-0;11;f;cmd;m;[2,24,21]
-R;2;m;24;21
-Moving entity 2 to : [24;21]
+0;11;f;cmd;m;[1,21,7]
+R;1;m;21;7
+Moving entity 1 to : [21;7]
 Received command 12
-0;12;f;cmd;c;[2,24,22,5866,[0,10,1]]
-R;2;c;24;22;5866;0;10;1
-Casting 0 to : [24;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [Gladiatonme 105/6/3]
-Casting spell directly onto : Gladiatonme 95/6/3
-    0 1
-Received command 13
-0;13;f;cmd;p;[2]
-R;2;p
-Entity 2 passing turn.
-Received command 14
-0;14;f;cmd;m;[3,22,20]
-R;3;m;22;20
-Moving entity 3 to : [22;20]
-Received command 15
-0;15;f;cmd;p;[3]
-R;3;p
-Entity 3 passing turn.
-Received command 16
-0;16;f;cmd;g;[0]
-Received command 17
-0;17;f;cmd;c;[0,26,22,165,[1,3,1]]
-R;0;c;26;22;165;1;3;1
-Casting 1 to : [26;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [3273 3/2/3]
-3273 0/2/3 died !
-Received command 18
-0;18;f;cmd;g;[0]
-Received command 19
-0;19;f;cmd;p;[0]
-R;0;p
-Entity 0 passing turn.
-Received command 20
-0;20;f;cmd;p;[1]
+0;12;f;cmd;p;[1]
 R;1;p
-Entity with id 1 is dead !
-Received command 21
-0;21;f;cmd;c;[2,24,22,5866,[0,6,0]]
-R;2;c;24;22;5866;0;6;0
-Casting 0 to : [24;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [Gladiatonme 95/6/3]
-Casting spell directly onto : Gladiatonme 89/6/3
-    0 1
-Received command 22
-0;22;f;cmd;p;[2]
+Entity 1 passing turn.
+Received command 13
+0;13;f;cmd;m;[2,21,8]
+R;2;m;21;8
+Moving entity 2 to : [21;8]
+Received command 14
+0;14;f;cmd;p;[2]
 R;2;p
 Entity 2 passing turn.
-Received command 23
-0;23;f;cmd;m;[3,23,22]
-R;3;m;23;22
-Moving entity 3 to : [23;22]
-Received command 24
-0;24;f;cmd;c;[3,24,22,5866,[0,9,0]]
-R;3;c;24;22;5866;0;9;0
-Casting 0 to : [24;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [Gladiatonme 89/6/3]
-Casting spell directly onto : Gladiatonme 80/6/3
-    0 1
-Received command 25
-0;25;f;cmd;p;[3]
-R;3;p
-Entity 3 passing turn.
-Received command 26
-0;26;f;cmd;g;[0]
-Received command 27
-0;27;f;cmd;c;[0,24,21,165,[2,12,1]]
-R;0;c;24;21;165;2;12;1
-Casting 2 to : [24;21]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [3273 18/2/3]
-Casting spell directly onto : 3273 6/2/3
-    2 1
-Received command 28
-0;28;f;cmd;g;[0]
-Received command 29
-0;29;f;cmd;p;[0]
+Received command 15
+0;15;f;cmd;g;[0]
+Received command 16
+0;16;f;cmd;p;[0]
 R;0;p
 Entity 0 passing turn.
+Received command 17
+0;17;f;cmd;m;[1,21,9]
+R;1;m;21;9
+Moving entity 1 to : [21;9]
+Received command 18
+0;18;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Received command 19
+0;19;f;cmd;m;[2,23,9]
+R;2;m;23;9
+Moving entity 2 to : [23;9]
+Received command 20
+0;20;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 21
+0;21;f;cmd;g;[0]
+Received command 22
+0;22;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 23
+0;23;f;cmd;m;[1,24,10]
+R;1;m;24;10
+Moving entity 1 to : [24;10]
+Received command 24
+0;24;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Received command 25
+0;25;f;cmd;m;[2,24,11]
+R;2;m;24;11
+Moving entity 2 to : [24;11]
+Received command 26
+0;26;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 27
+0;27;f;cmd;g;[0]
+Received command 28
+0;28;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 29
+0;29;f;cmd;m;[1,24,12]
+R;1;m;24;12
+Moving entity 1 to : [24;12]
 Received command 30
 0;30;f;cmd;p;[1]
 R;1;p
-Entity with id 1 is dead !
+Entity 1 passing turn.
+Exception in thread "AWT-EventQueue-0" java.lang.IndexOutOfBoundsException: Index: 0, Size: 33
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at ia.fight.map.Map.isPositionWalkable(Map.java:235)
+	at ia.fight.map.Map.isPositionAccessible(Map.java:192)
+	at ia.fight.map.Panel.paint(Panel.java:124)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at javax.swing.JLayeredPane.paint(Unknown Source)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paintToOffscreen(Unknown Source)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(Unknown Source)
+	at javax.swing.RepaintManager$PaintManager.paint(Unknown Source)
+	at javax.swing.RepaintManager.paint(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at java.awt.GraphicsCallback$PaintCallback.run(Unknown Source)
+	at sun.awt.SunGraphicsCallback.runOneComponent(Unknown Source)
+	at sun.awt.SunGraphicsCallback.runComponents(Unknown Source)
+	at java.awt.Container.paint(Unknown Source)
+	at java.awt.Window.paint(Unknown Source)
+	at javax.swing.RepaintManager$4.run(Unknown Source)
+	at javax.swing.RepaintManager$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at javax.swing.RepaintManager.paintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.paintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.access$1200(Unknown Source)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(Unknown Source)
+	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
 Received command 31
-0;31;f;cmd;m;[2,24,21]
-R;2;m;24;21
-Moving entity 2 to : [24;21]
+0;31;f;cmd;m;[2,25,13]
+R;2;m;25;13
+Moving entity 2 to : [25;13]
 Received command 32
-0;32;f;cmd;c;[2,24,22,5866,[0,8,0]]
-R;2;c;24;22;5866;0;8;0
-Casting 0 to : [24;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [Gladiatonme 80/6/3]
-Casting spell directly onto : Gladiatonme 72/6/3
-    0 1
-Received command 33
-0;33;f;cmd;p;[2]
+0;32;f;cmd;p;[2]
 R;2;p
 Entity 2 passing turn.
+Received command 33
+0;33;f;cmd;g;[0]
 Received command 34
-0;34;f;cmd;c;[3,24,22,5866,[0,8,0]]
-R;3;c;24;22;5866;0;8;0
-Casting 0 to : [24;22]. Not a crit.
+0;34;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 35
+0;35;f;cmd;m;[1,25,15]
+R;1;m;25;15
+Moving entity 1 to : [25;15]
+Received command 36
+0;36;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Exception in thread "AWT-EventQueue-0" java.lang.IndexOutOfBoundsException: Index: 13, Size: 24
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at ia.fight.map.Map.isPositionWalkable(Map.java:235)
+	at ia.fight.map.Map.isPositionAccessible(Map.java:192)
+	at ia.fight.map.Panel.paint(Panel.java:124)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at javax.swing.JLayeredPane.paint(Unknown Source)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paintToOffscreen(Unknown Source)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(Unknown Source)
+	at javax.swing.RepaintManager$PaintManager.paint(Unknown Source)
+	at javax.swing.RepaintManager.paint(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at java.awt.GraphicsCallback$PaintCallback.run(Unknown Source)
+	at sun.awt.SunGraphicsCallback.runOneComponent(Unknown Source)
+	at sun.awt.SunGraphicsCallback.runComponents(Unknown Source)
+	at java.awt.Container.paint(Unknown Source)
+	at java.awt.Window.paint(Unknown Source)
+	at javax.swing.RepaintManager$4.run(Unknown Source)
+	at javax.swing.RepaintManager$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at javax.swing.RepaintManager.paintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.paintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.access$1200(Unknown Source)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(Unknown Source)
+	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+Received command 37
+0;37;f;cmd;m;[2,24,15]
+R;2;m;24;15
+Moving entity 2 to : [24;15]
+Received command 38
+0;38;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 39
+0;39;f;cmd;g;[0]
+Received command 40
+0;40;f;cmd;c;[0,25,15,161,[1,15,1],[1,76936,1,1],[0,76936,1,1]]
+R;0;c;25;15;161;1;15;1
+Casting 1 to : [25;15]. Not a crit.
 null
 MonsterSpell (0 - 0)
-Touched entities : [Gladiatonme 72/6/3]
-Casting spell directly onto : Gladiatonme 64/6/3
-    0 1
-Received command 35
-0;35;f;cmd;p;[3]
-R;3;p
-Entity 3 passing turn.
-Received command 36
-0;36;f;cmd;g;[0]
-Received command 37
-0;37;f;cmd;c;[0,24,21,165,[2,6,1]]
-R;0;c;24;21;165;2;6;1
+Touched entities : [3272 18/2/4]
+Casting spell directly onto : 3272 3/2/4
+    1 1
+Received command 41
+0;41;f;cmd;g;[0]
+Received command 42
+0;42;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 43
+0;43;f;cmd;m;[1,25,19]
+R;1;m;25;19
+Moving entity 1 to : [25;19]
+Received command 44
+0;44;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Received command 45
+0;45;f;cmd;m;[2,24,18]
+R;2;m;24;18
+Moving entity 2 to : [24;18]
+Received command 46
+0;46;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Exception in thread "AWT-EventQueue-0" java.lang.IndexOutOfBoundsException: Index: 17, Size: 22
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at ia.fight.map.Map.isPositionWalkable(Map.java:235)
+	at ia.fight.map.Map.isPositionAccessible(Map.java:192)
+	at ia.fight.map.Panel.paint(Panel.java:124)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at javax.swing.JLayeredPane.paint(Unknown Source)
+	at javax.swing.JComponent.paintChildren(Unknown Source)
+	at javax.swing.JComponent.paintToOffscreen(Unknown Source)
+	at javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(Unknown Source)
+	at javax.swing.RepaintManager$PaintManager.paint(Unknown Source)
+	at javax.swing.RepaintManager.paint(Unknown Source)
+	at javax.swing.JComponent.paint(Unknown Source)
+	at java.awt.GraphicsCallback$PaintCallback.run(Unknown Source)
+	at sun.awt.SunGraphicsCallback.runOneComponent(Unknown Source)
+	at sun.awt.SunGraphicsCallback.runComponents(Unknown Source)
+	at java.awt.Container.paint(Unknown Source)
+	at java.awt.Window.paint(Unknown Source)
+	at javax.swing.RepaintManager$4.run(Unknown Source)
+	at javax.swing.RepaintManager$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at javax.swing.RepaintManager.paintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.paintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.prePaintDirtyRegions(Unknown Source)
+	at javax.swing.RepaintManager.access$1200(Unknown Source)
+	at javax.swing.RepaintManager$ProcessingRunnable.run(Unknown Source)
+	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+Received command 47
+0;47;f;cmd;g;[0]
+Received command 48
+0;48;f;cmd;m;[0,25,23]
+R;0;m;25;23
+Moving entity 0 to : [25;23]
+Received command 49
+0;49;f;cmd;g;[0]
+Received command 50
+0;50;f;cmd;c;[0,25,19,165,[1,3,1]]
+R;0;c;25;19;165;1;3;1
+Casting 1 to : [25;19]. Not a crit.
+null
+MonsterSpell (0 - 0)
+Touched entities : [3272 3/2/4]
+3272 0/2/4 died !
+Received command 51
+0;51;f;cmd;g;[0]
+Received command 52
+0;52;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 53
+0;53;f;cmd;p;[1]
+R;1;p
+Entity with id 1 is dead !
+Received command 54
+0;54;f;cmd;m;[2,24,21]
+R;2;m;24;21
+Moving entity 2 to : [24;21]
+Received command 55
+0;55;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 56
+0;56;f;cmd;g;[0]
+Received command 57
+0;57;f;cmd;m;[0,24,23]
+R;0;m;24;23
+Moving entity 0 to : [24;23]
+Received command 58
+0;58;f;cmd;g;[0]
+Received command 59
+0;59;f;cmd;c;[0,24,21,165,[2,18,2]]
+R;0;c;24;21;165;2;18;2
 Casting 2 to : [24;21]. Not a crit.
 null
 MonsterSpell (0 - 0)
-Touched entities : [3273 6/2/3]
-3273 0/2/3 died !
-Received command 38
-0;38;f;cmd;g;[0]
-Received command 39
-0;39;f;cmd;p;[0]
+Touched entities : [3270 18/2/3]
+3270 0/2/3 died !
+Received command 60
+0;60;f;cmd;endFight;[None]
+Ending fight
+Received command 62
+0;62;f;cmd;startfight;[154010883]
+Starting fight
+Map id : 154010883, loc : -2;-3
+Successfully initiated game.
+Cra player with base LP/AP/MP : 48/2/2 in pos [22;14]
+Monster 3272 with base LP/AP/MP : 0/2/4 in pos [11;5]
+Monster 3270 with base LP/AP/MP : 0/2/3 in pos [9;6]
+Received command 64
+0;64;f;cmd;g;[0]
+Received command 65
+0;65;f;cmd;p;[0]
 R;0;p
 Entity 0 passing turn.
-Received command 40
-0;40;f;cmd;p;[1]
+Received command 66
+0;66;f;cmd;m;[1,14,5]
+R;1;m;14;5
+Moving entity 1 to : [14;5]
+Received command 67
+0;67;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Received command 68
+0;68;f;cmd;m;[2,13,6]
+R;2;m;13;6
+Moving entity 2 to : [13;6]
+Received command 69
+0;69;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 70
+0;70;f;cmd;g;[0]
+Received command 71
+0;71;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 72
+0;72;f;cmd;m;[1,17,5]
+R;1;m;17;5
+Moving entity 1 to : [17;5]
+Received command 73
+0;73;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Received command 74
+0;74;f;cmd;m;[2,17,6]
+R;2;m;17;6
+Moving entity 2 to : [17;6]
+Received command 75
+0;75;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 76
+0;76;f;cmd;g;[0]
+Received command 77
+0;77;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 78
+0;78;f;cmd;m;[1,19,6]
+R;1;m;19;6
+Moving entity 1 to : [19;6]
+Received command 79
+0;79;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Received command 80
+0;80;f;cmd;m;[2,20,7]
+R;2;m;20;7
+Moving entity 2 to : [20;7]
+Received command 81
+0;81;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 82
+0;82;f;cmd;g;[0]
+Received command 83
+0;83;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 84
+0;84;f;cmd;m;[1,20,8]
+R;1;m;20;8
+Moving entity 1 to : [20;8]
+Received command 85
+0;85;f;cmd;p;[1]
+R;1;p
+Entity 1 passing turn.
+Received command 86
+0;86;f;cmd;m;[2,21,10]
+R;2;m;21;10
+Moving entity 2 to : [21;10]
+Received command 87
+0;87;f;cmd;p;[2]
+R;2;p
+Entity 2 passing turn.
+Received command 88
+0;88;f;cmd;g;[0]
+Received command 89
+0;89;f;cmd;c;[0,21,10,161,[2,15,1]]
+R;0;c;21;10;161;2;15;1
+Casting 2 to : [21;10]. Not a crit.
+null
+MonsterSpell (0 - 0)
+Touched entities : [3270 0/2/3]
+3272 0/2/4 died !
+Casting spell directly onto : 3270 -15/2/3
+    2 1
+Received command 90
+0;90;f;cmd;g;[0]
+Received command 91
+0;91;f;cmd;p;[0]
+R;0;p
+Entity 0 passing turn.
+Received command 92
+0;92;f;cmd;m;[1,20,11]
+R;1;m;20;11
+Entity with id 1 is dead !
+Received command 93
+0;93;f;cmd;p;[1]
 R;1;p
 Entity with id 1 is dead !
-Received command 41
-0;41;f;cmd;p;[2]
+Received command 94
+0;94;f;cmd;p;[2]
 R;2;p
-Entity with id 2 is dead !
-Received command 42
-0;42;f;cmd;c;[3,24,22,5866,[0,6,0]]
-R;3;c;24;22;5866;0;6;0
-Casting 0 to : [24;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [Gladiatonme 64/6/3]
-Casting spell directly onto : Gladiatonme 58/6/3
-    0 1
-Received command 43
-0;43;f;cmd;p;[3]
-R;3;p
-Entity 3 passing turn.
-Received command 44
-0;44;f;cmd;g;[0]
-Received command 45
-0;45;f;cmd;c;[0,23,22,165,[3,21,2]]
-R;0;c;23;22;165;3;21;2
-Casting 3 to : [23;22]. Not a crit.
-null
-MonsterSpell (0 - 0)
-Touched entities : [3271 21/2/3]
-3271 0/2/3 died !
-Received command 46
-0;46;f;cmd;endFight;[None]
-Ending fight
+Entity 2 passing turn.
+Received command 95
+0;95;f;cmd;g;[0]
+Received command 96
+0;96;f;cmd;c;[0,21,10,161]
+java.lang.ArrayIndexOutOfBoundsException: 4
+	at ia.fight.brain.Game.executeCommand(Game.java:578)
+	at game.combat.Fight.sendToFightAlgo(Fight.java:72)
+	at protocol.network.Network.TreatPacket(Network.java:820)
+	at protocol.network.Network.buildMessage(Network.java:982)
+	at protocol.network.Network.buildMessage(Network.java:993)
+	at protocol.network.Network.buildMessage(Network.java:993)
+	at protocol.network.Network.buildMessage(Network.java:993)
+	at protocol.network.Network.reception(Network.java:311)
+	at protocol.network.Network.run(Network.java:215)
+	at java.lang.Thread.run(Unknown Source)

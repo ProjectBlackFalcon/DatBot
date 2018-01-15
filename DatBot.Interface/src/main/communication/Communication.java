@@ -70,14 +70,17 @@ public class Communication implements Runnable {
 				toSend = new Object[] { "true" };
 				//Tests
 				modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
-				modelConnexion.getReturn("0;0;i;cmd;move;[" + modelConnexion.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
-				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + modelConnexion.getMonsters().getMonsters().get(0).getContextualId() +"]");
-
-
-				Thread.sleep(1000);
-			break;
+				modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
+				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
+//				while(true){
+//					Thread.sleep(2000);
+//					if(network.getMonsters().getMonsters().size() > 0 && !network.getInfo().isJoinedFight()){
+//						modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
+//						modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
+//						modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
+//					}
+//				}
 		}
-
 		return toSend;
 	}
 

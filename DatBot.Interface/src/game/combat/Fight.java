@@ -276,14 +276,21 @@ public class Fight {
 		return result;
 	}
 	
+	
+	/**
+	 * Ask the fight bot the best action to do and execute it
+	 * @throws NumberFormatException
+	 * @throws Exception
+	 * @author baptiste
+	 */
 	public void fightTurn() throws NumberFormatException, Exception{
 		boolean isMonstersAlive = false;
 		for(GameFightMonsterInformations m : monsters){
 			if(m.isAlive()) isMonstersAlive = true;
 		}
 		if(!isMonstersAlive) return;
+		System.out.println("SEND TO LYSOU");
 		String s = sendToFightAlgo("g", new Object[] { getId(this.network.getInfo().getActorId()) });
-		System.out.println("fight msg : " + s);
 		String[] message = s.split(";");
 		this.network.getInfo().setMsgIdFight(Integer.parseInt(message[1]));
 		message[4] = message[4].substring(1, message[4].length() - 1);
@@ -294,7 +301,6 @@ public class Fight {
 		for(String s2 : cmd){
 			System.out.println(s2);
 		}
-		System.out.println("SEND TO LYSOU");
 		new Thread(new Runnable() {
             public void run() {
         		try
