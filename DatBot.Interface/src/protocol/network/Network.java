@@ -411,7 +411,6 @@ public class Network implements Runnable {
 			case 500:
 				info.setStats(new CharacterStatsListMessage());
 				info.getStats().Deserialize(dataReader);
-				System.out.println(this.getStats());
 			break;
 			case 220:
 				CurrentMapMessage currentMapMessage = new CurrentMapMessage();
@@ -1178,6 +1177,7 @@ public class Network implements Runnable {
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
 		Map map = this.mapManager.FromId((int) mapId);
 		this.map = map;
+		this.interactive.setMap(map);
 		this.info.setCoords(new int[]{map.getPosition().getX(), map.getPosition().getY()});
 		this.info.setWorldmap(map.getPosition().getWorldId());
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");

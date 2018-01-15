@@ -15,8 +15,8 @@ public class Test {
 
 //		MapManager manager = new MapManager("C:\\Users\\baptiste\\Documents\\DofusBot\\DatBot\\DatBot.Interface\\utils\\maps");
 //		Map map = manager.FromId(84673538);
-//		System.out.println(map.toString());
-//		System.out.println(System.currentTimeMillis()  - time);
+//		System.out.println(map);
+
 
 		boolean arg = false;
 		if (args.length != 0)

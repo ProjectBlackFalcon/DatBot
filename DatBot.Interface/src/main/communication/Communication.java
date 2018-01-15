@@ -69,6 +69,8 @@ public class Communication implements Runnable {
 				network.append("Level : " + info.getLvl(), false);
 				toSend = new Object[] { "true" };
 				//Tests
+				modelConnexion.getReturn("0;0;i;cmd;getStats;[None]");
+				modelConnexion.getReturn("0;0;i;cmd;getResources;[None]");
 				modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
 				modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
 				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
@@ -80,6 +82,7 @@ public class Communication implements Runnable {
 //						modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
 //					}
 //				}
+				break;
 		}
 		return toSend;
 	}
