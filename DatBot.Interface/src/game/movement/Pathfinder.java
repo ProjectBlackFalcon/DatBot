@@ -512,12 +512,12 @@ public class Pathfinder {
             path.Orientation = squares[i].OrientationTo(squares[i + 1]);
             MovPath.Cells.add(path);
         }
-        for (PathElement cells : MovPath.Cells) {
-			System.out.println(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
-		}
+//        for (PathElement cells : MovPath.Cells) {
+//			System.out.println(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
+//		}
         MovPath.Compress();
-        for (PathElement cells : MovPath.Cells) {
-			System.out.println(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
-		}
+//        for (PathElement cells : MovPath.Cells) {
+//			System.out.println(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
+//		}
     }
 }

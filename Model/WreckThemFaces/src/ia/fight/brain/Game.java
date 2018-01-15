@@ -203,6 +203,13 @@ public class Game {
 	 * @param command
 	 */
 	static private void executeSpellCommand(String[] command) {
+		
+		System.out.println("COMMANDE RECU PAR LYS LE BEST");
+		
+		for(String s : command){
+			System.out.println(s);
+		}
+		
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
 		int posY = Integer.parseInt(command[3]);
@@ -217,13 +224,17 @@ public class Game {
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
 		Game.log.println(spellCast);
 		System.out.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
-		if(castingEntity.getModel().getType().equals("monster")) {
-			spellCast = Game.getSpellFromName(spellname, "monster");
-			Game.log.println(spellCast);
-		}else {
-			spellCast = Game.getSpellFromName(spellname, "cra");
-			Game.log.println(spellCast);
-		}
+		
+		spellCast = Game.getSpellFromName(spellname, "monster");
+		Game.log.println(spellCast);
+		
+//		if(castingEntity.getModel().getType().equals("monster")) {
+//			spellCast = Game.getSpellFromName(spellname, "monster");
+//			Game.log.println(spellCast);
+//		}else {
+//			spellCast = Game.getSpellFromName(spellname, "cra");
+//			Game.log.println(spellCast);
+//		}
 		spellCast.applySpells(castingEntity, new Position(posX, posY), true, damage);
 	}
 	
@@ -260,6 +271,8 @@ public class Game {
 				ennemies.add(playingEntities.get(i));
 			}
 		}
+		
+		if(ennemies.size() < 1) return "None";
 
 		String action = command[0]+",";
 		
@@ -319,6 +332,7 @@ public class Game {
 			if(selectedPosition.turn.size() < 1){
 				action += "None";
 			}else{
+				System.out.println("Casting "+selectedPosition.turn.get(0).getMinimumRange()+"-"+selectedPosition.turn.get(0).getMaximumRange()+" - "+selectedPosition.turn.get(0).getName());
 				action += "c,"+selectedPosition.turn.get(0).getID()+","+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
 			}
 			
@@ -595,8 +609,8 @@ public class Game {
 	 */
 	public static void initLogs() {
 		try {
-			log = System.out;
-			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			//log = System.out;
+			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
 		} catch (FileNotFoundException e1) {

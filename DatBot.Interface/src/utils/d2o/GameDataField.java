@@ -44,13 +44,10 @@ public class GameDataField {
         		fieldType = "Vector";
         		break;
         }
-        System.out.println("Num : " + num);
-        System.out.println("Type : " + fieldType);
         this.fieldType = fieldType;
 
         if (fieldType.equals("Vector"))
         {
-        	System.out.println("test");
             innerField = new GameDataField(reader);
         }
     }

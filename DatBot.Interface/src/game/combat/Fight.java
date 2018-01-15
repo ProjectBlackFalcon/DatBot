@@ -2,6 +2,7 @@ package game.combat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
@@ -265,11 +266,22 @@ public class Fight {
 	 * @return cellid : int
 	 * @author baptiste
 	 */
-	public int rotateToCellId(int i, int j){
-		return i + 13*(i+j-13);
+	public static int rotateToCellId(int i, int j){
+		int result = 0;
+		if(i+j / 2 == 0){
+			result = i + 13*(i+j-13) + (i+j-14)/2;
+		} else {
+			result = i + 13*(i+j-13) + (i+j-13)/2;
+		}
+		return result;
 	}
 	
 	public void fightTurn() throws NumberFormatException, Exception{
+		boolean isMonstersAlive = false;
+		for(GameFightMonsterInformations m : monsters){
+			if(m.isAlive()) isMonstersAlive = true;
+		}
+		if(!isMonstersAlive) return;
 		String s = sendToFightAlgo("g", new Object[] { getId(this.network.getInfo().getActorId()) });
 		System.out.println("fight msg : " + s);
 		String[] message = s.split(";");
@@ -279,15 +291,20 @@ public class Fight {
 			endTurn();
 		}
 		String[] cmd = message[4].split(",");
+		for(String s2 : cmd){
+			System.out.println(s2);
+		}
+		System.out.println("SEND TO LYSOU");
 		new Thread(new Runnable() {
             public void run() {
         		try
 				{
-        			Thread.sleep(2000);
+        			Random r = new Random();
+        			Thread.sleep(500 + r.nextInt(300));
         			if(cmd[1].equals("m")){
         				moveTo(rotateToCellId(Integer.parseInt(cmd[2]),(Integer.parseInt(cmd[3]))));
         			} else if (cmd[1].equals("c")){
-        				castSpell(Integer.parseInt(cmd[0]),rotateToCellId(Integer.parseInt(cmd[4]),(Integer.parseInt(cmd[5]))));
+        				castSpell(Integer.parseInt(cmd[2]),rotateToCellId(Integer.parseInt(cmd[4]),(Integer.parseInt(cmd[5]))));
         			} else if (cmd[1].equals("None")){
         				endTurn();
         			}

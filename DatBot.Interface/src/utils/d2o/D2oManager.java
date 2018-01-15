@@ -47,7 +47,7 @@ public class D2oManager {
 		readObjectPointerTable();
 		// printObjectPointerTable();
 		readClassTable();
-		printClassTable();
+//		printClassTable();
 		// readGameDataProcessor(); //TODO: implement
 		unpackObjectsAsJson();
 		// writeJsonFile(true);
@@ -106,7 +106,7 @@ public class D2oManager {
 		String className = reader.readUTF();
 		String packageName = reader.readUTF();
 		GameDataClassDefinition classDefinition = new GameDataClassDefinition(packageName, className);
-		System.out.println(String.format("ClassId: %s ClassMemberName: %s ClassPkgName %s", classId, className, packageName));
+//		System.out.println(String.format("ClassId: %s ClassMemberName: %s ClassPkgName %s", classId, className, packageName));
 		int fieldsCount = reader.readInt();
 		int i = 0;
 		while (i < fieldsCount)

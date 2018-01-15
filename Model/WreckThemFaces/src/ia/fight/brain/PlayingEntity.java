@@ -157,7 +157,7 @@ public class PlayingEntity {
 			boolean requiresLineOfSight = getModel().getAvailableSpells().get(i).requiresLineOfSight();
 			boolean overMinimumRange = getModel().getAvailableSpells().get(i).getMinimumRange() <= Position.distance(position, victim.getPosition());
 			boolean hasModifiableRange = getModel().getAvailableSpells().get(i).isModifiableRange();
-			boolean underMaximumRange = hasModifiableRange ? getModel().getAvailableSpells().get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition()) : getModel().getAvailableSpells().get(i).getMaximumRange() <= Position.distance(position, victim.getPosition());
+			boolean underMaximumRange = hasModifiableRange ? getModel().getAvailableSpells().get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition()) : getModel().getAvailableSpells().get(i).getMaximumRange() >= Position.distance(position, victim.getPosition());
 			boolean entityIsWithinDistance = overMinimumRange && underMaximumRange;
 			boolean isStraightLineCastAndInLine = getModel().getAvailableSpells().get(i).isStraightLineCast() && (!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY()));
 			boolean isNotStraightLineCast = !getModel().getAvailableSpells().get(i).isStraightLineCast();

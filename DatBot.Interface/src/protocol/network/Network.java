@@ -881,6 +881,7 @@ public class Network implements Runnable {
 			break;
 			case 6465:
 				info.setTurn(true);
+				System.out.println("TUUUUUUUUUURRRRRRRRRRRRRRRRNNNNNNNNNNNNN");
 				getFight().fightTurn();
 			break;
 			case 955:
@@ -1172,6 +1173,7 @@ public class Network implements Runnable {
 
 	private void HandleMapRequestMessage(double mapId) throws Exception
 	{
+		System.out.println("Mapid : "  + mapId);
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
 		Map map = this.mapManager.FromId((int) mapId);
 		this.map = map;

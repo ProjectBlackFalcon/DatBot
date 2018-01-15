@@ -3,8 +3,11 @@ package main;
 import java.util.List;
 import java.util.Scanner;
 
+import game.combat.Fight;
+import ia.fight.brain.Game;
 import main.communication.Communication;
 import main.communication.ModelConnexion;
+import utils.GameData;
 import utils.d2o.D2oManager;
 import utils.d2o.GameDataTypeEnum;
 import utils.d2p.MapManager;
@@ -15,11 +18,10 @@ public class Test {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception
 	{
-//		D2oManager d2oManager = new D2oManager("E:\\Ankama\\Dofus\\app\\data\\common\\AbuseReasons.d2o");
-//		System.out.println("-----------------------------------------");
-//		List<String> s = d2oManager.returnJsonString();
-//		System.out.println(s.get(0));
-//		long time = System.currentTimeMillis();
+//		new GameData();
+//		System.out.println(GameData.getMapPositions().get(0));
+//		GameData.getWorldMap(0);
+
 //		MapManager manager = new MapManager("C:\\Users\\baptiste\\Documents\\DofusBot\\DatBot\\DatBot.Interface\\utils\\maps");
 //		Map map = manager.FromId(84673538);
 //		System.out.println(map.toString());
