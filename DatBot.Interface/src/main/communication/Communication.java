@@ -74,15 +74,16 @@ public class Communication implements Runnable {
 				modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
 				modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
 				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
-//				while(true){
-//					Thread.sleep(2000);
-//					if(network.getMonsters().getMonsters().size() > 0 && !network.getInfo().isJoinedFight()){
-//						modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
-//						modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
-//						modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
-//					}
-//				}
-				break;
+				while(true){
+					System.out.println("Trying to launch fight ...");
+					Thread.sleep(2000);
+					if(network.getMonsters().getMonsters().size() > 0 && !network.getInfo().isJoinedFight()){
+						modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
+						modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
+						modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
+					}
+				}
+				//break;
 		}
 		return toSend;
 	}

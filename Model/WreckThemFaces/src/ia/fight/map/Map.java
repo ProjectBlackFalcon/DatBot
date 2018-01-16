@@ -232,7 +232,12 @@ public class Map {
 	}
 	
 	public boolean isPositionWalkable(Position position) {
-		return this.blocks.get(position.getY()).get(position.getX()) == 0;
+		try {
+			return this.blocks.get(position.getY()).get(position.getX()) == 0;
+		}catch(java.lang.IndexOutOfBoundsException e) {
+			return false;
+		}
+		
 	}
 	
 	public boolean isPositionWalkable(String team, Position position) {

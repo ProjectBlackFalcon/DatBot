@@ -196,7 +196,8 @@ public class Network implements Runnable {
 		JSONArray a;
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
-		s = s.substring(0, i + 6);
+		//s = s.substring(0, i + 6);
+		System.out.println(s);
 		return s;
 	}
 
