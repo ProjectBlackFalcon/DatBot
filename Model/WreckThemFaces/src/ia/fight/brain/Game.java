@@ -396,97 +396,6 @@ public class Game {
 		}
 		
 		return action;
-		
-		
-		/*
-		long start = System.currentTimeMillis();
-		int id = (int) Long.parseLong(command[0]);
-		boolean fullTurn = Boolean.parseBoolean(command[2]);
-		
-		PlayingEntity playingEntity = getPlayingEntityFromID(id);
-		ArrayList<PlayingEntity> ennemies = new ArrayList<>();
-		
-		for(int i = 0; i < playingEntities.size(); i++) {
-			if(!playingEntities.get(i).getTeam().equals(playingEntity.getTeam())) {
-				ennemies.add(playingEntities.get(i));
-			}
-		}
-		
-		if(ennemies.size() < 1) return "None";
-
-		String action = command[0]+",";
-		
-		ArrayList<bestEnemyAndTurn> bestPositions = new ArrayList<>();
-		int maxDamage = 0;
-		PlayingEntity selectedEntity;
-		ArrayList<SpellObject> selectedTurn;
-		
-		for(int i = 0; i < ennemies.size(); i++) {
-			ArrayList<SpellObject> turn = playingEntity.getOptimalTurnFrom(playingEntity.getPosition(), ennemies.get(i));
-			int totalDamage = 0;
-			
-			ArrayList<Position> accessiblePositions = new ArrayList<>();
-			accessiblePositions.add(playingEntity.getPosition());
-			
-			for(int k = playingEntity.getPosition().getX() - playingEntity.getModel().getMP(); k < playingEntity.getPosition().getX() + playingEntity.getModel().getMP()+1; k++) {
-				for(int l = playingEntity.getPosition().getX() - playingEntity.getModel().getMP(); l < playingEntity.getPosition().getX() + playingEntity.getModel().getMP()+1; l++) {
-					if(Game.map.isPositionAccessible(playingEntity.getPosition(), new Position(k,l), playingEntity.getModel().getMP())) {
-						accessiblePositions.add(new Position(k, l));
-					}
-				}
-			}
-			
-			
-			for(int k = 0; k < accessiblePositions.size(); k++) {
-				turn = playingEntity.getOptimalTurnFrom(accessiblePositions.get(k), ennemies.get(i));
-				for(int j = 0; j < turn.size(); j++) {
-					totalDamage += turn.get(j).getDamagePreviz(playingEntity, ennemies.get(i));
-				}
-
-				if(totalDamage > maxDamage) {
-					maxDamage = totalDamage;
-					bestPositions.clear();
-					bestPositions.add(new bestEnemyAndTurn(ennemies.get(i), accessiblePositions.get(k), maxDamage, turn));
-				}else if(totalDamage == maxDamage) {
-					bestPositions.add(new bestEnemyAndTurn(ennemies.get(i), accessiblePositions.get(k), maxDamage, turn));
-				}
-				
-				totalDamage = 0;
-			}
-		}
-		
-		int minDistanceBetweenOptimalPositionAndEntity = 1000;
-		bestEnemyAndTurn selectedPosition = bestPositions.get(0);
-		
-		for(int i = 0; i < bestPositions.size(); i++) {
-			int distance = Position.distance(bestPositions.get(i).position, playingEntity.getPosition());
-			if(distance < minDistanceBetweenOptimalPositionAndEntity) {
-				minDistanceBetweenOptimalPositionAndEntity = distance;
-				selectedPosition = bestPositions.get(i);
-			}
-		}
-		
-		if(!selectedPosition.position.deepEquals(playingEntity.getPosition())) {
-			action += "m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
-		}else {
-			if(selectedPosition.turn.size() < 1){
-				action += "None";
-			}else{
-				System.out.println("Casting "+selectedPosition.turn.get(0).getMinimumRange()+"-"+selectedPosition.turn.get(0).getMaximumRange()+" - "+selectedPosition.turn.get(0).getName());
-				action += "c,"+selectedPosition.turn.get(0).getID()+","+selectedPosition.turn.get(0).getName()+","+selectedPosition.entity.getPosition().getX()+","+selectedPosition.entity.getPosition().getY();
-			}
-			
-		}
-		
-		
-		long stop = System.currentTimeMillis();
-		
-		System.out.println("Total time : "+(stop-start));
-		
-		return action;
-		
-		*/
-		
 	}
 	
 	/**
@@ -587,7 +496,7 @@ public class Game {
 	public static String executeCommand(String s, ArrayList<Player> entities) {
 		String param = s.split(";")[5];
 		
-		Game.log.println("Initiating entities.");
+		Game.log.println("Initiating entities. Receiving : "+s+" with entities : "+entities);
 		
 		String[] strings = param.split(Pattern.quote(",["));
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
