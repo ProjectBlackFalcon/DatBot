@@ -72,7 +72,7 @@ public class SpellObject {
 			}
 		}
 		
-		return damagePreviz;
+		return damagePreviz/this.getCost();
 	}
 	
 	public boolean isEntityTargetableBySpell(PlayingEntity entity) {

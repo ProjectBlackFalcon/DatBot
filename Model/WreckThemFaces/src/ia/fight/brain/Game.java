@@ -87,6 +87,7 @@ public class Game {
 	 * Ends the game by disposing of the window.
 	 */
 	public static void endGame() {
+		Game.playingEntities.clear();
 		los.dispose();
 	}
 	
@@ -241,13 +242,18 @@ public class Game {
 		spellCast = Game.getSpellFromName(spellname, "monster");
 		Game.log.println(spellCast);
 		
-//		if(castingEntity.getModel().getType().equals("monster")) {
-//			spellCast = Game.getSpellFromName(spellname, "monster");
-//			Game.log.println(spellCast);
-//		}else {
-//			spellCast = Game.getSpellFromName(spellname, "cra");
-//			Game.log.println(spellCast);
-//		}
+		if(castingEntity.getModel().getType().equals("monster")) {
+			spellCast = Game.getSpellFromName(spellname, "monster");
+			Game.log.println(spellCast);
+		}else {
+			spellCast = Game.getSpellFromName(spellname, "cra");
+			Game.log.println(spellCast);
+		}
+		
+		if(spellCast == null) {
+			spellCast = Game.getSpellFromID(Integer.parseInt(command[4]));
+		}
+		
 		spellCast.applySpells(castingEntity, new Position(posX, posY), true, damage);
 	}
 	

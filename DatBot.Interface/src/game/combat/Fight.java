@@ -306,7 +306,7 @@ public class Fight {
         		try
 				{
         			Random r = new Random();
-        			Thread.sleep(500 + r.nextInt(300));
+        			Thread.sleep(1500 + r.nextInt(800));
         			if(cmd[1].equals("m")){
         				moveTo(rotateToCellId(Integer.parseInt(cmd[2]),(Integer.parseInt(cmd[3]))));
         			} else if (cmd[1].equals("c")){
