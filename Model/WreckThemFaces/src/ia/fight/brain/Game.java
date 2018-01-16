@@ -115,7 +115,6 @@ public class Game {
 	 * @param commandString
 	 */
 	static public void refresh(String commandString) {
-		log.println("R;"+commandString);
 		String[] command = commandString.split(";");
 		int id = Integer.parseInt(command[0]);
 		
@@ -155,7 +154,6 @@ public class Game {
 	 * @return a PlayingEntity object
 	 */
 	private static PlayingEntity getPlayingEntityFromID(int id) {
-		System.out.println("Entities : " + Game.playingEntities.size());
 		for(int i = 0; i < Game.playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
 				return Game.playingEntities.get(i);
@@ -177,10 +175,15 @@ public class Game {
 		}else if(playerClass.equals("monster")){
 			SpellObject spell = new SpellObject("MonsterSpell", 0, 0);
 			spell.addSpell(new Damage(Type.AIR, 0, 0, 0, 0, spell));
+			System.out.println();
 			return spell;
 		}
 		
 		return null;
+	}
+	
+	private static SpellObject getSpellFromID(int id) {
+		return CraModel.getSpellFromID(id);
 	}
 	
 	/**
@@ -203,10 +206,13 @@ public class Game {
 	 * @param command
 	 */
 	static private void executeSpellCommand(String[] command) {
-		
 		int id = Integer.parseInt(command[0]);
 		int posX = Integer.parseInt(command[2]);
 		int posY = Integer.parseInt(command[3]);
+		
+		for(String s : command) {
+			System.out.println(s);
+		}
 		
 		PlayingEntity castingEntity = getPlayingEntityFromID(id);
 		
@@ -214,8 +220,23 @@ public class Game {
 		int damage = Integer.parseInt(command[6]);
 		boolean crit = Boolean.parseBoolean(command[7]);
 
-		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+". " + (crit ? "Critical hit ! " : "Not a crit."));
+		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+" for "+damage+" damage.");
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
+
+		Game.log.println(spellCast);
+		Game.log.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
+
+		if(castingEntity.getModel().getType().equals("monster")) {
+			spellCast = Game.getSpellFromName(spellname, "monster");
+			Game.log.println(spellCast);
+		}else {
+			spellCast = Game.getSpellFromName(spellname, "cra");
+			Game.log.println(spellCast);
+		}
+		if(spellCast == null) {
+			spellCast = Game.getSpellFromID(Integer.parseInt(command[4]));
+		}
+
 		Game.log.println(spellCast);		
 		spellCast = Game.getSpellFromName(spellname, "monster");
 		Game.log.println(spellCast);
@@ -244,6 +265,46 @@ public class Game {
 		
 		log.println("Entity "+id+" passing turn.");
 	}
+	
+	static private PlayingEntity getClosestEnnemy(PlayingEntity caster) {
+		ArrayList<PlayingEntity> ennemies = new ArrayList<>();
+		
+		for(int i = 0; i < playingEntities.size(); i++) {
+			if(!playingEntities.get(i).getTeam().equals(caster.getTeam())) {
+				ennemies.add(playingEntities.get(i));
+				System.out.println(playingEntities.get(i).getPosition());
+			}
+		}
+		
+		System.out.println(ennemies);
+		
+		PlayingEntity selectedEnnemy = ennemies.get(0);
+		int distance = Position.distance(selectedEnnemy.getPosition(), caster.getPosition());
+		
+		for(PlayingEntity p : ennemies) {
+			if(Position.distance(p.getPosition(), caster.getPosition()) < distance) {
+				distance = Position.distance(p.getPosition(), caster.getPosition());
+				selectedEnnemy = p;
+			}
+		}
+		
+		return selectedEnnemy;
+	}
+	
+	static private Position getClosestPositionFromArrayList(ArrayList<Position> positions, Position position) {
+		int distance = Position.distance(positions.get(0), position);
+		Position selected = positions.get(0);
+		
+		for(int i = 1; i < positions.size(); i++) {
+			if(distance > Position.distance(positions.get(i), position)) {
+				selected = positions.get(i);
+				distance = Position.distance(positions.get(i), position);
+			}
+		}
+		
+		return selected;
+		
+	}
 		
 	/**
 	 * Method called to get the best turn. Returns a single action, either movement or spellcast.
@@ -251,6 +312,87 @@ public class Game {
 	 * @return
 	 */
 	static private String getBestTurn(String[] command) {
+		int id = (int) Long.parseLong(command[0]);
+
+		PlayingEntity caster = getPlayingEntityFromID(id);
+		PlayingEntity victim = getClosestEnnemy(caster);
+		
+		System.out.println();
+		
+		ArrayList<Position> accessiblePositions = new ArrayList<>();
+		accessiblePositions.add(caster.getPosition());
+		
+		for(int k = caster.getPosition().getX() - caster.getModel().getMP(); k < caster.getPosition().getX() + caster.getModel().getMP()+1; k++) {
+			for(int l = caster.getPosition().getY() - caster.getModel().getMP(); l < caster.getPosition().getY() + caster.getModel().getMP()+1; l++) {
+				if(Game.map.isPositionAccessible(caster.getPosition(), new Position(k,l), caster.getModel().getMP())) {
+					accessiblePositions.add(new Position(k, l));
+				}
+			}
+		}
+ 
+		int totalDamage = 0;
+		int maxDamage = 0;
+		ArrayList<bestEnemyAndTurn> bestPositions = new ArrayList<>();
+		
+		for(int i = 0; i < accessiblePositions.size(); i++) {
+			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim);
+			
+			for(int j = 0; j < turn.size(); j++) {
+				totalDamage += turn.get(j).getDamagePreviz(caster, victim);
+			}
+
+			if(totalDamage > maxDamage) {
+				maxDamage = totalDamage;
+				bestPositions.clear();
+				bestPositions.add(new bestEnemyAndTurn(victim, accessiblePositions.get(i), maxDamage, turn));
+			}else if(totalDamage == maxDamage) {
+				bestPositions.add(new bestEnemyAndTurn(victim, accessiblePositions.get(i), maxDamage, turn));
+			}
+			
+			totalDamage = 0;
+		}
+		
+		int minDistanceBetweenOptimalPositionAndEntity = 1000;
+		bestEnemyAndTurn selectedPosition = bestPositions.get(0);
+		
+		for(int i = 0; i < bestPositions.size(); i++) {
+			int distance = Position.distance(bestPositions.get(i).position, caster.getPosition());
+			if(distance < minDistanceBetweenOptimalPositionAndEntity) {
+				minDistanceBetweenOptimalPositionAndEntity = distance;
+				selectedPosition = bestPositions.get(i);
+			}
+		}
+		
+		ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(selectedPosition.position, victim);
+		System.out.println("AP remaining : "+caster.getModel().getAP()+"TURN : " +turn);
+		
+		String action = "";
+		
+		if(!selectedPosition.position.deepEquals(caster.getPosition())) {
+			action += command[0]+",m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
+		}else {
+			if(turn.size() < 1) {
+				Position desired = getClosestPositionFromArrayList(accessiblePositions, victim.getPosition());
+				System.out.println("Accessible positions : "+accessiblePositions);
+				System.out.println("MP available : "+caster.getModel().getMP());
+				System.out.println("Actual position : "+caster.getPosition());
+				System.out.println("Ennemy position : "+victim.getPosition());
+				System.out.println("Desired position : "+desired);
+				if(!caster.getPosition().deepEquals(desired)) {
+					action += command[0]+",m,"+desired.getX()+","+desired.getY();
+				}else {
+					action += command[0]+",None";
+				}
+			}else {
+				action += command[0]+",c,"+selectedPosition.turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
+			}
+			
+		}
+		
+		return action;
+		
+		
+		/*
 		long start = System.currentTimeMillis();
 		int id = (int) Long.parseLong(command[0]);
 		boolean fullTurn = Boolean.parseBoolean(command[2]);
@@ -336,6 +478,8 @@ public class Game {
 		System.out.println("Total time : "+(stop-start));
 		
 		return action;
+		
+		*/
 		
 	}
 	
@@ -436,15 +580,12 @@ public class Game {
 	 */
 	public static String executeCommand(String s, ArrayList<Player> entities) {
 		String param = s.split(";")[5];
-		System.out.println(param);
+		
+		Game.log.println("Initiating entities.");
 		
 		String[] strings = param.split(Pattern.quote(",["));
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
-		
-		for(int i = 0; i < strings.length; i++) {
-			System.out.println(strings[i]);
-		}
-		
+
 		for(int i = 0; i < strings.length; i++) {
 			String[] params = strings[i].replaceAll(Pattern.quote("]"), "").replaceAll(Pattern.quote("["), "").split(",");
 			int ID = Integer.parseInt(params[0]);
@@ -453,9 +594,9 @@ public class Game {
 			String team = Integer.parseInt(params[1]) == 0 ? "blue" : "red";
 			PlayingEntity playingEntity = new PlayingEntity(ID, false, new Position(posX, posY), team, entities.get(i));
 			playingEntities.add(playingEntity);
+			Game.log.println(playingEntity);
 		}
 		
-		System.out.println(playingEntities);
 		
 		Collections.sort(playingEntities, new Comparator<PlayingEntity>() {
 			@Override
@@ -468,7 +609,6 @@ public class Game {
 			}
 		});
 		
-		System.out.println(playingEntities);
 		Game.initEntities(playingEntities);
 		
 		return "";
@@ -534,15 +674,14 @@ public class Game {
 			Game.initLogs();
 		}
 		String[] command = s.split(";");
-		log.println("Received command "+command[1]);
-		log.println(s);
+		log.println("Received command "+command[1]+" : "+s);
 		
 		String returnInformation = "";
 		
 		current_command_nbr = Integer.parseInt(command[1]);
 		if(command.length > 2) {
 			if(!command[2].equals("f")) {
-				System.out.println("Broke out of loop");
+				Game.log.println("Broke out of loop");
 				log.println("Broke out of loop");
 				return "that ain't for me boi.";
 			}
@@ -602,38 +741,13 @@ public class Game {
 	public static void initLogs() {
 		try {
 			log = System.out;
-//			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-	}
-	
-	/**
-	 * main method - only used for testing and debugging.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		Game.initLogs();
-		
-		Game.log.println("Started fight !");
-		Game game = new Game();
-		
-		try {
-			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-			String s = bufferRead.readLine();
-			while(s.equals("x")==false) {
-				Game.executeCommand(s);
-				
-				s = bufferRead.readLine();
-			}
-			
-			
-		} catch(IOException e) {
-			e.printStackTrace();
 		}
 	}
 	

@@ -215,6 +215,20 @@ public class CraModel{
 		return null;
 	}
 	
+	public static SpellObject getSpellFromID(int id) {
+		if(spells == null) {
+			getSpells(1001);
+		}
+		
+		for(int i = 0; i < spells.length; i++) {
+			if(spells[i].getID() == id) {
+				return spells[i];
+			}
+		}
+		
+		return null;
+	}
+	
 	public static final SpellObject magicArrow = new SpellObject("Magic arrow", 1, 161);
 	public static final SpellObject concentrationArrow = new SpellObject("Concentration arrow", 101, 9301);
 
