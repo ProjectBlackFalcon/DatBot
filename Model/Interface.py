@@ -277,12 +277,28 @@ class Interface:
         self.bank_info = bank_content
         return bank_content, inventory_content
 
+    def get_hunting_hall_door_cell(self):
+        """
+        Returns the cell id of the hunting hall door, or False if there is none
+        :return: [cell_in, cell_out] or [False]
+        """
+        msg_id = self.add_command('getHuntingHallDoor')
+        return self.wait_for_return(msg_id)
+
     def enter_hunting_hall(self):
         """
         Uses the door to enter the hunting hall, then moves to the main room
         :return: Boolean
         """
         msg_id = self.add_command('goHuntingHall')
+        return self.wait_for_return(msg_id)
+
+    def exit_hunting_hall(self):
+        """
+        Goes back the the first room, and exits the hall
+        :return: Boolean
+        """
+        msg_id = self.add_command('exitHuntingHall')
         return self.wait_for_return(msg_id)
 
     def get_new_hunt(self, level):
@@ -302,10 +318,18 @@ class Interface:
         msg_id = self.add_command('abandonHunt')
         return self.wait_for_return(msg_id)
 
+    def get_hunt_start(self):
+        """
+        Returns the starting pos of the hunt
+        :return:
+        """
+        msg_id = self.add_command('getHuntStart')
+        return self.wait_for_return(msg_id)
+
     def get_hunt_clue(self):
         """
         Returns the clue the bot should be looking for
-        :return: String
+        :return: [clue : String, direction : 'n','s','w','e']
         """
         msg_id = self.add_command('getClue')
         return self.wait_for_return(msg_id)
