@@ -106,13 +106,27 @@ class LowLevelFunctions:
             conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                            database="wz3xj6_spec")
             cursor = conn.cursor()
-            put = (bot_id, name, occupation, current_map, worldmap)
+            put = (bot_id, name, occupation, str(current_map), worldmap)
             cursor.execute("""INSERT INTO Bots (BotId, Name, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s)""", put)
             conn.commit()
             conn.close()
         except Exception:
-            print
-            'Could not upload'
+            print('Could not upload')
+
+    def get_next_clue_pos(self, clue, current_pos, direction):
+        with open('..//Utils//TresureHuntClues.json', 'r') as f:
+            clues = json.load(f, encoding='latin-1')
+        clue_possible_pos = clues[clue.lower()]
+        direction_vector = {'n': (0, -1), 's': (0, 1), 'w': (-1, 0), 'e': (1, 0)}[direction]
+        found, i, checking_pos = False, 1, current_pos
+        while not found and i <= 10:
+            checking_pos = [checking_pos[j] + direction_vector[j] for j in range(2)]
+            if checking_pos in clue_possible_pos:
+                found = checking_pos
+        if found:
+            return found
+        else:
+            raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
 
 
 __author__ = 'Alexis'
