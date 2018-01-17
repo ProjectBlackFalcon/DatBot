@@ -277,5 +277,69 @@ class Interface:
         self.bank_info = bank_content
         return bank_content, inventory_content
 
+    def enter_hunting_hall(self):
+        """
+        Uses the door to enter the hunting hall, then moves to the main room
+        :return: Boolean
+        """
+        msg_id = self.add_command('goHuntingHall')
+        return self.wait_for_return(msg_id)
+
+    def get_new_hunt(self, level):
+        """
+        The bot gets a new hunt at the tresure hunt thing. It should already be standing at the right spot
+        :param level:
+        :return: Boolean
+        """
+        msg_id = self.add_command('newHunt', [level])
+        return self.wait_for_return(msg_id)
+
+    def abandon_hunt(self):
+        """
+        The bot drops the hunt
+        :return: Boolean
+        """
+        msg_id = self.add_command('abandonHunt')
+        return self.wait_for_return(msg_id)
+
+    def get_hunt_clue(self):
+        """
+        Returns the clue the bot should be looking for
+        :return: String
+        """
+        msg_id = self.add_command('getClue')
+        return self.wait_for_return(msg_id)
+
+    def validate_hunt_clue(self):
+        """
+        Validates the clue (the little flag in the gui)
+        :return: boolean
+        """
+        msg_id = self.add_command('validateClue')
+        return self.wait_for_return(msg_id)
+
+    def check_for_phorror(self):
+        """
+        If a phorror is on the map, return it's name
+        :return: String or False
+        """
+        msg_id = self.add_command('checkPhorror')
+        return self.wait_for_return(msg_id)
+
+    def validate_hunt_step(self):
+        """
+        Validates the full step.
+        :return: Boolean
+        """
+        msg_id = self.add_command('validateStep')
+        return self.wait_for_return(msg_id)
+
+    def start_hunt_fight(self):
+        """
+        Starts the fight
+        :return: Boolean
+        """
+        msg_id = self.add_command('huntFight')
+        return self.wait_for_return(msg_id)
 
 __author__ = 'Alexis'
