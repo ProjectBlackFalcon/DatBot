@@ -478,11 +478,11 @@ public class Network implements Runnable {
 				}
 				if (info.isJoinedFight())
 				{
-					for (int i = 0; i < this.getFight().monsters.size(); i++)
+					for (int i = 0; i < this.getFight().getMonsters().size(); i++)
 					{
-						if (this.getFight().monsters.get(i).getContextualId() == gameMapMovementMessage.getActorId())
+						if (this.getFight().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId())
 						{
-							this.getFight().monsters.get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
+							this.getFight().getMonsters().get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
 						}
 					} 
 					int cellId = gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1);
@@ -873,11 +873,11 @@ public class Network implements Runnable {
 				getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
 			break;
 			case 5921:
-				getFight().gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
-				getFight().gameFightSynchronizeMessage.Deserialize(dataReader);
+				getFight().setGameFightSynchronizeMessage(new GameFightSynchronizeMessage());
+				getFight().getGameFightSynchronizeMessage().Deserialize(dataReader);
 				if (!info.isInitFight())
 				{
-					getFight().sendToFightAlgo("s", new Object[] { getFight().init() }, getFight().entities);
+					getFight().sendToFightAlgo("s", new Object[] { getFight().init() }, getFight().getEntities());
 					info.setInitFight(true);
 				}
 			break;
@@ -917,11 +917,11 @@ public class Network implements Runnable {
 			case 1099:
 				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
 				gameActionFightDeathMessage.Deserialize(dataReader);
-				for (int i = 0; i < this.getFight().monsters.size(); i++)
+				for (int i = 0; i < this.getFight().getMonsters().size(); i++)
 				{
-					if (this.getFight().monsters.get(i).getContextualId() == gameActionFightDeathMessage.getTargetId())
+					if (this.getFight().getMonsters().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId())
 					{
-						this.getFight().monsters.get(i).setAlive(false);
+						this.getFight().getMonsters().get(i).setAlive(false);
 					}
 				} 
 			break;

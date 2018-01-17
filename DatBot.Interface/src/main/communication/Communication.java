@@ -71,9 +71,9 @@ public class Communication implements Runnable {
 				//Tests
 				modelConnexion.getReturn("0;0;i;cmd;getStats;[None]");
 				modelConnexion.getReturn("0;0;i;cmd;getResources;[None]");
-				modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
-				modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
-				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
+//				modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
+//				modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
+//				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
 				while(true){
 					System.out.println("Trying to launch fight ...");
 					Thread.sleep(2000);

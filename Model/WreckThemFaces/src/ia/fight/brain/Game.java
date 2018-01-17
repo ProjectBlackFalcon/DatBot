@@ -629,10 +629,11 @@ public class Game {
 				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
 			}else if(commandType.equals("c")) {
-				String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2] + ";" + parameters[3].replace("'", "") + ";" + parameters[4] + ";" + parameters[5]+";"+parameters[6];
-				Game.refresh(refreshMessage);
-				
-				Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+				if(parameters.length > 4){
+					String refreshMessage = parameters[0] +";" + commandType + ";" + parameters[1] + ";" + parameters[2] + ";" + parameters[3].replace("'", "") + ";" + parameters[4] + ";" + parameters[5]+";"+parameters[6];
+					Game.refresh(refreshMessage);
+					Game.com.println(command[0]+";"+command[1]+";"+command[2]+";rtn;[True]");
+				}				
 				returnInformation = command[0]+";"+command[1]+";"+command[2]+";rtn;[True]";
 			}else if(commandType.equals("g")) {
 				String bestTurn = Game.getBestTurn(new String[] {parameters[0], "g", "false"});

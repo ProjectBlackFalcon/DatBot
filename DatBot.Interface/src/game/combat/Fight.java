@@ -30,9 +30,9 @@ public class Fight {
 	// Init fight
 	public GameFightPlacementPossiblePositionsMessage gameFightPlacementPossiblePositionsMessage; // Available
 	public GameEntitiesDispositionMessage gameEntitiesDispositionMessage; // Disposition
-	public GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
-	public ArrayList<Player> entities = new ArrayList<>();
-	public List<GameFightMonsterInformations> monsters = new ArrayList<>();
+	private GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
+	private ArrayList<Player> entities;
+	private List<GameFightMonsterInformations> monsters;
 
 	public List<Double> turnListId;
 	public String spellToSend;
@@ -175,6 +175,8 @@ public class Fight {
 	 * @return String [id,teamId,posX,posY],...
 	 */
 	public String init(){
+		this.entities = new ArrayList<>();
+		this.monsters = new ArrayList<>();
 		Player player = null;
 		String toSend = "";
 		for(int i = 0; i < gameFightSynchronizeMessage.getFighters().size() ; i++){
@@ -415,5 +417,15 @@ public class Fight {
 	private Network getNetwork()
 	{
 		return network;
+	}
+
+	public List<GameFightMonsterInformations> getMonsters()
+	{
+		return monsters;
+	}
+
+	public void setMonsters(List<GameFightMonsterInformations> monsters)
+	{
+		this.monsters = monsters;
 	}
 }
