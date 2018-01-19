@@ -2,6 +2,9 @@ package main.communication;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Info;
 import protocol.network.Network;
 
@@ -10,10 +13,12 @@ public class Communication implements Runnable {
 	// <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
 	
 	private boolean displayPacket;
+	private List<Network> networks;
 
 	public Communication(boolean arg)
 	{
 		this.displayPacket = arg;
+		this.networks = new ArrayList<>();
 	}
 	
 
