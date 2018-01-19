@@ -7,8 +7,11 @@ import java.awt.Insets;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
@@ -127,6 +130,7 @@ public class Network implements Runnable {
 	private Socket socket;
 	private String ip = "213.248.126.40";
 	private int port = 5555;
+	private int botInstance = 0;
 	private Message message;
 	private List<Integer> Ticket;
 	// Log window
@@ -156,6 +160,7 @@ public class Network implements Runnable {
 
 	public Network(boolean displayPacket, Info info)
 	{
+		initLogs();
 		this.displayPacket = displayPacket;
 		try
 		{
@@ -197,7 +202,7 @@ public class Network implements Runnable {
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
 		//s = s.substring(0, i + 6);
-		System.out.println(s);
+		append(s);
 		return s;
 	}
 
@@ -206,7 +211,7 @@ public class Network implements Runnable {
 	{
 		try
 		{
-			append("Connection...", false);
+			append("Connection...");
 			if (displayPacket)
 			{
 				initComponent();
@@ -241,6 +246,27 @@ public class Network implements Runnable {
 		JScrollPane scroll = new JScrollPane(text);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		f.add(scroll);
+	}
+	
+	public PrintStream log;
+	public static PrintStream debug;
+	
+	/**
+	 * Inits all the logs.
+	 * 
+	 * @author baptiste
+	 */
+	public void initLogs() {
+		try {
+//			log = System.out;
+			log = new PrintStream(new FileOutputStream("log_network"+botInstance+".txt"));
+//			debug = new PrintStream(new FileOutputStream("debug.txt"));
+			debug = System.out;
+			System.setErr(debug);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	/**
@@ -292,9 +318,29 @@ public class Network implements Runnable {
 		else
 		{
 			String newSt = "[" + timing + "] " + str;
-			System.out.println(newSt);
+			log.println(str);
 		}
 	}
+	
+	public static void append(boolean str)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		String newSt = "[" + timing + "] " + str;
+		debug.println(newSt);
+	}
+	
+	
+	public static void append(String str)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		String newSt = "[" + timing + "] " + str;
+		debug.println(newSt);
+	}
+
 
 	public void reception() throws Exception
 	{
@@ -451,8 +497,8 @@ public class Network implements Runnable {
 					}
 					getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 					getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
-					append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]", false);
-					append("CellId : " + info.getCellId(), false);
+					Network.append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
+					Network.append("CellId : " + info.getCellId());
 					info.setWaitForMov(true);
 					info.setConnected(true);
 					info.setNewMap(true);
@@ -466,8 +512,7 @@ public class Network implements Runnable {
 				if (gameMapMovementMessage.getActorId() == info.getActorId())
 				{
 					info.setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-					append("D�placement r�ussi !", false);
-					append("CellId : " + info.getCellId(), false);
+					Network.append("Moving to cellId : " + info.getCellId());
 				}
 				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++)
 				{
@@ -817,7 +862,7 @@ public class Network implements Runnable {
 				}
 				if (!getFight().getSpellToSend().equals(""))
 				{
-					System.out.println("Spell send : " + getFight().getSpellToSend());
+					append("Spell send : " + getFight().getSpellToSend());
 					getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellToSend() });
 				}
 				if (info.isTurn())
@@ -883,7 +928,7 @@ public class Network implements Runnable {
 			break;
 			case 6465:
 				info.setTurn(true);
-				System.out.println("TUUUUUUUUUURRRRRRRRRRRRRRRRNNNNNNNNNNNNN");
+				append("TUUUUUUUUUURRRRRRRRRRRRRRRRNNNNNNNNNNNNN");
 				getFight().fightTurn();
 			break;
 			case 955:
@@ -953,14 +998,14 @@ public class Network implements Runnable {
 			}
 			if (bigPacketLengthToFull == 0)
 			{
-				// System.out.println("\n----------------------------------");
-				// System.out.println("[Re�u] ID = " + bigPacketId);
-				// System.out.println("[Re�u] ID = " + bigPacketId + " |
+				// this.network.append("\n----------------------------------");
+				// this.network.append("[Re�u] ID = " + bigPacketId);
+				// this.network.append("[Re�u] ID = " + bigPacketId + " |
 				// Taille
 				// du contenu = " + bigPacketData.length + "\n[Data] : " +
 				// bytesToString(bigPacketData, "%02X", false));
 				TreatPacket(bigPacketId, bigPacketData);
-				// System.out.println("\n----------------------------------");
+				// this.network.append("\n----------------------------------");
 				bigPacketData = null;
 				bigPacketId = 0;
 			}
@@ -975,13 +1020,13 @@ public class Network implements Runnable {
 			if (message.getId() != 0 && message.bigPacketLength == 0)
 			{
 				//
-				// System.out.println("\n----------------------------------");
-				// System.out.println("[Re�u] ID = " + message.getId());
-				// System.out.println("[Re�u] ID = " + message.getId() + " |
+				// this.network.append("\n----------------------------------");
+				// this.network.append("[Re�u] ID = " + message.getId());
+				// this.network.append("[Re�u] ID = " + message.getId() + " |
 				// Taille du contenu = " + message.getLength() + "\n[Data] : " +
 				// bytesToString(message.getData(), "%02X", false));
 				TreatPacket(message.getId(), message.getData());
-				// System.out.println("\n----------------------------------");
+				// this.network.append("\n----------------------------------");
 			}
 			else if (message.getId() != 0 && message.bigPacketLength != 0)
 			{

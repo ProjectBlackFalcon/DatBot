@@ -66,8 +66,8 @@ public class Movement{
         if(list.size() == 0) return null; // Can't go in this direction (Obstacles)
         Random r = new Random();
         int randomCellId = list.get(r.nextInt(list.size()));
-		this.getNetwork().append("Moving...",false);	
-		this.getNetwork().append("Direction : " + direction,false);
+//		this.getNetwork().append("Moving...",false);	
+//		this.getNetwork().append("Direction : " + direction,false);
         CellMovement move = MoveToCell(randomCellId);
         return new MapMovement(move, neighbourId,this.getNetwork());
 	}
@@ -95,12 +95,12 @@ public class Movement{
                 break;
         }
         if (num2 == -1 || neighbourId < 0) return null;
-        System.out.println((this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0);
-        System.out.println(this.network.getMap().NothingOnCell(cellId));
-        System.out.println(noObstacle(cellId));
+        this.network.append((this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0);
+        this.network.append(this.network.getMap().NothingOnCell(cellId));
+        this.network.append(noObstacle(cellId));
         if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
-        	this.getNetwork().append("Moving...",false);	
-        	this.getNetwork().append("Direction : " + direction,false);
+//        	Network.d("Moving...");	
+//        	this.getNetwork().append("Direction : " + direction,false);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId,this.getNetwork());
         } else if (this.network.getInfo().getCellId() == cellId){
@@ -129,7 +129,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-			this.getNetwork().append("Vous �tes arriv� !",false);
+//			this.getNetwork().append("Vous �tes arriv� !",false);
 			return;
 		}
 		
@@ -148,11 +148,11 @@ public class Movement{
 			blocked.add(new int[] {-8+95,-28+100});
 			blocked.add(new int[] {-9+95,-28+100});
 		}
-//		System.out.println("Size blocked : " + blocked.size());
-//		System.out.println("Map : " + (xCurrentMap) + ";" + (yCurrentMap));
+//		this.network.append("Size blocked : " + blocked.size());
+//		this.network.append("Map : " + (xCurrentMap) + ";" + (yCurrentMap));
 //		
 //		for (int[] is : blocked) {
-//			System.out.println("2	" + (is[0]) + ";" + (is[1]));
+//			this.network.append("2	" + (is[0]) + ";" + (is[1]));
 //		}
 		
 		boolean north = false;
@@ -205,7 +205,7 @@ public class Movement{
         new Astar(xCurrentMap, yCurrentMap, x + 95, y + 100, blocked, true);
         
 //		for (int[] is : blocked) {
-//			System.out.println("2	" + (is[0]-95) + ";" + (is[1]-100));
+//			this.network.append("2	" + (is[0]-95) + ";" + (is[1]-100));
 //		}
 		        
         for (int i = 0; i < Astar.pathString.size() ; i++) {
@@ -213,15 +213,15 @@ public class Movement{
         		Thread.sleep(500);
     		}
     		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-    			this.getNetwork().append("Vous �tes arriv� !",false);
+//    			this.getNetwork().append("Vous �tes arriv� !",false);
     			return;
     		}
     		xCurrentMap = this.network.getInfo().getCoords()[0] + 95; 
     		yCurrentMap = this.network.getInfo().getCoords()[1] + 100;
 			MapMovement mov = ChangeMap(Astar.pathString.get(i));
 			if (mov == null) {
-				this.getNetwork().append("D�placement impossible ! Un obstacle bloque le chemin !",false);
-				this.getNetwork().append("Cr�ation d'un nouveau chemin...",false);
+//				this.getNetwork().append("D�placement impossible ! Un obstacle bloque le chemin !",false);
+//				this.getNetwork().append("Cr�ation d'un nouveau chemin...",false);
 				if(Astar.pathString.get(i).equals("North")){
 					if(x+95 == xCurrentMap && y+100 == yCurrentMap-1){
 						blocked.add(new int[] {xCurrentMap, yCurrentMap});
@@ -267,7 +267,7 @@ public class Movement{
     		Thread.sleep(500);
 		}
 		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-			this.getNetwork().append("Vous �tes arriv� !",false);
+//			this.getNetwork().append("Vous �tes arriv� !",false);
 			return;
 		}
 	}

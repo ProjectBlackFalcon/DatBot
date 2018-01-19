@@ -10,12 +10,12 @@ public class Test {
 	public static void main(String[] args) throws Exception
 	{
 //		new GameData();
-//		System.out.println(GameData.getMapPositions().get(0));
+//		this.network.append(GameData.getMapPositions().get(0));
 //		GameData.getWorldMap(0);
 
 //		MapManager manager = new MapManager("C:\\Users\\baptiste\\Documents\\DofusBot\\DatBot\\DatBot.Interface\\utils\\maps");
 //		Map map = manager.FromId(84673538);
-//		System.out.println(map);
+//		this.network.append(map);
 
 
 		boolean arg = false;

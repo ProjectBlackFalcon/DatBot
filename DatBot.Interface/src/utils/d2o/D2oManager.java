@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import protocol.network.Network;
 import protocol.network.util.DofusDataReader;
 
 public class D2oManager {
@@ -106,7 +107,7 @@ public class D2oManager {
 		String className = reader.readUTF();
 		String packageName = reader.readUTF();
 		GameDataClassDefinition classDefinition = new GameDataClassDefinition(packageName, className);
-//		System.out.println(String.format("ClassId: %s ClassMemberName: %s ClassPkgName %s", classId, className, packageName));
+//		this.network.append(String.format("ClassId: %s ClassMemberName: %s ClassPkgName %s", classId, className, packageName));
 		int fieldsCount = reader.readInt();
 		int i = 0;
 		while (i < fieldsCount)
@@ -121,8 +122,8 @@ public class D2oManager {
 	{
 		for (Entry<Integer, Integer> objectPointer : this.objectPointerTable.entrySet())
 		{
-			System.out.println(String.format("Class %s, Object Id %s:", this.classDefinitions.get(getClassId(objectPointer.getKey().intValue())), objectPointer.getKey()));
-			System.out.println(unpacker.getObjectJsonString(objectPointer.getKey()));
+			Network.append(String.format("Class %s, Object Id %s:", this.classDefinitions.get(getClassId(objectPointer.getKey().intValue())), objectPointer.getKey()));
+			Network.append(unpacker.getObjectJsonString(objectPointer.getKey()));
 		}
 	}
 
@@ -137,13 +138,13 @@ public class D2oManager {
 	{
 		if (this.classDefinitions.size() > 0)
 		{
-			System.out.println(String.format("Printing %s class tables.", classDefinitions.size()));
-			System.out.println();
+			Network.append(String.format("Printing %s class tables.", classDefinitions.size()));
+			Network.append("");
 
 			for (Entry<Integer, GameDataClassDefinition> classDefinition : this.classDefinitions.entrySet())
 			{
-				System.out.println(String.format("Class id:%s - name %s", classDefinition.getKey(), classDefinition.getValue().Name));
-				System.out.println();
+				Network.append(String.format("Class id:%s - name %s", classDefinition.getKey(), classDefinition.getValue().Name));
+				Network.append("");
 
 				for (GameDataField field : classDefinition.getValue().Fields)
 				{
@@ -162,7 +163,7 @@ public class D2oManager {
 
 	private void printField(String fieldString)
 	{
-		System.out.println(fieldString);
+		Network.append(fieldString);
 	}
 
 	private String getFieldTypeString(GameDataField field)
@@ -180,7 +181,7 @@ public class D2oManager {
 	private String getCompositeFieldTypeString(GameDataField field)
 	{
 		StringBuilder compositeFieldTypeBuilder = new StringBuilder();
-		System.out.println(field.innerField.fieldType);
+		Network.append(field.innerField.fieldType);
 		compositeFieldTypeBuilder.append("vector").append("<").append(getFieldTypeString(field.innerField)).append(">");
 		return compositeFieldTypeBuilder.toString();
 	}

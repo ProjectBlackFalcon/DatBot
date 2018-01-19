@@ -217,7 +217,7 @@ public class Astar {
                   grid[i][j].heuristicCost = Math.abs(i-endI)+Math.abs(j-endJ);
 //                  System.out.print(grid[i][j].heuristicCost+" ");
               }
-//              System.out.println();
+//              this.network.append();
            }
            grid[si][sj].finalCost = 0;
            
@@ -230,7 +230,7 @@ public class Astar {
            }
            
            //Display initial map
-           System.out.println("Grid: ");
+           Network.append("Grid: ");
             for(int i=0;i<x;++i){
                 for(int j=0;j<y;++j){
                    if(i==si&&j==sj)System.out.print("SO  "); //Source
@@ -238,25 +238,25 @@ public class Astar {
                    else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
                    else System.out.print("BL  "); 
                 }
-                System.out.println();
+                Network.append("");
             } 
-            System.out.println();
+            Network.append("");
            
            AStarDiag(); 
-           System.out.println("\nScores for cells: ");
+           Network.append("\nScores for cells: ");
            for(int i=0;i<x;++i){
                for(int j=0;j<y;++j){
                    if(grid[i][j]!=null) System.out.printf("%-3d ", grid[i][j].finalCost);
                    else System.out.print("BL  ");
                }
-               System.out.println();
+               Network.append("");
            }
-           System.out.println("COST : " + grid[ei][ej].finalCost);
-           System.out.println();
+           Network.append("COST : " + grid[ei][ej].finalCost);
+           Network.append("");
            ArrayList<int[]> path = null;
            if(closed[endI][endJ]){
                //Trace back the path 
-                System.out.println("Path: ");
+                Network.append("Path: ");
                 Cell current = grid[endI][endJ];
                 System.out.print(current);
                 path = new ArrayList<int[]>();
@@ -266,9 +266,9 @@ public class Astar {
                     current = current.parent;
                     path.add(new int[]{current.i,current.j});
                 } 
-                System.out.println();
+                Network.append("");
                 //Display final map
-                System.out.println("Final: ");
+                Network.append("Final: ");
                  for(int i=0;i<x;++i){
                      for(int j=0;j<y;++j){
                      	 boolean pathTrue = false;
@@ -281,11 +281,11 @@ public class Astar {
                         else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
                         else System.out.print("BL  "); 
                      }
-                     System.out.println();
+                     Network.append("");
                  } 
-                 System.out.println();
+                 Network.append("");
            }else{
-        	   System.out.println("No possible path");
+        	   Network.append("No possible path");
            }
     }
     
@@ -333,7 +333,7 @@ public class Astar {
         }
         
 //      //Display initial map
-//        System.out.println("Grid: ");
+//        this.network.append("Grid: ");
 //         for(int i=0;i<x;++i){
 //             for(int j=0;j<y;++j){
 //                if(i==si&&j==sj)System.out.print("SO  "); //Source
@@ -341,9 +341,9 @@ public class Astar {
 //                else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
 //                else System.out.print("BL  "); 
 //             }
-//             System.out.println();
+//             this.network.append();
 //         } 
-//         System.out.println();
+//         this.network.append();
         
         AStarNoDiag(); 
         
@@ -432,7 +432,7 @@ public class Astar {
 //    public static void main(String[] args) throws Exception{   
 //        List<int[]> blocked = new ArrayList<int[]>();
 //        JSON json = new JSON("MapInfo", 84673538);
-//        System.out.println("Coords : " + json.coords);
+//        this.network.append("Coords : " + json.coords);
 //        for (int i = 0; i < json.cells.size(); i++){
 //        	for (int j = 0; j < json.cells.get(0).size() ; j++){
 //        		if (((Number) json.cells.get(i).get(j)).intValue() == 1  || ((Number) json.cells.get(i).get(j)).intValue() == 2  ){
@@ -493,7 +493,7 @@ public class Astar {
 //        for (int[] is : Astar.path) {
 //			patha += new String("->[" + is[0] + ";" + is[1] + "]");
 //		}
-//        System.out.println(patha);
+//        this.network.append(patha);
         
         if(isMapMonde){
             pathString = new ArrayList<String>();
