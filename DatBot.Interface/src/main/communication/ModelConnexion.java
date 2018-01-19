@@ -147,7 +147,7 @@ public class ModelConnexion implements Runnable {
 				if (mapMovement == null)
 				{
 					toSend = new Object[] { "False" };
-					getNetwork().append("D�placement impossible ! Un obstacle bloque le chemin !",false);
+					Network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 				}
 				else
 				{
@@ -495,10 +495,10 @@ public class ModelConnexion implements Runnable {
 		{
 			Thread.sleep(50);
 		}
-		// System.out.println((!Info.newMap && !Info.Storage &&
+		// this.network.append((!Info.newMap && !Info.Storage &&
 		// !Info.StorageUpdate && !Info.leaveExchange)
 		// && !Info.basicNoOperationMsg);
-		// System.out.println(Info.newMap + " " + Info.Storage + " " +
+		// this.network.append(Info.newMap + " " + Info.Storage + " " +
 		// Info.StorageUpdate + " " + Info.leaveExchange + " "
 		// + Info.basicNoOperationMsg);
 		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())

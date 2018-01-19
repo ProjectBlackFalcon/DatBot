@@ -122,7 +122,7 @@ public class Fight {
 	 */
 	public void endTurn() throws Exception
 	{
-		System.out.println("Ending turn");
+		Network.append("Ending turn");
 		network.sendToServer(new GameFightTurnFinishMessage(false), GameFightTurnFinishMessage.ProtocolId, "End turn");
 	}
 
@@ -134,7 +134,7 @@ public class Fight {
 	 */
 	public boolean moveTo(int cellId) throws Exception
 	{
-		System.out.println("Moving to " + cellId);
+		this.network.append("Moving to " + cellId);
 		CellMovement mov = this.getNetwork().getMovement().MoveToCell(cellId);
 		if (mov == null || mov.path == null)
 		{
@@ -164,7 +164,7 @@ public class Fight {
 	 * @author baptiste
 	 */
 	public void castSpell(int id, int cellId) throws Exception{
-		System.out.println("Casting " + id + " to " + cellId);
+		this.network.append("Casting " + id + " to " + cellId);
 		GameActionFightCastRequestMessage gameActionFightCastRequestMessage = new GameActionFightCastRequestMessage(id, cellId);
 		network.sendToServer(gameActionFightCastRequestMessage, GameActionFightCastRequestMessage.ProtocolId, "Cast spell");
 	}
@@ -291,7 +291,7 @@ public class Fight {
 			if(m.isAlive()) isMonstersAlive = true;
 		}
 		if(!isMonstersAlive) return;
-		System.out.println("SEND TO LYSOU");
+		this.network.append("SEND TO LYSOU");
 		String s = sendToFightAlgo("g", new Object[] { getId(this.network.getInfo().getActorId()) });
 		String[] message = s.split(";");
 		this.network.getInfo().setMsgIdFight(Integer.parseInt(message[1]));
@@ -301,7 +301,7 @@ public class Fight {
 		}
 		String[] cmd = message[4].split(",");
 		for(String s2 : cmd){
-			System.out.println(s2);
+			this.network.append(s2);
 		}
 		new Thread(new Runnable() {
             public void run() {
@@ -338,10 +338,10 @@ public class Fight {
 		{
 			Thread.sleep(50);
 		}
-		// System.out.println((!Info.newMap && !Info.Storage &&
+		// this.network.append((!Info.newMap && !Info.Storage &&
 		// !Info.StorageUpdate && !Info.leaveExchange)
 		// && !Info.basicNoOperationMsg);
-		// System.out.println(Info.newMap + " " + Info.Storage + " " +
+		// this.network.append(Info.newMap + " " + Info.Storage + " " +
 		// Info.StorageUpdate + " " + Info.leaveExchange + " "
 		// + Info.basicNoOperationMsg);
 		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())

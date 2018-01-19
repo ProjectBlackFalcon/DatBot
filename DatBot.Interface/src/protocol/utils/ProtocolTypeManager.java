@@ -1,5 +1,6 @@
 package protocol.utils;
 
+import protocol.network.Network;
 import protocol.network.NetworkMessage;
 import protocol.network.types.common.basic.StatisticData;
 import protocol.network.types.common.basic.StatisticDataBoolean;
@@ -364,7 +365,7 @@ public class ProtocolTypeManager {
         case 487 : objectValue = new StatisticDataString(); break;
         case 486 : objectValue = new StatisticDataByte(); break;
 	    default:
-	        System.out.println(("[ProtocolTypeManager] ID (" 
+	        Network.append(("[ProtocolTypeManager] ID (" 
 	                        + (id + ") absent.")));
 	        break;
 	}

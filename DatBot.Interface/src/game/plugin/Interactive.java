@@ -57,7 +57,7 @@ public class Interactive {
 				for (int k = 0; k < this.getMap().getLayers().get(i).getCells().get(j).getElementsCount(); k++) {
 					if(((GraphicalElement) this.getMap().getLayers().get(i).getCells().get(j).getElements().get(k)).getElementId() == 34708){
 						cellsIdRosette.add((int) this.getMap().getLayers().get(i).getCells().get(j).getCellId());
-						System.out.println("Rosace : " + this.getMap().getLayers().get(i).getCells().get(j).getCellId());
+						this.network.append("Rosace : " + this.getMap().getLayers().get(i).getCells().get(j).getCellId());
 					}	
 				}
 			}
@@ -79,7 +79,7 @@ public class Interactive {
 						if (this.getMap().getLayers().get(i).getCells().get(j).getCellId() == element.getElementCellId()) {
 							if (((GraphicalElement) this.getMap().getLayers().get(i).getCells().get(j).getElements().get(k)).getIdentifier() == element.getElementId()) {
 								farmCell += "("+element.getElementCellId()+","+((GraphicalElement) this.getMap().getLayers().get(i).getCells().get(j).getElements().get(k)).getElementId() +","+element.getElementState()+"), ";
-//								System.out.println(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
+//								this.network.append(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
 							}
 						}
 					}

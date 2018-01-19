@@ -69,9 +69,9 @@ public class Communication implements Runnable {
 					index += 1;
 					if (index == 30) { throw new java.lang.Error("Connection timed out"); }
 				}
-				network.append("Connected !", false);
-				network.append("Name : " + info.getName(), false);
-				network.append("Level : " + info.getLvl(), false);
+				Network.append("Connected !");
+				Network.append("Name : " + info.getName());
+				Network.append("Level : " + info.getLvl());
 				toSend = new Object[] { "true" };
 				//Tests
 				modelConnexion.getReturn("0;0;i;cmd;getStats;[None]");
@@ -80,7 +80,7 @@ public class Communication implements Runnable {
 //				modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
 //				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
 				while(true){
-					System.out.println("Trying to launch fight ...");
+					Network.append("Trying to launch fight ...");
 					Thread.sleep(2000);
 					if(network.getMonsters().getMonsters().size() > 0 && !network.getInfo().isJoinedFight()){
 						modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
@@ -107,7 +107,7 @@ public class Communication implements Runnable {
 				newParam += param[i] + ", ";
 			}
 		}
-		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
+		Network.debug.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
 	}
 	
 	public void getReturn(String s) throws NumberFormatException, Exception
