@@ -162,8 +162,8 @@ public class Network implements Runnable {
 
 	public Network(boolean displayPacket, Info info, int botInstance)
 	{
-		initLogs();
 		this.botInstance = botInstance;
+		initLogs();
 		this.displayPacket = displayPacket;
 		try
 		{
@@ -1225,21 +1225,6 @@ public class Network implements Runnable {
 		SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage(LatencyFrame.Sequence++);
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
 	}
-
-	// private static void HandleObjectAveragePricesGetMessage() throws
-	// Exception
-	// {
-	// // Send object average price request
-	// // sendToServer(new NetworkMessageEmpty(), 6334, "Object average price
-	// // request");
-	// // Send Quest List Request
-	// // sendToServer(new NetworkMessageEmpty(), 5623, "Quest list request");
-	// // Send Channel enabling message
-	// // ChannelEnablingMessage channelEnablingMessage = new
-	// // ChannelEnablingMessage((byte) 7, false);
-	// // sendToServer(channelEnablingMessage,
-	// // ChannelEnablingMessage.ProtocolId, "Channel enabling");
-	// }
 
 	private void HandleMapRequestMessage(double mapId) throws Exception
 	{

@@ -31,15 +31,15 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
-		communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
+//		communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
 
-		while (true)
-		{
-			Thread.sleep(2000);
-			// new Scanner(System.in);
-			communication.getReturn("0;0;i;cmd;getMap;[None]");
-			communication.getReturn("1;0;i;cmd;getMap;[None]");
-		}
+//		while (true)
+//		{
+//			Thread.sleep(2000);
+//			// new Scanner(System.in);
+//			communication.getReturn("0;0;i;cmd;getMap;[None]");
+//			communication.getReturn("1;0;i;cmd;getMap;[None]");
+//		}
 
 		// TESTS FOR INPUTS
 
