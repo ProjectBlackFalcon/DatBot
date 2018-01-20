@@ -6,6 +6,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="Model/WreckThemFaces/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="DatBot.Interface/utils/netty-all-4.1.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/baptiste/Documents/DofusBot/DatBot/DatBot.Interface/utils/mina-core-2.0.9.jar"/>
+	<classpathentry kind="lib" path="DatBot.Interface/utils/mina-core-2.0.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

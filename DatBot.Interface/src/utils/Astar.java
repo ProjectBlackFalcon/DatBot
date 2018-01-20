@@ -193,101 +193,101 @@ public class Astar {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static void test(int si, int sj, int ei, int ej, int[][] blocked){
-    	   int x = 40; int y = 14;
-            //Reset
-           grid = new Cell[x][y];
-           closed = new boolean[x][y];
-           open = new PriorityQueue<>((Object o1, Object o2) -> {
-                Cell c1 = (Cell)o1;
-                Cell c2 = (Cell)o2;
-
-                return c1.finalCost<c2.finalCost?-1:
-                        c1.finalCost>c2.finalCost?1:0;
-            });
-           //Set start position
-           setStartCell(si, sj);  //Setting to 0,0 by default. Will be useful for the UI part
-           
-           //Set End Location
-           setEndCell(ei, ej); 
-           
-           for(int i=0;i<x;++i){
-              for(int j=0;j<y;++j){
-                  grid[i][j] = new Cell(i, j);
-                  grid[i][j].heuristicCost = Math.abs(i-endI)+Math.abs(j-endJ);
-//                  System.out.print(grid[i][j].heuristicCost+" ");
-              }
-//              System.out.println();
-           }
-           grid[si][sj].finalCost = 0;
-           
-           /*
-             Set blocked cells. Simply set the cell values to null
-             for blocked cells.
-           */
-           for(int i=0;i<blocked.length;++i){
-               setBlocked(blocked[i][0], blocked[i][1]);
-           }
-           
-           //Display initial map
-           System.out.println("Grid: ");
-            for(int i=0;i<x;++i){
-                for(int j=0;j<y;++j){
-                   if(i==si&&j==sj)System.out.print("SO  "); //Source
-                   else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
-                   else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
-                   else System.out.print("BL  "); 
-                }
-                System.out.println();
-            } 
-            System.out.println();
-           
-           AStarDiag(); 
-           System.out.println("\nScores for cells: ");
-           for(int i=0;i<x;++i){
-               for(int j=0;j<y;++j){
-                   if(grid[i][j]!=null) System.out.printf("%-3d ", grid[i][j].finalCost);
-                   else System.out.print("BL  ");
-               }
-               System.out.println();
-           }
-           System.out.println("COST : " + grid[ei][ej].finalCost);
-           System.out.println();
-           ArrayList<int[]> path = null;
-           if(closed[endI][endJ]){
-               //Trace back the path 
-                System.out.println("Path: ");
-                Cell current = grid[endI][endJ];
-                System.out.print(current);
-                path = new ArrayList<int[]>();
-                path.add(new int[]{current.i,current.j});
-                while(current.parent!=null){
-                    System.out.print(" -> "+current.parent + "(" + (current.parent.i*14+current.parent.j) + ")");
-                    current = current.parent;
-                    path.add(new int[]{current.i,current.j});
-                } 
-                System.out.println();
-                //Display final map
-                System.out.println("Final: ");
-                 for(int i=0;i<x;++i){
-                     for(int j=0;j<y;++j){
-                     	 boolean pathTrue = false;
-                          for (int[] is : path) {
-                 			if(is[0] == i && is[1] == j) pathTrue = true;
-                          }
-                        if(i==si&&j==sj)System.out.print("SO  "); //Source
-                        else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
-                        else if(pathTrue)System.out.printf("%-3d ", 1);
-                        else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
-                        else System.out.print("BL  "); 
-                     }
-                     System.out.println();
-                 } 
-                 System.out.println();
-           }else{
-        	   System.out.println("No possible path");
-           }
-    }
+//    public static void test(int si, int sj, int ei, int ej, int[][] blocked){
+//    	   int x = 40; int y = 14;
+//            //Reset
+//           grid = new Cell[x][y];
+//           closed = new boolean[x][y];
+//           open = new PriorityQueue<>((Object o1, Object o2) -> {
+//                Cell c1 = (Cell)o1;
+//                Cell c2 = (Cell)o2;
+//
+//                return c1.finalCost<c2.finalCost?-1:
+//                        c1.finalCost>c2.finalCost?1:0;
+//            });
+//           //Set start position
+//           setStartCell(si, sj);  //Setting to 0,0 by default. Will be useful for the UI part
+//           
+//           //Set End Location
+//           setEndCell(ei, ej); 
+//           
+//           for(int i=0;i<x;++i){
+//              for(int j=0;j<y;++j){
+//                  grid[i][j] = new Cell(i, j);
+//                  grid[i][j].heuristicCost = Math.abs(i-endI)+Math.abs(j-endJ);
+////                  System.out.print(grid[i][j].heuristicCost+" ");
+//              }
+////              this.network.append();
+//           }
+//           grid[si][sj].finalCost = 0;
+//           
+//           /*
+//             Set blocked cells. Simply set the cell values to null
+//             for blocked cells.
+//           */
+//           for(int i=0;i<blocked.length;++i){
+//               setBlocked(blocked[i][0], blocked[i][1]);
+//           }
+//           
+//           //Display initial map
+//           Network.append("Grid: ");
+//            for(int i=0;i<x;++i){
+//                for(int j=0;j<y;++j){
+//                   if(i==si&&j==sj)System.out.print("SO  "); //Source
+//                   else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
+//                   else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
+//                   else System.out.print("BL  "); 
+//                }
+//                Network.append("");
+//            } 
+//            Network.append("");
+//           
+//           AStarDiag(); 
+//           Network.append("\nScores for cells: ");
+//           for(int i=0;i<x;++i){
+//               for(int j=0;j<y;++j){
+//                   if(grid[i][j]!=null) System.out.printf("%-3d ", grid[i][j].finalCost);
+//                   else System.out.print("BL  ");
+//               }
+//               Network.append("");
+//           }
+//           Network.append("COST : " + grid[ei][ej].finalCost);
+//           Network.append("");
+//           ArrayList<int[]> path = null;
+//           if(closed[endI][endJ]){
+//               //Trace back the path 
+//                Network.append("Path: ");
+//                Cell current = grid[endI][endJ];
+//                System.out.print(current);
+//                path = new ArrayList<int[]>();
+//                path.add(new int[]{current.i,current.j});
+//                while(current.parent!=null){
+//                    System.out.print(" -> "+current.parent + "(" + (current.parent.i*14+current.parent.j) + ")");
+//                    current = current.parent;
+//                    path.add(new int[]{current.i,current.j});
+//                } 
+//                Network.append("");
+//                //Display final map
+//                Network.append("Final: ");
+//                 for(int i=0;i<x;++i){
+//                     for(int j=0;j<y;++j){
+//                     	 boolean pathTrue = false;
+//                          for (int[] is : path) {
+//                 			if(is[0] == i && is[1] == j) pathTrue = true;
+//                          }
+//                        if(i==si&&j==sj)System.out.print("SO  "); //Source
+//                        else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
+//                        else if(pathTrue)System.out.printf("%-3d ", 1);
+//                        else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
+//                        else System.out.print("BL  "); 
+//                     }
+//                     Network.append("");
+//                 } 
+//                 Network.append("");
+//           }else{
+//        	   Network.append("No possible path");
+//           }
+//    }
     
     
     /*
@@ -333,7 +333,7 @@ public class Astar {
         }
         
 //      //Display initial map
-//        System.out.println("Grid: ");
+//        this.network.append("Grid: ");
 //         for(int i=0;i<x;++i){
 //             for(int j=0;j<y;++j){
 //                if(i==si&&j==sj)System.out.print("SO  "); //Source
@@ -341,9 +341,9 @@ public class Astar {
 //                else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
 //                else System.out.print("BL  "); 
 //             }
-//             System.out.println();
+//             this.network.append();
 //         } 
-//         System.out.println();
+//         this.network.append();
         
         AStarNoDiag(); 
         
@@ -432,7 +432,7 @@ public class Astar {
 //    public static void main(String[] args) throws Exception{   
 //        List<int[]> blocked = new ArrayList<int[]>();
 //        JSON json = new JSON("MapInfo", 84673538);
-//        System.out.println("Coords : " + json.coords);
+//        this.network.append("Coords : " + json.coords);
 //        for (int i = 0; i < json.cells.size(); i++){
 //        	for (int j = 0; j < json.cells.get(0).size() ; j++){
 //        		if (((Number) json.cells.get(i).get(j)).intValue() == 1  || ((Number) json.cells.get(i).get(j)).intValue() == 2  ){
@@ -493,7 +493,7 @@ public class Astar {
 //        for (int[] is : Astar.path) {
 //			patha += new String("->[" + is[0] + ";" + is[1] + "]");
 //		}
-//        System.out.println(patha);
+//        this.network.append(patha);
         
         if(isMapMonde){
             pathString = new ArrayList<String>();

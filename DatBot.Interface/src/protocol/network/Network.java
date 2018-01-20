@@ -7,8 +7,11 @@ import java.awt.Insets;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
@@ -45,6 +48,7 @@ import game.plugin.Stats;
 import ia.fight.map.CreateMap;
 import io.netty.util.internal.ThreadLocalRandom;
 import main.communication.Communication;
+import main.communication.ModelConnexion;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
 import protocol.network.messages.connection.IdentificationFailedMessage;
@@ -127,6 +131,8 @@ public class Network implements Runnable {
 	private Socket socket;
 	private String ip = "213.248.126.40";
 	private int port = 5555;
+	private int botInstance = 0;
+	private ModelConnexion modelConnexion;
 	private Message message;
 	private List<Integer> Ticket;
 	// Log window
@@ -154,8 +160,10 @@ public class Network implements Runnable {
 	private MapManager mapManager;
 	private Map map;
 
-	public Network(boolean displayPacket, Info info)
+	public Network(boolean displayPacket, Info info, int botInstance)
 	{
+		this.botInstance = botInstance;
+		initLogs();
 		this.displayPacket = displayPacket;
 		try
 		{
@@ -173,9 +181,10 @@ public class Network implements Runnable {
 		this.bank = new Bank();
 		this.npc = new Npc();
 		this.movement = new Movement(this);
-		this.setMonsters(new Monsters());
+		this.monsters = new Monsters();
 		try
 		{
+			this.modelConnexion = new ModelConnexion(this);
 			socket = new Socket(this.ip, this.port);
 			if (socket.isConnected())
 			{
@@ -190,6 +199,10 @@ public class Network implements Runnable {
 		{
 			e.printStackTrace();
 		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public String getPathDatBot(){
@@ -197,7 +210,6 @@ public class Network implements Runnable {
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
 		//s = s.substring(0, i + 6);
-		System.out.println(s);
 		return s;
 	}
 
@@ -206,7 +218,7 @@ public class Network implements Runnable {
 	{
 		try
 		{
-			append("Connection...", false);
+			append("Connection...");
 			if (displayPacket)
 			{
 				initComponent();
@@ -241,6 +253,26 @@ public class Network implements Runnable {
 		JScrollPane scroll = new JScrollPane(text);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		f.add(scroll);
+	}
+	
+	public PrintStream log;
+	public static PrintStream debug;
+	
+	/**
+	 * Inits all the logs.
+	 * 
+	 * @author baptiste
+	 */
+	public void initLogs() {
+		try {
+//			log = System.out;
+			log = new PrintStream(new FileOutputStream("log_network"+botInstance+".txt"));
+//			debug = new PrintStream(new FileOutputStream("debug.txt"));
+			debug = System.out;
+			System.setErr(debug);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	/**
@@ -291,8 +323,47 @@ public class Network implements Runnable {
 		}
 		else
 		{
-			String newSt = "[" + timing + "] " + str;
-			System.out.println(newSt);
+			String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
+			log.println(newSt);
+		}
+	}
+	
+	public void append(boolean str)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
+		debug.println(newSt);
+	}
+	
+	
+	public void append(String str)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
+		debug.println(newSt);
+	}
+	
+	public static void append1(String str)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		String newSt = "[" + timing + "] " + str;
+		debug.println(newSt);
+	}
+
+	public void getReturn(String [] message){
+		try
+		{
+			this.modelConnexion.getReturn(message);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -451,8 +522,8 @@ public class Network implements Runnable {
 					}
 					getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 					getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
-					append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]", false);
-					append("CellId : " + info.getCellId(), false);
+					append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
+					append("CellId : " + info.getCellId());
 					info.setWaitForMov(true);
 					info.setConnected(true);
 					info.setNewMap(true);
@@ -466,8 +537,7 @@ public class Network implements Runnable {
 				if (gameMapMovementMessage.getActorId() == info.getActorId())
 				{
 					info.setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-					append("D�placement r�ussi !", false);
-					append("CellId : " + info.getCellId(), false);
+					append("Moving to cellId : " + info.getCellId());
 				}
 				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++)
 				{
@@ -817,7 +887,7 @@ public class Network implements Runnable {
 				}
 				if (!getFight().getSpellToSend().equals(""))
 				{
-					System.out.println("Spell send : " + getFight().getSpellToSend());
+					append("Spell send : " + getFight().getSpellToSend());
 					getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellToSend() });
 				}
 				if (info.isTurn())
@@ -857,12 +927,10 @@ public class Network implements Runnable {
 						}
 						catch (InterruptedException e)
 						{
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						catch (Exception e)
 						{
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -883,7 +951,7 @@ public class Network implements Runnable {
 			break;
 			case 6465:
 				info.setTurn(true);
-				System.out.println("TUUUUUUUUUURRRRRRRRRRRRRRRRNNNNNNNNNNNNN");
+				append("TUUUUUUUUUURRRRRRRRRRRRRRRRNNNNNNNNNNNNN");
 				getFight().fightTurn();
 			break;
 			case 955:
@@ -953,14 +1021,14 @@ public class Network implements Runnable {
 			}
 			if (bigPacketLengthToFull == 0)
 			{
-				// System.out.println("\n----------------------------------");
-				// System.out.println("[Re�u] ID = " + bigPacketId);
-				// System.out.println("[Re�u] ID = " + bigPacketId + " |
+				// this.network.append("\n----------------------------------");
+				// this.network.append("[Re�u] ID = " + bigPacketId);
+				// this.network.append("[Re�u] ID = " + bigPacketId + " |
 				// Taille
 				// du contenu = " + bigPacketData.length + "\n[Data] : " +
 				// bytesToString(bigPacketData, "%02X", false));
 				TreatPacket(bigPacketId, bigPacketData);
-				// System.out.println("\n----------------------------------");
+				// this.network.append("\n----------------------------------");
 				bigPacketData = null;
 				bigPacketId = 0;
 			}
@@ -975,13 +1043,13 @@ public class Network implements Runnable {
 			if (message.getId() != 0 && message.bigPacketLength == 0)
 			{
 				//
-				// System.out.println("\n----------------------------------");
-				// System.out.println("[Re�u] ID = " + message.getId());
-				// System.out.println("[Re�u] ID = " + message.getId() + " |
+				// this.network.append("\n----------------------------------");
+				// this.network.append("[Re�u] ID = " + message.getId());
+				// this.network.append("[Re�u] ID = " + message.getId() + " |
 				// Taille du contenu = " + message.getLength() + "\n[Data] : " +
 				// bytesToString(message.getData(), "%02X", false));
 				TreatPacket(message.getId(), message.getData());
-				// System.out.println("\n----------------------------------");
+				// this.network.append("\n----------------------------------");
 			}
 			else if (message.getId() != 0 && message.bigPacketLength != 0)
 			{
@@ -1158,21 +1226,6 @@ public class Network implements Runnable {
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
 	}
 
-	// private static void HandleObjectAveragePricesGetMessage() throws
-	// Exception
-	// {
-	// // Send object average price request
-	// // sendToServer(new NetworkMessageEmpty(), 6334, "Object average price
-	// // request");
-	// // Send Quest List Request
-	// // sendToServer(new NetworkMessageEmpty(), 5623, "Quest list request");
-	// // Send Channel enabling message
-	// // ChannelEnablingMessage channelEnablingMessage = new
-	// // ChannelEnablingMessage((byte) 7, false);
-	// // sendToServer(channelEnablingMessage,
-	// // ChannelEnablingMessage.ProtocolId, "Channel enabling");
-	// }
-
 	private void HandleMapRequestMessage(double mapId) throws Exception
 	{
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
@@ -1180,7 +1233,7 @@ public class Network implements Runnable {
 		this.map = map;
 		this.interactive.setMap(map);
 		this.info.setCoords(new int[]{map.getPosition().getX(), map.getPosition().getY()});
-		this.info.setWorldmap(map.getPosition().getWorldId());
+		this.info.setWorldmap(map.getPosition().getWorldId()); //TODO
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
@@ -1268,5 +1321,10 @@ public class Network implements Runnable {
 	public void setFight(Fight fight)
 	{
 		this.fight = fight;
+	}
+
+	public int getBotInstance()
+	{
+		return botInstance;
 	}
 }

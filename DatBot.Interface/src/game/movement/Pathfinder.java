@@ -488,7 +488,7 @@ public class Pathfinder {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("CELL IS NULL");
+			this.network.append("CELL IS NULL");
 			cell = null;
 		}
 		return cell;
@@ -513,11 +513,11 @@ public class Pathfinder {
             MovPath.Cells.add(path);
         }
 //        for (PathElement cells : MovPath.Cells) {
-//			System.out.println(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
+//			this.network.append(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
 //		}
         MovPath.Compress();
 //        for (PathElement cells : MovPath.Cells) {
-//			System.out.println(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
+//			this.network.append(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
 //		}
     }
 }

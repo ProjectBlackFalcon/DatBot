@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import game.Info;
 import game.map.MapMovement;
@@ -26,10 +27,10 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfer
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
 import utils.d2p.map.Map;
 
-public class ModelConnexion implements Runnable {
+public class ModelConnexion {
 
-	private int botInstance; 
-	
+	private String msg;
+
 	private InteractiveUseRequestMessage interactiveUseRequestMessage;
 	private NpcGenericActionRequestMessage npcGenericactionRequestMessage;
 	private boolean bankOppened;
@@ -41,10 +42,10 @@ public class ModelConnexion implements Runnable {
 	private Stats stats;
 	private Monsters monsters;
 	private Map map;
-	
-	public ModelConnexion(Network network, int botInstance) throws InterruptedException{
+
+	public ModelConnexion(Network network) throws InterruptedException
+	{
 		this.network = network;
-		this.botInstance = botInstance;
 		this.interactive = network.getInteractive();
 		this.bank = network.getBank();
 		this.movement = network.getMovement();
@@ -52,34 +53,6 @@ public class ModelConnexion implements Runnable {
 		this.info = network.getInfo();
 		this.monsters = network.getMonsters();
 		this.map = network.getMap();
-	}
-	
-	@Override
-	public void run()
-	{
-		BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-		try
-		{
-			String s;
-			while (true)
-			{
-				this.info.setNewMap(false);
-				s = bufferRead.readLine();
-				if(s.contains(" ")) s = s.replaceAll(" ", "");
-				String[] message = s.split(";");
-				if(message[0].equals(String.valueOf(this.botInstance))){
-					message[5] = message[5].substring(1, message[5].length() - 1);
-					Object[] result = getReturn(message[4], message[5]);
-					if(result != null){
-						Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], result);
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception
@@ -147,7 +120,7 @@ public class ModelConnexion implements Runnable {
 				if (mapMovement == null)
 				{
 					toSend = new Object[] { "False" };
-					getNetwork().append("D�placement impossible ! Un obstacle bloque le chemin !",false);
+					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 				}
 				else
 				{
@@ -345,7 +318,7 @@ public class ModelConnexion implements Runnable {
 					getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
 					if (this.waitToSend())
 					{
-						toSend = new Object[] { this.stats, bank};
+						toSend = new Object[] { this.stats, bank };
 					}
 					else
 					{
@@ -474,17 +447,30 @@ public class ModelConnexion implements Runnable {
 				}
 			break;
 		}
-
 		return toSend;
 	}
-	
-	public void getReturn(String s) throws NumberFormatException, Exception
+
+	public void getReturn(String[] message) throws NumberFormatException, Exception
 	{
-		String[] message = s.split(";");
-		message[5] = message[5].substring(1, message[5].length() - 1);
-		Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], this.getReturn(message[4], message[5]));
+		new Thread(new Runnable() {
+			public void run()
+			{
+				try
+				{
+					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], getReturn(message[4], message[5]));
+				}
+				catch (NumberFormatException e)
+				{
+					e.printStackTrace();
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
-	
+
 	public boolean waitToSend() throws InterruptedException
 	{
 		while (!info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
@@ -495,12 +481,13 @@ public class ModelConnexion implements Runnable {
 		{
 			Thread.sleep(50);
 		}
-		// System.out.println((!Info.newMap && !Info.Storage &&
-		// !Info.StorageUpdate && !Info.leaveExchange)
-		// && !Info.basicNoOperationMsg);
-		// System.out.println(Info.newMap + " " + Info.Storage + " " +
-		// Info.StorageUpdate + " " + Info.leaveExchange + " "
-		// + Info.basicNoOperationMsg);
+		/*
+		 * this.network.append((!Info.newMap && !Info.Storage &&
+		 * !Info.StorageUpdate && !Info.leaveExchange) &&
+		 * !Info.basicNoOperationMsg); this.network.append(Info.newMap + " " +
+		 * Info.Storage + " " + Info.StorageUpdate + " " + Info.leaveExchange +
+		 * " " + Info.basicNoOperationMsg);
+		 */
 		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
 		{
 			return false;

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import protocol.network.Network;
 import protocol.network.util.DofusDataReader;
 
 public class JsonUnpacker {
@@ -173,7 +174,7 @@ public class JsonUnpacker {
                 }
                 else
                 {
-                	System.out.println(String.format("Error: invalid type( {0} ) for field {1}", field.fieldType, field.fieldName));
+                	Network.append1(String.format("Error: invalid type( {0} ) for field {1}", field.fieldType, field.fieldName));
                 }
                 break;
         }

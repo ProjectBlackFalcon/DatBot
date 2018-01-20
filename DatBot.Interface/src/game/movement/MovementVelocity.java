@@ -19,7 +19,7 @@ public class MovementVelocity {
 			velocity += GetVelocity(cell, moveType);
 		}
         velocity *= 2;
-        System.out.println("Durée : " + velocity + "ms");
+//        network.append("Durï¿½e : " + velocity + "ms");
         return velocity;
     }
 

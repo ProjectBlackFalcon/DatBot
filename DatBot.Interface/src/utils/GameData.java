@@ -2,6 +2,7 @@ package utils;
 
 import java.util.List;
 
+import protocol.network.Network;
 import utils.d2o.D2oManager;
 
 public class GameData{
@@ -23,16 +24,16 @@ public class GameData{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Duration : " + (System.currentTimeMillis()  - time) + "ms");
+		Network.append1("Duration : " + (System.currentTimeMillis()  - time) + "ms");
 	}
 	
 	private void init() throws Exception{
-		System.out.println("Initializing...");
+		Network.append1("Initializing...");
 //		this.d2oManager = new D2oManager("D:\\Ankama\\Dofus2\\app\\data\\common\\Items.d2o");
 //		items = d2oManager.returnJsonString();
 		this.d2oManager = new D2oManager("D:\\Ankama\\Dofus2\\app\\data\\common\\MapPositions.d2o");
 		mapPositions = d2oManager.returnJsonString();
-		System.out.println("Initialized!");
+		Network.append1("Initialized!");
 	}
 
 	public static List<String> getItems()
