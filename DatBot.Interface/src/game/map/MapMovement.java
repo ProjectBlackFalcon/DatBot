@@ -14,9 +14,9 @@ public class MapMovement {
 
 	public MapMovement(CellMovement move, int neighbourId, Network network) {
 		this.cellMovement = move;
+		this.network = network;
 		this.oldId = (double) this.network.getMap().getId();
 		this.newId = neighbourId;
-		this.network = network;
 	}
 	
     public void PerformChangement() throws Exception

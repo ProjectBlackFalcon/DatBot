@@ -113,7 +113,7 @@ public class ModelConnexion {
 			break;
 			case "changeMap":
 				String[] infoMov = param.split(",");
-				MapMovement mapMovement = getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
+				MapMovement mapMovement = movement.ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
 				if (mapMovement == null)
 				{
 					toSend = new Object[] { "False" };
