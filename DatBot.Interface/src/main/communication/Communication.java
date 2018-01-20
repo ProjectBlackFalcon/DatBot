@@ -32,6 +32,7 @@ public class Communication implements Runnable {
 			{
 				s = bufferRead.readLine();
 				s = s.replaceAll(" ", "");
+				s = s.replaceAll("'", "");
 				System.out.println(s);
 				String[] message = s.split(";");
 				message[5] = message[5].substring(1, message[5].length() - 1);
@@ -59,8 +60,8 @@ public class Communication implements Runnable {
 	{
 		Object[] toSend = null;
 		
-		System.out.println("cmd : " + cmd);
-		System.out.println("param : " + param);
+		param = param.replaceAll(" ", "");
+		param = param.replaceAll("'", "");
 		
 		switch (cmd)
 		{
