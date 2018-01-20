@@ -30,8 +30,8 @@ public class Test {
 		Communication communication = new Communication(arg);
 		Thread communication2 = new Thread(communication);
 		communication2.start();
-		communication.getReturn("5;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
+//		communication.getReturn("5;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
+		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 //		communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
 
 		while (true)
@@ -45,9 +45,6 @@ public class Test {
 				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
 				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster  + "]");
 			}
-			// new Scanner(System.in);
-			communication.getReturn("0;0;i;cmd;getMap;[None]");
-			communication.getReturn("1;0;i;cmd;getMap;[None]");
 		}
 
 		// TESTS FOR INPUTS

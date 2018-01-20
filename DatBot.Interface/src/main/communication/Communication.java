@@ -82,7 +82,7 @@ public class Communication implements Runnable {
 				network.append("Connected !");
 				network.append("Name : " + info.getName());
 				network.append("Level : " + info.getLvl());
-				toSend = new Object[] { "true" };
+				toSend = new Object[] { "True" };
 				break;
 		}
 		return toSend;
