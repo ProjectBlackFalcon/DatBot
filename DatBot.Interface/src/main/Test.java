@@ -3,13 +3,14 @@ package main;
 import java.util.Scanner;
 
 import main.communication.Communication;
+import utils.GameData;
 
 public class Test {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception
 	{
-		// new GameData();
+//		 new GameData();
 		// this.network.append(GameData.getMapPositions().get(0));
 		// GameData.getWorldMap(0);
 
@@ -31,8 +32,9 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 //		communication.getReturn("5;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
-		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
+		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
+//		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
+		communication.getReturn("0;0;i;cmd;changeMap;[406,w]");
 
 		while (true)
 		{
@@ -45,7 +47,6 @@ public class Test {
 //				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
 //				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster  + "]");
 //			}
-			communication.getReturn("0;0;i;cmd;getBankDoor;[None]");
 		}
 
 		// TESTS FOR INPUTS

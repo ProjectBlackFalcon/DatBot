@@ -95,12 +95,10 @@ public class Movement{
                 break;
         }
         if (num2 == -1 || neighbourId < 0) return null;
-        this.network.append((this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0);
-        this.network.append(this.network.getMap().NothingOnCell(cellId));
-        this.network.append(noObstacle(cellId));
+//        this.network.append((this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0);
+//        this.network.append(this.network.getMap().NothingOnCell(cellId));
+//        this.network.append(noObstacle(cellId));
         if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
-//        	Network.d("Moving...");	
-//        	this.getNetwork().append("Direction : " + direction,false);
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId,this.getNetwork());
         } else if (this.network.getInfo().getCellId() == cellId){
