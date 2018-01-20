@@ -32,6 +32,7 @@ public class Communication implements Runnable {
 			{
 				s = bufferRead.readLine();
 				s = s.replaceAll(" ", "");
+				System.out.println(s);
 				String[] message = s.split(";");
 				message[5] = message[5].substring(1, message[5].length() - 1);
 				Object[] result = getReturn(Integer.valueOf(message[0]),message[4], message[5]);
@@ -57,7 +58,10 @@ public class Communication implements Runnable {
 	public Object[] getReturn(int botInstance, String cmd, String param) throws NumberFormatException, Exception
 	{
 		Object[] toSend = null;
-
+		
+		System.out.println("cmd : " + cmd);
+		System.out.println("param : " + param);
+		
 		switch (cmd)
 		{
 			case "connect":
