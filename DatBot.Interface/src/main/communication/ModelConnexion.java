@@ -1,11 +1,7 @@
 package main.communication;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
@@ -46,6 +42,10 @@ public class ModelConnexion {
 	public ModelConnexion(Network network) throws InterruptedException
 	{
 		this.network = network;
+	}
+
+	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception
+	{
 		this.interactive = network.getInteractive();
 		this.bank = network.getBank();
 		this.movement = network.getMovement();
@@ -53,10 +53,7 @@ public class ModelConnexion {
 		this.info = network.getInfo();
 		this.monsters = network.getMonsters();
 		this.map = network.getMap();
-	}
-
-	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception
-	{
+		
 		Object[] toSend = null;
 
 		switch (cmd)
@@ -116,7 +113,7 @@ public class ModelConnexion {
 			break;
 			case "changeMap":
 				String[] infoMov = param.split(",");
-				MapMovement mapMovement = getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1].substring(2, infoMov[1].length() - 1));
+				MapMovement mapMovement = getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
 				if (mapMovement == null)
 				{
 					toSend = new Object[] { "False" };
@@ -194,7 +191,7 @@ public class ModelConnexion {
 				{
 					toSend = new Object[] { bank.cellIdBrakmarIN, bank.cellIdBrakmarOUT };
 				}
-				else if (this.map.getId() == 84674566)
+				else if (this.map.getId() == 84674566)	
 				{
 					toSend = new Object[] { bank.cellIdAstrubIN, bank.cellIdAstrubOUT };
 				}
@@ -271,7 +268,7 @@ public class ModelConnexion {
 				if (bankOppened)
 				{
 					String[] toBank = param.split(",");
-					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0].substring(1, toBank[0].length() - 1)), Integer.parseInt(toBank[1].substring(2, toBank[0].length() - 1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
 					if (this.waitToSend())
 					{
 						toSend = new Object[] { this.stats, bank };
@@ -290,7 +287,7 @@ public class ModelConnexion {
 				if (bankOppened)
 				{
 					String[] fromBank = param.split(",");
-					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0].substring(1, fromBank[0].length() - 1)), -Integer.parseInt(fromBank[1].substring(2, fromBank[0].length() - 1))), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
 					if (this.waitToSend())
 					{
 						toSend = new Object[] { this.stats, bank };

@@ -1234,7 +1234,7 @@ public class Network implements Runnable {
 		this.map = map;
 		this.interactive.setMap(map);
 		this.info.setCoords(new int[]{map.getPosition().getX(), map.getPosition().getY()});
-		this.info.setWorldmap(map.getPosition().getWorldId()); //TODO
+		this.info.setWorldmap(1); //TODO
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
