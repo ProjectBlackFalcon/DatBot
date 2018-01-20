@@ -1,421 +1,114 @@
-[1]	Taille : 8  -  ProtocolRequired
-[3]	Taille : 341  -  HelloConnectMessage
-[4]	[Envoi] Identification...
-[10]	Taille : 4  -  LoginQueueStatusMessage
-[6314]	Taille : 0  -  CredentialsAcknowledgementMessage
-[10]	Taille : 4  -  LoginQueueStatusMessage
-[22]	Taille : 59  -  IdentificationSuccessMessage
-[30]	Taille : 353  -  ServersListMessage
-[40]	[Envoi] Selection du serveur...
-[42]	Taille : 55  -  SelectedServerDataMessage
-[1]	Taille : 8  -  ProtocolRequired
-[101]	Taille : 0  -  HelloGameMessage
-[110]	[Envoi] Authentification du ticket...
-[6362]	Taille : 2  -  BasicAckMessage
-[6253]	Taille : 87200  -  RawDataMessage
-[6372]	[Envoi] Check Integrity Message...
-[6362]	Taille : 3  -  BasicAckMessage
-[111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
-[175]	Taille : 10  -  BasicTimeMessage
-[6340]	Taille : 7  -  ServerSettingsMessage
-[6305]	Taille : 11  -  ServerOptionalFeaturesMessage
-[6434]	Taille : 67  -  ServerSessionConstantsMessage
-[6216]	Taille : 20  -  AccountCapabilitiesMessage
-[6267]	Taille : 1  -  TrustStatusMessage
-[150]	[Envoi] Character list request
-[6362]	Taille : 3  -  BasicAckMessage
-[6100]	Taille : 4  -  QueueStatusMessage
-[6100]	Taille : 4  -  QueueStatusMessage
-[6100]	Taille : 4  -  QueueStatusMessage
-[151]	Taille : 118  -  CharactersListMessage
-[152]	[Envoi] Selection du personnage...
-[6362]	Taille : 3  -  BasicAckMessage
-[6100]	Taille : 4  -  QueueStatusMessage
-[6087]	Taille : 7  -  otificationListMessage
-[153]	Taille : 59  -  CharacterSelectedSuccessMessage
-[3016]	Taille : 1098  -  InventoryContentMessage
-[5503]	Taille : 7  -  SetUpdateMessage
-[5503]	Taille : 7  -  SetUpdateMessage
-[6231]	Taille : 3  -  ShortcutBarContentMessage
-[6231]	Taille : 37  -  ShortcutBarContentMessage
-[6630]	Taille : 1  -  RoomAvailableUpdateMessage
-[6620]	Taille : 4  -  HavenBagPackListMessage
-[5689]	Taille : 3  -  EmoteListMessage
-[5655]	Taille : 239  -  JobDescriptionMessage
-[5809]	Taille : 99  -  JobExperienceMultiUpdateMessage
-[5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
-[6058]	Taille : 2  -  AlignmentRankUpdateMessage
-[6663]	Taille : 4  -  DareCreatedListMessage
-[6658]	Taille : 4  -  DareSubscribedListMessage
-[6682]	Taille : 2  -  DareWonListMessage
-[6677]	Taille : 2  -  DareRewardsListMessage
-[6440]	Taille : 12028  -  PrismsListMessage
-[892]	Taille : 18  -  EnabledChannelsMessage
-[6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
-[1200]	Taille : 45  -  SpellListMessage
-[6231]	Taille : 37  -  ShortcutBarContentMessage
-[3009]	Taille : 4  -  InventoryWeightMessage
-[5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
-[6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
-[6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
-[6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
-[6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
-[6316]	Taille : 0  -  SequenceNumberRequestMessage
-[6317]	[Envoi] Sequence number
-[780]	Taille : 4  -  TextInformationMessage
-[780]	Taille : 27  -  TextInformationMessage
-[6717]	Taille : 105  -  FollowedQuestsMessage
-[6265]	Taille : 1  -  SpouseStatusMessage
-[6205]	Taille : 209  -  AchievementListMessage
-[6728]	Taille : 15  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
-[6339]	Taille : 2  -  CharacterCapabilitiesMessage
-[6341]	Taille : 4  -  AlmanachCalendarDateMessage
-[6585]	Taille : 6  -  IdolListMessage
-[6321]	Taille : 4  -  CharacterExperienceGainMessage
-[6275]	Taille : 2  -  MailStatusMessage
-[6315]	Taille : 2  -  AccountHouseMessage
-[6471]	Taille : 0  -  CharacterLoadingCompleteMessage
-[1301]	Taille : 2  -  StartupActionsListMessage
-[4001]	[Envoi] Friend list request
-[5676]	[Envoi] Ignored list request
-[6355]	[Envoi] Spouse list request
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[4002]	Taille : 2  -  FriendsListMessage
-[5607]	[Envoi] Client key
-[250]	[Envoi] Game context create request
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[5674]	Taille : 2  -  IgnoredListMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[201]	Taille : 0  -  GameContextDestroyMessage
-[200]	Taille : 1  -  GameContextCreateMessage
-[5684]	Taille : 1  -  LifePointsRegenBeginMessage
-[220]	Taille : 42  -  CurrentMapMessage
-[225]	[Envoi] Map info request
-[175]	Taille : 10  -  BasicTimeMessage
-[500]	Taille : 381  -  CharacterStatsListMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[226]	Taille : 1200  -  MapComplementaryInformationsDataMessage
-[6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
-[170]	Taille : 11  -  SetCharacterRestrictionsMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[950]	[Envoi] D�placement...
-[952]	[Envoi] Confirm...
-[951]	Taille : 16  -  GameMapMovementMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[951]	Taille : 18  -  GameMapMovementMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6191]	[Envoi] Attack monster -20007
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[5632]	Taille : 79  -  GameRolePlayShowActorMessage
-[251]	Taille : 8  -  GameContextRemoveElementMessage
-[201]	Taille : 0  -  GameContextDestroyMessage
-[200]	Taille : 1  -  GameContextCreateMessage
-[500]	Taille : 381  -  CharacterStatsListMessage
-[700]	Taille : 19  -  GameFightStartingMessage
-[702]	Taille : 4  -  GameFightJoinMessage
-[703]	Taille : 53  -  GameFightPlacementPossiblePositionsMessage
-[5927]	Taille : 5  -  GameFightOptionStateUpdateMessage
-[5927]	Taille : 5  -  GameFightOptionStateUpdateMessage
-[5927]	Taille : 5  -  GameFightOptionStateUpdateMessage
-[5927]	Taille : 5  -  GameFightOptionStateUpdateMessage
-[6586]	Taille : 3  -  IdolFightPreparationUpdateMessage
-[5686]	Taille : 3  -  LifePointsRegenEndMessage
-[6586]	Taille : 3  -  IdolFightPreparationUpdateMessage
-[5696]	Taille : 13  -  GameEntitiesDispositionMessage
-[5864]	Taille : 145  -   GameFightShowFighterMessage
-[5572]	Taille : 40  -  GameFightUpdateTeamMessage
-[5572]	Taille : 16  -  GameFightUpdateTeamMessage
-[5696]	Taille : 24  -  GameEntitiesDispositionMessage
-[5572]	Taille : 31  -  GameFightUpdateTeamMessage
-[5864]	Taille : 102  -   GameFightShowFighterMessage
-[5696]	Taille : 24  -  GameEntitiesDispositionMessage
-[5696]	Taille : 24  -  GameEntitiesDispositionMessage
-[5572]	Taille : 46  -  GameFightUpdateTeamMessage
-[5864]	Taille : 102  -   GameFightShowFighterMessage
-[5696]	Taille : 24  -  GameEntitiesDispositionMessage
-[5696]	Taille : 24  -  GameEntitiesDispositionMessage
-[5572]	Taille : 61  -  GameFightUpdateTeamMessage
-[5864]	Taille : 94  -   GameFightShowFighterMessage
-[5696]	Taille : 24  -  GameEntitiesDispositionMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[708]	[Envoi] Ready
-[6362]	Taille : 3  -  BasicAckMessage
-[740]	Taille : 7  -  GameFightHumanReadyStateMessage
-[5696]	Taille : 46  -  GameEntitiesDispositionMessage
-[712]	Taille : 2  -  GameFightStartMessage
-[713]	Taille : 36  -  GameFightTurnListMessage
-[6022]	Taille : 11  -  hallengeInfoMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[5921]	Taille : 441  -  GameFightSynchronizeMessage
-[6239]	Taille : 1  -  GameFightNewRoundMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[6322]	Taille : 381  -  FighterStatsListMessage
-[5921]	Taille : 441  -  GameFightSynchronizeMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6465]	Taille : 0  -  GameFightTurnStartPlayingMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[1005]	[Envoi] Cast spell
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[1010]	Taille : 28  -  GameActionFightSpellCastMessage
-[1030]	Taille : 19  -  GameActionFightPointsVariationMessage
-[6312]	Taille : 19  -  GameActionFightLifePointsLostMessage
-[5828]	Taille : 19  -  GameActionFightDodgePointLossMessage
-[6070]	Taille : 30  -  GameActionFightDispellableEffectMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[1005]	[Envoi] Cast spell
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[1010]	Taille : 28  -  GameActionFightSpellCastMessage
-[1030]	Taille : 19  -  GameActionFightPointsVariationMessage
-[6312]	Taille : 19  -  GameActionFightLifePointsLostMessage
-[5828]	Taille : 19  -  GameActionFightDodgePointLossMessage
-[6070]	Taille : 30  -  GameActionFightDispellableEffectMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[950]	[Envoi] D�placement...
-[5816]	Taille : 0  -  BasicLatencyStatsRequestMessage
-[5663]	[Envoi] Latency message
-[6362]	Taille : 3  -  BasicAckMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[954]	Taille : 4  -  GameMapNoMovementMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6019]	Taille : 2  -  ChallengeResultMessage
-[780]	Taille : 21  -  TextInformationMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[951]	Taille : 20  -  GameMapMovementMessage
-[1030]	Taille : 20  -  GameActionFightPointsVariationMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[951]	Taille : 20  -  GameMapMovementMessage
-[1030]	Taille : 20  -  GameActionFightPointsVariationMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[951]	Taille : 18  -  GameMapMovementMessage
-[1030]	Taille : 20  -  GameActionFightPointsVariationMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[6239]	Taille : 1  -  GameFightNewRoundMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[6322]	Taille : 381  -  FighterStatsListMessage
-[5921]	Taille : 457  -  GameFightSynchronizeMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6465]	Taille : 0  -  GameFightTurnStartPlayingMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[1005]	[Envoi] Cast spell
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[1010]	Taille : 28  -  GameActionFightSpellCastMessage
-[1030]	Taille : 19  -  GameActionFightPointsVariationMessage
-[6312]	Taille : 19  -  GameActionFightLifePointsLostMessage
-[1099]	Taille : 17  -  GameActionFightDeathMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[1005]	[Envoi] Cast spell
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[1010]	Taille : 28  -  GameActionFightSpellCastMessage
-[1030]	Taille : 19  -  GameActionFightPointsVariationMessage
-[6312]	Taille : 19  -  GameActionFightLifePointsLostMessage
-[5828]	Taille : 19  -  GameActionFightDodgePointLossMessage
-[6070]	Taille : 30  -  GameActionFightDispellableEffectMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[950]	[Envoi] D�placement...
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[951]	Taille : 18  -  GameMapMovementMessage
-[1030]	Taille : 20  -  GameActionFightPointsVariationMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[718]	[Envoi] End turn
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[951]	Taille : 20  -  GameMapMovementMessage
-[1030]	Taille : 20  -  GameActionFightPointsVariationMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[6239]	Taille : 1  -  GameFightNewRoundMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[6322]	Taille : 381  -  FighterStatsListMessage
-[5921]	Taille : 467  -  GameFightSynchronizeMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6465]	Taille : 0  -  GameFightTurnStartPlayingMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[1005]	[Envoi] Cast spell
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[1010]	Taille : 28  -  GameActionFightSpellCastMessage
-[1030]	Taille : 19  -  GameActionFightPointsVariationMessage
-[6312]	Taille : 19  -  GameActionFightLifePointsLostMessage
-[1099]	Taille : 17  -  GameActionFightDeathMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[1005]	[Envoi] Cast spell
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[1010]	Taille : 28  -  GameActionFightSpellCastMessage
-[1030]	Taille : 19  -  GameActionFightPointsVariationMessage
-[6312]	Taille : 19  -  GameActionFightLifePointsLostMessage
-[6070]	Taille : 30  -  GameActionFightDispellableEffectMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[950]	[Envoi] D�placement...
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[951]	Taille : 18  -  GameMapMovementMessage
-[1030]	Taille : 20  -  GameActionFightPointsVariationMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[718]	[Envoi] End turn
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[719]	Taille : 8  -  GameFightTurnEndMessage
-[6239]	Taille : 1  -  GameFightNewRoundMessage
-[714]	Taille : 10  -  GameFightTurnStartMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[6322]	Taille : 381  -  FighterStatsListMessage
-[5921]	Taille : 461  -  GameFightSynchronizeMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[6465]	Taille : 0  -  GameFightTurnStartPlayingMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[1005]	[Envoi] Cast spell
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[955]	Taille : 9  -  SequenceStartMessage
-[1010]	Taille : 28  -  GameActionFightSpellCastMessage
-[1030]	Taille : 19  -  GameActionFightPointsVariationMessage
-[6312]	Taille : 19  -  GameActionFightLifePointsLostMessage
-[1099]	Taille : 17  -  GameActionFightDeathMessage
-[956]	Taille : 10  -  SequenceEndMessage
-[957]	[Envoi] Game Action Acknowledgement Message
-[715]	Taille : 8  -  GameFightTurnReadyRequestMessage
-[716]	[Envoi] Turn ready
-[6362]	Taille : 3  -  BasicAckMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[3023]	Taille : 5  -  ObjectQuantityMessage
-[3009]	Taille : 4  -  InventoryWeightMessage
-[3025]	Taille : 30  -  ObjectAddedMessage
-[3009]	Taille : 4  -  InventoryWeightMessage
-[3025]	Taille : 20  -  ObjectAddedMessage
-[3009]	Taille : 4  -  InventoryWeightMessage
-[3023]	Taille : 5  -  ObjectQuantityMessage
-[3009]	Taille : 4  -  InventoryWeightMessage
-[500]	Taille : 381  -  CharacterStatsListMessage
-[6321]	Taille : 4  -  CharacterExperienceGainMessage
-[720]	Taille : 109  -  GameFightEndMessage
-[6367]	Taille : 6  -  TitlesAndOrnamentsListMessage
-[201]	Taille : 0  -  GameContextDestroyMessage
-[200]	Taille : 1  -  GameContextCreateMessage
-[5684]	Taille : 1  -  LifePointsRegenBeginMessage
-[220]	Taille : 42  -  CurrentMapMessage
-[225]	[Envoi] Map info request
-[175]	Taille : 10  -  BasicTimeMessage
-[500]	Taille : 381  -  CharacterStatsListMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
-[6362]	Taille : 3  -  BasicAckMessage
-[226]	Taille : 1188  -  MapComplementaryInformationsDataMessage
-[6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
-[170]	Taille : 11  -  SetCharacterRestrictionsMessage
-[176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:43] [BOT 1] [1]	Taille : 8  -  ProtocolRequired
+[02:28:43] [BOT 1] [3]	Taille : 341  -  HelloConnectMessage
+[02:28:43] [BOT 1] [4]	[Envoi] Identification...
+[02:28:43] [BOT 1] [10]	Taille : 4  -  LoginQueueStatusMessage
+[02:28:43] [BOT 1] [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+[02:28:43] [BOT 1] [10]	Taille : 4  -  LoginQueueStatusMessage
+[02:28:43] [BOT 1] [22]	Taille : 65  -  IdentificationSuccessMessage
+[02:28:43] [BOT 1] [30]	Taille : 353  -  ServersListMessage
+[02:28:43] [BOT 1] [40]	[Envoi] Selection du serveur...
+[02:28:43] [BOT 1] [42]	Taille : 54  -  SelectedServerDataMessage
+[02:28:43] [BOT 1] [1]	Taille : 8  -  ProtocolRequired
+[02:28:43] [BOT 1] [101]	Taille : 0  -  HelloGameMessage
+[02:28:43] [BOT 1] [110]	[Envoi] Authentification du ticket...
+[02:28:43] [BOT 1] [6362]	Taille : 2  -  BasicAckMessage
+[02:28:44] [BOT 1] [6253]	Taille : 88149  -  RawDataMessage
+[02:28:44] [BOT 1] [6372]	[Envoi] Check Integrity Message...
+[02:28:44] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:44] [BOT 1] [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+[02:28:44] [BOT 1] [175]	Taille : 10  -  BasicTimeMessage
+[02:28:44] [BOT 1] [6340]	Taille : 7  -  ServerSettingsMessage
+[02:28:44] [BOT 1] [6305]	Taille : 11  -  ServerOptionalFeaturesMessage
+[02:28:44] [BOT 1] [6434]	Taille : 67  -  ServerSessionConstantsMessage
+[02:28:44] [BOT 1] [6216]	Taille : 20  -  AccountCapabilitiesMessage
+[02:28:44] [BOT 1] [6267]	Taille : 1  -  TrustStatusMessage
+[02:28:44] [BOT 1] [150]	[Envoi] Character list request
+[02:28:44] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:44] [BOT 1] [6100]	Taille : 4  -  QueueStatusMessage
+[02:28:44] [BOT 1] [6100]	Taille : 4  -  QueueStatusMessage
+[02:28:44] [BOT 1] [6100]	Taille : 4  -  QueueStatusMessage
+[02:28:44] [BOT 1] [151]	Taille : 114  -  CharactersListMessage
+[02:28:44] [BOT 1] [152]	[Envoi] Selection du personnage...
+[02:28:44] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:44] [BOT 1] [6100]	Taille : 4  -  QueueStatusMessage
+[02:28:44] [BOT 1] [6087]	Taille : 2  -  otificationListMessage
+[02:28:44] [BOT 1] [153]	Taille : 52  -  CharacterSelectedSuccessMessage
+[02:28:44] [BOT 1] [3016]	Taille : 601  -  InventoryContentMessage
+[02:28:44] [BOT 1] [6231]	Taille : 3  -  ShortcutBarContentMessage
+[02:28:44] [BOT 1] [6231]	Taille : 19  -  ShortcutBarContentMessage
+[02:28:44] [BOT 1] [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+[02:28:44] [BOT 1] [6620]	Taille : 4  -  HavenBagPackListMessage
+[02:28:44] [BOT 1] [5689]	Taille : 3  -  EmoteListMessage
+[02:28:44] [BOT 1] [5655]	Taille : 239  -  JobDescriptionMessage
+[02:28:44] [BOT 1] [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+[02:28:44] [BOT 1] [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+[02:28:44] [BOT 1] [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+[02:28:44] [BOT 1] [6663]	Taille : 4  -  DareCreatedListMessage
+[02:28:44] [BOT 1] [6658]	Taille : 4  -  DareSubscribedListMessage
+[02:28:44] [BOT 1] [6682]	Taille : 2  -  DareWonListMessage
+[02:28:44] [BOT 1] [6677]	Taille : 2  -  DareRewardsListMessage
+[02:28:44] [BOT 1] [6440]	Taille : 13709  -  PrismsListMessage
+[02:28:44] [BOT 1] [892]	Taille : 19  -  EnabledChannelsMessage
+[02:28:44] [BOT 1] [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+[02:28:44] [BOT 1] [1200]	Taille : 27  -  SpellListMessage
+[02:28:44] [BOT 1] [6231]	Taille : 19  -  ShortcutBarContentMessage
+[02:28:44] [BOT 1] [3009]	Taille : 3  -  InventoryWeightMessage
+[02:28:44] [BOT 1] [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+[02:28:44] [BOT 1] [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+[02:28:44] [BOT 1] [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+[02:28:44] [BOT 1] [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+[02:28:44] [BOT 1] [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+[02:28:44] [BOT 1] [6316]	Taille : 0  -  SequenceNumberRequestMessage
+[02:28:44] [BOT 1] [6317]	[Envoi] Sequence number
+[02:28:44] [BOT 1] [780]	Taille : 4  -  TextInformationMessage
+[02:28:44] [BOT 1] [780]	Taille : 27  -  TextInformationMessage
+[02:28:44] [BOT 1] [6265]	Taille : 1  -  SpouseStatusMessage
+[02:28:44] [BOT 1] [6205]	Taille : 52  -  AchievementListMessage
+[02:28:44] [BOT 1] [6728]	Taille : 15  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+[02:28:44] [BOT 1] [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+[02:28:44] [BOT 1] [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+[02:28:44] [BOT 1] [6585]	Taille : 6  -  IdolListMessage
+[02:28:44] [BOT 1] [6321]	Taille : 4  -  CharacterExperienceGainMessage
+[02:28:44] [BOT 1] [6275]	Taille : 2  -  MailStatusMessage
+[02:28:44] [BOT 1] [6315]	Taille : 2  -  AccountHouseMessage
+[02:28:44] [BOT 1] [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+[02:28:44] [BOT 1] [1301]	Taille : 151  -  StartupActionsListMessage
+[02:28:44] [BOT 1] [4001]	[Envoi] Friend list request
+[02:28:44] [BOT 1] [5676]	[Envoi] Ignored list request
+[02:28:44] [BOT 1] [6355]	[Envoi] Spouse list request
+[02:28:44] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:44] [BOT 1] [176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:44] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:44] [BOT 1] [4002]	Taille : 2  -  FriendsListMessage
+[02:28:44] [BOT 1] [5607]	[Envoi] Client key
+[02:28:44] [BOT 1] [250]	[Envoi] Game context create request
+[02:28:44] [BOT 1] [176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:44] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:44] [BOT 1] [5674]	Taille : 2  -  IgnoredListMessage
+[02:28:44] [BOT 1] [176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:44] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:44] [BOT 1] [176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:45] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:45] [BOT 1] [176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:45] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:45] [BOT 1] [201]	Taille : 0  -  GameContextDestroyMessage
+[02:28:45] [BOT 1] [200]	Taille : 1  -  GameContextCreateMessage
+[02:28:45] [BOT 1] [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+[02:28:45] [BOT 1] [220]	Taille : 42  -  CurrentMapMessage
+[02:28:45] [BOT 1] [225]	[Envoi] Map info request
+[02:28:45] [BOT 1] [175]	Taille : 10  -  BasicTimeMessage
+[02:28:45] [BOT 1] [500]	Taille : 376  -  CharacterStatsListMessage
+[02:28:45] [BOT 1] [176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:45] [BOT 1] [6362]	Taille : 3  -  BasicAckMessage
+[02:28:45] [BOT 1] [226]	Taille : 1138  -  MapComplementaryInformationsDataMessage
+[02:28:45] [BOT 1] [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+[02:28:45] [BOT 1] [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+[02:28:45] [BOT 1] [176]	Taille : 0  -  BasicNoOperationMessage
+[02:28:51] [BOT 1] [951]	Taille : 16  -  GameMapMovementMessage
+[02:28:58] [BOT 1] [951]	Taille : 16  -  GameMapMovementMessage
+[02:29:05] [BOT 1] [951]	Taille : 16  -  GameMapMovementMessage
+[02:29:12] [BOT 1] [951]	Taille : 16  -  GameMapMovementMessage
+[BOT 0] [951]	Taille : 16  -  GameMapMovementMessage
+[02:28:56] [BOT 0] [951]	Taille : 16  -  GameMapMovementMessage
+[02:29:03] [BOT 0] [951]	Taille : 16  -  GameMapMovementMessage
+[02:29:10] [BOT 0] [951]	Taille : 16  -  GameMapMovementMessage

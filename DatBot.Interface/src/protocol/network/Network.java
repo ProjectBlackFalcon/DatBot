@@ -48,6 +48,7 @@ import game.plugin.Stats;
 import ia.fight.map.CreateMap;
 import io.netty.util.internal.ThreadLocalRandom;
 import main.communication.Communication;
+import main.communication.ModelConnexion;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
 import protocol.network.messages.connection.IdentificationFailedMessage;
@@ -131,6 +132,7 @@ public class Network implements Runnable {
 	private String ip = "213.248.126.40";
 	private int port = 5555;
 	private int botInstance = 0;
+	private ModelConnexion modelConnexion;
 	private Message message;
 	private List<Integer> Ticket;
 	// Log window
@@ -158,9 +160,10 @@ public class Network implements Runnable {
 	private MapManager mapManager;
 	private Map map;
 
-	public Network(boolean displayPacket, Info info)
+	public Network(boolean displayPacket, Info info, int botInstance)
 	{
 		initLogs();
+		this.botInstance = botInstance;
 		this.displayPacket = displayPacket;
 		try
 		{
@@ -178,9 +181,10 @@ public class Network implements Runnable {
 		this.bank = new Bank();
 		this.npc = new Npc();
 		this.movement = new Movement(this);
-		this.setMonsters(new Monsters());
+		this.monsters = new Monsters();
 		try
 		{
+			this.modelConnexion = new ModelConnexion(this);
 			socket = new Socket(this.ip, this.port);
 			if (socket.isConnected())
 			{
@@ -195,6 +199,10 @@ public class Network implements Runnable {
 		{
 			e.printStackTrace();
 		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public String getPathDatBot(){
@@ -202,7 +210,6 @@ public class Network implements Runnable {
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
 		//s = s.substring(0, i + 6);
-		append(s);
 		return s;
 	}
 
@@ -264,7 +271,6 @@ public class Network implements Runnable {
 			debug = System.out;
 			System.setErr(debug);
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -317,22 +323,31 @@ public class Network implements Runnable {
 		}
 		else
 		{
-			String newSt = "[" + timing + "] " + str;
-			log.println(str);
+			String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
+			log.println(newSt);
 		}
 	}
 	
-	public static void append(boolean str)
+	public void append(boolean str)
 	{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
-		String newSt = "[" + timing + "] " + str;
+		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
 		debug.println(newSt);
 	}
 	
 	
-	public static void append(String str)
+	public void append(String str)
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
+		debug.println(newSt);
+	}
+	
+	public static void append1(String str)
 	{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
@@ -341,6 +356,16 @@ public class Network implements Runnable {
 		debug.println(newSt);
 	}
 
+	public void getReturn(String [] message){
+		try
+		{
+			this.modelConnexion.getReturn(message);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	public void reception() throws Exception
 	{
@@ -497,8 +522,8 @@ public class Network implements Runnable {
 					}
 					getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 					getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
-					Network.append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
-					Network.append("CellId : " + info.getCellId());
+					append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
+					append("CellId : " + info.getCellId());
 					info.setWaitForMov(true);
 					info.setConnected(true);
 					info.setNewMap(true);
@@ -512,7 +537,7 @@ public class Network implements Runnable {
 				if (gameMapMovementMessage.getActorId() == info.getActorId())
 				{
 					info.setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-					Network.append("Moving to cellId : " + info.getCellId());
+					append("Moving to cellId : " + info.getCellId());
 				}
 				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++)
 				{
@@ -902,12 +927,10 @@ public class Network implements Runnable {
 						}
 						catch (InterruptedException e)
 						{
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						catch (Exception e)
 						{
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -1225,7 +1248,7 @@ public class Network implements Runnable {
 		this.map = map;
 		this.interactive.setMap(map);
 		this.info.setCoords(new int[]{map.getPosition().getX(), map.getPosition().getY()});
-		this.info.setWorldmap(map.getPosition().getWorldId());
+		this.info.setWorldmap(map.getPosition().getWorldId()); //TODO
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
@@ -1313,5 +1336,10 @@ public class Network implements Runnable {
 	public void setFight(Fight fight)
 	{
 		this.fight = fight;
+	}
+
+	public int getBotInstance()
+	{
+		return botInstance;
 	}
 }

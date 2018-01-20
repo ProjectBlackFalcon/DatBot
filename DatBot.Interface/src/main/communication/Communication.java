@@ -37,6 +37,13 @@ public class Communication implements Runnable {
 				Object[] result = getReturn(Integer.valueOf(message[0]),message[4], message[5]);
 				if(result != null){
 					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], result);
+				} else {
+					for (Network n : networks)
+					{
+						if(n.getBotInstance() == Integer.valueOf(message[0])){
+							n.getReturn(message);
+						}
+					}
 				}
 			}
 		}
@@ -56,12 +63,10 @@ public class Communication implements Runnable {
 			case "connect":
 				String[] str = param.split(",");
 				Info info = new Info(str[0],str[1],str[2],str[3]);
-				Network network = new Network(this.displayPacket, info);
-				ModelConnexion modelConnexion = new ModelConnexion(network,botInstance);
+				Network network = new Network(this.displayPacket, info, botInstance);
 				Thread threadNetwork = new Thread(network);
 				threadNetwork.start();
-				Thread threadModel = new Thread(modelConnexion);
-				threadModel.start();
+				networks.add(network);
 				while (!info.isConnected())
 				{
 					Thread.sleep(2000);
@@ -69,26 +74,10 @@ public class Communication implements Runnable {
 					index += 1;
 					if (index == 30) { throw new java.lang.Error("Connection timed out"); }
 				}
-				Network.append("Connected !");
-				Network.append("Name : " + info.getName());
-				Network.append("Level : " + info.getLvl());
+				network.append("Connected !");
+				network.append("Name : " + info.getName());
+				network.append("Level : " + info.getLvl());
 				toSend = new Object[] { "true" };
-				//Tests
-				modelConnexion.getReturn("0;0;i;cmd;getStats;[None]");
-				modelConnexion.getReturn("0;0;i;cmd;getResources;[None]");
-//				modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
-//				modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
-//				modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
-				while(true){
-					Network.append("Trying to launch fight ...");
-					Thread.sleep(2000);
-					if(network.getMonsters().getMonsters().size() > 0 && !network.getInfo().isJoinedFight()){
-						modelConnexion.getReturn("0;0;i;cmd;getMonsters;[None]");
-						modelConnexion.getReturn("0;0;i;cmd;move;[" + network.getMonsters().getMonsters().get(0).getDisposition().getCellId() +"]");
-						modelConnexion.getReturn("0;0;i;cmd;attackMonster;[" + network.getMonsters().getMonsters().get(0).getContextualId() +"]");
-					}
-				}
-				//break;
 		}
 		return toSend;
 	}
@@ -107,13 +96,37 @@ public class Communication implements Runnable {
 				newParam += param[i] + ", ";
 			}
 		}
-		Network.debug.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
+		Network.append1("[BOT " + botInstance + "] " + String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
+//		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
 	}
 	
+	/**
+	 * Test method which is equal to the while(true) that is listening to the model
+	 * @param s message from model
+	 * @throws NumberFormatException
+	 * @throws Exception
+	 */
 	public void getReturn(String s) throws NumberFormatException, Exception
 	{
+		s = s.replaceAll(" ", "");
 		String[] message = s.split(";");
 		message[5] = message[5].substring(1, message[5].length() - 1);
-		Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], this.getReturn(Integer.valueOf(message[0]),message[4], message[5]));
+		Object[] result = getReturn(Integer.valueOf(message[0]),message[4], message[5]);
+		if(result != null){
+			Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], result);
+		} else {
+			for (Network n : networks)
+			{
+				if(n.getBotInstance() == Integer.valueOf(message[0])){
+					n.getReturn(message);
+				}
+			}
+		}
+	}
+
+
+	public List<Network> getNetworks()
+	{
+		return networks;
 	}
 }
