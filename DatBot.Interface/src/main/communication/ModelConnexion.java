@@ -38,6 +38,7 @@ public class ModelConnexion {
 	private Stats stats;
 	private Monsters monsters;
 	private Map map;
+	private Npc npc;
 
 	public ModelConnexion(Network network) throws InterruptedException
 	{
@@ -53,6 +54,7 @@ public class ModelConnexion {
 		this.info = network.getInfo();
 		this.monsters = network.getMonsters();
 		this.map = network.getMap();
+		this.npc = network.getNpc();
 		
 		Object[] toSend = null;
 
@@ -234,7 +236,7 @@ public class ModelConnexion {
 			case "openBank":
 				if (this.map.getId() == 83887104 || this.map.getId() == 2884617 || this.map.getId() == 8912911)
 				{
-					npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) new Npc().getNpc().get(0).getContextualId(), 3, this.map.getId());
+					npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.npc.getNpc().get(0).getContextualId(), 3, this.map.getId());
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
 					if (this.waitToSend())
 					{

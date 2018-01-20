@@ -10,7 +10,8 @@ public class Test {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception
 	{
-//		 new GameData();
+		 new GameData();
+		 System.out.println(GameData.getWorldMap(84674566));
 		// this.network.append(GameData.getMapPositions().get(0));
 		// GameData.getWorldMap(0);
 
@@ -32,10 +33,9 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 //		communication.getReturn("5;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
-		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
-//		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
-		communication.getReturn("0;0;i;cmd;changeMap;[406,w]");
-
+//		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
+		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
+		communication.getReturn("0;4;i;cmd;openBank;None");
 		while (true)
 		{
 			Thread.sleep(2000);
