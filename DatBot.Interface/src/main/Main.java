@@ -14,6 +14,8 @@ public class Main {
 				arg = true;
 			}
 		}
+		
+		System.out.println("Working");
 
 		Communication communication = new Communication(arg);
 		Thread communication2 = new Thread(communication);
