@@ -24,16 +24,16 @@ public class GameData{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Network.append1("Duration : " + (System.currentTimeMillis()  - time) + "ms");
+		System.out.println("Duration : " + (System.currentTimeMillis()  - time) + "ms");
 	}
 	
 	private void init() throws Exception{
-		Network.append1("Initializing...");
+		System.out.println("Initializing...");
 //		this.d2oManager = new D2oManager("D:\\Ankama\\Dofus2\\app\\data\\common\\Items.d2o");
 //		items = d2oManager.returnJsonString();
 		this.d2oManager = new D2oManager("D:\\Ankama\\Dofus2\\app\\data\\common\\MapPositions.d2o");
 		mapPositions = d2oManager.returnJsonString();
-		Network.append1("Initialized!");
+		System.out.println("Initialized!");
 	}
 
 	public static List<String> getItems()
@@ -51,11 +51,20 @@ public class GameData{
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
 			s = s.replace("}", "");
-			String [] cmd = s.split("");
+			s = s.replaceAll("\n", "");
+			String [] cmd = s.split(",");
 			for(String si : cmd){
 				String [] cmd2 = si.split(":");
 				if(cmd2[0].equals("id")){
-					return Integer.parseInt(cmd2[1]);
+					if(Double.parseDouble(cmd2[1]) == mapId){
+						for(String si1 : cmd){
+							String [] cmd21 = si1.split(":");
+							if(cmd21[0].equals("worldMap")){
+								System.out.println(si);
+								return Integer.parseInt(cmd21[1]);
+							}
+						}
+					}
 				}
 			}
 		}

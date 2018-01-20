@@ -15,11 +15,6 @@ public class Npc {
 	private List<GameRolePlayNpcInformations> npc = new ArrayList<GameRolePlayNpcInformations>();
 	private Network network;
 
-	public Npc()
-	{
-
-	}
-
 	public Npc(Network network) throws Exception
 	{
 		this.network = network;

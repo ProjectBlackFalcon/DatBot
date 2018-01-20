@@ -179,11 +179,11 @@ public class Network implements Runnable {
 		this.fight = new Fight(this);
 		this.interactive = new Interactive(this);
 		this.bank = new Bank();
-		this.npc = new Npc();
 		this.movement = new Movement(this);
 		this.monsters = new Monsters();
 		try
 		{
+			this.npc = new Npc(this);
 			this.modelConnexion = new ModelConnexion(this);
 			socket = new Socket(this.ip, this.port);
 			if (socket.isConnected())
@@ -201,6 +201,11 @@ public class Network implements Runnable {
 		}
 		catch (InterruptedException e)
 		{
+			e.printStackTrace();
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -1327,5 +1332,15 @@ public class Network implements Runnable {
 	public int getBotInstance()
 	{
 		return botInstance;
+	}
+
+	public Npc getNpc()
+	{
+		return npc;
+	}
+
+	public void setNpc(Npc npc)
+	{
+		this.npc = npc;
 	}
 }
