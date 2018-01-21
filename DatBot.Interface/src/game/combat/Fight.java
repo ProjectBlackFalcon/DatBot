@@ -6,6 +6,9 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import game.Info;
 import game.movement.CellMovement;
 import ia.fight.brain.Game;
@@ -35,6 +38,7 @@ public class Fight {
 	private List<GameFightMonsterInformations> monsters;
 
 	public List<Double> turnListId;
+	private JSONArray spellJson;
 	public String spellToSend;
 	private Network network;
 	private Info info;
@@ -427,5 +431,15 @@ public class Fight {
 	public void setMonsters(List<GameFightMonsterInformations> monsters)
 	{
 		this.monsters = monsters;
+	}
+
+	public JSONArray getSpellJson()
+	{
+		return spellJson;
+	}
+
+	public void setSpellJson(JSONArray jsonArray)
+	{
+		this.spellJson = jsonArray;
 	}
 }

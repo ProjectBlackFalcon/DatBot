@@ -33,6 +33,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import game.Entity;
 import game.Info;
@@ -173,7 +174,7 @@ public class Network implements Runnable {
 		catch (IOException e1)
 		{
 			e1.printStackTrace();
-		} 
+		}
 		this.map = new Map();
 		this.info = info;
 		this.stats = new Stats(this);
@@ -210,8 +211,9 @@ public class Network implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
-	public static String getPathDatBot(){
+
+	public static String getPathDatBot()
+	{
 		JSONArray a;
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
@@ -227,9 +229,9 @@ public class Network implements Runnable {
 			append("Connection...");
 			if (displayPacket)
 			{
-//				initComponent();
-//				f.pack();
-//				f.setVisible(true);
+				// initComponent();
+				// f.pack();
+				// f.setVisible(true);
 			}
 			reception();
 		}
@@ -260,23 +262,27 @@ public class Network implements Runnable {
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		f.add(scroll);
 	}
-	
+
 	public PrintStream log;
 	public static PrintStream debug;
-	
+
 	/**
 	 * Inits all the logs.
 	 * 
 	 * @author baptiste
 	 */
-	public void initLogs() {
-		try {
-//			log = System.out;
-			log = new PrintStream(new FileOutputStream("log_network"+botInstance+".txt"));
-//			debug = new PrintStream(new FileOutputStream("debug.txt"));
+	public void initLogs()
+	{
+		try
+		{
+			// log = System.out;
+			log = new PrintStream(new FileOutputStream("log_network" + botInstance + ".txt"));
+			// debug = new PrintStream(new FileOutputStream("debug.txt"));
 			debug = System.out;
 			System.setErr(debug);
-		} catch (FileNotFoundException e1) {
+		}
+		catch (FileNotFoundException e1)
+		{
 			e1.printStackTrace();
 		}
 	}
@@ -293,20 +299,24 @@ public class Network implements Runnable {
 	 */
 	private void appendToPane(JTextPane tp, String msg, Color c)
 	{
-//		StyleContext sc = StyleContext.getDefaultStyleContext();
-//		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
-//		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-//		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-//		int len = tp.getDocument().getLength();
-//		tp.setCaretPosition(len);
-//		tp.setCharacterAttributes(aset, false);
-//		tp.replaceSelection(msg);
+		// StyleContext sc = StyleContext.getDefaultStyleContext();
+		// AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,
+		// StyleConstants.Foreground, c);
+		// aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida
+		// Console");
+		// aset = sc.addAttribute(aset, StyleConstants.Alignment,
+		// StyleConstants.ALIGN_JUSTIFIED);
+		// int len = tp.getDocument().getLength();
+		// tp.setCaretPosition(len);
+		// tp.setCharacterAttributes(aset, false);
+		// tp.replaceSelection(msg);
 	}
 
 	/**
 	 * Append the text eiher on the panel or System.out
 	 * 
-	 * @param String str
+	 * @param String
+	 *            str
 	 * @param boolean
 	 *            b ; True:panel ; False:System.out
 	 */
@@ -333,7 +343,7 @@ public class Network implements Runnable {
 			log.println(newSt);
 		}
 	}
-	
+
 	public void append(boolean str)
 	{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
@@ -342,8 +352,7 @@ public class Network implements Runnable {
 		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
 		debug.println(newSt);
 	}
-	
-	
+
 	public void append(String str)
 	{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
@@ -352,7 +361,7 @@ public class Network implements Runnable {
 		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
 		debug.println(newSt);
 	}
-	
+
 	public static void append1(String str)
 	{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
@@ -362,7 +371,8 @@ public class Network implements Runnable {
 		System.out.println(str);
 	}
 
-	public void getReturn(String [] message){
+	public void getReturn(String[] message)
+	{
 		try
 		{
 			this.modelConnexion.getReturn(message);
@@ -894,6 +904,7 @@ public class Network implements Runnable {
 				if (!getFight().getSpellToSend().equals(""))
 				{
 					append("Spell send : " + getFight().getSpellToSend());
+					append("JSON SPELL SEND : " + getFight().getSpellJson().toJSONString());
 					getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellToSend() });
 				}
 				if (info.isTurn())
@@ -961,24 +972,35 @@ public class Network implements Runnable {
 				getFight().fightTurn();
 			break;
 			case 955:
+				getFight().setSpellJson(new JSONArray());
 				getFight().spellToSend = "";
 			break;
 			case 1010:
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("spellId", gameActionFightSpellCastMessage.getSpellId());
+				jsonObject.put("targetId", getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
+				jsonObject.put("destinationCellId", gameActionFightSpellCastMessage.getDestinationCellId());
+				jsonObject.put("critical", gameActionFightSpellCastMessage.getCritical());
+				jsonObject.put("sourceId", getFight().getId(gameActionFightSpellCastMessage.getSourceId()));
+				JSONObject jsonObject2 = new JSONObject();
+				jsonObject2.put("SpellCast", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
 				getFight().spellToSend += getFight().getId(gameActionFightSpellCastMessage.getSourceId()) + "," + CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.getDestinationCellId() % 14, gameActionFightSpellCastMessage.getDestinationCellId() / 14 })[0] + ","
 					+ CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.getDestinationCellId() % 14, gameActionFightSpellCastMessage.getDestinationCellId() / 14 })[1] + "," + gameActionFightSpellCastMessage.getSpellId();
 			break;
 			case 6312:
 				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
+//				getFight().getSpellJson().put("lifePointlost", getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()) + "," + gameActionFightLifePointsLostMessage.getLoss() + "," + gameActionFightLifePointsLostMessage.getPermanentDamages());
 				getFight().spellToSend += ",[" + getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()) + "," + gameActionFightLifePointsLostMessage.getLoss() + "," + gameActionFightLifePointsLostMessage.getPermanentDamages() + "]";
 			break;
 			case 6070:
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
-				getFight().spellToSend += ",[" + getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable()
-					+ "]";
+//				getFight().getSpellJson().put("effect", getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable());
+				getFight().spellToSend += ",[" + getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable() + "]";
 			break;
 			case 713:
 				GameFightTurnListMessage gameFightTurnListMessage = new GameFightTurnListMessage();
@@ -991,6 +1013,7 @@ public class Network implements Runnable {
 			case 1099:
 				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
 				gameActionFightDeathMessage.Deserialize(dataReader);
+//				getFight().getSpellJson().put("death", gameActionFightDeathMessage.getTargetId());
 				for (int i = 0; i < this.getFight().getMonsters().size(); i++)
 				{
 					if (this.getFight().getMonsters().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId())
@@ -1238,8 +1261,8 @@ public class Network implements Runnable {
 		Map map = this.mapManager.FromId((int) mapId);
 		this.map = map;
 		this.interactive.setMap(map);
-		this.info.setCoords(new int[]{map.getPosition().getX(), map.getPosition().getY()});
-		this.info.setWorldmap(GameData.getWorldMap((int) mapId)); 
+		this.info.setCoords(new int[] { map.getPosition().getX(), map.getPosition().getY() });
+		this.info.setWorldmap(GameData.getWorldMap((int) mapId));
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
