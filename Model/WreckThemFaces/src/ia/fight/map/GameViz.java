@@ -16,14 +16,14 @@ import ia.fight.brain.PlayingEntity;
 
 public class GameViz extends JFrame{
 	
-	Panel panel;
+	public Panel panel;
 
 	public GameViz(Map map) {
 		
 		panel = new Panel(map);
 		
 		setTitle("Visualizer");
-		setSize(662, 662);
+		setSize(1000, 662);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
 		add(panel);

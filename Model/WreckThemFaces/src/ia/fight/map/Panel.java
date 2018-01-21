@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
@@ -31,9 +32,16 @@ public class Panel extends JPanel{
 	int[] selectedCase = new int[2];
 	ArrayList<int[]> obstacles;
 	Map mapObject;
+	ArrayList<ArrayList<String>> brainText;
+	int brainTextIndex = 0;
 
+	public final static int FIGHT_WIDTH = 662;
+	public final static int FIGHT_HEIGHT = 662;
+	public final static int BRAIN_WIDTH = 1000-FIGHT_WIDTH;
+	public final static int BRAIN_HEIGHT = FIGHT_HEIGHT;
 	
 	Panel(Map map) {
+		brainText = new ArrayList<>();
 		mapObject = map;
 		this.obstacles = map.getObstacles();
 		this.map = map.getBlocks();
@@ -55,6 +63,52 @@ public class Panel extends JPanel{
 			@Override
 			public void mouseDragged(MouseEvent e) {}
 		});		
+		
+		addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getX() > FIGHT_WIDTH+BRAIN_WIDTH-6-50 && e.getX() < FIGHT_WIDTH+BRAIN_WIDTH-6 && e.getY() > BRAIN_HEIGHT-6-20 && e.getY() < BRAIN_HEIGHT-6) {
+					
+					if(brainTextIndex < brainText.size()-1) {
+						brainTextIndex++;
+						repaint();
+					}
+				}
+				
+				if(e.getX() > FIGHT_WIDTH+BRAIN_WIDTH-6-100 && e.getX() < FIGHT_WIDTH+BRAIN_WIDTH-6-50 && e.getY() > BRAIN_HEIGHT-6-20 && e.getY() < BRAIN_HEIGHT-6) {
+					if(brainTextIndex > 0) {
+						brainTextIndex--;
+						repaint();
+					}
+				}
+			}
+		});
+		
 		setFocusable(true);
 	}
 	
@@ -79,9 +133,46 @@ public class Panel extends JPanel{
 		map = mapObject.getBlocks();
 	}
 	
+	
+	
+	public void updateBrainText(ArrayList<String> s) {
+		brainText.add(s);
+		brainTextIndex = brainText.size()-1;
+	}
+	
 	@Override
 	public void paint(Graphics g) {
+		paintFight(g);
+		paintBrain(g);
+	}
+	
+	public void paintBrain(Graphics g) {
+		g.setColor(Color.white);
+		g.fillRect(FIGHT_WIDTH, 0, BRAIN_WIDTH+FIGHT_WIDTH, BRAIN_HEIGHT);
+		g.setColor(Color.red);
+		g.fillRect(FIGHT_WIDTH, 0, 5, FIGHT_HEIGHT);
+		g.fillRect(FIGHT_WIDTH+BRAIN_WIDTH-5, 0, 5, FIGHT_HEIGHT);
+		g.fillRect(FIGHT_WIDTH, 0, FIGHT_WIDTH+BRAIN_WIDTH, 5);
+		g.fillRect(FIGHT_WIDTH, BRAIN_HEIGHT-5, FIGHT_WIDTH+BRAIN_WIDTH, BRAIN_HEIGHT);
+		g.setColor(Color.black);
+		for(int i = 0; i < brainText.get(brainTextIndex).size(); i++) {
+			g.drawString(brainText.get(brainTextIndex).get(i), FIGHT_WIDTH+10, 30+i*15);
+		}
 		
+		g.drawString((brainTextIndex+1)+"/"+brainText.size(), FIGHT_WIDTH+10, FIGHT_HEIGHT-10);
+		
+		g.setColor(Color.CYAN);
+		g.fillRect(FIGHT_WIDTH+BRAIN_WIDTH-6-50, BRAIN_HEIGHT-6-20, 50, 20);
+		g.fillRect(FIGHT_WIDTH+BRAIN_WIDTH-7-100, BRAIN_HEIGHT-6-20, 50, 20);
+		g.setColor(Color.BLUE);
+		g.drawLine(FIGHT_WIDTH+BRAIN_WIDTH-6-25, BRAIN_HEIGHT-6-10, FIGHT_WIDTH+BRAIN_WIDTH-6-25-5, BRAIN_HEIGHT-6-10-5);
+		g.drawLine(FIGHT_WIDTH+BRAIN_WIDTH-6-25, BRAIN_HEIGHT-6-10, FIGHT_WIDTH+BRAIN_WIDTH-6-25-5, BRAIN_HEIGHT-6-5);
+		
+		g.drawLine(FIGHT_WIDTH+BRAIN_WIDTH-6-75-5, BRAIN_HEIGHT-6-10, FIGHT_WIDTH+BRAIN_WIDTH-6-75, BRAIN_HEIGHT-6-10-5);
+		g.drawLine(FIGHT_WIDTH+BRAIN_WIDTH-6-75-5, BRAIN_HEIGHT-6-10, FIGHT_WIDTH+BRAIN_WIDTH-6-75, BRAIN_HEIGHT-6-5);
+	}
+	
+	public void paintFight(Graphics g) {
 		for(int i = 0; i < 33; i++) {
 			for(int j = 0; j < 33; j++) {
 				if(LineOfSight.visibility(new Position(selectedCase[0], selectedCase[1]), new Position(i, j), map))
