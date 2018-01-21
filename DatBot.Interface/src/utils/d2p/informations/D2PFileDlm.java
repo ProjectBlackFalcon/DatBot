@@ -49,6 +49,8 @@ public class D2PFileDlm {
                 i += 1;
             }
         }
+        this.Reader.dis.close();
+        this.Reader.bis.close();
     }
 
     public boolean ExistsDlm(String DlmName)

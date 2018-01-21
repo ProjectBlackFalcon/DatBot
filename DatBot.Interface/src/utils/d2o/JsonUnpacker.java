@@ -25,7 +25,7 @@ public class JsonUnpacker {
 
 	public void Unpack()
 	{
-		buildJsonString();
+//		buildJsonString();
 	}
 
 	private void buildJsonString()
