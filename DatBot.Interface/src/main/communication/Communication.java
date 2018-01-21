@@ -102,8 +102,7 @@ public class Communication implements Runnable {
 				newParam += param[i] + ", ";
 			}
 		}
-		Network.append1("[BOT " + botInstance + "] " + String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
-//		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
+		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
 	}
 	
 	/**

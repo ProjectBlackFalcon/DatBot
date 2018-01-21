@@ -123,6 +123,7 @@ import protocol.network.util.DofusDataWriter;
 import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
+import utils.GameData;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 
@@ -210,12 +211,11 @@ public class Network implements Runnable {
 		}
 	}
 	
-	public String getPathDatBot(){
+	public static String getPathDatBot(){
 		JSONArray a;
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
 		s = s.substring(0, i + 6);
-		append(s + "\\DatBot.Interface\\utils\\maps");
 		return s;
 	}
 
@@ -227,9 +227,9 @@ public class Network implements Runnable {
 			append("Connection...");
 			if (displayPacket)
 			{
-				initComponent();
-				f.pack();
-				f.setVisible(true);
+//				initComponent();
+//				f.pack();
+//				f.setVisible(true);
 			}
 			reception();
 		}
@@ -293,14 +293,14 @@ public class Network implements Runnable {
 	 */
 	private void appendToPane(JTextPane tp, String msg, Color c)
 	{
-		StyleContext sc = StyleContext.getDefaultStyleContext();
-		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
-		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-		int len = tp.getDocument().getLength();
-		tp.setCaretPosition(len);
-		tp.setCharacterAttributes(aset, false);
-		tp.replaceSelection(msg);
+//		StyleContext sc = StyleContext.getDefaultStyleContext();
+//		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+//		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+//		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+//		int len = tp.getDocument().getLength();
+//		tp.setCaretPosition(len);
+//		tp.setCharacterAttributes(aset, false);
+//		tp.replaceSelection(msg);
 	}
 
 	/**
@@ -359,7 +359,7 @@ public class Network implements Runnable {
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
 		String newSt = "[" + timing + "] " + str;
-		debug.println(newSt);
+		System.out.println(str);
 	}
 
 	public void getReturn(String [] message){
@@ -1239,7 +1239,7 @@ public class Network implements Runnable {
 		this.map = map;
 		this.interactive.setMap(map);
 		this.info.setCoords(new int[]{map.getPosition().getX(), map.getPosition().getY()});
-		this.info.setWorldmap(1); //TODO
+		this.info.setWorldmap(GameData.getWorldMap((int) mapId)); 
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 

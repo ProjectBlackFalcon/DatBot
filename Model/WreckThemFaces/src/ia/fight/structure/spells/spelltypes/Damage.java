@@ -129,7 +129,6 @@ public class Damage extends Spell{
 		if(pe.getModel().getResPrcnt()[this.getType()] == 0) {
 			prcntReduction = 0;
 		}else {
-			System.out.println(100/pe.getModel().getResPrcnt()[this.getType()]);
 			prcntReduction = outputDamage / (100/pe.getModel().getResPrcnt()[this.getType()]);
 		}
 		
@@ -138,7 +137,6 @@ public class Damage extends Spell{
 		if(pe.getModel().getResPrcnt()[this.getType()] == 0) {
 			prcntReductionCrit = 0;
 		}else {
-			System.out.println(100/pe.getModel().getResPrcnt()[this.getType()]);
 			prcntReductionCrit = outputDamageCrit / (100/pe.getModel().getResPrcnt()[this.getType()]);
 		}
 		

@@ -53,7 +53,7 @@ public class D2oManager {
 		unpackObjectsAsJson();
 		// writeJsonFile(true);
 //		printAllObjects(); // call after unpackObjectsAsJson();
-		// searchObjectById(); //call after unpackObjectsAsJson();
+//		 searchObjectById(0); //call after unpackObjectsAsJson();
 	}
 	
 	public List<String> returnJsonString(){
@@ -64,6 +64,19 @@ public class D2oManager {
 		}
 		return s;
 	}
+	
+    public String searchObjectById(int objectId)
+    {
+        if (objectPointerTable.containsKey(objectId))
+        {
+            return unpacker.getObjectJsonString(objectId);
+        }
+        else
+        {
+           System.out.println("Object of id: " + objectId + " is not present.");
+        }
+		return "";
+    }
 
 	private void readObjectPointerTable() throws IOException
 	{

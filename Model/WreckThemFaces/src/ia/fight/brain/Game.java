@@ -32,7 +32,7 @@ public class Game {
 	
 	static public Map map;
 	static public ArrayList<PlayingEntity> playingEntities;
-	static private GameViz los;
+	static public GameViz los;
 	private static int current_command_nbr = 0;
 	
 	public Game() {
@@ -127,7 +127,7 @@ public class Game {
 		String actionType = command[1];
 
 		//RECEIVED A MOVEMENT COMMAND
-			 if(actionType.equals("m")) {
+		if(actionType.equals("m")) {
 			executeMovementCommand(command);
 		}
 		//RECEIVED A MOVEMENT COMMAND
@@ -200,6 +200,19 @@ public class Game {
 		playingEntity.getModel().removeMP(Position.distance(new Position(posX, posY), playingEntity.getPosition()));
 		playingEntity.setPosition(new Position(posX, posY));
 		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		brainText.add("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
+		brainText.add("");
+		brainText.add("More details about entity "+id+" :");
+		brainText.add(playingEntity.toString());
+		String strings[] = playingEntity.getModel().toString().split("\n");
+		for(int i = 0; i < strings.length; i++) {
+			brainText.add(strings[i]);
+		}
+		
+		
+		Game.los.panel.updateBrainText(brainText);
 	}
 	
 	/**
@@ -223,6 +236,19 @@ public class Game {
 
 		Game.log.println("Casting "+spellname+" to : ["+posX+";"+posY+"]"+" for "+damage+" damage.");
 		SpellObject spellCast = Game.getSpellFromName(spellname, "cra");
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		brainText.add("Casting "+spellname+" to : ["+posX+";"+posY+"]"+" for "+damage+" damage.");
+		brainText.add("");
+		brainText.add("More details about entity "+id+" :");
+		brainText.add(castingEntity.toString());
+		String strings[] = castingEntity.getModel().toString().split("\n");
+		for(int i = 0; i < strings.length; i++) {
+			brainText.add(strings[i]);
+		}
+		
+		
+		Game.los.panel.updateBrainText(brainText);
 
 		Game.log.println(spellCast);
 		Game.log.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
@@ -524,6 +550,18 @@ public class Game {
 			}
 		});
 		
+		ArrayList<String> display = new ArrayList<>();
+		display.add("Initiating entities : ");
+		display.add("");
+		for(int i = 0; i < entities.size(); i++) {
+			String strings2[] = entities.get(i).toString().split("\n");
+			for(int j = 0; j < strings2.length; j++) {
+				display.add(strings2[j]);
+			}
+			display.add("");
+		}
+		
+		Game.los.panel.updateBrainText(display);
 		Game.initEntities(playingEntities);
 		
 		return "";

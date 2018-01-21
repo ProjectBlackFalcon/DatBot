@@ -30,7 +30,6 @@ public class FightTest {
 		//[[0,0,11,12],[1,1,6,12]]
 		//[[id_entity_0, team_entity_0, posX_entity_0, posY_entity_0], [id_entity_1, team_entity_1, posX_entity_1, posY_entity_1]]
 		System.out.println(Game.executeCommand("0;404;f;cmd;s;[[0,0,11,12],[1,1,6,12]]", players));
-
 		//Moving entity 0 to cell[11,12]
 		System.out.println(Game.executeCommand("0;405;f;cmd;m;[0,11,12]"));
 		//Entity 0 passing turn
