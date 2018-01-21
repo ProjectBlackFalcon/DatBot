@@ -19,9 +19,9 @@ import protocol.network.Network;
 public class d2iManager {
 
     private String fileName;
-    public IoBuffer buf;
+    public static IoBuffer buf;
 
-    private Hashtable _indexes;
+    private static Hashtable _indexes;
     private Hashtable _unDiacriticalIndex;
     private Hashtable _textIndexes;
     private Hashtable _textIndexesOverride;
@@ -46,7 +46,7 @@ public class d2iManager {
             MIN = MIN.length() == 1 ? ("0" + MIN) : (MIN);
             String SEC = Integer.toString(target.get(Calendar.SECOND));
             SEC = SEC.length() == 1 ? ("0" + SEC) : (SEC);
-            Network.append1("[" + HOUR + ":" + MIN + ":" + SEC + "] " + filePath + " readed in " + (System.currentTimeMillis() - startAt) + "ms");
+            System.out.println("[" + HOUR + ":" + MIN + ":" + SEC + "] " + filePath + " readed in " + (System.currentTimeMillis() - startAt) + "ms");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,9 +126,9 @@ public class d2iManager {
         return (readUTF(buf));
     }
 
-    public String getText(int key) {
+    public static String getText(int key) {
         try {
-            int pointer = (int) this._indexes.get(key);
+            int pointer = (int) _indexes.get(key);
 
             buf.position(pointer);
             return readUTF(buf);
