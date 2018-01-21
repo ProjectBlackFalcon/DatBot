@@ -23,7 +23,6 @@ class PathFinder:
             max(start_map[0], end_map[0]),
             max(start_map[1], end_map[1])
         )
-        self.shape = (abs(self.end[1]-self.start[1])+1, abs(self.end[0]-self.start[0])+1)
         self.shape = (abs(self.bbox[1]-self.bbox[3])+1, abs(self.bbox[0]-self.bbox[2])+1)
         self.mapinfo = self.llf.load_map_info()
         self.maps_coords = []
@@ -75,6 +74,7 @@ class PathFinder:
             raise Exception('n_row*n_col is different than the number of arrays given')
         else:
             maps_as_arrays = np.array(maps_as_arrays)
+            # print(maps_as_arrays.shape)
             arr = maps_as_arrays.reshape(shape[0], shape[1], 40, 14)
             out = np.concatenate([np.concatenate([map for map in arr[i]], axis=1) for i in range(shape[0])], axis=0)
             start_pos = (
@@ -111,10 +111,10 @@ class PathFinder:
         a[a == 0] = 255*64
         a[a == 2] = 255*32
         a[a == 4] = 255*16
-        a[a == 4] = 255*128
+        a[a == 4] = 255*255*255  # Path
         a[a == -2] = 255*128
         a[a == -3] = 255*128
-        a[a == 5] = 255*255
+        a[a == 5] = 255*255*255
         Image.fromarray(a).save('Out.png')
         # print('[Pathfinder] Done')
 
@@ -139,17 +139,14 @@ class PathFinder:
         oheap = []
 
         heappush(oheap, (fscore[start_pos], start_pos))
-
         while oheap:
-
             current = heappop(oheap)[1]
-
             if current == goal_pos:
                 data = []
                 while current in came_from:
                     data.append(current)
                     current = came_from[current]
-                self.path_cells = data[:]
+                self.path_cells = data
 
             close_set.add(current)
             for i, j in neighbors:
@@ -278,10 +275,10 @@ class PathFinder:
     def pick_end_cell(self):
         if self.end_cell is None:
             end_map_cells = self.llf.coord_fetch_map('{};{}'.format(self.end[0], self.end[1]), self.worldmap)
+            map_change_cells = list(set([i for i in range(28)] + [i for i in range(560) if i % 14 == 0] + [i for i in range(560) if i % 14 == 13] + [i for i in range(532, 560)]))
             found_walkable = False
             while not found_walkable:
-                x = randint(0, 13)
-                y = randint(0, 39)
+                x, y = self.cell2coord(map_change_cells[randint(0, len(map_change_cells)-1)])
                 # print(self.coord2cell((x, y)), end_map_cells[y][x])
                 if end_map_cells[y][x] == 0:
                     found_walkable = True

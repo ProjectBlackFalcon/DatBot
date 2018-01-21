@@ -68,6 +68,7 @@ public abstract class Player {
 		this.baseLP = baseLP;
 		this.baseAP = baseAP;
 		this.baseMP = baseMP;
+		this.maxLP = baseLP;
 		this.LP = baseLP;
 		this.AP = baseAP;
 		this.MP = baseMP;
@@ -428,8 +429,37 @@ public abstract class Player {
 		this.summoned = summoned;
 	}
 	
-	@Override
-	public abstract String toString();
+	public String toString() {
+		String s = this.getClass().getSimpleName()+" entity, "+this.getMaxLP()+"/"+this.getBaseAP()+"/"+this.getBaseMP() +"\n";
+		s += "Fixed Resistances : [";
+		for(int i = 0; i < this.getResFixed().length; i++) {
+			s+= this.getResFixed()[i];
+			if(i != this.getResFixed().length-1) {
+				s+=",";
+			}
+		}
+		s+="]\n";
+
+		s += "% Resistances : [";
+		for(int i = 0; i < this.getResPrcnt().length; i++) {
+			s+= this.getResPrcnt()[i];
+			if(i != this.getResPrcnt().length-1) {
+				s+=",";
+			}
+		}
+		s+="]\n";
+		
+		s += "Stats : [";
+		for(int i = 0; i < this.getStats().length; i++) {
+			s+= this.getStats()[i];
+			if(i != this.getStats().length-1) {
+				s+=",";
+			}
+		}
+		s+="]\n";
+		
+		return s;
+	}
 
 	public abstract String getType();
 

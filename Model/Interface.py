@@ -6,22 +6,15 @@ from subprocess import Popen, PIPE
 import time
 
 
-class Interface:
-    def __init__(self, bot_instance, headless=True):
-        self.bot_instance = bot_instance
-        self.current_id = 0
-        self.bank_info = {}
-        self.in_fight = False
-
-        self.connected = False
-
-        ON_POSIX = 'posix' in sys.builtin_module_names
-
+class PipeToJava:
+    def __init__(self, headless=True):
+        self.buffer = []
+        on_posix = 'posix' in sys.builtin_module_names
         args = ['java', '-jar', '..//BotTest.jar']
         if not headless:
-            args.append('true')
+            args.append("true")
 
-        self.p = Popen(args, stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=ON_POSIX)
+        self.p = Popen(args, stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=on_posix)
         self.q = Queue()
         t = Thread(target=self.enqueue_output, args=(self.p.stdout, self.q))
         t.daemon = True  # thread dies with the program
@@ -32,53 +25,81 @@ class Interface:
             queue.put(line)
         out.close()
 
+    def get_buffer(self):
+        local_buffer = []
+        try:
+            while 1:
+                read = self.q.get_nowait()
+                local_buffer.append(read.strip().decode('latin-1'))
+        except Empty:
+            pass
+
+        for message in local_buffer:
+            if len(message.split(';')) > 5:  # Shitty attempt to differentiate actual messages and debug prints
+                self.buffer.append(message)
+        return self.buffer
+
+    def remove_from_buffer(self, bot_id, message_id):
+        new_buffer = []
+        for entry in self.buffer:
+            if not ('{};{}'.format(bot_id, message_id) in entry):
+                new_buffer.append(entry)
+        self.buffer = new_buffer[:]
+
+
+class Interface:
+    def __init__(self, bot):
+        self.bot = bot  # type: Bot
+        self.pipe = self.bot.pipe  # type: PipeToJava
+        self.current_id = 0
+        self.bank_info = {}
+
     def add_command(self, command, parameters=None):
         # <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
-        message = '{};{};i;cmd;{};{}\r\n'.format(self.bot_instance, self.current_id, command, parameters)
+        message = '{};{};i;cmd;{};{}\r\n'.format(self.bot.id, self.current_id, command, parameters)
         print('[Interface] Sending : ', message.strip())
         self.current_id += 1
-        self.p.stdin.write(bytes(message, 'utf-8'))
-        self.p.stdin.flush()
+        self.pipe.p.stdin.write(bytes(message, 'utf-8'))
+        self.pipe.p.stdin.flush()
         return self.current_id-1
 
     def wait_for_return(self, message_id):
         print('[Interface] Waiting for response...')
         ret_val = None
         while ret_val is None:
-            messages = []
-            try:
-                while 1:
-                    read = self.q.get_nowait()
-                    messages.append(read.strip().decode('latin-1'))
-            except Empty:
-                pass
-
-            partial_message = '{};{};m;rtn'.format(self.bot_instance, message_id)
-            for message in messages:
-                # print(message)
-                if partial_message in message:
-                    # print(message)
-                    ret_val = ast.literal_eval(message.split(';')[-1])
-                if 'info;combat;[start]' in message:
-                    self.in_fight = True
-                if 'info;combat;[end]' in message:
-                    self.in_fight = False
+            partial_message = '{};{};m;rtn'.format(self.bot.id, message_id)
+            buffer = self.pipe.get_buffer()
+            # print(buffer)
+            for message in buffer:
+                if int(message.split(';')[0]) == self.bot.id:
+                    if partial_message in message:
+                        # print(message)
+                        ret_val = ast.literal_eval(message.split(';')[-1])
+                        self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
+                    elif 'info;combat;[start]' in message:
+                        self.bot.in_fight = True
+                    elif 'info;combat;[end]' in message:
+                        self.bot.in_fight = False
             time.sleep(0.1)
 
-        if not self.in_fight:
+        if not self.bot.in_fight:
             print('[Interface] Recieved : ', ret_val)
             return tuple(ret_val)
 
-    def connect(self, account, password, ig_name, server='Julith'):
+    def connect(self):
         """
         Connects a bot instance
-        :param account: bot account name
-        :param password: bot account password
         :return: Boolean
         """
-        msg_id = self.add_command('connect', [account, password, ig_name, server])
+        connection_param = [
+            self.bot.credentials['username'],
+            self.bot.credentials['password'],
+            self.bot.credentials['name'],
+            self.bot.credentials['server']
+        ]
+        msg_id = self.add_command('connect', connection_param)
         sucess = self.wait_for_return(msg_id)
-        self.connected = sucess
+        self.bot.connected = sucess
         return sucess
 
     def disconnect(self):
@@ -86,7 +107,7 @@ class Interface:
         Disconnects the bot instance
         :return:
         """
-        if self.connected:
+        if self.bot.connected:
             msg_id = self.add_command('disconnect')
             return self.wait_for_return(msg_id)
 
@@ -111,6 +132,7 @@ class Interface:
         """
         Moves the bot to an adjacent map
         :param cell: target cell number for map change
+        :param direction: cardnial direction as 'n', 's', 'w', 'e'
         :return: Boolean
         """
         msg_id = self.add_command('changeMap', [cell, direction])
@@ -364,6 +386,39 @@ class Interface:
         :return: Boolean
         """
         msg_id = self.add_command('huntFight')
+        return self.wait_for_return(msg_id)
+
+    def enter_heavenbag(self):
+        """
+        Enters heavenbag
+        :return: Boolean
+        """
+        msg_id = self.add_command('enterBag')
+        return self.wait_for_return(msg_id)
+
+    def exit_heavenbag(self):
+        """
+        Exits heavenbag
+        :return: Boolean
+        """
+        msg_id = self.add_command('exitBag')
+        return self.wait_for_return(msg_id)
+
+    def get_zaap_cell(self):
+        """
+        Returns the cell id of the current map zaap, or False if there is none
+        :return: [cell] or [False]
+        """
+        msg_id = self.add_command('getZaap')
+        return self.wait_for_return(msg_id)
+
+    def use_zaap(self, destination):
+        """
+        Uses the zaap to go to destination
+        :param destination: coords (ex: (-2, 0))
+        :return: Boolean
+        """
+        msg_id = self.add_command('useZaap', [destination])
         return self.wait_for_return(msg_id)
 
 __author__ = 'Alexis'

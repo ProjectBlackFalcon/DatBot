@@ -1,5 +1,6 @@
 import json
 import mysql.connector
+import numpy as np
 
 
 class LowLevelFunctions:
@@ -127,6 +128,35 @@ class LowLevelFunctions:
             return found
         else:
             raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+
+    def add_discovered_zaap(self, bot_name, zaap_pos):
+        with open('..//Utils//discoveredZaaps.json', 'r') as f:
+            disc_zaaps = json.load(f)
+        with open('..//Utils//zaaps.json', 'r') as f:
+            zaaps = json.load(f)
+
+        if list(zaap_pos) in zaaps:
+            if bot_name in disc_zaaps.keys():
+                if list(zaap_pos) not in disc_zaaps[bot_name]:
+                    disc_zaaps[bot_name].append(zaap_pos)
+            else:
+                disc_zaaps[bot_name] = [zaap_pos]
+
+        with open('..//Utils//discoveredZaaps.json', 'w') as f:
+            json.dump(disc_zaaps, f)
+
+    def get_closest_known_zaap(self, bot_name, pos):
+        with open('..//Utils//discoveredZaaps.json', 'r') as f:
+            disc_zaaps = json.load(f)
+        if bot_name in disc_zaaps.keys():
+            disc_zaaps = disc_zaaps[bot_name]
+        else:
+            return None
+        closest = None, 100000
+        for zaap_pos in disc_zaaps:
+            if self.distance_coords(pos, zaap_pos) < closest[1]:
+                closest = zaap_pos, self.distance_coords(pos, zaap_pos)
+        return closest[0]
 
 
 __author__ = 'Alexis'
