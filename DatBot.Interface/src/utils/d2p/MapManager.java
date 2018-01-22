@@ -9,6 +9,7 @@ import java.util.zip.DeflaterInputStream;
 import java.util.zip.InflaterInputStream;
 
 import protocol.network.util.DofusDataReader;
+import utils.d2p.informations.D2PFileDlm;
 import utils.d2p.informations.D2pFileManager;
 import utils.d2p.map.Map;
 
@@ -52,6 +53,14 @@ public class MapManager {
         }
         this.MapId_Map.put(id, null);
         return null;
+    }
+    
+    
+    public void parseAllMap(){
+    	for (D2PFileDlm file : D2pFileManager.getListD2pFileDlm())
+		{
+			
+		}
     }
     
     public MapManager(String directory) throws IOException

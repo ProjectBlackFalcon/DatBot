@@ -61,10 +61,17 @@ import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightCloseCombatMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightDeathMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightDispellableEffectMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDodgePointLossMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightLifeAndShieldPointsLostMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightLifePointsGainMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightMarkCellsMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSummonMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
@@ -114,6 +121,11 @@ import protocol.network.messages.handshake.ProtocolRequired;
 import protocol.network.messages.queues.LoginQueueStatusMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
+import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
+import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
+import protocol.network.types.game.actions.fight.FightTemporaryBoostWeaponDamagesEffect;
+import protocol.network.types.game.actions.fight.FightTemporarySpellBoostEffect;
+import protocol.network.types.game.actions.fight.GameActionMarkedCell;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
@@ -125,6 +137,7 @@ import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
 import utils.GameData;
+import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 
@@ -410,11 +423,14 @@ public class Network implements Runnable {
 	 * @param byte[]
 	 *            packet_content
 	 */
+	@SuppressWarnings("unchecked")
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception
 	{
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
 		append("[" + packet_id + "]\tTaille : " + packet_content.length + "  -  " + name.name, true);
+		JSONObject jsonObject = null;
+		JSONObject jsonObject2;
 		switch (packet_id)
 		{
 			case 1:
@@ -533,8 +549,7 @@ public class Network implements Runnable {
 							this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
 
 						}
-						if (complementaryInformationsDataMessage.getActors().get(i).getContextualId() == info.getActorId())
-							info.setCellId(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId());
+						if (complementaryInformationsDataMessage.getActors().get(i).getContextualId() == info.getActorId()) info.setCellId(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId());
 					}
 					getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 					getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
@@ -570,7 +585,7 @@ public class Network implements Runnable {
 						{
 							this.getFight().getMonsters().get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
 						}
-					} 
+					}
 					int cellId = gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1);
 					int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
 					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
@@ -928,7 +943,7 @@ public class Network implements Runnable {
 				info.setJoinedFight(false);
 				info.setTurn(false);
 				getFight().sendToFightAlgo("endFight", new Object[] { "None" });
-				break;
+			break;
 			case 703:
 				getFight().gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
 				getFight().gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
@@ -975,32 +990,177 @@ public class Network implements Runnable {
 				getFight().setSpellJson(new JSONArray());
 				getFight().spellToSend = "";
 			break;
+			/**
+			 * LYSANDRE FIGHT //
+			 * case 1010 to case 6310
+			 * Each sequence can contain multiple jsonObject
+			 * Each case contains one jsonObject
+			 * jsonObject : key of the variable
+			 * jsonObject : key of the packet
+			 * sourceId : caster
+			 * targetId : target
+			 */
 			case 1010:
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("spellId", gameActionFightSpellCastMessage.getSpellId());
+				jsonObject = new JSONObject();
+				jsonObject.put("spellId", d2iManager.getText(GameData.getSpellNameId(gameActionFightSpellCastMessage.getSpellId())));
 				jsonObject.put("targetId", getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
 				jsonObject.put("destinationCellId", gameActionFightSpellCastMessage.getDestinationCellId());
 				jsonObject.put("critical", gameActionFightSpellCastMessage.getCritical());
 				jsonObject.put("sourceId", getFight().getId(gameActionFightSpellCastMessage.getSourceId()));
-				JSONObject jsonObject2 = new JSONObject();
-				jsonObject2.put("SpellCast", jsonObject);
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("spellCast", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-				getFight().spellToSend += getFight().getId(gameActionFightSpellCastMessage.getSourceId()) + "," + CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.getDestinationCellId() % 14, gameActionFightSpellCastMessage.getDestinationCellId() / 14 })[0] + ","
-					+ CreateMap.rotate(new int[] { gameActionFightSpellCastMessage.getDestinationCellId() % 14, gameActionFightSpellCastMessage.getDestinationCellId() / 14 })[1] + "," + gameActionFightSpellCastMessage.getSpellId();
 			break;
 			case 6312:
 				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
-//				getFight().getSpellJson().put("lifePointlost", getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()) + "," + gameActionFightLifePointsLostMessage.getLoss() + "," + gameActionFightLifePointsLostMessage.getPermanentDamages());
-				getFight().spellToSend += ",[" + getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()) + "," + gameActionFightLifePointsLostMessage.getLoss() + "," + gameActionFightLifePointsLostMessage.getPermanentDamages() + "]";
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightLifePointsLostMessage.getSourceId()));
+				jsonObject.put("targetId", getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()));
+				jsonObject.put("lpLost", gameActionFightLifePointsLostMessage.getLoss());
+				jsonObject.put("lpMaxLost", gameActionFightLifePointsLostMessage.getPermanentDamages());
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("lifePointsLost", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
 			break;
+			case 5828:
+				GameActionFightDodgePointLossMessage dodgePointLossMessage = new GameActionFightDodgePointLossMessage();
+				dodgePointLossMessage.Deserialize(dataReader);
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(dodgePointLossMessage.getSourceId()));
+				jsonObject.put("targetId", getFight().getId(dodgePointLossMessage.getTargetId()));
+				jsonObject.put("amount", dodgePointLossMessage.getAmount());
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("dodgePointLoss", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
+			break;
+			/**
+			 * Depending on the packet received it will give a JsonObject with diferent key
+			 * the first are in common for every packet
+			 */
 			case 6070:
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
-//				getFight().getSpellJson().put("effect", getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable());
-				getFight().spellToSend += ",[" + getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()) + "," + gameActionFightDispellableEffectMessage.getEffect().getEffectId() + "," + gameActionFightDispellableEffectMessage.getEffect().getTurnDuration() + "," + gameActionFightDispellableEffectMessage.getEffect().getDispelable() + "]";
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightDispellableEffectMessage.getSourceId()));
+				jsonObject.put("targetId", gameActionFightDispellableEffectMessage.getEffect().getTargetId());
+				jsonObject.put("effectId", gameActionFightDispellableEffectMessage.getEffect().getEffectId());
+				jsonObject.put("spell", d2iManager.getText(GameData.getSpellNameId(gameActionFightDispellableEffectMessage.getEffect().getSpellId())));
+				jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
+				jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect"))
+				{
+					jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+				}
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect"))
+				{
+					jsonObject.put("stateId", ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
+				}
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostWeaponDamagesEffect"))
+				{
+					jsonObject.put("weaponTypeId", ((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+				}
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellBoostEffect"))
+				{
+					jsonObject.put("boostedSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()));
+
+				}
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellImmunityEffect"))
+				{
+					jsonObject.put("immuneSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()));
+
+				}
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("dispellableEffect", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
+			break;
+			case 5540:
+				GameActionFightMarkCellsMessage gameActionFightMarkCellsMessage = new GameActionFightMarkCellsMessage();
+				gameActionFightMarkCellsMessage.Deserialize(dataReader);
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
+				jsonObject.put("markSpell",d2iManager.getText(GameData.getSpellNameId(gameActionFightMarkCellsMessage.getMark().getMarkSpellId())));
+				jsonObject.put("markImpactCellId", gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
+				JSONArray jsonArray = new JSONArray();
+				for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells())
+				{
+					JSONObject jsonCells = new JSONObject();
+					jsonCells.put("cellId", object.getCellId());
+					jsonCells.put("zoneSize", object.getZoneSize());
+					jsonArray.add(jsonCells);
+				}
+				jsonObject.put("cells", jsonArray);
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("markCells", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
+			break;
+			case 6311:
+				GameActionFightLifePointsGainMessage gameActionFightLifePointsGainMessage = new GameActionFightLifePointsGainMessage();
+				gameActionFightLifePointsGainMessage.Deserialize(dataReader);
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightLifePointsGainMessage.getSourceId()));
+				jsonObject.put("targetId", getFight().getId(gameActionFightLifePointsGainMessage.getTargetId()));
+				jsonObject.put("lpGain", gameActionFightLifePointsGainMessage.getDelta());
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("lifePointsGain", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
+			break;
+			case 1099:
+				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
+				gameActionFightDeathMessage.Deserialize(dataReader);
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightDeathMessage.getSourceId()));
+				jsonObject.put("targetId", getFight().getId(gameActionFightDeathMessage.getTargetId()));
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("death", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
+				for (int i = 0; i < this.getFight().getMonsters().size(); i++)
+				{
+					if (this.getFight().getMonsters().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId())
+					{
+						this.getFight().getMonsters().get(i).setAlive(false);
+					}
+				}
+			break;
+			case 6116:
+				GameActionFightCloseCombatMessage gameActionFightCloseCombatMessage = new GameActionFightCloseCombatMessage();
+				gameActionFightCloseCombatMessage.Deserialize(dataReader);
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightCloseCombatMessage.getSourceId()));
+				jsonObject.put("targetId", getFight().getId(gameActionFightCloseCombatMessage.getTargetId()));
+				jsonObject.put("weaponGeneric", d2iManager.getText(GameData.getSpellNameId(gameActionFightCloseCombatMessage.getWeaponGenericId())));
+				jsonObject.put("critical", gameActionFightCloseCombatMessage.getCritical());
+				jsonObject.put("destinationCellId", gameActionFightCloseCombatMessage.getDestinationCellId());
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("closeCombat", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
+			break;
+			case 5525:
+				GameActionFightSlideMessage gameActionFightSlideMessage = new GameActionFightSlideMessage();
+				gameActionFightSlideMessage.Deserialize(dataReader);
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightSlideMessage.getSourceId()));
+				jsonObject.put("targetId", getFight().getId(gameActionFightSlideMessage.getTargetId()));
+				jsonObject.put("startCellId", gameActionFightSlideMessage.getStartCellId());
+				jsonObject.put("endCellId", gameActionFightSlideMessage.getEndCellId());
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("slide", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
+			break;
+			case 6310:
+				GameActionFightLifeAndShieldPointsLostMessage gameActionFightLifeAndShieldPointsLostMessage = new GameActionFightLifeAndShieldPointsLostMessage();
+				gameActionFightLifeAndShieldPointsLostMessage.Deserialize(dataReader);
+				jsonObject = new JSONObject();
+				jsonObject.put("sourceId", getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getSourceId()));
+				jsonObject.put("targetId", getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getTargetId()));
+				jsonObject.put("shieldLoss", gameActionFightLifeAndShieldPointsLostMessage.getShieldLoss());
+				jsonObject.put("lpLoss", gameActionFightLifeAndShieldPointsLostMessage.getLoss());
+				jsonObject.put("lpMaxLoss", gameActionFightLifeAndShieldPointsLostMessage.getPermanentDamages());
+				jsonObject2 = new JSONObject();
+				jsonObject2.put("shieldLpLoss", jsonObject);
+				getFight().getSpellJson().add(jsonObject2);
 			break;
 			case 713:
 				GameFightTurnListMessage gameFightTurnListMessage = new GameFightTurnListMessage();
@@ -1009,18 +1169,6 @@ public class Network implements Runnable {
 				{
 					getFight().turnListId = gameFightTurnListMessage.getIds();
 				}
-			break;
-			case 1099:
-				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
-				gameActionFightDeathMessage.Deserialize(dataReader);
-//				getFight().getSpellJson().put("death", gameActionFightDeathMessage.getTargetId());
-				for (int i = 0; i < this.getFight().getMonsters().size(); i++)
-				{
-					if (this.getFight().getMonsters().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId())
-					{
-						this.getFight().getMonsters().get(i).setAlive(false);
-					}
-				} 
 			break;
 		}
 	}

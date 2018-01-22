@@ -1,13 +1,14 @@
 package main;
 
 import main.communication.Communication;
-import utils.GameData;
+import protocol.network.Network;
+import utils.d2i.d2iManager;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception
 	{
-		new GameData();
+		new d2iManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
 		boolean arg = false;
 		if (args.length != 0)
 		{
