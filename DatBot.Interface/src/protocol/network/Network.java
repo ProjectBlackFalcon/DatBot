@@ -242,9 +242,9 @@ public class Network implements Runnable {
 			append("Connection...");
 			if (displayPacket)
 			{
-				// initComponent();
-				// f.pack();
-				// f.setVisible(true);
+				initComponent();
+				f.pack();
+				f.setVisible(true);
 			}
 			reception();
 		}
@@ -312,17 +312,14 @@ public class Network implements Runnable {
 	 */
 	private void appendToPane(JTextPane tp, String msg, Color c)
 	{
-		// StyleContext sc = StyleContext.getDefaultStyleContext();
-		// AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,
-		// StyleConstants.Foreground, c);
-		// aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida
-		// Console");
-		// aset = sc.addAttribute(aset, StyleConstants.Alignment,
-		// StyleConstants.ALIGN_JUSTIFIED);
-		// int len = tp.getDocument().getLength();
-		// tp.setCaretPosition(len);
-		// tp.setCharacterAttributes(aset, false);
-		// tp.replaceSelection(msg);
+		StyleContext sc = StyleContext.getDefaultStyleContext();
+		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida	Console");
+		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+		int len = tp.getDocument().getLength();
+		tp.setCaretPosition(len);
+		tp.setCharacterAttributes(aset, false);
+		tp.replaceSelection(msg);
 	}
 
 	/**
@@ -991,14 +988,10 @@ public class Network implements Runnable {
 				getFight().spellToSend = "";
 			break;
 			/**
-			 * LYSANDRE FIGHT //
-			 * case 1010 to case 6310
-			 * Each sequence can contain multiple jsonObject
-			 * Each case contains one jsonObject
-			 * jsonObject : key of the variable
-			 * jsonObject : key of the packet
-			 * sourceId : caster
-			 * targetId : target
+			 * LYSANDRE FIGHT // case 1010 to case 6310 Each sequence can
+			 * contain multiple jsonObject Each case contains one jsonObject
+			 * jsonObject : key of the variable jsonObject : key of the packet
+			 * sourceId : caster targetId : target
 			 */
 			case 1010:
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
@@ -1037,8 +1030,8 @@ public class Network implements Runnable {
 				getFight().getSpellJson().add(jsonObject2);
 			break;
 			/**
-			 * Depending on the packet received it will give a JsonObject with diferent key
-			 * the first are in common for every packet
+			 * Depending on the packet received it will give a JsonObject with
+			 * diferent key the first are in common for every packet
 			 */
 			case 6070:
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
@@ -1081,7 +1074,7 @@ public class Network implements Runnable {
 				gameActionFightMarkCellsMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
 				jsonObject.put("sourceId", getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
-				jsonObject.put("markSpell",d2iManager.getText(GameData.getSpellNameId(gameActionFightMarkCellsMessage.getMark().getMarkSpellId())));
+				jsonObject.put("markSpell", d2iManager.getText(GameData.getSpellNameId(gameActionFightMarkCellsMessage.getMark().getMarkSpellId())));
 				jsonObject.put("markImpactCellId", gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
 				JSONArray jsonArray = new JSONArray();
 				for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells())
@@ -1316,7 +1309,7 @@ public class Network implements Runnable {
 
 	private void HandleHelloConnectMessage(byte[] key, String salt) throws Exception
 	{
-		VersionExtended versionExtended = new VersionExtended(2, 45, 3, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 45, 10, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), salt);
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials)
