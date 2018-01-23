@@ -586,7 +586,15 @@ public class Network implements Runnable {
 					int cellId = gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1);
 					int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
 					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
-					getFight().sendToFightAlgo("m", new Object[] { this.getFight().getId(gameMapMovementMessage.getActorId()), x, y });
+					
+					JSONObject object = new JSONObject();
+					object.put("id", gameMapMovementMessage.getActorId());
+					object.put("x", x);
+					object.put("y", y);
+					JSONArray arr = new JSONArray();
+					arr.add(object);
+					
+					getFight().sendToFightAlgo("m", arr);
 				}
 			break;
 			case 6316:
@@ -902,7 +910,11 @@ public class Network implements Runnable {
 				info.setTurn(false);
 				info.setInitFight(false);
 				Communication.sendToModel(String.valueOf(info.getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] {});
-				getFight().sendToFightAlgo("startfight", new Object[] { (int) info.getMapId() });
+				JSONObject mapJSONObject = new JSONObject();
+				mapJSONObject.put("mapID", info.getMapId());
+				JSONArray tempArr = new JSONArray();
+				tempArr.add(mapJSONObject);
+				getFight().sendToFightAlgo("startfight", tempArr);
 			break;
 			case 956:
 				SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
@@ -913,11 +925,15 @@ public class Network implements Runnable {
 					sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.getActionId()), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
 					this.getInfo().setAcknowledged(true);
 				}
-				if (!getFight().getSpellToSend().equals(""))
+				if (!getFight().getSpellJson().isEmpty())
 				{
-					append("Spell send : " + getFight().getSpellToSend());
 					append("JSON SPELL SEND : " + getFight().getSpellJson().toJSONString());
-					getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellToSend() });
+					/**
+					 * FOR LYSANDRE
+					 * Use getFight().getSpellJson() in a function 
+					 */
+					getFight().sendToFightAlgo("c", getFight().getSpellJson());
+					//Previous trash function
 				}
 				if (info.isTurn())
 				{
@@ -934,12 +950,17 @@ public class Network implements Runnable {
 				{
 					info.setTurn(false);
 				}
-				getFight().sendToFightAlgo("p", new Object[] { getFight().getId(gameFightTurnEndMessage.getId()) });
+				
+				JSONObject passTurn = new JSONObject();
+				passTurn.put("id", getFight().getId(gameFightTurnEndMessage.getId()));
+				JSONArray arr = new JSONArray();
+				arr.add(passTurn);
+				getFight().sendToFightAlgo("p", arr);
 			break;
 			case 720:
 				info.setJoinedFight(false);
 				info.setTurn(false);
-				getFight().sendToFightAlgo("endFight", new Object[] { "None" });
+				getFight().sendToFightAlgo("endFight", null);
 			break;
 			case 703:
 				getFight().gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
@@ -973,8 +994,12 @@ public class Network implements Runnable {
 				getFight().setGameFightSynchronizeMessage(new GameFightSynchronizeMessage());
 				getFight().getGameFightSynchronizeMessage().Deserialize(dataReader);
 				if (!info.isInitFight())
-				{
-					getFight().sendToFightAlgo("s", new Object[] { getFight().init() }, getFight().getEntities());
+				{	
+					JSONObject startFight = new JSONObject();
+					startFight.put("entities", getFight().getEntities());
+					JSONArray arr2 = new JSONArray();
+					arr2.add(startFight);
+					getFight().sendToFightAlgo("s", arr2);
 					info.setInitFight(true);
 				}
 			break;
@@ -985,7 +1010,6 @@ public class Network implements Runnable {
 			break;
 			case 955:
 				getFight().setSpellJson(new JSONArray());
-				getFight().spellToSend = "";
 			break;
 			/**
 			 * LYSANDRE FIGHT // case 1010 to case 6310 Each sequence can

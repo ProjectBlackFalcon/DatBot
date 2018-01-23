@@ -39,7 +39,6 @@ public class Fight {
 
 	public List<Double> turnListId;
 	private JSONArray spellJson;
-	public String spellToSend;
 	private Network network;
 	private Info info;
 	
@@ -49,54 +48,14 @@ public class Fight {
 	}
 
 	/**
-	 * For spell casted
-	 * @return [idCaster,posX,posY,spellId,[targetId,LPlost,LPmaxLost],...,[targetId,effectId,turnDuration,dispelable],...]
-	 */
-	
-	/**
-	 * Communicate with the fight algo and the results 
+	 * Communicate with the fight algo and the results, modified by jikiw 
 	 * @param String command, Ojbect [] parameters
 	 * @return String results 
-	 * @author baptiste
+	 * @author baptiste & jikiw
 	 */
-	public String sendToFightAlgo(String command, Object[] param)
+	public String sendToFightAlgo(String command, JSONArray param)
 	{
-		String newParam = "";
-		for (int i = 0; i < param.length; i++)
-		{
-			if (i == param.length - 1)
-			{
-				newParam += param[i];
-			}
-			else
-			{
-				newParam += param[i] + ",";
-			}
-		}
-		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", this.network.getInfo().getBotInstance(), this.network.getInfo().addAndGetMsgIdFight(), "f", "cmd", command, newParam));
-	}
-	
-	/**
-	 * Init the entities to the fight algo
-	 * @param String command, Ojbect [] parameters, ArrayList<Players> players
-	 * @return String results 
-	 * @author baptiste
-	 */
-	public String sendToFightAlgo(String command, Object[] param, ArrayList<Player> players)
-	{
-		String newParam = "";
-		for (int i = 0; i < param.length; i++)
-		{
-			if (i == param.length - 1)
-			{
-				newParam += param[i];
-			}
-			else
-			{
-				newParam += param[i] + ", ";
-			}
-		}
-		return Game.executeCommand(String.format("%s;%s;%s;%s;%s;[%s]", this.network.getInfo().getBotInstance(), this.network.getInfo().addAndGetMsgIdFight(), "f", "cmd", command, newParam), players);
+		return Game.executeCommand(command, param);
 	}
 
 	/**
@@ -296,7 +255,7 @@ public class Fight {
 		}
 		if(!isMonstersAlive) return;
 		network.append("SEND TO LYSOU");
-		String s = sendToFightAlgo("g", new Object[] { getId(this.network.getInfo().getActorId()) });
+		String s = sendToFightAlgo("g", null);
 		String[] message = s.split(";");
 		this.network.getInfo().setMsgIdFight(Integer.parseInt(message[1]));
 		message[4] = message[4].substring(1, message[4].length() - 1);
@@ -406,16 +365,6 @@ public class Fight {
 	public void setTurnListId(List<Double> turnListId)
 	{
 		this.turnListId = turnListId;
-	}
-
-	public String getSpellToSend()
-	{
-		return spellToSend;
-	}
-
-	public void setSpellToSend(String spellToSend)
-	{
-		this.spellToSend = spellToSend;
 	}
 
 	private Network getNetwork()
