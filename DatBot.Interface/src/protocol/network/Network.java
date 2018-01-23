@@ -916,11 +916,15 @@ public class Network implements Runnable {
 					sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.getActionId()), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
 					this.getInfo().setAcknowledged(true);
 				}
-				if (!getFight().getSpellToSend().equals(""))
+				if (!getFight().getSpellJson().isEmpty())
 				{
-					append("Spell send : " + getFight().getSpellToSend());
 					append("JSON SPELL SEND : " + getFight().getSpellJson().toJSONString());
-					getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellToSend() });
+					/**
+					 * FOR LYSANDRE
+					 * Use getFight().getSpellJson() in a function 
+					 */
+					//getFight().sendToFightAlgo("c", new Object[] { getFight().getSpellJson().toJSONString() });
+					//Previous trash function
 				}
 				if (info.isTurn())
 				{
@@ -988,7 +992,6 @@ public class Network implements Runnable {
 			break;
 			case 955:
 				getFight().setSpellJson(new JSONArray());
-				getFight().spellToSend = "";
 			break;
 			/**
 			 * LYSANDRE FIGHT //

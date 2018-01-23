@@ -39,7 +39,6 @@ public class Fight {
 
 	public List<Double> turnListId;
 	private JSONArray spellJson;
-	public String spellToSend;
 	private Network network;
 	private Info info;
 	
@@ -47,11 +46,6 @@ public class Fight {
 		this.network = network;
 		this.info = network.getInfo();
 	}
-
-	/**
-	 * For spell casted
-	 * @return [idCaster,posX,posY,spellId,[targetId,LPlost,LPmaxLost],...,[targetId,effectId,turnDuration,dispelable],...]
-	 */
 	
 	/**
 	 * Communicate with the fight algo and the results 
@@ -406,16 +400,6 @@ public class Fight {
 	public void setTurnListId(List<Double> turnListId)
 	{
 		this.turnListId = turnListId;
-	}
-
-	public String getSpellToSend()
-	{
-		return spellToSend;
-	}
-
-	public void setSpellToSend(String spellToSend)
-	{
-		this.spellToSend = spellToSend;
 	}
 
 	private Network getNetwork()
