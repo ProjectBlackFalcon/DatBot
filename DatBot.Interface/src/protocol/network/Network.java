@@ -911,7 +911,7 @@ public class Network implements Runnable {
 				info.setInitFight(false);
 				Communication.sendToModel(String.valueOf(info.getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] {});
 				JSONObject mapJSONObject = new JSONObject();
-				mapJSONObject.put("mapID", info.getMapId());
+				mapJSONObject.put("mapID", (int)info.getMapId());
 				JSONArray tempArr = new JSONArray();
 				tempArr.add(mapJSONObject);
 				getFight().sendToFightAlgo("startfight", tempArr);
@@ -996,6 +996,7 @@ public class Network implements Runnable {
 				if (!info.isInitFight())
 				{	
 					JSONObject startFight = new JSONObject();
+					startFight.put("misc", getFight().init());
 					startFight.put("entities", getFight().getEntities());
 					JSONArray arr2 = new JSONArray();
 					arr2.add(startFight);

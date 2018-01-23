@@ -46,7 +46,7 @@ public class d2iManager {
             MIN = MIN.length() == 1 ? ("0" + MIN) : (MIN);
             String SEC = Integer.toString(target.get(Calendar.SECOND));
             SEC = SEC.length() == 1 ? ("0" + SEC) : (SEC);
-            System.out.println("[" + HOUR + ":" + MIN + ":" + SEC + "] " + filePath + " readed in " + (System.currentTimeMillis() - startAt) + "ms");
+            System.out.println("[" + HOUR + ":" + MIN + ":" + SEC + "] " + filePath + " readededededededededededededededededededededed in " + (System.currentTimeMillis() - startAt) + "ms");
         } catch (Exception e) {
             e.printStackTrace();
         }

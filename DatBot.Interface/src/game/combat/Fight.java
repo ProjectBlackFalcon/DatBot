@@ -41,10 +41,12 @@ public class Fight {
 	private JSONArray spellJson;
 	private Network network;
 	private Info info;
+	private Game game;
 	
 	public Fight(Network network){
 		this.network = network;
 		this.info = network.getInfo();
+		game = new Game();
 	}
 
 	/**
@@ -55,7 +57,7 @@ public class Fight {
 	 */
 	public String sendToFightAlgo(String command, JSONArray param)
 	{
-		return Game.executeCommand(command, param);
+		return game.executeCommand(command, param);
 	}
 
 	/**
@@ -137,12 +139,14 @@ public class Fight {
 	 * Init List<players> entities
 	 * @return String [id,teamId,posX,posY],...
 	 */
-	public String init(){
+	public ArrayList<JSONObject> init(){
 		this.entities = new ArrayList<>();
 		this.monsters = new ArrayList<>();
 		Player player = null;
-		String toSend = "";
+		ArrayList<JSONObject> arr = new ArrayList<>();
+		
 		for(int i = 0; i < gameFightSynchronizeMessage.getFighters().size() ; i++){
+			JSONObject toSend = new JSONObject();
 			if (this.getGameFightSynchronizeMessage().getFighters().get(i).getClass().getSimpleName().equals("GameFightCharacterInformations")){
 				GameFightCharacterInformations p = (GameFightCharacterInformations) gameFightSynchronizeMessage.getFighters().get(i);
 				GameFightMinimalStats stats = p.getStats();
@@ -173,9 +177,15 @@ public class Fight {
 				player.setCloseCombatResistancePrcnt(100 - stats.getMeleeDamageReceivedPercent());
 				player.setDistanceResistancePrcnt(100 - stats.getRangedDamageReceivedPercent());
 				if(i == this.getGameFightSynchronizeMessage().getFighters().size() - 1){
-					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "]";
+					toSend.put("id", getId(p.getContextualId()));
+					toSend.put("teamId", p.getTeamId());
+					toSend.put("x", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0]);
+					toSend.put("y", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1]);
 				} else {
-					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "],";
+					toSend.put("id", getId(p.getContextualId()));
+					toSend.put("teamId", p.getTeamId());
+					toSend.put("x", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0]);
+					toSend.put("y", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1]);
 				}
 				this.entities.add(player);
 			} else if (this.getGameFightSynchronizeMessage().getFighters().get(i).getClass().getSimpleName().equals("GameFightMonsterInformations")){
@@ -204,14 +214,21 @@ public class Fight {
 				monster.setCloseCombatResistancePrcnt(100 - stats.getMeleeDamageReceivedPercent());
 				monster.setDistanceResistancePrcnt(100 - stats.getRangedDamageReceivedPercent());
 				if(i == this.getGameFightSynchronizeMessage().getFighters().size() - 1){
-					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "]";
+					toSend.put("id", getId(p.getContextualId()));
+					toSend.put("teamId", p.getTeamId());
+					toSend.put("x", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0]);
+					toSend.put("y", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1]);
 				} else {
-					toSend += "[" + getId(p.getContextualId()) + "," + p.getTeamId() + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0] + "," + CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1] + "],";
+					toSend.put("id", getId(p.getContextualId()));
+					toSend.put("teamId", p.getTeamId());
+					toSend.put("x", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[0]);
+					toSend.put("y", CreateMap.rotate(new int[]{ p.getDisposition().getCellId() % 14, p.getDisposition().getCellId() / 14})[1]);
 				}
 				this.entities.add(monster);	
 			}
+			arr.add(toSend);
 		}
-		return toSend;
+		return arr;
 	}
 	
 	
@@ -255,14 +272,20 @@ public class Fight {
 		}
 		if(!isMonstersAlive) return;
 		network.append("SEND TO LYSOU");
-		String s = sendToFightAlgo("g", null);
-		String[] message = s.split(";");
-		this.network.getInfo().setMsgIdFight(Integer.parseInt(message[1]));
-		message[4] = message[4].substring(1, message[4].length() - 1);
-		if(message[4] == null){
+		JSONObject obj = new JSONObject();
+		obj.put("id", getId(this.info.getActorId()));
+		JSONArray arr = new JSONArray();
+		arr.add(obj);
+		String s = sendToFightAlgo("g", arr);
+		
+		if(s == null){
 			endTurn();
 		}
-		String[] cmd = message[4].split(",");
+		
+		System.out.println(s);
+		
+		String[] cmd = s.split(",");
+		
 		for(String s2 : cmd){
 			network.append(s2);
 		}
