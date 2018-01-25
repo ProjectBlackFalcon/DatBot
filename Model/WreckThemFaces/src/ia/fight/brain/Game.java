@@ -80,16 +80,20 @@ public class Game {
 	 * Initializes the game map. Creates a map and opens a JFrame.
 	 * @param map
 	 */
-	public static void initGame(int map) {
+	public void initGame(int map) {
 		Map mapObject = CreateMap.getMapById(map);
 		Game.map = mapObject;
 		los = new GameViz(mapObject);
+		log.println("Init game to map : "+map);
+		ArrayList<String> commands = new ArrayList<>();
+		commands.add("Init game to map : "+map);
+		los.panel.updateBrainText(commands);
 	}
 	
 	/**
 	 * Ends the game by disposing of the window.
 	 */
-	public static void endGame() {
+	public void endGame() {
 		Game.playingEntities.clear();
 		los.dispose();
 	}
@@ -98,7 +102,7 @@ public class Game {
 	 * Initializes entities according to the passed arrayList
 	 * @param entities Entities to be initialized.
 	 */
-	static public void initEntities(ArrayList<PlayingEntity> entities) {
+	public void initEntities(ArrayList<PlayingEntity> entities) {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		
 		for(int i = 0; i < entities.size(); i++) {
@@ -222,8 +226,10 @@ public class Game {
 	 * @param command
 	 * @return
 	 */
-	static private String getBestTurn(String[] command) {
-		int id = (int) Long.parseLong(command[0]);
+	static private String getBestTurn(JSONArray command) {
+		
+		JSONObject idObj = (JSONObject) command.get(0);
+		int id = (int) idObj.get("id");
 
 		PlayingEntity caster = getPlayingEntityFromID(id);
 		PlayingEntity victim = getClosestEnnemy(caster);
@@ -280,7 +286,7 @@ public class Game {
 		String action = "";
 		
 		if(!selectedPosition.position.deepEquals(caster.getPosition())) {
-			action += command[0]+",m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
+			action += id+",m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
 		}else {
 			if(turn.size() < 1) {
 				Position desired = getClosestPositionFromArrayList(accessiblePositions, victim.getPosition());
@@ -290,12 +296,12 @@ public class Game {
 				log.println("Ennemy position : "+victim.getPosition());
 				log.println("Desired position : "+desired);
 				if(!caster.getPosition().deepEquals(desired)) {
-					action += command[0]+",m,"+desired.getX()+","+desired.getY();
+					action += id+",m,"+desired.getX()+","+desired.getY();
 				}else {
-					action += command[0]+",None";
+					action += id+",None";
 				}
 			}else {
-				action += command[0]+",c,"+selectedPosition.turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
+				action += id+",c,"+selectedPosition.turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
 			}
 			
 		}
@@ -362,16 +368,43 @@ public class Game {
 	public static PrintStream log;
 	public static PrintStream com;
 	
-	public static String executeCommand(String s, JSONArray command) {
+	public String executeCommand(String s, JSONArray command) {
+		if(log == null) {
+			initLogs();
+		}
+		
 		System.out.println("RECEIVED COMMAND "+s);
 		System.out.println(command);
 		if(s.equals("c")) {
 			executeSpellCommand(command);
 		}else if(s.equals("m")) {
 			executeMovementCommand(command);
+		}else if(s.equals("startfight")) {
+			log.println("Starting fight");
+			initGame((int) ((JSONObject)command.get(0)).get("mapID"));
+		}else if(s.equals("s")) {
+			log.println("Initiating entities");
+			ArrayList<Player> players = (ArrayList<Player>)(((JSONObject)command.get(0))).get("entities");
+			ArrayList<JSONObject> commands = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("misc");
+			ArrayList<PlayingEntity> entities = new ArrayList<>();
+			for(int i = 0; i < players.size(); i++) {
+				JSONObject obj = (JSONObject) commands.get(i);
+				int id = (int) obj.get("id");
+				String team = (int)obj.get("teamId") == 0 ? "blue" : "red";
+				int x = (int)obj.get("x");
+				int y = (int)obj.get("y");
+				boolean npc = false;
+				Player model = players.get(i);
+				Position position = new Position(x,y);
+				entities.add(new PlayingEntity(id, npc, position, team, model));
+			}
+			
+			initEntities(entities);
+		}else if(s.equals("g")) {
+			return getBestTurn(command);
 		}
 		
-		los.update(playingEntities);
+		//los.update(playingEntities);
 		
 		if(DISPLAY_GUI)
 			los.repaint();
