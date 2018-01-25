@@ -17,8 +17,7 @@ public class Main {
 	private static String pathExe = "";
 	private static String pathInvoker = "E:\\Ankama\\Dofus\\app\\DofusInvoker.swf";
 
-	public static void main(String[] args) throws IOException, InterruptedException
-	{
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// Redirection does not work
 		String s = Paths.get("").toAbsolutePath().toString();
 		int newPath = s.indexOf("DatBot");
@@ -33,11 +32,9 @@ public class Main {
 		p.waitFor();
 		JSON json = new JSON(pathStr + "\\d2jsonOutput.json");
 
-		for (int i = 0; i < json.Messages.size(); i++)
-		{
+		for (int i = 0; i < json.Messages.size(); i++) {
 			List<String> data = new ArrayList<String>();
-			for (int k = 0; k < 500; k++)
-			{
+			for (int k = 0; k < 500; k++) {
 				data.add("");
 			}
 
@@ -65,28 +62,22 @@ public class Main {
 			// add class
 			String cls;
 			boolean extend = false;
-			if (msg.getParents().equals(""))
-			{
+			if (msg.getParents().equals("")) {
 				cls = "public class " + msg.getName() + " extends NetworkMessage {";
 				data.set(12, "import protocol.network.NetworkMessage;");
 				extend = true;
 			}
-			else
-			{
+			else {
 				cls = "public class " + msg.getName() + " extends " + msg.getParents() + " {";
-				for (Message message : json.Messages)
-				{
-					if (message.getName().equals(msg.getParents()))
-					{
+				for (Message message : json.Messages) {
+					if (message.getName().equals(msg.getParents())) {
 						String imp = "import " + message.getNamespace() + "." + msg.getParents() + ";";
 						imp = imp.replace("com.ankamagames.dofus", "protocol");
 						data.set(12, imp);
 					}
 				}
-				for (Message message : json.Types)
-				{
-					if (message.getName().equals(msg.getParents()))
-					{
+				for (Message message : json.Types) {
+					if (message.getName().equals(msg.getParents())) {
 						String imp = "import " + message.getNamespace() + "." + msg.getParents() + ";";
 						imp = imp.replace("com.ankamagames.dofus", "protocol");
 						data.set(12, imp);
@@ -96,50 +87,36 @@ public class Main {
 
 			int indexClass = 14;
 			int nbImport = 0;
-			if (msg.getFields() != null)
-			{
-				for (int j = 0; j < msg.getFields().size(); j++)
-				{
+			if (msg.getFields() != null) {
+				for (int j = 0; j < msg.getFields().size(); j++) {
 					Field field = msg.getFields().get(j);
-					if (field.getWriteMethod().equals("writeFloat"))
-					{
+					if (field.getWriteMethod().equals("writeFloat")) {
 						field.setWriteMethod("writeDouble");
 					}
-					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64"))
-					{
+					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64")) {
 					}
-					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64"))
-					{
+					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64")) {
 					}
-					else if (field.getType().equals("string"))
-					{
+					else if (field.getType().equals("string")) {
 					}
-					else if (field.getType().equals("bool"))
-					{
+					else if (field.getType().equals("bool")) {
 					}
-					else
-					{
-						for (Message message : json.Messages)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+					else {
+						for (Message message : json.Messages) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!impString.contains(imp))
-								{
+								if (!impString.contains(imp)) {
 									impString.add(imp);
 									nbImport++;
 								}
 							}
 						}
-						for (Message message : json.Types)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+						for (Message message : json.Types) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!impString.contains(imp))
-								{
+								if (!impString.contains(imp)) {
 									impString.add(imp);
 									nbImport++;
 								}
@@ -160,121 +137,93 @@ public class Main {
 			data.set(indexClass++, id);
 
 			int index = indexClass + 1;
-			if (msg.getFields() != null)
-			{
+			if (msg.getFields() != null) {
 				String varCons = "";
-				for (int j = 0; j < msg.getFields().size(); j++)
-				{
+				for (int j = 0; j < msg.getFields().size(); j++) {
 					Field field = msg.getFields().get(j);
 					String var = "private ";
-					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64"))
-					{
-						if (field.isVector)
-						{
-							if (field.getType().contains("int"))
-							{
-								if (field.getType().equals("int64"))
-								{
+					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64")) {
+						if (field.isVector) {
+							if (field.getType().contains("int")) {
+								if (field.getType().equals("int64")) {
 									var += "List<Long>" + " " + field.getName();
 									varCons += "List<Long>" + " " + field.getName();
 								}
-								else
-								{
+								else {
 									var += "List<Integer>" + " " + field.getName();
 									varCons += "List<Integer>" + " " + field.getName();
 								}
 							}
 
 						}
-						else
-						{
-							if (field.getType().equals("int64"))
-							{
+						else {
+							if (field.getType().equals("int64")) {
 								var += "long" + " " + field.getName();
 								varCons += "long" + " " + field.getName();
 							}
-							else
-							{
+							else {
 								var += "int" + " " + field.getName();
 								varCons += "int" + " " + field.getName();
 							}
 						}
 					}
-					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64"))
-					{
-						if (field.isVector)
-						{
+					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64")) {
+						if (field.isVector) {
 							var += "List<Double>" + " " + field.getName();
 							varCons += "List<Double>" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += "double" + " " + field.getName();
 							varCons += "double" + " " + field.getName();
 						}
 
 					}
-					else if (field.getType().equals("string"))
-					{
-						if (field.isVector)
-						{
+					else if (field.getType().equals("string")) {
+						if (field.isVector) {
 							var += "List<String>" + " " + field.getName();
 							varCons += "List<String>" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += "String" + " " + field.getName();
 							varCons += "String" + " " + field.getName();
 						}
 
 					}
-					else if (field.getType().equals("bool"))
-					{
-						if (field.isVector)
-						{
+					else if (field.getType().equals("bool")) {
+						if (field.isVector) {
 							var += "List<Boolean>" + " " + field.getName();
 							varCons += "List<Boolean>" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += "boolean" + " " + field.getName();
 							varCons += "boolean" + " " + field.getName();
 						}
 					}
-					else
-					{
-						if (field.isVector)
-						{
+					else {
+						if (field.isVector) {
 							var += "List<" + field.getType() + ">" + " " + field.getName();
 							varCons += "List<" + field.getType() + ">" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += field.getType() + " " + field.getName();
 							varCons += field.getType() + " " + field.getName();
 						}
-						for (Message message : json.Messages)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+						for (Message message : json.Messages) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!importString.contains(imp))
-								{
+								if (!importString.contains(imp)) {
 									importString.add(imp);
 									data.set(indexImport++, imp);
 								}
 
 							}
 						}
-						for (Message message : json.Types)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+						for (Message message : json.Types) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!importString.contains(imp))
-								{
+								if (!importString.contains(imp)) {
 									importString.add(imp);
 									data.set(indexImport++, imp);
 								}
@@ -286,102 +235,80 @@ public class Main {
 					data.set(index, "\t" + var);
 					index++;
 				}
-				
-				index ++;
 
+				index++;
 
 				// Getter + Setter
 
-				for (int j = 0; j < msg.getFields().size(); j++)
-				{
+				for (int j = 0; j < msg.getFields().size(); j++) {
 					Field field = msg.getFields().get(j);
 					String varGetter = "public ";
 					String varSetter = "public ";
-					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64"))
-					{
-						if (field.isVector)
-						{
-							if (field.getType().contains("int")) 
-							{
-								if (field.getType().equals("int64"))
-								{
-									varGetter += "List<Long>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }" ;
-									varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Long> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64")) {
+						if (field.isVector) {
+							if (field.getType().contains("int")) {
+								if (field.getType().equals("int64")) {
+									varGetter += "List<Long>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+									varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Long> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 								}
-								else
-								{
-									varGetter += "List<Integer>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-									varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Integer> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+								else {
+									varGetter += "List<Integer>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+									varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Integer> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 								}
 							}
 
 						}
-						else
-						{
-							if (field.getType().equals("int64"))
-							{
-								varGetter += "long" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-								varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(long " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							if (field.getType().equals("int64")) {
+								varGetter += "long" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+								varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(long " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 							}
-							else
-							{
-								varGetter += "int" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-								varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(int " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+							else {
+								varGetter += "int" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+								varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(int " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 							}
 						}
 					}
-					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64"))
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<Double>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Double> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64")) {
+						if (field.isVector) {
+							varGetter += "List<Double>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Double> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += "double" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(double " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += "double" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(double " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 
 					}
-					else if (field.getType().equals("string"))
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<String>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<String> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else if (field.getType().equals("string")) {
+						if (field.isVector) {
+							varGetter += "List<String>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<String> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += "String" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(String " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += "String" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(String " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 
 					}
-					else if (field.getType().equals("bool"))
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<Boolean>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Boolean> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else if (field.getType().equals("bool")) {
+						if (field.isVector) {
+							varGetter += "List<Boolean>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Boolean> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += "boolean" + " is" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(boolean " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += "boolean" + " is" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(boolean " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 					}
-					else
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<" + field.getType() + ">" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<" + field.getType() + "> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else {
+						if (field.isVector) {
+							varGetter += "List<" + field.getType() + ">" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<" + field.getType() + "> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += field.getType() + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(" + field.getType() + " " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += field.getType() + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(" + field.getType() + " " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 					}
 					varGetter += ";";
@@ -398,8 +325,7 @@ public class Main {
 
 				index++;
 				data.set(index++, "\tpublic " + msg.getName() + "(" + varCons + "){");
-				for (Field f : msg.getFields())
-				{
+				for (Field f : msg.getFields()) {
 					data.set(index++, "\t\tthis." + f.getName() + " = " + f.getName() + ";");
 				}
 				data.set(index++, "\t}");
@@ -410,29 +336,23 @@ public class Main {
 				data.set(index++, "\tpublic void Serialize(DofusDataWriter writer) {");
 				data.set(index++, "\t\ttry {");
 
-				if (!extend)
-				{
+				if (!extend) {
 					data.set(index++, "\t\t\tsuper.Serialize(writer);");
 				}
 
 				int indexBbw = 0;
 				boolean bbw = false;
-				for (Field f : msg.getFields())
-				{
-					if (f.isUseBBW())
-					{
+				for (Field f : msg.getFields()) {
+					if (f.isUseBBW()) {
 						bbw = true;
-						if (indexBbw == 0)
-						{
+						if (indexBbw == 0) {
 							data.set(index++, "\t\t\tbyte flag = 0;");
 							data.set(index++, "\t\t\tflag = BooleanByteWrapper.SetFlag(0, flag, " + f.getName() + ");");
 						}
-						else if (indexBbw < 8)
-						{
+						else if (indexBbw < 8) {
 							data.set(index++, "\t\t\tflag = BooleanByteWrapper.SetFlag(" + indexBbw + ", flag, " + f.getName() + ");");
 						}
-						else
-						{
+						else {
 							indexBbw = 0;
 							data.set(index++, "\t\t\twriter.writeByte(flag);");
 							data.set(index++, "\t\t\tflag = BooleanByteWrapper.SetFlag(" + indexBbw + ", flag, " + f.getName() + ");");
@@ -444,25 +364,20 @@ public class Main {
 				if (bbw) data.set(index++, "\t\t\twriter.writeByte(flag);");
 
 				int loc = 2;
-				for (Field f : msg.getFields())
-				{
-					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals(""))
-					{
+				for (Field f : msg.getFields()) {
+					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter." + f.getWriteMethod() + "(this." + f.getName() + ");");
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\t" + f.getName() + ".Serialize(writer);");
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter.writeShort(" + f.getType() + ".ProtocolId);");
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter.writeShort(this." + f.getName() + ".size());");
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < this." + f.getName() + ".size()){");
@@ -473,8 +388,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter.writeShort(this." + f.getName() + ".size());");
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < this." + f.getName() + ".size()){");
@@ -484,8 +398,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals("")) {
 						data.set(index++, "\t\t\twriter." + f.getWriteLengthMethod() + "(this." + f.getName() + ".size());");
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < this." + f.getName() + ".size()){");
@@ -495,8 +408,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5) {
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < " + f.getLength() + "){");
 						data.set(index++, "\t\t\t\twriter." + f.getWriteMethod() + "(this." + f.getName() + ".get(_loc" + loc + "_));");
@@ -505,8 +417,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2) {
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < " + f.getLength() + "){");
 						data.set(index++, "\t\t\t\tthis." + f.getName() + ".get(_loc" + loc + "_).Serialize(writer);");
@@ -515,12 +426,10 @@ public class Main {
 						loc++;
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 					}
 
-					else
-					{
+					else {
 						System.out.println(f.getName());
 						System.out.println("isDynamicLength : " + f.isDynamicLength);
 						System.out.println("isVector : " + f.isVector);
@@ -540,30 +449,24 @@ public class Main {
 				data.set(index++, "\tpublic void Deserialize(DofusDataReader reader) {");
 				data.set(index++, "\t\ttry {");
 
-				if (!extend)
-				{
+				if (!extend) {
 					data.set(index++, "\t\t\tsuper.Deserialize(reader);");
 				}
 
 				int indexBbw1 = 0;
 				boolean bbw1 = false;
-				for (Field f : msg.getFields())
-				{
-					if (f.isUseBBW())
-					{
+				for (Field f : msg.getFields()) {
+					if (f.isUseBBW()) {
 						bbw1 = true;
-						if (indexBbw1 == 0)
-						{
+						if (indexBbw1 == 0) {
 							data.set(index++, "\t\t\tbyte flag;");
 							data.set(index++, "\t\t\tflag = (byte) reader.readUnsignedByte();");
 							data.set(index++, "\t\t\tthis." + f.getName() + " = BooleanByteWrapper.GetFlag(flag, (byte) 0);");
 						}
-						else if (indexBbw1 < 8)
-						{
+						else if (indexBbw1 < 8) {
 							data.set(index++, "\t\t\tthis." + f.getName() + " = BooleanByteWrapper.GetFlag(flag, (byte) " + indexBbw1 + ");");
 						}
-						else
-						{
+						else {
 							indexBbw1 = 0;
 							data.set(index++, "\t\t\tflag = (byte) reader.readUnsignedByte();");
 							data.set(index++, "\t\t\tthis." + f.getName() + " = BooleanByteWrapper.GetFlag(flag, (byte) " + indexBbw1 + ");");
@@ -575,11 +478,9 @@ public class Main {
 				int loc1 = 2;
 				int loc2 = 3;
 				int loc3 = 15;
-				for (Field f : msg.getFields())
-				{
+				for (Field f : msg.getFields()) {
 					String type = "int";
-					if (f.getType().contains("int"))
-					{
+					if (f.getType().contains("int")) {
 						if (f.getType().equals("int64"))
 							type = "long";
 						else
@@ -595,8 +496,7 @@ public class Main {
 						type = f.getType();
 
 					String typeList = "Integer";
-					if (f.getType().contains("int"))
-					{
+					if (f.getType().contains("int")) {
 						if (f.getType().equals("int64"))
 							typeList = "Long";
 						else
@@ -611,26 +511,22 @@ public class Main {
 					else
 						typeList = f.getType();
 
-					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals(""))
-					{
+					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tthis." + f.getName() + " = reader." + getReadMethod(f.getWriteMethod()) + ";");
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new " + f.getType() + "();");
 						data.set(index++, "\t\t\tthis." + f.getName() + ".Deserialize(reader);");
 
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tthis." + f.getName() + " = (" + f.getType() + ") ProtocolTypeManager.getInstance(reader.readShort());");
 						data.set(index++, "\t\t\tthis." + f.getName() + ".Deserialize(reader);");
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = reader.readShort();");
 						data.set(index++, "\t\t\tint _loc" + loc2 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
@@ -645,8 +541,7 @@ public class Main {
 						loc3++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = reader.readShort();");
 						data.set(index++, "\t\t\tint _loc" + loc2 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
@@ -661,8 +556,7 @@ public class Main {
 						loc3++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals("")) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = reader." + getReadMethod(f.getWriteLengthMethod()) + ";");
 						data.set(index++, "\t\t\tint _loc" + loc2 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
@@ -676,8 +570,7 @@ public class Main {
 						loc3++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
 						data.set(index++, "\t\t\twhile( _loc" + loc1 + "_ < " + f.getLength() + "){");
@@ -687,8 +580,7 @@ public class Main {
 						loc1++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
 						data.set(index++, "\t\t\twhile( _loc" + loc1 + "_ < " + f.getLength() + "){");
@@ -699,12 +591,10 @@ public class Main {
 						loc1++;
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 					}
 
-					else
-					{
+					else {
 						System.out.println(f.getName());
 						System.out.println("isDynamicLength : " + f.isDynamicLength);
 						System.out.println("isVector : " + f.isVector);
@@ -722,10 +612,8 @@ public class Main {
 				data.set(index++, "\t}");
 				index++;
 			}
-			else
-			{
-				if (extend)
-				{
+			else {
+				if (extend) {
 					data.set(index++, "\t@Override");
 					data.set(index++, "\tpublic void Serialize(DofusDataWriter writer) {");
 					data.set(index++, "\t}");
@@ -734,8 +622,7 @@ public class Main {
 					data.set(index++, "\tpublic void Deserialize(DofusDataReader reader) {");
 					data.set(index++, "\t}");
 				}
-				else
-				{
+				else {
 					data.set(index++, "\t@Override");
 					data.set(index++, "\tpublic void Serialize(DofusDataWriter writer) {");
 					data.set(index++, "\t\tsuper.Serialize(writer);");
@@ -748,21 +635,17 @@ public class Main {
 				}
 			}
 			data.set(index, "}");
-			if (index < data.size())
-			{
-				for (int l = index + 1; l < 500; l++)
-				{
+			if (index < data.size()) {
+				for (int l = index + 1; l < 500; l++) {
 					data.remove(index + 1);
 				}
 			}
 			createBuilderFiles(msg.getNamespace(), msg.getName(), data);
 		}
 
-		for (int i = 0; i < json.Types.size(); i++)
-		{
+		for (int i = 0; i < json.Types.size(); i++) {
 			List<String> data = new ArrayList<String>();
-			for (int k = 0; k < 1000; k++)
-			{
+			for (int k = 0; k < 1000; k++) {
 				data.add("");
 			}
 
@@ -778,8 +661,7 @@ public class Main {
 
 			Message msg = json.Types.get(i);
 
-			if (msg.getName().equals("VersionExtended") || msg.getName().equals("AbstractCharacterInformation"))
-			{
+			if (msg.getName().equals("VersionExtended") || msg.getName().equals("AbstractCharacterInformation")) {
 				continue;
 			}
 
@@ -796,28 +678,22 @@ public class Main {
 			// add class
 			String cls;
 			boolean extend = false;
-			if (msg.getParents().equals(""))
-			{
+			if (msg.getParents().equals("")) {
 				cls = "public class " + msg.getName() + " extends NetworkMessage {";
 				data.set(12, "import protocol.network.NetworkMessage;");
 				extend = true;
 			}
-			else
-			{
+			else {
 				cls = "public class " + msg.getName() + " extends " + msg.getParents() + " {";
-				for (Message message : json.Messages)
-				{
-					if (message.getName().equals(msg.getParents()))
-					{
+				for (Message message : json.Messages) {
+					if (message.getName().equals(msg.getParents())) {
 						String imp = "import " + message.getNamespace() + "." + msg.getParents() + ";";
 						imp = imp.replace("com.ankamagames.dofus", "protocol");
 						data.set(12, imp);
 					}
 				}
-				for (Message message : json.Types)
-				{
-					if (message.getName().equals(msg.getParents()))
-					{
+				for (Message message : json.Types) {
+					if (message.getName().equals(msg.getParents())) {
 						String imp = "import " + message.getNamespace() + "." + msg.getParents() + ";";
 						imp = imp.replace("com.ankamagames.dofus", "protocol");
 						data.set(12, imp);
@@ -827,50 +703,36 @@ public class Main {
 
 			int indexClass = 14;
 			int nbImport = 0;
-			if (msg.getFields() != null)
-			{
-				for (int j = 0; j < msg.getFields().size(); j++)
-				{
+			if (msg.getFields() != null) {
+				for (int j = 0; j < msg.getFields().size(); j++) {
 					Field field = msg.getFields().get(j);
-					if (field.getWriteMethod().equals("writeFloat"))
-					{
+					if (field.getWriteMethod().equals("writeFloat")) {
 						field.setWriteMethod("writeDouble");
 					}
-					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64"))
-					{
+					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64")) {
 					}
-					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64"))
-					{
+					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64")) {
 					}
-					else if (field.getType().equals("string"))
-					{
+					else if (field.getType().equals("string")) {
 					}
-					else if (field.getType().equals("bool"))
-					{
+					else if (field.getType().equals("bool")) {
 					}
-					else
-					{
-						for (Message message : json.Messages)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+					else {
+						for (Message message : json.Messages) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!impString.contains(imp))
-								{
+								if (!impString.contains(imp)) {
 									impString.add(imp);
 									nbImport++;
 								}
 							}
 						}
-						for (Message message : json.Types)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+						for (Message message : json.Types) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!impString.contains(imp))
-								{
+								if (!impString.contains(imp)) {
 									impString.add(imp);
 									nbImport++;
 								}
@@ -891,121 +753,93 @@ public class Main {
 			data.set(indexClass++, id);
 
 			int index = indexClass + 1;
-			if (msg.getFields() != null)
-			{
+			if (msg.getFields() != null) {
 				String varCons = "";
-				for (int j = 0; j < msg.getFields().size(); j++)
-				{
+				for (int j = 0; j < msg.getFields().size(); j++) {
 					Field field = msg.getFields().get(j);
 					String var = "private ";
-					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64"))
-					{
-						if (field.isVector)
-						{
-							if (field.getType().contains("int"))
-							{
-								if (field.getType().equals("int64"))
-								{
+					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64")) {
+						if (field.isVector) {
+							if (field.getType().contains("int")) {
+								if (field.getType().equals("int64")) {
 									var += "List<Long>" + " " + field.getName();
 									varCons += "List<Long>" + " " + field.getName();
 								}
-								else
-								{
+								else {
 									var += "List<Integer>" + " " + field.getName();
 									varCons += "List<Integer>" + " " + field.getName();
 								}
 							}
 
 						}
-						else
-						{
-							if (field.getType().equals("int64"))
-							{
+						else {
+							if (field.getType().equals("int64")) {
 								var += "long" + " " + field.getName();
 								varCons += "long" + " " + field.getName();
 							}
-							else
-							{
+							else {
 								var += "int" + " " + field.getName();
 								varCons += "int" + " " + field.getName();
 							}
 						}
 					}
-					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64"))
-					{
-						if (field.isVector)
-						{
+					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64")) {
+						if (field.isVector) {
 							var += "List<Double>" + " " + field.getName();
 							varCons += "List<Double>" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += "double" + " " + field.getName();
 							varCons += "double" + " " + field.getName();
 						}
 
 					}
-					else if (field.getType().equals("string"))
-					{
-						if (field.isVector)
-						{
+					else if (field.getType().equals("string")) {
+						if (field.isVector) {
 							var += "List<String>" + " " + field.getName();
 							varCons += "List<String>" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += "String" + " " + field.getName();
 							varCons += "String" + " " + field.getName();
 						}
 
 					}
-					else if (field.getType().equals("bool"))
-					{
-						if (field.isVector)
-						{
+					else if (field.getType().equals("bool")) {
+						if (field.isVector) {
 							var += "List<Boolean>" + " " + field.getName();
 							varCons += "List<Boolean>" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += "boolean" + " " + field.getName();
 							varCons += "boolean" + " " + field.getName();
 						}
 					}
-					else
-					{
-						if (field.isVector)
-						{
+					else {
+						if (field.isVector) {
 							var += "List<" + field.getType() + ">" + " " + field.getName();
 							varCons += "List<" + field.getType() + ">" + " " + field.getName();
 						}
-						else
-						{
+						else {
 							var += field.getType() + " " + field.getName();
 							varCons += field.getType() + " " + field.getName();
 						}
-						for (Message message : json.Messages)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+						for (Message message : json.Messages) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!importString.contains(imp))
-								{
+								if (!importString.contains(imp)) {
 									importString.add(imp);
 									data.set(indexImport++, imp);
 								}
 
 							}
 						}
-						for (Message message : json.Types)
-						{
-							if (message.getName().equals(field.getType()))
-							{
+						for (Message message : json.Types) {
+							if (message.getName().equals(field.getType())) {
 								String imp = "import " + message.getNamespace() + "." + field.getType() + ";";
 								imp = imp.replace("com.ankamagames.dofus", "protocol");
-								if (!importString.contains(imp))
-								{
+								if (!importString.contains(imp)) {
 									importString.add(imp);
 									data.set(indexImport++, imp);
 								}
@@ -1017,100 +851,79 @@ public class Main {
 					data.set(index, "\t" + var);
 					index++;
 				}
-				
-				index ++;
+
+				index++;
 				// add getter + setter
-				
-				for (int j = 0; j < msg.getFields().size(); j++)
-				{
+
+				for (int j = 0; j < msg.getFields().size(); j++) {
 					Field field = msg.getFields().get(j);
 					String varGetter = "public ";
 					String varSetter = "public ";
-					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64"))
-					{
-						if (field.isVector)
-						{
-							if (field.getType().contains("int")) 
-							{
-								if (field.getType().equals("int64"))
-								{
-									varGetter += "List<Long>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }" ;
-									varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Long> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					if (field.getType().equals("int8") || field.getType().equals("int16") || field.getType().equals("int32") || field.getType().equals("int64") || field.getType().equals("uint8") || field.getType().equals("uint16") || field.getType().equals("uint32") || field.getType().equals("uint64")) {
+						if (field.isVector) {
+							if (field.getType().contains("int")) {
+								if (field.getType().equals("int64")) {
+									varGetter += "List<Long>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+									varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Long> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 								}
-								else
-								{
-									varGetter += "List<Integer>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-									varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Integer> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+								else {
+									varGetter += "List<Integer>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+									varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Integer> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 								}
 							}
 
 						}
-						else
-						{
-							if (field.getType().equals("int64"))
-							{
-								varGetter += "long" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-								varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(long " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							if (field.getType().equals("int64")) {
+								varGetter += "long" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+								varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(long " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 							}
-							else
-							{
-								varGetter += "int" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-								varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(int " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+							else {
+								varGetter += "int" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+								varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(int " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 							}
 						}
 					}
-					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64"))
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<Double>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Double> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else if (field.getType().equals("float8") || field.getType().equals("float16") || field.getType().equals("float32") || field.getType().equals("float64")) {
+						if (field.isVector) {
+							varGetter += "List<Double>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Double> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += "double" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(double " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += "double" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(double " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 
 					}
-					else if (field.getType().equals("string"))
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<String>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<String> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else if (field.getType().equals("string")) {
+						if (field.isVector) {
+							varGetter += "List<String>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<String> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += "String" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(String " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += "String" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(String " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 
 					}
-					else if (field.getType().equals("bool"))
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<Boolean>" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<Boolean> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else if (field.getType().equals("bool")) {
+						if (field.isVector) {
+							varGetter += "List<Boolean>" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<Boolean> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += "boolean" + " is" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(boolean " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += "boolean" + " is" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(boolean " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 					}
-					else
-					{
-						if (field.isVector)
-						{
-							varGetter += "List<" + field.getType() + ">" + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(List<" + field.getType() + "> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+					else {
+						if (field.isVector) {
+							varGetter += "List<" + field.getType() + ">" + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(List<" + field.getType() + "> " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
-						else
-						{
-							varGetter += field.getType() + " get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
-							varSetter += "void" + " set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1) + "(" + field.getType() + " " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
+						else {
+							varGetter += field.getType() + " get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "() { return this." + field.getName() + "; }";
+							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(" + field.getType() + " " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 					}
 					varGetter += ";";
@@ -1127,8 +940,7 @@ public class Main {
 
 				index++;
 				data.set(index++, "\tpublic " + msg.getName() + "(" + varCons + "){");
-				for (Field f : msg.getFields())
-				{
+				for (Field f : msg.getFields()) {
 					data.set(index++, "\t\tthis." + f.getName() + " = " + f.getName() + ";");
 				}
 				data.set(index++, "\t}");
@@ -1139,29 +951,23 @@ public class Main {
 				data.set(index++, "\tpublic void Serialize(DofusDataWriter writer) {");
 				data.set(index++, "\t\ttry {");
 
-				if (!extend)
-				{
+				if (!extend) {
 					data.set(index++, "\t\t\tsuper.Serialize(writer);");
 				}
 
 				int indexBbw = 0;
 				boolean bbw = false;
-				for (Field f : msg.getFields())
-				{
-					if (f.isUseBBW())
-					{
+				for (Field f : msg.getFields()) {
+					if (f.isUseBBW()) {
 						bbw = true;
-						if (indexBbw == 0)
-						{
+						if (indexBbw == 0) {
 							data.set(index++, "\t\t\tbyte flag = 0;");
 							data.set(index++, "\t\t\tflag = BooleanByteWrapper.SetFlag(0, flag, " + f.getName() + ");");
 						}
-						else if (indexBbw < 8)
-						{
+						else if (indexBbw < 8) {
 							data.set(index++, "\t\t\tflag = BooleanByteWrapper.SetFlag(" + indexBbw + ", flag, " + f.getName() + ");");
 						}
-						else
-						{
+						else {
 							indexBbw = 0;
 							data.set(index++, "\t\t\twriter.writeByte(flag);");
 							data.set(index++, "\t\t\tflag = BooleanByteWrapper.SetFlag(" + indexBbw + ", flag, " + f.getName() + ");");
@@ -1173,25 +979,20 @@ public class Main {
 				if (bbw) data.set(index++, "\t\t\twriter.writeByte(flag);");
 
 				int loc = 2;
-				for (Field f : msg.getFields())
-				{
-					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals(""))
-					{
+				for (Field f : msg.getFields()) {
+					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter." + f.getWriteMethod() + "(this." + f.getName() + ");");
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\t" + f.getName() + ".Serialize(writer);");
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter.writeShort(" + f.getType() + ".ProtocolId);");
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter.writeShort(this." + f.getName() + ".size());");
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < this." + f.getName() + ".size()){");
@@ -1202,8 +1003,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\twriter.writeShort(this." + f.getName() + ".size());");
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < this." + f.getName() + ".size()){");
@@ -1213,8 +1013,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals("")) {
 						data.set(index++, "\t\t\twriter." + f.getWriteLengthMethod() + "(this." + f.getName() + ".size());");
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < this." + f.getName() + ".size()){");
@@ -1224,8 +1023,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5) {
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < " + f.getLength() + "){");
 						data.set(index++, "\t\t\t\twriter." + f.getWriteMethod() + "(this." + f.getName() + ".get(_loc" + loc + "_));");
@@ -1234,8 +1032,7 @@ public class Main {
 						loc++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2) {
 						data.set(index++, "\t\t\tint _loc" + loc + "_ = 0;");
 						data.set(index++, "\t\t\twhile( _loc" + loc + "_ < " + f.getLength() + "){");
 						data.set(index++, "\t\t\t\tthis." + f.getName() + ".get(_loc" + loc + "_).Serialize(writer);");
@@ -1244,12 +1041,10 @@ public class Main {
 						loc++;
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 					}
 
-					else
-					{
+					else {
 						System.out.println(f.getName());
 						System.out.println("isDynamicLength : " + f.isDynamicLength);
 						System.out.println("isVector : " + f.isVector);
@@ -1269,30 +1064,24 @@ public class Main {
 				data.set(index++, "\tpublic void Deserialize(DofusDataReader reader) {");
 				data.set(index++, "\t\ttry {");
 
-				if (!extend)
-				{
+				if (!extend) {
 					data.set(index++, "\t\t\tsuper.Deserialize(reader);");
 				}
 
 				int indexBbw1 = 0;
 				boolean bbw1 = false;
-				for (Field f : msg.getFields())
-				{
-					if (f.isUseBBW())
-					{
+				for (Field f : msg.getFields()) {
+					if (f.isUseBBW()) {
 						bbw1 = true;
-						if (indexBbw1 == 0)
-						{
+						if (indexBbw1 == 0) {
 							data.set(index++, "\t\t\tbyte flag;");
 							data.set(index++, "\t\t\tflag = (byte) reader.readUnsignedByte();");
 							data.set(index++, "\t\t\tthis." + f.getName() + " = BooleanByteWrapper.GetFlag(flag, (byte) 0);");
 						}
-						else if (indexBbw1 < 8)
-						{
+						else if (indexBbw1 < 8) {
 							data.set(index++, "\t\t\tthis." + f.getName() + " = BooleanByteWrapper.GetFlag(flag, (byte) " + indexBbw1 + ");");
 						}
-						else
-						{
+						else {
 							indexBbw1 = 0;
 							data.set(index++, "\t\t\tflag = (byte) reader.readUnsignedByte();");
 							data.set(index++, "\t\t\tthis." + f.getName() + " = BooleanByteWrapper.GetFlag(flag, (byte) " + indexBbw1 + ");");
@@ -1304,12 +1093,10 @@ public class Main {
 				int loc1 = 2;
 				int loc2 = 3;
 				int loc3 = 15;
-				for (Field f : msg.getFields())
-				{
+				for (Field f : msg.getFields()) {
 
 					String type = "int";
-					if (f.getType().contains("int"))
-					{
+					if (f.getType().contains("int")) {
 						if (f.getType().equals("int64"))
 							type = "long";
 						else
@@ -1325,8 +1112,7 @@ public class Main {
 						type = f.getType();
 
 					String typeList = "Integer";
-					if (f.getType().contains("int"))
-					{
+					if (f.getType().contains("int")) {
 						if (f.getType().equals("int64"))
 							typeList = "Long";
 						else
@@ -1341,26 +1127,22 @@ public class Main {
 					else
 						typeList = f.getType();
 
-					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals(""))
-					{
+					if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tthis." + f.getName() + " = reader." + getReadMethod(f.getWriteMethod()) + ";");
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new " + f.getType() + "();");
 						data.set(index++, "\t\t\tthis." + f.getName() + ".Deserialize(reader);");
 
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tthis." + f.getName() + " = (" + f.getType() + ") ProtocolTypeManager.getInstance(reader.readShort());");
 						data.set(index++, "\t\t\tthis." + f.getName() + ".Deserialize(reader);");
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = reader.readShort();");
 						data.set(index++, "\t\t\tint _loc" + loc2 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
@@ -1375,8 +1157,7 @@ public class Main {
 						loc3++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = reader.readShort();");
 						data.set(index++, "\t\t\tint _loc" + loc2 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
@@ -1391,8 +1172,7 @@ public class Main {
 						loc3++;
 					}
 
-					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals(""))
-					{
+					else if (f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && !f.getWriteMethod().equals("") && !f.getWriteLengthMethod().equals("")) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = reader." + getReadMethod(f.getWriteLengthMethod()) + ";");
 						data.set(index++, "\t\t\tint _loc" + loc2 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
@@ -1406,8 +1186,7 @@ public class Main {
 						loc3++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 5) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
 						data.set(index++, "\t\t\twhile( _loc" + loc1 + "_ < " + f.getLength() + "){");
@@ -1417,8 +1196,7 @@ public class Main {
 						loc1++;
 					}
 
-					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2)
-					{
+					else if (!f.isDynamicLength && f.isVector && !f.useBBW && !f.useTypeManager && f.getLength() == 2) {
 						data.set(index++, "\t\t\tint _loc" + loc1 + "_  = 0;");
 						data.set(index++, "\t\t\tthis." + f.getName() + " = new ArrayList<" + typeList + ">();");
 						data.set(index++, "\t\t\twhile( _loc" + loc1 + "_ < " + f.getLength() + "){");
@@ -1429,12 +1207,10 @@ public class Main {
 						loc1++;
 					}
 
-					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals(""))
-					{
+					else if (!f.isDynamicLength && !f.isVector && f.useBBW && !f.useTypeManager && f.getWriteMethod().equals("")) {
 					}
 
-					else
-					{
+					else {
 						System.out.println(f.getName());
 						System.out.println("isDynamicLength : " + f.isDynamicLength);
 						System.out.println("isVector : " + f.isVector);
@@ -1452,10 +1228,8 @@ public class Main {
 				data.set(index++, "\t}");
 				index++;
 			}
-			else
-			{
-				if (extend)
-				{
+			else {
+				if (extend) {
 					data.set(index++, "\t@Override");
 					data.set(index++, "\tpublic void Serialize(DofusDataWriter writer) {");
 					data.set(index++, "\t}");
@@ -1464,8 +1238,7 @@ public class Main {
 					data.set(index++, "\tpublic void Deserialize(DofusDataReader reader) {");
 					data.set(index++, "\t}");
 				}
-				else
-				{
+				else {
 					data.set(index++, "\t@Override");
 					data.set(index++, "\tpublic void Serialize(DofusDataWriter writer) {");
 					data.set(index++, "\t\tsuper.Serialize(writer);");
@@ -1478,10 +1251,8 @@ public class Main {
 				}
 			}
 			data.set(index, "}");
-			if (index < data.size())
-			{
-				for (int l = index + 1; l < 1000; l++)
-				{
+			if (index < data.size()) {
+				for (int l = index + 1; l < 1000; l++) {
 					data.remove(index + 1);
 				}
 			}
@@ -1490,21 +1261,17 @@ public class Main {
 		System.out.println("done");
 	}
 
-	private static void createBuilderFiles(String s, String s2, List<String> data) throws IOException
-	{
+	private static void createBuilderFiles(String s, String s2, List<String> data) throws IOException {
 		String[] newString = s.substring(30).split("\\.");
 		String pathTemp = pathStr;
-		for (int i = 0; i < newString.length; i++)
-		{
+		for (int i = 0; i < newString.length; i++) {
 			pathTemp += "\\" + newString[i];
-			if (!Files.exists(Paths.get(pathTemp), LinkOption.NOFOLLOW_LINKS))
-			{
+			if (!Files.exists(Paths.get(pathTemp), LinkOption.NOFOLLOW_LINKS)) {
 				new File(pathTemp).mkdirs();
 			}
 		}
 		String pathFile = pathStr;
-		for (String string : newString)
-		{
+		for (String string : newString) {
 			pathFile += "\\" + string;
 		}
 		pathFile += "\\" + s2 + ".java";
@@ -1514,44 +1281,42 @@ public class Main {
 		Files.write(Paths.get(pathFile), data, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
 	}
 
-	private static String getReadMethod(String s)
-	{
+	private static String getReadMethod(String s) {
 		String var = "";
-		switch (s)
-		{
+		switch (s) {
 			case "writeUTF":
 				var = "readUTF()";
-			break;
+				break;
 			case "writeByte":
 				var = "readByte()";
-			break;
+				break;
 			case "writeVarShort":
 				var = "readVarShort()";
-			break;
+				break;
 			case "writeDouble":
 				var = "readDouble()";
-			break;
+				break;
 			case "writeShort":
 				var = "readShort()";
-			break;
+				break;
 			case "writeInt":
 				var = "readInt()";
-			break;
+				break;
 			case "writeVarInt":
 				var = "readVarInt()";
-			break;
+				break;
 			case "writeVarLong":
 				var = "readVarLong()";
-			break;
+				break;
 			case "writeBoolean":
 				var = "readBoolean()";
-			break;
+				break;
 			case "writeFloat":
 				var = "readDouble()";
-			break;
+				break;
 			case "writeUnsignedInt":
 				var = "readUnsignedByte()";
-			break;
+				break;
 		}
 		return var;
 	}

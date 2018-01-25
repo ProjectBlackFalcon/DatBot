@@ -10,15 +10,12 @@ import utils.d2o.D2oManager;
 
 public class Test {
 
-	public static void main(String[] args) throws Exception
-	{
+	public static void main(String[] args) throws Exception {
 		new d2iManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
 
 		boolean arg = false;
-		if (args.length != 0)
-		{
-			if ((args[0].equals("true") || args[0].equals("True")))
-			{
+		if (args.length != 0) {
+			if ((args[0].equals("true") || args[0].equals("True"))) {
 				arg = true;
 			}
 		}
@@ -26,25 +23,32 @@ public class Test {
 		Communication communication = new Communication(arg);
 		Thread communication2 = new Thread(communication);
 		communication2.start();
-//		communication.getReturn("5;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
-//		communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
-		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,kezaropod11,Faoy,Julith]");
-//		communication.getReturn("0;4;i;cmd;openBank;None");
+		// communication.getReturn("5;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
+		 communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
+		 communication.getReturn("0;0;i;cmd;enterBag;[None]");
+		 communication.getReturn("0;0;i;cmd;getZaap;[None]");
+		 Thread.sleep(1000);
+		 communication.getReturn("0;0;i;cmd;useZaap;[(3,0)]");
+		 communication.getReturn("0;0;i;cmd;getMap;[None]");
 
-		while (true)
-		{
-			Thread.sleep(2000);
-			if (!communication.getNetworks().get(0).getInfo().isJoinedFight() && communication.getNetworks().get(0).getInfo().isWaitForMov() && communication.getNetworks().get(0).getMonsters().getMonsters().size() > 0)
-			{
-				double idMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getContextualId();
-				int cellIdMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getDisposition().getCellId();
-				communication.getNetworks().get(0).append("Trying to start a fight...");
-				communication.getReturn("0;0;i;cmd;getMonsters;[None]");
-				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
-				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster + "]");
-			}
-		}
+
+//		 communication.getReturn("0;0;i;cmd;getZaap;[None]");
+
+		// communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
+//		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,kezaropod11,Faoy,Julith]");
+		// communication.getReturn("0;4;i;cmd;openBank;None");
+
+//		while (true) {
+//			Thread.sleep(2000);
+//			if (!communication.getNetworks().get(0).getInfo().isJoinedFight() && communication.getNetworks().get(0).getInfo().isWaitForMov() && communication.getNetworks().get(0).getMonsters().getMonsters().size() > 0) {
+//				double idMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getContextualId();
+//				int cellIdMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getDisposition().getCellId();
+//				communication.getNetworks().get(0).append("Trying to start a fight...");
+//				communication.getReturn("0;0;i;cmd;getMonsters;[None]");
+//				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
+//				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster + "]");
+//			}
+//		}
 
 		// TESTS FOR INPUTS
 
