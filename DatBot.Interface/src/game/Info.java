@@ -75,6 +75,8 @@ public class Info {
 		leaveExchange = false;
 		acknowledged = false;
 	}
+	
+	public boolean threadDone = true;
 
 	public double getMapId()
 	{

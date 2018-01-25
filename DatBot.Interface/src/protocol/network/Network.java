@@ -91,6 +91,7 @@ import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
 import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
+import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
@@ -101,6 +102,7 @@ import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMe
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
+import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
@@ -175,17 +177,14 @@ public class Network implements Runnable {
 	private MapManager mapManager;
 	private Map map;
 
-	public Network(boolean displayPacket, Info info, int botInstance)
-	{
+	public Network(boolean displayPacket, Info info, int botInstance) {
 		this.botInstance = botInstance;
 		initLogs();
 		this.displayPacket = displayPacket;
-		try
-		{
+		try {
 			this.mapManager = new MapManager(getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
 		}
-		catch (IOException e1)
-		{
+		catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		this.map = new Map();
@@ -196,37 +195,30 @@ public class Network implements Runnable {
 		this.bank = new Bank();
 		this.movement = new Movement(this);
 		this.monsters = new Monsters();
-		try
-		{
+		try {
 			this.npc = new Npc(this);
 			this.modelConnexion = new ModelConnexion(this);
 			socket = new Socket(this.ip, this.port);
-			if (socket.isConnected())
-			{
+			if (socket.isConnected()) {
 				new LatencyFrame();
 			}
 		}
-		catch (UnknownHostException e)
-		{
+		catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		catch (IOException e)
-		{
+		catch (IOException e) {
 			e.printStackTrace();
 		}
-		catch (InterruptedException e)
-		{
+		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static String getPathDatBot()
-	{
+	public static String getPathDatBot() {
 		JSONArray a;
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
@@ -235,28 +227,23 @@ public class Network implements Runnable {
 	}
 
 	@Override
-	public void run()
-	{
-		try
-		{
+	public void run() {
+		try {
 			append("Connection...");
-			if (displayPacket)
-			{
+			if (displayPacket) {
 				initComponent();
 				f.pack();
 				f.setVisible(true);
 			}
 			reception();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	private void initComponent()
-	{
+	private void initComponent() {
 		// Jframe Creation
 		f = new JFrame("Log");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -284,18 +271,15 @@ public class Network implements Runnable {
 	 * 
 	 * @author baptiste
 	 */
-	public void initLogs()
-	{
-		try
-		{
+	public void initLogs() {
+		try {
 			// log = System.out;
 			log = new PrintStream(new FileOutputStream("log_network" + botInstance + ".txt"));
 			// debug = new PrintStream(new FileOutputStream("debug.txt"));
 			debug = System.out;
 			System.setErr(debug);
 		}
-		catch (FileNotFoundException e1)
-		{
+		catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
 	}
@@ -310,8 +294,7 @@ public class Network implements Runnable {
 	 * @param Color
 	 *            c
 	 */
-	private void appendToPane(JTextPane tp, String msg, Color c)
-	{
+	private void appendToPane(JTextPane tp, String msg, Color c) {
 		StyleContext sc = StyleContext.getDefaultStyleContext();
 		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
 		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida	Console");
@@ -330,32 +313,26 @@ public class Network implements Runnable {
 	 * @param boolean
 	 *            b ; True:panel ; False:System.out
 	 */
-	public void append(String str, boolean b)
-	{
+	public void append(String str, boolean b) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
-		if (displayPacket && b)
-		{
+		if (displayPacket && b) {
 			appendToPane(text, "[" + timing + "] ", Color.black);
-			if (str.contains("Envoi"))
-			{
+			if (str.contains("Envoi")) {
 				appendToPane(text, str + "\n", new Color(0, 0, 140));
 			}
-			else
-			{
+			else {
 				appendToPane(text, str + "\n", new Color(0, 110, 0));
 			}
 		}
-		else
-		{
+		else {
 			String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
 			log.println(newSt);
 		}
 	}
 
-	public void append(boolean str)
-	{
+	public void append(boolean str) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
@@ -363,8 +340,7 @@ public class Network implements Runnable {
 		debug.println(newSt);
 	}
 
-	public void append(String str)
-	{
+	public void append(String str) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
@@ -372,8 +348,7 @@ public class Network implements Runnable {
 		debug.println(newSt);
 	}
 
-	public static void append1(String str)
-	{
+	public static void append1(String str) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
@@ -381,32 +356,28 @@ public class Network implements Runnable {
 		System.out.println(str);
 	}
 
-	public void getReturn(String[] message)
-	{
-		try
-		{
+	public void getReturn(String[] message) {
+		try {
 			this.modelConnexion.getReturn(message);
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void reception() throws Exception
-	{
-		while (!this.socket.isClosed())
-		{
+	public void reception() throws Exception {
+		while (!this.socket.isClosed()) {
 			Thread.sleep(200);
-			InputStream data = this.socket.getInputStream();
-			int available = data.available();
-			byte[] buffer = new byte[available];
-			if (available > 0)
-			{
-				LatencyFrame.updateLatency();
-				data.read(buffer, 0, available);
-				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
-				buildMessage(reader);
+			if (!this.socket.isClosed()) {
+				InputStream data = this.socket.getInputStream();
+				int available = data.available();
+				byte[] buffer = new byte[available];
+				if (available > 0) {
+					LatencyFrame.updateLatency();
+					data.read(buffer, 0, available);
+					DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
+					buildMessage(reader);
+				}
 			}
 		}
 		this.socket.close();
@@ -421,78 +392,71 @@ public class Network implements Runnable {
 	 *            packet_content
 	 */
 	@SuppressWarnings("unchecked")
-	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception
-	{
+	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
 		append("[" + packet_id + "]\tTaille : " + packet_content.length + "  -  " + name.name, true);
 		JSONObject jsonObject = null;
 		JSONObject jsonObject2;
-		switch (packet_id)
-		{
+		switch (packet_id) {
 			case 1:
 				ProtocolRequired protoc = new ProtocolRequired();
 				protoc.Deserialize(dataReader);
-			break;
+				break;
 			case 3:
 				HelloConnectMessage hello = new HelloConnectMessage();
 				hello.Deserialize(dataReader);
 				byte[] key = new byte[hello.getKey().size()];
-				for (int i = 0; i < hello.getKey().size(); i++)
-				{
+				for (int i = 0; i < hello.getKey().size(); i++) {
 					key[i] = hello.getKey().get(i).byteValue();
 				}
 				HandleHelloConnectMessage(key, hello.getSalt());
-			break;
+				break;
 			case 10:
 				LoginQueueStatusMessage queue = new LoginQueueStatusMessage();
 				queue.Deserialize(dataReader);
-			break;
+				break;
 			case 20:
 				IdentificationFailedMessage fail = new IdentificationFailedMessage();
 				fail.Deserialize(dataReader);
-			break;
+				break;
 			case 22:
 				IdentificationSuccessMessage success = new IdentificationSuccessMessage();
 				success.Deserialize(dataReader);
-			break;
+				break;
 			case 30:
 				ServersListMessage servers = new ServersListMessage();
 				servers.Deserialize(dataReader);
 				HandleServersListMessage(Servers.getServerId(info.getServer()));
-			break;
+				break;
 			case 42:
 				SelectedServerDataMessage selectServer = new SelectedServerDataMessage();
-				if (dataReader.available() == 0)
-				{
+				if (dataReader.available() == 0) {
 					this.message = null;
 					return;
 				}
 				selectServer.Deserialize(dataReader);
 				HandleSelectedDataServer(selectServer.getAddress(), selectServer.getPort(), selectServer.getTicket());
-			break;
+				break;
 			case 101:
 				HandleAuthentificationTicketMessage();
-				if (connectionToKoli)
-				{
+				if (connectionToKoli) {
 					Thread.sleep(r.nextInt(100));
 					HandleCharacterListRequestMessage();
 				}
-			break;
+				break;
 			case 6253:
 				HandleRawDataMessage();
-			break;
+				break;
 			case 6267:
 				HandleCharacterListRequestMessage();
-			break;
+				break;
 			case 151:
 				CharactersListMessage charactersListMessage = new CharactersListMessage();
 				charactersListMessage.Deserialize(dataReader);
 				int j = 0;
-				for (int i = 0; i < charactersListMessage.getCharacters().size(); i++)
-				{
-					if (charactersListMessage.getCharacters().get(i).getName().equals(info.getName()))
-					{
+				for (int i = 0; i < charactersListMessage.getCharacters().size(); i++) {
+					if (charactersListMessage.getCharacters().get(i).getName().equals(info.getName())) {
 						HandleCharacterSelectionMessage(charactersListMessage.getCharacters().get(i).getId());
 						info.setActorId(charactersListMessage.getCharacters().get(i).getId());
 						info.setLvl(charactersListMessage.getCharacters().get(i).getLevel());
@@ -501,48 +465,42 @@ public class Network implements Runnable {
 					}
 				}
 				if (j == 0) throw new Error("Wrong character name !");
-			break;
+				break;
 			case 1301:
 				HandleFriendIgnoreSpouseMessages();
-			break;
+				break;
 			case 4002:
 				HandleClientKeyMessage(FlashKeyGenerator.GetRandomFlashKey(info.getName()));
 				HandleGameContextCreateMessage();
-			break;
+				break;
 			case 500:
 				info.setStats(new CharacterStatsListMessage());
 				info.getStats().Deserialize(dataReader);
-			break;
+				break;
 			case 220:
 				CurrentMapMessage currentMapMessage = new CurrentMapMessage();
 				currentMapMessage.Deserialize(dataReader);
 				info.setMapId(currentMapMessage.getMapId());
-				if (connectionToKoli)
-				{
+				if (connectionToKoli) {
 					sendToServer(new GameContextReadyMessage(currentMapMessage.getMapId()), GameContextReadyMessage.ProtocolId, "Context ready");
 				}
-				else
-				{
+				else {
 					HandleMapRequestMessage(currentMapMessage.getMapId());
 				}
-			break;
+				break;
 			case 176:
 				info.setBasicNoOperationMsg(true);
-			break;
+				break;
 			case 226:
 				this.monsters.setMonsters(new ArrayList<>());
 				MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 				complementaryInformationsDataMessage.Deserialize(dataReader);
-				if (!connectionToKoli)
-				{
-					for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++)
-					{
-						if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations"))
-						{
+				if (!connectionToKoli) {
+					for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
+						if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")) {
 							npc.getNpc().add((GameRolePlayNpcInformations) complementaryInformationsDataMessage.getActors().get(i));
 						}
-						else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations"))
-						{
+						else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
 							this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
 
 						}
@@ -556,53 +514,56 @@ public class Network implements Runnable {
 					info.setConnected(true);
 					info.setNewMap(true);
 				}
-			break;
-			case 891:
-			break;
+				break;
+			case 6622:
+				MapComplementaryInformationsDataInHavenBagMessage mapComplementaryInformationsDataInHavenBagMessage = new MapComplementaryInformationsDataInHavenBagMessage();
+				mapComplementaryInformationsDataInHavenBagMessage.Deserialize(dataReader);
+				getInteractive().setStatedElements(mapComplementaryInformationsDataInHavenBagMessage.getStatedElements());
+				getInteractive().setInteractiveElements(mapComplementaryInformationsDataInHavenBagMessage.getInteractiveElements());
+				append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
+				this.info.setCellId(mapComplementaryInformationsDataInHavenBagMessage.getActors().get(0).getDisposition().getCellId());
+				append("CellId : " + info.getCellId());
+				info.setWaitForMov(true);
+				info.setNewMap(true);
+				break;
 			case 951:
 				GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
 				gameMapMovementMessage.Deserialize(dataReader);
-				if (gameMapMovementMessage.getActorId() == info.getActorId())
-				{
+				if (gameMapMovementMessage.getActorId() == info.getActorId()) {
 					info.setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
 					append("Moving to cellId : " + info.getCellId());
 				}
-				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++)
-				{
-					if (this.getMonsters().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId())
-					{
+				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++) {
+					if (this.getMonsters().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId()) {
 						this.getMonsters().getMonsters().get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
 					}
 				}
-				if (info.isJoinedFight())
-				{
-					for (int i = 0; i < this.getFight().getMonsters().size(); i++)
-					{
-						if (this.getFight().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId())
-						{
+				if (info.isJoinedFight()) {
+					for (int i = 0; i < this.getFight().getMonsters().size(); i++) {
+						if (this.getFight().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId()) {
 							this.getFight().getMonsters().get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
 						}
 					}
 					int cellId = gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1);
 					int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
 					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
-					
+
 					JSONObject object = new JSONObject();
 					object.put("id", gameMapMovementMessage.getActorId());
 					object.put("x", x);
 					object.put("y", y);
 					JSONArray arr = new JSONArray();
 					arr.add(object);
-					
+
 					getFight().sendToFightAlgo("m", arr);
 				}
-			break;
+				break;
 			case 6316:
 				HandleSequenceNumberMessage();
-			break;
+				break;
 			case 5816:
 				HandleLatencyMessage();
-			break;
+				break;
 			case 6575:
 				connectionToKoli = true;
 				GameRolePlayArenaSwitchToFightServerMessage arenaSwitchToFightServerMessage = new GameRolePlayArenaSwitchToFightServerMessage();
@@ -610,7 +571,7 @@ public class Network implements Runnable {
 				Ticket = arenaSwitchToFightServerMessage.getTicket();
 				this.socket.close();
 				this.socket = new Socket(arenaSwitchToFightServerMessage.getAddress(), 5555);
-			break;
+				break;
 			case 6574:
 				connectionToKoli = false;
 				LatencyFrame.Sequence = 1;
@@ -619,246 +580,216 @@ public class Network implements Runnable {
 				Ticket = arenaSwitchToGameServerMessage.getTicket();
 				this.socket.close();
 				this.socket = new Socket(ip, 5555);
-			break;
+				break;
 			case 6068:
 				sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Character force selection");
-			break;
+				break;
 			case 6471:
-				if (connectionToKoli)
-				{
+				if (connectionToKoli) {
 					sendToServer(new GameContextCreateRequestMessage(), GameContextCreateRequestMessage.ProtocolId, "Context creation request");
 				}
-			break;
+				break;
 			case 5864:
 				new GameFightShowFighterMessage().Deserialize(dataReader);
-			break;
+				break;
 			case 5709:
-				if (info.isConnected())
-				{
+				if (info.isConnected()) {
 					StatedElementUpdatedMessage elementUpdatedMessage = new StatedElementUpdatedMessage();
 					elementUpdatedMessage.Deserialize(dataReader);
-					for (int i = 0; i < getInteractive().getStatedElements().size(); i++)
-					{
-						if (elementUpdatedMessage.getStatedElement().getElementCellId() == getInteractive().getStatedElements().get(i).getElementCellId())
-						{
+					for (int i = 0; i < getInteractive().getStatedElements().size(); i++) {
+						if (elementUpdatedMessage.getStatedElement().getElementCellId() == getInteractive().getStatedElements().get(i).getElementCellId()) {
 							getInteractive().getStatedElements().set(i, elementUpdatedMessage.getStatedElement());
 						}
 					}
 				}
-			break;
+				break;
 			case 5708:
-				if (info.isConnected())
-				{
+				if (info.isConnected()) {
 					InteractiveElementUpdatedMessage interactiveElementUpdatedMessage = new InteractiveElementUpdatedMessage();
 					interactiveElementUpdatedMessage.Deserialize(dataReader);
-					for (int i = 0; i < getInteractive().getInteractiveElements().size(); i++)
-					{
-						if (interactiveElementUpdatedMessage.getInteractiveElement().getElementId() == getInteractive().getInteractiveElements().get(i).getElementId())
-						{
+					for (int i = 0; i < getInteractive().getInteractiveElements().size(); i++) {
+						if (interactiveElementUpdatedMessage.getInteractiveElement().getElementId() == getInteractive().getInteractiveElements().get(i).getElementId()) {
 							getInteractive().getInteractiveElements().set(i, interactiveElementUpdatedMessage.getInteractiveElement());
 						}
 					}
 				}
-			break;
+				break;
 			case 6112:
 				info.setWaitForHarvestSuccess(true);
-			break;
+				break;
 			case 6384:
 				info.setWaitForHarvestFailure(true);
-			break;
+				break;
 			case 3009:
 				InventoryWeightMessage weight = new InventoryWeightMessage();
 				weight.Deserialize(dataReader);
 				info.setWeight(weight.getWeight());
 				info.setWeigthMax(weight.getWeightMax());
-			break;
+				break;
 			case 6519:
 				ObtainedItemMessage itemMessage = new ObtainedItemMessage();
 				itemMessage.Deserialize(dataReader);
 				getInteractive().setLastItemHarvestedId(itemMessage.getGenericId());
 				getInteractive().setQuantityLastItemHarvested(itemMessage.getBaseQuantity());
-			break;
+				break;
 			case 5809:
 				JobExperienceMultiUpdateMessage experienceMultiUpdateMessage = new JobExperienceMultiUpdateMessage();
 				experienceMultiUpdateMessage.Deserialize(dataReader);
-				for (JobExperience b : experienceMultiUpdateMessage.getExperiencesUpdate())
-				{
+				for (JobExperience b : experienceMultiUpdateMessage.getExperiencesUpdate()) {
 					info.getJob().add(new JobExperience(b.getJobId(), b.getJobLevel(), b.getJobXP(), b.getJobXpLevelFloor(), b.getJobXpNextLevelFloor()));
 				}
-			break;
+				break;
 			case 5654:
 				JobExperienceUpdateMessage experienceUpdateMessage = new JobExperienceUpdateMessage();
 				experienceUpdateMessage.Deserialize(dataReader);
-				for (int i = 0; i < info.getJob().size(); i++)
-				{
-					if (experienceUpdateMessage.getExperiencesUpdate().getJobId() == info.getJob().get(i).getJobId())
-					{
+				for (int i = 0; i < info.getJob().size(); i++) {
+					if (experienceUpdateMessage.getExperiencesUpdate().getJobId() == info.getJob().get(i).getJobId()) {
 						info.getJob().set(i, experienceUpdateMessage.getExperiencesUpdate());
 					}
 				}
-			break;
+				break;
 			case 5670:
 				CharacterLevelUpMessage characterLevelUpMessage = new CharacterLevelUpMessage();
 				characterLevelUpMessage.Deserialize(dataReader);
 				info.setLvl(characterLevelUpMessage.getNewLevel());
-			break;
+				break;
 			case 5617:
 				NpcDialogQuestionMessage dialogQuestionMessage = new NpcDialogQuestionMessage();
 				dialogQuestionMessage.Deserialize(dataReader);
 				this.npc.reply(this.npc.getReplyId(dialogQuestionMessage.getMessageId()));
-			break;
+				break;
 			case 5502:
 				this.npc.setDialogOver(true);
-			break;
+				break;
 			case 5745:
 				info.setInteractiveUsed(true);
-			break;
+				break;
 			case 5646:
 				getBank().setStorage(new StorageInventoryContentMessage());
 				getBank().getStorage().Deserialize(dataReader);
 				info.setStorage(true);
-			break;
+				break;
 			case 6162:
 				this.stats.setInventoryContentMessage(new InventoryContentAndPresetMessage());
 				this.stats.getInventoryContentMessage().Deserialize(dataReader);
-			break;
+				break;
 			case 3023:
 				ObjectQuantityMessage objectQuantityMessage = new ObjectQuantityMessage();
 				objectQuantityMessage.Deserialize(dataReader);
-				for (int i = 0; i < this.stats.getInventoryContentMessage().getObjects().size(); i++)
-				{
-					if (this.stats.getInventoryContentMessage().getObjects().get(i).getObjectUID() == objectQuantityMessage.getObjectUID())
-					{
+				for (int i = 0; i < this.stats.getInventoryContentMessage().getObjects().size(); i++) {
+					if (this.stats.getInventoryContentMessage().getObjects().get(i).getObjectUID() == objectQuantityMessage.getObjectUID()) {
 						ObjectItem object = this.stats.getInventoryContentMessage().getObjects().get(i);
 						this.stats.getInventoryContentMessage().getObjects().set(i, new ObjectItem(object.getPosition(), object.getObjectGID(), object.getEffects(), object.getObjectUID(), objectQuantityMessage.getQuantity()));
 					}
 				}
-			break;
+				break;
 			case 3025:
 				ObjectAddedMessage objectAddedMessage = new ObjectAddedMessage();
 				objectAddedMessage.Deserialize(dataReader);
 				this.stats.getInventoryContentMessage().getObjects().add(objectAddedMessage.getObject());
-			break;
+				break;
 			case 3024:
 				ObjectDeletedMessage objectDeletedMessage = new ObjectDeletedMessage();
 				objectDeletedMessage.Deserialize(dataReader);
-				for (int i = 0; i < this.stats.getInventoryContentMessage().getObjects().size(); i++)
-				{
-					if (this.stats.getInventoryContentMessage().getObjects().get(i).getObjectUID() == objectDeletedMessage.getObjectUID())
-					{
+				for (int i = 0; i < this.stats.getInventoryContentMessage().getObjects().size(); i++) {
+					if (this.stats.getInventoryContentMessage().getObjects().get(i).getObjectUID() == objectDeletedMessage.getObjectUID()) {
 						this.stats.getInventoryContentMessage().getObjects().remove(i);
 					}
 				}
-			break;
+				break;
 			case 6034:
 				ObjectsDeletedMessage objectsDeletedMessage = new ObjectsDeletedMessage();
 				objectsDeletedMessage.Deserialize(dataReader);
-				for (int i = 0; i < objectsDeletedMessage.getObjectUID().size(); i++)
-				{
-					for (int k = 0; k < this.stats.getInventoryContentMessage().getObjects().size(); k++)
-					{
-						if (this.stats.getInventoryContentMessage().getObjects().get(k).getObjectUID() == objectsDeletedMessage.getObjectUID().get(i))
-						{
+				for (int i = 0; i < objectsDeletedMessage.getObjectUID().size(); i++) {
+					for (int k = 0; k < this.stats.getInventoryContentMessage().getObjects().size(); k++) {
+						if (this.stats.getInventoryContentMessage().getObjects().get(k).getObjectUID() == objectsDeletedMessage.getObjectUID().get(i)) {
 							this.stats.getInventoryContentMessage().getObjects().remove(k);
 							break;
 						}
 					}
 				}
-			break;
+				break;
 			case 6033:
 				ObjectsAddedMessage objectsAddedMessage = new ObjectsAddedMessage();
 				objectsAddedMessage.Deserialize(dataReader);
-				for (int i = 0; i < objectsAddedMessage.getObject().size(); i++)
-				{
+				for (int i = 0; i < objectsAddedMessage.getObject().size(); i++) {
 					this.stats.getInventoryContentMessage().getObjects().add(objectsAddedMessage.getObject().get(i));
 				}
-			break;
+				break;
 			case 3016:
 				this.stats.setInventoryContentMessage(new InventoryContentMessage());
 				this.stats.getInventoryContentMessage().Deserialize(dataReader);
-			break;
+				break;
 			case 6036:
 				StorageObjectsUpdateMessage storageObjectsUpdateMessage = new StorageObjectsUpdateMessage();
 				storageObjectsUpdateMessage.Deserialize(dataReader);
-				for (int i = 0; i < storageObjectsUpdateMessage.getObjectList().size(); i++)
-				{
+				for (int i = 0; i < storageObjectsUpdateMessage.getObjectList().size(); i++) {
 					boolean isInBank = false;
-					for (int k = 0; k < getBank().getStorage().getObjects().size(); k++)
-					{
-						if (storageObjectsUpdateMessage.getObjectList().get(i).getObjectUID() == getBank().getStorage().getObjects().get(k).getObjectUID())
-						{
+					for (int k = 0; k < getBank().getStorage().getObjects().size(); k++) {
+						if (storageObjectsUpdateMessage.getObjectList().get(i).getObjectUID() == getBank().getStorage().getObjects().get(k).getObjectUID()) {
 							getBank().getStorage().getObjects().set(i, storageObjectsUpdateMessage.getObjectList().get(i));
 							isInBank = true;
 						}
 					}
-					if (!isInBank)
-					{
+					if (!isInBank) {
 						getBank().getStorage().getObjects().add(storageObjectsUpdateMessage.getObjectList().get(i));
 					}
 				}
 				info.setStorageUpdate(true);
-			break;
+				break;
 			case 6035:
 				StorageObjectsRemoveMessage storageObjectsRemoveMessage = new StorageObjectsRemoveMessage();
 				storageObjectsRemoveMessage.Deserialize(dataReader);
-				for (int i = 0; i < storageObjectsRemoveMessage.getObjectUIDList().size(); i++)
-				{
-					for (int k = 0; k < getBank().getStorage().getObjects().size(); k++)
-					{
-						if (storageObjectsRemoveMessage.getObjectUIDList().get(i) == getBank().getStorage().getObjects().get(k).getObjectUID())
-						{
+				for (int i = 0; i < storageObjectsRemoveMessage.getObjectUIDList().size(); i++) {
+					for (int k = 0; k < getBank().getStorage().getObjects().size(); k++) {
+						if (storageObjectsRemoveMessage.getObjectUIDList().get(i) == getBank().getStorage().getObjects().get(k).getObjectUID()) {
 							getBank().getStorage().getObjects().remove(k);
 							break;
 						}
 					}
 				}
 				info.setStorageUpdate(true);
-			break;
+				break;
 			case 5647:
 				StorageObjectUpdateMessage storageObjectUpdateMessage = new StorageObjectUpdateMessage();
 				storageObjectUpdateMessage.Deserialize(dataReader);
 				boolean isItem = false;
-				for (int i = 0; i < getBank().getStorage().getObjects().size(); i++)
-				{
-					if (getBank().getStorage().getObjects().get(i).getObjectGID() == storageObjectUpdateMessage.getObject().getObjectGID() || getBank().getStorage().getObjects().get(i).getObjectUID() == storageObjectUpdateMessage.getObject().getObjectUID())
-					{
+				for (int i = 0; i < getBank().getStorage().getObjects().size(); i++) {
+					if (getBank().getStorage().getObjects().get(i).getObjectGID() == storageObjectUpdateMessage.getObject().getObjectGID() || getBank().getStorage().getObjects().get(i).getObjectUID() == storageObjectUpdateMessage.getObject().getObjectUID()) {
 						getBank().getStorage().getObjects().set(i, storageObjectUpdateMessage.getObject());
 						isItem = true;
 					}
 				}
-				if (!isItem)
-				{
+				if (!isItem) {
 					getBank().getStorage().getObjects().add(storageObjectUpdateMessage.getObject());
 				}
 				info.setStorageUpdate(true);
-			break;
+				break;
 			case 5648:
 				StorageObjectRemoveMessage storageObjectRemoveMessage = new StorageObjectRemoveMessage();
 				storageObjectRemoveMessage.Deserialize(dataReader);
-				for (int i = 0; i < getBank().getStorage().getObjects().size(); i++)
-				{
-					if (getBank().getStorage().getObjects().get(i).getObjectUID() == storageObjectRemoveMessage.getObjectUID())
-					{
+				for (int i = 0; i < getBank().getStorage().getObjects().size(); i++) {
+					if (getBank().getStorage().getObjects().get(i).getObjectUID() == storageObjectRemoveMessage.getObjectUID()) {
 						getBank().getStorage().getObjects().remove(i);
 					}
 				}
 				info.setStorageUpdate(true);
-			break;
+				break;
 			case 5628:
 				info.setLeaveExchange(true);
-			break;
+				break;
 			case 5537:
 				KamasUpdateMessage kamasUpdateMessage = new KamasUpdateMessage();
 				kamasUpdateMessage.Deserialize(dataReader);
 				this.stats.getInventoryContentMessage().setKamas(kamasUpdateMessage.getKamasTotal());
 				info.setStorageUpdate(true);
-			break;
+				break;
 			case 5645:
 				StorageKamasUpdateMessage storageKamasUpdateMessage = new StorageKamasUpdateMessage();
 				storageKamasUpdateMessage.Deserialize(dataReader);
 				getBank().getStorage().setKamas(storageKamasUpdateMessage.getKamasTotal());
 				info.setStorageUpdate(true);
-			break;
+				break;
 			// case 881:
 			// ChatServerMessage chatServerMessage = new ChatServerMessage();
 			// chatServerMessage.Deserialize(dataReader);
@@ -915,86 +846,76 @@ public class Network implements Runnable {
 				JSONArray tempArr = new JSONArray();
 				tempArr.add(mapJSONObject);
 				getFight().sendToFightAlgo("startfight", tempArr);
-			break;
+				break;
 			case 956:
 				SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
 				sequenceEndMessage.Deserialize(dataReader);
-				if (sequenceEndMessage.getAuthorId() == info.getActorId())
-				{
+				if (sequenceEndMessage.getAuthorId() == info.getActorId()) {
 					Thread.sleep(1000);
 					sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.getActionId()), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
 					this.getInfo().setAcknowledged(true);
 				}
-				if (!getFight().getSpellJson().isEmpty())
-				{
+				if (!getFight().getSpellJson().isEmpty()) {
 					append("JSON SPELL SEND : " + getFight().getSpellJson().toJSONString());
 					/**
-					 * FOR LYSANDRE
-					 * Use getFight().getSpellJson() in a function 
+					 * FOR LYSANDRE Use getFight().getSpellJson() in a function
 					 */
 					getFight().sendToFightAlgo("c", getFight().getSpellJson());
-					//Previous trash function
+					// Previous trash function
 				}
-				if (info.isTurn())
-				{
+				if (info.isTurn()) {
 					getFight().fightTurn();
 				}
-			break;
+				break;
 			case 715:
 				sendToServer(new GameFightTurnReadyMessage(true), GameFightTurnReadyMessage.ProtocolId, "Turn ready");
-			break;
+				break;
 			case 719:
 				GameFightTurnEndMessage gameFightTurnEndMessage = new GameFightTurnEndMessage();
 				gameFightTurnEndMessage.Deserialize(dataReader);
-				if (gameFightTurnEndMessage.getId() == info.getActorId())
-				{
+				if (gameFightTurnEndMessage.getId() == info.getActorId()) {
 					info.setTurn(false);
 				}
-				
+
 				JSONObject passTurn = new JSONObject();
 				passTurn.put("id", getFight().getId(gameFightTurnEndMessage.getId()));
 				JSONArray arr = new JSONArray();
 				arr.add(passTurn);
 				getFight().sendToFightAlgo("p", arr);
-			break;
+				break;
 			case 720:
 				info.setJoinedFight(false);
 				info.setTurn(false);
 				getFight().sendToFightAlgo("endFight", null);
-			break;
+				break;
 			case 703:
 				getFight().gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
 				getFight().gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
 				// TODO LYSANDRE
 				// Fight.setBeginingPosition();
 				SwingUtilities.invokeLater(new Runnable() {
-					public void run()
-					{
-						try
-						{
+					public void run() {
+						try {
 							Thread.sleep(1000);
 							getFight().fightReady();
 						}
-						catch (InterruptedException e)
-						{
+						catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						catch (Exception e)
-						{
+						catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
 				});
-			break;
+				break;
 			case 5696:
 				getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
 				getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
-			break;
+				break;
 			case 5921:
 				getFight().setGameFightSynchronizeMessage(new GameFightSynchronizeMessage());
 				getFight().getGameFightSynchronizeMessage().Deserialize(dataReader);
-				if (!info.isInitFight())
-				{	
+				if (!info.isInitFight()) {
 					JSONObject startFight = new JSONObject();
 					startFight.put("entities", getFight().getEntities());
 					JSONArray arr2 = new JSONArray();
@@ -1002,15 +923,15 @@ public class Network implements Runnable {
 					getFight().sendToFightAlgo("s", arr2);
 					info.setInitFight(true);
 				}
-			break;
+				break;
 			case 6465:
 				info.setTurn(true);
 				append("TUUUUUUUUUURRRRRRRRRRRRRRRRNNNNNNNNNNNNN");
 				getFight().fightTurn();
-			break;
+				break;
 			case 955:
 				getFight().setSpellJson(new JSONArray());
-			break;
+				break;
 			/**
 			 * LYSANDRE FIGHT // case 1010 to case 6310 Each sequence can
 			 * contain multiple jsonObject Each case contains one jsonObject
@@ -1021,7 +942,7 @@ public class Network implements Runnable {
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("spellId", d2iManager.getText(GameData.getSpellNameId(gameActionFightSpellCastMessage.getSpellId())));
+				jsonObject.put("spellId", gameActionFightSpellCastMessage.getSpellId());
 				jsonObject.put("targetId", getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
 				jsonObject.put("destinationCellId", gameActionFightSpellCastMessage.getDestinationCellId());
 				jsonObject.put("critical", gameActionFightSpellCastMessage.getCritical());
@@ -1029,7 +950,7 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("spellCast", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 6312:
 				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
@@ -1041,7 +962,7 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("lifePointsLost", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 5828:
 				GameActionFightDodgePointLossMessage dodgePointLossMessage = new GameActionFightDodgePointLossMessage();
 				dodgePointLossMessage.Deserialize(dataReader);
@@ -1052,7 +973,7 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("dodgePointLoss", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			/**
 			 * Depending on the packet received it will give a JsonObject with
 			 * diferent key the first are in common for every packet
@@ -1067,32 +988,27 @@ public class Network implements Runnable {
 				jsonObject.put("spell", d2iManager.getText(GameData.getSpellNameId(gameActionFightDispellableEffectMessage.getEffect().getSpellId())));
 				jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
 				jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
-				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect"))
-				{
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
 					jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
 				}
-				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect"))
-				{
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect")) {
 					jsonObject.put("stateId", ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
 				}
-				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostWeaponDamagesEffect"))
-				{
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostWeaponDamagesEffect")) {
 					jsonObject.put("weaponTypeId", ((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
 				}
-				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellBoostEffect"))
-				{
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellBoostEffect")) {
 					jsonObject.put("boostedSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()));
 
 				}
-				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellImmunityEffect"))
-				{
+				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellImmunityEffect")) {
 					jsonObject.put("immuneSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()));
 
 				}
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("dispellableEffect", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 5540:
 				GameActionFightMarkCellsMessage gameActionFightMarkCellsMessage = new GameActionFightMarkCellsMessage();
 				gameActionFightMarkCellsMessage.Deserialize(dataReader);
@@ -1101,8 +1017,7 @@ public class Network implements Runnable {
 				jsonObject.put("markSpell", d2iManager.getText(GameData.getSpellNameId(gameActionFightMarkCellsMessage.getMark().getMarkSpellId())));
 				jsonObject.put("markImpactCellId", gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
 				JSONArray jsonArray = new JSONArray();
-				for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells())
-				{
+				for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells()) {
 					JSONObject jsonCells = new JSONObject();
 					jsonCells.put("cellId", object.getCellId());
 					jsonCells.put("zoneSize", object.getZoneSize());
@@ -1112,7 +1027,7 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("markCells", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 6311:
 				GameActionFightLifePointsGainMessage gameActionFightLifePointsGainMessage = new GameActionFightLifePointsGainMessage();
 				gameActionFightLifePointsGainMessage.Deserialize(dataReader);
@@ -1123,7 +1038,7 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("lifePointsGain", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 1099:
 				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
 				gameActionFightDeathMessage.Deserialize(dataReader);
@@ -1133,14 +1048,12 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("death", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-				for (int i = 0; i < this.getFight().getMonsters().size(); i++)
-				{
-					if (this.getFight().getMonsters().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId())
-					{
+				for (int i = 0; i < this.getFight().getMonsters().size(); i++) {
+					if (this.getFight().getMonsters().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId()) {
 						this.getFight().getMonsters().get(i).setAlive(false);
 					}
 				}
-			break;
+				break;
 			case 6116:
 				GameActionFightCloseCombatMessage gameActionFightCloseCombatMessage = new GameActionFightCloseCombatMessage();
 				gameActionFightCloseCombatMessage.Deserialize(dataReader);
@@ -1153,7 +1066,7 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("closeCombat", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 5525:
 				GameActionFightSlideMessage gameActionFightSlideMessage = new GameActionFightSlideMessage();
 				gameActionFightSlideMessage.Deserialize(dataReader);
@@ -1165,7 +1078,7 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("slide", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 6310:
 				GameActionFightLifeAndShieldPointsLostMessage gameActionFightLifeAndShieldPointsLostMessage = new GameActionFightLifeAndShieldPointsLostMessage();
 				gameActionFightLifeAndShieldPointsLostMessage.Deserialize(dataReader);
@@ -1178,43 +1091,42 @@ public class Network implements Runnable {
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("shieldLpLoss", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
-			break;
+				break;
 			case 713:
 				GameFightTurnListMessage gameFightTurnListMessage = new GameFightTurnListMessage();
 				gameFightTurnListMessage.Deserialize(dataReader);
-				if (!info.isInitFight())
-				{
+				if (!info.isInitFight()) {
 					getFight().turnListId = gameFightTurnListMessage.getIds();
 				}
-			break;
+				break;
+			case 1604:
+				ZaapListMessage zaapListMessage = new ZaapListMessage();
+				zaapListMessage.Deserialize(dataReader);
+				this.interactive.setZaapList(zaapListMessage.getMapIds());
+				break;
 		}
 	}
 
-	public void buildMessage(DofusDataReader reader) throws Exception
-	{
+	public void buildMessage(DofusDataReader reader) throws Exception {
 		if (reader.available() <= 0) { return; }
 
 		// Packet split
-		if (bigPacketLengthToFull != 0)
-		{
-			if (reader.available() <= bigPacketLengthToFull)
-			{
+		if (bigPacketLengthToFull != 0) {
+			if (reader.available() <= bigPacketLengthToFull) {
 				bigPacketLengthToFull -= reader.available();
 				byte[] destination = new byte[bigPacketData.length + reader.available()];
 				System.arraycopy(bigPacketData, 0, destination, 0, bigPacketData.length);
 				System.arraycopy(reader.readBytes(reader.available()), 0, destination, bigPacketData.length, reader.available());
 				this.bigPacketData = destination;
 			}
-			else if (reader.available() > bigPacketLengthToFull)
-			{
+			else if (reader.available() > bigPacketLengthToFull) {
 				byte[] destination = new byte[bigPacketData.length + bigPacketLengthToFull];
 				System.arraycopy(bigPacketData, 0, destination, 0, bigPacketData.length);
 				System.arraycopy(reader.readBytes(bigPacketLengthToFull), 0, destination, bigPacketData.length, bigPacketLengthToFull);
 				bigPacketLengthToFull = 0;
 				this.bigPacketData = destination;
 			}
-			if (bigPacketLengthToFull == 0)
-			{
+			if (bigPacketLengthToFull == 0) {
 				// this.network.append("\n----------------------------------");
 				// this.network.append("[Re�u] ID = " + bigPacketId);
 				// this.network.append("[Re�u] ID = " + bigPacketId + " |
@@ -1227,15 +1139,12 @@ public class Network implements Runnable {
 				bigPacketId = 0;
 			}
 		}
-		else
-		{
-			if (this.message == null)
-			{
+		else {
+			if (this.message == null) {
 				this.message = new Message();
 			}
 			message.build(reader);
-			if (message.getId() != 0 && message.bigPacketLength == 0)
-			{
+			if (message.getId() != 0 && message.bigPacketLength == 0) {
 				//
 				// this.network.append("\n----------------------------------");
 				// this.network.append("[Re�u] ID = " + message.getId());
@@ -1245,8 +1154,7 @@ public class Network implements Runnable {
 				TreatPacket(message.getId(), message.getData());
 				// this.network.append("\n----------------------------------");
 			}
-			else if (message.getId() != 0 && message.bigPacketLength != 0)
-			{
+			else if (message.getId() != 0 && message.bigPacketLength != 0) {
 				bigPacketLengthToFull = message.bigPacketLength;
 				bigPacketId = message.getId();
 				bigPacketData = message.getData();
@@ -1260,8 +1168,7 @@ public class Network implements Runnable {
 	 * Send packet to server message = type; id = id packet; String s = String
 	 * displayed on log
 	 */
-	public void sendToServer(NetworkMessage message, int id, String s) throws Exception
-	{
+	public void sendToServer(NetworkMessage message, int id, String s) throws Exception {
 		info.setBooleanToFalse();
 		LatencyFrame.latestSent();
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
@@ -1274,28 +1181,26 @@ public class Network implements Runnable {
 		append("[" + id + "]	[Envoi] " + s, true);
 	}
 
-	private byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception
-	{
+	private byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception {
 		byte[] data = bous.toByteArray();
 		writer.Clear();
 		byte num = ComputeTypeLen(data.length);
 		int num1 = SubComputeStaticHeader(id, num);
 		writer.writeShort((short) num1);
 		writer.writeInt(MessageUtil.InstanceId++);
-		switch (num)
-		{
+		switch (num) {
 			case 0:
-			break;
+				break;
 			case 1:
 				writer.writeByte((byte) data.length);
-			break;
+				break;
 			case 2:
 				writer.writeShort((short) data.length);
-			break;
+				break;
 			case 3:
 				writer.writeByte((byte) ((data.length >> 16) & 255));
 				writer.writeShort((short) (data.length & 65535));
-			break;
+				break;
 			default:
 				throw new Exception("Packet's length can't be encoded on 4 or more bytes");
 		}
@@ -1303,8 +1208,7 @@ public class Network implements Runnable {
 		return writer.bous.toByteArray();
 	}
 
-	private byte ComputeTypeLen(int param1)
-	{
+	private byte ComputeTypeLen(int param1) {
 		byte num;
 		if (param1 > 65535)
 			num = 3;
@@ -1315,29 +1219,24 @@ public class Network implements Runnable {
 		return num;
 	}
 
-	private int SubComputeStaticHeader(int id, byte typeLen)
-	{
+	private int SubComputeStaticHeader(int id, byte typeLen) {
 		return (id << 2) | typeLen;
 	}
 
-	public String bytesToString(byte[] bytes, String format, boolean spacer)
-	{
+	public String bytesToString(byte[] bytes, String format, boolean spacer) {
 		StringBuilder sb = new StringBuilder(bytes.length * 2);
-		for (byte b : bytes)
-		{
+		for (byte b : bytes) {
 			sb.append(String.format(format, b));
 			if (spacer) sb.append(" ");
 		}
 		return sb.toString();
 	}
 
-	private void HandleHelloConnectMessage(byte[] key, String salt) throws Exception
-	{
+	private void HandleHelloConnectMessage(byte[] key, String salt) throws Exception {
 		VersionExtended versionExtended = new VersionExtended(2, 45, 10, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), salt);
 		List<Integer> credentialsArray = new ArrayList<Integer>();
-		for (byte b : credentials)
-		{
+		for (byte b : credentials) {
 			credentialsArray.add((int) b);
 		}
 		List<Integer> failedAttempts = new ArrayList<Integer>();
@@ -1345,17 +1244,14 @@ public class Network implements Runnable {
 		sendToServer(identification, IdentificationMessage.ProtocolId, "Identification...");
 	}
 
-	private void HandleServersListMessage(int i) throws Exception
-	{
+	private void HandleServersListMessage(int i) throws Exception {
 		ServerSelectionMessage select = new ServerSelectionMessage(i);
 		sendToServer(select, ServerSelectionMessage.ProtocolId, "Selection du serveur...");
 	}
 
-	private void HandleRawDataMessage() throws Exception
-	{
+	private void HandleRawDataMessage() throws Exception {
 		List<Integer> tt = new ArrayList<>();
-		for (int i = 0; i <= 255; i++)
-		{
+		for (int i = 0; i <= 255; i++) {
 			int rand = ThreadLocalRandom.current().nextInt(-127, 127);
 			tt.add(rand);
 		}
@@ -1363,18 +1259,15 @@ public class Network implements Runnable {
 		sendToServer(RDM, CheckIntegrityMessage.ProtocolId, "Check Integrity Message...");
 	}
 
-	private void HandleSelectedDataServer(String address, int port, List<Integer> ticket) throws IOException
-	{
+	private void HandleSelectedDataServer(String address, int port, List<Integer> ticket) throws IOException {
 		Ticket = ticket;
 		this.socket.close();
 		this.socket = new Socket(address, port);
 	}
 
-	private void HandleAuthentificationTicketMessage() throws Exception
-	{
+	private void HandleAuthentificationTicketMessage() throws Exception {
 		byte[] encryptedTicket = new byte[Ticket.size()];
-		for (int i = 0; i < Ticket.size(); i++)
-		{
+		for (int i = 0; i < Ticket.size(); i++) {
 			encryptedTicket[i] = Ticket.get(i).byteValue();
 		}
 		String decryptedTicket = Crypto.decryptAESkey(encryptedTicket);
@@ -1382,19 +1275,16 @@ public class Network implements Runnable {
 		sendToServer(authenticationTicketMessage, AuthenticationTicketMessage.ProtocolId, "Authentification du ticket...");
 	}
 
-	private void HandleCharacterListRequestMessage() throws Exception
-	{
+	private void HandleCharacterListRequestMessage() throws Exception {
 		sendToServer(new NetworkMessageEmpty(), 150, "Character list request");
 	}
 
-	private void HandleCharacterSelectionMessage(long id) throws Exception
-	{
+	private void HandleCharacterSelectionMessage(long id) throws Exception {
 		CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(id);
 		sendToServer(characterSelectionMessage, CharacterSelectionMessage.ProtocolId, "Selection du personnage...");
 	}
 
-	private void HandleFriendIgnoreSpouseMessages() throws Exception
-	{
+	private void HandleFriendIgnoreSpouseMessages() throws Exception {
 		// Send friend list request
 		sendToServer(new NetworkMessageEmpty(), 4001, "Friend list request");
 		// Send ignored list request
@@ -1403,132 +1293,124 @@ public class Network implements Runnable {
 		sendToServer(new NetworkMessageEmpty(), 6355, "Spouse list request");
 	}
 
-	private void HandleClientKeyMessage(String key) throws Exception
-	{
+	private void HandleClientKeyMessage(String key) throws Exception {
 		ClientKeyMessage clientKeyMessage = new ClientKeyMessage(key);
 		sendToServer(clientKeyMessage, ClientKeyMessage.ProtocolId, "Client key");
 	}
 
-	private void HandleGameContextCreateMessage() throws Exception
-	{
+	private void HandleGameContextCreateMessage() throws Exception {
 		sendToServer(new NetworkMessageEmpty(), 250, "Game context create request");
 	}
 
-	private void HandleSequenceNumberMessage() throws Exception
-	{
+	private void HandleSequenceNumberMessage() throws Exception {
 		SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage(LatencyFrame.Sequence++);
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
 	}
 
-	private void HandleMapRequestMessage(double mapId) throws Exception
-	{
+	private void HandleMapRequestMessage(double mapId) throws Exception {
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
 		Map map = this.mapManager.FromId((int) mapId);
 		this.map = map;
 		this.interactive.setMap(map);
-		this.info.setCoords(new int[] { map.getPosition().getX(), map.getPosition().getY() });
+		this.info.setCoords(GameData.getCoordMap((int) mapId));
 		this.info.setWorldmap(GameData.getWorldMap((int) mapId));
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
-	private void HandleLatencyMessage() throws Exception
-	{
+	private void HandleLatencyMessage() throws Exception {
 		BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage(LatencyFrame.getLatencyAvg(), LatencyFrame.getSamplesCount(), LatencyFrame.GetSamplesMax());
 		sendToServer(basicLatencyStatsMessage, BasicLatencyStatsMessage.ProtocolId, "Latency message");
 	}
 
-	public Interactive getInteractive()
-	{
+	public Interactive getInteractive() {
 		return interactive;
 	}
 
-	public void setInteractive(Interactive interactive)
-	{
+	public void setInteractive(Interactive interactive) {
 		this.interactive = interactive;
 	}
 
-	public Bank getBank()
-	{
+	public Bank getBank() {
 		return bank;
 	}
 
-	public void setBank(Bank bank)
-	{
+	public void setBank(Bank bank) {
 		this.bank = bank;
 	}
 
-	public Movement getMovement()
-	{
+	public Movement getMovement() {
 		return movement;
 	}
 
-	public void setMovement(Movement movement)
-	{
+	public void setMovement(Movement movement) {
 		this.movement = movement;
 	}
 
-	public Info getInfo()
-	{
+	public Info getInfo() {
 		return info;
 	}
 
-	public void setInfo(Info info)
-	{
+	public void setInfo(Info info) {
 		this.info = info;
 	}
 
-	public Stats getStats()
-	{
+	public Stats getStats() {
 		return stats;
 	}
 
-	public void setStats(Stats stats)
-	{
+	public void setStats(Stats stats) {
 		this.stats = stats;
 	}
 
-	public Monsters getMonsters()
-	{
+	public Monsters getMonsters() {
 		return monsters;
 	}
 
-	public void setMonsters(Monsters monsters)
-	{
+	public void setMonsters(Monsters monsters) {
 		this.monsters = monsters;
 	}
 
-	public Map getMap()
-	{
+	public Map getMap() {
 		return map;
 	}
 
-	public void setMap(Map map)
-	{
+	public void setMap(Map map) {
 		this.map = map;
 	}
 
-	public Fight getFight()
-	{
+	public Fight getFight() {
 		return fight;
 	}
 
-	public void setFight(Fight fight)
-	{
+	public void setFight(Fight fight) {
 		this.fight = fight;
 	}
 
-	public int getBotInstance()
-	{
+	public int getBotInstance() {
 		return botInstance;
 	}
 
-	public Npc getNpc()
-	{
+	public Npc getNpc() {
 		return npc;
 	}
 
-	public void setNpc(Npc npc)
-	{
+	public void setNpc(Npc npc) {
 		this.npc = npc;
+	}
+
+	public Socket getSocket() {
+		return socket;
+	}
+
+	public void setSocket(Socket socket) {
+		this.socket = socket;
+	}
+
+	public JFrame getF() {
+		return f;
+	}
+
+	public void setF(JFrame f) {
+		this.f = f;
 	}
 }

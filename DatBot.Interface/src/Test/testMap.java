@@ -5,23 +5,27 @@ import java.io.IOException;
 import protocol.network.Network;
 import utils.GameData;
 import utils.d2i.d2iManager;
+import utils.d2o.D2oManager;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 
 public class testMap {
 
-	public static void main(String[] args)
-	{
-		try
-		{
-			MapManager manager = new MapManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
-			Map map = manager.FromId(164364813);
-//			System.out.println("Size cell : " + map.getCells().size());
-			new d2iManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
-			System.out.println(d2iManager.getText(GameData.getWeaponNameId(1364)));
+	public static void main(String[] args) {
+		try {
+			D2oManager d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
+			String s = d2oManager.searchObjectById((int) 153879813);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			s = s.replaceAll(",", ":");
+			String[] cmd2 = s.split(":");
+			System.out.println("" + Integer.parseInt(cmd2[3]) + "," + Integer.parseInt(cmd2[5]));
+
 		}
-		catch (IOException e)
-		{
+		catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

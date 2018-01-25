@@ -7,6 +7,7 @@ import protocol.network.Network;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.StatedElement;
+import utils.GameData;
 import utils.d2p.map.Map;
 import utils.d2p.map.elements.GraphicalElement;
 
@@ -14,6 +15,7 @@ public class Interactive {
 	
 	private Network network;
 	private Map map;
+	private List<Double> zaapList;
 	
 	public Interactive(Network network){
 		this.network = network;	
@@ -22,9 +24,16 @@ public class Interactive {
 
 	private List<StatedElement> statedElements;
 	private List<InteractiveElement> interactiveElements;
-
 	
-	// Statue 
+	public double getMapIdZaap(int i, int j){
+		for (Double d : zaapList) {
+			int [] coord = GameData.getCoordMap(d.intValue());
+			if(coord[0] == i && coord[1] == j){
+				return d;
+			}
+		}
+		return -1;
+	}
 	
 	private int elementIdStatue = -1;
 	private int skillInstanceUidStatue = -1;
@@ -50,8 +59,35 @@ public class Interactive {
 	}
 	
 	
+	/**
+	 * Get the interactive informations
+	 * If no interactive : null
+	 * Case skillId : 
+	 * Zaap : 114
+	 * Statue : 302 
+	 * @return zaapCellId, elementId, skillId 
+	 */
+	public int[] getInteractive(int skillId){
+		for(int i = 0 ; i < getInteractiveElements().size() ; i++){
+			if (getInteractiveElements().get(i).getEnabledSkills().size() != 0) {
+				if (getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillId() == skillId && getInteractiveElements().get(i).isOnCurrentMap()) {
+					for (int j = 0; j < this.getMap().getLayersCount(); j++) {
+						for (int k = 0; k < this.getMap().getLayers().get(j).getCellsCount(); k++) {
+							for (int l = 0; l < this.getMap().getLayers().get(j).getCells().get(k).getElementsCount(); l++) {
+								if (((GraphicalElement) this.getMap().getLayers().get(j).getCells().get(k).getElements().get(l)).getIdentifier() == getInteractiveElements().get(i).getElementId()) {
+									return new int[] { this.getMap().getLayers().get(j).getCells().get(k).getCellId(), getInteractiveElements().get(i).getElementId(), getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillInstanceUid()  };
+								}
+							}
+						}
+					}
+				} 
+			}
+		}
+		return null;
+	}
+	
 	private List<Integer> cellsIdRosette;
-	public void getInteractive(){
+	public void getRosette(){
 		for (int i = 0; i < this.getMap().getLayersCount(); i++) {
 			for (int j = 0; j < this.getMap().getLayers().get(i).getCellsCount(); j++) {
 				for (int k = 0; k < this.getMap().getLayers().get(i).getCells().get(j).getElementsCount(); k++) {
@@ -242,6 +278,16 @@ public class Interactive {
 	public void setMap(Map map)
 	{
 		this.map = map;
+	}
+
+
+	public List<Double> getZaapList() {
+		return zaapList;
+	}
+
+
+	public void setZaapList(List<Double> zaapList) {
+		this.zaapList = zaapList;
 	}
 	
 	

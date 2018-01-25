@@ -2,6 +2,8 @@ package main.communication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
@@ -13,9 +15,11 @@ import game.plugin.Npc;
 import game.plugin.Stats;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
+import protocol.network.messages.game.context.roleplay.havenbag.EnterHavenBagRequestMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
 import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
+import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
@@ -40,13 +44,11 @@ public class ModelConnexion {
 	private Map map;
 	private Npc npc;
 
-	public ModelConnexion(Network network) throws InterruptedException
-	{
+	public ModelConnexion(Network network) throws InterruptedException {
 		this.network = network;
 	}
 
-	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception
-	{
+	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception {
 		this.interactive = network.getInteractive();
 		this.bank = network.getBank();
 		this.movement = network.getMovement();
@@ -55,429 +57,395 @@ public class ModelConnexion {
 		this.monsters = network.getMonsters();
 		this.map = network.getMap();
 		this.npc = network.getNpc();
-		
+
 		Object[] toSend = null;
 
-		switch (cmd)
-		{
-			case "disconnect":
-			// Info.nameAccount = "";
-			// Info.password = "";
-			// Info.name = "";
-			// Info.server = "";
-			// network.socket.close();
-			// sendToModel(message[0], message[1],"m", "rtn", message[4], new
-			// Object[]{"True"});
-			break;
+		switch (cmd) {
 			case "getMap":
 				toSend = new Object[] { String.valueOf("(" + this.info.getCoords()[0]) + "," + String.valueOf(this.info.getCoords()[1]) + ")", this.info.getCellId(), this.info.getWorldmap(), Integer.valueOf((int) this.info.getMapId()) };
-			break;
+				break;
 			case "move":
 				CellMovement mov = getMovement().MoveToCell(Integer.parseInt(param));
-				if (mov == null || mov.path == null)
-				{
+				if (mov == null || mov.path == null) {
 					toSend = new Object[] { "False" };
 				}
-				else if (this.info.getCellId() == Integer.parseInt(param))
-				{
+				else if (this.info.getCellId() == Integer.parseInt(param)) {
 					toSend = new Object[] { "True" };
 				}
-				else
-				{
+				else {
 					mov.performMovement();
-					if (this.getMovement().moveOver())
-					{
-						if (this.info.getCellId() == Integer.parseInt(param))
-						{
-							if ((this.map.getId() == 83887104 && this.info.getCellId() == 396) || (this.map.getId() == 2884617 && this.info.getCellId() == 424) || (this.map.getId() == 8912911 && this.info.getCellId() == 424))
-							{
-								while (!this.info.isNewMap())
-								{
+					if (this.getMovement().moveOver()) {
+						if (this.info.getCellId() == Integer.parseInt(param)) {
+							if ((this.map.getId() == 83887104 && this.info.getCellId() == 396) || (this.map.getId() == 2884617 && this.info.getCellId() == 424) || (this.map.getId() == 8912911 && this.info.getCellId() == 424)) {
+								while (!this.info.isNewMap()) {
 									Thread.sleep(50);
 								}
 								toSend = new Object[] { "True" };
 							}
-							else
-							{
+							else {
 								toSend = new Object[] { "True" };
 							}
 						}
-						else
-						{
+						else {
 							toSend = new Object[] { "False" };
 						}
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-			break;
+				break;
 			case "changeMap":
 				String[] infoMov = param.split(",");
 				MapMovement mapMovement = movement.ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
-				if (mapMovement == null)
-				{
+				if (mapMovement == null) {
 					toSend = new Object[] { "False" };
 					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 				}
-				else
-				{
+				else {
 					mapMovement.PerformChangement();
-					if (this.getMovement().moveOver())
-					{
+					if (this.getMovement().moveOver()) {
 						toSend = new Object[] { "True" };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-			break;
+				break;
 			case "getResources":
 				toSend = new Object[] { interactive.getFarmCell() };
-			break;
+				break;
 			case "harvest":
-				if (interactive.harvestCell(Integer.parseInt(param)))
-				{
+				if (interactive.harvestCell(Integer.parseInt(param))) {
 					toSend = new Object[] { interactive.getLastItemHarvestedId(), interactive.getQuantityLastItemHarvested(), this.info.getWeight(), this.info.getWeigthMax() };
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "getStats":
 				toSend = new Object[] { this.stats };
-			break;
+				break;
 			case "goAstrub":
-				if (this.map.getId() == 153880835)
-				{
+				if (this.map.getId() == 153880835) {
 					npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request Npc to go to Astrub");
 					this.waitToSend();
 					toSend = new Object[] { "True" };
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "goIncarnam":
 				int r = interactive.getStatue();
-				if (r != -1)
-				{
+				if (r != -1) {
 					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive.getElementIdStatue(), interactive.getSkillInstanceUidStatue());
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
 					this.waitToSend();
 					toSend = new Object[] { "True" };
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "getStatue":
 				int statueCellId = interactive.getStatue();
-				if (statueCellId != -1)
-				{
+				if (statueCellId != -1) {
 					toSend = new Object[] { statueCellId };
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "getBankDoor":
-				if (this.map.getId() == 144931)
-				{
+				if (this.map.getId() == 144931) {
 					toSend = new Object[] { bank.cellIdBrakmarIN, bank.cellIdBrakmarOUT };
 				}
-				else if (this.map.getId() == 84674566)	
-				{
+				else if (this.map.getId() == 84674566) {
 					toSend = new Object[] { bank.cellIdAstrubIN, bank.cellIdAstrubOUT };
 				}
-				else if (this.map.getId() == 147254)
-				{
+				else if (this.map.getId() == 147254) {
 					toSend = new Object[] { bank.cellIdBontaIN, bank.cellIdBontaOUT };
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "goBank":
-				if (this.map.getId() == 144931)
-				{ // Brakmar
+				if (this.map.getId() == 144931) { // Brakmar
 					interactiveUseRequestMessage = new InteractiveUseRequestMessage(bank.interactiveBrakmarIN, getInteractive().getSkill(bank.interactiveBrakmarIN));
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
 					this.waitToSend();
 					toSend = new Object[] { "True" };
 				}
-				else if (this.map.getId() == 84674566)
-				{ // Astrub
+				else if (this.map.getId() == 84674566) { // Astrub
 					interactiveUseRequestMessage = new InteractiveUseRequestMessage(bank.interactiveAstrubIN, getInteractive().getSkill(bank.interactiveAstrubIN));
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
 					this.waitToSend();
 					toSend = new Object[] { "True" };
 				}
-				else if (this.map.getId() == 147254)
-				{ // Bonta
+				else if (this.map.getId() == 147254) { // Bonta
 					interactiveUseRequestMessage = new InteractiveUseRequestMessage(bank.interactiveBontaIN, getInteractive().getSkill(bank.interactiveBontaIN));
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
 					this.waitToSend();
 					toSend = new Object[] { "True" };
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "openBank":
-				if (this.map.getId() == 83887104 || this.map.getId() == 2884617 || this.map.getId() == 8912911)
-				{
+				if (this.map.getId() == 83887104 || this.map.getId() == 2884617 || this.map.getId() == 8912911) {
 					npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.npc.getNpc().get(0).getContextualId(), 3, this.map.getId());
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 					bankOppened = true;
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "closeBank":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
 					this.waitToSend();
 					toSend = new Object[] { "True" };
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
 				bankOppened = false;
-			break;
+				break;
 			case "dropBank":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					String[] toBank = param.split(",");
 					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { this.stats, bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "getBank":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					String[] fromBank = param.split(",");
 					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { this.stats, bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "dropBankList":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					String[] toBankList = param.split(",");
 					List<Integer> ids = new ArrayList<Integer>();
-					for (String string : toBankList)
-					{
+					for (String string : toBankList) {
 						ids.add(Integer.parseInt(string.replaceAll("\\s+", "")));
 					}
 					ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
 					getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { this.stats, bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "getBankList":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					String[] fromBankList = param.split(",");
 					List<Integer> ids1 = new ArrayList<Integer>();
-					for (String string : fromBankList)
-					{
+					for (String string : fromBankList) {
 						ids1.add(Integer.parseInt(string.replaceAll("\\s+", "")));
 					}
 					ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
 					getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { this.stats, bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "getBankKamas":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(param));
 					getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { this.stats, bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "dropBankKamas":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(param));
 					getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { this.stats, bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "dropBankAll":
-				if (bankOppened)
-				{
+				if (bankOppened) {
 					ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
 					getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in bank");
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { this.stats, bank };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { "False" };
 				}
-			break;
+				break;
 			case "getMonsters":
 				toSend = new Object[] { this.getMonsters() };
-			break;
+				break;
 			case "attackMonster":
 				int id = (int) Double.parseDouble(param);
 				boolean canAtk = false;
-				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++)
-				{
-					if (id == (int) this.getMonsters().getMonsters().get(i).getContextualId())
-					{
-						if (this.info.getCellId() == this.getMonsters().getMonsters().get(i).getDisposition().getCellId())
-						{
+				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++) {
+					if (id == (int) this.getMonsters().getMonsters().get(i).getContextualId()) {
+						if (this.info.getCellId() == this.getMonsters().getMonsters().get(i).getDisposition().getCellId()) {
 							canAtk = true;
 						}
 					}
 				}
-				if (canAtk)
-				{
+				if (canAtk) {
 					GameRolePlayAttackMonsterRequestMessage gameRolePlayAttackMonsterRequestMessage = new GameRolePlayAttackMonsterRequestMessage(id);
 					getNetwork().sendToServer(gameRolePlayAttackMonsterRequestMessage, GameRolePlayAttackMonsterRequestMessage.ProtocolId, "Attack monster " + id);
-					if (this.waitToSend())
-					{
+					if (this.waitToSend()) {
 						toSend = new Object[] { "True" };
 					}
-					else
-					{
+					else {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else
-				{
+				else {
 					toSend = new Object[] { this.getMonsters() };
 				}
-			break;
+				break;
+			case "enterBag":
+				EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.info.getActorId());
+				getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
+				if (this.waitToSend()) {
+					toSend = new Object[] { "True" };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "exitBag":
+				EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.info.getActorId());
+				getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
+				if (this.waitToSend()) {
+					toSend = new Object[] { "True" };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "getZaap":
+				if(!(this.interactive.getInteractive(114) == null)){
+					toSend = new Object[] { this.interactive.getInteractive(114)[0] };
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "useZaap":
+				String newParam = param.replaceAll("\\(", "");
+				newParam = newParam.replaceAll("\\)", "");
+				String[] paramZaap = newParam.split(",");
+				int[] interactive = this.interactive.getInteractive(114);
+				if(!(interactive == null)){
+					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
+					if(this.waitToSend()){
+						Thread.sleep(1500 + new Random().nextInt(800));
+						double mapId = this.interactive.getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
+						TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
+						getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
+						if(this.waitToSend()){
+							toSend = new Object[] { "True" };
+						} else {
+							toSend = new Object[] { "False" };
+						}
+					} else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
 		}
 		return toSend;
 	}
 
-	public void getReturn(String[] message) throws NumberFormatException, Exception
-	{
+	public void getReturn(String[] message) throws NumberFormatException, Exception {
+		while(!this.network.getInfo().threadDone){
+			Thread.sleep(50);
+		}
+		this.network.getInfo().threadDone = false;
+		Thread.sleep(100);
 		new Thread(new Runnable() {
-			public void run()
-			{
-				try
-				{
+			public void run() {
+				try {
 					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], getReturn(message[4], message[5]));
 				}
-				catch (NumberFormatException e)
-				{
+				catch (NumberFormatException e) {
 					e.printStackTrace();
 				}
-				catch (Exception e)
-				{
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}).start();
 	}
 
-	public boolean waitToSend() throws InterruptedException
-	{
-		while (!info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
-		{
+	public boolean waitToSend() throws InterruptedException {
+		while (!info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight() && !info.isInteractiveUsed()) {
 			Thread.sleep(50);
 		}
-		while (!info.isBasicNoOperationMsg())
-		{
+		while (!info.isBasicNoOperationMsg()) {
 			Thread.sleep(50);
 		}
 		/*
@@ -487,83 +455,67 @@ public class ModelConnexion {
 		 * Info.Storage + " " + Info.StorageUpdate + " " + Info.leaveExchange +
 		 * " " + Info.basicNoOperationMsg);
 		 */
-		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight())
-		{
+		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight() && !info.isInteractiveUsed()) {
 			return false;
 		}
-		else
-		{
+		else {
 			return true;
 		}
 	}
 
-	public Network getNetwork()
-	{
+	public Network getNetwork() {
 		return network;
 	}
 
-	public void setNetwork(Network network)
-	{
+	public void setNetwork(Network network) {
 		this.network = network;
 	}
 
-	public Interactive getInteractive()
-	{
+	public Interactive getInteractive() {
 		return interactive;
 	}
 
-	public void setInteractive(Interactive interactive)
-	{
+	public void setInteractive(Interactive interactive) {
 		this.interactive = interactive;
 	}
 
-	public Bank getBank()
-	{
+	public Bank getBank() {
 		return bank;
 	}
 
-	public void setBank(Bank bank)
-	{
+	public void setBank(Bank bank) {
 		this.bank = bank;
 	}
 
-	public Movement getMovement()
-	{
+	public Movement getMovement() {
 		return movement;
 	}
 
-	public void setMovement(Movement movement)
-	{
+	public void setMovement(Movement movement) {
 		this.movement = movement;
 	}
 
-	public Info getInfo()
-	{
+	public Info getInfo() {
 		return info;
 	}
 
-	public void setInfo(Info info)
-	{
+	public void setInfo(Info info) {
 		this.info = info;
 	}
 
-	public Stats getStats()
-	{
+	public Stats getStats() {
 		return stats;
 	}
 
-	public void setStats(Stats stats)
-	{
+	public void setStats(Stats stats) {
 		this.stats = stats;
 	}
 
-	public Monsters getMonsters()
-	{
+	public Monsters getMonsters() {
 		return monsters;
 	}
 
-	public void setMonsters(Monsters monsters)
-	{
+	public void setMonsters(Monsters monsters) {
 		this.monsters = monsters;
 	}
 }

@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-=======
-[18:42:50] [BOT 0] [1]	Taille : 8  -  ProtocolRequired
-[18:42:50] [BOT 0] [3]	Taille : 341  -  HelloConnectMessage
-[18:42:50] [BOT 0] [4]	[Envoi] Identification...
-[18:42:50] [BOT 0] [10]	Taille : 4  -  LoginQueueStatusMessage
-[18:42:50] [BOT 0] [21]	Taille : 10  -  IdentificationFailedForBadVersionMessage
->>>>>>> d9bb8b84ac4f444133d1f3f519965fc28924d3d0
