@@ -76,7 +76,7 @@ public class ModelConnexion {
 					mov.performMovement();
 					if (this.getMovement().moveOver()) {
 						if (this.info.getCellId() == Integer.parseInt(param)) {
-							if ((this.map.getId() == 83887104 && this.info.getCellId() == 396) || (this.map.getId() == 2884617 && this.info.getCellId() == 424) || (this.map.getId() == 8912911 && this.info.getCellId() == 424)) {
+							if ((this.map.getId() == 83887104 && this.info.getCellId() == 396) || (this.map.getId() == 2884617 && this.info.getCellId() == 424) || (this.map.getId() == 8912911 && this.info.getCellId() == 424) || (this.map.getId() == 128451073 && this.info.getCellId() == 292)) {
 								while (!this.info.isNewMap()) {
 									Thread.sleep(50);
 								}
@@ -385,9 +385,10 @@ public class ModelConnexion {
 				}
 				break;
 			case "getZaap":
-				if(!(this.interactive.getInteractive(114) == null)){
+				if (!(this.interactive.getInteractive(114) == null)) {
 					toSend = new Object[] { this.interactive.getInteractive(114)[0] };
-				} else {
+				}
+				else {
 					toSend = new Object[] { "False" };
 				}
 				break;
@@ -396,24 +397,52 @@ public class ModelConnexion {
 				newParam = newParam.replaceAll("\\)", "");
 				String[] paramZaap = newParam.split(",");
 				int[] interactive = this.interactive.getInteractive(114);
-				if(!(interactive == null)){
+				if (!(interactive == null)) {
 					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
-					if(this.waitToSend()){
+					if (this.waitToSend()) {
 						Thread.sleep(1500 + new Random().nextInt(800));
 						double mapId = this.interactive.getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
-						TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
-						getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
-						if(this.waitToSend()){
-							toSend = new Object[] { "True" };
+						if(mapId != -1){
+							TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
+							getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
+							if (this.waitToSend()) {
+								toSend = new Object[] { "True" };
+							}
+							else {
+								toSend = new Object[] { "False" };
+							}
 						} else {
 							toSend = new Object[] { "False" };
 						}
-					} else {
+					}
+					else {
 						toSend = new Object[] { "False" };
 					}
-				} else {
+				}
+				else {
 					toSend = new Object[] { "False" };
+				}
+				break;
+			case "getHuntingHallDoorCell":
+				if (this.map.getId() == 142088718) {
+					toSend = new Object[] { this.interactive.getInteractive(184)[0] };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "goHuntingHall":
+				if (this.map.getId() == 142088718 && this.info.getCellId() == 356) {
+					int [] interactive2 = this.interactive.getInteractive(184);
+					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
+					if (this.waitToSend()) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
 				}
 				break;
 		}
@@ -421,7 +450,7 @@ public class ModelConnexion {
 	}
 
 	public void getReturn(String[] message) throws NumberFormatException, Exception {
-		while(!this.network.getInfo().threadDone){
+		while (!this.network.getInfo().threadDone) {
 			Thread.sleep(50);
 		}
 		this.network.getInfo().threadDone = false;

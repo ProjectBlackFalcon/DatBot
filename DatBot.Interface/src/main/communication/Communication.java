@@ -68,9 +68,9 @@ public class Communication implements Runnable {
 				Thread threadNetwork = new Thread(network);
 				threadNetwork.start();
 				networks.add(network);
+				int index = 0;
 				while (!info.isConnected()) {
-					Thread.sleep(2000);
-					int index = 0;
+					Thread.sleep(1000);
 					index += 1;
 					if (index == 30) { throw new java.lang.Error("Connection timed out"); }
 				}

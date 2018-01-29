@@ -280,7 +280,6 @@ public class Fight {
 			if (m.isAlive()) isMonstersAlive = true;
 		}
 		if (!isMonstersAlive) return;
-		network.append("SEND TO LYSOU");
 		JSONObject obj = new JSONObject();
 		obj.put("id", getId(this.info.getActorId()));
 		JSONArray arr = new JSONArray();
@@ -290,14 +289,9 @@ public class Fight {
 		if(s == null){
 			endTurn();
 		}
-		
-		System.out.println(s);
-		
+				
 		String[] cmd = s.split(",");
 		
-		for(String s2 : cmd){
-			network.append(s2);
-		}
 		new Thread(new Runnable() {
 			public void run() {
 				try {
