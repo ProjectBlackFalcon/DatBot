@@ -127,7 +127,9 @@ import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostWeaponDamagesEffect;
 import protocol.network.types.game.actions.fight.FightTemporarySpellBoostEffect;
+import protocol.network.types.game.actions.fight.FightTemporarySpellImmunityEffect;
 import protocol.network.types.game.actions.fight.GameActionMarkedCell;
+import protocol.network.types.game.context.fight.GameFightFighterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
@@ -856,12 +858,10 @@ public class Network implements Runnable {
 					this.getInfo().setAcknowledged(true);
 				}
 				if (!getFight().getSpellJson().isEmpty()) {
-					append("JSON SPELL SEND : " + getFight().getSpellJson().toJSONString());
 					/**
 					 * FOR LYSANDRE Use getFight().getSpellJson() in a function
 					 */
 					getFight().sendToFightAlgo("c", getFight().getSpellJson());
-					// Previous trash function
 				}
 				if (info.isTurn()) {
 					getFight().fightTurn();
@@ -927,7 +927,6 @@ public class Network implements Runnable {
 				break;
 			case 6465:
 				info.setTurn(true);
-				append("TUUUUUUUUUURRRRRRRRRRRRRRRRNNNNNNNNNNNNN");
 				getFight().fightTurn();
 				break;
 			case 955:
@@ -984,9 +983,9 @@ public class Network implements Runnable {
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
 				jsonObject.put("sourceId", getFight().getId(gameActionFightDispellableEffectMessage.getSourceId()));
-				jsonObject.put("targetId", gameActionFightDispellableEffectMessage.getEffect().getTargetId());
+				jsonObject.put("targetId", getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()));
 				jsonObject.put("effectId", gameActionFightDispellableEffectMessage.getEffect().getEffectId());
-				jsonObject.put("spell", d2iManager.getText(GameData.getSpellNameId(gameActionFightDispellableEffectMessage.getEffect().getSpellId())));
+				jsonObject.put("spellId", gameActionFightDispellableEffectMessage.getEffect().getSpellId());
 				jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
 				jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
@@ -996,14 +995,14 @@ public class Network implements Runnable {
 					jsonObject.put("stateId", ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostWeaponDamagesEffect")) {
-					jsonObject.put("weaponTypeId", ((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+					jsonObject.put("weaponTypeId", ((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getWeaponTypeId());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellBoostEffect")) {
-					jsonObject.put("boostedSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()));
+					jsonObject.put("boostedSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getBoostedSpellId());
 
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellImmunityEffect")) {
-					jsonObject.put("immuneSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()));
+					jsonObject.put("immuneSpellId", ((FightTemporarySpellImmunityEffect) gameActionFightDispellableEffectMessage.getEffect()).getImmuneSpellId());
 
 				}
 				jsonObject2 = new JSONObject();
@@ -1015,7 +1014,7 @@ public class Network implements Runnable {
 				gameActionFightMarkCellsMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
 				jsonObject.put("sourceId", getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
-				jsonObject.put("markSpell", d2iManager.getText(GameData.getSpellNameId(gameActionFightMarkCellsMessage.getMark().getMarkSpellId())));
+				jsonObject.put("markSpellId", gameActionFightMarkCellsMessage.getMark().getMarkSpellId());
 				jsonObject.put("markImpactCellId", gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
 				JSONArray jsonArray = new JSONArray();
 				for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells()) {
@@ -1061,7 +1060,7 @@ public class Network implements Runnable {
 				jsonObject = new JSONObject();
 				jsonObject.put("sourceId", getFight().getId(gameActionFightCloseCombatMessage.getSourceId()));
 				jsonObject.put("targetId", getFight().getId(gameActionFightCloseCombatMessage.getTargetId()));
-				jsonObject.put("weaponGeneric", d2iManager.getText(GameData.getSpellNameId(gameActionFightCloseCombatMessage.getWeaponGenericId())));
+				jsonObject.put("weaponGeneric", d2iManager.getText(GameData.getWeaponNameId(gameActionFightCloseCombatMessage.getWeaponGenericId())));
 				jsonObject.put("critical", gameActionFightCloseCombatMessage.getCritical());
 				jsonObject.put("destinationCellId", gameActionFightCloseCombatMessage.getDestinationCellId());
 				jsonObject2 = new JSONObject();
