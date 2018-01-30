@@ -27,82 +27,29 @@ public class GameActionMark extends NetworkMessage {
 	private List<GameActionMarkedCell> cells;
 	private boolean active;
 
-	public double getMarkAuthorId() {
-		return this.markAuthorId;
-	};
+	public double getMarkAuthorId() { return this.markAuthorId; };
+	public void setMarkAuthorId(double markAuthorId) { this.markAuthorId = markAuthorId; };
+	public int getMarkTeamId() { return this.markTeamId; };
+	public void setMarkTeamId(int markTeamId) { this.markTeamId = markTeamId; };
+	public int getMarkSpellId() { return this.markSpellId; };
+	public void setMarkSpellId(int markSpellId) { this.markSpellId = markSpellId; };
+	public int getMarkSpellLevel() { return this.markSpellLevel; };
+	public void setMarkSpellLevel(int markSpellLevel) { this.markSpellLevel = markSpellLevel; };
+	public int getMarkId() { return this.markId; };
+	public void setMarkId(int markId) { this.markId = markId; };
+	public int getMarkType() { return this.markType; };
+	public void setMarkType(int markType) { this.markType = markType; };
+	public int getMarkimpactCell() { return this.markimpactCell; };
+	public void setMarkimpactCell(int markimpactCell) { this.markimpactCell = markimpactCell; };
+	public List<GameActionMarkedCell> getCells() { return this.cells; };
+	public void setCells(List<GameActionMarkedCell> cells) { this.cells = cells; };
+	public boolean isActive() { return this.active; };
+	public void setActive(boolean active) { this.active = active; };
 
-	public void setMarkAuthorId(double markAuthorId) {
-		this.markAuthorId = markAuthorId;
-	};
-
-	public int getMarkTeamId() {
-		return this.markTeamId;
-	};
-
-	public void setMarkTeamId(int markTeamId) {
-		this.markTeamId = markTeamId;
-	};
-
-	public int getMarkSpellId() {
-		return this.markSpellId;
-	};
-
-	public void setMarkSpellId(int markSpellId) {
-		this.markSpellId = markSpellId;
-	};
-
-	public int getMarkSpellLevel() {
-		return this.markSpellLevel;
-	};
-
-	public void setMarkSpellLevel(int markSpellLevel) {
-		this.markSpellLevel = markSpellLevel;
-	};
-
-	public int getMarkId() {
-		return this.markId;
-	};
-
-	public void setMarkId(int markId) {
-		this.markId = markId;
-	};
-
-	public int getMarkType() {
-		return this.markType;
-	};
-
-	public void setMarkType(int markType) {
-		this.markType = markType;
-	};
-
-	public int getMarkimpactCell() {
-		return this.markimpactCell;
-	};
-
-	public void setMarkimpactCell(int markimpactCell) {
-		this.markimpactCell = markimpactCell;
-	};
-
-	public List<GameActionMarkedCell> getCells() {
-		return this.cells;
-	};
-
-	public void setCells(List<GameActionMarkedCell> cells) {
-		this.cells = cells;
-	};
-
-	public boolean isActive() {
-		return this.active;
-	};
-
-	public void setActive(boolean active) {
-		this.active = active;
-	};
-
-	public GameActionMark() {
+	public GameActionMark(){
 	}
 
-	public GameActionMark(double markAuthorId, int markTeamId, int markSpellId, int markSpellLevel, int markId, int markType, int markimpactCell, List<GameActionMarkedCell> cells, boolean active) {
+	public GameActionMark(double markAuthorId, int markTeamId, int markSpellId, int markSpellLevel, int markId, int markType, int markimpactCell, List<GameActionMarkedCell> cells, boolean active){
 		this.markAuthorId = markAuthorId;
 		this.markTeamId = markTeamId;
 		this.markSpellId = markSpellId;
@@ -126,13 +73,12 @@ public class GameActionMark extends NetworkMessage {
 			writer.writeShort(this.markimpactCell);
 			writer.writeShort(this.cells.size());
 			int _loc2_ = 0;
-			while (_loc2_ < this.cells.size()) {
+			while( _loc2_ < this.cells.size()){
 				this.cells.get(_loc2_).Serialize(writer);
 				_loc2_++;
 			}
 			writer.writeBoolean(this.active);
-		}
-		catch (Exception e) {
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 	}
@@ -147,18 +93,17 @@ public class GameActionMark extends NetworkMessage {
 			this.markId = reader.readShort();
 			this.markType = reader.readByte();
 			this.markimpactCell = reader.readShort();
-			int _loc2_ = reader.readShort();
-			int _loc3_ = 0;
+			int _loc2_  = reader.readShort();
+			int _loc3_  = 0;
 			this.cells = new ArrayList<GameActionMarkedCell>();
-			while (_loc3_ < _loc2_) {
+			while( _loc3_ <  _loc2_){
 				GameActionMarkedCell _loc15_ = new GameActionMarkedCell();
 				_loc15_.Deserialize(reader);
 				this.cells.add(_loc15_);
 				_loc3_++;
 			}
 			this.active = reader.readBoolean();
-		}
-		catch (Exception e) {
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 	}

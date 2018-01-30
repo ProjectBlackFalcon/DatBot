@@ -1233,7 +1233,7 @@ public class Network implements Runnable {
 	}
 
 	private void HandleHelloConnectMessage(byte[] key, String salt) throws Exception {
-		VersionExtended versionExtended = new VersionExtended(2, 45, 10, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 45, 15, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), salt);
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
