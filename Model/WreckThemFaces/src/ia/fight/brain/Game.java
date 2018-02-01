@@ -115,7 +115,7 @@ public class Game {
 		
 		los.update(playingEntities);
 		
-		Game.playingEntities = playingEntities;
+		this.playingEntities = playingEntities;
 	}
 	
 	/**
@@ -208,17 +208,17 @@ public class Game {
 		for(int i = 0; i < command.size(); i++) {
 			if(((JSONObject)command.get(i)).get("lifePointsLost") != null) {
 				LPLost = true;
-				lifePointsLost = (JSONObject)command.get(i);
+				lifePointsLost = (JSONObject)((JSONObject)command.get(i)).get("lifePointsLost");
 			}
 			
 			if(((JSONObject)command.get(i)).get("lifePointsGained") != null) {
 				LPGained = true;
-				lifePointsGained = (JSONObject)command.get(i);
+				lifePointsGained = (JSONObject)((JSONObject)command.get(i)).get("lifePointsGained");
 			}
 			
 			if(((JSONObject)command.get(i)).get("death") != null) {
 				isDead = true;
-				death = (JSONObject)command.get(i);
+				death = (JSONObject)((JSONObject)command.get(i)).get("death");
 			}
 		}
 		
@@ -264,11 +264,17 @@ public class Game {
 		Game.log.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
 		
 		if(LPLost) {
-			int damage = (int) lifePointsGained.get("lpLost");
+			int damage = (int) lifePointsLost.get("lpLost");
 			spellCast.applySpells(castingEntity, victim, false, damage);
 		}else if(LPGained) {
 			int heals = (int) lifePointsGained.get("lpGained");
 			spellCast.applySpells(castingEntity, victim, true, heals);
+		}
+		
+		for(int i = playingEntities.size()-1; i >= 0; i--) {
+			if(playingEntities.get(i).getModel().getLP() <= 0) {
+				playingEntities.remove(i);
+			}
 		}
 		
 	}
@@ -277,8 +283,15 @@ public class Game {
 	 * Executes a pass turn command
 	 * @param command
 	 */
-	static private void executePassTurn(JSONArray command) {
-
+	private void executePassTurn(JSONArray command) {
+		int id = (int) ((JSONObject)command.get(0)).get("id");
+		PlayingEntity castingEntity = getPlayingEntityFromID(id);
+		castingEntity.getModel().resetAP();
+		castingEntity.getModel().resetMP();
+		castingEntity.getModel().removeOneBuffTurn();
+		castingEntity.getModel().updateSpellsStatus();
+		
+		log.println("Entity "+id+" passing turn.");
 	}
 	
 	static private PlayingEntity getClosestEnnemy(PlayingEntity caster) {
@@ -502,6 +515,10 @@ public class Game {
 			initEntities(entities);
 		}else if(s.equals("g")) {
 			return getBestTurn(command);
+		}else if(s.equals("endFight")) {
+			endGame();
+		}else if(s.equals("p")) {
+			executePassTurn(command);
 		}
 		
 		//los.update(playingEntities);

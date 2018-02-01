@@ -240,6 +240,10 @@ public class SpellObject {
 		}
 		
 		
+		if(victim.getModel().getLP() <= 0) {
+			
+		}
+		
 
 		this.spellCounter++;
 		
