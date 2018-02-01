@@ -154,6 +154,9 @@ public abstract class Player {
 	
 	public void addLP(int LP){
 		this.LP += LP;
+		if(this.LP > maxLP) {
+			this.LP = maxLP;
+		}
 	}
 	
 	public void resetAP(){
