@@ -878,7 +878,7 @@ public class Network implements Runnable {
 				}
 
 				JSONObject passTurn = new JSONObject();
-				passTurn.put("id", getFight().getId(gameFightTurnEndMessage.getId()));
+				passTurn.put("id", (int)getFight().getId(gameFightTurnEndMessage.getId()));
 				JSONArray arr = new JSONArray();
 				arr.add(passTurn);
 				getFight().sendToFightAlgo("p", arr);
@@ -942,11 +942,17 @@ public class Network implements Runnable {
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("spellId", gameActionFightSpellCastMessage.getSpellId());
-				jsonObject.put("targetId", getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
-				jsonObject.put("destinationCellId", gameActionFightSpellCastMessage.getDestinationCellId());
+				jsonObject.put("spellId", (int)gameActionFightSpellCastMessage.getSpellId());
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
+				
+				int cellId = (int)gameActionFightSpellCastMessage.getDestinationCellId();
+				int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
+				int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
+				
+				jsonObject.put("x", (int)x);
+				jsonObject.put("y", (int)y);
 				jsonObject.put("critical", gameActionFightSpellCastMessage.getCritical());
-				jsonObject.put("sourceId", getFight().getId(gameActionFightSpellCastMessage.getSourceId()));
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightSpellCastMessage.getSourceId()));
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("spellCast", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -955,10 +961,10 @@ public class Network implements Runnable {
 				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightLifePointsLostMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()));
-				jsonObject.put("lpLost", gameActionFightLifePointsLostMessage.getLoss());
-				jsonObject.put("lpMaxLost", gameActionFightLifePointsLostMessage.getPermanentDamages());
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightLifePointsLostMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()));
+				jsonObject.put("lpLost", (int)gameActionFightLifePointsLostMessage.getLoss());
+				jsonObject.put("lpMaxLost", (int)gameActionFightLifePointsLostMessage.getPermanentDamages());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("lifePointsLost", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -967,9 +973,9 @@ public class Network implements Runnable {
 				GameActionFightDodgePointLossMessage dodgePointLossMessage = new GameActionFightDodgePointLossMessage();
 				dodgePointLossMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(dodgePointLossMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(dodgePointLossMessage.getTargetId()));
-				jsonObject.put("amount", dodgePointLossMessage.getAmount());
+				jsonObject.put("sourceId", (int)getFight().getId(dodgePointLossMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(dodgePointLossMessage.getTargetId()));
+				jsonObject.put("amount", (int)dodgePointLossMessage.getAmount());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("dodgePointLoss", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -982,27 +988,27 @@ public class Network implements Runnable {
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightDispellableEffectMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()));
-				jsonObject.put("effectId", gameActionFightDispellableEffectMessage.getEffect().getEffectId());
-				jsonObject.put("spellId", gameActionFightDispellableEffectMessage.getEffect().getSpellId());
-				jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightDispellableEffectMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()));
+				jsonObject.put("effectId", (int)gameActionFightDispellableEffectMessage.getEffect().getEffectId());
+				jsonObject.put("spellId", (int)gameActionFightDispellableEffectMessage.getEffect().getSpellId());
+				jsonObject.put("turnDuration", (int)gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
 				jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
-					jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+					jsonObject.put("amount", (int)((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect")) {
-					jsonObject.put("stateId", ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
+					jsonObject.put("stateId", (int)((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostWeaponDamagesEffect")) {
-					jsonObject.put("weaponTypeId", ((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getWeaponTypeId());
+					jsonObject.put("weaponTypeId", (int)((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getWeaponTypeId());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellBoostEffect")) {
-					jsonObject.put("boostedSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getBoostedSpellId());
+					jsonObject.put("boostedSpellId", (int)((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getBoostedSpellId());
 
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellImmunityEffect")) {
-					jsonObject.put("immuneSpellId", ((FightTemporarySpellImmunityEffect) gameActionFightDispellableEffectMessage.getEffect()).getImmuneSpellId());
+					jsonObject.put("immuneSpellId", (int)((FightTemporarySpellImmunityEffect) gameActionFightDispellableEffectMessage.getEffect()).getImmuneSpellId());
 
 				}
 				jsonObject2 = new JSONObject();
@@ -1013,13 +1019,13 @@ public class Network implements Runnable {
 				GameActionFightMarkCellsMessage gameActionFightMarkCellsMessage = new GameActionFightMarkCellsMessage();
 				gameActionFightMarkCellsMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
-				jsonObject.put("markSpellId", gameActionFightMarkCellsMessage.getMark().getMarkSpellId());
-				jsonObject.put("markImpactCellId", gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
+				jsonObject.put("markSpellId", (int)gameActionFightMarkCellsMessage.getMark().getMarkSpellId());
+				jsonObject.put("markImpactCellId", (int)gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
 				JSONArray jsonArray = new JSONArray();
 				for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells()) {
 					JSONObject jsonCells = new JSONObject();
-					jsonCells.put("cellId", object.getCellId());
+					jsonCells.put("cellId", (int)object.getCellId());
 					jsonCells.put("zoneSize", object.getZoneSize());
 					jsonArray.add(jsonCells);
 				}
@@ -1032,9 +1038,9 @@ public class Network implements Runnable {
 				GameActionFightLifePointsGainMessage gameActionFightLifePointsGainMessage = new GameActionFightLifePointsGainMessage();
 				gameActionFightLifePointsGainMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightLifePointsGainMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(gameActionFightLifePointsGainMessage.getTargetId()));
-				jsonObject.put("lpGain", gameActionFightLifePointsGainMessage.getDelta());
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightLifePointsGainMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightLifePointsGainMessage.getTargetId()));
+				jsonObject.put("lpGain", (int)gameActionFightLifePointsGainMessage.getDelta());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("lifePointsGain", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1043,8 +1049,8 @@ public class Network implements Runnable {
 				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
 				gameActionFightDeathMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightDeathMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(gameActionFightDeathMessage.getTargetId()));
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightDeathMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightDeathMessage.getTargetId()));
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("death", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1058,11 +1064,11 @@ public class Network implements Runnable {
 				GameActionFightCloseCombatMessage gameActionFightCloseCombatMessage = new GameActionFightCloseCombatMessage();
 				gameActionFightCloseCombatMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightCloseCombatMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(gameActionFightCloseCombatMessage.getTargetId()));
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightCloseCombatMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightCloseCombatMessage.getTargetId()));
 				jsonObject.put("weaponGeneric", d2iManager.getText(GameData.getWeaponNameId(gameActionFightCloseCombatMessage.getWeaponGenericId())));
 				jsonObject.put("critical", gameActionFightCloseCombatMessage.getCritical());
-				jsonObject.put("destinationCellId", gameActionFightCloseCombatMessage.getDestinationCellId());
+				jsonObject.put("destinationCellId", (int)gameActionFightCloseCombatMessage.getDestinationCellId());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("closeCombat", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1071,10 +1077,10 @@ public class Network implements Runnable {
 				GameActionFightSlideMessage gameActionFightSlideMessage = new GameActionFightSlideMessage();
 				gameActionFightSlideMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightSlideMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(gameActionFightSlideMessage.getTargetId()));
-				jsonObject.put("startCellId", gameActionFightSlideMessage.getStartCellId());
-				jsonObject.put("endCellId", gameActionFightSlideMessage.getEndCellId());
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightSlideMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightSlideMessage.getTargetId()));
+				jsonObject.put("startCellId", (int)gameActionFightSlideMessage.getStartCellId());
+				jsonObject.put("endCellId", (int)gameActionFightSlideMessage.getEndCellId());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("slide", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1083,11 +1089,11 @@ public class Network implements Runnable {
 				GameActionFightLifeAndShieldPointsLostMessage gameActionFightLifeAndShieldPointsLostMessage = new GameActionFightLifeAndShieldPointsLostMessage();
 				gameActionFightLifeAndShieldPointsLostMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getSourceId()));
-				jsonObject.put("targetId", getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getTargetId()));
-				jsonObject.put("shieldLoss", gameActionFightLifeAndShieldPointsLostMessage.getShieldLoss());
-				jsonObject.put("lpLoss", gameActionFightLifeAndShieldPointsLostMessage.getLoss());
-				jsonObject.put("lpMaxLoss", gameActionFightLifeAndShieldPointsLostMessage.getPermanentDamages());
+				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getSourceId()));
+				jsonObject.put("targetId", (int)getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getTargetId()));
+				jsonObject.put("shieldLoss", (int)gameActionFightLifeAndShieldPointsLostMessage.getShieldLoss());
+				jsonObject.put("lpLoss", (int)gameActionFightLifeAndShieldPointsLostMessage.getLoss());
+				jsonObject.put("lpMaxLoss", (int)gameActionFightLifeAndShieldPointsLostMessage.getPermanentDamages());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("shieldLpLoss", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);

@@ -230,69 +230,35 @@ public class SpellObject {
 	 * @param pe Entity on which the action is cast
 	 * @param action action cast
 	 */
-	public void applySpells(PlayingEntity caster, Position pos, boolean trueDamage, int intensity) {
-		ArrayList<PlayingEntity> touchedEntities = new ArrayList<>();
-		ArrayList<Position> positions = this.getAreaOfEffect().getPositions(caster.getPosition(), pos);
+	public void applySpells(PlayingEntity caster, PlayingEntity victim, boolean heal, int damage) {
+
 		
-		Map map = Game.map;
-		ArrayList<int[]> obstacles = map.getObstacles();
-		
-		for(int j = 0; j < obstacles.size(); j++) {
-			int[] obstacle = obstacles.get(j);
-			if(obstacle[2] > 2) {
-				for(int i = 0; i < positions.size(); i++) {
-					if(obstacle[0] == positions.get(i).getX() && obstacle[1] == positions.get(i).getY()) {
-						ArrayList<PlayingEntity> playingEntities = Game.playingEntities;
-						for(int k = 0; k < playingEntities.size(); k++) {
-							if(playingEntities.get(k).getPosition().deepEquals(positions.get(i))) {
-								touchedEntities.add(playingEntities.get(k));
-							}
-						}
-					}
-				}
-			}
+		if(heal) {
+			victim.getModel().addLP(damage);
+		}else {
+			victim.getModel().removeLP(damage);
 		}
 		
-		Game.log.println("Touched entities : "+touchedEntities);
 		
-		for(int j = 0; j < touchedEntities.size(); j++) {
-			for(int i = 0; i < this.getSpells().size(); i++){
-				if(this.getSpells().get(i).getClass().getSimpleName().equals("Pushback")) {
-					((Pushback)this.getSpells().get(i)).applySpell(caster, touchedEntities.get(j), trueDamage, intensity, pos);
-				}else {
-					this.getSpells().get(i).applySpell(caster, touchedEntities.get(j), trueDamage, intensity);
-				}
-				
-				for(int k = 0; k < Game.playingEntities.size(); k++) {
-					if(Game.playingEntities.get(k).getModel().getLP() <= 0) {
-						Game.log.println(Game.playingEntities.get(k)+" died !");
-						Game.playingEntities.remove(k);
-					}
-				}
-				
-			}
-		}
 
 		this.spellCounter++;
 		
-		for(int i = 0; i < Game.playingEntities.size(); i++) {
-			if(Game.playingEntities.get(i).getPosition().deepEquals(pos)) {
-				
-				Game.log.println("Casting spell directly onto : "+Game.playingEntities.get(i));
-				
-				boolean found = false;
-				for(int j = 0; j < this.spellPerEntityCounter.size(); j++) {
-					if(this.spellPerEntityCounter.get(j)[0] == Game.playingEntities.get(i).getID()) {
-						found = true;
-						this.spellPerEntityCounter.get(j)[1]++;
-					}
-				}
-				
-				if(!found) {
-					this.spellPerEntityCounter.add(new int[] {Game.playingEntities.get(i).getID(), 1});
-				}
+			
+		Game.log.println("Casting spell directly onto : "+victim);
+		
+		boolean found = false;
+		for(int j = 0; j < this.spellPerEntityCounter.size(); j++) {
+			if(this.spellPerEntityCounter.get(j)[0] == victim.getID()) {
+				found = true;
+				this.spellPerEntityCounter.get(j)[1]++;
 			}
 		}
+		
+		if(!found) {
+			this.spellPerEntityCounter.add(new int[] {victim.getID(), 1});
+		}
+		
+		
 		
 		for(int i = 0; i < this.spellPerEntityCounter.size(); i++) {
 			Game.log.println("    "+this.spellPerEntityCounter.get(i)[0]+" "+this.spellPerEntityCounter.get(i)[1]);
