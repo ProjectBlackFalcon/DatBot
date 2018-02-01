@@ -433,7 +433,7 @@ public abstract class Player {
 	}
 	
 	public String toString() {
-		String s = this.getClass().getSimpleName()+" entity, "+this.getMaxLP()+"/"+this.getBaseAP()+"/"+this.getBaseMP() +"\n";
+		String s = this.getClass().getSimpleName()+" entity, "+this.getLevel()+" "+this.getMaxLP()+"/"+this.getBaseAP()+"/"+this.getBaseMP() +"\n";
 		s += "Fixed Resistances : [";
 		for(int i = 0; i < this.getResFixed().length; i++) {
 			s+= this.getResFixed()[i];

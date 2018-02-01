@@ -216,11 +216,17 @@ public class CraModel{
 	}
 	
 	public static SpellObject getSpellFromID(int id) {
+		System.out.println("GETTING SPELL WITH ID");
+		
+		getSpells(1001);
+		
 		if(spells == null) {
 			getSpells(1001);
+			System.out.println("SPELLS WAS NULL. INITIATED.");
 		}
 		
 		for(int i = 0; i < spells.length; i++) {
+			System.out.println(spells[i].getID()+", "+id);
 			if(spells[i].getID() == id) {
 				return spells[i];
 			}
