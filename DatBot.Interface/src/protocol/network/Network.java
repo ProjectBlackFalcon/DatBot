@@ -551,7 +551,7 @@ public class Network implements Runnable {
 					int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
 
 					JSONObject object = new JSONObject();
-					object.put("id", gameMapMovementMessage.getActorId());
+					object.put("id", getFight().getId(gameMapMovementMessage.getActorId()));
 					object.put("x", x);
 					object.put("y", y);
 					JSONArray arr = new JSONArray();
