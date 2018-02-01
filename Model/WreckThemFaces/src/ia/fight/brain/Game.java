@@ -162,6 +162,30 @@ public class Game {
 	static private void executeMovementCommand(JSONArray command){
 		System.out.println("RECEIVED MOVEMENT COMMAND");
 		System.out.println(command);
+		
+		JSONObject movementCommand = (JSONObject) command.get(0);
+		
+		int id = (int) movementCommand.get("id");
+		int posX = (int) movementCommand.get("x");
+		int posY = (int) movementCommand.get("y");
+		
+		PlayingEntity playingEntity = getPlayingEntityFromID(id);
+		playingEntity.getModel().removeMP(Position.distance(new Position(posX, posY), playingEntity.getPosition()));
+		playingEntity.setPosition(new Position(posX, posY));
+		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		brainText.add("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
+		brainText.add("");
+		brainText.add("More details about entity "+id+" :");
+		brainText.add(playingEntity.toString());
+		String strings[] = playingEntity.getModel().toString().split("\n");
+		for(int i = 0; i < strings.length; i++) {
+			brainText.add(strings[i]);
+		}
+		
+				
+		Game.los.panel.updateBrainText(brainText);
 	}
 	
 	/**
@@ -171,6 +195,82 @@ public class Game {
 	static private void executeSpellCommand(JSONArray command) {
 		System.out.println("RECEIVED SPELL COMMAND");
 		System.out.println(command);
+		
+		JSONObject spellCommand = (JSONObject) ((JSONObject) command.get(0)).get("spellCast");
+		JSONObject lifePointsLost = null;
+		JSONObject lifePointsGained = null;
+		JSONObject death = null;
+		
+		boolean LPLost = false;
+		boolean LPGained = false;
+		boolean isDead = false;
+		
+		for(int i = 0; i < command.size(); i++) {
+			if(((JSONObject)command.get(i)).get("lifePointsLost") != null) {
+				LPLost = true;
+				lifePointsLost = (JSONObject)command.get(i);
+			}
+			
+			if(((JSONObject)command.get(i)).get("lifePointsGained") != null) {
+				LPGained = true;
+				lifePointsGained = (JSONObject)command.get(i);
+			}
+			
+			if(((JSONObject)command.get(i)).get("death") != null) {
+				isDead = true;
+				death = (JSONObject)command.get(i);
+			}
+		}
+		
+		if(LPLost) {
+			System.out.println("The target has lost some LP! "+lifePointsLost);
+		}
+		
+		if(LPGained) {
+			System.out.println("The target has gained some LP! "+lifePointsGained);
+		}
+		
+		if(isDead) {
+			System.out.println("The target has died! "+death);
+		}
+		
+		int id = (int) spellCommand.get("sourceId");
+		int spellId = (int) spellCommand.get("spellId");
+		int critical = (int) spellCommand.get("critical");
+		int targetId = (int) spellCommand.get("targetId");
+		int x = (int) spellCommand.get("x");
+		int y = (int) spellCommand.get("y");
+		
+		PlayingEntity castingEntity = getPlayingEntityFromID(id);
+		PlayingEntity victim = getPlayingEntityFromID(targetId);
+		
+		Game.log.println("Casting "+spellId+" to : ["+x+";"+y+"]");
+		SpellObject spellCast = Game.getSpellFromID(spellId);
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		brainText.add("Casting "+spellCast+" to : ["+x+";"+y+"]");
+		brainText.add("");
+		brainText.add("More details about entity "+id+" :");
+		brainText.add(castingEntity.toString());
+		String strings[] = castingEntity.getModel().toString().split("\n");
+		for(int i = 0; i < strings.length; i++) {
+			brainText.add(strings[i]);
+		}
+		
+		
+		Game.los.panel.updateBrainText(brainText);
+
+		Game.log.println(spellCast);
+		Game.log.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
+		
+		if(LPLost) {
+			int damage = (int) lifePointsGained.get("lpLost");
+			spellCast.applySpells(castingEntity, victim, false, damage);
+		}else if(LPGained) {
+			int heals = (int) lifePointsGained.get("lpGained");
+			spellCast.applySpells(castingEntity, victim, true, heals);
+		}
+		
 	}
 	
 	/**
