@@ -107,5 +107,4 @@ public class Hunt {
 	public void setPhorror(boolean phorror) {
 		this.phorror = phorror;
 	}
-
 }
