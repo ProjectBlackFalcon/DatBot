@@ -508,7 +508,6 @@ public class Network implements Runnable {
 				this.hunt.setPhorror(false);
 				MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 				complementaryInformationsDataMessage.Deserialize(dataReader);
-				System.out.println(complementaryInformationsDataMessage.toString());
 
 				if (!connectionToKoli) {
 					for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
