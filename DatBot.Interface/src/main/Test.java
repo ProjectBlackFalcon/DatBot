@@ -39,6 +39,8 @@ public class Test {
 				communication.getReturn("0;0;i;cmd;getMonsters;[None]");
 				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
 				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster + "]");
+			}else if(!communication.getNetworks().get(0).getInfo().isJoinedFight() && communication.getNetworks().get(0).getInfo().isWaitForMov() && communication.getNetworks().get(0).getMonsters().getMonsters().size() <= 0) {
+				
 			}
 		}
 
