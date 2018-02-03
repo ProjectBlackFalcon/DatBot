@@ -232,7 +232,7 @@ public class CraModel{
 			}
 		}
 		
-		return null;
+		return magicArrow;
 	}
 	
 	public static final SpellObject magicArrow = new SpellObject("Magic arrow", 1, 161);

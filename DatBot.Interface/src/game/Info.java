@@ -51,6 +51,7 @@ public class Info {
 	private boolean waitForMov = true;
 	private boolean waitForHarvestSuccess = false;
 	private boolean waitForHarvestFailure = false;
+	private boolean inHunt = false;
 
 	private boolean interactiveUsed = false;
 	private boolean newMap = false;
@@ -63,6 +64,9 @@ public class Info {
 	private boolean isTurn = false;
 	private boolean initFight = true;
 	private boolean acknowledged = false;
+	private boolean huntAnswered = false;
+	private boolean stepSuccess = false;
+
 
 	public void setBooleanToFalse()
 	{
@@ -74,6 +78,8 @@ public class Info {
 		basicNoOperationMsg = false;
 		leaveExchange = false;
 		acknowledged = false;
+		huntAnswered = false;
+		stepSuccess = false;
 	}
 	
 	public boolean threadDone = true;
@@ -414,6 +420,30 @@ public class Info {
 	public void setAcknowledged(boolean acknowledged)
 	{
 		this.acknowledged = acknowledged;
+	}
+
+	public boolean isHuntAnswered() {
+		return huntAnswered;
+	}
+
+	public void setHuntAnswered(boolean huntAnswered) {
+		this.huntAnswered = huntAnswered;
+	}
+
+	public boolean isInHunt() {
+		return inHunt;
+	}
+
+	public void setInHunt(boolean inHunt) {
+		this.inHunt = inHunt;
+	}
+
+	public boolean isStepSuccess() {
+		return stepSuccess;
+	}
+
+	public void setStepSuccess(boolean stepSuccess) {
+		this.stepSuccess = stepSuccess;
 	}
 
 }

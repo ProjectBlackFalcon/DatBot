@@ -188,5 +188,10 @@ public class MapComplementaryInformationsDataMessage extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "MapComplementaryInformationsDataMessage [subAreaId=" + subAreaId + ", mapId=" + mapId + ", houses=" + houses + ", actors=" + actors + ", interactiveElements=" + interactiveElements + ", statedElements=" + statedElements + ", obstacles=" + obstacles + ", fights=" + fights + ", hasAggressiveMonsters=" + hasAggressiveMonsters
+			+ ", fightStartPositions=" + fightStartPositions +"]";
+	}
 
 }

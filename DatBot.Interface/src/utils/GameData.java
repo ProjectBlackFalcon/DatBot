@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import protocol.network.Network;
+import utils.d2i.d2iManager;
 import utils.d2o.D2oManager;
 
 public class GameData {
@@ -92,6 +93,48 @@ public class GameData {
 			e.printStackTrace();
 		}
 		return -99;
+	}
+	
+	public static String getClueName(int id){
+		D2oManager d2oManager;
+		try {
+			d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\PointOfInterest.d2o");
+			String s = d2oManager.searchObjectById(id);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			String[] cmd = s.split(",");
+			for (String si : cmd) {
+				String[] cmd2 = si.split(":");
+				if (cmd2[0].equals("nameId")) { d2iManager.getText(Integer.parseInt(cmd2[1])); }
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String getNpcName(int id){
+		D2oManager d2oManager;
+		try {
+			d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Npcs.d2o");
+			String s = d2oManager.searchObjectById(id);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			String[] cmd = s.split(",");
+			for (String si : cmd) {
+				String[] cmd2 = si.split(":");
+				if (cmd2[0].equals("nameId")) { d2iManager.getText(Integer.parseInt(cmd2[1])); }
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
