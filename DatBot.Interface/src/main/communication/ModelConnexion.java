@@ -88,6 +88,22 @@ public class ModelConnexion {
 					}
 				}
 				break;
+			case "changeMapTest":
+				MapMovement mapMovement1 = movement.ChangeMap(param);
+				if (mapMovement1 == null) {
+					toSend = new Object[] { "False" };
+					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+				}
+				else {
+					mapMovement1.PerformChangement();
+					if (this.getMovement().moveOver()) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				}
+				break;
 			case "getResources":
 				toSend = new Object[] { interactive.getFarmCell() };
 				break;
