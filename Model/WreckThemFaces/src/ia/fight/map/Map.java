@@ -193,6 +193,15 @@ public class Map {
         	}
         }
 
+        if(desiredPosition.getX() > 32) {
+        	desiredPosition = new Position(32, desiredPosition.getY());
+        }
+        
+        if(desiredPosition.getY() > 32) {
+        	desiredPosition = new Position(desiredPosition.getY(), 32);
+        }
+        
+        
         List<ExampleNode> path = myMap.findPath(actualPosition.getX(),actualPosition.getY(),desiredPosition.getX(),desiredPosition.getY());
     
         if(path.size() < 1 || path.size() > MP){
