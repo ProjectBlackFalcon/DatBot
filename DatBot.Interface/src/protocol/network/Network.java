@@ -42,6 +42,7 @@ import game.combat.Fight;
 import game.movement.CellMovement;
 import game.movement.Movement;
 import game.plugin.Bank;
+import game.plugin.Hunt;
 import game.plugin.Interactive;
 import game.plugin.Monsters;
 import game.plugin.Npc;
@@ -81,6 +82,7 @@ import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
 import protocol.network.messages.game.context.GameContextReadyMessage;
+import protocol.network.messages.game.context.GameContextRemoveElementMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
 import protocol.network.messages.game.context.fight.GameFightJoinMessage;
@@ -91,6 +93,7 @@ import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
 import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
+import protocol.network.messages.game.context.roleplay.GameRolePlayShowActorMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
@@ -100,6 +103,9 @@ import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayA
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
+import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntDigRequestAnswerMessage;
+import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntFinishedMessage;
+import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
@@ -133,6 +139,8 @@ import protocol.network.types.game.context.fight.GameFightFighterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
+import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
+import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
@@ -178,6 +186,7 @@ public class Network implements Runnable {
 	private Monsters monsters;
 	private MapManager mapManager;
 	private Map map;
+	private Hunt hunt;
 
 	public Network(boolean displayPacket, Info info, int botInstance) {
 		this.botInstance = botInstance;
@@ -197,6 +206,7 @@ public class Network implements Runnable {
 		this.bank = new Bank();
 		this.movement = new Movement(this);
 		this.monsters = new Monsters();
+		this.hunt = new Hunt();
 		try {
 			this.npc = new Npc(this);
 			this.modelConnexion = new ModelConnexion(this);
@@ -495,8 +505,11 @@ public class Network implements Runnable {
 				break;
 			case 226:
 				this.monsters.setMonsters(new ArrayList<>());
+				this.hunt.setPhorror(false);
 				MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 				complementaryInformationsDataMessage.Deserialize(dataReader);
+				System.out.println(complementaryInformationsDataMessage.toString());
+
 				if (!connectionToKoli) {
 					for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
 						if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")) {
@@ -505,6 +518,8 @@ public class Network implements Runnable {
 						else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
 							this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
 
+						} else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")){
+							this.hunt.setPhorror(true);
 						}
 						if (complementaryInformationsDataMessage.getActors().get(i).getContextualId() == info.getActorId()) info.setCellId(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId());
 					}
@@ -844,7 +859,7 @@ public class Network implements Runnable {
 				info.setInitFight(false);
 				Communication.sendToModel(String.valueOf(info.getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] {});
 				JSONObject mapJSONObject = new JSONObject();
-				mapJSONObject.put("mapID", (int)info.getMapId());
+				mapJSONObject.put("mapID", (int) info.getMapId());
 				JSONArray tempArr = new JSONArray();
 				tempArr.add(mapJSONObject);
 				getFight().sendToFightAlgo("startfight", tempArr);
@@ -876,12 +891,28 @@ public class Network implements Runnable {
 				if (gameFightTurnEndMessage.getId() == info.getActorId()) {
 					info.setTurn(false);
 				}
-
-				JSONObject passTurn = new JSONObject();
-				passTurn.put("id", (int)getFight().getId(gameFightTurnEndMessage.getId()));
-				JSONArray arr = new JSONArray();
-				arr.add(passTurn);
-				getFight().sendToFightAlgo("p", arr);
+				for (int i = 0; i < this.getFight().getMonsters().size(); i++) {
+					if (this.getFight().getMonsters().get(i).getContextualId() == gameFightTurnEndMessage.getId()) {
+						if (this.getFight().getMonsters().get(i).isAlive()) {
+							JSONObject passTurn = new JSONObject();
+							passTurn.put("id", (int) getFight().getId(gameFightTurnEndMessage.getId()));
+							JSONArray arr = new JSONArray();
+							arr.add(passTurn);
+							getFight().sendToFightAlgo("p", arr);
+						}
+					}
+				}
+				for (int i = 0; i < this.getFight().getPlayers().size(); i++) {
+					if (this.getFight().getPlayers().get(i).getContextualId() == gameFightTurnEndMessage.getId()) {
+						if (this.getFight().getPlayers().get(i).isAlive()) {
+							JSONObject passTurn = new JSONObject();
+							passTurn.put("id", (int) getFight().getId(gameFightTurnEndMessage.getId()));
+							JSONArray arr = new JSONArray();
+							arr.add(passTurn);
+							getFight().sendToFightAlgo("p", arr);
+						}
+					}
+				}
 				break;
 			case 720:
 				info.setJoinedFight(false);
@@ -942,17 +973,17 @@ public class Network implements Runnable {
 				GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 				gameActionFightSpellCastMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("spellId", (int)gameActionFightSpellCastMessage.getSpellId());
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
-				
-				int cellId = (int)gameActionFightSpellCastMessage.getDestinationCellId();
+				jsonObject.put("spellId", (int) gameActionFightSpellCastMessage.getSpellId());
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
+
+				int cellId = (int) gameActionFightSpellCastMessage.getDestinationCellId();
 				int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
 				int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
-				
-				jsonObject.put("x", (int)x);
-				jsonObject.put("y", (int)y);
+
+				jsonObject.put("x", (int) x);
+				jsonObject.put("y", (int) y);
 				jsonObject.put("critical", gameActionFightSpellCastMessage.getCritical());
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightSpellCastMessage.getSourceId()));
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightSpellCastMessage.getSourceId()));
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("spellCast", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -961,10 +992,10 @@ public class Network implements Runnable {
 				GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 				gameActionFightLifePointsLostMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightLifePointsLostMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()));
-				jsonObject.put("lpLost", (int)gameActionFightLifePointsLostMessage.getLoss());
-				jsonObject.put("lpMaxLost", (int)gameActionFightLifePointsLostMessage.getPermanentDamages());
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightLifePointsLostMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()));
+				jsonObject.put("lpLost", (int) gameActionFightLifePointsLostMessage.getLoss());
+				jsonObject.put("lpMaxLost", (int) gameActionFightLifePointsLostMessage.getPermanentDamages());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("lifePointsLost", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -973,9 +1004,9 @@ public class Network implements Runnable {
 				GameActionFightDodgePointLossMessage dodgePointLossMessage = new GameActionFightDodgePointLossMessage();
 				dodgePointLossMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(dodgePointLossMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(dodgePointLossMessage.getTargetId()));
-				jsonObject.put("amount", (int)dodgePointLossMessage.getAmount());
+				jsonObject.put("sourceId", (int) getFight().getId(dodgePointLossMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(dodgePointLossMessage.getTargetId()));
+				jsonObject.put("amount", (int) dodgePointLossMessage.getAmount());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("dodgePointLoss", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -988,27 +1019,27 @@ public class Network implements Runnable {
 				GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 				gameActionFightDispellableEffectMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightDispellableEffectMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()));
-				jsonObject.put("effectId", (int)gameActionFightDispellableEffectMessage.getEffect().getEffectId());
-				jsonObject.put("spellId", (int)gameActionFightDispellableEffectMessage.getEffect().getSpellId());
-				jsonObject.put("turnDuration", (int)gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightDispellableEffectMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()));
+				jsonObject.put("effectId", (int) gameActionFightDispellableEffectMessage.getEffect().getEffectId());
+				jsonObject.put("spellId", (int) gameActionFightDispellableEffectMessage.getEffect().getSpellId());
+				jsonObject.put("turnDuration", (int) gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
 				jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
-					jsonObject.put("amount", (int)((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+					jsonObject.put("amount", (int) ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect")) {
-					jsonObject.put("stateId", (int)((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
+					jsonObject.put("stateId", (int) ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostWeaponDamagesEffect")) {
-					jsonObject.put("weaponTypeId", (int)((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getWeaponTypeId());
+					jsonObject.put("weaponTypeId", (int) ((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getWeaponTypeId());
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellBoostEffect")) {
-					jsonObject.put("boostedSpellId", (int)((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getBoostedSpellId());
+					jsonObject.put("boostedSpellId", (int) ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getBoostedSpellId());
 
 				}
 				if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellImmunityEffect")) {
-					jsonObject.put("immuneSpellId", (int)((FightTemporarySpellImmunityEffect) gameActionFightDispellableEffectMessage.getEffect()).getImmuneSpellId());
+					jsonObject.put("immuneSpellId", (int) ((FightTemporarySpellImmunityEffect) gameActionFightDispellableEffectMessage.getEffect()).getImmuneSpellId());
 
 				}
 				jsonObject2 = new JSONObject();
@@ -1019,13 +1050,13 @@ public class Network implements Runnable {
 				GameActionFightMarkCellsMessage gameActionFightMarkCellsMessage = new GameActionFightMarkCellsMessage();
 				gameActionFightMarkCellsMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
-				jsonObject.put("markSpellId", (int)gameActionFightMarkCellsMessage.getMark().getMarkSpellId());
-				jsonObject.put("markImpactCellId", (int)gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
+				jsonObject.put("markSpellId", (int) gameActionFightMarkCellsMessage.getMark().getMarkSpellId());
+				jsonObject.put("markImpactCellId", (int) gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
 				JSONArray jsonArray = new JSONArray();
 				for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells()) {
 					JSONObject jsonCells = new JSONObject();
-					jsonCells.put("cellId", (int)object.getCellId());
+					jsonCells.put("cellId", (int) object.getCellId());
 					jsonCells.put("zoneSize", object.getZoneSize());
 					jsonArray.add(jsonCells);
 				}
@@ -1038,9 +1069,9 @@ public class Network implements Runnable {
 				GameActionFightLifePointsGainMessage gameActionFightLifePointsGainMessage = new GameActionFightLifePointsGainMessage();
 				gameActionFightLifePointsGainMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightLifePointsGainMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightLifePointsGainMessage.getTargetId()));
-				jsonObject.put("lpGain", (int)gameActionFightLifePointsGainMessage.getDelta());
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightLifePointsGainMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightLifePointsGainMessage.getTargetId()));
+				jsonObject.put("lpGain", (int) gameActionFightLifePointsGainMessage.getDelta());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("lifePointsGain", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1049,8 +1080,8 @@ public class Network implements Runnable {
 				GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
 				gameActionFightDeathMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightDeathMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightDeathMessage.getTargetId()));
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightDeathMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightDeathMessage.getTargetId()));
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("death", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1059,16 +1090,21 @@ public class Network implements Runnable {
 						this.getFight().getMonsters().get(i).setAlive(false);
 					}
 				}
+				for (int i = 0; i < this.getFight().getPlayers().size(); i++) {
+					if (this.getFight().getPlayers().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId()) {
+						this.getFight().getPlayers().get(i).setAlive(false);
+					}
+				}
 				break;
 			case 6116:
 				GameActionFightCloseCombatMessage gameActionFightCloseCombatMessage = new GameActionFightCloseCombatMessage();
 				gameActionFightCloseCombatMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightCloseCombatMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightCloseCombatMessage.getTargetId()));
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightCloseCombatMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightCloseCombatMessage.getTargetId()));
 				jsonObject.put("weaponGeneric", d2iManager.getText(GameData.getWeaponNameId(gameActionFightCloseCombatMessage.getWeaponGenericId())));
 				jsonObject.put("critical", gameActionFightCloseCombatMessage.getCritical());
-				jsonObject.put("destinationCellId", (int)gameActionFightCloseCombatMessage.getDestinationCellId());
+				jsonObject.put("destinationCellId", (int) gameActionFightCloseCombatMessage.getDestinationCellId());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("closeCombat", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1077,10 +1113,10 @@ public class Network implements Runnable {
 				GameActionFightSlideMessage gameActionFightSlideMessage = new GameActionFightSlideMessage();
 				gameActionFightSlideMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightSlideMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightSlideMessage.getTargetId()));
-				jsonObject.put("startCellId", (int)gameActionFightSlideMessage.getStartCellId());
-				jsonObject.put("endCellId", (int)gameActionFightSlideMessage.getEndCellId());
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightSlideMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightSlideMessage.getTargetId()));
+				jsonObject.put("startCellId", (int) gameActionFightSlideMessage.getStartCellId());
+				jsonObject.put("endCellId", (int) gameActionFightSlideMessage.getEndCellId());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("slide", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1089,11 +1125,11 @@ public class Network implements Runnable {
 				GameActionFightLifeAndShieldPointsLostMessage gameActionFightLifeAndShieldPointsLostMessage = new GameActionFightLifeAndShieldPointsLostMessage();
 				gameActionFightLifeAndShieldPointsLostMessage.Deserialize(dataReader);
 				jsonObject = new JSONObject();
-				jsonObject.put("sourceId", (int)getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getSourceId()));
-				jsonObject.put("targetId", (int)getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getTargetId()));
-				jsonObject.put("shieldLoss", (int)gameActionFightLifeAndShieldPointsLostMessage.getShieldLoss());
-				jsonObject.put("lpLoss", (int)gameActionFightLifeAndShieldPointsLostMessage.getLoss());
-				jsonObject.put("lpMaxLoss", (int)gameActionFightLifeAndShieldPointsLostMessage.getPermanentDamages());
+				jsonObject.put("sourceId", (int) getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getSourceId()));
+				jsonObject.put("targetId", (int) getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getTargetId()));
+				jsonObject.put("shieldLoss", (int) gameActionFightLifeAndShieldPointsLostMessage.getShieldLoss());
+				jsonObject.put("lpLoss", (int) gameActionFightLifeAndShieldPointsLostMessage.getLoss());
+				jsonObject.put("lpMaxLoss", (int) gameActionFightLifeAndShieldPointsLostMessage.getPermanentDamages());
 				jsonObject2 = new JSONObject();
 				jsonObject2.put("shieldLpLoss", jsonObject);
 				getFight().getSpellJson().add(jsonObject2);
@@ -1110,7 +1146,51 @@ public class Network implements Runnable {
 				zaapListMessage.Deserialize(dataReader);
 				this.interactive.setZaapList(zaapListMessage.getMapIds());
 				break;
+			case 5632:
+				GameRolePlayShowActorMessage gameRolePlayShowActorMessage = new GameRolePlayShowActorMessage();
+				gameRolePlayShowActorMessage.Deserialize(dataReader);
+				if (gameRolePlayShowActorMessage.getInformations().getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
+					this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) gameRolePlayShowActorMessage.getInformations());
+				}
+				break;
+			case 251:
+				GameContextRemoveElementMessage gameContextRemoveElementMessage = new GameContextRemoveElementMessage();
+				gameContextRemoveElementMessage.Deserialize(dataReader);
+				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++) {
+					if (this.getMonsters().getMonsters().get(i).getContextualId() == gameContextRemoveElementMessage.getId()) {
+						this.getMonsters().getMonsters().remove(i);
+					}
+				}
+				break;
+			case 6483:
+				this.info.setHuntAnswered(true);
+				this.info.setInHunt(false);
+				break;
+			case 6484:
+				TreasureHuntDigRequestAnswerMessage treasureHuntDigRequestAnswerMessage = new TreasureHuntDigRequestAnswerMessage();
+				treasureHuntDigRequestAnswerMessage.Deserialize(dataReader);
+				if(treasureHuntDigRequestAnswerMessage.getResult() == 1){
+					this.getInfo().setStepSuccess(true);
+				}
+			case 6486:
+				TreasureHuntMessage treasureHuntMessage = new TreasureHuntMessage();
+				treasureHuntMessage.Deserialize(dataReader);
+				int sizeStep = treasureHuntMessage.getKnownStepsList().size();
+				this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getStartMapId()));
+				this.hunt.setCurrentIndex(sizeStep-1);
+				if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToPOI")) {
+					this.hunt.setCurrentClue(GameData.getClueName(((TreasureHuntStepFollowDirectionToPOI) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getPoiLabelId()));
+					this.hunt.setCurrentDir(((TreasureHuntStepFollowDirectionToPOI) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getDirection());
+				}
+				else if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToHint")) {
+					this.hunt.setCurrentClue(GameData.getNpcName(((TreasureHuntStepFollowDirectionToHint) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getNpcId()));
+					this.hunt.setCurrentDir(((TreasureHuntStepFollowDirectionToHint) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getDirection());
+				}
+				this.info.setHuntAnswered(true);
+				this.info.setInHunt(true);
+				break;
 		}
+		return;
 	}
 
 	public void buildMessage(DofusDataReader reader) throws Exception {
@@ -1418,5 +1498,13 @@ public class Network implements Runnable {
 
 	public void setF(JFrame f) {
 		this.f = f;
+	}
+
+	public Hunt getHunt() {
+		return hunt;
+	}
+
+	public void setHunt(Hunt hunt) {
+		this.hunt = hunt;
 	}
 }

@@ -36,6 +36,7 @@ public class Fight {
 	private GameFightSynchronizeMessage gameFightSynchronizeMessage; // Recap
 	private ArrayList<Player> entities;
 	private List<GameFightMonsterInformations> monsters;
+	private List<GameFightCharacterInformations> players;
 
 	public List<Double> turnListId;
 	private JSONArray spellJson;
@@ -144,6 +145,7 @@ public class Fight {
 	public ArrayList<JSONObject> init(){
 		this.entities = new ArrayList<>();
 		this.monsters = new ArrayList<>();
+		this.players = new ArrayList<>();
 		Player player = null;
 		ArrayList<JSONObject> arr = new ArrayList<>();
 		
@@ -151,6 +153,7 @@ public class Fight {
 			JSONObject toSend = new JSONObject();
 			if (this.getGameFightSynchronizeMessage().getFighters().get(i).getClass().getSimpleName().equals("GameFightCharacterInformations")){
 				GameFightCharacterInformations p = (GameFightCharacterInformations) gameFightSynchronizeMessage.getFighters().get(i);
+				this.players.add(p);
 				GameFightMinimalStats stats = p.getStats();
 				if (p.getBreed() == 9) {
 					player = new Cra(p.getName(), p.getStats().getLifePoints(), p.getStats().getActionPoints(), p.getStats().getMovementPoints(), p.getLevel());
@@ -395,5 +398,13 @@ public class Fight {
 
 	public void setSpellJson(JSONArray jsonArray) {
 		this.spellJson = jsonArray;
+	}
+
+	public List<GameFightCharacterInformations> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<GameFightCharacterInformations> players) {
+		this.players = players;
 	}
 }

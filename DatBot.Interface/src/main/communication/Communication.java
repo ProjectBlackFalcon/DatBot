@@ -101,7 +101,6 @@ public class Communication implements Runnable {
 			}
 		}
 		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
-		networks.get(Integer.parseInt(botInstance)).getInfo().threadDone = true;
 	}
 
 	/**

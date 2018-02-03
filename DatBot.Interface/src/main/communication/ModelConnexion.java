@@ -9,6 +9,7 @@ import game.map.MapMovement;
 import game.movement.CellMovement;
 import game.movement.Movement;
 import game.plugin.Bank;
+import game.plugin.Hunt;
 import game.plugin.Interactive;
 import game.plugin.Monsters;
 import game.plugin.Npc;
@@ -17,6 +18,9 @@ import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
 import protocol.network.messages.game.context.roleplay.havenbag.EnterHavenBagRequestMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
+import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntDigRequestMessage;
+import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntFlagRequestMessage;
+import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntGiveUpRequestMessage;
 import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
@@ -65,35 +69,7 @@ public class ModelConnexion {
 				toSend = new Object[] { String.valueOf("(" + this.info.getCoords()[0]) + "," + String.valueOf(this.info.getCoords()[1]) + ")", this.info.getCellId(), this.info.getWorldmap(), Integer.valueOf((int) this.info.getMapId()) };
 				break;
 			case "move":
-				CellMovement mov = getMovement().MoveToCell(Integer.parseInt(param));
-				if (mov == null || mov.path == null) {
-					toSend = new Object[] { "False" };
-				}
-				else if (this.info.getCellId() == Integer.parseInt(param)) {
-					toSend = new Object[] { "True" };
-				}
-				else {
-					mov.performMovement();
-					if (this.getMovement().moveOver()) {
-						if (this.info.getCellId() == Integer.parseInt(param)) {
-							if ((this.map.getId() == 83887104 && this.info.getCellId() == 396) || (this.map.getId() == 2884617 && this.info.getCellId() == 424) || (this.map.getId() == 8912911 && this.info.getCellId() == 424) || (this.map.getId() == 128451073 && this.info.getCellId() == 292)) {
-								while (!this.info.isNewMap()) {
-									Thread.sleep(50);
-								}
-								toSend = new Object[] { "True" };
-							}
-							else {
-								toSend = new Object[] { "True" };
-							}
-						}
-						else {
-							toSend = new Object[] { "False" };
-						}
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
+				toSend = move(Integer.parseInt(param));
 				break;
 			case "changeMap":
 				String[] infoMov = param.split(",");
@@ -432,28 +408,160 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
+			/**
+			* Go into the first hall
+			* Then move to cell 292 to go in main hall
+			*/
 			case "goHuntingHall":
 				if (this.map.getId() == 142088718 && this.info.getCellId() == 356) {
 					int [] interactive2 = this.interactive.getInteractive(184);
 					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
 					if (this.waitToSend()) {
+						toSend = move(292);
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			/**
+			 * Go to use cell 504 to go to first hall
+			 * Then exit the building
+			 */
+			case "exitHuntingHall":
+				if(this.map.getId() == 128452097){
+					move(504);
+				}
+				if(this.map.getId() == 128451073){
+					move(536);
+					int [] interactive2 = this.interactive.getInteractive(184);
+					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exiting hunting hall");
+					if (this.waitToSend()) {
+						toSend =new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			/**
+			 * Bot needs to go to cell 304 to get new hunt
+			 * It will get the highest hunt for its level
+			 */
+			case "newHunt":
+				if(this.map.getId() == 128452097){
+					if(!(this.info.getCellId() == 304)){
+						move(304);
+					}
+					int [] interactiveHunt = Hunt.getHuntFromLvl(this.info.getLvl());
+					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
+					if (this.waitToSend()) {
 						toSend = new Object[] { "True" };
 					}
 					else {
 						toSend = new Object[] { "False" };
 					}
+				} else {
+					toSend = new Object[] { "False" };
 				}
 				break;
+			case "abandonHunt":
+				TreasureHuntGiveUpRequestMessage huntGiveUpRequestMessage = new TreasureHuntGiveUpRequestMessage(0);
+				getNetwork().sendToServer(huntGiveUpRequestMessage, TreasureHuntGiveUpRequestMessage.ProtocolId, "Abandon hunt");
+				if (this.waitToSend()) {
+					toSend = new Object[] { "True" };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			/**
+			 * Get the start map of the hunt
+			 */
+			case "gethuntStart":
+				if(this.info.isInHunt()){
+					toSend = new Object[] { "(" + this.getNetwork().getHunt().getStartMapCoords()[0] + "," + this.getNetwork().getHunt().getStartMapCoords()[1] + ")" };
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "getClue":
+				if(this.info.isInHunt()){
+					toSend = new Object[] { this.network.getHunt().getCurrentClue() + "," + Hunt.getDirection(this.network.getHunt().getCurrentDir()) };
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "validateClue":
+				if(this.info.isInHunt()){
+					TreasureHuntFlagRequestMessage treasureHuntFlagRequestMessage = new TreasureHuntFlagRequestMessage(0,this.network.getHunt().getCurrentIndex());
+					getNetwork().sendToServer(treasureHuntFlagRequestMessage, TreasureHuntFlagRequestMessage.ProtocolId, "Validating clue");
+					if (this.waitToSend()) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "checkPhorror":
+				if(this.network.getHunt().isPhorror()){
+					toSend = new Object[] { "True" };
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "validateStep":
+				if(this.info.isInHunt()){
+					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
+					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
+					if (this.waitToSend()) {
+						if(this.info.isStepSuccess()){
+							toSend = new Object[] { "True" };
+						} else {
+							toSend = new Object[] { "False" };
+						}
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "huntFight":
+				if(this.info.isInHunt()){
+					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
+					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Starting hunt fight");
+					if (this.waitToSend()) {
+						if(this.info.isJoinedFight()){
+							toSend = new Object[] { "True" };
+						} else {
+							toSend = new Object[] { "False" };
+						}
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			
 		}
 		return toSend;
 	}
 
 	public void getReturn(String[] message) throws NumberFormatException, Exception {
-		while (!this.network.getInfo().threadDone) {
-			Thread.sleep(50);
-		}
-		this.network.getInfo().threadDone = false;
 		Thread.sleep(100);
 		new Thread(new Runnable() {
 			public void run() {
@@ -471,24 +579,97 @@ public class ModelConnexion {
 	}
 
 	public boolean waitToSend() throws InterruptedException {
-		while (!info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight() && !info.isInteractiveUsed()) {
+		while (!info.isNewMap() 
+			&& !info.isStorage() 
+			&& !info.isStorageUpdate() 
+			&& !info.isLeaveExchange() 
+			&& !info.isJoinedFight() 
+			&& !info.isInteractiveUsed()
+			&& !info.isHuntAnswered()) 
+		{
 			Thread.sleep(50);
 		}
 		while (!info.isBasicNoOperationMsg()) {
 			Thread.sleep(50);
 		}
-		/*
-		 * this.network.append((!Info.newMap && !Info.Storage &&
-		 * !Info.StorageUpdate && !Info.leaveExchange) &&
-		 * !Info.basicNoOperationMsg); this.network.append(Info.newMap + " " +
-		 * Info.Storage + " " + Info.StorageUpdate + " " + Info.leaveExchange +
-		 * " " + Info.basicNoOperationMsg);
-		 */
-		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight() && !info.isInteractiveUsed()) {
+		if (info.isBasicNoOperationMsg() 
+			&& !info.isNewMap() 
+			&& !info.isStorage() 
+			&& !info.isStorageUpdate() 
+			&& !info.isLeaveExchange() 
+			&& !info.isJoinedFight()
+			&& !info.isInteractiveUsed()
+			&& !info.isHuntAnswered()) 
+		{
 			return false;
 		}
-		else {
+		else 
+		{
 			return true;
+		}
+	}
+	
+	private Object[] move(int param){
+		CellMovement mov;
+		Object[] toSend = null;
+		try {
+			mov = getMovement().MoveToCell(param);
+			if (mov == null || mov.path == null) {
+				toSend = new Object[] { "False" };
+			}
+			else if (this.info.getCellId() == param) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				mov.performMovement();
+				if (this.getMovement().moveOver()) {
+					if (this.info.getCellId() == param) {
+						if ((this.map.getId() == 83887104 && this.info.getCellId() == 396) 
+							|| (this.map.getId() == 2884617 && this.info.getCellId() == 424) 
+							|| (this.map.getId() == 8912911 && this.info.getCellId() == 424) 
+							|| (this.map.getId() == 128451073 && this.info.getCellId() == 292)
+							|| (this.map.getId() == 128452097 && this.info.getCellId() == 504)) {
+							while (!this.info.isNewMap()) {
+								Thread.sleep(50);
+							}
+							toSend = new Object[] { "True" };
+						}
+						else {
+							toSend = new Object[] { "True" };
+						}
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return toSend;
+	}
+	
+	private void sleepShort(){
+		try {
+			Random r = new Random();
+			Thread.sleep(500 + r.nextInt(1000));
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void sleepLong(){
+		try {
+			Random r = new Random();
+			Thread.sleep(1500 + r.nextInt(1000));
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 

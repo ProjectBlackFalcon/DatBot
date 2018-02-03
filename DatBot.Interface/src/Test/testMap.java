@@ -13,16 +13,19 @@ public class testMap {
 
 	public static void main(String[] args) {
 		try {
-			D2oManager d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
-			String s = d2oManager.searchObjectById((int) 153879813);
+			new d2iManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
+			D2oManager d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Npcs.d2o");
+			String s = d2oManager.searchObjectById((int) 2669);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
 			s = s.replace("}", "");
 			s = s.replaceAll("\n", "");
-			s = s.replaceAll(",", ":");
-			String[] cmd2 = s.split(":");
-			System.out.println("" + Integer.parseInt(cmd2[3]) + "," + Integer.parseInt(cmd2[5]));
-
+			String[] cmd = s.split(",");
+			for (String si : cmd) {
+				String[] cmd2 = si.split(":");
+				if (cmd2[0].equals("nameId")) { System.out.println(d2iManager.getText(Integer.parseInt(cmd2[1]))); }
+			}
+			
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
