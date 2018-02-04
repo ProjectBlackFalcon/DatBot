@@ -107,7 +107,7 @@ public class GameData {
 			String[] cmd = s.split(",");
 			for (String si : cmd) {
 				String[] cmd2 = si.split(":");
-				if (cmd2[0].equals("nameId")) { d2iManager.getText(Integer.parseInt(cmd2[1])); }
+				if (cmd2[0].equals("nameId")) { return d2iManager.getText(Integer.parseInt(cmd2[1])); }
 			}
 		}
 		catch (Exception e) {
@@ -128,7 +128,7 @@ public class GameData {
 			String[] cmd = s.split(",");
 			for (String si : cmd) {
 				String[] cmd2 = si.split(":");
-				if (cmd2[0].equals("nameId")) { d2iManager.getText(Integer.parseInt(cmd2[1])); }
+				if (cmd2[0].equals("nameId")) { return d2iManager.getText(Integer.parseInt(cmd2[1])); }
 			}
 		}
 		catch (Exception e) {
