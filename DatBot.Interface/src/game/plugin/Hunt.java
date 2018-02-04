@@ -5,7 +5,10 @@ public class Hunt {
 	private int[] startMapCoords;
 	private String currentClue;
 	private int currentIndex;
+	private int numberOfIndex;
 	private int currentDir;
+	private int currentStep;
+	private int numberOfSteps;
 	private boolean phorror;
 	
 	/**
@@ -15,34 +18,34 @@ public class Hunt {
 	 */
 	public static int[] getHuntFromLvl(int lvl){
 		int[] result = new int[2];
-		if(lvl < 20){
+		if(lvl >= 20){
 			result[0] = 484993;
 			result[1] = 35426444;
-		} else if(lvl < 40){
+		} else if(lvl >= 40){
 			result[0] = 484993;
 			result[1] = 35426445;
-		} else if(lvl < 60){
+		} else if(lvl >= 60){
 			result[0] = 484993;
 			result[1] = 35426446;
-		} else if(lvl < 80){
+		} else if(lvl >= 80){
 			result[0] = 484993;
 			result[1] = 35426447;
-		} else if(lvl < 100){
+		} else if(lvl >= 100){
 			result[0] = 484993;
 			result[1] = 35426448;
-		} else if(lvl < 120){
+		} else if(lvl >= 120){
 			result[0] = 484993;
 			result[1] = 35426449;
-		} else if(lvl < 140){
+		} else if(lvl >= 140){
 			result[0] = 484993;
 			result[1] = 35426450;
-		} else if(lvl < 160){
+		} else if(lvl >= 160){
 			result[0] = 484993;
 			result[1] = 35426451;
-		} else if(lvl < 180){
+		} else if(lvl >= 180){
 			result[0] = 484993;
 			result[1] = 35426452;
-		} else if(lvl < 200){
+		} else if(lvl >= 200){
 			result[0] = 484993;
 			result[1] = 35426453;
 		}
@@ -92,9 +95,7 @@ public class Hunt {
 		this.currentDir = currentDir;
 	}
 
-	public int getCurrentIndex() {
-		return currentIndex;
-	}
+
 
 	public void setCurrentIndex(int currentIndex) {
 		this.currentIndex = currentIndex;
@@ -106,5 +107,33 @@ public class Hunt {
 
 	public void setPhorror(boolean phorror) {
 		this.phorror = phorror;
+	}
+
+	public int getNumberOfSteps() {
+		return numberOfSteps;
+	}
+
+	public void setNumberOfSteps(int numberOfSteps) {
+		this.numberOfSteps = numberOfSteps;
+	}
+
+	public int getCurrentIndex() {
+		return currentIndex;
+	}
+
+	public int getCurrentStep() {
+		return currentStep;
+	}
+
+	public void setCurrentStep(int currentStep) {
+		this.currentStep = currentStep;
+	}
+
+	public int getNumberOfIndex() {
+		return numberOfIndex;
+	}
+
+	public void setNumberOfIndex(int numberOfIndex) {
+		this.numberOfIndex = numberOfIndex;
 	}
 }
