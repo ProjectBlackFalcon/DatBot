@@ -856,7 +856,7 @@ public class Network implements Runnable {
 				info.setJoinedFight(true);
 				info.setTurn(false);
 				info.setInitFight(false);
-				Communication.sendToModel(String.valueOf(info.getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] {});
+				Communication.sendToModel(String.valueOf(botInstance), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] { "None" });
 				JSONObject mapJSONObject = new JSONObject();
 				mapJSONObject.put("mapID", (int) info.getMapId());
 				JSONArray tempArr = new JSONArray();
@@ -1171,10 +1171,14 @@ public class Network implements Runnable {
 				if(treasureHuntDigRequestAnswerMessage.getResult() == 1){
 					this.getInfo().setStepSuccess(true);
 				}
+				break;
 			case 6486:
 				TreasureHuntMessage treasureHuntMessage = new TreasureHuntMessage();
 				treasureHuntMessage.Deserialize(dataReader);
 				int sizeStep = treasureHuntMessage.getKnownStepsList().size();
+				this.hunt.setNumberOfSteps(treasureHuntMessage.getCheckPointTotal());
+				this.hunt.setCurrentStep(treasureHuntMessage.getCheckPointCurrent());
+				this.hunt.setNumberOfIndex(treasureHuntMessage.getTotalStepCount());
 				this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getStartMapId()));
 				this.hunt.setCurrentIndex(sizeStep-1);
 				if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToPOI")) {
