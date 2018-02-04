@@ -120,12 +120,14 @@ public class Panel extends JPanel{
 			}
 		}
 		
-		for(int i = 0; i < playingEntities.size(); i++) {
-			Position p = playingEntities.get(i).getPosition();
-			if(playingEntities.get(i).getTeam().equals("red")) {
-				obstacles.add(new int[] {p.getX(), p.getY(), 3, playingEntities.get(i).isNpc() ? 1 : 0});
-			}else {
-				obstacles.add(new int[] {p.getX(), p.getY(), 4, playingEntities.get(i).isNpc() ? 1 : 0});
+		if(playingEntities != null) {
+			for(int i = 0; i < playingEntities.size(); i++) {
+				Position p = playingEntities.get(i).getPosition();
+				if(playingEntities.get(i).getTeam().equals("red")) {
+					obstacles.add(new int[] {p.getX(), p.getY(), 3, playingEntities.get(i).isNpc() ? 1 : 0});
+				}else {
+					obstacles.add(new int[] {p.getX(), p.getY(), 4, playingEntities.get(i).isNpc() ? 1 : 0});
+				}
 			}
 		}
 		
@@ -136,6 +138,7 @@ public class Panel extends JPanel{
 	
 	
 	public void updateBrainText(ArrayList<String> s) {
+		System.out.println("ADDING TO BRAIN TEXT");
 		brainText.add(s);
 		brainTextIndex = brainText.size()-1;
 	}
@@ -212,7 +215,7 @@ public class Panel extends JPanel{
 		
 		for(int i = 0; i < 33; i++) {
 			for(int j = 0; j < 33; j++) {
-				if(Game.map.isPositionAccessible(new Position(selectedCase[0], selectedCase[1]), new Position(i, j), 6)) {
+				if(mapObject.isPositionAccessible(new Position(selectedCase[0], selectedCase[1]), new Position(i, j), 6)) {
 					g.setColor(Color.green);
 				}else {
 					g.setColor(Color.black);

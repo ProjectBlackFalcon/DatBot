@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import main.communication.Communication;
@@ -25,16 +26,31 @@ public class Test {
 		communication2.start();
 //		 communication.getReturn("5;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Tank-stp,Julith]");
-		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
+//		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 		// communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
-//		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,***REMOVED***11,Faoy,Julith]");
+		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,***REMOVED***11,Faoy,Julith]");
 		// communication.getReturn("0;4;i;cmd;openBank;None");
 
 		/**
 		 * ChangeMapTest method
 		 * Input : North, South, East, West
 		 */
-		communication.getReturn("0;0;i;cmd;changeMapTest;[North]");
+		//communication.getReturn("0;0;i;cmd;changeMapTest;[North]");
+		
+		Random rand = new Random();
+		
+		for(int i = 0; i < 3; i++) {
+			if (!communication.getNetworks().get(0).getInfo().isJoinedFight() && communication.getNetworks().get(0).getInfo().isWaitForMov() && communication.getNetworks().get(0).getMonsters().getMonsters().size() > 0)  {
+				double idMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getContextualId();
+				int cellIdMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getDisposition().getCellId();
+				communication.getNetworks().get(0).append("Trying to start a fight...");
+				communication.getReturn("0;0;i;cmd;getMonsters;[None]");
+				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
+				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster + "]");
+			}
+			Thread.sleep(2000);
+		}
+		
 		
 //		while (true) {
 //			Thread.sleep(2000);
@@ -45,6 +61,24 @@ public class Test {
 //				communication.getReturn("0;0;i;cmd;getMonsters;[None]");
 //				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
 //				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster + "]");
+//			}else if(!communication.getNetworks().get(0).getInfo().isJoinedFight() && communication.getNetworks().get(0).getInfo().isWaitForMov() && communication.getNetworks().get(0).getMonsters().getMonsters().size() <= 0) {
+//				
+//				int movement = rand.nextInt(4);
+//				
+//				switch(movement) {
+//					case 0: communication.getReturn("0;0;i;cmd;changeMapTest;[North]");
+//					break;
+//					
+//					case 1: communication.getReturn("0;0;i;cmd;changeMapTest;[South]");
+//					break;
+//					
+//					case 2: communication.getReturn("0;0;i;cmd;changeMapTest;[West]");
+//					break;
+//					
+//					case 3: communication.getReturn("0;0;i;cmd;changeMapTest;[East]");
+//					break;
+//				}
+//				
 //			}
 //		}
 
