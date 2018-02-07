@@ -9,11 +9,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -163,6 +167,7 @@ public class Network implements Runnable {
 	private Message message;
 	private List<Integer> Ticket;
 	// Log window
+	private FileOutputStream fileOutputStream;
 	public boolean displayPacket;
 	private JFrame f;
 	private JPanel panel;
@@ -280,7 +285,8 @@ public class Network implements Runnable {
 	public void initLogs() {
 		try {
 			// log = System.out;
-			log = new PrintStream(new FileOutputStream("log_network" + botInstance + ".txt"));
+			fileOutputStream = new FileOutputStream("log_network" + botInstance + ".txt");
+			log = new PrintStream(fileOutputStream);
 			// debug = new PrintStream(new FileOutputStream("debug.txt"));
 			debug = System.out;
 			System.setErr(debug);
@@ -333,10 +339,34 @@ public class Network implements Runnable {
 			}
 		}
 		else {
+			List<String> lines;
+			try {
+				lines = Files.readAllLines(Paths.get("log_network" + botInstance + ".txt"), Charset.defaultCharset());
+				if(lines.size() > 20){
+					clearTheFile();
+				}
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 			String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
 			log.println(newSt);
 		}
 	}
+	
+	public void clearTheFile() {
+        FileWriter fwOb;
+		try {
+			fwOb = new FileWriter("log_network" + botInstance + ".txt", false);
+	        PrintWriter pwOb = new PrintWriter(fwOb, false);
+	        pwOb.flush();
+	        pwOb.close();
+	        fwOb.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		} 
+    }
 
 	public void append(boolean str) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
