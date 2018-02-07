@@ -1,0 +1,124 @@
+[21:46:36] [BOT 3] [1]	Taille : 8  -  ProtocolRequired
+[21:46:36] [BOT 3] [3]	Taille : 341  -  HelloConnectMessage
+[21:46:36] [BOT 3] [4]	[Envoi] Identification...
+[21:46:37] [BOT 3] [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+[21:46:37] [BOT 3] [22]	Taille : 53  -  IdentificationSuccessMessage
+[21:46:37] [BOT 3] [30]	Taille : 368  -  ServersListMessage
+[21:46:37] [BOT 3] [40]	[Envoi] Selection du serveur...
+[21:46:37] [BOT 3] [42]	Taille : 54  -  SelectedServerDataMessage
+[21:46:37] [BOT 3] [1]	Taille : 8  -  ProtocolRequired
+[21:46:37] [BOT 3] [101]	Taille : 0  -  HelloGameMessage
+[21:46:37] [BOT 3] [110]	[Envoi] Authentification du ticket...
+[21:46:37] [BOT 3] [6362]	Taille : 2  -  BasicAckMessage
+[21:46:37] [BOT 3] [6253]	Taille : 92388  -  RawDataMessage
+[21:46:37] [BOT 3] [6372]	[Envoi] Check Integrity Message...
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+[21:46:38] [BOT 3] [175]	Taille : 10  -  BasicTimeMessage
+[21:46:38] [BOT 3] [6340]	Taille : 7  -  ServerSettingsMessage
+[21:46:38] [BOT 3] [6305]	Taille : 11  -  ServerOptionalFeaturesMessage
+[21:46:38] [BOT 3] [6434]	Taille : 67  -  ServerSessionConstantsMessage
+[21:46:38] [BOT 3] [6216]	Taille : 20  -  AccountCapabilitiesMessage
+[21:46:38] [BOT 3] [6267]	Taille : 1  -  TrustStatusMessage
+[21:46:38] [BOT 3] [150]	[Envoi] Character list request
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [6100]	Taille : 4  -  QueueStatusMessage
+[21:46:38] [BOT 3] [6100]	Taille : 4  -  QueueStatusMessage
+[21:46:38] [BOT 3] [6100]	Taille : 4  -  QueueStatusMessage
+[21:46:38] [BOT 3] [151]	Taille : 59  -  CharactersListMessage
+[21:46:38] [BOT 3] [152]	[Envoi] Selection du personnage...
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [6100]	Taille : 4  -  QueueStatusMessage
+[21:46:38] [BOT 3] [6087]	Taille : 2  -  otificationListMessage
+[21:46:38] [BOT 3] [153]	Taille : 55  -  CharacterSelectedSuccessMessage
+[21:46:38] [BOT 3] [3016]	Taille : 628  -  InventoryContentMessage
+[21:46:38] [BOT 3] [5503]	Taille : 7  -  SetUpdateMessage
+[21:46:38] [BOT 3] [5503]	Taille : 7  -  SetUpdateMessage
+[21:46:38] [BOT 3] [6231]	Taille : 58  -  ShortcutBarContentMessage
+[21:46:38] [BOT 3] [6231]	Taille : 33  -  ShortcutBarContentMessage
+[21:46:38] [BOT 3] [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+[21:46:38] [BOT 3] [6620]	Taille : 4  -  HavenBagPackListMessage
+[21:46:38] [BOT 3] [5689]	Taille : 3  -  EmoteListMessage
+[21:46:38] [BOT 3] [5655]	Taille : 258  -  JobDescriptionMessage
+[21:46:38] [BOT 3] [5809]	Taille : 109  -  JobExperienceMultiUpdateMessage
+[21:46:38] [BOT 3] [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+[21:46:38] [BOT 3] [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+[21:46:38] [BOT 3] [6663]	Taille : 4  -  DareCreatedListMessage
+[21:46:38] [BOT 3] [6658]	Taille : 4  -  DareSubscribedListMessage
+[21:46:38] [BOT 3] [6682]	Taille : 2  -  DareWonListMessage
+[21:46:38] [BOT 3] [6677]	Taille : 2  -  DareRewardsListMessage
+[21:46:38] [BOT 3] [6440]	Taille : 13744  -  PrismsListMessage
+[21:46:38] [BOT 3] [892]	Taille : 19  -  EnabledChannelsMessage
+[21:46:38] [BOT 3] [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+[21:46:38] [BOT 3] [1200]	Taille : 45  -  SpellListMessage
+[21:46:38] [BOT 3] [6231]	Taille : 33  -  ShortcutBarContentMessage
+[21:46:38] [BOT 3] [3009]	Taille : 4  -  InventoryWeightMessage
+[21:46:38] [BOT 3] [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+[21:46:38] [BOT 3] [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+[21:46:38] [BOT 3] [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+[21:46:38] [BOT 3] [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+[21:46:38] [BOT 3] [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+[21:46:38] [BOT 3] [6316]	Taille : 0  -  SequenceNumberRequestMessage
+[21:46:38] [BOT 3] [6317]	[Envoi] Sequence number
+[21:46:38] [BOT 3] [780]	Taille : 4  -  TextInformationMessage
+[21:46:38] [BOT 3] [780]	Taille : 27  -  TextInformationMessage
+[21:46:38] [BOT 3] [6717]	Taille : 15  -  FollowedQuestsMessage
+[21:46:38] [BOT 3] [6265]	Taille : 1  -  SpouseStatusMessage
+[21:46:38] [BOT 3] [6205]	Taille : 109  -  AchievementListMessage
+[21:46:38] [BOT 3] [6728]	Taille : 15  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+[21:46:38] [BOT 3] [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+[21:46:38] [BOT 3] [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+[21:46:38] [BOT 3] [6585]	Taille : 6  -  IdolListMessage
+[21:46:38] [BOT 3] [6321]	Taille : 4  -  CharacterExperienceGainMessage
+[21:46:38] [BOT 3] [6275]	Taille : 2  -  MailStatusMessage
+[21:46:38] [BOT 3] [6315]	Taille : 2  -  AccountHouseMessage
+[21:46:38] [BOT 3] [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+[21:46:38] [BOT 3] [1301]	Taille : 2  -  StartupActionsListMessage
+[21:46:38] [BOT 3] [4001]	[Envoi] Friend list request
+[21:46:38] [BOT 3] [5676]	[Envoi] Ignored list request
+[21:46:38] [BOT 3] [6355]	[Envoi] Spouse list request
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [4002]	Taille : 25  -  FriendsListMessage
+[21:46:38] [BOT 3] [5607]	[Envoi] Client key
+[21:46:38] [BOT 3] [250]	[Envoi] Game context create request
+[21:46:38] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [5674]	Taille : 2  -  IgnoredListMessage
+[21:46:38] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:38] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:38] [BOT 3] [201]	Taille : 0  -  GameContextDestroyMessage
+[21:46:38] [BOT 3] [200]	Taille : 1  -  GameContextCreateMessage
+[21:46:38] [BOT 3] [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+[21:46:38] [BOT 3] [220]	Taille : 42  -  CurrentMapMessage
+[21:46:39] [BOT 3] [225]	[Envoi] Map info request
+[21:46:39] [BOT 3] [175]	Taille : 10  -  BasicTimeMessage
+[21:46:39] [BOT 3] [500]	Taille : 383  -  CharacterStatsListMessage
+[21:46:39] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:39] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:39] [BOT 3] [226]	Taille : 1785  -  MapComplementaryInformationsDataMessage
+[21:46:39] [BOT 3] [210]	Taille : 1  -  MapFightCountMessage
+[21:46:39] [BOT 3] [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+[21:46:39] [BOT 3] [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+[21:46:39] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:39] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:46:46] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:46:52] [BOT 3] [5816]	Taille : 0  -  BasicLatencyStatsRequestMessage
+[21:46:52] [BOT 3] [5663]	[Envoi] Latency message
+[21:46:53] [BOT 3] [6362]	Taille : 3  -  BasicAckMessage
+[21:46:53] [BOT 3] [176]	Taille : 0  -  BasicNoOperationMessage
+[21:46:53] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:46:54] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:46:57] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:46:58] [BOT 3] [951]	Taille : 20  -  GameMapMovementMessage
+[21:47:00] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:47:02] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:47:03] [BOT 3] [946]	Taille : 9  -  GameMapChangeOrientationMessage
+[21:47:03] [BOT 3] [251]	Taille : 8  -  GameContextRemoveElementMessage
+[21:47:07] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage
+[21:47:14] [BOT 3] [951]	Taille : 16  -  GameMapMovementMessage

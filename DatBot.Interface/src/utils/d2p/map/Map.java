@@ -64,8 +64,8 @@ public class Map {
 
 	public Map()
 	{
-		BackgroundFixtures = new ArrayList<Fixture>();
-		ForegroundFixtures = new ArrayList<Fixture>();
+//		BackgroundFixtures = new ArrayList<Fixture>();
+//		ForegroundFixtures = new ArrayList<Fixture>();
 		Layers = new ArrayList<Layer>();
 	}
 
@@ -157,14 +157,14 @@ public class Map {
 		{
 			Fixture item = new Fixture();
 			item.init(reader);
-			BackgroundFixtures.add(item);
+//			BackgroundFixtures.add(item);
 		}
 		ForegroundsCount = reader.readByte();
 		for (int i = 0; i < ForegroundsCount; i++)
 		{
 			Fixture fixture2 = new Fixture();
 			fixture2.init(reader);
-			ForegroundFixtures.add(fixture2);
+//			ForegroundFixtures.add(fixture2);
 		}
 		CellsCount = 560;
 		reader.readInt();

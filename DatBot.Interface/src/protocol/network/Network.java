@@ -192,12 +192,6 @@ public class Network implements Runnable {
 		this.botInstance = botInstance;
 		initLogs();
 		this.displayPacket = displayPacket;
-		try {
-			this.mapManager = new MapManager(getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
-		}
-		catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		this.map = new Map();
 		this.info = info;
 		this.stats = new Stats(this);
@@ -365,7 +359,7 @@ public class Network implements Runnable {
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
 		String newSt = "[" + timing + "] " + str;
-		System.out.println(str);
+		System.out.println(newSt);
 	}
 
 	public void getReturn(String[] message) {
@@ -375,6 +369,7 @@ public class Network implements Runnable {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		return;
 	}
 
 	public void reception() throws Exception {
@@ -390,6 +385,7 @@ public class Network implements Runnable {
 					DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 					buildMessage(reader);
 				}
+//				data.close();
 			}
 		}
 		this.socket.close();
@@ -1193,6 +1189,8 @@ public class Network implements Runnable {
 				this.info.setInHunt(true);
 				break;
 		}
+		packet_content = null;
+		dataReader.bis.close();
 		return;
 	}
 
@@ -1359,6 +1357,7 @@ public class Network implements Runnable {
 		for (int i = 0; i < Ticket.size(); i++) {
 			encryptedTicket[i] = Ticket.get(i).byteValue();
 		}
+		Ticket = null;
 		String decryptedTicket = Crypto.decryptAESkey(encryptedTicket);
 		AuthenticationTicketMessage authenticationTicketMessage = new AuthenticationTicketMessage("fr", decryptedTicket);
 		sendToServer(authenticationTicketMessage, AuthenticationTicketMessage.ProtocolId, "Authentification du ticket...");
@@ -1398,8 +1397,7 @@ public class Network implements Runnable {
 
 	private void HandleMapRequestMessage(double mapId) throws Exception {
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
-		Map map = this.mapManager.FromId((int) mapId);
-		this.map = map;
+		this.map = MapManager.FromId((int) mapId);
 		this.interactive.setMap(map);
 		this.info.setCoords(GameData.getCoordMap((int) mapId));
 		this.info.setWorldmap(GameData.getWorldMap((int) mapId));
