@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import ia.fight.map.LineOfSight;
+import ia.fight.map.Map;
 import ia.fight.structure.Player;
 import ia.fight.structure.spells.SpellObject;
 
@@ -107,9 +108,9 @@ public class PlayingEntity {
 	public ArrayList<SpellObject> getOptimalTurn(PlayingEntity victim){
 		long start = System.currentTimeMillis();
 		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
-		for(int i = 0; i < getModel().getAvailableSpells().size(); i++) {
-			if(getModel().getAvailableSpells().get(i).isEntityTargetableBySpell(victim)) {
-				spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
+		for(int i = 0; i < getModel().getAvailableSpells(false).size(); i++) {
+			if(getModel().getAvailableSpells(false).get(i).isEntityTargetableBySpell(victim)) {
+				spellsForEnnemy.add(getModel().getAvailableSpells(false).get(i));
 			}
 		}
 		
@@ -148,30 +149,42 @@ public class PlayingEntity {
 		return optimalTurn;
 	}
 	
-	public ArrayList<SpellObject> getOptimalTurnFrom(Position position, PlayingEntity victim){
+	public ArrayList<SpellObject> getOptimalTurnFrom(Position position, PlayingEntity victim, boolean show, Map map){
 		long start = System.currentTimeMillis();
 		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
-		for(int i = 0; i < getModel().getAvailableSpells().size(); i++) {
-			boolean entityTargetable = getModel().getAvailableSpells().get(i).isEntityTargetableBySpell(victim);
-			boolean hasVisibility = LineOfSight.visibility(position, victim.getPosition(), Game.map.getBlocks());
-			boolean requiresLineOfSight = getModel().getAvailableSpells().get(i).requiresLineOfSight();
-			boolean overMinimumRange = getModel().getAvailableSpells().get(i).getMinimumRange() <= Position.distance(position, victim.getPosition());
-			boolean hasModifiableRange = getModel().getAvailableSpells().get(i).isModifiableRange();
-			boolean underMaximumRange = hasModifiableRange ? getModel().getAvailableSpells().get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition()) : getModel().getAvailableSpells().get(i).getMaximumRange() >= Position.distance(position, victim.getPosition());
+		for(int i = 0; i < getModel().getAvailableSpells(false).size(); i++) {
+			boolean entityTargetable = getModel().getAvailableSpells(false).get(i).isEntityTargetableBySpell(victim);
+			boolean hasVisibility = LineOfSight.visibility(position, victim.getPosition(), map.getBlocks());
+			boolean requiresLineOfSight = getModel().getAvailableSpells(false).get(i).requiresLineOfSight();
+			boolean overMinimumRange = getModel().getAvailableSpells(false).get(i).getMinimumRange() <= Position.distance(position, victim.getPosition());
+			boolean hasModifiableRange = getModel().getAvailableSpells(false).get(i).isModifiableRange();
+			boolean underMaximumRange = hasModifiableRange ? getModel().getAvailableSpells(false).get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition()) : getModel().getAvailableSpells(false).get(i).getMaximumRange() >= Position.distance(position, victim.getPosition());
 			boolean entityIsWithinDistance = overMinimumRange && underMaximumRange;
-			boolean isStraightLineCastAndInLine = getModel().getAvailableSpells().get(i).isStraightLineCast() && (!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY()));
-			boolean isNotStraightLineCast = !getModel().getAvailableSpells().get(i).isStraightLineCast();
+			boolean isStraightLineCastAndInLine = getModel().getAvailableSpells(false).get(i).isStraightLineCast() && (!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY()));
+			boolean isNotStraightLineCast = !getModel().getAvailableSpells(false).get(i).isStraightLineCast();
+			boolean isNotOnCooldown = getModel().getAvailableSpells(false).get(i).getCooldown() <= 0;
 			
 			if(entityTargetable && (hasVisibility || !requiresLineOfSight)) {
 				if(entityIsWithinDistance) {
 					if(isStraightLineCastAndInLine || isNotStraightLineCast) {
-						spellsForEnnemy.add(getModel().getAvailableSpells().get(i));
+						spellsForEnnemy.add(getModel().getAvailableSpells(false).get(i));
 					}
 				}
 			}
 		}
 		
 		PlayingEntity caster = this;
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		
+		if(spellsForEnnemy.size() > 0) {
+			brainText.add("Spell selection for damage.");
+		}else {
+			brainText.add("No spell currently available for selection !");
+		}
+		
+		
+		
 		
 		Collections.sort(spellsForEnnemy, new Comparator<SpellObject>() {
 			@Override
@@ -183,6 +196,16 @@ public class PlayingEntity {
 				}
 			}
 		});
+		
+		for(int i = 0; i < spellsForEnnemy.size(); i++) {
+			brainText.add(spellsForEnnemy.get(i).getName()+" : "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+		}
+		
+		
+		if(show) {
+			Game.los.panel.updateBrainText(brainText);
+		}
+		
 		
 		ArrayList<SpellObject> optimalTurn = new ArrayList<>();
 		int tempAP = this.getModel().getAP();

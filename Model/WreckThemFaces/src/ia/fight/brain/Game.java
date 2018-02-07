@@ -33,8 +33,8 @@ public class Game {
 	static final int RANDOM = -1;
 	static final boolean DISPLAY_GUI = true;
 	
-	static public Map map;
-	static public ArrayList<PlayingEntity> playingEntities;
+	public Map map;
+	public ArrayList<PlayingEntity> playingEntities;
 	static public GameViz los;
 	private static int current_command_nbr = 0;
 	
@@ -80,13 +80,13 @@ public class Game {
 	 * Initializes the game map. Creates a map and opens a JFrame.
 	 * @param map
 	 */
-	public void initGame(int map) {
-		Map mapObject = CreateMap.getMapById(map);
-		Game.map = mapObject;
+	public void initGame(int map_nbr) {
+		Map mapObject = CreateMap.getMapById(map_nbr);
+		map = mapObject;
 		los = new GameViz(mapObject);
-		log.println("Init game to map : "+map);
+		log.println("Init game to map : "+map_nbr);
 		ArrayList<String> commands = new ArrayList<>();
-		commands.add("Init game to map : "+map);
+		commands.add("Init game to map : "+map_nbr);
 		los.panel.updateBrainText(commands);
 	}
 	
@@ -94,8 +94,8 @@ public class Game {
 	 * Ends the game by disposing of the window.
 	 */
 	public void endGame() {
-		Game.playingEntities.clear();
-		los.dispose();
+		playingEntities.clear();
+		//los.dispose();
 	}
 	
 	/**
@@ -123,10 +123,10 @@ public class Game {
 	 * @param id ID of the playingEntity seeked after
 	 * @return a PlayingEntity object
 	 */
-	private static PlayingEntity getPlayingEntityFromID(int id) {
-		for(int i = 0; i < Game.playingEntities.size(); i++) {
+	private PlayingEntity getPlayingEntityFromID(int id) {
+		for(int i = 0; i < playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
-				return Game.playingEntities.get(i);
+				return playingEntities.get(i);
 			}
 		}
 		
@@ -159,7 +159,7 @@ public class Game {
 	 * Executes a movement command
 	 * @param command
 	 */
-	static private void executeMovementCommand(JSONArray command){
+	private void executeMovementCommand(JSONArray command){
 		System.out.println("RECEIVED MOVEMENT COMMAND");
 		System.out.println(command);
 		
@@ -192,7 +192,7 @@ public class Game {
 	 * Executes a spell command
 	 * @param command
 	 */
-	static private void executeSpellCommand(JSONArray command) {
+	private void executeSpellCommand(JSONArray command) {
 		System.out.println("RECEIVED SPELL COMMAND");
 		System.out.println(command);
 		
@@ -234,42 +234,52 @@ public class Game {
 			System.out.println("The target has died! "+death);
 		}
 		
-		int id = (int) spellCommand.get("sourceId");
-		int spellId = (int) spellCommand.get("spellId");
-		int critical = (int) spellCommand.get("critical");
-		int targetId = (int) spellCommand.get("targetId");
-		int x = (int) spellCommand.get("x");
-		int y = (int) spellCommand.get("y");
-		
-		PlayingEntity castingEntity = getPlayingEntityFromID(id);
-		PlayingEntity victim = getPlayingEntityFromID(targetId);
-		
-		Game.log.println("Casting "+spellId+" to : ["+x+";"+y+"]");
-		SpellObject spellCast = Game.getSpellFromID(spellId);
-		
 		ArrayList<String> brainText = new ArrayList<>();
-		brainText.add("Casting "+spellCast+" to : ["+x+";"+y+"]");
-		brainText.add("");
-		brainText.add("More details about entity "+id+" :");
-		brainText.add(castingEntity.toString());
-		String strings[] = castingEntity.getModel().toString().split("\n");
-		for(int i = 0; i < strings.length; i++) {
-			brainText.add(strings[i]);
-		}
 		
+		if(spellCommand != null) {
+			int id = (int) spellCommand.get("sourceId");
+			int spellId = (int) spellCommand.get("spellId");
+			int critical = (int) spellCommand.get("critical");
+			int targetId = (int) spellCommand.get("targetId");
+			int x = (int) spellCommand.get("x");
+			int y = (int) spellCommand.get("y");
+			
+			PlayingEntity castingEntity = getPlayingEntityFromID(id);
+			PlayingEntity victim = getPlayingEntityFromID(targetId);
+			
+			Game.log.println("Casting "+spellId+" to : ["+x+";"+y+"]");
+			SpellObject spellCast = Game.getSpellFromID(spellId);
+			
+			brainText.add("Casting "+spellCast+" to : ["+x+";"+y+"]");
+			brainText.add("");
+			brainText.add("More details about entity "+id+" :");
+			brainText.add(castingEntity.toString());
+			String strings[] = castingEntity.getModel().toString().split("\n");
+			for(int i = 0; i < strings.length; i++) {
+				brainText.add(strings[i]);
+			}
+
+			if(LPLost) {
+				int damage = (int) lifePointsLost.get("lpLost");
+				spellCast.applySpells(castingEntity, victim, false, damage);
+			}else if(LPGained) {
+				int heals = (int) lifePointsGained.get("lpGained");
+				spellCast.applySpells(castingEntity, victim, true, heals);
+			}
+		}else {
+			if(LPLost) {
+				int damage = (int) lifePointsLost.get("lpLost");
+				PlayingEntity victim = getPlayingEntityFromID((int)lifePointsLost.get("targetId"));
+				victim.getModel().removeLP(damage);
+			}else if(LPGained) {
+				int heals = (int) lifePointsGained.get("lpGained");
+				PlayingEntity victim = getPlayingEntityFromID((int)lifePointsGained.get("targetId"));
+				victim.getModel().addLP(heals);
+			}
+		}
+
 		
 		Game.los.panel.updateBrainText(brainText);
-
-		Game.log.println(spellCast);
-		Game.log.println("Printing simple name : " + castingEntity.getClass().getSimpleName());
-		
-		if(LPLost) {
-			int damage = (int) lifePointsLost.get("lpLost");
-			spellCast.applySpells(castingEntity, victim, false, damage);
-		}else if(LPGained) {
-			int heals = (int) lifePointsGained.get("lpGained");
-			spellCast.applySpells(castingEntity, victim, true, heals);
-		}
 		
 		for(int i = playingEntities.size()-1; i >= 0; i--) {
 			if(playingEntities.get(i).getModel().getLP() <= 0) {
@@ -294,7 +304,7 @@ public class Game {
 		log.println("Entity "+id+" passing turn.");
 	}
 	
-	static private PlayingEntity getClosestEnnemy(PlayingEntity caster) {
+	private PlayingEntity getClosestEnnemy(PlayingEntity caster) {
 		ArrayList<PlayingEntity> ennemies = new ArrayList<>();
 		
 		for(int i = 0; i < playingEntities.size(); i++) {
@@ -339,7 +349,7 @@ public class Game {
 	 * @param command
 	 * @return
 	 */
-	static private String getBestTurn(JSONArray command) {
+	private String getBestTurn(JSONArray command) {
 		
 		JSONObject idObj = (JSONObject) command.get(0);
 		int id = (int) idObj.get("id");
@@ -354,7 +364,7 @@ public class Game {
 		
 		for(int k = caster.getPosition().getX() - caster.getModel().getMP(); k < caster.getPosition().getX() + caster.getModel().getMP()+1; k++) {
 			for(int l = caster.getPosition().getY() - caster.getModel().getMP(); l < caster.getPosition().getY() + caster.getModel().getMP()+1; l++) {
-				if(Game.map.isPositionAccessible(caster.getPosition(), new Position(k,l), caster.getModel().getMP())) {
+				if(map.isPositionAccessible(caster.getPosition(), new Position(k,l), caster.getModel().getMP())) {
 					accessiblePositions.add(new Position(k, l));
 				}
 			}
@@ -365,7 +375,7 @@ public class Game {
 		ArrayList<bestEnemyAndTurn> bestPositions = new ArrayList<>();
 		
 		for(int i = 0; i < accessiblePositions.size(); i++) {
-			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim);
+			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim, false, map);
 			
 			for(int j = 0; j < turn.size(); j++) {
 				totalDamage += turn.get(j).getDamagePreviz(caster, victim);
@@ -393,8 +403,9 @@ public class Game {
 			}
 		}
 		
-		ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(selectedPosition.position, victim);
-		log.println("AP remaining : "+caster.getModel().getAP()+"TURN : " +turn);
+		ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(selectedPosition.position, victim, true, map);
+		turn.clear();
+		log.println("AP remaining : "+caster.getModel().getAP()+" TURN : " +turn);
 		
 		String action = "";
 		
@@ -521,7 +532,7 @@ public class Game {
 			executePassTurn(command);
 		}
 		
-		//los.update(playingEntities);
+		los.update(playingEntities);
 		
 		if(DISPLAY_GUI)
 			los.repaint();
