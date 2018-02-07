@@ -3,6 +3,7 @@ package ia.fight.structure;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import ia.fight.brain.Game;
 import ia.fight.structure.spells.SpellObject;
 import ia.fight.structure.spells.spelltypes.Buff;
 
@@ -84,15 +85,30 @@ public abstract class Player {
 		return level;
 	}
 
-	public ArrayList<SpellObject> getAvailableSpells(){
+	public ArrayList<SpellObject> getAvailableSpells(boolean show){
 		ArrayList<SpellObject> spells = new ArrayList<>();
 		
+		ArrayList<String> brainText = new ArrayList<>();
+		brainText.add("Getting all available spells.");
+
 		for(int i = 0; i < this.getSpells().length; i++){
 			if(this.getSpells()[i].getCost() <= this.AP && this.getSpells()[i].isAvailable()){
 				spells.add(this.getSpells()[i]);
+				brainText.add(this.getSpells()[i].getName() + "is currently available.");
+			}else {
+				brainText.add(this.getSpells()[i].getName() + "is currently unavailable !! Reason :");
+				if(this.getSpells()[i].getCost() <= this.AP) {
+					brainText.add("    It costs too much : "+this.getSpells()[i].getCost()+"/"+this.AP);
+				}else {
+					brainText.add("    It is not available. CD : "+this.getSpells()[i].getCooldown()+". Number of casts done this turn :"+this.getSpells()[i].getSpellCounter()+"/"+this.getSpells()[i].getNumberOfCastsPerTurn());
+				}
 			}
 		}
 		
+		if(show) {
+			Game.los.panel.updateBrainText(brainText);
+		}
+			
 		return spells;
 	}
 	

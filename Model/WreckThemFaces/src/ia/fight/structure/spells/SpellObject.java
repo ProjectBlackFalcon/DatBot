@@ -57,10 +57,14 @@ public class SpellObject {
 	}
 	
 	public boolean isAvailable() {
-		boolean cd = cooldown >= 0;
+		boolean cd = cooldown <= 0;
 		boolean sc = spellCounter < numberOfCastsPerTurn;
 
 		return cd && sc;
+	}
+	
+	public int getSpellCounter() {
+		return spellCounter;
 	}
 	
 	public int getDamagePreviz(PlayingEntity caster, PlayingEntity target) {
@@ -225,6 +229,10 @@ public class SpellObject {
 		this.requireLineOfSight = lineOfSight;
 	}
 
+	public int getCooldown() {
+		return cooldown;
+	}
+	
 	/**
 	 * Apply a spell on a certain entity
 	 * @param pe Entity on which the action is cast
@@ -240,6 +248,8 @@ public class SpellObject {
 		}
 		
 		
+		
+		
 		if(victim.getModel().getLP() <= 0) {
 			
 		}
@@ -249,6 +259,7 @@ public class SpellObject {
 		
 			
 		Game.log.println("Casting spell directly onto : "+victim);
+		
 		
 		boolean found = false;
 		for(int j = 0; j < this.spellPerEntityCounter.size(); j++) {

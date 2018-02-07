@@ -107,15 +107,15 @@ public class Pushback extends Spell{
 			
 		});
 
-		for(int i = 0; i < concernedPositions.size(); i++){
-			if(Game.map.isPositionWalkable(concernedPositions.get(i))){
-				target.setPosition(concernedPositions.get(i));
-			}else{
-				target.getModel().removeLP((concernedPositions.size()-i)*50);
-				//Game.log.println("Got squished against a wall with "+(concernedPositions.size()-i)+" remaining.");
-				break;
-			}
-		}
+//		for(int i = 0; i < concernedPositions.size(); i++){
+//			if(Game.map.isPositionWalkable(concernedPositions.get(i))){
+//				target.setPosition(concernedPositions.get(i));
+//			}else{
+//				target.getModel().removeLP((concernedPositions.size()-i)*50);
+//				//Game.log.println("Got squished against a wall with "+(concernedPositions.size()-i)+" remaining.");
+//				break;
+//			}
+//		}
 	}
 
 	@Override
