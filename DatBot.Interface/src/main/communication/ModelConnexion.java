@@ -636,6 +636,7 @@ public class ModelConnexion {
 				}
 			}
 		}).start();
+		return;
 	}
 
 	public boolean waitToSend() throws InterruptedException {
