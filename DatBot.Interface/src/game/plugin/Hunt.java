@@ -81,6 +81,7 @@ public class Hunt {
 	}
 
 	public String getCurrentClue() {
+		this.currentClue = this.currentClue.replaceAll("\"", "");
 		return currentClue;
 	}
 
