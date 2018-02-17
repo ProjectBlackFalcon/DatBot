@@ -174,7 +174,7 @@ public class JsonUnpacker {
                 }
                 else
                 {
-                	Network.append1(String.format("Error: invalid type( {0} ) for field {1}", field.fieldType, field.fieldName));
+                	System.out.println(String.format("Error: invalid type( {0} ) for field {1}", field.fieldType, field.fieldName));
                 }
                 break;
         }

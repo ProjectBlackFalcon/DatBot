@@ -44,8 +44,6 @@ public class Info {
 	private int lvl = -1;
 	private int weigthMax;
 	private int weight;
-	private CharacterStatsListMessage stats;
-	private List<JobExperience> job = new ArrayList<JobExperience>();
 
 	// Game utils
 	private boolean waitForMov = true;
@@ -260,26 +258,6 @@ public class Info {
 	public void setWeight(int weight)
 	{
 		this.weight = weight;
-	}
-
-	public CharacterStatsListMessage getStats()
-	{
-		return stats;
-	}
-
-	public void setStats(CharacterStatsListMessage stats)
-	{
-		this.stats = stats;
-	}
-
-	public List<JobExperience> getJob()
-	{
-		return job;
-	}
-
-	public void setJob(List<JobExperience> job)
-	{
-		this.job = job;
 	}
 
 	public boolean isWaitForMov()

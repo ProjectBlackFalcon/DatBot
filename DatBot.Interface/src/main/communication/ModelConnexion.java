@@ -4,16 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
-import game.movement.Movement;
-import game.plugin.Bank;
 import game.plugin.Hunt;
-import game.plugin.Interactive;
-import game.plugin.Monsters;
-import game.plugin.Npc;
-import game.plugin.Stats;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
 import protocol.network.messages.game.context.roleplay.havenbag.EnterHavenBagRequestMessage;
@@ -29,58 +22,36 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMess
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
-import utils.d2p.map.Map;
 
 public class ModelConnexion {
 
-	private String msg;
-
-	private InteractiveUseRequestMessage interactiveUseRequestMessage;
-	private NpcGenericActionRequestMessage npcGenericactionRequestMessage;
 	private boolean bankOppened;
 	private Network network;
-	private Interactive interactive;
-	private Bank bank;
-	private Movement movement;
-	private Info info;
-	private Stats stats;
-	private Monsters monsters;
-	private Map map;
-	private Npc npc;
 
 	public ModelConnexion(Network network) throws InterruptedException {
 		this.network = network;
 	}
 
 	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception {
-		this.interactive = network.getInteractive();
-		this.bank = network.getBank();
-		this.movement = network.getMovement();
-		this.stats = network.getStats();
-		this.info = network.getInfo();
-		this.monsters = network.getMonsters();
-		this.map = network.getMap();
-		this.npc = network.getNpc();
-
 		Object[] toSend = null;
 
 		switch (cmd) {
 			case "getMap":
-				toSend = new Object[] { String.valueOf("(" + this.info.getCoords()[0]) + "," + String.valueOf(this.info.getCoords()[1]) + ")", this.info.getCellId(), this.info.getWorldmap(), Integer.valueOf((int) this.info.getMapId()) };
+				toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
 				break;
 			case "move":
 				toSend = move(Integer.parseInt(param));
 				break;
 			case "changeMap":
 				String[] infoMov = param.split(",");
-				MapMovement mapMovement = movement.ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
+				MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
 				if (mapMovement == null) {
 					toSend = new Object[] { "False" };
 					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 				}
 				else {
 					mapMovement.PerformChangement();
-					if (this.getMovement().moveOver()) {
+					if (this.network.getMovement().moveOver()) {
 						toSend = new Object[] { "True" };
 					}
 					else {
@@ -89,14 +60,14 @@ public class ModelConnexion {
 				}
 				break;
 			case "changeMapTest":
-				MapMovement mapMovement1 = movement.ChangeMap(param);
+				MapMovement mapMovement1 = this.network.getMovement().ChangeMap(param);
 				if (mapMovement1 == null) {
 					toSend = new Object[] { "False" };
 					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 				}
 				else {
 					mapMovement1.PerformChangement();
-					if (this.getMovement().moveOver()) {
+					if (this.network.getMovement().moveOver()) {
 						toSend = new Object[] { "True" };
 					}
 					else {
@@ -105,22 +76,22 @@ public class ModelConnexion {
 				}
 				break;
 			case "getResources":
-				toSend = new Object[] { interactive.getFarmCell() };
+				toSend = new Object[] { this.network.getInteractive().getFarmCell() };
 				break;
 			case "harvest":
-				if (interactive.harvestCell(Integer.parseInt(param))) {
-					toSend = new Object[] { interactive.getLastItemHarvestedId(), interactive.getQuantityLastItemHarvested(), this.info.getWeight(), this.info.getWeigthMax() };
+				if (this.network.getInteractive().harvestCell(Integer.parseInt(param))) {
+					toSend = new Object[] { this.network.getInteractive().getLastItemHarvestedId(), this.network.getInteractive().getQuantityLastItemHarvested(), this.network.getInfo().getWeight(), this.network.getInfo().getWeigthMax() };
 				}
 				else {
 					toSend = new Object[] { "False" };
 				}
 				break;
 			case "getStats":
-				toSend = new Object[] { this.stats };
+				toSend = new Object[] { this.network.getStats() };
 				break;
 			case "goAstrub":
-				if (this.map.getId() == 153880835) {
-					npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
+				if (this.network.getMap().getId() == 153880835) {
+					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request Npc to go to Astrub");
 					if (this.waitToSend("Map")) {
 						toSend = new Object[] { "True" };
@@ -134,9 +105,9 @@ public class ModelConnexion {
 				}
 				break;
 			case "goIncarnam":
-				int r = interactive.getStatue();
+				int r = this.network.getInteractive().getStatue();
 				if (r != -1) {
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive.getElementIdStatue(), interactive.getSkillInstanceUidStatue());
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getInteractive().getElementIdStatue(), this.network.getInteractive().getSkillInstanceUidStatue());
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
 					if (this.waitToSend("Map")) {
 						toSend = new Object[] { "True" };
@@ -150,7 +121,7 @@ public class ModelConnexion {
 				}
 				break;
 			case "getStatue":
-				int statueCellId = interactive.getStatue();
+				int statueCellId = this.network.getInteractive().getStatue();
 				if (statueCellId != -1) {
 					toSend = new Object[] { statueCellId };
 				}
@@ -159,23 +130,23 @@ public class ModelConnexion {
 				}
 				break;
 			case "getBankDoor":
-				if (this.map.getId() == 144931) {
-					toSend = new Object[] { bank.cellIdBrakmarIN, bank.cellIdBrakmarOUT };
+				if (this.network.getMap().getId() == 144931) {
+					toSend = new Object[] { this.network.getBank().cellIdBrakmarIN, this.network.getBank().cellIdBrakmarOUT };
 				}
-				else if (this.map.getId() == 84674566) {
-					toSend = new Object[] { bank.cellIdAstrubIN, bank.cellIdAstrubOUT };
+				else if (this.network.getMap().getId() == 84674566) {
+					toSend = new Object[] { this.network.getBank().cellIdAstrubIN, this.network.getBank().cellIdAstrubOUT };
 				}
-				else if (this.map.getId() == 147254) {
-					toSend = new Object[] { bank.cellIdBontaIN, bank.cellIdBontaOUT };
+				else if (this.network.getMap().getId() == 147254) {
+					toSend = new Object[] { this.network.getBank().cellIdBontaIN, this.network.getBank().cellIdBontaOUT };
 				}
 				else {
 					toSend = new Object[] { "False" };
 				}
 				break;
 			case "goBank":
-				if (this.map.getId() == 144931) { // Brakmar
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(bank.interactiveBrakmarIN, getInteractive().getSkill(bank.interactiveBrakmarIN));
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
+				if (this.network.getMap().getId() == 144931) { // Brakmar
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBrakmarIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBrakmarIN));
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
 					if (this.waitToSend("Map")) {
 						toSend = new Object[] { "True" };
 					}
@@ -183,9 +154,9 @@ public class ModelConnexion {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else if (this.map.getId() == 84674566) { // Astrub
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(bank.interactiveAstrubIN, getInteractive().getSkill(bank.interactiveAstrubIN));
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
+				else if (this.network.getMap().getId() == 84674566) { // Astrub
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveAstrubIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveAstrubIN));
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
 					if (this.waitToSend("Map")) {
 						toSend = new Object[] { "True" };
 					}
@@ -193,9 +164,9 @@ public class ModelConnexion {
 						toSend = new Object[] { "False" };
 					}
 				}
-				else if (this.map.getId() == 147254) { // Bonta
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(bank.interactiveBontaIN, getInteractive().getSkill(bank.interactiveBontaIN));
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
+				else if (this.network.getMap().getId() == 147254) { // Bonta
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBontaIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBontaIN));
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
 					if (this.waitToSend("Map")) {
 						toSend = new Object[] { "True" };
 					}
@@ -208,11 +179,11 @@ public class ModelConnexion {
 				}
 				break;
 			case "openBank":
-				if (this.map.getId() == 83887104 || this.map.getId() == 2884617 || this.map.getId() == 8912911) {
-					npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.npc.getNpc().get(0).getContextualId(), 3, this.map.getId());
-					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+				if (this.network.getMap().getId() == 83887104 || this.network.getMap().getId() == 2884617 || this.network.getMap().getId() == 8912911) {
+					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.network.getNpc().getNpc().get(0).getContextualId(), 3, this.network.getMap().getId());
+					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { bank };
+						toSend = new Object[] { this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -225,7 +196,7 @@ public class ModelConnexion {
 				break;
 			case "closeBank":
 				if (bankOppened) {
-					getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
+					getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close this.network.getBank()");
 					this.waitToSend();
 					toSend = new Object[] { "True" };
 				}
@@ -237,9 +208,9 @@ public class ModelConnexion {
 			case "dropBank":
 				if (bankOppened) {
 					String[] toBank = param.split(",");
-					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { this.stats, bank };
+						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -252,9 +223,9 @@ public class ModelConnexion {
 			case "getBank":
 				if (bankOppened) {
 					String[] fromBank = param.split(",");
-					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in bank");
+					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { this.stats, bank };
+						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -272,9 +243,9 @@ public class ModelConnexion {
 						ids.add(Integer.parseInt(string.replaceAll("\\s+", "")));
 					}
 					ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
-					getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in bank");
+					getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { this.stats, bank };
+						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -292,9 +263,9 @@ public class ModelConnexion {
 						ids1.add(Integer.parseInt(string.replaceAll("\\s+", "")));
 					}
 					ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
-					getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
+					getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { this.stats, bank };
+						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -307,9 +278,9 @@ public class ModelConnexion {
 			case "getBankKamas":
 				if (bankOppened) {
 					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(param));
-					getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from bank");
+					getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { this.stats, bank };
+						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -322,9 +293,9 @@ public class ModelConnexion {
 			case "dropBankKamas":
 				if (bankOppened) {
 					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(param));
-					getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in bank");
+					getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { this.stats, bank };
+						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -337,9 +308,9 @@ public class ModelConnexion {
 			case "dropBankAll":
 				if (bankOppened) {
 					ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
-					getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in bank");
+					getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
 					if (this.waitToSend()) {
-						toSend = new Object[] { this.stats, bank };
+						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -350,14 +321,14 @@ public class ModelConnexion {
 				}
 				break;
 			case "getMonsters":
-				toSend = new Object[] { this.getMonsters() };
+				toSend = new Object[] { this.network.getMonsters() };
 				break;
 			case "attackMonster":
 				int id = (int) Double.parseDouble(param);
 				boolean canAtk = false;
-				for (int i = 0; i < this.getMonsters().getMonsters().size(); i++) {
-					if (id == (int) this.getMonsters().getMonsters().get(i).getContextualId()) {
-						if (this.info.getCellId() == this.getMonsters().getMonsters().get(i).getDisposition().getCellId()) {
+				for (int i = 0; i < this.network.getMonsters().getMonsters().size(); i++) {
+					if (id == (int) this.network.getMonsters().getMonsters().get(i).getContextualId()) {
+						if (this.network.getInfo().getCellId() == this.network.getMonsters().getMonsters().get(i).getDisposition().getCellId()) {
 							canAtk = true;
 						}
 					}
@@ -373,11 +344,11 @@ public class ModelConnexion {
 					}
 				}
 				else {
-					toSend = new Object[] { this.getMonsters() };
+					toSend = new Object[] { this.network.getMonsters() };
 				}
 				break;
 			case "enterBag":
-				EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.info.getActorId());
+				EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 				getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
 				if (this.waitToSend()) {
 					toSend = new Object[] { "True" };
@@ -387,7 +358,7 @@ public class ModelConnexion {
 				}
 				break;
 			case "exitBag":
-				EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.info.getActorId());
+				EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 				getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
 				if (this.waitToSend()) {
 					toSend = new Object[] { "True" };
@@ -397,8 +368,8 @@ public class ModelConnexion {
 				}
 				break;
 			case "getZaap":
-				if (!(this.interactive.getInteractive(114) == null)) {
-					toSend = new Object[] { this.interactive.getInteractive(114)[0] };
+				if (!(this.network.getInteractive().getInteractive(114) == null)) {
+					toSend = new Object[] { this.network.getInteractive().getInteractive(114)[0] };
 				}
 				else {
 					toSend = new Object[] { "False" };
@@ -408,13 +379,13 @@ public class ModelConnexion {
 				String newParam = param.replaceAll("\\(", "");
 				newParam = newParam.replaceAll("\\)", "");
 				String[] paramZaap = newParam.split(",");
-				int[] interactive = this.interactive.getInteractive(114);
+				int[] interactive = this.network.getInteractive().getInteractive(114);
 				if (!(interactive == null)) {
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
 					if (this.waitToSend()) {
 						Thread.sleep(1500 + new Random().nextInt(800));
-						double mapId = this.interactive.getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
+						double mapId = this.network.getInteractive().getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
 						if (mapId != -1) {
 							TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
 							getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
@@ -438,8 +409,8 @@ public class ModelConnexion {
 				}
 				break;
 			case "getHuntingHallDoorCell":
-				if (this.map.getId() == 142088718) {
-					toSend = new Object[] { this.interactive.getInteractive(184)[0] };
+				if (this.network.getMap().getId() == 142088718) {
+					toSend = new Object[] { this.network.getInteractive().getInteractive(184)[0] };
 				}
 				else {
 					toSend = new Object[] { "False" };
@@ -449,9 +420,9 @@ public class ModelConnexion {
 			 * Go into the first hall Then move to cell 292 to go in main hall
 			 */
 			case "goHuntingHall":
-				if (this.map.getId() == 142088718 && this.info.getCellId() == 356) {
-					int[] interactive2 = this.interactive.getInteractive(184);
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+				if (this.network.getMap().getId() == 142088718 && this.network.getInfo().getCellId() == 356) {
+					int[] interactive2 = this.network.getInteractive().getInteractive(184);
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
 					if (this.waitToSend("Map")) {
 						sleepShort();
@@ -475,8 +446,8 @@ public class ModelConnexion {
 				}
 				if (this.network.getMap().getId() == 128451073) {
 					move(536);
-					int[] interactive2 = this.interactive.getInteractive(184);
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+					int[] interactive2 = this.network.getInteractive().getInteractive(184);
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exiting hunting hall");
 					if (this.waitToSend("Map")) {
 						toSend = new Object[] { "True" };
@@ -496,12 +467,12 @@ public class ModelConnexion {
 			 *
 			 */
 			case "newHunt":
-				if (this.map.getId() == 128452097 && !this.network.getInfo().isInHunt()) {
-					if (!(this.info.getCellId() == 304)) {
+				if (this.network.getMap().getId() == 128452097 && !this.network.getInfo().isInHunt()) {
+					if (!(this.network.getInfo().getCellId() == 304)) {
 						move(304);
 					}
-					int[] interactiveHunt = Hunt.getHuntFromLvl(this.info.getLvl());
-					interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
+					int[] interactiveHunt = Hunt.getHuntFromLvl(Integer.parseInt(param));
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
 					if (this.waitToSend("Interactive")) {
 						toSend = new Object[] { this.getNetwork().getHunt().getNumberOfSteps() , this.getNetwork().getHunt().getNumberOfIndex()};
@@ -528,7 +499,7 @@ public class ModelConnexion {
 			 * Get the start map of the hunt
 			 */
 			case "getHuntStart":
-				if (this.info.isInHunt()) {
+				if (this.network.getInfo().isInHunt()) {
 					toSend = new Object[] { "(" + this.getNetwork().getHunt().getStartMapCoords()[0] + "," + this.getNetwork().getHunt().getStartMapCoords()[1] + ")" };
 				}
 				else {
@@ -540,9 +511,9 @@ public class ModelConnexion {
 			 * Return fight if its the last step
 			 */
 			case "getClue":
-				if (this.info.isInHunt() && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
+				if (this.network.getInfo().isInHunt() && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
 					toSend = new Object[] { this.network.getHunt().getCurrentClue() + "," + Hunt.getDirection(this.network.getHunt().getCurrentDir()) };
-				} else if(this.info.isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)){
+				} else if(this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)){
 					toSend = new Object[] { "Fight" };
 				}
 				else {
@@ -550,7 +521,7 @@ public class ModelConnexion {
 				}
 				break;
 			case "validateClue":
-				if (this.info.isInHunt() && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
+				if (this.network.getInfo().isInHunt() && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
 					TreasureHuntFlagRequestMessage treasureHuntFlagRequestMessage = new TreasureHuntFlagRequestMessage(0, this.network.getHunt().getCurrentIndex());
 					getNetwork().sendToServer(treasureHuntFlagRequestMessage, TreasureHuntFlagRequestMessage.ProtocolId, "Validating clue");
 					if (this.waitToSend("Hunt")) {
@@ -577,11 +548,11 @@ public class ModelConnexion {
 			 * Return the number of index for the next step
 			 */
 			case "validateStep":
-				if (this.info.isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex() - 1) && !(this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
+				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex() - 1) && !(this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
 					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
 					if (this.waitToSend("Hunt")) {
-						if (this.info.isStepSuccess()) {
+						if (this.network.getInfo().isStepSuccess()) {
 							toSend = new Object[] { this.getNetwork().getHunt().getNumberOfIndex() };
 						}
 						else {
@@ -597,11 +568,11 @@ public class ModelConnexion {
 				}
 				break;
 			case "huntFight":
-				if (this.info.isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
+				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
 					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Starting hunt fight");
 					if (this.waitToSend("Hunt")) {
-						if (this.info.isJoinedFight()) {
+						if (this.network.getInfo().isJoinedFight()) {
 							toSend = new Object[] { "True" };
 						}
 						else {
@@ -640,13 +611,13 @@ public class ModelConnexion {
 	}
 
 	public boolean waitToSend() throws InterruptedException {
-		while (!info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight() && !info.isInteractiveUsed() && !info.isHuntAnswered()) {
+		while (!this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered()) {
 			Thread.sleep(50);
 		}
-		while (!info.isBasicNoOperationMsg()) {
+		while (!this.network.getInfo().isBasicNoOperationMsg()) {
 			Thread.sleep(50);
 		}
-		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight() && !info.isInteractiveUsed() && !info.isHuntAnswered()) {
+		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered()) {
 			return false;
 		}
 		else {
@@ -657,47 +628,47 @@ public class ModelConnexion {
 	public boolean waitToSend(String s) throws InterruptedException {
 		switch (s) {
 			case "Map":
-				while (!info.isNewMap()) {
+				while (!this.network.getInfo().isNewMap()) {
 					Thread.sleep(50);
 				}
 				break;
 			case "Storage":
-				while (!info.isStorage()) {
+				while (!this.network.getInfo().isStorage()) {
 					Thread.sleep(50);
 				}
 				break;
 			case "StorageUpd":
-				while (!info.isStorageUpdate()) {
+				while (!this.network.getInfo().isStorageUpdate()) {
 					Thread.sleep(50);
 				}
 				break;
 			case "Exchange":
-				while (!info.isLeaveExchange()) {
+				while (!this.network.getInfo().isLeaveExchange()) {
 					Thread.sleep(50);
 				}
 				break;
 			case "Fight":
-				while (!info.isJoinedFight()) {
+				while (!this.network.getInfo().isJoinedFight()) {
 					Thread.sleep(50);
 				}
 				break;
 			case "Interactive":
-				while (!info.isInteractiveUsed() && !info.isBasicNoOperationMsg()) {
+				while (!this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isBasicNoOperationMsg()) {
 					Thread.sleep(50);
 				}
 				break;
 			case "Hunt":
-				while (!info.isHuntAnswered() && !info.isBasicNoOperationMsg()) {
+				while (!this.network.getInfo().isHuntAnswered() && !this.network.getInfo().isBasicNoOperationMsg()) {
 					Thread.sleep(50);
 				}
 				break;
 		}
 
-		while (!info.isBasicNoOperationMsg()) {
+		while (!this.network.getInfo().isBasicNoOperationMsg()) {
 			Thread.sleep(50);
 		}
 
-		if (info.isBasicNoOperationMsg() && !info.isNewMap() && !info.isStorage() && !info.isStorageUpdate() && !info.isLeaveExchange() && !info.isJoinedFight() && !info.isInteractiveUsed() && !info.isHuntAnswered()) {
+		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered()) {
 			return false;
 		}
 		else {
@@ -706,25 +677,23 @@ public class ModelConnexion {
 	}
 
 	private Object[] move(int param) {
-		this.info = network.getInfo();
-		this.map = network.getMap();
 		CellMovement mov;
 		Object[] toSend = null;
 		try {
-			mov = getMovement().MoveToCell(param);
+			mov = this.network.getMovement().MoveToCell(param);
 			if (mov == null || mov.path == null) {
 				toSend = new Object[] { "False" };
 			}
-			else if (this.info.getCellId() == param) {
+			else if (this.network.getInfo().getCellId() == param) {
 				toSend = new Object[] { "True" };
 			}
 			else {
-				int mapId = this.map.getId();
+				int mapId = this.network.getMap().getId();
 				mov.performMovement();
-				if (this.getMovement().moveOver()) {
-					if (this.info.getCellId() == param) {
-						if ((mapId == 83887104 && this.info.getCellId() == 396) || (mapId == 2884617 && this.info.getCellId() == 424) || (mapId == 8912911 && this.info.getCellId() == 424) || (mapId == 128451073 && this.info.getCellId() == 292) || (mapId == 128452097 && this.info.getCellId() == 504)) {
-							while (!this.info.isNewMap()) {
+				if (this.network.getMovement().moveOver()) {
+					if (this.network.getInfo().getCellId() == param) {
+						if ((mapId == 83887104 && this.network.getInfo().getCellId() == 396) || (mapId == 2884617 && this.network.getInfo().getCellId() == 424) || (mapId == 8912911 && this.network.getInfo().getCellId() == 424) || (mapId == 128451073 && this.network.getInfo().getCellId() == 292) || (mapId == 128452097 && this.network.getInfo().getCellId() == 504)) {
+							while (!this.network.getInfo().isNewMap()) {
 								Thread.sleep(50);
 							}
 							toSend = new Object[] { "True" };
@@ -758,6 +727,7 @@ public class ModelConnexion {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void sleepLong() {
 		try {
 			Random r = new Random();
@@ -774,53 +744,5 @@ public class ModelConnexion {
 
 	public void setNetwork(Network network) {
 		this.network = network;
-	}
-
-	public Interactive getInteractive() {
-		return interactive;
-	}
-
-	public void setInteractive(Interactive interactive) {
-		this.interactive = interactive;
-	}
-
-	public Bank getBank() {
-		return bank;
-	}
-
-	public void setBank(Bank bank) {
-		this.bank = bank;
-	}
-
-	public Movement getMovement() {
-		return movement;
-	}
-
-	public void setMovement(Movement movement) {
-		this.movement = movement;
-	}
-
-	public Info getInfo() {
-		return info;
-	}
-
-	public void setInfo(Info info) {
-		this.info = info;
-	}
-
-	public Stats getStats() {
-		return stats;
-	}
-
-	public void setStats(Stats stats) {
-		this.stats = stats;
-	}
-
-	public Monsters getMonsters() {
-		return monsters;
-	}
-
-	public void setMonsters(Monsters monsters) {
-		this.monsters = monsters;
 	}
 }
