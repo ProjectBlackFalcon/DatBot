@@ -23,30 +23,8 @@ import utils.d2p.map.Map;
 public class testMap {
 
 	public static void main(String[] args) throws IOException {
-        long startAt1 = System.currentTimeMillis();
-        d2iManager d2iManager = new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
-        System.out.println(utils.d2i.d2iManager.getText(1));
+		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
         System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(1));
-        System.out.println("Read in " + (System.currentTimeMillis() - startAt1) + "ms");
-        System.gc();
-        while(true){
-        	try {
-				Thread.sleep(1000);
-			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-        }
+        System.out.println(d2iManager.getText(505126));
 	}
 }
