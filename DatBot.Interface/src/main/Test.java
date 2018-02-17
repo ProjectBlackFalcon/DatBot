@@ -32,8 +32,8 @@ public class Test {
 		// communication.getReturn("2;0;i;cmd;connect;[wublel7,wubwublel7,Dihydroquerina,Julith]");
 		// communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 		 communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
-		communication.getReturn("0;0;i;cmd;getClue;[None]");
-
+		communication.getReturn("0;0;i;cmd;getCluesLeft;[None]");
+		communication.getReturn("0;0;i;cmd;getStepsLeft;[None]");
 		// /**
 		// * ChangeMapTest method Input : North, South, East, West
 		// */
