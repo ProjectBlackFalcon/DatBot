@@ -24,7 +24,7 @@ public class testMap {
 
 	public static void main(String[] args) throws IOException {
         long startAt1 = System.currentTimeMillis();
-        d2iManager d2iManager = new d2iManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
+        d2iManager d2iManager = new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
         System.out.println(utils.d2i.d2iManager.getText(1));
         System.out.println(d2iManager.getText(1));
         System.out.println(d2iManager.getText(1));

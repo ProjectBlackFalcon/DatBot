@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -54,6 +55,7 @@ import game.plugin.Stats;
 import ia.fight.map.CreateMap;
 import io.netty.util.internal.ThreadLocalRandom;
 import main.communication.Communication;
+import main.communication.DisplayInfo;
 import main.communication.ModelConnexion;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
@@ -84,6 +86,7 @@ import protocol.network.messages.game.character.choice.CharacterSelectionMessage
 import protocol.network.messages.game.character.choice.CharactersListMessage;
 import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
+import protocol.network.messages.game.chat.ChatServerMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
 import protocol.network.messages.game.context.GameContextReadyMessage;
 import protocol.network.messages.game.context.GameContextRemoveElementMessage;
@@ -157,29 +160,22 @@ import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 
-public class Network implements Runnable {
+public class Network extends DisplayInfo implements Runnable {
 
 	private Socket socket;
 	private String ip = "213.248.126.40";
 	private int port = 5555;
-	private int botInstance = 0;
 	private ModelConnexion modelConnexion;
 	private Message message;
 	private List<Integer> Ticket;
-	// Log window
-	private FileOutputStream fileOutputStream;
-	public boolean displayPacket;
-	private JFrame f;
-	private JPanel panel;
-	private JTextPane text;
 	// Big packet split
 	private int bigPacketLengthToFull;// Length needed to finish the packet
 	private int bigPacketId;
 	private byte[] bigPacketData;
-	// Timing
-	private Random r = new Random(); // Random for thread sleep
 
-	// Plugin
+	/*
+	 * Plugin variable
+	 */
 	public boolean connectionToKoli = false;
 	private Fight fight;
 	private Interactive interactive;
@@ -189,14 +185,11 @@ public class Network implements Runnable {
 	private Stats stats;
 	private Info info;
 	private Monsters monsters;
-	private MapManager mapManager;
 	private Map map;
 	private Hunt hunt;
 
 	public Network(boolean displayPacket, Info info, int botInstance) {
-		this.botInstance = botInstance;
-		initLogs();
-		this.displayPacket = displayPacket;
+		super(botInstance,displayPacket);
 		this.map = new Map();
 		this.info = info;
 		this.stats = new Stats(this);
@@ -229,167 +222,16 @@ public class Network implements Runnable {
 		}
 	}
 
-	public static String getPathDatBot() {
-		JSONArray a;
-		String s = Paths.get("").toAbsolutePath().toString();
-		int i = s.indexOf("DatBot");
-		s = s.substring(0, i + 6);
-		return s;
-	}
-
 	@Override
 	public void run() {
 		try {
 			append("Connection...");
-			if (displayPacket) {
-				initComponent();
-				f.pack();
-				f.setVisible(true);
-			}
 			reception();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	private void initComponent() {
-		// Jframe Creation
-		f = new JFrame("Log");
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setLocation(950, 25);
-		f.setPreferredSize(new Dimension(900, 600));
-		// JPanel creation
-		panel = new JPanel();
-		f.getContentPane().add(panel);
-		// JtextArea creation
-		text = new JTextPane();
-		text.setBorder(new EmptyBorder(new Insets(0, 0, 0, 0)));
-		text.setFont(new Font("Lucida Console", text.getFont().getStyle(), 12));
-		panel.add(text);
-		// Scroll
-		JScrollPane scroll = new JScrollPane(text);
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		f.add(scroll);
-	}
-
-	public PrintStream log;
-	public static PrintStream debug;
-
-	/**
-	 * Inits all the logs.
-	 * 
-	 * @author baptiste
-	 */
-	public void initLogs() {
-		try {
-			// log = System.out;
-			fileOutputStream = new FileOutputStream("log_network" + botInstance + ".txt");
-			log = new PrintStream(fileOutputStream);
-			// debug = new PrintStream(new FileOutputStream("debug.txt"));
-			debug = System.out;
-			System.setErr(debug);
-		}
-		catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	/**
-	 * Append the text on the panel depending on the String
-	 * 
-	 * @param JtextPane
-	 *            tp
-	 * @param String
-	 *            msg
-	 * @param Color
-	 *            c
-	 */
-	private void appendToPane(JTextPane tp, String msg, Color c) {
-		StyleContext sc = StyleContext.getDefaultStyleContext();
-		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
-		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida	Console");
-		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-		int len = tp.getDocument().getLength();
-		tp.setCaretPosition(len);
-		tp.setCharacterAttributes(aset, false);
-		tp.replaceSelection(msg);
-	}
-
-	/**
-	 * Append the text eiher on the panel or System.out
-	 * 
-	 * @param String
-	 *            str
-	 * @param boolean
-	 *            b ; True:panel ; False:System.out
-	 */
-	public void append(String str, boolean b) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		String timing = formatter.format(time);
-		if (displayPacket && b) {
-			appendToPane(text, "[" + timing + "] ", Color.black);
-			if (str.contains("Envoi")) {
-				appendToPane(text, str + "\n", new Color(0, 0, 140));
-			}
-			else {
-				appendToPane(text, str + "\n", new Color(0, 110, 0));
-			}
-		}
-		else {
-			List<String> lines;
-			try {
-				lines = Files.readAllLines(Paths.get("log_network" + botInstance + ".txt"), Charset.defaultCharset());
-				if(lines.size() > 20){
-					clearTheFile();
-				}
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
-			log.println(newSt);
-		}
-	}
-	
-	public void clearTheFile() {
-        FileWriter fwOb;
-		try {
-			fwOb = new FileWriter("log_network" + botInstance + ".txt", false);
-	        PrintWriter pwOb = new PrintWriter(fwOb, false);
-	        pwOb.flush();
-	        pwOb.close();
-	        fwOb.close();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		} 
-    }
-
-	public void append(boolean str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		String timing = formatter.format(time);
-		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
-		debug.println(newSt);
-	}
-
-	public void append(String str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		String timing = formatter.format(time);
-		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
-		debug.println(newSt);
-	}
-
-	public static void append1(String str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		String timing = formatter.format(time);
-		String newSt = "[" + timing + "] " + str;
-		System.out.println(newSt);
 	}
 
 	public void getReturn(String[] message) {
@@ -415,7 +257,7 @@ public class Network implements Runnable {
 					DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 					buildMessage(reader);
 				}
-//				data.close();
+				//				data.close();
 			}
 		}
 		this.socket.close();
@@ -424,62 +266,29 @@ public class Network implements Runnable {
 	/**
 	 * Packet manager
 	 * 
-	 * @param int
-	 *            packet_id
-	 * @param byte[]
-	 *            packet_content
+	 * @param int packet_id
+	 * @param byte[] packet_content
 	 */
 	@SuppressWarnings("unchecked")
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
-		append("[" + packet_id + "]\tTaille : " + packet_content.length + "  -  " + name.name, true);
+		appendLog("[" + packet_id + "]\tTaille : " + packet_content.length + "  -  " + name.name);
 		JSONObject jsonObject = null;
 		JSONObject jsonObject2;
 		switch (packet_id) {
-			case 1:
-				ProtocolRequired protoc = new ProtocolRequired();
-				protoc.Deserialize(dataReader);
-				break;
 			case 3:
-				HelloConnectMessage hello = new HelloConnectMessage();
-				hello.Deserialize(dataReader);
-				byte[] key = new byte[hello.getKey().size()];
-				for (int i = 0; i < hello.getKey().size(); i++) {
-					key[i] = hello.getKey().get(i).byteValue();
-				}
-				HandleHelloConnectMessage(key, hello.getSalt());
-				break;
-			case 10:
-				LoginQueueStatusMessage queue = new LoginQueueStatusMessage();
-				queue.Deserialize(dataReader);
-				break;
-			case 20:
-				IdentificationFailedMessage fail = new IdentificationFailedMessage();
-				fail.Deserialize(dataReader);
-				break;
-			case 22:
-				IdentificationSuccessMessage success = new IdentificationSuccessMessage();
-				success.Deserialize(dataReader);
+				handleHelloConnectMessage(dataReader);
 				break;
 			case 30:
-				ServersListMessage servers = new ServersListMessage();
-				servers.Deserialize(dataReader);
-				HandleServersListMessage(Servers.getServerId(info.getServer()));
+				handleServersListMessage(dataReader);
 				break;
 			case 42:
-				SelectedServerDataMessage selectServer = new SelectedServerDataMessage();
-				if (dataReader.available() == 0) {
-					this.message = null;
-					return;
-				}
-				selectServer.Deserialize(dataReader);
-				HandleSelectedDataServer(selectServer.getAddress(), selectServer.getPort(), selectServer.getTicket());
+				handleSelectedServerDataMessage(dataReader);
 				break;
 			case 101:
 				HandleAuthentificationTicketMessage();
 				if (connectionToKoli) {
-					Thread.sleep(r.nextInt(100));
 					HandleCharacterListRequestMessage();
 				}
 				break;
@@ -490,19 +299,7 @@ public class Network implements Runnable {
 				HandleCharacterListRequestMessage();
 				break;
 			case 151:
-				CharactersListMessage charactersListMessage = new CharactersListMessage();
-				charactersListMessage.Deserialize(dataReader);
-				int j = 0;
-				for (int i = 0; i < charactersListMessage.getCharacters().size(); i++) {
-					if (charactersListMessage.getCharacters().get(i).getName().equals(info.getName())) {
-						HandleCharacterSelectionMessage(charactersListMessage.getCharacters().get(i).getId());
-						info.setActorId(charactersListMessage.getCharacters().get(i).getId());
-						info.setLvl(charactersListMessage.getCharacters().get(i).getLevel());
-						j = 1;
-						break;
-					}
-				}
-				if (j == 0) throw new Error("Wrong character name !");
+				handleCharacterSelectionMessage(dataReader);
 				break;
 			case 1301:
 				HandleFriendIgnoreSpouseMessages();
@@ -512,19 +309,11 @@ public class Network implements Runnable {
 				HandleGameContextCreateMessage();
 				break;
 			case 500:
-				info.setStats(new CharacterStatsListMessage());
-				info.getStats().Deserialize(dataReader);
+				stats.setStats(new CharacterStatsListMessage());
+				stats.getStats().Deserialize(dataReader);
 				break;
 			case 220:
-				CurrentMapMessage currentMapMessage = new CurrentMapMessage();
-				currentMapMessage.Deserialize(dataReader);
-				info.setMapId(currentMapMessage.getMapId());
-				if (connectionToKoli) {
-					sendToServer(new GameContextReadyMessage(currentMapMessage.getMapId()), GameContextReadyMessage.ProtocolId, "Context ready");
-				}
-				else {
-					HandleMapRequestMessage(currentMapMessage.getMapId());
-				}
+				handleMapRequestMessage(dataReader);
 				break;
 			case 176:
 				info.setBasicNoOperationMsg(true);
@@ -543,7 +332,8 @@ public class Network implements Runnable {
 						else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
 							this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
 
-						} else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")){
+						}
+						else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")) {
 							this.hunt.setPhorror(true);
 						}
 						if (complementaryInformationsDataMessage.getActors().get(i).getContextualId() == info.getActorId()) info.setCellId(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId());
@@ -558,15 +348,7 @@ public class Network implements Runnable {
 				}
 				break;
 			case 6622:
-				MapComplementaryInformationsDataInHavenBagMessage mapComplementaryInformationsDataInHavenBagMessage = new MapComplementaryInformationsDataInHavenBagMessage();
-				mapComplementaryInformationsDataInHavenBagMessage.Deserialize(dataReader);
-				getInteractive().setStatedElements(mapComplementaryInformationsDataInHavenBagMessage.getStatedElements());
-				getInteractive().setInteractiveElements(mapComplementaryInformationsDataInHavenBagMessage.getInteractiveElements());
-				append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
-				this.info.setCellId(mapComplementaryInformationsDataInHavenBagMessage.getActors().get(0).getDisposition().getCellId());
-				append("CellId : " + info.getCellId());
-				info.setWaitForMov(true);
-				info.setNewMap(true);
+				handleMapComplementaryInformationsDataInHavenBagMessage(dataReader);
 				break;
 			case 951:
 				GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
@@ -678,15 +460,15 @@ public class Network implements Runnable {
 				JobExperienceMultiUpdateMessage experienceMultiUpdateMessage = new JobExperienceMultiUpdateMessage();
 				experienceMultiUpdateMessage.Deserialize(dataReader);
 				for (JobExperience b : experienceMultiUpdateMessage.getExperiencesUpdate()) {
-					info.getJob().add(new JobExperience(b.getJobId(), b.getJobLevel(), b.getJobXP(), b.getJobXpLevelFloor(), b.getJobXpNextLevelFloor()));
+					stats.getJob().add(new JobExperience(b.getJobId(), b.getJobLevel(), b.getJobXP(), b.getJobXpLevelFloor(), b.getJobXpNextLevelFloor()));
 				}
 				break;
 			case 5654:
 				JobExperienceUpdateMessage experienceUpdateMessage = new JobExperienceUpdateMessage();
 				experienceUpdateMessage.Deserialize(dataReader);
-				for (int i = 0; i < info.getJob().size(); i++) {
-					if (experienceUpdateMessage.getExperiencesUpdate().getJobId() == info.getJob().get(i).getJobId()) {
-						info.getJob().set(i, experienceUpdateMessage.getExperiencesUpdate());
+				for (int i = 0; i < stats.getJob().size(); i++) {
+					if (experienceUpdateMessage.getExperiencesUpdate().getJobId() == stats.getJob().get(i).getJobId()) {
+						stats.getJob().set(i, experienceUpdateMessage.getExperiencesUpdate());
 					}
 				}
 				break;
@@ -832,57 +614,13 @@ public class Network implements Runnable {
 				getBank().getStorage().setKamas(storageKamasUpdateMessage.getKamasTotal());
 				info.setStorageUpdate(true);
 				break;
-			// case 881:
-			// ChatServerMessage chatServerMessage = new ChatServerMessage();
-			// chatServerMessage.Deserialize(dataReader);
-			// if (chatServerMessage.channel == 0)
-			// { // Général
-			// output = new BufferedWriter(new FileWriter(info.server +
-			// "General.txt", true));
-			// output.append(System.lineSeparator() + "[" +
-			// chatServerMessage.senderName + "]" + "[" + (int)
-			// chatServerMessage.senderAccountId + "] " +
-			// chatServerMessage.content);
-			// output.close();
-			// }
-			// else if (chatServerMessage.channel == 5)
-			// { // Commerce
-			// output = new BufferedWriter(new FileWriter(info.server +
-			// "Commerce.txt", true));
-			// output.append(System.lineSeparator() + "[" +
-			// chatServerMessage.senderName + "]" + "[" + (int)
-			// chatServerMessage.senderAccountId + "] " +
-			// chatServerMessage.content);
-			// output.close();
-			// }
-			// else if (chatServerMessage.channel == 6)
-			// { // Recrutement
-			// output = new BufferedWriter(new FileWriter(info.server +
-			// "Recrutement.txt", true));
-			// output.append(System.lineSeparator() + "[" +
-			// chatServerMessage.senderName + "]" + "[" + (int)
-			// chatServerMessage.senderAccountId + "] " +
-			// chatServerMessage.content);
-			// output.close();
-			// }
-			// break;
-			// case 5683:
-			// EmotePlayMessage emotePlayMessage = new EmotePlayMessage();
-			// emotePlayMessage.Deserialize(dataReader);
-			// output = new BufferedWriter(new FileWriter(info.server +
-			// "General.txt", true));
-			// output.append(System.lineSeparator() + "[" + (int)
-			// emotePlayMessage.accountId + "] EmoteId : " +
-			// emotePlayMessage.emoteId);
-			// output.close();
-			// break;
 			case 702:
 				GameFightJoinMessage gameFightJoinMessage = new GameFightJoinMessage();
 				gameFightJoinMessage.Deserialize(dataReader);
 				info.setJoinedFight(true);
 				info.setTurn(false);
 				info.setInitFight(false);
-				Communication.sendToModel(String.valueOf(botInstance), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] { "None" });
+				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] { "None" });
 				JSONObject mapJSONObject = new JSONObject();
 				mapJSONObject.put("mapID", (int) info.getMapId());
 				JSONArray tempArr = new JSONArray();
@@ -1194,7 +932,7 @@ public class Network implements Runnable {
 			case 6484:
 				TreasureHuntDigRequestAnswerMessage treasureHuntDigRequestAnswerMessage = new TreasureHuntDigRequestAnswerMessage();
 				treasureHuntDigRequestAnswerMessage.Deserialize(dataReader);
-				if(treasureHuntDigRequestAnswerMessage.getResult() == 1){
+				if (treasureHuntDigRequestAnswerMessage.getResult() == 1) {
 					this.getInfo().setStepSuccess(true);
 				}
 				break;
@@ -1206,7 +944,7 @@ public class Network implements Runnable {
 				this.hunt.setCurrentStep(treasureHuntMessage.getCheckPointCurrent());
 				this.hunt.setNumberOfIndex(treasureHuntMessage.getTotalStepCount());
 				this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getStartMapId()));
-				this.hunt.setCurrentIndex(sizeStep-1);
+				this.hunt.setCurrentIndex(sizeStep - 1);
 				if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToPOI")) {
 					this.hunt.setCurrentClue(GameData.getClueName(((TreasureHuntStepFollowDirectionToPOI) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getPoiLabelId()));
 					this.hunt.setCurrentDir(((TreasureHuntStepFollowDirectionToPOI) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getDirection());
@@ -1222,6 +960,85 @@ public class Network implements Runnable {
 		packet_content = null;
 		dataReader.bis.close();
 		return;
+	}
+
+	private void handleMapRequestMessage(DofusDataReader dataReader) throws Exception, IOException {
+		CurrentMapMessage currentMapMessage = new CurrentMapMessage();
+		currentMapMessage.Deserialize(dataReader);
+		info.setMapId(currentMapMessage.getMapId());
+		if (connectionToKoli) {
+			sendToServer(new GameContextReadyMessage(currentMapMessage.getMapId()), GameContextReadyMessage.ProtocolId, "Context ready");
+		}
+		else {
+			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
+			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
+			this.interactive.setMap(map);
+			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
+			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));
+			sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
+		}
+	}
+
+	private void handleCharacterSelectionMessage(DofusDataReader dataReader) throws Exception, Error {
+		CharactersListMessage charactersListMessage = new CharactersListMessage();
+		charactersListMessage.Deserialize(dataReader);
+		int j = 0;
+		for (int i = 0; i < charactersListMessage.getCharacters().size(); i++) {
+			if (charactersListMessage.getCharacters().get(i).getName().equals(info.getName())) {
+				CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(charactersListMessage.getCharacters().get(i).getId());
+				sendToServer(characterSelectionMessage, CharacterSelectionMessage.ProtocolId, "Selection du personnage...");
+				info.setActorId(charactersListMessage.getCharacters().get(i).getId());
+				info.setLvl(charactersListMessage.getCharacters().get(i).getLevel());
+				j = 1;
+				break;
+			}
+		}
+		if (j == 0) throw new Error("Wrong character name !");
+	}
+
+	private void handleSelectedServerDataMessage(DofusDataReader dataReader) throws IOException, UnknownHostException {
+		SelectedServerDataMessage selectServer = new SelectedServerDataMessage();
+		selectServer.Deserialize(dataReader);
+		Ticket = selectServer.getTicket();
+		this.socket.close();
+		this.socket = new Socket(selectServer.getAddress(), selectServer.getPort());
+	}
+
+	private void handleServersListMessage(DofusDataReader dataReader) throws Exception {
+		ServersListMessage servers = new ServersListMessage();
+		servers.Deserialize(dataReader);
+		ServerSelectionMessage select = new ServerSelectionMessage(Servers.getServerId(info.getServer()));
+		sendToServer(select, ServerSelectionMessage.ProtocolId, "Selection du serveur...");
+	}
+
+	private void handleHelloConnectMessage(DofusDataReader dataReader) throws IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, Exception {
+		HelloConnectMessage hello = new HelloConnectMessage();
+		hello.Deserialize(dataReader);
+		byte[] key = new byte[hello.getKey().size()];
+		for (int i = 0; i < hello.getKey().size(); i++) {
+			key[i] = hello.getKey().get(i).byteValue();
+		}
+		VersionExtended versionExtended = new VersionExtended(2, 45, 15, 0, 0, 0, 1, 1);
+		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
+		List<Integer> credentialsArray = new ArrayList<Integer>();
+		for (byte b : credentials) {
+			credentialsArray.add((int) b);
+		}
+		List<Integer> failedAttempts = new ArrayList<Integer>();
+		IdentificationMessage identification = new IdentificationMessage(versionExtended, "fr", credentialsArray, 0, true, false, false, 0, failedAttempts);
+		sendToServer(identification, IdentificationMessage.ProtocolId, "Identification...");
+	}
+
+	private void handleMapComplementaryInformationsDataInHavenBagMessage(DofusDataReader dataReader) {
+		MapComplementaryInformationsDataInHavenBagMessage mapComplementaryInformationsDataInHavenBagMessage = new MapComplementaryInformationsDataInHavenBagMessage();
+		mapComplementaryInformationsDataInHavenBagMessage.Deserialize(dataReader);
+		getInteractive().setStatedElements(mapComplementaryInformationsDataInHavenBagMessage.getStatedElements());
+		getInteractive().setInteractiveElements(mapComplementaryInformationsDataInHavenBagMessage.getInteractiveElements());
+		append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
+		this.info.setCellId(mapComplementaryInformationsDataInHavenBagMessage.getActors().get(0).getDisposition().getCellId());
+		append("CellId : " + info.getCellId());
+		info.setWaitForMov(true);
+		info.setNewMap(true);
 	}
 
 	public void buildMessage(DofusDataReader reader) throws Exception {
@@ -1244,14 +1061,7 @@ public class Network implements Runnable {
 				this.bigPacketData = destination;
 			}
 			if (bigPacketLengthToFull == 0) {
-				// this.network.append("\n----------------------------------");
-				// this.network.append("[Re�u] ID = " + bigPacketId);
-				// this.network.append("[Re�u] ID = " + bigPacketId + " |
-				// Taille
-				// du contenu = " + bigPacketData.length + "\n[Data] : " +
-				// bytesToString(bigPacketData, "%02X", false));
 				TreatPacket(bigPacketId, bigPacketData);
-				// this.network.append("\n----------------------------------");
 				bigPacketData = null;
 				bigPacketId = 0;
 			}
@@ -1262,14 +1072,7 @@ public class Network implements Runnable {
 			}
 			message.build(reader);
 			if (message.getId() != 0 && message.bigPacketLength == 0) {
-				//
-				// this.network.append("\n----------------------------------");
-				// this.network.append("[Re�u] ID = " + message.getId());
-				// this.network.append("[Re�u] ID = " + message.getId() + " |
-				// Taille du contenu = " + message.getLength() + "\n[Data] : " +
-				// bytesToString(message.getData(), "%02X", false));
 				TreatPacket(message.getId(), message.getData());
-				// this.network.append("\n----------------------------------");
 			}
 			else if (message.getId() != 0 && message.bigPacketLength != 0) {
 				bigPacketLengthToFull = message.bigPacketLength;
@@ -1295,7 +1098,7 @@ public class Network implements Runnable {
 		byte[] wrote = WritePacket(writer, bous, id);
 		dout.write(wrote);
 		dout.flush();
-		append("[" + id + "]	[Envoi] " + s, true);
+		appendLog("[" + id + "]	[Envoi] " + s);
 	}
 
 	private byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception {
@@ -1349,23 +1152,6 @@ public class Network implements Runnable {
 		return sb.toString();
 	}
 
-	private void HandleHelloConnectMessage(byte[] key, String salt) throws Exception {
-		VersionExtended versionExtended = new VersionExtended(2, 45, 15, 0, 0, 0, 1, 1);
-		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), salt);
-		List<Integer> credentialsArray = new ArrayList<Integer>();
-		for (byte b : credentials) {
-			credentialsArray.add((int) b);
-		}
-		List<Integer> failedAttempts = new ArrayList<Integer>();
-		IdentificationMessage identification = new IdentificationMessage(versionExtended, "fr", credentialsArray, 0, true, false, false, 0, failedAttempts);
-		sendToServer(identification, IdentificationMessage.ProtocolId, "Identification...");
-	}
-
-	private void HandleServersListMessage(int i) throws Exception {
-		ServerSelectionMessage select = new ServerSelectionMessage(i);
-		sendToServer(select, ServerSelectionMessage.ProtocolId, "Selection du serveur...");
-	}
-
 	private void HandleRawDataMessage() throws Exception {
 		List<Integer> tt = new ArrayList<>();
 		for (int i = 0; i <= 255; i++) {
@@ -1377,9 +1163,7 @@ public class Network implements Runnable {
 	}
 
 	private void HandleSelectedDataServer(String address, int port, List<Integer> ticket) throws IOException {
-		Ticket = ticket;
-		this.socket.close();
-		this.socket = new Socket(address, port);
+
 	}
 
 	private void HandleAuthentificationTicketMessage() throws Exception {
@@ -1398,8 +1182,7 @@ public class Network implements Runnable {
 	}
 
 	private void HandleCharacterSelectionMessage(long id) throws Exception {
-		CharacterSelectionMessage characterSelectionMessage = new CharacterSelectionMessage(id);
-		sendToServer(characterSelectionMessage, CharacterSelectionMessage.ProtocolId, "Selection du personnage...");
+
 	}
 
 	private void HandleFriendIgnoreSpouseMessages() throws Exception {
@@ -1423,15 +1206,6 @@ public class Network implements Runnable {
 	private void HandleSequenceNumberMessage() throws Exception {
 		SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage(LatencyFrame.Sequence++);
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
-	}
-
-	private void HandleMapRequestMessage(double mapId) throws Exception {
-		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(mapId);
-		this.map = MapManager.FromId((int) mapId);
-		this.interactive.setMap(map);
-		this.info.setCoords(GameData.getCoordMap((int) mapId));
-		this.info.setWorldmap(GameData.getWorldMap((int) mapId));
-		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 	}
 
 	private void HandleLatencyMessage() throws Exception {
@@ -1503,10 +1277,6 @@ public class Network implements Runnable {
 		this.fight = fight;
 	}
 
-	public int getBotInstance() {
-		return botInstance;
-	}
-
 	public Npc getNpc() {
 		return npc;
 	}
@@ -1521,14 +1291,6 @@ public class Network implements Runnable {
 
 	public void setSocket(Socket socket) {
 		this.socket = socket;
-	}
-
-	public JFrame getF() {
-		return f;
-	}
-
-	public void setF(JFrame f) {
-		this.f = f;
 	}
 
 	public Hunt getHunt() {

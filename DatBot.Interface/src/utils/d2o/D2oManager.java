@@ -135,8 +135,8 @@ public class D2oManager {
 	{
 		for (Entry<Integer, Integer> objectPointer : this.objectPointerTable.entrySet())
 		{
-			Network.append1(String.format("Class %s, Object Id %s:", this.classDefinitions.get(getClassId(objectPointer.getKey().intValue())), objectPointer.getKey()));
-			Network.append1(unpacker.getObjectJsonString(objectPointer.getKey()));
+			System.out.println(String.format("Class %s, Object Id %s:", this.classDefinitions.get(getClassId(objectPointer.getKey().intValue())), objectPointer.getKey()));
+			System.out.println(unpacker.getObjectJsonString(objectPointer.getKey()));
 		}
 	}
 
@@ -151,13 +151,13 @@ public class D2oManager {
 	{
 		if (this.classDefinitions.size() > 0)
 		{
-			Network.append1(String.format("Printing %s class tables.", classDefinitions.size()));
-			Network.append1("");
+			System.out.println(String.format("Printing %s class tables.", classDefinitions.size()));
+			System.out.println("");
 
 			for (Entry<Integer, GameDataClassDefinition> classDefinition : this.classDefinitions.entrySet())
 			{
-				Network.append1(String.format("Class id:%s - name %s", classDefinition.getKey(), classDefinition.getValue().Name));
-				Network.append1("");
+				System.out.println(String.format("Class id:%s - name %s", classDefinition.getKey(), classDefinition.getValue().Name));
+				System.out.println("");
 
 				for (GameDataField field : classDefinition.getValue().Fields)
 				{
@@ -176,7 +176,7 @@ public class D2oManager {
 
 	private void printField(String fieldString)
 	{
-		Network.append1(fieldString);
+		System.out.println(fieldString);
 	}
 
 	private String getFieldTypeString(GameDataField field)
@@ -194,7 +194,7 @@ public class D2oManager {
 	private String getCompositeFieldTypeString(GameDataField field)
 	{
 		StringBuilder compositeFieldTypeBuilder = new StringBuilder();
-		Network.append1(field.innerField.fieldType);
+		System.out.println(field.innerField.fieldType);
 		compositeFieldTypeBuilder.append("vector").append("<").append(getFieldTypeString(field.innerField)).append(">");
 		return compositeFieldTypeBuilder.toString();
 	}

@@ -1,8 +1,11 @@
 package utils;
 
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.json.simple.JSONArray;
 
 import protocol.network.Network;
 import utils.d2i.d2iManager;
@@ -12,10 +15,18 @@ public class GameData {
 
 	public GameData() {
 	}
+	
+	public static String getPathDatBot() {
+		JSONArray a;
+		String s = Paths.get("").toAbsolutePath().toString();
+		int i = s.indexOf("DatBot");
+		s = s.substring(0, i + 6);
+		return s;
+	}
 
 	public static int getWorldMap(double mapId) {
 		try {
-			D2oManager d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
+			D2oManager d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
 			String s = d2oManager.searchObjectById((int) mapId);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
@@ -36,7 +47,7 @@ public class GameData {
 	
 	public static int[] getCoordMap(int mapId){
 		try {
-			D2oManager d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
+			D2oManager d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
 			String s = d2oManager.searchObjectById((int) mapId);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
@@ -54,29 +65,25 @@ public class GameData {
 	}
 
 	public static int getSpellNameId(int id) {
-		try {
-			D2oManager d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Spells.d2o");
-			String s = d2oManager.searchObjectById(id);
-			s = s.replace("{", "");
-			s = s.replace(" ", "");
-			s = s.replace("}", "");
-			s = s.replaceAll("\n", "");
-			String[] cmd = s.split(",");
-			for (String si : cmd) {
-				String[] cmd2 = si.split(":");
-				if (cmd2[0].equals("nameId")) { return Integer.parseInt(cmd2[1]); }
-			}
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return -99;
+		return getDataFromFile(id,"Spells");
 	}
 
 	public static int getWeaponNameId(int id) {
+		return getDataFromFile(id,"Items");
+	}
+	
+	public static String getClueName(int id){
+		return d2iManager.getText(getDataFromFile(id,"PointOfInterest"));
+	}
+	
+	public static String getNpcName(int id){
+		return d2iManager.getText(getDataFromFile(id,"Npcs"));
+	}
+
+	private static int getDataFromFile(int id, String file) {
+		D2oManager d2oManager;
 		try {
-			D2oManager d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Items.d2o");
+			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\" + file + ".d2o");
 			String s = d2oManager.searchObjectById(id);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
@@ -89,52 +96,9 @@ public class GameData {
 			}
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return -99;
-	}
-	
-	public static String getClueName(int id){
-		D2oManager d2oManager;
-		try {
-			d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\PointOfInterest.d2o");
-			String s = d2oManager.searchObjectById(id);
-			s = s.replace("{", "");
-			s = s.replace(" ", "");
-			s = s.replace("}", "");
-			s = s.replaceAll("\n", "");
-			String[] cmd = s.split(",");
-			for (String si : cmd) {
-				String[] cmd2 = si.split(":");
-				if (cmd2[0].equals("nameId")) { return d2iManager.getText(Integer.parseInt(cmd2[1])); }
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public static String getNpcName(int id){
-		D2oManager d2oManager;
-		try {
-			d2oManager = new D2oManager(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Npcs.d2o");
-			String s = d2oManager.searchObjectById(id);
-			s = s.replace("{", "");
-			s = s.replace(" ", "");
-			s = s.replace("}", "");
-			s = s.replaceAll("\n", "");
-			String[] cmd = s.split(",");
-			for (String si : cmd) {
-				String[] cmd2 = si.split(":");
-				if (cmd2[0].equals("nameId")) { return d2iManager.getText(Integer.parseInt(cmd2[1])); }
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		return -9999;
 	}
 
 }

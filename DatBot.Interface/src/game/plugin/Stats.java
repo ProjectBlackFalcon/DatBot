@@ -1,12 +1,19 @@
 package game.plugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Info;
 import protocol.network.Network;
+import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
+import protocol.network.types.game.context.roleplay.job.JobExperience;
 
 public class Stats {
 
 	private InventoryContentMessage inventoryContentMessage;
+	private CharacterStatsListMessage stats;
+	private List<JobExperience> job = new ArrayList<JobExperience>();
 	private Network network;
 	private Info info;
 
@@ -20,20 +27,20 @@ public class Stats {
 		String str = "{";
 		// Add weight
 		str += "\"Lvl\" : " + this.info.getLvl() + ",";
-		str += "\"Xp\" : " + this.info.getStats().getStats().getExperience() + ",";
-		str += "\"XpNextLevelFloor\" : " + this.info.getStats().getStats().getExperienceNextLevelFloor() + ",";
+		str += "\"Xp\" : " + stats.getStats().getExperience() + ",";
+		str += "\"XpNextLevelFloor\" : " + stats.getStats().getExperienceNextLevelFloor() + ",";
 		str += "\"Weigth\" : " + this.info.getWeight() + ",";
 		str += "\"WeigthMax\" : " + this.info.getWeigthMax() + ",";
 
 		// Job
 		str += "\"Job\" : {";
-		for (int i = 0; i < this.info.getJob().size(); i++) {
-			if (i == this.info.getJob().size() - 1) {
-				str += "\"" + this.info.getJob().get(i).getJobId() + "\" : [" + this.info.getJob().get(i).getJobLevel() + "," + this.info.getJob().get(i).getJobXP()
-						+ "," + this.info.getJob().get(i).getJobXpLevelFloor() + "," + this.info.getJob().get(i).getJobXpNextLevelFloor() + "]}";
+		for (int i = 0; i < this.job.size(); i++) {
+			if (i == job.size() - 1) {
+				str += "\"" + job.get(i).getJobId() + "\" : [" + job.get(i).getJobLevel() + "," + job.get(i).getJobXP()
+						+ "," + job.get(i).getJobXpLevelFloor() + "," + job.get(i).getJobXpNextLevelFloor() + "]}";
 			} else {
-				str += "\"" + this.info.getJob().get(i).getJobId() + "\" : [" + this.info.getJob().get(i).getJobLevel() + "," + this.info.getJob().get(i).getJobXP()
-						+ "," + this.info.getJob().get(i).getJobXpLevelFloor() + "," + this.info.getJob().get(i).getJobXpNextLevelFloor() + "],";
+				str += "\"" + job.get(i).getJobId() + "\" : [" + job.get(i).getJobLevel() + "," + job.get(i).getJobXP()
+						+ "," + job.get(i).getJobXpLevelFloor() + "," + job.get(i).getJobXpNextLevelFloor() + "],";
 			}
 		}
 
@@ -70,6 +77,22 @@ public class Stats {
 	public void setInventoryContentMessage(InventoryContentMessage inventoryContentMessage)
 	{
 		this.inventoryContentMessage = inventoryContentMessage;
+	}
+
+	public CharacterStatsListMessage getStats() {
+		return stats;
+	}
+
+	public void setStats(CharacterStatsListMessage stats) {
+		this.stats = stats;
+	}
+
+	public List<JobExperience> getJob() {
+		return job;
+	}
+
+	public void setJob(List<JobExperience> job) {
+		this.job = job;
 	}
 
 }
