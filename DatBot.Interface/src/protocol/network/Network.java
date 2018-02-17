@@ -319,33 +319,7 @@ public class Network extends DisplayInfo implements Runnable {
 				info.setBasicNoOperationMsg(true);
 				break;
 			case 226:
-				this.monsters.setMonsters(new ArrayList<>());
-				this.hunt.setPhorror(false);
-				MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
-				complementaryInformationsDataMessage.Deserialize(dataReader);
-
-				if (!connectionToKoli) {
-					for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
-						if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")) {
-							npc.getNpc().add((GameRolePlayNpcInformations) complementaryInformationsDataMessage.getActors().get(i));
-						}
-						else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
-							this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
-
-						}
-						else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")) {
-							this.hunt.setPhorror(true);
-						}
-						if (complementaryInformationsDataMessage.getActors().get(i).getContextualId() == info.getActorId()) info.setCellId(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId());
-					}
-					getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
-					getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
-					append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
-					append("CellId : " + info.getCellId());
-					info.setWaitForMov(true);
-					info.setConnected(true);
-					info.setNewMap(true);
-				}
+				handleMapComplementaryInformationsDataMessage(dataReader);
 				break;
 			case 6622:
 				handleMapComplementaryInformationsDataInHavenBagMessage(dataReader);
@@ -961,6 +935,36 @@ public class Network extends DisplayInfo implements Runnable {
 		packet_content = null;
 		dataReader.bis.close();
 		return;
+	}
+
+	private void handleMapComplementaryInformationsDataMessage(DofusDataReader dataReader) {
+		this.monsters.setMonsters(new ArrayList<>());
+		this.hunt.setPhorror(false);
+		MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
+		complementaryInformationsDataMessage.Deserialize(dataReader);
+
+		if (!connectionToKoli) {
+			for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
+				if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")) {
+					npc.getNpc().add((GameRolePlayNpcInformations) complementaryInformationsDataMessage.getActors().get(i));
+				}
+				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
+					this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
+
+				}
+				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")) {
+					this.hunt.setPhorror(true);
+				}
+				if (complementaryInformationsDataMessage.getActors().get(i).getContextualId() == info.getActorId()) info.setCellId(complementaryInformationsDataMessage.getActors().get(i).getDisposition().getCellId());
+			}
+			getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
+			getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
+			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
+			append("CellId : " + info.getCellId());
+			info.setWaitForMov(true);
+			info.setConnected(true);
+			info.setNewMap(true);
+		}
 	}
 
 	private void handleMapRequestMessage(DofusDataReader dataReader) throws Exception, IOException {

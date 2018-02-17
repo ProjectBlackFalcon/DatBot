@@ -512,7 +512,7 @@ public class ModelConnexion {
 			 */
 			case "getClue":
 				if (this.network.getInfo().isInHunt() && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
-					toSend = new Object[] { this.network.getHunt().getCurrentClue() + "," + Hunt.getDirection(this.network.getHunt().getCurrentDir()) };
+					toSend = new Object[] { "\"" + this.network.getHunt().getCurrentClue() + "\", \"" + Hunt.getDirection(this.network.getHunt().getCurrentDir()) + "\""};
 				} else if(this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)){
 					toSend = new Object[] { "Fight" };
 				}
