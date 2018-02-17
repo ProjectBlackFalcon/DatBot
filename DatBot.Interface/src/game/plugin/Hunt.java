@@ -96,8 +96,6 @@ public class Hunt {
 		this.currentDir = currentDir;
 	}
 
-
-
 	public void setCurrentIndex(int currentIndex) {
 		this.currentIndex = currentIndex;
 	}
