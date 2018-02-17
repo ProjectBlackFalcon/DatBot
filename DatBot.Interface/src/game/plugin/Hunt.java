@@ -10,6 +10,7 @@ public class Hunt {
 	private int currentStep;
 	private int numberOfSteps;
 	private boolean phorror;
+	private String phorrorName;
 	
 	/**
 	 * Get the maximum hunt for the lvl
@@ -135,5 +136,13 @@ public class Hunt {
 
 	public void setNumberOfIndex(int numberOfIndex) {
 		this.numberOfIndex = numberOfIndex;
+	}
+
+	public String getPhorrorName() {
+		return phorrorName;
+	}
+
+	public void setPhorrorName(String phorrorName) {
+		this.phorrorName = phorrorName;
 	}
 }
