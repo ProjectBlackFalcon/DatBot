@@ -537,7 +537,7 @@ public class ModelConnexion {
 				break;
 			case "checkPhorror":
 				if (this.network.getHunt().isPhorror()) {
-					toSend = new Object[] { "True" };
+					toSend = new Object[] { "\"" + this.getNetwork().getHunt().getPhorrorName() + "\"" };
 				}
 				else {
 					toSend = new Object[] { "False" };
@@ -589,7 +589,7 @@ public class ModelConnexion {
 				break;
 			case "getCluesLeft":
 				if (this.network.getInfo().isInHunt()) {
-					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex() - 1)};
+					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex())};
 				}
 				else {
 					toSend = new Object[] { "False" };
