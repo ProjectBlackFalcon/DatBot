@@ -548,12 +548,12 @@ public class ModelConnexion {
 			 * Return the number of index for the next step
 			 */
 			case "validateStep":
-				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex() - 1) && !(this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
+				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex() - 1) && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
 					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
 					if (this.waitToSend("Hunt")) {
 						if (this.network.getInfo().isStepSuccess()) {
-							toSend = new Object[] { this.getNetwork().getHunt().getNumberOfIndex() };
+							toSend = new Object[] { "\"" + this.getNetwork().getHunt().getNumberOfIndex() + "\""};
 						}
 						else {
 							toSend = new Object[] { "False" };
@@ -568,7 +568,7 @@ public class ModelConnexion {
 				}
 				break;
 			case "huntFight":
-				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
+				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps() - 1)) {
 					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Starting hunt fight");
 					if (this.waitToSend("Hunt")) {
@@ -582,6 +582,22 @@ public class ModelConnexion {
 					else {
 						toSend = new Object[] { "False" };
 					}
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "getCluesLeft":
+				if (this.network.getInfo().isInHunt()) {
+					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex() - 1)};
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "getStepsLeft":
+				if (this.network.getInfo().isInHunt()) {
+					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfSteps() - this.getNetwork().getHunt().getCurrentStep() - 1)};
 				}
 				else {
 					toSend = new Object[] { "False" };
