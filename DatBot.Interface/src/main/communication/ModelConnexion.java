@@ -589,7 +589,7 @@ public class ModelConnexion {
 				break;
 			case "getCluesLeft":
 				if (this.network.getInfo().isInHunt()) {
-					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex())};
+					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex() - 1)};
 				}
 				else {
 					toSend = new Object[] { "False" };
