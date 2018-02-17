@@ -950,6 +950,7 @@ public class Network extends DisplayInfo implements Runnable {
 					this.hunt.setCurrentDir(((TreasureHuntStepFollowDirectionToPOI) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getDirection());
 				}
 				else if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToHint")) {
+					System.out.println(((TreasureHuntStepFollowDirectionToHint) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getNpcId());
 					this.hunt.setCurrentClue(GameData.getNpcName(((TreasureHuntStepFollowDirectionToHint) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getNpcId()));
 					this.hunt.setCurrentDir(((TreasureHuntStepFollowDirectionToHint) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getDirection());
 				}

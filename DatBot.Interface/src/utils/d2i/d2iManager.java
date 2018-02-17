@@ -16,13 +16,14 @@ import java.util.Set;
 import org.apache.mina.core.buffer.IoBuffer;
 
 import protocol.network.Network;
+import utils.GameData;
 
 public class d2iManager {
 	
 //	public String getText(int id){
 //		String s = "";
 //		try {
-//			RandomAccessFile f = new RandomAccessFile(Network.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i", "r");
+//			RandomAccessFile f = new RandomAccessFile(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i", "r");
 //			byte[] binary = new byte[(int)f.length()];
 //			f.readFully(binary);
 //	        IoBuffer buf = IoBuffer.wrap(binary);
@@ -70,7 +71,7 @@ public class d2iManager {
 //    }
 
     public static IoBuffer buf;
-    private static Hashtable _indexes;
+    private static Hashtable<Integer, Integer> _indexes;
 
     public d2iManager(String filePath) {
 
@@ -100,7 +101,7 @@ public class d2iManager {
         boolean diacriticalText;
         int position;
         String textKey;
-        this._indexes = new Hashtable();
+        this._indexes = new Hashtable<Integer, Integer>();
         int indexesPointer = buf.getInt();
         buf.position(indexesPointer);
         int indexesLength = buf.getInt();
@@ -109,21 +110,20 @@ public class d2iManager {
             key = buf.getInt();
             diacriticalText = readBoolean(buf);
             pointer = buf.getInt();
-            this._indexes.put(key, pointer);
-            if (diacriticalText) {
-                i = (i + 4);
-            } else {
-            };
             i = (i + 9);
+            this._indexes.put(key, pointer);
+            if(diacriticalText){
+            	i += 4;
+            	buf.getInt();
+            }
         };
     }
 
     public static String getText(int key) {
         try {
             int pointer = (int) _indexes.get(key);
-
             buf.position(pointer);
-            return readUTF(buf);
+            return readUTF(buf) ;
 
         } catch (Exception e) {
             return null;
