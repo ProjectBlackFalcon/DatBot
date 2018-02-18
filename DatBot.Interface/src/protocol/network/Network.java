@@ -923,7 +923,7 @@ public class Network extends DisplayInfo implements Runnable {
 				} else {
 					this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getFlags().get(treasureHuntMessage.getFlags().size() - 1 ).getMapId()));
 				}
-				this.hunt.setCurrentIndex(sizeStep - 1);
+				this.hunt.setCurrentIndex(treasureHuntMessage.getFlags().size());
 				if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToPOI")) {
 					this.hunt.setCurrentClue(GameData.getClueName(((TreasureHuntStepFollowDirectionToPOI) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getPoiLabelId()));
 					this.hunt.setCurrentDir(((TreasureHuntStepFollowDirectionToPOI) treasureHuntMessage.getKnownStepsList().get(sizeStep - 1)).getDirection());
