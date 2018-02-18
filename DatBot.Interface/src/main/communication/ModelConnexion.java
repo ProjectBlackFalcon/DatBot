@@ -548,7 +548,7 @@ public class ModelConnexion {
 			 * Return the number of index for the next step
 			 */
 			case "validateStep":
-				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex() - 1) && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
+				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex()) && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
 					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
 					if (this.waitToSend("Hunt")) {
@@ -589,7 +589,7 @@ public class ModelConnexion {
 				break;
 			case "getCluesLeft":
 				if (this.network.getInfo().isInHunt()) {
-					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex() - 1)};
+					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex())};
 				}
 				else {
 					toSend = new Object[] { "False" };
