@@ -606,7 +606,12 @@ public class ModelConnexion {
 				}
 				break;
 			case "huntActive":
-				toSend = new Object[] { this.getNetwork().getInfo().isInHunt() };
+				if (this.getNetwork().getInfo().isInHunt()) {
+					toSend = new Object[] { "True" };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
 				break;
 		}
 		return toSend;
