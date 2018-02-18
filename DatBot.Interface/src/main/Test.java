@@ -36,7 +36,7 @@ public class Test {
 		communication.getReturn("0;0;i;cmd;getHuntStart;[None]");
 		communication.getReturn("0;0;i;cmd;getCluesLeft;[None]");
 		communication.getReturn("0;0;i;cmd;getStepsLeft;[None]");
-
+		communication.getReturn("0;0;i;cmd;huntFight;[None]");
 
 		// /**
 		// * ChangeMapTest method Input : North, South, East, West
