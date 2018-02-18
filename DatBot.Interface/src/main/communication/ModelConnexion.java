@@ -475,7 +475,11 @@ public class ModelConnexion {
 					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
 					if (this.waitToSend("Hunt")) {
-						toSend = new Object[] { this.getNetwork().getHunt().getNumberOfSteps() , this.getNetwork().getHunt().getNumberOfIndex()};
+						if(this.getNetwork().getInfo().isInHunt()){
+							toSend = new Object[] { this.getNetwork().getHunt().getNumberOfSteps() , this.getNetwork().getHunt().getNumberOfIndex()};
+						} else {
+							toSend = new Object[] { "False" };
+						}
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -486,7 +490,7 @@ public class ModelConnexion {
 				}
 				break;
 			case "abandonHunt":
-				if (this.network.getMap().getId() == 128452097 && !this.network.getInfo().isInHunt()) {
+				if (this.network.getInfo().isInHunt()) {
 					TreasureHuntGiveUpRequestMessage huntGiveUpRequestMessage = new TreasureHuntGiveUpRequestMessage(0);
 					getNetwork().sendToServer(huntGiveUpRequestMessage, TreasureHuntGiveUpRequestMessage.ProtocolId, "Abandon hunt");
 					if (this.waitToSend("Hunt")) {
@@ -495,6 +499,8 @@ public class ModelConnexion {
 					else {
 						toSend = new Object[] { "False" };
 					}
+				} else {
+					toSend = new Object[] { "False" };
 				}
 				break;
 			/**
@@ -555,7 +561,7 @@ public class ModelConnexion {
 					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
 					if (this.waitToSend("Hunt")) {
 						if (this.network.getInfo().isStepSuccess()) {
-							toSend = new Object[] { this.getNetwork().getHunt().getNumberOfIndex() };
+							toSend = new Object[] { "True" };
 						}
 						else {
 							toSend = new Object[] { "False" };
