@@ -486,13 +486,15 @@ public class ModelConnexion {
 				}
 				break;
 			case "abandonHunt":
-				TreasureHuntGiveUpRequestMessage huntGiveUpRequestMessage = new TreasureHuntGiveUpRequestMessage(0);
-				getNetwork().sendToServer(huntGiveUpRequestMessage, TreasureHuntGiveUpRequestMessage.ProtocolId, "Abandon hunt");
-				if (this.waitToSend("Hunt")) {
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
+				if (this.network.getMap().getId() == 128452097 && !this.network.getInfo().isInHunt()) {
+					TreasureHuntGiveUpRequestMessage huntGiveUpRequestMessage = new TreasureHuntGiveUpRequestMessage(0);
+					getNetwork().sendToServer(huntGiveUpRequestMessage, TreasureHuntGiveUpRequestMessage.ProtocolId, "Abandon hunt");
+					if (this.waitToSend("Hunt")) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
 				}
 				break;
 			/**
@@ -602,6 +604,9 @@ public class ModelConnexion {
 				else {
 					toSend = new Object[] { "False" };
 				}
+				break;
+			case "huntActive":
+				toSend = new Object[] { this.getNetwork().getInfo().isInHunt() };
 				break;
 		}
 		return toSend;
