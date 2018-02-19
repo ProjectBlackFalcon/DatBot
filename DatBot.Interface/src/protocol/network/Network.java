@@ -411,7 +411,13 @@ public class Network extends DisplayInfo implements Runnable {
 		jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
 		jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
 		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
-			jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			if(gameActionFightDispellableEffectMessage.getActionId() == 168){
+				jsonObject.put("pa", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			} else if(gameActionFightDispellableEffectMessage.getActionId() == 169){
+				jsonObject.put("pm", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			} else {
+				jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			}
 		}
 		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect")) {
 			jsonObject.put("stateId", ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
@@ -1471,6 +1477,8 @@ public class Network extends DisplayInfo implements Runnable {
 		if(gameActionFightPointsVariationMessage.getActionId() == 102){
 			jsonObject.put("pa", gameActionFightPointsVariationMessage.getDelta());
 		} else if (gameActionFightPointsVariationMessage.getActionId() == 129){
+			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
+		} else if (gameActionFightPointsVariationMessage.getActionId() == 127){
 			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
 		}
 		jsonObject2 = new JSONObject();
