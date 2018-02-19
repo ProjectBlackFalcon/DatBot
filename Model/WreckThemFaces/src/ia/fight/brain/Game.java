@@ -95,7 +95,7 @@ public class Game {
 	 */
 	public void endGame() {
 		playingEntities.clear();
-		//los.dispose();
+		los.dispose();
 	}
 	
 	/**
@@ -222,6 +222,12 @@ public class Game {
 			}
 		}
 		
+		if(JSONArrayContainsObject(command, "slide"))
+			executeSlide(getJSONObjectFromJSONArray(command, "slide"));
+		
+		if(JSONArrayContainsObject(command, "slide"))
+			executeSlide(getJSONObjectFromJSONArray(command, "slide"));
+		
 		if(LPLost) {
 			System.out.println("The target has lost some LP! "+lifePointsLost);
 		}
@@ -287,6 +293,48 @@ public class Game {
 			}
 		}
 		
+	}
+	
+	private boolean JSONArrayContainsObject(JSONArray command, String object) {
+		for(int i = 0; i < command.size(); i++) {
+			if(((JSONObject)command.get(i)).get(object) != null) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private JSONObject getJSONObjectFromJSONArray(JSONArray command, String object) {
+		for(int i = 0; i < command.size(); i++) {
+			if(((JSONObject)command.get(i)).get(object) != null) {
+				return (JSONObject) ((JSONObject)command.get(i)).get(object);
+			}
+		}
+		
+		return null;
+	}
+	
+	private void executeSlide(JSONObject command) {
+		
+		int sourceId = (int) command.get("sourceId");
+		int targetId = (int) command.get("targetId");
+		JSONObject startCell = (JSONObject) command.get("startCell");
+		JSONObject endCell = (JSONObject) command.get("endCell");
+		
+		int x = (int)endCell.get("x");
+		int y = (int)endCell.get("y");
+		
+		PlayingEntity victim = getPlayingEntityFromID(targetId);
+		
+		victim.setPosition(new Position(x, y));
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		brainText.add("Slide received from "+sourceId+", to "+targetId+".");
+		brainText.add("Moving entity to : "+endCell);
+		Game.los.panel.updateBrainText(brainText);
+		
+		log.println("Slide received from "+sourceId+", to "+targetId+". Moving entity to : "+endCell);
 	}
 	
 	/**
@@ -404,7 +452,7 @@ public class Game {
 		}
 		
 		ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(selectedPosition.position, victim, true, map);
-		turn.clear();
+		//turn.clear();
 		log.println("AP remaining : "+caster.getModel().getAP()+" TURN : " +turn);
 		
 		String action = "";
@@ -497,8 +545,7 @@ public class Game {
 			initLogs();
 		}
 		
-		System.out.println("RECEIVED COMMAND "+s);
-		System.out.println(command);
+		System.out.println("Received command of type : "+s);
 		if(s.equals("c")) {
 			executeSpellCommand(command);
 		}else if(s.equals("m")) {
