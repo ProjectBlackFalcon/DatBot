@@ -521,8 +521,25 @@ public class Network extends DisplayInfo implements Runnable {
 		jsonObject = new JSONObject();
 		jsonObject.put("sourceId", getFight().getId(gameActionFightSlideMessage.getSourceId()));
 		jsonObject.put("targetId", getFight().getId(gameActionFightSlideMessage.getTargetId()));
-		jsonObject.put("startCellId", gameActionFightSlideMessage.getStartCellId());
-		jsonObject.put("endCellId", gameActionFightSlideMessage.getEndCellId());
+		
+		int startCellId = gameActionFightSlideMessage.getStartCellId();
+		int startX = CreateMap.rotate(new int[] { startCellId % 14, startCellId / 14 })[0];
+		int startY = CreateMap.rotate(new int[] { startCellId % 14, startCellId / 14 })[1];
+		JSONObject startCell = new JSONObject();
+		startCell.put("x", startX);
+		startCell.put("y", startY);
+		
+		jsonObject.put("startCell", startCell);
+		
+		int endCellId = gameActionFightSlideMessage.getEndCellId();
+		int endX = CreateMap.rotate(new int[] { endCellId % 14, endCellId / 14 })[0];
+		int endY = CreateMap.rotate(new int[] { endCellId % 14, endCellId / 14 })[1];
+		JSONObject endCell = new JSONObject();
+		endCell.put("x", endX);
+		endCell.put("y", endY);
+		
+		jsonObject.put("endCell", endCell);
+		
 		jsonObject2 = new JSONObject();
 		jsonObject2.put("slide", jsonObject);
 		getFight().getSpellJson().add(jsonObject2);
