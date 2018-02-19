@@ -14,3 +14,4 @@ class Bot:
         self.position = None
         self.connected = False
         self.in_fight = False
+
