@@ -409,7 +409,7 @@ public class Network extends DisplayInfo implements Runnable {
 		jsonObject.put("effectId", gameActionFightDispellableEffectMessage.getEffect().getEffectId());
 		jsonObject.put("spellId", gameActionFightDispellableEffectMessage.getEffect().getSpellId());
 		jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
-		jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
+		jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable()); 
 		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
 			if(gameActionFightDispellableEffectMessage.getActionId() == 168){
 				jsonObject.put("pa", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
@@ -1481,9 +1481,9 @@ public class Network extends DisplayInfo implements Runnable {
 		} else if (gameActionFightPointsVariationMessage.getActionId() == 127){
 			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
 		}
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("pointVariation", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+		JSONArray arr = new JSONArray();
+		arr.add(jsonObject);
+		getFight().sendToFightAlgo("i", arr);
 	}
 
 	private void handleGameRolePlayPlayerFightFriendlyRequestedMessage(DofusDataReader dataReader) throws Exception {
