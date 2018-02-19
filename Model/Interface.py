@@ -69,8 +69,8 @@ class Interface:
         while ret_val is None:
             partial_message = '{};{};m;rtn'.format(self.bot.id, message_id)
             buffer = self.pipe.get_buffer()
-            # print(buffer)
             for message in buffer:
+                # print(message)
                 if int(message.split(';')[0]) == self.bot.id:
                     if partial_message in message:
                         # print(message)
@@ -304,7 +304,7 @@ class Interface:
         Returns the cell id of the hunting hall door, or False if there is none
         :return: [cell_in, cell_out] or [False]
         """
-        msg_id = self.add_command('getHuntingHallDoor')
+        msg_id = self.add_command('getHuntingHallDoorCell')
         return self.wait_for_return(msg_id)
 
     def enter_hunting_hall(self):
@@ -323,13 +323,24 @@ class Interface:
         msg_id = self.add_command('exitHuntingHall')
         return self.wait_for_return(msg_id)
 
-    def get_new_hunt(self, level):
+    def get_new_hunt(self, level='max'):
         """
         The bot gets a new hunt at the tresure hunt thing. It should already be standing at the right spot
         :param level:
         :return: Boolean
         """
-        msg_id = self.add_command('newHunt', [level])
+        if level == 'max':
+            msg_id = self.add_command('newHunt')
+        else:
+            msg_id = self.add_command('newHunt', [level])
+        return self.wait_for_return(msg_id)
+
+    def hunt_is_active(self):
+        """
+        Checks wether a hunt is active or not
+        :return: Boolean
+        """
+        msg_id = self.add_command('huntActive')
         return self.wait_for_return(msg_id)
 
     def abandon_hunt(self):
@@ -346,6 +357,22 @@ class Interface:
         :return:
         """
         msg_id = self.add_command('getHuntStart')
+        return self.wait_for_return(msg_id)
+
+    def get_clues_left(self):
+        """
+        Gets the number of clues left in this step
+        :return:
+        """
+        msg_id = self.add_command('getCluesLeft')
+        return self.wait_for_return(msg_id)
+
+    def get_steps_left(self):
+        """
+        Gets the number of steps left in the hunt
+        :return:
+        """
+        msg_id = self.add_command('getStepsLeft')
         return self.wait_for_return(msg_id)
 
     def get_hunt_clue(self):
@@ -418,7 +445,25 @@ class Interface:
         :param destination: coords (ex: (-2, 0))
         :return: Boolean
         """
+        destination = ast.literal_eval(str(destination).replace('[', '(').replace(']', ')'))
         msg_id = self.add_command('useZaap', [destination])
+        return self.wait_for_return(msg_id)
+
+    def get_monsters(self):
+        """
+        Gives the positions and types of monsters on the map
+        :return: [[mob_id, mob_name_ref, cell], [...]]
+        """
+        msg_id = self.add_command('getMonsters')
+        return self.wait_for_return(msg_id)
+
+    def attack_monster(self, mob_id):
+        """
+        Attacks the mob specified my mob_id. The bot must be on the same cell.
+        :param mob_id: Id of the mob to attack. Given by get_monsters.
+        :return:
+        """
+        msg_id = self.add_command('attackMonster', [mob_id])
         return self.wait_for_return(msg_id)
 
 __author__ = 'Alexis'
