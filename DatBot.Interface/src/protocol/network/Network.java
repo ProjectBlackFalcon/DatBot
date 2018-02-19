@@ -45,6 +45,7 @@ import protocol.network.messages.game.actions.fight.GameActionFightLifeAndShield
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsGainMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightMarkCellsMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightPointsVariationMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
@@ -1433,10 +1434,31 @@ public class Network extends DisplayInfo implements Runnable {
 			case 5937:
 				handleGameRolePlayPlayerFightFriendlyRequestedMessage(dataReader);
 				break;
+			case 1030:
+				handleGameActionFightPointsVariationMessage(dataReader);
+				break;
 		}
 		packet_content = null;
 		dataReader.bis.close();
 		return;
+	}
+
+	private void handleGameActionFightPointsVariationMessage(DofusDataReader dataReader) {
+		JSONObject jsonObject;
+		JSONObject jsonObject2;
+		GameActionFightPointsVariationMessage gameActionFightPointsVariationMessage = new GameActionFightPointsVariationMessage();
+		gameActionFightPointsVariationMessage.Deserialize(dataReader);
+		jsonObject = new JSONObject();
+		jsonObject.put("sourceId", getFight().getId(gameActionFightPointsVariationMessage.getSourceId()));
+		jsonObject.put("targetId", getFight().getId(gameActionFightPointsVariationMessage.getTargetId()));
+		if(gameActionFightPointsVariationMessage.getActionId() == 102){
+			jsonObject.put("pa", gameActionFightPointsVariationMessage.getDelta());
+		} else if (gameActionFightPointsVariationMessage.getActionId() == 129){
+			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
+		}
+		jsonObject2 = new JSONObject();
+		jsonObject2.put("pointVariation", jsonObject);
+		getFight().getSpellJson().add(jsonObject2);
 	}
 
 	private void handleGameRolePlayPlayerFightFriendlyRequestedMessage(DofusDataReader dataReader) throws Exception {
