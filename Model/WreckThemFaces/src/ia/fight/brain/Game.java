@@ -104,17 +104,15 @@ public class Game {
 	 */
 	public void initEntities(ArrayList<PlayingEntity> entities) {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
-		
+		System.out.println("\n\n\n");
+		System.out.println(entities);
+		System.out.println("\n\n\n");
 		for(int i = 0; i < entities.size(); i++) {
-
 			playingEntities.add(entities.get(i));
-			
 			Game.log.println(entities.get(i).getModel() == null ? "No model currently selected." : entities.get(i).getModel()+" in pos "+entities.get(i).getPosition());
 		}
 
-		
 		los.update(playingEntities);
-		
 		this.playingEntities = playingEntities;
 	}
 	
@@ -155,9 +153,41 @@ public class Game {
 		return CraModel.getSpellFromID(id);
 	}
 	
-	private void executeInfoReception(JSONArray command) {
+	private void executeInfoReception(JSONArray array) {
+		System.out.println();
 		System.out.println("RECEIVED INFO");
-		System.out.println(command);
+		System.out.println(array);
+		
+		JSONObject command = (JSONObject)array.get(0);
+		
+		int sourceId = (int) command.get("sourceId");
+		int targetId = (int) command.get("targetId");
+		
+		int APLost = 0;
+		int MPLost = 0;
+		
+		if(command.get("pa") != null) {
+			APLost = (int) command.get("pa");
+		}
+		
+		if(command.get("pm") != null) {
+			MPLost = (int) command.get("pm");
+		}
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		PlayingEntity victim = getPlayingEntityFromID(targetId);
+		
+		if(APLost != 0) {
+			brainText.add("Lost "+APLost+" AP.");
+			victim.getModel().removeAP(-APLost);
+		}
+		
+		if(MPLost != 0) {
+			brainText.add("Lost "+MPLost+" MP.");
+			victim.getModel().removeMP(-MPLost);
+		}
+		
+		Game.los.panel.updateBrainText(brainText);
 	}
 	
 	/**
@@ -165,6 +195,7 @@ public class Game {
 	 * @param command
 	 */
 	private void executeMovementCommand(JSONArray command){
+		System.out.println();
 		System.out.println("RECEIVED MOVEMENT COMMAND");
 		System.out.println(command);
 		
@@ -197,6 +228,7 @@ public class Game {
 	 * @param command
 	 */
 	private void executeSpellCommand(JSONArray command) {
+		System.out.println();
 		System.out.println("RECEIVED SPELL COMMAND");
 		System.out.println(command);
 		
@@ -366,12 +398,12 @@ public class Game {
 		
 		if(APLost != 0) {
 			brainText.add("Lost "+APLost+" AP.");
-			victim.getModel().removeAP(APLost);
+			victim.getModel().removeAP(-APLost);
 		}
 		
 		if(MPLost != 0) {
 			brainText.add("Lost "+MPLost+" MP.");
-			victim.getModel().removeMP(MPLost);
+			victim.getModel().removeMP(-MPLost);
 		}
 		
 		Game.los.panel.updateBrainText(brainText);
@@ -431,6 +463,57 @@ public class Game {
 		return selected;
 		
 	}
+	
+	static private Position getDeepClosestPositionFromArrayList(ArrayList<Position> positions, ArrayList<Position> nextPositions) {
+		int distance = 0;
+		int distance_temp = 0;
+		Position selected = positions.get(0);
+		
+		for(int i = 0; i < nextPositions.size(); i++) {
+			distance += Math.pow(Position.distance(selected, nextPositions.get(i)), 2);
+		}
+		
+		for(int i = 1; i < positions.size(); i++) {
+			distance_temp = 0;
+			for(int j = 0; j < nextPositions.size(); j++) {
+				distance_temp += Math.pow(Position.distance(positions.get(i), nextPositions.get(j)), 2);
+			}
+			
+			if(distance > distance_temp) {
+				selected = positions.get(i);
+				distance = distance_temp;
+			}
+		}
+		
+		return selected;
+		
+	}
+	
+	static private Position getClosestDiagonalPositionFromArrayList(ArrayList<Position> positions, Position position) {
+		int distance = Position.distance(positions.get(0), position);
+		int diagonalDistance = 0;
+		diagonalDistance += Math.abs(positions.get(0).getX() - position.getX());
+		diagonalDistance -= Math.abs(positions.get(0).getY() - position.getY());
+		
+		Position selected = positions.get(0);
+		
+		for(int i = 1; i < positions.size(); i++) {
+			if(distance >= Position.distance(positions.get(i), position)) {
+				int diagonalDistanceTemp = 0;
+				diagonalDistanceTemp += Math.abs(positions.get(i).getX() - position.getX());
+				diagonalDistanceTemp -= Math.abs(positions.get(i).getY() - position.getY());
+				
+				if(diagonalDistance > diagonalDistanceTemp) {
+					selected = positions.get(i);
+					distance = Position.distance(positions.get(i), position);
+					diagonalDistance = diagonalDistanceTemp;
+				}
+				
+			}
+		}
+		
+		return selected;
+	}
 		
 	/**
 	 * Method called to get the best turn. Returns a single action, either movement or spellcast.
@@ -450,10 +533,21 @@ public class Game {
 		ArrayList<Position> accessiblePositions = new ArrayList<>();
 		accessiblePositions.add(caster.getPosition());
 		
+		ArrayList<Position> victimAccessiblePositions = new ArrayList<>();
+		victimAccessiblePositions.add(caster.getPosition());
+		
 		for(int k = caster.getPosition().getX() - caster.getModel().getMP(); k < caster.getPosition().getX() + caster.getModel().getMP()+1; k++) {
 			for(int l = caster.getPosition().getY() - caster.getModel().getMP(); l < caster.getPosition().getY() + caster.getModel().getMP()+1; l++) {
 				if(map.isPositionAccessible(caster.getPosition(), new Position(k,l), caster.getModel().getMP())) {
 					accessiblePositions.add(new Position(k, l));
+				}
+			}
+		}
+		
+		for(int k = victim.getPosition().getX() - victim.getModel().getMP(); k < victim.getPosition().getX() + victim.getModel().getMP()+1; k++) {
+			for(int l = victim.getPosition().getY() - victim.getModel().getMP(); l < victim.getPosition().getY() + victim.getModel().getMP()+1; l++) {
+				if(map.isPositionAccessible(victim.getPosition(), new Position(k,l), victim.getModel().getMP())) {
+					victimAccessiblePositions.add(new Position(k, l));
 				}
 			}
 		}
@@ -501,7 +595,7 @@ public class Game {
 			action += id+",m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
 		}else {
 			if(turn.size() < 1) {
-				Position desired = getClosestPositionFromArrayList(accessiblePositions, victim.getPosition());
+				Position desired = getClosestDiagonalPositionFromArrayList(accessiblePositions, victim.getPosition());
 				log.println("Accessible positions : "+accessiblePositions);
 				log.println("MP available : "+caster.getModel().getMP());
 				log.println("Actual position : "+caster.getPosition());

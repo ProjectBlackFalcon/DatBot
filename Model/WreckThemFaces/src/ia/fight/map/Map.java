@@ -201,8 +201,14 @@ public class Map {
         	desiredPosition = new Position(desiredPosition.getY(), 32);
         }
         
+        List<ExampleNode> path;
         
-        List<ExampleNode> path = myMap.findPath(actualPosition.getX(),actualPosition.getY(),desiredPosition.getX(),desiredPosition.getY());
+        try {
+        	path = myMap.findPath(actualPosition.getX(),actualPosition.getY(),desiredPosition.getX(),desiredPosition.getY());
+        }catch(Exception e) {
+        	return false;
+        }
+        
     
         if(path.size() < 1 || path.size() > MP){
         	return false;
