@@ -45,6 +45,7 @@ import protocol.network.messages.game.actions.fight.GameActionFightLifeAndShield
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsGainMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightMarkCellsMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightPointsVariationMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
@@ -72,6 +73,8 @@ import protocol.network.messages.game.context.roleplay.GameRolePlayShowActorMess
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
+import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyAnswerMessage;
+import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyRequestedMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
@@ -408,7 +411,13 @@ public class Network extends DisplayInfo implements Runnable {
 		jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
 		jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable());
 		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
-			jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			if(gameActionFightDispellableEffectMessage.getActionId() == 168){
+				jsonObject.put("pa", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			} else if(gameActionFightDispellableEffectMessage.getActionId() == 169){
+				jsonObject.put("pm", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			} else {
+				jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
+			}
 		}
 		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect")) {
 			jsonObject.put("stateId", ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
@@ -518,8 +527,25 @@ public class Network extends DisplayInfo implements Runnable {
 		jsonObject = new JSONObject();
 		jsonObject.put("sourceId", getFight().getId(gameActionFightSlideMessage.getSourceId()));
 		jsonObject.put("targetId", getFight().getId(gameActionFightSlideMessage.getTargetId()));
-		jsonObject.put("startCellId", gameActionFightSlideMessage.getStartCellId());
-		jsonObject.put("endCellId", gameActionFightSlideMessage.getEndCellId());
+		
+		int startCellId = gameActionFightSlideMessage.getStartCellId();
+		int startX = CreateMap.rotate(new int[] { startCellId % 14, startCellId / 14 })[0];
+		int startY = CreateMap.rotate(new int[] { startCellId % 14, startCellId / 14 })[1];
+		JSONObject startCell = new JSONObject();
+		startCell.put("x", startX);
+		startCell.put("y", startY);
+		
+		jsonObject.put("startCell", startCell);
+		
+		int endCellId = gameActionFightSlideMessage.getEndCellId();
+		int endX = CreateMap.rotate(new int[] { endCellId % 14, endCellId / 14 })[0];
+		int endY = CreateMap.rotate(new int[] { endCellId % 14, endCellId / 14 })[1];
+		JSONObject endCell = new JSONObject();
+		endCell.put("x", endX);
+		endCell.put("y", endY);
+		
+		jsonObject.put("endCell", endCell);
+		
 		jsonObject2 = new JSONObject();
 		jsonObject2.put("slide", jsonObject);
 		getFight().getSpellJson().add(jsonObject2);
@@ -1428,10 +1454,43 @@ public class Network extends DisplayInfo implements Runnable {
 			case 6486:
 				handleTreasureHuntMessage(dataReader);
 				break;
+			case 5937:
+				handleGameRolePlayPlayerFightFriendlyRequestedMessage(dataReader);
+				break;
+			case 1030:
+				handleGameActionFightPointsVariationMessage(dataReader);
+				break;
 		}
 		packet_content = null;
 		dataReader.bis.close();
 		return;
+	}
+
+	private void handleGameActionFightPointsVariationMessage(DofusDataReader dataReader) {
+		JSONObject jsonObject;
+		JSONObject jsonObject2;
+		GameActionFightPointsVariationMessage gameActionFightPointsVariationMessage = new GameActionFightPointsVariationMessage();
+		gameActionFightPointsVariationMessage.Deserialize(dataReader);
+		jsonObject = new JSONObject();
+		jsonObject.put("sourceId", getFight().getId(gameActionFightPointsVariationMessage.getSourceId()));
+		jsonObject.put("targetId", getFight().getId(gameActionFightPointsVariationMessage.getTargetId()));
+		if(gameActionFightPointsVariationMessage.getActionId() == 102){
+			jsonObject.put("pa", gameActionFightPointsVariationMessage.getDelta());
+		} else if (gameActionFightPointsVariationMessage.getActionId() == 129){
+			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
+		} else if (gameActionFightPointsVariationMessage.getActionId() == 127){
+			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
+		}
+		jsonObject2 = new JSONObject();
+		jsonObject2.put("pointVariation", jsonObject);
+		getFight().getSpellJson().add(jsonObject2);
+	}
+
+	private void handleGameRolePlayPlayerFightFriendlyRequestedMessage(DofusDataReader dataReader) throws Exception {
+		GameRolePlayPlayerFightFriendlyRequestedMessage gameRolePlayPlayerFightFriendlyRequestedMessage = new GameRolePlayPlayerFightFriendlyRequestedMessage();
+		gameRolePlayPlayerFightFriendlyRequestedMessage.Deserialize(dataReader);
+		GameRolePlayPlayerFightFriendlyAnswerMessage gameRolePlayPlayerFightFriendlyAnswerMessage = new GameRolePlayPlayerFightFriendlyAnswerMessage(gameRolePlayPlayerFightFriendlyRequestedMessage.getFightId(), true);
+		sendToServer(gameRolePlayPlayerFightFriendlyAnswerMessage, GameRolePlayPlayerFightFriendlyAnswerMessage.ProtocolId, "Accept duel");
 	}
 
 	private byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception {
