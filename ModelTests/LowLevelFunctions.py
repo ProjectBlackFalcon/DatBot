@@ -8,4 +8,6 @@ print(LowLevelFunctions().get_neighbour_cells(14))
 LowLevelFunctions().add_discovered_zaap('bot_name', (-3, -42))
 LowLevelFunctions().add_discovered_zaap('bot_name', (-27, -36))
 LowLevelFunctions().add_discovered_zaap('bot_name', (-3, -45))
+
+print(LowLevelFunctions().get_next_clue_pos('Souche qui ne repousse pas', (-1, 8), 's'))
 __author__ = 'Alexis'
