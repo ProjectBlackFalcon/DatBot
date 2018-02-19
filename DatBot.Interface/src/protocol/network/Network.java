@@ -72,6 +72,8 @@ import protocol.network.messages.game.context.roleplay.GameRolePlayShowActorMess
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
+import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyAnswerMessage;
+import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyRequestedMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
@@ -1428,10 +1430,20 @@ public class Network extends DisplayInfo implements Runnable {
 			case 6486:
 				handleTreasureHuntMessage(dataReader);
 				break;
+			case 5937:
+				handleGameRolePlayPlayerFightFriendlyRequestedMessage(dataReader);
+				break;
 		}
 		packet_content = null;
 		dataReader.bis.close();
 		return;
+	}
+
+	private void handleGameRolePlayPlayerFightFriendlyRequestedMessage(DofusDataReader dataReader) throws Exception {
+		GameRolePlayPlayerFightFriendlyRequestedMessage gameRolePlayPlayerFightFriendlyRequestedMessage = new GameRolePlayPlayerFightFriendlyRequestedMessage();
+		gameRolePlayPlayerFightFriendlyRequestedMessage.Deserialize(dataReader);
+		GameRolePlayPlayerFightFriendlyAnswerMessage gameRolePlayPlayerFightFriendlyAnswerMessage = new GameRolePlayPlayerFightFriendlyAnswerMessage(gameRolePlayPlayerFightFriendlyRequestedMessage.getFightId(), true);
+		sendToServer(gameRolePlayPlayerFightFriendlyAnswerMessage, GameRolePlayPlayerFightFriendlyAnswerMessage.ProtocolId, "Accept duel");
 	}
 
 	private byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception {
