@@ -12,8 +12,9 @@ class PathFinder:
         self.llf = LowLevelFunctions()
         self.start = start_map
         self.end = end_map
-        self.start_cell = start_cell
         self.worldmap = worldmap
+        self.start_cell = start_cell
+        self.start_cell = self.pick_start_cell()
         self.end_cell = end_cell
         self.end_cell = self.pick_end_cell()
         print('[Pathfinder] Going from map {}, cell {} to map {}, cell {}, worldmap : {}'.format(start_map, start_cell, end_map, self.end_cell, worldmap))
@@ -108,7 +109,7 @@ class PathFinder:
         map_as_array[map_as_array == 0] = 0
         # map_as_array[map_as_array != 0] = 1
         a = np.kron(map_as_array, np.ones((scaling_factor, scaling_factor))).astype(int)
-        a[a == 0] = 255*64
+        a[a == 0] = 255*255*128
         a[a == 2] = 255*32
         a[a == 4] = 255*16
         a[a == 4] = 255*255*255  # Path
@@ -284,5 +285,19 @@ class PathFinder:
                     found_walkable = True
                 self.end_cell = self.coord2cell((y, x))
         return self.end_cell
+
+    def pick_start_cell(self):
+        if self.start_cell is None:
+            start_map_cells = self.llf.coord_fetch_map('{};{}'.format(self.start[0], self.start[1]), self.worldmap)
+            map_change_cells = list(set([i for i in range(28)] + [i for i in range(560) if i % 14 == 0] + [i for i in range(560) if i % 14 == 13] + [i for i in range(532, 560)]))
+            found_walkable = False
+            while not found_walkable:
+                x, y = self.cell2coord(map_change_cells[randint(0, len(map_change_cells)-1)])
+                # print(self.coord2cell((x, y)), end_map_cells[y][x])
+                if start_map_cells[y][x] == 0:
+                    found_walkable = True
+                self.start_cell = self.coord2cell((y, x))
+        return self.start_cell
+
 
 __author__ = 'Alexis'
