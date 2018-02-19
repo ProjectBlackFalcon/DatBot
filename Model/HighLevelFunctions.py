@@ -1,6 +1,9 @@
 from Model.Pathfinder import PathFinder
 from Model.LowLevelFunctions import LowLevelFunctions
 import json
+import time
+import datetime
+import traceback
 
 
 class HighLevelFunctions:
@@ -39,11 +42,12 @@ class HighLevelFunctions:
                 raise Exception('Worldmap change not supported')
 
         closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
-        distance_zaap_target = self.llf.distance_coords(closest_zaap, target_coord)
-        if worldmap == current_worldmap and self.llf.distance_coords(current_map, target_coord) > distance_zaap_target+5:
-            if self.bot.interface.enter_heavenbag():
-                self.bot.interface.use_zaap(closest_zaap)
-                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+        if closest_zaap is not None:
+            distance_zaap_target = self.llf.distance_coords(closest_zaap, target_coord)
+            if worldmap == current_worldmap and self.llf.distance_coords(current_map, target_coord) > distance_zaap_target+5:
+                if self.bot.interface.enter_heavenbag():
+                    self.bot.interface.use_zaap(closest_zaap)
+                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
         if current_map == target_coord and current_cell == target_cell and worldmap == current_worldmap:
             return
@@ -56,25 +60,28 @@ class HighLevelFunctions:
         path_directions = pf.get_map_change_cells()
         for i in range(len(path_directions)):
             if self.bot.interface.change_map(path_directions[i][0], path_directions[i][1])[0]:
-                self.bot.position = self.bot.interface.get_map()[0]
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+                self.bot.position = current_map
                 self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
             else:
                 raise Exception('Interface returned false on move command')
+
+        if tuple(current_map) != tuple(target_coord):
+            self.goto(target_coord, target_cell, worldmap)
 
         if target_cell is not None:
             self.bot.interface.move(target_cell)
         self.bot.position = (target_coord, worldmap)
 
     def discover_zaaps(self):
-        with open('zaapDiscoveryPath.json', 'r') as f:
+        with open('..//Utils//zaapDiscoveryPath.json', 'r') as f:
             paths = json.load(f)
-        for path_directions in paths:
-            for i in range(len(path_directions)):
-                if self.bot.interface.change_map(path_directions[i][0], path_directions[i][1])[0]:
-                    self.bot.position = self.bot.interface.get_map()[0]
-                    self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
-                else:
-                    raise Exception('Interface returned false on move command')
+        for cell, direction in paths:
+            if self.bot.interface.change_map(cell, direction)[0]:
+                self.bot.position = self.bot.interface.get_map()[0]
+                self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
+            else:
+                raise Exception('Interface returned false on move command')
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
         self.bot.occupation = 'Harvesting map'
@@ -227,30 +234,64 @@ class HighLevelFunctions:
             self.bot.occupation = 'Getting a new hunt'
             self.update_db()
             self.goto((-25, -36))
-            hall_entrance, hall_exit = self.bot.interface.get_hunting_hall_door_cell()
-            self.bot.interface.move(hall_entrance)
+            door = self.bot.interface.get_hunting_hall_door_cell()[0]
+            self.bot.interface.move(self.llf.get_closest_walkable_cell(door, self.bot.position[0], self.bot.position[1]))
             self.bot.interface.enter_hunting_hall()
-            self.bot.interface.move(304)  # The cell used to pick up a treasure hunt
-            self.bot.interface.get_new_hunt(level)
+            while not self.bot.interface.get_new_hunt(level)[0]:
+                print('[Treasure Hunt] Getting new hunt')
+                time.sleep(30)
             self.bot.interface.exit_hunting_hall()
 
         if level == 'max':
-            level = self.bot.interface.get_player_stats()[0]['Level']
+            level = self.bot.interface.get_player_stats()[0]['Lvl']
         level = int(level/20)*20
-        get_hunt(level)
 
-        hunt_state = 'start'
-        while not hunt_state == 'done':
-            if hunt_state == 'start':
-                hunt_start = self.bot.interface.get_hunt_start()
-                clue_pos = hunt_start
-                hunt_state = 'in progress'
+        if not self.bot.interface.hunt_is_active()[0]:
+            get_hunt(level)
+        hunt_start = self.bot.interface.get_hunt_start()[0]
+        self.goto(hunt_start)
 
-            elif hunt_state == 'in progress':
-                self.goto(clue_pos)
+        hunt_error_flag = False
+        while self.bot.interface.get_steps_left()[0] and not hunt_error_flag:
+            while self.bot.interface.get_clues_left()[0] and not hunt_error_flag:
                 clue, direction = self.bot.interface.get_hunt_clue()
-                next_clue_pos = self.llf.get_next_clue_pos(clue, clue_pos, direction)
-        # Todo no more clues, next step
+                if 'Phorreur' in clue:
+                    n_steps = 0
+                    while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11:
+                        direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
+                        try:
+                            self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+                        except Exception:
+                            with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
+                                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                                f.write(traceback.format_exc())
+                            hunt_error_flag = True
+                            break
+                else:
+                    try:
+                        clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+                        self.goto(clue_pos)
+                    except Exception:
+                        with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
+                            f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                            f.write(traceback.format_exc())
+                        hunt_error_flag = True
+                        break
+                if not self.bot.interface.validate_hunt_clue()[0]:
+                    hunt_error_flag = True
+                    break
+            if not self.bot.interface.validate_hunt_step()[0]:
+                hunt_error_flag = True
+                break
+
+        if hunt_error_flag:
+            print('[Treasure Hunt] Issue detected, abandoning hunt')
+            while not self.bot.interface.abandon_hunt()[0]:
+                time.sleep(30)
+        else:
+            pass
+            # TODO : Uncomment when fight is working
+            # self.bot.interface.start_hunt_fight()
 
     def update_db(self):
         try:
