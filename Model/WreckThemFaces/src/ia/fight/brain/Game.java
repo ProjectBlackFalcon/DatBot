@@ -155,6 +155,11 @@ public class Game {
 		return CraModel.getSpellFromID(id);
 	}
 	
+	private void executeInfoReception(JSONArray command) {
+		System.out.println("RECEIVED INFO");
+		System.out.println(command);
+	}
+	
 	/**
 	 * Executes a movement command
 	 * @param command
@@ -170,7 +175,6 @@ public class Game {
 		int posY = (int) movementCommand.get("y");
 		
 		PlayingEntity playingEntity = getPlayingEntityFromID(id);
-		playingEntity.getModel().removeMP(Position.distance(new Position(posX, posY), playingEntity.getPosition()));
 		playingEntity.setPosition(new Position(posX, posY));
 		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
 		
@@ -225,8 +229,8 @@ public class Game {
 		if(JSONArrayContainsObject(command, "slide"))
 			executeSlide(getJSONObjectFromJSONArray(command, "slide"));
 		
-		if(JSONArrayContainsObject(command, "slide"))
-			executeSlide(getJSONObjectFromJSONArray(command, "slide"));
+		if(JSONArrayContainsObject(command, "dispellableEffect"))
+			executeDispellable(getJSONObjectFromJSONArray(command, "dispellableEffect"));
 		
 		if(LPLost) {
 			System.out.println("The target has lost some LP! "+lifePointsLost);
@@ -335,6 +339,42 @@ public class Game {
 		Game.los.panel.updateBrainText(brainText);
 		
 		log.println("Slide received from "+sourceId+", to "+targetId+". Moving entity to : "+endCell);
+	}
+	
+	
+	
+	private void executeDispellable(JSONObject command) {
+		int sourceId = (int) command.get("sourceId");
+		int targetId = (int) command.get("targetId");
+		
+		int APLost = 0;
+		int MPLost = 0;
+		
+		if(command.get("pa") != null) {
+			APLost = (int) command.get("pa");
+		}
+		
+		if(command.get("pm") != null) {
+			MPLost = (int) command.get("pm");
+		}
+		
+		PlayingEntity victim = getPlayingEntityFromID(targetId);
+		
+		ArrayList<String> brainText = new ArrayList<>();
+		brainText.add("Dispellable effect cast on "+victim);
+		
+		
+		if(APLost != 0) {
+			brainText.add("Lost "+APLost+" AP.");
+			victim.getModel().removeAP(APLost);
+		}
+		
+		if(MPLost != 0) {
+			brainText.add("Lost "+MPLost+" MP.");
+			victim.getModel().removeMP(MPLost);
+		}
+		
+		Game.los.panel.updateBrainText(brainText);
 	}
 	
 	/**
@@ -577,6 +617,8 @@ public class Game {
 			endGame();
 		}else if(s.equals("p")) {
 			executePassTurn(command);
+		}else if(s.equals("i")) {
+			executeInfoReception(command);
 		}
 		
 		los.update(playingEntities);
