@@ -476,7 +476,7 @@ public class ModelConnexion {
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
 					if (this.waitToSend("Hunt")) {
 						if(this.getNetwork().getInfo().isInHunt()){
-							toSend = new Object[] { this.getNetwork().getHunt().getNumberOfSteps() , this.getNetwork().getHunt().getNumberOfIndex()};
+							toSend = new Object[] { "True" };
 						} else {
 							toSend = new Object[] { "False" };
 						}
