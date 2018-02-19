@@ -280,7 +280,6 @@ public class Fight {
 	 */
 	@SuppressWarnings("unchecked")
 	public void fightTurn() throws NumberFormatException, Exception {
-		System.out.println("Team id : " + this.teamIdPlayer);
 		boolean opponentIsAlive = false;
 		for (GameFightMonsterInformations m : monsters) {
 			if (m.isAlive() && (m.getTeamId() != teamIdPlayer)) opponentIsAlive = true;

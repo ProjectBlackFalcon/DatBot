@@ -18,6 +18,7 @@ import org.json.simple.JSONObject;
 import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.classes.Cra;
 import ia.fight.map.CreateMap;
+import ia.fight.map.Display;
 import ia.fight.map.GameViz;
 import ia.fight.map.LineOfSight;
 import ia.fight.map.Map;
@@ -527,6 +528,8 @@ public class Game {
 
 		PlayingEntity caster = getPlayingEntityFromID(id);
 		PlayingEntity victim = getClosestEnnemy(caster);
+		
+		Display.show(map.getBlocks());
 		
 		log.println();
 		
