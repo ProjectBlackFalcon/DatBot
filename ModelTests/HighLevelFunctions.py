@@ -2,16 +2,22 @@ from Model.Interface import PipeToJava
 from Model.LowLevelFunctions import LowLevelFunctions
 from Model.Bot import Bot
 import time
+from threading import Thread
+import winsound
 
-# credentials = {'username': 'wublel6', 'password': '32407c62d2f', 'name': 'Pot-ator'}
 
 pipe = PipeToJava(headless=True)
 bot_id = 0
-credentials = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
+
+credentials = {'username': 'Jemappellehenry2', 'password': 'azerty123henry', 'name': 'Baddosch', 'server': 'Julith'}
+credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
+credentials2 = {'username': 'wublel6', 'password': '32407c62d2f', 'name': 'Pot-ator', 'server': 'Julith'}
+
 llf = LowLevelFunctions()
 bot = Bot(pipe, bot_id, credentials, llf)
-
 bot.interface.connect()
+bot.hf.tresure_hunt()
+winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
 
 path = (
     ((-2, -4), None, 2),
@@ -44,7 +50,8 @@ path = (
 )
 
 # hf.harvest_path(path, do_not_harvest=['Ble'])
-bot.hf.goto((7, -19))
+# bot1.hf.goto((9, -10))
+# bot2.hf.goto((9, -10))
 
 while 1:
     time.sleep(1)

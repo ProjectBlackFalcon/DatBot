@@ -124,6 +124,7 @@ class LowLevelFunctions:
             checking_pos = [checking_pos[j] + direction_vector[j] for j in range(2)]
             if checking_pos in clue_possible_pos:
                 found = checking_pos
+            i += 1
         if found:
             return found
         else:
