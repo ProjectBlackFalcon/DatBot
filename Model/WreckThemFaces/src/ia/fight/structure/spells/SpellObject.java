@@ -239,28 +239,13 @@ public class SpellObject {
 	 * @param action action cast
 	 */
 	public void applySpells(PlayingEntity caster, PlayingEntity victim, boolean heal, int damage) {
-
-		
 		if(heal) {
 			victim.getModel().addLP(damage);
 		}else {
 			victim.getModel().removeLP(damage);
 		}
-		
-		
-		
-		
-		if(victim.getModel().getLP() <= 0) {
-			
-		}
-		
-
-		this.spellCounter++;
-		
-			
+		this.spellCounter++;	
 		Game.log.println("Casting spell directly onto : "+victim);
-		
-		
 		boolean found = false;
 		for(int j = 0; j < this.spellPerEntityCounter.size(); j++) {
 			if(this.spellPerEntityCounter.get(j)[0] == victim.getID()) {
@@ -273,12 +258,9 @@ public class SpellObject {
 			this.spellPerEntityCounter.add(new int[] {victim.getID(), 1});
 		}
 		
-		
-		
 		for(int i = 0; i < this.spellPerEntityCounter.size(); i++) {
 			Game.log.println("    "+this.spellPerEntityCounter.get(i)[0]+" "+this.spellPerEntityCounter.get(i)[1]);
 		}
 		this.cooldown = this.getRecastInterval();
-		caster.getModel().removeAP(this.getCost());
 	}	
 }
