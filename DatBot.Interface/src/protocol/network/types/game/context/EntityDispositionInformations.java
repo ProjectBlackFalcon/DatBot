@@ -51,5 +51,9 @@ public class EntityDispositionInformations extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "EntityDispositionInformations [cellId=" + cellId + ", direction=" + direction + "]";
+	}
 
 }

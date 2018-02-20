@@ -64,10 +64,12 @@ public class Info {
 	private boolean acknowledged = false;
 	private boolean huntAnswered = false;
 	private boolean stepSuccess = false;
+	private boolean exchangeBidSeller = false;
 
 
 	public void setBooleanToFalse()
 	{
+		exchangeBidSeller = false;
 		interactiveUsed = false;
 		newMap = false;
 		leaveDialog = false;
@@ -422,6 +424,14 @@ public class Info {
 
 	public void setStepSuccess(boolean stepSuccess) {
 		this.stepSuccess = stepSuccess;
+	}
+
+	public boolean isExchangeBidSeller() {
+		return exchangeBidSeller;
+	}
+
+	public void setExchangeBidSeller(boolean exchangeBidSeller) {
+		this.exchangeBidSeller = exchangeBidSeller;
 	}
 
 }

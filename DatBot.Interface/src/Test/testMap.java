@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 import org.apache.mina.core.buffer.IoBuffer;
 
+import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;
 import protocol.network.Network;
 import protocol.network.util.DofusDataReader;
@@ -24,7 +25,6 @@ public class testMap {
 
 	public static void main(String[] args) throws IOException {
 		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
-        System.out.println(d2iManager.getText(1));
-        System.out.println(d2iManager.getText(505126));
+		System.out.println(DisplayInfo.cleanString((GameData.getItemName(15216))));
 	}
 }

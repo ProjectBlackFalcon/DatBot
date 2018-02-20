@@ -25,4 +25,5 @@ public class GameRolePlayActorInformations extends GameContextActorInformations 
 	public void Deserialize(DofusDataReader reader) {
 		super.Deserialize(reader);
 	}
+
 }

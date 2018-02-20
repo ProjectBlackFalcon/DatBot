@@ -76,6 +76,10 @@ public class GameData {
 		return d2iManager.getText(getDataFromFile(id,"PointOfInterest"));
 	}
 	
+	public static String getItemName(int id){
+		return d2iManager.getText(getDataFromFile(id,"Items"));
+	}
+	
 	public static String getNpcName(int id){
 		return d2iManager.getText(getDataFromFile(id,"Npcs"));
 	}
