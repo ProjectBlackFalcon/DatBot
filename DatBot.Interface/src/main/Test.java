@@ -40,20 +40,22 @@ public class Test {
 		Thread.sleep(2000);
 		communication.getReturn("0;0;i;cmd;getStats;[None]");
 		Thread.sleep(2000);
-		int id = 0; 
-		for(int i = 0; i < communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().size() ; i++){
-			if(communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectGID() == 1984){
-				id = communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectUID();
-			}
-		}
-		communication.getReturn("0;0;i;cmd;sellItem;[" + id + ",1,2]");
+		
+//		int id = 0; 
+//		for(int i = 0; i < communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().size() ; i++){
+//			if(communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectGID() == 1984){
+//				id = communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectUID();
+//			}
+//		}
+		
+		communication.getReturn("0;0;i;cmd;modifyPrice;[" + 1984 + ",1,159]");
 
 
 //		communication.getReturn("0;0;i;cmd;getHuntStart;[None]");
 //		communication.getReturn("0;0;i;cmd;getCluesLeft;[None]");
 //		communication.getReturn("0;0;i;cmd;getStepsLeft;[None]");
 //		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");
-		communication.getReturn("0;0;i;cmd;huntFight;[None]");
+//		communication.getReturn("0;0;i;cmd;huntFight;[None]");
 
 		// /**
 		// * ChangeMapTest method Input : North, South, East, West

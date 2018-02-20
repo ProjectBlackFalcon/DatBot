@@ -652,7 +652,10 @@ public class ModelConnexion {
 				System.out.println("Size : " + Integer.parseInt(paramItems[2]));
 				for(int i = 0 ; i < Integer.parseInt(paramItems[2]) ; i++){
 					Thread.sleep(80);
-					ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[1]));
+					System.out.println("Id : " + Integer.parseInt(paramItems[0]));
+					ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[3]));
+					exchangeObjectMovePricedMessage.setObjectUID(Integer.parseInt(paramItems[0]));
+					exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems[1]));
 					getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
 					if(!(i == Integer.parseInt(paramItems[2]) - 1)){
 						this.waitToSend("exchangeBigSeller");
@@ -678,7 +681,7 @@ public class ModelConnexion {
 					exchangeObjectMovePricedMessage.setObjectUID(uid.get(i));
 					exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems1[1]));
 					exchangeObjectMovePricedMessage.setPrice(Integer.parseInt(paramItems1[2]));
-					getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectModifyPricedMessage.ProtocolId, "Sell item");
+					getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectModifyPricedMessage.ProtocolId, "Modify item");
 					if(!(i == uid.size() - 1)){
 						this.waitToSend("exchangeBigSeller");
 					}
