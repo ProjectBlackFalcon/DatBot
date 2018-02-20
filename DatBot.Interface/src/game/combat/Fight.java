@@ -37,6 +37,7 @@ public class Fight {
 	private ArrayList<Player> entities;
 	private List<GameFightMonsterInformations> monsters;
 	private List<GameFightCharacterInformations> players;
+	private int teamIdPlayer;
 
 	public List<Double> turnListId;
 	private JSONArray spellJson;
@@ -150,9 +151,14 @@ public class Fight {
 			JSONObject toSend = new JSONObject();
 			if (this.getGameFightSynchronizeMessage().getFighters().get(i).getClass().getSimpleName().equals("GameFightCharacterInformations")) {
 				GameFightCharacterInformations p = (GameFightCharacterInformations) gameFightSynchronizeMessage.getFighters().get(i);
+				if(p.getContextualId() == this.getNetwork().getInfo().getActorId()){
+					this.teamIdPlayer = p.getTeamId();
+				}
 				this.players.add(p);
 				GameFightMinimalStats stats = p.getStats();
 				if (p.getBreed() == 9) {
+					player = new Cra(p.getName(), p.getStats().getLifePoints(), p.getStats().getActionPoints(), p.getStats().getMovementPoints(), p.getLevel());
+				} else {
 					player = new Cra(p.getName(), p.getStats().getLifePoints(), p.getStats().getActionPoints(), p.getStats().getMovementPoints(), p.getLevel());
 				}
 				if (p.getContextualId() == this.network.getInfo().getActorId()) {
@@ -274,17 +280,19 @@ public class Fight {
 	 */
 	@SuppressWarnings("unchecked")
 	public void fightTurn() throws NumberFormatException, Exception {
-		boolean isMonstersAlive = false;
+		boolean opponentIsAlive = false;
 		for (GameFightMonsterInformations m : monsters) {
-			if (m.isAlive()) isMonstersAlive = true;
+			if (m.isAlive() && (m.getTeamId() != teamIdPlayer)) opponentIsAlive = true;
 		}
-		if (!isMonstersAlive) return;
+		for (GameFightCharacterInformations m : players) {
+			if (m.isAlive() && (m.getTeamId() != teamIdPlayer)) opponentIsAlive = true;
+		}
+		if (!opponentIsAlive) return;
 		JSONObject obj = new JSONObject();
 		obj.put("id", getId(this.info.getActorId()));
 		JSONArray arr = new JSONArray();
 		arr.add(obj);
 		String s = sendToFightAlgo("g", arr);
-
 		if (s == null) {
 			endTurn();
 		}
