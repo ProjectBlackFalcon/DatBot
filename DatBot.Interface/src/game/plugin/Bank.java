@@ -1,10 +1,12 @@
 package game.plugin;
 
 import game.Info;
+import main.communication.DisplayInfo;
 import protocol.network.messages.game.inventory.storage.StorageInventoryContentMessage;
 import protocol.network.types.game.data.items.ObjectItem;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.InteractiveElementSkill;
+import utils.GameData;
 
 public class Bank {
 
@@ -31,10 +33,10 @@ public class Bank {
 		str += "\"Items\" : [";
 		for (int i = 0; i < storage.getObjects().size(); i++) {
 			if (i == storage.getObjects().size() - 1) {
-				str += "[" + storage.getObjects().get(i).getObjectGID() + "," + storage.getObjects().get(i).getObjectUID() + ","
+				str += "[" + DisplayInfo.cleanString(GameData.getItemName(storage.getObjects().get(i).getObjectGID())) + "," + storage.getObjects().get(i).getObjectUID() + ","
 						+ storage.getObjects().get(i).getQuantity() + "," + storage.getObjects().get(i).getPosition() + "]";
 			} else {
-				str += "[" + storage.getObjects().get(i).getObjectGID() + "," + storage.getObjects().get(i).getObjectUID() + ","
+				str += "[" + DisplayInfo.cleanString(GameData.getItemName(storage.getObjects().get(i).getObjectGID())) + "," + storage.getObjects().get(i).getObjectUID() + ","
 						+ storage.getObjects().get(i).getQuantity() + "," + storage.getObjects().get(i).getPosition() + "],";
 			}
 		}

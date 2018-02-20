@@ -88,6 +88,9 @@ import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessa
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidSellerMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
@@ -1502,6 +1505,30 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 1030:
 				handleGameActionFightPointsVariationMessage(dataReader);
+				break;
+			case 5905:
+				ExchangeStartedBidSellerMessage exchangeStartedBidSellerMessage = new ExchangeStartedBidSellerMessage();
+				exchangeStartedBidSellerMessage.Deserialize(dataReader);
+				this.getNpc().setItemsToSell(exchangeStartedBidSellerMessage.getObjectsInfos());
+				this.npc.setCanSell(exchangeStartedBidSellerMessage.getSellerDescriptor().getTypes());
+				this.info.setExchangeBidSeller(true);
+				break;
+			case 6464:
+				ExchangeBidPriceForSellerMessage exchangeBidPriceForSellerMessage = new ExchangeBidPriceForSellerMessage();
+				exchangeBidPriceForSellerMessage.Deserialize(dataReader);
+				this.npc.setCurrentPrice(exchangeBidPriceForSellerMessage.getMinimalPrices());
+				this.info.setExchangeBidSeller(true);
+				break;
+			case 5945:
+				this.info.setExchangeBidSeller(true);
+				break;
+			case 5946:
+				ExchangeBidHouseItemRemoveOkMessage exchangeBidHouseItemRemoveOkMessage = new ExchangeBidHouseItemRemoveOkMessage();
+				exchangeBidHouseItemRemoveOkMessage.Deserialize(dataReader);
+				if(this.npc.getItemsToSell() != null){
+					this.npc.removeItemToSell(exchangeBidHouseItemRemoveOkMessage.getSellerId());
+				}
+				this.info.setExchangeBidSeller(true);
 				break;
 		}
 		packet_content = null;

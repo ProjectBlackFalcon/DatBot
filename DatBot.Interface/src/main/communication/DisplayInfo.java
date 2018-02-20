@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -164,6 +166,12 @@ public class DisplayInfo {
 		String timing = formatter.format(time);
 		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
 		debug.println(newSt);
+	}
+	
+	public static String cleanString(String s){
+		s = s.toLowerCase();
+		s = s.replaceAll("\"", "");
+		 return s == null ? null : Normalizer.normalize(s, Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 	}
 
 	public int getBotInstance() {

@@ -17,8 +17,11 @@ import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHunt
 import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHousePriceMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectModifyPricedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMovePricedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
@@ -34,6 +37,8 @@ public class ModelConnexion {
 
 	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception {
 		Object[] toSend = null;
+		
+		param.replaceAll(" ", "");
 
 		switch (cmd) {
 			case "getMap":
@@ -613,6 +618,104 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
+			case "openHdv":
+				int idSeller = (int) this.getNetwork().getNpc().getSeller();
+				if(idSeller != -1){
+					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(idSeller, 5, this.getNetwork().getMap().getId());
+					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
+					if (this.waitToSend("exchangeBigSeller")) {
+						toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "getHdvItemStats":
+				if(Integer.parseInt(param) > 0){
+					ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
+					getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
+					if (this.waitToSend("exchangeBigSeller")) {
+						toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "sellItem":
+				String[] paramItems = param.split(",");
+				System.out.println("Size : " + Integer.parseInt(paramItems[2]));
+				for(int i = 0 ; i < Integer.parseInt(paramItems[2]) ; i++){
+					Thread.sleep(80);
+					ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[1]));
+					getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
+					if(!(i == Integer.parseInt(paramItems[2]) - 1)){
+						this.waitToSend("exchangeBigSeller");
+					}
+				}
+				if (this.waitToSend("exchangeBigSeller")) {
+					toSend = new Object[] { "True" };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "modifyPrice":
+				String[] paramItems1 = param.split(",");
+				List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
+				
+				for(int i = 0 ; i < uid.size() ; i++){
+					if(this.getNetwork().getNpc().isSelling(uid.get(i))){
+						continue;
+					}
+					Thread.sleep(80);
+					ExchangeObjectModifyPricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectModifyPricedMessage();
+					exchangeObjectMovePricedMessage.setObjectUID(uid.get(i));
+					exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems1[1]));
+					exchangeObjectMovePricedMessage.setPrice(Integer.parseInt(paramItems1[2]));
+					getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectModifyPricedMessage.ProtocolId, "Sell item");
+					if(!(i == uid.size() - 1)){
+						this.waitToSend("exchangeBigSeller");
+					}
+				}
+				if (this.waitToSend("exchangeBigSeller")) {
+					toSend = new Object[] { "True" };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "withdrawItem":
+				String[] paramItems11 = param.split(",");
+				List<Integer> uid1 = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems11[0]), Integer.parseInt(paramItems11[1]));
+	
+				if (Integer.parseInt(paramItems11[2]) <= uid1.size()) {
+					for (int i = 0; i < Integer.parseInt(paramItems11[2]); i++) {
+						if(this.getNetwork().getNpc().isSelling(uid1.get(i))){
+							continue;
+						}
+						Thread.sleep(80);
+						ExchangeObjectMoveMessage exchangeObjectMoveMessage = new ExchangeObjectMoveMessage(uid1.get(i), -Integer.parseInt(paramItems11[1]));
+						getNetwork().sendToServer(exchangeObjectMoveMessage, ExchangeObjectMoveMessage.ProtocolId, "Withdraw item");
+						if (!(i == uid1.size() - 1)) {
+							this.waitToSend("exchangeBigSeller");
+						}
+					}
+					if (this.waitToSend("exchangeBigSeller")) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					} 
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
 		}
 		return toSend;
 	}
@@ -687,13 +790,18 @@ public class ModelConnexion {
 					Thread.sleep(50);
 				}
 				break;
+			case "exchangeBigSeller":
+				while (!this.network.getInfo().isExchangeBidSeller()) {
+					Thread.sleep(50);
+				}
+				break;
 		}
 
 		while (!this.network.getInfo().isBasicNoOperationMsg()) {
 			Thread.sleep(50);
 		}
 
-		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered()) {
+		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered() && !this.network.getInfo().isExchangeBidSeller()) {
 			return false;
 		}
 		else {

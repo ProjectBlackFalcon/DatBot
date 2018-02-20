@@ -99,13 +99,14 @@ public class SellerBuyerDescriptor extends NetworkMessage {
 			while( _loc5_ <  _loc4_){
 				int _loc16_ = reader.readVarInt();
 				this.types.add(_loc16_);
+
 				_loc5_++;
 			}
-			this.taxPercentage = reader.readDouble();
-			this.taxModificationPercentage = reader.readDouble();
-			this.maxItemLevel = reader.readByte();
-			this.maxItemPerAccount = reader.readVarInt();
-			this.npcContextualId = reader.readInt();
+			this.taxPercentage = reader.readFloat(); 
+			this.taxModificationPercentage = reader.readFloat(); 
+			this.maxItemLevel = reader.readByte(); 	
+			this.maxItemPerAccount = reader.readVarInt(); 
+			this.npcContextualId = reader.readInt(); 
 			this.unsoldDelay = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();

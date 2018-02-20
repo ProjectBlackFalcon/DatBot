@@ -661,7 +661,7 @@ public class Main {
 
 			Message msg = json.Types.get(i);
 
-			if (msg.getName().equals("VersionExtended") || msg.getName().equals("AbstractCharacterInformation")) {
+			if (msg.getName().equals("VersionExtended") || msg.getName().equals("SellerBuyerDescriptor") || msg.getName().equals("AbstractCharacterInformation")) {
 				continue;
 			}
 
