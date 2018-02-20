@@ -599,7 +599,7 @@ public class Network extends DisplayInfo implements Runnable {
 		info.setJoinedFight(true);
 		info.setTurn(false);
 		info.setInitFight(false);
-		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "rtn", "startFight", new Object[] { "None" });
+		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
 		JSONObject mapJSONObject = new JSONObject();
 		mapJSONObject.put("mapID", (int) info.getMapId());
 		JSONArray tempArr = new JSONArray();
@@ -1420,6 +1420,7 @@ public class Network extends DisplayInfo implements Runnable {
 				info.setJoinedFight(false);
 				info.setTurn(false);
 				getFight().sendToFightAlgo("endFight", null);
+				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"end\"" });
 				break;
 			case 703:
 				handleGameFightPlacementPossiblePositionsMessage(dataReader);
