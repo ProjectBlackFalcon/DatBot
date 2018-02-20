@@ -671,7 +671,7 @@ public class ModelConnexion {
 			case "modifyPrice":
 				String[] paramItems1 = param.split(",");
 				List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
-				
+				System.out.println("Size : " + uid.size());
 				for(int i = 0 ; i < uid.size() ; i++){
 					if(this.getNetwork().getNpc().isSelling(uid.get(i))){
 						continue;
