@@ -26,7 +26,7 @@ public class GameData {
 
 	public static int getWorldMap(double mapId) {
 		try {
-			D2oManager d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
+			D2oManager d2oManager = new D2oManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
 			String s = d2oManager.searchObjectById((int) mapId);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
