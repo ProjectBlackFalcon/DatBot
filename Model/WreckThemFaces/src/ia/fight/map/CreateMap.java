@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import ia.fight.brain.Game;
+import utils.GameData;
 
 public class CreateMap {
 
@@ -19,7 +20,7 @@ public class CreateMap {
 		JSONParser parser = new JSONParser();
 		ArrayList<int[]> blocks = new ArrayList<>();
 		try{
-			String path = new File("Model/WreckThemFaces/src/ia/fight/data/MapInfo.json").getAbsolutePath();
+			String path = GameData.getPathDatBot() + "Model/WreckThemFaces/src/ia/fight/data/MapInfo.json";
 			JSONArray arr = (JSONArray) parser.parse(new FileReader(path));
 			JSONObject map;
 			
