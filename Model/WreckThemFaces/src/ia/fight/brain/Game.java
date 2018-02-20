@@ -31,27 +31,18 @@ import ia.fight.structure.spells.spelltypes.Damage;
 
 public class Game {
 
-	static final int RANDOM = -1;
 	static final boolean DISPLAY_GUI = true;
 	
 	public Map map;
 	public ArrayList<PlayingEntity> playingEntities;
 	static public GameViz los;
-	private static int current_command_nbr = 0;
-	
-	public Game() {
-		
-	}
-	
-	public Game(int map) {
 
-	}
-	
 	/**
 	 * Initializes the game map. Creates a map and opens a JFrame.
 	 * @param map
 	 */
 	public void initGame(int map_nbr) {
+		Game.log.println("Starting fight on map : "+map_nbr);
 		Map mapObject = CreateMap.getMapById(map_nbr);
 		map = mapObject;
 		los = new GameViz(mapObject);
@@ -73,11 +64,27 @@ public class Game {
 	 * Initializes entities according to the passed arrayList
 	 * @param entities Entities to be initialized.
 	 */
-	public void initEntities(ArrayList<PlayingEntity> entities) {
+	public void initEntities(JSONArray command) {
+		Game.log.println("Initiating entities.");
+		ArrayList<Player> players = (ArrayList<Player>)(((JSONObject)command.get(0))).get("entities");
+		ArrayList<JSONObject> commands = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("misc");
+		ArrayList<JSONObject> stats = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("stats");
+		Game.log.println("RECEIVED STATS");
+		Game.log.println("\n\n"+stats+"\n\n");
+		ArrayList<PlayingEntity> entities = new ArrayList<>();
+		for(int i = 0; i < players.size(); i++) {
+			JSONObject obj = (JSONObject) commands.get(i);
+			int id = (int) obj.get("id");
+			String team = (int)obj.get("teamId") == 0 ? "blue" : "red";
+			int x = (int)obj.get("x");
+			int y = (int)obj.get("y");
+			boolean npc = false;
+			Player model = players.get(i);
+			Position position = new Position(x,y);
+			entities.add(new PlayingEntity(id, npc, position, team, model));
+		}
+		
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
-		System.out.println("\n\n\n");
-		System.out.println(entities);
-		System.out.println("\n\n\n");
 		for(int i = 0; i < entities.size(); i++) {
 			playingEntities.add(entities.get(i));
 			Game.log.println(entities.get(i).getModel() == null ? "No model currently selected." : entities.get(i).getModel()+" in pos "+entities.get(i).getPosition());
@@ -108,6 +115,7 @@ public class Game {
 	 * @param playerClass Name of the class
 	 * @return a SpellObject object
 	 */
+	@SuppressWarnings("unused")
 	private static SpellObject getSpellFromName(String name, String playerClass) {
 		if(playerClass.equals("cra")) {
 			return CraModel.getSpellFromName(name);
@@ -125,9 +133,9 @@ public class Game {
 	}
 	
 	private void executeInfoReception(JSONArray array) {
-		System.out.println();
-		System.out.println("RECEIVED INFO");
-		System.out.println(array);
+		Game.log.println();
+		Game.log.println("RECEIVED INFO");
+		Game.log.println(array);
 		
 		JSONObject command = (JSONObject)array.get(0);
 		
@@ -166,9 +174,9 @@ public class Game {
 	 * @param command
 	 */
 	private void executeMovementCommand(JSONArray command){
-		System.out.println();
-		System.out.println("RECEIVED MOVEMENT COMMAND");
-		System.out.println(command);
+		Game.log.println();
+		Game.log.println("RECEIVED MOVEMENT COMMAND");
+		Game.log.println(command);
 		
 		JSONObject movementCommand = (JSONObject) command.get(0);
 		
@@ -199,9 +207,9 @@ public class Game {
 	 * @param command
 	 */
 	private void executeSpellCommand(JSONArray command) {
-		System.out.println();
-		System.out.println("RECEIVED SPELL COMMAND");
-		System.out.println(command);
+		Game.log.println();
+		Game.log.println("RECEIVED SPELL COMMAND");
+		Game.log.println(command);
 		
 		JSONObject spellCommand = (JSONObject) ((JSONObject) command.get(0)).get("spellCast");
 		JSONObject lifePointsLost = null;
@@ -236,15 +244,15 @@ public class Game {
 			executeDispellable(getJSONObjectFromJSONArray(command, "dispellableEffect"));
 		
 		if(LPLost) {
-			System.out.println("The target has lost some LP! "+lifePointsLost);
+			Game.log.println("The target has lost some LP! "+lifePointsLost);
 		}
 		
 		if(LPGained) {
-			System.out.println("The target has gained some LP! "+lifePointsGained);
+			Game.log.println("The target has gained some LP! "+lifePointsGained);
 		}
 		
 		if(isDead) {
-			System.out.println("The target has died! "+death);
+			Game.log.println("The target has died! "+death);
 		}
 		
 		ArrayList<String> brainText = new ArrayList<>();
@@ -343,8 +351,6 @@ public class Game {
 		
 		log.println("Slide received from "+sourceId+", to "+targetId+". Moving entity to : "+endCell);
 	}
-	
-	
 	
 	private void executeDispellable(JSONObject command) {
 		int sourceId = (int) command.get("sourceId");
@@ -652,35 +658,16 @@ public class Game {
 			initLogs();
 		}
 		
-		System.out.println("Received command of type : "+s);
+		Game.log.println("Received command of type : "+s);
+		
 		if(s.equals("c")) {
 			executeSpellCommand(command);
 		}else if(s.equals("m")) {
 			executeMovementCommand(command);
 		}else if(s.equals("startfight")) {
-			log.println("Starting fight");
 			initGame((int) ((JSONObject)command.get(0)).get("mapID"));
-		}else if(s.equals("s")) {
-			log.println("Initiating entities");
-			ArrayList<Player> players = (ArrayList<Player>)(((JSONObject)command.get(0))).get("entities");
-			ArrayList<JSONObject> commands = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("misc");
-			ArrayList<JSONObject> stats = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("stats");
-			System.out.println("RECEIVED STATS");
-			System.out.println("\n\n"+stats+"\n\n");
-			ArrayList<PlayingEntity> entities = new ArrayList<>();
-			for(int i = 0; i < players.size(); i++) {
-				JSONObject obj = (JSONObject) commands.get(i);
-				int id = (int) obj.get("id");
-				String team = (int)obj.get("teamId") == 0 ? "blue" : "red";
-				int x = (int)obj.get("x");
-				int y = (int)obj.get("y");
-				boolean npc = false;
-				Player model = players.get(i);
-				Position position = new Position(x,y);
-				entities.add(new PlayingEntity(id, npc, position, team, model));
-			}
-			
-			initEntities(entities);
+		}else if(s.equals("s")) {	
+			initEntities(command);
 		}else if(s.equals("g")) {
 			return getBestTurn(command);
 		}else if(s.equals("endFight")) {
@@ -692,7 +679,6 @@ public class Game {
 		}
 		
 		los.update(playingEntities);
-		
 		if(DISPLAY_GUI)
 			los.repaint();
 		
