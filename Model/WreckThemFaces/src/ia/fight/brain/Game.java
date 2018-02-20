@@ -73,7 +73,7 @@ public class Game {
 	 * @param entities Entities to be initialized.
 	 */
 	public void initEntities(JSONArray command) {
-		Game.log.println("Initiating entities.");
+		Game.log.println("\n\nINITIATING ENTITIES");
 		ArrayList<Player> players = (ArrayList<Player>)(((JSONObject)command.get(0))).get("entities");
 		ArrayList<JSONObject> commands = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("misc");
 		ArrayList<PlayingEntity> entities = new ArrayList<>();
@@ -92,10 +92,9 @@ public class Game {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		for(int i = 0; i < entities.size(); i++) {
 			playingEntities.add(entities.get(i));
+			Game.log.println(entities.get(i));
+			Game.log.println(entities.get(i).getModel()+"\n");
 		}
-		
-		System.out.println("\n\n\nGetting path !");
-		getPath(playingEntities.get(0).getPosition(), playingEntities.get(1).getPosition(), AStarMap.DIAGONAL);
 
 		los.update(playingEntities);
 		this.playingEntities = playingEntities;
@@ -465,9 +464,6 @@ public class Game {
         myMap.setWalkable(target.getX(), target.getY(), true);
         
         List<ExampleNode> path = myMap.findPath(caster.getX(), caster.getY(), target.getX(), target.getY());
-        System.out.println("Caster : "+caster);
-        System.out.println("Target : "+target);
-        System.out.println(path);
         
         if(DIAGONAL)
 			AStarMap.CANMOVEDIAGONALY = false;
@@ -484,45 +480,58 @@ public class Game {
 	private Position getBestPositionDiagOptimization(Position caster, Position target, int MP) {
 		ArrayList<Position> positions = getPath(caster, target, true);
 		Position kept = caster;
+		Position kept_ndo = caster;
 		int MPLeft = MP;
 		
-		System.out.println("Getting best position with diagonal optimization.");
-		System.out.println("The diagonally optimized path is of size : "+positions.size());
-		System.out.println("Caster : "+caster+", target : "+target+". MP available : "+MP);
+		Game.log.println("\n\n///////////////////\nGetting best position with diagonal optimization.");
+		Game.log.println("The diagonally optimized path is of size : "+positions.size());
+		Game.log.println("Caster : "+caster+", target : "+target+". MP available : "+MP);
 		
 		for(int i = 0; i < positions.size(); i++) {
-			System.out.println(caster+" "+positions.get(i)+" "+Position.distance(caster, positions.get(i)));
+			Game.log.println(caster+" "+positions.get(i)+" "+Position.distance(caster, positions.get(i)));
 			if(Position.distance(caster, positions.get(i)) <= MPLeft) {
+				if(positions.get(i).deepEquals(target)) {
+					break;
+				}
 				kept = positions.get(i);
+				kept_ndo = positions.get(i);
 			}else {
 				break;
 			}
 		}
 		
-		System.out.println("After diagonal movement, position "+kept+" was kept.");
+		Game.log.println("After diagonal movement, position "+kept+" was kept.");
 		
 		MPLeft -= Position.distance(caster, kept);
 		
-		System.out.println(MPLeft+" MP Left.");
-		
-		if(MPLeft > 0) {
-			System.out.println("There are movement points remaining, but not enough for a diagonal approach.");
-			positions = getPath(caster, target, false);
-			
-			for(int i = 0; i < positions.size(); i++) {
-				if(Position.distance(caster, positions.get(i)) <= MPLeft) {
-					kept = positions.get(i);
-				}else {
-					break;
+		Game.log.println(MPLeft+" MP Left.");
+		try {
+			if(MPLeft > 0) {
+				Game.log.println("There are movement points remaining, but not enough for a diagonal approach.");
+				positions = getPath(kept, target, false);
+				Game.log.println("The remainder of the path is of size : "+positions.size());
+				for(int i = 0; i < positions.size(); i++) {
+					Game.log.println(kept+" "+positions.get(i)+" "+Position.distance(kept, positions.get(i)));
+					if(Position.distance(kept, positions.get(i)) <= MPLeft) {
+						if(positions.get(i).deepEquals(target)) {
+							break;
+						}
+						kept_ndo = positions.get(i);
+						Game.log.println("NPK : "+kept_ndo);
+					}else {
+						Game.log.println("Broke out of the loop");
+						break;
+					}
 				}
+				MPLeft = MP-Position.distance(caster, kept_ndo);
+				Game.log.println("New position kept : "+kept_ndo);
+				Game.log.println(MPLeft+" MP Left.");
 			}
-			MPLeft -= Position.distance(caster, kept);
-			System.out.println("New position kept : "+kept);
-			System.out.println(MPLeft+" MP Left.");
-		}
+		}catch(NullPointerException e) {}
 		
-		System.out.println("Algorithm finished. Kept position : "+kept);
-		return kept;
+		Game.log.println("Algorithm finished. Kept position : "+kept_ndo);
+		Game.log.println("///////////////////\n\n");
+		return kept_ndo;
 	}
 	
 	static private Position getClosestPositionFromArrayList(ArrayList<Position> positions, Position position) {
@@ -597,7 +606,7 @@ public class Game {
 	 * @return
 	 */
 	private String getBestTurn(JSONArray command) {
-		
+		/*
 		JSONObject idObj = (JSONObject) command.get(0);
 		int id = (int) idObj.get("id");
 
@@ -686,6 +695,27 @@ public class Game {
 				action += id+",c,"+selectedPosition.turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
 			}
 			
+		}
+		*/
+		
+		JSONObject idObj = (JSONObject) command.get(0);
+		int id = (int) idObj.get("id");
+		PlayingEntity caster = getPlayingEntityFromID(id);
+		PlayingEntity victim = getClosestEnnemy(caster);
+		
+		Position desired = getBestPositionDiagOptimization(caster.getPosition(), victim.getPosition(), caster.getModel().getMP());
+		
+		String action = "";
+
+		if(desired.deepEquals(caster.getPosition())) {
+			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim, false, map);
+			if(turn.size() > 0) {
+				action += id+",c,"+turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
+			}else {
+				action += id+",None";
+			}
+		}else {
+			action += id+",m,"+desired.getX()+","+desired.getY();
 		}
 		
 		return action;

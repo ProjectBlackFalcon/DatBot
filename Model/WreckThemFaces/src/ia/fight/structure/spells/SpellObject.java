@@ -67,13 +67,25 @@ public class SpellObject {
 		return spellCounter;
 	}
 	
-	public int getDamagePreviz(PlayingEntity caster, PlayingEntity target) {
+	public int getDamagePreviz(PlayingEntity caster, PlayingEntity target, boolean print) {
 		int damagePreviz = 0;
+
+		if(print) {
+			System.out.println(spells);
+			for(int i = 0; i < this.spells.size(); i++) {
+				System.out.println(this.spells.get(i).getClass().getSimpleName().equals("Damage"));
+			}
+		}
 		
 		for(int i = 0; i < this.spells.size(); i++) {
 			if(this.spells.get(i).getClass().getSimpleName().equals("Damage")) {
-				damagePreviz += ((Damage)spells.get(i)).previz(caster, target);
+				damagePreviz += ((Damage)spells.get(i)).previz(caster, target, print);
 			}
+		}
+		
+		if(print) {
+			Game.log.println("Total damage previz : "+damagePreviz);
+			Game.log.println("Total damage per AP : "+damagePreviz/this.getCost());
 		}
 		
 		return damagePreviz/this.getCost();
