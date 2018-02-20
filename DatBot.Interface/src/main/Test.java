@@ -46,9 +46,9 @@ public class Test {
 //			if(communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectGID() == 1984){
 //				id = communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectUID();
 //			}
-//		}
+//		}k
 		
-		communication.getReturn("0;0;i;cmd;modifyPrice;[" + 1984 + ",1,159]");
+//		communication.getReturn("0;0;i;cmd;withdrawItem;[" + 1984 + ",1,1]");
 
 
 //		communication.getReturn("0;0;i;cmd;getHuntStart;[None]");

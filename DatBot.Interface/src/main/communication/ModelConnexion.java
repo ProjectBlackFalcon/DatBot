@@ -671,9 +671,8 @@ public class ModelConnexion {
 			case "modifyPrice":
 				String[] paramItems1 = param.split(",");
 				List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
-				System.out.println("Size : " + uid.size());
 				for(int i = 0 ; i < uid.size() ; i++){
-					if(this.getNetwork().getNpc().isSelling(uid.get(i))){
+					if(!this.getNetwork().getNpc().isSelling(uid.get(i))){
 						continue;
 					}
 					Thread.sleep(80);
@@ -699,7 +698,7 @@ public class ModelConnexion {
 	
 				if (Integer.parseInt(paramItems11[2]) <= uid1.size()) {
 					for (int i = 0; i < Integer.parseInt(paramItems11[2]); i++) {
-						if(this.getNetwork().getNpc().isSelling(uid1.get(i))){
+						if(!this.getNetwork().getNpc().isSelling(uid1.get(i))){
 							continue;
 						}
 						Thread.sleep(80);
