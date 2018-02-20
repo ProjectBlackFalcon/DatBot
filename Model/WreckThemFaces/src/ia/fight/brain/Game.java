@@ -10,15 +10,18 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import ia.fight.astar.AStarMap;
+import ia.fight.astar.ExampleFactory;
+import ia.fight.astar.ExampleNode;
 import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.classes.Cra;
 import ia.fight.map.CreateMap;
-import ia.fight.map.Display;
 import ia.fight.map.GameViz;
 import ia.fight.map.LineOfSight;
 import ia.fight.map.Map;
@@ -56,7 +59,12 @@ public class Game {
 	 * Ends the game by disposing of the window.
 	 */
 	public void endGame() {
-		playingEntities.clear();
+		if(playingEntities != null) {
+			playingEntities.clear();
+		}else {
+			playingEntities = new ArrayList<>();
+		}
+		
 		los.dispose();
 	}
 	
@@ -65,12 +73,9 @@ public class Game {
 	 * @param entities Entities to be initialized.
 	 */
 	public void initEntities(JSONArray command) {
-		Game.log.println("Initiating entities.");
+		Game.log.println("\n\nINITIATING ENTITIES");
 		ArrayList<Player> players = (ArrayList<Player>)(((JSONObject)command.get(0))).get("entities");
 		ArrayList<JSONObject> commands = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("misc");
-		ArrayList<JSONObject> stats = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("stats");
-		Game.log.println("RECEIVED STATS");
-		Game.log.println("\n\n"+stats+"\n\n");
 		ArrayList<PlayingEntity> entities = new ArrayList<>();
 		for(int i = 0; i < players.size(); i++) {
 			JSONObject obj = (JSONObject) commands.get(i);
@@ -87,7 +92,8 @@ public class Game {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		for(int i = 0; i < entities.size(); i++) {
 			playingEntities.add(entities.get(i));
-			Game.log.println(entities.get(i).getModel() == null ? "No model currently selected." : entities.get(i).getModel()+" in pos "+entities.get(i).getPosition());
+			Game.log.println(entities.get(i));
+			Game.log.println(entities.get(i).getModel()+"\n");
 		}
 
 		los.update(playingEntities);
@@ -157,16 +163,27 @@ public class Game {
 		PlayingEntity victim = getPlayingEntityFromID(targetId);
 		
 		if(APLost != 0) {
-			brainText.add("Lost "+APLost+" AP.");
+			if(APLost > 0) {
+				brainText.add("Entity "+victim+" gained "+(-APLost)+" AP.");
+			}else {
+				brainText.add("Entity "+victim+" lost "+(-APLost)+" AP.");
+			}
+			
 			victim.getModel().removeAP(-APLost);
 		}
 		
 		if(MPLost != 0) {
-			brainText.add("Lost "+MPLost+" MP.");
+			if(MPLost > 0) {
+				brainText.add("Entity "+victim+" gained "+(-MPLost)+" MP.");
+			}else {
+				brainText.add("Entity "+victim+" lost "+(-MPLost)+" MP.");
+			}
+			
 			victim.getModel().removeMP(-MPLost);
 		}
 		
-		Game.los.panel.updateBrainText(brainText);
+		if(brainText.size() > 0)
+			Game.los.panel.updateBrainText(brainText);
 	}
 	
 	/**
@@ -271,7 +288,7 @@ public class Game {
 			Game.log.println("Casting "+spellId+" to : ["+x+";"+y+"]");
 			SpellObject spellCast = Game.getSpellFromID(spellId);
 			
-			brainText.add("Casting "+spellCast+" to : ["+x+";"+y+"]");
+			brainText.add("Casting "+spellId+" to : ["+x+";"+y+"]");
 			brainText.add("");
 			brainText.add("More details about entity "+id+" :");
 			brainText.add(castingEntity.toString());
@@ -283,22 +300,29 @@ public class Game {
 			if(LPLost) {
 				int damage = (int) lifePointsLost.get("lpLost");
 				spellCast.applySpells(castingEntity, victim, false, damage);
+				brainText.add("Target lost "+damage+" LP.");
 			}else if(LPGained) {
 				int heals = (int) lifePointsGained.get("lpGained");
 				spellCast.applySpells(castingEntity, victim, true, heals);
+				brainText.add("Target got healed "+heals+" LP.");
 			}
 		}else {
 			if(LPLost) {
 				int damage = (int) lifePointsLost.get("lpLost");
 				PlayingEntity victim = getPlayingEntityFromID((int)lifePointsLost.get("targetId"));
 				victim.getModel().removeLP(damage);
+				brainText.add("Target lost "+damage+" LP.");
 			}else if(LPGained) {
 				int heals = (int) lifePointsGained.get("lpGained");
 				PlayingEntity victim = getPlayingEntityFromID((int)lifePointsGained.get("targetId"));
 				victim.getModel().addLP(heals);
+				brainText.add("Target got healed "+heals+" LP.");
 			}
 		}
 
+		if(isDead) {
+			brainText.add("The target is dead !");
+		}
 		
 		Game.los.panel.updateBrainText(brainText);
 		
@@ -426,6 +450,90 @@ public class Game {
 		return selectedEnnemy;
 	}
 	
+	private ArrayList<Position> getPath(Position caster, Position target, boolean DIAGONAL) {
+		if(DIAGONAL)
+			AStarMap.CANMOVEDIAGONALY = true;
+		AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+        for(int i = 0; i < 33; i++){
+        	for(int j = 0; j < 33; j++){
+        		myMap.setWalkable(i, j, map.isPositionWalkable(new Position(i, j)));
+        	}
+        }
+        
+        myMap.setWalkable(caster.getX(), caster.getY(), true);
+        myMap.setWalkable(target.getX(), target.getY(), true);
+        
+        List<ExampleNode> path = myMap.findPath(caster.getX(), caster.getY(), target.getX(), target.getY());
+        
+        if(DIAGONAL)
+			AStarMap.CANMOVEDIAGONALY = false;
+        
+        ArrayList<Position> positions = new ArrayList<>();
+        
+        for(int i = 0; i < path.size(); i++) {
+        	positions.add(new Position(path.get(i).getxPosition(), path.get(i).getyPosition()));
+        }
+        
+        return positions;
+	}
+	
+	private Position getBestPositionDiagOptimization(Position caster, Position target, int MP) {
+		ArrayList<Position> positions = getPath(caster, target, true);
+		Position kept = caster;
+		Position kept_ndo = caster;
+		int MPLeft = MP;
+		
+		Game.log.println("\n\n///////////////////\nGetting best position with diagonal optimization.");
+		Game.log.println("The diagonally optimized path is of size : "+positions.size());
+		Game.log.println("Caster : "+caster+", target : "+target+". MP available : "+MP);
+		
+		for(int i = 0; i < positions.size(); i++) {
+			Game.log.println(caster+" "+positions.get(i)+" "+Position.distance(caster, positions.get(i)));
+			if(Position.distance(caster, positions.get(i)) <= MPLeft) {
+				if(positions.get(i).deepEquals(target)) {
+					break;
+				}
+				kept = positions.get(i);
+				kept_ndo = positions.get(i);
+			}else {
+				break;
+			}
+		}
+		
+		Game.log.println("After diagonal movement, position "+kept+" was kept.");
+		
+		MPLeft -= Position.distance(caster, kept);
+		
+		Game.log.println(MPLeft+" MP Left.");
+		try {
+			if(MPLeft > 0) {
+				Game.log.println("There are movement points remaining, but not enough for a diagonal approach.");
+				positions = getPath(kept, target, false);
+				Game.log.println("The remainder of the path is of size : "+positions.size());
+				for(int i = 0; i < positions.size(); i++) {
+					Game.log.println(kept+" "+positions.get(i)+" "+Position.distance(kept, positions.get(i)));
+					if(Position.distance(kept, positions.get(i)) <= MPLeft) {
+						if(positions.get(i).deepEquals(target)) {
+							break;
+						}
+						kept_ndo = positions.get(i);
+						Game.log.println("NPK : "+kept_ndo);
+					}else {
+						Game.log.println("Broke out of the loop");
+						break;
+					}
+				}
+				MPLeft = MP-Position.distance(caster, kept_ndo);
+				Game.log.println("New position kept : "+kept_ndo);
+				Game.log.println(MPLeft+" MP Left.");
+			}
+		}catch(NullPointerException e) {}
+		
+		Game.log.println("Algorithm finished. Kept position : "+kept_ndo);
+		Game.log.println("///////////////////\n\n");
+		return kept_ndo;
+	}
+	
 	static private Position getClosestPositionFromArrayList(ArrayList<Position> positions, Position position) {
 		int distance = Position.distance(positions.get(0), position);
 		Position selected = positions.get(0);
@@ -498,15 +606,13 @@ public class Game {
 	 * @return
 	 */
 	private String getBestTurn(JSONArray command) {
-		
+		/*
 		JSONObject idObj = (JSONObject) command.get(0);
 		int id = (int) idObj.get("id");
 
 		PlayingEntity caster = getPlayingEntityFromID(id);
 		PlayingEntity victim = getClosestEnnemy(caster);
-		
-		Display.show(map.getBlocks());
-		
+
 		log.println();
 		
 		ArrayList<Position> accessiblePositions = new ArrayList<>();
@@ -574,7 +680,7 @@ public class Game {
 			action += id+",m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
 		}else {
 			if(turn.size() < 1) {
-				Position desired = getClosestDiagonalPositionFromArrayList(accessiblePositions, victim.getPosition());
+				Position desired = getBestPositionDiagOptimization(caster.getPosition(), victim.getPosition(), caster.getModel().getMP());
 				log.println("Accessible positions : "+accessiblePositions);
 				log.println("MP available : "+caster.getModel().getMP());
 				log.println("Actual position : "+caster.getPosition());
@@ -589,6 +695,27 @@ public class Game {
 				action += id+",c,"+selectedPosition.turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
 			}
 			
+		}
+		*/
+		
+		JSONObject idObj = (JSONObject) command.get(0);
+		int id = (int) idObj.get("id");
+		PlayingEntity caster = getPlayingEntityFromID(id);
+		PlayingEntity victim = getClosestEnnemy(caster);
+		
+		Position desired = getBestPositionDiagOptimization(caster.getPosition(), victim.getPosition(), caster.getModel().getMP());
+		
+		String action = "";
+
+		if(desired.deepEquals(caster.getPosition())) {
+			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim, false, map);
+			if(turn.size() > 0) {
+				action += id+",c,"+turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
+			}else {
+				action += id+",None";
+			}
+		}else {
+			action += id+",m,"+desired.getX()+","+desired.getY();
 		}
 		
 		return action;

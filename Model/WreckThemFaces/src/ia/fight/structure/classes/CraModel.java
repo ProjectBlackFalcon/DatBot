@@ -118,7 +118,7 @@ public class CraModel{
 		criticalShooting.setMaxEffectAccumulation(1);
 		criticalShooting.setRecastInterval(5);
 		
-		paralyzingArrow.clearSpells();
+		paralysingArrow.clearSpells();
 		paralysingArrow.setCost(2);
 		paralysingArrow.setMinimumRange(1);
 		paralysingArrow.setMaximumRange(6);
@@ -159,7 +159,7 @@ public class CraModel{
 		allSpells.add(dispersingArrow);
 		allSpells.add(reprisal);
 		allSpells.add(frozenArrow);
-		allSpells.add(paralyzingArrow);
+		allSpells.add(paralysingArrow);
 		allSpells.add(burningArrow);
 		allSpells.add(repulsiveArrow);
 		allSpells.add(distantShooting);
@@ -170,7 +170,6 @@ public class CraModel{
 		allSpells.add(crushingArrow);
 		allSpells.add(lashingArrow);
 		allSpells.add(criticalShooting);
-		allSpells.add(paralysingArrow);
 		allSpells.add(punitiveArrow);
 		allSpells.add(powerfulShooting);
 		allSpells.add(plaguingArrow);
@@ -242,7 +241,7 @@ public class CraModel{
 	public static final SpellObject reprisal = new SpellObject("Reprisal", 110, 9303);
 	
 	public static final SpellObject frozenArrow = new SpellObject("Frozen arrow", 3, 163);
-	public static final SpellObject paralyzingArrow = new SpellObject("Paralyzing arrow", 115, 9304);
+	public static final SpellObject paralyzingArrow115 = new SpellObject("Paralyzing arrow115", 115, 9304);
 	
 	public static final SpellObject burningArrow = new SpellObject("Burning arrow", 6, 165);
 	public static final SpellObject repulsiveArrow = new SpellObject("Repulsive arrow", 120, 9305);

@@ -1,7 +1,12 @@
 package ia.fight.map;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import ia.fight.astar.AStarMap;
 import ia.fight.astar.ExampleFactory;
@@ -10,6 +15,13 @@ import ia.fight.brain.Game;
 import ia.fight.brain.Position;
 
 public class Map {
+	
+	public static final int WALKABLE = 0;
+	public static final int BLOCK = 1;
+	public static final int HOVER = 2;
+	public static final int BLUE_TEAM_ENTITY = 3;
+	public static final int RED_TEAM_ENTITY = 4;
+	
 	ArrayList<int[]> obstacles;
 	ArrayList<ArrayList<Integer>> blocks;
 	ArrayList<int[]> jsonBlocks;
@@ -296,6 +308,59 @@ public class Map {
 	public void printObstacles() {
 		for(int i = 0; i < this.obstacles.size(); i++) {
 			Game.log.println("["+this.obstacles.get(i)[0]+";"+this.obstacles.get(i)[1]+"] "+this.obstacles.get(i)[2]);
+		}
+	}
+	
+	JFrame frame;
+	
+	public void show() {
+		if(frame != null) {
+			if(!frame.isVisible()) {
+				frame.setVisible(true);
+			}
+		}else {
+			frame = new JFrame();
+			frame.setUndecorated(false);
+			frame.setSize(762, 762);
+			frame.add(this.new Panel());
+			frame.setVisible(true);
+			frame.setLocation(1200, 200);
+		}
+		
+	}
+	
+	public void hide() {
+		frame.setVisible(false);
+	}
+	
+	public class Panel extends JPanel{
+		@Override
+		public void paint(Graphics g) {
+			for(int i = 0; i < 33; i++) {
+				for(int j = 0; j < 33; j++) {
+					switch(getBlockType(new Position(i, j))){
+					case WALKABLE:
+						g.setColor(Color.white);
+						break;
+					case BLOCK:
+						g.setColor(Color.GRAY);
+						break;
+					case HOVER:
+						g.setColor(Color.black);
+						break;
+					case BLUE_TEAM_ENTITY:
+						g.setColor(Color.blue);
+						break;
+					case RED_TEAM_ENTITY:
+						g.setColor(Color.red);
+						break;
+					}
+					
+					g.fillRect(i*20, j*20, (i+1)*20, (j+1)*20);
+					g.setColor(Color.black);
+					g.drawRect(i*20, j*20, (i+1)*20, (j+1)*20);
+				}
+			}
 		}
 	}
 }

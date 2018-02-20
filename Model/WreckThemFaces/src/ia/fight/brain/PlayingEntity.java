@@ -119,7 +119,7 @@ public class PlayingEntity {
 		Collections.sort(spellsForEnnemy, new Comparator<SpellObject>() {
 			@Override
 			public int compare(SpellObject arg0, SpellObject arg1) {
-				if(arg0.getDamagePreviz(caster, victim) < arg1.getDamagePreviz(caster, victim)) {
+				if(arg0.getDamagePreviz(caster, victim, false) < arg1.getDamagePreviz(caster, victim, false)) {
 					return 1;
 				}else {
 					return -1;
@@ -132,7 +132,7 @@ public class PlayingEntity {
 		Game.log.println("AP available : "+tempAP);
 		
 		for(int i = 0; i < spellsForEnnemy.size(); i++) {
-			Game.log.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+			Game.log.println(spellsForEnnemy.get(i)+" "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim, false));
 			Game.log.println(spellsForEnnemy.get(i).remainingCastsForThisEntity(victim));
 			
 			for(int j = 0; j < spellsForEnnemy.get(i).remainingCastsForThisEntity(victim); j++) {
@@ -182,14 +182,11 @@ public class PlayingEntity {
 		}else {
 			brainText.add("No spell currently available for selection !");
 		}
-		
-		
-		
-		
+
 		Collections.sort(spellsForEnnemy, new Comparator<SpellObject>() {
 			@Override
 			public int compare(SpellObject arg0, SpellObject arg1) {
-				if(arg0.getDamagePreviz(caster, victim) < arg1.getDamagePreviz(caster, victim)) {
+				if(arg0.getDamagePreviz(caster, victim, false) < arg1.getDamagePreviz(caster, victim, false)) {
 					return 1;
 				}else {
 					return -1;
@@ -198,7 +195,7 @@ public class PlayingEntity {
 		});
 		
 		for(int i = 0; i < spellsForEnnemy.size(); i++) {
-			brainText.add(spellsForEnnemy.get(i).getName()+" : "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim));
+			brainText.add(spellsForEnnemy.get(i).getName()+" : "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim, false));
 		}
 		
 		

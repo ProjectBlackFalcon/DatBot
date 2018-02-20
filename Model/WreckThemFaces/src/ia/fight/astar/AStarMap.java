@@ -55,7 +55,9 @@ import ia.fight.brain.Game;
 public class AStarMap<T extends AbstractNode> {
 
     /** weather or not it is possible to walk diagonally on the map in general. */
-    protected static boolean CANMOVEDIAGONALY = false;
+	public static boolean CANMOVEDIAGONALY = false;
+    public static final boolean DIAGONAL = true;
+    public static final boolean NONDIAGONAL = false;
 
     /** holds nodes. first dim represents x-, second y-axis. */
     private T[][] nodes;
@@ -234,6 +236,7 @@ public class AStarMap<T extends AbstractNode> {
                 return new LinkedList<T>(); // return empty list
             }
         }
+        
         return null; // unreachable
     }
 
