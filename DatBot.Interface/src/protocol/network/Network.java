@@ -25,7 +25,9 @@ import game.plugin.Interactive;
 import game.plugin.Monsters;
 import game.plugin.Npc;
 import game.plugin.Stats;
+import ia.fight.brain.PlayingEntity;
 import ia.fight.map.CreateMap;
+import ia.fight.structure.Player;
 import io.netty.util.internal.ThreadLocalRandom;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
@@ -109,6 +111,7 @@ import protocol.network.types.game.actions.fight.FightTemporaryBoostWeaponDamage
 import protocol.network.types.game.actions.fight.FightTemporarySpellBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporarySpellImmunityEffect;
 import protocol.network.types.game.actions.fight.GameActionMarkedCell;
+import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
@@ -629,7 +632,47 @@ public class Network extends DisplayInfo implements Runnable {
 		if (!info.isInitFight()) {
 			JSONObject startFight = new JSONObject();
 			startFight.put("misc", getFight().init());
-			startFight.put("entities", getFight().getEntities());
+			
+			ArrayList<Player> playingEntities = getFight().getEntities();
+			Player bot = null;
+			
+			for(int i = 0; i < playingEntities.size(); i++) {
+				if(playingEntities.get(i).getName().equals(info.getName())) {
+					bot = playingEntities.get(i);
+				}
+			}
+			
+			CharacterCharacteristicsInformations botStats = stats.getStats().getStats();
+			
+			int totalAgility = botStats.getAgility().getTotal();
+			int totalIntelligence = botStats.getIntelligence().getTotal();
+			int totalStrength = botStats.getStrength().getTotal();
+			int totalLuck = botStats.getChance().getTotal();
+			int[] stats = new int[] {totalAgility, totalStrength, totalLuck, totalIntelligence, totalStrength};
+			int[] elementaryDamage = new int[] {botStats.getAirDamageBonus().getTotal(), botStats.getEarthDamageBonus().getTotal(), botStats.getWaterDamageBonus().getTotal(), botStats.getFireDamageBonus().getTotal(), botStats.getNeutralDamageBonus().getTotal()};
+			
+			bot.setInitiative(botStats.getInitiative().getTotal());
+			bot.setProspection(botStats.getProspecting().getTotal());
+			bot.setRange(botStats.getRange().getTotal());
+			bot.setCriticalChance(botStats.getCriticalHit().getTotal());
+			bot.setHeals(botStats.getHealBonus().getTotal());
+			bot.setFixedDamages(botStats.getAllDamagesBonus().getTotal());
+			bot.setPower(botStats.getDamagesBonusPercent().getTotal());
+			bot.setCriticalDamage(botStats.getCriticalDamageBonus().getTotal());
+			bot.setElementaryDamage(elementaryDamage);
+			bot.setDamageReturn(botStats.getReflect().getTotal());
+			bot.setWeaponPower(botStats.getWeaponDamagesBonusPercent().getTotal());
+			bot.setTrapDamage(botStats.getTrapBonus().getTotal());
+			bot.setTrapPower(botStats.getTrapBonusPercent().getTotal());
+			bot.setPushbackDamage(botStats.getPushDamageBonus().getTotal());
+			bot.setSpellPowerPrcnt(botStats.getSpellDamageDonePercent().getTotal());
+			bot.setWeaponPowerPrcnt(botStats.getWeaponDamageDonePercent().getTotal());
+			bot.setDistancePowerPrcnt(botStats.getRangedDamageDonePercent().getTotal());
+			bot.setCloseCombatPowerPrcnt(botStats.getMeleeDamageDonePercent().getTotal());
+			bot.setStats(stats);
+			
+			startFight.put("entities", playingEntities);
+			
 			JSONArray arr2 = new JSONArray();
 			arr2.add(startFight);
 			getFight().sendToFightAlgo("s", arr2);
