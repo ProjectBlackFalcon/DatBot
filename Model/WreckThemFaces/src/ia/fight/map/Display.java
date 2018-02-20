@@ -11,12 +11,12 @@ public class Display {
 	int[][] map;
 
 	public static void show(int[][] map) {
-		JFrame frame = new JFrame();
+/*		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.setSize(660, 660);
 		Display display = new Display(map);
 		frame.add(display.new Panel());
-		frame.setVisible(true);
+		frame.setVisible(true);*/
 	}
 	
 	public Display(int[][] map) {
@@ -31,13 +31,13 @@ public class Display {
 				for(int j = 0; j < map[0].length; j++) {
 					switch(map[i][j]) {
 					case 0:
-						g.setColor(Color.white);
+						g.setColor(Color.gray);
 						break;
 					case 1:
 						g.setColor(Color.black);
 						break;
 					case 2:
-						g.setColor(Color.gray);
+						g.setColor(Color.white);
 						break;
 					case 3:
 						g.setColor(Color.blue);

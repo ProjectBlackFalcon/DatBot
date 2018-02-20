@@ -44,37 +44,7 @@ public class Game {
 	}
 	
 	public Game(int map) {
-		/*
-		String[] entities = new String[2];
-		// Player ID / posX / posY / Player or Monster / Player type (0:cra, 1:Enu, ...) / Team / HP Max / AP Max / MP Max
-		entities[0] = "0;10;12;p;0;1;2020;11;4";
-		entities[1] = "1;6;12;m;0;0;200;15;5";
-		ArrayList<String> refreshMessage = new ArrayList<>();
 
-		refreshMessage.add("0;m;11;12");
-		refreshMessage.add("0;p");
-		refreshMessage.add("1;m;12;12");
-		refreshMessage.add("1;p");
-		refreshMessage.add("0;c;9;12;Magic arrow;150;false");
-		//refreshMessage.add("0;c;10;12;Dispersing arrow;0;false");
-		refreshMessage.add("0;p");
-		//refreshMessage.add("1;c;13;12;Magic arrow;150;false");
-		refreshMessage.add("1;g");
-		initGame(map);
-		initEntities(entities);
-
-		try {
-			Thread.sleep(500);
-			Game.log.println("Starting in 1 second ...");
-			Thread.sleep(1000);
-			for(int i = 0; i < refreshMessage.size(); i++) {
-				refresh(refreshMessage.get(i));
-				Thread.sleep(200);
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 	
 	/**
@@ -694,6 +664,9 @@ public class Game {
 			log.println("Initiating entities");
 			ArrayList<Player> players = (ArrayList<Player>)(((JSONObject)command.get(0))).get("entities");
 			ArrayList<JSONObject> commands = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("misc");
+			ArrayList<JSONObject> stats = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("stats");
+			System.out.println("RECEIVED STATS");
+			System.out.println("\n\n"+stats+"\n\n");
 			ArrayList<PlayingEntity> entities = new ArrayList<>();
 			for(int i = 0; i < players.size(); i++) {
 				JSONObject obj = (JSONObject) commands.get(i);
