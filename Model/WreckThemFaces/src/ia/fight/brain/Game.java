@@ -819,8 +819,8 @@ public class Game {
 	 */
 	public static void initLogs() {
 		try {
-//			log = System.out;
-			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			log = System.out;
+			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
