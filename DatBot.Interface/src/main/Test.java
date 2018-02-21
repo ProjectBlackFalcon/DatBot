@@ -34,11 +34,11 @@ public class Test {
 		// communication.getReturn("2;0;i;cmd;connect;[wublel7,wubwublel7,Dihydroquerina,Julith]");
 		// communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
-		communication.getReturn("0;0;i;cmd;openHdv;[None]");
-		Thread.sleep(2000);
-		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
-		Thread.sleep(2000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
+//		communication.getReturn("0;0;i;cmd;openHdv;[None]");
+//		Thread.sleep(2000);
+//		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
+//		Thread.sleep(2000);
+//		communication.getReturn("0;0;i;cmd;getStats;[None]");
 		Thread.sleep(2000);
 		
 //		int id = 0; 
