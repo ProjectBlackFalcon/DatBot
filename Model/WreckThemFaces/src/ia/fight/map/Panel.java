@@ -37,6 +37,11 @@ public class Panel extends JPanel{
 	int[] clickedCell = new int[2];
 	int[] clickedRightCell = new int[2];
 	
+	ArrayList<Position> selectedStartPositions;
+	ArrayList<Position> challengers;
+	ArrayList<Position> defenders;
+	boolean showStartingPositions = true;
+	
 	ArrayList<int[]> trail;
 	ArrayList<int[]> obstacles;
 	AStarMap<ExampleNode> myMap;
@@ -62,6 +67,9 @@ public class Panel extends JPanel{
         	}
         }
 		
+        selectedStartPositions = new ArrayList<>();
+        challengers = new ArrayList<>();
+        defenders = new ArrayList<>();
 		brainText = new ArrayList<>();
 		trail = new ArrayList<>();
 		mapObject = map;
@@ -206,6 +214,17 @@ public class Panel extends JPanel{
 		map = mapObject.getBlocks();
 	}
 	
+	public void update(ArrayList<Position> challengers, ArrayList<Position> defenders) {
+		this.challengers = challengers;
+		this.defenders = defenders;
+		repaint();
+	}
+	
+	public void updateStartingPositions(ArrayList<Position> positions) {
+		this.selectedStartPositions = positions;
+		repaint();
+	}
+	
 	public void updateBrainText(ArrayList<String> s) {
 		brainText.add(s);
 		brainTextIndex = brainText.size()-1;
@@ -216,6 +235,16 @@ public class Panel extends JPanel{
 		paintFight(g);
 		paintBrain(g);
 		paintMenu(g);
+	}
+	
+	public void showStartingPositions() {
+		this.showStartingPositions = true;
+		repaint();
+	}
+	
+	public void hideStartingPositions() {
+		this.showStartingPositions = false;
+		repaint();
 	}
 	
 	public void paintMenu(Graphics g) {
@@ -318,6 +347,29 @@ public class Panel extends JPanel{
 			for(int j = 0; j < 33; j++) {
 				g.drawRect(i*20, OFFSETY+j*20, 20, 20);
 			}	
+		}
+		
+		if(this.showStartingPositions) {
+			g.setColor(new Color(255,0,0,50));
+			for(int i = 0; i < challengers.size(); i++) {
+				g.setColor(new Color(255,0,0,50));
+				for(int j = 0; j < selectedStartPositions.size(); j++) {
+					if(challengers.get(i).getX() == selectedStartPositions.get(j).getX() && challengers.get(i).getY() == selectedStartPositions.get(j).getY()) {
+						g.setColor(new Color(255, 0, 0, 255));
+					}
+				}
+				g.fillRect(challengers.get(i).getX()*20+1, challengers.get(i).getY()*20+1, 19, 19);
+			}
+			
+			for(int i = 0; i < defenders.size(); i++) {
+				g.setColor(new Color(0,0,255,100));
+				for(int j = 0; j < selectedStartPositions.size(); j++) {
+					if(defenders.get(i).getX() == selectedStartPositions.get(j).getX() && defenders.get(i).getY() == selectedStartPositions.get(j).getY()) {
+						g.setColor(new Color(0, 0, 255, 255));
+					}
+				}
+				g.fillRect(defenders.get(i).getX()*20+1, defenders.get(i).getY()*20+1, 19, 19);
+			}
 		}
 	}
 }

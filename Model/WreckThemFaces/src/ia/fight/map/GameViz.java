@@ -13,6 +13,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import ia.fight.brain.PlayingEntity;
+import ia.fight.brain.Position;
 
 public class GameViz extends JFrame{
 	
@@ -30,5 +31,9 @@ public class GameViz extends JFrame{
 
 	public void update(ArrayList<PlayingEntity> playingEntities) {
 		panel.update(playingEntities);
+	}
+	
+	public void update(ArrayList<Position> challengers, ArrayList<Position> defenders) {
+		panel.update(challengers, defenders);
 	}
 }
