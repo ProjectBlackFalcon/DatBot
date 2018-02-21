@@ -40,13 +40,13 @@ public class ExampleUsage {
         List<ExampleNode> path = myMap.findPath(0, 0, 40, 40);
         
         if(path.size() < 1){
-        	Game.log.println("Not accessible");
+        	Game.println("Not accessible");
         }else{
-        	Game.log.println("Accessible");
+        	Game.println("Accessible");
         }
 
         for (int i = 0; i < path.size(); i++) {
-            Game.log.print("(" + path.get(i).getxPosition() + ", " + path.get(i).getyPosition() + ") -> ");
+            Game.print("(" + path.get(i).getxPosition() + ", " + path.get(i).getyPosition() + ") -> ");
         }
     }
 

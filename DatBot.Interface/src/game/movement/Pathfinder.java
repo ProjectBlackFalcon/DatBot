@@ -361,7 +361,7 @@ public class Pathfinder {
 			if (!(mov == false) && isNewSystem && cellId != -1 && cellId != actualPoint.CellId) {
 				sCellData = this.network.getMap().getCells().get(cellId);
 				floor = (int) Math.abs(Math.abs(fCellData.getFloor()) - Math.abs(sCellData.getFloor()));
-				if (!(sCellData.getMoveZone() == fCellData.getMoveZone()) && floor > 0 && sCellData.getMoveZone() == fCellData.getMoveZone()
+				if (!(sCellData.getMoveZone() == fCellData.getMoveZone()) && floor > 0 || sCellData.getMoveZone() == fCellData.getMoveZone()
 						&& fCellData.getMoveZone() == 0 && floor > 11)
 					mov = false;
 			}
@@ -512,12 +512,14 @@ public class Pathfinder {
             path.Orientation = squares[i].OrientationTo(squares[i + 1]);
             MovPath.Cells.add(path);
         }
-//        for (PathElement cells : MovPath.Cells) {
-//			this.network.append(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
-//		}
+        System.out.println("---------------NOT COMPRESSED------------------");
+        for (PathElement cells : MovPath.Cells) {
+			this.network.append(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
+		}
+        System.out.println("\n\n---------------COMPRESSED------------------");
         MovPath.Compress();
-//        for (PathElement cells : MovPath.Cells) {
-//			this.network.append(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
-//		}
+        for (PathElement cells : MovPath.Cells) {
+			this.network.append(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
+		}
     }
 }

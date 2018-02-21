@@ -16,13 +16,13 @@ public class CharSteal extends Spell{
 
 	@Override
 	public void applySpell(PlayingEntity pe, PlayingEntity target, boolean trueDamage, int intensity) {
-		//Game.log.println("Taking "+value+" "+characteristic+" off "+target.getModel().getBuffs());
+		//Game.println("Taking "+value+" "+characteristic+" off "+target.getModel().getBuffs());
 		target.getModel().addBuff(new Buff("-"+characteristic, value, value, false, 1));
-		//Game.log.println("Taking "+value+" "+characteristic+" off "+target.getModel().getBuffs());
+		//Game.println("Taking "+value+" "+characteristic+" off "+target.getModel().getBuffs());
 		
-		//Game.log.println("Adding "+value+" "+characteristic+" off "+pe.getModel().getBuffs());
+		//Game.println("Adding "+value+" "+characteristic+" off "+pe.getModel().getBuffs());
 		pe.getModel().addBuff(new Buff("+"+characteristic, value, value, false, 1));
-		//Game.log.println("Adding "+value+" "+characteristic+" off "+pe.getModel().getBuffs());
+		//Game.println("Adding "+value+" "+characteristic+" off "+pe.getModel().getBuffs());
 	}
 	
 }

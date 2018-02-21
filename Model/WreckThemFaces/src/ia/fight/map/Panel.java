@@ -37,6 +37,12 @@ public class Panel extends JPanel{
 	int[] clickedCell = new int[2];
 	int[] clickedRightCell = new int[2];
 	
+	ArrayList<Cell> cells;
+	ArrayList<Position> selectedStartPositions;
+	ArrayList<Position> challengers;
+	ArrayList<Position> defenders;
+	boolean showStartingPositions = true;
+	
 	ArrayList<int[]> trail;
 	ArrayList<int[]> obstacles;
 	AStarMap<ExampleNode> myMap;
@@ -62,8 +68,12 @@ public class Panel extends JPanel{
         	}
         }
 		
+        selectedStartPositions = new ArrayList<>();
+        challengers = new ArrayList<>();
+        defenders = new ArrayList<>();
 		brainText = new ArrayList<>();
 		trail = new ArrayList<>();
+		cells = new ArrayList<>();
 		mapObject = map;
 		this.obstacles = map.getObstacles();
 		this.map = map.getBlocks();
@@ -145,7 +155,7 @@ public class Panel extends JPanel{
 							clickedCell[1] >= 0 && clickedCell[1] < 33 &&
 							clickedRightCell[0] >= 0 && clickedRightCell[0] < 33 &&
 							clickedRightCell[1] >= 0 && clickedRightCell[1] < 33) {
-						System.out.println("Creating path");
+						Game.println("Creating path");
 						List<ExampleNode> path;
 				        path = myMap.findPath(clickedCell[0],clickedCell[1],clickedRightCell[0],clickedRightCell[1]);
 				        for(int i = 0; i < path.size(); i++) {
@@ -206,8 +216,18 @@ public class Panel extends JPanel{
 		map = mapObject.getBlocks();
 	}
 	
+	public void update(ArrayList<Position> challengers, ArrayList<Position> defenders) {
+		this.challengers = challengers;
+		this.defenders = defenders;
+		repaint();
+	}
+	
+	public void updateStartingPositions(ArrayList<Position> positions) {
+		this.selectedStartPositions = positions;
+		repaint();
+	}
+	
 	public void updateBrainText(ArrayList<String> s) {
-		System.out.println("ADDING TO BRAIN TEXT");
 		brainText.add(s);
 		brainTextIndex = brainText.size()-1;
 	}
@@ -217,6 +237,46 @@ public class Panel extends JPanel{
 		paintFight(g);
 		paintBrain(g);
 		paintMenu(g);
+	}
+	
+	public void showCell(Position pos, String txt, Color color) {
+		boolean found = false;
+		for(int i = 0; i < cells.size(); i++) {
+			if(cells.get(i).pos.deepEquals(pos)) {
+				cells.get(i).txt = txt;
+				cells.get(i).color = color;
+				found = true;
+			}
+		}
+		
+		if(!found)
+			cells.add(new Cell(pos, txt, color));
+		
+		repaint();
+	}
+	
+	public void clearCells() {
+		cells.clear();
+		repaint();
+	}
+	
+	public void hideCell(Position pos) {
+		for(int i = 0; i < cells.size(); i++) {
+			if(cells.get(i).pos.deepEquals(pos)) {
+				cells.remove(i);
+			}
+		}
+		repaint();
+	}
+	
+	public void showStartingPositions() {
+		this.showStartingPositions = true;
+		repaint();
+	}
+	
+	public void hideStartingPositions() {
+		this.showStartingPositions = false;
+		repaint();
 	}
 	
 	public void paintMenu(Graphics g) {
@@ -319,6 +379,49 @@ public class Panel extends JPanel{
 			for(int j = 0; j < 33; j++) {
 				g.drawRect(i*20, OFFSETY+j*20, 20, 20);
 			}	
+		}
+		
+		if(this.showStartingPositions) {
+			g.setColor(new Color(255,0,0,50));
+			for(int i = 0; i < challengers.size(); i++) {
+				g.setColor(new Color(255,0,0,50));
+				for(int j = 0; j < selectedStartPositions.size(); j++) {
+					if(challengers.get(i).getX() == selectedStartPositions.get(j).getX() && challengers.get(i).getY() == selectedStartPositions.get(j).getY()) {
+						g.setColor(new Color(255, 0, 0, 255));
+					}
+				}
+				g.fillRect(challengers.get(i).getX()*20+1, challengers.get(i).getY()*20+1, 19, 19);
+			}
+			
+			for(int i = 0; i < defenders.size(); i++) {
+				g.setColor(new Color(0,0,255,100));
+				for(int j = 0; j < selectedStartPositions.size(); j++) {
+					if(defenders.get(i).getX() == selectedStartPositions.get(j).getX() && defenders.get(i).getY() == selectedStartPositions.get(j).getY()) {
+						g.setColor(new Color(0, 0, 255, 255));
+					}
+				}
+				g.fillRect(defenders.get(i).getX()*20+1, defenders.get(i).getY()*20+1, 19, 19);
+			}
+		}
+		
+		for(int i = 0; i < cells.size(); i++) {
+			g.setColor(cells.get(i).color);
+			g.fillRect(cells.get(i).pos.getX()*20+1, cells.get(i).pos.getY()*20+1, 19, 19);
+			g.setColor(Color.black);
+			g.drawString(cells.get(i).txt, cells.get(i).pos.getX()*20+3, cells.get(i).pos.getY()*20+12);
+		}
+	}
+	
+	public class Cell{
+		
+		Position pos;
+		String txt;
+		Color color;
+		
+		public Cell(Position pos, String txt, Color color) {
+			this.pos = pos;
+			this.txt = txt;
+			this.color = color;
 		}
 	}
 }

@@ -94,14 +94,14 @@ public class Damage extends Spell{
 		
 		int finalDamage = outputDamage - fixedReduction - prcntReduction;
 		/*
-		Game.log.println("Casting spell : "+superSpell.getName());
-		Game.log.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
-		Game.log.println("Chosen damage : "+baseDamage);
-		Game.log.println("Added damage : "+addedDamage);
-		Game.log.println("Fixed damage : "+fixedDamage);
-		Game.log.println("Output damage : "+outputDamage);
-		Game.log.println("Fixed reduction : "+fixedReduction);
-		Game.log.println("Final damage : "+finalDamage);
+		Game.println("Casting spell : "+superSpell.getName());
+		Game.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
+		Game.println("Chosen damage : "+baseDamage);
+		Game.println("Added damage : "+addedDamage);
+		Game.println("Fixed damage : "+fixedDamage);
+		Game.println("Output damage : "+outputDamage);
+		Game.println("Fixed reduction : "+fixedReduction);
+		Game.println("Final damage : "+finalDamage);
 		*/
 		return finalDamage;
 	}
@@ -129,16 +129,16 @@ public class Damage extends Spell{
 		double finalDamage = outputDamage - fixedReduction - prcntReduction;
 		
 		if(print) {
-			Game.log.println(baseDamage+" * ( "+caster.getModel().getStats()[this.getType()]+" + "+caster.getModel().getPower()+" ) / 100");
-			Game.log.println(caster.getModel().getFixedDamages()+" | "+caster.getModel().getElementaryDamage()[this.getType()]);
-			Game.log.println("Casting spell : "+superSpell.getName());
-			Game.log.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
-			Game.log.println("Chosen damage : "+baseDamage);
-			Game.log.println("Added damage : "+addedDamage);
-			Game.log.println("Fixed damage : "+fixedDamage);
-			Game.log.println("Output damage : "+outputDamage);
-			Game.log.println("Fixed reduction : "+fixedReduction);
-			Game.log.println("Final damage : "+finalDamage);
+			Game.println(baseDamage+" * ( "+caster.getModel().getStats()[this.getType()]+" + "+caster.getModel().getPower()+" ) / 100");
+			Game.println(caster.getModel().getFixedDamages()+" | "+caster.getModel().getElementaryDamage()[this.getType()]);
+			Game.println("Casting spell : "+superSpell.getName());
+			Game.println("Base damage : "+this.getLowDamage()+" - "+this.getCriticalHighDamage());
+			Game.println("Chosen damage : "+baseDamage);
+			Game.println("Added damage : "+addedDamage);
+			Game.println("Fixed damage : "+fixedDamage);
+			Game.println("Output damage : "+outputDamage);
+			Game.println("Fixed reduction : "+fixedReduction);
+			Game.println("Final damage : "+finalDamage);
 		}
 		
 		

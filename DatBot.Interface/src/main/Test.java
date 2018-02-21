@@ -27,7 +27,7 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 
-		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
+		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 //		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,kezaropod11,Faoy,Julith]");
 //		 communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
@@ -39,19 +39,17 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
 //		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(2000);
-		
 //		int id = 0; 
 //		for(int i = 0; i < communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().size() ; i++){
 //			if(communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectGID() == 1984){
 //				id = communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectUID();
 //			}
-//		}k
+//		}
 		
 //		communication.getReturn("0;0;i;cmd;withdrawItem;[" + 1984 + ",1,1]");
 
 
-//		communication.getReturn("0;0;i;cmd;getHuntStart;[None]");
+		communication.getReturn("0;0;i;cmd;changeMap;[21,n]");
 //		communication.getReturn("0;0;i;cmd;getCluesLeft;[None]");
 //		communication.getReturn("0;0;i;cmd;getStepsLeft;[None]");
 //		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");

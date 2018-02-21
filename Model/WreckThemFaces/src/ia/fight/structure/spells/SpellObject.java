@@ -69,14 +69,6 @@ public class SpellObject {
 	
 	public int getDamagePreviz(PlayingEntity caster, PlayingEntity target, boolean print) {
 		int damagePreviz = 0;
-
-		if(print) {
-			System.out.println(spells);
-			for(int i = 0; i < this.spells.size(); i++) {
-				System.out.println(this.spells.get(i).getClass().getSimpleName().equals("Damage"));
-			}
-		}
-		
 		for(int i = 0; i < this.spells.size(); i++) {
 			if(this.spells.get(i).getClass().getSimpleName().equals("Damage")) {
 				damagePreviz += ((Damage)spells.get(i)).previz(caster, target, print);
@@ -84,8 +76,8 @@ public class SpellObject {
 		}
 		
 		if(print) {
-			Game.log.println("Total damage previz : "+damagePreviz);
-			Game.log.println("Total damage per AP : "+damagePreviz/this.getCost());
+			Game.println("Total damage previz : "+damagePreviz);
+			Game.println("Total damage per AP : "+damagePreviz/this.getCost());
 		}
 		
 		return damagePreviz/this.getCost();
@@ -257,7 +249,7 @@ public class SpellObject {
 			victim.getModel().removeLP(damage);
 		}
 		this.spellCounter++;	
-		Game.log.println("Casting spell directly onto : "+victim);
+		Game.println("Casting spell directly onto : "+victim);
 		boolean found = false;
 		for(int j = 0; j < this.spellPerEntityCounter.size(); j++) {
 			if(this.spellPerEntityCounter.get(j)[0] == victim.getID()) {
@@ -271,7 +263,7 @@ public class SpellObject {
 		}
 		
 		for(int i = 0; i < this.spellPerEntityCounter.size(); i++) {
-			Game.log.println("    "+this.spellPerEntityCounter.get(i)[0]+" "+this.spellPerEntityCounter.get(i)[1]);
+			Game.println("    "+this.spellPerEntityCounter.get(i)[0]+" "+this.spellPerEntityCounter.get(i)[1]);
 		}
 		this.cooldown = this.getRecastInterval();
 	}	
