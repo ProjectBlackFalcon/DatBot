@@ -145,7 +145,7 @@ public class Panel extends JPanel{
 							clickedCell[1] >= 0 && clickedCell[1] < 33 &&
 							clickedRightCell[0] >= 0 && clickedRightCell[0] < 33 &&
 							clickedRightCell[1] >= 0 && clickedRightCell[1] < 33) {
-						System.out.println("Creating path");
+						Game.println("Creating path");
 						List<ExampleNode> path;
 				        path = myMap.findPath(clickedCell[0],clickedCell[1],clickedRightCell[0],clickedRightCell[1]);
 				        for(int i = 0; i < path.size(); i++) {
@@ -207,7 +207,6 @@ public class Panel extends JPanel{
 	}
 	
 	public void updateBrainText(ArrayList<String> s) {
-		System.out.println("ADDING TO BRAIN TEXT");
 		brainText.add(s);
 		brainTextIndex = brainText.size()-1;
 	}

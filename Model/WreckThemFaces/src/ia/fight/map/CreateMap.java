@@ -21,7 +21,6 @@ public class CreateMap {
 		ArrayList<int[]> blocks = new ArrayList<>();
 		try{
 			String path = GameData.getPathDatBot() + "\\Model\\WreckThemFaces\\src\\ia\\fight\\data\\MapInfo.json";
-			System.out.println(path);
 			JSONArray arr = (JSONArray) parser.parse(new FileReader(path));
 			JSONObject map;
 			
@@ -50,7 +49,7 @@ public class CreateMap {
 
 			long id = (java.lang.Long) map.get("id");
 			String coords = (String) map.get("coord");
-			Game.log.println("Map id : "+id+", loc : "+coords);
+			Game.println("Map id : "+id+", loc : "+coords);
 			JSONArray cells = (JSONArray) map.get("cells");
 
 			for(int i = 0; i < cells.size(); i++){
