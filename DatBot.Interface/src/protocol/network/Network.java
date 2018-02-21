@@ -611,7 +611,7 @@ public class Network extends DisplayInfo implements Runnable {
 		info.setInitFight(false);
 		if(this.info.isInHunt()){
 			// Send the start fight a little later for huntFight
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
 		}
 		JSONObject mapJSONObject = new JSONObject();
