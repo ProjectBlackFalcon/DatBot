@@ -49,7 +49,7 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;withdrawItem;[" + 1984 + ",1,1]");
 
 
-		communication.getReturn("0;0;i;cmd;changeMap;[21,n]");
+//		communication.getReturn("0;0;i;cmd;changeMap;[21,n]");
 //		communication.getReturn("0;0;i;cmd;getCluesLeft;[None]");
 //		communication.getReturn("0;0;i;cmd;getStepsLeft;[None]");
 //		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");

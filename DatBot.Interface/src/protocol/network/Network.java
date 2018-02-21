@@ -67,6 +67,7 @@ import protocol.network.messages.game.context.GameContextReadyMessage;
 import protocol.network.messages.game.context.GameContextRemoveElementMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
+import protocol.network.messages.game.context.GameMapNoMovementMessage;
 import protocol.network.messages.game.context.fight.GameFightJoinMessage;
 import protocol.network.messages.game.context.fight.GameFightPlacementPositionRequestMessage;
 import protocol.network.messages.game.context.fight.GameFightPlacementPossiblePositionsMessage;
@@ -1370,6 +1371,9 @@ public class Network extends DisplayInfo implements Runnable {
 			case 6622:
 				handleMapComplementaryInformationsDataInHavenBagMessage(dataReader);
 				break;
+			case 950:
+				GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
+				throw new Exception("Can't move to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14));
 			case 951:
 				handleGameMapMovementMessage(dataReader);
 				break;
