@@ -37,6 +37,7 @@ public class Panel extends JPanel{
 	int[] clickedCell = new int[2];
 	int[] clickedRightCell = new int[2];
 	
+	ArrayList<Cell> cells;
 	ArrayList<Position> selectedStartPositions;
 	ArrayList<Position> challengers;
 	ArrayList<Position> defenders;
@@ -72,6 +73,7 @@ public class Panel extends JPanel{
         defenders = new ArrayList<>();
 		brainText = new ArrayList<>();
 		trail = new ArrayList<>();
+		cells = new ArrayList<>();
 		mapObject = map;
 		this.obstacles = map.getObstacles();
 		this.map = map.getBlocks();
@@ -237,6 +239,36 @@ public class Panel extends JPanel{
 		paintMenu(g);
 	}
 	
+	public void showCell(Position pos, String txt, Color color) {
+		boolean found = false;
+		for(int i = 0; i < cells.size(); i++) {
+			if(cells.get(i).pos.deepEquals(pos)) {
+				cells.get(i).txt = txt;
+				cells.get(i).color = color;
+				found = true;
+			}
+		}
+		
+		if(!found)
+			cells.add(new Cell(pos, txt, color));
+		
+		repaint();
+	}
+	
+	public void clearCells() {
+		cells.clear();
+		repaint();
+	}
+	
+	public void hideCell(Position pos) {
+		for(int i = 0; i < cells.size(); i++) {
+			if(cells.get(i).pos.deepEquals(pos)) {
+				cells.remove(i);
+			}
+		}
+		repaint();
+	}
+	
 	public void showStartingPositions() {
 		this.showStartingPositions = true;
 		repaint();
@@ -370,6 +402,26 @@ public class Panel extends JPanel{
 				}
 				g.fillRect(defenders.get(i).getX()*20+1, defenders.get(i).getY()*20+1, 19, 19);
 			}
+		}
+		
+		for(int i = 0; i < cells.size(); i++) {
+			g.setColor(cells.get(i).color);
+			g.fillRect(cells.get(i).pos.getX()*20+1, cells.get(i).pos.getY()*20+1, 19, 19);
+			g.setColor(Color.black);
+			g.drawString(cells.get(i).txt, cells.get(i).pos.getX()*20+3, cells.get(i).pos.getY()*20+12);
+		}
+	}
+	
+	public class Cell{
+		
+		Position pos;
+		String txt;
+		Color color;
+		
+		public Cell(Position pos, String txt, Color color) {
+			this.pos = pos;
+			this.txt = txt;
+			this.color = color;
 		}
 	}
 }

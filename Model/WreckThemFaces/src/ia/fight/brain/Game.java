@@ -1,5 +1,6 @@
 package ia.fight.brain;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -39,7 +40,10 @@ public class Game {
 	
 	public Map map;
 	public ArrayList<PlayingEntity> playingEntities;
+	ArrayList<Position> challengerAvailableCells;
+	ArrayList<Position> defenderAvailableCells;
 	static public GameViz los;
+	String botTeam = "";
 
 	/**
 	 * Initializes the game map. Creates a map and opens a JFrame.
@@ -71,22 +75,102 @@ public class Game {
 	
 	public void initStartAvailablePositions(JSONArray command) {
 		Game.println("\n\nINITIATING START POSITIONS");
-		ArrayList<Position> challengers = (ArrayList<Position>)(((JSONObject)command.get(0))).get("challengerPositions");
-		ArrayList<Position> defenders = (ArrayList<Position>)(((JSONObject)command.get(0))).get("defenderPositions");
-		Game.println("Received challengers :");
-		Game.println(challengers);
-		Game.println("Received defenders :");
-		Game.println(defenders);
-		los.panel.update(challengers, defenders);
+		challengerAvailableCells = (ArrayList<Position>)(((JSONObject)command.get(0))).get("challengerPositions");
+		defenderAvailableCells = (ArrayList<Position>)(((JSONObject)command.get(0))).get("defenderPositions");
+		botTeam = (int)((JSONObject)command.get(0)).get("team") == 0 ? "red" : "blue";
+		los.panel.update(challengerAvailableCells, defenderAvailableCells);
 		los.panel.showStartingPositions();
 	}
 	
 	public void initStartChosenPositionsModified(JSONArray command) {
 		Game.println("\n\nSTART POSITIONS HAVE BEEN ALTERED");
 		ArrayList<Position> positions = (ArrayList<Position>)(((JSONObject)command.get(0))).get("positions");
+		ArrayList<Position> challengers = new ArrayList<>();
+		ArrayList<Position> defenders = new ArrayList<>();
+		
+		for(int i = 0; i < positions.size(); i++) {
+			for(int j = 0; j < challengerAvailableCells.size(); j++) {
+				if(positions.get(i).deepEquals(challengerAvailableCells.get(j))) {
+					challengers.add(positions.get(i));
+				}
+			}
+			
+			for(int j = 0; j < defenderAvailableCells.size(); j++) {
+				if(positions.get(i).deepEquals(defenderAvailableCells.get(j))) {
+					defenders.add(positions.get(i));
+				}
+			}
+		}
+		
+		boolean isChallenger = false;
+		boolean isDefender = false;
+		
+		if(botTeam.equals("red")) {
+			isChallenger = true;
+		}else {
+			isDefender = true;
+		}
+		
+		ArrayList<Integer> totalDistance = new ArrayList<>();
+		Position keptPosition = null;
+		
+		if(isChallenger) {
+			for(int i = 0; i < challengerAvailableCells.size(); i++) {
+				int tempDistance = 0;
+				for(int j = 0; j < defenders.size(); j++) {
+					tempDistance += Position.distance(challengerAvailableCells.get(i), defenders.get(j));
+				}
+				totalDistance.add(tempDistance);
+			}
+			
+			keptPosition = challengerAvailableCells.get(indexOfMax(totalDistance));
+		}else {
+			for(int i = 0; i < defenderAvailableCells.size(); i++) {
+				int tempDistance = 0;
+				for(int j = 0; j < challengers.size(); j++) {
+					tempDistance += Position.distance(defenderAvailableCells.get(i), challengers.get(j));
+				}
+				totalDistance.add(tempDistance);
+			}
+			
+			keptPosition = defenderAvailableCells.get(indexOfMin(totalDistance));
+		}
+		
 		Game.println("Received positions :");
 		Game.println(positions);
+		Game.println("Closest position :");
+		Game.println(keptPosition);
+		
+		los.panel.showCell(keptPosition, "150", Color.magenta);
 		los.panel.updateStartingPositions(positions);
+	}
+	
+	public int indexOfMax(ArrayList<Integer> arr) {
+		int max = arr.get(0);
+		int index = 0;
+		
+		for(int i = 0; i < arr.size(); i++) {
+			if(arr.get(i) > max) {
+				max = arr.get(i);
+				index = i;
+			}
+		}
+		
+		return index;
+	}
+	
+	public int indexOfMin(ArrayList<Integer> arr) {
+		int max = arr.get(0);
+		int index = 0;
+		
+		for(int i = 0; i < arr.size(); i++) {
+			if(arr.get(i) < max) {
+				max = arr.get(i);
+				index = i;
+			}
+		}
+		
+		return index;
 	}
 	
 	/**
@@ -130,6 +214,24 @@ public class Game {
 	private PlayingEntity getPlayingEntityFromID(int id) {
 		for(int i = 0; i < playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
+				return playingEntities.get(i);
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Returns the playingEntity corresponding to the name passed as a parameter
+	 * @param name Name of the playingEntity seeked after
+	 * @return a PlayingEntity object
+	 */
+	private PlayingEntity getPlayingEntityFromName(String name) {
+		if(playingEntities == null) {
+			return null;
+		}
+		for(int i = 0; i < playingEntities.size(); i++) {
+			if(playingEntities.get(i).getModel().getName().equals(name)) {
 				return playingEntities.get(i);
 			}
 		}
