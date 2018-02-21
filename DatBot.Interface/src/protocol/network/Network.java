@@ -609,11 +609,7 @@ public class Network extends DisplayInfo implements Runnable {
 		info.setJoinedFight(true);
 		info.setTurn(false);
 		info.setInitFight(false);
-		if(this.info.isInHunt()){
-			// Send the start fight a little later for huntFight
-			Thread.sleep(2000);
-			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
-		}
+		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
 		JSONObject mapJSONObject = new JSONObject();
 		mapJSONObject.put("mapID", (int) info.getMapId());
 		JSONArray tempArr = new JSONArray();
@@ -1358,6 +1354,7 @@ public class Network extends DisplayInfo implements Runnable {
 			case 500:
 				stats.setStats(new CharacterStatsListMessage());
 				stats.getStats().Deserialize(dataReader);
+				stats.setTimePacketRecv(System.currentTimeMillis() / 1000);
 				break;
 			case 220:
 				handleMapRequestMessage(dataReader);
