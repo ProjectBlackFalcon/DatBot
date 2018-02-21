@@ -20,7 +20,7 @@ public class CreateMap {
 		JSONParser parser = new JSONParser();
 		ArrayList<int[]> blocks = new ArrayList<>();
 		try{
-			String path = GameData.getPathDatBot() + "Model/WreckThemFaces/src/ia/fight/data/MapInfo.json";
+			String path = GameData.getPathDatBot() + "\\Model\\WreckThemFaces\\src\\ia\\fight\\data\\MapInfo.json";
 			System.out.println(path);
 			JSONArray arr = (JSONArray) parser.parse(new FileReader(path));
 			JSONObject map;
