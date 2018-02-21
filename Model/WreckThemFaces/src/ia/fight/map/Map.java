@@ -307,7 +307,7 @@ public class Map {
 	
 	public void printObstacles() {
 		for(int i = 0; i < this.obstacles.size(); i++) {
-			Game.log.println("["+this.obstacles.get(i)[0]+";"+this.obstacles.get(i)[1]+"] "+this.obstacles.get(i)[2]);
+			Game.println("["+this.obstacles.get(i)[0]+";"+this.obstacles.get(i)[1]+"] "+this.obstacles.get(i)[2]);
 		}
 	}
 	

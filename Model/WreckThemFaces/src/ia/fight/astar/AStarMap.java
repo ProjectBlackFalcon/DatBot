@@ -160,7 +160,7 @@ public class AStarMap<T extends AbstractNode> {
      * prints something to sto.
      */
     private void print(String s) {
-        Game.log.print(s);
+        Game.println(s);
     }
 
 
