@@ -24,9 +24,8 @@ import utils.d2p.map.Map;
 
 public class testMap {
 
-	public static void main(String[] args) throws IOException {
-		Game game = new Game();
-		game.initLogs();
-		game.initGame(95422468);
+	public static void main(String[] args) throws IOException, InterruptedException {
+		double test = ((double)148)/200;
+		System.out.println(test);
 	}
 }

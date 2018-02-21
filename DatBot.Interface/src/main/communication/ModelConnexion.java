@@ -718,6 +718,14 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
+			case "getHealth":
+				long diffTime = System.currentTimeMillis() / 1000 - this.network.getStats().getTimePacketRecv();
+				if(2*diffTime + this.network.getStats().getStats().getStats().getLifePoints() >= this.network.getStats().getStats().getStats().getMaxLifePoints()){
+					toSend = new Object[] { this.network.getStats().getStats().getStats().getMaxLifePoints() };
+				} else {
+					toSend = new Object[] { 2*diffTime + this.network.getStats().getStats().getStats().getLifePoints() };
+				}
+				break;
 		}
 		return toSend;
 	}

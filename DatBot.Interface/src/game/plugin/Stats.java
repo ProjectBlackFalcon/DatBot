@@ -18,6 +18,7 @@ public class Stats {
 	private List<JobExperience> job = new ArrayList<JobExperience>();
 	private Network network;
 	private Info info;
+	private long timePacketRecv;
 
 	public Stats(Network network)
 	{
@@ -34,6 +35,14 @@ public class Stats {
 		str += "\"Weigth\" : " + this.info.getWeight() + ",";
 		str += "\"WeigthMax\" : " + this.info.getWeigthMax() + ",";
 
+		int hpPrct = 100;
+		long diffTime = System.currentTimeMillis() / 1000 - timePacketRecv;
+		if(2*diffTime + getStats().getStats().getLifePoints() < getStats().getStats().getMaxLifePoints()){
+			hpPrct = (int) ((double)(2*diffTime + getStats().getStats().getLifePoints()) / getStats().getStats().getMaxLifePoints() * 100) ;
+		}
+		
+		str += "\"Health\" : " + hpPrct + ",";
+		
 		// Job
 		str += "\"Job\" : {";
 		for (int i = 0; i < this.job.size(); i++) {
@@ -104,6 +113,14 @@ public class Stats {
 
 	public void setJob(List<JobExperience> job) {
 		this.job = job;
+	}
+
+	public long getTimePacketRecv() {
+		return timePacketRecv;
+	}
+
+	public void setTimePacketRecv(long timePacketRecv) {
+		this.timePacketRecv = timePacketRecv;
 	}
 
 }
