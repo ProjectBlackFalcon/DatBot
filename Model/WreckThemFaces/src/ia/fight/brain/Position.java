@@ -22,7 +22,7 @@ public class Position {
 	}
 	
 	public String toString(){
-		return "["+getX()+";"+getY()+"]";
+		return getX()+","+getY();
 	}
 	
 	public boolean deepEquals(Position p) {

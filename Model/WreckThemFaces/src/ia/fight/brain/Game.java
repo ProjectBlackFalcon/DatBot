@@ -82,7 +82,7 @@ public class Game {
 		los.panel.showStartingPositions();
 	}
 	
-	public void initStartChosenPositionsModified(JSONArray command) {
+	public String initStartChosenPositionsModified(JSONArray command) {
 		Game.println("\n\nSTART POSITIONS HAVE BEEN ALTERED");
 		ArrayList<Position> positions = (ArrayList<Position>)(((JSONObject)command.get(0))).get("positions");
 		ArrayList<Position> challengers = new ArrayList<>();
@@ -131,6 +131,7 @@ public class Game {
 					tempDistance += Position.distance(defenderAvailableCells.get(i), challengers.get(j));
 				}
 				totalDistance.add(tempDistance);
+				los.panel.showCell(defenderAvailableCells.get(i), String.valueOf(tempDistance), new Color(150, 150, 150, 100));
 			}
 			
 			keptPosition = defenderAvailableCells.get(indexOfMin(totalDistance));
@@ -141,8 +142,10 @@ public class Game {
 		Game.println("Closest position :");
 		Game.println(keptPosition);
 		
-		los.panel.showCell(keptPosition, "150", Color.magenta);
+		
 		los.panel.updateStartingPositions(positions);
+		
+		return keptPosition.toString();
 	}
 	
 	public int indexOfMax(ArrayList<Integer> arr) {
@@ -930,7 +933,7 @@ public class Game {
 		}else if(s.equals("fightPositionInitialization")) {
 			initStartAvailablePositions(command);
 		}else if(s.equals("startPosAltered")) {
-			initStartChosenPositionsModified(command);
+			return initStartChosenPositionsModified(command);
 		}
 		
 		los.update(playingEntities);

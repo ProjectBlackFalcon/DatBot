@@ -613,10 +613,6 @@ public class Network extends DisplayInfo implements Runnable {
 		getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
 		getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
 		
-		System.out.println(" ///");
-		System.out.println(getFight().getTurnListId());
-		System.out.println(info.getActorId());
-		
 		List<IdentifiedEntityDispositionInformations> identifiedPositions = getFight().gameEntitiesDispositionMessage.getDispositions();
 		ArrayList<Position> positions = new ArrayList<>();
 		for(int i = 0; i < identifiedPositions.size(); i++) {
@@ -630,7 +626,36 @@ public class Network extends DisplayInfo implements Runnable {
 		
 		posJSON.put("positions", positions);
 		arr.add(posJSON);
-		getFight().sendToFightAlgo("startPosAltered", arr);
+		
+		String newPosition = getFight().sendToFightAlgo("startPosAltered", arr);
+		System.out.println(newPosition);
+		int cellID = Fight.rotateToCellId(Integer.parseInt(newPosition.split(",")[0]), Integer.parseInt(newPosition.split(",")[1]));
+		
+		try {
+			getFight().moveTo(cellID);
+		} catch (Exception e1) {
+			System.err.println("Movement was not possible.");
+		}
+		
+		/**
+		 * BATOU
+		 */
+		
+//		SwingUtilities.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					Thread.sleep(1000);
+//					getFight().fightReady();
+//				}
+//				catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
 	}
 
 	private void handleGameFightPlacementPossiblePositionsMessage(DofusDataReader dataReader) {
@@ -667,22 +692,6 @@ public class Network extends DisplayInfo implements Runnable {
 		arr.add(posJSON);
 		
 		getFight().sendToFightAlgo("fightPositionInitialization", arr);
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(1000);
-					getFight().fightReady();
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	private void handleGameFightSynchronizeMessage(DofusDataReader dataReader) {
