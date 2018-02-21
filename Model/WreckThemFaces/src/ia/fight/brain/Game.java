@@ -69,6 +69,26 @@ public class Game {
 		los.dispose();
 	}
 	
+	public void initStartAvailablePositions(JSONArray command) {
+		Game.println("\n\nINITIATING START POSITIONS");
+		ArrayList<Position> challengers = (ArrayList<Position>)(((JSONObject)command.get(0))).get("challengerPositions");
+		ArrayList<Position> defenders = (ArrayList<Position>)(((JSONObject)command.get(0))).get("defenderPositions");
+		Game.println("Received challengers :");
+		Game.println(challengers);
+		Game.println("Received defenders :");
+		Game.println(defenders);
+		los.panel.update(challengers, defenders);
+		los.panel.showStartingPositions();
+	}
+	
+	public void initStartChosenPositionsModified(JSONArray command) {
+		Game.println("\n\nSTART POSITIONS HAVE BEEN ALTERED");
+		ArrayList<Position> positions = (ArrayList<Position>)(((JSONObject)command.get(0))).get("positions");
+		Game.println("Received positions :");
+		Game.println(positions);
+		los.panel.updateStartingPositions(positions);
+	}
+	
 	/**
 	 * Initializes entities according to the passed arrayList
 	 * @param entities Entities to be initialized.
@@ -99,6 +119,7 @@ public class Game {
 
 		los.update(playingEntities);
 		this.playingEntities = playingEntities;
+		los.panel.hideStartingPositions();
 	}
 	
 	/**
@@ -804,6 +825,10 @@ public class Game {
 			executePassTurn(command);
 		}else if(s.equals("i")) {
 			executeInfoReception(command);
+		}else if(s.equals("fightPositionInitialization")) {
+			initStartAvailablePositions(command);
+		}else if(s.equals("startPosAltered")) {
+			initStartChosenPositionsModified(command);
 		}
 		
 		los.update(playingEntities);
