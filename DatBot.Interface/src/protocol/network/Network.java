@@ -613,6 +613,10 @@ public class Network extends DisplayInfo implements Runnable {
 		getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
 		getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
 		
+		System.out.println(" ///");
+		System.out.println(getFight().getTurnListId());
+		System.out.println(info.getActorId());
+		
 		List<IdentifiedEntityDispositionInformations> identifiedPositions = getFight().gameEntitiesDispositionMessage.getDispositions();
 		ArrayList<Position> positions = new ArrayList<>();
 		for(int i = 0; i < identifiedPositions.size(); i++) {
@@ -636,6 +640,7 @@ public class Network extends DisplayInfo implements Runnable {
 		List<Integer> challengerCells = getFight().gameFightPlacementPossiblePositionsMessage.getPositionsForChallengers();
 		List<Integer> defenderCells = getFight().gameFightPlacementPossiblePositionsMessage.getPositionsForDefenders();
 		
+		
 		ArrayList<Position> challengerPositions = new ArrayList<>();
 		
 		for(int i = 0; i < challengerCells.size(); i++) {
@@ -657,6 +662,8 @@ public class Network extends DisplayInfo implements Runnable {
 		
 		posJSON.put("challengerPositions", challengerPositions);
 		posJSON.put("defenderPositions", defenderPositions);
+		
+		posJSON.put("team", getFight().gameFightPlacementPossiblePositionsMessage.getTeamNumber());
 		arr.add(posJSON);
 		
 		getFight().sendToFightAlgo("fightPositionInitialization", arr);
@@ -724,7 +731,7 @@ public class Network extends DisplayInfo implements Runnable {
 			bot.setStats(stats);
 			
 			startFight.put("entities", playingEntities);
-			
+
 			JSONArray arr2 = new JSONArray();
 			arr2.add(startFight);
 			getFight().sendToFightAlgo("s", arr2);
