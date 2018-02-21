@@ -29,6 +29,11 @@ import protocol.network.types.game.context.fight.GameFightMinimalStats;
 import protocol.network.types.game.context.fight.GameFightMonsterInformations;
 
 public class Fight {
+	
+	/*
+	 * BUG FIGHT :
+	 * - POUSSER
+	 */
 
 	// Init fight
 	public GameFightPlacementPossiblePositionsMessage gameFightPlacementPossiblePositionsMessage; // Available
@@ -38,6 +43,7 @@ public class Fight {
 	private List<GameFightMonsterInformations> monsters;
 	private List<GameFightCharacterInformations> players;
 	private int teamIdPlayer;
+	private boolean isRdy = false;
 
 	public List<Double> turnListId;
 	private JSONArray spellJson;
@@ -410,5 +416,13 @@ public class Fight {
 
 	public void setPlayers(List<GameFightCharacterInformations> players) {
 		this.players = players;
+	}
+
+	public boolean isRdy() {
+		return isRdy;
+	}
+
+	public void setRdy(boolean isRdy) {
+		this.isRdy = isRdy;
 	}
 }

@@ -112,7 +112,7 @@ public class Pushback extends Spell{
 //				target.setPosition(concernedPositions.get(i));
 //			}else{
 //				target.getModel().removeLP((concernedPositions.size()-i)*50);
-//				//Game.log.println("Got squished against a wall with "+(concernedPositions.size()-i)+" remaining.");
+//				//Game.println("Got squished against a wall with "+(concernedPositions.size()-i)+" remaining.");
 //				break;
 //			}
 //		}

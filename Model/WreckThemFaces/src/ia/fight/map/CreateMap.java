@@ -49,7 +49,7 @@ public class CreateMap {
 
 			long id = (java.lang.Long) map.get("id");
 			String coords = (String) map.get("coord");
-			Game.log.println("Map id : "+id+", loc : "+coords);
+			Game.println("Map id : "+id+", loc : "+coords);
 			JSONArray cells = (JSONArray) map.get("cells");
 
 			for(int i = 0; i < cells.size(); i++){

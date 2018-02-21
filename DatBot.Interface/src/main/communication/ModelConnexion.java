@@ -394,7 +394,7 @@ public class ModelConnexion {
 						if (mapId != -1) {
 							TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
 							getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
-							if (this.waitToSend()) {
+							if (this.waitToSend("Map")) {
 								toSend = new Object[] { "True" };
 							}
 							else {

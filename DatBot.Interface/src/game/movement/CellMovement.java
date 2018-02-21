@@ -32,6 +32,7 @@ public class CellMovement {
 		this.network.getInfo().setWaitForMov(false);
 
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path);
+
 		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "D�placement...");
 		if (!this.network.getInfo().isJoinedFight()){
 			if (path.Cells.size() >= 4)

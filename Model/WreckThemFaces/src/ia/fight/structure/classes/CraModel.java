@@ -219,7 +219,6 @@ public class CraModel{
 		
 		if(spells == null) {
 			getSpells(1001);
-			System.out.println("SPELLS WAS NULL. INITIATED.");
 		}
 		
 		for(int i = 0; i < spells.length; i++) {

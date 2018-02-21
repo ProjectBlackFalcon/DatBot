@@ -1,5 +1,6 @@
 package ia.fight.brain;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,14 +40,17 @@ public class Game {
 	
 	public Map map;
 	public ArrayList<PlayingEntity> playingEntities;
+	ArrayList<Position> challengerAvailableCells;
+	ArrayList<Position> defenderAvailableCells;
 	static public GameViz los;
+	String botTeam = "";
 
 	/**
 	 * Initializes the game map. Creates a map and opens a JFrame.
 	 * @param map
 	 */
 	public void initGame(int map_nbr) {
-		Game.log.println("Starting fight on map : "+map_nbr);
+		Game.println("Starting fight on map : "+map_nbr);
 		Map mapObject = CreateMap.getMapById(map_nbr);
 		map = mapObject;
 		los = new GameViz(mapObject);
@@ -68,12 +73,115 @@ public class Game {
 		los.dispose();
 	}
 	
+	public void initStartAvailablePositions(JSONArray command) {
+		Game.println("\n\nINITIATING START POSITIONS");
+		challengerAvailableCells = (ArrayList<Position>)(((JSONObject)command.get(0))).get("challengerPositions");
+		defenderAvailableCells = (ArrayList<Position>)(((JSONObject)command.get(0))).get("defenderPositions");
+		botTeam = (int)((JSONObject)command.get(0)).get("team") == 0 ? "red" : "blue";
+		los.panel.update(challengerAvailableCells, defenderAvailableCells);
+		los.panel.showStartingPositions();
+	}
+	
+	public String initStartChosenPositionsModified(JSONArray command) {
+		Game.println("\n\nSTART POSITIONS HAVE BEEN ALTERED");
+		ArrayList<Position> positions = (ArrayList<Position>)(((JSONObject)command.get(0))).get("positions");
+		ArrayList<Position> challengers = new ArrayList<>();
+		ArrayList<Position> defenders = new ArrayList<>();
+		
+		for(int i = 0; i < positions.size(); i++) {
+			for(int j = 0; j < challengerAvailableCells.size(); j++) {
+				if(positions.get(i).deepEquals(challengerAvailableCells.get(j))) {
+					challengers.add(positions.get(i));
+				}
+			}
+			
+			for(int j = 0; j < defenderAvailableCells.size(); j++) {
+				if(positions.get(i).deepEquals(defenderAvailableCells.get(j))) {
+					defenders.add(positions.get(i));
+				}
+			}
+		}
+		
+		boolean isChallenger = false;
+		boolean isDefender = false;
+		
+		if(botTeam.equals("red")) {
+			isChallenger = true;
+		}else {
+			isDefender = true;
+		}
+		
+		ArrayList<Integer> totalDistance = new ArrayList<>();
+		Position keptPosition = null;
+		
+		if(isChallenger) {
+			for(int i = 0; i < challengerAvailableCells.size(); i++) {
+				int tempDistance = 0;
+				for(int j = 0; j < defenders.size(); j++) {
+					tempDistance += Position.distance(challengerAvailableCells.get(i), defenders.get(j));
+				}
+				totalDistance.add(tempDistance);
+			}
+			
+			keptPosition = challengerAvailableCells.get(indexOfMax(totalDistance));
+		}else {
+			for(int i = 0; i < defenderAvailableCells.size(); i++) {
+				int tempDistance = 0;
+				for(int j = 0; j < challengers.size(); j++) {
+					tempDistance += Position.distance(defenderAvailableCells.get(i), challengers.get(j));
+				}
+				totalDistance.add(tempDistance);
+				los.panel.showCell(defenderAvailableCells.get(i), String.valueOf(tempDistance), new Color(150, 150, 150, 100));
+			}
+			
+			keptPosition = defenderAvailableCells.get(indexOfMin(totalDistance));
+		}
+		
+		Game.println("Received positions :");
+		Game.println(positions);
+		Game.println("Closest position :");
+		Game.println(keptPosition);
+		
+		
+		los.panel.updateStartingPositions(positions);
+		
+		return keptPosition.toString();
+	}
+	
+	public int indexOfMax(ArrayList<Integer> arr) {
+		int max = arr.get(0);
+		int index = 0;
+		
+		for(int i = 0; i < arr.size(); i++) {
+			if(arr.get(i) > max) {
+				max = arr.get(i);
+				index = i;
+			}
+		}
+		
+		return index;
+	}
+	
+	public int indexOfMin(ArrayList<Integer> arr) {
+		int max = arr.get(0);
+		int index = 0;
+		
+		for(int i = 0; i < arr.size(); i++) {
+			if(arr.get(i) < max) {
+				max = arr.get(i);
+				index = i;
+			}
+		}
+		
+		return index;
+	}
+	
 	/**
 	 * Initializes entities according to the passed arrayList
 	 * @param entities Entities to be initialized.
 	 */
 	public void initEntities(JSONArray command) {
-		Game.log.println("\n\nINITIATING ENTITIES");
+		Game.println("\n\nINITIATING ENTITIES");
 		ArrayList<Player> players = (ArrayList<Player>)(((JSONObject)command.get(0))).get("entities");
 		ArrayList<JSONObject> commands = (ArrayList<JSONObject>)(((JSONObject)command.get(0))).get("misc");
 		ArrayList<PlayingEntity> entities = new ArrayList<>();
@@ -92,12 +200,13 @@ public class Game {
 		ArrayList<PlayingEntity> playingEntities = new ArrayList<>();
 		for(int i = 0; i < entities.size(); i++) {
 			playingEntities.add(entities.get(i));
-			Game.log.println(entities.get(i));
-			Game.log.println(entities.get(i).getModel()+"\n");
+			Game.println(entities.get(i));
+			Game.println(entities.get(i).getModel()+"\n");
 		}
 
 		los.update(playingEntities);
 		this.playingEntities = playingEntities;
+		los.panel.hideStartingPositions();
 	}
 	
 	/**
@@ -108,6 +217,24 @@ public class Game {
 	private PlayingEntity getPlayingEntityFromID(int id) {
 		for(int i = 0; i < playingEntities.size(); i++) {
 			if(playingEntities.get(i).getID() == id) {
+				return playingEntities.get(i);
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Returns the playingEntity corresponding to the name passed as a parameter
+	 * @param name Name of the playingEntity seeked after
+	 * @return a PlayingEntity object
+	 */
+	private PlayingEntity getPlayingEntityFromName(String name) {
+		if(playingEntities == null) {
+			return null;
+		}
+		for(int i = 0; i < playingEntities.size(); i++) {
+			if(playingEntities.get(i).getModel().getName().equals(name)) {
 				return playingEntities.get(i);
 			}
 		}
@@ -139,9 +266,9 @@ public class Game {
 	}
 	
 	private void executeInfoReception(JSONArray array) {
-		Game.log.println();
-		Game.log.println("RECEIVED INFO");
-		Game.log.println(array);
+		Game.println();
+		Game.println("RECEIVED INFO");
+		Game.println(array);
 		
 		JSONObject command = (JSONObject)array.get(0);
 		
@@ -191,9 +318,9 @@ public class Game {
 	 * @param command
 	 */
 	private void executeMovementCommand(JSONArray command){
-		Game.log.println();
-		Game.log.println("RECEIVED MOVEMENT COMMAND");
-		Game.log.println(command);
+		Game.println();
+		Game.println("RECEIVED MOVEMENT COMMAND");
+		Game.println(command);
 		
 		JSONObject movementCommand = (JSONObject) command.get(0);
 		
@@ -203,7 +330,7 @@ public class Game {
 		
 		PlayingEntity playingEntity = getPlayingEntityFromID(id);
 		playingEntity.setPosition(new Position(posX, posY));
-		Game.log.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
+		Game.println("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
 		
 		ArrayList<String> brainText = new ArrayList<>();
 		brainText.add("Moving entity "+ id +" to : ["+posX+";"+posY+"]");
@@ -224,9 +351,9 @@ public class Game {
 	 * @param command
 	 */
 	private void executeSpellCommand(JSONArray command) {
-		Game.log.println();
-		Game.log.println("RECEIVED SPELL COMMAND");
-		Game.log.println(command);
+		Game.println();
+		Game.println("RECEIVED SPELL COMMAND");
+		Game.println(command);
 		
 		JSONObject spellCommand = (JSONObject) ((JSONObject) command.get(0)).get("spellCast");
 		JSONObject lifePointsLost = null;
@@ -261,15 +388,15 @@ public class Game {
 			executeDispellable(getJSONObjectFromJSONArray(command, "dispellableEffect"));
 		
 		if(LPLost) {
-			Game.log.println("The target has lost some LP! "+lifePointsLost);
+			Game.println("The target has lost some LP! "+lifePointsLost);
 		}
 		
 		if(LPGained) {
-			Game.log.println("The target has gained some LP! "+lifePointsGained);
+			Game.println("The target has gained some LP! "+lifePointsGained);
 		}
 		
 		if(isDead) {
-			Game.log.println("The target has died! "+death);
+			Game.println("The target has died! "+death);
 		}
 		
 		ArrayList<String> brainText = new ArrayList<>();
@@ -285,7 +412,7 @@ public class Game {
 			PlayingEntity castingEntity = getPlayingEntityFromID(id);
 			PlayingEntity victim = getPlayingEntityFromID(targetId);
 			
-			Game.log.println("Casting "+spellId+" to : ["+x+";"+y+"]");
+			Game.println("Casting "+spellId+" to : ["+x+";"+y+"]");
 			SpellObject spellCast = Game.getSpellFromID(spellId);
 			
 			brainText.add("Casting "+spellId+" to : ["+x+";"+y+"]");
@@ -483,12 +610,12 @@ public class Game {
 		Position kept_ndo = caster;
 		int MPLeft = MP;
 		
-		Game.log.println("\n\n///////////////////\nGetting best position with diagonal optimization.");
-		Game.log.println("The diagonally optimized path is of size : "+positions.size());
-		Game.log.println("Caster : "+caster+", target : "+target+". MP available : "+MP);
+		Game.println("\n\n///////////////////\nGetting best position with diagonal optimization.");
+		Game.println("The diagonally optimized path is of size : "+positions.size());
+		Game.println("Caster : "+caster+", target : "+target+". MP available : "+MP);
 		
 		for(int i = 0; i < positions.size(); i++) {
-			Game.log.println(caster+" "+positions.get(i)+" "+Position.distance(caster, positions.get(i)));
+			Game.println(caster+" "+positions.get(i)+" "+Position.distance(caster, positions.get(i)));
 			if(Position.distance(caster, positions.get(i)) <= MPLeft) {
 				if(positions.get(i).deepEquals(target)) {
 					break;
@@ -500,37 +627,37 @@ public class Game {
 			}
 		}
 		
-		Game.log.println("After diagonal movement, position "+kept+" was kept.");
+		Game.println("After diagonal movement, position "+kept+" was kept.");
 		
 		MPLeft -= Position.distance(caster, kept);
 		
-		Game.log.println(MPLeft+" MP Left.");
+		Game.println(MPLeft+" MP Left.");
 		try {
 			if(MPLeft > 0) {
-				Game.log.println("There are movement points remaining, but not enough for a diagonal approach.");
+				Game.println("There are movement points remaining, but not enough for a diagonal approach.");
 				positions = getPath(kept, target, false);
-				Game.log.println("The remainder of the path is of size : "+positions.size());
+				Game.println("The remainder of the path is of size : "+positions.size());
 				for(int i = 0; i < positions.size(); i++) {
-					Game.log.println(kept+" "+positions.get(i)+" "+Position.distance(kept, positions.get(i)));
+					Game.println(kept+" "+positions.get(i)+" "+Position.distance(kept, positions.get(i)));
 					if(Position.distance(kept, positions.get(i)) <= MPLeft) {
 						if(positions.get(i).deepEquals(target)) {
 							break;
 						}
 						kept_ndo = positions.get(i);
-						Game.log.println("NPK : "+kept_ndo);
+						Game.println("NPK : "+kept_ndo);
 					}else {
-						Game.log.println("Broke out of the loop");
+						Game.println("Broke out of the loop");
 						break;
 					}
 				}
 				MPLeft = MP-Position.distance(caster, kept_ndo);
-				Game.log.println("New position kept : "+kept_ndo);
-				Game.log.println(MPLeft+" MP Left.");
+				Game.println("New position kept : "+kept_ndo);
+				Game.println(MPLeft+" MP Left.");
 			}
 		}catch(NullPointerException e) {}
 		
-		Game.log.println("Algorithm finished. Kept position : "+kept_ndo);
-		Game.log.println("///////////////////\n\n");
+		Game.println("Algorithm finished. Kept position : "+kept_ndo);
+		Game.println("///////////////////\n\n");
 		return kept_ndo;
 	}
 	
@@ -785,7 +912,7 @@ public class Game {
 			initLogs();
 		}
 		
-		Game.log.println("Received command of type : "+s);
+		Game.println("Received command of type : "+s);
 		
 		if(s.equals("c")) {
 			executeSpellCommand(command);
@@ -803,6 +930,10 @@ public class Game {
 			executePassTurn(command);
 		}else if(s.equals("i")) {
 			executeInfoReception(command);
+		}else if(s.equals("fightPositionInitialization")) {
+			initStartAvailablePositions(command);
+		}else if(s.equals("startPosAltered")) {
+			return initStartChosenPositionsModified(command);
 		}
 		
 		los.update(playingEntities);
@@ -819,8 +950,8 @@ public class Game {
 	 */
 	public static void initLogs() {
 		try {
-//			log = System.out;
-			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			log = System.out;
+			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
@@ -849,6 +980,28 @@ public class Game {
 		}
 		
 		return results;
+	}
+	
+	static Timestamp timestamp;
+
+	public static void println(Object s){
+		timestamp = new Timestamp(System.currentTimeMillis());
+		log.println("["+timestamp+"] Lys : "+s);
+	}
+	
+	public static void println(){
+		timestamp = new Timestamp(System.currentTimeMillis());
+		log.println("["+timestamp+"] /");
+	}
+	
+	public static void print(Object s){
+		timestamp = new Timestamp(System.currentTimeMillis());
+		log.println("["+timestamp+"] Lys : "+s);
+	}
+	
+	public static void print(){
+		timestamp = new Timestamp(System.currentTimeMillis());
+		log.println("["+timestamp+"] /");
 	}
 
 }

@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
@@ -26,6 +27,7 @@ import game.plugin.Monsters;
 import game.plugin.Npc;
 import game.plugin.Stats;
 import ia.fight.brain.PlayingEntity;
+import ia.fight.brain.Position;
 import ia.fight.map.CreateMap;
 import ia.fight.structure.Player;
 import io.netty.util.internal.ThreadLocalRandom;
@@ -47,6 +49,7 @@ import protocol.network.messages.game.actions.fight.GameActionFightLifeAndShield
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsGainMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightMarkCellsMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightModifyEffectsDurationMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightPointsVariationMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
@@ -65,6 +68,7 @@ import protocol.network.messages.game.context.GameContextRemoveElementMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
 import protocol.network.messages.game.context.fight.GameFightJoinMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementPositionRequestMessage;
 import protocol.network.messages.game.context.fight.GameFightPlacementPossiblePositionsMessage;
 import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
@@ -115,6 +119,7 @@ import protocol.network.types.game.actions.fight.FightTemporarySpellBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporarySpellImmunityEffect;
 import protocol.network.types.game.actions.fight.GameActionMarkedCell;
 import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
+import protocol.network.types.game.context.IdentifiedEntityDispositionInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
@@ -131,6 +136,7 @@ import protocol.network.util.SwitchNameClass;
 import utils.GameData;
 import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
+import utils.d2p.map.CellData;
 import utils.d2p.map.Map;
 
 @SuppressWarnings("unchecked")
@@ -530,6 +536,9 @@ public class Network extends DisplayInfo implements Runnable {
 		JSONObject jsonObject2;
 		GameActionFightSlideMessage gameActionFightSlideMessage = new GameActionFightSlideMessage();
 		gameActionFightSlideMessage.Deserialize(dataReader);
+		if(gameActionFightSlideMessage.getTargetId() == this.info.getActorId()){
+			this.info.setCellId(gameActionFightSlideMessage.getEndCellId());
+		}
 		jsonObject = new JSONObject();
 		jsonObject.put("sourceId", getFight().getId(gameActionFightSlideMessage.getSourceId()));
 		jsonObject.put("targetId", getFight().getId(gameActionFightSlideMessage.getTargetId()));
@@ -593,40 +602,95 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 	}
 
-	private void handleGameFightJoinMessage(DofusDataReader dataReader) {
+	private void handleGameFightJoinMessage(DofusDataReader dataReader) throws InterruptedException {
 		GameFightJoinMessage gameFightJoinMessage = new GameFightJoinMessage();
 		gameFightJoinMessage.Deserialize(dataReader);
 		info.setJoinedFight(true);
 		info.setTurn(false);
 		info.setInitFight(false);
-		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
+		if(this.info.isInHunt()){
+			// Send the start fight a little later for huntFight
+			Thread.sleep(500);
+			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
+		}
 		JSONObject mapJSONObject = new JSONObject();
 		mapJSONObject.put("mapID", (int) info.getMapId());
 		JSONArray tempArr = new JSONArray();
 		tempArr.add(mapJSONObject);
 		getFight().sendToFightAlgo("startfight", tempArr);
 	}
+	
+	private void handleGameEntitiesDispositionMessage(DofusDataReader dataReader) throws Exception {
+		getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
+		getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
+		
+		List<IdentifiedEntityDispositionInformations> identifiedPositions = getFight().gameEntitiesDispositionMessage.getDispositions();
+		ArrayList<Position> positions = new ArrayList<>();
+		for(int i = 0; i < identifiedPositions.size(); i++) {
+			if(identifiedPositions.get(i).getId() == this.info.getActorId()){
+				this.info.setCellId(identifiedPositions.get(i).getCellId());
+			}
+			int x = CreateMap.rotate(new int[] { identifiedPositions.get(i).getCellId() % 14, identifiedPositions.get(i).getCellId() / 14 })[0];
+			int y = CreateMap.rotate(new int[] { identifiedPositions.get(i).getCellId() % 14, identifiedPositions.get(i).getCellId() / 14 })[1];
+			positions.add(new Position(x, y));
+		}
+		
+		JSONArray arr = new JSONArray();
+		JSONObject posJSON = new JSONObject();
+		
+		posJSON.put("positions", positions);
+		arr.add(posJSON);
+		
+		String newPosition = getFight().sendToFightAlgo("startPosAltered", arr);
+		int cellID = Fight.rotateToCellId(Integer.parseInt(newPosition.split(",")[0]), Integer.parseInt(newPosition.split(",")[1]));
+		
+		if(cellID != this.info.getCellId()){
+			GameFightPlacementPositionRequestMessage gameFightPlacementPositionRequestMessage = new GameFightPlacementPositionRequestMessage(cellID);
+			Thread.sleep(80);
+			sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Fight placement to " + cellID);
+		}
+		if(!this.fight.isRdy()){
+			Thread.sleep(new Random().nextInt(1500));
+			getFight().fightReady();
+			this.fight.setRdy(true);
+		}
+
+	}
 
 	private void handleGameFightPlacementPossiblePositionsMessage(DofusDataReader dataReader) {
 		getFight().gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
 		getFight().gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
-		// TODO LYSANDRE
-		// Fight.setBeginingPosition();
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(1000);
-					getFight().fightReady();
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		
+		List<Integer> challengerCells = getFight().gameFightPlacementPossiblePositionsMessage.getPositionsForChallengers();
+		List<Integer> defenderCells = getFight().gameFightPlacementPossiblePositionsMessage.getPositionsForDefenders();
+		
+		
+		ArrayList<Position> challengerPositions = new ArrayList<>();
+		
+		for(int i = 0; i < challengerCells.size(); i++) {
+			int x = CreateMap.rotate(new int[] { challengerCells.get(i) % 14, challengerCells.get(i) / 14 })[0];
+			int y = CreateMap.rotate(new int[] { challengerCells.get(i) % 14, challengerCells.get(i) / 14 })[1];
+			challengerPositions.add(new Position(x, y));
+		}
+		
+		ArrayList<Position> defenderPositions = new ArrayList<>();
+		
+		for(int i = 0; i < defenderCells.size(); i++) {
+			int x = CreateMap.rotate(new int[] { defenderCells.get(i) % 14, defenderCells.get(i) / 14 })[0];
+			int y = CreateMap.rotate(new int[] { defenderCells.get(i) % 14, defenderCells.get(i) / 14 })[1];
+			defenderPositions.add(new Position(x, y));
+		}
+		
+		JSONArray arr = new JSONArray();
+		JSONObject posJSON = new JSONObject();
+		
+		posJSON.put("challengerPositions", challengerPositions);
+		posJSON.put("defenderPositions", defenderPositions);
+		
+		posJSON.put("team", getFight().gameFightPlacementPossiblePositionsMessage.getTeamNumber());
+		arr.add(posJSON);
+		
+		getFight().sendToFightAlgo("fightPositionInitialization", arr);
 	}
 
 	private void handleGameFightSynchronizeMessage(DofusDataReader dataReader) {
@@ -675,7 +739,7 @@ public class Network extends DisplayInfo implements Runnable {
 			bot.setStats(stats);
 			
 			startFight.put("entities", playingEntities);
-			
+
 			JSONArray arr2 = new JSONArray();
 			arr2.add(startFight);
 			getFight().sendToFightAlgo("s", arr2);
@@ -906,6 +970,15 @@ public class Network extends DisplayInfo implements Runnable {
 		else {
 			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
 			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
+			
+			System.out.println("--------------MAP : " + (int) currentMapMessage.getMapId() + "--------------");
+			for (int i = 0 ; i < map.getCells().size() ; i++) {
+				System.out.print("Cellid : " + i + map.getCells().get(i).isMov());
+				System.out.println(" ----- Floor : " + i + map.getCells().get(i).getFloor());
+
+			}
+			
+			
 			this.interactive.setMap(map);
 			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
 			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));
@@ -1426,8 +1499,7 @@ public class Network extends DisplayInfo implements Runnable {
 				handleGameFightPlacementPossiblePositionsMessage(dataReader);
 				break;
 			case 5696:
-				getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
-				getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
+				handleGameEntitiesDispositionMessage(dataReader);
 				break;
 			case 5921:
 				handleGameFightSynchronizeMessage(dataReader);
@@ -1531,10 +1603,28 @@ public class Network extends DisplayInfo implements Runnable {
 				}
 				this.info.setExchangeBidSeller(true);
 				break;
+			case 6304:
+				handleGameActionFightModifyEffectsDurationMessage(dataReader);
+				break;
 		}
 		packet_content = null;
 		dataReader.bis.close();
 		return;
+	}
+
+	private void handleGameActionFightModifyEffectsDurationMessage(DofusDataReader dataReader) {
+		GameActionFightModifyEffectsDurationMessage gameActionFightModifyEffectsDurationMessage = new GameActionFightModifyEffectsDurationMessage();
+		gameActionFightModifyEffectsDurationMessage.Deserialize(dataReader);
+		JSONObject jsonObject;
+		JSONObject jsonObject2;
+		jsonObject = new JSONObject();
+		jsonObject.put("sourceId", getFight().getId(gameActionFightModifyEffectsDurationMessage.getSourceId()));
+		jsonObject.put("targetId", getFight().getId(gameActionFightModifyEffectsDurationMessage.getTargetId()));
+		jsonObject.put("actionId", gameActionFightModifyEffectsDurationMessage.getActionId());
+		jsonObject.put("amount", gameActionFightModifyEffectsDurationMessage.getDelta());
+		JSONArray arr = new JSONArray();
+		arr.add(jsonObject);
+		getFight().sendToFightAlgo("effectDuration", arr);
 	}
 
 	private void handleGameActionFightPointsVariationMessage(DofusDataReader dataReader) {
