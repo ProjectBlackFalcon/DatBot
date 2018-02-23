@@ -63,11 +63,13 @@ public class Stats {
 		for (int i = 0; i < this.getInventoryContentMessage().getObjects().size(); i++) {
 			if (i == this.getInventoryContentMessage().getObjects().size() - 1) {
 				str += "[" + "\"" + DisplayInfo.cleanString(GameData.getItemName(this.getInventoryContentMessage().getObjects().get(i).getObjectGID())) + "\"" + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getObjectGID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getObjectUID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getQuantity() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getPosition() + "]";
 			} else {
 				str += "[" + "\"" + DisplayInfo.cleanString(GameData.getItemName(this.getInventoryContentMessage().getObjects().get(i).getObjectGID())) + "\"" + ","
+						+ this.getInventoryContentMessage().getObjects().get(i).getObjectGID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getObjectUID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getQuantity() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getPosition() + "],";

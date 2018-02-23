@@ -37,12 +37,12 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;openHdv;[None]");
 //		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
-		Thread.sleep(2000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(20000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
+//		Thread.sleep(2000);
+//		communication.getReturn("0;0;i;cmd;getStats;[None]");
+//		Thread.sleep(20000);
+//		communication.getReturn("0;0;i;cmd;getStats;[None]");
+//		Thread.sleep(5000);
+//		communication.getReturn("0;0;i;cmd;getStats;[None]");
 //		int id = 0; 
 //		for(int i = 0; i < communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().size() ; i++){
 //			if(communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectGID() == 1984){
@@ -64,17 +64,17 @@ public class Test {
 		// */
 		// communication.getReturn("0;0;i;cmd;changeMapTest;[West]");
 
-//		while (true) {
-//			Thread.sleep(2000);
-//			if (!communication.getNetworks().get(0).getInfo().isJoinedFight() && communication.getNetworks().get(0).getInfo().isWaitForMov() && communication.getNetworks().get(0).getMonsters().getMonsters().size() > 0) {
-//				double idMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getContextualId();
-//				int cellIdMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getDisposition().getCellId();
-//				communication.getNetworks().get(0).append("Trying to start a fight...");
-//				communication.getReturn("0;0;i;cmd;getMonsters;[None]");
-//				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
-//				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster + "]");
-//			}
-//		}
+		while (true) {
+			Thread.sleep(2000);
+			if (!communication.getNetworks().get(0).getInfo().isJoinedFight() && communication.getNetworks().get(0).getInfo().isWaitForMov() && communication.getNetworks().get(0).getMonsters().getMonsters().size() > 0) {
+				double idMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getContextualId();
+				int cellIdMonster = communication.getNetworks().get(0).getMonsters().getMonsters().get(0).getDisposition().getCellId();
+				communication.getNetworks().get(0).append("Trying to start a fight...");
+				communication.getReturn("0;0;i;cmd;getMonsters;[None]");
+				communication.getReturn("0;0;i;cmd;move;[" + cellIdMonster + "]");
+				communication.getReturn("0;0;i;cmd;attackMonster;[" + idMonster + "]");
+			}
+		}
 
 		// TESTS FOR INPUTS
 

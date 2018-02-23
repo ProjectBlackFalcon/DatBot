@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.SwingUtilities;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -26,7 +24,6 @@ import game.plugin.Interactive;
 import game.plugin.Monsters;
 import game.plugin.Npc;
 import game.plugin.Stats;
-import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.Position;
 import ia.fight.map.CreateMap;
 import ia.fight.structure.Player;
@@ -41,6 +38,7 @@ import protocol.network.messages.connection.SelectedServerDataMessage;
 import protocol.network.messages.connection.ServerSelectionMessage;
 import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightActivateGlyphTrapMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightCloseCombatMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightDeathMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightDispellableEffectMessage;
@@ -137,7 +135,6 @@ import protocol.network.util.SwitchNameClass;
 import utils.GameData;
 import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
-import utils.d2p.map.CellData;
 import utils.d2p.map.Map;
 
 @SuppressWarnings("unchecked")
@@ -966,16 +963,7 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 		else {
 			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
-			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
-			
-			System.out.println("--------------MAP : " + (int) currentMapMessage.getMapId() + "--------------");
-			for (int i = 0 ; i < map.getCells().size() ; i++) {
-				System.out.print("Cellid : " + i + map.getCells().get(i).isMov());
-				System.out.println(" ----- Floor : " + i + map.getCells().get(i).getFloor());
-
-			}
-			
-			
+			this.map = MapManager.FromId((int) currentMapMessage.getMapId());			
 			this.interactive.setMap(map);
 			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
 			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));
@@ -1607,30 +1595,69 @@ public class Network extends DisplayInfo implements Runnable {
 			case 6304:
 				handleGameActionFightModifyEffectsDurationMessage(dataReader);
 				break;
+			case 6545:
+				handleGameActionFightActivateGlyphTrapMessage(dataReader);
+				break;
 		}
 		packet_content = null;
 		dataReader.bis.close();
 		return;
 	}
 
+	/**
+	 * A glyph has been activated
+	 * key : activateGlyph
+	 * Send info : cellId, actionId, sourceId
+	 * TODO LYSANDRE
+	 * @param dataReader
+	 */
+	private void handleGameActionFightActivateGlyphTrapMessage(DofusDataReader dataReader)
+	{
+		GameActionFightActivateGlyphTrapMessage gameActionFightActivateGlyphTrapMessage = new GameActionFightActivateGlyphTrapMessage();
+		gameActionFightActivateGlyphTrapMessage.Deserialize(dataReader);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("cellId", gameActionFightActivateGlyphTrapMessage.getMarkId());
+		jsonObject.put("actionId", gameActionFightActivateGlyphTrapMessage.getActionId());
+		jsonObject.put("sourceId", getFight().getId(gameActionFightActivateGlyphTrapMessage.getSourceId()));
+		JSONObject jsonObject2 = new JSONObject();
+		jsonObject2.put("activateGlyph", jsonObject);
+		JSONArray arr = new JSONArray();
+		arr.add(jsonObject2);
+		getFight().sendToFightAlgo("i", arr);
+	}
+
+	/**
+	 * Duration of the effects has been reduced
+	 * key : modifyEffectDuration
+	 * Send info : sourceId, targetId, actionId, amount
+	 * TODO LYSANDRE
+	 * @param dataReader
+	 */
 	private void handleGameActionFightModifyEffectsDurationMessage(DofusDataReader dataReader) {
 		GameActionFightModifyEffectsDurationMessage gameActionFightModifyEffectsDurationMessage = new GameActionFightModifyEffectsDurationMessage();
 		gameActionFightModifyEffectsDurationMessage.Deserialize(dataReader);
 		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		jsonObject = new JSONObject();
 		jsonObject.put("sourceId", getFight().getId(gameActionFightModifyEffectsDurationMessage.getSourceId()));
 		jsonObject.put("targetId", getFight().getId(gameActionFightModifyEffectsDurationMessage.getTargetId()));
 		jsonObject.put("actionId", gameActionFightModifyEffectsDurationMessage.getActionId());
 		jsonObject.put("amount", gameActionFightModifyEffectsDurationMessage.getDelta());
+		JSONObject jsonObject2 = new JSONObject();
+		jsonObject2.put("modifyEffectDuration", jsonObject);
 		JSONArray arr = new JSONArray();
-		arr.add(jsonObject);
-		getFight().sendToFightAlgo("effectDuration", arr);
+		arr.add(jsonObject2);
+		getFight().sendToFightAlgo("i", arr);
 	}
 
+	/**
+	 * Entity lost/gain pa/pm
+	 * key : pointsVariation
+	 * Send info : sourceId, targetId, actionId, amount
+	 * TODO LYSANDRE
+	 * @param dataReader
+	 */
 	private void handleGameActionFightPointsVariationMessage(DofusDataReader dataReader) {
 		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightPointsVariationMessage gameActionFightPointsVariationMessage = new GameActionFightPointsVariationMessage();
 		gameActionFightPointsVariationMessage.Deserialize(dataReader);
 		jsonObject = new JSONObject();
@@ -1643,8 +1670,10 @@ public class Network extends DisplayInfo implements Runnable {
 		} else if (gameActionFightPointsVariationMessage.getActionId() == 127){
 			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
 		}
+		JSONObject jsonObject2 = new JSONObject();
+		jsonObject2.put("pointsVariation", jsonObject);
 		JSONArray arr = new JSONArray();
-		arr.add(jsonObject);
+		arr.add(jsonObject2);
 		getFight().sendToFightAlgo("i", arr);
 	}
 
