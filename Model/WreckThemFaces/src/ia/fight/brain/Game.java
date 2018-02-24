@@ -270,8 +270,13 @@ public class Game {
 		Game.println("RECEIVED INFO");
 		Game.println(array);
 		
-		JSONObject command = (JSONObject)array.get(0);
-		
+		if(JSONArrayContainsObject(array, "pointsVariation"))
+			executePointVariation(getJSONObjectFromJSONArray(array, "pointsVariation"));
+
+	}
+	
+	private void executePointVariation(JSONObject command) {
+		Game.println("Executing points variation.");
 		int sourceId = (int) command.get("sourceId");
 		int targetId = (int) command.get("targetId");
 		

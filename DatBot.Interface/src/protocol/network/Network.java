@@ -111,6 +111,7 @@ import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMess
 import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
+import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostWeaponDamagesEffect;
