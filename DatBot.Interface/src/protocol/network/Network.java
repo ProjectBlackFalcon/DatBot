@@ -618,6 +618,11 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleGameEntitiesDispositionMessage(DofusDataReader dataReader) throws Exception {
 		getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
 		getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
+		this.fight.fightToggleAdvancedRdy(false);
+		
+		
+		
+		
 		
 		List<IdentifiedEntityDispositionInformations> identifiedPositions = getFight().gameEntitiesDispositionMessage.getDispositions();
 		ArrayList<Position> positions = new ArrayList<>();
@@ -640,11 +645,16 @@ public class Network extends DisplayInfo implements Runnable {
 		int cellID = Fight.rotateToCellId(Integer.parseInt(newPosition.split(",")[0]), Integer.parseInt(newPosition.split(",")[1]));
 		
 		if(cellID != this.info.getCellId()){
+			if(this.fight.isRdy()) {
+				getFight().fightNotReady();
+				this.fight.setRdy(false);
+			}
 			GameFightPlacementPositionRequestMessage gameFightPlacementPositionRequestMessage = new GameFightPlacementPositionRequestMessage(cellID);
 			Thread.sleep(80);
 			sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Fight placement to " + cellID);
 		}
 		if(!this.fight.isRdy()){
+			this.fight.fightToggleAdvancedRdy(true);
 			Thread.sleep(new Random().nextInt(1500));
 			getFight().fightReady();
 			this.fight.setRdy(true);
