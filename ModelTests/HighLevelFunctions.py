@@ -43,18 +43,20 @@ path = (
 credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
 credentials2 = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
 credentials3 = {'username': 'wublel4', 'password': 'notabot0', 'name': 'Los-Flachos', 'server': 'Julith'}
+credentials4 = {'username': 'wublel6', 'password': '32407c62d2f', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
+
 
 llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials2, llf)
+bot = Bot(pipe, bot_id, credentials4, llf)
 bot.interface.connect()
 start = time.time()
-bot.hf.hunt_treasures(60)
+
+bot.hf.discover_zaaps()
+
 winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
 print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
 
 
-
 while 1:
     time.sleep(1)
-
 __author__ = 'Alexis'
