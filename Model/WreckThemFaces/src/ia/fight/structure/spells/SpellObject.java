@@ -59,7 +59,6 @@ public class SpellObject {
 	public boolean isAvailable() {
 		boolean cd = cooldown <= 0;
 		boolean sc = spellCounter < numberOfCastsPerTurn;
-
 		return cd && sc;
 	}
 	
