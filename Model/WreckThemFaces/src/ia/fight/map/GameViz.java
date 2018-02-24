@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import ia.fight.brain.Game;
 import ia.fight.brain.PlayingEntity;
 import ia.fight.brain.Position;
 
@@ -26,7 +27,7 @@ public class GameViz extends JFrame{
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setUndecorated(false);
 		add(panel);
-		setVisible(true);
+		setVisible(Game.DISPLAY_GUI);
 	}
 
 	public void update(ArrayList<PlayingEntity> playingEntities) {
