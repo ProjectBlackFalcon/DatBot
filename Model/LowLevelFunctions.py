@@ -165,7 +165,9 @@ class LowLevelFunctions:
         if bot_name in disc_zaaps.keys():
             disc_zaaps = disc_zaaps[bot_name]
         else:
-            return None
+            disc_zaaps[bot_name] = []
+            with open('..//Utils//discoveredZaaps.json', 'w') as f:
+                json.dump(disc_zaaps, f)
         with open('..//Utils//zaapList.json', 'r') as f:
             zaaps = json.load(f)
 
