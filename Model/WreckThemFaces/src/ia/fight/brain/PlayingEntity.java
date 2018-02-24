@@ -153,6 +153,7 @@ public class PlayingEntity {
 		long start = System.currentTimeMillis();
 		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
 		for(int i = 0; i < getModel().getAvailableSpells(false).size(); i++) {
+			Game.println(getModel().getAvailableSpells(false).get(i).getName());
 			boolean entityTargetable = getModel().getAvailableSpells(false).get(i).isEntityTargetableBySpell(victim);
 			boolean hasVisibility = LineOfSight.visibility(position, victim.getPosition(), map.getBlocks());
 			boolean requiresLineOfSight = getModel().getAvailableSpells(false).get(i).requiresLineOfSight();
@@ -162,11 +163,13 @@ public class PlayingEntity {
 			boolean entityIsWithinDistance = overMinimumRange && underMaximumRange;
 			boolean isStraightLineCastAndInLine = getModel().getAvailableSpells(false).get(i).isStraightLineCast() && (!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY()));
 			boolean isNotStraightLineCast = !getModel().getAvailableSpells(false).get(i).isStraightLineCast();
-			boolean isNotOnCooldown = getModel().getAvailableSpells(false).get(i).getCooldown() <= 0;
-			
+	
 			if(entityTargetable && (hasVisibility || !requiresLineOfSight)) {
+				Game.println("    LoV is okay.");
 				if(entityIsWithinDistance) {
+					Game.println("    Entity is within distance !");
 					if(isStraightLineCastAndInLine || isNotStraightLineCast) {
+						Game.println("    In line or doesn't require slc");
 						spellsForEnnemy.add(getModel().getAvailableSpells(false).get(i));
 					}
 				}
