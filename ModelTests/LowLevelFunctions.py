@@ -9,5 +9,5 @@ LowLevelFunctions().add_discovered_zaap('bot_name', (-3, -42))
 LowLevelFunctions().add_discovered_zaap('bot_name', (-27, -36))
 LowLevelFunctions().add_discovered_zaap('bot_name', (-3, -45))
 
-print(LowLevelFunctions().get_next_clue_pos('Souche qui ne repousse pas', (-1, 8), 's'))
+print(LowLevelFunctions().get_next_clue_pos('Rondin de bois', (12, 15), 'n'))
 __author__ = 'Alexis'
