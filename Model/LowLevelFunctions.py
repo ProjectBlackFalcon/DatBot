@@ -159,5 +159,11 @@ class LowLevelFunctions:
                 closest = zaap_pos, self.distance_coords(pos, zaap_pos)
         return closest[0]
 
+    def get_inventory_id(self, inventory, general_id):
+        inv_id = 0
+        for item in inventory:
+            if item[1] == general_id:
+                inv_id = item[2]
+        return inv_id
 
 __author__ = 'Alexis'
