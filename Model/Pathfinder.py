@@ -86,6 +86,13 @@ class PathFinder:
                 self.cell2coord(self.end_cell)[0]+14*(self.end[0]-self.bbox[0]),
                 self.cell2coord(self.end_cell)[1]+40*(self.end[1]-self.bbox[1])
             )
+            while self.llf.distance_coords(start_pos, goal_pos) < 2:
+                self.end_cell = None
+                self.end_cell = self.pick_end_cell()
+                goal_pos = (
+                    self.cell2coord(self.end_cell)[0] + 14 * (self.end[0] - self.bbox[0]),
+                    self.cell2coord(self.end_cell)[1] + 40 * (self.end[1] - self.bbox[1])
+                )
             out[start_pos[1]][start_pos[0]] = -2
             out[goal_pos[1]][goal_pos[0]] = -3
             self.glued_maps = out[:]
@@ -203,7 +210,6 @@ class PathFinder:
 
         # IndexError: index 0 is out of bounds for axis 0 with size 0
         start_pos = (np.where(self.adapted_maps == -2)[1][0], np.where(self.adapted_maps == -2)[0][0])
-
         goal_pos = (np.where(self.adapted_maps == -3)[1][0], np.where(self.adapted_maps == -3)[0][0])
 
         self.astar(goal_pos, start_pos)
@@ -211,7 +217,7 @@ class PathFinder:
     def get_path(self):
         self.get_path_try()
         # print(self.path_cells)
-        while not self.path_cells and self.enlargement_n < 9:
+        while not self.path_cells and self.enlargement_n < 15:
             self.enlarge()
             self.get_path_try()
         if not self.path_cells:
