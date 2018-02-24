@@ -30,7 +30,7 @@ public class CraModel{
 		magicArrow.setNumberOfCastsPerTarget(2);
 		magicArrow.setMaxEffectAccumulation(2);
 		magicArrow.setNumberOfCastsPerTurn(3);
-		magicArrow.setCost(4);
+		magicArrow.setCost(3);
 		
 		retreatArrow.clearSpells();
 		retreatArrow.addSpell(new Pushback(4, retreatArrow));

@@ -90,17 +90,29 @@ public abstract class Player {
 		
 		ArrayList<String> brainText = new ArrayList<>();
 		brainText.add("Getting all available spells.");
+		if(show)
+			Game.println("Getting all available spells");
 
 		for(int i = 0; i < this.getSpells().length; i++){
 			if(this.getSpells()[i].getCost() <= this.AP && this.getSpells()[i].isAvailable()){
 				spells.add(this.getSpells()[i]);
-				brainText.add(this.getSpells()[i].getName() + "is currently available.");
+				brainText.add(this.getSpells()[i].getName() + " is currently available.");
+				if(show)
+					Game.println(this.getSpells()[i].getName() + " is currently available.");
 			}else {
-				brainText.add(this.getSpells()[i].getName() + "is currently unavailable !! Reason :");
-				if(this.getSpells()[i].getCost() <= this.AP) {
+				brainText.add(this.getSpells()[i].getName() + " is currently unavailable !! Reason :");
+				if(show)
+					Game.println(this.getSpells()[i].getName() + " is currently unavailable !! Reason :");
+				
+				
+				if(this.getSpells()[i].getCost() > this.AP) {
 					brainText.add("    It costs too much : "+this.getSpells()[i].getCost()+"/"+this.AP);
+					if(show)
+						Game.println("    It costs too much : "+this.getSpells()[i].getCost()+"/"+this.AP);
 				}else {
 					brainText.add("    It is not available. CD : "+this.getSpells()[i].getCooldown()+". Number of casts done this turn :"+this.getSpells()[i].getSpellCounter()+"/"+this.getSpells()[i].getNumberOfCastsPerTurn());
+					if(show)
+						Game.println("    It is not available. CD : "+this.getSpells()[i].getCooldown()+". Number of casts done this turn :"+this.getSpells()[i].getSpellCounter()+"/"+this.getSpells()[i].getNumberOfCastsPerTurn());
 				}
 			}
 		}
