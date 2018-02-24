@@ -172,7 +172,7 @@ class LowLevelFunctions:
         for disc_zaap in disc_zaaps:
             del zaaps[zaaps.index(disc_zaap)]
 
-        closest = None, 100000
+        closest = False, 100000
         for zaap_pos in zaaps:
             if self.distance_coords(pos, zaap_pos) < closest[1]:
                 closest = zaap_pos, self.distance_coords(pos, zaap_pos)
