@@ -35,8 +35,11 @@ class tool:
         self.end_cell_entry = tkinter.Entry(width=3)
         self.end_cell_entry.place(relx=0.9, rely=0.1, anchor='center')
 
-        self.ok_button = tkinter.Button(command=self.generate_path, text='OK')
-        self.ok_button.place(relx=0.5, rely=0.15, anchor='center')
+        self.path_button = tkinter.Button(command=self.generate_path, text='Get path')
+        self.path_button.place(relx=0.33, rely=0.15, anchor='center')
+
+        self.maps_button = tkinter.Button(command=self.generate_map_collage, text='Get maps')
+        self.maps_button.place(relx=0.66, rely=0.15, anchor='center')
 
         self.tk.mainloop()
 
@@ -71,7 +74,7 @@ class tool:
 
     def generate_map_collage(self):
         start_coords, start_cell, end_coords, end_cell = self.eval_entry()
-        pf = PathFinder(start_coords, start_cell, end_coords, end_cell, worldmap=1)
+        pf = PathFinder(start_coords, end_coords, start_cell, end_cell, worldmap=1)
 
         maps_coords = pf.get_maps_coords()
         maps = []
@@ -90,11 +93,13 @@ class tool:
         glued = pf.glue_maps(maps, shape)
         # print(glued)
         # print(pf.adapted_maps)
-        image = pf.map_to_image(pf.adapt_shape_maps(glued), 1)
-        Image.imshow(image)
+        pf.map_to_image(pf.adapt_shape_maps(glued), 1)
+        lel = np.divide(np.array(Image.open('Out.png')), 255)
+        image = Image.fromarray(lel)
+        image = image.resize((350, 350))
+        photo = ImageTk.PhotoImage(image)
+        image_lbl = tkinter.Label(self.tk, image=photo)
+        image_lbl.image = photo
+        image_lbl.place(relx=0.5, rely=0.6, anchor='center')
 
 tool()
-
-"(-1, -8), cell 322 to map [-2, -8], cell 335, worldmap : 1"
-"(15, 23), cell 550 to map [15, 24]"
-"(15, 23), cell 550 to map [15, 24], cell 18, worldmap : 1"
