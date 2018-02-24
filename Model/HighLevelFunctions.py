@@ -74,14 +74,11 @@ class HighLevelFunctions:
         self.bot.position = (target_coord, worldmap)
 
     def discover_zaaps(self):
-        with open('..//Utils//zaapDiscoveryPath.json', 'r') as f:
-            paths = json.load(f)
-        for cell, direction in paths:
-            if self.bot.interface.change_map(cell, direction)[0]:
-                self.bot.position = self.bot.interface.get_map()[0]
-                self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
-            else:
-                raise Exception('Interface returned false on move command')
+        closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position)
+        while closest_unk_zaap:
+            self.goto(closest_unk_zaap)
+            self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
+            closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position)
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
         self.bot.occupation = 'Harvesting map'
