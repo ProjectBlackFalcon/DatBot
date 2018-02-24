@@ -159,6 +159,25 @@ class LowLevelFunctions:
                 closest = zaap_pos, self.distance_coords(pos, zaap_pos)
         return closest[0]
 
+    def get_closest_unknown_zaap(self, bot_name, pos):
+        with open('..//Utils//discoveredZaaps.json', 'r') as f:
+            disc_zaaps = json.load(f)
+        if bot_name in disc_zaaps.keys():
+            disc_zaaps = disc_zaaps[bot_name]
+        else:
+            return None
+        with open('..//Utils//zaapList.json', 'r') as f:
+            zaaps = json.load(f)
+
+        for disc_zaap in disc_zaaps:
+            del zaaps[zaaps.index(disc_zaap)]
+
+        closest = None, 100000
+        for zaap_pos in zaaps:
+            if self.distance_coords(pos, zaap_pos) < closest[1]:
+                closest = zaap_pos, self.distance_coords(pos, zaap_pos)
+        return closest[0]
+
     def get_inventory_id(self, inventory, general_id):
         inv_id = 0
         for item in inventory:
