@@ -619,8 +619,9 @@ public class Game {
 		Game.println("Caster : "+caster+", target : "+target+". MP available : "+MP);
 		
 		for(int i = 0; i < positions.size(); i++) {
-			Game.println(caster+" "+positions.get(i)+" "+Position.distance(caster, positions.get(i)));
-			if(Position.distance(caster, positions.get(i)) <= MPLeft) {
+			Game.println(caster+" "+positions.get(i)+" "+getPath(caster, positions.get(i), false).size());
+			System.out.println(getPath(caster, positions.get(i), false));
+			if(getPath(caster, positions.get(i), false).size() <= MPLeft) {
 				if(positions.get(i).deepEquals(target)) {
 					break;
 				}
@@ -642,8 +643,8 @@ public class Game {
 				positions = getPath(kept, target, false);
 				Game.println("The remainder of the path is of size : "+positions.size());
 				for(int i = 0; i < positions.size(); i++) {
-					Game.println(kept+" "+positions.get(i)+" "+Position.distance(kept, positions.get(i)));
-					if(Position.distance(kept, positions.get(i)) <= MPLeft) {
+					Game.println(kept+" "+positions.get(i)+" "+getPath(caster, positions.get(i), false).size());
+					if(getPath(caster, positions.get(i), false).size() <= MPLeft) {
 						if(positions.get(i).deepEquals(target)) {
 							break;
 						}
@@ -749,6 +750,7 @@ public class Game {
 		if(desired.deepEquals(caster.getPosition())) {
 			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim, false, map);
 			if(turn.size() > 0) {
+				//action += id+",None";
 				action += id+",c,"+turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
 			}else {
 				action += id+",None";
@@ -864,7 +866,7 @@ public class Game {
 		try {
 			log = System.out;
 			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
-			log = new PrintStream(new FileOutputStream("fight_ia_log.txt", true));
+			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt", true));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
 		} catch (FileNotFoundException e1) {

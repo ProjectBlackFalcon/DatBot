@@ -86,6 +86,7 @@ public class DisplayInfo {
 			log = new PrintStream(fileOutputStream);
 			// debug = new PrintStream(new FileOutputStream("debug.txt"));
 			debug = System.out;
+			log = System.out;
 			System.setErr(debug);
 		}
 		catch (FileNotFoundException e1) {
