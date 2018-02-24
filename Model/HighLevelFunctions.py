@@ -289,9 +289,54 @@ class HighLevelFunctions:
             while not self.bot.interface.abandon_hunt()[0]:
                 time.sleep(30)
         else:
-            pass
-            # TODO : Uncomment when fight is working
-            # self.bot.interface.start_hunt_fight()
+            while self.bot.interface.get_player_stats()[0]['Health'] < 95:
+                time.sleep(5)
+            self.bot.interface.start_hunt_fight()
+
+    def hunt_treasures(self, duration_minutes):
+        duration = duration_minutes * 60
+        start = time.time()
+        n_hunts = 0
+        while time.time()-start < duration:
+            try:
+                n_hunts += 1
+                print('[Treasure Hunt] Starting hunt n #{}'.format(n_hunts))
+                self.tresure_hunt()
+            except Exception:
+                with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
+                    f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                    f.write(traceback.format_exc())
+
+    def fight_on_map(self, duration_minutes):
+        duration = duration_minutes*60
+        start = time.time()
+        while time.time()-start < duration:
+            mobs_on_map = self.bot.interface.get_monsters()
+            mobs_on_map = False if not mobs_on_map else mobs_on_map[0]
+            if mobs_on_map:
+                mob_id, mob_ref, cell = mobs_on_map
+                self.bot.interface.move(cell)
+                self.bot.interface.attack_monster(mob_id)
+            else:
+                time.sleep(5)
+
+    def update_hdv(self):
+        hdv_content = self.bot.interface.open_hdv()
+        items_for_sale = []
+        if hdv_content and hdv_content[0] != 'empty':
+            for batch in hdv_content:
+                if batch not in items_for_sale:
+                    items_for_sale.append(batch)
+
+        for item in items_for_sale:
+            item_hdv_stats = self.bot.interface.get_hdv_item_stats(item[1])
+            item_hdv_stats = False if not item_hdv_stats[0] else item_hdv_stats[0]
+            if item_hdv_stats:
+                batch_size_index = [1, 10, 100].index(item[2])
+                new_price = item_hdv_stats[batch_size_index]-1
+                self.bot.interface.modify_price(item[1], item[2], new_price)
+
+
 
     def update_db(self):
         try:
