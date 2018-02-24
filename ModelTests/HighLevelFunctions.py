@@ -9,16 +9,7 @@ import winsound
 pipe = PipeToJava(headless=True)
 bot_id = 0
 
-credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
-credentials2 = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
-
-llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials2, llf)
-bot.interface.connect()
-start = time.time()
-bot.hf.update_hdv()
-winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
-print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
+zaap_path_1 = [(4, -19), (-5, -23), (-13, -28), (-3, -42), (-17, -47), (-32, -56), (-27, -36), (-20, -20), (-16, 1), (-25, 12), (-15, 25), (-26, 35)]
 path = (
     ((-2, -4), None, 2),
     ((-2, -5), None, 2),
@@ -49,9 +40,19 @@ path = (
     ((0, 0), None, 2),
 )
 
-# hf.harvest_path(path, do_not_harvest=['Ble'])
-# bot1.hf.goto((9, -10))
-# bot2.hf.goto((9, -10))
+credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
+credentials2 = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
+credentials3 = {'username': 'wublel4', 'password': 'notabot0', 'name': 'Los-Flachos', 'server': 'Julith'}
+
+llf = LowLevelFunctions()
+bot = Bot(pipe, bot_id, credentials2, llf)
+bot.interface.connect()
+start = time.time()
+bot.hf.hunt_treasures(60)
+winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
+print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
+
+
 
 while 1:
     time.sleep(1)
