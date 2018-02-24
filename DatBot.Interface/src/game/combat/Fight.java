@@ -44,7 +44,8 @@ public class Fight {
 	private List<GameFightCharacterInformations> players;
 	private int teamIdPlayer;
 	private boolean isRdy = false;
-
+	private boolean advancedRdy = false;
+	
 	public List<Double> turnListId;
 	private JSONArray spellJson;
 	private Network network;
@@ -88,6 +89,15 @@ public class Fight {
 	 */
 	public void fightReady() throws Exception {
 		network.sendToServer(new GameFightReadyMessage(true), GameFightReadyMessage.ProtocolId, "Ready");
+	}
+	
+	/**
+	 * Stop being ready
+	 * 
+	 * @author jikiw
+	 */
+	public void fightNotReady() throws Exception {
+		network.sendToServer(new GameFightReadyMessage(false), GameFightReadyMessage.ProtocolId, "Ready");
 	}
 
 	/**
@@ -424,5 +434,13 @@ public class Fight {
 
 	public void setRdy(boolean isRdy) {
 		this.isRdy = isRdy;
+	}
+
+	public boolean isAdvancedRdy() {
+		return advancedRdy;
+	}
+	
+	public void fightToggleAdvancedRdy(boolean isRdy) {
+		advancedRdy = isRdy;
 	}
 }

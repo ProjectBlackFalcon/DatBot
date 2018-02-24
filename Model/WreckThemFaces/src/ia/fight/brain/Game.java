@@ -615,7 +615,9 @@ public class Game {
 		Position kept_ndo = caster;
 		int MPLeft = MP;
 		
-		Game.println("\n\n///////////////////\nGetting best position with diagonal optimization.");
+		Game.println("");
+		Game.println("//////////////////");
+		Game.println("Getting best position with diagonal optimization.");
 		Game.println("The diagonally optimized path is of size : "+positions.size());
 		Game.println("Caster : "+caster+", target : "+target+". MP available : "+MP);
 		
@@ -738,98 +740,6 @@ public class Game {
 	 * @return
 	 */
 	private String getBestTurn(JSONArray command) {
-		/*
-		JSONObject idObj = (JSONObject) command.get(0);
-		int id = (int) idObj.get("id");
-
-		PlayingEntity caster = getPlayingEntityFromID(id);
-		PlayingEntity victim = getClosestEnnemy(caster);
-
-		log.println();
-		
-		ArrayList<Position> accessiblePositions = new ArrayList<>();
-		accessiblePositions.add(caster.getPosition());
-		
-		ArrayList<Position> victimAccessiblePositions = new ArrayList<>();
-		victimAccessiblePositions.add(caster.getPosition());
-		
-		for(int k = caster.getPosition().getX() - caster.getModel().getMP(); k < caster.getPosition().getX() + caster.getModel().getMP()+1; k++) {
-			for(int l = caster.getPosition().getY() - caster.getModel().getMP(); l < caster.getPosition().getY() + caster.getModel().getMP()+1; l++) {
-				if(map.isPositionAccessible(caster.getPosition(), new Position(k,l), caster.getModel().getMP())) {
-					accessiblePositions.add(new Position(k, l));
-				}
-			}
-		}
-		
-		for(int k = victim.getPosition().getX() - victim.getModel().getMP(); k < victim.getPosition().getX() + victim.getModel().getMP()+1; k++) {
-			for(int l = victim.getPosition().getY() - victim.getModel().getMP(); l < victim.getPosition().getY() + victim.getModel().getMP()+1; l++) {
-				if(map.isPositionAccessible(victim.getPosition(), new Position(k,l), victim.getModel().getMP())) {
-					victimAccessiblePositions.add(new Position(k, l));
-				}
-			}
-		}
- 
-		int totalDamage = 0;
-		int maxDamage = 0;
-		ArrayList<bestEnemyAndTurn> bestPositions = new ArrayList<>();
-		
-		for(int i = 0; i < accessiblePositions.size(); i++) {
-			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim, false, map);
-			
-			for(int j = 0; j < turn.size(); j++) {
-				totalDamage += turn.get(j).getDamagePreviz(caster, victim);
-			}
-
-			if(totalDamage > maxDamage) {
-				maxDamage = totalDamage;
-				bestPositions.clear();
-				bestPositions.add(new bestEnemyAndTurn(victim, accessiblePositions.get(i), maxDamage, turn));
-			}else if(totalDamage == maxDamage) {
-				bestPositions.add(new bestEnemyAndTurn(victim, accessiblePositions.get(i), maxDamage, turn));
-			}
-			
-			totalDamage = 0;
-		}
-		
-		int minDistanceBetweenOptimalPositionAndEntity = 1000;
-		bestEnemyAndTurn selectedPosition = bestPositions.get(0);
-		
-		for(int i = 0; i < bestPositions.size(); i++) {
-			int distance = Position.distance(bestPositions.get(i).position, caster.getPosition());
-			if(distance < minDistanceBetweenOptimalPositionAndEntity) {
-				minDistanceBetweenOptimalPositionAndEntity = distance;
-				selectedPosition = bestPositions.get(i);
-			}
-		}
-		
-		ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(selectedPosition.position, victim, true, map);
-		//turn.clear();
-		log.println("AP remaining : "+caster.getModel().getAP()+" TURN : " +turn);
-		
-		String action = "";
-		
-		if(!selectedPosition.position.deepEquals(caster.getPosition())) {
-			action += id+",m,"+selectedPosition.position.getX()+","+selectedPosition.position.getY();
-		}else {
-			if(turn.size() < 1) {
-				Position desired = getBestPositionDiagOptimization(caster.getPosition(), victim.getPosition(), caster.getModel().getMP());
-				log.println("Accessible positions : "+accessiblePositions);
-				log.println("MP available : "+caster.getModel().getMP());
-				log.println("Actual position : "+caster.getPosition());
-				log.println("Ennemy position : "+victim.getPosition());
-				log.println("Desired position : "+desired);
-				if(!caster.getPosition().deepEquals(desired)) {
-					action += id+",m,"+desired.getX()+","+desired.getY();
-				}else {
-					action += id+",None";
-				}
-			}else {
-				action += id+",c,"+selectedPosition.turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
-			}
-			
-		}
-		*/
-		
 		JSONObject idObj = (JSONObject) command.get(0);
 		int id = (int) idObj.get("id");
 		PlayingEntity caster = getPlayingEntityFromID(id);

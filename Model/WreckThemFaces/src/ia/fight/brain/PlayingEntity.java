@@ -220,6 +220,11 @@ public class PlayingEntity {
 			}
 		}
 		
+		Game.println("Creating best turn ...");
+		for(int i = 0; i < optimalTurn.size(); i++) {
+			Game.println(optimalTurn.get(i).getName()+" "+optimalTurn.get(i).getDamagePreviz(caster, victim, false));
+		}
+		
 		long stop = System.currentTimeMillis();
 		
 		//Game.println(stop-start+" ms");
