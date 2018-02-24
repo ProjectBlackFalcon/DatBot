@@ -1,7 +1,1109 @@
-Received command of type : startfight
-Starting fight on map : 88212737
-Map id : 88212737, loc : -1;22
-Init game to map : 88212737
-java.lang.NullPointerException
-	at main.communication.Communication.run(Communication.java:30)
-	at java.lang.Thread.run(Unknown Source)
+[2018-02-24 15:43:54.3] Lys : Received command of type : startfight
+[2018-02-24 15:43:54.3] Lys : Starting fight on map : 153878789
+[2018-02-24 15:43:55.047] Lys : Map id : 153878789, loc : 0;-5
+Init game to map : 153878789
+[2018-02-24 15:43:55.235] Lys : Received command of type : fightPositionInitialization
+[2018-02-24 15:43:55.236] Lys : 
+
+INITIATING START POSITIONS
+[2018-02-24 15:43:55.241] Lys : Received command of type : startPosAltered
+[2018-02-24 15:43:55.241] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:43:55.241] Lys : Received positions :
+[2018-02-24 15:43:55.241] Lys : [18,15]
+[2018-02-24 15:43:55.241] Lys : Closest position :
+[2018-02-24 15:43:55.241] Lys : 18,15
+[2018-02-24 15:43:55.271] Lys : Received command of type : startPosAltered
+[2018-02-24 15:43:55.271] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:43:55.271] Lys : Received positions :
+[2018-02-24 15:43:55.271] Lys : [18,15, 9,17]
+[2018-02-24 15:43:55.271] Lys : Closest position :
+[2018-02-24 15:43:55.271] Lys : 19,24
+[2018-02-24 15:43:56.27] Lys : Received command of type : startPosAltered
+[2018-02-24 15:43:56.27] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:43:56.271] Lys : Received positions :
+[2018-02-24 15:43:56.271] Lys : [18,15, 9,17]
+[2018-02-24 15:43:56.271] Lys : Closest position :
+[2018-02-24 15:43:56.271] Lys : 19,24
+[2018-02-24 15:43:56.576] Lys : Received command of type : startPosAltered
+[2018-02-24 15:43:56.576] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:43:56.576] Lys : Received positions :
+[2018-02-24 15:43:56.576] Lys : [18,15, 9,20]
+[2018-02-24 15:43:56.576] Lys : Closest position :
+[2018-02-24 15:43:56.576] Lys : 19,15
+[2018-02-24 15:43:57.017] Lys : Received command of type : startPosAltered
+[2018-02-24 15:43:57.017] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:43:57.017] Lys : Received positions :
+[2018-02-24 15:43:57.017] Lys : [18,15, 9,20]
+[2018-02-24 15:43:57.017] Lys : Closest position :
+[2018-02-24 15:43:57.017] Lys : 19,15
+[2018-02-24 15:43:57.632] Lys : Received command of type : startPosAltered
+[2018-02-24 15:43:57.632] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:43:57.632] Lys : Received positions :
+[2018-02-24 15:43:57.632] Lys : [9,17, 9,20, 18,15]
+[2018-02-24 15:43:57.632] Lys : Closest position :
+[2018-02-24 15:43:57.632] Lys : 19,24
+[2018-02-24 15:43:57.906] Lys : Received command of type : s
+[2018-02-24 15:43:57.906] Lys : 
+
+INITIATING ENTITIES
+[2018-02-24 15:43:57.907] Lys : 981 21/5/2
+[2018-02-24 15:43:57.908] Lys : Monster entity, 1 21/5/2
+Fixed Resistances : [0,0,0,0,0]
+% Resistances : [-15,0,0,-10,10]
+Stats : [100,100,100,100,100]
+
+
+[2018-02-24 15:43:57.908] Lys : 981 28/5/2
+[2018-02-24 15:43:57.908] Lys : Monster entity, 3 28/5/2
+Fixed Resistances : [0,0,0,0,0]
+% Resistances : [-13,0,0,-8,12]
+Stats : [100,100,100,100,100]
+
+
+[2018-02-24 15:43:57.908] Lys : La-Belle-Veineuse 85/6/3
+[2018-02-24 15:43:57.908] Lys : Cra entity, 7 85/6/3
+Fixed Resistances : [0,0,0,0,0]
+% Resistances : [0,0,0,0,0]
+Stats : [0,0,0,0,0]
+
+
+[2018-02-24 15:43:58.915] Lys : Received command of type : g
+[2018-02-24 15:43:58.92] Lys : 
+[2018-02-24 15:43:58.92] Lys : //////////////////
+[2018-02-24 15:43:58.92] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:43:58.92] Lys : The diagonally optimized path is of size : 10
+[2018-02-24 15:43:58.92] Lys : Caster : 18,15, target : 9,17. MP available : 3
+[2018-02-24 15:43:58.92] Lys : 18,15 17,16 2
+[2018-02-24 15:43:58.92] Lys : 18,15 17,17 3
+[2018-02-24 15:43:58.92] Lys : 18,15 16,18 5
+[2018-02-24 15:43:58.92] Lys : After diagonal movement, position 17,17 was kept.
+[2018-02-24 15:43:58.92] Lys : 0 MP Left.
+[2018-02-24 15:43:58.92] Lys : Algorithm finished. Kept position : 17,17
+[2018-02-24 15:43:58.92] Lys : ///////////////////
+
+
+[2018-02-24 15:44:01.328] Lys : Received command of type : m
+[2018-02-24 15:44:01.329] /
+[2018-02-24 15:44:01.329] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:44:01.329] Lys : [{"x":17,"y":17,"id":0}]
+[2018-02-24 15:44:01.33] Lys : Moving entity 0 to : [17;17]
+[2018-02-24 15:44:01.332] Lys : Received command of type : i
+[2018-02-24 15:44:01.332] /
+[2018-02-24 15:44:01.332] Lys : RECEIVED INFO
+[2018-02-24 15:44:01.332] Lys : [{"pointsVariation":{"sourceId":0,"targetId":0,"pm":-3}}]
+[2018-02-24 15:44:01.332] Lys : Executing points variation.
+[2018-02-24 15:44:02.335] Lys : Received command of type : g
+[2018-02-24 15:44:02.335] Lys : 
+[2018-02-24 15:44:02.335] Lys : //////////////////
+[2018-02-24 15:44:02.335] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:44:02.335] Lys : The diagonally optimized path is of size : 8
+[2018-02-24 15:44:02.335] Lys : Caster : 17,17, target : 9,17. MP available : 0
+[2018-02-24 15:44:02.335] Lys : 17,17 16,18 2
+[2018-02-24 15:44:02.335] Lys : After diagonal movement, position 17,17 was kept.
+[2018-02-24 15:44:02.335] Lys : 0 MP Left.
+[2018-02-24 15:44:02.335] Lys : Algorithm finished. Kept position : 17,17
+[2018-02-24 15:44:02.335] Lys : ///////////////////
+
+
+[2018-02-24 15:44:02.335] Lys : Getting all available spells
+[2018-02-24 15:44:02.335] Lys : Magic arrow is currently available.
+[2018-02-24 15:44:02.335] Lys : Retreat arrow is currently available.
+[2018-02-24 15:44:02.335] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:44:02.335] Lys : Frozen arrow is currently available.
+[2018-02-24 15:44:02.335] Lys : Burning arrow is currently available.
+[2018-02-24 15:44:02.335] Lys : Magic arrow 2
+[2018-02-24 15:44:02.336] Lys :     LoV is okay.
+[2018-02-24 15:44:02.336] Lys :     Entity is within distance !
+[2018-02-24 15:44:02.336] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:02.336] Lys : Retreat arrow 1
+[2018-02-24 15:44:02.336] Lys :     LoV is okay.
+[2018-02-24 15:44:02.336] Lys : Dispersing arrow 1
+[2018-02-24 15:44:02.336] Lys :     LoV is okay.
+[2018-02-24 15:44:02.336] Lys : Frozen arrow 2
+[2018-02-24 15:44:02.336] Lys :     LoV is okay.
+[2018-02-24 15:44:02.336] Lys : Burning arrow 2
+[2018-02-24 15:44:02.336] Lys :     LoV is okay.
+[2018-02-24 15:44:02.337] Lys : Creating best turn ...
+[2018-02-24 15:44:02.337] Lys : Magic arrow 7
+[2018-02-24 15:44:02.337] Lys : Magic arrow 7
+[2018-02-24 15:44:04.543] Lys : Received command of type : i
+[2018-02-24 15:44:04.543] /
+[2018-02-24 15:44:04.543] Lys : RECEIVED INFO
+[2018-02-24 15:44:04.543] Lys : [{"pointsVariation":{"sourceId":0,"pa":-3,"targetId":0}}]
+[2018-02-24 15:44:04.543] Lys : Executing points variation.
+[2018-02-24 15:44:05.548] Lys : Received command of type : c
+[2018-02-24 15:44:05.548] /
+[2018-02-24 15:44:05.548] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:44:05.548] Lys : [{"spellCast":{"sourceId":0,"targetId":1,"critical":1,"x":9,"y":17,"spellId":161}},{"lifePointsLost":{"sourceId":0,"lpLost":17,"lpMaxLost":1,"targetId":1}},{"dispellableEffect":{"sourceId":0,"effectId":76936,"amount":2,"targetId":1,"dispelable":1,"spellId":161,"turnDuration":1}},{"dispellableEffect":{"sourceId":0,"effectId":76936,"amount":2,"targetId":0,"dispelable":1,"spellId":161,"turnDuration":1}}]
+[2018-02-24 15:44:05.548] Lys : The target has lost some LP! {"sourceId":0,"lpLost":17,"lpMaxLost":1,"targetId":1}
+[2018-02-24 15:44:05.548] Lys : Casting 161 to : [9;17]
+[2018-02-24 15:44:05.549] Lys : Casting spell directly onto : 981 4/5/2
+[2018-02-24 15:44:05.549] Lys :     1 1
+[2018-02-24 15:44:05.549] Lys : Received command of type : g
+[2018-02-24 15:44:05.55] Lys : 
+[2018-02-24 15:44:05.55] Lys : //////////////////
+[2018-02-24 15:44:05.55] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:44:05.55] Lys : The diagonally optimized path is of size : 8
+[2018-02-24 15:44:05.55] Lys : Caster : 17,17, target : 9,17. MP available : 0
+[2018-02-24 15:44:05.55] Lys : 17,17 16,18 2
+[2018-02-24 15:44:05.55] Lys : After diagonal movement, position 17,17 was kept.
+[2018-02-24 15:44:05.55] Lys : 0 MP Left.
+[2018-02-24 15:44:05.551] Lys : Algorithm finished. Kept position : 17,17
+[2018-02-24 15:44:05.551] Lys : ///////////////////
+
+
+[2018-02-24 15:44:05.551] Lys : Getting all available spells
+[2018-02-24 15:44:05.551] Lys : Magic arrow is currently available.
+[2018-02-24 15:44:05.551] Lys : Retreat arrow is currently available.
+[2018-02-24 15:44:05.551] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:44:05.551] Lys : Frozen arrow is currently available.
+[2018-02-24 15:44:05.551] Lys : Burning arrow is currently unavailable !! Reason :
+[2018-02-24 15:44:05.551] Lys :     It costs too much : 4/3
+[2018-02-24 15:44:05.551] Lys : Magic arrow 1
+[2018-02-24 15:44:05.551] Lys :     LoV is okay.
+[2018-02-24 15:44:05.551] Lys :     Entity is within distance !
+[2018-02-24 15:44:05.551] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:05.551] Lys : Retreat arrow 1
+[2018-02-24 15:44:05.551] Lys :     LoV is okay.
+[2018-02-24 15:44:05.551] Lys : Dispersing arrow 1
+[2018-02-24 15:44:05.551] Lys :     LoV is okay.
+[2018-02-24 15:44:05.551] Lys : Frozen arrow 2
+[2018-02-24 15:44:05.552] Lys :     LoV is okay.
+[2018-02-24 15:44:05.552] Lys : Creating best turn ...
+[2018-02-24 15:44:05.552] Lys : Magic arrow 7
+[2018-02-24 15:44:07.358] Lys : Received command of type : i
+[2018-02-24 15:44:07.358] /
+[2018-02-24 15:44:07.358] Lys : RECEIVED INFO
+[2018-02-24 15:44:07.358] Lys : [{"pointsVariation":{"sourceId":0,"pa":-3,"targetId":0}}]
+[2018-02-24 15:44:07.358] Lys : Executing points variation.
+[2018-02-24 15:44:08.364] Lys : Received command of type : c
+[2018-02-24 15:44:08.364] /
+[2018-02-24 15:44:08.364] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:44:08.364] Lys : [{"spellCast":{"sourceId":0,"targetId":1,"critical":1,"x":9,"y":17,"spellId":161}},{"lifePointsLost":{"sourceId":0,"lpLost":4,"lpMaxLost":1,"targetId":1}},{"death":{"sourceId":0,"targetId":1}}]
+[2018-02-24 15:44:08.364] Lys : The target has lost some LP! {"sourceId":0,"lpLost":4,"lpMaxLost":1,"targetId":1}
+[2018-02-24 15:44:08.364] Lys : The target has died! {"sourceId":0,"targetId":1}
+[2018-02-24 15:44:08.364] Lys : Casting 161 to : [9;17]
+[2018-02-24 15:44:08.364] Lys : Casting spell directly onto : 981 0/5/2
+[2018-02-24 15:44:08.366] Lys :     1 2
+[2018-02-24 15:44:08.367] Lys : Received command of type : g
+[2018-02-24 15:44:08.367] Lys : 
+[2018-02-24 15:44:08.367] Lys : //////////////////
+[2018-02-24 15:44:08.367] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:44:08.367] Lys : The diagonally optimized path is of size : 8
+[2018-02-24 15:44:08.367] Lys : Caster : 17,17, target : 9,20. MP available : 0
+[2018-02-24 15:44:08.367] Lys : 17,17 16,18 2
+[2018-02-24 15:44:08.367] Lys : After diagonal movement, position 17,17 was kept.
+[2018-02-24 15:44:08.367] Lys : 0 MP Left.
+[2018-02-24 15:44:08.367] Lys : Algorithm finished. Kept position : 17,17
+[2018-02-24 15:44:08.367] Lys : ///////////////////
+
+
+[2018-02-24 15:44:08.367] Lys : Getting all available spells
+[2018-02-24 15:44:08.367] Lys : Magic arrow is currently unavailable !! Reason :
+[2018-02-24 15:44:08.367] Lys :     It costs too much : 3/0
+[2018-02-24 15:44:08.367] Lys : Retreat arrow is currently unavailable !! Reason :
+[2018-02-24 15:44:08.368] Lys :     It costs too much : 3/0
+[2018-02-24 15:44:08.368] Lys : Dispersing arrow is currently unavailable !! Reason :
+[2018-02-24 15:44:08.368] Lys :     It costs too much : 3/0
+[2018-02-24 15:44:08.368] Lys : Frozen arrow is currently unavailable !! Reason :
+[2018-02-24 15:44:08.368] Lys :     It costs too much : 3/0
+[2018-02-24 15:44:08.368] Lys : Burning arrow is currently unavailable !! Reason :
+[2018-02-24 15:44:08.368] Lys :     It costs too much : 4/0
+[2018-02-24 15:44:08.368] Lys : Creating best turn ...
+[2018-02-24 15:44:10.775] Lys : Received command of type : p
+[2018-02-24 15:44:10.776] Lys : Entity 0 passing turn.
+[2018-02-24 15:44:10.98] Lys : Received command of type : m
+[2018-02-24 15:44:10.98] /
+[2018-02-24 15:44:10.98] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:44:10.98] Lys : [{"x":11,"y":20,"id":2}]
+[2018-02-24 15:44:10.98] Lys : Moving entity 2 to : [11;20]
+[2018-02-24 15:44:10.984] Lys : Received command of type : i
+[2018-02-24 15:44:10.984] /
+[2018-02-24 15:44:10.984] Lys : RECEIVED INFO
+[2018-02-24 15:44:10.984] Lys : [{"pointsVariation":{"sourceId":2,"targetId":2,"pm":-2}}]
+[2018-02-24 15:44:10.984] Lys : Executing points variation.
+[2018-02-24 15:44:10.988] Lys : Received command of type : p
+[2018-02-24 15:44:10.988] Lys : Entity 2 passing turn.
+[2018-02-24 15:44:12.197] Lys : Received command of type : g
+[2018-02-24 15:44:12.197] Lys : 
+[2018-02-24 15:44:12.197] Lys : //////////////////
+[2018-02-24 15:44:12.197] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:44:12.198] Lys : The diagonally optimized path is of size : 6
+[2018-02-24 15:44:12.198] Lys : Caster : 17,17, target : 11,20. MP available : 3
+[2018-02-24 15:44:12.198] Lys : 17,17 16,18 2
+[2018-02-24 15:44:12.198] Lys : 17,17 15,19 4
+[2018-02-24 15:44:12.198] Lys : After diagonal movement, position 16,18 was kept.
+[2018-02-24 15:44:12.198] Lys : 1 MP Left.
+[2018-02-24 15:44:12.198] Lys : There are movement points remaining, but not enough for a diagonal approach.
+[2018-02-24 15:44:12.198] Lys : The remainder of the path is of size : 7
+[2018-02-24 15:44:12.198] Lys : 16,18 16,19 1
+[2018-02-24 15:44:12.198] Lys : NPK : 16,19
+[2018-02-24 15:44:12.198] Lys : 16,18 15,19 2
+[2018-02-24 15:44:12.198] Lys : Broke out of the loop
+[2018-02-24 15:44:12.198] Lys : New position kept : 16,19
+[2018-02-24 15:44:12.198] Lys : 0 MP Left.
+[2018-02-24 15:44:12.198] Lys : Algorithm finished. Kept position : 16,19
+[2018-02-24 15:44:12.198] Lys : ///////////////////
+
+
+[2018-02-24 15:44:14.003] Lys : Received command of type : m
+[2018-02-24 15:44:14.003] /
+[2018-02-24 15:44:14.003] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:44:14.003] Lys : [{"x":16,"y":19,"id":0}]
+[2018-02-24 15:44:14.003] Lys : Moving entity 0 to : [16;19]
+[2018-02-24 15:44:14.007] Lys : Received command of type : i
+[2018-02-24 15:44:14.007] /
+[2018-02-24 15:44:14.007] Lys : RECEIVED INFO
+[2018-02-24 15:44:14.007] Lys : [{"pointsVariation":{"sourceId":0,"targetId":0,"pm":-3}}]
+[2018-02-24 15:44:14.007] Lys : Executing points variation.
+[2018-02-24 15:44:15.013] Lys : Received command of type : g
+[2018-02-24 15:44:15.013] Lys : 
+[2018-02-24 15:44:15.013] Lys : //////////////////
+[2018-02-24 15:44:15.013] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:44:15.013] Lys : The diagonally optimized path is of size : 5
+[2018-02-24 15:44:15.013] Lys : Caster : 16,19, target : 11,20. MP available : 0
+[2018-02-24 15:44:15.013] Lys : 16,19 15,20 2
+[2018-02-24 15:44:15.013] Lys : After diagonal movement, position 16,19 was kept.
+[2018-02-24 15:44:15.013] Lys : 0 MP Left.
+[2018-02-24 15:44:15.013] Lys : Algorithm finished. Kept position : 16,19
+[2018-02-24 15:44:15.013] Lys : ///////////////////
+
+
+[2018-02-24 15:44:15.013] Lys : Getting all available spells
+[2018-02-24 15:44:15.013] Lys : Magic arrow is currently available.
+[2018-02-24 15:44:15.013] Lys : Retreat arrow is currently available.
+[2018-02-24 15:44:15.013] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:44:15.013] Lys : Frozen arrow is currently available.
+[2018-02-24 15:44:15.013] Lys : Burning arrow is currently available.
+[2018-02-24 15:44:15.013] Lys : Magic arrow 2
+[2018-02-24 15:44:15.013] Lys :     LoV is okay.
+[2018-02-24 15:44:15.013] Lys :     Entity is within distance !
+[2018-02-24 15:44:15.013] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:15.013] Lys : Retreat arrow 1
+[2018-02-24 15:44:15.013] Lys :     LoV is okay.
+[2018-02-24 15:44:15.013] Lys : Dispersing arrow 1
+[2018-02-24 15:44:15.013] Lys :     LoV is okay.
+[2018-02-24 15:44:15.013] Lys :     Entity is within distance !
+[2018-02-24 15:44:15.013] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:15.013] Lys : Frozen arrow 2
+[2018-02-24 15:44:15.013] Lys :     LoV is okay.
+[2018-02-24 15:44:15.013] Lys :     Entity is within distance !
+[2018-02-24 15:44:15.013] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:15.013] Lys : Burning arrow 2
+[2018-02-24 15:44:15.013] Lys :     LoV is okay.
+[2018-02-24 15:44:15.013] Lys : Removing Dispersing arrow (1 - 6) because of lack of damage.
+[2018-02-24 15:44:15.014] Lys : Creating best turn ...
+[2018-02-24 15:44:15.014] Lys : Magic arrow 7
+[2018-02-24 15:44:15.014] Lys : Magic arrow 7
+[2018-02-24 15:44:17.018] Lys : Received command of type : i
+[2018-02-24 15:44:17.018] /
+[2018-02-24 15:44:17.018] Lys : RECEIVED INFO
+[2018-02-24 15:44:17.018] Lys : [{"pointsVariation":{"sourceId":0,"pa":-3,"targetId":0}}]
+[2018-02-24 15:44:17.018] Lys : Executing points variation.
+[2018-02-24 15:44:18.024] Lys : Received command of type : c
+[2018-02-24 15:44:18.024] /
+[2018-02-24 15:44:18.024] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:44:18.024] Lys : [{"spellCast":{"sourceId":0,"targetId":2,"critical":1,"x":11,"y":20,"spellId":161}},{"lifePointsLost":{"sourceId":0,"lpLost":15,"lpMaxLost":1,"targetId":2}},{"dispellableEffect":{"sourceId":0,"effectId":76936,"amount":2,"targetId":2,"dispelable":1,"spellId":161,"turnDuration":1}},{"dispellableEffect":{"sourceId":0,"effectId":76936,"amount":2,"targetId":0,"dispelable":1,"spellId":161,"turnDuration":1}}]
+[2018-02-24 15:44:18.025] Lys : The target has lost some LP! {"sourceId":0,"lpLost":15,"lpMaxLost":1,"targetId":2}
+[2018-02-24 15:44:18.025] Lys : Casting 161 to : [11;20]
+[2018-02-24 15:44:18.025] Lys : Casting spell directly onto : 981 13/5/2
+[2018-02-24 15:44:18.025] Lys :     2 1
+[2018-02-24 15:44:18.025] Lys : Received command of type : g
+[2018-02-24 15:44:18.026] Lys : 
+[2018-02-24 15:44:18.026] Lys : //////////////////
+[2018-02-24 15:44:18.026] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:44:18.026] Lys : The diagonally optimized path is of size : 5
+[2018-02-24 15:44:18.026] Lys : Caster : 16,19, target : 11,20. MP available : 0
+[2018-02-24 15:44:18.026] Lys : 16,19 15,20 2
+[2018-02-24 15:44:18.026] Lys : After diagonal movement, position 16,19 was kept.
+[2018-02-24 15:44:18.026] Lys : 0 MP Left.
+[2018-02-24 15:44:18.026] Lys : Algorithm finished. Kept position : 16,19
+[2018-02-24 15:44:18.026] Lys : ///////////////////
+
+
+[2018-02-24 15:44:18.026] Lys : Getting all available spells
+[2018-02-24 15:44:18.026] Lys : Magic arrow is currently available.
+[2018-02-24 15:44:18.026] Lys : Retreat arrow is currently available.
+[2018-02-24 15:44:18.026] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:44:18.026] Lys : Frozen arrow is currently available.
+[2018-02-24 15:44:18.026] Lys : Burning arrow is currently unavailable !! Reason :
+[2018-02-24 15:44:18.026] Lys :     It costs too much : 4/3
+[2018-02-24 15:44:18.026] Lys : Magic arrow 1
+[2018-02-24 15:44:18.026] Lys :     LoV is okay.
+[2018-02-24 15:44:18.026] Lys :     Entity is within distance !
+[2018-02-24 15:44:18.026] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:18.026] Lys : Retreat arrow 1
+[2018-02-24 15:44:18.026] Lys :     LoV is okay.
+[2018-02-24 15:44:18.026] Lys : Dispersing arrow 1
+[2018-02-24 15:44:18.026] Lys :     LoV is okay.
+[2018-02-24 15:44:18.026] Lys :     Entity is within distance !
+[2018-02-24 15:44:18.026] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:18.026] Lys : Frozen arrow 2
+[2018-02-24 15:44:18.026] Lys :     LoV is okay.
+[2018-02-24 15:44:18.026] Lys :     Entity is within distance !
+[2018-02-24 15:44:18.027] Lys :     In line or doesn't require slc
+[2018-02-24 15:44:18.027] Lys : Removing Dispersing arrow (1 - 6) because of lack of damage.
+[2018-02-24 15:44:18.027] Lys : Creating best turn ...
+[2018-02-24 15:44:18.027] Lys : Magic arrow 7
+[2018-02-24 15:44:20.432] Lys : Received command of type : i
+[2018-02-24 15:44:20.432] /
+[2018-02-24 15:44:20.432] Lys : RECEIVED INFO
+[2018-02-24 15:44:20.432] Lys : [{"pointsVariation":{"sourceId":0,"pa":-3,"targetId":0}}]
+[2018-02-24 15:44:20.432] Lys : Executing points variation.
+[2018-02-24 15:44:21.435] Lys : Received command of type : c
+[2018-02-24 15:44:21.435] /
+[2018-02-24 15:44:21.435] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:44:21.435] Lys : [{"spellCast":{"sourceId":0,"targetId":2,"critical":1,"x":11,"y":20,"spellId":161}},{"lifePointsLost":{"sourceId":0,"lpLost":13,"lpMaxLost":1,"targetId":2}},{"death":{"sourceId":0,"targetId":2}}]
+[2018-02-24 15:44:21.435] Lys : The target has lost some LP! {"sourceId":0,"lpLost":13,"lpMaxLost":1,"targetId":2}
+[2018-02-24 15:44:21.435] Lys : The target has died! {"sourceId":0,"targetId":2}
+[2018-02-24 15:44:21.435] Lys : Casting 161 to : [11;20]
+[2018-02-24 15:44:21.435] Lys : Casting spell directly onto : 981 0/5/2
+[2018-02-24 15:44:21.435] Lys :     2 2
+[2018-02-24 15:44:21.641] Lys : Received command of type : endFight
+[2018-02-24 15:45:49.071] Lys : Received command of type : startfight
+[2018-02-24 15:45:49.071] Lys : Starting fight on map : 153878789
+[2018-02-24 15:45:49.789] Lys : Map id : 153878789, loc : 0;-5
+Init game to map : 153878789
+[2018-02-24 15:45:49.959] Lys : Received command of type : fightPositionInitialization
+[2018-02-24 15:45:49.959] Lys : 
+
+INITIATING START POSITIONS
+[2018-02-24 15:45:49.964] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:49.964] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:49.964] Lys : Received positions :
+[2018-02-24 15:45:49.964] Lys : [17,23]
+[2018-02-24 15:45:49.964] Lys : Closest position :
+[2018-02-24 15:45:49.964] Lys : 17,23
+[2018-02-24 15:45:50.479] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:50.479] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:50.479] Lys : Received positions :
+[2018-02-24 15:45:50.479] Lys : [17,23, 9,19]
+[2018-02-24 15:45:50.479] Lys : Closest position :
+[2018-02-24 15:45:50.479] Lys : 19,30
+[2018-02-24 15:45:51.345] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:51.345] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:51.345] Lys : Received positions :
+[2018-02-24 15:45:51.345] Lys : [17,23, 9,19]
+[2018-02-24 15:45:51.345] Lys : Closest position :
+[2018-02-24 15:45:51.345] Lys : 19,30
+[2018-02-24 15:45:51.865] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:51.866] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:51.866] Lys : Received positions :
+[2018-02-24 15:45:51.868] Lys : [17,23, 10,17]
+[2018-02-24 15:45:51.868] Lys : Closest position :
+[2018-02-24 15:45:51.868] Lys : 19,30
+[2018-02-24 15:45:53.047] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:53.047] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:53.047] Lys : Received positions :
+[2018-02-24 15:45:53.047] Lys : [17,23, 10,17]
+[2018-02-24 15:45:53.047] Lys : Closest position :
+[2018-02-24 15:45:53.047] Lys : 19,30
+[2018-02-24 15:45:54.08] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:54.08] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:54.08] Lys : Received positions :
+[2018-02-24 15:45:54.08] Lys : [17,23, 9,22]
+[2018-02-24 15:45:54.08] Lys : Closest position :
+[2018-02-24 15:45:54.08] Lys : 19,30
+[2018-02-24 15:45:55.262] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:55.262] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:55.262] Lys : Received positions :
+[2018-02-24 15:45:55.262] Lys : [17,23, 9,22]
+[2018-02-24 15:45:55.262] Lys : Closest position :
+[2018-02-24 15:45:55.262] Lys : 19,30
+[2018-02-24 15:45:56.779] Lys : Received command of type : startPosAltered
+[2018-02-24 15:45:56.779] Lys : 
+
+START POSITIONS HAVE BEEN ALTERED
+[2018-02-24 15:45:56.779] Lys : Received positions :
+[2018-02-24 15:45:56.779] Lys : [9,19, 10,17, 9,22, 17,23]
+[2018-02-24 15:45:56.779] Lys : Closest position :
+[2018-02-24 15:45:56.779] Lys : 19,30
+[2018-02-24 15:45:58.182] Lys : Received command of type : s
+[2018-02-24 15:45:58.182] Lys : 
+
+INITIATING ENTITIES
+[2018-02-24 15:45:58.183] Lys : 981 24/5/2
+[2018-02-24 15:45:58.183] Lys : Monster entity, 2 24/5/2
+Fixed Resistances : [0,0,0,0,0]
+% Resistances : [-14,0,0,-9,11]
+Stats : [100,100,100,100,100]
+
+
+[2018-02-24 15:45:58.183] Lys : 981 24/5/2
+[2018-02-24 15:45:58.183] Lys : Monster entity, 2 24/5/2
+Fixed Resistances : [0,0,0,0,0]
+% Resistances : [-14,0,0,-9,11]
+Stats : [100,100,100,100,100]
+
+
+[2018-02-24 15:45:58.183] Lys : 970 15/4/6
+[2018-02-24 15:45:58.183] Lys : Monster entity, 1 15/4/6
+Fixed Resistances : [0,0,0,0,0]
+% Resistances : [5,-10,0,-5,0]
+Stats : [100,100,100,100,100]
+
+
+[2018-02-24 15:45:58.183] Lys : La-Belle-Veineuse 85/6/3
+[2018-02-24 15:45:58.183] Lys : Cra entity, 7 85/6/3
+Fixed Resistances : [0,0,0,0,0]
+% Resistances : [0,0,0,0,0]
+Stats : [0,0,0,0,0]
+
+
+[2018-02-24 15:45:58.186] Lys : Received command of type : m
+[2018-02-24 15:45:58.186] /
+[2018-02-24 15:45:58.186] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:45:58.186] Lys : [{"x":14,"y":21,"id":0}]
+[2018-02-24 15:45:58.188] Lys : Moving entity 0 to : [14;21]
+[2018-02-24 15:45:58.192] Lys : Received command of type : i
+[2018-02-24 15:45:58.192] /
+[2018-02-24 15:45:58.192] Lys : RECEIVED INFO
+[2018-02-24 15:45:58.192] Lys : [{"pointsVariation":{"sourceId":0,"targetId":0,"pm":-6}}]
+[2018-02-24 15:45:58.192] Lys : Executing points variation.
+[2018-02-24 15:45:58.196] Lys : Received command of type : p
+[2018-02-24 15:45:58.196] Lys : Entity 0 passing turn.
+[2018-02-24 15:45:59.411] Lys : Received command of type : g
+[2018-02-24 15:45:59.412] Lys : 
+[2018-02-24 15:45:59.412] Lys : //////////////////
+[2018-02-24 15:45:59.412] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:45:59.412] Lys : The diagonally optimized path is of size : 4
+[2018-02-24 15:45:59.412] Lys : Caster : 17,23, target : 14,21. MP available : 3
+[2018-02-24 15:45:59.412] Lys : 17,23 16,22 2
+[2018-02-24 15:45:59.412] Lys : 17,23 16,21 3
+[2018-02-24 15:45:59.412] Lys : 17,23 15,20 5
+[2018-02-24 15:45:59.412] Lys : After diagonal movement, position 16,21 was kept.
+[2018-02-24 15:45:59.412] Lys : 0 MP Left.
+[2018-02-24 15:45:59.412] Lys : Algorithm finished. Kept position : 16,21
+[2018-02-24 15:45:59.412] Lys : ///////////////////
+
+
+[2018-02-24 15:46:01.219] Lys : Received command of type : m
+[2018-02-24 15:46:01.219] /
+[2018-02-24 15:46:01.219] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:01.219] Lys : [{"x":16,"y":21,"id":1}]
+[2018-02-24 15:46:01.219] Lys : Moving entity 1 to : [16;21]
+[2018-02-24 15:46:01.222] Lys : Received command of type : i
+[2018-02-24 15:46:01.222] /
+[2018-02-24 15:46:01.222] Lys : RECEIVED INFO
+[2018-02-24 15:46:01.222] Lys : [{"pointsVariation":{"sourceId":1,"targetId":1,"pm":-3}}]
+[2018-02-24 15:46:01.222] Lys : Executing points variation.
+[2018-02-24 15:46:02.225] Lys : Received command of type : g
+[2018-02-24 15:46:02.225] Lys : 
+[2018-02-24 15:46:02.225] Lys : //////////////////
+[2018-02-24 15:46:02.225] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:02.225] Lys : The diagonally optimized path is of size : 2
+[2018-02-24 15:46:02.225] Lys : Caster : 16,21, target : 14,21. MP available : 0
+[2018-02-24 15:46:02.225] Lys : 16,21 15,20 2
+[2018-02-24 15:46:02.225] Lys : After diagonal movement, position 16,21 was kept.
+[2018-02-24 15:46:02.226] Lys : 0 MP Left.
+[2018-02-24 15:46:02.226] Lys : Algorithm finished. Kept position : 16,21
+[2018-02-24 15:46:02.226] Lys : ///////////////////
+
+
+[2018-02-24 15:46:02.226] Lys : Getting all available spells
+[2018-02-24 15:46:02.226] Lys : Magic arrow is currently available.
+[2018-02-24 15:46:02.226] Lys : Retreat arrow is currently available.
+[2018-02-24 15:46:02.226] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:46:02.226] Lys : Frozen arrow is currently available.
+[2018-02-24 15:46:02.226] Lys : Burning arrow is currently available.
+[2018-02-24 15:46:02.226] Lys : Magic arrow 2
+[2018-02-24 15:46:02.226] Lys : Retreat arrow 1
+[2018-02-24 15:46:02.226] Lys : Dispersing arrow 1
+[2018-02-24 15:46:02.226] Lys : Frozen arrow 2
+[2018-02-24 15:46:02.226] Lys : Burning arrow 2
+[2018-02-24 15:46:02.227] Lys : Creating best turn ...
+[2018-02-24 15:46:04.632] Lys : Received command of type : p
+[2018-02-24 15:46:04.633] Lys : Entity 1 passing turn.
+[2018-02-24 15:46:04.838] Lys : Received command of type : m
+[2018-02-24 15:46:04.838] /
+[2018-02-24 15:46:04.838] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:04.838] Lys : [{"x":11,"y":19,"id":2}]
+[2018-02-24 15:46:04.838] Lys : Moving entity 2 to : [11;19]
+[2018-02-24 15:46:04.84] Lys : Received command of type : i
+[2018-02-24 15:46:04.84] /
+[2018-02-24 15:46:04.84] Lys : RECEIVED INFO
+[2018-02-24 15:46:04.84] Lys : [{"pointsVariation":{"sourceId":2,"targetId":2,"pm":-2}}]
+[2018-02-24 15:46:04.84] Lys : Executing points variation.
+[2018-02-24 15:46:04.846] Lys : Received command of type : p
+[2018-02-24 15:46:04.846] Lys : Entity 2 passing turn.
+[2018-02-24 15:46:05.051] Lys : Received command of type : m
+[2018-02-24 15:46:05.051] /
+[2018-02-24 15:46:05.051] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:05.051] Lys : [{"x":10,"y":19,"id":3}]
+[2018-02-24 15:46:05.051] Lys : Moving entity 3 to : [10;19]
+[2018-02-24 15:46:05.055] Lys : Received command of type : i
+[2018-02-24 15:46:05.055] /
+[2018-02-24 15:46:05.055] Lys : RECEIVED INFO
+[2018-02-24 15:46:05.055] Lys : [{"pointsVariation":{"sourceId":3,"targetId":3,"pm":-2}}]
+[2018-02-24 15:46:05.055] Lys : Executing points variation.
+[2018-02-24 15:46:05.057] Lys : Received command of type : p
+[2018-02-24 15:46:05.057] Lys : Entity 3 passing turn.
+[2018-02-24 15:46:05.262] Lys : Received command of type : m
+[2018-02-24 15:46:05.263] /
+[2018-02-24 15:46:05.263] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:05.263] Lys : [{"x":15,"y":20,"id":0}]
+[2018-02-24 15:46:05.263] Lys : Moving entity 0 to : [15;20]
+[2018-02-24 15:46:05.266] Lys : Received command of type : i
+[2018-02-24 15:46:05.266] /
+[2018-02-24 15:46:05.266] Lys : RECEIVED INFO
+[2018-02-24 15:46:05.266] Lys : [{"pointsVariation":{"sourceId":0,"targetId":0,"pm":-2}}]
+[2018-02-24 15:46:05.266] Lys : Executing points variation.
+[2018-02-24 15:46:05.272] Lys : Received command of type : i
+[2018-02-24 15:46:05.273] /
+[2018-02-24 15:46:05.274] Lys : RECEIVED INFO
+[2018-02-24 15:46:05.274] Lys : [{"pointsVariation":{"sourceId":0,"pa":-4,"targetId":0}}]
+[2018-02-24 15:46:05.274] Lys : Executing points variation.
+[2018-02-24 15:46:05.278] Lys : Received command of type : c
+[2018-02-24 15:46:05.278] /
+[2018-02-24 15:46:05.278] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:05.278] Lys : [{"spellCast":{"sourceId":0,"targetId":1,"critical":1,"x":16,"y":21,"spellId":201}},{"lifePointsLost":{"sourceId":0,"lpLost":18,"lpMaxLost":1,"targetId":1}}]
+[2018-02-24 15:46:05.278] Lys : The target has lost some LP! {"sourceId":0,"lpLost":18,"lpMaxLost":1,"targetId":1}
+[2018-02-24 15:46:05.279] Lys : Casting 201 to : [16;21]
+[2018-02-24 15:46:05.279] Lys : Casting spell directly onto : La-Belle-Veineuse 67/6/3
+[2018-02-24 15:46:05.279] Lys :     1 1
+[2018-02-24 15:46:05.288] Lys : Received command of type : m
+[2018-02-24 15:46:05.288] /
+[2018-02-24 15:46:05.288] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:05.288] Lys : [{"x":11,"y":20,"id":0}]
+[2018-02-24 15:46:05.288] Lys : Moving entity 0 to : [11;20]
+[2018-02-24 15:46:05.292] Lys : Received command of type : i
+[2018-02-24 15:46:05.292] /
+[2018-02-24 15:46:05.292] Lys : RECEIVED INFO
+[2018-02-24 15:46:05.292] Lys : [{"pointsVariation":{"sourceId":0,"targetId":0,"pm":-4}}]
+[2018-02-24 15:46:05.292] Lys : Executing points variation.
+[2018-02-24 15:46:05.295] Lys : Received command of type : p
+[2018-02-24 15:46:05.295] Lys : Entity 0 passing turn.
+[2018-02-24 15:46:06.502] Lys : Received command of type : g
+[2018-02-24 15:46:06.502] Lys : 
+[2018-02-24 15:46:06.502] Lys : //////////////////
+[2018-02-24 15:46:06.502] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:06.502] Lys : The diagonally optimized path is of size : 5
+[2018-02-24 15:46:06.502] Lys : Caster : 16,21, target : 11,20. MP available : 3
+[2018-02-24 15:46:06.502] Lys : 16,21 15,20 2
+[2018-02-24 15:46:06.502] Lys : 16,21 14,20 3
+[2018-02-24 15:46:06.502] Lys : 16,21 13,20 4
+[2018-02-24 15:46:06.502] Lys : After diagonal movement, position 14,20 was kept.
+[2018-02-24 15:46:06.502] Lys : 0 MP Left.
+[2018-02-24 15:46:06.502] Lys : Algorithm finished. Kept position : 14,20
+[2018-02-24 15:46:06.502] Lys : ///////////////////
+
+
+[2018-02-24 15:46:08.506] Lys : Received command of type : m
+[2018-02-24 15:46:08.506] /
+[2018-02-24 15:46:08.506] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:08.506] Lys : [{"x":14,"y":20,"id":1}]
+[2018-02-24 15:46:08.506] Lys : Moving entity 1 to : [14;20]
+[2018-02-24 15:46:08.507] Lys : Received command of type : i
+[2018-02-24 15:46:08.507] /
+[2018-02-24 15:46:08.507] Lys : RECEIVED INFO
+[2018-02-24 15:46:08.507] Lys : [{"pointsVariation":{"sourceId":1,"targetId":1,"pm":-3}}]
+[2018-02-24 15:46:08.507] Lys : Executing points variation.
+[2018-02-24 15:46:09.511] Lys : Received command of type : g
+[2018-02-24 15:46:09.511] Lys : 
+[2018-02-24 15:46:09.511] Lys : //////////////////
+[2018-02-24 15:46:09.511] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:09.511] Lys : The diagonally optimized path is of size : 3
+[2018-02-24 15:46:09.511] Lys : Caster : 14,20, target : 11,20. MP available : 0
+[2018-02-24 15:46:09.511] Lys : 14,20 13,20 1
+[2018-02-24 15:46:09.511] Lys : After diagonal movement, position 14,20 was kept.
+[2018-02-24 15:46:09.511] Lys : 0 MP Left.
+[2018-02-24 15:46:09.511] Lys : Algorithm finished. Kept position : 14,20
+[2018-02-24 15:46:09.511] Lys : ///////////////////
+
+
+[2018-02-24 15:46:09.511] Lys : Getting all available spells
+[2018-02-24 15:46:09.511] Lys : Magic arrow is currently available.
+[2018-02-24 15:46:09.511] Lys : Retreat arrow is currently available.
+[2018-02-24 15:46:09.511] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:46:09.511] Lys : Frozen arrow is currently available.
+[2018-02-24 15:46:09.511] Lys : Burning arrow is currently available.
+[2018-02-24 15:46:09.511] Lys : Magic arrow 2
+[2018-02-24 15:46:09.511] Lys :     LoV is okay.
+[2018-02-24 15:46:09.511] Lys :     Entity is within distance !
+[2018-02-24 15:46:09.511] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:09.512] Lys : Retreat arrow 1
+[2018-02-24 15:46:09.512] Lys :     LoV is okay.
+[2018-02-24 15:46:09.512] Lys :     Entity is within distance !
+[2018-02-24 15:46:09.512] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:09.512] Lys : Dispersing arrow 1
+[2018-02-24 15:46:09.512] Lys :     LoV is okay.
+[2018-02-24 15:46:09.512] Lys :     Entity is within distance !
+[2018-02-24 15:46:09.512] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:09.512] Lys : Frozen arrow 2
+[2018-02-24 15:46:09.512] Lys :     LoV is okay.
+[2018-02-24 15:46:09.512] Lys :     Entity is within distance !
+[2018-02-24 15:46:09.512] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:09.512] Lys : Burning arrow 2
+[2018-02-24 15:46:09.512] Lys :     LoV is okay.
+[2018-02-24 15:46:09.512] Lys :     Entity is within distance !
+[2018-02-24 15:46:09.512] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:09.512] Lys : Removing Dispersing arrow (1 - 6) because of lack of damage.
+[2018-02-24 15:46:09.513] Lys : Creating best turn ...
+[2018-02-24 15:46:09.513] Lys : Burning arrow 8
+[2018-02-24 15:46:11.517] Lys : Received command of type : i
+[2018-02-24 15:46:11.517] /
+[2018-02-24 15:46:11.517] Lys : RECEIVED INFO
+[2018-02-24 15:46:11.517] Lys : [{"pointsVariation":{"sourceId":1,"pa":-4,"targetId":1}}]
+[2018-02-24 15:46:11.517] Lys : Executing points variation.
+[2018-02-24 15:46:12.519] Lys : Received command of type : c
+[2018-02-24 15:46:12.519] /
+[2018-02-24 15:46:12.519] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:12.519] Lys : [{"spellCast":{"sourceId":1,"targetId":0,"critical":2,"x":11,"y":20,"spellId":165}},{"lifePointsLost":{"sourceId":1,"lpLost":15,"lpMaxLost":2,"targetId":0}},{"death":{"sourceId":1,"targetId":0}}]
+[2018-02-24 15:46:12.519] Lys : The target has lost some LP! {"sourceId":1,"lpLost":15,"lpMaxLost":2,"targetId":0}
+[2018-02-24 15:46:12.519] Lys : The target has died! {"sourceId":1,"targetId":0}
+[2018-02-24 15:46:12.519] Lys : Casting 165 to : [11;20]
+[2018-02-24 15:46:12.519] Lys : Casting spell directly onto : 970 0/4/6
+[2018-02-24 15:46:12.519] Lys :     0 1
+[2018-02-24 15:46:12.52] Lys : Received command of type : g
+[2018-02-24 15:46:12.521] Lys : 
+[2018-02-24 15:46:12.521] Lys : //////////////////
+[2018-02-24 15:46:12.521] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:12.521] Lys : The diagonally optimized path is of size : 3
+[2018-02-24 15:46:12.521] Lys : Caster : 14,20, target : 11,19. MP available : 0
+[2018-02-24 15:46:12.521] Lys : 14,20 13,20 1
+[2018-02-24 15:46:12.521] Lys : After diagonal movement, position 14,20 was kept.
+[2018-02-24 15:46:12.521] Lys : 0 MP Left.
+[2018-02-24 15:46:12.521] Lys : Algorithm finished. Kept position : 14,20
+[2018-02-24 15:46:12.521] Lys : ///////////////////
+
+
+[2018-02-24 15:46:12.521] Lys : Getting all available spells
+[2018-02-24 15:46:12.521] Lys : Magic arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:12.521] Lys :     It costs too much : 3/2
+[2018-02-24 15:46:12.521] Lys : Retreat arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:12.522] Lys :     It costs too much : 3/2
+[2018-02-24 15:46:12.522] Lys : Dispersing arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:12.522] Lys :     It costs too much : 3/2
+[2018-02-24 15:46:12.522] Lys : Frozen arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:12.522] Lys :     It costs too much : 3/2
+[2018-02-24 15:46:12.522] Lys : Burning arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:12.522] Lys :     It costs too much : 4/2
+[2018-02-24 15:46:12.522] Lys : Creating best turn ...
+[2018-02-24 15:46:14.527] Lys : Received command of type : p
+[2018-02-24 15:46:14.527] Lys : Entity 1 passing turn.
+[2018-02-24 15:46:14.735] Lys : Received command of type : i
+[2018-02-24 15:46:14.735] /
+[2018-02-24 15:46:14.735] Lys : RECEIVED INFO
+[2018-02-24 15:46:14.735] Lys : [{"pointsVariation":{"sourceId":2,"pa":-3,"targetId":2}}]
+[2018-02-24 15:46:14.735] Lys : Executing points variation.
+[2018-02-24 15:46:14.736] Lys : Received command of type : c
+[2018-02-24 15:46:14.736] /
+[2018-02-24 15:46:14.736] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:14.736] Lys : [{"spellCast":{"sourceId":2,"targetId":1,"critical":1,"x":14,"y":20,"spellId":3453}},{"lifePointsLost":{"sourceId":2,"lpLost":17,"lpMaxLost":1,"targetId":1}}]
+[2018-02-24 15:46:14.736] Lys : The target has lost some LP! {"sourceId":2,"lpLost":17,"lpMaxLost":1,"targetId":1}
+[2018-02-24 15:46:14.736] Lys : Casting 3453 to : [14;20]
+[2018-02-24 15:46:14.737] Lys : Casting spell directly onto : La-Belle-Veineuse 50/6/3
+[2018-02-24 15:46:14.737] Lys :     1 1
+[2018-02-24 15:46:14.739] Lys : Received command of type : m
+[2018-02-24 15:46:14.739] /
+[2018-02-24 15:46:14.739] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:14.739] Lys : [{"x":10,"y":20,"id":2}]
+[2018-02-24 15:46:14.739] Lys : Moving entity 2 to : [10;20]
+[2018-02-24 15:46:14.744] Lys : Received command of type : i
+[2018-02-24 15:46:14.744] /
+[2018-02-24 15:46:14.744] Lys : RECEIVED INFO
+[2018-02-24 15:46:14.744] Lys : [{"pointsVariation":{"sourceId":2,"targetId":2,"pm":-2}}]
+[2018-02-24 15:46:14.744] Lys : Executing points variation.
+[2018-02-24 15:46:14.748] Lys : Received command of type : p
+[2018-02-24 15:46:14.748] Lys : Entity 2 passing turn.
+[2018-02-24 15:46:14.952] Lys : Received command of type : m
+[2018-02-24 15:46:14.952] /
+[2018-02-24 15:46:14.952] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:14.952] Lys : [{"x":11,"y":19,"id":3}]
+[2018-02-24 15:46:14.952] Lys : Moving entity 3 to : [11;19]
+[2018-02-24 15:46:14.954] Lys : Received command of type : i
+[2018-02-24 15:46:14.954] /
+[2018-02-24 15:46:14.954] Lys : RECEIVED INFO
+[2018-02-24 15:46:14.954] Lys : [{"pointsVariation":{"sourceId":3,"targetId":3,"pm":-1}}]
+[2018-02-24 15:46:14.954] Lys : Executing points variation.
+[2018-02-24 15:46:14.957] Lys : Received command of type : i
+[2018-02-24 15:46:14.957] /
+[2018-02-24 15:46:14.957] Lys : RECEIVED INFO
+[2018-02-24 15:46:14.957] Lys : [{"pointsVariation":{"sourceId":3,"pa":-3,"targetId":3}}]
+[2018-02-24 15:46:14.957] Lys : Executing points variation.
+[2018-02-24 15:46:14.958] Lys : Received command of type : c
+[2018-02-24 15:46:14.958] /
+[2018-02-24 15:46:14.958] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:14.958] Lys : [{"spellCast":{"sourceId":3,"targetId":1,"critical":1,"x":14,"y":20,"spellId":3453}},{"lifePointsLost":{"sourceId":3,"lpLost":15,"lpMaxLost":1,"targetId":1}}]
+[2018-02-24 15:46:14.958] Lys : The target has lost some LP! {"sourceId":3,"lpLost":15,"lpMaxLost":1,"targetId":1}
+[2018-02-24 15:46:14.958] Lys : Casting 3453 to : [14;20]
+[2018-02-24 15:46:14.959] Lys : Casting spell directly onto : La-Belle-Veineuse 35/6/3
+[2018-02-24 15:46:14.959] Lys :     1 1
+[2018-02-24 15:46:14.962] Lys : Received command of type : m
+[2018-02-24 15:46:14.962] /
+[2018-02-24 15:46:14.962] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:14.962] Lys : [{"x":10,"y":19,"id":3}]
+[2018-02-24 15:46:14.962] Lys : Moving entity 3 to : [10;19]
+[2018-02-24 15:46:14.964] Lys : Received command of type : i
+[2018-02-24 15:46:14.965] /
+[2018-02-24 15:46:14.965] Lys : RECEIVED INFO
+[2018-02-24 15:46:14.965] Lys : [{"pointsVariation":{"sourceId":3,"targetId":3,"pm":-1}}]
+[2018-02-24 15:46:14.965] Lys : Executing points variation.
+[2018-02-24 15:46:14.967] Lys : Received command of type : p
+[2018-02-24 15:46:14.967] Lys : Entity 3 passing turn.
+[2018-02-24 15:46:16.174] Lys : Received command of type : g
+[2018-02-24 15:46:16.174] Lys : 
+[2018-02-24 15:46:16.174] Lys : //////////////////
+[2018-02-24 15:46:16.174] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:16.174] Lys : The diagonally optimized path is of size : 4
+[2018-02-24 15:46:16.174] Lys : Caster : 14,20, target : 10,20. MP available : 3
+[2018-02-24 15:46:16.174] Lys : 14,20 13,20 1
+[2018-02-24 15:46:16.174] Lys : 14,20 12,20 2
+[2018-02-24 15:46:16.174] Lys : 14,20 11,20 3
+[2018-02-24 15:46:16.174] Lys : 14,20 10,20 4
+[2018-02-24 15:46:16.174] Lys : After diagonal movement, position 11,20 was kept.
+[2018-02-24 15:46:16.174] Lys : 0 MP Left.
+[2018-02-24 15:46:16.174] Lys : Algorithm finished. Kept position : 11,20
+[2018-02-24 15:46:16.174] Lys : ///////////////////
+
+
+[2018-02-24 15:46:18.179] Lys : Received command of type : m
+[2018-02-24 15:46:18.179] /
+[2018-02-24 15:46:18.179] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:18.179] Lys : [{"x":11,"y":20,"id":1}]
+[2018-02-24 15:46:18.179] Lys : Moving entity 1 to : [11;20]
+[2018-02-24 15:46:18.181] Lys : Received command of type : i
+[2018-02-24 15:46:18.181] /
+[2018-02-24 15:46:18.181] Lys : RECEIVED INFO
+[2018-02-24 15:46:18.181] Lys : [{"pointsVariation":{"sourceId":1,"targetId":1,"pm":-3}}]
+[2018-02-24 15:46:18.181] Lys : Executing points variation.
+[2018-02-24 15:46:19.183] Lys : Received command of type : g
+[2018-02-24 15:46:19.183] Lys : 
+[2018-02-24 15:46:19.183] Lys : //////////////////
+[2018-02-24 15:46:19.183] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:19.183] Lys : The diagonally optimized path is of size : 1
+[2018-02-24 15:46:19.184] Lys : Caster : 11,20, target : 10,20. MP available : 0
+[2018-02-24 15:46:19.184] Lys : 11,20 10,20 1
+[2018-02-24 15:46:19.184] Lys : After diagonal movement, position 11,20 was kept.
+[2018-02-24 15:46:19.184] Lys : 0 MP Left.
+[2018-02-24 15:46:19.184] Lys : Algorithm finished. Kept position : 11,20
+[2018-02-24 15:46:19.184] Lys : ///////////////////
+
+
+[2018-02-24 15:46:19.184] Lys : Getting all available spells
+[2018-02-24 15:46:19.184] Lys : Magic arrow is currently available.
+[2018-02-24 15:46:19.184] Lys : Retreat arrow is currently available.
+[2018-02-24 15:46:19.184] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:46:19.184] Lys : Frozen arrow is currently available.
+[2018-02-24 15:46:19.184] Lys : Burning arrow is currently available.
+[2018-02-24 15:46:19.184] Lys : Magic arrow 2
+[2018-02-24 15:46:19.184] Lys :     LoV is okay.
+[2018-02-24 15:46:19.184] Lys :     Entity is within distance !
+[2018-02-24 15:46:19.184] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:19.184] Lys : Retreat arrow 1
+[2018-02-24 15:46:19.184] Lys :     LoV is okay.
+[2018-02-24 15:46:19.184] Lys :     Entity is within distance !
+[2018-02-24 15:46:19.184] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:19.184] Lys : Dispersing arrow 1
+[2018-02-24 15:46:19.184] Lys :     LoV is okay.
+[2018-02-24 15:46:19.184] Lys :     Entity is within distance !
+[2018-02-24 15:46:19.184] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:19.184] Lys : Frozen arrow 2
+[2018-02-24 15:46:19.184] Lys :     LoV is okay.
+[2018-02-24 15:46:19.184] Lys : Burning arrow 2
+[2018-02-24 15:46:19.184] Lys :     LoV is okay.
+[2018-02-24 15:46:19.184] Lys :     Entity is within distance !
+[2018-02-24 15:46:19.184] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:19.184] Lys : Removing Dispersing arrow (1 - 6) because of lack of damage.
+[2018-02-24 15:46:19.184] Lys : Creating best turn ...
+[2018-02-24 15:46:19.184] Lys : Retreat arrow 10
+[2018-02-24 15:46:19.184] Lys : Magic arrow 7
+[2018-02-24 15:46:21.389] Lys : Received command of type : i
+[2018-02-24 15:46:21.389] /
+[2018-02-24 15:46:21.389] Lys : RECEIVED INFO
+[2018-02-24 15:46:21.389] Lys : [{"pointsVariation":{"sourceId":1,"pa":-3,"targetId":1}}]
+[2018-02-24 15:46:21.389] Lys : Executing points variation.
+[2018-02-24 15:46:22.393] Lys : Received command of type : c
+[2018-02-24 15:46:22.393] /
+[2018-02-24 15:46:22.393] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:22.393] Lys : [{"spellCast":{"sourceId":1,"targetId":2,"critical":1,"x":10,"y":20,"spellId":169}},{"lifePointsLost":{"sourceId":1,"lpLost":20,"lpMaxLost":2,"targetId":2}},{"slide":{"sourceId":1,"targetId":2,"endCell":{"x":8,"y":20},"startCell":{"x":10,"y":20}}}]
+Slide received from 1, to 2. Moving entity to : {"x":8,"y":20}
+[2018-02-24 15:46:22.393] Lys : The target has lost some LP! {"sourceId":1,"lpLost":20,"lpMaxLost":2,"targetId":2}
+[2018-02-24 15:46:22.393] Lys : Casting 169 to : [10;20]
+[2018-02-24 15:46:22.393] Lys : Casting spell directly onto : 981 4/5/2
+[2018-02-24 15:46:22.393] Lys :     2 1
+[2018-02-24 15:46:22.394] Lys : Received command of type : g
+[2018-02-24 15:46:22.394] Lys : 
+[2018-02-24 15:46:22.394] Lys : //////////////////
+[2018-02-24 15:46:22.394] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:22.394] Lys : The diagonally optimized path is of size : 1
+[2018-02-24 15:46:22.394] Lys : Caster : 11,20, target : 10,19. MP available : 0
+[2018-02-24 15:46:22.394] Lys : 11,20 10,19 2
+[2018-02-24 15:46:22.394] Lys : After diagonal movement, position 11,20 was kept.
+[2018-02-24 15:46:22.394] Lys : 0 MP Left.
+[2018-02-24 15:46:22.394] Lys : Algorithm finished. Kept position : 11,20
+[2018-02-24 15:46:22.394] Lys : ///////////////////
+
+
+[2018-02-24 15:46:22.394] Lys : Getting all available spells
+[2018-02-24 15:46:22.394] Lys : Magic arrow is currently available.
+[2018-02-24 15:46:22.394] Lys : Retreat arrow is currently available.
+[2018-02-24 15:46:22.394] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:46:22.394] Lys : Frozen arrow is currently available.
+[2018-02-24 15:46:22.394] Lys : Burning arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:22.394] Lys :     It costs too much : 4/3
+[2018-02-24 15:46:22.394] Lys : Magic arrow 2
+[2018-02-24 15:46:22.394] Lys :     LoV is okay.
+[2018-02-24 15:46:22.394] Lys :     Entity is within distance !
+[2018-02-24 15:46:22.394] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:22.394] Lys : Retreat arrow 1
+[2018-02-24 15:46:22.394] Lys :     LoV is okay.
+[2018-02-24 15:46:22.394] Lys :     Entity is within distance !
+[2018-02-24 15:46:22.394] Lys : Dispersing arrow 1
+[2018-02-24 15:46:22.395] Lys :     LoV is okay.
+[2018-02-24 15:46:22.395] Lys :     Entity is within distance !
+[2018-02-24 15:46:22.395] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:22.395] Lys : Frozen arrow 2
+[2018-02-24 15:46:22.395] Lys :     LoV is okay.
+[2018-02-24 15:46:22.395] Lys : Removing Dispersing arrow (1 - 6) because of lack of damage.
+[2018-02-24 15:46:22.395] Lys : Creating best turn ...
+[2018-02-24 15:46:22.395] Lys : Magic arrow 7
+[2018-02-24 15:46:24.2] Lys : Received command of type : i
+[2018-02-24 15:46:24.2] /
+[2018-02-24 15:46:24.2] Lys : RECEIVED INFO
+[2018-02-24 15:46:24.2] Lys : [{"pointsVariation":{"sourceId":1,"pa":-3,"targetId":1}}]
+[2018-02-24 15:46:24.2] Lys : Executing points variation.
+[2018-02-24 15:46:25.204] Lys : Received command of type : c
+[2018-02-24 15:46:25.204] /
+[2018-02-24 15:46:25.204] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:25.204] Lys : [{"spellCast":{"sourceId":1,"targetId":3,"critical":1,"x":10,"y":19,"spellId":161}},{"lifePointsLost":{"sourceId":1,"lpLost":15,"lpMaxLost":1,"targetId":3}},{"dispellableEffect":{"sourceId":1,"effectId":76936,"amount":2,"targetId":3,"dispelable":1,"spellId":161,"turnDuration":1}},{"dispellableEffect":{"sourceId":1,"effectId":76936,"amount":2,"targetId":1,"dispelable":1,"spellId":161,"turnDuration":1}}]
+[2018-02-24 15:46:25.204] Lys : The target has lost some LP! {"sourceId":1,"lpLost":15,"lpMaxLost":1,"targetId":3}
+[2018-02-24 15:46:25.204] Lys : Casting 161 to : [10;19]
+[2018-02-24 15:46:25.204] Lys : Casting spell directly onto : 981 9/5/2
+[2018-02-24 15:46:25.206] Lys :     3 1
+[2018-02-24 15:46:25.206] Lys : Received command of type : g
+[2018-02-24 15:46:25.207] Lys : 
+[2018-02-24 15:46:25.207] Lys : //////////////////
+[2018-02-24 15:46:25.207] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:25.207] Lys : The diagonally optimized path is of size : 1
+[2018-02-24 15:46:25.207] Lys : Caster : 11,20, target : 10,19. MP available : 0
+[2018-02-24 15:46:25.207] Lys : 11,20 10,19 2
+[2018-02-24 15:46:25.207] Lys : After diagonal movement, position 11,20 was kept.
+[2018-02-24 15:46:25.207] Lys : 0 MP Left.
+[2018-02-24 15:46:25.207] Lys : Algorithm finished. Kept position : 11,20
+[2018-02-24 15:46:25.207] Lys : ///////////////////
+
+
+[2018-02-24 15:46:25.207] Lys : Getting all available spells
+[2018-02-24 15:46:25.207] Lys : Magic arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:25.207] Lys :     It costs too much : 3/0
+[2018-02-24 15:46:25.207] Lys : Retreat arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:25.207] Lys :     It costs too much : 3/0
+[2018-02-24 15:46:25.207] Lys : Dispersing arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:25.207] Lys :     It costs too much : 3/0
+[2018-02-24 15:46:25.207] Lys : Frozen arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:25.207] Lys :     It costs too much : 3/0
+[2018-02-24 15:46:25.207] Lys : Burning arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:25.207] Lys :     It costs too much : 4/0
+[2018-02-24 15:46:25.208] Lys : Creating best turn ...
+[2018-02-24 15:46:27.413] Lys : Received command of type : p
+[2018-02-24 15:46:27.413] Lys : Entity 1 passing turn.
+[2018-02-24 15:46:27.619] Lys : Received command of type : i
+[2018-02-24 15:46:27.619] /
+[2018-02-24 15:46:27.619] Lys : RECEIVED INFO
+[2018-02-24 15:46:27.619] Lys : [{"pointsVariation":{"sourceId":2,"pa":-3,"targetId":2}}]
+[2018-02-24 15:46:27.619] Lys : Executing points variation.
+[2018-02-24 15:46:27.621] Lys : Received command of type : c
+[2018-02-24 15:46:27.621] /
+[2018-02-24 15:46:27.621] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:27.621] Lys : [{"spellCast":{"sourceId":2,"targetId":1,"critical":1,"x":11,"y":20,"spellId":3453}},{"lifePointsLost":{"sourceId":2,"lpLost":16,"lpMaxLost":1,"targetId":1}}]
+[2018-02-24 15:46:27.621] Lys : The target has lost some LP! {"sourceId":2,"lpLost":16,"lpMaxLost":1,"targetId":1}
+[2018-02-24 15:46:27.621] Lys : Casting 3453 to : [11;20]
+[2018-02-24 15:46:27.621] Lys : Casting spell directly onto : La-Belle-Veineuse 19/6/3
+[2018-02-24 15:46:27.621] Lys :     1 1
+[2018-02-24 15:46:27.623] Lys : Received command of type : m
+[2018-02-24 15:46:27.623] /
+[2018-02-24 15:46:27.623] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:27.623] Lys : [{"x":8,"y":18,"id":2}]
+[2018-02-24 15:46:27.624] Lys : Moving entity 2 to : [8;18]
+[2018-02-24 15:46:27.626] Lys : Received command of type : i
+[2018-02-24 15:46:27.626] /
+[2018-02-24 15:46:27.626] Lys : RECEIVED INFO
+[2018-02-24 15:46:27.626] Lys : [{"pointsVariation":{"sourceId":2,"targetId":2,"pm":-2}}]
+[2018-02-24 15:46:27.626] Lys : Executing points variation.
+[2018-02-24 15:46:27.633] Lys : Received command of type : p
+[2018-02-24 15:46:27.633] Lys : Entity 2 passing turn.
+[2018-02-24 15:46:27.842] Lys : Received command of type : i
+[2018-02-24 15:46:27.842] /
+[2018-02-24 15:46:27.842] Lys : RECEIVED INFO
+[2018-02-24 15:46:27.842] Lys : [{"pointsVariation":{"sourceId":3,"pa":-3,"targetId":3}}]
+[2018-02-24 15:46:27.842] Lys : Executing points variation.
+[2018-02-24 15:46:27.845] Lys : Received command of type : c
+[2018-02-24 15:46:27.845] /
+[2018-02-24 15:46:27.845] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:27.845] Lys : [{"spellCast":{"sourceId":3,"targetId":1,"critical":1,"x":11,"y":20,"spellId":3453}},{"lifePointsLost":{"sourceId":3,"lpLost":16,"lpMaxLost":1,"targetId":1}}]
+[2018-02-24 15:46:27.846] Lys : The target has lost some LP! {"sourceId":3,"lpLost":16,"lpMaxLost":1,"targetId":1}
+[2018-02-24 15:46:27.846] Lys : Casting 3453 to : [11;20]
+[2018-02-24 15:46:27.846] Lys : Casting spell directly onto : La-Belle-Veineuse 3/6/3
+[2018-02-24 15:46:27.846] Lys :     1 1
+[2018-02-24 15:46:27.848] Lys : Received command of type : m
+[2018-02-24 15:46:27.848] /
+[2018-02-24 15:46:27.848] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:27.848] Lys : [{"x":10,"y":17,"id":3}]
+[2018-02-24 15:46:27.848] Lys : Moving entity 3 to : [10;17]
+[2018-02-24 15:46:27.849] Lys : Received command of type : i
+[2018-02-24 15:46:27.849] /
+[2018-02-24 15:46:27.849] Lys : RECEIVED INFO
+[2018-02-24 15:46:27.849] Lys : [{"pointsVariation":{"sourceId":3,"targetId":3,"pm":-2}}]
+[2018-02-24 15:46:27.849] Lys : Executing points variation.
+[2018-02-24 15:46:27.853] Lys : Received command of type : p
+[2018-02-24 15:46:27.853] Lys : Entity 3 passing turn.
+[2018-02-24 15:46:29.063] Lys : Received command of type : g
+[2018-02-24 15:46:29.063] Lys : 
+[2018-02-24 15:46:29.063] Lys : //////////////////
+[2018-02-24 15:46:29.063] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:29.064] Lys : The diagonally optimized path is of size : 3
+[2018-02-24 15:46:29.064] Lys : Caster : 11,20, target : 10,17. MP available : 3
+[2018-02-24 15:46:29.064] Lys : 11,20 10,19 2
+[2018-02-24 15:46:29.064] Lys : 11,20 10,18 3
+[2018-02-24 15:46:29.064] Lys : 11,20 10,17 4
+[2018-02-24 15:46:29.064] Lys : After diagonal movement, position 10,18 was kept.
+[2018-02-24 15:46:29.064] Lys : 0 MP Left.
+[2018-02-24 15:46:29.064] Lys : Algorithm finished. Kept position : 10,18
+[2018-02-24 15:46:29.064] Lys : ///////////////////
+
+
+[2018-02-24 15:46:31.27] Lys : Received command of type : m
+[2018-02-24 15:46:31.27] /
+[2018-02-24 15:46:31.27] Lys : RECEIVED MOVEMENT COMMAND
+[2018-02-24 15:46:31.271] Lys : [{"x":10,"y":18,"id":1}]
+[2018-02-24 15:46:31.271] Lys : Moving entity 1 to : [10;18]
+[2018-02-24 15:46:31.272] Lys : Received command of type : i
+[2018-02-24 15:46:31.272] /
+[2018-02-24 15:46:31.273] Lys : RECEIVED INFO
+[2018-02-24 15:46:31.273] Lys : [{"pointsVariation":{"sourceId":1,"targetId":1,"pm":-3}}]
+[2018-02-24 15:46:31.273] Lys : Executing points variation.
+[2018-02-24 15:46:32.276] Lys : Received command of type : g
+[2018-02-24 15:46:32.276] Lys : 
+[2018-02-24 15:46:32.276] Lys : //////////////////
+[2018-02-24 15:46:32.276] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:32.276] Lys : The diagonally optimized path is of size : 1
+[2018-02-24 15:46:32.276] Lys : Caster : 10,18, target : 10,17. MP available : 0
+[2018-02-24 15:46:32.276] Lys : 10,18 10,17 1
+[2018-02-24 15:46:32.276] Lys : After diagonal movement, position 10,18 was kept.
+[2018-02-24 15:46:32.276] Lys : 0 MP Left.
+[2018-02-24 15:46:32.276] Lys : Algorithm finished. Kept position : 10,18
+[2018-02-24 15:46:32.276] Lys : ///////////////////
+
+
+[2018-02-24 15:46:32.276] Lys : Getting all available spells
+[2018-02-24 15:46:32.276] Lys : Magic arrow is currently available.
+[2018-02-24 15:46:32.276] Lys : Retreat arrow is currently available.
+[2018-02-24 15:46:32.276] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:46:32.276] Lys : Frozen arrow is currently available.
+[2018-02-24 15:46:32.276] Lys : Burning arrow is currently available.
+[2018-02-24 15:46:32.276] Lys : Magic arrow 2
+[2018-02-24 15:46:32.276] Lys :     LoV is okay.
+[2018-02-24 15:46:32.276] Lys :     Entity is within distance !
+[2018-02-24 15:46:32.276] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:32.276] Lys : Retreat arrow 1
+[2018-02-24 15:46:32.276] Lys :     LoV is okay.
+[2018-02-24 15:46:32.276] Lys :     Entity is within distance !
+[2018-02-24 15:46:32.276] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:32.276] Lys : Dispersing arrow 1
+[2018-02-24 15:46:32.276] Lys :     LoV is okay.
+[2018-02-24 15:46:32.276] Lys :     Entity is within distance !
+[2018-02-24 15:46:32.276] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:32.276] Lys : Frozen arrow 2
+[2018-02-24 15:46:32.276] Lys :     LoV is okay.
+[2018-02-24 15:46:32.276] Lys : Burning arrow 2
+[2018-02-24 15:46:32.276] Lys :     LoV is okay.
+[2018-02-24 15:46:32.276] Lys :     Entity is within distance !
+[2018-02-24 15:46:32.276] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:32.276] Lys : Removing Dispersing arrow (1 - 6) because of lack of damage.
+[2018-02-24 15:46:32.276] Lys : Creating best turn ...
+[2018-02-24 15:46:32.276] Lys : Retreat arrow 10
+[2018-02-24 15:46:32.276] Lys : Magic arrow 7
+[2018-02-24 15:46:34.281] Lys : Received command of type : i
+[2018-02-24 15:46:34.281] /
+[2018-02-24 15:46:34.281] Lys : RECEIVED INFO
+[2018-02-24 15:46:34.281] Lys : [{"pointsVariation":{"sourceId":1,"pa":-3,"targetId":1}}]
+[2018-02-24 15:46:34.281] Lys : Executing points variation.
+[2018-02-24 15:46:35.287] Lys : Received command of type : c
+[2018-02-24 15:46:35.287] /
+[2018-02-24 15:46:35.287] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:35.287] Lys : [{"spellCast":{"sourceId":1,"targetId":3,"critical":1,"x":10,"y":17,"spellId":169}},{"lifePointsLost":{"sourceId":1,"lpLost":9,"lpMaxLost":2,"targetId":3}},{"death":{"sourceId":1,"targetId":3}}]
+[2018-02-24 15:46:35.287] Lys : The target has lost some LP! {"sourceId":1,"lpLost":9,"lpMaxLost":2,"targetId":3}
+[2018-02-24 15:46:35.287] Lys : The target has died! {"sourceId":1,"targetId":3}
+[2018-02-24 15:46:35.287] Lys : Casting 169 to : [10;17]
+[2018-02-24 15:46:35.287] Lys : Casting spell directly onto : 981 0/5/2
+[2018-02-24 15:46:35.287] Lys :     3 1
+[2018-02-24 15:46:35.288] Lys : Received command of type : g
+[2018-02-24 15:46:35.288] Lys : 
+[2018-02-24 15:46:35.288] Lys : //////////////////
+[2018-02-24 15:46:35.288] Lys : Getting best position with diagonal optimization.
+[2018-02-24 15:46:35.288] Lys : The diagonally optimized path is of size : 2
+[2018-02-24 15:46:35.288] Lys : Caster : 10,18, target : 8,18. MP available : 0
+[2018-02-24 15:46:35.288] Lys : 10,18 9,18 1
+[2018-02-24 15:46:35.288] Lys : After diagonal movement, position 10,18 was kept.
+[2018-02-24 15:46:35.288] Lys : 0 MP Left.
+[2018-02-24 15:46:35.288] Lys : Algorithm finished. Kept position : 10,18
+[2018-02-24 15:46:35.288] Lys : ///////////////////
+
+
+[2018-02-24 15:46:35.288] Lys : Getting all available spells
+[2018-02-24 15:46:35.288] Lys : Magic arrow is currently available.
+[2018-02-24 15:46:35.288] Lys : Retreat arrow is currently available.
+[2018-02-24 15:46:35.288] Lys : Dispersing arrow is currently available.
+[2018-02-24 15:46:35.288] Lys : Frozen arrow is currently available.
+[2018-02-24 15:46:35.288] Lys : Burning arrow is currently unavailable !! Reason :
+[2018-02-24 15:46:35.288] Lys :     It costs too much : 4/3
+[2018-02-24 15:46:35.288] Lys : Magic arrow 2
+[2018-02-24 15:46:35.288] Lys :     LoV is okay.
+[2018-02-24 15:46:35.288] Lys :     Entity is within distance !
+[2018-02-24 15:46:35.288] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:35.288] Lys : Retreat arrow 1
+[2018-02-24 15:46:35.288] Lys :     LoV is okay.
+[2018-02-24 15:46:35.288] Lys :     Entity is within distance !
+[2018-02-24 15:46:35.288] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:35.288] Lys : Dispersing arrow 1
+[2018-02-24 15:46:35.288] Lys :     LoV is okay.
+[2018-02-24 15:46:35.288] Lys :     Entity is within distance !
+[2018-02-24 15:46:35.288] Lys :     In line or doesn't require slc
+[2018-02-24 15:46:35.288] Lys : Frozen arrow 2
+[2018-02-24 15:46:35.288] Lys :     LoV is okay.
+[2018-02-24 15:46:35.288] Lys : Removing Dispersing arrow (1 - 6) because of lack of damage.
+[2018-02-24 15:46:35.289] Lys : Creating best turn ...
+[2018-02-24 15:46:35.289] Lys : Retreat arrow 10
+[2018-02-24 15:46:37.094] Lys : Received command of type : i
+[2018-02-24 15:46:37.094] /
+[2018-02-24 15:46:37.094] Lys : RECEIVED INFO
+[2018-02-24 15:46:37.094] Lys : [{"pointsVariation":{"sourceId":1,"pa":-3,"targetId":1}}]
+[2018-02-24 15:46:37.094] Lys : Executing points variation.
+[2018-02-24 15:46:38.102] Lys : Received command of type : c
+[2018-02-24 15:46:38.102] /
+[2018-02-24 15:46:38.102] Lys : RECEIVED SPELL COMMAND
+[2018-02-24 15:46:38.102] Lys : [{"spellCast":{"sourceId":1,"targetId":2,"critical":1,"x":8,"y":18,"spellId":169}},{"lifePointsLost":{"sourceId":1,"lpLost":4,"lpMaxLost":2,"targetId":2}},{"death":{"sourceId":1,"targetId":2}}]
+[2018-02-24 15:46:38.102] Lys : The target has lost some LP! {"sourceId":1,"lpLost":4,"lpMaxLost":2,"targetId":2}
+[2018-02-24 15:46:38.102] Lys : The target has died! {"sourceId":1,"targetId":2}
+[2018-02-24 15:46:38.102] Lys : Casting 169 to : [8;18]
+[2018-02-24 15:46:38.102] Lys : Casting spell directly onto : 981 0/5/2
+[2018-02-24 15:46:38.103] Lys :     3 1
+[2018-02-24 15:46:38.103] Lys :     2 1
+[2018-02-24 15:46:38.311] Lys : Received command of type : endFight
