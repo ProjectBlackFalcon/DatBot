@@ -110,6 +110,8 @@ class Interface:
         msg_id = self.add_command('connect', connection_param)
         sucess = self.wait_for_return(msg_id)
         self.bot.connected = sucess
+        current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+        self.bot.position = (current_map, current_worldmap)
         return sucess
 
     def disconnect(self):
