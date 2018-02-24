@@ -554,7 +554,7 @@ public class Game {
 		castingEntity.getModel().removeOneBuffTurn();
 		castingEntity.getModel().updateSpellsStatus();
 		
-		log.println("Entity "+id+" passing turn.");
+		Game.println("Entity "+id+" passing turn.");
 	}
 	
 	private PlayingEntity getClosestEnnemy(PlayingEntity caster) {
@@ -563,11 +563,8 @@ public class Game {
 		for(int i = 0; i < playingEntities.size(); i++) {
 			if(!playingEntities.get(i).getTeam().equals(caster.getTeam())) {
 				ennemies.add(playingEntities.get(i));
-				log.println(playingEntities.get(i).getPosition());
 			}
 		}
-		
-		log.println(ennemies);
 		
 		PlayingEntity selectedEnnemy = ennemies.get(0);
 		int distance = Position.distance(selectedEnnemy.getPosition(), caster.getPosition());
@@ -867,7 +864,7 @@ public class Game {
 		try {
 			log = System.out;
 			//log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
-			log = new PrintStream(new FileOutputStream("fight_ia_log.txt"));
+			log = new PrintStream(new FileOutputStream("fight_ia_log.txt", true));
 			com = new PrintStream(new FileOutputStream("fight_ia_com.txt"));
 			System.setErr(log);
 		} catch (FileNotFoundException e1) {
