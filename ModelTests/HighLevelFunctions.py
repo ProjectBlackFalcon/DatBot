@@ -9,16 +9,16 @@ import winsound
 pipe = PipeToJava(headless=True)
 bot_id = 0
 
-credentials = {'username': 'Jemappellehenry2', 'password': 'azerty123henry', 'name': 'Baddosch', 'server': 'Julith'}
 credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
-credentials2 = {'username': 'wublel6', 'password': '32407c62d2f', 'name': 'Pot-ator', 'server': 'Julith'}
+credentials2 = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
 
 llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials, llf)
+bot = Bot(pipe, bot_id, credentials2, llf)
 bot.interface.connect()
-bot.hf.tresure_hunt()
+start = time.time()
+bot.hf.update_hdv()
 winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
-
+print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
 path = (
     ((-2, -4), None, 2),
     ((-2, -5), None, 2),
