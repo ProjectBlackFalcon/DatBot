@@ -66,22 +66,32 @@ class Interface:
     def wait_for_return(self, message_id):
         print('[Interface] Waiting for response...')
         ret_val = None
+        message_queue = []
         while ret_val is None:
             partial_message = '{};{};m;rtn'.format(self.bot.id, message_id)
             buffer = self.pipe.get_buffer()
             for message in buffer:
-                # print(message)
-                if int(message.split(';')[0]) == self.bot.id:
-                    if partial_message in message:
-                        # print(message)
-                        ret_val = ast.literal_eval(message.split(';')[-1])
-                        self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
-                    elif 'info;combat;[start]' in message:
-                        self.bot.in_fight = True
-                    elif 'info;combat;[end]' in message:
-                        self.bot.in_fight = False
-            time.sleep(0.1)
+                if int(message.split(';')[0]) == self.bot.id and message not in message_queue:
+                    # print(message)
+                    message_queue.append(message)
 
+            for message in message_queue:
+                if partial_message in message and not self.bot.in_fight:
+                    ret_val = ast.literal_eval(message.split(';')[-1])
+                    self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
+                    del message_queue[message_queue.index(message)]
+                elif 'info;combat;["start"]' in message:
+                    print('Fight Started')
+                    self.bot.in_fight = True
+                    self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
+                    del message_queue[message_queue.index(message)]
+                elif 'info;combat;["end"]' in message:
+                    print('Fight Ended')
+                    self.bot.in_fight = False
+                    self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
+                    del message_queue[message_queue.index(message)]
+
+            time.sleep(0.1)
         if not self.bot.in_fight:
             print('[Interface] Recieved : ', ret_val)
             return tuple(ret_val)
@@ -464,6 +474,56 @@ class Interface:
         :return:
         """
         msg_id = self.add_command('attackMonster', [mob_id])
+        return self.wait_for_return(msg_id)
+
+    def open_hdv(self):
+        """
+        Tries to open the map's hdv. If sucessful, returns what items are being sold.
+        :return: False / "empty" / [[name, id, batch_size, price], [...]]
+        """
+        msg_id = self.add_command('openHdv')
+        return self.wait_for_return(msg_id)
+
+    def get_hdv_item_stats(self, item_id):
+        """
+        Gathers data about the item given
+        :param item_id: item id
+        :return: False / [price1, price 10, price 100]
+        """
+        msg_id = self.add_command('getHdvItemStats', [item_id])
+        return self.wait_for_return(msg_id)
+
+    def sell_item(self, item_id, batch_size, batch_number, price):
+        """
+        Sells an item as a batch
+        :param item_id: Item id
+        :param batch_size: 1, 10, or 100 items
+        :param batch_number: Number of batches to sell
+        :return: Boolaen
+        """
+        msg_id = self.add_command('sellItem', [item_id, batch_size, batch_number, price])
+        return self.wait_for_return(msg_id)
+
+    def modify_price(self, item_id, batch_size, new_price):
+        """
+        Modifies the selling price of an item
+        :param item_id: item id
+        :param batch_size: which batch size to modify (1, 10, 100)
+        :param new_price: New price
+        :return: Boolean
+        """
+        msg_id = self.add_command('modifyPrice', [item_id, batch_size, new_price])
+        return self.wait_for_return(msg_id)
+
+    def withdraw_item(self, item_id, batch_size, batch_number):
+        """
+        Cancels a selling order
+        :param item_id: item ID
+        :param batch_size: which batch size to withdraw (1, 10, 100)
+        :param batch_number: Number of batches to withdraw
+        :return: Boolean
+        """
+        msg_id = self.add_command('withdrawItem', [item_id, batch_size, batch_number])
         return self.wait_for_return(msg_id)
 
 __author__ = 'Alexis'

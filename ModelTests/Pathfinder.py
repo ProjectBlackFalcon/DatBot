@@ -1,6 +1,8 @@
 from Model.Pathfinder import PathFinder
 import time
 import numpy as np
+import json
+import winsound
 
 
 def generate_map_collage():
@@ -28,16 +30,31 @@ def generate_path():
     pf.get_path()
     pf.add_path_to_adapted_maps()
     pf.add_map_change_coords_to_adapted_maps()
-    pf.map_to_image(pf.adapted_maps, 10)
+    pf.map_to_image(pf.adapted_maps, 1)
     print(pf.path_cells)
     print(pf.get_map_change_cells())
+    return(pf.get_map_change_cells())
+
+lel = [(4, -19), (-5, -23), (-13, -28), (-3, -42), (-17, -47), (-32, -56), (-27, -36), (-20, -20), (-16, 1), (-25, 12), (-15, 25), (-26, 35)]
+
+for i in range(len(lel)-1):
+    start = lel[i]
+    end = lel[i+1]
+    worldmap = 1
+    pf = PathFinder(start, end, None, None, worldmap)
+    path = generate_path()
+
+    with open('..//Utils//zaapDiscoveryPath.json', 'r') as f:
+        paths = json.load(f)
+
+    paths += path
+
+    with open('..//Utils//zaapDiscoveryPath.json', 'w') as f:
+        json.dump(paths, f)
 
 
-
-start = (-20, -20); end = (-16, 1)
-worldmap = 1
-pf = PathFinder(start, end, 200, None, worldmap)
-generate_path()
+    print('Done !')
+    winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
 
 
 __author__ = 'Alexis'

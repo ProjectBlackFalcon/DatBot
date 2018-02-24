@@ -109,14 +109,14 @@ class PathFinder:
         map_as_array[map_as_array == 0] = 0
         # map_as_array[map_as_array != 0] = 1
         a = np.kron(map_as_array, np.ones((scaling_factor, scaling_factor))).astype(int)
-        a[a == 0] = 255*255*128
+        a[a == 0] = 255*180  # Walkable
         a[a == 2] = 255*32
-        a[a == 4] = 255*16
+        a[a == 5] = 255*200
         a[a == 4] = 255*255*255  # Path
         a[a == -2] = 255*128
         a[a == -3] = 255*128
-        a[a == 5] = 255*255*255
         Image.fromarray(a).save('Out.png')
+        return Image.fromarray(a)
         # print('[Pathfinder] Done')
 
     def heuristic(self, a, b):
@@ -216,6 +216,7 @@ class PathFinder:
             self.get_path_try()
         if not self.path_cells:
             raise Exception('Could not generate path')
+        # self.path_cells.append(self.cell2coord_diag(self.end_cell))
 
     def get_map_change_cells(self):
         if not self.path_cells:
@@ -234,6 +235,7 @@ class PathFinder:
             cell = self.coord2cell_diag((y, x))
             path_cells.append(cell)
 
+        path_cells.append(self.end_cell)
         for i in range(len(path_cells)-1):
             current = (path_cells[i] - width*((path_cells[i] // width) % (total_width//width)) - (total_width-width)*(path_cells[i]//total_width)) % 560
             nxt = (path_cells[i+1] - width*((path_cells[i+1] // width) % (total_width//width)) - (total_width-width)*(path_cells[i+1]//total_width)) % 560
