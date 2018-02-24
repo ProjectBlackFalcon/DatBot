@@ -37,24 +37,15 @@ def generate_path():
 
 lel = [(4, -19), (-5, -23), (-13, -28), (-3, -42), (-17, -47), (-32, -56), (-27, -36), (-20, -20), (-16, 1), (-25, 12), (-15, 25), (-26, 35)]
 
-for i in range(len(lel)-1):
-    start = lel[i]
-    end = lel[i+1]
-    worldmap = 1
-    pf = PathFinder(start, end, None, None, worldmap)
-    path = generate_path()
-
-    with open('..//Utils//zaapDiscoveryPath.json', 'r') as f:
-        paths = json.load(f)
-
-    paths += path
-
-    with open('..//Utils//zaapDiscoveryPath.json', 'w') as f:
-        json.dump(paths, f)
+start = (4, -19)
+end = (-5, -23)
+worldmap = 1
+pf = PathFinder(start, end, None, None, worldmap)
+path = generate_path()
 
 
-    print('Done !')
-    winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
+print('Done !')
+winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
 
 
 __author__ = 'Alexis'
