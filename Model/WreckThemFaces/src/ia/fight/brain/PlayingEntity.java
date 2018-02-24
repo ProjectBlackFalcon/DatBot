@@ -152,17 +152,18 @@ public class PlayingEntity {
 	public ArrayList<SpellObject> getOptimalTurnFrom(Position position, PlayingEntity victim, boolean show, Map map){
 		long start = System.currentTimeMillis();
 		ArrayList<SpellObject> spellsForEnnemy = new ArrayList<>();
-		for(int i = 0; i < getModel().getAvailableSpells(false).size(); i++) {
-			Game.println(getModel().getAvailableSpells(false).get(i).getName());
-			boolean entityTargetable = getModel().getAvailableSpells(false).get(i).isEntityTargetableBySpell(victim);
+		ArrayList<SpellObject> allAvailableSpells = getModel().getAvailableSpells(true);
+		for(int i = 0; i < allAvailableSpells.size(); i++) {
+			Game.println(allAvailableSpells.get(i).getName()+" "+allAvailableSpells.get(i).remainingCastsForThisEntity(victim));
+			boolean entityTargetable = allAvailableSpells.get(i).isEntityTargetableBySpell(victim);
 			boolean hasVisibility = LineOfSight.visibility(position, victim.getPosition(), map.getBlocks());
-			boolean requiresLineOfSight = getModel().getAvailableSpells(false).get(i).requiresLineOfSight();
-			boolean overMinimumRange = getModel().getAvailableSpells(false).get(i).getMinimumRange() <= Position.distance(position, victim.getPosition());
-			boolean hasModifiableRange = getModel().getAvailableSpells(false).get(i).isModifiableRange();
-			boolean underMaximumRange = hasModifiableRange ? getModel().getAvailableSpells(false).get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition()) : getModel().getAvailableSpells(false).get(i).getMaximumRange() >= Position.distance(position, victim.getPosition());
+			boolean requiresLineOfSight = allAvailableSpells.get(i).requiresLineOfSight();
+			boolean overMinimumRange = allAvailableSpells.get(i).getMinimumRange() <= Position.distance(position, victim.getPosition());
+			boolean hasModifiableRange = allAvailableSpells.get(i).isModifiableRange();
+			boolean underMaximumRange = hasModifiableRange ? allAvailableSpells.get(i).getMaximumRange()+this.getModel().getRange() >= Position.distance(position, victim.getPosition()) : allAvailableSpells.get(i).getMaximumRange() >= Position.distance(position, victim.getPosition());
 			boolean entityIsWithinDistance = overMinimumRange && underMaximumRange;
-			boolean isStraightLineCastAndInLine = getModel().getAvailableSpells(false).get(i).isStraightLineCast() && (!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY()));
-			boolean isNotStraightLineCast = !getModel().getAvailableSpells(false).get(i).isStraightLineCast();
+			boolean isStraightLineCastAndInLine = allAvailableSpells.get(i).isStraightLineCast() && (!(position.getX() != victim.getPosition().getX() && position.getY() != victim.getPosition().getY()));
+			boolean isNotStraightLineCast = !allAvailableSpells.get(i).isStraightLineCast();
 	
 			if(entityTargetable && (hasVisibility || !requiresLineOfSight)) {
 				Game.println("    LoV is okay.");
@@ -170,7 +171,7 @@ public class PlayingEntity {
 					Game.println("    Entity is within distance !");
 					if(isStraightLineCastAndInLine || isNotStraightLineCast) {
 						Game.println("    In line or doesn't require slc");
-						spellsForEnnemy.add(getModel().getAvailableSpells(false).get(i));
+						spellsForEnnemy.add(allAvailableSpells.get(i));
 					}
 				}
 			}
@@ -196,6 +197,13 @@ public class PlayingEntity {
 				}
 			}
 		});
+		
+		for(int i = spellsForEnnemy.size()-1; i >= 0; i--) {
+			if(spellsForEnnemy.get(i).getDamagePreviz(caster, victim, false) <= 0) {
+				Game.println("Removing "+spellsForEnnemy.get(i)+" because of lack of damage.");
+				spellsForEnnemy.remove(i);
+			}
+		}
 		
 		for(int i = 0; i < spellsForEnnemy.size(); i++) {
 			brainText.add(spellsForEnnemy.get(i).getName()+" : "+spellsForEnnemy.get(i).getDamagePreviz(caster, victim, false));
