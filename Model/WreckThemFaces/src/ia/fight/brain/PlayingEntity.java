@@ -16,26 +16,16 @@ public class PlayingEntity {
 	Player model;
 	Position position;
 	int ID;
-	boolean npc;
 	
-	public PlayingEntity(int ID, boolean npc, Position position, String team, Player model) {
+	public PlayingEntity(int ID, Position position, String team, Player model) {
 		this.ID = ID;
 		this.position = position;
 		this.team = team;
 		this.model = model;
-		this.npc = npc;
 	}
 	
 	public int getID() {
 		return ID;
-	}
-	
-	public boolean isNpc() {
-		return npc;
-	}
-
-	public void setNpc(boolean npc) {
-		this.npc = npc;
 	}
 
 	public Position getPosition() {

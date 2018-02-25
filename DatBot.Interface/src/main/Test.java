@@ -16,7 +16,7 @@ public class Test {
 		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
 		new MapManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
 
-		boolean arg = false;
+		boolean arg = true;
 		if (args.length != 0) {
 			if ((args[0].equals("true") || args[0].equals("True"))) {
 				arg = true;
@@ -27,7 +27,7 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 
-		communication.getReturn("0;0;i;cmd;connect;['monpetitpote','azertyuiop1','La-Belle-Veineuse','Julith']");
+		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 //		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,kezaropod11,Faoy,Julith]");

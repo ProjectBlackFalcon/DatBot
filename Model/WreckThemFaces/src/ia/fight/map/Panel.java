@@ -198,9 +198,9 @@ public class Panel extends JPanel{
 			for(int i = 0; i < playingEntities.size(); i++) {
 				Position p = playingEntities.get(i).getPosition();
 				if(playingEntities.get(i).getTeam().equals("red")) {
-					obstacles.add(new int[] {p.getX(), p.getY(), 3, playingEntities.get(i).isNpc() ? 1 : 0});
+					obstacles.add(new int[] {p.getX(), p.getY(), 3, 0});
 				}else {
-					obstacles.add(new int[] {p.getX(), p.getY(), 4, playingEntities.get(i).isNpc() ? 1 : 0});
+					obstacles.add(new int[] {p.getX(), p.getY(), 4, 0});
 				}
 			}
 		}
