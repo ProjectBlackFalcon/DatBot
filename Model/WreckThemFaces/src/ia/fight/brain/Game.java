@@ -197,7 +197,6 @@ public class Game {
         for (PlayingEntity entity : entities) {
             playingEntities.add(entity);
             Game.println(entity);
-            Game.println(entity.getModel());
             Game.println();
         }
 
@@ -293,8 +292,8 @@ public class Game {
 		
 		if(APLost != 0) {
 			if(APLost > 0) {
-			    Game.println("Entity "+victim+" gained "+(-APLost)+" AP.");
-				brainText.add("Entity "+victim+" gained "+(-APLost)+" AP.");
+			    Game.println("Entity "+victim+" gained "+(APLost)+" AP.");
+				brainText.add("Entity "+victim+" gained "+(APLost)+" AP.");
 			}else {
                 Game.println("Entity "+victim+" lost "+(-APLost)+" AP.");
 				brainText.add("Entity "+victim+" lost "+(-APLost)+" AP.");
@@ -305,10 +304,10 @@ public class Game {
 		
 		if(MPLost != 0) {
 			if(MPLost > 0) {
-                Game.println("Entity "+victim+" gained "+(-APLost)+" MP.");
-				brainText.add("Entity "+victim+" gained "+(-MPLost)+" MP.");
+                Game.println("Entity "+victim+" gained "+(MPLost)+" MP.");
+				brainText.add("Entity "+victim+" gained "+(MPLost)+" MP.");
 			}else {
-                Game.println("Entity "+victim+" lost "+(-APLost)+" MP.");
+                Game.println("Entity "+victim+" lost "+(-MPLost)+" MP.");
 				brainText.add("Entity "+victim+" lost "+(-MPLost)+" MP.");
 			}
 			
@@ -621,7 +620,6 @@ public class Game {
 
         for (Position position1 : positions) {
             Game.println(caster + " " + position1 + " " + getPath(caster, position1, false).size());
-            System.out.println(getPath(caster, position1, false));
             if (getPath(caster, position1, false).size() <= MPLeft) {
                 if (position1.deepEquals(target)) {
                     break;

@@ -1679,8 +1679,10 @@ public class Network extends DisplayInfo implements Runnable {
 		} else if (gameActionFightPointsVariationMessage.getActionId() == 129){
 			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
 		} else if (gameActionFightPointsVariationMessage.getActionId() == 127){
-			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
-		}
+            jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
+        } else if (gameActionFightPointsVariationMessage.getActionId() == 78){
+            jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
+        }
 		JSONObject jsonObject2 = new JSONObject();
 		jsonObject2.put("pointsVariation", jsonObject);
 		JSONArray arr = new JSONArray();
