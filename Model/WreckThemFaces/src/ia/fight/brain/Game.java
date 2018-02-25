@@ -274,7 +274,6 @@ public class Game {
 	}
 	
 	private void executePointVariation(JSONObject command) {
-		Game.println("Executing points variation.");
 		int sourceId = (int) command.get("sourceId");
 		int targetId = (int) command.get("targetId");
 		
@@ -294,8 +293,10 @@ public class Game {
 		
 		if(APLost != 0) {
 			if(APLost > 0) {
+			    Game.println("Entity "+victim+" gained "+(-APLost)+" AP.");
 				brainText.add("Entity "+victim+" gained "+(-APLost)+" AP.");
 			}else {
+                Game.println("Entity "+victim+" lost "+(-APLost)+" AP.");
 				brainText.add("Entity "+victim+" lost "+(-APLost)+" AP.");
 			}
 			
@@ -304,8 +305,10 @@ public class Game {
 		
 		if(MPLost != 0) {
 			if(MPLost > 0) {
+                Game.println("Entity "+victim+" gained "+(-APLost)+" MP.");
 				brainText.add("Entity "+victim+" gained "+(-MPLost)+" MP.");
 			}else {
+                Game.println("Entity "+victim+" lost "+(-APLost)+" MP.");
 				brainText.add("Entity "+victim+" lost "+(-MPLost)+" MP.");
 			}
 			
