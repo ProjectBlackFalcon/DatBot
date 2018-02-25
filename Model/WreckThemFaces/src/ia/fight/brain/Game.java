@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -42,11 +41,11 @@ public class Game {
 	 * Initializes the game map. Creates a map and opens a JFrame.
 	 * @param map_nbr number of map initialized
 	 */
-	public void initGame(int map_nbr) {
+	public void initGame(int map_nbr, String bot_name) {
 		Game.println("Starting fight on map : "+map_nbr);
 		Map mapObject = CreateMap.getMapById(map_nbr);
 		map = mapObject;
-		los = new GameViz(mapObject);
+		los = new GameViz(mapObject, bot_name);
 		log.println("Init game to map : "+map_nbr);
 		ArrayList<String> commands = new ArrayList<>();
 		commands.add("Init game to map : "+map_nbr);
@@ -840,7 +839,7 @@ public class Game {
 		}else if(s.equals("m")) {
 			executeMovementCommand(command);
 		}else if(s.equals("startfight")) {
-			initGame((int) ((JSONObject)command.get(0)).get("mapID"));
+			initGame((int) ((JSONObject)command.get(0)).get("mapID"), (String) ((JSONObject)command.get(0)).get("name"));
 		}else if(s.equals("s")) {	
 			initEntities(command);
 		}else if(s.equals("g")) {

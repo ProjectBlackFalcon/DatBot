@@ -610,6 +610,7 @@ public class Network extends DisplayInfo implements Runnable {
 		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
 		JSONObject mapJSONObject = new JSONObject();
 		mapJSONObject.put("mapID", (int) info.getMapId());
+		mapJSONObject.put("name", info.getName());
 		JSONArray tempArr = new JSONArray();
 		tempArr.add(mapJSONObject);
 		getFight().sendToFightAlgo("startfight", tempArr);
