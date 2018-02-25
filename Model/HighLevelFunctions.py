@@ -361,7 +361,9 @@ class HighLevelFunctions:
                 self.bot.positions[1]
             )
         except Exception:
-            pass
+            with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:
+                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                f.write(traceback.format_exc())
 
 
 __author__ = 'Alexis'
