@@ -1,0 +1,3847 @@
+[
+  {
+    "id": 0,
+    "name": "Coup de poing",
+    "descName": "Occasionne des dommages Neutre."
+  },
+  {
+    "id": 1,
+    "name": "Typhon",
+    "descName": "Occasionne des dommages Air et vole de l'Agilité en zone."
+  },
+  {
+    "id": 2,
+    "name": "Aveuglement",
+    "descName": "Occasionne des dommages Neutre en zone et retire des PA à la cible.\nL'effet de retrait de PA ne peut pas être cumulé sur une même cible, ni désenvoûté."
+  },
+  {
+    "id": 3,
+    "name": "Attaque Naturelle",
+    "descName": "Occasionne des dommages Feu et vole de l'Intelligence."
+  },
+  {
+    "id": 4,
+    "name": "Barricade",
+    "descName": "Réduit tous les dommages subis en mêlée pendant 1 tour et augmente les PM de la cible si elle reçoit des dommages à distance. Ne peut pas être lancé dans l'état « Glyphor »."
+  },
+  {
+    "id": 5,
+    "name": "Trêve",
+    "descName": "Réduit tous les dommages subis par les alliés et les ennemis pendant 1 tour.\nLe lanceur ne peut pas occasionner de dommages pendant son tour suivant.\nNe peut pas être lancé dans l'état Glyphor."
+  },
+  {
+    "id": 6,
+    "name": "Rempart",
+    "descName": "Réduit les dommages reçus.\nLa protection sur les alliés est plus faible.\nNe peut pas être lancé dans l'état Glyphor."
+  },
+  {
+    "id": 7,
+    "name": "Bouclier Féca",
+    "descName": "Réduit les dommages subis.\nNe peut pas être lancé dans l'état Glyphor."
+  },
+  {
+    "id": 8,
+    "name": "Retour du Bâton",
+    "descName": "Occasionne des dommages Terre et vole de la Force."
+  },
+  {
+    "id": 9,
+    "name": "Attaque Nuageuse",
+    "descName": "Occasionne des dommages Eau et vole de la Chance."
+  },
+  {
+    "id": 10,
+    "name": "Glyphe Enflammé",
+    "descName": "Pose un glyphe qui occasionne des dommages Feu.\nLes ennemis et alliés perdent des PM tant qu'ils sont présents dans la zone d'effet du glyphe.\nEmpêche le lancer d'autres glyphes élémentaires dans le même tour."
+  },
+  {
+    "id": 11,
+    "name": "Téléglyphe",
+    "descName": "Téléporte sur la cellule ciblée et déclenche les glyphes ciblés."
+  },
+  {
+    "id": 12,
+    "name": "Glyphe d'Aveuglement",
+    "descName": "Pose un glyphe qui occasionne des dommages Terre.\nLes ennemis et alliés perdent des PA tant qu'ils sont présents dans la zone d'effet du glyphe.\nEmpêche le lancer d'autres glyphes élémentaires dans le même tour."
+  },
+  {
+    "id": 13,
+    "name": "Glyphe de Répulsion",
+    "descName": "Pose un glyphe qui occasionne en fin de tour des dommages Feu, Eau, Air et Terre aux cibles autour de la cellule visée."
+  },
+  {
+    "id": 14,
+    "name": "Frisson",
+    "descName": "Rapproche les cibles et occasionne aux ennemis des dommages Air en cône."
+  },
+  {
+    "id": 15,
+    "name": "Glyphe Optique",
+    "descName": "Pose un glyphe qui occasionne des dommages Eau.\nLes alliés et ennemis perdent de la Portée tant qu'ils sont présents dans la zone d'effet du glyphe.\nEmpêche le lancer d'autres glyphes élémentaires dans le même tour."
+  },
+  {
+    "id": 16,
+    "name": "Glyphe gravitationnel",
+    "descName": "Pose un glyphe qui applique l'état Inébranlable empêchant le lanceur d'être poussé.\nApplique l'état Pesanteur sur les alliés et les ennemis.\nAffecte les alliés et ennemis présents dans la zone d'effet."
+  },
+  {
+    "id": 17,
+    "name": "Glyphe Agressif",
+    "descName": "Pose un glyphe qui occasionne des dommages Air et attire en début de tour.\nLes ennemis et alliés occasionnent moins de dommages tant qu'ils sont présents dans la zone d'effet du glyphe.\nEmpêche le lancer d'autres glyphes élémentaires dans le même tour."
+  },
+  {
+    "id": 18,
+    "name": "Léthargie",
+    "descName": "Occasionne des dommages Feu et retire des PM.\nLes pertes de PM ne peuvent être ni cumulées ni désenvoûtées."
+  },
+  {
+    "id": 19,
+    "name": "Bulle",
+    "descName": "Occasionne des dommages Eau et diminue la portée."
+  },
+  {
+    "id": 20,
+    "name": "Bastion",
+    "descName": "Réduit tous les dommages subis à distance.\nAugmente la Puissance de la cible si elle reçoit des dommages de mêlée.\nNe peut pas être lancé dans l'état Glyphor."
+  },
+  {
+    "id": 21,
+    "name": "Dragonique",
+    "descName": "Occasionne des dommages Feu, les entités qui attaquent la cible sont soignées."
+  },
+  {
+    "id": 22,
+    "name": "Canine",
+    "descName": "Occasionne des dommages Air et retire du Tacle."
+  },
+  {
+    "id": 23,
+    "name": "Envol",
+    "descName": "Sacrifie une invocation alliée pour prendre sa place.\nOccasionne des dommages Air au début et à la fin de la téléportation."
+  },
+  {
+    "id": 24,
+    "name": "Souffle du dragon",
+    "descName": "Occasionne des dommages Feu.\nQuand un Dragonnet attaque la cible, les alliés à proximité sont soignés."
+  },
+  {
+    "id": 25,
+    "name": "Feu sacrificiel",
+    "descName": "Sacrifie une invocation pour soigner à proximité.\nNe fonctionne que sur les invocations du lanceur."
+  },
+  {
+    "id": 26,
+    "name": "Lien animal",
+    "descName": "Fusionne avec une invocation alliée pour modifier sa propre apparence et prendre le contrôle des invocations de la même famille.\nL'invocation ciblée est tuée.\n\nTofu : \n•  Tous les Tofus gagnent 2 PA ainsi que 50% de l'Agilité et des Dommages Air du lanceur. \n•  Le lanceur gagne 2 PM.\n\nBouftou : \n•  Tous les Bouftous gagnent 2PA ainsi que 50% de la Force, des Dommages Terre et des Dommages Neutre du lanceur. \n•  Le lanceur réduit les dommages subis de 20%.\n\nDragonnet : \n•  Tous les Dragonnets gagnent 2 PA ainsi que 50% de l'Intelligence, des Dommages Feu et des Soins du lanceur. \n•  Le lanceur gagne un bonus aux soins.\n\nCrapaud :\n•  Tous les Crapauds gagnent 2 PA ainsi que 50% de la Chance et des Dommages Eau du lanceur. \n•  Le lanceur gagne un bonus aux dommages."
+  },
+  {
+    "id": 27,
+    "name": "Piqûre motivante",
+    "descName": "Augmente considérablement la Vitalité, les Dommages, les PM et les PA d'une invocation du lanceur."
+  },
+  {
+    "id": 28,
+    "name": "Fossile",
+    "descName": "Occasionne des dommages Terre et retire des PM."
+  },
+  {
+    "id": 29,
+    "name": "Symbiose",
+    "descName": "Prend le contrôle d'une invocation alliée.\nTofu : débloque un sort qui permet d'échanger de place avec un allié.\nBouftou : débloque un sort qui permet d'attirer une entité.\nDragonnet : débloque un sort qui permet de soigner un allié.\nCrapaud : débloque un sort qui repousse la cible jusqu'à la cellule ciblée."
+  },
+  {
+    "id": 30,
+    "name": "Fouet",
+    "descName": "Sur ennemis : occasionne des dommages dans l'élément de la Transformation du lanceur.\n\nSur alliés : applique un effet en fonction de la transformation du lanceur :\n• Tofu : +2 PM\n• Bouftou : 20% de réduction des dommages subis\n• Dragonnet : Soigne la cible\n• Crapaud : Bonus Puissance"
+  },
+  {
+    "id": 31,
+    "name": "Dragonnet rouge",
+    "descName": "Invoque un Dragonnet rouge qui occasionne des dommages Feu en ligne et désenvoûte les ennemis.\nSi contrôlé par son invocateur, peut soigner un allié.\nEmpêche l'invocation d'un Bouftou, d'un Crapaud ou d'un Tofu dans le même tour."
+  },
+  {
+    "id": 32,
+    "name": "Résistance naturelle",
+    "descName": "L'invocation ciblée devient Invulnérable mais ne vit qu'un tour.\nNe fonctionne que sur les invocations du lanceur."
+  },
+  {
+    "id": 33,
+    "name": "Plumeau",
+    "descName": "Occasionne des dommages Air.\nLes dommages sont augmentés pour chaque Tofu présent sur le terrain."
+  },
+  {
+    "id": 34,
+    "name": "Tofu noir",
+    "descName": "Invoque un Tofu noir qui retire du Tacle aux ennemis et dont les dommages augmentent à chaque tour. \nSi contrôlé par son invocateur, peut échanger de place avec un allié.\nEmpêche l'invocation d'un Bouftou, d'un Crapaud ou d'un Dragonnet dans le même tour."
+  },
+  {
+    "id": 35,
+    "name": "Bouftou",
+    "descName": "Invoque un Bouftou qui tacle les ennemis et retire de la Fuite.\nSi contrôlé par son invocateur, peut attirer une cible.\nEmpêche l'invocation d'un Dragonnet, d'un Crapaud ou d'un Tofu dans le même tour."
+  },
+  {
+    "id": 36,
+    "name": "Frappe du craqueleur",
+    "descName": "Occasionne des dommages Terre en zone."
+  },
+  {
+    "id": 37,
+    "name": "Rappel",
+    "descName": "Tue une invocation alliée.\nRécupère les PA qui ont servi à l'invoquer si c'est un Tofu, Bouftou, un Crapaud ou Dragonnet."
+  },
+  {
+    "id": 38,
+    "name": "Tofu dodu",
+    "descName": "Invoque un Tofu Dodu qui repousse les ennemis et dont les dommages augmentent à chaque tour.\nSi contrôlé par son invocateur, peut échanger de place avec un allié.\nEmpêche l'invocation d'un Bouftou, d'un Crapaud ou d'un Dragonnet dans le même tour."
+  },
+  {
+    "id": 39,
+    "name": "Dragonnet noir",
+    "descName": "Invoque un Dragonnet noir qui attaque les ennemis en ligne et soigne les alliés à proximité.\nSi contrôlé par son invocateur, peut soigner un allié.\nEmpêche l'invocation d'un Bouftou, d'un Crapaud ou d'un Tofu dans le même tour."
+  },
+  {
+    "id": 40,
+    "name": "Bouftou noir",
+    "descName": "Invoque un Bouftou noir qui tacle les ennemis.\nIl applique l'état Pesanteur 1 tour sur 2.\nEmpêche l'invocation d'un Dragonnet, d'un Crapaud ou d'un Tofu dans le même tour."
+  },
+  {
+    "id": 41,
+    "name": "Sac Animé",
+    "descName": "Invoque un Sac Animé qui subit les dommages à la place de ses alliés.\nLe Sac Animé disparaît après 4 tours.\nQuand il est attaqué par un allié, ce dernier est soigné."
+  },
+  {
+    "id": 42,
+    "name": "Chance",
+    "descName": "Augmente la Fuite de la cible pendant le tour en cours puis augmente sa Puissance le tour suivant."
+  },
+  {
+    "id": 43,
+    "name": "Lancer de Pelle",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 44,
+    "name": "Roulage de Pelle",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 45,
+    "name": "Clé Réductrice",
+    "descName": "Réduit la portée."
+  },
+  {
+    "id": 46,
+    "name": "Désinvocation",
+    "descName": "Occasionne des dommages Feu.\nLes dommages sont doublés sur invocations."
+  },
+  {
+    "id": 47,
+    "name": "Boîte de Pandore",
+    "descName": "Rend des PV en fonction de la Vitalité maximale de la cible mais réduit la capacité du lanceur à retirer des PM le tour suivant."
+  },
+  {
+    "id": 48,
+    "name": "Remblai",
+    "descName": "Occasionne des dommages Terre en croix."
+  },
+  {
+    "id": 49,
+    "name": "Pelle Fantomatique",
+    "descName": "Réduit la durée des effets et occasionne des dommages Feu."
+  },
+  {
+    "id": 50,
+    "name": "Maladresse",
+    "descName": "Retire des PM."
+  },
+  {
+    "id": 51,
+    "name": "Lancer de Pièces",
+    "descName": "Occasionne des dommages Eau à longue portée."
+  },
+  {
+    "id": 52,
+    "name": "Cupidité",
+    "descName": "Augmente les dommages des alliés et des ennemis en zone."
+  },
+  {
+    "id": 53,
+    "name": "Force de l'Âge",
+    "descName": "Occasionne des dommages Terre et un malus d'esquive PM à courte portée."
+  },
+  {
+    "id": 54,
+    "name": "Maladresse de Masse",
+    "descName": "Retire des PA en zone aux ennemis."
+  },
+  {
+    "id": 55,
+    "name": "Accélération",
+    "descName": "Augmente les PM de la cible."
+  },
+  {
+    "id": 56,
+    "name": "Pelle du Jugement",
+    "descName": "Occasionne des dommages Eau et retire des PM."
+  },
+  {
+    "id": 57,
+    "name": "Pelle Animée",
+    "descName": "Invoque une pelle qui repousse les ennemis et réduit leurs résistances aux pertes de PM.\nQuand elle est attaquée par un allié, ce dernier est soigné."
+  },
+  {
+    "id": 58,
+    "name": "Pelle Massacrante",
+    "descName": "Occasionne des dommages Eau."
+  },
+  {
+    "id": 59,
+    "name": "Corruption",
+    "descName": "Sur Allié : soigne et fixe l'état Pacifiste pendant 1 tour\nSur Ennemi : fixe l'état Pacifiste et Invulnérable pendant 1 tour\nLes effets du sort ne peuvent pas être désenvoûtés."
+  },
+  {
+    "id": 60,
+    "name": "Coffre Animé",
+    "descName": "Invoque un Coffre Animé qui tacle les ennemis.\nIl occasionne des dommages en zone autour de lui et détecte les invisibles. Moins il a de vie et plus ses dommages sont importants.\nQuand il est attaqué par un allié, ce dernier est soigné."
+  },
+  {
+    "id": 61,
+    "name": "Sournoiserie",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 62,
+    "name": "Concentration de Chakra",
+    "descName": "Vole de la vie dans l'élément Feu lorsque la cible déclenche un piège."
+  },
+  {
+    "id": 63,
+    "name": "Coup Sournois",
+    "descName": "Occasionne des dommages Feu sur les ennemis.\nPousse la cible."
+  },
+  {
+    "id": 64,
+    "name": "Fourberie",
+    "descName": "Occasionne des dommages Feu en zone.\nAttire les cibles.\nVole de l'Intelligence."
+  },
+  {
+    "id": 65,
+    "name": "Piège Sournois",
+    "descName": "Occasionne des dommages Feu et attire."
+  },
+  {
+    "id": 66,
+    "name": "Poison insidieux",
+    "descName": "Empoisonne la cible pendant 2 tours en occasionnant des dommages Air."
+  },
+  {
+    "id": 67,
+    "name": "Peur",
+    "descName": "Pousse un allié ou un ennemi sur la cellule ciblée."
+  },
+  {
+    "id": 68,
+    "name": "Fourvoiement",
+    "descName": "Occasionne des dommages Air et Terre.\nVole de l'Agilité et de la Force.\nApplique un malus de vie insoignable."
+  },
+  {
+    "id": 69,
+    "name": "Piège d'Immobilisation",
+    "descName": "Retire des PM."
+  },
+  {
+    "id": 70,
+    "name": "Arnaque",
+    "descName": "Occasionne des dommages Air."
+  },
+  {
+    "id": 71,
+    "name": "Piège Empoisonné",
+    "descName": "Empoisonne la cible en occasionnant des dommages Terre pendant 3 tours."
+  },
+  {
+    "id": 72,
+    "name": "Invisibilité",
+    "descName": "Rend invisible."
+  },
+  {
+    "id": 73,
+    "name": "Piège répulsif",
+    "descName": "Repousse les alliés et les ennemis.\nOccasionne des dommages Air aux ennemis."
+  },
+  {
+    "id": 74,
+    "name": "Double",
+    "descName": "Invoque un double contrôlable qui possède les mêmes caractéristiques que l'invocateur.\nN'attaque pas et meurt au bout de 2 tours en échangeant de place avec son invocateur."
+  },
+  {
+    "id": 75,
+    "name": "Piège Fangeux",
+    "descName": "Pose un piège qui occasionne des dommages Eau.\nLes alliés à proximité de la cible sont soignés à hauteur de 50% des dommages occasionnés."
+  },
+  {
+    "id": 76,
+    "name": "Attaque Mortelle",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 77,
+    "name": "Piège Insidieux",
+    "descName": "Pose un piège. Une fois déclenché, les ennemis qui terminent leur tour dans sa zone d'effet subissent des dommages Air."
+  },
+  {
+    "id": 78,
+    "name": "Cruauté",
+    "descName": "Occasionne des dommages Eau et augmente les PM du lanceur."
+  },
+  {
+    "id": 79,
+    "name": "Piège de Masse",
+    "descName": "Pose un piège qui occasionne des dommages Terre en zone."
+  },
+  {
+    "id": 80,
+    "name": "Piège Mortel",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 81,
+    "name": "Ralentissement",
+    "descName": "Occasionne des dommages Eau et retire 1 PA à la cible.\nRetire 1 PA supplémentaire aux ennemis dans l'état Téléfrag.\nLe retrait de PA ne peut pas être désenvoûté."
+  },
+  {
+    "id": 82,
+    "name": "Rembobinage",
+    "descName": "À la fin de son tour, téléporte l'allié ciblé sur sa position de début de tour."
+  },
+  {
+    "id": 83,
+    "name": "Aiguille",
+    "descName": "Occasionne des dommages Feu et retire 1 PA à la cible.\nRetire des PA supplémentaires aux ennemis dans l'état Téléfrag.\nLe retrait de PA ne peut pas être désenvoûté.\nRetire l'état Téléfrag."
+  },
+  {
+    "id": 84,
+    "name": "Gelure",
+    "descName": "Occasionne des dommages Air aux ennemis.\nTéléporte la cible à sa position précédente."
+  },
+  {
+    "id": 85,
+    "name": "Flou",
+    "descName": "Retire des PA en zone le tour en cours.\nAugmente les PA en zone le tour suivant."
+  },
+  {
+    "id": 86,
+    "name": "Synchro",
+    "descName": "Invoque Synchro qui gagne en puissance et se soigne quand un Téléfrag est généré, 1 fois par tour.\nLa Synchro meurt en occasionnant des dommages Air en zone de 3 cases si elle subit un Téléfrag.\nElle n'est pas affectée par les effets de Rembobinage.\nÀ partir du tour suivant son lancer, son invocateur perd 1 PA."
+  },
+  {
+    "id": 87,
+    "name": "Démotivation",
+    "descName": "Occasionne des dommages Terre aux ennemis en diagonale.\nRéduit la durée des effets sur les cibles dans l'état Téléfrag et retire l'état."
+  },
+  {
+    "id": 88,
+    "name": "Téléportation",
+    "descName": "Téléporte le lanceur symétriquement par rapport à la cible.\nLe lanceur gagne 2 PA pour 1 tour à chaque fois qu'il génère un Téléfrag.\nLe temps de relance est supprimé quand un Téléfrag est généré ou consommé.\n\nUn Téléfrag est généré lorsqu'une entité prend la place d'une autre."
+  },
+  {
+    "id": 89,
+    "name": "Paradoxe Temporel",
+    "descName": "Téléporte symétriquement par rapport au Complice (ou au Cadran) les alliés et ennemis (dans une zone de 4 cases autour du Cadran).\nAu début du tour du Complice (ou du Cadran) : téléporte à nouveau symétriquement les mêmes cibles.\nFixe le temps de relance de Cadran de Xélor et de Complice à 1."
+  },
+  {
+    "id": 90,
+    "name": "Fuite",
+    "descName": "Téléporte la cible sur sa position précédente au début du prochain tour du lanceur."
+  },
+  {
+    "id": 91,
+    "name": "Frappe de Xélor",
+    "descName": "Occasionne des dommages Terre aux ennemis.\nTéléporte la cible symétriquement par rapport au lanceur du sort."
+  },
+  {
+    "id": 92,
+    "name": "Rayon Obscur",
+    "descName": "Occasionne des dommages Terre en ligne.\nLes dommages de base du sort sont doublés contre les ennemis dans l'état Téléfrag.\nRetire l'état Téléfrag."
+  },
+  {
+    "id": 93,
+    "name": "Flétrissement",
+    "descName": "Occasionne des dommages Air en ligne.\nOccasionne des dommages supplémentaires aux ennemis dans l'état Téléfrag."
+  },
+  {
+    "id": 94,
+    "name": "Contre",
+    "descName": "Renvoie une partie des dommages subis en mêlée à l'attaquant."
+  },
+  {
+    "id": 95,
+    "name": "Horloge",
+    "descName": "Vole de vie dans l'élément Eau.\nLe lanceur gagne 1 PA  au début de son prochain tour.\nRetire des PA aux ennemis dans l'état Téléfrag et leur retire l'état.\nLe retrait de PA ne peut pas être désenvoûté."
+  },
+  {
+    "id": 96,
+    "name": "Poussière Temporelle",
+    "descName": "Occasionne des dommages Feu.\nSi la cible est dans l'état Téléfrag, les dommages sont occasionnés en zone et les entités à proximité sont téléportées symétriquement par rapport au centre de la zone d'effet."
+  },
+  {
+    "id": 97,
+    "name": "Cadran de Xélor",
+    "descName": "Invoque un Cadran qui occasionne des dommages Feu en zone et retire des PA aux ennemis dans l'état Téléfrag.\nDonne des PA aux alliés autour de lui et dans l'état Téléfrag."
+  },
+  {
+    "id": 98,
+    "name": "Vol du Temps",
+    "descName": "Occasionne des dommages Eau à la cible.\nLe lanceur gagne 1 PA au début de son prochain tour."
+  },
+  {
+    "id": 99,
+    "name": "Momification",
+    "descName": "Le lanceur ne peut plus occasionner de dommages avec ses sorts élémentaires et gagne 2 PM pendant 1 tour.\nFixe l'état Téléfrag à tous les alliés et ennemis pendant 2 tours.\nQuand l'état Téléfrag est retiré, le lanceur gagne 100 Puissance pendant 2 tours."
+  },
+  {
+    "id": 100,
+    "name": "Sablier de Xélor",
+    "descName": "Occasionne des dommages Feu et retire des PA à la cible en ligne et sans ligne de vue.\nSi la cible est dans l'état Téléfrag, l'effet du sort se joue en zone.\nLe retrait de PA ne peut pas être désenvoûté."
+  },
+  {
+    "id": 101,
+    "name": "Roulette",
+    "descName": "Invoque une Roulette qui procure un bonus aléatoire à tout le monde au début de son tour."
+  },
+  {
+    "id": 102,
+    "name": "Pile ou Face",
+    "descName": "Occasionne des dommages Terre et augmente les dommages occasionnés par la cible pendant 1 tour si c'est un ennemi."
+  },
+  {
+    "id": 103,
+    "name": "Chance d'Ecaflip",
+    "descName": "Divise par 2 les dommages subis pendant 1 tour.\nAu tour suivant, les dommages reçus sont augmentés de 50%."
+  },
+  {
+    "id": 104,
+    "name": "Trèfle",
+    "descName": "Applique un bonus aux Coups Critiques mais réduit les dommages d'armes pendant 2 tours.\nSi relancé pendant la durée de l'effet, applique un malus aux coups critiques à la place."
+  },
+  {
+    "id": 105,
+    "name": "Bond du Félin",
+    "descName": "Augmente les PM de la cible de 1 pendant 1 tour."
+  },
+  {
+    "id": 106,
+    "name": "Roue de la Fortune",
+    "descName": "Augmente les dommages."
+  },
+  {
+    "id": 107,
+    "name": "Topkaj",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 108,
+    "name": "Esprit Félin",
+    "descName": "Occasionne des dommages Terre et téléporte symétriquement par rapport à la cible.\nPour chaque lancer, le lanceur perd un tour d'envoûtement à la fin de son tour suivant."
+  },
+  {
+    "id": 109,
+    "name": "Bluff",
+    "descName": "Occasionne dommages Air.\nEn coup critique, occasionne des dommages Eau."
+  },
+  {
+    "id": 110,
+    "name": "Griffe Joueuse",
+    "descName": "Occasionne des dommages Terre sur plusieurs cases en ligne droite.\nEn coup critique, occasionne des dommages Eau."
+  },
+  {
+    "id": 111,
+    "name": "Contrecoup",
+    "descName": "Applique un bouclier sur la cible.\nLa valeur du bouclier est plus importante sur le lanceur."
+  },
+  {
+    "id": 112,
+    "name": "Griffe de Ceangal",
+    "descName": "Occasionne des dommages Air.\nRepousse la cible puis se rapproche d'elle."
+  },
+  {
+    "id": 113,
+    "name": "Perception",
+    "descName": "La cible est soignée de 4% de sa vie par ennemi à proximité.\nDétecte les entités invisibles dans la zone d'effet."
+  },
+  {
+    "id": 114,
+    "name": "Rekop",
+    "descName": "Occasionne des dommages Air, Eau, Terre et Feu.\nLe sort est déclenché aléatoirement : dans 1, 2, ou 3 tours et les effets ne sont cumulables qu'une fois par cible.\nPlus les dommages sont appliqués à retardement, plus ils sont importants."
+  },
+  {
+    "id": 115,
+    "name": "Odorat",
+    "descName": "Occasionne un gain de PM mais une perte de PA en zone le tour en cours, puis un gain de PA mais une perte de PM le tour suivant.\nLe coût en PA du sort est remboursé pour l'Ecaflip."
+  },
+  {
+    "id": 116,
+    "name": "Langue Râpeuse",
+    "descName": "Occasionne des dommages Feu aux ennemis.\nSur ennemi : réduit la portée le tour en cours mais l'augmente le tour suivant.\nSur allié : augmente la portée le tour en cours mais la réduit le tour suivant.\nNe peut être cumulé qu'une seule fois."
+  },
+  {
+    "id": 117,
+    "name": "Griffe Invocatrice",
+    "descName": "Invoque un Chaton qui inflige des dégâts Eau à ses ennemis."
+  },
+  {
+    "id": 118,
+    "name": "Réflexes",
+    "descName": "Occasionne des dommages Air en zone et applique un malus de vie insoignable."
+  },
+  {
+    "id": 119,
+    "name": "Tout ou Rien",
+    "descName": "Sur ennemis : Occasionne des dommages Eau en zone immédiatement et soigne au tour suivant.\nSur alliés : Soigne en zone immédiatement et occasionne des dommages Eau au tour suivant.\nLe lanceur est toujours affecté en premier."
+  },
+  {
+    "id": 120,
+    "name": "Destin d'Ecaflip",
+    "descName": "Occasionne des dommages Terre, attire puis repousse la cible.\nSi la cible subit des dégâts de poussée dans le même tour, elle subit un malus de PM pendant 2 tours."
+  },
+  {
+    "id": 121,
+    "name": "Mot Fracassant",
+    "descName": "Occasionne des dommages Eau et retire des PA aux ennemis."
+  },
+  {
+    "id": 122,
+    "name": "Mot Blessant",
+    "descName": "Occasionne des dommages Air.\n\nLes alliés à proximité du lanceur (2 cases ou moins) sont soignés à hauteur de 100% des dommages occasionnés avant réduction."
+  },
+  {
+    "id": 123,
+    "name": "Mot Turbulent",
+    "descName": "Vole de la vie dans l'élément Air."
+  },
+  {
+    "id": 124,
+    "name": "Mot Alternatif",
+    "descName": "Occasionne des dommages Feu aux ennemis.\nSoigne les alliés."
+  },
+  {
+    "id": 125,
+    "name": "Mot Interdit",
+    "descName": "Occasionne des dommages Eau.\n\nLes alliés à proximité de la cible (2 cases ou moins) sont soignés à hauteur de 100% des dommages occasionnés avant réduction."
+  },
+  {
+    "id": 126,
+    "name": "Mot Stimulant",
+    "descName": "La cible devient Stimulée : elle gagne 2 PA pendant 4 tours.\n\nN'affecte pas les Eniripsas."
+  },
+  {
+    "id": 127,
+    "name": "Mot de Prévention",
+    "descName": "La cible gagne des points de bouclier pendant 2 tours."
+  },
+  {
+    "id": 128,
+    "name": "Mot de Frayeur",
+    "descName": "Pousse la cible."
+  },
+  {
+    "id": 129,
+    "name": "Mot d'Amitié",
+    "descName": "Invoque un Lapino qui Stimule le lanceur tant qu'il est en vie : il donne 2 PA.\nLe Lapino soigne ses alliés.\n\nQuand le Lapino meurt, un glyphe de soin apparaît : les entités qui terminent leur tour sur le glyphe sont soignées."
+  },
+  {
+    "id": 130,
+    "name": "Mot Sélectif",
+    "descName": "Occasionne des dommages Feu en zone aux ennemis.\nSoigne les alliés."
+  },
+  {
+    "id": 131,
+    "name": "Mot de Régénération",
+    "descName": "La cible est soignée à retardement : au début du prochain tour du lanceur, et au tour suivant."
+  },
+  {
+    "id": 132,
+    "name": "Mot Tournoyant",
+    "descName": "Occasionne des dommages Air en zone.\n\nLes alliés à proximité du lanceur (2 cases ou moins) sont soignés à hauteur de 100% des dommages occasionnés avant réduction."
+  },
+  {
+    "id": 133,
+    "name": "Mot de Jouvence",
+    "descName": "Soigne un allié et lui retire 1 tour d'envoûtement."
+  },
+  {
+    "id": 134,
+    "name": "Mot Éclatant",
+    "descName": "Occasionne des dommages Eau en zone.\n\nLes alliés à proximité des cibles (2 cases ou moins) sont soignés à hauteur de 100% des dommages occasionnés avant réduction."
+  },
+  {
+    "id": 135,
+    "name": "Mot Déroutant",
+    "descName": "Occasionne des dommages Feu aux ennemis et soigne les alliés."
+  },
+  {
+    "id": 136,
+    "name": "Mot d'Immobilisation",
+    "descName": "Enlève des PM pendant 1 tour.\nÀ la fin de son tour, la cible soigne les alliés à proximité (2 cases ou moins)."
+  },
+  {
+    "id": 137,
+    "name": "Mot d'Envol",
+    "descName": "Échange de place avec un allié (hors invocations).\n\nRetire l'état Stimulé. Applique l'état Insoignable au lanceur si l'allié n'est pas Stimulé.\nLe Lapino peut être ciblé mais il est tué."
+  },
+  {
+    "id": 138,
+    "name": "Mot de Silence",
+    "descName": "Retire des PA en zone et dévoile les entités invisibles. \nLes alliés Stimulés ainsi que le lanceur ne sont pas affectés."
+  },
+  {
+    "id": 139,
+    "name": "Mot Revitalisant",
+    "descName": "Tous les alliés Stimulés sont soignés, mais l'état Stimulé est retiré.\nTue le Lapino s'il était invoqué.\nPasse l'intervalle de relance du sort Mot Stimulant de 1 tour."
+  },
+  {
+    "id": 140,
+    "name": "Mot de Reconstitution",
+    "descName": "Soigne totalement la cible alliée mais la rend ensuite Insoignable pour 3 tours."
+  },
+  {
+    "id": 141,
+    "name": "Pression",
+    "descName": "Occasionne des dommages Terre et applique un malus d'Érosion."
+  },
+  {
+    "id": 142,
+    "name": "Bond",
+    "descName": "Téléporte sur la case ciblée.\nAugmente les dommages reçus par les ennemis situés sur les cases adjacentes."
+  },
+  {
+    "id": 143,
+    "name": "Intimidation",
+    "descName": "Occasionne des dommages Neutre sur les ennemis et repousse la cible."
+  },
+  {
+    "id": 144,
+    "name": "Duel",
+    "descName": "Retire leurs PM à la cible et au lanceur, leur applique l'état Pesanteur et les rend invulnérable aux dommages à distance.\nNe fonctionne que si lancé sur un ennemi."
+  },
+  {
+    "id": 145,
+    "name": "Épée Divine",
+    "descName": "Occasionne des dommages Air et augmente les dommages des alliés ciblés."
+  },
+  {
+    "id": 146,
+    "name": "Épée du destin",
+    "descName": "Occasionne des dommages Feu.\nLes dommages sont augmentés à partir du second lancer."
+  },
+  {
+    "id": 147,
+    "name": "Massacre",
+    "descName": "Lorsque la cible ennemie reçoit des dommages de sorts, elle occasionne 50% de ces dommages aux entités au contact."
+  },
+  {
+    "id": 148,
+    "name": "Friction",
+    "descName": "La cible se rapproche de l'attaquant si elle reçoit des dommages issus de sorts.\nNécessite d'être aligné avec la cible."
+  },
+  {
+    "id": 149,
+    "name": "Précipitation",
+    "descName": "Augmente les PA de la cible pour le tour en cours mais lui retire des PA le tour suivant.\nInterdit l'utilisation des armes et du sort Colère de Iop."
+  },
+  {
+    "id": 150,
+    "name": "Couper",
+    "descName": "Occasionne des dommages Feu et retire des PM."
+  },
+  {
+    "id": 151,
+    "name": "Souffle",
+    "descName": "Repousse les alliés et les ennemis situés autour de la cellule ciblée."
+  },
+  {
+    "id": 152,
+    "name": "Épée du Jugement",
+    "descName": "Occasionne des dommages Air et vole de la vie dans l'élément Feu sans ligne de vue."
+  },
+  {
+    "id": 153,
+    "name": "Puissance",
+    "descName": "Augmente la Puissance de la cible."
+  },
+  {
+    "id": 154,
+    "name": "Épée Destructrice",
+    "descName": "Occasionne des dommages Feu et réduit la probabilité que la cible occasionne des coups critiques."
+  },
+  {
+    "id": 155,
+    "name": "Vitalité",
+    "descName": "Augmente temporairement les PV de la cible en pourcentage.\nLe bonus de PV est plus faible sur les alliés que sur le lanceur."
+  },
+  {
+    "id": 156,
+    "name": "Tempête de Puissance",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 157,
+    "name": "Épée Céleste",
+    "descName": "Occasionne des dommages Air en zone."
+  },
+  {
+    "id": 158,
+    "name": "Concentration",
+    "descName": "Occasionne des dommages Terre.\nLes dommages sont augmentés contre les Invocations."
+  },
+  {
+    "id": 159,
+    "name": "Colère de Iop",
+    "descName": "Occasionne des dommages Terre.\nAugmente les dommages du sort au troisième tour après son lancer."
+  },
+  {
+    "id": 160,
+    "name": "Épée de Iop",
+    "descName": "Occasionne des dommages Terre en croix."
+  },
+  {
+    "id": 161,
+    "name": "Flèche Magique",
+    "descName": "Occasionne des dommages Air et vole la portée de la cible."
+  },
+  {
+    "id": 162,
+    "name": "Tir Critique",
+    "descName": "Augmente la probabilité de faire un coup critique."
+  },
+  {
+    "id": 163,
+    "name": "Flèche Glacée",
+    "descName": "Occasionne des dommages Feu et retire des PA."
+  },
+  {
+    "id": 164,
+    "name": "Flèche Cinglante",
+    "descName": "Applique de l'Érosion aux ennemis et repousse de 2 cases."
+  },
+  {
+    "id": 165,
+    "name": "Flèche Enflammée",
+    "descName": "Occasionne des dommages Feu et pousse les cibles présentes dans la zone d'effet du sort."
+  },
+  {
+    "id": 166,
+    "name": "Tir Puissant",
+    "descName": "Augmente les dommages des sorts."
+  },
+  {
+    "id": 167,
+    "name": "Flèche d'Expiation",
+    "descName": "Occasionne des dommages Eau, augmente les dommages du sort tous les 3 tours et empêche la cible d'utiliser des sorts de déplacement."
+  },
+  {
+    "id": 168,
+    "name": "Œil de Taupe",
+    "descName": "Réduit la portée des personnages ciblés, vole de la vie dans l'élément Eau et repère les objets invisibles dans sa zone d'effet."
+  },
+  {
+    "id": 169,
+    "name": "Flèche de Recul",
+    "descName": "Occasionne des dommages Air aux ennemis et pousse la cible."
+  },
+  {
+    "id": 170,
+    "name": "Flèche d'Immobilisation",
+    "descName": "Occasionne des dommages Eau et vole des PM à la cible."
+  },
+  {
+    "id": 171,
+    "name": "Flèche Punitive",
+    "descName": "Occasionne des dommages Terre et augmente les dommages du sort tous les 2 tours."
+  },
+  {
+    "id": 172,
+    "name": "Tir Éloigné",
+    "descName": "Augmente la portée des cibles présentes dans la zone d'effet."
+  },
+  {
+    "id": 173,
+    "name": "Flèche Harcelante",
+    "descName": "Occasionne des dommages Air sans ligne de vue."
+  },
+  {
+    "id": 174,
+    "name": "Flèche Empoisonnée",
+    "descName": "Occasionne des dommages Neutre sur plusieurs tours et retire des PM."
+  },
+  {
+    "id": 175,
+    "name": "Flèche Destructrice",
+    "descName": "Occasionne des dommages Terre et réduit les dommages occasionnés par la cible."
+  },
+  {
+    "id": 176,
+    "name": "Flèche Persécutrice",
+    "descName": "Occasionne des dommages Air et Feu."
+  },
+  {
+    "id": 177,
+    "name": "Flèche Ralentissante",
+    "descName": "Occasionne des dommages Eau et retire des PA en zone."
+  },
+  {
+    "id": 178,
+    "name": "Flèche Absorbante",
+    "descName": "Vole de la vie dans l'élément Air."
+  },
+  {
+    "id": 179,
+    "name": "Flèche Explosive",
+    "descName": "Occasionne des dommages Feu en zone."
+  },
+  {
+    "id": 180,
+    "name": "Maîtrise de l'Arc",
+    "descName": "Augmente les dommages."
+  },
+  {
+    "id": 181,
+    "name": "Tremblement",
+    "descName": "Dans une zone de 3 cases autour de chaque arbre allié :\n • Occasionne des dommages Feu.\n • Attire les cibles.\n • Détecte les invisibles."
+  },
+  {
+    "id": 182,
+    "name": "Folle Transmutée",
+    "descName": "Remplace l'arbre ciblé par une Folle qui retire des PA et applique l'état Infecté.\n\nSi une cible dans l'état Infecté est touchée par certains sorts du Sadida : toutes les cibles qui sont dans l'état Infecté sont touchées par ces sorts.\nSorts concernés : Ronce, Vent empoisonné, Larme, Sacrifice Poupesque, Ronce Apaisante, Ronce Agressive, Ronce Insolente et Feu de Brousse.\nÀ sa mort, la Folle redevient un arbre."
+  },
+  {
+    "id": 183,
+    "name": "Ronce",
+    "descName": "Occasionne des dommages Terre. \n\nSur un Arbre : permet à une Bloqueuse d'échanger sa place avec l'arbre.\nElle ne peut alors plus recevoir de dommages pendant 1 tour.\n\nSi la cible est un ennemi dans l'état \"Infecté\", occasionne des dommages Terre à tous les ennemis dans l'état \"Infecté\"."
+  },
+  {
+    "id": 184,
+    "name": "Feu de Brousse",
+    "descName": "Occasionne des dommages Feu et Eau.\n\nSur un ennemi dans l'état Infecté : occasionne des dommages Feu et Eau à tous les ennemis dans l'état Infecté."
+  },
+  {
+    "id": 185,
+    "name": "Herbe Folle",
+    "descName": "Occasionne des dommages Feu et retire des PM en zone."
+  },
+  {
+    "id": 186,
+    "name": "Arbre",
+    "descName": "Invoque un arbre.\nPendant 1 tour, l'arbre ne peut pas être utilisé comme intermédiaire pour lancer d'autres sorts.\nAprès 1 tour, l'arbre est utilisable et ne peut plus être poussé ou attiré."
+  },
+  {
+    "id": 187,
+    "name": "Surpuissante Transmutée",
+    "descName": "Remplace l'Arbre ciblé par une Surpuissante qui retire des PM et de l'esquive PM aux ennemis en zone, ainsi qu'aux ennemis au contact des arbres.\nÀ sa mort, la Surpuissante redevient un arbre."
+  },
+  {
+    "id": 188,
+    "name": "Ronce Insolente",
+    "descName": "Réduit de 4 tours la durée des envoûtements de la cible.\n\nSur un ennemi dans l'état Infecté : réduit la durée des envoûtements de tous les ennemis dans l'état Infecté."
+  },
+  {
+    "id": 189,
+    "name": "Sacrifiée Transmutée",
+    "descName": "Remplace l'arbre ciblé par une Sacrifiée qui occasionne des dommages Air et meurt.\n\nChaque tour de jeu où la Sacrifiée reste en vie augmente sa Vitalité et les dommages qu'elle occasionne.\nÀ sa mort, la Sacrifiée redevient un arbre."
+  },
+  {
+    "id": 190,
+    "name": "Gonflable Transmutée",
+    "descName": "Remplace l'Arbre ciblé par une Gonflable qui soigne les alliés (situés à 3 cases ou moins d'elle). \n\nElle soigne également tous les alliés au contact des arbres.\nÀ sa mort, la Gonflable redevient un arbre."
+  },
+  {
+    "id": 191,
+    "name": "Ronces Multiples",
+    "descName": "Occasionne des dommages Terre en zone."
+  },
+  {
+    "id": 192,
+    "name": "Ronce Apaisante",
+    "descName": "Occasionne une perte de PM pendant 2 tours aux ennemis.\nSoigne les alliés.\n\nSur un ennemi dans l'état Infecté : occasionne une perte de PM à tous les ennemis dans l'état Infecté."
+  },
+  {
+    "id": 193,
+    "name": "Bloqueuse Transmutée",
+    "descName": "Remplace l'arbre ciblé par une Bloqueuse qui cherchera à aller au contact des adversaires pour les gêner. \n\nSi le sort Ronce a été lancé sur un arbre allié, la Bloqueuse échangera sa place avec celle de l'arbre et ne pourra plus recevoir de dommage pendant 1 tour.\nÀ sa mort, la Bloqueuse redevient un arbre."
+  },
+  {
+    "id": 194,
+    "name": "Ronces Agressives",
+    "descName": "Occasionne des dommages Terre.\n\nSur un ennemi dans l'état Infecté : occasionne des dommages Terre à tous les ennemis dans l'état Infecté."
+  },
+  {
+    "id": 195,
+    "name": "Larme",
+    "descName": "Occasionne des dommages Eau. \n\nSur un arbre allié qui vient d'apparaître : le fait pousser et le rend exploitable avec les autres sorts du Sadida.\nSi la cible est dans l'état Infecté : occasionne des dommages Eau à tous les ennemis dans l'état Infecté."
+  },
+  {
+    "id": 196,
+    "name": "Vent Empoisonné",
+    "descName": "Tue la poupée ciblée pour la transformer en Arbre Feuillu."
+  },
+  {
+    "id": 197,
+    "name": "Puissance Sylvestre",
+    "descName": "Remplace l'arbre ciblé par un arbre contrôlable qui peut pousser une cible, réduire la durée des envoûtements ou soigner en zone.\nÀ la fin de son tour, il redevient un arbre."
+  },
+  {
+    "id": 198,
+    "name": "Sacrifice Poupesque",
+    "descName": "Occasionne des dommages Eau aux ennemis.\nVole de la vie dans l'élément Eau aux alliés et aux invocations.\n\nSur un ennemi dans l'état Infecté : occasionne des dommages Eau à tous les ennemis dans l'état Infecté."
+  },
+  {
+    "id": 199,
+    "name": "Don naturel",
+    "descName": "Les alliés situés à 2 cases ou moins de l'arbre ciblé sont soignés.\nLes personnages alliés situés à 2 cases ou moins de l'arbre ciblé partagent les dommages reçus entre eux pendant 1 tour.\nL'arbre est tué."
+  },
+  {
+    "id": 200,
+    "name": "Poison Paralysant",
+    "descName": "Occasionne des dommages Feu en fin de tour et fixe l'état Infecté sur les ennemis.\n\nSi un ennemi dans l'état Infecté est touché par un sort monocible du Sadida : toutes les cibles qui sont dans l'état Infecté sont également affectées par ce sort."
+  },
+  {
+    "id": 350,
+    "name": "Flamiche",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 364,
+    "name": "Boomerang perfide",
+    "descName": "Vole de la vie dans un élément aléatoire."
+  },
+  {
+    "id": 366,
+    "name": "Marteau de Moon",
+    "descName": "Occasionne des dommages Air.\nRéduit la Portée."
+  },
+  {
+    "id": 367,
+    "name": "Cawotte",
+    "descName": "Invoque une Cawotte qui soigne les alliés et ennemis à proximité."
+  },
+  {
+    "id": 368,
+    "name": "Libération",
+    "descName": "Pousse les alliés et ennemis autour du lanceur."
+  },
+  {
+    "id": 369,
+    "name": "Foudroiement",
+    "descName": "Occasionne des dommages Feu en zone."
+  },
+  {
+    "id": 370,
+    "name": "Invocation d'Arakne",
+    "descName": "Invoque une Arakne qui occasionne des dommages Terre.\nEn critique : invoque une Arakne majeure qui occasionne des dommages Terre et retire des PA."
+  },
+  {
+    "id": 373,
+    "name": "Invocation de Chaferfu",
+    "descName": "Invoque un Chaferfu qui attaque aléatoirement les alliés et les ennemis."
+  },
+  {
+    "id": 410,
+    "name": "Déferlement",
+    "descName": "Occasionne des dommages Eau aux ennemis et rapproche le lanceur de la cible.\nLe lanceur gagne des points de bouclier."
+  },
+  {
+    "id": 412,
+    "name": "Félintion",
+    "descName": "Vole des points de vie aux ennemis dans l'élément Eau.\nPousse les ennemis et alliés"
+  },
+  {
+    "id": 413,
+    "name": "Capture d'âmes",
+    "descName": "Capture les âmes des créatures vaincues à la fin du combat."
+  },
+  {
+    "id": 414,
+    "name": "Apprivoisement de monture",
+    "descName": "Applique l'état Apprivoisement permettant de capturer les montures sauvages.\nAugmente l'expérience gagnée en combat par la monture du lanceur."
+  },
+  {
+    "id": 416,
+    "name": "Poisse",
+    "descName": "Occasionne des dommages Eau et réduit les chances de Coup critique."
+  },
+  {
+    "id": 418,
+    "name": "Flèche de dispersion",
+    "descName": "Pousse les ennemis et alliés, même s'ils sont bloqués par d'autres entités."
+  },
+  {
+    "id": 420,
+    "name": "Laisse Spirituelle",
+    "descName": "Ressuscite le dernier personnage allié mort.\nSi l'invocateur meurt, le personnage ressuscité meurt également.\nTant que l'allié ressuscité est en vie, les autres alliés subissent un malus de 30% de résistance dans tous les éléments."
+  },
+  {
+    "id": 422,
+    "name": "Mise en Garde",
+    "descName": "Augmente les dommages des Glyphes et la Puissance du lanceur.\nDésactive les sorts de protection du lanceur."
+  },
+  {
+    "id": 423,
+    "name": "Ivresse",
+    "descName": "Invoque un tonneau qui attire les ennemis.\nS'il est porté ou jeté : soigne autour de lui."
+  },
+  {
+    "id": 424,
+    "name": "Raulebaque",
+    "descName": "Replace tous les personnages à leurs positions précédentes."
+  },
+  {
+    "id": 425,
+    "name": "Retraite anticipée",
+    "descName": "Interdit l'utilisation des sorts de déplacement et empêche d'utiliser des PM.\nLe lanceur du sort est affecté au tour suivant.\nLes effets ne peuvent pas être désenvoûtés."
+  },
+  {
+    "id": 426,
+    "name": "Arbre de vie",
+    "descName": "Transforme l'Arbre ciblé en Arbre de Vie.\nPendant 2 tours, chaque dommage reçu par l'arbre est rendu à son attaquant sous forme de soin.\nSoigne les invocations Sadida à chaque tour de jeu."
+  },
+  {
+    "id": 427,
+    "name": "Mot Brutal",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 430,
+    "name": "Roublabot",
+    "descName": "Invoque un robot contrôlable capable de pousser, attirer ou faire exploser des bombes.\nLe robot explose à la fin de son tour de jeu."
+  },
+  {
+    "id": 686,
+    "name": "Picole",
+    "descName": "Applique l'état Saoul et retire 1 PM.\nRéduit les dommages reçus.\nRelancer Picole permet d'annuler ses effets."
+  },
+  {
+    "id": 687,
+    "name": "Poing Enflammé",
+    "descName": "Occasionne des dommages Feu.\nL'état Saoul est nécessaire."
+  },
+  {
+    "id": 688,
+    "name": "Schnaps",
+    "descName": "Occasionne des dommages Air en zone."
+  },
+  {
+    "id": 689,
+    "name": "Épouvante",
+    "descName": "Repousse la cible et réduit la probabilité d'occasionner des critiques aux ennemis."
+  },
+  {
+    "id": 690,
+    "name": "Souffle Alcoolisé",
+    "descName": "Occasionne des dommages Air et pousse la cible.\nL'état Saoul est nécessaire."
+  },
+  {
+    "id": 691,
+    "name": "Vulnérabilité",
+    "descName": "Augmente les dommages reçus par la cible pendant 2 tours.\nL'état Saoul est nécessaire."
+  },
+  {
+    "id": 692,
+    "name": "Ribote",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 693,
+    "name": "Karcham",
+    "descName": "Porte la cible. Au second lancer, jette la cible.\nDésactive les lignes de vue des sorts de la cible portée."
+  },
+  {
+    "id": 694,
+    "name": "Vertige",
+    "descName": "Lance l'entité portée et augmente son tacle.\nAttire les entités alignées avec la cellule ciblée."
+  },
+  {
+    "id": 695,
+    "name": "Stabilisation",
+    "descName": "Empêche la cible d'être déplacée.\nAugmente les résistances aux pertes de PM."
+  },
+  {
+    "id": 696,
+    "name": "Éviction",
+    "descName": "Occasionne des dommages Terre aux ennemis.\nLa cible est téléportée derrière le lanceur."
+  },
+  {
+    "id": 697,
+    "name": "Ethylo",
+    "descName": "Occasionne des dommages Eau.\nApplique un malus au retrait de PA."
+  },
+  {
+    "id": 698,
+    "name": "Souillure",
+    "descName": "Réduit la durée des effets sur la cible de 1 tour.\nApplique un malus de dommages.\nL'état Saoul est nécessaire."
+  },
+  {
+    "id": 699,
+    "name": "Propulsion",
+    "descName": "Lance l'entité portée.\nOccasionne des dommages Feu aux ennemis et repousse autour de la cellule ciblée."
+  },
+  {
+    "id": 700,
+    "name": "Vague à Lame",
+    "descName": "Occasionne des dommages Eau."
+  },
+  {
+    "id": 701,
+    "name": "Colère de Zatoïshwan",
+    "descName": "Applique l'état Saoul.\nAugmente les dommages et les PA du lanceur."
+  },
+  {
+    "id": 702,
+    "name": "Flasque Explosive",
+    "descName": "Occasionne des dommages Feu en zone."
+  },
+  {
+    "id": 703,
+    "name": "Pandatak",
+    "descName": "Occasionne des dommages Terre sur plusieurs cases en ligne."
+  },
+  {
+    "id": 704,
+    "name": "Pandanlku",
+    "descName": "Augmente les PM de la cible.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 705,
+    "name": "Lien Spiritueux",
+    "descName": "Invoque un Pandawasta qui bloque les déplacements des adversaires.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 2763,
+    "name": "Roublardise",
+    "descName": "Crée plusieurs images du Roublard pour tromper les adversaires, et lui permet de se téléporter.\nLes images disparaissent si elles reçoivent des dommages.\nLe sort passe le tour en cours du Roublard."
+  },
+  {
+    "id": 2778,
+    "name": "Détonateur",
+    "descName": "Déclenche l'explosion d'une bombe à distance."
+  },
+  {
+    "id": 2794,
+    "name": "Extraction",
+    "descName": "Vol de vie Feu en ligne."
+  },
+  {
+    "id": 2795,
+    "name": "Botte",
+    "descName": "Pousse les bombes.\nPlus le sort est lancé à proximité d'une bombe, plus elle est poussée.\nPousse les entités qui ne sont pas des bombes d'une case seulement.\nAugmente les dommages des alliés."
+  },
+  {
+    "id": 2796,
+    "name": "Tornabombe",
+    "descName": "Pose une bombe qui occasionne des dommages Air et retire des PM.\nExplose automatiquement en occasionnant des dommages plus faibles si elle est lancée directement sur une cible."
+  },
+  {
+    "id": 2797,
+    "name": "Bombe à Eau",
+    "descName": "Pose une bombe qui occasionne des dommages Eau et retire des PA.\nExplose automatiquement en occasionnant des dommages plus faibles si elle est lancée directement sur une cible."
+  },
+  {
+    "id": 2801,
+    "name": "Aimantation",
+    "descName": "Attire les bombes.\nAttire les alliés et ennemis d'une case.\nNe peut être lancé que sur une case occupée."
+  },
+  {
+    "id": 2802,
+    "name": "Dagues Boomerang",
+    "descName": "Occasionne des dommages Air en arc de cercle."
+  },
+  {
+    "id": 2803,
+    "name": "Entourloupe",
+    "descName": "Échange la place du Roublard avec celle de la bombe ciblée."
+  },
+  {
+    "id": 2804,
+    "name": "Espingole",
+    "descName": "Occasionne des dommages Air et retire des PM en diagonale."
+  },
+  {
+    "id": 2805,
+    "name": "Poudre",
+    "descName": "Rend une bombe non déplaçable et la fait exploser avec un bonus de combo si elle perd tous ses PV."
+  },
+  {
+    "id": 2806,
+    "name": "Pulsar",
+    "descName": "Occasionne des dommages Feu.\nPlus le pourcentage de PM du personnage au lancement du sort est important, plus les dommages occasionnés sont importants."
+  },
+  {
+    "id": 2807,
+    "name": "Resquille",
+    "descName": "Occasionne des dommages Eau en anneau autour du Roublard et retire 1 PA."
+  },
+  {
+    "id": 2808,
+    "name": "Explobombe",
+    "descName": "Pose une bombe qui occasionne des dommages Feu.\nExplose automatiquement en occasionnant des dommages plus faibles si elle est lancée directement sur une cible."
+  },
+  {
+    "id": 2809,
+    "name": "Rémission",
+    "descName": "Pousse les alliés ou ennemis qui attaquent la cible depuis une case adjacente.\nSur une bombe : réduit les dommages reçus à distance."
+  },
+  {
+    "id": 2810,
+    "name": "Dernier Souffle",
+    "descName": "Augmente le bonus de combo des bombes et les dommages des alliés.\nRéduit temporairement la Vitalité maximale du Roublard."
+  },
+  {
+    "id": 2811,
+    "name": "Rebours",
+    "descName": "Sur bombe : Explose automatiquement à la fin du prochain tour du lanceur et applique de l'érosion en zone.\nSur allié : Augmente les dommages."
+  },
+  {
+    "id": 2812,
+    "name": "Surcharge",
+    "descName": "Permet aux bombes ciblées de réduire la durée des effets de leurs cibles lors de leur explosion.\nL'effet s'active à partir du tour suivant et devient de plus en plus puissant au fil des tours."
+  },
+  {
+    "id": 2813,
+    "name": "Tromblon",
+    "descName": "Occasionne des dommages Eau en cône.\nApplique un malus de vie insoignable."
+  },
+  {
+    "id": 2815,
+    "name": "Kaboom",
+    "descName": "Rend les alliés et le Roublard invulnérables aux explosions des bombes déclenchées et leur confère des bonus."
+  },
+  {
+    "id": 2849,
+    "name": "Diffraction",
+    "descName": "Applique un bouclier sur tous les alliés et ennemis."
+  },
+  {
+    "id": 2872,
+    "name": "Masque de l'Intrépide",
+    "descName": "Applique le Masque de l'Intrépide.\nAugmente le Tacle du lanceur et des alliés en zone."
+  },
+  {
+    "id": 2879,
+    "name": "Masque du Pleutre",
+    "descName": "Applique le Masque du Pleutre.\nAugmente les PM du lanceur et des alliés au contact."
+  },
+  {
+    "id": 2880,
+    "name": "Masque du Psychopathe",
+    "descName": "Applique le Masque du Psychopathe.\nAugmente les dommages en mêlée du lanceur et des alliés."
+  },
+  {
+    "id": 2881,
+    "name": "Martelo",
+    "descName": "Vole des PV dans l'élément Terre.\nApplique un malus de Fuite."
+  },
+  {
+    "id": 2882,
+    "name": "Rétention",
+    "descName": "Vole de la vie dans l'élément Air.\nRetire des PM."
+  },
+  {
+    "id": 2883,
+    "name": "Appeau",
+    "descName": "Vole de la vie dans l'élément Eau sur ennemis.\nAttire la cible en ligne."
+  },
+  {
+    "id": 2885,
+    "name": "Distance",
+    "descName": "Occasionne des dommages Eau sur ennemi et pousse la cible en ligne."
+  },
+  {
+    "id": 2886,
+    "name": "Apathie",
+    "descName": "Occasionne des dommages Terre.\nRetire des PM."
+  },
+  {
+    "id": 2887,
+    "name": "Furia",
+    "descName": "Occasionne des dommages Terre sur ennemis.\nAugmente les dommages du lanceur pendant 2 tours."
+  },
+  {
+    "id": 2888,
+    "name": "Cabriole",
+    "descName": "Téléporte sur la case ciblée.\nOccasionne des dommages Air en croix."
+  },
+  {
+    "id": 2889,
+    "name": "Boliche",
+    "descName": "Occasionne des dommages Eau sur ennemis.\nPousse la cible et rapproche le lanceur."
+  },
+  {
+    "id": 2890,
+    "name": "Plastron",
+    "descName": "Applique un bouclier en zone sur le lanceur et les alliés."
+  },
+  {
+    "id": 2891,
+    "name": "Tortoruga",
+    "descName": "Applique un bouclier sur la cible."
+  },
+  {
+    "id": 2892,
+    "name": "Transe",
+    "descName": "Applique un bouclier sur allié.\nDiminue temporairement les PV du lanceur."
+  },
+  {
+    "id": 2893,
+    "name": "Reuche",
+    "descName": "Rapproche le lanceur de la cible."
+  },
+  {
+    "id": 2894,
+    "name": "Débandade",
+    "descName": "Téléporte à courte portée et augmente les PM."
+  },
+  {
+    "id": 2895,
+    "name": "Fougue",
+    "descName": "Rend la cible insensible au Tacle mais la rend Insoignable."
+  },
+  {
+    "id": 2896,
+    "name": "Appui",
+    "descName": "Occasionne des dommages Air, Feu, Terre et Eau aux ennemis.\nÉloigne le lanceur de sa cible."
+  },
+  {
+    "id": 2897,
+    "name": "Mascarade",
+    "descName": "Occasionne des dommages Neutre au lanceur et à sa cible.\nPlus la vie du lanceur est élevée, plus les dommages occasionnés sont importants."
+  },
+  {
+    "id": 2899,
+    "name": "Picada",
+    "descName": "Occasionne des dommages Air."
+  },
+  {
+    "id": 3202,
+    "name": "Scaphandre",
+    "descName": "Les retraits de PA reçus augmentent les PM.\nAugmente les dommages et les dommages de poussée du lanceur et des alliés ciblés."
+  },
+  {
+    "id": 3203,
+    "name": "Marée",
+    "descName": "Échange de position avec la cible en diagonale et occasionne des dommages aux ennemis."
+  },
+  {
+    "id": 3204,
+    "name": "Ressac",
+    "descName": "Repousse la cible en diagonale, occasionne des dommages Terre."
+  },
+  {
+    "id": 3205,
+    "name": "Courant",
+    "descName": "Occasionne des dommages Eau et attire la cible en diagonale."
+  },
+  {
+    "id": 3206,
+    "name": "Flibuste",
+    "descName": "Vole des PV dans l'élément Feu en diagonale."
+  },
+  {
+    "id": 3207,
+    "name": "Selpâtre",
+    "descName": "Occasionne des dommages Feu et applique un malus de dommages à la cible."
+  },
+  {
+    "id": 3208,
+    "name": "Écume",
+    "descName": "Occasionne des dommages Eau aux ennemis en zone."
+  },
+  {
+    "id": 3209,
+    "name": "Vapor",
+    "descName": "Occasionne des dommages Feu en zone et réduit les chances de coup critique."
+  },
+  {
+    "id": 3210,
+    "name": "Ancrage",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 3211,
+    "name": "Foène",
+    "descName": "Occasionne des dommages Terre.\nOccasionne des dommages Terre supplémentaires sur réception de dommages de poussée."
+  },
+  {
+    "id": 3212,
+    "name": "Harponneuse",
+    "descName": "Pose une tourelle offensive qui vole de la vie aux ennemis et alliés à portée dans l'élément Eau, Terre, Air ou Feu."
+  },
+  {
+    "id": 3213,
+    "name": "Gardienne",
+    "descName": "Pose une tourelle défensive qui soigne les alliés et les ennemis dans sa zone d'effet.\nLes soins sont indexés sur la vie maximale des cibles."
+  },
+  {
+    "id": 3214,
+    "name": "Tactirelle",
+    "descName": "Pose une tourelle tactique qui repousse les ennemis et les alliés."
+  },
+  {
+    "id": 3215,
+    "name": "Évolution",
+    "descName": "Débloque de nouveaux sorts sur la tourelle ciblée.\nSoigne la tourelle ciblée si elle reçoit une évolution.\nAugmente la Puissance des alliés ciblés."
+  },
+  {
+    "id": 3216,
+    "name": "Cuirasse",
+    "descName": "Immunise les alliés ciblés contre les dommages de la Harponneuse et contre les déplacements de la Tactirelle.\nImmunise les ennemis contre les soins de la Gardienne."
+  },
+  {
+    "id": 3217,
+    "name": "Armure de Sel",
+    "descName": "Protège les tourelles et les alliés des attaques à distance.\nLes protections sont plus faibles sur les alliés.\nFixe l'état Indéplaçable sur les tourelles."
+  },
+  {
+    "id": 3218,
+    "name": "Embuscade",
+    "descName": "Occasionne des dommages Feu, Eau, Air et Terre.\nApplique l'état Embuscade sur la cible pour qu'elle puisse être ciblée par le sort spécial de la Harponneuse."
+  },
+  {
+    "id": 3219,
+    "name": "Secourisme",
+    "descName": "Soigne la cible.\nApplique l'état Secourisme sur l'allié ciblé pour qu'il puisse être ciblé par le sort spécial de la Gardienne."
+  },
+  {
+    "id": 3220,
+    "name": "Longue Vue",
+    "descName": "Occasionne des dommages Eau sur les ennemis.\nApplique l'état Longue vue sur la cible pour qu'elle puisse être ciblée par le sort spécial de la Tactirelle.\nAugmente la portée de l'allié ciblé."
+  },
+  {
+    "id": 3221,
+    "name": "Aspiration",
+    "descName": "Rapproche le lanceur d'une de ses tourelles en ligne ou en diagonale."
+  },
+  {
+    "id": 3277,
+    "name": "Brise l'âme",
+    "descName": "Permet à la tourelle ciblée de protéger les cibles situées à proximité lorsque le sort est lancé.\nLes dommages reçus au contact par les cibles sont transférés à la tourelle."
+  },
+  {
+    "id": 3506,
+    "name": "Maîtrise d'Arme",
+    "descName": "Augmente les dommages infligés par les armes."
+  },
+  {
+    "id": 5359,
+    "name": "Portail",
+    "descName": "Pose un portail.\nLorsque plusieurs portails sont actifs, ils permettent de se téléporter ou de projeter des sorts.\nLes dommages et soins des sorts projetés sont augmentés par les portails."
+  },
+  {
+    "id": 5361,
+    "name": "Affront",
+    "descName": "Occasionne des dommages Air.\nSi lancé à travers un portail : retire du tacle."
+  },
+  {
+    "id": 5367,
+    "name": "Poing fulgurant",
+    "descName": "Occasionne des dommages Eau aux ennemis et repousse la cible.\nSi lancé au travers d'un portail : repousse davantage."
+  },
+  {
+    "id": 5368,
+    "name": "Distribution",
+    "descName": "Lorsque la cible reçoit des dommages de sorts, les alliés à proximité de la cible (2 cases) sont soignés d'une partie des dommages occasionnés."
+  },
+  {
+    "id": 5370,
+    "name": "Rayon de Wakfu",
+    "descName": "Occasionne des dommages Feu en ligne aux ennemis.\nSoigne les alliés."
+  },
+  {
+    "id": 5371,
+    "name": "Étirement",
+    "descName": "Réduit temporairement les PV du lanceur mais augmente la portée de la cible.\nAugmente la portée du sort Portail."
+  },
+  {
+    "id": 5372,
+    "name": "Thérapie",
+    "descName": "Occasionne des dommages Terre aux ennemis.\nSi lancé à travers un portail : attire la cible."
+  },
+  {
+    "id": 5381,
+    "name": "Neutral",
+    "descName": "Désactive un Portail pendant 1 tour."
+  },
+  {
+    "id": 5382,
+    "name": "Commotion",
+    "descName": "Occasionne des dommages Terre en croix aux ennemis.\nAttire les cibles vers la cellule ciblée."
+  },
+  {
+    "id": 5383,
+    "name": "Affliction",
+    "descName": "Occasionne des dommages Eau."
+  },
+  {
+    "id": 5386,
+    "name": "Stupeur",
+    "descName": "Pose un piège qui invoque un portail lorsqu'il est déclenché."
+  },
+  {
+    "id": 5388,
+    "name": "Cicatrisation",
+    "descName": "Soigne en zone."
+  },
+  {
+    "id": 5389,
+    "name": "Offense",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 5390,
+    "name": "Odyssée",
+    "descName": "Éloigne le lanceur de la cible et attire la cible vers le lanceur."
+  },
+  {
+    "id": 5391,
+    "name": "Camouflet",
+    "descName": "Occasionne des dommages Terre aux ennemis.\nSi lancé à travers un portail : retire un tour d'envoûtement."
+  },
+  {
+    "id": 5392,
+    "name": "Focus",
+    "descName": "La cible gagne de la Puissance lorsqu'elle est téléportée par un portail."
+  },
+  {
+    "id": 5397,
+    "name": "Brimade",
+    "descName": "Occasionne des dommages Air et pousse les cibles."
+  },
+  {
+    "id": 5400,
+    "name": "Audace",
+    "descName": "Occasionne des dommages Eau sans ligne de vue."
+  },
+  {
+    "id": 5401,
+    "name": "Parasite",
+    "descName": "Occasionne des dommages Feu.\nSi lancé au travers d'un portail : occasionne des dommages supplémentaires en fin de tour."
+  },
+  {
+    "id": 5402,
+    "name": "Raillerie",
+    "descName": "Occasionne des dommages Air.\nRetire des PM si le sort est lancé au travers d'un portail."
+  },
+  {
+    "id": 5403,
+    "name": "Entraide",
+    "descName": "Pendant 2 tours, le lanceur soigne en zone autour de lui à chaque fois qu'un allié emprunte un portail.\nIl gagne 1 PA à chaque fois qu'un ennemi emprunte un portail."
+  },
+  {
+    "id": 5829,
+    "name": "Lance-Flamme",
+    "descName": "Occasionne des dommages Feu et fixe l'état Feu. Pose une rune de Feu à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : - 50 Fuite (1 tour)\n• Air : - 3 PA (1 tour)\n• Terre : + 20% dommages subis (1 tour)"
+  },
+  {
+    "id": 5830,
+    "name": "Stalagmite",
+    "descName": "Occasionne des dommages Eau et fixe l'état Eau. Pose une rune d'Eau à l'emplacement de la cible.\n\nSuivant l'état élémentaire de la cible, elle subit les effets suivants :\n• Air : - 25% dommages (1 tour)\n• Feu : - 50 Fuite (1 tour)\n• Terre : - 2 PM (1 tour)"
+  },
+  {
+    "id": 5831,
+    "name": "Onde Tellurique",
+    "descName": "Occasionne des dommages Terre et fixe l'état Terre.\nPose une rune de Terre à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : vol de 3 portée pendant 1 tour.\n• Eau : perte de 2 PM pendant 1 tour.\n• Feu : 20% de dommages supplémentaires subis pendant 1 tour."
+  },
+  {
+    "id": 5832,
+    "name": "Éther",
+    "descName": "Occasionne des dommages Air et fixe l'état Air. Pose une rune d'Air à l'emplacement de la cible.\n\nSuivant l'état élémentaire de la cible, elle subit les effets suivants :\nEau : elle occasionne 25% de dommages en moins pendant 1 tour.\nFeu : elle perd 3 PA pendant 1 tour.\nTerre : elle subit un vol de 3 de portée pendant 1 tour."
+  },
+  {
+    "id": 5833,
+    "name": "Runification",
+    "descName": "Déclenche toutes les runes élémentaires : elles occasionnent des dommages, fixent l'état de leur élément et améliorent les caractéristiques du lanceur.\nPeut générer des combinaisons élémentaires."
+  },
+  {
+    "id": 5836,
+    "name": "Drain Élémentaire",
+    "descName": "Occasionne des dommages et vole des caractéristiques dans un élément qui dépend de l'état élémentaire de la cible. \n\nConsomme l'état élémentaire de la cible."
+  },
+  {
+    "id": 5838,
+    "name": "Orage",
+    "descName": "Vole de la vie dans l'élément Terre en zone et fixe l'état Terre.\nPose une rune de Terre à l'emplacement de la cible.\n\nl'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : vol de 3 portée pendant 1 tour.\n• Eau : perte de 2 PM pendant 1 tour.\n• Feu : 20% de dommages supplémentaires subis pendant 1 tour."
+  },
+  {
+    "id": 5839,
+    "name": "Météore Percutant",
+    "descName": "Occasionne des dommages Terre et fixe l'état Terre aux ennemis. Repousse la cible.\nPose une rune Terre à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : vol de 3 portée pendant 1 tour.\n• Eau : perte de 2 PM pendant 1 tour.\n• Feu : 20% de dommages supplémentaires subis pendant 1 tour."
+  },
+  {
+    "id": 5840,
+    "name": "Glacier",
+    "descName": "Occasionne des dommages Eau en zone et fixe l'état Eau. Pose une rune d'Eau à l'emplacement des cibles touchées.\n\nSuivant l'état élémentaire des cibles, elles subissent les effets suivants :\nAir : elles occasionnent 25% de dommages en moins pendant 1 tour.\nFeu : elles subissent un malus de 50 fuite pendant 1 tour.\nTerre : elles perdent 2PM pendant 1 tour."
+  },
+  {
+    "id": 5841,
+    "name": "Éclats Glacés",
+    "descName": "Occasionne des dommages Eau et fixe l'état Eau aux ennemis. Attire la cible de 2 cases.\nPose une rune Eau à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : 25% de dommages en moins pendant 1 tour.\n• Feu : malus de 50 Fuite pendant 1 tour.\n• Terre : perte de 2 PM pendant 1 tour."
+  },
+  {
+    "id": 5842,
+    "name": "Rafale Transperçante",
+    "descName": "Vole de la vie dans l'élément Air en zone et fixe l'état Air.\nPose une rune Air à l'emplacement des cibles touchées.\n\nl'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : 25% de dommages en moins pendant 1 tour.\n• Feu : perte de 3 PA pendant 1 tour.\n• Terre : vol de 3 de portée pendant 1 tour."
+  },
+  {
+    "id": 5843,
+    "name": "Lame Astrale",
+    "descName": "Occasionne des dommages Air et fixe l'état Air aux ennemis.\nRéduit la portée des ennemis, augmente la portée des alliés.\nPose une rune d'Air à l'emplacement de la cible.\n\nSuivant l'état élémentaire de la cible, elle subit les effets suivants :\nEau : elle occasionne 25% de dommages en moins pendant 1 tour.\nFeu : elle perd 3PA pendant 1 tour.\nTerre : elle subit un vol de 3 de portée pendant 1 tour."
+  },
+  {
+    "id": 5844,
+    "name": "Trait Ardent",
+    "descName": "Occasionne des dommages Feu en zone et fixe l'état Feu. Pose une rune de Feu à l'emplacement des cibles touchées.\n\nSuivant l'état élémentaire des cibles, elles subissent les effets suivants :\nEau : elles subissent un malus de 50 fuite pendant 1 tour.\nAir : elles perdent 3PA pendant 1 tour.\nTerre : elles subissent 20% de dommages supplémentaire pendant 1 tour."
+  },
+  {
+    "id": 5845,
+    "name": "Déflagration",
+    "descName": "Occasionne des dommages Feu et fixe l'état Feu aux ennemis. Réduit la durée des effets de la cible de 1 tour.\nPose une rune Feu à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : malus de 50 Fuite pendant 1 tour.\n• Air : perte de 3 PA pendant 1 tour.\n• Terre : 20% de dommages supplémentaires pendant 1 tour."
+  },
+  {
+    "id": 5846,
+    "name": "Bouclier Élémentaire",
+    "descName": "La cible gagne des résistances élémentaires.\nÀ chaque fois qu'elle subit des dommages, elle perd de la résistance à l'élément de l'attaque subie ; mais son attaquant entre dans l'état élémentaire lié à son attaque.\n\nPeut générer des combinaisons élémentaires."
+  },
+  {
+    "id": 5847,
+    "name": "Traversée",
+    "descName": "Téléporte sur la cellule ciblée.\nLes cibles comprises entre la cellule initiale et la cellule d'arrivée subissent des dommages en fonction de leur état élémentaire et perdent des PM."
+  },
+  {
+    "id": 5850,
+    "name": "Traitement Runique",
+    "descName": "La cible alliée est soignée en fonction du nombre de runes présentes.\n\nConsomme toutes les runes sans activer leurs effets."
+  },
+  {
+    "id": 6226,
+    "name": "Propagation",
+    "descName": "Fixe l'état élémentaire de la cible sur tous les ennemis dans un rayon de 2 cases.\nPeut générer des combinaisons élémentaires.\n\nSi une rune élémentaire est ciblée, génère un effet en fonction de l'élément, dans un rayon de 2 cases :\nFeu : Divise les soins reçus par les ennemis par 2 pendant 1 tour.\nTerre : Réduit de 1 tour les effets actifs des ennemis.\nEau : Applique l'état pesanteur aux ennemis, les empêchant de se téléporter pendant 1 tour.\nAir : Applique l'état intacleur aux ennemis, les empêchant de tacler les alliés pendant 1 tour."
+  },
+  {
+    "id": 6227,
+    "name": "Polarité",
+    "descName": "Attire les ennemis qui sont dans l'état \"Eau\" .\nRepousse les ennemis qui sont dans l'état \"Terre\".\nÉchange sa position avec un ennemi dans l'état \"Feu\".\nSe téléporte symétriquement par rapport à un ennemi dans l'état \"Air\".\n\nConsomme les états élémentaires des ennemis affectés."
+  },
+  {
+    "id": 6228,
+    "name": "Empreinte",
+    "descName": "Pose une rune pour chaque ennemi affecté par un état élémentaire.\nLa puissance de la rune dépend du niveau d'Empreinte."
+  },
+  {
+    "id": 6413,
+    "name": "Contribution",
+    "descName": "La cible gagne des bonus (cumulables 2 fois) en fonction des états élémentaires des ennemis :\n• Eau : 150 Puissance.\n• Feu : 10% de la vie du lanceur en points de bouclier.\n• Air : 1 PA.\n• Terre : 1PM.\n\nLes ennemis perdent leur état élémentaire."
+  },
+  {
+    "id": 8310,
+    "name": "Proie",
+    "descName": "La cible devient une Proie.\nQuand elle est attaquée, son attaquant est soigné d'une partie des dommages occasionnés."
+  },
+  {
+    "id": 8311,
+    "name": "Flair",
+    "descName": "Téléporte le lanceur à proximité de la Proie.\nRéduit la Rage."
+  },
+  {
+    "id": 8315,
+    "name": "Tétanisation",
+    "descName": "Occasionne des dommages Feu, applique l'état Pesanteur et retire des PM.\n\nAugmente la Rage."
+  },
+  {
+    "id": 8316,
+    "name": "Rabattage",
+    "descName": "Occasionne des dommages Feu.\nSi la cible est la Proie, vole des PM."
+  },
+  {
+    "id": 8317,
+    "name": "Traque",
+    "descName": "Occasionne des dommages Feu.\nSe rapproche de la cible si c'est la Proie."
+  },
+  {
+    "id": 8318,
+    "name": "Molosse",
+    "descName": "Occasionne des dommages Terre.\nLes dommages subis par le lanceur sont réduits de 15% pendant 1 tour.\n\nAugmente la Rage."
+  },
+  {
+    "id": 8319,
+    "name": "Dogue",
+    "descName": "Occasionne des dommages Terre.\nSi la cible est la Proie, vole de la vie."
+  },
+  {
+    "id": 8320,
+    "name": "Cerbère",
+    "descName": "Occasionne des dommages Terre.\nSi la cible est la Proie, applique un malus de Fuite."
+  },
+  {
+    "id": 8322,
+    "name": "Cubitus",
+    "descName": "Occasionne des dommages Eau.\nSi la cible est la Proie, le lanceur gagne 1 PM."
+  },
+  {
+    "id": 8324,
+    "name": "Os à moelle",
+    "descName": "Occasionne des dommages Eau.\nSi la cible est la Proie, les dommages du sort sont augmentés pendant 3 tours."
+  },
+  {
+    "id": 8325,
+    "name": "Tibia",
+    "descName": "Occasionne des dommages Eau autour du lanceur et repousse.\n\nAugmente la Rage."
+  },
+  {
+    "id": 8327,
+    "name": "Limier",
+    "descName": "Occasionne des dommages Air.\n\nSi la cible est la Proie, augmente la Puissance du lanceur."
+  },
+  {
+    "id": 8328,
+    "name": "Charogne",
+    "descName": "Occasionne des dommages Air et applique de l'Érosion.\n\nAugmente la Rage."
+  },
+  {
+    "id": 8330,
+    "name": "Carcasse",
+    "descName": "Occasionne des dommages Air.\nSi la cible est la Proie, les dommages du sort sont augmentés pendant 3 tours."
+  },
+  {
+    "id": 8331,
+    "name": "Apaisement",
+    "descName": "Réduit la Rage du lanceur pour se soigner."
+  },
+  {
+    "id": 8332,
+    "name": "Convergence",
+    "descName": "Sur allié : se rapproche de la cible.\nSur ennemi : attire la cible."
+  },
+  {
+    "id": 8333,
+    "name": "Arcanin",
+    "descName": "Réduit la Rage et augmente la Puissance."
+  },
+  {
+    "id": 8334,
+    "name": "Pelage protecteur",
+    "descName": "Applique un bouclier sur la cible.\n\nSi la cible subit des dommages de poussée, elle perd le bouclier et la Rage du lanceur augmente."
+  },
+  {
+    "id": 8335,
+    "name": "Aboiement",
+    "descName": "La cible ne peut plus être poussée ni attirée et gagne 2 PM pendant 1 tour.\n\nSi la cible subit des dommages en mêlée, les effets du sorts sont retirés et la Rage du lanceur augmente."
+  },
+  {
+    "id": 8336,
+    "name": "Lance-roquet",
+    "descName": "Invoque un Roquet qui avance vers la Proie et l'attaque à chaque fois que son maître occasionne des dommages avec un sort de classe.\nSes dommages sont augmentés sur les invocations."
+  },
+  {
+    "id": 8400,
+    "name": "Panique",
+    "descName": "Éloigne la cible de la Proie.\nSi le sort est lancé sur la Proie, éloigne toutes les entités à 2 cases de la cible."
+  },
+  {
+    "id": 9301,
+    "name": "Flèche de Concentration",
+    "descName": "Occasionne des dommages Air et attire vers la cible."
+  },
+  {
+    "id": 9302,
+    "name": "Flèche Érosive",
+    "descName": "Occasionne des dommages Terre et applique un malus d'Érosion."
+  },
+  {
+    "id": 9303,
+    "name": "Flèche de Repli",
+    "descName": "Le lanceur du sort recule de 2 cases."
+  },
+  {
+    "id": 9304,
+    "name": "Flèche Paralysante",
+    "descName": "Occasionne des dommages Feu et retire des PA."
+  },
+  {
+    "id": 9305,
+    "name": "Flèche Répulsive",
+    "descName": "Occasionne des dommages Feu et repousse de 1 case."
+  },
+  {
+    "id": 9306,
+    "name": "Acuité Absolue",
+    "descName": "Tous les sorts du Crâ peuvent être lancés au travers des obstacles."
+  },
+  {
+    "id": 9307,
+    "name": "Flèche de Rédemption",
+    "descName": "Occasionne des dommages Eau qui sont augmentés si le sort est relancé le tour suivant."
+  },
+  {
+    "id": 9308,
+    "name": "Flèche Écrasante",
+    "descName": "Occasionne des dommages Feu et applique l'état Pesanteur."
+  },
+  {
+    "id": 9309,
+    "name": "Balise de Rappel",
+    "descName": "Invoque une balise qui échange sa position avec celle du lanceur (au début du prochain tour)."
+  },
+  {
+    "id": 9310,
+    "name": "Flèche Assaillante",
+    "descName": "Occasionne des dommages Eau sur les ennemis et le lanceur recule de 1 case.\nSur un allié : rapproche le lanceur de 1 case."
+  },
+  {
+    "id": 9311,
+    "name": "Flèche du Jugement",
+    "descName": "Occasionne des dommages Terre.\nPlus le pourcentage de PM du personnage au lancement du sort est important, plus les dommages occasionnés sont importants."
+  },
+  {
+    "id": 9312,
+    "name": "Balise Tactique",
+    "descName": "Invoque une Balise qui peut servir d'obstacle et de cible.\nLa Balise subit 2 fois moins de dommages des alliés."
+  },
+  {
+    "id": 9313,
+    "name": "Flèche Massacrante",
+    "descName": "Occasionne des dommages Air.\nLes dommages du sort sont augmentés au tour suivant."
+  },
+  {
+    "id": 9314,
+    "name": "Flèche Curative",
+    "descName": "Soigne et augmente les soins reçus par la cible."
+  },
+  {
+    "id": 9315,
+    "name": "Flèche Tyrannique",
+    "descName": "Occasionne des dommages Air si la cible est poussée.\nOccasionne des dommages Feu si la cible subit des dommages de poussée."
+  },
+  {
+    "id": 9316,
+    "name": "Tir de Barrage",
+    "descName": "Occasionne des dommages Terre et repousse la cible."
+  },
+  {
+    "id": 9317,
+    "name": "Flèche Dévorante",
+    "descName": "Occasionne des dommages Air.\nLes dommages sont appliqués lorsque le sort est lancé sur une autre cible.\nPeut se cumuler 3 fois sur une même cible."
+  },
+  {
+    "id": 9318,
+    "name": "Flèche Percutante",
+    "descName": "Occasionne des dommages Eau.\nÀ la fin de son tour, la cible occasionne des dommages Eau et retire des PA en cercle de taille 2 autour d'elle."
+  },
+  {
+    "id": 9319,
+    "name": "Flèche Fulminante",
+    "descName": "Occasionne des dommages Feu.\nSe propage sur l'ennemi le plus proche dans un rayon de 2 cellules. Peut rebondir sur la Balise Tactique.\nÀ chaque cible supplémentaire, les dommages du sort sont augmentés."
+  },
+  {
+    "id": 9320,
+    "name": "Sentinelle",
+    "descName": "Au tour suivant, le lanceur perd tous ses PM mais gagne un bonus de dommages."
+  },
+  {
+    "id": 9321,
+    "name": "Représailles",
+    "descName": "Immobilise la cible."
+  },
+  {
+    "id": 9322,
+    "name": "Aubaine",
+    "descName": "La cible alliée regagne 25% de ses points de vie mais elle subit 25% de dommages supplémentaires."
+  },
+  {
+    "id": 9323,
+    "name": "Toupet",
+    "descName": "Occasionne des dommages Eau en coup normal et des dommages Air en coup critique."
+  },
+  {
+    "id": 9324,
+    "name": "Entrechat",
+    "descName": "Téléporte sur la cellule ciblée."
+  },
+  {
+    "id": 9325,
+    "name": "Face ou Pile",
+    "descName": "Occasionne des dommages Terre en coup normal.\nAugmente la Force en coup critique."
+  },
+  {
+    "id": 9326,
+    "name": "Rugissement",
+    "descName": "Augmente la Puissance en fonction du nombre d'ennemis présents dans la zone d'effet.\nDétecte les invisibles présents dans la zone d'effet."
+  },
+  {
+    "id": 9327,
+    "name": "Corollaire",
+    "descName": "Applique un malus d'Érosion."
+  },
+  {
+    "id": 9328,
+    "name": "Caresse Invocatrice",
+    "descName": "Invoque un chaton qui soigne les alliés."
+  },
+  {
+    "id": 9329,
+    "name": "Péril",
+    "descName": "Occasionne des dommages Eau sur les cibles qui ont plus de 50% de leurs points de vie.\nSoigne les cibles qui ont moins de 50% de leurs points de vie."
+  },
+  {
+    "id": 9330,
+    "name": "Coup du Sort",
+    "descName": "Invoque une Roulette qui donne un bonus aléatoire à son attaquant lorsqu'elle est attaquée.\nDonne un bonus aléatoire à son invocateur lorsqu'elle est invoquée."
+  },
+  {
+    "id": 9331,
+    "name": "Feulement",
+    "descName": "Occasionne des dommages Feu.\nSoigne les alliés."
+  },
+  {
+    "id": 9332,
+    "name": "Lapement",
+    "descName": "Occasionne des dommages Terre et retire des PM.\nLa cible gagne 1 PM au tour suivant."
+  },
+  {
+    "id": 9333,
+    "name": "Mistigri",
+    "descName": "Sur allié : rend 15% des points de vie par tour pendant 3 tours.\nSur le lanceur : rend 10% des points de vie par tour pendant 3 tours."
+  },
+  {
+    "id": 9334,
+    "name": "Coussinets",
+    "descName": "Occasionne des dommages Feu sur la cible ennemie et éloigne le lanceur de la cible."
+  },
+  {
+    "id": 9335,
+    "name": "Bonne Étoile",
+    "descName": "Si la cible alliée est attirée ou poussée, elle regagne 5% de ses PV."
+  },
+  {
+    "id": 9336,
+    "name": "Redistribution",
+    "descName": "Applique l'état Intaclable puis l'état Pesanteur le tour suivant."
+  },
+  {
+    "id": 9337,
+    "name": "Fanfaronnade",
+    "descName": "Occasionne des dommages Air.\nLe lanceur gagne des dommages de poussée pour chaque ennemi touché."
+  },
+  {
+    "id": 9338,
+    "name": "Mésaventure",
+    "descName": "Vole de la vie dans l'élément Eau en coup normal.\nVole de la vie dans l'élément Terre en coup critique.\nLe lanceur n'est pas affecté par le sort."
+  },
+  {
+    "id": 9339,
+    "name": "Infortune",
+    "descName": "Occasionne des dommages Eau aux ennemis et rapproche le lanceur de la cible."
+  },
+  {
+    "id": 9340,
+    "name": "Tromperie",
+    "descName": "Les dommages et l'élément d'attaque sont modifiés aléatoirement à chaque lancer :\n• Terre : 5 PA\n• Air : 4 PA\n• Eau : 3 PA\n• Feu : 2 PA"
+  },
+  {
+    "id": 9341,
+    "name": "Audace d'Ecaflip",
+    "descName": "Occasionne des dommages Terre.\nRepousse la cible puis rapproche le lanceur.\nSi la cible subit des dommages de poussée, le lanceur gagne de la Puissance pendant 2 tours."
+  },
+  {
+    "id": 9342,
+    "name": "Kraps",
+    "descName": "Occasionne des dommages Eau aux ennemis et pousse la cible."
+  },
+  {
+    "id": 9348,
+    "name": "Nécronyx",
+    "descName": "Applique l'état Nécronyx à la cible et passe le tour en cours du lanceur."
+  },
+  {
+    "id": 9373,
+    "name": "Mépris",
+    "descName": "Occasionne des dommages Air et attire la cible."
+  },
+  {
+    "id": 9374,
+    "name": "Tribulation",
+    "descName": "Occasionne des dommages Eau."
+  },
+  {
+    "id": 9375,
+    "name": "Portail Rigide",
+    "descName": "Pose un portail.\nLorsque plusieurs portails sont actifs, ils permettent de se téléporter ou de projeter des sorts.\nLes dommages des sorts projetés sont augmentés par les portails."
+  },
+  {
+    "id": 9376,
+    "name": "Convulsion",
+    "descName": "Occasionne des dommages Terre et repousse la cible."
+  },
+  {
+    "id": 9377,
+    "name": "Faisceau",
+    "descName": "Occasionne des dommages Feu.\nVole de la vie dans l'élément Feu si le sort est lancé via un portail."
+  },
+  {
+    "id": 9378,
+    "name": "Interruption",
+    "descName": "Désactive l'ensemble des portails alliés."
+  },
+  {
+    "id": 9379,
+    "name": "Outrage",
+    "descName": "Occasionne des dommages Feu si le sort est lancé au travers d'un portail."
+  },
+  {
+    "id": 9380,
+    "name": "Contraction",
+    "descName": "Pose et active un portail sur une cellule occupée par un allié."
+  },
+  {
+    "id": 9381,
+    "name": "Sinécure",
+    "descName": "Occasionne des dommages Eau.\nApplique un malus de résistance aux dommages de poussée si le sort est lancé via un portail."
+  },
+  {
+    "id": 9382,
+    "name": "Diffusion",
+    "descName": "La cible renvoie en zone 35% des dommages subis."
+  },
+  {
+    "id": 9383,
+    "name": "Distorsion",
+    "descName": "Invoque un totem qui pose et active un portail sur les cellules occupées par ses attaquants."
+  },
+  {
+    "id": 9384,
+    "name": "Correction",
+    "descName": "Occasionne des dommages Air.\nRapproche le lanceur de la cible."
+  },
+  {
+    "id": 9385,
+    "name": "Conjuration",
+    "descName": "Si la cible traverse un portail, la prochaine attaque qu'elle subit occasionne 25% de dommages supplémentaire."
+  },
+  {
+    "id": 9386,
+    "name": "Paume Curative",
+    "descName": "Soigne la cible."
+  },
+  {
+    "id": 9387,
+    "name": "Exode",
+    "descName": "Téléporte le lanceur symétriquement par rapport à la cible."
+  },
+  {
+    "id": 9388,
+    "name": "Cabale",
+    "descName": "Augmente les PM de la cible.\nSi lancé au travers d'un portail : le bonus de PM est augmenté."
+  },
+  {
+    "id": 9389,
+    "name": "Aplomb",
+    "descName": "Occasionne des dommages Eau uniquement à travers un portail."
+  },
+  {
+    "id": 9390,
+    "name": "Virus",
+    "descName": "Occasionne des dommages Feu en zone.\nLes alliés compris dans la zone d'effet sont soignés à hauteur de 50% des dommages infligés aux ennemis.\nN'affecte pas le lanceur."
+  },
+  {
+    "id": 9391,
+    "name": "Persiflage",
+    "descName": "Occasionne des dommages Terre.\nRetire de la portée si le sort est lancé via un portail."
+  },
+  {
+    "id": 9392,
+    "name": "Coalition",
+    "descName": "Augmente les PA d'un allié.\nSi lancé au travers d'un portail : le bonus de PA est augmenté."
+  },
+  {
+    "id": 9393,
+    "name": "Conflagration",
+    "descName": "Soigne l'allié ciblé.\nSi lancé au travers d'un portail : soigne les alliés en zone autour de la cible."
+  },
+  {
+    "id": 9394,
+    "name": "Mot d'Affection",
+    "descName": "Invoque un Lapino qui applique des points de bouclier sur les alliés et applique l'état Stimulé sur son invocateur.\nLorsque le Lapino meurt, il pose un glyphe de fin de tour qui applique des points de bouclier."
+  },
+  {
+    "id": 9395,
+    "name": "Mot Marquant",
+    "descName": "Occasionne des dommages Feu.\nPose un glyphe autour de la cible. Le glyphe soigne les alliés en fin de tour."
+  },
+  {
+    "id": 9396,
+    "name": "Mot Vexant",
+    "descName": "Occasionne des dommages Air."
+  },
+  {
+    "id": 9397,
+    "name": "Mot Tabou",
+    "descName": "Occasionne des dommages Eau."
+  },
+  {
+    "id": 9398,
+    "name": "Mot de Séduction",
+    "descName": "Occasionne des dommages Terre et invoque une fiole.\nLorsqu'elle est attaquée par un allié, elle subit 2 fois moins de dommages et rend 100% des points de vie perdus à son attaquant.\nLorsqu'elle meurt, elle occasionne des dommages en zone.\nElle meurt si elle entre dans l'état Stimulé."
+  },
+  {
+    "id": 9399,
+    "name": "Mot d'Abnégation",
+    "descName": "Augmente la Puissance de la cible mais réduit les soins qu'elle reçoit.\nApplique l'état Stimulé."
+  },
+  {
+    "id": 9400,
+    "name": "Mot Espiègle",
+    "descName": "Occasionne des dommages Air.\n\nLes alliés à proximité du lanceur (2 cases ou moins) sont soignés à hauteur de 100% des dommages occasionnés avant réduction."
+  },
+  {
+    "id": 9401,
+    "name": "Mot Défendu",
+    "descName": "Occasionne des dommages Terre.\nRéduit la durée des effets sur la cible.\nApplique un malus d'Érosion sur le lanceur."
+  },
+  {
+    "id": 9402,
+    "name": "Mot Impartial",
+    "descName": "Sur allié : soigne la cible et occasionne des dommages Feu autour de la cible.\nSur ennemi : occasionne des dommages Feu et soigne autour de la cible."
+  },
+  {
+    "id": 9403,
+    "name": "Mot Retentissant",
+    "descName": "Occasionne des dommages Eau."
+  },
+  {
+    "id": 9404,
+    "name": "Mot d'Agonie",
+    "descName": "Occasionne des dommages Terre sur un allié.\nLes dommages subis sont augmentés et occasionnés aux ennemis autour de la cible.\nLes ennemis affectés sont repoussés."
+  },
+  {
+    "id": 9405,
+    "name": "Marque de Régénération",
+    "descName": "Pose un glyphe de fin de tour qui soigne."
+  },
+  {
+    "id": 9406,
+    "name": "Mot Vivifiant",
+    "descName": "Augmente les PM.\nNécessite et consomme l'état Stimulé."
+  },
+  {
+    "id": 9407,
+    "name": "Mot Furieux",
+    "descName": "Occasionne des dommages Terre sur un allié et augmente sa Puissance en fonction du nombre d'ennemis au contact.\nLes dommages subis par la cible sont augmentés et occasionnés autour d'elle."
+  },
+  {
+    "id": 9408,
+    "name": "Mot Tourbillonnant",
+    "descName": "Vole de la vie dans l'élément Air."
+  },
+  {
+    "id": 9409,
+    "name": "Mot Accablant",
+    "descName": "Occasionne des dommages Eau et retire des PM.\n\nLes alliés à proximité de la cible (2 cases ou moins) sont soignés à hauteur de 100% des dommages occasionnés avant réduction."
+  },
+  {
+    "id": 9410,
+    "name": "Mot Sacrificiel",
+    "descName": "Les dommages reçus par l'allié ciblé soignent les alliés dans l'état Stimulé."
+  },
+  {
+    "id": 9411,
+    "name": "Mot de Ralliement",
+    "descName": "Rapproche le lanceur d'un allié puis l'attire.\nNécessite et consomme l'état Stimulé sur l'allié.\nPeut être lancé sur le Lapino sans qu'il ne soit dans l'état Stimulé, mais tue le Lapino."
+  },
+  {
+    "id": 9412,
+    "name": "Mot Galvanisant",
+    "descName": "Tous les alliés stimulés reçoivent l'état Intaclable.\nConsomme l'état Stimulé.\nTue le Lapino s'il était invoqué.\nPasse l'intervalle de relance du sort Mot Stimulant de 1 tour."
+  },
+  {
+    "id": 9413,
+    "name": "Mot de Solidarité",
+    "descName": "Sur allié stimulé : tous les autres alliés stimulés lui transfèrent 10% de leurs PV.\nSur allié non stimulé : il transfère 10% de ses PV aux autres alliés stimulés."
+  },
+  {
+    "id": 9414,
+    "name": "Mot Pernicieux",
+    "descName": "Occasionne des dommages Terre sur un allié.\n\n300% des dommages subis sont appliqués aux ennemis autour de la cible."
+  },
+  {
+    "id": 9468,
+    "name": "Lancer de Bêche",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 9469,
+    "name": "Monnaie Sonnante",
+    "descName": "Vole de la vie dans l'élément Eau."
+  },
+  {
+    "id": 9470,
+    "name": "Musette Animée",
+    "descName": "Invoque une Musette Animée qui partage les dommages entre tous les alliés situés dans sa zone d'invocation.\nLa Musette Animée disparaît au bout de 2 tours.\nQuand elle est attaquée par un allié, ce dernier est soigné."
+  },
+  {
+    "id": 9471,
+    "name": "Bêche Fantomatique",
+    "descName": "Occasionne des dommages Air. Les entités qui attaquent la cible sont soignées."
+  },
+  {
+    "id": 9472,
+    "name": "Déambulation",
+    "descName": "La cible échange de position avec le Sac Animé ou la Musette Animée."
+  },
+  {
+    "id": 9473,
+    "name": "Boîte à Outils",
+    "descName": "Augmente les PA et PM d'un allié mais fixe l'état Pacifiste."
+  },
+  {
+    "id": 9474,
+    "name": "Tourbière",
+    "descName": "Occasionne des dommages Terre.\nPlus le pourcentage de PM du personnage au lancement du sort est important, plus les dommages occasionnés sont importants."
+  },
+  {
+    "id": 9475,
+    "name": "Clef de bras",
+    "descName": "Soigne un allié mais lui retire 1 PM non esquivable."
+  },
+  {
+    "id": 9476,
+    "name": "Obsolescence",
+    "descName": "Occasionne des dommages Terre.\nLe lanceur gagne 1 PM à chaque lancer."
+  },
+  {
+    "id": 9477,
+    "name": "Bêche Animée",
+    "descName": "Invoque une Bêche Animée qui vole de la vie dans l'élément Air.\nElle soigne son invocateur lorsqu'elle est attaquée par un allié."
+  },
+  {
+    "id": 9478,
+    "name": "Avarice",
+    "descName": "Réduit les PM mais augmente les PA.\nN'affecte pas le lanceur."
+  },
+  {
+    "id": 9479,
+    "name": "Roulage de Bêche",
+    "descName": "Occasionne des dommages Feu lorsque la cible subit un retrait de PM."
+  },
+  {
+    "id": 9480,
+    "name": "Vivacité",
+    "descName": "Échange de position avec la cible et la soigne s'il s'agit d'un allié."
+  },
+  {
+    "id": 9481,
+    "name": "Abattement",
+    "descName": "Occasionne des dommages Air et retire des PA."
+  },
+  {
+    "id": 9482,
+    "name": "Opportunité",
+    "descName": "Occasionne des dommages Air et augmente la Puissance du lanceur."
+  },
+  {
+    "id": 9483,
+    "name": "Bêche du Jugement",
+    "descName": "Occasionne des dommages Air et repousse."
+  },
+  {
+    "id": 9484,
+    "name": "Bêche Carnivore",
+    "descName": "Vole de la vie dans l'élément Eau si la cible est soignée."
+  },
+  {
+    "id": 9485,
+    "name": "Décadence",
+    "descName": "Applique un bonus aux dommages finaux à un allié pendant 1 tour.\nAu tour suivant, la cible subit davantage de dommages."
+  },
+  {
+    "id": 9486,
+    "name": "Correction",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 9487,
+    "name": "Coffre Régénérant",
+    "descName": "Invoque un coffre qui soigne les alliés à proximité.\nSoigne les alliés qui l'attaquent.\nS'il est tué par un ennemi, il soigne toute l'équipe ennemie."
+  },
+  {
+    "id": 9488,
+    "name": "Dernier Recours",
+    "descName": "Fixe l'état Pesanteur et occasionne des dommages aux ennemis autour de l'invocation du lanceur ciblée.\nPlus l'invocation a de Vitalité, plus les dommages sont importants.\nL'invocation est tuée."
+  },
+  {
+    "id": 9520,
+    "name": "Attraction Naturelle",
+    "descName": "Occasionne des dommages Feu et attire la cible."
+  },
+  {
+    "id": 9521,
+    "name": "Éblouissement",
+    "descName": "Occasionne des dommages Terre et applique un malus de Fuite."
+  },
+  {
+    "id": 9522,
+    "name": "Fortification",
+    "descName": "Réduit les dommages reçus."
+  },
+  {
+    "id": 9523,
+    "name": "Bourrasque",
+    "descName": "Occasionne des dommages Air et pousse les cibles."
+  },
+  {
+    "id": 9524,
+    "name": "Boursoufflure",
+    "descName": "Occasionne des dommages Air et pousse la cible."
+  },
+  {
+    "id": 9525,
+    "name": "Manoeuvre",
+    "descName": "Échange de position avec la cible."
+  },
+  {
+    "id": 9526,
+    "name": "Glyphe Fulminant",
+    "descName": "Occasionne des dommages Air et pose un glyphe qui augmente les dommages de mêlée des alliés."
+  },
+  {
+    "id": 9527,
+    "name": "Atonie",
+    "descName": "Occasionne des dommages Feu et vole de l'Intelligence."
+  },
+  {
+    "id": 9528,
+    "name": "Attaque Orageuse",
+    "descName": "Occasionne des dommages Eau sans ligne de vue et réduit les chances de coups critiques."
+  },
+  {
+    "id": 9529,
+    "name": "Ruée",
+    "descName": "Rapproche le lanceur de la cible.\nAugmente le Tacle du lanceur."
+  },
+  {
+    "id": 9530,
+    "name": "Tétanie",
+    "descName": "Occasionne des dommages Neutre et retire des PA."
+  },
+  {
+    "id": 9531,
+    "name": "Égide",
+    "descName": "Invoque un bouclier qui subit les dommages à la place des alliés présents dans son glyphe-aura."
+  },
+  {
+    "id": 9532,
+    "name": "Barrière",
+    "descName": "Pose un glyphe-aura autour de la cible au début de son prochain tour.\nLe glyphe inflige des dommages à la cible si elle le traverse."
+  },
+  {
+    "id": 9533,
+    "name": "Renfort",
+    "descName": "Téléporte sur la première cellule disponible entre le lanceur et l'allié ciblé."
+  },
+  {
+    "id": 9534,
+    "name": "Glyphe Protecteur",
+    "descName": "Occasionne des dommages Terre et pose un glyphe-aura qui réduit les dommages subis par les alliés."
+  },
+  {
+    "id": 9535,
+    "name": "Tension",
+    "descName": "Occasionne des dommages Eau et pousse la cible."
+  },
+  {
+    "id": 9536,
+    "name": "Glyphe d'Itinérance",
+    "descName": "Occasionne des dommages Eau.\nPose un glyphe qui augmente la Fuite des alliés."
+  },
+  {
+    "id": 9537,
+    "name": "Glyphe d'Excursion",
+    "descName": "Pose un glyphe qui échange la position des alliés avec celle du lanceur."
+  },
+  {
+    "id": 9538,
+    "name": "Glyphe de Perception",
+    "descName": "Occasionne des dommages Feu.\nPose un glyphe autour du lanceur qui augmente la portée des alliés."
+  },
+  {
+    "id": 9539,
+    "name": "Inertie",
+    "descName": "Applique l'état Pesanteur autour du lanceur.\nAugmente le Tacle de 25 par ennemi présent dans la zone d'effet."
+  },
+  {
+    "id": 9540,
+    "name": "Ataraxie",
+    "descName": "Applique un bouclier qui réduit les dommages de la prochaine attaque subie."
+  },
+  {
+    "id": 9577,
+    "name": "Onde Céleste",
+    "descName": "Occasionne des dommages Air et fixe l'état Air. Pose une rune d'Air à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : - 25% dommages (1 tour)\n• Feu : - 3 PA (1 tour)\n• Terre : vole 3 Portée (1 tour)"
+  },
+  {
+    "id": 9578,
+    "name": "Dard",
+    "descName": "Occasionne des dommages Terre et fixe l'état Terre. Pose une rune de Terre à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : vole 3 Portée (1 tour)\n• Eau : - 2 PM (1 tour)\n• Feu : + 20% dommages subis (1 tour)"
+  },
+  {
+    "id": 9579,
+    "name": "Manifestation",
+    "descName": "Déclenche la rune ciblée.\nSi la cellule est vide, invoque une Manifestation pendant 1 tour :\n• Eau : la Manifestation attire toutes les entités à proximité (2 cases).\n• Air : les entités présentes au contact de la Manifestation sont téléportées par symétrie.\n• Feu : le lanceur échange de position avec la Manifestation.\n• Terre : les entités présentes au contact de la Manifestation sont repoussées.\nÀ sa mort, applique son élément à proximité."
+  },
+  {
+    "id": 9580,
+    "name": "Cataracte",
+    "descName": "Occasionne des dommages Eau et fixe l'état Eau. Pose une rune d'Eau à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : - 25% dommages (1 tour)\n• Feu : - 50 Fuite (1 tour)\n• Terre : - 2 PM (1 tour)"
+  },
+  {
+    "id": 9581,
+    "name": "Tison",
+    "descName": "Occasionne des dommages Feu et fixe l'état Feu. Pose une rune de Feu à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : - 50 Fuite (1 tour)\n• Air : - 3 PA (1 tour)\n• Terre : + 20% dommages subis (1 tour)"
+  },
+  {
+    "id": 9582,
+    "name": "Morph",
+    "descName": "Occasionne des dommages en fonction de l'élément de la cible.\nLes contraintes de lancer du sort sont modifiées pendant 2 tours, en fonction de l'élément :\n• Eau : réduit le coût en PA\n• Feu : augmente les dégâts\n• Air : augmente la Portée\n• Terre : augmente le nombre de lancers par cible"
+  },
+  {
+    "id": 9583,
+    "name": "Ouragan",
+    "descName": "Vole de la vie dans l'élément Air et fixe l'état Air. Pose une rune d'Air à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : - 25% dommages (1 tour)\n• Feu : - 3 PA (1 tour)\n• Terre : vole 3 Portée (1 tour)"
+  },
+  {
+    "id": 9584,
+    "name": "Lame Tellurique",
+    "descName": "Occasionne des dommages Terre et fixe l'état Terre. Pose une rune de Terre à l'emplacement de la cible.\nRéduit la probabilité de critique des ennemis et augmente la probabilité de critique des alliés.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : vole 3 Portée (1 tour)\n• Eau : - 2 PM (1 tour)\n• Feu : + 20% dommages subis (1 tour)"
+  },
+  {
+    "id": 9585,
+    "name": "Courant Quadramental",
+    "descName": "Déclenche des effets sur la cible en fonction de son élément :\n• Eau = la cible attire toutes les entités à proximité (2 cases)\n• Air = les entités à proximité de la cible sont téléportées par symétrie\n• Terre = la cible repousse toutes les entités au contact\n• Feu = la cible échange de place avec l'entité la plus proche"
+  },
+  {
+    "id": 9586,
+    "name": "Stalactite",
+    "descName": "Vole de la vie dans l'élément Eau et fixe l'état Eau. Pose une rune d'Eau à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : - 25% dommages (1 tour)\n• Feu : - 50 Fuite (1 tour)\n• Terre : - 2 PM (1 tour)"
+  },
+  {
+    "id": 9587,
+    "name": "Volcan",
+    "descName": "Vole de la vie dans l'élément Feu et fixe l'état Feu. Pose une rune de Feu à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : - 50 Fuite (1 tour)\n• Air : - 3 PA (1 tour)\n• Terre : + 20% dommages subis (1 tour)"
+  },
+  {
+    "id": 9588,
+    "name": "Piège Élémentaire",
+    "descName": "Pose un piège qui applique des effets en fonction de l'élément de l'entité qui déclenche le piège :\n• Feu : les prochains soins reçus dans le tour sont divisés par 2\n• Air : applique l'état Intacleur\n• Terre : réduit la durée des effets actifs de 1 tour\n• Eau : applique l'état Pesanteur"
+  },
+  {
+    "id": 9589,
+    "name": "Gardien Élémentaire",
+    "descName": "Invoque un élémentaire statique dont la puissance augmente à chaque fois qu'un combo élémentaire différent est généré.\nIl attaque dans l'élément de la cible."
+  },
+  {
+    "id": 9590,
+    "name": "Déluge",
+    "descName": "Occasionne des dommages Eau et fixe l'état Eau. Rapproche le lanceur de sa cible.\nPose une rune d'Eau à l'emplacement de la cible.\n\nl'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : - 25% dommages (1 tour)\n• Feu : - 50 Fuite (1 tour)\n• Terre : - 2 PM (1 tour)"
+  },
+  {
+    "id": 9591,
+    "name": "Cycle Élémentaire",
+    "descName": "Change l'élément de la cible en fonction de son élément :\nTerre -> Eau -> Feu -> Air -> Terre"
+  },
+  {
+    "id": 9592,
+    "name": "Lance Solaire",
+    "descName": "Occasionne des dommages Feu, échange de position avec la cible et fixe l'état Feu.\nPose une rune de Feu à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : - 50 Fuite (1 tour)\n• Air : - 3 PA (1 tour)\n• Terre : + 20% dommages subis (1 tour)"
+  },
+  {
+    "id": 9593,
+    "name": "Surcharge Runique",
+    "descName": "Consomme toutes les runes sans activer leurs effets.\nLa cible subit des dommages en fonction du nombre et de l'élément des runes consommées."
+  },
+  {
+    "id": 9594,
+    "name": "Brèche Tectonique",
+    "descName": "Vole de la vie dans l'élément Terre et fixe l'état Terre. Pose une rune de Terre à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Air : vole 3 Portée (1 tour)\n• Eau : - 2 PM (1 tour)\n• Feu : + 20% dommages subis (1 tour)"
+  },
+  {
+    "id": 9595,
+    "name": "Comète",
+    "descName": "Occasionne des dommages Air, éloigne le lanceur et fixe l'état Air.\nPose une rune d'Air à l'emplacement de la cible.\n\nL'état élémentaire de la cible modifie les effets qu'elle subit :\n• Eau : - 25% dommages (1 tour)\n• Feu : - 3 PA (1 tour)\n• Terre : vole 3 Portée (1 tour)"
+  },
+  {
+    "id": 9596,
+    "name": "Boucle Élémentaire",
+    "descName": "Occasionne des dommages dans l'élément de la cible.\nChange l'élément de la cible :\nEau -> Terre -> Air -> Feu -> Eau"
+  },
+  {
+    "id": 9597,
+    "name": "Répulsion Runique",
+    "descName": "Repousse en croix pour chaque rune présente sur le terrain.\nConsomme les runes sans déclencher leurs effets."
+  },
+  {
+    "id": 9626,
+    "name": "Menace",
+    "descName": "Occasionne des dommages Eau et attire la cible.\nLe lanceur gagne des points de bouclier."
+  },
+  {
+    "id": 9627,
+    "name": "Tannée",
+    "descName": "Occasionne des dommages Air en zone et retire des PM."
+  },
+  {
+    "id": 9628,
+    "name": "Détermination",
+    "descName": "Fixe l'état Indéplaçable et réduit 25% des dommages subis pendant 1 tour.\nNe peut pas être désenvoûté."
+  },
+  {
+    "id": 9629,
+    "name": "Endurance",
+    "descName": "Occasionne des dommages Eau.\nApplique des points de bouclier au lanceur."
+  },
+  {
+    "id": 9630,
+    "name": "Fendoir",
+    "descName": "Occasionne des dommages Eau en zone.\nApplique des points de bouclier pour chaque ennemi touché."
+  },
+  {
+    "id": 9631,
+    "name": "Anneau Destructeur",
+    "descName": "Occasionne des dommages Air en anneau et attire les cibles."
+  },
+  {
+    "id": 9632,
+    "name": "Rassemblement",
+    "descName": "La cible attire ses alliés à proximité (2 cases) lorsqu'elle est attaquée."
+  },
+  {
+    "id": 9633,
+    "name": "Violence",
+    "descName": "Attire les entités à proximité et augmente les dommages de poussée et le Tacle pour chaque ennemi dans la zone d'effet."
+  },
+  {
+    "id": 9634,
+    "name": "Accumulation",
+    "descName": "Occasionne des dommages Terre.\nSi le sort est lancé sur soi, le sort n'occasionne pas de dommages et ils sont augmentés pour les prochains lancers."
+  },
+  {
+    "id": 9635,
+    "name": "Fracture",
+    "descName": "Occasionne des dommages Air jusqu'à la cellule ciblée.\nApplique un malus d'Érosion."
+  },
+  {
+    "id": 9636,
+    "name": "Coup pour coup",
+    "descName": "La cible est repoussée de 2 cases à chaque fois qu'elle attaque le lanceur."
+  },
+  {
+    "id": 9637,
+    "name": "Emprise",
+    "descName": "Retire tous les PM de l'ennemi ciblé mais le rend invulnérable."
+  },
+  {
+    "id": 9639,
+    "name": "Vertu",
+    "descName": "Applique un bouclier zone mais réduit la Puissance du lanceur."
+  },
+  {
+    "id": 9640,
+    "name": "Agitation",
+    "descName": "Augmente les PM et la Fuite pour le tours en cours."
+  },
+  {
+    "id": 9641,
+    "name": "Tumulte",
+    "descName": "Occasionne des dommages Feu en zone.\nPlus le nombre de cibles est important, plus les dommages sont importants."
+  },
+  {
+    "id": 9642,
+    "name": "Zénith",
+    "descName": "Occasionne des dommages Air en zone.\nLes dommages sont augmentés pour chaque PM disponible lorsque le sort est lancé."
+  },
+  {
+    "id": 9643,
+    "name": "Pugilat",
+    "descName": "Occasionne des dommages Terre en zone.\nLes dommages sont augmentés pendant 1 tour après chaque lancer."
+  },
+  {
+    "id": 9644,
+    "name": "Sentence",
+    "descName": "Occasionne des dommages Feu.\nOccasionne des dommages Feu supplémentaires en zone à la fin du tour de la cible."
+  },
+  {
+    "id": 9645,
+    "name": "Conquête",
+    "descName": "Invoque un épouvantail qui redistribue à proximité (2 cases) 50% des dommages qu'il subit."
+  },
+  {
+    "id": 9651,
+    "name": "Croc Répulsif",
+    "descName": "Occasionne des dommages Air.\nSi la cible termine son tour au contact d'un allié, elle est repoussée par le lanceur."
+  },
+  {
+    "id": 9652,
+    "name": "Onde Aquatique",
+    "descName": "Occasionne des dommages Eau.\nAugmente les dommages occasionnés sur la cible par les invocations."
+  },
+  {
+    "id": 9653,
+    "name": "Tofu Albinos",
+    "descName": "Invoque un Tofu Albinos qui occasionne des dommages Air et retire des PM.\nSes dommages augmentent au fil des tour.\nEmpêche l'invocation d'un Bouftou, d'un Crapaud ou d'un Dragonnet dans le même tour."
+  },
+  {
+    "id": 9654,
+    "name": "Union Animale",
+    "descName": "Fusionne avec une invocation alliée pour prendre le contrôle des invocations de la même famille.\n\nTofu : \n•  Tous les Tofus gagnent 2 PA ainsi que 50% de l'Agilité et des Dommages Air du lanceur. \n•  Le lanceur gagne 2 PM.\n\nBouftou : \n•  Tous les Bouftous gagnent 2PA ainsi que 50% de la Force, des Dommages Terre et des Dommages Neutre du lanceur. \n•  Le lanceur réduit les dommages subis de 20%.\n\nDragonnet : \n•  Tous les Dragonnets gagnent 2 PA ainsi que 50% de l'Intelligence, des Dommages Feu et des Soins du lanceur. \n•  Le lanceur gagne un bonus aux soins.\n\nCrapaud :\n•  Tous les Crapauds gagnent 2 PA ainsi que 50% de la Chance et des Dommages Eau du lanceur. \n•  Le lanceur gagne un bonus aux dommages."
+  },
+  {
+    "id": 9655,
+    "name": "Sédimentation",
+    "descName": "Occasionne des dommages Terre.\nRéduit la Puissance de la cible."
+  },
+  {
+    "id": 9656,
+    "name": "Tourbillon",
+    "descName": "Occasionne des dommages Eau.\nSur une invocation alliée : occasionne des dommages Eau en zone et repousse."
+  },
+  {
+    "id": 9657,
+    "name": "Baume Protecteur",
+    "descName": "Le lanceur perd 10% de ses points de vie mais applique un bouclier sur l'invocation ciblée."
+  },
+  {
+    "id": 9658,
+    "name": "Crapaud Albinos",
+    "descName": "Invoque un Crapaud Albinos qui applique un poison Eau.\nSi contrôlé par son invocateur, peut pousser une cible jusqu'à la cellule ciblée."
+  },
+  {
+    "id": 9659,
+    "name": "Cravache",
+    "descName": "Applique des effets en fonction de la transformation du lanceur :\nCrapaud : rapproche le lanceur de la cible\nBouftou : attire la cible\nDragonnet : repousse le lanceur\nTofu : échange de place avec la cible"
+  },
+  {
+    "id": 9660,
+    "name": "Déplumage",
+    "descName": "Le Tofu ciblé occasionne des dommages Air en zone et meurt à la fin de son tour."
+  },
+  {
+    "id": 9661,
+    "name": "Boufton",
+    "descName": "Invoque un Boufton qui tacle et retire des PA."
+  },
+  {
+    "id": 9662,
+    "name": "Dragonnet Albinos",
+    "descName": "Invoque un Dragonnet qui occasionne des dommages Feu.\nSi contrôlé par son invocateur, peut soigner un allié.\nEmpêche l'invocation d'un Bouftou, d'un Crapaud ou d'un Tofu dans le même tour."
+  },
+  {
+    "id": 9663,
+    "name": "Coeur de Dragon",
+    "descName": "La cible est soignée quand un Dragonnet occasionne des dommages."
+  },
+  {
+    "id": 9664,
+    "name": "Crapaud Noir",
+    "descName": "Invoque un Crapaud Noir qui occasionne des dommages Eau au contact.\nPlus il utilise de PM avant d'attaquer, moins il fait de dommages.\nSi contrôlé par son invocateur, peut pousser une cible jusqu'à la cellule ciblée."
+  },
+  {
+    "id": 9665,
+    "name": "Constriction",
+    "descName": "Vole de la vie dans l'élément Terre."
+  },
+  {
+    "id": 9666,
+    "name": "Geyser",
+    "descName": "Occasionne des dommages Eau.\nAugmente la Puissance."
+  },
+  {
+    "id": 9667,
+    "name": "Crapaud Baveux",
+    "descName": "Invoque un Crapaud Baveux qui occasionne des dommages Eau en zone.\nSi contrôlé par son invocateur, peut pousser une cible jusqu'à la cellule ciblée."
+  },
+  {
+    "id": 9668,
+    "name": "Relais",
+    "descName": "Donne 2 PA à la cible.\nSi une autre entité est déjà sous l'effet du sort, elle perd son bonus PA et les deux entités échangent de position."
+  },
+  {
+    "id": 9669,
+    "name": "Favoritisme",
+    "descName": "Tue toutes les invocations du lanceur sauf l'invocation ciblée.\nElle gagne 1 PA, 1PM, 50% de vitalité et 30% de dommages par invocation ainsi sacrifiée."
+  },
+  {
+    "id": 9670,
+    "name": "Remplacement",
+    "descName": "Tue l'invocation ciblée et la remplace par une autre (en fonction de la transformation du lanceur)."
+  },
+  {
+    "id": 9671,
+    "name": "Communion Animale",
+    "descName": "Toutes les invocations alliées partagent les dommages qu'elles reçoivent mais subissent 50% de dommages en plus."
+  },
+  {
+    "id": 9672,
+    "name": "Condamnation",
+    "descName": "Occasionne des dommages Air et Feu.\nLes dommages sont appliqués lorsque le sort est lancé sur une autre cible.\nPeut se cumuler 2 fois sur une même cible."
+  },
+  {
+    "id": 9675,
+    "name": "Fureur",
+    "descName": "Occasionne des dommages Terre.\nLes dommages sont augmentés à chaque lancer du sort, mais ce bonus est perdu si le sort n'est pas relancé."
+  },
+  {
+    "id": 9683,
+    "name": "Gibier",
+    "descName": "Applique temporairement l'état Proie sur la cible. Il est possible d'avoir plusieurs proies simultanément."
+  },
+  {
+    "id": 9684,
+    "name": "Mâchoire",
+    "descName": "Occasionne des dommages Feu. \nAugment la puissance des alliés à proximité de la cible. Le lanceur n'est pas affecté.\nAugmente la Rage."
+  },
+  {
+    "id": 9685,
+    "name": "Calcaneus",
+    "descName": "Occasionne des dommages Eau. \nSi la cible est dans l'état Proie, elle est attirée d'une case."
+  },
+  {
+    "id": 9686,
+    "name": "Dépouille",
+    "descName": "Occasionne des dommages Air. \nSi la cible est dans l'état Proie, les dommages du sort sont augmentés en fonction du nombres d'alliés au contact de la cible."
+  },
+  {
+    "id": 9687,
+    "name": "Aboi",
+    "descName": "Vole de la vie dans l'élément Feu. \nSi la cible est dans l'état Proie, ses résistances aux dommages de poussée sont réduites."
+  },
+  {
+    "id": 9689,
+    "name": "Affection",
+    "descName": "Échange de place avec une cible alliée.\nRéduit la Rage."
+  },
+  {
+    "id": 9690,
+    "name": "Gangrène",
+    "descName": "Applique de l'Érosion sur la cible.\nAugmente la Rage."
+  },
+  {
+    "id": 9691,
+    "name": "Muselière",
+    "descName": "Occasionne des dommages Terre.\nSi la cible est dans l'état Proie, le lanceur gagne du tacle."
+  },
+  {
+    "id": 9692,
+    "name": "Humérus",
+    "descName": "Occasionne des dommages Terre et téléporte le lanceur derrière la cible.\nAugmente la Rage."
+  },
+  {
+    "id": 9693,
+    "name": "Chasse",
+    "descName": "Occasionne des dommages Feu. \nSi la cible est dans l'état Proie, elle est repoussée."
+  },
+  {
+    "id": 9694,
+    "name": "Battue",
+    "descName": "Occasionne des dommages Air.\nSi la cible est dans l'état Proie, les alliés à son contact gagnent 1 PM."
+  },
+  {
+    "id": 9695,
+    "name": "Caninos",
+    "descName": "Réduit la puissance du lanceur.\nRéduit la Rage."
+  },
+  {
+    "id": 9696,
+    "name": "Férocité",
+    "descName": "Si la cible est déplacée ou subit un retrait PM, elle gagne de la Puissance."
+  },
+  {
+    "id": 9697,
+    "name": "Radius",
+    "descName": "Occasionne des dommages Eau. \nLe lanceur échange de place avec la cible.\nAugmente la Rage."
+  },
+  {
+    "id": 9698,
+    "name": "Vertèbre",
+    "descName": "Empoisonne la cible pendant 2 tours en occasionnant des dommages Eau."
+  },
+  {
+    "id": 9699,
+    "name": "Poursuite",
+    "descName": "Pose un glyphe-aura qui attire les alliés vers la Proie la plus proche lorsqu'il est activé."
+  },
+  {
+    "id": 9700,
+    "name": "Amarok",
+    "descName": "Occasionne des dommages Terre.\nSi la cible est dans l'état Proie, attire les entités alignées avec la cible."
+  },
+  {
+    "id": 9701,
+    "name": "Rogne",
+    "descName": "Si le lanceur subit des dommages à distance, il gagne des dommages de poussée et du tacle."
+  },
+  {
+    "id": 9702,
+    "name": "Dépeçage",
+    "descName": "Occasionne des dommages Air.\nRéduit la durée des effets actifs sur la cible.\nAugmente la Rage."
+  },
+  {
+    "id": 9703,
+    "name": "Acharnement",
+    "descName": "La Proie ciblée subit des dommages supplémentaires pendant 1 tour.\nAugmente la Rage."
+  },
+  {
+    "id": 9704,
+    "name": "Pistage",
+    "descName": "Pousse la cible, puis rapproche le lanceur de la cible."
+  },
+  {
+    "id": 9739,
+    "name": "Gueule de Bois",
+    "descName": "Occasionne des dommages Terre.\nLes dommages du sort augmentent aux lancers suivants.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9740,
+    "name": "Bombance",
+    "descName": "Applique l'état Saoul et donne du tacle. Ne bloque pas le lancer des sorts Sobre."
+  },
+  {
+    "id": 9741,
+    "name": "Cercle Brûlant",
+    "descName": "Occasionne des dommages Feu en zone.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9742,
+    "name": "Consolation",
+    "descName": "Attire la cible vers le lanceur. Soigne la cible si c'est un allié.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9743,
+    "name": "Engourdissement",
+    "descName": "Occasionne des dommages Air et retire des PM en zone.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9744,
+    "name": "Eau-de-vie",
+    "descName": "Jette la cible sur la cellule ciblée. Soigne les alliés en zone autour du point d'impact.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9745,
+    "name": "Liqueur",
+    "descName": "Vole de la vie dans l'élément Air.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9746,
+    "name": "Chamrak",
+    "descName": "Porte la cible. Au second lancer, jette la cible.\nDésactive les lignes de vue des sorts de la cible portée."
+  },
+  {
+    "id": 9747,
+    "name": "Cascade",
+    "descName": "Le lanceur jette la cible et s'en rapproche.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9748,
+    "name": "Broussaille Empoisonnée",
+    "descName": "Applique un poison Terre de début de tour."
+  },
+  {
+    "id": 9749,
+    "name": "Arbre Feuillu",
+    "descName": "Pose un Arbre feuillu."
+  },
+  {
+    "id": 9750,
+    "name": "La Bloqueuse",
+    "descName": "Invoque une Bloqueuse."
+  },
+  {
+    "id": 9751,
+    "name": "Poison de Proximité",
+    "descName": "Applique l'état Infecté à toutes les cibles ennemies au contact d'une poupée ou d'un arbre feuillu du lanceur."
+  },
+  {
+    "id": 9752,
+    "name": "Montée de Sève",
+    "descName": "Vole de la vie en zone dans l'élément Eau.\n\nSur un arbre allié qui vient d'apparaître : le fait pousser et le rend exploitable avec les autres sorts du Sadida."
+  },
+  {
+    "id": 9753,
+    "name": "La Folle",
+    "descName": "Invoque une Folle."
+  },
+  {
+    "id": 9754,
+    "name": "Rempotage",
+    "descName": "Téléporte l'arbre feuillu ciblé sur la première case disponible entre lui et le lanceur."
+  },
+  {
+    "id": 9755,
+    "name": "Influence Végétale",
+    "descName": "Remplace l'arbre ciblé par un arbre contrôlable qui peut attirer une cible et retirer des PM."
+  },
+  {
+    "id": 9756,
+    "name": "La Sacrifiée",
+    "descName": "Invoque une Sacrifiée."
+  },
+  {
+    "id": 9758,
+    "name": "Secousse",
+    "descName": "Occasionne des dommages Air au contact de chaque arbre allié.\nLe lanceur gagne 1 PM par ennemi touché."
+  },
+  {
+    "id": 9759,
+    "name": "Inoculation",
+    "descName": "Tue l'arbre ciblé. Occasionne des dommages Air et applique l'état Infecté en zone."
+  },
+  {
+    "id": 9760,
+    "name": "Force de la Nature",
+    "descName": "Occasionne des dommages Terre en fonction du nombre d'arbre posés sur le terrain par le lanceur."
+  },
+  {
+    "id": 9761,
+    "name": "Fléau",
+    "descName": "Occasionne des dommages Eau et vole de la vie Eau à tous les ennemis infectés."
+  },
+  {
+    "id": 9762,
+    "name": "Altruisme végétal",
+    "descName": "Tue l'arbre ciblé. Donne un bonus de vitalité infini à toutes les poupées du lanceur."
+  },
+  {
+    "id": 9763,
+    "name": "La Gonflable",
+    "descName": "Invoque une Gonflable."
+  },
+  {
+    "id": 9764,
+    "name": "Varappe",
+    "descName": "Si le lanceur subit une attaque de mêlée, il porte son attaquant.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9765,
+    "name": "Ronce Harcelante",
+    "descName": "Occasionne des dommages Terre en zone autour d'un arbre allié."
+  },
+  {
+    "id": 9766,
+    "name": "Contagion",
+    "descName": "Occasionne des dommages Air et propage l'état Infecté aux ennemis au contact de la cible.\nSi la cible est dans l'état Infecté : occasionne des dommages Air à tous les ennemis dans l'état Infecté."
+  },
+  {
+    "id": 9767,
+    "name": "Malédiction Vaudou",
+    "descName": "La cible subit des dommages Feu si elle perd des PM, et des dommages Eau si elle perd des PA."
+  },
+  {
+    "id": 9768,
+    "name": "Ronce Paralysante",
+    "descName": "Occasionne des dommages Air et retire des PM."
+  },
+  {
+    "id": 9769,
+    "name": "La Surpuissante",
+    "descName": "Invoque une Surpuissante."
+  },
+  {
+    "id": 9770,
+    "name": "Harmonie",
+    "descName": "Applique l'état Enraciné au lanceur et lui retire tous ses PM à la fin du tour.\nLe lanceur partage les dommages avec ses poupées."
+  },
+  {
+    "id": 9771,
+    "name": "Nausée",
+    "descName": "Occasionne des dommages Air et repousse le lanceur de la cible.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9772,
+    "name": "Distillation",
+    "descName": "Occasionne des dommages Eau et zone et retire de la portée.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9773,
+    "name": "Brassage",
+    "descName": "Applique l'état Pesanteur.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9774,
+    "name": "Prohibition",
+    "descName": "Applique l'état Insoignable sur la cible et la rend invulnérable aux dommages de mêlée.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9775,
+    "name": "Gnôle",
+    "descName": "Occasionne des dommages Eau en fonction des PM utilisés.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9776,
+    "name": "Fermentation",
+    "descName": "Applique un bouclier pour le tour en cours et un second au tour suivant.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9777,
+    "name": "Absinthe",
+    "descName": "Occasionne des dommages Feu sans ligne de vue.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9778,
+    "name": "Bistouille",
+    "descName": "Occasionne des dommages Terre en zone autour du lanceur.\nNécessite l'état Saoul."
+  },
+  {
+    "id": 9780,
+    "name": "Brancard",
+    "descName": "Jette la cible jusqu'à la cellule ciblée. La cible est soignée en fonction du nombre d'entités survolées.\nNécessite l'état Sobre."
+  },
+  {
+    "id": 9781,
+    "name": "Bambou",
+    "descName": "Invoque un Bambou.\nLe lanceur monte sur le Bambou s'il l'attaque en mêlée en étant dans l'état Sobre.\nDésactive les lignes de vue des sorts du lanceur s'il est porté par un Bambou.\nUn Pandawa porté par un Bambou ne peut pas porter d'autres entités."
+  },
+  {
+    "id": 9783,
+    "name": "Ebriété",
+    "descName": "Invoque un Tonneau qui augmente la Puissance en zone autour de lui.\nQuand il est jeté, il retire des PM en zone aux ennemis autour du point d'impact."
+  },
+  {
+    "id": 9793,
+    "name": "Brume",
+    "descName": "Pose un glyphe-aura qui rend invisible les alliés présents dans la zone."
+  },
+  {
+    "id": 9794,
+    "name": "Piège Perfide",
+    "descName": "Pose un piège mono-cellule qui attire en zone."
+  },
+  {
+    "id": 9795,
+    "name": "Chausse-Trappe",
+    "descName": "Occasionne des dommages Terre. Chaque piège déclenché augmente les dommages de Chausse-Trape.\nLe bonus de dommages disparaît quand le sort est lancé."
+  },
+  {
+    "id": 9796,
+    "name": "Toxines",
+    "descName": "La cible subit un poison Air lorsqu'elle est affectée par un piège."
+  },
+  {
+    "id": 9797,
+    "name": "Pillage",
+    "descName": "Occasionne des dommages Eau. \n50% des dommages sont distribués sous forme de soin aux alliés autour de la cible. \nN'affecte pas le lanceur."
+  },
+  {
+    "id": 9798,
+    "name": "Coupe-gorge",
+    "descName": "Occasionne des dommages Feu et augmente la puissance des pièges."
+  },
+  {
+    "id": 9799,
+    "name": "Comploteur",
+    "descName": "Invoque un Double contrôlable.\nChaque piège déclenché augmente la puissance du Double.\nLe Double occasionne des dommages Neutre en zone autour de lui lorsqu'il meurt."
+  },
+  {
+    "id": 9800,
+    "name": "Larcin",
+    "descName": "Occasionne des dommages Eau et vole de la Chance."
+  },
+  {
+    "id": 9801,
+    "name": "Traquenard",
+    "descName": "Occasionne des dommages Terre. Chaque piège déclenché augmente la portée de Traquenard.\nLe bonus de portée disparaît quand le sort est lancé."
+  },
+  {
+    "id": 9802,
+    "name": "Guet-apens",
+    "descName": "Occasionne des dommages Feu et attire la cible vers le Double."
+  },
+  {
+    "id": 9803,
+    "name": "Injection Toxique",
+    "descName": "Applique un poison Air sur la cible. Chaque piège déclenché réduit le temps de relance d'Injection Toxique.\nLa réduction du temps de relance disparaît quand le sort est lancé."
+  },
+  {
+    "id": 9804,
+    "name": "Piège à Fragmentation",
+    "descName": "Pose un piège mono-cellule qui inflige des dommages Feu.\nLes dommages augmentent en fonction de la distance avec le centre de la zone d'effet."
+  },
+  {
+    "id": 9806,
+    "name": "Piège de Dérive",
+    "descName": "Pose un piège qui pousse de 2 cases."
+  },
+  {
+    "id": 9807,
+    "name": "Épidémie",
+    "descName": "Applique un poison Air de fin de tour sur les ennemis.\nLa cible propage le poison en zone autour d'elle."
+  },
+  {
+    "id": 9808,
+    "name": "Piège Repoussant",
+    "descName": "Piège mono-cellule qui repousse de 2 cases en zone."
+  },
+  {
+    "id": 9809,
+    "name": "Méprise",
+    "descName": "La cible échange de place avec le Double."
+  },
+  {
+    "id": 9810,
+    "name": "Piège de Proximité",
+    "descName": "Pose un piège mono-cellule qui occasionne des dommages Air en zone."
+  },
+  {
+    "id": 9811,
+    "name": "Perquisition",
+    "descName": "Occasionne des dommages Eau et pousse la cible de 2 cases.\n100% des dommages sont distribués sous forme de soin aux alliés en zone autour de la cible.\nN'affecte pas le lanceur."
+  },
+  {
+    "id": 9812,
+    "name": "Piège Funeste",
+    "descName": "Pose un piège monocible qui occasionne des dommages Terre.\nLes dommages sont augmentés en fonction du nombre d'ennemis à proximité du piège."
+  },
+  {
+    "id": 9813,
+    "name": "Perfidie",
+    "descName": "Occasionne des dommages Terre. Chaque piège déclenché réduit le coût en PA de Perfidie.\nLa réduction du coût en PA disparaît quand le sort est lancé."
+  },
+  {
+    "id": 9814,
+    "name": "Calamité",
+    "descName": "Pose un piège mono-cellule qui vole de la vie Eau en zone et retire de la fuite."
+  },
+  {
+    "id": 9852,
+    "name": "Amarage",
+    "descName": "Occasionne des dommages Terre."
+  },
+  {
+    "id": 9853,
+    "name": "Sabordage",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 9854,
+    "name": "Chalutier",
+    "descName": "Pose une tourelle qui attire toutes les entités en zone autour d'elle et qui peut tacler.\nEn Évolution III, elle peut retirer des PM sur les cibles dans l'état Longue-Vue."
+  },
+  {
+    "id": 9855,
+    "name": "Transition",
+    "descName": "Fait évoluer la tourelle ciblée.\nSoigne la tourelle ciblée si elle reçoit une évolution.\nAugmente la Puissance des alliés ciblés."
+  },
+  {
+    "id": 9856,
+    "name": "Harmattan",
+    "descName": "Occasionne des dommages Air et réduit les résistances de poussée de la cible."
+  },
+  {
+    "id": 9857,
+    "name": "Assistance",
+    "descName": "Téléporte la tourelle ciblée sur la première case disponible entre elle et le lanceur."
+  },
+  {
+    "id": 9858,
+    "name": "Blindage",
+    "descName": "Applique un bouclier sur les alliés. Le bouclier est plus important sur les tourelles."
+  },
+  {
+    "id": 9859,
+    "name": "Foreuse",
+    "descName": "Pose une tourelle qui occasionne des dommages.\nEn Évolution III, elle applique de l'érosion aux cibles dans l'état Embuscade."
+  },
+  {
+    "id": 9860,
+    "name": "Torpille",
+    "descName": "Occasionne des dommages Air et pousse la cible de 4 cases."
+  },
+  {
+    "id": 9861,
+    "name": "Corrosion",
+    "descName": "Occasionne des dommages Air et retire des PM."
+  },
+  {
+    "id": 9862,
+    "name": "Soupape",
+    "descName": "Occasionne des dommages Feu à la cible et augmente les soins du lanceur."
+  },
+  {
+    "id": 9863,
+    "name": "Surtension",
+    "descName": "Applique l'état Évolution III sur la tourelle ciblée mais la tue à la fin de son tour."
+  },
+  {
+    "id": 9864,
+    "name": "Bathyscaphe",
+    "descName": "Pose une tourelle qui donne du bouclier aux cibles à proximité.\nEn Évolution III, elle peut donner 2 PA aux cibles dans l'état Secourisme."
+  },
+  {
+    "id": 9865,
+    "name": "Périscope",
+    "descName": "Occasionne des dommages Eau sans ligne de vue et applique l'état Longue-Vue."
+  },
+  {
+    "id": 9866,
+    "name": "Sauvetage",
+    "descName": "Soigne la cible et applique l'état Secourisme."
+  },
+  {
+    "id": 9867,
+    "name": "Court-circuit",
+    "descName": "Tue la tourelle ciblée et occasionne des dommages Air en zone.\nFixe le temps de relance de la tourelle détruite à 1 tour."
+  },
+  {
+    "id": 9868,
+    "name": "Sonar",
+    "descName": "Applique l'état Embuscade sur la cible et pousse les entités à son contact de 2 cases."
+  },
+  {
+    "id": 9869,
+    "name": "Nautile",
+    "descName": "Occasionne des dommages Eau et retire des PM."
+  },
+  {
+    "id": 9870,
+    "name": "Arraisonnage",
+    "descName": "Occasionne des dommages Terre en zone."
+  },
+  {
+    "id": 9871,
+    "name": "Récursivité",
+    "descName": "Pousse la cible de 4 cases.\nSi elle termine son déplacement au contact d'une tourelle du lanceur, la tourelle le téléporte symétriquement et réapplique l'effet du sort sur la cible."
+  },
+  {
+    "id": 9872,
+    "name": "Compas",
+    "descName": "Échange les positions de deux entités au contact et alignées. \nNe fonctionne que si elles sont toutes les deux comprises dans la zone d'effet du sort."
+  },
+  {
+    "id": 9888,
+    "name": "Souvenir",
+    "descName": "Occasionne des dommages Terre et téléporte la cible à sa position précédente."
+  },
+  {
+    "id": 9889,
+    "name": "Retour Spontané",
+    "descName": "Le lanceur revient à sa position précédente."
+  },
+  {
+    "id": 9890,
+    "name": "Rouage",
+    "descName": "Occasionne des dommages Eau. \nLe lanceur gagne 1 PA au tour suivant."
+  },
+  {
+    "id": 9891,
+    "name": "Dessèchement",
+    "descName": "Occasionne des dommages Air.\nAu prochain tour du lanceur, la cible occasionne des dommages autour d'elle."
+  },
+  {
+    "id": 9892,
+    "name": "Renvoi",
+    "descName": "Téléporte la cible ennemie à sa cellule de début de tour."
+  },
+  {
+    "id": 9893,
+    "name": "Rayon Ténébreux",
+    "descName": "Occasionne des dommages Terre.\nSi la cible est dans l'état Téléfrag, occasionne des dommages Terre en zone autour d'elle."
+  },
+  {
+    "id": 9894,
+    "name": "Complice",
+    "descName": "Invoque un Complice statique qui ne possède aucun sort.\nIl est tué si un autre Complice est invoqué."
+  },
+  {
+    "id": 9895,
+    "name": "Perturbation",
+    "descName": "Occasionne des dommages Feu et téléporte la cible symétriquement par rapport au lanceur."
+  },
+  {
+    "id": 9896,
+    "name": "Distorsion Temporelle",
+    "descName": "Occasionne des dommages Air aux ennemis.\nTéléporte les cibles à leur position précédente."
+  },
+  {
+    "id": 9897,
+    "name": "Pétrification",
+    "descName": "Occasionne des dommages Eau et retire des PA.\nSi la cible est dans l'état Téléfrag, le coût en PA du sort est réduit pendant 2 tours."
+  },
+  {
+    "id": 9898,
+    "name": "Conservation",
+    "descName": "Augmente les dommages subis par l'allié ciblé ou le lanceur de 50% pour le tour en cours.\nAu tour suivant, la cible réduit les dommages subis de 30%."
+  },
+  {
+    "id": 9899,
+    "name": "Suspension Temporelle",
+    "descName": "Occasionne des dommages Feu sur les ennemis.\nRéduit la durée des effets sur les cibles ennemies dans l'état Téléfrag et retire l'état."
+  },
+  {
+    "id": 9900,
+    "name": "Prémonition",
+    "descName": "Au prochain tour, le lanceur se téléporte sur la cellule ciblée."
+  },
+  {
+    "id": 9901,
+    "name": "Pendule",
+    "descName": "Le lanceur se téléporte symétriquement par rapport à la cible et occasionne des dommages Air en zone sur sa cellule de destination.\nIl revient ensuite à sa position précédente."
+  },
+  {
+    "id": 9902,
+    "name": "Faille Temporelle",
+    "descName": "Le lanceur échange sa position avec celle du Complice (ou du Cadran).\nÀ la fin du tour, le Complice (ou le Cadran) revient à sa position précédente.\nLa Synchro ne peut pas être déclenchée pendant la durée de Faille Temporelle."
+  },
+  {
+    "id": 9903,
+    "name": "Désynchronisation",
+    "descName": "Pose un piège qui téléporte symétriquement les entités proches."
+  },
+  {
+    "id": 9904,
+    "name": "Bouclier Temporel",
+    "descName": "Si la cible subit des dommages, son attaquant revient à sa position précédente."
+  },
+  {
+    "id": 9905,
+    "name": "Clepsydre",
+    "descName": "Occasionne des dommages Eau.\nSi la cible est dans l'état Téléfrag, le lanceur gagne 2 PA au prochain tour.\nRetire l'état Téléfrag."
+  },
+  {
+    "id": 9906,
+    "name": "Engrenage",
+    "descName": "Occasionne des dommages Terre et téléporte les cibles symétriquement par rapport au centre de la zone d'effet."
+  },
+  {
+    "id": 9907,
+    "name": "Glas",
+    "descName": "Occasionne des dommages Neutre aux ennemis autour de chaque entité dans l'état Téléfrag.\nPlus le lanceur a de vie, plus les dommages sont importants.\nRetire l'état Téléfrag."
+  },
+  {
+    "id": 9908,
+    "name": "Instabilité Temporelle",
+    "descName": "Pose un glyphe qui renvoie les entités à leur position précédente.\nLes effets du glyphe sont également exécutés lorsque le lanceur génère un Téléfrag."
+  },
+  {
+    "id": 9920,
+    "name": "Masque du Couard",
+    "descName": "Applique le Masque du Pleutre.\nAugmente les dommages à distance du lanceur et des alliés au contact."
+  },
+  {
+    "id": 9921,
+    "name": "Agular",
+    "descName": "Occasionne des dommages Air en zone."
+  },
+  {
+    "id": 9922,
+    "name": "Parafuso",
+    "descName": "Vole de la vie Feu et réduit la Puissance de la cible."
+  },
+  {
+    "id": 9923,
+    "name": "Masque de l'Infatiguable",
+    "descName": "Applique le Masque de l'Intrépide.\nRéduit les dommages subis par le lanceur et les alliés au contact."
+  },
+  {
+    "id": 9924,
+    "name": "Pivot",
+    "descName": "Se téléporte derrière la cible."
+  },
+  {
+    "id": 9925,
+    "name": "Armadur",
+    "descName": "Augmente les PM et la Fuite de la cible."
+  },
+  {
+    "id": 9926,
+    "name": "Scudo",
+    "descName": "Applique un Bouclier sur la cible."
+  },
+  {
+    "id": 9927,
+    "name": "Estrelia",
+    "descName": "Vole de la vie Eau et téléporte la cible derrière le lanceur."
+  },
+  {
+    "id": 9928,
+    "name": "Masque de l'Hystérique",
+    "descName": "Applique le Masque du Psychopathe.\nÀ la fin de son tour, le lanceur occasionne des dommages Neutre. Plus il a de vie restante, plus les dommages sont importants."
+  },
+  {
+    "id": 9929,
+    "name": "Cavalcade",
+    "descName": "Occasionne des dommages Air et rapproche le lanceur de la cible."
+  },
+  {
+    "id": 9930,
+    "name": "Atabak",
+    "descName": "Occasionne des dommages Terre et retire des PA."
+  },
+  {
+    "id": 9931,
+    "name": "Ginga",
+    "descName": "Applique l'état Indéplaçable et augmente la Puissance au lanceur."
+  },
+  {
+    "id": 9932,
+    "name": "Comédie",
+    "descName": "Repousse la cible de 4 cases puis l'attire de 2 cases."
+  },
+  {
+    "id": 9933,
+    "name": "Bocciara",
+    "descName": "Occasionne des dommages Eau et augmente les Dommages de poussée du lanceur."
+  },
+  {
+    "id": 9934,
+    "name": "Catalepsie",
+    "descName": "Occasionne des dommages Terre et retire des PM à la cible."
+  },
+  {
+    "id": 9935,
+    "name": "Apostasie",
+    "descName": "Occasionne des dommages Feu et éloigne le lanceur de sa cible."
+  },
+  {
+    "id": 9936,
+    "name": "Ponteira",
+    "descName": "Occasionne des dommages Eau et réduit les dommages de la cible."
+  },
+  {
+    "id": 9937,
+    "name": "Inferno",
+    "descName": "Occasionne des dommages Feu et augmente la Puissance du lanceur."
+  },
+  {
+    "id": 9938,
+    "name": "Grimace",
+    "descName": ""
+  },
+  {
+    "id": 9939,
+    "name": "Brincaderia",
+    "descName": "Occasionne des dommages Feu et réduit la Portée de la cible."
+  },
+  {
+    "id": 9940,
+    "name": "Névrose",
+    "descName": "Augmente la Puissance de la cible et lui applique l'état Pesanteur."
+  },
+  {
+    "id": 9948,
+    "name": "Furie",
+    "descName": "Occasionne des dommages Air.\nLes dommages sont augmentés en fonction du nombre de charges de Souffrance.\nApplique 1 charge de Souffrance : plus le Sacrieur a de charges de Souffrance, plus il occasionne de dommages.\nÀ partir de 6 charges de Souffrance, le Sacrieur change d'apparence et gagne un bonus supplémentaire de dommages."
+  },
+  {
+    "id": 9956,
+    "name": "Fulgurance",
+    "descName": "Téléporte en ligne sur la première cellule disponible et occasionne des dommages Air sur les cellules traversées."
+  },
+  {
+    "id": 9957,
+    "name": "Supplice",
+    "descName": "Vole de la vie dans l'élément Air.\nRéduit les dommages de 15%.\nRetire 1 charge de Souffrance."
+  },
+  {
+    "id": 9958,
+    "name": "Projection",
+    "descName": "Occasionne des dommages Eau.\nLa cible est téléportée derrière le lanceur."
+  },
+  {
+    "id": 9959,
+    "name": "Nervosité",
+    "descName": "Occasionne des dommages Eau.\nLes dommages sont augmentés en fonction du nombre de charges de Souffrance.\nAjoute 1 charge de Souffrance."
+  },
+  {
+    "id": 9960,
+    "name": "Stase",
+    "descName": "Occasionne des dommages Eau et retire des PM.\nRetire 1 charge de Souffrance."
+  },
+  {
+    "id": 9961,
+    "name": "Afflux",
+    "descName": "Occasionne des dommages Feu.\nAttire les cibles."
+  },
+  {
+    "id": 9963,
+    "name": "Douleur motivante",
+    "descName": "Occasionne des dommages Feu en zone.\nLes dommages sont augmentés en fonction du nombre de charges de Souffrance.\nApplique 1 charge de Souffrance."
+  },
+  {
+    "id": 9964,
+    "name": "Décimation",
+    "descName": "Occasionne des dommages Terre.\nLes dommages sont augmentés en fonction du nombre de charges de Souffrance.\nAjoute 1 charge de Souffrance."
+  },
+  {
+    "id": 9965,
+    "name": "Bain de Sang",
+    "descName": "Occasionne des dommages Feu en zone.\nRetire 1 charge de Souffrance par ennemi présent dans la zone."
+  },
+  {
+    "id": 9966,
+    "name": "Assaut",
+    "descName": "Occasionne des dommages Terre sur ennemis.\nÉchange de position avec la cible."
+  },
+  {
+    "id": 9967,
+    "name": "Absorption",
+    "descName": "Vole de la vie dans l'élément Terre.\nRetire 1 charge de Souffrance.\nMoins le Sacrieur a de charges de Souffrance, plus il a de Vitalité.\nÀ partir de 6 charges de Souffrance négatives, le Sacrieur change d'apparence et gagne un bonus de réduction de dommages."
+  },
+  {
+    "id": 9968,
+    "name": "Attirance",
+    "descName": "Attire la cible."
+  },
+  {
+    "id": 9969,
+    "name": "Transposition",
+    "descName": "Échange de position avec la cible."
+  },
+  {
+    "id": 9970,
+    "name": "Mutilation",
+    "descName": "Ajoute 2 charges de Souffrance."
+  },
+  {
+    "id": 9971,
+    "name": "Transfert de Vie",
+    "descName": "Transfère une partie des PV du lanceur vers les alliés présents dans la zone d'effet."
+  },
+  {
+    "id": 9972,
+    "name": "Sacrifice",
+    "descName": "Cible des alliés en zone pour recevoir les dommages à leur place."
+  },
+  {
+    "id": 9973,
+    "name": "Convalescence",
+    "descName": "Réinitialise la Souffrance. Elle ne peut pas évoluer pendant 1 tour.\nLe lanceur subit 10% de dommages supplémentaires pendant 1 tour."
+  },
+  {
+    "id": 9975,
+    "name": "Punition",
+    "descName": "Occasionne des dommages Neutre.\nPlus les PV du lanceur sont proches de la moitié du total de ses PV, plus les dommages occasionnés sont importants."
+  },
+  {
+    "id": 9977,
+    "name": "Berserk",
+    "descName": "Pendant 1 tour, quand le lanceur subit des dommages, il gagne de la puissance.\nLa quantité maximale de puissance engrangée dépend du niveau de Souffrance du lanceur.\nNe fonctionne pas si le lanceur est en Souffrance négative à la fin de son tour."
+  },
+  {
+    "id": 9978,
+    "name": "Épée volante",
+    "descName": "Invoque une épée qui soigne le lanceur lorsqu'elle occasionne des dommages."
+  },
+  {
+    "id": 9988,
+    "name": "Condensation",
+    "descName": "Occasionne des dommages Eau en zone.\nAttire les cibles vers le Sacrieur."
+  },
+  {
+    "id": 9989,
+    "name": "Ravage",
+    "descName": "Occasionne des dommages Terre.\nRapproche le lanceur de la cible."
+  },
+  {
+    "id": 9990,
+    "name": "Cautérisation",
+    "descName": "Occasionne des dommages Feu sur la cible et le lanceur.\nApplique 2 charges de Souffrance."
+  },
+  {
+    "id": 9991,
+    "name": "Saignée Rituelle",
+    "descName": "Vole de la vie dans l'élément Feu.\nRetire 1 charge de Souffrance."
+  },
+  {
+    "id": 9992,
+    "name": "Aversion",
+    "descName": "Occasionne des dommages Feu en zone.\nRepousse les cibles."
+  },
+  {
+    "id": 9993,
+    "name": "Hécatombe",
+    "descName": "Vole de la vie Terre en zone.\nRetire 1 charge de Souffrance par ennemi touché."
+  },
+  {
+    "id": 9994,
+    "name": "Entaille",
+    "descName": "Occasionne des dommages Terre.\nLes dommages sont augmentés pour chaque charge de Souffrance.\nApplique 1 charge de Souffrance."
+  },
+  {
+    "id": 9995,
+    "name": "Carnage",
+    "descName": "Occasionne des dommages Air.\nApplique 2 charges de Souffrance."
+  },
+  {
+    "id": 9996,
+    "name": "Désolation",
+    "descName": "Occasionne des dommages Air et soigne le lanceur.\nRetire 1 charge de Souffrance."
+  },
+  {
+    "id": 9997,
+    "name": "Riposte",
+    "descName": "Rapproche le lanceur de son attaquant lorsqu'il subit des dommages à distance."
+  },
+  {
+    "id": 9998,
+    "name": "Déchaînement",
+    "descName": "Occasionne des dommages Eau.\nLes dommages sont augmentés en fonction du nombre de charges de Souffrance.\nApplique une charge de Souffrance."
+  },
+  {
+    "id": 9999,
+    "name": "Hostilité",
+    "descName": "Occasionne des dommages Air.\nPousse la cible."
+  },
+  {
+    "id": 10000,
+    "name": "Dissolution",
+    "descName": "Vole de la vie dans l'élément Eau.\nApplique un malus de Fuite.\nRetire 1 charge de Souffrance."
+  },
+  {
+    "id": 10001,
+    "name": "Perfusion",
+    "descName": "Pendant 1 tour, la cible est soignée à hauteur de 25% des dommages infligés au lanceur."
+  },
+  {
+    "id": 10002,
+    "name": "Coagulation",
+    "descName": "Retire 2 charges de Souffrance."
+  },
+  {
+    "id": 10003,
+    "name": "Châtiment",
+    "descName": "Fixe l'état Pesanteur en zone.\nOccasionne 2% des PV du lanceur en dommages par charge de Souffrance."
+  },
+  {
+    "id": 10004,
+    "name": "Folie Sanguinaire",
+    "descName": "Pendant 1 tour, le lanceur renvoie 25% des dommages qu'il subit en zone autour de lui."
+  },
+  {
+    "id": 10005,
+    "name": "Pacte de Sang",
+    "descName": "Les dommages occasionnés par la cible sont réduits de 30%.\nLa cible renvoie 50% des dommages qu'elle subit sur le lanceur."
+  },
+  {
+    "id": 10006,
+    "name": "Fluctuation",
+    "descName": "Augmente les PM.\nApplique les états Intacleur et Intaclable."
+  },
+  {
+    "id": 10007,
+    "name": "Pénitence",
+    "descName": "Le lanceur échange de position avec la cible lorsqu'elle est attaquée."
+  },
+  {
+    "id": 10008,
+    "name": "Épée Véloce",
+    "descName": "Invoque une épée contrôlable qui attire."
+  },
+  {
+    "id": 10018,
+    "name": "Oblitération",
+    "descName": "Occasionne des dommages Feu."
+  },
+  {
+    "id": 10019,
+    "name": "Étoupille",
+    "descName": "Fait exploser toutes les bombes du lanceur."
+  },
+  {
+    "id": 10020,
+    "name": "Explobombe Latente",
+    "descName": "Pose une bombe au prochain tour qui occasionne des dommages Feu."
+  },
+  {
+    "id": 10021,
+    "name": "Ruse",
+    "descName": "Rapproche le lanceur de la bombe ciblée."
+  },
+  {
+    "id": 10022,
+    "name": "Mousquet",
+    "descName": "Occasionne des dommages Terre.\nAugmente le bonus de combo des bombes au contact de la cible."
+  },
+  {
+    "id": 10023,
+    "name": "Tornabombe Latente",
+    "descName": "Pose une bombe au prochain tour qui occasionne des dommages Air."
+  },
+  {
+    "id": 10024,
+    "name": "Cadence",
+    "descName": "Occasionne des dommages Air en zone aux ennemis.\nLes effets du sort sont rejoués depuis chaque bombe présente dans la zone d'effet."
+  },
+  {
+    "id": 10025,
+    "name": "Stratagème",
+    "descName": "La bombe ciblée se téléporte sur sa position précédente."
+  },
+  {
+    "id": 10026,
+    "name": "Recel",
+    "descName": "Occasionne des dommages Eau aux ennemis.\nAttire la cible."
+  },
+  {
+    "id": 10027,
+    "name": "Bombe à Eau Latente",
+    "descName": "Pose une bombe au prochain tour qui occasionne des dommages Eau."
+  },
+  {
+    "id": 10028,
+    "name": "Explobombe Collante",
+    "descName": "Pose une bombe sur la cible. La bombe peut être activée avec les sorts d'activation ou les explosions de bombe.\nQuand elle est activée, elle occasionne des dommages Feu en zone."
+  },
+  {
+    "id": 10029,
+    "name": "Fulmination",
+    "descName": "Occasionne des dommages en zone pour chaque type de bombe présent sur le terrain et fait exploser les bombes."
+  },
+  {
+    "id": 10031,
+    "name": "Arquebuse",
+    "descName": "Occasionne des dommages Terre sur les ennemis.\nRéduit la durée des effets actifs de 1 tour."
+  },
+  {
+    "id": 10032,
+    "name": "Mitraille",
+    "descName": "Occasionne des dommages Air.\nRepousse la cible."
+  },
+  {
+    "id": 10033,
+    "name": "Piège Magnétique",
+    "descName": "Pose un piège qui attire les bombes et les déclenche."
+  },
+  {
+    "id": 10035,
+    "name": "Sismobombe Latente",
+    "descName": "Pose une bombe au prochain tour qui occasionne des dommages Terre."
+  },
+  {
+    "id": 10036,
+    "name": "Bombe Ambulante",
+    "descName": "Invoque une bombe contrôlable qui peut obtenir un élément en ciblant une bombe élémentaire.\nA la fin de son tour, elle meurt et pose une bombe dans l'élément correspondant.\nElle meurt au bout de 2 tours si elle n'a pas obtenu d'élément."
+  },
+  {
+    "id": 10037,
+    "name": "Plombage",
+    "descName": "Occasionne des dommages Terre entre les bombes alignées d'éléments différents.\nLes Bombes affectées gagnent un bonus de 25% de combo. \nNécessite de cibler une bombe."
+  },
+  {
+    "id": 10038,
+    "name": "Imposture",
+    "descName": "Echange de position avec la cible.\nSi c'est une bombe, augmente son combo de 40%."
+  },
+  {
+    "id": 10039,
+    "name": "Mégabombe",
+    "descName": "Pose une Mégabombe contrôlable qui occasionne des dommages Neutre.\nSes dommages augmentent à chaque fois qu'elle dévore une bombe.\nElle déclenche les autres bombes lors de son explosion. Elle perd 1 PM par bombe dévorée.\nElle explose si elle meurt."
+  },
+  {
+    "id": 10041,
+    "name": "Sismobombe",
+    "descName": "Pose une bombe qui occasionne des dommages Terre.\nExplose automatiquement en occasionnant des dommages plus faibles si elle est lancée directement sur une cible."
+  }
+]
