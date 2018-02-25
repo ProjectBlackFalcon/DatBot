@@ -204,6 +204,22 @@ public class Game {
 		los.panel.hideStartingPositions();
 	}
 	
+	public void updatePlayingEntities(JSONArray command) {
+		Game.println();
+		Game.println();
+		Game.println("UPDATING ENTITIES");
+		for(int i = 0; i < command.size(); i++) {
+			JSONObject obj = (JSONObject) command.get(i);
+			JSONArray summons = (JSONArray) obj.get("summons");
+			
+			if(summons.size() > 0) {
+				Game.println("Entity "+i+" has summons !");
+				Game.println(summons);
+			}
+		}
+		Game.println(command);
+	}
+	
 	/**
 	 * Returns the playingEntity corresponding to the ID passed as a parameter
 	 * @param id ID of the playingEntity seeked after
@@ -416,7 +432,7 @@ public class Game {
 			PlayingEntity castingEntity = getPlayingEntityFromID(id);
 			PlayingEntity victim = getPlayingEntityFromID(targetId);
 			
-			Game.println("Casting "+spellId+" to : ["+x+";"+y+"]");
+			Game.println("Casting "+Player.getSpellNameFromId(spellId)+" to : ["+x+";"+y+"]");
 			SpellObject spellCast = Game.getSpellFromID(spellId);
 			
 			brainText.add("Casting "+Player.getSpellNameFromId(spellId)+" to : ["+x+";"+y+"]");
@@ -854,6 +870,8 @@ public class Game {
 			initStartAvailablePositions(command);
 		}else if(s.equals("startPosAltered")) {
 			return initStartChosenPositionsModified(command);
+		}else if(s.equals("updateEntities")) {
+			updatePlayingEntities(command);
 		}
 		
 		los.update(playingEntities);
