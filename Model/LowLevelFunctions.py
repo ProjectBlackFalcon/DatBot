@@ -133,7 +133,7 @@ class LowLevelFunctions:
     def add_discovered_zaap(self, bot_name, zaap_pos):
         with open('..//Utils//discoveredZaaps.json', 'r') as f:
             disc_zaaps = json.load(f)
-        with open('..//Utils//zaapList.json', 'r') as f:
+        with open('..//Utils//zaaps.json', 'r') as f:
             zaaps = json.load(f)
 
         if list(zaap_pos) in zaaps:
@@ -168,7 +168,7 @@ class LowLevelFunctions:
             disc_zaaps[bot_name] = []
             with open('..//Utils//discoveredZaaps.json', 'w') as f:
                 json.dump(disc_zaaps, f)
-        with open('..//Utils//zaapList.json', 'r') as f:
+        with open('..//Utils//zaaps.json', 'r') as f:
             zaaps = json.load(f)
 
         for disc_zaap in disc_zaaps:
