@@ -19,8 +19,14 @@ public class GameData {
 	public static String getPathDatBot() {
 		JSONArray a;
 		String s = Paths.get("").toAbsolutePath().toString();
+        System.out.println(s);
 		int i = s.indexOf("DatBot");
-		s = s.substring(0, i + 6);
+		if(i == -1){
+            s = Paths.get("").toAbsolutePath().toString()+"\\DatBot";
+        }else{
+            s = s.substring(0, i + 6);
+        }
+        System.out.println(s);
 		return s;
 	}
 
