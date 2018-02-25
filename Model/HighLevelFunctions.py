@@ -286,23 +286,30 @@ class HighLevelFunctions:
             while not self.bot.interface.abandon_hunt()[0]:
                 time.sleep(30)
         else:
-            while self.bot.interface.get_player_stats()[0]['Health'] < 95:
+            while self.bot.interface.get_player_stats()[0]['Health'] < 100:
                 time.sleep(5)
             self.bot.interface.start_hunt_fight()
+
+            if not self.bot.interface.hunt_is_active()[0]:
+                print('[Treasure Hunt] Hunt successful')
+                return True
 
     def hunt_treasures(self, duration_minutes):
         duration = duration_minutes * 60
         start = time.time()
         n_hunts = 0
+        n_success = 0
         while time.time()-start < duration:
             try:
                 n_hunts += 1
-                print('[Treasure Hunt] Starting hunt n #{}'.format(n_hunts))
-                self.tresure_hunt()
+                print('[Treasure Hunt] Starting hunt #{}'.format(n_hunts))
+                success = self.tresure_hunt()
+                n_success = n_success+1 if success else n_success
             except Exception:
                 with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
+        print('[Treasure Hunt] {} were started, {} were successful. ({}%)'.format(n_hunts, n_success, round(n_success*100/n_hunts, 0)))
 
     def fight_on_map(self, duration_minutes):
         duration = duration_minutes*60
@@ -332,8 +339,6 @@ class HighLevelFunctions:
                 batch_size_index = [1, 10, 100].index(item[2])
                 new_price = item_hdv_stats[batch_size_index]-1
                 self.bot.interface.modify_price(item[1], item[2], new_price)
-
-
 
     def update_db(self):
         try:
