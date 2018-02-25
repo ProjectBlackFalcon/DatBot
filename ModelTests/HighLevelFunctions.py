@@ -44,14 +44,15 @@ credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name':
 credentials2 = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
 credentials3 = {'username': 'wublel4', 'password': 'notabot0', 'name': 'Los-Flachos', 'server': 'Julith'}
 credentials4 = {'username': 'wublel6', 'password': '32407c62d2f', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
+credentials5 = {'username': 'debugthemall', 'password': 'azertyuiop1', 'name': 'Le-Gros-Veineux', 'server': 'Julith'}
 
 
 llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials4, llf)
+bot = Bot(pipe, bot_id, credentials5, llf)
 bot.interface.connect()
 start = time.time()
 
-bot.hf.discover_zaaps()
+bot.hf.hunt_treasures(120)
 
 winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
 print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
