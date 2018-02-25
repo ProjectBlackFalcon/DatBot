@@ -283,11 +283,21 @@ class HighLevelFunctions:
 
         if hunt_error_flag:
             print('[Treasure Hunt] Issue detected, abandoning hunt')
+            in_hb = False
             while not self.bot.interface.abandon_hunt()[0]:
+                self.bot.interface.enter_heavenbag()
+                in_hb = True
                 time.sleep(30)
+            if in_hb:
+                self.bot.interface.exit_heavenbag()
         else:
+            in_hb = False
             while self.bot.interface.get_player_stats()[0]['Health'] < 100:
-                time.sleep(5)
+                self.bot.interface.enter_heavenbag()
+                in_hb = True
+                time.sleep(10)
+            if in_hb:
+                self.bot.interface.exit_heavenbag()
             self.bot.interface.start_hunt_fight()
 
             if not self.bot.interface.hunt_is_active()[0]:
