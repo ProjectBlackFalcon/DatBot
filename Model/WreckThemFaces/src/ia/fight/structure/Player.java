@@ -1,11 +1,18 @@
 package ia.fight.structure;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import ia.fight.brain.Game;
 import ia.fight.structure.spells.SpellObject;
 import ia.fight.structure.spells.spelltypes.Buff;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import utils.GameData;
 
 
 public abstract class Player {
@@ -62,6 +69,7 @@ public abstract class Player {
 	private ArrayList<Buff> buffs;
 	
 	private static SpellObject[] spells;
+	private static JSONArray jsonSpells;
 	
 	public Player(String name, int baseLP, int baseAP, int baseMP, int level) {
 		buffs = new ArrayList<>();
@@ -494,7 +502,29 @@ public abstract class Player {
 
 	public abstract String getType();
 
+    public static void loadSpellIDs(){
+        JSONParser parser = new JSONParser();
+        String path = GameData.getPathDatBot() + "\\Model\\WreckThemFaces\\src\\ia\\fight\\data\\NameSpell.json";
+        try {
+            Player.jsonSpells = (JSONArray) parser.parse(new FileReader(path));
+        } catch(ParseException | IOException pe){
+            pe.printStackTrace();
+        }
+    }
 
+    public static String getSpellNameFromId(int id){
+        if(Player.jsonSpells == null){
+            loadSpellIDs();
+        }
+
+        for(int i = 0; i < Player.jsonSpells.size(); i++){
+            if(((long)((JSONObject)Player.jsonSpells.get(i)).get("id")) == id){
+                return (String) ((JSONObject)Player.jsonSpells.get(i)).get("name");
+            }
+        }
+
+        return "{inv_id}";
+    }
 
 
 }
