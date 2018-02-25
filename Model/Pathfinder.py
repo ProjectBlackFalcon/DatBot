@@ -86,7 +86,7 @@ class PathFinder:
                 self.cell2coord(self.end_cell)[0]+14*(self.end[0]-self.bbox[0]),
                 self.cell2coord(self.end_cell)[1]+40*(self.end[1]-self.bbox[1])
             )
-            while self.llf.distance_coords(start_pos, goal_pos) < 2:
+            while self.llf.distance_coords(start_pos, goal_pos) <= 2:
                 self.end_cell = None
                 self.end_cell = self.pick_end_cell()
                 goal_pos = (
