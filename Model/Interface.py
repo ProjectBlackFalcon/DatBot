@@ -113,6 +113,7 @@ class Interface:
                 msg_id = self.add_command(command, parameters)
                 return self.wait_for_return(msg_id)
             except Exception:
+                time.sleep(10)
                 self.connect()
 
     def connect(self):
@@ -126,11 +127,11 @@ class Interface:
             self.bot.credentials['name'],
             self.bot.credentials['server']
         ]
-        sucess = self.execute_command('connect', connection_param)
-        self.bot.connected = sucess
+        success = self.execute_command('connect', connection_param)
+        self.bot.connected = success
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         self.bot.position = (current_map, current_worldmap)
-        return sucess
+        return success
 
     def disconnect(self):
         """
