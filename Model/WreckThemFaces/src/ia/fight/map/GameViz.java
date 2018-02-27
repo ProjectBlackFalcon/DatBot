@@ -20,9 +20,9 @@ public class GameViz extends JFrame{
 	
 	public Panel panel;
 
-	public GameViz(Map map) {
+	public GameViz(Map map, String botName) {
 		panel = new Panel(map);
-		setTitle("Visualizer");
+		setTitle(botName);
 		setSize(1015, 700);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setUndecorated(false);
