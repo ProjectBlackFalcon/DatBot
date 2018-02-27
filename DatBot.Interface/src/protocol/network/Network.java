@@ -51,6 +51,7 @@ import protocol.network.messages.game.actions.fight.GameActionFightModifyEffects
 import protocol.network.messages.game.actions.fight.GameActionFightPointsVariationMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSummonMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
@@ -120,6 +121,7 @@ import protocol.network.types.game.actions.fight.FightTemporarySpellImmunityEffe
 import protocol.network.types.game.actions.fight.GameActionMarkedCell;
 import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
 import protocol.network.types.game.context.IdentifiedEntityDispositionInformations;
+import protocol.network.types.game.context.fight.GameFightCharacterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
@@ -610,6 +612,7 @@ public class Network extends DisplayInfo implements Runnable {
 		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
 		JSONObject mapJSONObject = new JSONObject();
 		mapJSONObject.put("mapID", (int) info.getMapId());
+		mapJSONObject.put("name", info.getName());
 		JSONArray tempArr = new JSONArray();
 		tempArr.add(mapJSONObject);
 		getFight().sendToFightAlgo("startfight", tempArr);
@@ -751,6 +754,27 @@ public class Network extends DisplayInfo implements Runnable {
 			info.setInitFight(true);
 		}
 	}
+	
+	private void handleGameActionFightSummonMessage(DofusDataReader dataReader) {
+		GameActionFightSummonMessage gameActionFightSummonMessage = new GameActionFightSummonMessage();
+		gameActionFightSummonMessage.Deserialize(dataReader);
+		
+		for(int i = 0; i < gameActionFightSummonMessage.getSummons().size(); i++) {
+			System.out.println();
+			System.out.println();
+			System.out.println(gameActionFightSummonMessage.getSummons().get(i));
+			System.out.println();
+		}
+		
+		for(int i = 0; i < getFight().getGameFightSynchronizeMessage().getFighters().size(); i++) {
+			GameFightCharacterInformations p = (GameFightCharacterInformations) getFight().getGameFightSynchronizeMessage().getFighters().get(i);
+			double id = p.getContextualId();
+			if(id == gameActionFightSummonMessage.getSourceId()) {
+				p.setSummons(gameActionFightSummonMessage.getSummons());
+			}
+		}
+		
+	}
 
 	private void handleGameFightTurnEndMessage(DofusDataReader dataReader) {
 		GameFightTurnEndMessage gameFightTurnEndMessage = new GameFightTurnEndMessage();
@@ -787,6 +811,43 @@ public class Network extends DisplayInfo implements Runnable {
 		gameFightTurnListMessage.Deserialize(dataReader);
 		if (!info.isInitFight()) {
 			getFight().turnListId = gameFightTurnListMessage.getIds();
+		}else {
+			
+			List<Double> IDs = gameFightTurnListMessage.getIds();
+			JSONArray arr = new JSONArray();
+			for(int i = 0; i < getFight().getGameFightSynchronizeMessage().getFighters().size(); i++) {
+				GameFightCharacterInformations p = (GameFightCharacterInformations) getFight().getGameFightSynchronizeMessage().getFighters().get(i);
+				JSONObject obj = new JSONObject();
+				obj.put("name", p.getName());
+				obj.put("id", p.getContextualId());
+				obj.put("otherId", i);
+				JSONArray summons = new JSONArray();
+				
+				if(p.getSummons() != null) {
+					for(int j = 0; j < p.getSummons().size(); j++) {
+						JSONObject summon = new JSONObject();
+						System.out.println();
+						System.out.println(p.getSummons().get(j));
+						summon.put("id", p.getSummons().get(j).getContextualId());
+						
+						int cell = p.getSummons().get(j).getDisposition().getCellId();
+						int x = CreateMap.rotate(new int[] { cell % 14, cell / 14 })[0];
+						int y = CreateMap.rotate(new int[] { cell % 14, cell / 14 })[1];
+						
+						summon.put("x", x);
+						summon.put("y", y);
+						
+						summons.add(summon);
+					}
+				}
+				
+				
+				obj.put("summons", summons);
+				
+				arr.add(obj);
+			}
+			
+			getFight().sendToFightAlgo("updateEntities", arr);
 		}
 	}
 
@@ -1232,7 +1293,12 @@ public class Network extends DisplayInfo implements Runnable {
 	public void run() {
 		try {
 			append("Connection...");
-			reception();
+			try {
+				reception();
+			}catch(java.io.EOFException e) {
+				System.err.println("Caught EOF exception.");
+			}
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -1510,6 +1576,9 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 955:
 				getFight().setSpellJson(new JSONArray());
+				break;
+			case 5825:
+				handleGameActionFightSummonMessage(dataReader);
 				break;
 			/**
 			 * LYSANDRE FIGHT // case 1010 to case 6310 Each sequence can

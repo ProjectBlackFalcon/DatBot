@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -42,11 +41,11 @@ public class Game {
 	 * Initializes the game map. Creates a map and opens a JFrame.
 	 * @param map_nbr number of map initialized
 	 */
-	public void initGame(int map_nbr) {
+	public void initGame(int map_nbr, String bot_name) {
 		Game.println("Starting fight on map : "+map_nbr);
 		Map mapObject = CreateMap.getMapById(map_nbr);
 		map = mapObject;
-		los = new GameViz(mapObject);
+		los = new GameViz(mapObject, bot_name);
 		log.println("Init game to map : "+map_nbr);
 		ArrayList<String> commands = new ArrayList<>();
 		commands.add("Init game to map : "+map_nbr);
@@ -203,6 +202,22 @@ public class Game {
 		los.update(playingEntities);
 		this.playingEntities = playingEntities;
 		los.panel.hideStartingPositions();
+	}
+	
+	public void updatePlayingEntities(JSONArray command) {
+		Game.println();
+		Game.println();
+		Game.println("UPDATING ENTITIES");
+		for(int i = 0; i < command.size(); i++) {
+			JSONObject obj = (JSONObject) command.get(i);
+			JSONArray summons = (JSONArray) obj.get("summons");
+			
+			if(summons.size() > 0) {
+				Game.println("Entity "+i+" has summons !");
+				Game.println(summons);
+			}
+		}
+		Game.println(command);
 	}
 	
 	/**
@@ -417,7 +432,7 @@ public class Game {
 			PlayingEntity castingEntity = getPlayingEntityFromID(id);
 			PlayingEntity victim = getPlayingEntityFromID(targetId);
 			
-			Game.println("Casting "+spellId+" to : ["+x+";"+y+"]");
+			Game.println("Casting "+Player.getSpellNameFromId(spellId)+" to : ["+x+";"+y+"]");
 			SpellObject spellCast = Game.getSpellFromID(spellId);
 			
 			brainText.add("Casting "+Player.getSpellNameFromId(spellId)+" to : ["+x+";"+y+"]");
@@ -840,7 +855,7 @@ public class Game {
 		}else if(s.equals("m")) {
 			executeMovementCommand(command);
 		}else if(s.equals("startfight")) {
-			initGame((int) ((JSONObject)command.get(0)).get("mapID"));
+			initGame((int) ((JSONObject)command.get(0)).get("mapID"), (String) ((JSONObject)command.get(0)).get("name"));
 		}else if(s.equals("s")) {	
 			initEntities(command);
 		}else if(s.equals("g")) {
@@ -855,6 +870,8 @@ public class Game {
 			initStartAvailablePositions(command);
 		}else if(s.equals("startPosAltered")) {
 			return initStartChosenPositionsModified(command);
+		}else if(s.equals("updateEntities")) {
+			updatePlayingEntities(command);
 		}
 		
 		los.update(playingEntities);
