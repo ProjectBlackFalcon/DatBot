@@ -187,7 +187,7 @@ class HighLevelFunctions:
                 full = False if ret_val[3] < ret_val[4] else True
                 harvest.append(ret_val)
 
-        with open('..//Misc//HarvestLogs//HarvestLog_{}.txt'.format(self.bot), 'a') as f:
+        with open('..//Utils//HarvestLog_{}.txt'.format(self.bot.id), 'a') as f:
             for item in harvest:
                 f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
         if type(ret_val) is tuple and ret_val[3] == ret_val[4]:
@@ -285,16 +285,18 @@ class HighLevelFunctions:
             print('[Treasure Hunt] Issue detected, abandoning hunt')
             in_hb = False
             while not self.bot.interface.abandon_hunt()[0]:
-                self.bot.interface.enter_heavenbag()
-                in_hb = True
+                if not in_hb:
+                    self.bot.interface.enter_heavenbag()
+                    in_hb = True
                 time.sleep(30)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
         else:
             in_hb = False
             while self.bot.interface.get_player_stats()[0]['Health'] < 100:
-                self.bot.interface.enter_heavenbag()
-                in_hb = True
+                if not in_hb:
+                    self.bot.interface.enter_heavenbag()
+                    in_hb = True
                 time.sleep(10)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
@@ -304,7 +306,7 @@ class HighLevelFunctions:
                 print('[Treasure Hunt] Hunt successful')
                 return True
 
-    def hunt_treasures(self, duration_minutes):
+    def hunt_treasures(self, duration_minutes, level='max'):
         duration = duration_minutes * 60
         start = time.time()
         n_hunts = 0
@@ -313,7 +315,7 @@ class HighLevelFunctions:
             try:
                 n_hunts += 1
                 print('[Treasure Hunt] Starting hunt #{}'.format(n_hunts))
-                success = self.tresure_hunt()
+                success = self.tresure_hunt(level)
                 n_success = n_success+1 if success else n_success
             except Exception:
                 with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
@@ -321,10 +323,20 @@ class HighLevelFunctions:
                     f.write(traceback.format_exc())
         print('[Treasure Hunt] {} were started, {} were successful. ({}%)'.format(n_hunts, n_success, round(n_success*100/n_hunts, 0)))
 
-    def fight_on_map(self, duration_minutes):
+    def fight_on_map(self, duration_minutes, hp_threshold=100):
         duration = duration_minutes*60
         start = time.time()
         while time.time()-start < duration:
+
+            in_hb = False
+            while self.bot.interface.get_player_stats()[0]['Health'] < hp_threshold:
+                if not in_hb:
+                    self.bot.interface.enter_heavenbag()
+                    in_hb = True
+                time.sleep(10)
+            if in_hb:
+                self.bot.interface.exit_heavenbag()
+
             mobs_on_map = self.bot.interface.get_monsters()
             mobs_on_map = False if not mobs_on_map else mobs_on_map[0]
             if mobs_on_map:
@@ -350,15 +362,51 @@ class HighLevelFunctions:
                 new_price = item_hdv_stats[batch_size_index]-1
                 self.bot.interface.modify_price(item[1], item[2], new_price)
 
+    def sell_hdv(self, hdv_coords=None):
+        with open('..//Utils//hdv_pos.json', 'r') as f:
+            hdv_pos = json.load(f)
+        with open('..//Utils//ItemsToSell.json', 'r') as f:
+            items_to_sell = json.load(f)
+
+        current_map = list(self.bot.position[0]) if hdv_coords is None else list(hdv_coords)
+        valid_map = False
+        hdv_type = None
+
+        for hdv, hdv_coords in hdv_pos.items():
+            if current_map in hdv_coords and items_to_sell[self.bot.credentials['name']][hdv]:
+                valid_map = True
+                hdv_type = hdv
+        print('[SELL HDV] {}'.format(hdv_type))
+        if valid_map:
+            self.update_hdv()
+            items = self.bot.interface.get_player_stats()[0]['Inventory']['Items']
+            items_to_sell = items_to_sell[self.bot.credentials['name']][hdv_type]
+            print('[SELL HDV] Items : {},\n[SELL HDV] Items to sell {}'.format(items, items_to_sell))
+            for item in items:
+                # item looks like ['name', item_id, inv_id, number, inv_slot]
+                if str(item[1]) in items_to_sell.keys() and item[3] >= items_to_sell[str(item[1])]["quantity"]:
+                    print('[SELL HDV] Item going to be sold : {}'.format(item))
+                    item_hdv_stats = self.bot.interface.get_hdv_item_stats(item[1])
+                    item_hdv_stats = False if not item_hdv_stats[0] else item_hdv_stats[0]
+                    # TODO Not for sale yet
+                    if item_hdv_stats:
+                        batch_size_index = [1, 10, 100].index(items_to_sell[str(item[1])]["quantity"])
+                        batch_size = [1, 10, 100][batch_size_index]
+                        price = item_hdv_stats[batch_size_index] - 1
+                        print('[SELL HDV]Selling {} batches of {} {} for {}'.format(item[3] // batch_size, batch_size, item[0], price))
+                        self.bot.interface.sell_item(item[2], batch_size, item[3] // batch_size, price)
+        else:
+            return False
+
     def update_db(self):
         try:
             print('[Database] Uploading {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.credentials['name'], self.bot.occupation, self.bot.position[0], self.bot.position[1]))
             self.llf.update_db(
-                self.bot,
+                self.bot.id,
                 self.bot.credentials['name'],
-                self.bot.occupation[self.bot],
-                self.bot.positions[0],
-                self.bot.positions[1]
+                self.bot.occupation,
+                self.bot.position[0],
+                self.bot.position[1]
             )
         except Exception:
             with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:
