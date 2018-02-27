@@ -1,0 +1,22 @@
+{
+  "Ilancelet": {
+    "Animaux": {},
+    "Cordonniers": {},
+    "Documents": {},
+    "Ressources": {},
+    "Runes": {},
+    "Alchimistes": {},
+    "Ames": {},
+    "Bijoutiers": {},
+    "Bricoleurs": {},
+    "Bucherons": {},
+    "Chasseurs": {},
+    "Faconneurs": {},
+    "Forgerons": {},
+    "Mineurs": {"15263": {"name": "rose des sables", "quantity": 100}},
+    "Paysans": {},
+    "Pecheurs": {},
+    "Sculpteurs": {},
+    "Tailleurs": {}
+  }
+}
