@@ -1,0 +1,20 @@
+{
+  "Animaux": [[-36, -56]],
+  "Cordonniers": [[-30, -58]],
+  "Documents": [[-33, -58]],
+  "Ressources": [[-33, -54], [4, -17]],
+  "Runes": [[-32, -55]],
+  "Alchimistes": [[-30, -53]],
+  "Ames": [[-32, -57]],
+  "Bijoutiers": [[-33, -59]],
+  "Bricoleurs": [[-26, -60]],
+  "Bucherons": [[-30, -60], [3, -21]],
+  "Chasseurs": [[-32, -51], [0, -16]],
+  "Faconneurs": [[-27, -51]],
+  "Forgerons": [[-28, -55]],
+  "Mineurs": [[-26, -55], [6, -19]],
+  "Paysans": [[-28, -52], [3, -17]],
+  "Pecheurs": [[-36, -53], [0, -18]],
+  "Sculpteurs": [[-29, -59]],
+  "Tailleurs": [[-30, -56]]
+}
