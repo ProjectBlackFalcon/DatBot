@@ -63,11 +63,12 @@ class Interface:
         self.pipe.p.stdin.flush()
         return self.current_id-1
 
-    def wait_for_return(self, message_id):
+    def wait_for_return(self, message_id, timeout=180):
         print('[Interface] Waiting for response...')
         ret_val = None
         message_queue = []
-        while ret_val is None:
+        start = time.time()
+        while ret_val is None and time.time()-start < timeout:
             partial_message = '{};{};m;rtn'.format(self.bot.id, message_id)
             buffer = self.pipe.get_buffer()
             for message in buffer:
@@ -92,9 +93,27 @@ class Interface:
                     del message_queue[message_queue.index(message)]
 
             time.sleep(0.1)
-        if not self.bot.in_fight:
+        if not self.bot.in_fight and ret_val is not None:
             print('[Interface] Recieved : ', ret_val)
             return tuple(ret_val)
+        else:
+            print('[Interface] Request timed out')
+            raise Exception('Request timed out')
+
+    def execute_command(self, command, parameters=None):
+        """
+        Executes commands while managing disconnections
+        :param command: command to send
+        :param parameters: params for the command
+        :return: return value form interface
+        """
+        tries = 0
+        while tries < 5:
+            try:
+                msg_id = self.add_command(command, parameters)
+                return self.wait_for_return(msg_id)
+            except Exception:
+                self.connect()
 
     def connect(self):
         """
@@ -107,8 +126,7 @@ class Interface:
             self.bot.credentials['name'],
             self.bot.credentials['server']
         ]
-        msg_id = self.add_command('connect', connection_param)
-        sucess = self.wait_for_return(msg_id)
+        sucess = self.execute_command('connect', connection_param)
         self.bot.connected = sucess
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         self.bot.position = (current_map, current_worldmap)
@@ -120,16 +138,14 @@ class Interface:
         :return:
         """
         if self.bot.connected:
-            msg_id = self.add_command('disconnect')
-            return self.wait_for_return(msg_id)
+            return self.execute_command('disconnect')
 
     def get_map(self):
         """
         Gets the map the player is on
         :return: coords, cell, worldmap, mapID
         """
-        msg_id = self.add_command('getMap')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getMap')
 
     def move(self, cell):
         """
@@ -137,8 +153,7 @@ class Interface:
         :param cell: target cell number
         :return: Boolean
         """
-        msg_id = self.add_command('move', [cell])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('move', [cell])
 
     def change_map(self, cell, direction):
         """
@@ -147,24 +162,21 @@ class Interface:
         :param direction: cardnial direction as 'n', 's', 'w', 'e'
         :return: Boolean
         """
-        msg_id = self.add_command('changeMap', [cell, direction])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('changeMap', [cell, direction])
 
     def get_map_resources(self):
         """
         Gets the resources and their info for the map the player is on
         :return: TODO
         """
-        msg_id = self.add_command('getResources')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getResources')
 
     def get_player_stats(self):
         """
         Get the bot player stats
         :return: {"current_pods": <>, "max_pods": <>, "level": <>, "job_levels": {"job_id": level, ...}}
         """
-        msg_id = self.add_command('getStats')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getStats')
 
     def harvest_resource(self, cell):
         """
@@ -172,56 +184,49 @@ class Interface:
         :param cell: cell number
         :return: [id, number_harvested, new_pods, max_pods], or combat or false
         """
-        msg_id = self.add_command('harvest', [cell])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('harvest', [cell])
 
     def go_to_astrub(self):
         """
         Talks to the PNJ to go to Astrub
         :return: Boolean
         """
-        msg_id = self.add_command('goAstrub')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('goAstrub')
 
     def go_to_incarnam(self):
         """
         Uses a statue to go to Incarnam
         :return: Boolean
         """
-        msg_id = self.add_command('goIncarnam')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('goIncarnam')
 
     def get_class_statue_cell(self):
         """
         Returns the cell id of the current map class statue, or False if there is none
         :return: [cell] or [False]
         """
-        msg_id = self.add_command('getStatue')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getStatue')
 
     def get_bank_door_cell(self):
         """
         Returns the cell id of the current map bank door, or False if there is none
         :return: [cell_in, cell_out] or [False]
         """
-        msg_id = self.add_command('getBankDoor')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getBankDoor')
 
     def enter_bank(self):
         """
         Uses a door to enter bank
         :return: Boolean
         """
-        msg_id = self.add_command('goBank')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('goBank')
 
     def open_bank(self):
         """
         Opens bank
         :return: items json / False
         """
-        msg_id = self.add_command('openBank')
-        bank_content = self.wait_for_return(msg_id)
+        bank_content = self.execute_command('openBank')
         self.bank_info = bank_content[0]
         return bank_content
 
@@ -230,9 +235,8 @@ class Interface:
         Closes Bank
         :return: Boolean
         """
-        msg_id = self.add_command('closeBank')
         self.bank_info = {}
-        return self.wait_for_return(msg_id)
+        return self.execute_command('closeBank')
 
     def drop_in_bank_list(self, item_id_list):
         """
@@ -241,10 +245,9 @@ class Interface:
         :return: New bank content, new inventory content
         """
         if item_id_list in ['All', 'all']:
-            msg_id = self.add_command('dropBankAll', item_id_list)
+            bank_content, inventory_content = self.execute_command('dropBankAll', item_id_list)
         else:
-            msg_id = self.add_command('dropBankList', item_id_list)
-        bank_content, inventory_content = self.wait_for_return(msg_id)
+            bank_content, inventory_content = self.execute_command('dropBankList', item_id_list)
         self.bank_info = bank_content
         return bank_content, inventory_content
 
@@ -255,8 +258,7 @@ class Interface:
         :param quantity: quantity of item to drop
         :return: New bank content, new inventory content
         """
-        msg_id = self.add_command('dropBank', [item_id, quantity])
-        bank_content, inventory_content = self.wait_for_return(msg_id)
+        bank_content, inventory_content = self.execute_command('dropBank', [item_id, quantity])
         self.bank_info = bank_content
         return bank_content, inventory_content
 
@@ -266,8 +268,7 @@ class Interface:
         :param item_id_list: [ItemID1, ItemID2...] / ['All']
         :return: New bank content, new inventory content
         """
-        msg_id = self.add_command('getBankList', item_id_list)
-        bank_content, inventory_content = self.wait_for_return(msg_id)
+        bank_content, inventory_content = self.execute_command('getBankList', item_id_list)
         self.bank_info = bank_content
         return bank_content, inventory_content
 
@@ -278,8 +279,7 @@ class Interface:
         :param quantity: quantity of item to retrieve
         :return: New bank content, new inventory content
         """
-        msg_id = self.add_command('getBank', [item_id, quantity])
-        bank_content, inventory_content = self.wait_for_return(msg_id)
+        bank_content, inventory_content = self.execute_command('getBank', [item_id, quantity])
         self.bank_info = bank_content
         return bank_content, inventory_content
 
@@ -292,8 +292,7 @@ class Interface:
         kamas = self.get_player_stats()[0]['Kamas']
         if quantity in ['all', 'All'] or quantity > kamas:
             quantity = kamas
-        msg_id = self.add_command('dropBankKamas', [quantity])
-        bank_content, inventory_content = self.wait_for_return(msg_id)
+        bank_content, inventory_content = self.execute_command('dropBankKamas', [quantity])
         self.bank_info = bank_content
         return bank_content, inventory_content
 
@@ -306,8 +305,7 @@ class Interface:
         kamas = self.bank_info['Kamas']
         if quantity in ['all', 'All'] or quantity > kamas:
             quantity = kamas
-        msg_id = self.add_command('getBankKamas', [quantity])
-        bank_content, inventory_content = self.wait_for_return(msg_id)
+        bank_content, inventory_content = self.execute_command('getBankKamas', [quantity])
         self.bank_info = bank_content
         return bank_content, inventory_content
 
@@ -316,24 +314,21 @@ class Interface:
         Returns the cell id of the hunting hall door, or False if there is none
         :return: [cell_in, cell_out] or [False]
         """
-        msg_id = self.add_command('getHuntingHallDoorCell')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getHuntingHallDoorCell')
 
     def enter_hunting_hall(self):
         """
         Uses the door to enter the hunting hall, then moves to the main room
         :return: Boolean
         """
-        msg_id = self.add_command('goHuntingHall')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('goHuntingHall')
 
     def exit_hunting_hall(self):
         """
         Goes back the the first room, and exits the hall
         :return: Boolean
         """
-        msg_id = self.add_command('exitHuntingHall')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('exitHuntingHall')
 
     def get_new_hunt(self, level='max'):
         """
@@ -342,114 +337,100 @@ class Interface:
         :return: Boolean
         """
         if level == 'max':
-            msg_id = self.add_command('newHunt')
+            return self.execute_command('newHunt')
         else:
-            msg_id = self.add_command('newHunt', [level])
-        return self.wait_for_return(msg_id)
+            return self.execute_command('newHunt', [level])
 
     def hunt_is_active(self):
         """
         Checks wether a hunt is active or not
         :return: Boolean
         """
-        msg_id = self.add_command('huntActive')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('huntActive')
 
     def abandon_hunt(self):
         """
         The bot drops the hunt
         :return: Boolean
         """
-        msg_id = self.add_command('abandonHunt')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('abandonHunt')
 
     def get_hunt_start(self):
         """
         Returns the starting pos of the hunt
         :return:
         """
-        msg_id = self.add_command('getHuntStart')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getHuntStart')
 
     def get_clues_left(self):
         """
         Gets the number of clues left in this step
         :return:
         """
-        msg_id = self.add_command('getCluesLeft')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getCluesLeft')
 
     def get_steps_left(self):
         """
         Gets the number of steps left in the hunt
         :return:
         """
-        msg_id = self.add_command('getStepsLeft')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getStepsLeft')
 
     def get_hunt_clue(self):
         """
         Returns the clue the bot should be looking for
         :return: [clue : String, direction : 'n','s','w','e']
         """
-        msg_id = self.add_command('getClue')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getClue')
 
     def validate_hunt_clue(self):
         """
         Validates the clue (the little flag in the gui)
         :return: boolean
         """
-        msg_id = self.add_command('validateClue')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('validateClue')
 
     def check_for_phorror(self):
         """
         If a phorror is on the map, return it's name
         :return: String or False
         """
-        msg_id = self.add_command('checkPhorror')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('checkPhorror')
 
     def validate_hunt_step(self):
         """
         Validates the full step.
         :return: Boolean
         """
-        msg_id = self.add_command('validateStep')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('validateStep')
 
     def start_hunt_fight(self):
         """
         Starts the fight
         :return: Boolean
         """
-        msg_id = self.add_command('huntFight')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('huntFight')
 
     def enter_heavenbag(self):
         """
         Enters heavenbag
         :return: Boolean
         """
-        msg_id = self.add_command('enterBag')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('enterBag')
 
     def exit_heavenbag(self):
         """
         Exits heavenbag
         :return: Boolean
         """
-        msg_id = self.add_command('exitBag')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('exitBag')
 
     def get_zaap_cell(self):
         """
         Returns the cell id of the current map zaap, or False if there is none
         :return: [cell] or [False]
         """
-        msg_id = self.add_command('getZaap')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getZaap')
 
     def use_zaap(self, destination):
         """
@@ -458,16 +439,14 @@ class Interface:
         :return: Boolean
         """
         destination = ast.literal_eval(str(destination).replace('[', '(').replace(']', ')'))
-        msg_id = self.add_command('useZaap', [destination])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('useZaap', [destination])
 
     def get_monsters(self):
         """
         Gives the positions and types of monsters on the map
         :return: [[mob_id, mob_name_ref, cell], [...]]
         """
-        msg_id = self.add_command('getMonsters')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getMonsters')
 
     def attack_monster(self, mob_id):
         """
@@ -475,16 +454,14 @@ class Interface:
         :param mob_id: Id of the mob to attack. Given by get_monsters.
         :return:
         """
-        msg_id = self.add_command('attackMonster', [mob_id])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('attackMonster', [mob_id])
 
     def open_hdv(self):
         """
         Tries to open the map's hdv. If sucessful, returns what items are being sold.
         :return: False / "empty" / [[name, id, batch_size, price], [...]]
         """
-        msg_id = self.add_command('openHdv')
-        return self.wait_for_return(msg_id)
+        return self.execute_command('openHdv')
 
     def get_hdv_item_stats(self, item_id):
         """
@@ -492,8 +469,7 @@ class Interface:
         :param item_id: item id
         :return: False / [price1, price 10, price 100]
         """
-        msg_id = self.add_command('getHdvItemStats', [item_id])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('getHdvItemStats', [item_id])
 
     def sell_item(self, item_id, batch_size, batch_number, price):
         """
@@ -503,8 +479,7 @@ class Interface:
         :param batch_number: Number of batches to sell
         :return: Boolaen
         """
-        msg_id = self.add_command('sellItem', [item_id, batch_size, batch_number, price])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('sellItem', [item_id, batch_size, batch_number, price])
 
     def modify_price(self, item_id, batch_size, new_price):
         """
@@ -514,8 +489,7 @@ class Interface:
         :param new_price: New price
         :return: Boolean
         """
-        msg_id = self.add_command('modifyPrice', [item_id, batch_size, new_price])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('modifyPrice', [item_id, batch_size, new_price])
 
     def withdraw_item(self, item_id, batch_size, batch_number):
         """
@@ -525,7 +499,6 @@ class Interface:
         :param batch_number: Number of batches to withdraw
         :return: Boolean
         """
-        msg_id = self.add_command('withdrawItem', [item_id, batch_size, batch_number])
-        return self.wait_for_return(msg_id)
+        return self.execute_command('withdrawItem', [item_id, batch_size, batch_number])
 
 __author__ = 'Alexis'
