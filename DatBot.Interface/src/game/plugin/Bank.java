@@ -34,12 +34,12 @@ public class Bank {
 		for (int i = 0; i < storage.getObjects().size(); i++) {
 			if (i == storage.getObjects().size() - 1) {
 				str += "[" + "\"" + DisplayInfo.cleanString(GameData.getItemName(storage.getObjects().get(i).getObjectGID())) + "\"" + ","
-						+ GameData.getItemName(storage.getObjects().get(i).getObjectGID()) + "," 
+						+ storage.getObjects().get(i).getObjectGID() + "," 
 						+ storage.getObjects().get(i).getObjectUID() + ","
 						+ storage.getObjects().get(i).getQuantity() + "," + storage.getObjects().get(i).getPosition() + "," +  GameData.getPodsFromItem(storage.getObjects().get(i).getObjectGID()) + "]";
 			} else {
 				str += "[" + "\"" + DisplayInfo.cleanString(GameData.getItemName(storage.getObjects().get(i).getObjectGID())) + "\"" + "," 
-						+ GameData.getItemName(storage.getObjects().get(i).getObjectGID()) + "," 
+						+ storage.getObjects().get(i).getObjectGID() + "," 
 						+ storage.getObjects().get(i).getObjectUID() + ","
 						+ storage.getObjects().get(i).getQuantity() + "," + storage.getObjects().get(i).getPosition() + "," +  GameData.getPodsFromItem(storage.getObjects().get(i).getObjectGID()) + "],";
 			}
