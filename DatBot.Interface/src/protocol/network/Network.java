@@ -24,6 +24,7 @@ import game.plugin.Interactive;
 import game.plugin.Monsters;
 import game.plugin.Npc;
 import game.plugin.Stats;
+import ia.fight.brain.Game;
 import ia.fight.brain.Position;
 import ia.fight.map.CreateMap;
 import ia.fight.structure.Player;
@@ -622,10 +623,7 @@ public class Network extends DisplayInfo implements Runnable {
 		getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
 		getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
 		this.fight.fightToggleAdvancedRdy(false);
-		
-		
-		
-		
+		this.fight.incrementMoving();
 		
 		List<IdentifiedEntityDispositionInformations> identifiedPositions = getFight().gameEntitiesDispositionMessage.getDispositions();
 		ArrayList<Position> positions = new ArrayList<>();
@@ -646,23 +644,45 @@ public class Network extends DisplayInfo implements Runnable {
 		
 		String newPosition = getFight().sendToFightAlgo("startPosAltered", arr);
 		int cellID = Fight.rotateToCellId(Integer.parseInt(newPosition.split(",")[0]), Integer.parseInt(newPosition.split(",")[1]));
-		
+
 		if(cellID != this.info.getCellId()){
 			if(this.fight.isRdy()) {
 				getFight().fightNotReady();
 				this.fight.setRdy(false);
 			}
-			GameFightPlacementPositionRequestMessage gameFightPlacementPositionRequestMessage = new GameFightPlacementPositionRequestMessage(cellID);
-			Thread.sleep(80);
-			sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Fight placement to " + cellID);
+			
+			Game.setTimeout(() -> {
+				try{
+					if(this.fight.isMoving() <= 1) {
+						System.out.println(this.fight.isMoving());
+						GameFightPlacementPositionRequestMessage gameFightPlacementPositionRequestMessage = new GameFightPlacementPositionRequestMessage(cellID);
+						sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Fight placement to " + cellID);
+						this.fight.setMovingToZero();
+					}else {
+						this.fight.decrementMoving();
+					}
+					
+				}catch(Exception e) {e.printStackTrace();}
+			}, 500);
 		}
 		if(!this.fight.isRdy()){
 			this.fight.fightToggleAdvancedRdy(true);
-			Thread.sleep(new Random().nextInt(1500));
-			getFight().fightReady();
-			this.fight.setRdy(true);
+			Game.setTimeout(() -> {
+				try {
+					if(this.fight.isAdvancedRdy()) {
+						if(!this.fight.isRdy()) {
+							getFight().fightReady();
+							this.fight.setRdy(true);
+						}
+						
+						this.fight.setMovingToZero();
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}, 1000);
 		}
-
 	}
 
 	private void handleGameFightPlacementPossiblePositionsMessage(DofusDataReader dataReader) {

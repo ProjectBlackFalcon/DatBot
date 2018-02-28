@@ -45,6 +45,7 @@ public class Fight {
 	private int teamIdPlayer;
 	private boolean isRdy = false;
 	private boolean advancedRdy = false;
+	private int moving = 0;
 	
 	public List<Double> turnListId;
 	private JSONArray spellJson;
@@ -442,5 +443,21 @@ public class Fight {
 	
 	public void fightToggleAdvancedRdy(boolean isRdy) {
 		advancedRdy = isRdy;
+	}
+	
+	public int isMoving() {
+		return moving;
+	}
+	
+	public void incrementMoving() {
+		this.moving++;
+	}
+	
+	public void decrementMoving() {
+		this.moving--;
+	}
+	
+	public void setMovingToZero() {
+		this.moving = 0;
 	}
 }
