@@ -939,5 +939,17 @@ public class Game {
         String timeStamp = new SimpleDateFormat("yy-MM-dd HH:mm:ss").format(new Date());
 		log.println("["+timeStamp+"] ");
 	}
+	
+	public static void setTimeout(Runnable runnable, int delay){
+	    new Thread(() -> {
+	        try {
+	            Thread.sleep(delay);
+	            runnable.run();
+	        }
+	        catch (Exception e){
+	            System.err.println(e);
+	        }
+	    }).start();
+	}
 
 }
