@@ -32,8 +32,8 @@ public class Stats {
 		str += "\"Lvl\" : " + this.info.getLvl() + ",";
 		str += "\"Xp\" : " + stats.getStats().getExperience() + ",";
 		str += "\"XpNextLevelFloor\" : " + stats.getStats().getExperienceNextLevelFloor() + ",";
-		str += "\"Weigth\" : " + this.info.getWeight() + ",";
-		str += "\"WeigthMax\" : " + this.info.getWeigthMax() + ",";
+		str += "\"Weight\" : " + this.info.getWeight() + ",";
+		str += "\"WeightMax\" : " + this.info.getWeigthMax() + ",";
 
 		int hpPrct = 100;
 		long diffTime = System.currentTimeMillis() / 1000 - timePacketRecv;
