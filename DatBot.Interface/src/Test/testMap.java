@@ -26,6 +26,6 @@ public class testMap {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		double test = ((double)148)/200;
-		System.out.println(test);
+		System.out.println( GameData.getPodsFromItem(15264));
 	}
 }
