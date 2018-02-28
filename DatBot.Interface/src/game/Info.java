@@ -50,6 +50,7 @@ public class Info {
 	private boolean waitForHarvestSuccess = false;
 	private boolean waitForHarvestFailure = false;
 	private boolean inHunt = false;
+	private boolean inExchange = false;
 
 	private boolean interactiveUsed = false;
 	private boolean newMap = false;
@@ -432,6 +433,16 @@ public class Info {
 
 	public void setExchangeBidSeller(boolean exchangeBidSeller) {
 		this.exchangeBidSeller = exchangeBidSeller;
+	}
+
+	public boolean isInExchange()
+	{
+		return inExchange;
+	}
+
+	public void setInExchange(boolean inExchange)
+	{
+		this.inExchange = inExchange;
 	}
 
 }

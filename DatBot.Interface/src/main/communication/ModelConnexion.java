@@ -619,6 +619,7 @@ public class ModelConnexion {
 				}
 				break;
 			case "openHdv":
+				this.network.getInfo().setInExchange(true);
 				int idSeller = (int) this.getNetwork().getNpc().getSeller();
 				if(idSeller != -1){
 					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(idSeller, 5, this.getNetwork().getMap().getId());
@@ -634,7 +635,7 @@ public class ModelConnexion {
 				}
 				break;
 			case "getHdvItemStats":
-				if(Integer.parseInt(param) > 0){
+				if(Integer.parseInt(param) > 0  && this.network.getInfo().isInExchange()){
 					ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
 					getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
 					if (this.waitToSend("exchangeBigSeller")) {
@@ -648,63 +649,15 @@ public class ModelConnexion {
 				}
 				break;
 			case "sellItem":
-				String[] paramItems = param.split(",");
-				System.out.println("Size : " + Integer.parseInt(paramItems[2]));
-				for(int i = 0 ; i < Integer.parseInt(paramItems[2]) ; i++){
-					Thread.sleep(80);
-					System.out.println("Id : " + Integer.parseInt(paramItems[0]));
-					ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[3]));
-					exchangeObjectMovePricedMessage.setObjectUID(Integer.parseInt(paramItems[0]));
-					exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems[1]));
-					getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
-					if(!(i == Integer.parseInt(paramItems[2]) - 1)){
-						this.waitToSend("exchangeBigSeller");
-					}
-				}
-				if (this.waitToSend("exchangeBigSeller")) {
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
-				break;
-			case "modifyPrice":
-				String[] paramItems1 = param.split(",");
-				List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
-				for(int i = 0 ; i < uid.size() ; i++){
-					if(!this.getNetwork().getNpc().isSelling(uid.get(i))){
-						continue;
-					}
-					Thread.sleep(80);
-					ExchangeObjectModifyPricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectModifyPricedMessage();
-					exchangeObjectMovePricedMessage.setObjectUID(uid.get(i));
-					exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems1[1]));
-					exchangeObjectMovePricedMessage.setPrice(Integer.parseInt(paramItems1[2]));
-					getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectModifyPricedMessage.ProtocolId, "Modify item");
-					if(!(i == uid.size() - 1)){
-						this.waitToSend("exchangeBigSeller");
-					}
-				}
-				if (this.waitToSend("exchangeBigSeller")) {
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
-				break;
-			case "withdrawItem":
-				String[] paramItems11 = param.split(",");
-				List<Integer> uid1 = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems11[0]), Integer.parseInt(paramItems11[1]));
-	
-				if (Integer.parseInt(paramItems11[2]) <= uid1.size()) {
-					for (int i = 0; i < Integer.parseInt(paramItems11[2]); i++) {
-						if(!this.getNetwork().getNpc().isSelling(uid1.get(i))){
-							continue;
-						}
+				if(this.network.getInfo().isInExchange()){
+					String[] paramItems = param.split(",");
+					for(int i = 0 ; i < Integer.parseInt(paramItems[2]) ; i++){
 						Thread.sleep(80);
-						ExchangeObjectMoveMessage exchangeObjectMoveMessage = new ExchangeObjectMoveMessage(uid1.get(i), -Integer.parseInt(paramItems11[1]));
-						getNetwork().sendToServer(exchangeObjectMoveMessage, ExchangeObjectMoveMessage.ProtocolId, "Withdraw item");
-						if (!(i == uid1.size() - 1)) {
+						ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[3]));
+						exchangeObjectMovePricedMessage.setObjectUID(Integer.parseInt(paramItems[0]));
+						exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems[1]));
+						getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
+						if(!(i == Integer.parseInt(paramItems[2]) - 1)){
 							this.waitToSend("exchangeBigSeller");
 						}
 					}
@@ -713,20 +666,83 @@ public class ModelConnexion {
 					}
 					else {
 						toSend = new Object[] { "False" };
-					} 
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "modifyPrice":
+				if(this.network.getInfo().isInExchange()){
+					String[] paramItems1 = param.split(",");
+					List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
+					for(int i = 0 ; i < uid.size() ; i++){
+						if(!this.getNetwork().getNpc().isSelling(uid.get(i))){
+							continue;
+						}
+						Thread.sleep(80);
+						ExchangeObjectModifyPricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectModifyPricedMessage();
+						exchangeObjectMovePricedMessage.setObjectUID(uid.get(i));
+						exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems1[1]));
+						exchangeObjectMovePricedMessage.setPrice(Integer.parseInt(paramItems1[2]));
+						getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectModifyPricedMessage.ProtocolId, "Modify item");
+						if(!(i == uid.size() - 1)){
+							this.waitToSend("exchangeBigSeller");
+						}
+					}
+					if (this.waitToSend("exchangeBigSeller")) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "withdrawItem":
+				if(this.network.getInfo().isInExchange()){
+					String[] paramItems11 = param.split(",");
+					List<Integer> uid1 = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems11[0]), Integer.parseInt(paramItems11[1]));
+		
+					if (Integer.parseInt(paramItems11[2]) <= uid1.size()) {
+						for (int i = 0; i < Integer.parseInt(paramItems11[2]); i++) {
+							if(!this.getNetwork().getNpc().isSelling(uid1.get(i))){
+								continue;
+							}
+							Thread.sleep(80);
+							ExchangeObjectMoveMessage exchangeObjectMoveMessage = new ExchangeObjectMoveMessage(uid1.get(i), -Integer.parseInt(paramItems11[1]));
+							getNetwork().sendToServer(exchangeObjectMoveMessage, ExchangeObjectMoveMessage.ProtocolId, "Withdraw item");
+							if (!(i == uid1.size() - 1)) {
+								this.waitToSend("exchangeBigSeller");
+							}
+						}
+						if (this.waitToSend("exchangeBigSeller")) {
+							toSend = new Object[] { "True" };
+						}
+						else {
+							toSend = new Object[] { "False" };
+						} 
+					} else {
+						toSend = new Object[] { "False" };
+					}
 				} else {
 					toSend = new Object[] { "False" };
 				}
 				break;
 			case "closeHdv":
-				LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
-				getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave hdv");
-				if (this.waitToSend("Exchange")) {
-					toSend = new Object[] { "True" };
-				}
-				else {
+				if(this.network.getInfo().isInExchange()){
+					LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
+					getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave hdv");
+					if (this.waitToSend("Exchange")) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					} 
+				} else {
 					toSend = new Object[] { "False" };
-				} 
+				}
+				this.network.getInfo().setInExchange(false);
 				break;
 		}
 		return toSend;
