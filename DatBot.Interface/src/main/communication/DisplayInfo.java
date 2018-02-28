@@ -40,7 +40,7 @@ public class DisplayInfo {
 	private JTextPane text;
 
 	private PrintStream log;
-	private static PrintStream debug;
+	public PrintStream debug;
 
 	public DisplayInfo(int botInstance, boolean displayPacket) {
 		this.botInstance = botInstance;
@@ -84,14 +84,24 @@ public class DisplayInfo {
 			// log = System.out;
 			fileOutputStream = new FileOutputStream("log_network" + botInstance + ".txt");
 			log = new PrintStream(fileOutputStream);
-			// debug = new PrintStream(new FileOutputStream("debug.txt"));
-			debug = System.out;
+			debug = new PrintStream(new FileOutputStream("debug.txt"));
+//			debug = System.out;
 			log = System.out;
 			System.setErr(debug);
 		}
 		catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	/**
+	 * @return String timestamp
+	 */
+	public String getTiming(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+		LocalTime time = LocalTime.now();
+		String timing = formatter.format(time);
+		return timing;
 	}
 
 	/**
