@@ -98,7 +98,7 @@ public class Fight {
 	 * @author jikiw
 	 */
 	public void fightNotReady() throws Exception {
-		network.sendToServer(new GameFightReadyMessage(false), GameFightReadyMessage.ProtocolId, "Ready");
+		network.sendToServer(new GameFightReadyMessage(false), GameFightReadyMessage.ProtocolId, "Not ready");
 	}
 
 	/**
