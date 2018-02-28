@@ -49,6 +49,7 @@ import protocol.network.messages.game.actions.fight.GameActionFightLifePointsGai
 import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightMarkCellsMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightModifyEffectsDurationMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightNoSpellCastMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightPointsVariationMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
 import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
@@ -1455,7 +1456,7 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 950:
 				GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
-				throw new Exception("Can't move to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14));
+				super.debug.println(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
 			case 951:
 				handleGameMapMovementMessage(dataReader);
 				break;
@@ -1608,6 +1609,10 @@ public class Network extends DisplayInfo implements Runnable {
 			 */
 			case 1010:
 				handleGameActionFightSpellCastMessage(dataReader);
+				break;
+			case 6132:
+				GameActionFightNoSpellCastMessage gameActionFightNoSpellCastMessage = new GameActionFightNoSpellCastMessage();
+				super.debug.println(getTiming() + "Can't send spell " + gameActionFightNoSpellCastMessage.getSpellLevelId());
 				break;
 			case 6312:
 				handleGameActionFightLifePointsLostMessage(dataReader);

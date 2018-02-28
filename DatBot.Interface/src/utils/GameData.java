@@ -87,6 +87,31 @@ public class GameData {
 	public static String getNpcName(int id){
 		return d2iManager.getText(getDataFromFile(id,"Npcs"));
 	}
+	
+	public static String getPodsFromItem(int id){
+		return getDataFromFile(id,"Items","realWeight");
+	}
+	
+	private static String getDataFromFile(int id, String file, String value) {
+		D2oManager d2oManager;
+		try {
+			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\" + file + ".d2o");
+			String s = d2oManager.searchObjectById(id);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			String[] cmd = s.split(",");
+			for (String si : cmd) {
+				String[] cmd2 = si.split(":");
+				if (cmd2[0].equals(value)) { return cmd2[1]; }
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	private static int getDataFromFile(int id, String file) {
 		D2oManager d2oManager;
