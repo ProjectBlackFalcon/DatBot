@@ -1,1 +1,6 @@
-[20:01:05] [BOT 0] Connection...
+[19:08:55] [BOT 0] Connection...
+[19:08:59] [BOT 0] Map : [2;-19]
+[19:08:59] [BOT 0] CellId : 82
+[19:09:00] [BOT 0] Connected !
+[19:09:00] [BOT 0] Name : Le-Gros-Veineux
+[19:09:00] [BOT 0] Level : 21

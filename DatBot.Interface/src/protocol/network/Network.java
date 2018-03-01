@@ -15,7 +15,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import game.Info;
-import game.Servers;
 import game.combat.Fight;
 import game.movement.Movement;
 import game.plugin.Bank;
@@ -1170,7 +1169,17 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleServersListMessage(DofusDataReader dataReader) throws Exception {
 		ServersListMessage servers = new ServersListMessage();
 		servers.Deserialize(dataReader);
-		ServerSelectionMessage select = new ServerSelectionMessage(Servers.getServerId(info.getServer()));
+		int serverId = -1;
+		for (GameServerInformations server : servers.getServers())
+		{
+			if(GameData.getNameServer(server.getId()).equals(this.info.getServer())){
+				serverId = server.getId();
+			}
+		}
+		if(serverId == -1){
+			throw new Exception("Wrong server name");
+		}
+		ServerSelectionMessage select = new ServerSelectionMessage(serverId);
 		sendToServer(select, ServerSelectionMessage.ProtocolId, "Selection du serveur...");
 	}
 

@@ -26,6 +26,7 @@ public class testMap {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		double test = ((double)148)/200;
-		System.out.println( GameData.getPodsFromItem(15264));
+		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
+		System.out.println(GameData.getNameServer(201));
 	}
 }
