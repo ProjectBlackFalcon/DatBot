@@ -769,8 +769,8 @@ public class Game {
 		if(desired.deepEquals(caster.getPosition())) {
 			ArrayList<SpellObject> turn = caster.getOptimalTurnFrom(caster.getPosition(), victim, false, map);
 			if(turn.size() > 0) {
-				action += id+",None";
-				//action += id+",c,"+turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
+//				action += id+",None";
+				action += id+",c,"+turn.get(0).getID()+","+turn.get(0).getName()+","+victim.getPosition().getX()+","+victim.getPosition().getY();
 			}else {
 				action += id+",None";
 			}
