@@ -221,7 +221,7 @@ class PathFinder:
             self.enlarge()
             self.get_path_try()
         if not self.path_cells:
-            raise Exception('Could not generate path')
+            raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
         # self.path_cells.append(self.cell2coord_diag(self.end_cell))
 
     def get_map_change_cells(self):
