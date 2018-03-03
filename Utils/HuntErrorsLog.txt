@@ -1,0 +1,559 @@
+
+2018-02-24 14:18:22.898455
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Grand coquillage, going w from [-37, -50]
+
+
+2018-02-24 17:44:59.052102
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Panneau, going w from [-37, -57]
+
+
+2018-02-24 17:47:07.070107
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Panneau, going w from (-37, -57)
+
+
+2018-02-24 18:22:53.033956
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path (Sufokia, l'histoire des Ã©tages)
+
+
+2018-02-24 19:21:51.601321
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 59, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-02-24 20:09:17.501631
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-24 21:02:53.997728
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-24 23:25:06.344938
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-25 01:04:36.423513
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-25 01:33:51.687195
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-25 01:54:57.527278
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-25 02:08:50.044580
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-25 02:09:20.839957
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 59, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-02-25 11:35:59.778909
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Bandeau, going w from [5, -8]
+
+
+2018-02-25 11:46:36.730903
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Bandeau, going w from [6, -8]
+
+
+2018-02-25 15:15:11.503690
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Rondin de bois, going s from (-2, 10)
+
+
+2018-02-25 15:19:50.223412
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Rondin de bois, going s from (-2, 10)
+
+
+2018-02-25 15:40:09.019829
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-25 16:24:44.286088
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-25 17:55:02.442119
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-25 17:58:09.167485
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Feu de camp, going e from (-31, 32)
+
+
+2018-02-25 18:18:40.712990
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-25 18:55:05.000089
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-25 19:46:27.795417
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-25 20:26:41.364057
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-26 21:57:01.884228
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Panneau, going e from (7, -5)
+
+
+2018-02-26 22:15:38.970717
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-26 22:54:35.474270
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-27 19:00:23.804587
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-27 19:21:40.880864
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-27 23:07:11.132096
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-27 23:21:00.025236
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-27 23:39:03.862270
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-28 00:17:32.181673
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 260, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-28 00:47:26.336457
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 270, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-02-28 12:33:16.467420
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 269, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Barque avec une étoile, going e from [10, -15]
+
+
+2018-02-28 15:45:11.477960
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 272, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-02-28 18:56:14.587939
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 271, in tresure_hunt
+    hunt_error_flag = True
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Bombe, going s from [7, -17]
+
+
+2018-03-01 21:37:57.593348
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-01 21:41:35.771307
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-01 22:01:48.028770
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-02 01:05:03.234060
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-02 20:54:28.591841
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 296, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-02 21:14:38.783681
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 296, in tresure_hunt
+    self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 59, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-02 22:04:33.699670
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-02 22:30:44.585742
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-02 23:32:20.509488
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise Exception('Interface returned false on move command')
+Exception: Interface returned false on move command
+
+
+2018-03-03 09:38:06.463593
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 306, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise Exception('Could not generate path')
+Exception: Could not generate path
+
+
+2018-03-03 09:49:06.745211
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 305, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 131, in get_next_clue_pos
+    raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+Exception: Could not find clue : Chaloupe renversée, going e from [15, 25]
+
+
+2018-03-03 11:05:56.851981
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 300, in tresure_hunt
+    self.goto(destination)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 59, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-03 11:27:05.199372
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 313, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 60, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path')
+RuntimeError: Could not generate path
+
+
+2018-03-03 13:05:04.709222
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 313, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : (-36, -53), Cell : 182, Direction : w

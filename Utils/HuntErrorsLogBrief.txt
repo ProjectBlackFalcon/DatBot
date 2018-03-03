@@ -1,0 +1,5 @@
+2018-03-03 11:05:56.852981
+Could not go to [-22, 42] from ([-23, 42], 1) to find phorror
+
+2018-03-03 13:05:04.714227
+Interface returned false on move command. Position : (-36, -53), Cell : 182, Direction : w
