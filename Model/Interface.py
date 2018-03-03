@@ -4,6 +4,8 @@ import sys
 from queue import Queue, Empty
 from subprocess import Popen, PIPE
 import time
+import datetime
+import traceback
 
 
 class PipeToJava:
@@ -63,7 +65,7 @@ class Interface:
         self.pipe.p.stdin.flush()
         return self.current_id-1
 
-    def wait_for_return(self, message_id, timeout=180):
+    def wait_for_return(self, message_id, timeout=600):
         print('[Interface] Waiting for response...')
         ret_val = None
         message_queue = []
@@ -109,11 +111,14 @@ class Interface:
         """
         tries = 0
         while tries < 5:
+            tries += 1
             try:
                 msg_id = self.add_command(command, parameters)
                 return self.wait_for_return(msg_id)
             except Exception:
-                time.sleep(10)
+                with open('..//Utils//InterfaceErrors.txt', 'a') as f:
+                    f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                    f.write(traceback.format_exc())
                 self.connect()
 
     def connect(self):
@@ -130,6 +135,9 @@ class Interface:
         success = self.execute_command('connect', connection_param)
         self.bot.connected = success
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+        bot_stats = self.bot.interface.get_player_stats()[0]
+        self.bot.kamas = bot_stats['Inventory']['Kamas']
+        self.bot.level = bot_stats['Lvl']
         self.bot.position = (current_map, current_worldmap)
         return success
 
@@ -175,9 +183,12 @@ class Interface:
     def get_player_stats(self):
         """
         Get the bot player stats
-        :return: {"current_pods": <>, "max_pods": <>, "level": <>, "job_levels": {"job_id": level, ...}}
+        :return: {"Weight": <>, "WeightMax": <>, "Lvl": <>, "Job": {"job_id": level, ...}}
         """
-        return self.execute_command('getStats')
+        stats = self.execute_command('getStats')
+        self.bot.kamas = stats[0]['Inventory']['Kamas']
+        self.bot.level = stats[0]['Lvl']
+        return stats
 
     def harvest_resource(self, cell):
         """
@@ -246,11 +257,11 @@ class Interface:
         :return: New bank content, new inventory content
         """
         if item_id_list in ['All', 'all']:
-            bank_content, inventory_content = self.execute_command('dropBankAll', item_id_list)
+            inventory_content, bank_content = self.execute_command('dropBankAll')
         else:
-            bank_content, inventory_content = self.execute_command('dropBankList', item_id_list)
+            inventory_content, bank_content = self.execute_command('dropBankList', item_id_list)
         self.bank_info = bank_content
-        return bank_content, inventory_content
+        return inventory_content, bank_content
 
     def drop_in_bank_unique(self, item_id, quantity):
         """
@@ -259,9 +270,9 @@ class Interface:
         :param quantity: quantity of item to drop
         :return: New bank content, new inventory content
         """
-        bank_content, inventory_content = self.execute_command('dropBank', [item_id, quantity])
+        inventory_content, bank_content = self.execute_command('dropBank', [item_id, quantity])
         self.bank_info = bank_content
-        return bank_content, inventory_content
+        return inventory_content, bank_content
 
     def get_from_bank_list(self, item_id_list):
         """
@@ -269,9 +280,9 @@ class Interface:
         :param item_id_list: [ItemID1, ItemID2...] / ['All']
         :return: New bank content, new inventory content
         """
-        bank_content, inventory_content = self.execute_command('getBankList', item_id_list)
+        inventory_content, bank_content = self.execute_command('getBankList', item_id_list)
         self.bank_info = bank_content
-        return bank_content, inventory_content
+        return inventory_content, bank_content
 
     def get_from_bank_unique(self, item_id, quantity):
         """
@@ -280,9 +291,9 @@ class Interface:
         :param quantity: quantity of item to retrieve
         :return: New bank content, new inventory content
         """
-        bank_content, inventory_content = self.execute_command('getBank', [item_id, quantity])
+        inventory_content, bank_content = self.execute_command('getBank', [item_id, quantity])
         self.bank_info = bank_content
-        return bank_content, inventory_content
+        return inventory_content, bank_content
 
     def put_kamas_in_bank(self, quantity):
         """
@@ -293,9 +304,9 @@ class Interface:
         kamas = self.get_player_stats()[0]['Kamas']
         if quantity in ['all', 'All'] or quantity > kamas:
             quantity = kamas
-        bank_content, inventory_content = self.execute_command('dropBankKamas', [quantity])
+        inventory_content, bank_content = self.execute_command('dropBankKamas', [quantity])
         self.bank_info = bank_content
-        return bank_content, inventory_content
+        return inventory_content, bank_content
 
     def get_kamas_from_bank(self, quantity):
         """
@@ -303,12 +314,14 @@ class Interface:
         :param quantity: quantity of kamas to drop
         :return: New bank content, new inventory content
         """
+        print(self.bank_info)
         kamas = self.bank_info['Kamas']
         if quantity in ['all', 'All'] or quantity > kamas:
             quantity = kamas
-        bank_content, inventory_content = self.execute_command('getBankKamas', [quantity])
-        self.bank_info = bank_content
-        return bank_content, inventory_content
+        if quantity:
+            inventory_content, bank_content = self.execute_command('getBankKamas', [quantity])
+            self.bank_info = bank_content
+            return inventory_content, bank_content
 
     def get_hunting_hall_door_cell(self):
         """
@@ -463,6 +476,13 @@ class Interface:
         :return: False / "empty" / [[name, id, batch_size, price], [...]]
         """
         return self.execute_command('openHdv')
+
+    def close_hdv(self):
+        """
+        Closes the hdv
+        :return: Boolean
+        """
+        return self.execute_command('closeHdv')
 
     def get_hdv_item_stats(self, item_id):
         """
