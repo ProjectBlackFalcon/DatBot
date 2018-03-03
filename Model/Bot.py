@@ -3,7 +3,7 @@ from Model.HighLevelFunctions import HighLevelFunctions
 
 
 class Bot:
-    def __init__(self, pipe, bot_id, credentials, llf):
+    def __init__(self, pipe, bot_id, credentials, llf, subscribed):
         self.pipe = pipe
         self.id = bot_id
         self.credentials = credentials
@@ -14,4 +14,7 @@ class Bot:
         self.position = None
         self.connected = False
         self.in_fight = False
+        self.subscribed = subscribed
+        self.kamas = None
+        self.level = None
 
