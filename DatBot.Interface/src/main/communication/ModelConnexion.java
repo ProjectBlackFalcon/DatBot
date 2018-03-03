@@ -744,6 +744,34 @@ public class ModelConnexion {
 				}
 				this.network.getInfo().setInExchange(false);
 				break;
+			case "enterBwork":
+				if(this.network.getMap().getId() == 88212751 && this.network.getInfo().getCellId() == 383){
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(473020,35416892);
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter bwork");
+					if (this.waitToSend("Map")) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "exitBwork":
+				if(this.network.getMap().getId() == 104073218 && this.network.getInfo().getCellId() == 260){
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555,34523772);
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit bwork");
+					if (this.waitToSend("Map")) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
 		}
 		return toSend;
 	}
