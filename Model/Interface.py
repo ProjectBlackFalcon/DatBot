@@ -522,4 +522,18 @@ class Interface:
         """
         return self.execute_command('withdrawItem', [item_id, batch_size, batch_number])
 
+    def enter_bwork(self):
+        """
+        Bot is already on the right cell, just use the activable to enter bwork village
+        :return:
+        """
+        return self.execute_command('enterBwork')
+
+    def exit_bwork(self):
+        """
+        Bot is already on the right cell, just use the activable to exit bwork village
+        :return:
+        """
+        return self.execute_command('exitBwork')
+
 __author__ = 'Alexis'
