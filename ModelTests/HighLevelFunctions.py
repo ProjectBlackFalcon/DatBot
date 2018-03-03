@@ -42,17 +42,23 @@ path = (
 
 credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
 credentials2 = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
-credentials3 = {'username': 'wublel4', 'password': 'notabot0', 'name': 'Los-Flachos', 'server': 'Julith'}
-credentials4 = {'username': 'wublel6', 'password': '32407c62d2f', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
-credentials5 = {'username': 'debugthemall', 'password': 'azertyuiop1', 'name': 'Le-Gros-Veineux', 'server': 'Julith'}
+credentials3 = {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
+credentials4 = {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
+credentials5 = {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
+credentials6 = {'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
 
 
 llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials5, llf)
+bot = Bot(pipe, bot_id, credentials2, llf, False)
 bot.interface.connect()
 start = time.time()
 
-bot.hf.hunt_treasures(120)
+bot.hf.goto((-4, 8))
+bot.hf.goto((0, 8))
+# bot.hf.hunt_treasures(1)
+# bot.hf.fight_on_map(1, 100)
+# bot.hf.harvest_path(path, -1, sell=True)
+# bot.hf.drop_to_bank('all', True)
 
 winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
 print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
