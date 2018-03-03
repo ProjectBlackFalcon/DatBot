@@ -27,7 +27,7 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 
-		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
+//		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 //		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,***REMOVED***11,Faoy,Julith]");
@@ -36,8 +36,17 @@ public class Test {
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
-//		communication.getReturn("0;0;i;cmd;openHdv;[None]");
-//		Thread.sleep(2000);
+//		communication.getReturn("0;0;i;cmd;move;[383]");
+//		Thread.sleep(5000);
+//
+//		communication.getReturn("0;0;i;cmd;enterBwork;[None]");
+//		Thread.sleep(5000);
+//		communication.getReturn("0;0;i;cmd;move;[260]");
+//
+//		Thread.sleep(5000);
+//
+//		communication.getReturn("0;0;i;cmd;exitBwork;[None]");
+
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
 //		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;getStats;[None]");

@@ -1,6 +1,9 @@
-[19:08:55] [BOT 0] Connection...
-[19:08:59] [BOT 0] Map : [2;-19]
-[19:08:59] [BOT 0] CellId : 82
-[19:09:00] [BOT 0] Connected !
-[19:09:00] [BOT 0] Name : Le-Gros-Veineux
-[19:09:00] [BOT 0] Level : 21
+[21:12:05] [BOT 0] Connection...
+[21:12:09] [BOT 0] Map : [-2;8]
+[21:12:09] [BOT 0] CellId : 274
+[21:12:09] [BOT 0] Connected !
+[21:12:09] [BOT 0] Name : Ilancelet
+[21:12:09] [BOT 0] Level : 62
+[21:12:09] [BOT 0] Moving to cellId : 260
+[21:12:15] [BOT 0] Map : [-1;8]
+[21:12:15] [BOT 0] CellId : 397
