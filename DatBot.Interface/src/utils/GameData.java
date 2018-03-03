@@ -92,6 +92,12 @@ public class GameData {
 		return getDataFromFile(id,"Items","realWeight");
 	}
 	
+	public static String getNameServer(int id){
+		return d2iManager.getText(getDataFromFile(id,"Servers"));
+	}
+	
+
+	
 	private static String getDataFromFile(int id, String file, String value) {
 		D2oManager d2oManager;
 		try {
