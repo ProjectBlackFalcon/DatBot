@@ -154,7 +154,9 @@ class Interface:
         Gets the map the player is on
         :return: coords, cell, worldmap, mapID
         """
-        return self.execute_command('getMap')
+        current_map, current_cell, current_worldmap, map_id = self.execute_command('getMap')
+        self.bot.position = (current_map, current_worldmap)
+        return current_map, current_cell, current_worldmap, map_id
 
     def move(self, cell):
         """
