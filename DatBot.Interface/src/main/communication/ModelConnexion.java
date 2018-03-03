@@ -760,7 +760,7 @@ public class ModelConnexion {
 				break;
 			case "exitBwork":
 				if(this.network.getMap().getId() == 104073218 && this.network.getInfo().getCellId() == 260){
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555,34523772);
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555,35423772);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit bwork");
 					if (this.waitToSend("Map")) {
 						toSend = new Object[] { "True" };
