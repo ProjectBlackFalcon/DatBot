@@ -102,17 +102,18 @@ class LowLevelFunctions:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
 
-    def update_db(self, bot_id, name, occupation, current_map, worldmap):
+    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map, worldmap):
         try:
             conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                            database="wz3xj6_spec")
             cursor = conn.cursor()
-            put = (bot_id, name, occupation, str(current_map), worldmap)
-            cursor.execute("""INSERT INTO Bots (BotId, Name, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s)""", put)
+            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap)
+            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", put)
             conn.commit()
             conn.close()
         except Exception:
             print('Could not upload')
+            # Eww
 
     def get_next_clue_pos(self, clue, current_pos, direction):
         with open('..//Utils//TresureHuntClues.json', 'r') as f:
@@ -128,7 +129,7 @@ class LowLevelFunctions:
         if found:
             return found
         else:
-            raise Exception('Could not find clue : {}, going {} from {}'.format(clue, direction, current_pos))
+            raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
 
     def add_discovered_zaap(self, bot_name, zaap_pos):
         with open('..//Utils//discoveredZaaps.json', 'r') as f:
@@ -186,5 +187,29 @@ class LowLevelFunctions:
             if item[1] == general_id:
                 inv_id = item[2]
         return inv_id
+
+    def get_number_of_item_in_inventory(self, inventory, general_id):
+        number = 0
+        for item in inventory:
+            if item[1] == general_id:
+                number = item[3]
+        return number
+
+    def get_weight_of_item_in_inventory(self, inventory, general_id):
+        weight = 0
+        for item in inventory:
+            if item[1] == general_id:
+                weight = item[5]
+        return weight
+
+    def get_brak_maps(self):
+        with open('..//Utils//BrakMaps.json', 'r') as f:
+            brak_maps = json.load(f)
+        return brak_maps
+
+    def get_bwork_maps(self):
+        with open('..//Utils//bworkMaps.json', 'r') as f:
+            bwork_maps = json.load(f)
+        return bwork_maps
 
 __author__ = 'Alexis'
