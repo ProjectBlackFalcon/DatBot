@@ -10,6 +10,8 @@ class HighLevelFunctions:
     def __init__(self, bot):
         self.bot = bot
         self.llf = LowLevelFunctions()
+        self.brak_maps = self.llf.get_brak_maps()
+        self.bwork_maps = self.llf.get_bwork_maps()
 
     def goto(self, target_coord, target_cell=None, worldmap=1):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
@@ -32,7 +34,7 @@ class HighLevelFunctions:
                     self.goto(statue_map)
                     current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                 statue_cell = self.bot.interface.get_class_statue_cell()[0]
-                teleport_cell = self.llf.get_closest_walkable_neighbour_cell(statue_cell, current_cell, statue_map, current_worldmap)
+                teleport_cell = self.llf.get_closest_walkable_cell(statue_cell, statue_map, current_worldmap)
                 self.bot.interface.move(teleport_cell)
                 self.bot.interface.go_to_incarnam()
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
@@ -49,6 +51,27 @@ class HighLevelFunctions:
                     self.bot.interface.use_zaap(closest_zaap)
                     current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
+        if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
+            # Bot needs to enter brak
+            if self.bot.interface.enter_heavenbag():
+                self.bot.interface.use_zaap((-26, 35))
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+        if list(current_map) in self.brak_maps and list(target_coord) not in self.brak_maps:
+            # Bot needs to exit brak
+            # TODO
+            pass
+        if list(current_map) not in self.bwork_maps and list(target_coord) in self.bwork_maps:
+            # Bot needs to enter bwork village
+            # TODO
+            self.goto((-1, 8), target_cell=383)
+            raise NotImplementedError('Bwork village door enter')
+        if list(current_map) in self.bwork_maps and list(target_coord) not in self.bwork_maps:
+            # Bot needs to exit bwork village
+            # TODO
+            self.goto((-2, 8), target_cell=260)
+            raise NotImplementedError('Bwork village door exit')
+
+
         if current_map == target_coord and current_cell == target_cell and worldmap == current_worldmap:
             return
 
@@ -64,7 +87,7 @@ class HighLevelFunctions:
                 self.bot.position = current_map
                 self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
             else:
-                raise Exception('Interface returned false on move command')
+                raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
 
         if tuple(current_map) != tuple(target_coord):
             self.goto(target_coord, target_cell, worldmap)
@@ -74,6 +97,8 @@ class HighLevelFunctions:
         self.bot.position = (target_coord, worldmap)
 
     def discover_zaaps(self):
+        self.bot.occupation = 'Discovering Zaaps'
+        self.update_db()
         closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
         while closest_unk_zaap:
             self.goto(closest_unk_zaap)
@@ -104,7 +129,7 @@ class HighLevelFunctions:
                 else:
                     with open('..//Utils//unknownResourceID.txt', 'a') as f:
                         f.write('Map : {}, ID : {}, Cell : {}\n'.format(map_coords, res_id, cell_id))
-            print('[Harvest] map_resources : {}'.format(map_resources))
+            # print('[Harvest] map_resources : {}'.format(map_resources))
 
             if harvest_only is not None:
                 filtered_map_resources = {}
@@ -121,7 +146,7 @@ class HighLevelFunctions:
                         filtered_map_resources2[resource] = filtered_map_resources[resource]
             else:
                 filtered_map_resources2 = filtered_map_resources
-            print('[Harvest] filtered_map_resources2 : {}'.format(filtered_map_resources2))
+            # print('[Harvest] filtered_map_resources2 : {}'.format(filtered_map_resources2))
 
             filtered_map_resources3 = {}
             job_levels = self.bot.interface.get_player_stats()[0]['Job']
@@ -136,7 +161,7 @@ class HighLevelFunctions:
                     if spot[1] == 0:
                         harvestable.append(spot[0])
                         harvestable_match_res_name.append(resource)
-            print('[Harvest] harvestable : {}'.format(harvestable))
+            # print('[Harvest] harvestable : {}'.format(harvestable))
 
             harvestable = list(set(harvestable)-set(local_blacklist))
             # print('Harvestable :', harvestable)
@@ -151,7 +176,7 @@ class HighLevelFunctions:
                     harvest_spots.append((neighbour_cell, cell))
                 else:
                     harvest_spots.append((self.llf.get_closest_walkable_cell(cell, map_coords, worldmap), cell))
-            print('[Harvest] harvest spot : {}'.format(harvest_spots))
+            # print('[Harvest] harvest spot : {}'.format(harvest_spots))
 
             if harvest_spots:
                 success = True
@@ -161,7 +186,7 @@ class HighLevelFunctions:
                 resource_cell = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
                 resource_name = harvestable_match_res_name[harvestable.index(resource_cell)]
                 ret_val = self.bot.interface.harvest_resource(resource_cell)
-                if not ret_val[0]:
+                if len(ret_val) == 1:
                     success = False
                 else:
                     ret_val = ret_val[0], resource_name, ret_val[1], ret_val[2], ret_val[3]
@@ -169,7 +194,7 @@ class HighLevelFunctions:
                 if not success:
                     inacessible_res = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
                     local_blacklist.append(inacessible_res)
-                    print('Black List : ', local_blacklist)
+                    # print('Black List : ', local_blacklist)
                     return -1
                 return ret_val
             return False
@@ -190,14 +215,14 @@ class HighLevelFunctions:
         with open('..//Utils//HarvestLog_{}.txt'.format(self.bot.id), 'a') as f:
             for item in harvest:
                 f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
-        if type(ret_val) is tuple and ret_val[3] == ret_val[4]:
+        if type(ret_val) is tuple and ret_val[3]+5 >= ret_val[4]:
             print('[Harvest] Full')
             return False
         else:
             print('[Harvest] Done')
             return True
 
-    def harvest_path(self, path, number_of_loops=-1, harvest_only=None, do_not_harvest=None):
+    def harvest_path(self, path, number_of_loops=-1, harvest_only=None, do_not_harvest=None, sell=False):
         n_loops = 0
         full = False
         while number_of_loops == -1 or n_loops < number_of_loops:
@@ -208,25 +233,59 @@ class HighLevelFunctions:
                     full = not self.harvest_map(harvest_only, do_not_harvest)
                 else:
                     self.goto((4, -16))
-                    self.drop_to_bank('all')
+                    self.drop_to_bank('all', withdraw_items_to_sell=sell)
+                    if sell:
+                        self.sell_all(self.bot.subscribed)
                     self.goto(tile, target_cell=target_cell, worldmap=worldmap)
                     full = not self.harvest_map(harvest_only, do_not_harvest)
 
-    def drop_to_bank(self, item_id_list='all'):
+    def withdraw_items_to_sell_from_bank(self, player_stats, bank_contents):
+        self.bot.occupation = 'Withdrawing items from bank'
+        self.update_db()
+        with open('..//Utils//ItemsToSell.json', 'r') as f:
+            items_to_sell = json.load(f)
+        if self.bot.credentials['name'] in items_to_sell.keys():
+            items_to_sell = items_to_sell[self.bot.credentials['name']]
+        else:
+            items_to_sell = items_to_sell['Default']
+
+        item_to_sell_ids = [int(key) for hdv_name in items_to_sell.keys() for key in items_to_sell[hdv_name]]
+        item_to_sell_batch_size = [items_to_sell[hdv_name][key]['quantity'] for hdv_name in items_to_sell.keys() for key in items_to_sell[hdv_name]]
+        for item_id in item_to_sell_ids:
+            unique_id = self.llf.get_inventory_id(bank_contents['Items'], item_id)
+            number = self.llf.get_number_of_item_in_inventory(bank_contents['Items'], item_id)
+            weight = self.llf.get_weight_of_item_in_inventory(bank_contents['Items'], item_id)
+            inv_space = player_stats['WeightMax'] - player_stats['Weight']
+            quantity_to_withdraw = min(number, int(inv_space / weight)) if weight else number
+            batch_size = item_to_sell_batch_size[item_to_sell_ids.index(item_id)]
+            round_quantity_to_withdraw = quantity_to_withdraw//batch_size*batch_size
+            if round_quantity_to_withdraw:
+                player_stats, bank_contents = self.bot.interface.get_from_bank_unique(unique_id, round_quantity_to_withdraw)
+
+    def drop_to_bank(self, item_id_list='all', withdraw_items_to_sell=False):
         self.bot.occupation = 'Dropping to bank'
         self.update_db()
+        if not tuple(self.bot.position[0]) == (4, -16):
+            self.goto((4, -16))
         bank_entrance, bank_exit = self.bot.interface.get_bank_door_cell()
         if bank_entrance:
             self.bot.interface.move(bank_entrance)
             self.bot.interface.enter_bank()
             self.bot.interface.open_bank()
-            self.bot.interface.drop_in_bank_list(item_id_list)
+            player_stats, bank_contents = self.bot.interface.drop_in_bank_list(item_id_list)
+            if withdraw_items_to_sell:
+                self.withdraw_items_to_sell_from_bank(player_stats, bank_contents)
+            self.bot.interface.get_kamas_from_bank('all')
             self.bot.interface.close_bank()
             self.bot.interface.move(bank_exit)
+            return player_stats, bank_contents
         else:
             raise Exception('Not a map with a bank')
 
     def tresure_hunt(self, level='max'):
+        self.bot.occupation = 'Treasure Hunting'
+        self.update_db()
+
         def get_hunt(level):
             self.bot.occupation = 'Getting a new hunt'
             self.update_db()
@@ -250,35 +309,59 @@ class HighLevelFunctions:
 
         hunt_error_flag = False
         while self.bot.interface.get_steps_left()[0] and not hunt_error_flag:
+            clue, direction, start_pos = None, None, None
             while self.bot.interface.get_clues_left()[0] and not hunt_error_flag:
                 clue, direction = self.bot.interface.get_hunt_clue()
+                start_pos = self.bot.position
+                destination = None
                 if 'Phorreur' in clue:
                     n_steps = 0
                     while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
-                            self.goto([sum(x) for x in zip(self.bot.position[0], direction_coords)])
-                        except Exception:
+                            destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
+                            self.goto(destination)
+                        except Exception as e:
                             with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write(traceback.format_exc())
+                            with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                                f.write('Could not go to {} from {} to find {}'.format(destination, self.bot.position, clue))
                             hunt_error_flag = True
                             break
                 else:
                     try:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
                         self.goto(clue_pos)
-                    except Exception:
+                    except Exception as e:
                         with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                             f.write(traceback.format_exc())
+
+                        with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                            f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                            f.write(e.args[0])
+
                         hunt_error_flag = True
                         break
-                if not self.bot.interface.validate_hunt_clue()[0]:
+
+                if not self.bot.interface.validate_hunt_clue()[0] and not hunt_error_flag:
+                    with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                        f.write('Failed to validate clue {} on map {} (bot pos : {})'.format(clue, destination, self.bot.position))
                     hunt_error_flag = True
                     break
-            if not self.bot.interface.validate_hunt_step()[0]:
+                elif hunt_error_flag:
+                    break
+
+            if not self.bot.interface.validate_hunt_step()[0] and not hunt_error_flag:
+                with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                    f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                    f.write('Failed to validate step because of clue {} going {} from {} (bot pos : {})'.format(clue, direction, start_pos, self.bot.position))
                 hunt_error_flag = True
+                break
+            elif hunt_error_flag:
                 break
 
         if hunt_error_flag:
@@ -324,13 +407,16 @@ class HighLevelFunctions:
         print('[Treasure Hunt] {} were started, {} were successful. ({}%)'.format(n_hunts, n_success, round(n_success*100/n_hunts, 0)))
 
     def fight_on_map(self, duration_minutes, hp_threshold=100):
+        self.bot.occupation = 'Fighting'
+        self.update_db()
+
         duration = duration_minutes*60
         start = time.time()
         while time.time()-start < duration:
 
             in_hb = False
             while self.bot.interface.get_player_stats()[0]['Health'] < hp_threshold:
-                if not in_hb:
+                if not in_hb and self.bot.interface.get_player_stats()[0]['Lvl'] >= 10:
                     self.bot.interface.enter_heavenbag()
                     in_hb = True
                 time.sleep(10)
@@ -346,7 +432,9 @@ class HighLevelFunctions:
             else:
                 time.sleep(5)
 
-    def update_hdv(self):
+    def update_hdv(self, close_after=True):
+        self.bot.occupation = 'Updating HDV'
+        self.update_db()
         hdv_content = self.bot.interface.open_hdv()
         items_for_sale = []
         if hdv_content and hdv_content[0] != 'empty':
@@ -359,51 +447,99 @@ class HighLevelFunctions:
             item_hdv_stats = False if not item_hdv_stats[0] else item_hdv_stats[0]
             if item_hdv_stats:
                 batch_size_index = [1, 10, 100].index(item[2])
-                new_price = item_hdv_stats[batch_size_index]-1
-                self.bot.interface.modify_price(item[1], item[2], new_price)
+                if item[3] != item_hdv_stats[batch_size_index]:
+                    new_price = item_hdv_stats[batch_size_index]-1
+                    self.bot.interface.modify_price(item[1], item[2], new_price)
+        if close_after:
+            self.bot.interface.close_hdv()
+        return hdv_content
 
-    def sell_hdv(self, hdv_coords=None):
+    def sell_hdv(self, hdv_position=None):
+        self.bot.occupation = 'Selling items'
+        self.update_db()
         with open('..//Utils//hdv_pos.json', 'r') as f:
             hdv_pos = json.load(f)
         with open('..//Utils//ItemsToSell.json', 'r') as f:
             items_to_sell = json.load(f)
 
-        current_map = list(self.bot.position[0]) if hdv_coords is None else list(hdv_coords)
+        if self.bot.credentials['name'] in items_to_sell.keys():
+            items_to_sell = items_to_sell[self.bot.credentials['name']]
+        else:
+            items_to_sell = items_to_sell['Default']
+
+        current_map = list(self.bot.position[0]) if hdv_position is None else list(hdv_position)
         valid_map = False
         hdv_type = None
 
         for hdv, hdv_coords in hdv_pos.items():
-            if current_map in hdv_coords and items_to_sell[self.bot.credentials['name']][hdv]:
+            if current_map in hdv_coords and items_to_sell[hdv]:
                 valid_map = True
                 hdv_type = hdv
-        print('[SELL HDV] {}'.format(hdv_type))
+        # print('[SELL HDV] {}'.format(hdv_type))
         if valid_map:
-            self.update_hdv()
+            if hdv_position is None:
+                selling = self.update_hdv()
             items = self.bot.interface.get_player_stats()[0]['Inventory']['Items']
-            items_to_sell = items_to_sell[self.bot.credentials['name']][hdv_type]
-            print('[SELL HDV] Items : {},\n[SELL HDV] Items to sell {}'.format(items, items_to_sell))
+            items_to_sell = items_to_sell[hdv_type]
+            # print('[SELL HDV] Items : {},\n[SELL HDV] Items to sell {}'.format(items, items_to_sell))
             for item in items:
                 # item looks like ['name', item_id, inv_id, number, inv_slot]
+
                 if str(item[1]) in items_to_sell.keys() and item[3] >= items_to_sell[str(item[1])]["quantity"]:
-                    print('[SELL HDV] Item going to be sold : {}'.format(item))
-                    item_hdv_stats = self.bot.interface.get_hdv_item_stats(item[1])
-                    item_hdv_stats = False if not item_hdv_stats[0] else item_hdv_stats[0]
-                    # TODO Not for sale yet
-                    if item_hdv_stats:
-                        batch_size_index = [1, 10, 100].index(items_to_sell[str(item[1])]["quantity"])
-                        batch_size = [1, 10, 100][batch_size_index]
-                        price = item_hdv_stats[batch_size_index] - 1
-                        print('[SELL HDV]Selling {} batches of {} {} for {}'.format(item[3] // batch_size, batch_size, item[0], price))
-                        self.bot.interface.sell_item(item[2], batch_size, item[3] // batch_size, price)
+                    # print('[SELL HDV] Item going to be sold : {}'.format(item))
+                    hdv_list = []
+                    for key in hdv_pos.keys():
+                        hdv_list += hdv_pos[key]
+                    if self.bot.position[1] == 1 and self.bot.position[0] in hdv_list:
+                        self.bot.interface.open_hdv()
+                        item_hdv_stats = self.bot.interface.get_hdv_item_stats(item[1])
+                        item_hdv_stats = False if item_hdv_stats[0] == [0, 0, 0] else item_hdv_stats[0]
+                        # TODO What to do when item not for sale
+                        if item_hdv_stats:
+                            batch_size_index = [1, 10, 100].index(items_to_sell[str(item[1])]["quantity"])
+                            batch_size = [1, 10, 100][batch_size_index]
+                            price = item_hdv_stats[batch_size_index] - 1
+                            player_lvl = self.bot.interface.get_player_stats()[0]['Lvl']
+                            if hdv_position is None and price > 0:
+                                print('[Sell HDV] Selling {} batches of {} {} for {}'.format(min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
+                                self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
+                    elif hdv_position is not None:
+                        return True
+            if hdv_position is None:
+                self.bot.interface.close_hdv()
         else:
             return False
 
+    def sell_all(self, subscribed):
+        with open('..//Utils//hdv_pos.json', 'r') as f:
+            all_hdvs = json.load(f)
+
+        hdvs = []
+        for position in all_hdvs.values():
+            if subscribed:
+                hdvs.append(position[0])
+            else:
+                if len(position) == 3:
+                    hdvs.append(position[2])
+
+        hdv_route = []
+        for hdv in hdvs:
+            if self.sell_hdv(hdv):
+                hdv_route.append(hdv)
+
+        for hdv in hdv_route:
+            self.goto(hdv)
+            self.sell_hdv()
+
     def update_db(self):
         try:
-            print('[Database] Uploading {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.credentials['name'], self.bot.occupation, self.bot.position[0], self.bot.position[1]))
+            print('[Database] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
             self.llf.update_db(
                 self.bot.id,
+                self.bot.credentials['server'],
                 self.bot.credentials['name'],
+                self.bot.kamas,
+                self.bot.level,
                 self.bot.occupation,
                 self.bot.position[0],
                 self.bot.position[1]
