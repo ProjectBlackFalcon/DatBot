@@ -62,14 +62,14 @@ class HighLevelFunctions:
             pass
         if list(current_map) not in self.bwork_maps and list(target_coord) in self.bwork_maps:
             # Bot needs to enter bwork village
-            # TODO
             self.goto((-1, 8), target_cell=383)
-            raise NotImplementedError('Bwork village door enter')
+            self.bot.interface.enter_bwork()
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.bwork_maps and list(target_coord) not in self.bwork_maps:
             # Bot needs to exit bwork village
-            # TODO
             self.goto((-2, 8), target_cell=260)
-            raise NotImplementedError('Bwork village door exit')
+            self.bot.interface.exit_bwork()
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
 
         if current_map == target_coord and current_cell == target_cell and worldmap == current_worldmap:
@@ -309,10 +309,10 @@ class HighLevelFunctions:
 
         hunt_error_flag = False
         while self.bot.interface.get_steps_left()[0] and not hunt_error_flag:
-            clue, direction, start_pos = None, None, None
+            clue, direction, start_pos, clue_pos = None, None, None, None
             while self.bot.interface.get_clues_left()[0] and not hunt_error_flag:
                 clue, direction = self.bot.interface.get_hunt_clue()
-                start_pos = self.bot.position
+                start_pos = self.bot.position[0]
                 destination = None
                 if 'Phorreur' in clue:
                     n_steps = 0
@@ -349,7 +349,8 @@ class HighLevelFunctions:
                 if not self.bot.interface.validate_hunt_clue()[0] and not hunt_error_flag:
                     with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-                        f.write('Failed to validate clue {} on map {} (bot pos : {})'.format(clue, destination, self.bot.position))
+                        f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
+                        f.write('Clue was supposed to be at {}'.format(clue_pos))
                     hunt_error_flag = True
                     break
                 elif hunt_error_flag:
@@ -358,7 +359,8 @@ class HighLevelFunctions:
             if not self.bot.interface.validate_hunt_step()[0] and not hunt_error_flag:
                 with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-                    f.write('Failed to validate step because of clue {} going {} from {} (bot pos : {})'.format(clue, direction, start_pos, self.bot.position))
+                    f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, start_pos, self.bot.position[0]))
+                    f.write('Clue was supposed to be at {}'.format(clue_pos))
                 hunt_error_flag = True
                 break
             elif hunt_error_flag:
