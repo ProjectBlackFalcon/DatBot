@@ -1020,7 +1020,7 @@ public class Network extends DisplayInfo implements Runnable {
 		this.hunt.setPhorror(false);
 		MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 		complementaryInformationsDataMessage.Deserialize(dataReader);
-
+		System.out.println(complementaryInformationsDataMessage.getInteractiveElements());
 		if (!connectionToKoli) {
 			for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
 				if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")) {
