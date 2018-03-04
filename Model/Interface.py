@@ -538,4 +538,83 @@ class Interface:
         """
         return self.execute_command('exitBwork')
 
+    def get_dd_pen_door(self):
+        """
+        Gives the interactive cell
+        :return: [False] / [cellId]
+        """
+        return self.execute_command('getDDPenDoor')
+
+    def open_dd(self):
+        """
+        Opens the DD pen and returns contents. The player is already on the right spot
+        :return: [False] / [{
+                              "id": 99999,
+                              "behaviours": ["thing1", "thing2"],
+                              "name": "name",
+                              "sex": True,
+                              "experience": 10000,
+                              "level": 5,
+                              "stamina": 10000,
+                              "staminaMax": 10000,
+                              "maturity": 10000,
+                              "maturityForAdult": 10000,
+                              "energy": 7400,
+                              "energyMax": 7400,
+                              "serenity": 0,
+                              "serenityMax": 10000,
+                              "aggressivityMax": -10000,
+                              "love": 10000,
+                              "loveMax": 10000,
+                              "fecondationTime": -1,
+                              "isFecondationReady": True,
+                              "boostLimiter": 0,
+                              "boostMax": 240,
+                              "reproductionCount": 6,
+                              "reproductionCountMax" : 20,
+                              "inPaddock"; True
+                        },
+                        {}, ...]
+        """
+        return self.execute_command('openDD')
+
+    def close_dd(self):
+        """
+        Closes the pen
+        :return: Boolean
+        """
+        return self.execute_command('closeDD')
+
+    def put_dd_in_stable(self, id):
+        """
+        Moves a DD  to stable
+        :param id: DD's id
+        :return: Boolean
+        """
+        return self.execute_command('putInStable', [id])
+
+    def put_dd_in_paddock(self, id):
+        """
+        Moves a DD to paddock
+        :param id: DD's id
+        :return: Boolean
+        """
+        return self.execute_command('putInStable', [id])
+
+    def put_dd_in_inventory(self, id):
+        """
+        Moves a DD to paddock
+        :param id: DD's id
+        :return: Boolean
+        """
+        return self.execute_command('putInInventory', [id])
+
+    def equip_dd(self, id):
+        """
+        Equips a DD
+        :param id: DD's id
+        :return: Boolean
+        """
+        return self.execute_command('equipDD', [id])
+
 __author__ = 'Alexis'
