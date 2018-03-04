@@ -71,7 +71,7 @@ public class Communication implements Runnable {
 				while (!info.isConnected()) {
 					Thread.sleep(1000);
 					index += 1;
-					if (index == 30) { throw new java.lang.Error("Connection timed out"); }
+					if (index == 60) { throw new java.lang.Error("Connection timed out"); }
 				}
 				network.append("Connected !");
 				network.append("Name : " + info.getName());

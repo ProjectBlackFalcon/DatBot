@@ -65,7 +65,8 @@ public class Interactive {
 	 * Case skillId : 
 	 * Zaap : 114
 	 * Statue : 302 
-	 * @return zaapCellId, elementId, skillId 
+	 * Enclo : 175
+	 * @return CellId, elementId, skillId 
 	 */
 	public int[] getInteractive(int skillId){
 		for(int i = 0 ; i < getInteractiveElements().size() ; i++){
