@@ -772,6 +772,45 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
+			case "getDDPenDoor":
+				if (!(this.network.getInteractive().getInteractive(175) == null)) {
+					toSend = new Object[] { this.network.getInteractive().getInteractive(175)[0] };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "openDD":
+				int[] interactive1 = this.network.getInteractive().getInteractive(175);
+				if (!(interactive1 == null)) {
+					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive1[1], interactive1[2]);
+					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Open DD");
+					if (this.waitToSend("inStable")) {
+						toSend = new Object[] { this.getNetwork().getDragodinde() };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "closeDD":
+				if(this.network.getDragodinde().isInStable()){
+					LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
+					getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave stable");
+					if (this.waitToSend("Exchange")) {
+						this.network.getDragodinde().setInStable(false);
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					} 
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
 		}
 		return toSend;
 	}
@@ -851,6 +890,11 @@ public class ModelConnexion {
 					Thread.sleep(50);
 				}
 				break;
+			case "inStable":
+				while (!this.network.getDragodinde().isInStable()) {
+					Thread.sleep(50);
+				}
+				break;
 		}
 
 		while (!this.network.getInfo().isBasicNoOperationMsg()) {
@@ -919,8 +963,7 @@ public class ModelConnexion {
 	@SuppressWarnings("unused")
 	private void sleepLong() {
 		try {
-			Random r = new Random();
-			Thread.sleep(1500 + r.nextInt(1000));
+			Thread.sleep(1500 + new Random().nextInt(1000));
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();

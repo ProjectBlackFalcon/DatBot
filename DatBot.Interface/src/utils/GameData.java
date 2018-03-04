@@ -84,6 +84,10 @@ public class GameData {
 		return d2iManager.getText(getDataFromFile(id,"Items"));
 	}
 	
+	public static String getMountBehaviorName(int id){
+		return d2iManager.getText(getDataFromFile(id,"MountBehaviors"));
+	}
+	
 	public static String getNpcName(int id){
 		return d2iManager.getText(getDataFromFile(id,"Npcs"));
 	}
