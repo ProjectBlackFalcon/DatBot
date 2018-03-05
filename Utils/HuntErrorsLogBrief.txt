@@ -3,3 +3,123 @@ Could not go to [-22, 42] from ([-23, 42], 1) to find phorror
 
 2018-03-03 13:05:04.714227
 Interface returned false on move command. Position : (-36, -53), Cell : 182, Direction : w
+
+2018-03-03 14:58:17.053299
+Failed to validate step because of clue "Caisse d'outils" going e from [3, -18] (bot pos : [5, -18])
+
+2018-03-03 16:41:34.639735
+Bwork village door enter
+
+2018-03-03 16:50:46.987419
+Interface returned false on move command. Position : (4, -17), Cell : 14, Direction : w
+
+2018-03-03 17:00:20.814729
+Non existing clue : Chaloupe, going n from [14, 26]
+
+2018-03-03 17:12:31.290774
+Could not generate path from (9, 25) cell 321 to [8, 25] cell 335
+
+2018-03-03 17:21:08.134095
+Non existing clue : Caisse explosive, going w from [-27, -15]
+
+2018-03-03 18:01:09.539474
+Non existing clue : Etoile de mer, going w from [-7, -55]
+
+2018-03-03 22:01:04.368809
+Interface returned false on move command. Position : (-28, -60), Cell : 308, Direction : w
+
+2018-03-03 22:35:00.948790
+Interface returned false on move command. Position : (-22, 41), Cell : 559, Direction : e
+
+2018-03-03 22:50:14.965917
+Interface returned false on move command. Position : (7, 29), Cell : 0, Direction : n
+
+2018-03-04 01:40:37.458088
+Non existing clue : Bombe, going w from [8, -19]
+
+2018-03-04 06:17:20.828750
+Failed to validate step because of clue "Volatile aux yeux globuleux" going e from [17, 25] (bot pos : [20, 25])Clue was supposed to be at [20, 25]
+
+2018-03-04 12:05:37.825704
+Could not go to [-24, 46] from ((-25, 46), 1) to find Phorreur fourbe
+
+2018-03-04 12:13:59.051657
+Non existing clue : Tente, going w from [-5, 6]
+
+2018-03-04 12:15:45.967232
+Non existing clue : Tente, going w from (-5, 6)
+
+2018-03-04 12:58:52.402063
+Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+2018-03-04 13:05:26.063049
+Interface returned false on move command. Position : ((-12, -22), 1), Cell : 555, Direction : s
+
+2018-03-04 13:11:47.694494
+Interface returned false on move command. Position : ((-19, -23), 1), Cell : 0, Direction : w
+
+2018-03-04 13:14:32.904302
+Non existing clue : Cawotte plantée, going e from [3, -10]
+
+2018-03-04 13:40:54.502731
+Failed to validate clue "Caisse" on map None (bot pos : [3, -13])Clue was supposed to be at [3, -13]
+
+2018-03-04 13:47:50.510435
+Could not go to [1, -5] from ((2, -5), 1) to find Phorreur sournois
+
+2018-03-04 13:53:52.025873
+Non existing clue : Outil, going n from [-17, -56]
+
+2018-03-04 18:13:42.800575
+Interface returned false on move command. Position : ((-27, 31), 1), Cell : 0, Direction : w
+
+2018-03-04 18:52:21.010707
+Interface returned false on move command. Position : ((-25, 36), 1), Cell : 558, Direction : s
+
+2018-03-04 19:10:57.679314
+Failed to validate step because of clue "Ossements" going s from [-30, 37] (bot pos : [-30, 39])Clue was supposed to be at [-30, 39]
+
+2018-03-04 20:13:14.389827
+Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+2018-03-04 20:47:57.491325
+Could not generate path from (10, 25) cell 539 to [8, 25] cell 321
+
+2018-03-04 21:30:15.014014
+Could not go to [8, -7] from ((8, -6), 1) to find Phorreur sournois
+
+2018-03-04 21:37:11.862378
+Non existing clue : Chaloupe, going n from [14, 26]
+
+2018-03-04 22:42:43.817498
+Could not go to [5, -32] from ((5, -31), 1) to find Phorreur sournois
+
+2018-03-04 22:58:31.877384
+Non existing clue : Coquillage rayé, going n from [-26, -40]
+
+2018-03-04 23:05:59.682329
+Failed to validate clue "Panneau" on map None (bot pos : [-22, 32])Clue was supposed to be at [-22, 32]
+
+2018-03-04 23:09:44.625648
+Failed to validate clue "Panneau" on map None (bot pos : [-22, 32])Clue was supposed to be at [-22, 32]
+
+2018-03-04 23:14:36.726174
+Non existing clue : Charrette à deux roues, going n from [-4, 26]
+
+2018-03-04 23:19:30.636287
+Non existing clue : Sac, going w from [6, -8]
+
+2018-03-04 23:46:40.411423
+Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+2018-03-04 23:56:36.346261
+Failed to validate step because of clue "Phorreur sournois" going s from [6, 6] (bot pos : [6, 12])Clue was supposed to be at [6, 6]
+
+2018-03-05 00:07:25.178423
+Could not go to [-25, -58] from ((-27, -58), 1) to find Phorreur sournois
+
+2018-03-05 00:54:12.174364
+Failed to validate step because of clue "Squelette d'humanoïde assis" going w from [-2, -58] (bot pos : [-7, -58])Clue was supposed to be at [-7, -58]
+
+2018-03-05 01:05:06.361064
+Could not go to [-3, -59] from ((-3, -58), 1) to find Phorreur sournois

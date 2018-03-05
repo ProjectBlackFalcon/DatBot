@@ -74,8 +74,8 @@ class Interface:
             partial_message = '{};{};m;rtn'.format(self.bot.id, message_id)
             buffer = self.pipe.get_buffer()
             for message in buffer:
+                # print(message)
                 if int(message.split(';')[0]) == self.bot.id and message not in message_queue:
-                    # print(message)
                     message_queue.append(message)
 
             for message in message_queue:
@@ -110,7 +110,7 @@ class Interface:
         :return: return value form interface
         """
         tries = 0
-        while tries < 5:
+        while tries < 1:
             tries += 1
             try:
                 msg_id = self.add_command(command, parameters)
@@ -547,7 +547,7 @@ class Interface:
 
     def open_dd(self):
         """
-        Opens the DD pen and returns contents. The player is already on the right spot
+        Opens the DD pen and returns contents. The bot is already on the right spot
         :return: [False] / [{
                               "id": 99999,
                               "behaviours": ["thing1", "thing2"],
