@@ -103,3 +103,5 @@ class tool:
         image_lbl.place(relx=0.5, rely=0.6, anchor='center')
 
 tool()
+"(7, -6), cell 546 to map [6, -6], cell 391, worldmap : 1"
+"(9, 25) cell 321 to [8, 25] cell 335"
