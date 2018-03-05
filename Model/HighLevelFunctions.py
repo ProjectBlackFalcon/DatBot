@@ -559,7 +559,7 @@ class HighLevelFunctions:
         for tile, cell in path:
             self.goto(tile, cell)
             tool = self.llf.get_map_dd_tool(self.bot.position[0])
-            all_dds = self.bot.interface.open_dd()[0]
+            all_dds = self.bot.interface.open_dd()
             dds_stable = []
             dds_paddock = []
             if all_dds:
@@ -569,6 +569,10 @@ class HighLevelFunctions:
                         dds_paddock.append(dd_obj)
                     else:
                         dds_stable.append(dd_obj)
+
+            print('[DD Manager] Current tool : ', tool)
+            print('[DD Manager] DDs in stable : ', len(dds_stable))
+            print('[DD Manager] DDs in paddock : ', len(dds_paddock))
 
             # Pull sterile non pregnant dds
             for dd in dds_stable:
