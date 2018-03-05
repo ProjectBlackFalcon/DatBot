@@ -4,12 +4,12 @@ from Model.Bot import Bot
 import time
 from threading import Thread
 import winsound
+import json
 
 
 pipe = PipeToJava(headless=True)
 bot_id = 0
 
-zaap_path_1 = [(4, -19), (-5, -23), (-13, -28), (-3, -42), (-17, -47), (-32, -56), (-27, -36), (-20, -20), (-16, 1), (-25, 12), (-15, 25), (-26, 35)]
 path = (
     ((-2, -4), None, 2),
     ((-2, -5), None, 2),
@@ -46,16 +46,15 @@ credentials3 = {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-ho
 credentials4 = {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
 credentials5 = {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
 credentials6 = {'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
+credentials7 = {'username': 'wublel2', 'password': 'notabot0', 'name': 'Scalpelementaire', 'server': 'Julith'}
 
 
 llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials2, llf, False)
+bot = Bot(pipe, bot_id, credentials5, llf, False)
 bot.interface.connect()
 start = time.time()
 
-bot.hf.goto((-4, 8))
-bot.hf.goto((0, 8))
-# bot.hf.hunt_treasures(1)
+bot.hf.hunt_treasures(duration_minutes=60)
 # bot.hf.fight_on_map(1, 100)
 # bot.hf.harvest_path(path, -1, sell=True)
 # bot.hf.drop_to_bank('all', True)
