@@ -573,7 +573,7 @@ class HighLevelFunctions:
             # Pull sterile non pregnant dds
             for dd in dds_stable:
                 if dd.get_next_spot() == 'out':
-                    self.bot.interface.put_dd_in_inventory(dd.id)
+                    self.bot.interface.put_dd_in_inventory(dd.id, "stable")
                 if dd.get_next_spot() == 'pex':
                     # TODO Pex dat motherfucker
                     pass
@@ -589,10 +589,11 @@ class HighLevelFunctions:
                     dds_to_kick = score_sorted_dds[:n_dds_to_kick]
                     for dd_to_kick in dds_to_kick:
                         print('[DD Manager] Kicking dd {}. Score : {}'.format(dd_to_kick.id, dd_to_kick.score))
-                        self.bot.interface.put_dd_in_inventory(dd_to_kick.id)
+                        self.bot.interface.put_dd_in_inventory(dd_to_kick.id, "stable")
                         del dds_stable[dds_stable.index(dd_to_kick)]
 
                 dds_stable.append(dd)
+                self.bot.interface.put_dd_in_stable(dd.id, "paddock")
 
             dds_for_tool = []
             exhausted_dd_for_tool = []
@@ -610,7 +611,7 @@ class HighLevelFunctions:
                 selected_dds = fatigue_sorted_dds_for_tool
 
             for dd in selected_dds:
-                self.bot.interface.put_dd_in_paddock(dd.id)
+                self.bot.interface.put_dd_in_paddock(dd.id, "stable")
 
             self.bot.interface.close_dd()
 
