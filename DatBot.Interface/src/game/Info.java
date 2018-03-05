@@ -46,6 +46,7 @@ public class Info {
 	private int weight;
 
 	// Game utils
+	private boolean isRiding = false;
 	private boolean waitForMov = true;
 	private boolean waitForHarvestSuccess = false;
 	private boolean waitForHarvestFailure = false;
@@ -443,6 +444,16 @@ public class Info {
 	public void setInExchange(boolean inExchange)
 	{
 		this.inExchange = inExchange;
+	}
+
+	public boolean isRiding()
+	{
+		return isRiding;
+	}
+
+	public void setRiding(boolean isRiding)
+	{
+		this.isRiding = isRiding;
 	}
 
 }

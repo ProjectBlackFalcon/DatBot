@@ -40,6 +40,11 @@ public class CellMovement {
 				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.RUNNING);
 				Thread.sleep(time);
 			}
+			else if(this.network.getInfo().isRiding())
+			{
+				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.MOUNTED);
+				Thread.sleep(time);
+			}
 			else
 			{
 				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
