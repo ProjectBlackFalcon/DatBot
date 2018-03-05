@@ -599,6 +599,25 @@ class HighLevelFunctions:
                 dds_stable.append(dd)
                 self.bot.interface.put_dd_in_stable(dd.id, "paddock")
 
+            if tool == 'energy':
+                males_for_mating = []
+                females_for_mating = []
+                for dd in dds_stable:
+                    if dd.is_fecondation_ready and dd.sex == 'male' and len(males_for_mating) < 5:
+                        males_for_mating.append(dd)
+                    elif dd.is_fecondation_ready and dd.sex == 'female' and len(females_for_mating) < 5:
+                        females_for_mating.append(dd)
+                males_for_mating = males_for_mating[:min(len(males_for_mating), len(females_for_mating))]
+                females_for_mating = females_for_mating[:min(len(males_for_mating), len(females_for_mating))]
+                dds_for_mating = males_for_mating + females_for_mating
+                for dd in dds_for_mating:
+                    self.bot.interface.put_dd_in_paddock(dd.id, 'stable')
+                time.sleep(3)
+                self.bot.interface.fart()
+                time.sleep(10)
+                for dd in dds_for_mating:
+                    self.bot.interface.put_dd_in_stable(dd.id, 'paddock')
+
             dds_for_tool = []
             exhausted_dd_for_tool = []
             for dd in dds_stable:
