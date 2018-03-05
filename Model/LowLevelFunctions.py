@@ -224,10 +224,9 @@ class LowLevelFunctions:
                 n_male += 1
             else:
                 n_female += 1
-            if 'Reproductrice' in dd.behaviours:
-                n_repro += 1
 
         for dd in dd_list:
+            dd.score = 0
             if dd.maturity > 0:
                 dd.score += 1
             if dd.maturity == 100:
@@ -235,10 +234,11 @@ class LowLevelFunctions:
             if dd.level == 5:
                 dd.score += 1
             if dd.fecondation_time != -1:
-                dd.score += 1
-            if 'Reproductrice' in dd.behaviours and n_repro != len(dd_list):
+                dd.score += 5
+            if dd.is_fecondation_ready:
+                dd.score += 5
+            if 'Reproductrice' in dd.behaviours:
                 # Heavily favor this trait so that eventually all DDs are repro.
-                # Then don't favor anymore to limit turnover.
                 dd.score += 50
             if n_female < n_male and dd.sex == 'female':
                 dd.score += 1
