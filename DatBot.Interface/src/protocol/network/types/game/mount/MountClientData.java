@@ -285,5 +285,13 @@ public class MountClientData extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString()
+	{
+		return "MountClientData [id=" + id + ", model=" + model + ", ancestor=" + ancestor + ", behaviors=" + behaviors + ", name=" + name + ", sex=" + sex + ", ownerId=" + ownerId + ", experience=" + experience + ", experienceForLevel=" + experienceForLevel + ", experienceForNextLevel=" + experienceForNextLevel + ", level=" + level
+			+ ", isRideable=" + isRideable + ", maxPods=" + maxPods + ", isWild=" + isWild + ", stamina=" + stamina + ", staminaMax=" + staminaMax + ", maturity=" + maturity + ", maturityForAdult=" + maturityForAdult + ", energy=" + energy + ", energyMax=" + energyMax + ", serenity=" + serenity + ", aggressivityMax=" + aggressivityMax
+			+ ", serenityMax=" + serenityMax + ", love=" + love + ", loveMax=" + loveMax + ", fecondationTime=" + fecondationTime + ", isFecondationReady=" + isFecondationReady + ", boostLimiter=" + boostLimiter + ", boostMax=" + boostMax + ", reproductionCount=" + reproductionCount + ", reproductionCountMax=" + reproductionCountMax
+			+ ", harnessGID=" + harnessGID + ", useHarnessColors=" + useHarnessColors + ", effectList=" + effectList + "]";
+	}
 
 }

@@ -18,6 +18,7 @@ import game.Info;
 import game.combat.Fight;
 import game.movement.Movement;
 import game.plugin.Bank;
+import game.plugin.Dragodinde;
 import game.plugin.Hunt;
 import game.plugin.Interactive;
 import game.plugin.Monsters;
@@ -75,6 +76,8 @@ import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
+import protocol.network.messages.game.context.mount.MountRidingMessage;
+import protocol.network.messages.game.context.mount.MountSetMessage;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
 import protocol.network.messages.game.context.roleplay.GameRolePlayShowActorMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
@@ -95,6 +98,7 @@ import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidSellerMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
@@ -130,6 +134,7 @@ import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
+import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
@@ -165,6 +170,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Monsters monsters;
 	private Movement movement;
 	private Npc npc;
+	private Dragodinde dragodinde;
 	private int port = 5555;
 	private Socket socket;
 	private Stats stats;
@@ -181,6 +187,7 @@ public class Network extends DisplayInfo implements Runnable {
 		this.movement = new Movement(this);
 		this.monsters = new Monsters();
 		this.hunt = new Hunt();
+		this.dragodinde = new Dragodinde();
 		try {
 			this.npc = new Npc(this);
 			this.modelConnexion = new ModelConnexion(this);
@@ -343,6 +350,12 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void handleCharacterSelectionMessage(DofusDataReader dataReader) throws Exception, Error {
+		try {
+			Thread.sleep(4000 + new Random().nextInt(5000));
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		CharactersListMessage charactersListMessage = new CharactersListMessage();
 		charactersListMessage.Deserialize(dataReader);
 		int j = 0;
@@ -1020,7 +1033,6 @@ public class Network extends DisplayInfo implements Runnable {
 		this.hunt.setPhorror(false);
 		MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 		complementaryInformationsDataMessage.Deserialize(dataReader);
-		System.out.println(complementaryInformationsDataMessage.getInteractiveElements());
 		if (!connectionToKoli) {
 			for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
 				if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")) {
@@ -1712,6 +1724,21 @@ public class Network extends DisplayInfo implements Runnable {
 			case 6545:
 				handleGameActionFightActivateGlyphTrapMessage(dataReader);
 				break;
+			case 5967:
+				MountRidingMessage mountRidingMessage = new MountRidingMessage();
+				mountRidingMessage.Deserialize(dataReader);
+				this.info.setRiding(mountRidingMessage.isIsRiding());
+				break;
+			case 5968:
+				MountSetMessage mountSetMessage = new MountSetMessage();
+				mountSetMessage.Deserialize(dataReader);
+				break;
+			case 5979:
+				ExchangeStartOkMountMessage exchangeStartOkMountMessage = new ExchangeStartOkMountMessage();
+				exchangeStartOkMountMessage.Deserialize(dataReader);
+				this.dragodinde.setPaddock(exchangeStartOkMountMessage.getPaddockedMountsDescription());
+				this.dragodinde.setStable(exchangeStartOkMountMessage.getStabledMountsDescription());
+				this.dragodinde.setInStable(true);
 		}
 		packet_content = null;
 		dataReader.bis.close();
@@ -1825,5 +1852,15 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 		writer.write(data);
 		return writer.bous.toByteArray();
+	}
+
+	public Dragodinde getDragodinde()
+	{
+		return dragodinde;
+	}
+
+	public void setDragodinde(Dragodinde dragodinde)
+	{
+		this.dragodinde = dragodinde;
 	}
 }
