@@ -212,4 +212,37 @@ class LowLevelFunctions:
             bwork_maps = json.load(f)
         return bwork_maps
 
+    def get_map_dd_tool(self, position):
+        with open('..//Utils//ddTools.json', 'r') as f:
+            tools = json.load(f)
+        return tools[str(tuple(position))]
+
+    def score_dds(self, dd_list):
+        n_male, n_female, n_repro = 0, 0, 0
+        for dd in dd_list:
+            if dd.sex == 'male':
+                n_male += 1
+            else:
+                n_female += 1
+            if 'Reproductrice' in dd.behaviours:
+                n_repro += 1
+
+        for dd in dd_list:
+            if dd.maturity > 0:
+                dd.score += 1
+            if dd.maturity == 100:
+                dd.score += 1
+            if dd.level == 5:
+                dd.score += 1
+            if dd.fecondation_time != -1:
+                dd.score += 1
+            if 'Reproductrice' in dd.behaviours and n_repro != len(dd_list):
+                # Heavily favor this trait so that eventually all DDs are repro.
+                # Then don't favor anymore to limit turnover.
+                dd.score += 50
+            if n_female < n_male and dd.sex == 'female':
+                dd.score += 1
+            if n_female > n_male and dd.sex == 'male':
+                dd.score += 1
+
 __author__ = 'Alexis'

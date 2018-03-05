@@ -1,5 +1,6 @@
 from Model.Pathfinder import PathFinder
 from Model.LowLevelFunctions import LowLevelFunctions
+from Model.DD import DD
 import json
 import time
 import datetime
@@ -71,7 +72,6 @@ class HighLevelFunctions:
             self.bot.interface.exit_bwork()
             current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
-
         if current_map == target_coord and current_cell == target_cell and worldmap == current_worldmap:
             return
 
@@ -84,8 +84,9 @@ class HighLevelFunctions:
         for i in range(len(path_directions)):
             if self.bot.interface.change_map(path_directions[i][0], path_directions[i][1])[0]:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-                self.bot.position = current_map
-                self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
+                self.bot.position = current_map, current_worldmap
+                if current_worldmap == 1:
+                    self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
             else:
                 raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
 
@@ -551,5 +552,66 @@ class HighLevelFunctions:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
 
+    def manage_dds(self):
+        with open('..//Utils//ddPath.json', 'r') as f:
+            path = json.load(f)
+
+        for tile, cell in path:
+            self.goto(tile, cell)
+            tool = self.llf.get_map_dd_tool(self.bot.position[0])
+            all_dds = self.bot.interface.open_dd()[0]
+            dds_stable = []
+            dds_paddock = []
+            if all_dds:
+                for dd in all_dds:
+                    dd_obj = DD(dd)
+                    if dd_obj.in_paddock:
+                        dds_paddock.append(dd_obj)
+                    else:
+                        dds_stable.append(dd_obj)
+
+            # Pull sterile non pregnant dds
+            for dd in dds_stable:
+                if dd.get_next_spot() == 'out':
+                    self.bot.interface.put_dd_in_inventory(dd.id)
+                if dd.get_next_spot() == 'pex':
+                    # TODO Pex dat motherfucker
+                    pass
+
+            # Retrieve DDs from paddock
+            # Make sure there is at least 5 spots free first (dd + the 4 eventual children)
+            # Put the dds with the lowest scores in the inventory until there is enough room
+            for dd in dds_paddock:
+                n_dds_to_kick = len(dds_stable)-245 if len(dds_stable)-245 > 0 else 0
+                if n_dds_to_kick:
+                    self.llf.score_dds(dds_stable)
+                    score_sorted_dds = sorted(dds_stable, key=lambda one_dd: one_dd.score)
+                    dds_to_kick = score_sorted_dds[:n_dds_to_kick]
+                    for dd_to_kick in dds_to_kick:
+                        print('[DD Manager] Kicking dd {}. Score : {}'.format(dd_to_kick.id, dd_to_kick.score))
+                        self.bot.interface.put_dd_in_inventory(dd_to_kick.id)
+                        del dds_stable[dds_stable.index(dd_to_kick)]
+
+                dds_stable.append(dd)
+
+            dds_for_tool = []
+            exhausted_dd_for_tool = []
+            for dd in dds_stable:
+                if dd.get_next_spot() == tool and dd.fatigue < 100:
+                    dds_for_tool.append(dd)
+                elif dd.get_next_spot() == tool and dd.fatigue == 100:
+                    exhausted_dd_for_tool.append(dd)
+
+            fatigue_sorted_dds_for_tool = sorted(dds_for_tool, key=lambda one_dd: one_dd.fatigue)
+            fatigue_sorted_dds_for_tool += exhausted_dd_for_tool
+            if len(fatigue_sorted_dds_for_tool) >= 10:
+                selected_dds = fatigue_sorted_dds_for_tool[:10]
+            else:
+                selected_dds = fatigue_sorted_dds_for_tool
+
+            for dd in selected_dds:
+                self.bot.interface.put_dd_in_paddock(dd.id)
+
+            self.bot.interface.close_dd()
 
 __author__ = 'Alexis'

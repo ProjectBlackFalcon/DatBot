@@ -557,3 +557,320 @@ Traceback (most recent call last):
   File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
     raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
 ValueError: Interface returned false on move command. Position : (-36, -53), Cell : 182, Direction : w
+
+
+2018-03-03 16:41:34.637732
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 67, in goto
+    raise NotImplementedError('Bwork village door enter')
+NotImplementedError: Bwork village door enter
+
+
+2018-03-03 16:50:46.981440
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 90, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : (4, -17), Cell : 14, Direction : w
+
+
+2018-03-03 17:00:20.810725
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Chaloupe, going n from [14, 26]
+
+
+2018-03-03 17:12:31.288772
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 83, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (9, 25) cell 321 to [8, 25] cell 335
+
+
+2018-03-03 17:21:08.129072
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Caisse explosive, going w from [-27, -15]
+
+
+2018-03-03 18:01:09.536454
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Etoile de mer, going w from [-7, -55]
+
+
+2018-03-03 18:05:41.733165
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Etoile de mer, going w from (-7, -55)
+
+
+2018-03-03 22:01:04.366803
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 89, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : (-28, -60), Cell : 308, Direction : w
+
+
+2018-03-03 22:35:00.945787
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 89, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : (-22, 41), Cell : 559, Direction : e
+
+
+2018-03-03 22:50:14.960913
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 89, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : (7, 29), Cell : 0, Direction : n
+
+
+2018-03-04 01:40:37.456099
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 334, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Bombe, going w from [8, -19]
+
+
+2018-03-04 12:05:37.821700
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 323, in tresure_hunt
+    self.goto(destination)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 81, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-04 12:13:59.049644
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Tente, going w from [-5, 6]
+
+
+2018-03-04 12:15:45.966231
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 335, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Tente, going w from (-5, 6)
+
+
+2018-03-04 12:58:52.399060
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 90, in goto
+    else:
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-04 13:05:26.062064
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 90, in goto
+    else:
+ValueError: Interface returned false on move command. Position : ((-12, -22), 1), Cell : 555, Direction : s
+
+
+2018-03-04 13:11:47.692502
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 337, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-19, -23), 1), Cell : 0, Direction : w
+
+
+2018-03-04 13:14:32.895293
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Cawotte plantée, going e from [3, -10]
+
+
+2018-03-04 13:47:50.508421
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 324, in tresure_hunt
+    self.goto(destination)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((2, -5), 1), Cell : 559, Direction : s
+
+
+2018-03-04 13:53:52.024872
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Outil, going n from [-17, -56]
+
+
+2018-03-04 18:13:42.794570
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 337, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-27, 31), 1), Cell : 0, Direction : w
+
+
+2018-03-04 18:52:21.008720
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 337, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-25, 36), 1), Cell : 558, Direction : s
+
+
+2018-03-04 20:13:14.386835
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 337, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-04 20:47:57.488322
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 337, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 83, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (10, 25) cell 539 to [8, 25] cell 321
+
+
+2018-03-04 21:30:15.011011
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 324, in tresure_hunt
+    self.goto(destination)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 82, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-04 21:37:11.566097
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Chaloupe, going n from [14, 26]
+
+
+2018-03-04 22:42:43.816501
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 324, in tresure_hunt
+    self.goto(destination)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 82, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-04 22:58:31.875383
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Coquillage rayé, going n from [-26, -40]
+
+
+2018-03-04 23:14:36.723192
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Charrette à deux roues, going n from [-4, 26]
+
+
+2018-03-04 23:19:30.634285
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 336, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Python35\DatBot\Model\LowLevelFunctions.py", line 132, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Sac, going w from [6, -8]
+
+
+2018-03-04 23:46:40.409435
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 337, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-05 00:07:25.175433
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 324, in tresure_hunt
+    self.goto(destination)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-27, -58), 1), Cell : 559, Direction : s
+
+
+2018-03-05 01:05:06.357060
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 324, in tresure_hunt
+    self.goto(destination)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-3, -58), 1), Cell : 9, Direction : n
