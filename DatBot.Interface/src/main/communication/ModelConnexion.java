@@ -6,6 +6,7 @@ import java.util.Random;
 
 import game.map.MapMovement;
 import game.movement.CellMovement;
+import game.plugin.Dragodinde;
 import game.plugin.Hunt;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
@@ -18,6 +19,7 @@ import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHousePriceMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeHandleMountsStableMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectModifyPricedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
@@ -811,6 +813,40 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
+			case "putInStable":
+				toSend = manageDD("stable",param);
+				break;
+			case "putInPaddock":
+				toSend = manageDD("paddock",param);
+				break;
+			case "putInInventory":
+				toSend = manageDD("inventory",param);
+				break;
+			case "equipDD":
+				toSend = manageDD("equip",param);
+				break;
+		}
+		return toSend;
+	}
+
+	private Object[] manageDD(String to, String param) throws Exception, InterruptedException {
+		Object[] toSend;
+		if(this.network.getDragodinde().isInStable()){
+			String paramdd = param.replaceAll("\\(", "");
+			paramdd = paramdd.replaceAll("\\)", "");
+			String[] newParamdd = paramdd.split(",");
+			int actionId = Dragodinde.getActionId(to, newParamdd[1]);
+			List<Integer> listId = new ArrayList<>();
+			listId.add(Integer.parseInt(newParamdd[0]));
+			ExchangeHandleMountsStableMessage exchangeHandleMountsStableMessage = new ExchangeHandleMountsStableMessage(actionId,listId);
+			getNetwork().sendToServer(exchangeHandleMountsStableMessage, ExchangeHandleMountsStableMessage.ProtocolId, "Put in " + to);
+			if (this.waitToSend("ExchangeDD")) {
+				toSend = new Object[] { "True" };
+			} else {
+				toSend = new Object[] { "False" };
+			} 
+		} else {
+			toSend = new Object[] { "False" };
 		}
 		return toSend;
 	}
@@ -895,13 +931,20 @@ public class ModelConnexion {
 					Thread.sleep(50);
 				}
 				break;
+			case "ExchangeDD":
+				while (!this.network.getInfo().isExchangeDD() && !this.network.getInfo().isBasicNoOperationMsg()) {
+					Thread.sleep(50);
+				}
+				break;
 		}
+		
+		Thread.sleep(250);
 
 		while (!this.network.getInfo().isBasicNoOperationMsg()) {
 			Thread.sleep(50);
 		}
 
-		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered() && !this.network.getInfo().isExchangeBidSeller()) {
+		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered() && !this.network.getInfo().isExchangeBidSeller() && !this.network.getInfo().isExchangeDD() && !this.network.getDragodinde().isInStable()) {
 			return false;
 		}
 		else {

@@ -13,6 +13,53 @@ public class Dragodinde {
 	private boolean inStable = false;
 	private List<MountClientData> paddock;
 	private List<MountClientData> stable;
+	public int testdd = 0;
+	
+	public static int getActionId(String to, String from){
+		switch(to){
+			case "stable":
+				switch(from){
+					case "paddock":
+						return 7;
+					case "inventory":
+						return 5;
+					case "equip":
+						return 1;
+				}
+				break;
+			case "paddock":
+				switch(from){
+					case "stable":
+						return 6;
+					case "inventory":
+						return 16;
+					case "equip":
+						return 9;
+				}
+				break;
+			case "inventory":
+				switch(from){
+					case "paddock":
+						return 14;
+					case "stable":
+						return 4;
+					case "equip":
+						return 13;
+				}
+				break;
+			case "equip":
+				switch(from){
+					case "paddock":
+						return 10;
+					case "inventory":
+						return 15;
+					case "stable":
+						return 2;
+				}
+				break;
+		}
+		return 0;
+	}
 
 	public boolean isInStable()
 	{
@@ -101,6 +148,7 @@ public class Dragodinde {
 		for (int i = 0 ; i < stable.size() ; i++)
 		{
 			s += "{";
+			testdd = (int) stable.get(i).getId();
 			s += "\"id\":" + (int) stable.get(i).getId() + "," ;
 			s += "\"behaviours\":[";
 			for (int i1 = 0 ; i1 < stable.get(i).getBehaviors().size() ; i1++)

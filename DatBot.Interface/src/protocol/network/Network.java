@@ -1739,6 +1739,19 @@ public class Network extends DisplayInfo implements Runnable {
 				this.dragodinde.setPaddock(exchangeStartOkMountMessage.getPaddockedMountsDescription());
 				this.dragodinde.setStable(exchangeStartOkMountMessage.getStabledMountsDescription());
 				this.dragodinde.setInStable(true);
+				break;
+			case 6555:
+				this.info.setExchangeDD(true);
+				break;
+			case 6559:
+				this.info.setExchangeDD(true);
+				break;
+			case 5982:
+				this.info.setExchangeDD(true);
+				break;
+			case 2970:
+				this.info.setExchangeDD(true);
+				break;
 		}
 		packet_content = null;
 		dataReader.bis.close();
