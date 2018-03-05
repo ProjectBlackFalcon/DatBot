@@ -599,7 +599,7 @@ class Interface:
         :param id: DD's id
         :return: Boolean
         """
-        return self.execute_command('putInStable', [id, source])
+        return self.execute_command('putInPaddock', [id, source])
 
     def put_dd_in_inventory(self, id, source):
         """
