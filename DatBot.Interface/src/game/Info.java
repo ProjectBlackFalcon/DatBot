@@ -67,6 +67,7 @@ public class Info {
 	private boolean huntAnswered = false;
 	private boolean stepSuccess = false;
 	private boolean exchangeBidSeller = false;
+	private boolean exchangeDD = false;
 
 
 	public void setBooleanToFalse()
@@ -82,6 +83,7 @@ public class Info {
 		acknowledged = false;
 		huntAnswered = false;
 		stepSuccess = false;
+		exchangeDD = false;
 	}
 	
 	public boolean threadDone = true;
@@ -454,6 +456,14 @@ public class Info {
 	public void setRiding(boolean isRiding)
 	{
 		this.isRiding = isRiding;
+	}
+
+	public boolean isExchangeDD() {
+		return exchangeDD;
+	}
+
+	public void setExchangeDD(boolean exchangeDD) {
+		this.exchangeDD = exchangeDD;
 	}
 
 }
