@@ -186,7 +186,7 @@ public class Dragodinde {
 			s += "\"boostMax\":" + (int) stable.get(i).getBoostMax() + "," ;
 			s += "\"reproductionCount\":" + stable.get(i).getReproductionCount() + "," ;
 			s += "\"reproductionCountMax\":" + stable.get(i).getReproductionCountMax() + "," ;
-			s += "\"inPaddock\":" + "True" ;
+			s += "\"inPaddock\":" + "False" ;
 			s += "}";
 			if(i != stable.size() - 1){
 				s += ",";
