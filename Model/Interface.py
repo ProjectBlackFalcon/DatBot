@@ -115,7 +115,7 @@ class Interface:
             try:
                 msg_id = self.add_command(command, parameters)
                 return self.wait_for_return(msg_id)
-            except Exception:
+            except Exception as e:
                 with open('..//Utils//InterfaceErrors.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
@@ -585,36 +585,76 @@ class Interface:
         """
         return self.execute_command('closeDD')
 
-    def put_dd_in_stable(self, id):
+    def put_dd_in_stable(self, id, source):
         """
         Moves a DD  to stable
         :param id: DD's id
         :return: Boolean
         """
-        return self.execute_command('putInStable', [id])
+        return self.execute_command('putInStable', [id, source])
 
-    def put_dd_in_paddock(self, id):
+    def put_dd_in_paddock(self, id, source):
         """
         Moves a DD to paddock
         :param id: DD's id
         :return: Boolean
         """
-        return self.execute_command('putInStable', [id])
+        return self.execute_command('putInPaddock', [id, source])
 
-    def put_dd_in_inventory(self, id):
+    def put_dd_in_inventory(self, id, source):
         """
         Moves a DD to paddock
         :param id: DD's id
         :return: Boolean
         """
-        return self.execute_command('putInInventory', [id])
+        return self.execute_command('putInInventory', [id, source])
 
-    def equip_dd(self, id):
+    def equip_dd(self, id, source):
         """
         Equips a DD
         :param id: DD's id
         :return: Boolean
         """
-        return self.execute_command('equipDD', [id])
+        return self.execute_command('equipDD', [id, source])
+
+    def get_dd_level(self):
+        """
+        Returns the level of the equipped DD
+        :return: False/level
+        """
+        return self.execute_command('lvlDD')
+
+    def set_dd_xp(self, xp):
+        """
+        Sets the xp to give the equipped DD
+        :param xp: 0 to 90%
+        :return: Boolean
+        """
+        if not 0 <= xp <= 90:
+            raise ValueError("Xp to give a DD must be between 0 and 90")
+            # Dumb fuck
+        return self.execute_command('setXpDD', [xp])
+
+    def feed_dd(self):
+        # TODO How does that work ?
+        """
+        Feeds DD
+        :return:
+        """
+        return self.execute_command('feedDD')
+
+    def mount_dd(self):
+        """
+        Mounts DD
+        :return: Boolean
+        """
+        return self.execute_command('mountDD')
+
+    def dismount_dd(self):
+        """
+        Dismounts DD
+        :return: Boolean
+        """
+        return self.execute_command('dismountDD')
 
 __author__ = 'Alexis'

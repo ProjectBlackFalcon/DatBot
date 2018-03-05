@@ -8,7 +8,7 @@ class DD:
         self.level = dd_stats_dict['level']
         self.stamina = dd_stats_dict['stamina']*100/dd_stats_dict['staminaMax']
         self.maturity = dd_stats_dict['maturity']*100/dd_stats_dict['maturityForAdult']
-        self.energy = dd_stats_dict['energy']*100/dd_stats_dict['energyMax']
+        self.energy = dd_stats_dict['energy']*100/dd_stats_dict['energyMax'] if dd_stats_dict['energyMax'] else 0
         self.serenity = dd_stats_dict['serenity']
         self.love = dd_stats_dict['love']*100/dd_stats_dict['loveMax']
         self.fecondation_time = dd_stats_dict['fecondationTime']
