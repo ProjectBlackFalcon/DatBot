@@ -59,7 +59,12 @@ public class ModelConnexion {
 				else {
 					mapMovement.PerformChangement();
 					if (this.network.getMovement().moveOver()) {
-						toSend = new Object[] { "True" };
+						if (this.waitToSend("Map")) {
+							toSend = new Object[] { "True" };
+						}
+						else {
+							toSend = new Object[] { "False" };
+						}
 					}
 					else {
 						toSend = new Object[] { "False" };

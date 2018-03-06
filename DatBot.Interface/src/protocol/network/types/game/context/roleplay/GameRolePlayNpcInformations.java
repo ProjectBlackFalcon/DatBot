@@ -59,9 +59,5 @@ public class GameRolePlayNpcInformations extends GameRolePlayActorInformations {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString() {
-		return "GameRolePlayNpcInformations [npcId=" + npcId + ", sex=" + sex + ", specialArtworkId=" + specialArtworkId + ", getContextualId()=" + getContextualId() + ", getLook()=" + getLook() + ", getDisposition()=" + getDisposition() + "]";
-	}
 
 }

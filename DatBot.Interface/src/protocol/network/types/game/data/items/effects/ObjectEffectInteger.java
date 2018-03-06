@@ -47,10 +47,5 @@ public class ObjectEffectInteger extends ObjectEffect {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString()
-	{
-		return "ObjectEffectInteger [value=" + value + "]";
-	}
 
 }

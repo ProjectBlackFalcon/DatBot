@@ -61,9 +61,5 @@ public class GameContextActorInformations extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString() {
-		return "GameContextActorInformations [contextualId=" + contextualId + ", look=" + look + ", disposition=" + disposition + "]";
-	}
 
 }

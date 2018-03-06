@@ -802,9 +802,11 @@ public class Network extends DisplayInfo implements Runnable {
 		for(int i = 0; i < getFight().getGameFightSynchronizeMessage().getFighters().size(); i++) {
 			GameFightCharacterInformations p = (GameFightCharacterInformations) getFight().getGameFightSynchronizeMessage().getFighters().get(i);
 			double id = p.getContextualId();
+			/*
 			if(id == gameActionFightSummonMessage.getSourceId()) {
 				p.setSummons(gameActionFightSummonMessage.getSummons());
 			}
+			*/
 		}
 		
 	}
@@ -845,7 +847,7 @@ public class Network extends DisplayInfo implements Runnable {
 		if (!info.isInitFight()) {
 			getFight().turnListId = gameFightTurnListMessage.getIds();
 		}else {
-			
+			/*
 			List<Double> IDs = gameFightTurnListMessage.getIds();
 			JSONArray arr = new JSONArray();
 			for(int i = 0; i < getFight().getGameFightSynchronizeMessage().getFighters().size(); i++) {
@@ -881,6 +883,7 @@ public class Network extends DisplayInfo implements Runnable {
 			}
 			
 			getFight().sendToFightAlgo("updateEntities", arr);
+			*/
 		}
 	}
 
@@ -951,7 +954,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 45, 20, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 45, 21, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {

@@ -98,10 +98,5 @@ public class InteractiveElement extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString()
-	{
-		return "InteractiveElement [elementId=" + elementId + ", elementTypeId=" + elementTypeId + ", enabledSkills=" + enabledSkills + ", disabledSkills=" + disabledSkills + ", onCurrentMap=" + onCurrentMap + "]";
-	}
 
 }
