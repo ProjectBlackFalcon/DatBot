@@ -37,22 +37,6 @@ public class Test {
 		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Scalpelementaire','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
 //		communication.getReturn("0;0;i;cmd;move;[383]");
-		Thread.sleep(5000);
-//
-		communication.getReturn("0;0;i;cmd;openDD;[None]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;equipDD;[" + communication.getNetworks().get(0).getDragodinde().testdd + ",stable]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;putInPaddock;[" + communication.getNetworks().get(0).getDragodinde().testdd + ",equip]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;putInStable;[" + communication.getNetworks().get(0).getDragodinde().testdd + ",paddock]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;putInPaddock;[" + communication.getNetworks().get(0).getDragodinde().testdd + ",stable]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;equipDD;[" + communication.getNetworks().get(0).getDragodinde().testdd + ",paddock]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;putInInventory;[" + communication.getNetworks().get(0).getDragodinde().testdd + ",equip]");
-
 //		communication.getReturn("0;0;i;cmd;closeDD;[None]");
 
 //		Thread.sleep(5000);

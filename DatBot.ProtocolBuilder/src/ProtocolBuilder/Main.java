@@ -661,8 +661,8 @@ public class Main {
 
 			Message msg = json.Types.get(i);
 
-			if (msg.getName().equals("VersionExtended") || msg.getName().equals("SellerBuyerDescriptor") || msg.getName().equals("AbstractCharacterInformation")) {
-				continue;
+			if (msg.getName().equals("VersionExtended") || msg.getName().equals("SellerBuyerDescriptor") || msg.getName().equals("AbstractCharacterInformation") || msg.getName().equals("CharacterBaseCharacteristic")) {
+				continue; 
 			}
 
 			// add package

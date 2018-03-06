@@ -47,10 +47,5 @@ public class MountSetMessage extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString()
-	{
-		return "MountSetMessage [mountData=" + mountData + "]";
-	}
 
 }

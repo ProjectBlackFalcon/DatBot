@@ -10,7 +10,6 @@ import protocol.network.NetworkMessage;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
 import protocol.network.Network;
-import protocol.network.types.game.context.GameContextActorInformations;
 import protocol.network.types.game.context.fight.GameFightFighterNamedInformations;
 import protocol.network.types.game.character.alignment.ActorAlignmentInformations;
 
@@ -22,7 +21,6 @@ public class GameFightCharacterInformations extends GameFightFighterNamedInforma
 	private ActorAlignmentInformations alignmentInfos;
 	private int breed;
 	private boolean sex;
-	private List<GameFightFighterInformations> summons;
 
 	public int getLevel() { return this.level; };
 	public void setLevel(int level) { this.level = level; };
@@ -32,11 +30,7 @@ public class GameFightCharacterInformations extends GameFightFighterNamedInforma
 	public void setBreed(int breed) { this.breed = breed; };
 	public boolean isSex() { return this.sex; };
 	public void setSex(boolean sex) { this.sex = sex; };
-	public List<GameFightFighterInformations> getSummons() { return summons; }
-	public void setSummons(List<GameFightFighterInformations> summons) { this.summons = summons; }
-	public void addSummon(GameFightFighterInformations summon) { this.summons.add(summon); }
-	
-	
+
 	public GameFightCharacterInformations(){
 	}
 
