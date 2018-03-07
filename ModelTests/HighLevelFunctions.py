@@ -50,19 +50,21 @@ credentials7 = {'username': 'wublel2', 'password': 'notabot0', 'name': 'Scalpele
 
 
 llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials5, llf, False)
-bot.interface.connect()
-start = time.time()
-
-bot.hf.hunt_treasures(duration_minutes=60)
-# bot.hf.fight_on_map(1, 100)
-# bot.hf.harvest_path(path, -1, sell=True)
-# bot.hf.drop_to_bank('all', True)
-
-winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
-print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
+bot = Bot(pipe, bot_id, credentials7, llf, False)
 
 
 while 1:
-    time.sleep(1)
+    start = time.time()
+    bot.interface.connect()
+    bot.hf.manage_dds()
+    # bot.hf.hunt_treasures(duration_minutes=60)
+    # bot.hf.fight_on_map(1, 100)
+    # bot.hf.harvest_path(path, -1, sell=True)
+    # bot.hf.drop_to_bank('all', True)
+
+    winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
+    print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
+    bot.interface.disconnect()
+    time.sleep(20)
+
 __author__ = 'Alexis'
