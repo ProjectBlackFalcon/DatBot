@@ -248,13 +248,13 @@ class PathFinder:
             if current in top_map_change_cells and nxt in bottom_map_change_cells:
                 path_map_change_cells.append(current)
                 self.map_change_directions.append('n')
-            if current in bottom_map_change_cells and nxt in top_map_change_cells:
+            elif current in bottom_map_change_cells and nxt in top_map_change_cells:
                 path_map_change_cells.append(current)
                 self.map_change_directions.append('s')
-            if current in left_map_change_cells and nxt in right_map_change_cells:
+            elif current in left_map_change_cells and nxt in right_map_change_cells:
                 path_map_change_cells.append(current)
                 self.map_change_directions.append('w')
-            if current in right_map_change_cells and nxt in left_map_change_cells:
+            elif current in right_map_change_cells and nxt in left_map_change_cells:
                 path_map_change_cells.append(current)
                 self.map_change_directions.append('e')
 
