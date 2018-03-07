@@ -358,6 +358,7 @@ class HighLevelFunctions:
                     break
 
             if not self.bot.interface.validate_hunt_step()[0] and not hunt_error_flag:
+                clue, direction = self.bot.interface.get_hunt_clue()
                 with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, start_pos, self.bot.position[0]))
@@ -613,8 +614,8 @@ class HighLevelFunctions:
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_paddock(dd.id, 'stable')
                 time.sleep(3)
-                self.bot.interface.fart()
-                time.sleep(10)
+                # self.bot.interface.fart()
+                time.sleep(5)
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_stable(dd.id, 'paddock')
 
