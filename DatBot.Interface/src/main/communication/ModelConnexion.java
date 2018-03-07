@@ -397,7 +397,7 @@ public class ModelConnexion {
 							TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
 							getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
 							if (this.waitToSendMap(this.network.getMap().getId())) {
-								toSend = new Object[] { "True" };
+								toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
 							}
 							else {
 								toSend = new Object[] { "False" };
