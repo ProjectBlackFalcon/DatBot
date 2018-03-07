@@ -1,6 +1,8 @@
 import mysql.connector
 from tkinter import *
 import datetime
+import json
+import copy
 
 
 class Bot:
@@ -20,7 +22,140 @@ class Bot:
         return '{:^25} {:^7} {:^15} {:^50} {:^20}'.format(self.credentials['name'], self.level, self.kamas, self.occupation, self.last_update)
 
 
-class AccountManager():
+class ScheduleBar:
+    def __init__(self, duration, idx):
+        self.duration = duration
+        self.tasks = [{'name': 'sleep', 'start': 0, 'end': duration}]
+        self.idx = idx
+
+
+class Scheduler:
+    def __init__(self):
+        self.tk = Tk()
+        self.tk.title('Schedule creator')
+        self.frame = Frame(self.tk, height=500, width=500)
+        self.frame.pack()
+        self.command_field = Entry(self.frame, width=40)
+        self.command_field.pack(anchor='center')
+        self.command_field.bind("<Return>", self.eval)
+        self.bars = []
+        self.bar_canvas = Canvas(self.frame, width=230, height=200)
+        self.bar_canvas.pack()
+
+        self.tasks = {
+            'sleep': '#888888',
+            'hunt': '#ff0000',
+            'dd': '#00ff00'
+        }
+
+    def eval(self, event=None):
+        command = self.command_field.get()
+        self.command_field.delete(0, 'end')
+        print(command)
+
+        if 'new' in command:
+            self.add_bar(int(command.split(' ')[1]))
+
+        elif 'del' in command:
+            self.del_bar(command.split(' ')[1])
+
+        elif 'clear' in command:
+            self.del_bar('all')
+
+        elif command.split(' ')[0] in self.tasks.keys():
+            task, idx, start, end = command.split(' ')
+            idx, start, end = int(idx), int(start), int(end)
+            selected_bar = None
+            for bar in self.bars:
+                if bar.idx == idx:
+                    selected_bar = bar
+            selected_bar.tasks.append({'name': task, 'start': start, 'end': end})
+            print(selected_bar.idx, selected_bar.tasks)
+            self.draw_bars()
+
+        elif 'save' in command:
+            _, idx, file_name = command.split(' ')
+            idx = int(idx)
+            selected_bar = None
+            for bar in self.bars:
+                if bar.idx == idx:
+                    selected_bar = bar
+            self.bar2json(selected_bar, file_name)
+
+        elif 'resize' in command:
+            _, idx, new_duration = command.split(' ')
+            idx, new_duration = int(idx), int(new_duration)
+            selected_bar = None
+            for bar in self.bars:
+                if bar.idx == idx:
+                    selected_bar = bar
+            self.resize_bar(selected_bar, new_duration)
+
+        elif 'add' in command:
+            _, idx1, idx2, offset = command.split(' ')
+            idx1, idx2, offset = int(idx1), int(idx2), int(offset)
+            selected_bar1, selected_bar2 = None, None
+            for bar in self.bars:
+                if bar.idx == idx1:
+                    selected_bar1 = bar
+                elif bar.idx == idx2:
+                    selected_bar2 = bar
+            self.concat_bars(selected_bar1, selected_bar2, offset)
+
+    def concat_bars(self, bar1, bar2, offset):
+        # puts bar1 in bar2 at value
+        print(bar1.idx, bar1.tasks)
+        tasks = copy.deepcopy(bar1.tasks)
+        for task in tasks:
+            task['start'] += offset
+            task['end'] += offset
+        bar2.tasks += tasks
+        self.draw_bars()
+
+    def resize_bar(self, bar, new_duration):
+        for task in bar.tasks:
+            task['start'] = task['start'] * new_duration / bar.duration
+            task['end'] = task['end'] * new_duration / bar.duration
+        bar.duration = new_duration
+        self.draw_bars()
+
+    def bar2json(self, bar, file_name):
+        # First, 'flatten' the tasks
+        flattened = ['sleep']*1440
+        for task in bar.tasks:
+            for i in range(task['start']*1440//bar.duration, task['end']*1440//bar.duration):
+                flattened[i] = task['name']
+        with open('..//Utils//{}.json'.format(file_name), 'w') as f:
+            json.dump({'duration': bar.duration, 'data': flattened}, f)
+
+    def add_bar(self, duration):
+        self.bars.append(ScheduleBar(duration, len(self.bars)))
+        self.draw_bars()
+
+    def del_bar(self, idx):
+        if idx == 'all':
+            [self.del_bar(0) for i in range(len(self.bars))]
+        else:
+            idx = int(idx)
+            del self.bars[idx]
+            for i in range(len(self.bars)):
+                self.bars[i].idx = i
+            self.draw_bars()
+
+    def draw_bars(self):
+        self.bar_canvas.delete('all')
+        for bar in self.bars:
+            idx = bar.idx
+            self.bar_canvas.create_rectangle((10, (idx+1)*20, 210, (idx+1)*20+20), fill='#888888')
+            self.bar_canvas.create_text((5, (idx+1)*20+10), text=str(idx))
+            self.bar_canvas.create_text((220, (idx+1)*20+10), text=bar.duration)
+            for task in bar.tasks:
+                startx = 10+int(task['start']*200/bar.duration)
+                endx = 10+int(task['end']*200/bar.duration)
+                self.bar_canvas.create_rectangle((startx, (idx+1)*20+1, endx, (idx+1)*20+20), fill=self.tasks[task['name']], outline='')
+
+
+class AccountManager:
     def __init__(self):
         self.bots = []
         self.tk = Tk()
@@ -32,6 +167,9 @@ class AccountManager():
 
         self.tk.mainloop()
 
+    def bot_action(self, bot):
+        Scheduler()
+
     def build_ui(self):
         self.add_bot_btn = Button(self.frame, text='Add bot', command=self.add_bot, font='courier')
         self.add_bot_btn.pack()
@@ -39,15 +177,20 @@ class AccountManager():
         self.add_bot_frame.pack()
 
         self.get_bots_db()
-        self.bots_frame = Frame(self.frame, bg='#666666')
+        self.bots_frame = Frame(self.frame)
         self.bots_frame.pack()
-        self.bot_labels = []
+        self.bot_labels, self.bot_buttons = [], []
         self.bot_labels.append(Label(self.bots_frame, font='courier', text='{:^25} {:^7} {:^15} {:^50} {:^20}'.format('Name', 'Level', 'Kamas', 'Occupation', 'Last update')))
-        self.bot_labels[-1].pack()
-        for bot in self.bots:
+        self.bot_labels[-1].grid(row=0, column=0)
+
+        self.sorted_bots = sorted(self.bots, key=lambda one_bot: one_bot.last_update, reverse=True)
+        for i in range(len(self.sorted_bots)):
+            bot = self.sorted_bots[i]
             botstring = bot.to_string()
             self.bot_labels.append(Label(self.bots_frame, text=botstring, font='courier'))
-            self.bot_labels[-1].pack()
+            self.bot_labels[-1].grid(row=i+1, column=0)
+            self.bot_buttons.append(Button(master=self.bots_frame, text='LEL', font='courier', command=lambda idx=i: self.bot_action(idx)))
+            self.bot_buttons[-1].grid(row=i+1, column=1)
 
     def add_bot(self):
         def ok():
@@ -60,6 +203,7 @@ class AccountManager():
             self.add_bot_frame_labels.destroy()
             self.add_bot_frame_entries.destroy()
             self.add_bot_frame_btns.destroy()
+            self.tk.wm_geometry("")
 
         def cancel():
             self.add_bot_frame_labels.destroy()
