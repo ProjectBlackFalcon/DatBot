@@ -1,4 +1,5 @@
 import mysql.connector
+from tkinter import filedialog
 from tkinter import *
 import datetime
 import json
@@ -23,33 +24,45 @@ class Bot:
 
 
 class ScheduleBar:
-    def __init__(self, duration, idx):
+    def __init__(self, duration, idx, tasks=None):
         self.duration = duration
-        self.tasks = [{'name': 'sleep', 'start': 0, 'end': duration}]
+        self.tasks = [{'name': 'sleep', 'start': 0, 'end': duration}] if tasks is None else tasks
         self.idx = idx
 
 
 class Scheduler:
     def __init__(self):
+        self.tasks = {
+            'sleep': '#aaaaaa',
+            'hunt': '#bb3333',
+            'dd': '#33bb33',
+            'sell': '#3333bb'
+        }
         self.tk = Tk()
         self.tk.title('Schedule creator')
         self.frame = Frame(self.tk, height=500, width=500)
         self.frame.pack()
+        Label(self.frame, text='New bar : new <duration>').pack()
+        Label(self.frame, text='Del bar : del <bar id/all> | clear').pack()
+        Label(self.frame, text='Add task : <task> <bar id> <start> <end>').pack()
+        Label(self.frame, text='Resize bar : resize <bar id> <new duration>').pack()
+        Label(self.frame, text='Add bar1 to bar 2 : add <bar1 id> <bar2 id> <offset>').pack()
+        Label(self.frame, text='Save : save <file name>').pack()
+        Label(self.frame, text='Load : load <file name (optionnal)>').pack()
+        Label(self.frame, text='TASKS : ').pack()
+        Label(self.frame, text=str(list(self.tasks.keys()))).pack()
         self.command_field = Entry(self.frame, width=40)
         self.command_field.pack(anchor='center')
         self.command_field.bind("<Return>", self.eval)
+        self.last_command = ''
+        self.command_field.bind("<Up>", self.redo)
         self.bars = []
         self.bar_canvas = Canvas(self.frame, width=230, height=200)
         self.bar_canvas.pack()
 
-        self.tasks = {
-            'sleep': '#888888',
-            'hunt': '#ff0000',
-            'dd': '#00ff00'
-        }
-
     def eval(self, event=None):
         command = self.command_field.get()
+        self.last_command = command
         self.command_field.delete(0, 'end')
         print(command)
 
@@ -74,13 +87,15 @@ class Scheduler:
             self.draw_bars()
 
         elif 'save' in command:
-            _, idx, file_name = command.split(' ')
-            idx = int(idx)
-            selected_bar = None
-            for bar in self.bars:
-                if bar.idx == idx:
-                    selected_bar = bar
-            self.bar2json(selected_bar, file_name)
+            _, file_name = command.split(' ')
+            self.save(file_name)
+
+        elif 'load' in command:
+            split_cmd = command.split(' ')
+            if len(split_cmd) > 1:
+                self.load(split_cmd[1])
+            else:
+                self.load()
 
         elif 'resize' in command:
             _, idx, new_duration = command.split(' ')
@@ -102,6 +117,9 @@ class Scheduler:
                     selected_bar2 = bar
             self.concat_bars(selected_bar1, selected_bar2, offset)
 
+    def redo(self, _):
+        self.command_field.insert(0, self.last_command)
+
     def concat_bars(self, bar1, bar2, offset):
         # puts bar1 in bar2 at value
         print(bar1.idx, bar1.tasks)
@@ -119,14 +137,40 @@ class Scheduler:
         bar.duration = new_duration
         self.draw_bars()
 
-    def bar2json(self, bar, file_name):
-        # First, 'flatten' the tasks
-        flattened = ['sleep']*1440
-        for task in bar.tasks:
-            for i in range(task['start']*1440//bar.duration, task['end']*1440//bar.duration):
-                flattened[i] = task['name']
-        with open('..//Utils//{}.json'.format(file_name), 'w') as f:
-            json.dump({'duration': bar.duration, 'data': flattened}, f)
+    def save(self, file_name):
+        bars = []
+        for bar in self.bars:
+            flattened = ['sleep']*1440
+            for task in bar.tasks:
+                for i in range(task['start']*1440//bar.duration, task['end']*1440//bar.duration):
+                    flattened[i] = task['name']
+
+            tasks = [{'name': flattened[0], 'start': 0, 'end': 0}]
+            for i in range(1, len(flattened)):
+                if flattened[i] == flattened[i-1]:
+                    tasks[-1]['end'] += bar.duration / 1440
+                else:
+                    tasks.append({'name': flattened[i], 'start': i*bar.duration / 1440, 'end': i*bar.duration / 1440})
+
+            bars.append({'tasks': copy.deepcopy(tasks), 'duration': bar.duration, 'idx': bar.idx})
+
+        with open('..//Utils//Schedules//{}.json'.format(file_name), 'w') as f:
+            json.dump(bars, f)
+
+    def load(self, file_name=None):
+        if file_name is None:
+            path = False
+            path = filedialog.askopenfilename(initialdir="..//Utils//Schedules//", title="Select schedule", filetypes=(("json files", "*.json"),("all files","*.*")))
+        else:
+            path = "..//Utils//Schedules//{}.json".format(file_name)
+
+        bars = []
+        if path:
+            with open(path, 'r') as f:
+                bars = json.load(f)
+        for bar in bars:
+            self.bars.append(ScheduleBar(bar['duration'], bar['idx']+len(self.bars), bar['tasks']))
+        self.draw_bars()
 
     def add_bar(self, duration):
         self.bars.append(ScheduleBar(duration, len(self.bars)))
