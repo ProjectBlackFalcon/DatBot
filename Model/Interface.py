@@ -657,4 +657,27 @@ class Interface:
         """
         return self.execute_command('dismountDD')
 
+    def fart(self):
+        """
+        Bot farts
+        :return: Boolean
+        """
+        return self.execute_command('fart')
+
+    def get_zaapi_cell(self):
+        """
+        Gives the maps zaapi position
+        :return: False / cell
+        """
+        return self.execute_command('getZaapiCell')
+
+    def use_zaapi(self, destination):
+        """
+        Uses the zaap to go to destination
+        :param destination: coords (ex: (-2, 0))
+        :return: Boolean
+        """
+        destination = ast.literal_eval(str(destination).replace('[', '(').replace(']', ')'))
+        return self.execute_command('useZaapi', [destination])
+
 __author__ = 'Alexis'
