@@ -176,7 +176,7 @@ public class DisplayInfo {
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
 		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
-		debug.println(newSt);
+		System.out.println(newSt);
 	}
 	
 	public static String cleanString(String s){

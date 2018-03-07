@@ -1328,7 +1328,7 @@ public class Network extends DisplayInfo implements Runnable {
 					DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 					buildMessage(reader);
 				}
-				//				data.close();
+				//data.close();
 			}
 		}
 		this.socket.close();
@@ -1343,7 +1343,6 @@ public class Network extends DisplayInfo implements Runnable {
 			}catch(java.io.EOFException e) {
 				System.err.println("Caught EOF exception.");
 			}
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

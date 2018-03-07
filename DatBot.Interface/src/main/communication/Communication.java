@@ -59,29 +59,44 @@ public class Communication implements Runnable {
 		switch (cmd) {
 			case "connect":
 				if(getIndexOfNetwork(botInstance) != -1){
-					networks.set(botInstance, new Network(this.displayPacket,networks.get(botInstance).getInfo(),botInstance));
+					Network network = new Network(this.displayPacket,networks.get(botInstance).getInfo(),botInstance);
+					Thread threadNetwork = new Thread(network);
+					threadNetwork.start();
+					networks.set(botInstance, network);
+					int index = 0;
+					while (!networks.get(botInstance).getInfo().isConnected()) {
+						Thread.sleep(1000);
+						index += 1;
+						if (index == 60) { throw new java.lang.Error("Connection timed out"); }
+					}
+					networks.get(botInstance).append("Connected !");
+					networks.get(botInstance).append("Name : " + networks.get(botInstance).getInfo().getName());
+					networks.get(botInstance).append("Level : " + networks.get(botInstance).getInfo().getLvl());
+					toSend = new Object[] { "True" };
+				} else {
+					String[] str = param.split(",");
+					Info info = new Info(str[0], str[1], str[2], str[3]);
+					Network network = new Network(this.displayPacket, info, botInstance);
+					Thread threadNetwork = new Thread(network);
+					threadNetwork.start();
+					networks.add(network);
+					int index = 0;
+					while (!info.isConnected()) {
+						Thread.sleep(1000);
+						index += 1;
+						if (index == 60) { throw new java.lang.Error("Connection timed out"); }
+					}
+					network.append("Connected !");
+					network.append("Name : " + info.getName());
+					network.append("Level : " + info.getLvl());
+					toSend = new Object[] { "True" };
 				}
-				String[] str = param.split(",");
-				Info info = new Info(str[0], str[1], str[2], str[3]);
-				Network network = new Network(this.displayPacket, info, botInstance);
-				Thread threadNetwork = new Thread(network);
-				threadNetwork.start();
-				networks.add(network);
-				int index = 0;
-				while (!info.isConnected()) {
-					Thread.sleep(1000);
-					index += 1;
-					if (index == 60) { throw new java.lang.Error("Connection timed out"); }
-				}
-				network.append("Connected !");
-				network.append("Name : " + info.getName());
-				network.append("Level : " + info.getLvl());
-				toSend = new Object[] { "True" };
 				break;
 			case "disconnect":
 				if(displayPacket){
 					networks.get(botInstance).getF().setVisible(false);
 				}
+				networks.get(botInstance).getInfo().setConnected(false);
 				networks.get(botInstance).getSocket().close();
 				toSend = new Object[] { "True" };
 				break;
