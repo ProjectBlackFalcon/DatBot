@@ -58,13 +58,8 @@ public class ModelConnexion {
 				}
 				else {
 					mapMovement.PerformChangement();
-					if (this.network.getMovement().moveOver()) {
-						if (this.waitToSend("Map")) {
-							toSend = new Object[] { "True" };
-						}
-						else {
-							toSend = new Object[] { "False" };
-						}
+					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+						toSend = new Object[] { "True" };
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -887,6 +882,21 @@ public class ModelConnexion {
 		else {
 			return true;
 		}
+	}
+	
+	public boolean waitToSendMap(int actualMapId) throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isNewMap()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 10000){
+				if(this.network.getMap().getId() != actualMapId){
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public boolean waitToSend(String s) throws InterruptedException {
