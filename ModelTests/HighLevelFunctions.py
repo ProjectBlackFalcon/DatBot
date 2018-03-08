@@ -9,6 +9,7 @@ import json
 
 pipe = PipeToJava(headless=True)
 bot_id = 0
+llf = LowLevelFunctions()
 
 path = (
     ((-2, -4), None, 2),
@@ -40,19 +41,46 @@ path = (
     ((0, 0), None, 2),
 )
 
-credentials1 = {'username': 'notabotatall', 'password': 'notabotatall0', 'name': 'Docteur-Vilamoule', 'server': 'Julith'}
-credentials2 = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
-credentials3 = {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
-credentials4 = {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
-credentials5 = {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
-credentials6 = {'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
-credentials7 = {'username': 'wublel2', 'password': 'notabot0', 'name': 'Scalpelementaire', 'server': 'Julith'}
+colors = [
+    '\033[95m',
+    '\033[94m',
+    '\033[93m',
+    '\033[92m'
+]
 
+'''
+{'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
+{'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
+{'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
+{'username': 'wublel2', 'password': 'notabot0', 'name': 'Scalpelementaire', 'server': 'Julith'}
+'''
 
-llf = LowLevelFunctions()
-bot = Bot(pipe, bot_id, credentials7, llf, False)
+credentials = [
+    {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
+    {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
+]
 
+bots = []
+threads = []
+for cred in credentials:
+    bots.append(Bot(pipe, credentials.index(cred), cred, llf, False, color=colors[credentials.index(cred)]))
 
+for bot in bots:
+    threads.append(Thread(target=bot.interface.connect))
+    threads[-1].start()
+
+for thread in threads:
+    thread.join()
+
+duration = 1
+threads = []
+for bot in bots:
+    threads.append(Thread(target=bot.hf.hunt_treasures, args=(duration, )))
+    threads[-1].start()
+for thread in threads:
+    thread.join()
+
+'''
 while 1:
     start = time.time()
     bot.interface.connect()
@@ -65,6 +93,7 @@ while 1:
     winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
     print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
     bot.interface.disconnect()
-    time.sleep(20)
+    time.sleep(3600)
+'''
 
 __author__ = 'Alexis'
