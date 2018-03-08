@@ -100,7 +100,7 @@ public class ModelConnexion {
 				if (this.network.getMap().getId() == 153880835) {
 					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request Npc to go to Astrub");
-					if (this.waitToSend("Map")) {
+					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 						toSend = new Object[] { "True" };
 					}
 					else {
@@ -116,7 +116,7 @@ public class ModelConnexion {
 				if (r != -1) {
 					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getInteractive().getElementIdStatue(), this.network.getInteractive().getSkillInstanceUidStatue());
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
-					if (this.waitToSend("Map")) {
+					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 						toSend = new Object[] { "True" };
 					}
 					else {
@@ -154,7 +154,7 @@ public class ModelConnexion {
 				if (this.network.getMap().getId() == 144931) { // Brakmar
 					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBrakmarIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBrakmarIN));
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
-					if (this.waitToSend("Map")) {
+					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 						toSend = new Object[] { "True" };
 					}
 					else {
@@ -357,7 +357,7 @@ public class ModelConnexion {
 			case "enterBag":
 				EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 				getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
-				if (this.waitToSend()) {
+				if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 					toSend = new Object[] { "True" };
 				}
 				else {
@@ -367,7 +367,7 @@ public class ModelConnexion {
 			case "exitBag":
 				EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 				getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
-				if (this.waitToSend()) {
+				if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 					toSend = new Object[] { "True" };
 				}
 				else {
@@ -431,7 +431,7 @@ public class ModelConnexion {
 					int[] interactive2 = this.network.getInteractive().getInteractive(184);
 					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
-					if (this.waitToSend("Map")) {
+					if (this.waitToSendMap(this.network.getMap().getId())) {
 						sleepShort();
 						toSend = move(292);
 					}
@@ -456,7 +456,7 @@ public class ModelConnexion {
 					int[] interactive2 = this.network.getInteractive().getInteractive(184);
 					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exiting hunting hall");
-					if (this.waitToSend("Map")) {
+					if (this.waitToSendMap(this.network.getMap().getId())) {
 						toSend = new Object[] { "True" };
 					}
 					else {
@@ -750,7 +750,7 @@ public class ModelConnexion {
 				if(this.network.getMap().getId() == 88212751 && this.network.getInfo().getCellId() == 383){
 					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(473020,35416892);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter bwork");
-					if (this.waitToSend("Map")) {
+					if (this.waitToSendMap(this.network.getMap().getId())) {
 						toSend = new Object[] { "True" };
 					}
 					else {
@@ -764,7 +764,7 @@ public class ModelConnexion {
 				if(this.network.getMap().getId() == 104073218 && this.network.getInfo().getCellId() == 260){
 					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555,35423772);
 					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit bwork");
-					if (this.waitToSend("Map")) {
+					if (this.waitToSendMap(this.network.getMap().getId())) {
 						toSend = new Object[] { "True" };
 					}
 					else {
