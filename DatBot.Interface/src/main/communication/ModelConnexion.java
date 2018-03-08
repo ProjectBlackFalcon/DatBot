@@ -9,6 +9,8 @@ import game.movement.CellMovement;
 import game.plugin.Dragodinde;
 import game.plugin.Hunt;
 import protocol.network.Network;
+import protocol.network.messages.game.context.mount.MountSetXpRatioRequestMessage;
+import protocol.network.messages.game.context.roleplay.emote.EmotePlayRequestMessage;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
 import protocol.network.messages.game.context.roleplay.havenbag.EnterHavenBagRequestMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
@@ -825,6 +827,46 @@ public class ModelConnexion {
 			case "equipDD":
 				toSend = manageDD("equip",param);
 				break;
+			case "fart":
+				if(this.network.getDragodinde().isFart()){
+					EmotePlayRequestMessage emotePlayRequestMessage = new EmotePlayRequestMessage(8);
+					getNetwork().sendToServer(emotePlayRequestMessage, EmotePlayRequestMessage.ProtocolId, "Fart");
+					if (this.waitToSendEmote()) {
+						toSend = new Object[] { "True" };
+					}
+					else {
+						toSend = new Object[] { "False" };
+					} 
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "lvlDD":
+				if (this.network.getDragodinde().isHavingDd()) {
+					toSend = new Object[] { this.network.getDragodinde().getLevelEquipedDD() };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				} 
+				break;
+			case "setXpDD":
+				if (this.network.getDragodinde().isHavingDd()) {
+					if(Integer.parseInt(param) != this.network.getDragodinde().getRatioXp()){
+						MountSetXpRatioRequestMessage mountSetXpRatioRequestMessage = new MountSetXpRatioRequestMessage(Integer.parseInt(param));
+						getNetwork().sendToServer(mountSetXpRatioRequestMessage, MountSetXpRatioRequestMessage.ProtocolId, "Set xp dd");
+						if (this.waitToSendMountXp()) {
+							toSend = new Object[] { "True" };
+						} else {
+							toSend = new Object[] { "False" };
+						}
+					} else {
+						toSend = new Object[] { "True" };
+					}
+				}
+				else {
+					toSend = new Object[] { "False" };
+				} 
+				break;
 		}
 		return toSend;
 	}
@@ -898,6 +940,28 @@ public class ModelConnexion {
 		}
 		return true;
 	}
+	
+	public boolean waitToSendEmote() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isEmoteLaunched()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false; 
+			}
+		}
+		return true;
+	}
+	
+	public boolean waitToSendMountXp() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isMountxpmsg()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false; 
+			}
+		}
+		return true;
+	}
 
 	public boolean waitToSend(String s) throws InterruptedException {
 		switch (s) {
@@ -948,6 +1012,11 @@ public class ModelConnexion {
 				break;
 			case "ExchangeDD":
 				while (!this.network.getInfo().isExchangeDD() && !this.network.getInfo().isBasicNoOperationMsg()) {
+					Thread.sleep(50);
+				}
+				break;
+			case "MountXp":
+				while (!this.network.getInfo().isExchangeDD()) {
 					Thread.sleep(50);
 				}
 				break;

@@ -68,6 +68,8 @@ public class Info {
 	private boolean stepSuccess = false;
 	private boolean exchangeBidSeller = false;
 	private boolean exchangeDD = false;
+	private boolean emoteLaunched = false;
+	private boolean mountxpmsg = false;
 
 
 	public void setBooleanToFalse()
@@ -84,6 +86,8 @@ public class Info {
 		huntAnswered = false;
 		stepSuccess = false;
 		exchangeDD = false;
+		emoteLaunched = false;
+		mountxpmsg = false;
 	}
 	
 	public boolean threadDone = true;
@@ -464,6 +468,22 @@ public class Info {
 
 	public void setExchangeDD(boolean exchangeDD) {
 		this.exchangeDD = exchangeDD;
+	}
+
+	public boolean isEmoteLaunched() {
+		return emoteLaunched;
+	}
+
+	public void setEmoteLaunched(boolean emoteLaunched) {
+		this.emoteLaunched = emoteLaunched;
+	}
+
+	public boolean isMountxpmsg() {
+		return mountxpmsg;
+	}
+
+	public void setMountxpmsg(boolean mountxpmsg) {
+		this.mountxpmsg = mountxpmsg;
 	}
 
 }

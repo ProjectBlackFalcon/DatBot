@@ -13,7 +13,15 @@ public class Dragodinde {
 	private boolean inStable = false;
 	private List<MountClientData> paddock;
 	private List<MountClientData> stable;
-	public int testdd = 0;
+	private boolean fart = false;
+	
+	/*
+	 * Equiped dd
+	 */
+	private boolean havingDd = false;
+	private int levelEquipedDD;
+	private int ratioXp; 
+	
 	
 	public static int getActionId(String to, String from){
 		switch(to){
@@ -148,7 +156,6 @@ public class Dragodinde {
 		for (int i = 0 ; i < stable.size() ; i++)
 		{
 			s += "{";
-			testdd = (int) stable.get(i).getId();
 			s += "\"id\":" + (int) stable.get(i).getId() + "," ;
 			s += "\"behaviours\":[";
 			for (int i1 = 0 ; i1 < stable.get(i).getBehaviors().size() ; i1++)
@@ -193,6 +200,38 @@ public class Dragodinde {
 			}
 		}
 		return s;
+	}
+	
+	public boolean isFart() {
+		return fart;
+	}
+
+	public void setFart(boolean fart) {
+		this.fart = fart;
+	}
+
+	public int getLevelEquipedDD() {
+		return levelEquipedDD;
+	}
+
+	public void setLevelEquipedDD(int levelEquipedDD) {
+		this.levelEquipedDD = levelEquipedDD;
+	}
+
+	public int getRatioXp() {
+		return ratioXp;
+	}
+
+	public void setRatioXp(int ratioXp) {
+		this.ratioXp = ratioXp;
+	}
+
+	public boolean isHavingDd() {
+		return havingDd;
+	}
+
+	public void setHavingDd(boolean havingDd) {
+		this.havingDd = havingDd;
 	}
 
 }

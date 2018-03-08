@@ -28,31 +28,31 @@ public class Test {
 		communication2.start();
 
 //		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
+		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 //		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,kezaropod11,Faoy,Julith]");
 //		communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
 //		communication.getReturn("2;0;i;cmd;connect;[wublel7,wubwublel7,Dihydroquerina,Julith]");
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Scalpelementaire','Julith']");
-		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;disconnect;['wublel5','notabot0','Ilancelet','Julith']");
-		Thread.sleep(5000);
+//		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
+//		Thread.sleep(5000);
+//		communication.getReturn("0;0;i;cmd;disconnect;['wublel5','notabot0','Ilancelet','Julith']");
+//		Thread.sleep(5000);
 
-		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
+//		communication.getReturn("0;0;i;cmd;connect;[C'wublel5','notabot0','Ilancelet','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
 
 //		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
 //		communication.getReturn("0;0;i;cmd;move;[383]");
 //		communication.getReturn("0;0;i;cmd;closeDD;[None]");
 
-//		Thread.sleep(5000);
-//		communication.getReturn("0;0;i;cmd;move;[260]");
+		Thread.sleep(5000);
+		communication.getReturn("0;0;i;cmd;setXpDD;[90]");
 //
 //		Thread.sleep(5000);
 //
-//		communication.getReturn("0;0;i;cmd;exitBwork;[None]");
+//		communication.getReturn("0;0;i;cmd;fart;[None]");
 
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
 //		Thread.sleep(2000);
