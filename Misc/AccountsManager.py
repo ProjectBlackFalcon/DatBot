@@ -26,7 +26,7 @@ class Bot:
 class ScheduleBar:
     def __init__(self, duration, idx, tasks=None):
         self.duration = duration
-        self.tasks = [{'name': 'sleep', 'start': 0, 'end': duration}] if tasks is None else tasks
+        self.tasks = [] if tasks is None else tasks
         self.idx = idx
 
 
@@ -34,9 +34,9 @@ class Scheduler:
     def __init__(self):
         self.tasks = {
             'sleep': '#aaaaaa',
-            'hunt': '#bb3333',
-            'dd': '#33bb33',
-            'sell': '#3333bb'
+            'hunt': '#cc5555',
+            'dd': '#55cc55',
+            'sell': '#5555cc'
         }
         self.tk = Tk()
         self.tk.title('Schedule creator')
@@ -140,16 +140,16 @@ class Scheduler:
     def save(self, file_name):
         bars = []
         for bar in self.bars:
-            flattened = ['sleep']*1440
+            flattened = [None]*1440
             for task in bar.tasks:
                 for i in range(task['start']*1440//bar.duration, task['end']*1440//bar.duration):
                     flattened[i] = task['name']
 
             tasks = [{'name': flattened[0], 'start': 0, 'end': 0}]
             for i in range(1, len(flattened)):
-                if flattened[i] == flattened[i-1]:
+                if flattened[i] == flattened[i-1] and flattened[i] is not None:
                     tasks[-1]['end'] += bar.duration / 1440
-                else:
+                elif flattened[i] is not None:
                     tasks.append({'name': flattened[i], 'start': i*bar.duration / 1440, 'end': i*bar.duration / 1440})
 
             bars.append({'tasks': copy.deepcopy(tasks), 'duration': bar.duration, 'idx': bar.idx})
@@ -190,7 +190,7 @@ class Scheduler:
         self.bar_canvas.delete('all')
         for bar in self.bars:
             idx = bar.idx
-            self.bar_canvas.create_rectangle((10, (idx+1)*20, 210, (idx+1)*20+20), fill='#888888')
+            self.bar_canvas.create_rectangle((10, (idx+1)*20, 210, (idx+1)*20+20), fill='#555555')
             self.bar_canvas.create_text((5, (idx+1)*20+10), text=str(idx))
             self.bar_canvas.create_text((220, (idx+1)*20+10), text=bar.duration)
             for task in bar.tasks:
