@@ -5,6 +5,7 @@ import time
 from threading import Thread
 import winsound
 import json
+import random
 
 
 pipe = PipeToJava(headless=True)
@@ -42,17 +43,23 @@ path = (
 )
 
 colors = [
-    '\033[95m',
+    '\033[92m',
     '\033[94m',
     '\033[93m',
-    '\033[92m'
+    '\033[95m',
+    '\033[91m',
+    '\033[96m',
+    '\033[99m'
 ]
 
+random.shuffle(colors)
 '''
 {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
 {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
 {'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
 {'username': 'wublel2', 'password': 'notabot0', 'name': 'Scalpelementaire', 'server': 'Julith'}
+{'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
+{'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
 '''
 
 credentials = [
