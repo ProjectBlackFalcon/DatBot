@@ -78,11 +78,14 @@ import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
 import protocol.network.messages.game.context.mount.MountRidingMessage;
 import protocol.network.messages.game.context.mount.MountSetMessage;
+import protocol.network.messages.game.context.mount.MountXpRatioMessage;
 import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
 import protocol.network.messages.game.context.roleplay.GameRolePlayShowActorMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
 import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
 import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
+import protocol.network.messages.game.context.roleplay.emote.EmoteListMessage;
+import protocol.network.messages.game.context.roleplay.emote.EmotePlayMessage;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyAnswerMessage;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyRequestedMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
@@ -134,7 +137,6 @@ import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
-import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
@@ -1735,6 +1737,14 @@ public class Network extends DisplayInfo implements Runnable {
 			case 5968:
 				MountSetMessage mountSetMessage = new MountSetMessage();
 				mountSetMessage.Deserialize(dataReader);
+				this.dragodinde.setHavingDd(true);
+				this.dragodinde.setLevelEquipedDD(mountSetMessage.getMountData().getLevel());
+				break;
+			case 5970:
+				MountXpRatioMessage mountXpRatioMessage = new MountXpRatioMessage();
+				mountXpRatioMessage.Deserialize(dataReader);
+				this.dragodinde.setRatioXp(mountXpRatioMessage.getRatio());
+				this.info.setMountxpmsg(true);
 				break;
 			case 5979:
 				ExchangeStartOkMountMessage exchangeStartOkMountMessage = new ExchangeStartOkMountMessage();
@@ -1750,10 +1760,27 @@ public class Network extends DisplayInfo implements Runnable {
 				this.info.setExchangeDD(true);
 				break;
 			case 5982:
+				this.dragodinde.setHavingDd(false);
 				this.info.setExchangeDD(true);
 				break;
 			case 2970:
 				this.info.setExchangeDD(true);
+				break;
+			case 5689:
+				EmoteListMessage emoteListMessage = new EmoteListMessage();
+				emoteListMessage.Deserialize(dataReader);
+				for (Integer b : emoteListMessage.getEmoteIds()) {
+					if(b==8){
+						this.getDragodinde().setFart(true);
+					}
+				}
+				break;
+			case 5683:
+				EmotePlayMessage emote = new EmotePlayMessage();
+				emote.Deserialize(dataReader);
+				if(emote.getActorId() == this.info.getActorId()){
+					this.info.setEmoteLaunched(true);
+				}
 				break;
 		}
 		packet_content = null;
