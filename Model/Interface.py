@@ -50,23 +50,25 @@ class PipeToJava:
 
 
 class Interface:
-    def __init__(self, bot):
+    def __init__(self, bot, color=''):
         self.bot = bot  # type: Bot
         self.pipe = self.bot.pipe  # type: PipeToJava
         self.current_id = 0
         self.bank_info = {}
+        self.color = color
+        self.end_color = '\033[0m'
 
     def add_command(self, command, parameters=None):
         # <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
         message = '{};{};i;cmd;{};{}\r\n'.format(self.bot.id, self.current_id, command, parameters)
-        print('[Interface] Sending : ', message.strip())
+        print(self.color + '[Interface {}] Sending : '.format(self.bot.id), message.strip() + self.end_color)
         self.current_id += 1
         self.pipe.p.stdin.write(bytes(message, 'utf-8'))
         self.pipe.p.stdin.flush()
         return self.current_id-1
 
     def wait_for_return(self, message_id, timeout=600):
-        print('[Interface] Waiting for response...')
+        # print('[Interface] Waiting for response...')
         ret_val = None
         message_queue = []
         start = time.time()
@@ -74,8 +76,8 @@ class Interface:
             partial_message = '{};{};m;rtn'.format(self.bot.id, message_id)
             buffer = self.pipe.get_buffer()
             for message in buffer:
-                # print(message)
                 if int(message.split(';')[0]) == self.bot.id and message not in message_queue:
+                    print(self.color + '[Interface {}] Recieved : '.format(self.bot.id) + message + self.end_color)
                     message_queue.append(message)
 
             for message in message_queue:
@@ -84,19 +86,19 @@ class Interface:
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
                 elif 'info;combat;["start"]' in message:
-                    print('Fight Started')
+                    print(self.color + 'Fight Started' + self.end_color)
                     self.bot.in_fight = True
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
                 elif 'info;combat;["end"]' in message:
-                    print('Fight Ended')
+                    print(self.color + 'Fight Ended' + self.end_color)
                     self.bot.in_fight = False
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
 
             time.sleep(0.1)
         if not self.bot.in_fight and ret_val is not None:
-            print('[Interface] Recieved : ', ret_val)
+            # print('[Interface] Recieved : ', ret_val)
             return tuple(ret_val)
         else:
             print('[Interface] Request timed out')
