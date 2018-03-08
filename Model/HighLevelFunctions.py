@@ -18,8 +18,8 @@ class HighLevelFunctions:
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
         if self.llf.distance_coords(current_map, target_coord) > 3:
-            self.bot.position = (current_map, current_worldmap)
-            self.bot.occupation = 'Moving to {}, worldmap {}'.format(target_coord, worldmap)
+            # self.bot.position = (current_map, current_worldmap)
+            # self.bot.occupation = 'Moving to {}, worldmap {}'.format(target_coord, worldmap)
             self.update_db()
 
         if current_worldmap != worldmap:
@@ -46,11 +46,13 @@ class HighLevelFunctions:
 
         closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
         if closest_zaap is not None:
-            distance_zaap_target = self.llf.distance_coords(closest_zaap, target_coord)
-            if worldmap == current_worldmap and self.llf.distance_coords(current_map, target_coord) > distance_zaap_target+5:
+            distance_zaap_target = self.llf.distance_coords(closest_zaap, tuple(target_coord))
+            if worldmap == current_worldmap and self.llf.distance_coords(current_map, tuple(target_coord)) > distance_zaap_target+5:
                 if self.bot.interface.enter_heavenbag():
                     self.bot.interface.use_zaap(closest_zaap)
-                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+                    while tuple(current_map) != tuple(closest_zaap):
+                        current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+                        time.sleep(2)
 
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
             # Bot needs to enter brak
@@ -554,6 +556,8 @@ class HighLevelFunctions:
                 f.write(traceback.format_exc())
 
     def manage_dds(self):
+        self.bot.occupation = 'Managing DDs'
+        self.update_db()
         with open('..//Utils//ddPath.json', 'r') as f:
             path = json.load(f)
 
@@ -615,7 +619,7 @@ class HighLevelFunctions:
                     self.bot.interface.put_dd_in_paddock(dd.id, 'stable')
                 time.sleep(3)
                 # self.bot.interface.fart()
-                time.sleep(5)
+                time.sleep(15)
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_stable(dd.id, 'paddock')
 
