@@ -5,10 +5,10 @@ import java.util.List;
 
 public class LatencyFrame {
 	
-    private final static int LatencyAvgBufferSize = 50;
-    private static List<Integer> _latencyBuffer;
-    private static long _latestSent;
-    public static int Sequence ;
+    private final int LatencyAvgBufferSize = 50;
+    private List<Integer> _latencyBuffer;
+    private long _latestSent;
+    public int Sequence ;
 
     public LatencyFrame()
     {
@@ -16,12 +16,12 @@ public class LatencyFrame {
         Sequence = 1;
     }
     
-    public static void latestSent()
+    public void latestSent()
     {
         _latestSent = System.currentTimeMillis();
     }
 
-    public static void updateLatency()
+    public void updateLatency()
     {
         long lastReceive = System.currentTimeMillis();
 
@@ -34,7 +34,7 @@ public class LatencyFrame {
             _latencyBuffer.remove(0);
     }
 
-    public static int getLatencyAvg()
+    public int getLatencyAvg()
     {
         if (_latencyBuffer.size() == 0)
             return 0;
@@ -45,12 +45,12 @@ public class LatencyFrame {
         return _loc1_ / _latencyBuffer.size();
     }
 
-    public static int getSamplesCount()
+    public int getSamplesCount()
     {
         return _latencyBuffer.size();
     }
 
-    public static int GetSamplesMax()
+    public int GetSamplesMax()
     {
         return (int) LatencyAvgBufferSize;
     }

@@ -166,6 +166,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private String ip = "213.248.126.40";
 	private Map map;
 	private Message message;
+	private LatencyFrame latencyFrame;
 	private ModelConnexion modelConnexion;
 	private Monsters monsters;
 	private Movement movement;
@@ -193,7 +194,7 @@ public class Network extends DisplayInfo implements Runnable {
 			this.modelConnexion = new ModelConnexion(this);
 			socket = new Socket(this.ip, this.port);
 			if (socket.isConnected()) {
-				new LatencyFrame();
+				latencyFrame = new LatencyFrame();
 			}
 		}
 		catch (UnknownHostException e) {
@@ -931,7 +932,7 @@ public class Network extends DisplayInfo implements Runnable {
 
 	private void handleGameRolePlayArenaSwitchToGameServerMessage(DofusDataReader dataReader) throws IOException, UnknownHostException {
 		connectionToKoli = false;
-		LatencyFrame.Sequence = 1;
+		latencyFrame.Sequence = 1;
 		GameRolePlayArenaSwitchToGameServerMessage arenaSwitchToGameServerMessage = new GameRolePlayArenaSwitchToGameServerMessage();
 		arenaSwitchToGameServerMessage.Deserialize(dataReader);
 		Ticket = arenaSwitchToGameServerMessage.getTicket();
@@ -1015,7 +1016,7 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void HandleLatencyMessage() throws Exception {
-		BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage(LatencyFrame.getLatencyAvg(), LatencyFrame.getSamplesCount(), LatencyFrame.GetSamplesMax());
+		BasicLatencyStatsMessage basicLatencyStatsMessage = new BasicLatencyStatsMessage(latencyFrame.getLatencyAvg(), latencyFrame.getSamplesCount(), latencyFrame.GetSamplesMax());
 		sendToServer(basicLatencyStatsMessage, BasicLatencyStatsMessage.ProtocolId, "Latency message");
 	}
 
@@ -1177,7 +1178,7 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void HandleSequenceNumberMessage() throws Exception {
-		SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage(LatencyFrame.Sequence++);
+		SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage(latencyFrame.Sequence++);
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
 	}
 
@@ -1323,7 +1324,7 @@ public class Network extends DisplayInfo implements Runnable {
 				int available = data.available();
 				byte[] buffer = new byte[available];
 				if (available > 0) {
-					LatencyFrame.updateLatency();
+					latencyFrame.updateLatency();
 					data.read(buffer, 0, available);
 					DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 					buildMessage(reader);
@@ -1356,7 +1357,7 @@ public class Network extends DisplayInfo implements Runnable {
 	 */
 	public void sendToServer(NetworkMessage message, int id, String s) throws Exception {
 		info.setBooleanToFalse();
-		LatencyFrame.latestSent();
+		latencyFrame.latestSent();
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DofusDataWriter writer = new DofusDataWriter(bous);
 		message.Serialize(writer);
@@ -1877,5 +1878,13 @@ public class Network extends DisplayInfo implements Runnable {
 	public void setDragodinde(Dragodinde dragodinde)
 	{
 		this.dragodinde = dragodinde;
+	}
+
+	public LatencyFrame getLatencyFrame() {
+		return latencyFrame;
+	}
+
+	public void setLatencyFrame(LatencyFrame latencyFrame) {
+		this.latencyFrame = latencyFrame;
 	}
 }
