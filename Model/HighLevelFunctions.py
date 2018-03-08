@@ -297,7 +297,7 @@ class HighLevelFunctions:
             self.bot.interface.move(self.llf.get_closest_walkable_cell(door, self.bot.position[0], self.bot.position[1]))
             self.bot.interface.enter_hunting_hall()
             while not self.bot.interface.get_new_hunt(level)[0]:
-                print('[Treasure Hunt] Getting new hunt')
+                print('[Treasure Hunt {}] Getting new hunt'.format(self.bot.id))
                 time.sleep(30)
             self.bot.interface.exit_hunting_hall()
 
@@ -371,7 +371,7 @@ class HighLevelFunctions:
                 break
 
         if hunt_error_flag:
-            print('[Treasure Hunt] Issue detected, abandoning hunt')
+            print('[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
             in_hb = False
             while not self.bot.interface.abandon_hunt()[0]:
                 if not in_hb:
@@ -392,7 +392,7 @@ class HighLevelFunctions:
             self.bot.interface.start_hunt_fight()
 
             if not self.bot.interface.hunt_is_active()[0]:
-                print('[Treasure Hunt] Hunt successful')
+                print('[Treasure Hunt {}] Hunt successful'.format(self.bot.id))
                 return True
 
     def hunt_treasures(self, duration_minutes, level='max'):
@@ -403,14 +403,14 @@ class HighLevelFunctions:
         while time.time()-start < duration:
             try:
                 n_hunts += 1
-                print('[Treasure Hunt] Starting hunt #{}'.format(n_hunts))
+                print('[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
                 success = self.tresure_hunt(level)
                 n_success = n_success+1 if success else n_success
             except Exception:
                 with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
-        print('[Treasure Hunt] {} were started, {} were successful. ({}%)'.format(n_hunts, n_success, round(n_success*100/n_hunts, 0)))
+        print('[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
 
     def fight_on_map(self, duration_minutes, hp_threshold=100):
         self.bot.occupation = 'Fighting'
