@@ -219,10 +219,10 @@ class HighLevelFunctions:
             for item in harvest:
                 f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
         if type(ret_val) is tuple and ret_val[3]+5 >= ret_val[4]:
-            print('[Harvest] Full')
+            print(self.bot.interface.color + '[Harvest {}] Full'.format(self.bot.id) + self.bot.interface.end_color)
             return False
         else:
-            print('[Harvest] Done')
+            print(self.bot.interface.color + '[Harvest {}] Done'.format(self.bot.id) + self.bot.interface.end_color)
             return True
 
     def harvest_path(self, path, number_of_loops=-1, harvest_only=None, do_not_harvest=None, sell=False):
@@ -297,7 +297,7 @@ class HighLevelFunctions:
             self.bot.interface.move(self.llf.get_closest_walkable_cell(door, self.bot.position[0], self.bot.position[1]))
             self.bot.interface.enter_hunting_hall()
             while not self.bot.interface.get_new_hunt(level)[0]:
-                print('[Treasure Hunt {}] Getting new hunt'.format(self.bot.id))
+                print(self.bot.interface.color + '[Treasure Hunt {}] Getting new hunt'.format(self.bot.id) + self.bot.interface.end_color)
                 time.sleep(30)
             self.bot.interface.exit_hunting_hall()
 
@@ -371,7 +371,7 @@ class HighLevelFunctions:
                 break
 
         if hunt_error_flag:
-            print('[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
+            print(self.bot.interface.color + '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id) + self.bot.interface.end_color)
             in_hb = False
             while not self.bot.interface.abandon_hunt()[0]:
                 if not in_hb:
@@ -392,7 +392,7 @@ class HighLevelFunctions:
             self.bot.interface.start_hunt_fight()
 
             if not self.bot.interface.hunt_is_active()[0]:
-                print('[Treasure Hunt {}] Hunt successful'.format(self.bot.id))
+                print(self.bot.interface.color + '[Treasure Hunt {}] Hunt successful'.format(self.bot.id) + self.bot.interface.end_color)
                 return True
 
     def hunt_treasures(self, duration_minutes, level='max'):
@@ -403,14 +403,14 @@ class HighLevelFunctions:
         while time.time()-start < duration:
             try:
                 n_hunts += 1
-                print('[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
+                print(self.bot.interface.color + '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts) + self.bot.interface.end_color)
                 success = self.tresure_hunt(level)
                 n_success = n_success+1 if success else n_success
             except Exception:
                 with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
-        print('[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
+        print(self.bot.interface.color + '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)) + self.bot.interface.end_color)
 
     def fight_on_map(self, duration_minutes, hp_threshold=100):
         self.bot.occupation = 'Fighting'
@@ -507,7 +507,7 @@ class HighLevelFunctions:
                             price = item_hdv_stats[batch_size_index] - 1
                             player_lvl = self.bot.interface.get_player_stats()[0]['Lvl']
                             if hdv_position is None and price > 0:
-                                print('[Sell HDV] Selling {} batches of {} {} for {}'.format(min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
+                                print(self.bot.interface.color + '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price) + self.bot.interface.end_color)
                                 self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
                         return True
@@ -539,7 +539,7 @@ class HighLevelFunctions:
 
     def update_db(self):
         try:
-            print('[Database] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
+            print(self.bot.interface.color + '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]) + self.bot.interface.end_color)
             self.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
@@ -575,9 +575,9 @@ class HighLevelFunctions:
                     else:
                         dds_stable.append(dd_obj)
 
-            print('[DD Manager] Current tool : ', tool)
-            print('[DD Manager] DDs in stable : ', len(dds_stable))
-            print('[DD Manager] DDs in paddock : ', len(dds_paddock))
+            print(self.bot.interface.color + '[DD Manager {}] Current tool : '.format(self.bot.id) + tool + self.bot.interface.end_color)
+            print(self.bot.interface.color + '[DD Manager {}] DDs in stable : '.format(self.bot.id) + len(dds_stable) + self.bot.interface.end_color)
+            print(self.bot.interface.color + '[DD Manager {}] DDs in paddock : '.format(self.bot.id) + len(dds_paddock) + self.bot.interface.end_color)
 
             # Pull sterile non pregnant dds
             for dd in dds_stable:
@@ -597,7 +597,7 @@ class HighLevelFunctions:
                     score_sorted_dds = sorted(dds_stable, key=lambda one_dd: one_dd.score)
                     dds_to_kick = score_sorted_dds[:n_dds_to_kick]
                     for dd_to_kick in dds_to_kick:
-                        print('[DD Manager] Kicking dd {}. Score : {}'.format(dd_to_kick.id, dd_to_kick.score))
+                        print(self.bot.interface.color + '[DD Manager{} ] Kicking dd {}. Score : {}'.format(self.bot.id, dd_to_kick.id, dd_to_kick.score) + self.bot.interface.end_color)
                         self.bot.interface.put_dd_in_inventory(dd_to_kick.id, "stable")
                         del dds_stable[dds_stable.index(dd_to_kick)]
 
