@@ -1,11 +1,16 @@
 import json
 import mysql.connector
 import numpy as np
+import copy
 
 
 class LowLevelFunctions:
     def __init__(self, map_info=None):
         self.map_info = [] if map_info is None else map_info
+        with open('..//Utils//discoveredZaaps.json', 'r') as f:
+            self.disc_zaaps = json.load(f)
+        with open('..//Utils//zaapList.json', 'r') as f:
+            self.zaaps = json.load(f)
 
     def cell2coord(self, cell):
         return cell % 14 + int((cell//14)/2+0.5), (13 - cell % 14 + int((cell//14)/2))
@@ -132,26 +137,19 @@ class LowLevelFunctions:
             raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
 
     def add_discovered_zaap(self, bot_name, zaap_pos):
-        with open('..//Utils//discoveredZaaps.json', 'r') as f:
-            disc_zaaps = json.load(f)
-        with open('..//Utils//zaapList.json', 'r') as f:
-            zaaps = json.load(f)
-
-        if list(zaap_pos) in zaaps:
-            if bot_name in disc_zaaps.keys():
-                if list(zaap_pos) not in disc_zaaps[bot_name]:
-                    disc_zaaps[bot_name].append(zaap_pos)
+        if list(zaap_pos) in self.zaaps:
+            if bot_name in self.disc_zaaps.keys():
+                if list(zaap_pos) not in self.disc_zaaps[bot_name]:
+                    self.disc_zaaps[bot_name].append(zaap_pos)
             else:
-                disc_zaaps[bot_name] = [zaap_pos]
+                self.disc_zaaps[bot_name] = [zaap_pos]
 
         with open('..//Utils//discoveredZaaps.json', 'w') as f:
-            json.dump(disc_zaaps, f)
+            json.dump(self.disc_zaaps, f)
 
     def get_closest_known_zaap(self, bot_name, pos):
-        with open('..//Utils//discoveredZaaps.json', 'r') as f:
-            disc_zaaps = json.load(f)
-        if bot_name in disc_zaaps.keys():
-            disc_zaaps = disc_zaaps[bot_name]
+        if bot_name in self.disc_zaaps.keys():
+            disc_zaaps = self.disc_zaaps[bot_name]
         else:
             return None
         closest = None, 100000
@@ -161,16 +159,15 @@ class LowLevelFunctions:
         return closest[0]
 
     def get_closest_unknown_zaap(self, bot_name, pos):
-        with open('..//Utils//discoveredZaaps.json', 'r') as f:
-            disc_zaaps = json.load(f)
-        if bot_name in disc_zaaps.keys():
-            disc_zaaps = disc_zaaps[bot_name]
+        disc_zaaps = []
+        if bot_name in self.disc_zaaps.keys():
+            disc_zaaps = self.disc_zaaps[bot_name]
         else:
-            disc_zaaps[bot_name] = []
+            self.disc_zaaps[bot_name] = []
             with open('..//Utils//discoveredZaaps.json', 'w') as f:
-                json.dump(disc_zaaps, f)
-        with open('..//Utils//zaapList.json', 'r') as f:
-            zaaps = json.load(f)
+                json.dump(self.disc_zaaps, f)
+
+        zaaps = copy.deepcopy(self.zaaps)
 
         for disc_zaap in disc_zaaps:
             del zaaps[zaaps.index(disc_zaap)]
