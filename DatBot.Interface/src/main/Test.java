@@ -35,18 +35,18 @@ public class Test {
 //		communication.getReturn("2;0;i;cmd;connect;[wublel7,wubwublel7,Dihydroquerina,Julith]");
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Scalpelementaire','Julith']");
-		communication.getReturn("0;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
+//		communication.getReturn("0;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
 //		Thread.sleep(5000);
-//		communication.getReturn("0;0;i;cmd;disconnect;['wublel5','notabot0','Ilancelet','Julith']");
+		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
 //		Thread.sleep(5000);
 
 //		communication.getReturn("0;0;i;cmd;connect;[C'wublel5','notabot0','Ilancelet','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
 //		communication.getReturn("0;0;i;cmd;move;[383]");
-		communication.getReturn("0;0;i;cmd;getZaapiCell;[None]");
-		communication.getReturn("0;0;i;cmd;useZaapi;[(-24,40)]");
+//		communication.getReturn("0;0;i;cmd;getZaapiCell;[None]");
+//		communication.getReturn("0;0;i;cmd;useZaapi;[(-24,40)]");
 
 //
 //		communication.getReturn("0;0;i;cmd;fart;[None]");
@@ -68,7 +68,7 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;withdrawItem;[" + 1984 + ",1,1]");
 
 
-//		communication.getReturn("0;0;i;cmd;changeMap;[0,n]");
+		communication.getReturn("0;0;i;cmd;changeMap;[5,n]");
 //		communication.getReturn("0;0;i;cmd;enterBag;[None]");
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;useZaap;[(-32,-56)]");
