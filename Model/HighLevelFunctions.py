@@ -576,8 +576,8 @@ class HighLevelFunctions:
                         dds_stable.append(dd_obj)
 
             print(self.bot.interface.color + '[DD Manager {}] Current tool : '.format(self.bot.id) + tool + self.bot.interface.end_color)
-            print(self.bot.interface.color + '[DD Manager {}] DDs in stable : '.format(self.bot.id) + len(dds_stable) + self.bot.interface.end_color)
-            print(self.bot.interface.color + '[DD Manager {}] DDs in paddock : '.format(self.bot.id) + len(dds_paddock) + self.bot.interface.end_color)
+            print(self.bot.interface.color + '[DD Manager {}] DDs in stable : '.format(self.bot.id) + str(len(dds_stable)) + self.bot.interface.end_color)
+            print(self.bot.interface.color + '[DD Manager {}] DDs in paddock : '.format(self.bot.id) + str(len(dds_paddock)) + self.bot.interface.end_color)
 
             # Pull sterile non pregnant dds
             for dd in dds_stable:
