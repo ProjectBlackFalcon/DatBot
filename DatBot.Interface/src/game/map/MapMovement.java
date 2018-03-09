@@ -28,4 +28,8 @@ public class MapMovement {
 		this.network.sendToServer(new ChangeMapMessage(newId,false), ChangeMapMessage.ProtocolId, "Changing map...");
     }
 
+	public CellMovement getCellMovement() {
+		return cellMovement;
+	}
+
 }

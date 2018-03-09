@@ -84,10 +84,9 @@ public class DisplayInfo {
 			// log = System.out;
 			fileOutputStream = new FileOutputStream("log_network" + botInstance + ".txt");
 			log = new PrintStream(fileOutputStream);
-			debug = new PrintStream(new FileOutputStream("debug.txt"));
-//			debug = System.out;
+//			debug = new PrintStream(new FileOutputStream("debug.txt"));
+			debug = System.out;
 			log = System.out;
-			System.setErr(debug);
 		}
 		catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -176,7 +175,7 @@ public class DisplayInfo {
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
 		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
-		System.out.println(newSt);
+		debug.println(newSt);
 	}
 	
 	public static String cleanString(String s){

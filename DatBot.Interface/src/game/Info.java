@@ -70,6 +70,8 @@ public class Info {
 	private boolean exchangeDD = false;
 	private boolean emoteLaunched = false;
 	private boolean mountxpmsg = false;
+	private boolean mountSet = false;
+	private boolean mountRiding = false;
 
 
 	public void setBooleanToFalse()
@@ -88,6 +90,8 @@ public class Info {
 		exchangeDD = false;
 		emoteLaunched = false;
 		mountxpmsg = false;
+		mountSet = false;
+		mountRiding = false;
 	}
 	
 	public boolean threadDone = true;
@@ -484,6 +488,22 @@ public class Info {
 
 	public void setMountxpmsg(boolean mountxpmsg) {
 		this.mountxpmsg = mountxpmsg;
+	}
+
+	public boolean isMountSet() {
+		return mountSet;
+	}
+
+	public void setMountSet(boolean mountSet) {
+		this.mountSet = mountSet;
+	}
+
+	public boolean isMountRiding() {
+		return mountRiding;
+	}
+
+	public void setMountRiding(boolean mountRiding) {
+		this.mountRiding = mountRiding;
 	}
 
 }
