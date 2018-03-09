@@ -28,6 +28,8 @@ public class Test {
 		communication2.start();
 
 //		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
+//		communication.getReturn("0;0;i;cmd;getStats;[None]");
+
 //		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 //		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,***REMOVED***11,Faoy,Julith]");
@@ -37,12 +39,15 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Scalpelementaire','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
 //		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
+//		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
 //		Thread.sleep(5000);
 
 //		communication.getReturn("0;0;i;cmd;connect;[C'wublel5','notabot0','Ilancelet','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
-		Thread.sleep(2000);
+		communication.getReturn("0;0;i;cmd;connect;['wublel6','notabot0','Holle-holla-hollu','Julith']");
+//		Thread.sleep(2000);
+//		communication.getReturn("0;0;i;cmd;disconnect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
+//		Thread.sleep(2000);
+//		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosch,Julith]");
 //		communication.getReturn("0;0;i;cmd;move;[383]");
 //		communication.getReturn("0;0;i;cmd;getZaapiCell;[None]");
@@ -67,8 +72,8 @@ public class Test {
 
 //		communication.getReturn("0;0;i;cmd;withdrawItem;[" + 1984 + ",1,1]");
 
-
-		communication.getReturn("0;0;i;cmd;changeMap;[5,n]");
+//
+		communication.getReturn("0;0;i;cmd;changeMap;[3,n]");
 //		communication.getReturn("0;0;i;cmd;enterBag;[None]");
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;useZaap;[(-32,-56)]");

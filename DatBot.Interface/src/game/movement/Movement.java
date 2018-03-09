@@ -138,7 +138,7 @@ public class Movement{
 	 * @param listCellAvailable : List<int>
 	 * @return closestCell : int
 	 */
-	public int getClosetChangedMapAvailableCell(int cell, List<Integer> listCellAvailable){
+	public static int getClosetChangedMapAvailableCell(int cell, List<Integer> listCellAvailable){
 		int min = 9999;
 		int newCell = -1;
 		for (Integer integer : listCellAvailable) {
