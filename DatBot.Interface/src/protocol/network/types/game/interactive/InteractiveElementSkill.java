@@ -51,5 +51,9 @@ public class InteractiveElementSkill extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "InteractiveElementSkill [skillId=" + skillId + ", skillInstanceUid=" + skillInstanceUid + "]";
+	}
 
 }

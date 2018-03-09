@@ -389,35 +389,35 @@ public class ModelConnexion {
 				}
 				break;
 			case "useZaap":
-				String newParam = param.replaceAll("\\(", "");
-				newParam = newParam.replaceAll("\\)", "");
-				String[] paramZaap = newParam.split(",");
 				int[] interactive = this.network.getInteractive().getInteractive(114);
 				if (!(interactive == null)) {
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
-					if (this.waitToSend()) {
-						Thread.sleep(1500 + new Random().nextInt(800));
-						double mapId = this.network.getInteractive().getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
-						if (mapId != -1) {
-							TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
-							getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
-							if (this.waitToSendMap(this.network.getMap().getId())) {
-								toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
-							}
-							else {
+					if(isCloseToCell(this.network.getInfo().getCellId(), interactive[0])){
+						String newParam = param.replaceAll("\\(", "");
+						newParam = newParam.replaceAll("\\)", "");
+						String[] paramZaap = newParam.split(",");
+						InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
+						getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
+						if (this.waitToSend()) {
+							Thread.sleep(1500 + new Random().nextInt(800));
+							double mapId = this.network.getInteractive().getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
+							if (mapId != -1) {
+								TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
+								getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
+								if (this.waitToSendMap(this.network.getMap().getId())) {
+									toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
+								} else {
+									toSend = new Object[] { "False" };
+								}
+							} else {
 								toSend = new Object[] { "False" };
 							}
-						}
-						else {
+						} else {
 							toSend = new Object[] { "False" };
 						}
-					}
-					else {
+					} else {
 						toSend = new Object[] { "False" };
 					}
-				}
-				else {
+				} else {
 					toSend = new Object[] { "False" };
 				}
 				break;
@@ -922,6 +922,46 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				} 
 				break;
+			case "getZaapiCell":
+				if (!(this.network.getInteractive().getInteractive(157) == null)) {
+					toSend = new Object[] { this.network.getInteractive().getInteractive(157)[0] };
+				}
+				else {
+					toSend = new Object[] { "False" };
+				}
+				break;
+			case "useZaapi":
+				int[] interactiveZaapi = this.network.getInteractive().getInteractive(157);
+				if (!(interactiveZaapi == null)) {
+					if(isCloseToCell(this.network.getInfo().getCellId(), interactiveZaapi[0])){
+						String[] paramZaap = param.split(",");
+						System.out.println(interactiveZaapi[1] + " : " + interactiveZaapi[2]);
+						InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveZaapi[1], interactiveZaapi[2]);
+						getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaapi");
+						if (this.waitToSend()) {
+							Thread.sleep(1500 + new Random().nextInt(800));
+							double mapId = this.network.getInteractive().getMapIdZaapi(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
+							if (mapId != -1) {
+								TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(1, mapId);
+								getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
+								if (this.waitToSendMap(this.network.getMap().getId())) {
+									toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
+								} else {
+									toSend = new Object[] { "False" };
+								}
+							} else {
+								toSend = new Object[] { "False" };
+							}
+						} else {
+							toSend = new Object[] { "False" };
+						}
+					} else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
 		}
 		return toSend;
 	}
@@ -1109,6 +1149,10 @@ public class ModelConnexion {
 		else {
 			return true;
 		}
+	}
+	
+	public boolean isCloseToCell(int cellid, int cellToUse){
+		return (cellToUse - 14) == cellid || (cellToUse - 13) == cellid || (cellToUse + 14) == cellid || (cellToUse + 15) == cellid;
 	}
 
 	private Object[] move(int param) {
