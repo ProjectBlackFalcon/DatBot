@@ -27,18 +27,20 @@ public class Communication implements Runnable {
 			String s;
 			while (true) {
 				s = bufferRead.readLine();
-				s = s.replaceAll(" ", "");
-				s = s.replaceAll("'", "");
-				String[] message = s.split(";");
-				message[5] = message[5].substring(1, message[5].length() - 1);
-				Object[] result = getReturn(Integer.valueOf(message[0]), message[4], message[5]);
-				if (result != null) {
-					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], result);
-				}
-				else {
-					for (Network n : networks) {
-						if (n.getBotInstance() == Integer.valueOf(message[0])) {
-							n.getReturn(message);
+				if(s != null && s.length() > 0){
+					s = s.replaceAll(" ", "");
+					s = s.replaceAll("'", "");
+					String[] message = s.split(";");
+					message[5] = message[5].substring(1, message[5].length() - 1);
+					Object[] result = getReturn(Integer.valueOf(message[0]), message[4], message[5]);
+					if (result != null) {
+						Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], result);
+					}
+					else {
+						for (Network n : networks) {
+							if (n.getBotInstance() == Integer.valueOf(message[0])) {
+								n.getReturn(message);
+							}
 						}
 					}
 				}

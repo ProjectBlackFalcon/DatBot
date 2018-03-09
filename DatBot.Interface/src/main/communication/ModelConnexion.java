@@ -58,7 +58,7 @@ public class ModelConnexion {
 			case "changeMap":
 				String[] infoMov = param.split(",");
 				MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
-				if (mapMovement == null || mapMovement.getCellMovement() == null) {
+				if (mapMovement == null) {
 					toSend = new Object[] { "False" };
 					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 				}
