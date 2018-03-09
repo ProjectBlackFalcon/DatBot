@@ -6,6 +6,7 @@ import java.util.Random;
 
 import game.map.MapMovement;
 import game.movement.CellMovement;
+import game.movement.Movement;
 import game.plugin.Dragodinde;
 import game.plugin.Hunt;
 import protocol.network.Network;
@@ -31,6 +32,7 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMovePric
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
+import utils.d2p.map.CellData;
 
 public class ModelConnexion {
 
@@ -65,7 +67,13 @@ public class ModelConnexion {
 				else {
 					mapMovement.PerformChangement();
 					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-						toSend = new Object[] { "True" };
+						if(Integer.parseInt(infoMov[0]) != this.network.getInfo().getCellId()){
+							toSend = new Object[] { "True" };
+						} else {
+							enterBag();
+							exitBag();
+							toSend = new Object[] { "True" };
+						}
 					}
 					else {
 						toSend = new Object[] { "False" };
@@ -361,24 +369,10 @@ public class ModelConnexion {
 				}
 				break;
 			case "enterBag":
-				EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
-				getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
-				if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = enterBag();
 				break;
 			case "exitBag":
-				EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
-				getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
-				if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = exitBag();
 				break;
 			case "getZaap":
 				if (!(this.network.getInteractive().getInteractive(114) == null)) {
@@ -962,6 +956,32 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
+		}
+		return toSend;
+	}
+
+	private Object[] exitBag() throws Exception, InterruptedException {
+		Object[] toSend;
+		EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
+		getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
+		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+	private Object[] enterBag() throws Exception, InterruptedException {
+		Object[] toSend;
+		EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
+		getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
+		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
 		}
 		return toSend;
 	}
