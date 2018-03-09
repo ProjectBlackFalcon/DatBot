@@ -95,16 +95,26 @@ public class Movement{
                 break;
         }
         if (num2 == -1 || neighbourId < 0) return null;
-//        this.network.append((this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0);
-//        this.network.append(this.network.getMap().NothingOnCell(cellId));
-//        this.network.append(noObstacle(cellId));
-        if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId)){  //(Map.Cells.get(cellId).MapChangeData & num2) > 0 && 
+        if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId) && (this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0){ 
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId,this.getNetwork());
         } else if (this.network.getInfo().getCellId() == cellId){
             return new MapMovement(null, neighbourId,this.getNetwork());
         } else {
-        	return null;
+        	// Get available cell for the direction choosed
+            List<Integer> list = new ArrayList<Integer>();
+            for (int i = 0; i < this.network.getMap().getCells().size() - 1; i++){
+                if ((this.network.getMap().getCells().get(i).getMapChangeData() & num2) > 0 && this.network.getMap().NothingOnCell(i) && noObstacle(i)){
+                	list.add(i);
+                }
+            }
+        	int closestCellId = getClosetChangedMapAvailableCell(cellId, list);
+        	if(closestCellId == -1){
+        		return null;
+        	}
+        	this.network.append("Cell " + cellId + " can't be used to change map : now using cell " + closestCellId);
+            CellMovement move = MoveToCell(closestCellId);
+            return new MapMovement(move, neighbourId,this.getNetwork());
         }
 	}
 	
@@ -118,6 +128,24 @@ public class Movement{
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Get the closest cellid from the original cellid
+	 * @param cell : int
+	 * @param listCellAvailable : List<int>
+	 * @return closestCell : int
+	 */
+	public int getClosetChangedMapAvailableCell(int cell, List<Integer> listCellAvailable){
+		int min = 9999;
+		int newCell = -1;
+		for (Integer integer : listCellAvailable) {
+			if(Math.abs(integer - cell) < min){
+				min = Math.abs(integer - cell);
+				newCell = integer;
+			}
+		}
+		return newCell;
 	}
 	
 	

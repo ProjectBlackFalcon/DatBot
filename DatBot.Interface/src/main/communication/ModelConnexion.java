@@ -9,7 +9,9 @@ import game.movement.CellMovement;
 import game.plugin.Dragodinde;
 import game.plugin.Hunt;
 import protocol.network.Network;
+import protocol.network.messages.game.context.mount.MountFeedRequestMessage;
 import protocol.network.messages.game.context.mount.MountSetXpRatioRequestMessage;
+import protocol.network.messages.game.context.mount.MountToggleRidingRequestMessage;
 import protocol.network.messages.game.context.roleplay.emote.EmotePlayRequestMessage;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
 import protocol.network.messages.game.context.roleplay.havenbag.EnterHavenBagRequestMessage;
@@ -42,8 +44,10 @@ public class ModelConnexion {
 	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception {
 		Object[] toSend = null;
 		
-		param.replaceAll(" ", "");
-
+		param = param.replaceAll(" ", "");
+		param = param.replaceAll("\\(", "");
+		param = param.replaceAll("\\)", "");
+		
 		switch (cmd) {
 			case "getMap":
 				toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
@@ -54,7 +58,7 @@ public class ModelConnexion {
 			case "changeMap":
 				String[] infoMov = param.split(",");
 				MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
-				if (mapMovement == null) {
+				if (mapMovement == null || mapMovement.getCellMovement() == null) {
 					toSend = new Object[] { "False" };
 					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 				}
@@ -841,9 +845,9 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
-			case "lvlDD":
+			case "getDDStat":
 				if (this.network.getDragodinde().isHavingDd()) {
-					toSend = new Object[] { this.network.getDragodinde().getLevelEquipedDD() };
+					toSend = new Object[] { this.network.getDragodinde().getLevelEquipedDD(), this.network.getDragodinde().getEnergy() };
 				}
 				else {
 					toSend = new Object[] { "False" };
@@ -854,13 +858,64 @@ public class ModelConnexion {
 					if(Integer.parseInt(param) != this.network.getDragodinde().getRatioXp()){
 						MountSetXpRatioRequestMessage mountSetXpRatioRequestMessage = new MountSetXpRatioRequestMessage(Integer.parseInt(param));
 						getNetwork().sendToServer(mountSetXpRatioRequestMessage, MountSetXpRatioRequestMessage.ProtocolId, "Set xp dd");
-						if (this.waitToSendMountXp()) {
+						if (this.waitToSendMount("xp")) {
 							toSend = new Object[] { "True" };
 						} else {
 							toSend = new Object[] { "False" };
 						}
 					} else {
 						toSend = new Object[] { "True" };
+					}
+				}
+				else {
+					toSend = new Object[] { "False" };
+				} 
+				break;
+			case "feedDD": 
+				if (this.network.getDragodinde().isHavingDd()) {
+					String[] param2 = param.split(",");
+					MountFeedRequestMessage mountFeedRequestMessage = new MountFeedRequestMessage(this.network.getDragodinde().getId(),1,Integer.parseInt(param2[0]),Integer.parseInt(param2[1]));
+					getNetwork().sendToServer(mountFeedRequestMessage, MountFeedRequestMessage.ProtocolId, "Feed dd");
+					if (this.waitToSendMount("set")) {
+						toSend = new Object[] { "True" };
+					} else {
+						toSend = new Object[] { "False" };
+					}
+				}
+				else {
+					toSend = new Object[] { "False" };
+				} 
+				break;
+			case "mountDD":
+				if (this.network.getDragodinde().isHavingDd()) {
+					if(this.network.getInfo().isRiding()){
+						toSend = new Object[] { "True" };
+					} else {
+						MountToggleRidingRequestMessage mountFeedRequestMessage = new MountToggleRidingRequestMessage();
+						getNetwork().sendToServer(mountFeedRequestMessage, MountToggleRidingRequestMessage.ProtocolId, "Mount dd");
+						if (this.waitToSendMount("ride")) {
+							toSend = new Object[] { "True" };
+						} else {
+							toSend = new Object[] { "False" };
+						}
+					}
+				}
+				else {
+					toSend = new Object[] { "False" };
+				} 
+				break;
+			case "dismountDD":
+				if (this.network.getDragodinde().isHavingDd()) {
+					if(!this.network.getInfo().isRiding()){
+						toSend = new Object[] { "True" };
+					} else {
+						MountToggleRidingRequestMessage mountFeedRequestMessage = new MountToggleRidingRequestMessage();
+						getNetwork().sendToServer(mountFeedRequestMessage, MountToggleRidingRequestMessage.ProtocolId, "dismount dd");
+						if (this.waitToSendMount("ride")) {
+							toSend = new Object[] { "True" };
+						} else {
+							toSend = new Object[] { "False" };
+						}
 					}
 				}
 				else {
@@ -952,13 +1007,33 @@ public class ModelConnexion {
 		return true;
 	}
 	
-	public boolean waitToSendMountXp() throws InterruptedException{
+	public boolean waitToSendMount(String s) throws InterruptedException{
 		long index =  System.currentTimeMillis();
-		while (!this.network.getInfo().isMountxpmsg()) {
-			Thread.sleep(50);
-			if(System.currentTimeMillis() - index > 2000){
-				return false; 
-			}
+		switch (s) {
+			case "xp":
+				while (!this.network.getInfo().isMountxpmsg()) {
+					Thread.sleep(50);
+					if(System.currentTimeMillis() - index > 2000){
+						return false; 
+					}
+				}
+				break;
+			case "set":
+				while (!this.network.getInfo().isMountSet()) {
+					Thread.sleep(50);
+					if(System.currentTimeMillis() - index > 2000){
+						return false; 
+					}
+				}
+				break;
+			case "ride":
+				while (!this.network.getInfo().isMountRiding()) {
+					Thread.sleep(50);
+					if(System.currentTimeMillis() - index > 2000){
+						return false; 
+					}
+				}
+				break;
 		}
 		return true;
 	}

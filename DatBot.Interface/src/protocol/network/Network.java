@@ -1073,7 +1073,7 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 		else {
 			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
-			this.map = MapManager.FromId((int) currentMapMessage.getMapId());			
+			this.map = MapManager.FromId((int) currentMapMessage.getMapId());		
 			this.interactive.setMap(map);
 			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
 			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));
@@ -1732,13 +1732,17 @@ public class Network extends DisplayInfo implements Runnable {
 			case 5967:
 				MountRidingMessage mountRidingMessage = new MountRidingMessage();
 				mountRidingMessage.Deserialize(dataReader);
+				this.info.setMountRiding(true);
 				this.info.setRiding(mountRidingMessage.isIsRiding());
 				break;
 			case 5968:
 				MountSetMessage mountSetMessage = new MountSetMessage();
 				mountSetMessage.Deserialize(dataReader);
 				this.dragodinde.setHavingDd(true);
+				this.dragodinde.setId((int) mountSetMessage.getMountData().getId());
+				this.dragodinde.setEnergy(mountSetMessage.getMountData().getEnergy());
 				this.dragodinde.setLevelEquipedDD(mountSetMessage.getMountData().getLevel());
+				this.info.setMountSet(true);
 				break;
 			case 5970:
 				MountXpRatioMessage mountXpRatioMessage = new MountXpRatioMessage();

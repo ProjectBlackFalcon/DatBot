@@ -19,7 +19,9 @@ public class Dragodinde {
 	 * Equiped dd
 	 */
 	private boolean havingDd = false;
+	private int id;
 	private int levelEquipedDD;
+	private int energy;
 	private int ratioXp; 
 	
 	
@@ -232,6 +234,22 @@ public class Dragodinde {
 
 	public void setHavingDd(boolean havingDd) {
 		this.havingDd = havingDd;
+	}
+
+	public int getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
