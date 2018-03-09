@@ -106,22 +106,18 @@ class Interface:
 
     def execute_command(self, command, parameters=None):
         """
-        Executes commands while managing disconnections
+        Executes interface commands, logs errors
         :param command: command to send
         :param parameters: params for the command
         :return: return value form interface
         """
-        tries = 0
-        while tries < 1:
-            tries += 1
-            try:
-                msg_id = self.add_command(command, parameters)
-                return self.wait_for_return(msg_id)
-            except Exception as e:
-                with open('..//Utils//InterfaceErrors.txt', 'a') as f:
-                    f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-                    f.write(traceback.format_exc())
-                self.connect()
+        try:
+            msg_id = self.add_command(command, parameters)
+            return self.wait_for_return(msg_id)
+        except Exception as e:
+            with open('..//Utils//InterfaceErrors.txt', 'a') as f:
+                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                f.write(traceback.format_exc())
 
     def connect(self):
         """
@@ -637,13 +633,14 @@ class Interface:
             # Dumb fuck
         return self.execute_command('setXpDD', [xp])
 
-    def feed_dd(self):
-        # TODO How does that work ?
+    def feed_dd(self, inv_id, quantity):
         """
-        Feeds DD
+        Feeds dd
+        :param inv_id:
+        :param quantity:
         :return:
         """
-        return self.execute_command('feedDD')
+        return self.execute_command('feedDD', [inv_id, quantity])
 
     def mount_dd(self):
         """
@@ -658,6 +655,9 @@ class Interface:
         :return: Boolean
         """
         return self.execute_command('dismountDD')
+
+    def get_dd_stat(self):
+        pass
 
     def fart(self):
         """
