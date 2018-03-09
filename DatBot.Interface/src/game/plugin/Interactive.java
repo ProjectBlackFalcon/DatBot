@@ -16,7 +16,8 @@ public class Interactive {
 	private Network network;
 	private Map map;
 	private List<Double> zaapList;
-	
+	private List<Double> zaapiList;
+
 	public Interactive(Network network){
 		this.network = network;	
 		this.setMap(network.getMap());
@@ -27,6 +28,16 @@ public class Interactive {
 	
 	public double getMapIdZaap(int i, int j){
 		for (Double d : zaapList) {
+			int [] coord = GameData.getCoordMap(d.intValue());
+			if(coord[0] == i && coord[1] == j){
+				return d;
+			}
+		}
+		return -1;
+	}
+	
+	public double getMapIdZaapi(int i, int j){
+		for (Double d : zaapiList) {
 			int [] coord = GameData.getCoordMap(d.intValue());
 			if(coord[0] == i && coord[1] == j){
 				return d;
@@ -71,11 +82,11 @@ public class Interactive {
 	public int[] getInteractive(int skillId){
 		for(int i = 0 ; i < getInteractiveElements().size() ; i++){
 			if (getInteractiveElements().get(i).getEnabledSkills().size() != 0) {
-				if (getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillId() == skillId && getInteractiveElements().get(i).isOnCurrentMap()) {
+				if (getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillId() == skillId) {
 					for (int j = 0; j < this.getMap().getLayersCount(); j++) {
 						for (int k = 0; k < this.getMap().getLayers().get(j).getCellsCount(); k++) {
 							for (int l = 0; l < this.getMap().getLayers().get(j).getCells().get(k).getElementsCount(); l++) {
-								if (((GraphicalElement) this.getMap().getLayers().get(j).getCells().get(k).getElements().get(l)).getIdentifier() == getInteractiveElements().get(i).getElementId()) {
+								if (((GraphicalElement) this.getMap().getLayers().get(j).getCells().get(k).getElements().get(l)).getIdentifier() == getInteractiveElements().get(i).getElementId() && getInteractiveElements().get(i).isOnCurrentMap()) {
 									return new int[] { this.getMap().getLayers().get(j).getCells().get(k).getCellId(), getInteractiveElements().get(i).getElementId(), getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillInstanceUid()  };
 								}
 							}
@@ -84,7 +95,7 @@ public class Interactive {
 				} 
 			}
 		}
-		return null;
+		return new int[]{-1,-1,-1};
 	}
 	
 	private List<Integer> cellsIdRosette;
@@ -289,6 +300,14 @@ public class Interactive {
 
 	public void setZaapList(List<Double> zaapList) {
 		this.zaapList = zaapList;
+	}
+
+	public List<Double> getZaapiList() {
+		return zaapiList;
+	}
+
+	public void setZaapiList(List<Double> zaapiList) {
+		this.zaapiList = zaapiList;
 	}
 	
 	

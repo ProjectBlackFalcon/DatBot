@@ -97,6 +97,7 @@ import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHunt
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
+import protocol.network.messages.game.interactive.zaap.TeleportDestinationsListMessage;
 import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
@@ -137,6 +138,7 @@ import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
+import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
@@ -1056,6 +1058,10 @@ public class Network extends DisplayInfo implements Runnable {
 			}
 			getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 			getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
+			/*for (InteractiveElement interactiveElement : this.interactive.getInteractiveElements()) {
+				if(interactiveElement.getEnabledSkills().size() > 0 && interactiveElement.isOnCurrentMap())
+					System.out.println(interactiveElement + " cell : " + this.interactive.getInteractive(interactiveElement.getEnabledSkills().get(0).getSkillId())[0]);
+			}*/
 			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
 			append("CellId : " + info.getCellId());
 			info.setWaitForMov(true);
@@ -1784,6 +1790,13 @@ public class Network extends DisplayInfo implements Runnable {
 				emote.Deserialize(dataReader);
 				if(emote.getActorId() == this.info.getActorId()){
 					this.info.setEmoteLaunched(true);
+				}
+				break;
+			case 5960:
+				TeleportDestinationsListMessage destinationsListMessage = new TeleportDestinationsListMessage();
+				destinationsListMessage.Deserialize(dataReader);
+				if(destinationsListMessage.getTeleporterType() == 1){
+					this.interactive.setZaapiList(destinationsListMessage.getMapIds());
 				}
 				break;
 		}
