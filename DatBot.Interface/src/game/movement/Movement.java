@@ -98,7 +98,9 @@ public class Movement{
         if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId) && (this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0){ 
             CellMovement move = MoveToCell(cellId);
             return new MapMovement(move, neighbourId,this.getNetwork());
-        } else if(this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId) && (this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) <= 0) {
+        } else if (this.network.getInfo().getCellId() == cellId){
+            return new MapMovement(null, neighbourId,this.getNetwork());
+        } else {
         	// Get available cell for the direction choosed
             List<Integer> list = new ArrayList<Integer>();
             for (int i = 0; i < this.network.getMap().getCells().size() - 1; i++){
@@ -106,18 +108,16 @@ public class Movement{
                 	list.add(i);
                 }
             }
+            if(list.size() == 0 ){
+            	return null;
+            }
         	int closestCellId = getClosetChangedMapAvailableCell(cellId, list);
         	if(closestCellId == -1){
         		return null;
         	}
         	this.network.append("Cell " + cellId + " can't be used to change map : now using cell " + closestCellId);
             CellMovement move = MoveToCell(closestCellId);
-            return new MapMovement(move, neighbourId,this.getNetwork());
-        } else if (this.network.getInfo().getCellId() == cellId){
-            return new MapMovement(null, neighbourId,this.getNetwork());
-        } else {
-            return null;
-        }
+            return new MapMovement(move, neighbourId,this.getNetwork());        }
 	}
 	
 	public boolean moveOver() throws InterruptedException{
