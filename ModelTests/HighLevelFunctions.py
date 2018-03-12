@@ -19,6 +19,7 @@ def dds():
 
 
 pipe = PipeToJava(headless=True)
+pipe.t.join()
 bot_id = 0
 llf = LowLevelFunctions()
 
@@ -75,15 +76,13 @@ random.shuffle(colors)
 
 credentials = [
     {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'},
-    {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'},
-    {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
-    {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
 ]
 
 bots = []
 threads = []
 for cred in credentials:
     bots.append(Bot(pipe, credentials.index(cred), cred, llf, False, color=colors[credentials.index(cred)]))
+
 
 for bot in bots:
     threads.append(Thread(target=bot.interface.connect))
@@ -94,7 +93,7 @@ for thread in threads:
 
 threads = []
 for bot in bots:
-    threads.append(Thread(target=bot.hf.use_schedule('8hrHunts')))
+    threads.append(Thread(target=bot.hf.test))
     threads[-1].start()
 for thread in threads:
     thread.join()

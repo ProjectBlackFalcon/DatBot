@@ -16,11 +16,11 @@ class PipeToJava:
         if not headless:
             args.append("true")
 
-        self.p = Popen(args, stdin=PIPE, stdout=PIPE, bufsize=10, close_fds=on_posix)
+        self.p = Popen(args, stdin=PIPE, stdout=PIPE, bufsize=4096, close_fds=on_posix)
         self.q = Queue()
-        t = Thread(target=self.enqueue_output, args=(self.p.stdout, self.q))
-        t.daemon = True  # thread dies with the program
-        t.start()
+        self.t = Thread(target=self.enqueue_output, args=(self.p.stdout, self.q))
+        self.t.daemon = True  # thread dies with the program
+        self.t.start()
 
     def enqueue_output(self, out, queue):
         for line in iter(out.readline, b''):
