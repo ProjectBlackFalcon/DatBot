@@ -76,6 +76,7 @@ import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnStartPlayingMessage;
 import protocol.network.messages.game.context.mount.MountRidingMessage;
 import protocol.network.messages.game.context.mount.MountSetMessage;
 import protocol.network.messages.game.context.mount.MountXpRatioMessage;

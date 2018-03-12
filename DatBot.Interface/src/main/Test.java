@@ -30,7 +30,7 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
 //		communication.getReturn("0;0;i;cmd;getStats;[None]");
 
-		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
+//		communication.getReturn("0;0;i;cmd;connect;[flasheowine,mdppourlysandre,Capillotracteur,Julith]");
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest,ceciestlemdp1,Gladiatonme,Echo]");
 //		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,***REMOVED***11,Faoy,Julith]");
 //		communication.getReturn("1;0;i;cmd;connect;[Jemappellehenry2,azerty123henry,Baddosh,Julith]");
@@ -43,8 +43,8 @@ public class Test {
 //		Thread.sleep(5000);
 
 //		communication.getReturn("0;0;i;cmd;connect;[C'wublel5','notabot0','Ilancelet','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;['wublel6','notabot0','Holle-holla-hollu','Julith']");
-//		Thread.sleep(2000);
+		communication.getReturn("0;0;i;cmd;connect;['wublel6','notabot0','Holle-holla-hollu','Julith']");
+		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;disconnect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
 //		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;connect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
@@ -73,17 +73,17 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;withdrawItem;[" + 1984 + ",1,1]");
 
 //
-		communication.getReturn("0;0;i;cmd;changeMap;[112,w]");
+		communication.getReturn("0;0;i;cmd;changeMapTest;[East]");
 //		communication.getReturn("0;0;i;cmd;enterBag;[None]");
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;useZaap;[(-32,-56)]");
-//		Thread.sleep(5000);
+		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;getMap;[0,n]");
 
 //		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");
 		
 		
-		//communication.getReturn("0;0;i;cmd;huntFight;[None]");
+		communication.getReturn("0;0;i;cmd;huntFight;[None]");
 
 		// /**
 		// * ChangeMapTest method Input : North, South, East, West
