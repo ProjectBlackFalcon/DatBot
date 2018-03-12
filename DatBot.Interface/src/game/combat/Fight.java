@@ -311,7 +311,7 @@ public class Fight {
 		arr.add(obj);
 		String s = sendToFightAlgo("g", arr);
 		if (s == null) {
-			endTurn();
+			return;
 		}
 
 		String[] cmd = s.split(",");
@@ -330,6 +330,7 @@ public class Fight {
 						endTurn();
 					}
 					waitToSend();
+					Thread.sleep(300 + new Random().nextInt(200));
 					return;
 				}
 				catch (Exception e) {
