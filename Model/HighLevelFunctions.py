@@ -400,6 +400,8 @@ class HighLevelFunctions:
                 return True
 
     def hunt_treasures(self, duration_minutes, level='max'):
+        if not self.bot.connected:
+            self.bot.interface.connect()
         duration = duration_minutes * 60
         start = time.time()
         n_hunts = 0
