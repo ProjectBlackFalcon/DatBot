@@ -20,7 +20,8 @@ class Bot:
         self.last_update = None
 
     def to_string(self):
-        return '{:^25} {:^7} {:^15} {:^50} {:^20}'.format(self.credentials['name'], self.level, self.kamas, self.occupation, self.last_update)
+        return '{:^25} {:^7} {:^15} {:^50} {:^20}'.format(self.credentials['name'], self.level, self.kamas,
+                                                          self.occupation, self.last_update)
 
 
 class ScheduleBar:
@@ -142,10 +143,10 @@ class Scheduler:
         for bar in self.bars:
             flattened = [None]*1440
             for task in bar.tasks:
-                for i in range(task['start']*1440//bar.duration, task['end']*1440//bar.duration):
+                for i in range(int(task['start']*1440/bar.duration), int(task['end']*1440/bar.duration)):
                     flattened[i] = task['name']
 
-            tasks = [{'name': flattened[0], 'start': 0, 'end': 0}]
+            tasks = [{'name': flattened[0], 'start': 0, 'end': 0}] if flattened[0] is not None else []
             for i in range(1, len(flattened)):
                 if flattened[i] == flattened[i-1] and flattened[i] is not None:
                     tasks[-1]['end'] += bar.duration / 1440
@@ -160,7 +161,8 @@ class Scheduler:
     def load(self, file_name=None):
         if file_name is None:
             path = False
-            path = filedialog.askopenfilename(initialdir="..//Utils//Schedules//", title="Select schedule", filetypes=(("json files", "*.json"),("all files","*.*")))
+            path = filedialog.askopenfilename(initialdir="..//Utils//Schedules//", title="Select schedule",
+                                              filetypes=(("json files", "*.json"), ("all files", "*.*")))
         else:
             path = "..//Utils//Schedules//{}.json".format(file_name)
 
@@ -196,7 +198,8 @@ class Scheduler:
             for task in bar.tasks:
                 startx = 10+int(task['start']*200/bar.duration)
                 endx = 10+int(task['end']*200/bar.duration)
-                self.bar_canvas.create_rectangle((startx, (idx+1)*20+1, endx, (idx+1)*20+20), fill=self.tasks[task['name']], outline='')
+                self.bar_canvas.create_rectangle((startx, (idx + 1) * 20 + 1, endx, (idx + 1) * 20 + 20),
+                                                 fill=self.tasks[task['name']], outline='')
 
 
 class AccountManager:
@@ -224,7 +227,9 @@ class AccountManager:
         self.bots_frame = Frame(self.frame)
         self.bots_frame.pack()
         self.bot_labels, self.bot_buttons = [], []
-        self.bot_labels.append(Label(self.bots_frame, font='courier', text='{:^25} {:^7} {:^15} {:^50} {:^20}'.format('Name', 'Level', 'Kamas', 'Occupation', 'Last update')))
+        self.bot_labels.append(Label(self.bots_frame, font='courier',
+                                     text='{:^25} {:^7} {:^15} {:^50} {:^20}'.format('Name', 'Level', 'Kamas',
+                                                                                     'Occupation', 'Last update')))
         self.bot_labels[-1].grid(row=0, column=0)
 
         self.sorted_bots = sorted(self.bots, key=lambda one_bot: one_bot.last_update, reverse=True)
@@ -233,7 +238,8 @@ class AccountManager:
             botstring = bot.to_string()
             self.bot_labels.append(Label(self.bots_frame, text=botstring, font='courier'))
             self.bot_labels[-1].grid(row=i+1, column=0)
-            self.bot_buttons.append(Button(master=self.bots_frame, text='LEL', font='courier', command=lambda idx=i: self.bot_action(idx)))
+            self.bot_buttons.append(
+                Button(master=self.bots_frame, text='LEL', font='courier', command=lambda idx=i: self.bot_action(idx)))
             self.bot_buttons[-1].grid(row=i+1, column=1)
 
     def add_bot(self):
@@ -256,7 +262,8 @@ class AccountManager:
 
         self.add_bot_frame_labels = Frame(self.add_bot_frame)
         self.add_bot_frame_labels.pack()
-        fields = ['{:^15}'.format('Username'), '{:^15}'.format('Password'), '{:^15}'.format('Name'), '{:^15}'.format('Server')]
+        fields = ['{:^15}'.format('Username'), '{:^15}'.format('Password'), '{:^15}'.format('Name'),
+                  '{:^15}'.format('Server')]
         for text in fields:
             Label(self.add_bot_frame_labels, text=text, font='courier').pack(side='left')
 
@@ -271,7 +278,8 @@ class AccountManager:
         self.add_bot_frame_btns.pack()
         self.add_bot_ok_btn = Button(self.add_bot_frame_btns, text='OK', font='courier', width=10, command=ok)
         self.add_bot_ok_btn.pack(side='left')
-        self.add_bot_cancel_btn = Button(self.add_bot_frame_btns, text='Cancel', font='courier', width=10, command=cancel)
+        self.add_bot_cancel_btn = Button(self.add_bot_frame_btns, text='Cancel', font='courier', width=10,
+                                         command=cancel)
         self.add_bot_cancel_btn.pack(side='left')
 
     def get_bots_db(self):
@@ -291,7 +299,9 @@ class AccountManager:
             self.bots.append(new_bot)
 
         for bot in self.bots:
-            cursor.execute("""SELECT * FROM (SELECT * FROM Bots WHERE Name = %s) t2 WHERE Time IN (SELECT max(Time) FROM (SELECT * FROM Bots WHERE Name = %s) t3)""", (bot.credentials['name'], bot.credentials['name']))
+            cursor.execute(
+                """SELECT * FROM (SELECT * FROM Bots WHERE Name = %s) t2 WHERE Time IN (SELECT max(Time) FROM (SELECT * FROM Bots WHERE Name = %s) t3)""",
+                (bot.credentials['name'], bot.credentials['name']))
             for data in cursor:
                 bot.kamas = data[3]
                 bot.level = data[4]
@@ -322,5 +332,6 @@ class AccountManager:
         cursor.execute("""DELETE FROM BotAccounts WHERE username = %s""", (username,))
         conn.commit()
         conn.close()
+
 
 AM = AccountManager()
