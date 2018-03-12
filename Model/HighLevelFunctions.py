@@ -647,4 +647,46 @@ class HighLevelFunctions:
 
             self.bot.interface.close_dd()
 
+    def manage_dds_duration(self, duration_minutes):
+        duration = duration_minutes * 60
+        start = time.time()
+        while time.time()-start < duration:
+            self.manage_dds()
+
+    def use_schedule(self, schedule_name):
+        with open('..//Utils//Schedules//{}.json'.format(schedule_name), 'r') as f:
+            schedules = json.load(f)
+        schedule = []
+        for schedule_curr in schedules:
+            if schedule_curr['idx'] == 0:
+                schedule = schedule_curr['tasks']
+
+        caught_up = False
+        for task in schedule:
+            if (time.localtime().tm_hour + time.localtime().tm_min/60) - task['end'] < 0 or caught_up:
+                caught_up = True
+                pass
+            else:
+                continue
+
+            minutes_left = max(1, (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
+            if task['name'] == 'dd':
+                print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
+                self.manage_dds_duration(minutes_left)
+            elif task['name'] == 'hunt':
+                print(self.bot.interface.color + '[Scheduler {}] Starting to hunt'.format(
+                    self.bot.id) + self.bot.interface.end_color)
+                self.hunt_treasures(minutes_left)
+            elif task['name'] == 'sell':
+                print(self.bot.interface.color + '[Scheduler {}] Starting to sell items'.format(
+                    self.bot.id) + self.bot.interface.end_color)
+                # TODO adapted sell function
+                self.sell_all(self.bot.subscribed)
+            elif task['name'] == 'sleep':
+                print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
+                    self.bot.id) + self.bot.interface.end_color)
+                self.bot.interface.disconnect()
+                time.sleep(60*minutes_left)
+
+
 __author__ = 'Alexis'
