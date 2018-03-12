@@ -8,6 +8,16 @@ import json
 import random
 
 
+def dds():
+    while 1:
+        start = time.time()
+        bot.hf.manage_dds()
+        winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
+        print('Done in {} minutes'.format(round((time.time() - start) / 60, 1)))
+        bot.interface.disconnect()
+        time.sleep(3600)
+
+
 pipe = PipeToJava(headless=True)
 bot_id = 0
 llf = LowLevelFunctions()
@@ -51,8 +61,8 @@ colors = [
     '\033[96m',
     '\033[99m'
 ]
-
 random.shuffle(colors)
+
 '''
 {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
 {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
@@ -62,10 +72,12 @@ random.shuffle(colors)
 {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
 '''
 
+
 credentials = [
+    {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'},
+    {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'},
     {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
-    {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'},
-    {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'}
+    {'username': 'wublel10', 'password': 'notabot0', 'name': 'Gaspienura', 'server': 'Julith'}
 ]
 
 bots = []
@@ -80,28 +92,12 @@ for bot in bots:
 for thread in threads:
     thread.join()
 
-duration = 1
 threads = []
 for bot in bots:
-    threads.append(Thread(target=bot.hf.hunt_treasures, args=(duration, )))
+    threads.append(Thread(target=bot.hf.use_schedule('8hrHunts')))
     threads[-1].start()
 for thread in threads:
     thread.join()
 
-'''
-while 1:
-    start = time.time()
-    bot.interface.connect()
-    bot.hf.manage_dds()
-    # bot.hf.hunt_treasures(duration_minutes=60)
-    # bot.hf.fight_on_map(1, 100)
-    # bot.hf.harvest_path(path, -1, sell=True)
-    # bot.hf.drop_to_bank('all', True)
-
-    winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
-    print('Done in {} minutes'.format(round((time.time()-start)/60, 1)))
-    bot.interface.disconnect()
-    time.sleep(3600)
-'''
 
 __author__ = 'Alexis'
