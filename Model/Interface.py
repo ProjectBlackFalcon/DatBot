@@ -130,13 +130,15 @@ class Interface:
             self.bot.credentials['name'],
             self.bot.credentials['server']
         ]
-        success = self.execute_command('connect', connection_param)
-        self.bot.connected = success
-        current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-        bot_stats = self.bot.interface.get_player_stats()[0]
-        self.bot.kamas = bot_stats['Inventory']['Kamas']
-        self.bot.level = bot_stats['Lvl']
-        self.bot.position = (current_map, current_worldmap)
+        success = [True]
+        if not self.bot.connected:
+            success = self.execute_command('connect', connection_param)
+            self.bot.connected = success
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+            bot_stats = self.bot.interface.get_player_stats()[0]
+            self.bot.kamas = bot_stats['Inventory']['Kamas']
+            self.bot.level = bot_stats['Lvl']
+            self.bot.position = (current_map, current_worldmap)
         return success
 
     def disconnect(self):
@@ -144,8 +146,12 @@ class Interface:
         Disconnects the bot instance
         :return:
         """
+        success = [True]
         if self.bot.connected:
-            return self.execute_command('disconnect')
+            success = self.execute_command('disconnect')
+            if success[0]:
+                self.bot.connected = False
+        return success
 
     def get_map(self):
         """
@@ -615,13 +621,6 @@ class Interface:
         """
         return self.execute_command('equipDD', [id, source])
 
-    def get_dd_level(self):
-        """
-        Returns the level of the equipped DD
-        :return: False/level
-        """
-        return self.execute_command('lvlDD')
-
     def set_dd_xp(self, xp):
         """
         Sets the xp to give the equipped DD
@@ -657,7 +656,11 @@ class Interface:
         return self.execute_command('dismountDD')
 
     def get_dd_stat(self):
-        pass
+        """
+        Returns info on the equipped DD
+        :return: False / [level, energy]
+        """
+        return self.execute_command('getDDStat')
 
     def fart(self):
         """
