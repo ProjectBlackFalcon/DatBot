@@ -17,6 +17,10 @@ class HighLevelFunctions:
     def goto(self, target_coord, target_cell=None, worldmap=1):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
+        with open('..//Utils//gotos.txt', 'a') as f:
+            f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+            f.write('Going from map {}, cell {} to map {}, worldmap : {}'.format(current_map, current_cell, target_coord, worldmap))
+
         if self.llf.distance_coords(current_map, target_coord) > 3:
             # self.bot.position = (current_map, current_worldmap)
             # self.bot.occupation = 'Moving to {}, worldmap {}'.format(target_coord, worldmap)
@@ -286,9 +290,6 @@ class HighLevelFunctions:
             raise Exception('Not a map with a bank')
 
     def tresure_hunt(self, level='max'):
-        self.bot.occupation = 'Treasure Hunting'
-        self.update_db()
-
         def get_hunt(level):
             self.bot.occupation = 'Getting a new hunt'
             self.update_db()
@@ -309,6 +310,9 @@ class HighLevelFunctions:
             get_hunt(level)
         hunt_start = self.bot.interface.get_hunt_start()[0]
         self.goto(hunt_start)
+
+        self.bot.occupation = 'Treasure Hunting'
+        self.update_db()
 
         hunt_error_flag = False
         while self.bot.interface.get_steps_left()[0] and not hunt_error_flag:
@@ -618,8 +622,8 @@ class HighLevelFunctions:
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_paddock(dd.id, 'stable')
                 time.sleep(3)
-                # self.bot.interface.fart()
-                time.sleep(15)
+                self.bot.interface.fart()
+                time.sleep(3)
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_stable(dd.id, 'paddock')
 
