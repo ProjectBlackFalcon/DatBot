@@ -86,7 +86,7 @@ for cred in credentials:
     bots.append(Bot(pipe, credentials.index(cred), cred, llf, False, color=colors[credentials.index(cred)]))
 
 for bot in bots:
-    threads.append(Thread(target=bot.hf.use_schedule('8hrHunts')))
+    threads.append(Thread(target=bot.hf.use_schedule, args=('8hrHunts', )))
     threads[-1].start()
 for thread in threads:
     thread.join()
