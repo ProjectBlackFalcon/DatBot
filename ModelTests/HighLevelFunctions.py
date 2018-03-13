@@ -19,7 +19,6 @@ def dds():
 
 
 pipe = PipeToJava(headless=True)
-pipe.t.join()
 bot_id = 0
 llf = LowLevelFunctions()
 
@@ -92,5 +91,5 @@ for bot in bots:
 for thread in threads:
     thread.join()
 
-
+pipe.t.join()
 __author__ = 'Alexis'

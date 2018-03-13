@@ -671,6 +671,14 @@ class HighLevelFunctions:
             else:
                 continue
 
+            if task['start'] > (time.localtime().tm_hour + time.localtime().tm_min / 60):
+                print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
+                    self.bot.id) + self.bot.interface.end_color)
+                self.bot.interface.disconnect()
+                minutes_left = (task['start'] - (time.localtime().tm_hour + time.localtime().tm_min / 60))*60
+                print(minutes_left)
+                time.sleep(60 * minutes_left)
+
             minutes_left = max(1, (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
             if task['name'] == 'dd':
                 print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
