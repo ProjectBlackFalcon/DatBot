@@ -684,8 +684,8 @@ class HighLevelFunctions:
                 print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
                 self.manage_dds_duration(minutes_left)
             elif task['name'] == 'hunt':
-                print(self.bot.interface.color + '[Scheduler {}] Starting to hunt'.format(
-                    self.bot.id) + self.bot.interface.end_color)
+                print(self.bot.interface.color + '[Scheduler {}] Starting to hunt for {} minutes'.format(
+                    self.bot.id, round(minutes_left, 0)) + self.bot.interface.end_color)
                 self.hunt_treasures(minutes_left)
             elif task['name'] == 'sell':
                 print(self.bot.interface.color + '[Scheduler {}] Starting to sell items'.format(
