@@ -187,33 +187,36 @@ public class Panel extends JPanel{
 	}
 	
 	void update(ArrayList<PlayingEntity> playingEntities){
-		for(int i = obstacles.size()-1; i >= 0; i--) {
-			if(obstacles.get(i)[2] == 3 || obstacles.get(i)[2] == 4) {
-				mapObject.getBlocks()[obstacles.get(i)[0]][obstacles.get(i)[1]] = 0;
-				obstacles.remove(i);
-			}
-		}
-		
-		if(playingEntities != null) {
-			for(int i = 0; i < playingEntities.size(); i++) {
-				Position p = playingEntities.get(i).getPosition();
-				if(playingEntities.get(i).getTeam().equals("red")) {
-					obstacles.add(new int[] {p.getX(), p.getY(), 3, 0});
-				}else {
-					obstacles.add(new int[] {p.getX(), p.getY(), 4, 0});
+		try {
+			for(int i = obstacles.size()-1; i >= 0; i--) {
+				if(obstacles.get(i)[2] == 3 || obstacles.get(i)[2] == 4) {
+					mapObject.getBlocks()[obstacles.get(i)[0]][obstacles.get(i)[1]] = 0;
+					obstacles.remove(i);
 				}
 			}
-		}
-		
-		myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
-        for(int i = 0; i < 33; i++){
-        	for(int j = 0; j < 33; j++){
-        		myMap.setWalkable(i, j, mapObject.isPositionWalkable(new Position(i, j)));
-        	}
-        }
-        
-		mapObject.setObstacles(obstacles);
-		map = mapObject.getBlocks();
+			
+			if(playingEntities != null) {
+				for(int i = 0; i < playingEntities.size(); i++) {
+					Position p = playingEntities.get(i).getPosition();
+					if(playingEntities.get(i).getTeam().equals("red")) {
+						obstacles.add(new int[] {p.getX(), p.getY(), 3, 0});
+					}else {
+						obstacles.add(new int[] {p.getX(), p.getY(), 4, 0});
+					}
+				}
+			}
+			
+			myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+	        for(int i = 0; i < 33; i++){
+	        	for(int j = 0; j < 33; j++){
+	        		myMap.setWalkable(i, j, mapObject.isPositionWalkable(new Position(i, j)));
+	        	}
+	        }
+	        
+			mapObject.setObstacles(obstacles);
+			map = mapObject.getBlocks();
+		}catch(Exception e) {e.printStackTrace();}
+
 	}
 	
 	public void update(ArrayList<Position> challengers, ArrayList<Position> defenders) {
