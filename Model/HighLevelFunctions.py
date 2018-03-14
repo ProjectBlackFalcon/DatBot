@@ -675,9 +675,15 @@ class HighLevelFunctions:
                 if (time.localtime().tm_hour + time.localtime().tm_min/60) - task['end'] < 0 or caught_up:
                     caught_up = True
                     pass
+                elif task == schedule[-1] and not caught_up:
+                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
+                        self.bot.id, 60 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2) + self.bot.interface.end_color)
+                    self.bot.interface.disconnect()
+                    self.bot.occupation = 'Sleeping'
+                    self.update_db()
+                    time.sleep(3600 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2)
                 else:
                     continue
-
                 if task['start'] > (time.localtime().tm_hour + time.localtime().tm_min / 60):
                     print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
                         self.bot.id) + self.bot.interface.end_color)
@@ -700,12 +706,11 @@ class HighLevelFunctions:
                     self.drop_to_bank('all', True)
                     self.sell_all(self.bot.subscribed)
                 elif task['name'] == 'sleep':
-                    print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
-                        self.bot.id) + self.bot.interface.end_color)
+                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {}'.format(
+                        self.bot.id, 60*minutes_left) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
                     time.sleep(60*minutes_left)
-
 
 __author__ = 'Alexis'
