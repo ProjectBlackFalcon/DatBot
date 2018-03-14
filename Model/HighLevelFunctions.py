@@ -24,7 +24,8 @@ class HighLevelFunctions:
         if self.llf.distance_coords(current_map, target_coord) > 3:
             # self.bot.position = (current_map, current_worldmap)
             # self.bot.occupation = 'Moving to {}, worldmap {}'.format(target_coord, worldmap)
-            self.update_db()
+            # self.update_db()
+            pass
 
         if current_worldmap != worldmap:
             # Incarnam to Astrub
@@ -44,7 +45,11 @@ class HighLevelFunctions:
                 self.bot.interface.go_to_incarnam()
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
-            # TODO manage worldmap changing
+            elif list(current_map) == [-25, -36] and current_worldmap == -1:
+                # bot is in hunting hall
+                self.bot.interface.exit_hunting_hall()
+
+            # TODO manage more worldmap changing
             else:
                 raise Exception('Worldmap change not supported')
 
@@ -293,7 +298,7 @@ class HighLevelFunctions:
         def get_hunt(level):
             self.bot.occupation = 'Getting a new hunt'
             self.update_db()
-            self.goto((-25, -36))
+            self.goto((-25, -36), worldmap=1)
             door = self.bot.interface.get_hunting_hall_door_cell()[0]
             self.bot.interface.move(self.llf.get_closest_walkable_cell(door, self.bot.position[0], self.bot.position[1]))
             self.bot.interface.enter_hunting_hall()
@@ -535,6 +540,7 @@ class HighLevelFunctions:
                     hdvs.append(position[2])
 
         hdv_route = []
+        # Determines which hdvs the bot should visit to sell stuff
         for hdv in hdvs:
             if self.sell_hdv(hdv):
                 hdv_route.append(hdv)
@@ -664,39 +670,40 @@ class HighLevelFunctions:
                 schedule = schedule_curr['tasks']
 
         caught_up = False
-        for task in schedule:
-            if (time.localtime().tm_hour + time.localtime().tm_min/60) - task['end'] < 0 or caught_up:
-                caught_up = True
-                pass
-            else:
-                continue
+        while 1:
+            for task in schedule:
+                if (time.localtime().tm_hour + time.localtime().tm_min/60) - task['end'] < 0 or caught_up:
+                    caught_up = True
+                    pass
+                else:
+                    continue
 
-            if task['start'] > (time.localtime().tm_hour + time.localtime().tm_min / 60):
-                print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
-                    self.bot.id) + self.bot.interface.end_color)
-                self.bot.interface.disconnect()
-                minutes_left = (task['start'] - (time.localtime().tm_hour + time.localtime().tm_min / 60))*60
-                print(minutes_left)
-                time.sleep(60 * minutes_left)
+                if task['start'] > (time.localtime().tm_hour + time.localtime().tm_min / 60):
+                    print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
+                        self.bot.id) + self.bot.interface.end_color)
+                    self.bot.interface.disconnect()
+                    minutes_left = (task['start'] - (time.localtime().tm_hour + time.localtime().tm_min / 60))*60
+                    print(minutes_left)
+                    time.sleep(60 * minutes_left)
 
-            minutes_left = max(1, (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
-            if task['name'] == 'dd':
-                print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
-                self.manage_dds_duration(minutes_left)
-            elif task['name'] == 'hunt':
-                print(self.bot.interface.color + '[Scheduler {}] Starting to hunt for {} minutes'.format(
-                    self.bot.id, round(minutes_left, 0)) + self.bot.interface.end_color)
-                self.hunt_treasures(minutes_left)
-            elif task['name'] == 'sell':
-                print(self.bot.interface.color + '[Scheduler {}] Starting to sell items'.format(
-                    self.bot.id) + self.bot.interface.end_color)
-                # TODO adapted sell function
-                self.sell_all(self.bot.subscribed)
-            elif task['name'] == 'sleep':
-                print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
-                    self.bot.id) + self.bot.interface.end_color)
-                self.bot.interface.disconnect()
-                time.sleep(60*minutes_left)
+                minutes_left = max(1, 60*(task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
+                if task['name'] == 'dd':
+                    print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
+                    self.manage_dds_duration(minutes_left)
+                elif task['name'] == 'hunt':
+                    print(self.bot.interface.color + '[Scheduler {}] Starting to hunt for {} minutes'.format(
+                        self.bot.id, round(minutes_left, 0)) + self.bot.interface.end_color)
+                    self.hunt_treasures(minutes_left)
+                elif task['name'] == 'sell':
+                    print(self.bot.interface.color + '[Scheduler {}] Starting to sell items'.format(
+                        self.bot.id) + self.bot.interface.end_color)
+                    self.drop_to_bank('all', True)
+                    self.sell_all(self.bot.subscribed)
+                elif task['name'] == 'sleep':
+                    print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
+                        self.bot.id) + self.bot.interface.end_color)
+                    self.bot.interface.disconnect()
+                    time.sleep(60*minutes_left)
 
 
 __author__ = 'Alexis'
