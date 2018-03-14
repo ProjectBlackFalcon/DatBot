@@ -27,7 +27,7 @@ public class GameViz extends JFrame{
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setUndecorated(false);
 		add(panel);
-		setVisible(Game.DISPLAY_GUI);
+//		setVisible(Game.DISPLAY_GUI);
 	}
 
 	public void update(ArrayList<PlayingEntity> playingEntities) {
