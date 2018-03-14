@@ -15,7 +15,8 @@ public class Communication implements Runnable {
 
 	private boolean displayPacket;
 	private static List<Network> networks;
-	boolean isConnecting = false;
+	public static boolean isConnecting = false;
+	public static int idConnecting;
 
 
 	public Communication(boolean arg) {
@@ -39,6 +40,7 @@ public class Communication implements Runnable {
 							Thread.sleep(1000);
 						}
 						isConnecting = true;
+						idConnecting = Integer.valueOf(message[0]);
 						getReturn(Integer.valueOf(message[0]), Integer.valueOf(message[1]), message[4], message[5], this.displayPacket);
 					}
 					else {
@@ -75,6 +77,7 @@ public class Communication implements Runnable {
 					switch (cmd) {
 						case "connect":
 							if (getIndexOfNetwork(botInstance) != -1) {
+								networks.get(botInstance).getInfo().setConnected(false);
 								Network network = new Network(displayPacket, networks.get(botInstance).getInfo(), botInstance);
 								Thread threadNetwork = new Thread(network);
 								threadNetwork.start();
