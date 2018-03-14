@@ -44,6 +44,7 @@ public class ModelConnexion {
 	}
 
 	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception {
+		
 		Object[] toSend = null;
 		
 		param = param.replaceAll(" ", "");
@@ -1009,11 +1010,12 @@ public class ModelConnexion {
 	}
 
 	public void getReturn(String[] message) throws NumberFormatException, Exception {
+		this.network.getInfo().setMsgIdModel(Integer.valueOf(message[1]));
 		Thread.sleep(100);
 		new Thread(new Runnable() {
 			public void run() {
 				try {
-					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], getReturn(message[4], message[5]));
+					Communication.sendToModel(message[0], String.valueOf(Integer.valueOf(message[1]) + 1), "m", "rtn", message[4], getReturn(message[4], message[5]));
 				}
 				catch (NumberFormatException e) {
 					e.printStackTrace();
