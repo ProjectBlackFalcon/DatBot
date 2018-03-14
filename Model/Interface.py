@@ -95,6 +95,12 @@ class Interface:
                     self.bot.in_fight = False
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
+                elif 'info;disconnect;[True]' in message:
+                    print(self.color + '[Interface {}] Disconnected'.format(self.bot.id) + self.end_color)
+                    self.bot.connected = False
+                    self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
+                    del message_queue[message_queue.index(message)]
+                    self.connect()
 
             time.sleep(0.1)
         if not self.bot.in_fight and ret_val is not None:
