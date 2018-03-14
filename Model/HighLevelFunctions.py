@@ -703,6 +703,8 @@ class HighLevelFunctions:
                     print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
                         self.bot.id) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
+                    self.bot.occupation = 'Sleeping'
+                    self.update_db()
                     time.sleep(60*minutes_left)
 
 
