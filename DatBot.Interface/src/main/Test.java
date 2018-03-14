@@ -43,6 +43,7 @@ public class Test {
 //		Thread.sleep(5000);
 
 		communication.getReturn("0;0;i;cmd;connect;['wublel9','notabot0','Sayerses','Julith']");
+		
 //		Thread.sleep(2000);
 //		communication.getReturn("1;0;i;cmd;connect;['wublel6','notabot0','Holle-holla-hollu','Julith']");
 //		Thread.sleep(2000);
@@ -60,7 +61,7 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
 //		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(20000);
+//		Thread.sleep(20000);
 //		communication.getReturn("1;0;i;cmd;getStats;[None]");
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;getStats;[None]");
@@ -75,7 +76,7 @@ public class Test {
 
 //
 //		communication.getReturn("0;0;i;cmd;changeMapTest;[East]");
-		communication.getReturn("0;0;i;cmd;enterBag;[None]");
+//		communication.getReturn("0;0;i;cmd;connect;['wublel9','notabot0','Sayerses','Julith']");
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;useZaap;[(-32,-56)]");
 //		Thread.sleep(5000);

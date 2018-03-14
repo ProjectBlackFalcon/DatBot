@@ -1329,6 +1329,7 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	public void reception() throws Exception {
+		timeout = System.currentTimeMillis();
 		while (!this.socket.isClosed()) {
 			Thread.sleep(200);
 			InputStream data = this.socket.getInputStream();
@@ -1336,6 +1337,7 @@ public class Network extends DisplayInfo implements Runnable {
 			byte[] buffer = new byte[available];
 			if(System.currentTimeMillis() - timeout > 241000){
 				this.socket.close();
+				break;
 			}
 			if (available > 0) {
 				timeout = System.currentTimeMillis();
@@ -1345,7 +1347,8 @@ public class Network extends DisplayInfo implements Runnable {
 				buildMessage(reader);
 			}
 		}
-		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdModel()), "m", "info", "disconnect", new Object[] { "True" });
+		if(!Communication.isConnecting && Communication.idConnecting == getBotInstance())
+			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdModel()), "m", "info", "disconnect", new Object[] { "True" });
 	}
 
 	@Override
@@ -1379,6 +1382,7 @@ public class Network extends DisplayInfo implements Runnable {
 			byte[] wrote = WritePacket(writer, bous, id);
 			dout.write(wrote);
 			dout.flush();
+			timeout = System.currentTimeMillis() - 210000;
 		}
 		catch (SocketException e) {
 			this.socket.close();
