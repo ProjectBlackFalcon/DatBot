@@ -360,7 +360,8 @@ public class Network extends DisplayInfo implements Runnable {
 
 	private void handleCharacterSelectionMessage(DofusDataReader dataReader) throws Exception, Error {
 		try {
-			Thread.sleep(4000 + new Random().nextInt(5000));
+			Thread.sleep(1000);
+//			Thread.sleep(4000 + new Random().nextInt(5000));
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();
