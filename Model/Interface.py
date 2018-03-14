@@ -135,7 +135,8 @@ class Interface:
             success = self.execute_command('connect', connection_param)
             self.bot.connected = success
             current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-            bot_stats = self.bot.interface.get_player_stats()[0]
+            bot_stats = self.bot.interface.get_player_stats()
+            bot_stats = bot_stats[0]
             self.bot.kamas = bot_stats['Inventory']['Kamas']
             self.bot.level = bot_stats['Lvl']
             self.bot.position = (current_map, current_worldmap)
@@ -684,5 +685,13 @@ class Interface:
         """
         destination = ast.literal_eval(str(destination).replace('[', '(').replace(']', ')'))
         return self.execute_command('useZaapi', [destination])
+
+    def use_item(self, inv_id):
+        """
+        Uses an item of the inventory
+        :param inv_id: inventory id of the item to use
+        :return: Boolean
+        """
+        return self.execute_command('useItem', [inv_id])
 
 __author__ = 'Alexis'
