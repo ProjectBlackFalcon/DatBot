@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,7 @@ import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMess
 import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
+import protocol.network.messages.server.basic.SystemMessageDisplayMessage;
 import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
@@ -179,6 +181,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Dragodinde dragodinde;
 	private int port = 5555;
 	private Socket socket;
+	long timeout;
 	private Stats stats;
 	private List<Integer> Ticket;
 
@@ -1328,20 +1331,21 @@ public class Network extends DisplayInfo implements Runnable {
 	public void reception() throws Exception {
 		while (!this.socket.isClosed()) {
 			Thread.sleep(200);
-			if (!this.socket.isClosed()) {
-				InputStream data = this.socket.getInputStream();
-				int available = data.available();
-				byte[] buffer = new byte[available];
-				if (available > 0) {
-					latencyFrame.updateLatency();
-					data.read(buffer, 0, available);
-					DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
-					buildMessage(reader);
-				}
-				//data.close();
+			InputStream data = this.socket.getInputStream();
+			int available = data.available();
+			byte[] buffer = new byte[available];
+			if(System.currentTimeMillis() - timeout > 241000){
+				this.socket.close();
+			}
+			if (available > 0) {
+				timeout = System.currentTimeMillis();
+				latencyFrame.updateLatency();
+				data.read(buffer, 0, available);
+				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
+				buildMessage(reader);
 			}
 		}
-		this.socket.close();
+		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdModel()), "m", "info", "disconnect", new Object[] { "True" });
 	}
 
 	@Override
@@ -1370,10 +1374,15 @@ public class Network extends DisplayInfo implements Runnable {
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DofusDataWriter writer = new DofusDataWriter(bous);
 		message.Serialize(writer);
-		DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
-		byte[] wrote = WritePacket(writer, bous, id);
-		dout.write(wrote);
-		dout.flush();
+		try {
+			DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
+			byte[] wrote = WritePacket(writer, bous, id);
+			dout.write(wrote);
+			dout.flush();
+		}
+		catch (SocketException e) {
+			this.socket.close();
+		}
 		appendLog("[" + id + "]	[Envoi] " + s);
 	}
 
@@ -1441,6 +1450,9 @@ public class Network extends DisplayInfo implements Runnable {
 		switch (packet_id) {
 			case 3:
 				handleHelloConnectMessage(dataReader);
+				break;
+			case 189:
+				this.socket.close();
 				break;
 			case 30:
 				handleServersListMessage(dataReader);
