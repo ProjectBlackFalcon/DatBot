@@ -1015,7 +1015,7 @@ public class ModelConnexion {
 		new Thread(new Runnable() {
 			public void run() {
 				try {
-					Communication.sendToModel(message[0], String.valueOf(Integer.valueOf(message[1]) + 1), "m", "rtn", message[4], getReturn(message[4], message[5]));
+					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], getReturn(message[4], message[5]));
 				}
 				catch (NumberFormatException e) {
 					e.printStackTrace();

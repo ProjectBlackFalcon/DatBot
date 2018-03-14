@@ -40,21 +40,16 @@ public class Communication implements Runnable {
 							Thread.sleep(1000);
 						}
 						isConnecting = true;
-						idConnecting = Integer.valueOf(message[0]);
 						getReturn(Integer.valueOf(message[0]), Integer.valueOf(message[1]), message[4], message[5], this.displayPacket);
 					}
 					else {
 						while (networks.size() < Integer.valueOf(message[0])) {
 							Thread.sleep(1000);
 						}
-						for (Network n : networks) {
-							if (n.getBotInstance() == Integer.valueOf(message[0])) {
-								while (!n.getInfo().isConnected()) {
-									Thread.sleep(1000);
-								}
-								n.getReturn(message);
-							}
+						while (!networks.get(Integer.valueOf(message[0])).getInfo().isConnected()) {
+							Thread.sleep(1000);
 						}
+						networks.get(Integer.valueOf(message[0])).getReturn(message);
 					}
 				}
 			}
@@ -121,7 +116,7 @@ public class Communication implements Runnable {
 							toSend = new Object[] { "True" };
 							break;
 					}
-					Communication.sendToModel(String.valueOf(botInstance), String.valueOf(msgId + 1), "m", "rtn", cmd, toSend);
+					Communication.sendToModel(String.valueOf(botInstance), String.valueOf(msgId), "m", "rtn", cmd, toSend);
 					isConnecting = false;
 				}
 				catch (NumberFormatException e) {
