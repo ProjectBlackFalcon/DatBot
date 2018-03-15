@@ -1,7 +1,7 @@
 import json
 import mysql.connector
-import numpy as np
 import copy
+import ast
 
 
 class LowLevelFunctions:
@@ -241,5 +241,28 @@ class LowLevelFunctions:
                 dd.score += 1
             if n_female > n_male and dd.sex == 'male':
                 dd.score += 1
+
+    def get_schedule(self, bot_name):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec", database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute('''SELECT schedule FROM BotAccounts WHERE name="{}"'''.format(bot_name))
+        schedule = ''
+        conn.close()
+        for row in cursor:
+            schedule = row[0]
+        if schedule:
+            schedules = [ast.literal_eval(schedule)]
+        else:
+            with open('..//Utils//Schedules//default.json', 'r') as f:
+                schedules = json.load(f)
+
+        schedule = []
+        for schedule_curr in schedules:
+            if schedule_curr['idx'] == 0:
+                schedule = schedule_curr['tasks']
+        if schedule:
+            return schedule
+        else:
+            raise RuntimeError('Error fetching schedule')
 
 __author__ = 'Alexis'
