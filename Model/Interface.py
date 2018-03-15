@@ -128,7 +128,7 @@ class Interface:
     def connect(self):
         """
         Connects a bot instance
-        :return: Boolean
+        :return: Boolean/['Save']
         """
         connection_param = [
             self.bot.credentials['username'],
@@ -140,12 +140,18 @@ class Interface:
         if not self.bot.connected:
             success = self.execute_command('connect', connection_param)
             self.bot.connected = success
-            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-            bot_stats = self.bot.interface.get_player_stats()
-            bot_stats = bot_stats[0]
-            self.bot.kamas = bot_stats['Inventory']['Kamas']
-            self.bot.level = bot_stats['Lvl']
-            self.bot.position = (current_map, current_worldmap)
+            if self.bot.connected[0] == 'Save':
+                while self.bot.connected[0] == 'Save':
+                    time.sleep(60*5)
+                    success = self.execute_command('connect', connection_param)
+                    self.bot.connected = success
+            if self.bot.connected:
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+                bot_stats = self.bot.interface.get_player_stats()
+                bot_stats = bot_stats[0]
+                self.bot.kamas = bot_stats['Inventory']['Kamas']
+                self.bot.level = bot_stats['Lvl']
+                self.bot.position = (current_map, current_worldmap)
         return success
 
     def disconnect(self):
