@@ -37,15 +37,15 @@ public class Test {
 //		communication.getReturn("2;0;i;cmd;connect;[wublel7,wubwublel7,Dihydroquerina,Julith]");
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Scalpelementaire','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
+		communication.getReturn("2;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
 //		Thread.sleep(5000);
-//		communication.getReturn("0;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
+//		communication.getReturn("1;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
 //		Thread.sleep(5000);
 
 		communication.getReturn("0;0;i;cmd;connect;['wublel9','notabot0','Sayerses','Julith']");
 		
 //		Thread.sleep(2000);
-//		communication.getReturn("1;0;i;cmd;connect;['wublel6','notabot0','Holle-holla-hollu','Julith']");
+//		communication.getReturn("3;0;i;cmd;connect;['wublel6','notabot0','Holle-holla-hollu','Julith']");
 //		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;disconnect;['debugthemall','azertyuiop1','Le-Gros-Veineux','Julith']");
 //		Thread.sleep(2000);
@@ -60,11 +60,11 @@ public class Test {
 
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
 //		Thread.sleep(2000);
-//		communication.getReturn("0;0;i;cmd;getStats;[None]");
+		communication.getReturn("0;0;i;cmd;getStats;[None]");
 //		Thread.sleep(20000);
-//		communication.getReturn("1;0;i;cmd;getStats;[None]");
+		communication.getReturn("2;0;i;cmd;getStats;[None]");
 //		Thread.sleep(5000);
-//		communication.getReturn("0;0;i;cmd;getStats;[None]");
+//		communication.getReturn("3;0;i;cmd;getStats;[None]");
 //		int id = 0; 
 //		for(int i = 0; i < communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().size() ; i++){
 //			if(communication.getNetworks().get(0).getStats().getInventoryContentMessage().getObjects().get(i).getObjectGID() == 1984){
@@ -80,7 +80,10 @@ public class Test {
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;useZaap;[(-32,-56)]");
 //		Thread.sleep(5000);
-//		communication.getReturn("0;0;i;cmd;getMap;[0,n]");
+		communication.getReturn("0;0;i;cmd;getMap;[None]");
+//		communication.getReturn("1;0;i;cmd;getMap;[None]");
+		communication.getReturn("2;0;i;cmd;getMap;[None]");
+//		communication.getReturn("3;0;i;cmd;getMap;[None]");
 
 //		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");
 		
