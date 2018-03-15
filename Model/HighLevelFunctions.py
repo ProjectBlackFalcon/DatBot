@@ -49,9 +49,24 @@ class HighLevelFunctions:
                 # bot is in hunting hall
                 self.bot.interface.exit_hunting_hall()
 
+            elif current_worldmap == -1:
+                closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
+                if closest_zaap is not None:
+                    if self.bot.interface.enter_heavenbag()[0]:
+                        tries = 0
+                        while tuple(current_map) != tuple(closest_zaap) and tries < 5:
+                            self.bot.interface.use_zaap(closest_zaap)
+                            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+                            time.sleep(2)
+                            tries += 1
+                        if tuple(current_map) != tuple(closest_zaap):
+                            raise RuntimeError('Unable to use Zaap to go to {}'.format(closest_zaap))
+                    else:
+                        raise RuntimeError('Unable to enter heavenbag to go from {}, worldmap -1 to {}'.format(current_map, closest_zaap))
+
             # TODO manage more worldmap changing
             else:
-                raise Exception('Worldmap change not supported')
+                raise RuntimeError('Worldmap change not supported')
 
         closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
         if closest_zaap is not None:
@@ -685,14 +700,15 @@ class HighLevelFunctions:
                 else:
                     continue
                 if task['start'] > (time.localtime().tm_hour + time.localtime().tm_min / 60):
-                    print(self.bot.interface.color + '[Scheduler {}] Starting to sleep'.format(
-                        self.bot.id) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
                     minutes_left = (task['start'] - (time.localtime().tm_hour + time.localtime().tm_min / 60))*60
-                    print(minutes_left)
+                    self.bot.occupation = 'Sleeping'
+                    self.update_db()
+                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
+                        self.bot.id, round(minutes_left)) + self.bot.interface.end_color)
                     time.sleep(60 * minutes_left)
 
-                minutes_left = max(1, 60*(task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
+                minutes_left = max(1, 60 * (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
                 if task['name'] == 'dd':
                     print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
                     self.manage_dds_duration(minutes_left)
@@ -706,11 +722,11 @@ class HighLevelFunctions:
                     self.drop_to_bank('all', True)
                     self.sell_all(self.bot.subscribed)
                 elif task['name'] == 'sleep':
-                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {}'.format(
-                        self.bot.id, 60*minutes_left) + self.bot.interface.end_color)
+                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
+                        self.bot.id, round(minutes_left)) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
-                    time.sleep(60*minutes_left)
+                    time.sleep(60 * minutes_left)
 
 __author__ = 'Alexis'
