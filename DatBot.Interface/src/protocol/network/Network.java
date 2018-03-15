@@ -633,7 +633,7 @@ public class Network extends DisplayInfo implements Runnable {
 		info.setJoinedFight(true);
 		info.setTurn(false);
 		info.setInitFight(false);
-		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"start\"" });
+		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "combat", new Object[] { "\"start\"" });
 		JSONObject mapJSONObject = new JSONObject();
 		mapJSONObject.put("mapID", (int) info.getMapId());
 		mapJSONObject.put("name", info.getName());
@@ -1203,6 +1203,11 @@ public class Network extends DisplayInfo implements Runnable {
 		{
 			if(GameData.getNameServer(server.getId()).equals(this.info.getServer())){
 				serverId = server.getId();
+				if(server.getStatus() == 5){
+					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(this.info.getMsgIdModel()), "m", "info", "connect", new Object[] { "\"Save\"" });
+					this.socket.close();
+					return;
+				}
 			}
 		}
 		if(serverId == -1){
@@ -1349,7 +1354,7 @@ public class Network extends DisplayInfo implements Runnable {
 			}
 		}
 		if(!Communication.isConnecting && Communication.idConnecting == getBotInstance())
-			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdModel()), "m", "info", "disconnect", new Object[] { "True" });
+			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
 	}
 
 	@Override

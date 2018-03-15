@@ -46,10 +46,10 @@ public class Communication implements Runnable {
 						while (networks.size() < Integer.valueOf(message[0])) {
 							Thread.sleep(1000);
 						}
-						while (!networks.get(Integer.valueOf(message[0])).getInfo().isConnected()) {
+						while (!networks.get(getIndexOfNetwork(Integer.valueOf(message[0]))).getInfo().isConnected()) {
 							Thread.sleep(1000);
 						}
-						networks.get(Integer.valueOf(message[0])).getReturn(message);
+						networks.get(getIndexOfNetwork(Integer.valueOf(message[0]))).getReturn(message);
 					}
 				}
 			}
@@ -72,20 +72,21 @@ public class Communication implements Runnable {
 					switch (cmd) {
 						case "connect":
 							if (getIndexOfNetwork(botInstance) != -1) {
-								networks.get(botInstance).getInfo().setConnected(false);
-								Network network = new Network(displayPacket, networks.get(botInstance).getInfo(), botInstance);
+								networks.get(getIndexOfNetwork(botInstance)).getInfo().setConnected(false);
+								Network network = new Network(displayPacket, networks.get(getIndexOfNetwork(botInstance)).getInfo(), botInstance);
+								network.getInfo().setMsgIdModel(msgId);
 								Thread threadNetwork = new Thread(network);
 								threadNetwork.start();
-								networks.set(botInstance, network);
+								networks.set(getIndexOfNetwork(botInstance), network);
 								int index = 0;
-								while (!networks.get(botInstance).getInfo().isConnected()) {
+								while (!networks.get(getIndexOfNetwork(botInstance)).getInfo().isConnected()) {
 									Thread.sleep(1000);
 									index += 1;
 									if (index == 60) { throw new java.lang.Error("Connection timed out"); }
 								}
-								networks.get(botInstance).append("Connected !");
-								networks.get(botInstance).append("Name : " + networks.get(botInstance).getInfo().getName());
-								networks.get(botInstance).append("Level : " + networks.get(botInstance).getInfo().getLvl());
+								networks.get(getIndexOfNetwork(botInstance)).append("Connected !");
+								networks.get(getIndexOfNetwork(botInstance)).append("Name : " + networks.get(getIndexOfNetwork(botInstance)).getInfo().getName());
+								networks.get(getIndexOfNetwork(botInstance)).append("Level : " + networks.get(getIndexOfNetwork(botInstance)).getInfo().getLvl());
 								toSend = new Object[] { "True" };
 							}
 							else {
@@ -109,10 +110,10 @@ public class Communication implements Runnable {
 							break;
 						case "disconnect":
 							if (displayPacket) {
-								networks.get(botInstance).getF().setVisible(false);
+								networks.get(getIndexOfNetwork(botInstance)).getF().setVisible(false);
 							}
-							networks.get(botInstance).getInfo().setConnected(false);
-							networks.get(botInstance).getSocket().close();
+							networks.get(getIndexOfNetwork(botInstance)).getInfo().setConnected(false);
+							networks.get(getIndexOfNetwork(botInstance)).getSocket().close();
 							toSend = new Object[] { "True" };
 							break;
 					}
@@ -163,13 +164,13 @@ public class Communication implements Runnable {
 			getReturn(Integer.valueOf(message[0]), Integer.valueOf(message[1]), message[4], message[5], this.displayPacket);
 		}
 		else {
-			while (networks.size() < Integer.valueOf(message[0])) {
+			while (getIndexOfNetwork(Integer.valueOf(message[0])) == - 1) {
 				Thread.sleep(1000);
 			}
-			while (!networks.get(Integer.valueOf(message[0])).getInfo().isConnected()) {
+			while (!networks.get(getIndexOfNetwork(Integer.valueOf(message[0]))).getInfo().isConnected()) {
 				Thread.sleep(1000);
 			}
-			networks.get(Integer.valueOf(message[0])).getReturn(message);
+			networks.get(getIndexOfNetwork(Integer.valueOf(message[0]))).getReturn(message);
 		}
 	}
 
