@@ -1,5 +1,6 @@
 from Model.Interface import Interface
 from Model.HighLevelFunctions import HighLevelFunctions
+from Model.LowLevelFunctions import LowLevelFunctions
 
 
 class Bot:
@@ -8,7 +9,7 @@ class Bot:
         self.id = bot_id
         self.credentials = credentials
         self.interface = Interface(self, color=color)
-        self.llf = llf
+        self.llf = llf  # type: LowLevelFunctions
         self.hf = HighLevelFunctions(self)
         self.occupation = None
         self.position = None
@@ -17,4 +18,7 @@ class Bot:
         self.subscribed = subscribed
         self.kamas = None
         self.level = None
+        self.schedule = self.llf.get_schedule(self.credentials['name'])
 
+    def run(self, schedule_name=None):
+        self.hf.use_schedule(schedule_name)
