@@ -16,8 +16,6 @@ public class Communication implements Runnable {
 	private boolean displayPacket;
 	private static List<Network> networks;
 	public static boolean isConnecting = false;
-	public static int idConnecting;
-
 
 	public Communication(boolean arg) {
 		this.displayPacket = arg;
@@ -80,7 +78,7 @@ public class Communication implements Runnable {
 								networks.set(getIndexOfNetwork(botInstance), network);
 								int index = 0;
 								while (!networks.get(getIndexOfNetwork(botInstance)).getInfo().isConnected()) {
-									Thread.sleep(1000);
+									Thread.sleep(2000);
 									index += 1;
 									if (index == 60) { throw new java.lang.Error("Connection timed out"); }
 								}

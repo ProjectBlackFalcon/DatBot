@@ -181,6 +181,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Dragodinde dragodinde;
 	private int port = 5555;
 	private Socket socket;
+	boolean packetSent = false;
 	long timeout;
 	private Stats stats;
 	private List<Integer> Ticket;
@@ -1335,26 +1336,24 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	public void reception() throws Exception {
-		timeout = System.currentTimeMillis();
 		while (!this.socket.isClosed()) {
 			Thread.sleep(200);
 			InputStream data = this.socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
-			if(System.currentTimeMillis() - timeout > 241000){
+			if(System.currentTimeMillis() - timeout > 15000 && packetSent){
 				this.socket.close();
 				break;
 			}
 			if (available > 0) {
-				timeout = System.currentTimeMillis();
+				packetSent = false;
 				latencyFrame.updateLatency();
 				data.read(buffer, 0, available);
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
 			}
 		}
-		if(!Communication.isConnecting && Communication.idConnecting == getBotInstance())
-			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
+		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
 	}
 
 	@Override
@@ -1388,7 +1387,8 @@ public class Network extends DisplayInfo implements Runnable {
 			byte[] wrote = WritePacket(writer, bous, id);
 			dout.write(wrote);
 			dout.flush();
-			timeout = System.currentTimeMillis() - 210000;
+			timeout = System.currentTimeMillis();
+			packetSent = true;
 		}
 		catch (SocketException e) {
 			this.socket.close();
@@ -1512,6 +1512,7 @@ public class Network extends DisplayInfo implements Runnable {
 			case 950:
 				GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
 				super.debug.println(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
+				break;
 			case 951:
 				handleGameMapMovementMessage(dataReader);
 				break;
