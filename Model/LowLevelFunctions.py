@@ -241,6 +241,15 @@ class LowLevelFunctions:
                 dd.score += 1
             if n_female > n_male and dd.sex == 'male':
                 dd.score += 1
+            if dd.name == 'Bot-Mobile':
+                dd.score += 100
+
+    def get_bot_mobile(self, dd_list):
+        bm_id = False
+        for dd in dd_list:
+            if dd['name'] == 'Bot-Mobile':
+                bm_id = dd['id']
+        return bm_id
 
     def get_schedule(self, bot_name):
         conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec", database="wz3xj6_spec")
