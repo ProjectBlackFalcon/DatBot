@@ -72,6 +72,7 @@ public class Info {
 	private boolean mountxpmsg = false;
 	private boolean mountSet = false;
 	private boolean mountRiding = false;
+	private boolean objectUse = false;
 
 
 	public void setBooleanToFalse()
@@ -92,6 +93,7 @@ public class Info {
 		mountxpmsg = false;
 		mountSet = false;
 		mountRiding = false;
+		objectUse = false;
 	}
 	
 	public boolean threadDone = true;
@@ -504,6 +506,14 @@ public class Info {
 
 	public void setMountRiding(boolean mountRiding) {
 		this.mountRiding = mountRiding;
+	}
+
+	public boolean isObjectUse() {
+		return objectUse;
+	}
+
+	public void setObjectUse(boolean objectUse) {
+		this.objectUse = objectUse;
 	}
 
 }

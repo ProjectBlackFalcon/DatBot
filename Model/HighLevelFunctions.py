@@ -543,6 +543,8 @@ class HighLevelFunctions:
             return False
 
     def sell_all(self, subscribed):
+        if not self.bot.connected:
+            self.bot.interface.connect()
         with open('..//Utils//hdv_pos.json', 'r') as f:
             all_hdvs = json.load(f)
 
@@ -583,6 +585,8 @@ class HighLevelFunctions:
                 f.write(traceback.format_exc())
 
     def manage_dds(self):
+        if not self.bot.connected:
+            self.bot.interface.connect()
         self.bot.occupation = 'Managing DDs'
         self.update_db()
         with open('..//Utils//ddPath.json', 'r') as f:
@@ -676,16 +680,19 @@ class HighLevelFunctions:
         while time.time()-start < duration:
             self.manage_dds()
 
-    def use_schedule(self, schedule_name):
-        with open('..//Utils//Schedules//{}.json'.format(schedule_name), 'r') as f:
-            schedules = json.load(f)
-        schedule = []
-        for schedule_curr in schedules:
-            if schedule_curr['idx'] == 0:
-                schedule = schedule_curr['tasks']
+    def use_schedule(self, schedule_name=None):
+        if schedule_name is not None:
+            with open('..//Utils//Schedules//{}.json'.format(schedule_name), 'r') as f:
+                schedules = json.load(f)
+            schedule = []
+            for schedule_curr in schedules:
+                if schedule_curr['idx'] == 0:
+                    schedule = schedule_curr['tasks']
+        else:
+            schedule = self.bot.schedule
 
-        caught_up = False
         while 1:
+            caught_up = False
             for task in schedule:
                 if (time.localtime().tm_hour + time.localtime().tm_min/60) - task['end'] < 0 or caught_up:
                     caught_up = True
@@ -728,5 +735,6 @@ class HighLevelFunctions:
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
                     time.sleep(60 * minutes_left)
+
 
 __author__ = 'Alexis'
