@@ -137,14 +137,11 @@ class Interface:
             self.bot.credentials['server']
         ]
         success = [True]
-        if not self.bot.connected:
+        while not self.bot.connected:
+            self.bot.occupation = 'Connecting'
+            self.bot.hf.update_db()
             success = self.execute_command('connect', connection_param)
             self.bot.connected = success[0]
-            if self.bot.connected == 'Save':
-                while self.bot.connected == 'Save':
-                    time.sleep(60*5)
-                    success = self.execute_command('connect', connection_param)
-                    self.bot.connected = success[0]
             if self.bot.connected:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                 bot_stats = self.bot.interface.get_player_stats()
@@ -152,6 +149,8 @@ class Interface:
                 self.bot.kamas = bot_stats['Inventory']['Kamas']
                 self.bot.level = bot_stats['Lvl']
                 self.bot.position = (current_map, current_worldmap)
+            else:
+                time.sleep(5*60)
         return success
 
     def disconnect(self):
@@ -673,7 +672,7 @@ class Interface:
     def get_dd_stat(self):
         """
         Returns info on the equipped DD
-        :return: False / [level, energy]
+        :return: False / [level, energy, id]
         """
         return self.execute_command('getDDStat')
 
