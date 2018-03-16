@@ -95,6 +95,7 @@ public class Communication implements Runnable {
 								String[] str = param.split(",");
 								Info info = new Info(str[0], str[1], str[2], str[3]);
 								Network network = new Network(displayPacket, info, botInstance);
+								network.getInfo().setMsgIdModel(msgId);
 								Thread threadNetwork = new Thread(network);
 								threadNetwork.start();
 								networks.add(network);

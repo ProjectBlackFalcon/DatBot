@@ -56,7 +56,7 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;useZaapi;[(-24,40)]");
 
 //
-//		communication.getReturn("0;0;i;cmd;fart;[None]");
+//		communication.getReturn("1;0;i;cmd;openDD;[None]");
 
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[1984]");
 //		Thread.sleep(2000);
