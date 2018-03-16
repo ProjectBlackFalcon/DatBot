@@ -1204,7 +1204,7 @@ public class Network extends DisplayInfo implements Runnable {
 		{
 			if(GameData.getNameServer(server.getId()).equals(this.info.getServer())){
 				serverId = server.getId();
-				if(server.getStatus() == 5){
+				if(server.getStatus() != 3){
 					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(this.info.getMsgIdModel()), "m", "info", "connect", new Object[] { "\"Save\"" });
 					this.socket.close();
 					return;
@@ -1338,19 +1338,21 @@ public class Network extends DisplayInfo implements Runnable {
 	public void reception() throws Exception {
 		while (!this.socket.isClosed()) {
 			Thread.sleep(200);
-			InputStream data = this.socket.getInputStream();
-			int available = data.available();
-			byte[] buffer = new byte[available];
-			if(System.currentTimeMillis() - timeout > 15000 && packetSent){
-				this.socket.close();
-				break;
-			}
-			if (available > 0) {
-				packetSent = false;
-				latencyFrame.updateLatency();
-				data.read(buffer, 0, available);
-				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
-				buildMessage(reader);
+			if(!this.socket.isClosed()){
+				InputStream data = this.socket.getInputStream();
+				int available = data.available();
+				byte[] buffer = new byte[available];
+				if(System.currentTimeMillis() - timeout > 15000 && packetSent){
+					this.socket.close();
+					break;
+				}
+				if (available > 0) {
+					packetSent = false;
+					latencyFrame.updateLatency();
+					data.read(buffer, 0, available);
+					DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
+					buildMessage(reader);
+				}	
 			}
 		}
 		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
