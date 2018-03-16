@@ -361,7 +361,7 @@ public class Network extends DisplayInfo implements Runnable {
 
 	private void handleCharacterSelectionMessage(DofusDataReader dataReader) throws Exception, Error {
 		try {
-			Thread.sleep(4000 + new Random().nextInt(5000));
+			Thread.sleep(4000 + new Random().nextInt(3000));
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();
@@ -1176,7 +1176,7 @@ public class Network extends DisplayInfo implements Runnable {
 		SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
 		sequenceEndMessage.Deserialize(dataReader);
 		if (sequenceEndMessage.getAuthorId() == info.getActorId()) {
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.getActionId()), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
 			this.getInfo().setAcknowledged(true);
 		}
@@ -1204,9 +1204,7 @@ public class Network extends DisplayInfo implements Runnable {
 		{
 			if(GameData.getNameServer(server.getId()).equals(this.info.getServer())){
 				serverId = server.getId();
-				if(server.getStatus() != 3){
-					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(this.info.getMsgIdModel()), "m", "info", "connect", new Object[] { "False" });
-					this.socket.close();
+				if(!(server.getStatus() == 3 || server.getStatus() == 0)){
 					return;
 				}
 			}
