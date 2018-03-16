@@ -80,7 +80,11 @@ public class Communication implements Runnable {
 								while (!networks.get(getIndexOfNetwork(botInstance)).getInfo().isConnected()) {
 									Thread.sleep(2000);
 									index += 1;
-									if (index == 60) { throw new java.lang.Error("Connection timed out"); }
+									if (index == 60) { 
+										System.out.println("Connection timed out"); 
+										Communication.sendToModel(String.valueOf(botInstance), String.valueOf(msgId), "m", "rtn", cmd, new Object[] { "False" });
+										return;
+									}
 								}
 								networks.get(getIndexOfNetwork(botInstance)).append("Connected !");
 								networks.get(getIndexOfNetwork(botInstance)).append("Name : " + networks.get(getIndexOfNetwork(botInstance)).getInfo().getName());
@@ -96,9 +100,13 @@ public class Communication implements Runnable {
 								networks.add(network);
 								int index = 0;
 								while (!info.isConnected()) {
-									Thread.sleep(1000);
+									Thread.sleep(2000);
 									index += 1;
-									if (index == 60) { throw new java.lang.Error("Connection timed out"); }
+									if (index == 60) { 
+										System.out.println("Connection timed out"); 
+										Communication.sendToModel(String.valueOf(botInstance), String.valueOf(msgId), "m", "rtn", cmd, new Object[] { "False" });
+										return;
+									}
 								}
 								network.append("Connected !");
 								network.append("Name : " + info.getName());
