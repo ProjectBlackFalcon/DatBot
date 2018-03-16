@@ -1337,20 +1337,18 @@ public class Network extends DisplayInfo implements Runnable {
 	public void reception() throws Exception {
 		timeout = System.currentTimeMillis();
 		while (!this.socket.isClosed()) {
-			Thread.sleep(200);
+			Thread.sleep(400);
 			InputStream data = this.socket.getInputStream();
 			int available = data.available();
 			byte[] buffer = new byte[available];
-			if(System.currentTimeMillis() - timeout > 241000){
-				this.socket.close();
-				break;
-			}
-			if (available > 0) {
-				timeout = System.currentTimeMillis();
-				latencyFrame.updateLatency();
+			latencyFrame.updateLatency();
+			try {
 				data.read(buffer, 0, available);
 				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 				buildMessage(reader);
+			}
+			catch (Exception e) {
+				System.out.println("Socket error");
 			}
 		}
 		if(!Communication.isConnecting && Communication.idConnecting == getBotInstance())
@@ -1384,10 +1382,9 @@ public class Network extends DisplayInfo implements Runnable {
 		DofusDataWriter writer = new DofusDataWriter(bous);
 		message.Serialize(writer);
 		try {
-			DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
 			byte[] wrote = WritePacket(writer, bous, id);
-			dout.write(wrote);
-			dout.flush();
+			socket.getOutputStream().write(wrote);
+			socket.getOutputStream().flush();
 			timeout = System.currentTimeMillis() - 210000;
 		}
 		catch (SocketException e) {
