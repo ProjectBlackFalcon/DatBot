@@ -4,6 +4,7 @@ from tkinter import *
 import datetime
 import json
 import copy
+import ast
 
 
 class Bot:
@@ -118,6 +119,10 @@ class Scheduler:
                     selected_bar2 = bar
             self.concat_bars(selected_bar1, selected_bar2, offset)
 
+        elif 'assign' in command:
+            _, sched_name, bot_name = command.split()
+            self.assign_schedule(sched_name, bot_name)
+
     def redo(self, _):
         self.command_field.insert(0, self.last_command)
 
@@ -158,9 +163,19 @@ class Scheduler:
         with open('..//Utils//Schedules//{}.json'.format(file_name), 'w') as f:
             json.dump(bars, f)
 
+    def assign_schedule(self, schedule_name, bot_name):
+        with open('..//Utils//Schedules//{}.json'.format(schedule_name), 'r') as f:
+            schedule = json.load(f)[0]
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+
+        cursor = conn.cursor()
+        cursor.execute('''UPDATE BotAccounts SET schedule="{}" WHERE name="{}"'''.format(str(schedule), bot_name))
+        conn.commit()
+        conn.close()
+
     def load(self, file_name=None):
         if file_name is None:
-            path = False
             path = filedialog.askopenfilename(initialdir="..//Utils//Schedules//", title="Select schedule",
                                               filetypes=(("json files", "*.json"), ("all files", "*.*")))
         else:
