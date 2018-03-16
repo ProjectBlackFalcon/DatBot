@@ -1,29 +1,13 @@
 {
-  "Ilancelet": {
-    "Animaux": {},
-    "Cordonniers": {},
-    "Documents": {},
-    "Ressources": {},
-    "Runes": {},
-    "Alchimistes": {},
-    "Ames": {},
-    "Bijoutiers": {},
-    "Bricoleurs": {},
-    "Bucherons": {},
-    "Chasseurs": {},
-    "Faconneurs": {},
-    "Forgerons": {},
-    "Mineurs": {"15263": {"name": "rose des sables", "quantity": 100}},
-    "Paysans": {},
-    "Pecheurs": {},
-    "Sculpteurs": {},
-    "Tailleurs": {}
-  },
   "Default": {
     "Animaux": {},
     "Cordonniers": {},
     "Documents": {},
-    "Ressources": {"311": {"name": "eau potable", "quantity": 100}},
+    "Ressources": {
+      "311": {"name": "eau potable", "quantity": 100},
+      "2239": {"name": "poudre d'eniripsa", "quantity": 10},
+      "8012": {"name": "poudre de resurrection", "quantity": 1}
+    },
     "Runes": {},
     "Alchimistes": {},
     "Ames": {},
