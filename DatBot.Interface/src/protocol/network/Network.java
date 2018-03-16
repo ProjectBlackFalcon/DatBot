@@ -181,6 +181,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Dragodinde dragodinde;
 	private int port = 5555;
 	private Socket socket;
+	boolean packetSent = false;
 	long timeout;
 	private Stats stats;
 	private List<Integer> Ticket;
@@ -360,8 +361,7 @@ public class Network extends DisplayInfo implements Runnable {
 
 	private void handleCharacterSelectionMessage(DofusDataReader dataReader) throws Exception, Error {
 		try {
-			Thread.sleep(1000);
-//			Thread.sleep(4000 + new Random().nextInt(5000));
+			Thread.sleep(4000 + new Random().nextInt(5000));
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();
@@ -997,6 +997,7 @@ public class Network extends DisplayInfo implements Runnable {
 		weight.Deserialize(dataReader);
 		info.setWeight(weight.getWeight());
 		info.setWeigthMax(weight.getWeightMax());
+		info.setObjectUse(true);
 	}
 
 	private void handleJobExperienceMultiUpdateMessage(DofusDataReader dataReader) {
@@ -1203,8 +1204,8 @@ public class Network extends DisplayInfo implements Runnable {
 		{
 			if(GameData.getNameServer(server.getId()).equals(this.info.getServer())){
 				serverId = server.getId();
-				if(server.getStatus() == 5){
-					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(this.info.getMsgIdModel()), "m", "info", "connect", new Object[] { "\"Save\"" });
+				if(server.getStatus() != 3){
+					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(this.info.getMsgIdModel()), "m", "info", "connect", new Object[] { "False" });
 					this.socket.close();
 					return;
 				}
@@ -1335,23 +1336,32 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	public void reception() throws Exception {
-		timeout = System.currentTimeMillis();
 		while (!this.socket.isClosed()) {
-			Thread.sleep(400);
-			InputStream data = this.socket.getInputStream();
-			int available = data.available();
-			byte[] buffer = new byte[available];
-			latencyFrame.updateLatency();
-			try {
-				data.read(buffer, 0, available);
-				DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
-				buildMessage(reader);
+			Thread.sleep(300);
+			if(!this.socket.isClosed()){
+				InputStream data = this.socket.getInputStream();
+				int available = data.available();
+				byte[] buffer = new byte[available];
+				if(System.currentTimeMillis() - timeout > 15000 && packetSent){
+					System.out.println("Disconnected from server");
+					this.socket.close();
+					break;
+				}
+				if (available > 0) {
+					packetSent = false;
+					latencyFrame.updateLatency();
+					try {
+						data.read(buffer, 0, available);
+						DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
+						buildMessage(reader);
+					} 			catch (Exception e) {
+						System.out.println("Socket error");
+					}
+				}	
 			}
-			catch (Exception e) {
-				System.out.println("Socket error");
-			}
+
 		}
-		if(!Communication.isConnecting && Communication.idConnecting == getBotInstance())
+		if(this.info.isConnected())
 			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
 	}
 
@@ -1385,7 +1395,8 @@ public class Network extends DisplayInfo implements Runnable {
 			byte[] wrote = WritePacket(writer, bous, id);
 			socket.getOutputStream().write(wrote);
 			socket.getOutputStream().flush();
-			timeout = System.currentTimeMillis() - 210000;
+			timeout = System.currentTimeMillis();
+			packetSent = true;
 		}
 		catch (SocketException e) {
 			this.socket.close();
@@ -1509,6 +1520,7 @@ public class Network extends DisplayInfo implements Runnable {
 			case 950:
 				GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
 				super.debug.println(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
+				break;
 			case 951:
 				handleGameMapMovementMessage(dataReader);
 				break;

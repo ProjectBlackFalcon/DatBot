@@ -32,6 +32,7 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMovePric
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
+import protocol.network.messages.game.inventory.items.ObjectUseMessage;
 import utils.d2p.map.CellData;
 
 public class ModelConnexion {
@@ -842,7 +843,7 @@ public class ModelConnexion {
 				break;
 			case "getDDStat":
 				if (this.network.getDragodinde().isHavingDd()) {
-					toSend = new Object[] { this.network.getDragodinde().getLevelEquipedDD(), this.network.getDragodinde().getEnergy() };
+					toSend = new Object[] { this.network.getDragodinde().getLevelEquipedDD(), this.network.getDragodinde().getEnergy(), this.network.getDragodinde().getId() };
 				}
 				else {
 					toSend = new Object[] { "False" };
@@ -957,6 +958,15 @@ public class ModelConnexion {
 					toSend = new Object[] { "False" };
 				}
 				break;
+			case "useItem":
+				ObjectUseMessage objectUseMessage = new ObjectUseMessage(Integer.parseInt(param));
+				getNetwork().sendToServer(objectUseMessage, ObjectUseMessage.ProtocolId, "Using item");
+				if(this.waitToSendObjectUse()){
+					toSend = new Object[] { "True" };
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				break;
 		}
 		return toSend;
 	}
@@ -1061,6 +1071,17 @@ public class ModelConnexion {
 	public boolean waitToSendEmote() throws InterruptedException{
 		long index =  System.currentTimeMillis();
 		while (!this.network.getInfo().isEmoteLaunched()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false; 
+			}
+		}
+		return true;
+	}
+	
+	public boolean waitToSendObjectUse() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isObjectUse()) {
 			Thread.sleep(50);
 			if(System.currentTimeMillis() - index > 2000){
 				return false; 

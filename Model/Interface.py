@@ -139,12 +139,12 @@ class Interface:
         success = [True]
         if not self.bot.connected:
             success = self.execute_command('connect', connection_param)
-            self.bot.connected = success
-            if self.bot.connected[0] == 'Save':
-                while self.bot.connected[0] == 'Save':
+            self.bot.connected = success[0]
+            if self.bot.connected == 'Save':
+                while self.bot.connected == 'Save':
                     time.sleep(60*5)
                     success = self.execute_command('connect', connection_param)
-                    self.bot.connected = success
+                    self.bot.connected = success[0]
             if self.bot.connected:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                 bot_stats = self.bot.interface.get_player_stats()
@@ -205,6 +205,8 @@ class Interface:
         :return: {"Weight": <>, "WeightMax": <>, "Lvl": <>, "Job": {"job_id": level, ...}}
         """
         stats = self.execute_command('getStats')
+        time.sleep(0.5)
+        print(self.bot.id, stats)
         self.bot.kamas = stats[0]['Inventory']['Kamas']
         self.bot.level = stats[0]['Lvl']
         return stats
