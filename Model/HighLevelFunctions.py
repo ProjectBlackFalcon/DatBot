@@ -415,6 +415,13 @@ class HighLevelFunctions:
                 self.bot.interface.exit_heavenbag()
             self.bot.interface.start_hunt_fight()
 
+            chest_ids = [15248, 15260, 15261, 15262, 15264, 15265, 15266, 15267, 15268, 15269, 15270]
+            inventory = self.bot.interface.get_player_stats()[0]['Inventory']['Items']
+            for chest_id in chest_ids:
+                number = self.llf.get_number_of_item_in_inventory(inventory, chest_id)
+                for i in range(number):
+                    self.bot.interface.use_item(self.llf.get_inventory_id(inventory, chest_id))
+
             if not self.bot.interface.hunt_is_active()[0]:
                 print(self.bot.interface.color + '[Treasure Hunt {}] Hunt successful'.format(self.bot.id) + self.bot.interface.end_color)
                 return True
@@ -592,6 +599,7 @@ class HighLevelFunctions:
         with open('..//Utils//ddPath.json', 'r') as f:
             path = json.load(f)
 
+        dd_to_pex_id = None
         for tile, cell in path:
             self.goto(tile, cell)
             tool = self.llf.get_map_dd_tool(self.bot.position[0])
@@ -615,8 +623,7 @@ class HighLevelFunctions:
                 if dd.get_next_spot() == 'out':
                     self.bot.interface.put_dd_in_inventory(dd.id, "stable")
                 if dd.get_next_spot() == 'pex':
-                    # TODO Pex dat motherfucker
-                    pass
+                    dd_to_pex_id = dd.id
 
             # Retrieve DDs from paddock
             # Make sure there is at least 5 spots free first (dd + the 4 eventual children)
@@ -648,9 +655,10 @@ class HighLevelFunctions:
                 dds_for_mating = males_for_mating + females_for_mating
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_paddock(dd.id, 'stable')
-                time.sleep(3)
-                self.bot.interface.fart()
-                time.sleep(3)
+                if len(dd):
+                    time.sleep(3)
+                    self.bot.interface.fart()
+                    time.sleep(3)
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_stable(dd.id, 'paddock')
 
@@ -672,13 +680,41 @@ class HighLevelFunctions:
             for dd in selected_dds:
                 self.bot.interface.put_dd_in_paddock(dd.id, "stable")
 
+            bot_mobile = False
+            if dd_to_pex_id is not None and tuple(self.bot.position[0]) == (-32, 38):
+                bot_mobile = self.pex_dd(dd_to_pex_id)
             self.bot.interface.close_dd()
+            if bot_mobile:
+                self.bot.interface.mount_dd()
 
     def manage_dds_duration(self, duration_minutes):
         duration = duration_minutes * 60
         start = time.time()
         while time.time()-start < duration:
             self.manage_dds()
+
+    def pex_dd(self, dd_id):
+        if self.bot.interface.get_player_stats()[0]['Lvl'] >= 60:
+            dd_stats = self.bot.interface.get_dd_stat()
+            if dd_stats[0]:
+                self.bot.interface.put_dd_in_stable(dd_stats[2], 'equip')
+            self.bot.interface.equip_dd(dd_id, 'stable')
+            self.bot.interface.close_dd()
+        self.bot.interface.mount_dd()
+        self.bot.interface.set_dd_xp(90)
+        dd_stats = self.bot.interface.get_dd_stat()
+        while dd_stats[0] <= 5:
+            self.hunt_treasures(1)
+            dd_stats = self.bot.interface.get_dd_stat()
+        self.bot.interface.set_dd_xp(0)
+        self.goto((-37, -56), target_cell=219)
+        self.bot.interface.dismount_dd()
+        dds = self.bot.interface.open_dd()
+        self.bot.interface.put_dd_in_stable(dd_id, 'equip')
+        bot_mobile_id = self.llf.get_bot_mobile(dds)
+        if bot_mobile_id:
+            self.bot.interface.equip_dd(bot_mobile_id, 'stable')
+            return True
 
     def use_schedule(self, schedule_name=None):
         if schedule_name is not None:
@@ -699,7 +735,7 @@ class HighLevelFunctions:
                     pass
                 elif task == schedule[-1] and not caught_up:
                     print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
-                        self.bot.id, 60 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2) + self.bot.interface.end_color)
+                        self.bot.id, round(60 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2)) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
