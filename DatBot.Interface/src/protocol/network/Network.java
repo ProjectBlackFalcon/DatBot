@@ -1339,6 +1339,9 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	public void reception() throws Exception {
+		if(socket == null){
+			return;
+		}
 		while (!this.socket.isClosed()) {
 			Thread.sleep(300);
 			if(!this.socket.isClosed()){
