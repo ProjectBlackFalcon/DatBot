@@ -40,7 +40,8 @@ public class Test {
 //		communication.getReturn("2;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
 //		Thread.sleep(5000);
 //		communication.getReturn("1;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
-//		Thread.sleep(5000);
+		Thread.sleep(5000);
+		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 
 //		communication.getReturn("0;0;i;cmd;connect;['wublel9','notabot0','Sayerses','Julith']");
 		
@@ -80,7 +81,7 @@ public class Test {
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;useZaap;[(-32,-56)]");
 //		Thread.sleep(5000);
-//		communication.getReturn("0;0;i;cmd;getMap;[None]");
+		communication.getReturn("1;0;i;cmd;getMap;[None]");
 //		communication.getReturn("1;0;i;cmd;getMap;[None]");
 //		communication.getReturn("2;0;i;cmd;getMap;[None]");
 //		communication.getReturn("3;0;i;cmd;getMap;[None]");

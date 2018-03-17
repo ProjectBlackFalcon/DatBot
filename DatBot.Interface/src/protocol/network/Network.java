@@ -1200,11 +1200,16 @@ public class Network extends DisplayInfo implements Runnable {
 		ServersListMessage servers = new ServersListMessage();
 		servers.Deserialize(dataReader);
 		int serverId = -1;
+		
 		for (GameServerInformations server : servers.getServers())
 		{
 			if(GameData.getNameServer(server.getId()).equals(this.info.getServer())){
 				serverId = server.getId();
 				if(!(server.getStatus() == 3 || server.getStatus() == 0)){
+					this.socket.close();
+					Communication.isConnecting = false;
+					if(this.displayPacket)
+						f.setVisible(false);
 					return;
 				}
 			}
