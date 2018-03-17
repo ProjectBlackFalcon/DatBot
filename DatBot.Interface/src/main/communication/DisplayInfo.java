@@ -33,9 +33,9 @@ import javax.swing.text.StyleContext;
 public class DisplayInfo {
 
 	private int botInstance;
-	private boolean displayPacket;
+	protected boolean displayPacket;
 
-	private JFrame f;
+	protected JFrame f;
 	private FileOutputStream fileOutputStream;
 	private JTextPane text;
 

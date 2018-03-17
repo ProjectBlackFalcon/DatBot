@@ -41,7 +41,7 @@ public class Communication implements Runnable {
 						getReturn(Integer.valueOf(message[0]), Integer.valueOf(message[1]), message[4], message[5], this.displayPacket);
 					}
 					else {
-						while (networks.size() < Integer.valueOf(message[0])) {
+						while (getIndexOfNetwork(Integer.valueOf(message[0])) == - 1) {
 							Thread.sleep(1000);
 						}
 						while (!networks.get(getIndexOfNetwork(Integer.valueOf(message[0]))).getInfo().isConnected()) {
@@ -71,7 +71,8 @@ public class Communication implements Runnable {
 						case "connect":
 							if (getIndexOfNetwork(botInstance) != -1) {
 								networks.get(getIndexOfNetwork(botInstance)).getInfo().setConnected(false);
-								Network network = new Network(displayPacket, networks.get(getIndexOfNetwork(botInstance)).getInfo(), botInstance);
+								Info info = networks.get(getIndexOfNetwork(botInstance)).getInfo();
+								Network network = new Network(displayPacket, new Info(info.getNameAccount(), info.getPassword(), info.getName(), info.getServer()), botInstance);
 								network.getInfo().setMsgIdModel(msgId);
 								Thread threadNetwork = new Thread(network);
 								threadNetwork.start();
@@ -83,6 +84,7 @@ public class Communication implements Runnable {
 									if (index == 60) { 
 										System.out.println("Connection timed out"); 
 										Communication.sendToModel(String.valueOf(botInstance), String.valueOf(msgId), "m", "rtn", cmd, new Object[] { "False" });
+										isConnecting = false;
 										return;
 									}
 								}
@@ -106,6 +108,7 @@ public class Communication implements Runnable {
 									if (index == 60) { 
 										System.out.println("Connection timed out"); 
 										Communication.sendToModel(String.valueOf(botInstance), String.valueOf(msgId), "m", "rtn", cmd, new Object[] { "False" });
+										isConnecting = false;
 										return;
 									}
 								}
