@@ -121,6 +121,7 @@ class Interface:
             msg_id = self.add_command(command, parameters)
             return self.wait_for_return(msg_id)
         except Exception as e:
+            print(self.color + '[Interface {}] ERROR : \n{}'.format(self.bot.id, traceback.format_exc()) + self.end_color)
             with open('..//Utils//InterfaceErrors.txt', 'a') as f:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
