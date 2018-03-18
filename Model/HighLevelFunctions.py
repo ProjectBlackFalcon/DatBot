@@ -445,6 +445,7 @@ class HighLevelFunctions:
                     f.write(traceback.format_exc())
         print(self.bot.interface.color + '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)) + self.bot.interface.end_color)
 
+
     def fight_on_map(self, duration_minutes, hp_threshold=100):
         self.bot.occupation = 'Fighting'
         self.update_db()
@@ -573,24 +574,6 @@ class HighLevelFunctions:
             self.goto(hdv)
             self.sell_hdv()
 
-    def update_db(self):
-        try:
-            print(self.bot.interface.color + '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]) + self.bot.interface.end_color)
-            self.llf.update_db(
-                self.bot.id,
-                self.bot.credentials['server'],
-                self.bot.credentials['name'],
-                self.bot.kamas,
-                self.bot.level,
-                self.bot.occupation,
-                self.bot.position[0],
-                self.bot.position[1]
-            )
-        except Exception:
-            with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:
-                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-                f.write(traceback.format_exc())
-
     def manage_dds(self):
         self.bot.occupation = 'Managing DDs'
         self.update_db()
@@ -640,7 +623,7 @@ class HighLevelFunctions:
                 dds_stable.append(dd)
                 self.bot.interface.put_dd_in_stable(dd.id, "paddock")
 
-            if tool == 'energy':
+            if tool == 'mood+':
                 males_for_mating = []
                 females_for_mating = []
                 for dd in dds_stable:
@@ -775,6 +758,59 @@ class HighLevelFunctions:
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
                     time.sleep(60 * minutes_left)
+
+    def drop_bot_mobile(self, idx):
+        self.goto((-32, 37), 271)
+        self.bot.interface.dismount_dd()
+        dds_stable = []
+        dds_paddock = []
+        all_dds = self.bot.interface.open_dd()
+        if all_dds:
+            for dd in all_dds:
+                dd_obj = DD(dd)
+                if dd_obj.in_paddock:
+                    dds_paddock.append(dd_obj)
+                else:
+                    dds_stable.append(dd_obj)
+        if len(dds_paddock) == 10:
+            self.bot.interface.put_dd_in_stable(dds_paddock[0].id, 'paddock')
+        self.bot.interface.put_dd_in_paddock(idx, 'equip')
+        self.bot.interface.close_dd()
+        self.bot.mount = 'resting'
+        self.bot.occupation = 'Putting Bot-Mobile in paddock'
+        self.update_db()
+
+    def fetch_bot_mobile(self):
+        self.bot.occupation = 'Fetching Bot-Mobile'
+        self.update_db()
+        self.goto((-32, 37), 271)
+        all_dds = self.bot.interface.open_dd()
+        bm_id = self.llf.get_bot_mobile(all_dds)
+        if bm_id:
+            self.bot.interface.equip_dd(bm_id, 'paddock')
+        self.bot.interface.close_dd()
+        self.bot.interface.mount_dd()
+        self.bot.mount = 'equipped'
+        self.update_db()
+
+    def update_db(self):
+        try:
+            print(self.bot.interface.color + '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1], self.bot.mount) + self.bot.interface.end_color)
+            self.llf.update_db(
+                self.bot.id,
+                self.bot.credentials['server'],
+                self.bot.credentials['name'],
+                self.bot.kamas,
+                self.bot.level,
+                self.bot.occupation,
+                self.bot.position[0],
+                self.bot.position[1],
+                self.bot.mount
+            )
+        except Exception:
+            with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:
+                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                f.write(traceback.format_exc())
 
 
 __author__ = 'Alexis'
