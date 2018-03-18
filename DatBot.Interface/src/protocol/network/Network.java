@@ -1325,7 +1325,7 @@ public class Network extends DisplayInfo implements Runnable {
 				return;
 			}
 			while (!this.socket.isClosed()) {
-				Thread.sleep(400);
+				Thread.sleep(250);
 				if(!this.socket.isClosed()){
 					InputStream data = this.socket.getInputStream();
 					int available = data.available();
@@ -1349,7 +1349,7 @@ public class Network extends DisplayInfo implements Runnable {
 				}
 
 			}
-			if(this.info.isPrintDc())
+			if(this.info.isPrintDc() && this.info.isConnected())
 				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
 		}
 		catch (Exception e) {
