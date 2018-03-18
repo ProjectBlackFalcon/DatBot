@@ -19,6 +19,7 @@ class Bot:
         self.kamas = None
         self.level = None
         self.schedule = self.llf.get_schedule(self.credentials['name'])
+        self.mount = None
 
     def run(self, schedule_name=None):
         self.hf.use_schedule(schedule_name)
