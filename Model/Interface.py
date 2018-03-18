@@ -175,6 +175,8 @@ class Interface:
             success = self.execute_command('disconnect')
             if success[0]:
                 self.bot.connected = False
+                self.bot.occupation = 'Sleeping'
+                self.bot.hf.update_db()
         return success
 
     def get_map(self):
