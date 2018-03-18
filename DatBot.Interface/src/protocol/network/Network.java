@@ -2,7 +2,6 @@ package protocol.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -37,6 +36,7 @@ import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
 import protocol.network.messages.connection.IdentificationMessage;
 import protocol.network.messages.connection.SelectedServerDataMessage;
+import protocol.network.messages.connection.SelectedServerRefusedMessage;
 import protocol.network.messages.connection.ServerSelectionMessage;
 import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
@@ -77,7 +77,6 @@ import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
-import protocol.network.messages.game.context.fight.GameFightTurnStartPlayingMessage;
 import protocol.network.messages.game.context.mount.MountRidingMessage;
 import protocol.network.messages.game.context.mount.MountSetMessage;
 import protocol.network.messages.game.context.mount.MountXpRatioMessage;
@@ -123,7 +122,6 @@ import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMess
 import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
-import protocol.network.messages.server.basic.SystemMessageDisplayMessage;
 import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
@@ -141,7 +139,6 @@ import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
-import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
@@ -170,16 +167,15 @@ public class Network extends DisplayInfo implements Runnable {
 	private Info info;
 	private Interactive interactive;
 
-	private String ip = "213.248.126.40";
+	public String ip = "213.248.126.40";
 	private Map map;
 	private Message message;
 	private LatencyFrame latencyFrame;
-	private ModelConnexion modelConnexion;
 	private Monsters monsters;
 	private Movement movement;
 	private Npc npc;
 	private Dragodinde dragodinde;
-	private int port = 5555;
+	public int port = 5555;
 	private Socket socket;
 	boolean packetSent = false;
 	long timeout;
@@ -200,7 +196,6 @@ public class Network extends DisplayInfo implements Runnable {
 		this.dragodinde = new Dragodinde();
 		try {
 			this.npc = new Npc(this);
-			this.modelConnexion = new ModelConnexion(this);
 			socket = new Socket(this.ip, this.port);
 			if (socket.isConnected()) {
 				latencyFrame = new LatencyFrame();
@@ -216,7 +211,6 @@ public class Network extends DisplayInfo implements Runnable {
 			e.printStackTrace();
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -318,16 +312,6 @@ public class Network extends DisplayInfo implements Runnable {
 
 	public Npc getNpc() {
 		return npc;
-	}
-
-	public void getReturn(String[] message) {
-		try {
-			this.modelConnexion.getReturn(message);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		return;
 	}
 
 	public Socket getSocket() {
@@ -902,7 +886,6 @@ public class Network extends DisplayInfo implements Runnable {
 		gameMapMovementMessage.Deserialize(dataReader);
 		if (gameMapMovementMessage.getActorId() == info.getActorId()) {
 			info.setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-			append("Moving to cellId : " + info.getCellId());
 		}
 		for (int i = 0; i < this.getMonsters().getMonsters().size(); i++) {
 			if (this.getMonsters().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId()) {
@@ -1068,8 +1051,8 @@ public class Network extends DisplayInfo implements Runnable {
 				if(interactiveElement.getEnabledSkills().size() > 0 && interactiveElement.isOnCurrentMap())
 					System.out.println(interactiveElement + " cell : " + this.interactive.getInteractive(interactiveElement.getEnabledSkills().get(0).getSkillId())[0]);
 			}*/
-			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
-			append("CellId : " + info.getCellId());
+//			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
+//			append("CellId : " + info.getCellId());
 			info.setWaitForMov(true);
 			info.setConnected(true);
 			info.setNewMap(true);
@@ -1207,9 +1190,6 @@ public class Network extends DisplayInfo implements Runnable {
 				serverId = server.getId();
 				if(!(server.getStatus() == 3 || server.getStatus() == 0)){
 					this.socket.close();
-					Communication.isConnecting = false;
-					if(this.displayPacket)
-						f.setVisible(false);
 					return;
 				}
 			}
@@ -1338,48 +1318,39 @@ public class Network extends DisplayInfo implements Runnable {
 		this.interactive.setZaapList(zaapListMessage.getMapIds());
 	}
 
-	public void reception() throws Exception {
-		if(socket == null){
-			return;
-		}
-		while (!this.socket.isClosed()) {
-			Thread.sleep(300);
-			if(!this.socket.isClosed()){
-				InputStream data = this.socket.getInputStream();
-				int available = data.available();
-				byte[] buffer = new byte[available];
-				if(System.currentTimeMillis() - timeout > 15000 && packetSent){
-					System.out.println("Disconnected from server");
-					this.socket.close();
-					break;
-				}
-				if (available > 0) {
-					packetSent = false;
-					latencyFrame.updateLatency();
-					try {
-						data.read(buffer, 0, available);
-						DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
-						buildMessage(reader);
-					} 			catch (Exception e) {
-						System.out.println("Socket error");
-					}
-				}	
-			}
-
-		}
-		if(this.info.isConnected())
-			Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
-	}
-
 	@Override
 	public void run() {
 		try {
-			append("Connection...");
-			try {
-				reception();
-			}catch(java.io.EOFException e) {
-				System.err.println("Caught EOF exception.");
+			if(socket == null){
+				return;
 			}
+			while (!this.socket.isClosed()) {
+				Thread.sleep(400);
+				if(!this.socket.isClosed()){
+					InputStream data = this.socket.getInputStream();
+					int available = data.available();
+					byte[] buffer = new byte[available];
+					if(System.currentTimeMillis() - timeout > 15000 && packetSent){
+						System.out.println("Disconnected from server");
+						this.socket.close();
+						break;
+					}
+					if (available > 0) {
+						packetSent = false;
+						latencyFrame.updateLatency();
+						try {
+							data.read(buffer, 0, available);
+							DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
+							buildMessage(reader);
+						} 			catch (Exception e) {
+							System.out.println("Socket error");
+						}
+					}	
+				}
+
+			}
+			if(this.info.isPrintDc())
+				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -1480,6 +1451,13 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 30:
 				handleServersListMessage(dataReader);
+				break;
+			case 41:
+				SelectedServerRefusedMessage selectedServerRefusedMessage = new SelectedServerRefusedMessage();
+				selectedServerRefusedMessage.Deserialize(dataReader);
+				System.out.println(selectedServerRefusedMessage.getError());
+				System.out.println(selectedServerRefusedMessage.getServerId());
+				System.out.println(selectedServerRefusedMessage.getServerStatus());
 				break;
 			case 42:
 				handleSelectedServerDataMessage(dataReader);
