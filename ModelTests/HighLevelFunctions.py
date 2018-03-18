@@ -68,14 +68,18 @@ random.shuffle(colors)
 {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
 {'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
 {'username': 'wublel2', 'password': 'notabot0', 'name': 'Scalpelementaire', 'server': 'Julith'}
+{'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'}
 {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
+{'username': 'wublel12', 'password': 'notabot0', 'name': 'Draideac', 'server': 'Julith'},
 '''
 
 
 credentials = [
-    {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'},
-    {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'},
     {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
+    {'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'},
+    {'username': 'wublel12', 'password': 'notabot0', 'name': 'Draideac', 'server': 'Julith'},
+    {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'},
+    {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
 ]
 
 bots = []
