@@ -124,6 +124,8 @@ class HighLevelFunctions:
         self.bot.position = (target_coord, worldmap)
 
     def discover_zaaps(self):
+        if not self.bot.connected:
+            self.bot.interface.connect()
         self.bot.occupation = 'Discovering Zaaps'
         self.update_db()
         closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
@@ -427,8 +429,6 @@ class HighLevelFunctions:
                 return True
 
     def hunt_treasures(self, duration_minutes, level='max'):
-        if not self.bot.connected:
-            self.bot.interface.connect()
         duration = duration_minutes * 60
         start = time.time()
         n_hunts = 0
@@ -592,8 +592,6 @@ class HighLevelFunctions:
                 f.write(traceback.format_exc())
 
     def manage_dds(self):
-        if not self.bot.connected:
-            self.bot.interface.connect()
         self.bot.occupation = 'Managing DDs'
         self.update_db()
         with open('..//Utils//ddPath.json', 'r') as f:
@@ -603,9 +601,9 @@ class HighLevelFunctions:
         for tile, cell in path:
             self.goto(tile, cell)
             tool = self.llf.get_map_dd_tool(self.bot.position[0])
-            all_dds = self.bot.interface.open_dd()
             dds_stable = []
             dds_paddock = []
+            all_dds = self.bot.interface.open_dd()
             if all_dds:
                 for dd in all_dds:
                     dd_obj = DD(dd)
@@ -655,7 +653,7 @@ class HighLevelFunctions:
                 dds_for_mating = males_for_mating + females_for_mating
                 for dd in dds_for_mating:
                     self.bot.interface.put_dd_in_paddock(dd.id, 'stable')
-                if len(dd):
+                if len(dds_for_mating):
                     time.sleep(3)
                     self.bot.interface.fart()
                     time.sleep(3)
@@ -753,13 +751,19 @@ class HighLevelFunctions:
 
                 minutes_left = max(1, 60 * (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
                 if task['name'] == 'dd':
+                    if not self.bot.connected:
+                        self.bot.interface.connect()
                     print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
                     self.manage_dds_duration(minutes_left)
                 elif task['name'] == 'hunt':
+                    if not self.bot.connected:
+                        self.bot.interface.connect()
                     print(self.bot.interface.color + '[Scheduler {}] Starting to hunt for {} minutes'.format(
                         self.bot.id, round(minutes_left, 0)) + self.bot.interface.end_color)
                     self.hunt_treasures(minutes_left)
                 elif task['name'] == 'sell':
+                    if not self.bot.connected:
+                        self.bot.interface.connect()
                     print(self.bot.interface.color + '[Scheduler {}] Starting to sell items'.format(
                         self.bot.id) + self.bot.interface.end_color)
                     self.drop_to_bank('all', True)
