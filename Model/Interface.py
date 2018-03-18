@@ -121,6 +121,7 @@ class Interface:
             msg_id = self.add_command(command, parameters)
             return self.wait_for_return(msg_id)
         except Exception as e:
+            print(self.color + '[Interface {}] ERROR : \n{}'.format(self.bot.id, traceback.format_exc()) + self.end_color)
             with open('..//Utils//InterfaceErrors.txt', 'a') as f:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
@@ -149,6 +150,12 @@ class Interface:
                 self.bot.kamas = bot_stats['Inventory']['Kamas']
                 self.bot.level = bot_stats['Lvl']
                 self.bot.position = (current_map, current_worldmap)
+                if self.get_dd_stat()[0]:
+                    self.bot.mount = 'equipped'
+                else:
+                    self.bot.mount = self.bot.llf.get_mount_situation(self.bot.credentials['name'])
+                    if self.bot.mount == 'resting':
+                        self.bot.hf.fetch_bot_mobile()
             else:
                 time.sleep(5*60)
         return success
@@ -160,6 +167,11 @@ class Interface:
         """
         success = [True]
         if self.bot.connected:
+            dd_stats = self.bot.interface.get_dd_stat()
+            if dd_stats[0]:
+                level, energy, idx = dd_stats
+                if energy < 1000:
+                    self.bot.hf.drop_bot_mobile(idx)
             success = self.execute_command('disconnect')
             if success[0]:
                 self.bot.connected = False
