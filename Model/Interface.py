@@ -165,13 +165,13 @@ class Interface:
         Disconnects the bot instance
         :return:
         """
-        dd_stats = self.bot.interface.get_dd_stat()
-        if dd_stats[0]:
-            level, energy, idx = dd_stats
-            if energy < 1000:
-                self.bot.hf.drop_bot_mobile(idx)
         success = [True]
         if self.bot.connected:
+            dd_stats = self.bot.interface.get_dd_stat()
+            if dd_stats[0]:
+                level, energy, idx = dd_stats
+                if energy < 1000:
+                    self.bot.hf.drop_bot_mobile(idx)
             success = self.execute_command('disconnect')
             if success[0]:
                 self.bot.connected = False
