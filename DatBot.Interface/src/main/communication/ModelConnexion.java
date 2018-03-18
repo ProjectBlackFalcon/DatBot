@@ -1,9 +1,11 @@
 package main.communication;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
 import game.movement.Movement;
@@ -39,20 +41,60 @@ public class ModelConnexion {
 
 	private boolean bankOppened;
 	private Network network;
+	public int botInstance;
+	boolean actionFinished = true;
 
-	public ModelConnexion(Network network) throws InterruptedException {
-		this.network = network;
+	public ModelConnexion(int botInstance) throws InterruptedException {
+		this.botInstance = botInstance;
 	}
+	
 
 	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception {
 		
 		Object[] toSend = null;
 		
+		param = param.substring(1, param.length() - 1);
 		param = param.replaceAll(" ", "");
 		param = param.replaceAll("\\(", "");
 		param = param.replaceAll("\\)", "");
 		
 		switch (cmd) {
+			case "connect":
+				String[] str = param.split(",");
+				Info info = new Info(str[0], str[1], str[2], str[3]);
+				if(this.network != null){
+					this.network.getInfo().setPrintDc(false);
+					this.network.getF().setVisible(false);
+				}
+				this.network = new Network(Communication.displayPacket, info, botInstance);
+				Thread threadNetwork = new Thread(network);
+				threadNetwork.start();
+				int index = 0;
+				while (!info.isConnected()) {
+					Thread.sleep(2000);
+					index += 1;
+					if (index == 60) { 
+						System.out.println("Connection timed out"); 
+						break;
+					}
+				}
+				if(info.isConnected()){
+					toSend = new Object[] { "True" };
+				} else {
+					toSend = new Object[] { "False" };
+				}
+				Communication.isConnecting = false;
+				break;
+			case "disconnect":
+				if(network != null){
+					this.network.getInfo().setPrintDc(false);
+					this.network.getF().setVisible(false);
+					this.network.getSocket().close();
+					toSend = new Object[] { "True" };
+				} else {
+					toSend = new Object[] { "True" };
+				}
+				break;
 			case "getMap":
 				toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
 				break;
@@ -1020,12 +1062,22 @@ public class ModelConnexion {
 	}
 
 	public void getReturn(String[] message) throws NumberFormatException, Exception {
-		this.network.getInfo().setMsgIdModel(Integer.valueOf(message[1]));
 		Thread.sleep(100);
 		new Thread(new Runnable() {
 			public void run() {
 				try {
+					while(!actionFinished){
+						Thread.sleep(1000);
+					}
+					actionFinished = false;
+					if(message[4].equals("connect")){
+						while(Communication.isConnecting){
+							Thread.sleep(1000);
+						}
+						Communication.isConnecting = true;
+					}
 					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], getReturn(message[4], message[5]));
+					actionFinished = true;
 				}
 				catch (NumberFormatException e) {
 					e.printStackTrace();

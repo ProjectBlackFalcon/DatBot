@@ -33,6 +33,7 @@ public class Info {
 	private String server = "";
 	private long actorId = -1;
 	private boolean isConnected = false;
+	private boolean printDc = true;
 
 	// Bot info
 
@@ -514,6 +515,14 @@ public class Info {
 
 	public void setObjectUse(boolean objectUse) {
 		this.objectUse = objectUse;
+	}
+
+	public boolean isPrintDc() {
+		return printDc;
+	}
+
+	public void setPrintDc(boolean printDc) {
+		this.printDc = printDc;
 	}
 
 }
