@@ -35,9 +35,9 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Scalpelementaire','Julith']");
 //		communication.getReturn("2;0;i;cmd;connect;['wublel10','notabot0','Gaspienura','Julith']");
 //		Thread.sleep(5000);
-//		communication.getReturn("1;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
-//		Thread.sleep(10000);
-		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
+		communication.getReturn("1;0;i;cmd;connect;['wublel5','notabot0','Ilancelet','Julith']");
+		communication.getReturn("1;0;i;cmd;openDD;[None]");
+//		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 
 		// TESTS FOR INPUTS
 

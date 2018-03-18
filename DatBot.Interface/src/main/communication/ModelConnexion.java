@@ -1,6 +1,9 @@
 package main.communication;
 
-import java.net.Socket;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,7 +11,6 @@ import java.util.Random;
 import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
-import game.movement.Movement;
 import game.plugin.Dragodinde;
 import game.plugin.Hunt;
 import protocol.network.Network;
@@ -35,7 +37,6 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfer
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
 import protocol.network.messages.game.inventory.items.ObjectUseMessage;
-import utils.d2p.map.CellData;
 
 public class ModelConnexion {
 
@@ -54,6 +55,7 @@ public class ModelConnexion {
 		Object[] toSend = null;
 		
 		param = param.substring(1, param.length() - 1);
+		param = param.replaceAll("'", "");
 		param = param.replaceAll(" ", "");
 		param = param.replaceAll("\\(", "");
 		param = param.replaceAll("\\)", "");
