@@ -675,7 +675,7 @@ class HighLevelFunctions:
             self.manage_dds()
 
     def pex_dd(self, dd_id):
-        if self.bot.interface.get_player_stats()[0]['Lvl'] >= 60:
+        if self.bot.interface.get_player_stats()[0]['Lvl'] >= 80:
             dd_stats = self.bot.interface.get_dd_stat()
             if dd_stats[0]:
                 self.bot.interface.put_dd_in_stable(dd_stats[2], 'equip')
