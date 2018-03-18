@@ -150,6 +150,12 @@ class Interface:
                 self.bot.kamas = bot_stats['Inventory']['Kamas']
                 self.bot.level = bot_stats['Lvl']
                 self.bot.position = (current_map, current_worldmap)
+                if self.get_dd_stat()[0]:
+                    self.bot.mount = 'equipped'
+                else:
+                    self.bot.mount = self.bot.llf.get_mount_situation(self.bot.credentials['name'])
+                    if self.bot.mount == 'resting':
+                        self.bot.hf.fetch_bot_mobile()
             else:
                 time.sleep(5*60)
         return success
@@ -159,6 +165,11 @@ class Interface:
         Disconnects the bot instance
         :return:
         """
+        dd_stats = self.bot.interface.get_dd_stat()
+        if dd_stats[0]:
+            level, energy, idx = dd_stats
+            if energy < 1000:
+                self.bot.hf.drop_bot_mobile(idx)
         success = [True]
         if self.bot.connected:
             success = self.execute_command('disconnect')
