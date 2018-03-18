@@ -149,7 +149,7 @@ public class Dragodinde {
 			s += "\"inPaddock\":" + "True" ;
 			s += "}";
 			if(i != paddock.size() - 1){
-				s += ",\n";
+				s += ",";
 			}
 		}
 		if(paddock.size() > 0){
@@ -198,7 +198,7 @@ public class Dragodinde {
 			s += "\"inPaddock\":" + "False" ;
 			s += "}";
 			if(i != stable.size() - 1){
-				s += ",\n";
+				s += ",";
 			}
 		}
 		return s;
