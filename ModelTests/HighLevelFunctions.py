@@ -1,22 +1,8 @@
 from Model.Interface import PipeToJava
 from Model.LowLevelFunctions import LowLevelFunctions
 from Model.Bot import Bot
-import time
 from threading import Thread
-import winsound
-import json
 import random
-
-
-def dds():
-    while 1:
-        start = time.time()
-        bot.hf.manage_dds()
-        winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
-        print('Done in {} minutes'.format(round((time.time() - start) / 60, 1)))
-        bot.interface.disconnect()
-        time.sleep(3600)
-
 
 pipe = PipeToJava(headless=True)
 bot_id = 0
@@ -68,28 +54,17 @@ random.shuffle(colors)
 {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
 {'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
 {'username': 'wublel2', 'password': 'notabot0', 'name': 'Scalpelementaire', 'server': 'Julith'}
+{'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'}
 {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
+{'username': 'wublel12', 'password': 'notabot0', 'name': 'Draideac', 'server': 'Julith'},
 '''
 
 
-credentials = [
-    {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'},
-    {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'},
-    {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
-]
+cred = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'}
 
-bots = []
-threads = []
-for cred in credentials:
-    bots.append(Bot(pipe, credentials.index(cred), cred, llf, False, color=colors[credentials.index(cred)]))
+bot = Bot(pipe, 0, cred, llf, False, color='\033[92m')
 
-for bot in bots:
-    threads.append(Thread(target=bot.run))
-    threads[-1].name = bot.credentials['name']
-    threads[-1].start()
-for thread in threads:
-    thread.join()
+bot.interface.connect()
 
 pipe.t.join()
-winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
 __author__ = 'Alexis'
