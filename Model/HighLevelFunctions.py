@@ -718,8 +718,6 @@ class HighLevelFunctions:
                     print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
                         self.bot.id, round(60 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2)) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
-                    self.bot.occupation = 'Sleeping'
-                    self.update_db()
                     time.sleep(3600 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2)
                 else:
                     continue
@@ -755,8 +753,6 @@ class HighLevelFunctions:
                     print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
                         self.bot.id, round(minutes_left)) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
-                    self.bot.occupation = 'Sleeping'
-                    self.update_db()
                     time.sleep(60 * minutes_left)
 
     def drop_bot_mobile(self, idx):
