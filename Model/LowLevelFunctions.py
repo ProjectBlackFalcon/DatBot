@@ -107,13 +107,13 @@ class LowLevelFunctions:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
 
-    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map, worldmap):
+    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map, worldmap, mount):
         try:
             conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                            database="wz3xj6_spec")
             cursor = conn.cursor()
-            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap)
-            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", put)
+            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap, mount)
+            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap, Mount) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""", put)
             conn.commit()
             conn.close()
         except Exception:
@@ -273,5 +273,16 @@ class LowLevelFunctions:
             return schedule
         else:
             raise RuntimeError('Error fetching schedule')
+
+    def get_mount_situation(self, bot_name):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute('''SELECT Mount FROM Bots WHERE Name='{}' ORDER BY Time DESC LIMIT 1'''.format(bot_name))
+        conn.close()
+        mount_situation = ''
+        for row in cursor:
+            mount_situation = row[0] if row[0] else 'None'
+        return mount_situation
 
 __author__ = 'Alexis'
