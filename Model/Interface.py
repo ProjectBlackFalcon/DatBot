@@ -67,7 +67,7 @@ class Interface:
         self.pipe.p.stdin.flush()
         return self.current_id-1
 
-    def wait_for_return(self, message_id, timeout=600):
+    def wait_for_return(self, message_id, timeout=15*60):
         # print('[Interface] Waiting for response...')
         ret_val = None
         message_queue = []
