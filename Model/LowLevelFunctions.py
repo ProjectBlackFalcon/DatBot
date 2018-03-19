@@ -2,13 +2,13 @@ import json
 import mysql.connector
 import copy
 import ast
+import datetime
 
 
 class LowLevelFunctions:
     def __init__(self, map_info=None):
         self.map_info = [] if map_info is None else map_info
-        with open('..//Utils//discoveredZaaps.json', 'r') as f:
-            self.disc_zaaps = json.load(f)
+        self.disc_zaaps = self.get_discovered_zaaps()
         with open('..//Utils//zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
 
@@ -144,8 +144,37 @@ class LowLevelFunctions:
             else:
                 self.disc_zaaps[bot_name] = [zaap_pos]
 
-        with open('..//Utils//discoveredZaaps.json', 'w') as f:
-            json.dump(self.disc_zaaps, f)
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE BotAccounts SET zaaps='{}' WHERE name='{}'""".format(self.disc_zaaps[bot_name], bot_name))
+        conn.commit()
+        conn.close()
+
+    def get_discovered_zaaps(self, bot_name=None):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+
+        cursor = conn.cursor()
+        if bot_name is not None:
+            cursor.execute("""SELECT zaaps FROM BotAccounts WHERE name='{}'""".format(bot_name))
+            conn.close()
+            zaaps = []
+            for row in cursor:
+                zaaps = row[0]
+            if zaaps:
+                zaaps = ast.literal_eval(zaaps)
+            else:
+                zaaps = []
+            self.disc_zaaps[bot_name] = copy.deepcopy(zaaps)
+            return zaaps
+        else:
+            cursor.execute("""SELECT zaaps, name FROM BotAccounts""")
+            conn.close()
+            zaaps = {}
+            for row in cursor:
+                zaaps[row[1]] = ast.literal_eval(row[0])
+            return copy.deepcopy(zaaps)
 
     def get_closest_known_zaap(self, bot_name, pos):
         if bot_name in self.disc_zaaps.keys():
@@ -163,9 +192,7 @@ class LowLevelFunctions:
         if bot_name in self.disc_zaaps.keys():
             disc_zaaps = self.disc_zaaps[bot_name]
         else:
-            self.disc_zaaps[bot_name] = []
-            with open('..//Utils//discoveredZaaps.json', 'w') as f:
-                json.dump(self.disc_zaaps, f)
+            self.disc_zaaps[bot_name] = self.get_discovered_zaaps(bot_name)
 
         zaaps = copy.deepcopy(self.zaaps)
 
@@ -284,5 +311,18 @@ class LowLevelFunctions:
         for row in cursor:
             mount_situation = row[0] if row[0] else 'None'
         return mount_situation
+
+    def log(self, bot, message):
+        name = bot.credentials['name']
+        color = bot.interface.color
+        print(color + message + '\033[0m')
+        with open('..//Utils//BotsLogs//{}.json'.format(name), 'a') as f:
+            f.write(str(datetime.datetime.now()) + '  ' + color + message + '\033[0m' + '\n')
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE BotAccounts SET pos='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
+        conn.commit()
+        conn.close()
 
 __author__ = 'Alexis'
