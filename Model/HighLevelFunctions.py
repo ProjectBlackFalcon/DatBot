@@ -245,10 +245,10 @@ class HighLevelFunctions:
             for item in harvest:
                 f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
         if type(ret_val) is tuple and ret_val[3]+5 >= ret_val[4]:
-            print(self.bot.interface.color + '[Harvest {}] Full'.format(self.bot.id) + self.bot.interface.end_color)
+            self.llf.log(self.bot, '[Harvest {}] Full'.format(self.bot.id))
             return False
         else:
-            print(self.bot.interface.color + '[Harvest {}] Done'.format(self.bot.id) + self.bot.interface.end_color)
+            self.llf.log(self.bot, '[Harvest {}] Done'.format(self.bot.id))
             return True
 
     def harvest_path(self, path, number_of_loops=-1, harvest_only=None, do_not_harvest=None, sell=False):
@@ -436,14 +436,14 @@ class HighLevelFunctions:
         while time.time()-start < duration:
             try:
                 n_hunts += 1
-                print(self.bot.interface.color + '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts) + self.bot.interface.end_color)
+                self.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
                 success = self.tresure_hunt(level)
                 n_success = n_success+1 if success else n_success
             except Exception:
                 with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
-        print(self.bot.interface.color + '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)) + self.bot.interface.end_color)
+        self.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
 
 
     def fight_on_map(self, duration_minutes, hp_threshold=100):
@@ -541,7 +541,7 @@ class HighLevelFunctions:
                             price = item_hdv_stats[batch_size_index] - 1
                             player_lvl = self.bot.interface.get_player_stats()[0]['Lvl']
                             if hdv_position is None and price > 0:
-                                print(self.bot.interface.color + '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price) + self.bot.interface.end_color)
+                                self.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
                                 self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
                         return True
@@ -595,9 +595,9 @@ class HighLevelFunctions:
                     else:
                         dds_stable.append(dd_obj)
 
-            print(self.bot.interface.color + '[DD Manager {}] Current tool : '.format(self.bot.id) + tool + self.bot.interface.end_color)
-            print(self.bot.interface.color + '[DD Manager {}] DDs in stable : '.format(self.bot.id) + str(len(dds_stable)) + self.bot.interface.end_color)
-            print(self.bot.interface.color + '[DD Manager {}] DDs in paddock : '.format(self.bot.id) + str(len(dds_paddock)) + self.bot.interface.end_color)
+            self.llf.log(self.bot, '[DD Manager {}] Current tool : {}'.format(self.bot.id, tool))
+            self.llf.log(self.bot, '[DD Manager {}] DDs in stable : {}'.format(self.bot.id, len(dds_stable)))
+            self.llf.log(self.bot, '[DD Manager {}] DDs in paddock : {}'.format(self.bot.id, len(dds_paddock)))
 
             # Pull sterile non pregnant dds
             for dd in dds_stable:
@@ -616,7 +616,7 @@ class HighLevelFunctions:
                     score_sorted_dds = sorted(dds_stable, key=lambda one_dd: one_dd.score)
                     dds_to_kick = score_sorted_dds[:n_dds_to_kick]
                     for dd_to_kick in dds_to_kick:
-                        print(self.bot.interface.color + '[DD Manager{} ] Kicking dd {}. Score : {}'.format(self.bot.id, dd_to_kick.id, dd_to_kick.score) + self.bot.interface.end_color)
+                        self.llf.log(self.bot, '[DD Manager{} ] Kicking dd {}. Score : {}'.format(self.bot.id, dd_to_kick.id, dd_to_kick.score))
                         self.bot.interface.put_dd_in_inventory(dd_to_kick.id, "stable")
                         del dds_stable[dds_stable.index(dd_to_kick)]
 
@@ -715,7 +715,7 @@ class HighLevelFunctions:
                     caught_up = True
                     pass
                 elif task == schedule[-1] and not caught_up:
-                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
+                    self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
                         self.bot.id, round(60 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2)) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
                     time.sleep(3600 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2)
@@ -726,7 +726,7 @@ class HighLevelFunctions:
                     minutes_left = (task['start'] - (time.localtime().tm_hour + time.localtime().tm_min / 60))*60
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
-                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
+                    self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
                         self.bot.id, round(minutes_left)) + self.bot.interface.end_color)
                     time.sleep(60 * minutes_left)
 
@@ -734,23 +734,23 @@ class HighLevelFunctions:
                 if task['name'] == 'dd':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    print(self.bot.interface.color + '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
                     self.manage_dds_duration(minutes_left)
                 elif task['name'] == 'hunt':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    print(self.bot.interface.color + '[Scheduler {}] Starting to hunt for {} minutes'.format(
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
                         self.bot.id, round(minutes_left, 0)) + self.bot.interface.end_color)
                     self.hunt_treasures(minutes_left)
                 elif task['name'] == 'sell':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    print(self.bot.interface.color + '[Scheduler {}] Starting to sell items'.format(
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to sell items'.format(
                         self.bot.id) + self.bot.interface.end_color)
                     self.drop_to_bank('all', True)
                     self.sell_all(self.bot.subscribed)
                 elif task['name'] == 'sleep':
-                    print(self.bot.interface.color + '[Scheduler {}] Sleeping for {} minutes'.format(
+                    self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
                         self.bot.id, round(minutes_left)) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
                     time.sleep(60 * minutes_left)
@@ -773,6 +773,7 @@ class HighLevelFunctions:
         self.bot.interface.put_dd_in_paddock(idx, 'equip')
         self.bot.interface.close_dd()
         self.bot.mount = 'resting'
+        self.llf.set_mount_situation(self.bot.credentials['name'], 'resting')
         self.bot.occupation = 'Putting Bot-Mobile in paddock'
         self.update_db()
 
@@ -787,11 +788,11 @@ class HighLevelFunctions:
         self.bot.interface.close_dd()
         self.bot.interface.mount_dd()
         self.bot.mount = 'equipped'
-        self.update_db()
+        self.llf.set_mount_situation(self.bot.credentials['name'], 'equipped')
 
     def update_db(self):
         try:
-            print(self.bot.interface.color + '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1], self.bot.mount) + self.bot.interface.end_color)
+            self.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
             self.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
@@ -800,8 +801,7 @@ class HighLevelFunctions:
                 self.bot.level,
                 self.bot.occupation,
                 self.bot.position[0],
-                self.bot.position[1],
-                self.bot.mount
+                self.bot.position[1]
             )
         except Exception:
             with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:
