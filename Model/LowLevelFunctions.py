@@ -2,13 +2,13 @@ import json
 import mysql.connector
 import copy
 import ast
+import datetime
 
 
 class LowLevelFunctions:
     def __init__(self, map_info=None):
         self.map_info = [] if map_info is None else map_info
-        with open('..//Utils//discoveredZaaps.json', 'r') as f:
-            self.disc_zaaps = json.load(f)
+        self.disc_zaaps = self.get_discovered_zaaps()
         with open('..//Utils//zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
 
@@ -112,8 +112,8 @@ class LowLevelFunctions:
             conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                            database="wz3xj6_spec")
             cursor = conn.cursor()
-            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap, mount)
-            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap, Mount) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""", put)
+            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap)
+            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", put)
             conn.commit()
             conn.close()
         except Exception:
@@ -144,8 +144,37 @@ class LowLevelFunctions:
             else:
                 self.disc_zaaps[bot_name] = [zaap_pos]
 
-        with open('..//Utils//discoveredZaaps.json', 'w') as f:
-            json.dump(self.disc_zaaps, f)
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE BotAccounts SET zaaps='{}' WHERE name='{}'""".format(self.disc_zaaps[bot_name], bot_name))
+        conn.commit()
+        conn.close()
+
+    def get_discovered_zaaps(self, bot_name=None):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+
+        cursor = conn.cursor()
+        if bot_name is not None:
+            cursor.execute("""SELECT zaaps FROM BotAccounts WHERE name='{}'""".format(bot_name))
+            conn.close()
+            zaaps = []
+            for row in cursor:
+                zaaps = row[0]
+            if zaaps:
+                zaaps = ast.literal_eval(zaaps)
+            else:
+                zaaps = []
+            self.disc_zaaps[bot_name] = copy.deepcopy(zaaps)
+            return zaaps
+        else:
+            cursor.execute("""SELECT zaaps, name FROM BotAccounts""")
+            conn.close()
+            zaaps = {}
+            for row in cursor:
+                zaaps[row[1]] = ast.literal_eval(row[0])
+            return copy.deepcopy(zaaps)
 
     def get_closest_known_zaap(self, bot_name, pos):
         if bot_name in self.disc_zaaps.keys():
@@ -163,9 +192,7 @@ class LowLevelFunctions:
         if bot_name in self.disc_zaaps.keys():
             disc_zaaps = self.disc_zaaps[bot_name]
         else:
-            self.disc_zaaps[bot_name] = []
-            with open('..//Utils//discoveredZaaps.json', 'w') as f:
-                json.dump(self.disc_zaaps, f)
+            self.disc_zaaps[bot_name] = self.get_discovered_zaaps(bot_name)
 
         zaaps = copy.deepcopy(self.zaaps)
 
@@ -254,7 +281,7 @@ class LowLevelFunctions:
     def get_schedule(self, bot_name):
         conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec", database="wz3xj6_spec")
         cursor = conn.cursor()
-        cursor.execute('''SELECT schedule FROM BotAccounts WHERE name="{}"'''.format(bot_name))
+        cursor.execute("""SELECT schedule FROM BotAccounts WHERE name='{}'""".format(bot_name))
         schedule = ''
         conn.close()
         for row in cursor:
@@ -278,11 +305,58 @@ class LowLevelFunctions:
         conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                        database="wz3xj6_spec")
         cursor = conn.cursor()
-        cursor.execute('''SELECT Mount FROM Bots WHERE Name='{}' ORDER BY Time DESC LIMIT 1'''.format(bot_name))
+        cursor.execute("""SELECT mount FROM BotAccounts WHERE Name='{}'""".format(bot_name))
         conn.close()
         mount_situation = ''
         for row in cursor:
             mount_situation = row[0] if row[0] else 'None'
         return mount_situation
+
+    def set_mount_situation(self, bot_name, situation):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE BotAccounts SET mount='{}' WHERE name='{}'""".format(situation, bot_name))
+        conn.commit()
+        conn.close()
+
+    def log(self, bot, message):
+        name = bot.credentials['name']
+        color = bot.interface.color
+        print(color + message + '\033[0m')
+        with open('..//Utils//BotsLogs//{}.json'.format(name), 'a') as f:
+            f.write(str(datetime.datetime.now()) + '  ' + color + message + '\033[0m' + '\n')
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE BotAccounts SET pos='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
+        conn.commit()
+        conn.close()
+
+    def dds_to_db(self, bot_name, dds):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        db_dd_ids = set()
+        cursor.execute("""SELECT dd_id FROM DDs""")
+        for row in cursor:
+            db_dd_ids.add(row[0])
+
+        for dd in dds:
+            preg = True if dd.fecondation_time != -1 else False
+            if dd.id in db_dd_ids:
+                cursor.execute("""UPDATE DDs SET fec='{}', preg='{}', sterile='{}', fatigue='{}' WHERE dd_id='{}'""".format(int(dd.is_fecondation_ready), int(preg), int(dd.sterile), dd.fatigue, dd.id))
+            else:
+                cursor.execute("""INSERT INTO DDs (id, dd_id, owner, sex, fec, preg, repro, sterile, fatigue) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(dd.id, bot_name, dd.sex, int(dd.is_fecondation_ready), int(preg), int('Reproductrice' in dd.behaviours), int(dd.sterile), dd.fatigue))
+        conn.commit()
+        conn.close()
+
+    def hunts_to_db(self, bot_name, duration, success, reason=''):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration) VALUES ('{}', '{}', '{}', '{}')""".format(bot_name, int(success), reason, duration))
+        conn.commit()
+        conn.close()
 
 __author__ = 'Alexis'
