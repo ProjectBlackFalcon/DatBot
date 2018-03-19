@@ -333,4 +333,23 @@ class LowLevelFunctions:
         conn.commit()
         conn.close()
 
+    def dds_to_db(self, bot_name, dds):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        db_dd_ids = set()
+        cursor.execute("""SELECT dd_id FROM DDs""")
+        for row in cursor:
+            db_dd_ids.add(row[0])
+
+        for dd in dds:
+            preg = True if dd.fecondation_time != -1 else False
+            if dd.id in db_dd_ids:
+                cursor.execute("""UPDATE DDs SET fec='{}', preg='{}', sterile='{}', fatigue='{}' WHERE dd_id='{}'""".format(int(dd.is_fecondation_ready), int(preg), int(dd.sterile), dd.fatigue, dd.id))
+            else:
+                cursor.execute("""INSERT INTO DDs (id, dd_id, owner, sex, fec, preg, repro, sterile, fatigue) VALUES (NULL, {}, {}, {}, {}, {}, {}, {}, {})""".format(dd.id, bot_name, dd.sex, int(dd.is_fecondation_ready), int(preg), int('Reproductrice' in dd.behaviours), int(dd.sterile), dd.fatigue))
+        conn.commit()
+        conn.close()
+
+
 __author__ = 'Alexis'
