@@ -61,7 +61,7 @@ class Interface:
     def add_command(self, command, parameters=None):
         # <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
         message = '{};{};i;cmd;{};{}\r\n'.format(self.bot.id, self.current_id, command, parameters)
-        print(self.color + '[Interface {}] Sending : '.format(self.bot.id), message.strip() + self.end_color)
+        self.bot.llf.log(self.bot, '[Interface {}] Sending : {}'.format(self.bot.id, message.strip()))
         self.current_id += 1
         self.pipe.p.stdin.write(bytes(message, 'utf-8'))
         self.pipe.p.stdin.flush()
@@ -77,7 +77,7 @@ class Interface:
             buffer = self.pipe.get_buffer()
             for message in buffer:
                 if int(message.split(';')[0]) == self.bot.id and message not in message_queue:
-                    print(self.color + '[Interface {}] Recieved : '.format(self.bot.id) + message + self.end_color)
+                    self.bot.llf.log(self.bot, '[Interface {}] Recieved : {}'.format(self.bot.id, message))
                     message_queue.append(message)
 
             for message in message_queue:
@@ -86,17 +86,18 @@ class Interface:
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
                 elif 'info;combat;["start"]' in message:
-                    print(self.color + 'Fight Started' + self.end_color)
+                    self.bot.llf.log(self.bot, '[Fight {}] Started'.format(self.bot.id))
+                    start_fight = time.time()
                     self.bot.in_fight = True
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
                 elif 'info;combat;["end"]' in message:
-                    print(self.color + 'Fight Ended' + self.end_color)
+                    self.bot.llf.log(self.bot, '[Fight {}] Ended in {} mins'.format(self.bot.id, round((start_fight-time.time())/60, 1)))
                     self.bot.in_fight = False
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
                 elif 'info;disconnect;[True]' in message:
-                    print(self.color + '[Interface {}] Disconnected'.format(self.bot.id) + self.end_color)
+                    self.bot.llf.log(self.bot, '[Interface {}] Disconnected'.format(self.bot.id))
                     self.bot.connected = False
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
@@ -121,7 +122,7 @@ class Interface:
             msg_id = self.add_command(command, parameters)
             return self.wait_for_return(msg_id)
         except Exception as e:
-            print(self.color + '[Interface {}] ERROR : \n{}'.format(self.bot.id, traceback.format_exc()) + self.end_color)
+            self.bot.llf.log(self.bot, '[Interface {}] ERROR : \n{}'.format(self.bot.id, traceback.format_exc()))
             with open('..//Utils//InterfaceErrors.txt', 'a') as f:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
@@ -186,6 +187,7 @@ class Interface:
         """
         current_map, current_cell, current_worldmap, map_id = self.execute_command('getMap')
         self.bot.position = (current_map, current_worldmap)
+        self.bot.llf.log(self.bot, '[Position {}] {}'.format(self.bot.id, current_map))
         return current_map, current_cell, current_worldmap, map_id
 
     def move(self, cell):
