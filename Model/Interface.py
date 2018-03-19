@@ -175,6 +175,7 @@ class Interface:
                     self.bot.hf.drop_bot_mobile(idx)
             success = self.execute_command('disconnect')
             if success[0]:
+                self.bot.llf.log(self.bot, '[Position {}] {}'.format(self.bot.id, 'OFFLINE'))
                 self.bot.connected = False
                 self.bot.occupation = 'Sleeping'
                 self.bot.hf.update_db()
