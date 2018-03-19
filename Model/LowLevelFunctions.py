@@ -112,8 +112,8 @@ class LowLevelFunctions:
             conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                            database="wz3xj6_spec")
             cursor = conn.cursor()
-            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap, mount)
-            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap, Mount) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""", put)
+            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap)
+            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", put)
             conn.commit()
             conn.close()
         except Exception:
@@ -281,7 +281,7 @@ class LowLevelFunctions:
     def get_schedule(self, bot_name):
         conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec", database="wz3xj6_spec")
         cursor = conn.cursor()
-        cursor.execute('''SELECT schedule FROM BotAccounts WHERE name="{}"'''.format(bot_name))
+        cursor.execute("""SELECT schedule FROM BotAccounts WHERE name='{}'""".format(bot_name))
         schedule = ''
         conn.close()
         for row in cursor:
@@ -305,12 +305,20 @@ class LowLevelFunctions:
         conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                        database="wz3xj6_spec")
         cursor = conn.cursor()
-        cursor.execute('''SELECT Mount FROM Bots WHERE Name='{}' ORDER BY Time DESC LIMIT 1'''.format(bot_name))
+        cursor.execute("""SELECT mount FROM BotAccounts WHERE Name='{}'""".format(bot_name))
         conn.close()
         mount_situation = ''
         for row in cursor:
             mount_situation = row[0] if row[0] else 'None'
         return mount_situation
+
+    def set_mount_situation(self, bot_name, situation):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE BotAccounts SET mount='{}' WHERE name='{}'""".format(situation, bot_name))
+        conn.commit()
+        conn.close()
 
     def log(self, bot, message):
         name = bot.credentials['name']
