@@ -337,6 +337,7 @@ class HighLevelFunctions:
         self.update_db()
 
         hunt_error_flag = False
+        reason = ''
         while self.bot.interface.get_steps_left()[0] and not hunt_error_flag:
             clue, direction, start_pos, clue_pos = None, None, None, None
             while self.bot.interface.get_clues_left()[0] and not hunt_error_flag:
@@ -358,6 +359,7 @@ class HighLevelFunctions:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write('Could not go to {} from {} to find {}'.format(destination, self.bot.position, clue))
                             hunt_error_flag = True
+                            reason = 'Goto fail'
                             break
                 else:
                     try:
@@ -373,6 +375,7 @@ class HighLevelFunctions:
                             f.write(e.args[0])
 
                         hunt_error_flag = True
+                        reason = 'Could not find clue'
                         break
 
                 if not self.bot.interface.validate_hunt_clue()[0] and not hunt_error_flag:
@@ -381,6 +384,7 @@ class HighLevelFunctions:
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
                         f.write('Clue was supposed to be at {}'.format(clue_pos))
                     hunt_error_flag = True
+                    reason = 'Could not validate clue'
                     break
                 elif hunt_error_flag:
                     break
@@ -392,6 +396,7 @@ class HighLevelFunctions:
                     f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, start_pos, self.bot.position[0]))
                     f.write('Clue was supposed to be at {}'.format(clue_pos))
                 hunt_error_flag = True
+                reason = 'Could not validate step'
                 break
             elif hunt_error_flag:
                 break
@@ -406,6 +411,7 @@ class HighLevelFunctions:
                 time.sleep(30)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
+            return False, reason
         else:
             in_hb = False
             while self.bot.interface.get_player_stats()[0]['Health'] < 100:
@@ -425,8 +431,10 @@ class HighLevelFunctions:
                     self.bot.interface.use_item(self.llf.get_inventory_id(inventory, chest_id))
 
             if not self.bot.interface.hunt_is_active()[0]:
-                print(self.bot.interface.color + '[Treasure Hunt {}] Hunt successful'.format(self.bot.id) + self.bot.interface.end_color)
+                self.llf.log(self.bot, '[Treasure Hunt {}] Hunt successful'.format(self.bot.id))
                 return True
+            else:
+                return False, 'Lost against chest'
 
     def hunt_treasures(self, duration_minutes, level='max'):
         duration = duration_minutes * 60
@@ -436,15 +444,16 @@ class HighLevelFunctions:
         while time.time()-start < duration:
             try:
                 n_hunts += 1
+                hunt_start = time.time()
                 self.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
-                success = self.tresure_hunt(level)
+                success, reason = self.tresure_hunt(level)
+                self.llf.hunts_to_db(self.bot.credentials['name'], round((hunt_start-time.time())/60, 1), success, reason)
                 n_success = n_success+1 if success else n_success
             except Exception:
                 with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
         self.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
-
 
     def fight_on_map(self, duration_minutes, hp_threshold=100):
         self.bot.occupation = 'Fighting'

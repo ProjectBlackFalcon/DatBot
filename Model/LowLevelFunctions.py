@@ -347,9 +347,16 @@ class LowLevelFunctions:
             if dd.id in db_dd_ids:
                 cursor.execute("""UPDATE DDs SET fec='{}', preg='{}', sterile='{}', fatigue='{}' WHERE dd_id='{}'""".format(int(dd.is_fecondation_ready), int(preg), int(dd.sterile), dd.fatigue, dd.id))
             else:
-                cursor.execute("""INSERT INTO DDs (id, dd_id, owner, sex, fec, preg, repro, sterile, fatigue) VALUES (NULL, {}, {}, {}, {}, {}, {}, {}, {})""".format(dd.id, bot_name, dd.sex, int(dd.is_fecondation_ready), int(preg), int('Reproductrice' in dd.behaviours), int(dd.sterile), dd.fatigue))
+                cursor.execute("""INSERT INTO DDs (id, dd_id, owner, sex, fec, preg, repro, sterile, fatigue) VALUES (NULL, '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(dd.id, bot_name, dd.sex, int(dd.is_fecondation_ready), int(preg), int('Reproductrice' in dd.behaviours), int(dd.sterile), dd.fatigue))
         conn.commit()
         conn.close()
 
+    def hunts_to_db(self, bot_name, duration, success, reason=''):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration) VALUES ('{}', '{}', '{}', '{}')""".format(bot_name, int(success), reason, duration))
+        conn.commit()
+        conn.close()
 
 __author__ = 'Alexis'
