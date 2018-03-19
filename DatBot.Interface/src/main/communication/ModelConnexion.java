@@ -66,7 +66,7 @@ public class ModelConnexion {
 				Info info = new Info(str[0], str[1], str[2], str[3]);
 				if(this.network != null){
 					this.network.getInfo().setPrintDc(false);
-					this.network.getF().setVisible(false);
+					//this.network.getF().setVisible(false);
 				}
 				this.network = new Network(Communication.displayPacket, info, botInstance);
 				Thread threadNetwork = new Thread(network);
@@ -92,6 +92,7 @@ public class ModelConnexion {
 					this.network.getInfo().setPrintDc(false);
 					this.network.getF().setVisible(false);
 					this.network.getSocket().close();
+					System.out.println("Closed");
 					toSend = new Object[] { "True" };
 				} else {
 					toSend = new Object[] { "True" };

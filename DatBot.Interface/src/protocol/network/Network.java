@@ -122,6 +122,8 @@ import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMess
 import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
+import protocol.network.messages.server.basic.SystemMessageDisplayMessage;
+import protocol.network.messages.web.haapi.HaapiApiKeyRequestMessage;
 import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
@@ -167,7 +169,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Info info;
 	private Interactive interactive;
 
-	public String ip = "213.248.126.40";
+	public String ip = "213.248.126.39";
 	private Map map;
 	private Message message;
 	private LatencyFrame latencyFrame;
@@ -194,12 +196,10 @@ public class Network extends DisplayInfo implements Runnable {
 		this.monsters = new Monsters();
 		this.hunt = new Hunt();
 		this.dragodinde = new Dragodinde();
+		latencyFrame = new LatencyFrame();
 		try {
 			this.npc = new Npc(this);
 			socket = new Socket(this.ip, this.port);
-			if (socket.isConnected()) {
-				latencyFrame = new LatencyFrame();
-			}
 		}
 		catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -919,6 +919,7 @@ public class Network extends DisplayInfo implements Runnable {
 		arenaSwitchToFightServerMessage.Deserialize(dataReader);
 		Ticket = arenaSwitchToFightServerMessage.getTicket();
 		this.socket.close();
+		System.out.println("New connection to server for arena");
 		this.socket = new Socket(arenaSwitchToFightServerMessage.getAddress(), 5555);
 	}
 
@@ -929,6 +930,7 @@ public class Network extends DisplayInfo implements Runnable {
 		arenaSwitchToGameServerMessage.Deserialize(dataReader);
 		Ticket = arenaSwitchToGameServerMessage.getTicket();
 		this.socket.close();
+		System.out.println("New connection to server from arena");
 		this.socket = new Socket(ip, 5555);
 	}
 
@@ -947,7 +949,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 45, 25, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 45, 27, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -1152,6 +1154,7 @@ public class Network extends DisplayInfo implements Runnable {
 		selectServer.Deserialize(dataReader);
 		Ticket = selectServer.getTicket();
 		this.socket.close();
+		System.out.println("New connection to server");
 		this.socket = new Socket(selectServer.getAddress(), selectServer.getPort());
 	}
 
@@ -1189,6 +1192,7 @@ public class Network extends DisplayInfo implements Runnable {
 			if(GameData.getNameServer(server.getId()).equals(this.info.getServer())){
 				serverId = server.getId();
 				if(!(server.getStatus() == 3 || server.getStatus() == 0)){
+					System.out.println("Server down");
 					this.socket.close();
 					return;
 				}
@@ -1349,6 +1353,7 @@ public class Network extends DisplayInfo implements Runnable {
 				}
 
 			}
+			System.out.println("Socket is closed");
 			if(this.info.isPrintDc() && this.info.isConnected())
 				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
 		}
@@ -1376,7 +1381,8 @@ public class Network extends DisplayInfo implements Runnable {
 			packetSent = true;
 		}
 		catch (SocketException e) {
-			this.socket.close();
+			System.out.print(e);
+			System.out.println(" " + message);
 		}
 		appendLog("[" + id + "]	[Envoi] " + s);
 	}
@@ -1447,7 +1453,9 @@ public class Network extends DisplayInfo implements Runnable {
 				handleHelloConnectMessage(dataReader);
 				break;
 			case 189:
-				this.socket.close();
+				SystemMessageDisplayMessage systemMessageDisplayMessage = new SystemMessageDisplayMessage();
+				systemMessageDisplayMessage.Deserialize(dataReader);
+				System.out.println(systemMessageDisplayMessage.getMsgId());
 				break;
 			case 30:
 				handleServersListMessage(dataReader);
