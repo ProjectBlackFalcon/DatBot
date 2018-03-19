@@ -107,7 +107,7 @@ class LowLevelFunctions:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
 
-    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map, worldmap, mount):
+    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map, worldmap):
         try:
             conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                            database="wz3xj6_spec")
@@ -324,12 +324,15 @@ class LowLevelFunctions:
         name = bot.credentials['name']
         color = bot.interface.color
         print(color + message + '\033[0m')
-        with open('..//Utils//BotsLogs//{}.json'.format(name), 'a') as f:
-            f.write(str(datetime.datetime.now()) + '  ' + color + message + '\033[0m' + '\n')
+        with open('..//Utils//BotsLogs//{}.txt'.format(name), 'a') as f:
+            f.write(str(datetime.datetime.now()) + '  ' + message + '\n')
         conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                        database="wz3xj6_spec")
         cursor = conn.cursor()
-        cursor.execute("""UPDATE BotAccounts SET pos='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
+        try:
+            cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
+        except TypeError as e:
+            print("Not uploading that")
         conn.commit()
         conn.close()
 

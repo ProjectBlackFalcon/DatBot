@@ -320,7 +320,7 @@ class HighLevelFunctions:
             self.bot.interface.move(self.llf.get_closest_walkable_cell(door, self.bot.position[0], self.bot.position[1]))
             self.bot.interface.enter_hunting_hall()
             while not self.bot.interface.get_new_hunt(level)[0]:
-                print(self.bot.interface.color + '[Treasure Hunt {}] Getting new hunt'.format(self.bot.id) + self.bot.interface.end_color)
+                self.llf.log(self.bot, '[Treasure Hunt {}] Getting new hunt'.format(self.bot.id))
                 time.sleep(30)
             self.bot.interface.exit_hunting_hall()
 
@@ -402,7 +402,7 @@ class HighLevelFunctions:
                 break
 
         if hunt_error_flag:
-            print(self.bot.interface.color + '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id) + self.bot.interface.end_color)
+            self.llf.log(self.bot, '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
             in_hb = False
             while not self.bot.interface.abandon_hunt()[0]:
                 if not in_hb:
