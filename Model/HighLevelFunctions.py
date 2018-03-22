@@ -802,7 +802,14 @@ class HighLevelFunctions:
 
     def update_db(self):
         try:
-            self.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
+            self.llf.log(self.bot,
+                         '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id,
+                                                                                         self.bot.credentials['server'],
+                                                                                         self.bot.credentials['name'],
+                                                                                         self.bot.kamas, self.bot.level,
+                                                                                         self.bot.occupation,
+                                                                                         self.bot.position[0],
+                                                                                         self.bot.position[1]))
             self.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
@@ -812,6 +819,17 @@ class HighLevelFunctions:
                 self.bot.occupation,
                 self.bot.position[0],
                 self.bot.position[1]
+            )
+        except TypeError:
+            # Degraded upload
+            self.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name']))
+            self.llf.update_db(
+                self.bot.id,
+                self.bot.credentials['server'],
+                self.bot.credentials['name'],
+                self.bot.kamas,
+                self.bot.level,
+                self.bot.occupation
             )
         except Exception:
             with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:

@@ -107,7 +107,7 @@ class LowLevelFunctions:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
 
-    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map, worldmap):
+    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map='OFFLINE', worldmap=1):
         try:
             conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
                                            database="wz3xj6_spec")
