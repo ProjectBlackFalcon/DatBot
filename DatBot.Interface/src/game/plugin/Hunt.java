@@ -9,6 +9,7 @@ public class Hunt {
 	private int currentDir;
 	private int currentStep;
 	private int numberOfSteps;
+	private boolean rdyToFight = false; //untested
 	private boolean phorror;
 	private String phorrorName;
 	
@@ -143,5 +144,13 @@ public class Hunt {
 
 	public void setPhorrorName(String phorrorName) {
 		this.phorrorName = phorrorName;
+	}
+
+	public boolean isRdyToFight() {
+		return rdyToFight;
+	}
+
+	public void setRdyToFight(boolean rdyToFight) {
+		this.rdyToFight = rdyToFight;
 	}
 }

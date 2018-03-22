@@ -33,7 +33,7 @@ public class CellMovement {
 
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path);
 
-		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "D�placement...");
+		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "Moving to " + keys.get(keys.size() - 1));
 		if (!this.network.getInfo().isJoinedFight()){
 			if (path.Cells.size() >= 4)
 			{
@@ -50,7 +50,6 @@ public class CellMovement {
 				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
 				Thread.sleep(time);
 			}
-			this.network.getInfo().setWaitForMov(true);
 			this.network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
 		} else {
 			if (path.Cells.size() >= 3)
@@ -63,7 +62,7 @@ public class CellMovement {
 				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
 				Thread.sleep(time);
 			}
-			this.network.getInfo().setWaitForMov(true);
 		}
+		this.network.getInfo().setWaitForMov(true);
 	}
 }

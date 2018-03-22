@@ -31,7 +31,6 @@ import ia.fight.structure.Player;
 import io.netty.util.internal.ThreadLocalRandom;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
-import main.communication.ModelConnexion;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
 import protocol.network.messages.connection.IdentificationMessage;
@@ -123,7 +122,6 @@ import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMess
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
 import protocol.network.messages.server.basic.SystemMessageDisplayMessage;
-import protocol.network.messages.web.haapi.HaapiApiKeyRequestMessage;
 import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
 import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
@@ -949,7 +947,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 45, 27, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 45, 30, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -1154,7 +1152,6 @@ public class Network extends DisplayInfo implements Runnable {
 		selectServer.Deserialize(dataReader);
 		Ticket = selectServer.getTicket();
 		this.socket.close();
-		System.out.println("New connection to server");
 		this.socket = new Socket(selectServer.getAddress(), selectServer.getPort());
 	}
 
@@ -1177,7 +1174,7 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 	}
 
-	private void HandleSequenceNumberMessage() throws Exception {
+	private void handleSequenceNumberMessage() throws Exception {
 		SequenceNumberMessage sequenceNumberMessage = new SequenceNumberMessage(latencyFrame.Sequence++);
 		sendToServer(sequenceNumberMessage, SequenceNumberMessage.ProtocolId, "Sequence number");
 	}
@@ -1288,6 +1285,10 @@ public class Network extends DisplayInfo implements Runnable {
 		treasureHuntDigRequestAnswerMessage.Deserialize(dataReader);
 		if (treasureHuntDigRequestAnswerMessage.getResult() == 1) {
 			this.getInfo().setStepSuccess(true);
+		} else if(treasureHuntDigRequestAnswerMessage.getResult() == 3) {
+			this.hunt.setRdyToFight(true);
+		} else {
+			this.getInfo().setStepFailed(true);
 		}
 	}
 
@@ -1517,7 +1518,7 @@ public class Network extends DisplayInfo implements Runnable {
 				handleGameMapMovementMessage(dataReader);
 				break;
 			case 6316:
-				HandleSequenceNumberMessage();
+				handleSequenceNumberMessage();
 				break;
 			case 5816:
 				HandleLatencyMessage();
@@ -1571,6 +1572,9 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 5745:
 				info.setInteractiveUsed(true);
+				break;
+			case 780:
+				info.setTextMessage(true);
 				break;
 			case 5646:
 				getBank().setStorage(new StorageInventoryContentMessage());
@@ -1716,6 +1720,7 @@ public class Network extends DisplayInfo implements Runnable {
 			case 6483:
 				this.info.setHuntAnswered(true);
 				this.info.setInHunt(false);
+				this.hunt.setRdyToFight(false);
 				break;
 			case 6484:
 				handleTreasureHuntDigRequestAnswerMessage(dataReader);

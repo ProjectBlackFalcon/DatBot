@@ -67,6 +67,7 @@ public class Info {
 	private boolean acknowledged = false;
 	private boolean huntAnswered = false;
 	private boolean stepSuccess = false;
+	private boolean stepFailed = false;
 	private boolean exchangeBidSeller = false;
 	private boolean exchangeDD = false;
 	private boolean emoteLaunched = false;
@@ -74,6 +75,7 @@ public class Info {
 	private boolean mountSet = false;
 	private boolean mountRiding = false;
 	private boolean objectUse = false;
+	private boolean textMessage = false;
 
 
 	public void setBooleanToFalse()
@@ -89,12 +91,14 @@ public class Info {
 		acknowledged = false;
 		huntAnswered = false;
 		stepSuccess = false;
+		stepFailed = false;
 		exchangeDD = false;
 		emoteLaunched = false;
 		mountxpmsg = false;
 		mountSet = false;
 		mountRiding = false;
 		objectUse = false;
+		textMessage = false;
 	}
 	
 	public boolean threadDone = true;
@@ -523,6 +527,22 @@ public class Info {
 
 	public void setPrintDc(boolean printDc) {
 		this.printDc = printDc;
+	}
+
+	public boolean isTextMessage() {
+		return textMessage;
+	}
+
+	public void setTextMessage(boolean textMessage) {
+		this.textMessage = textMessage;
+	}
+
+	public boolean isStepFailed() {
+		return stepFailed;
+	}
+
+	public void setStepFailed(boolean stepFailed) {
+		this.stepFailed = stepFailed;
 	}
 
 }

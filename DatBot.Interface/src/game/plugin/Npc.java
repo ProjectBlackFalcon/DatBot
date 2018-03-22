@@ -81,7 +81,7 @@ public class Npc {
 	 * @return String : Items selling
 	 */
 	public String getToSell(){
-		if (itemsToSell.size() == 0) {
+		if (itemsToSell.isEmpty()) {
 			return "\"empty\"";
 		}
 		String str = "";

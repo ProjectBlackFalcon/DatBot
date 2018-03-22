@@ -4,15 +4,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.time.LocalTime;
@@ -29,6 +32,8 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+
+import utils.GameData;
 
 public class DisplayInfo {
 
@@ -96,11 +101,41 @@ public class DisplayInfo {
 	/**
 	 * @return String timestamp
 	 */
-	public String getTiming(){
+	public static String getTiming(){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
 		return timing;
+	}
+	
+	public static void appendDebugLog(String errorType, String s){
+		File file = new File(GameData.getPathDatBot() + "//packetErrors.txt");
+		if(!file.exists()){
+			try {
+				file.createNewFile();
+				
+			}
+			catch (IOException e) {
+				System.out.println("File not created");
+				e.printStackTrace();
+			}
+		}
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			e.printStackTrace();
+		}
+		catch (UnsupportedEncodingException e) {
+			System.out.println("Cannot write into file");
+			e.printStackTrace();
+		}
+		writer.println(getTiming() + " : " + errorType);
+		writer.println(s);
+		writer.println();
+		writer.close();
 	}
 
 	/**
