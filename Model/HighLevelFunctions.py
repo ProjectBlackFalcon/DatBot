@@ -715,8 +715,9 @@ class HighLevelFunctions:
             schedule = self.bot.schedule
 
         while 1:
-            self.bot.schedule = self.llf.get_schedule(self.bot.credentials['name'])
-            schedule = self.bot.schedule
+            if schedule_name is None:
+                self.bot.schedule = self.llf.get_schedule(self.bot.credentials['name'])
+                schedule = self.bot.schedule
             caught_up = False
             for task in schedule:
                 if (time.localtime().tm_hour + time.localtime().tm_min/60) - task['end'] < 0 or caught_up:
