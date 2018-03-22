@@ -19,7 +19,7 @@ class PipeToJava:
         self.p = Popen(args, stdin=PIPE, stdout=PIPE, bufsize=4096, close_fds=on_posix)
         self.q = Queue()
         self.t = Thread(target=self.enqueue_output, args=(self.p.stdout, self.q))
-        self.t.daemon = True  # thread dies with the program
+        self.t.daemon = True
         self.t.start()
 
     def enqueue_output(self, out, queue):
@@ -127,7 +127,7 @@ class Interface:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
 
-    def connect(self):
+    def connect(self, max_tries=5):
         """
         Connects a bot instance
         :return: Boolean/['Save']
@@ -138,11 +138,12 @@ class Interface:
             self.bot.credentials['name'],
             self.bot.credentials['server']
         ]
-        success = [True]
-        while not self.bot.connected:
+        tries = 0
+        while not self.bot.connected and tries < max_tries:
             self.bot.occupation = 'Connecting'
             self.bot.hf.update_db()
             success = self.execute_command('connect', connection_param)
+            tries += 1
             self.bot.connected = success[0]
             if self.bot.connected:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
@@ -157,9 +158,10 @@ class Interface:
                     self.bot.mount = self.bot.llf.get_mount_situation(self.bot.credentials['name'])
                     if self.bot.mount == 'resting':
                         self.bot.hf.fetch_bot_mobile()
+                return [True]
             else:
-                time.sleep(5*60)
-        return success
+                time.sleep(min(15, tries*30))
+        return [False]
 
     def disconnect(self):
         """
