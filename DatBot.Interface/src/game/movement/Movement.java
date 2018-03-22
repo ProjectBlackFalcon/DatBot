@@ -63,11 +63,9 @@ public class Movement{
             	list.add(i);
             }
         }
-        if(list.size() == 0) return null; // Can't go in this direction (Obstacles)
+        if(list.size() == 0) return null; 
         Random r = new Random();
         int randomCellId = list.get(r.nextInt(list.size()));
-//		this.getNetwork().append("Moving...",false);	
-//		this.getNetwork().append("Direction : " + direction,false);
         CellMovement move = MoveToCell(randomCellId);
         return new MapMovement(move, neighbourId,this.getNetwork());
 	}
@@ -150,156 +148,6 @@ public class Movement{
 		return newCell;
 	}
 	
-	
-// TRIED TO GET THE WAY BUT NOT WORKING
-	public void goToMap(int xStart, int yStart, int x, int y, List<int[]> blocked) throws Exception{
-    	while(!this.network.getInfo().isWaitForMov()){
-    		Thread.sleep(500);
-		}
-		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-//			this.getNetwork().append("Vous �tes arriv� !",false);
-			return;
-		}
-		
-		int xCurrentMap = this.network.getInfo().getCoords()[0] + 95; 
-		int yCurrentMap = this.network.getInfo().getCoords()[1] + 100;
-//		int xNew = 0; int yNew = 0; int xStartNew = 0; int yStartNew = 0;
-//		
-//		// Need only positiv values
-//		if(x >= -95 && y >= -100 && xStart >= -95 && yStart >= -100){
-//			xNew = x + 95; yNew = y + 100;
-//			xStartNew = xStart + 95; yStartNew = yStart + 100;		
-//		}
-		
-		if(blocked == null){
-			blocked = new ArrayList<int[]>();
-			blocked.add(new int[] {-8+95,-28+100});
-			blocked.add(new int[] {-9+95,-28+100});
-		}
-//		this.network.append("Size blocked : " + blocked.size());
-//		this.network.append("Map : " + (xCurrentMap) + ";" + (yCurrentMap));
-//		
-//		for (int[] is : blocked) {
-//			this.network.append("2	" + (is[0]) + ";" + (is[1]));
-//		}
-		
-		boolean north = false;
-		boolean south = false;
-		boolean east = false;
-		boolean west = false;	
-		int index = 0 ;
-		for(int k = 0; k < blocked.size() ; k++){
-			if(blocked.get(k)[0] == xCurrentMap && blocked.get(k)[1] == yCurrentMap-1){
-				north = true;
-				index++;
-			}
-			if(blocked.get(k)[0] == xCurrentMap && blocked.get(k)[1] == yCurrentMap+1){
-				south = true;
-				index++;
-			}
-			if(blocked.get(k)[0] == xCurrentMap+1 && blocked.get(k)[1] == yCurrentMap){
-				east = true;
-				index++;
-			}
-			if(blocked.get(k)[0] == xCurrentMap-1 && blocked.get(k)[1] == yCurrentMap){
-				west = true;
-				index++;
-			}
-		}
-		if(index == 3){
-			blocked.add(new int[] {xCurrentMap, yCurrentMap});
-			String way = "";
-			if(!north){
-				way = "North";
-				yCurrentMap--;
-			}
-			if(!south){
-				way = "South";
-				yCurrentMap++;
-			}
-			if(!east){
-				way = "East";
-				xCurrentMap++;
-			}
-			if(!west){
-				way = "West";
-				xCurrentMap--;
-			}
-			MapMovement mov = ChangeMap(way);
-			mov.PerformChangement();
-			goToMap(xCurrentMap, yCurrentMap, x, y, blocked);
-		}
-		
-        new Astar(xCurrentMap, yCurrentMap, x + 95, y + 100, blocked, true);
-        
-//		for (int[] is : blocked) {
-//			this.network.append("2	" + (is[0]-95) + ";" + (is[1]-100));
-//		}
-		        
-        for (int i = 0; i < Astar.pathString.size() ; i++) {
-        	while(!this.network.getInfo().isWaitForMov()){
-        		Thread.sleep(500);
-    		}
-    		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-//    			this.getNetwork().append("Vous �tes arriv� !",false);
-    			return;
-    		}
-    		xCurrentMap = this.network.getInfo().getCoords()[0] + 95; 
-    		yCurrentMap = this.network.getInfo().getCoords()[1] + 100;
-			MapMovement mov = ChangeMap(Astar.pathString.get(i));
-			if (mov == null) {
-//				this.getNetwork().append("D�placement impossible ! Un obstacle bloque le chemin !",false);
-//				this.getNetwork().append("Cr�ation d'un nouveau chemin...",false);
-				if(Astar.pathString.get(i).equals("North")){
-					if(x+95 == xCurrentMap && y+100 == yCurrentMap-1){
-						blocked.add(new int[] {xCurrentMap, yCurrentMap});
-						goToOtherAvailableDirection(xCurrentMap, yCurrentMap, x, y, blocked);
-					} else {
-						blocked.add(new int[] {xCurrentMap, yCurrentMap-1});
-						goToMap(xCurrentMap, yCurrentMap, x, y, blocked);
-					}
-				}
-				else if(Astar.pathString.get(i).equals("South")){
-					if(x+95 == xCurrentMap && y+100 == yCurrentMap+1){
-						blocked.add(new int[] {xCurrentMap, yCurrentMap});
-						goToOtherAvailableDirection(xCurrentMap, yCurrentMap, x, y, blocked);
-					} else {
-						blocked.add(new int[] {xCurrentMap, yCurrentMap+1});
-						goToMap(xCurrentMap, yCurrentMap, x, y, blocked);
-					}
-				}
-				else if(Astar.pathString.get(i).equals("East")){
-					if(x+95 == xCurrentMap+1 && y+100 == yCurrentMap){
-						blocked.add(new int[] {xCurrentMap, yCurrentMap});
-						goToOtherAvailableDirection(xCurrentMap, yCurrentMap, x, y, blocked);
-					} else {
-						blocked.add(new int[] {xCurrentMap+1, yCurrentMap});
-						goToMap(xCurrentMap, yCurrentMap, x, y, blocked);
-					}
-				}
-				else if(Astar.pathString.get(i).equals("West")){
-					if(x+95 == xCurrentMap-1 && y+100 == yCurrentMap){
-						blocked.add(new int[] {xCurrentMap, yCurrentMap});
-						goToOtherAvailableDirection(xCurrentMap, yCurrentMap, x, y, blocked);
-					} else {
-						blocked.add(new int[] {xCurrentMap-1, yCurrentMap});
-						goToMap(xCurrentMap, yCurrentMap, x, y, blocked);
-					}
-				}
-			}
-			else {
-				mov.PerformChangement();
-			}			
-		}
-    	while(!this.network.getInfo().isWaitForMov()){
-    		Thread.sleep(500);
-		}
-		if(x == this.network.getInfo().getCoords()[0] && y == this.network.getInfo().getCoords()[1]){
-//			this.getNetwork().append("Vous �tes arriv� !",false);
-			return;
-		}
-	}
-	
 	private boolean noObstacle(int random){
         List<int[]> blocked = new ArrayList<int[]>();
         for (int i = 0; i < this.network.getInfo().getCells().size(); i++){
@@ -320,26 +168,6 @@ public class Movement{
         	return false; // Can't go in this direction (Obstacles)
         else 
         	return true;
-	}
-	
-	private void goToOtherAvailableDirection(int xCurrentMap, int yCurrentMap, int x, int y, List<int[]> blocked) throws Exception{
-		MapMovement mov;
-		if((mov = ChangeMap("North"))!=null){
-			mov.PerformChangement();
-			goToMap(xCurrentMap, --yCurrentMap, x, y, blocked);
-		}
-		else if((mov = ChangeMap("South"))!=null){
-			mov.PerformChangement();
-			goToMap(xCurrentMap, ++yCurrentMap, x, y, blocked);
-		}
-		else if((mov = ChangeMap("East"))!=null){
-			mov.PerformChangement();
-			goToMap(++xCurrentMap, yCurrentMap, x, y, blocked);
-		}
-		else if((mov = ChangeMap("West"))!=null){
-			mov.PerformChangement();
-			goToMap(--xCurrentMap, yCurrentMap, x, y, blocked);
-		}
 	}
 
 	public Network getNetwork()

@@ -31,8 +31,8 @@ public class AbstractFightDispellableEffect extends NetworkMessage {
 	public int getTurnDuration() { return this.turnDuration; };
 	public void setTurnDuration(int turnDuration) { this.turnDuration = turnDuration; };
 	public int getDispelable() { return this.dispelable; };
-	public void setDispelable(int dispelable) { this.dispelable = dispelable; };
-	public int getSpellId() { return this.spellId; };
+	public void setDispelable(int dispelable) { this.dispelable = dispelable; }
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
 	public int getEffectId() { return this.effectId; };
 	public void setEffectId(int effectId) { this.effectId = effectId; };

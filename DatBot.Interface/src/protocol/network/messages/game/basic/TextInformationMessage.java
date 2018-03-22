@@ -14,7 +14,7 @@ import protocol.network.NetworkMessage;
 
 @SuppressWarnings("unused")
 public class TextInformationMessage extends NetworkMessage {
-	public static final int ProtocolId = 780;
+	public static final int PROTOCOLID = 780;
 
 	private int msgType;
 	private int msgId;

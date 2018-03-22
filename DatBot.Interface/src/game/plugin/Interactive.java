@@ -3,6 +3,7 @@ package game.plugin;
 import java.util.List;
 
 import game.Info;
+import main.communication.DisplayInfo;
 import protocol.network.Network;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
@@ -159,11 +160,15 @@ public class Interactive {
 				}
 			}
 		}
+		long index =  System.currentTimeMillis();
 		this.network.sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting resource cell " + cellId);	
 		this.network.getInfo().setWaitForHarvestFailure(false);
 		this.network.getInfo().setWaitForHarvestSuccess(false);
 		while(!this.network.getInfo().isWaitForHarvestFailure() && !this.network.getInfo().isWaitForHarvestSuccess()){
-			Thread.sleep(1000);
+			if(System.currentTimeMillis() - index > 2000){
+				DisplayInfo.appendDebugLog("Harvesting error, server returned false", "CellId : " + this.network.getInfo().getCellId() + ", cellIdToHarvest : " + cellId );
+				return false;
+			}
 		}
 		if(this.network.getInfo().isWaitForHarvestFailure()){
 			return false;

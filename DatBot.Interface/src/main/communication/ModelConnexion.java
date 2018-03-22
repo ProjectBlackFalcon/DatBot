@@ -1,9 +1,6 @@
 package main.communication;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,20 +34,701 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfer
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
 import protocol.network.messages.game.inventory.items.ObjectUseMessage;
+import utils.GameData;
 
 public class ModelConnexion {
-
-	private boolean bankOppened;
-	private Network network;
-	public int botInstance;
+	
 	boolean actionFinished = true;
+	private boolean bankOppened;
+	int botInstance;
 
-	public ModelConnexion(int botInstance) throws InterruptedException {
+	private Network network;
+	
+
+	public ModelConnexion(int botInstance) {
 		this.botInstance = botInstance;
 	}
 	
+	public static boolean isCloseToCell(int cellid, int cellToUse){
+		return (cellToUse - 14) == cellid || (cellToUse - 13) == cellid || (cellToUse + 14) == cellid || (cellToUse + 15) == cellid;
+	}
 
-	public Object[] getReturn(String cmd, String param) throws NumberFormatException, Exception {
+	private Object[] abandonHunt() throws Exception {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt()) {
+			TreasureHuntGiveUpRequestMessage huntGiveUpRequestMessage = new TreasureHuntGiveUpRequestMessage(0);
+			getNetwork().sendToServer(huntGiveUpRequestMessage, TreasureHuntGiveUpRequestMessage.ProtocolId, "Abandon hunt");
+			if (this.waitToSendAbandonHunt()){
+				toSend = new Object[] { "True" };
+			}
+			else {
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] attackMonster(String param) throws Exception {
+		Object[] toSend;
+		int id = (int) Double.parseDouble(param);
+		boolean canAtk = false;
+		for (int i = 0; i < this.network.getMonsters().getMonsters().size(); i++) {
+			if (id == (int) this.network.getMonsters().getMonsters().get(i).getContextualId()) {
+				if (this.network.getInfo().getCellId() == this.network.getMonsters().getMonsters().get(i).getDisposition().getCellId()) {
+					canAtk = true;
+				}
+			}
+		}
+		if (canAtk) {
+			GameRolePlayAttackMonsterRequestMessage gameRolePlayAttackMonsterRequestMessage = new GameRolePlayAttackMonsterRequestMessage(id);
+			getNetwork().sendToServer(gameRolePlayAttackMonsterRequestMessage, GameRolePlayAttackMonsterRequestMessage.ProtocolId, "Attack monster " + id);
+			if (this.waitToSendFight()) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("attackMonster error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("attackMonster error", "CellId invalid : " + this.network.getInfo().getCellId() + " Monsters : " + this.network.getMonsters());
+			toSend = getMonsters();
+ 		}
+		return toSend;
+	}
+
+
+	private Object[] changeMap(String param) throws Exception {
+		Object[] toSend;
+		String[] infoMov = param.split(",");
+		MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
+		if (mapMovement == null) {
+			toSend = new Object[] { "False" };
+			DisplayInfo.appendDebugLog("ChangeMap error, no possible cell to changeMap", param);
+			this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+		}
+		else {
+			mapMovement.PerformChangement();
+			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+				if(Integer.parseInt(infoMov[0]) != this.network.getInfo().getCellId()){
+					toSend = new Object[] { "True" };
+				} else {
+					enterBag();
+					exitBag();
+					if(Integer.parseInt(infoMov[0]) != this.network.getInfo().getCellId()){
+						toSend = new Object[] { "True" };
+					} else {
+						DisplayInfo.appendDebugLog("ChangeMap error after enterBag tactic", param);
+						toSend = new Object[] { "False" };
+					}
+				}
+			}
+			else {
+				DisplayInfo.appendDebugLog("ChangeMap error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		return toSend;
+	}
+
+
+	private Object[] changeMapTest(String param) throws Exception {
+		Object[] toSend;
+		MapMovement mapMovement1 = this.network.getMovement().ChangeMap(param);
+		if (mapMovement1 == null) {
+			toSend = new Object[] { "False" };
+			this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
+		}
+		else {
+			mapMovement1.PerformChangement();
+			if (this.network.getMovement().moveOver()) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				toSend = new Object[] { "False" };
+			}
+		}
+		return toSend;
+	}
+
+
+	private Object[] checkPhorror() {
+		Object[] toSend;
+		if (this.network.getHunt().isPhorror()) {
+			toSend = new Object[] { "\"" + this.getNetwork().getHunt().getPhorrorName() + "\"" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] closeBank() throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
+			if (this.waitToSendLeaveExchange()) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Bank oppened : " + bankOppened);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("Open bank error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		bankOppened = false;
+		return toSend;
+	}
+
+
+	private Object[] closeDD() throws Exception {
+		Object[] toSend;
+		if(this.network.getDragodinde().isInStable()){
+			LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
+			getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave stable");
+			if (this.waitToSendLeaveExchange()) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("closeDD error, server returned false", "No response");
+				toSend = new Object[] { "False" };
+			} 
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] closeHdv() throws Exception {
+		Object[] toSend;
+		if(this.network.getInfo().isInExchange()){
+			LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
+			getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave hdv");
+			if (this.waitToSendLeaveExchange()) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("closeHdv error, server returned false", "No response");
+				toSend = new Object[] { "False" };
+			} 
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		this.network.getInfo().setInExchange(false);
+		return toSend;
+	}
+
+
+	private Object[] connect(String param) throws InterruptedException {
+		Object[] toSend;
+		String[] str = param.split(",");
+		Info info = new Info(str[0], str[1], str[2], str[3]);
+		if(this.network != null){
+			this.network.getInfo().setPrintDc(false);
+			if(this.network.displayPacket){
+				this.network.getF().setVisible(false);
+			}
+		}
+		this.network = new Network(Communication.displayPacket, info, botInstance);
+		Thread threadNetwork = new Thread(network);
+		threadNetwork.start();
+		int index = 0;
+		while (!info.isConnected()) {
+			Thread.sleep(2000);
+			index += 1;
+			if (index == 60) { 
+				System.out.println("Connection timed out"); 
+				DisplayInfo.appendDebugLog("Connection error", param);
+				break;
+			}
+		}
+		if(info.isConnected()){
+			toSend = new Object[] { "True" };
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		Communication.isConnecting = false;
+		return toSend;
+	}
+
+
+	private Object[] disconnect() throws IOException {
+		Object[] toSend;
+		if(network != null){
+			this.network.getInfo().setPrintDc(false);
+			if(this.network.displayPacket)
+				this.network.getF().setVisible(false);
+			this.network.getSocket().close();
+			toSend = new Object[] { "True" };
+		} else {
+			toSend = new Object[] { "True" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] dismountDD() throws Exception {
+		Object[] toSend;
+		if (this.network.getDragodinde().isHavingDd()) {
+			if(!this.network.getInfo().isRiding()){
+				toSend = new Object[] { "True" };
+			} else {
+				MountToggleRidingRequestMessage mountFeedRequestMessage = new MountToggleRidingRequestMessage();
+				getNetwork().sendToServer(mountFeedRequestMessage, MountToggleRidingRequestMessage.ProtocolId, "dismount dd");
+				if (this.waitToSendMount("ride")) {
+					toSend = new Object[] { "True" };
+				} else {
+					DisplayInfo.appendDebugLog("dismountDD error, server returned false", "No response");
+					toSend = new Object[] { "False" };
+				}
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] dropBank(String param) throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			String[] toBank = param.split(",");
+			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item bank");
+			if (this.waitToSendBank("move")) {
+				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Drop bank error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("Drop bank error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] dropBankAll() throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
+			getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
+			if (this.waitToSendBank("move")) {
+				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("dropBankAll error, server returned false", "Bank oppened : " + bankOppened);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("dropBankAll error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] dropBankKamas(String param) throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(param));
+			getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in this.network.getBank()");
+			if (this.waitToSendBank("move")) {
+				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("dropBankKamas error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("dropBankKamas error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] dropBankList(String param) throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			String[] toBankList = param.split(",");
+			List<Integer> ids = new ArrayList<Integer>();
+			for (String string : toBankList) {
+				ids.add(Integer.parseInt(string.replaceAll("\\s+", "")));
+			}
+			ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
+			getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list bank");
+			if (this.waitToSendBank("move")) {
+				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("dropBankList error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("dropBankList error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] enterBag() throws Exception {
+		Object[] toSend;
+		EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
+		getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
+		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] enterBwork() throws Exception {
+		Object[] toSend;
+		if(this.network.getMap().getId() == 88212751 && this.network.getInfo().getCellId() == 383){
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(473020,35416892);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter bwork");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("enterBwork error, server returned false", "ChangeMap error");
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] exitBag() throws Exception {
+		Object[] toSend;
+		EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
+		getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
+		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] exitBwork() throws Exception {
+		Object[] toSend;
+		if(this.network.getMap().getId() == 104073218 && this.network.getInfo().getCellId() == 260){
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555,35423772);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit bwork");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("exitBwork error, server returned false", "ChangeMap error");
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] exitHuntingHall() throws Exception {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 128452097) {
+			move(504);
+			sleepShort();
+		}
+		if (this.network.getMap().getId() == 128451073) {
+			move(536);
+			int[] interactive2 = this.network.getInteractive().getInteractive(184);
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exiting hunting hall");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("exitHuntingHall error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : "  + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] fart() throws Exception {
+		Object[] toSend;
+		if(this.network.getDragodinde().isFart()){
+			EmotePlayRequestMessage emotePlayRequestMessage = new EmotePlayRequestMessage(8);
+			getNetwork().sendToServer(emotePlayRequestMessage, EmotePlayRequestMessage.ProtocolId, "Fart");
+			if (this.waitToSendEmote()) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("fart error, server returned false", "No fart");
+				toSend = new Object[] { "False" };
+			} 
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] feedDD(String param) throws Exception {
+		Object[] toSend;
+		if (this.network.getDragodinde().isHavingDd()) {
+			String[] param2 = param.split(",");
+			MountFeedRequestMessage mountFeedRequestMessage = new MountFeedRequestMessage(this.network.getDragodinde().getId(),1,Integer.parseInt(param2[0]),Integer.parseInt(param2[1]));
+			getNetwork().sendToServer(mountFeedRequestMessage, MountFeedRequestMessage.ProtocolId, "Feed dd");
+			if (this.waitToSendMount("set")) {
+				toSend = new Object[] { "True" };
+			} else {
+				DisplayInfo.appendDebugLog("feedDD error, server returned false", "No response");
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getBank(String param) throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			String[] fromBank = param.split(",");
+			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Get item bank");
+			if (this.waitToSendBank("move")) {
+				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Get bank error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("Get bank error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getBankDoor() {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 144931) {
+			toSend = new Object[] { this.network.getBank().cellIdBrakmarIN, this.network.getBank().cellIdBrakmarOUT };
+		}
+		else if (this.network.getMap().getId() == 84674566) {
+			toSend = new Object[] { this.network.getBank().cellIdAstrubIN, this.network.getBank().cellIdAstrubOUT };
+		}
+		else if (this.network.getMap().getId() == 147254) {
+			toSend = new Object[] { this.network.getBank().cellIdBontaIN, this.network.getBank().cellIdBontaOUT };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getBankKamas(String param) throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(param));
+			getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from this.network.getBank()");
+			if (this.waitToSendBank("move")) {
+				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("getBankKamas error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("getBankKamas error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getBankList(String param) throws Exception {
+		Object[] toSend;
+		if (bankOppened) {
+			String[] fromBankList = param.split(",");
+			List<Integer> ids1 = new ArrayList<Integer>();
+			for (String string : fromBankList) {
+				ids1.add(Integer.parseInt(string.replaceAll("\\s+", "")));
+			}
+			ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
+			getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from this.network.getBank()");
+			if (this.waitToSendBank("move")) {
+				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("getBankList error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("getBankList error", "Bank was not open");
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getClue() {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt() && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps()-1) {
+			toSend = new Object[] { "\"" + this.network.getHunt().getCurrentClue() + "\", \"" + Hunt.getDirection(this.network.getHunt().getCurrentDir()) + "\""};
+		} else if(this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)){
+			toSend = new Object[] { "Fight" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getCluesLeft() {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt()) {
+			toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex())};
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getDDPenDoor() {
+		Object[] toSend;
+		if (this.network.getInteractive().getInteractive(175) != null) {
+			toSend = new Object[] { this.network.getInteractive().getInteractive(175)[0] };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getDDStat() {
+		Object[] toSend;
+		if (this.network.getDragodinde().isHavingDd()) {
+			toSend = new Object[] { this.network.getDragodinde().getLevelEquipedDD(), this.network.getDragodinde().getEnergy(), this.network.getDragodinde().getId() };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getHdvItemStats(String param) throws Exception {
+		Object[] toSend;
+		if(Integer.parseInt(param) > 0  && this.network.getInfo().isInExchange()){
+			ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
+			getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
+			if (this.waitToSendHdv()) {
+				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getHuntingHallDoorCell() {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 142088718) {
+			toSend = new Object[] { this.network.getInteractive().getInteractive(184)[0] };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getHuntStart() {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt()) {
+			toSend = new Object[] { "(" + this.getNetwork().getHunt().getStartMapCoords()[0] + "," + this.getNetwork().getHunt().getStartMapCoords()[1] + ")" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getMap() {
+		if(this.network == null){
+			return new Object[] { "False" };
+		}
+		if(this.network.getInfo().isConnected()){
+			return new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
+		} else {
+			return new Object[] { "False" };
+		}
+	}
+
+
+	private Object[] getMonsters() {
+		Object[] toSend;
+		toSend = new Object[] { this.network.getMonsters() };
+		return toSend;
+	}
+
+
+	public Network getNetwork() {
+		return network;
+	}
+
+
+	private Object[] getRessources() {
+		Object[] toSend;
+		toSend = new Object[] { this.network.getInteractive().getFarmCell() };
+		return toSend;
+	}
+
+
+	public Object[] getReturn(String cmd, String param) throws Exception {
 		
 		Object[] toSend = null;
 		
@@ -62,360 +740,79 @@ public class ModelConnexion {
 		
 		switch (cmd) {
 			case "connect":
-				String[] str = param.split(",");
-				Info info = new Info(str[0], str[1], str[2], str[3]);
-				if(this.network != null){
-					this.network.getInfo().setPrintDc(false);
-					if(this.network.displayPacket){
-						this.network.getF().setVisible(false);
-					}
-				}
-				this.network = new Network(Communication.displayPacket, info, botInstance);
-				Thread threadNetwork = new Thread(network);
-				threadNetwork.start();
-				int index = 0;
-				while (!info.isConnected()) {
-					Thread.sleep(2000);
-					index += 1;
-					if (index == 60) { 
-						System.out.println("Connection timed out"); 
-						break;
-					}
-				}
-				if(info.isConnected()){
-					toSend = new Object[] { "True" };
-				} else {
-					toSend = new Object[] { "False" };
-				}
-				Communication.isConnecting = false;
+				toSend = connect(param);
 				break;
 			case "disconnect":
-				if(network != null){
-					this.network.getInfo().setPrintDc(false);
-					this.network.getF().setVisible(false);
-					this.network.getSocket().close();
-					System.out.println("Closed");
-					toSend = new Object[] { "True" };
-				} else {
-					toSend = new Object[] { "True" };
-				}
+				toSend = disconnect();
 				break;
 			case "getMap":
-				toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
+				toSend = getMap();
 				break;
 			case "move":
 				toSend = move(Integer.parseInt(param));
 				break;
 			case "changeMap":
-				String[] infoMov = param.split(",");
-				MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
-				if (mapMovement == null) {
-					toSend = new Object[] { "False" };
-					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
-				}
-				else {
-					mapMovement.PerformChangement();
-					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-						if(Integer.parseInt(infoMov[0]) != this.network.getInfo().getCellId()){
-							toSend = new Object[] { "True" };
-						} else {
-							enterBag();
-							exitBag();
-							toSend = new Object[] { "True" };
-						}
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
+				toSend = changeMap(param);
 				break;
 			case "changeMapTest":
-				MapMovement mapMovement1 = this.network.getMovement().ChangeMap(param);
-				if (mapMovement1 == null) {
-					toSend = new Object[] { "False" };
-					this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
-				}
-				else {
-					mapMovement1.PerformChangement();
-					if (this.network.getMovement().moveOver()) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
+				toSend = changeMapTest(param);
 				break;
 			case "getResources":
-				toSend = new Object[] { this.network.getInteractive().getFarmCell() };
+				toSend = getRessources();
 				break;
 			case "harvest":
-				if (this.network.getInteractive().harvestCell(Integer.parseInt(param))) {
-					toSend = new Object[] { this.network.getInteractive().getLastItemHarvestedId(), this.network.getInteractive().getQuantityLastItemHarvested(), this.network.getInfo().getWeight(), this.network.getInfo().getWeigthMax() };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = harvest(param);
 				break;
 			case "getStats":
-				toSend = new Object[] { this.network.getStats() };
+				toSend = getStats();
 				break;
 			case "goAstrub":
-				if (this.network.getMap().getId() == 153880835) {
-					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
-					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request Npc to go to Astrub");
-					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = goAstrub();
 				break;
 			case "goIncarnam":
-				int r = this.network.getInteractive().getStatue();
-				if (r != -1) {
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getInteractive().getElementIdStatue(), this.network.getInteractive().getSkillInstanceUidStatue());
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
-					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = goIncarnam();
 				break;
 			case "getStatue":
-				int statueCellId = this.network.getInteractive().getStatue();
-				if (statueCellId != -1) {
-					toSend = new Object[] { statueCellId };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getStatue();
 				break;
 			case "getBankDoor":
-				if (this.network.getMap().getId() == 144931) {
-					toSend = new Object[] { this.network.getBank().cellIdBrakmarIN, this.network.getBank().cellIdBrakmarOUT };
-				}
-				else if (this.network.getMap().getId() == 84674566) {
-					toSend = new Object[] { this.network.getBank().cellIdAstrubIN, this.network.getBank().cellIdAstrubOUT };
-				}
-				else if (this.network.getMap().getId() == 147254) {
-					toSend = new Object[] { this.network.getBank().cellIdBontaIN, this.network.getBank().cellIdBontaOUT };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getBankDoor();
 				break;
 			case "goBank":
-				if (this.network.getMap().getId() == 144931) { // Brakmar
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBrakmarIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBrakmarIN));
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
-					if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else if (this.network.getMap().getId() == 84674566) { // Astrub
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveAstrubIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveAstrubIN));
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
-					if (this.waitToSend("Map")) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else if (this.network.getMap().getId() == 147254) { // Bonta
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBontaIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBontaIN));
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
-					if (this.waitToSend("Map")) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = goBank(param);
 				break;
 			case "openBank":
-				if (this.network.getMap().getId() == 83887104 || this.network.getMap().getId() == 2884617 || this.network.getMap().getId() == 8912911) {
-					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.network.getNpc().getNpc().get(0).getContextualId(), 3, this.network.getMap().getId());
-					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-					bankOppened = true;
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = openBank();
 				break;
 			case "closeBank":
-				if (bankOppened) {
-					getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close this.network.getBank()");
-					this.waitToSend();
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
-				bankOppened = false;
+				toSend = closeBank();
 				break;
 			case "dropBank":
-				if (bankOppened) {
-					String[] toBank = param.split(",");
-					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = dropBank(param);
 				break;
 			case "getBank":
-				if (bankOppened) {
-					String[] fromBank = param.split(",");
-					getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item in this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getBank(param);
 				break;
 			case "dropBankList":
-				if (bankOppened) {
-					String[] toBankList = param.split(",");
-					List<Integer> ids = new ArrayList<Integer>();
-					for (String string : toBankList) {
-						ids.add(Integer.parseInt(string.replaceAll("\\s+", "")));
-					}
-					ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
-					getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list in this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = dropBankList(param);
 				break;
 			case "getBankList":
-				if (bankOppened) {
-					String[] fromBankList = param.split(",");
-					List<Integer> ids1 = new ArrayList<Integer>();
-					for (String string : fromBankList) {
-						ids1.add(Integer.parseInt(string.replaceAll("\\s+", "")));
-					}
-					ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
-					getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getBankList(param);
 				break;
 			case "getBankKamas":
-				if (bankOppened) {
-					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(param));
-					getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getBankKamas(param);
 				break;
 			case "dropBankKamas":
-				if (bankOppened) {
-					ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(param));
-					getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = dropBankKamas(param);
 				break;
 			case "dropBankAll":
-				if (bankOppened) {
-					ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
-					getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
-					if (this.waitToSend()) {
-						toSend = new Object[] { this.network.getStats(), this.network.getBank() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = dropBankAll();
 				break;
 			case "getMonsters":
-				toSend = new Object[] { this.network.getMonsters() };
+				toSend = getMonsters();
 				break;
 			case "attackMonster":
-				int id = (int) Double.parseDouble(param);
-				boolean canAtk = false;
-				for (int i = 0; i < this.network.getMonsters().getMonsters().size(); i++) {
-					if (id == (int) this.network.getMonsters().getMonsters().get(i).getContextualId()) {
-						if (this.network.getInfo().getCellId() == this.network.getMonsters().getMonsters().get(i).getDisposition().getCellId()) {
-							canAtk = true;
-						}
-					}
-				}
-				if (canAtk) {
-					GameRolePlayAttackMonsterRequestMessage gameRolePlayAttackMonsterRequestMessage = new GameRolePlayAttackMonsterRequestMessage(id);
-					getNetwork().sendToServer(gameRolePlayAttackMonsterRequestMessage, GameRolePlayAttackMonsterRequestMessage.ProtocolId, "Attack monster " + id);
-					if (this.waitToSend()) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { this.network.getMonsters() };
-				}
+				toSend = attackMonster(param);
 				break;
 			case "enterBag":
 				toSend = enterBag();
@@ -424,443 +821,85 @@ public class ModelConnexion {
 				toSend = exitBag();
 				break;
 			case "getZaap":
-				if (!(this.network.getInteractive().getInteractive(114) == null)) {
-					toSend = new Object[] { this.network.getInteractive().getInteractive(114)[0] };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getZaap();
 				break;
 			case "useZaap":
-				int[] interactive = this.network.getInteractive().getInteractive(114);
-				if (!(interactive == null)) {
-					if(isCloseToCell(this.network.getInfo().getCellId(), interactive[0])){
-						String newParam = param.replaceAll("\\(", "");
-						newParam = newParam.replaceAll("\\)", "");
-						String[] paramZaap = newParam.split(",");
-						InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
-						getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
-						if (this.waitToSend()) {
-							Thread.sleep(1500 + new Random().nextInt(800));
-							double mapId = this.network.getInteractive().getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
-							if (mapId != -1) {
-								TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
-								getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
-								if (this.waitToSendMap(this.network.getMap().getId())) {
-									toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
-								} else {
-									toSend = new Object[] { "False" };
-								}
-							} else {
-								toSend = new Object[] { "False" };
-							}
-						} else {
-							toSend = new Object[] { "False" };
-						}
-					} else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = useZaap(param);
 				break;
 			case "getHuntingHallDoorCell":
-				if (this.network.getMap().getId() == 142088718) {
-					toSend = new Object[] { this.network.getInteractive().getInteractive(184)[0] };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getHuntingHallDoorCell();
 				break;
-			/**
-			 * Go into the first hall Then move to cell 292 to go in main hall
-			 */
 			case "goHuntingHall":
-				if (this.network.getMap().getId() == 142088718 && this.network.getInfo().getCellId() == 356) {
-					int[] interactive2 = this.network.getInteractive().getInteractive(184);
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
-					if (this.waitToSendMap(this.network.getMap().getId())) {
-						sleepShort();
-						toSend = move(292);
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = goHuntingHall();
 				break;
-			/**
-			 * Go to use cell 504 to go to first hall Then exit the building
-			 */
 			case "exitHuntingHall":
-				if (this.network.getMap().getId() == 128452097) {
-					move(504);
-					sleepShort();
-				}
-				if (this.network.getMap().getId() == 128451073) {
-					move(536);
-					int[] interactive2 = this.network.getInteractive().getInteractive(184);
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exiting hunting hall");
-					if (this.waitToSendMap(this.network.getMap().getId())) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = exitHuntingHall();
 				break;
-			/**
-			 * Bot needs to go to cell 304 to get new hunt It will get the
-			 * highest hunt for its level
-			 * Return (the number of steps, number of index in first step)
-			 *
-			 */
 			case "newHunt":
-				if (this.network.getMap().getId() == 128452097 && !this.network.getInfo().isInHunt()) {
-					if (!(this.network.getInfo().getCellId() == 304)) {
-						move(304);
-					}
-					int[] interactiveHunt = Hunt.getHuntFromLvl(Integer.parseInt(param));
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
-					while (!this.network.getInfo().isHuntAnswered()) {
-						Thread.sleep(50);
-					}
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = newHunt(param);
 				break;
 			case "abandonHunt":
-				if (this.network.getInfo().isInHunt()) {
-					TreasureHuntGiveUpRequestMessage huntGiveUpRequestMessage = new TreasureHuntGiveUpRequestMessage(0);
-					getNetwork().sendToServer(huntGiveUpRequestMessage, TreasureHuntGiveUpRequestMessage.ProtocolId, "Abandon hunt");
-					if (this.waitToSend("Hunt")) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = abandonHunt();
 				break;
-			/**
-			 * Get the start map of the hunt
-			 */
 			case "getHuntStart":
-				if (this.network.getInfo().isInHunt()) {
-					toSend = new Object[] { "(" + this.getNetwork().getHunt().getStartMapCoords()[0] + "," + this.getNetwork().getHunt().getStartMapCoords()[1] + ")" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getHuntStart();
 				break;
-			/**
-			 * Return the current clue
-			 * Return fight if its the last step
-			 */
 			case "getClue":
-				if (this.network.getInfo().isInHunt() && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
-					toSend = new Object[] { "\"" + this.network.getHunt().getCurrentClue() + "\", \"" + Hunt.getDirection(this.network.getHunt().getCurrentDir()) + "\""};
-				} else if(this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)){
-					toSend = new Object[] { "Fight" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getClue();
 				break;
 			case "validateClue":
-				if (this.network.getInfo().isInHunt() && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
-					TreasureHuntFlagRequestMessage treasureHuntFlagRequestMessage = new TreasureHuntFlagRequestMessage(0, this.network.getHunt().getCurrentIndex());
-					getNetwork().sendToServer(treasureHuntFlagRequestMessage, TreasureHuntFlagRequestMessage.ProtocolId, "Validating clue");
-					if (this.waitToSend("Hunt")) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = validateClue();
 				break;
 			case "checkPhorror":
-				if (this.network.getHunt().isPhorror()) {
-					toSend = new Object[] { "\"" + this.getNetwork().getHunt().getPhorrorName() + "\"" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = checkPhorror();
 				break;
-			/**
-			 * Validate the step 
-			 * Return the number of index for the next step
-			 */
 			case "validateStep":
-				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex()) && !(this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps()-1)) {
-					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
-					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
-					if (this.waitToSend("Hunt")) {
-						if (this.network.getInfo().isStepSuccess()) {
-							toSend = new Object[] { "True" };
-						}
-						else {
-							toSend = new Object[] { "False" };
-						}
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = validateStep();
 				break;
 			case "huntFight":
-				if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps() - 1)) {
-					TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
-					getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Starting hunt fight");
-					if (this.waitToSend("Hunt")) {
-						if (this.network.getInfo().isJoinedFight()) {
-							toSend = new Object[] { "True" };
-						}
-						else {
-							toSend = new Object[] { "False" };
-						}
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = huntFight();
 				break;
 			case "getCluesLeft":
-				if (this.network.getInfo().isInHunt()) {
-					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex())};
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getCluesLeft();
 				break;
 			case "getStepsLeft":
-				if (this.network.getInfo().isInHunt()) {
-					toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfSteps() - this.getNetwork().getHunt().getCurrentStep() - 1)};
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getStepsLeft();
 				break;
 			case "huntActive":
-				if (this.getNetwork().getInfo().isInHunt()) {
-					toSend = new Object[] { "True" };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = huntActive();
 				break;
 			case "openHdv":
-				this.network.getInfo().setInExchange(true);
-				int idSeller = (int) this.getNetwork().getNpc().getSeller();
-				if(idSeller != -1){
-					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(idSeller, 5, this.getNetwork().getMap().getId());
-					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
-					if (this.waitToSend("exchangeBigSeller")) {
-						toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = openHdv();
 				break;
 			case "getHdvItemStats":
-				if(Integer.parseInt(param) > 0  && this.network.getInfo().isInExchange()){
-					ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
-					getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
-					if (this.waitToSend("exchangeBigSeller")) {
-						toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getHdvItemStats(param);
 				break;
 			case "sellItem":
-				if(this.network.getInfo().isInExchange()){
-					String[] paramItems = param.split(",");
-					for(int i = 0 ; i < Integer.parseInt(paramItems[2]) ; i++){
-						Thread.sleep(80);
-						ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[3]));
-						exchangeObjectMovePricedMessage.setObjectUID(Integer.parseInt(paramItems[0]));
-						exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems[1]));
-						getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
-						if(!(i == Integer.parseInt(paramItems[2]) - 1)){
-							this.waitToSend("exchangeBigSeller");
-						}
-					}
-					if (this.waitToSend("exchangeBigSeller")) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = sellItem(param);
 				break;
 			case "modifyPrice":
-				if(this.network.getInfo().isInExchange()){
-					String[] paramItems1 = param.split(",");
-					List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
-					for(int i = 0 ; i < uid.size() ; i++){
-						if(!this.getNetwork().getNpc().isSelling(uid.get(i))){
-							continue;
-						}
-						Thread.sleep(80);
-						ExchangeObjectModifyPricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectModifyPricedMessage();
-						exchangeObjectMovePricedMessage.setObjectUID(uid.get(i));
-						exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems1[1]));
-						exchangeObjectMovePricedMessage.setPrice(Integer.parseInt(paramItems1[2]));
-						getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectModifyPricedMessage.ProtocolId, "Modify item");
-						if(!(i == uid.size() - 1)){
-							this.waitToSend("exchangeBigSeller");
-						}
-					}
-					if (this.waitToSend("exchangeBigSeller")) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = modifyPrice(param);
 				break;
 			case "withdrawItem":
-				if(this.network.getInfo().isInExchange()){
-					String[] paramItems11 = param.split(",");
-					List<Integer> uid1 = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems11[0]), Integer.parseInt(paramItems11[1]));
-		
-					if (Integer.parseInt(paramItems11[2]) <= uid1.size()) {
-						for (int i = 0; i < Integer.parseInt(paramItems11[2]); i++) {
-							if(!this.getNetwork().getNpc().isSelling(uid1.get(i))){
-								continue;
-							}
-							Thread.sleep(80);
-							ExchangeObjectMoveMessage exchangeObjectMoveMessage = new ExchangeObjectMoveMessage(uid1.get(i), -Integer.parseInt(paramItems11[1]));
-							getNetwork().sendToServer(exchangeObjectMoveMessage, ExchangeObjectMoveMessage.ProtocolId, "Withdraw item");
-							if (!(i == uid1.size() - 1)) {
-								this.waitToSend("exchangeBigSeller");
-							}
-						}
-						if (this.waitToSend("exchangeBigSeller")) {
-							toSend = new Object[] { "True" };
-						}
-						else {
-							toSend = new Object[] { "False" };
-						} 
-					} else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = withdrawItem(param);
 				break;
 			case "closeHdv":
-				if(this.network.getInfo().isInExchange()){
-					LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
-					getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave hdv");
-					if (this.waitToSend("Exchange")) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					} 
-				} else {
-					toSend = new Object[] { "False" };
-				}
-				this.network.getInfo().setInExchange(false);
+				toSend = closeHdv();
 				break;
 			case "enterBwork":
-				if(this.network.getMap().getId() == 88212751 && this.network.getInfo().getCellId() == 383){
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(473020,35416892);
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter bwork");
-					if (this.waitToSendMap(this.network.getMap().getId())) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = enterBwork();
 				break;
 			case "exitBwork":
-				if(this.network.getMap().getId() == 104073218 && this.network.getInfo().getCellId() == 260){
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555,35423772);
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit bwork");
-					if (this.waitToSendMap(this.network.getMap().getId())) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = exitBwork();
 				break;
 			case "getDDPenDoor":
-				if (!(this.network.getInteractive().getInteractive(175) == null)) {
-					toSend = new Object[] { this.network.getInteractive().getInteractive(175)[0] };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getDDPenDoor();
 				break;
 			case "openDD":
-				int[] interactive1 = this.network.getInteractive().getInteractive(175);
-				if (!(interactive1 == null)) {
-					InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive1[1], interactive1[2]);
-					getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Open DD");
-					if (this.waitToSend("inStable")) {
-						toSend = new Object[] { this.getNetwork().getDragodinde() };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = openDD();
 				break;
 			case "closeDD":
-				if(this.network.getDragodinde().isInStable()){
-					LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
-					getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave stable");
-					if (this.waitToSend("Exchange")) {
-						this.network.getDragodinde().setInStable(false);
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					} 
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = closeDD();
 				break;
 			case "putInStable":
 				toSend = manageDD("stable",param);
@@ -875,200 +914,41 @@ public class ModelConnexion {
 				toSend = manageDD("equip",param);
 				break;
 			case "fart":
-				if(this.network.getDragodinde().isFart()){
-					EmotePlayRequestMessage emotePlayRequestMessage = new EmotePlayRequestMessage(8);
-					getNetwork().sendToServer(emotePlayRequestMessage, EmotePlayRequestMessage.ProtocolId, "Fart");
-					if (this.waitToSendEmote()) {
-						toSend = new Object[] { "True" };
-					}
-					else {
-						toSend = new Object[] { "False" };
-					} 
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = fart();
 				break;
 			case "getDDStat":
-				if (this.network.getDragodinde().isHavingDd()) {
-					toSend = new Object[] { this.network.getDragodinde().getLevelEquipedDD(), this.network.getDragodinde().getEnergy(), this.network.getDragodinde().getId() };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				} 
+				toSend = getDDStat(); 
 				break;
 			case "setXpDD":
-				if (this.network.getDragodinde().isHavingDd()) {
-					if(Integer.parseInt(param) != this.network.getDragodinde().getRatioXp()){
-						MountSetXpRatioRequestMessage mountSetXpRatioRequestMessage = new MountSetXpRatioRequestMessage(Integer.parseInt(param));
-						getNetwork().sendToServer(mountSetXpRatioRequestMessage, MountSetXpRatioRequestMessage.ProtocolId, "Set xp dd");
-						if (this.waitToSendMount("xp")) {
-							toSend = new Object[] { "True" };
-						} else {
-							toSend = new Object[] { "False" };
-						}
-					} else {
-						toSend = new Object[] { "True" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				} 
+				toSend = setXpDD(param); 
 				break;
 			case "feedDD": 
-				if (this.network.getDragodinde().isHavingDd()) {
-					String[] param2 = param.split(",");
-					MountFeedRequestMessage mountFeedRequestMessage = new MountFeedRequestMessage(this.network.getDragodinde().getId(),1,Integer.parseInt(param2[0]),Integer.parseInt(param2[1]));
-					getNetwork().sendToServer(mountFeedRequestMessage, MountFeedRequestMessage.ProtocolId, "Feed dd");
-					if (this.waitToSendMount("set")) {
-						toSend = new Object[] { "True" };
-					} else {
-						toSend = new Object[] { "False" };
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				} 
+				toSend = feedDD(param); 
 				break;
 			case "mountDD":
-				if (this.network.getDragodinde().isHavingDd()) {
-					if(this.network.getInfo().isRiding()){
-						toSend = new Object[] { "True" };
-					} else {
-						MountToggleRidingRequestMessage mountFeedRequestMessage = new MountToggleRidingRequestMessage();
-						getNetwork().sendToServer(mountFeedRequestMessage, MountToggleRidingRequestMessage.ProtocolId, "Mount dd");
-						if (this.waitToSendMount("ride")) {
-							toSend = new Object[] { "True" };
-						} else {
-							toSend = new Object[] { "False" };
-						}
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				} 
+				toSend = mountDD(); 
 				break;
 			case "dismountDD":
-				if (this.network.getDragodinde().isHavingDd()) {
-					if(!this.network.getInfo().isRiding()){
-						toSend = new Object[] { "True" };
-					} else {
-						MountToggleRidingRequestMessage mountFeedRequestMessage = new MountToggleRidingRequestMessage();
-						getNetwork().sendToServer(mountFeedRequestMessage, MountToggleRidingRequestMessage.ProtocolId, "dismount dd");
-						if (this.waitToSendMount("ride")) {
-							toSend = new Object[] { "True" };
-						} else {
-							toSend = new Object[] { "False" };
-						}
-					}
-				}
-				else {
-					toSend = new Object[] { "False" };
-				} 
+				toSend = dismountDD(); 
 				break;
 			case "getZaapiCell":
-				if (!(this.network.getInteractive().getInteractive(157) == null)) {
-					toSend = new Object[] { this.network.getInteractive().getInteractive(157)[0] };
-				}
-				else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = getZaapiCell();
 				break;
 			case "useZaapi":
-				int[] interactiveZaapi = this.network.getInteractive().getInteractive(157);
-				if (!(interactiveZaapi == null)) {
-					if(isCloseToCell(this.network.getInfo().getCellId(), interactiveZaapi[0])){
-						String[] paramZaap = param.split(",");
-						System.out.println(interactiveZaapi[1] + " : " + interactiveZaapi[2]);
-						InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveZaapi[1], interactiveZaapi[2]);
-						getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaapi");
-						if (this.waitToSend()) {
-							Thread.sleep(1500 + new Random().nextInt(800));
-							double mapId = this.network.getInteractive().getMapIdZaapi(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
-							if (mapId != -1) {
-								TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(1, mapId);
-								getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
-								if (this.waitToSendMap(this.network.getMap().getId())) {
-									toSend = new Object[] { String.valueOf("(" + this.network.getInfo().getCoords()[0]) + "," + String.valueOf(this.network.getInfo().getCoords()[1]) + ")", this.network.getInfo().getCellId(), this.network.getInfo().getWorldmap(), Integer.valueOf((int) this.network.getInfo().getMapId()) };
-								} else {
-									toSend = new Object[] { "False" };
-								}
-							} else {
-								toSend = new Object[] { "False" };
-							}
-						} else {
-							toSend = new Object[] { "False" };
-						}
-					} else {
-						toSend = new Object[] { "False" };
-					}
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = useZaapi(param);
 				break;
 			case "useItem":
-				ObjectUseMessage objectUseMessage = new ObjectUseMessage(Integer.parseInt(param));
-				getNetwork().sendToServer(objectUseMessage, ObjectUseMessage.ProtocolId, "Using item");
-				if(this.waitToSendObjectUse()){
-					toSend = new Object[] { "True" };
-				} else {
-					toSend = new Object[] { "False" };
-				}
+				toSend = useItem(param);
 				break;
 		}
 		return toSend;
 	}
 
-	private Object[] exitBag() throws Exception, InterruptedException {
-		Object[] toSend;
-		EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
-		getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
-		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-			toSend = new Object[] { "True" };
-		}
-		else {
-			toSend = new Object[] { "False" };
-		}
-		return toSend;
-	}
 
-	private Object[] enterBag() throws Exception, InterruptedException {
-		Object[] toSend;
-		EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
-		getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
-		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-			toSend = new Object[] { "True" };
-		}
-		else {
-			toSend = new Object[] { "False" };
-		}
-		return toSend;
-	}
-
-	private Object[] manageDD(String to, String param) throws Exception, InterruptedException {
-		Object[] toSend;
-		if(this.network.getDragodinde().isInStable()){
-			String paramdd = param.replaceAll("\\(", "");
-			paramdd = paramdd.replaceAll("\\)", "");
-			String[] newParamdd = paramdd.split(",");
-			int actionId = Dragodinde.getActionId(to, newParamdd[1]);
-			List<Integer> listId = new ArrayList<>();
-			listId.add(Integer.parseInt(newParamdd[0]));
-			ExchangeHandleMountsStableMessage exchangeHandleMountsStableMessage = new ExchangeHandleMountsStableMessage(actionId,listId);
-			getNetwork().sendToServer(exchangeHandleMountsStableMessage, ExchangeHandleMountsStableMessage.ProtocolId, "Put in " + to);
-			if (this.waitToSend("ExchangeDD")) {
-				toSend = new Object[] { "True" };
-			} else {
-				toSend = new Object[] { "False" };
-			} 
-		} else {
-			toSend = new Object[] { "False" };
-		}
-		return toSend;
-	}
-
-	public void getReturn(String[] message) throws NumberFormatException, Exception {
+	public void getReturn(String[] message) throws InterruptedException {
 		Thread.sleep(100);
 		new Thread(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					while(!actionFinished){
@@ -1095,19 +975,730 @@ public class ModelConnexion {
 		return;
 	}
 
-	public boolean waitToSend() throws InterruptedException {
-		while (!this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered()) {
-			Thread.sleep(50);
-		}
-		while (!this.network.getInfo().isBasicNoOperationMsg()) {
-			Thread.sleep(50);
-		}
-		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered()) {
-			return false;
+
+	private Object[] getStats() {
+		return new Object[] { this.network.getStats() };
+	}
+
+
+	private Object[] getStatue() {
+		Object[] toSend;
+		int statueCellId = this.network.getInteractive().getStatue();
+		if (statueCellId != -1) {
+			toSend = new Object[] { statueCellId };
 		}
 		else {
-			return true;
+			toSend = new Object[] { "False" };
 		}
+		return toSend;
+	}
+
+
+	private Object[] getStepsLeft() {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt()) {
+			toSend = new Object[] {(this.getNetwork().getHunt().getNumberOfSteps() - this.getNetwork().getHunt().getCurrentStep() - 1)};
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getZaap() {
+		Object[] toSend;
+		if (this.network.getInteractive().getInteractive(114) != null) {
+			toSend = new Object[] { this.network.getInteractive().getInteractive(114)[0] };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] getZaapiCell() {
+		Object[] toSend;
+		if (this.network.getInteractive().getInteractive(157) != null) {
+			toSend = new Object[] { this.network.getInteractive().getInteractive(157)[0] };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] goAstrub() throws Exception {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 153880835) {
+			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
+			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request Npc to go to Astrub");
+			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Astrub change error, server returned false", "MapId : " + this.network.getMap().getId() + " cellId : " + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] goBank(String param) throws Exception {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 144931) { // Brakmar
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBrakmarIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBrakmarIN));
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
+			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Bank error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else if (this.network.getMap().getId() == 84674566) { // Astrub
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveAstrubIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveAstrubIN));
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
+			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Bank error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else if (this.network.getMap().getId() == 147254) { // Bonta
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBontaIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBontaIN));
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
+			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Bank error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("Bank error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] goHuntingHall() throws Exception {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 142088718 && this.network.getInfo().getCellId() == 356) {
+			int[] interactive2 = this.network.getInteractive().getInteractive(184);
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				sleepShort();
+				toSend = move(292);
+			}
+			else {
+				DisplayInfo.appendDebugLog("goHuntingHall error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : "  + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] goIncarnam() throws Exception {
+		Object[] toSend;
+		int r = this.network.getInteractive().getStatue();
+		if (r != -1) {
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getInteractive().getElementIdStatue(), this.network.getInteractive().getSkillInstanceUidStatue());
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
+			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Incarnam change error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("Incarnam change error", "No statue, wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] harvest(String param) throws Exception {
+		Object[] toSend;
+		if(isCloseToCell(this.network.getInfo().getCellId(), Integer.parseInt(param))){
+			if (this.network.getInteractive().harvestCell(Integer.parseInt(param))) {
+				toSend = new Object[] { this.network.getInteractive().getLastItemHarvestedId(), this.network.getInteractive().getQuantityLastItemHarvested(), this.network.getInfo().getWeight(), this.network.getInfo().getWeigthMax() };
+			}
+			else {
+				toSend = new Object[] { "False" };
+			}	
+		} else {
+			DisplayInfo.appendDebugLog("Harvest error", "Bot not on the right position, cannot harvest the cellId : " + Integer.parseInt(param));
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] huntActive() {
+		Object[] toSend;
+		if (this.getNetwork().getInfo().isInHunt()) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] huntFight() throws Exception {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps() - 1)) {
+			TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
+			getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Starting hunt fight");
+			if (this.waitToSendFight()) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("huntFight error, server returned false", "Was not able to launch fight - rdyToFight : " + this.network.getHunt().isRdyToFight());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] manageDD(String to, String param) throws Exception {
+		Object[] toSend;
+		if(this.network.getDragodinde().isInStable()){
+			String paramdd = param.replaceAll("\\(", "");
+			paramdd = paramdd.replaceAll("\\)", "");
+			String[] newParamdd = paramdd.split(",");
+			int actionId = Dragodinde.getActionId(to, newParamdd[1]);
+			List<Integer> listId = new ArrayList<>();
+			listId.add(Integer.parseInt(newParamdd[0]));
+			ExchangeHandleMountsStableMessage exchangeHandleMountsStableMessage = new ExchangeHandleMountsStableMessage(actionId,listId);
+			getNetwork().sendToServer(exchangeHandleMountsStableMessage, ExchangeHandleMountsStableMessage.ProtocolId, "Put in " + to);
+			if (this.waitToSendMount("exchange")) {
+				toSend = new Object[] { "True" };
+			} else {
+				toSend = new Object[] { "False" };
+			} 
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] modifyPrice(String param) throws Exception {
+		Object[] toSend;
+		if(this.network.getInfo().isInExchange()){
+			String[] paramItems1 = param.split(",");
+			List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
+			for(int i = 0 ; i < uid.size() ; i++){
+				if(!this.getNetwork().getNpc().isSelling(uid.get(i))){
+					continue;
+				}
+				Thread.sleep(80);
+				ExchangeObjectModifyPricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectModifyPricedMessage();
+				exchangeObjectMovePricedMessage.setObjectUID(uid.get(i));
+				exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems1[1]));
+				exchangeObjectMovePricedMessage.setPrice(Integer.parseInt(paramItems1[2]));
+				getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectModifyPricedMessage.ProtocolId, "Modify item");
+				if(i != uid.size() - 1 && !this.waitToSendHdv()){
+					DisplayInfo.appendDebugLog("modifyPrice error, server returned false", param);
+				}
+			}
+			if (this.waitToSendHdv()) {
+				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("modifyPrice error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] mountDD() throws Exception {
+		Object[] toSend;
+		if (this.network.getDragodinde().isHavingDd()) {
+			if(this.network.getInfo().isRiding()){
+				toSend = new Object[] { "True" };
+			} else {
+				MountToggleRidingRequestMessage mountFeedRequestMessage = new MountToggleRidingRequestMessage();
+				getNetwork().sendToServer(mountFeedRequestMessage, MountToggleRidingRequestMessage.ProtocolId, "Mount dd");
+				if (this.waitToSendMount("ride")) {
+					toSend = new Object[] { "True" };
+				} else {
+					DisplayInfo.appendDebugLog("mountDD error, server returned false", "No response");
+					toSend = new Object[] { "False" };
+				}
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] move(int param) {
+		CellMovement mov;
+		Object[] toSend = null;
+		try {
+			mov = this.network.getMovement().MoveToCell(param);
+			if (mov == null || mov.path == null) {
+				toSend = new Object[] { "False" };
+				DisplayInfo.appendDebugLog("Move error, this cell is not accessible", String.valueOf(param));
+			}
+			else if (this.network.getInfo().getCellId() == param) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				int mapId = this.network.getMap().getId();
+				mov.performMovement();
+				if (this.network.getMovement().moveOver()) {
+					if (this.network.getInfo().getCellId() == param) {
+						if ((mapId == 83887104 && this.network.getInfo().getCellId() == 396) || (mapId == 2884617 && this.network.getInfo().getCellId() == 424) || (mapId == 8912911 && this.network.getInfo().getCellId() == 424) || (mapId == 128451073 && this.network.getInfo().getCellId() == 292) || (mapId == 128452097 && this.network.getInfo().getCellId() == 504)) {
+							if(waitToSendMap(mapId)){
+								toSend = new Object[] { "True" };
+							} else {
+								toSend = new Object[] { "False" };
+							}
+						}
+						else {
+							toSend = new Object[] { "True" };
+						}
+					}
+					else {
+						toSend = new Object[] { "False" };
+					}
+				}
+				else {
+					DisplayInfo.appendDebugLog("Move error, server returned false", String.valueOf(param));
+					toSend = new Object[] { "False" };
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return toSend;
+	}
+
+
+	private Object[] newHunt(String param) throws Exception {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 128452097 && !this.network.getInfo().isInHunt()) {
+			if (this.network.getInfo().getCellId() != 304) {
+				move(304);
+			}
+			int[] interactiveHunt = Hunt.getHuntFromLvl(Integer.parseInt(param));
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
+			if (this.waitToSendHunt()){
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("newHunt error, server returned false", "Interactive error - cellId : "  + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] openBank() throws Exception {
+		Object[] toSend;
+		if (this.network.getMap().getId() == 83887104 || this.network.getMap().getId() == 2884617 || this.network.getMap().getId() == 8912911) {
+			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.network.getNpc().getNpc().get(0).getContextualId(), 3, this.network.getMap().getId());
+			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
+			if (this.waitToSendBank("open")) {
+				toSend = new Object[] { this.network.getBank() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+				toSend = new Object[] { "False" };
+			}
+			bankOppened = true;
+		}
+		else {
+			DisplayInfo.appendDebugLog("Open bank error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] openDD() throws Exception {
+		Object[] toSend;
+		int[] interactive1 = this.network.getInteractive().getInteractive(175);
+		if (interactive1 != null) {
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive1[1], interactive1[2]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Open DD");
+			if (this.waitToSendMount("exchange")) {
+				toSend = new Object[] { this.getNetwork().getDragodinde() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("closeDD error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : "  + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] openHdv() throws Exception {
+		Object[] toSend;
+		this.network.getInfo().setInExchange(true);
+		int idSeller = (int) this.getNetwork().getNpc().getSeller();
+		if(idSeller != -1){
+			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(idSeller, 5, this.getNetwork().getMap().getId());
+			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
+			if (this.waitToSendHdv()) {
+				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("openHdv error, server returned false", "No response from server");
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+
+	private Object[] sellItem(String param) throws Exception {
+		Object[] toSend;
+		if(this.network.getInfo().isInExchange()){
+			String[] paramItems = param.split(",");
+			for(int i = 0 ; i < Integer.parseInt(paramItems[2]) ; i++){
+				sleepShort();
+				ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[3]));
+				exchangeObjectMovePricedMessage.setObjectUID(Integer.parseInt(paramItems[0]));
+				exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems[1]));
+				getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
+				if(i != Integer.parseInt(paramItems[2]) - 1 && !this.waitToSendHdv()){
+					DisplayInfo.appendDebugLog("sellItem error, server returned false", param);
+				}
+			}
+			if (this.waitToSendHdv()) {
+				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+			}
+			else {
+				DisplayInfo.appendDebugLog("sellItem error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	public void setNetwork(Network network) {
+		this.network = network;
+	}
+
+	private Object[] setXpDD(String param) throws Exception {
+		Object[] toSend;
+		if (this.network.getDragodinde().isHavingDd()) {
+			if(Integer.parseInt(param) != this.network.getDragodinde().getRatioXp()){
+				MountSetXpRatioRequestMessage mountSetXpRatioRequestMessage = new MountSetXpRatioRequestMessage(Integer.parseInt(param));
+				getNetwork().sendToServer(mountSetXpRatioRequestMessage, MountSetXpRatioRequestMessage.ProtocolId, "Set xp dd");
+				if (this.waitToSendMount("xp")) {
+					toSend = new Object[] { "True" };
+				} else {
+					DisplayInfo.appendDebugLog("setXpDD error, server returned false", "No response");
+					toSend = new Object[] { "False" };
+				}
+			} else {
+				toSend = new Object[] { "True" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+	@SuppressWarnings("unused")
+	private void sleepLong() {
+		try {
+			Thread.sleep(1500 + new Random().nextInt(1000));
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void sleepShort() {
+		try {
+			Random r = new Random();
+			Thread.sleep(500 + r.nextInt(700));
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private Object[] useItem(String param) throws Exception {
+		Object[] toSend;
+		ObjectUseMessage objectUseMessage = new ObjectUseMessage(Integer.parseInt(param));
+		getNetwork().sendToServer(objectUseMessage, ObjectUseMessage.ProtocolId, "Using item");
+		if(this.waitToSendObjectUse()){
+			toSend = new Object[] { "True" };
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	private Object[] useZaap(String param) throws Exception {
+		Object[] toSend;
+		int[] interactive = this.network.getInteractive().getInteractive(114);
+		if (interactive != null) {
+			if(isCloseToCell(this.network.getInfo().getCellId(), interactive[0])){
+				String newParam = param.replaceAll("\\(", "");
+				newParam = newParam.replaceAll("\\)", "");
+				String[] paramZaap = newParam.split(",");
+				InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
+				getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
+				if (this.waitToInteractive()) {
+					Thread.sleep(1500 + new Random().nextInt(800));
+					double mapId = this.network.getInteractive().getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
+					if (mapId != -1) {
+						TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
+						getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
+						if (this.waitToSendMap(this.network.getMap().getId())) {
+							toSend = getMap();
+						} else {
+							DisplayInfo.appendDebugLog("useZaap error, server returned false", "Teleportation problème\n" + param);
+							toSend = new Object[] { "False" };
+						}
+					} else {
+						DisplayInfo.appendDebugLog("useZaap error", "Map not found in the list");
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					DisplayInfo.appendDebugLog("useZaap error, server returned false", "Interactive problème\n" + param);
+					toSend = new Object[] { "False" };
+				}
+			} else {
+				DisplayInfo.appendDebugLog("useZaap error", "Wrong cell Id : " + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}	
+	
+	private Object[] useZaapi(String param) throws Exception {
+		Object[] toSend;
+		int[] interactiveZaapi = this.network.getInteractive().getInteractive(157);
+		if (interactiveZaapi != null) {
+			if(isCloseToCell(this.network.getInfo().getCellId(), interactiveZaapi[0])){
+				String[] paramZaap = param.split(",");
+				InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveZaapi[1], interactiveZaapi[2]);
+				getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaapi");
+				if (this.waitToInteractive()) {
+					Thread.sleep(1500 + new Random().nextInt(800));
+					double mapId = this.network.getInteractive().getMapIdZaapi(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
+					if (mapId != -1) {
+						TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(1, mapId);
+						getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
+						if (this.waitToSendMap(this.network.getMap().getId())) {
+							toSend = getMap();
+						} else {
+							DisplayInfo.appendDebugLog("useZaapi error, server returned false", "Teleportation problème\n" + param);
+							toSend = new Object[] { "False" };
+						}
+					} else {
+						DisplayInfo.appendDebugLog("useZaapi error", "Map not found in the list");
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					DisplayInfo.appendDebugLog("useZaapi error, server returned false", "Interactive probleme\n" + param);
+					toSend = new Object[] { "False" };
+				}
+			} else {
+				DisplayInfo.appendDebugLog("useZaapi error", "Wrong cell Id : " + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	private Object[] validateClue() throws Exception {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt() && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps()-1) {
+			TreasureHuntFlagRequestMessage treasureHuntFlagRequestMessage = new TreasureHuntFlagRequestMessage(0, this.network.getHunt().getCurrentIndex());
+			getNetwork().sendToServer(treasureHuntFlagRequestMessage, TreasureHuntFlagRequestMessage.ProtocolId, "Validating clue");
+			if (this.waitToSendHunt()){
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("validateClue error, server returned false","");
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	private Object[] validateStep() throws Exception {
+		Object[] toSend;
+		if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentIndex() == this.getNetwork().getHunt().getNumberOfIndex()) && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps()-1) {
+			TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
+			getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
+			if (this.waitToSendValidateStep()) {
+				toSend = new Object[] { "True" };
+			} else {
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	public boolean waitToInteractive() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isInteractiveUsed()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean waitToSendAbandonHunt() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isTextMessage() && !this.network.getInfo().isHuntAnswered()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				DisplayInfo.appendDebugLog("abandonHunt error, server returned false", "No response error");
+				return false;
+			}
+		}
+		return this.network.getInfo().isHuntAnswered();
+	}
+	
+	public boolean waitToSendBank(String s) throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		switch (s) {
+			case "open":
+				while (!this.network.getInfo().isStorage()) {
+					Thread.sleep(50);
+					if(System.currentTimeMillis() - index > 2000){
+						return false; 
+					}
+				}
+				break;
+			case "move":
+				while (!this.network.getInfo().isStorageUpdate()) {
+					Thread.sleep(50);
+					if(System.currentTimeMillis() - index > 2000){
+						return false; 
+					}
+				}
+				break;
+			default : 
+				return false;
+		}
+		return true;
+	}
+	
+	public boolean waitToSendEmote() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isEmoteLaunched()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false; 
+			}
+		}
+		return true;
+	}
+	
+	public boolean waitToSendFight() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isJoinedFight()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean waitToSendHdv() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isExchangeBidSeller()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean waitToSendHunt() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isHuntAnswered()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean waitToSendLeaveExchange() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isLeaveExchange()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean waitToSendMap(int actualMapId) throws InterruptedException{
@@ -1124,29 +1715,7 @@ public class ModelConnexion {
 		}
 		return true;
 	}
-	
-	public boolean waitToSendEmote() throws InterruptedException{
-		long index =  System.currentTimeMillis();
-		while (!this.network.getInfo().isEmoteLaunched()) {
-			Thread.sleep(50);
-			if(System.currentTimeMillis() - index > 2000){
-				return false; 
-			}
-		}
-		return true;
-	}
-	
-	public boolean waitToSendObjectUse() throws InterruptedException{
-		long index =  System.currentTimeMillis();
-		while (!this.network.getInfo().isObjectUse()) {
-			Thread.sleep(50);
-			if(System.currentTimeMillis() - index > 2000){
-				return false; 
-			}
-		}
-		return true;
-	}
-	
+
 	public boolean waitToSendMount(String s) throws InterruptedException{
 		long index =  System.currentTimeMillis();
 		switch (s) {
@@ -1174,153 +1743,74 @@ public class ModelConnexion {
 					}
 				}
 				break;
+			case "exchange":
+				while (!this.network.getInfo().isExchangeDD()) {
+					Thread.sleep(50);
+					if(System.currentTimeMillis() - index > 2000){
+						return false; 
+					}
+				}
+				break;
+			default : 
+				return false;
 		}
 		return true;
 	}
 
-	public boolean waitToSend(String s) throws InterruptedException {
-		switch (s) {
-			case "Map":
-				while (!this.network.getInfo().isNewMap()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "Storage":
-				while (!this.network.getInfo().isStorage()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "StorageUpd":
-				while (!this.network.getInfo().isStorageUpdate()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "Exchange":
-				while (!this.network.getInfo().isLeaveExchange()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "Fight":
-				while (!this.network.getInfo().isJoinedFight()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "Interactive":
-				while (!this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isBasicNoOperationMsg()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "Hunt":
-				while (!this.network.getInfo().isHuntAnswered() && !this.network.getInfo().isBasicNoOperationMsg()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "exchangeBigSeller":
-				while (!this.network.getInfo().isExchangeBidSeller()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "inStable":
-				while (!this.network.getDragodinde().isInStable()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "ExchangeDD":
-				while (!this.network.getInfo().isExchangeDD() && !this.network.getInfo().isBasicNoOperationMsg()) {
-					Thread.sleep(50);
-				}
-				break;
-			case "MountXp":
-				while (!this.network.getInfo().isExchangeDD()) {
-					Thread.sleep(50);
-				}
-				break;
-		}
-		
-		Thread.sleep(250);
-
-		while (!this.network.getInfo().isBasicNoOperationMsg()) {
+	public boolean waitToSendObjectUse() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isObjectUse()) {
 			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				return false; 
+			}
 		}
-
-		if (this.network.getInfo().isBasicNoOperationMsg() && !this.network.getInfo().isNewMap() && !this.network.getInfo().isStorage() && !this.network.getInfo().isStorageUpdate() && !this.network.getInfo().isLeaveExchange() && !this.network.getInfo().isJoinedFight() && !this.network.getInfo().isInteractiveUsed() && !this.network.getInfo().isHuntAnswered() && !this.network.getInfo().isExchangeBidSeller() && !this.network.getInfo().isExchangeDD() && !this.network.getDragodinde().isInStable()) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-	
-	public boolean isCloseToCell(int cellid, int cellToUse){
-		return (cellToUse - 14) == cellid || (cellToUse - 13) == cellid || (cellToUse + 14) == cellid || (cellToUse + 15) == cellid;
+		return true;
 	}
 
-	private Object[] move(int param) {
-		CellMovement mov;
-		Object[] toSend = null;
-		try {
-			mov = this.network.getMovement().MoveToCell(param);
-			if (mov == null || mov.path == null) {
-				toSend = new Object[] { "False" };
+	public boolean waitToSendValidateStep() throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isStepSuccess() || !this.network.getInfo().isStepFailed()) {
+			Thread.sleep(50);
+			if(System.currentTimeMillis() - index > 2000){
+				DisplayInfo.appendDebugLog("validateStep error, server returned false", "No response error");
+				return false;
 			}
-			else if (this.network.getInfo().getCellId() == param) {
-				toSend = new Object[] { "True" };
-			}
-			else {
-				int mapId = this.network.getMap().getId();
-				mov.performMovement();
-				if (this.network.getMovement().moveOver()) {
-					if (this.network.getInfo().getCellId() == param) {
-						if ((mapId == 83887104 && this.network.getInfo().getCellId() == 396) || (mapId == 2884617 && this.network.getInfo().getCellId() == 424) || (mapId == 8912911 && this.network.getInfo().getCellId() == 424) || (mapId == 128451073 && this.network.getInfo().getCellId() == 292) || (mapId == 128452097 && this.network.getInfo().getCellId() == 504)) {
-							while (!this.network.getInfo().isNewMap()) {
-								Thread.sleep(50);
-							}
-							toSend = new Object[] { "True" };
-						}
-						else {
-							toSend = new Object[] { "True" };
-						}
+		}
+		return this.network.getInfo().isStepSuccess();
+	}
+
+	private Object[] withdrawItem(String param) throws Exception {
+		Object[] toSend;
+		if(this.network.getInfo().isInExchange()){
+			String[] paramItems11 = param.split(",");
+			List<Integer> uid1 = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems11[0]), Integer.parseInt(paramItems11[1]));
+
+			if (Integer.parseInt(paramItems11[2]) <= uid1.size()) {
+				for (int i = 0; i < Integer.parseInt(paramItems11[2]); i++) {
+					if(!this.getNetwork().getNpc().isSelling(uid1.get(i))){
+						continue;
 					}
-					else {
-						toSend = new Object[] { "False" };
+					Thread.sleep(80);
+					ExchangeObjectMoveMessage exchangeObjectMoveMessage = new ExchangeObjectMoveMessage(uid1.get(i), -Integer.parseInt(paramItems11[1]));
+					getNetwork().sendToServer(exchangeObjectMoveMessage, ExchangeObjectMoveMessage.ProtocolId, "Withdraw item");
+					if (i != uid1.size() - 1 && !!this.waitToSendHdv()) {
+						DisplayInfo.appendDebugLog("withdrawItem error, server returned false", param);
 					}
+				}
+				if (this.waitToSendHdv()) {
+					toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
 				}
 				else {
+					DisplayInfo.appendDebugLog("withdrawItem error, server returned false", param);
 					toSend = new Object[] { "False" };
 				}
+			} else {
+				toSend = new Object[] { "False" };
 			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+		} else {
+			toSend = new Object[] { "False" };
 		}
 		return toSend;
-	}
-
-	private void sleepShort() {
-		try {
-			Random r = new Random();
-			Thread.sleep(500 + r.nextInt(700));
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private void sleepLong() {
-		try {
-			Thread.sleep(1500 + new Random().nextInt(1000));
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public Network getNetwork() {
-		return network;
-	}
-
-	public void setNetwork(Network network) {
-		this.network = network;
 	}
 }
