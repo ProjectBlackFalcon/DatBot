@@ -362,4 +362,22 @@ class LowLevelFunctions:
         conn.commit()
         conn.close()
 
+    def fetch_harvest_path(self, bot_name):
+        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
+                                       database="wz3xj6_spec")
+        cursor = conn.cursor()
+        cursor.execute("""SELECT * FROM HarvestPaths""")
+        conn.close()
+        assigned_path = None
+        default_path = None
+        for row in cursor:
+            if row[0] == 1:
+                default_path = ast.literal_eval(row[2])
+            if bot_name in row[3]:
+                assigned_path = ast.literal_eval(row[2])
+        if assigned_path is None:
+            assigned_path = default_path
+
+        return assigned_path
+
 __author__ = 'Alexis'

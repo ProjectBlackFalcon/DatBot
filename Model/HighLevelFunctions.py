@@ -248,12 +248,14 @@ class HighLevelFunctions:
             self.llf.log(self.bot, '[Harvest {}] Done'.format(self.bot.id))
             return True
 
-    def harvest_path(self, path, number_of_loops=-1, harvest_only=None, do_not_harvest=None, sell=False):
-        n_loops = 0
+    def harvest_path(self, duration_minutes, path=None, harvest_only=None, do_not_harvest=None, sell=False):
+        duration = duration_minutes * 60
+        start = time.time()
         full = False
-        while number_of_loops == -1 or n_loops < number_of_loops:
-            n_loops += 1
+        while time.time() - start < duration:
             for tile, target_cell, worldmap in path:
+                if time.time() - start > duration:
+                    continue
                 if not full:
                     self.goto(tile, target_cell=target_cell, worldmap=worldmap)
                     full = not self.harvest_map(harvest_only, do_not_harvest)
@@ -744,26 +746,31 @@ class HighLevelFunctions:
                 if task['name'] == 'dd':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id))
                     self.manage_dds_duration(minutes_left)
                 elif task['name'] == 'hunt':
                     if not self.bot.connected:
                         self.bot.interface.connect()
                     self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
-                        self.bot.id, round(minutes_left, 0)) + self.bot.interface.end_color)
+                        self.bot.id, round(minutes_left, 0)))
                     self.hunt_treasures(minutes_left)
                 elif task['name'] == 'sell':
                     if not self.bot.connected:
                         self.bot.interface.connect()
                     self.llf.log(self.bot, '[Scheduler {}] Starting to sell items'.format(
-                        self.bot.id) + self.bot.interface.end_color)
+                        self.bot.id))
                     self.drop_to_bank('all', True)
                     self.sell_all(self.bot.subscribed)
                 elif task['name'] == 'sleep':
                     self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
-                        self.bot.id, round(minutes_left)) + self.bot.interface.end_color)
+                        self.bot.id, round(minutes_left)))
                     self.bot.interface.disconnect()
                     time.sleep(60 * minutes_left)
+                elif task['name'] == 'harvest':
+                    if not self.bot.connected:
+                        self.bot.interface.connect()
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to harvest resources'.format(self.bot.id))
+                    self.harvest_path(minutes_left, sell=True)
 
     def drop_bot_mobile(self, idx):
         self.goto((-32, 37), 271)
@@ -803,13 +810,7 @@ class HighLevelFunctions:
     def update_db(self):
         try:
             self.llf.log(self.bot,
-                         '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id,
-                                                                                         self.bot.credentials['server'],
-                                                                                         self.bot.credentials['name'],
-                                                                                         self.bot.kamas, self.bot.level,
-                                                                                         self.bot.occupation,
-                                                                                         self.bot.position[0],
-                                                                                         self.bot.position[1]))
+                         '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
             self.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
