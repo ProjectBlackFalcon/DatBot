@@ -14,7 +14,7 @@ class HighLevelFunctions:
         self.brak_maps = self.llf.get_brak_maps()
         self.bwork_maps = self.llf.get_bwork_maps()
 
-    def goto(self, target_coord, target_cell=None, worldmap=1):
+    def goto(self, target_coord, target_cell=None, worldmap=1, harvest=False):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
         with open('..//Utils//gotos.txt', 'a') as f:
@@ -110,6 +110,8 @@ class HighLevelFunctions:
                 self.bot.position = current_map, current_worldmap
                 if current_worldmap == 1:
                     self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
+                if harvest:
+                    self.harvest_map()
             else:
                 raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
 
@@ -132,6 +134,9 @@ class HighLevelFunctions:
             closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
+        stats = self.bot.interface.get_player_stats()[0]
+        if stats['WeightMax'] - stats['Weight'] < 200:
+            return False
         self.bot.occupation = 'Harvesting map'
         self.update_db()
         with open('..//Utils//resourcesIDs.json', 'r') as f:
@@ -258,7 +263,10 @@ class HighLevelFunctions:
                 if time.time() - start > duration:
                     continue
                 if not full:
-                    self.goto(tile, target_cell=target_cell, worldmap=worldmap)
+                    try:
+                        self.goto(tile, target_cell=target_cell, worldmap=worldmap)
+                    except Exception:
+                        self.llf.log(self.bot, str(traceback.format_exc()))
                     full = not self.harvest_map(harvest_only, do_not_harvest)
                 else:
                     self.goto((4, -16))
@@ -311,7 +319,7 @@ class HighLevelFunctions:
         else:
             raise Exception('Not a map with a bank')
 
-    def tresure_hunt(self, level='max'):
+    def tresure_hunt(self, level='max', harvest=False):
         def get_hunt(level):
             self.bot.occupation = 'Getting a new hunt'
             self.update_db()
@@ -350,7 +358,7 @@ class HighLevelFunctions:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
-                            self.goto(destination)
+                            self.goto(destination, harvest)
                         except Exception as e:
                             with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
@@ -436,7 +444,7 @@ class HighLevelFunctions:
             else:
                 return False, 'Lost against chest'
 
-    def hunt_treasures(self, duration_minutes, level='max'):
+    def hunt_treasures(self, duration_minutes, level='max', harvest=False):
         duration = duration_minutes * 60
         start = time.time()
         n_hunts = 0
@@ -446,7 +454,7 @@ class HighLevelFunctions:
                 n_hunts += 1
                 hunt_start = time.time()
                 self.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
-                success, reason = self.tresure_hunt(level)
+                success, reason = self.tresure_hunt(level, harvest)
                 self.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), success, reason)
                 n_success = n_success+1 if success else n_success
             except Exception:
@@ -755,6 +763,12 @@ class HighLevelFunctions:
                     self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
                         self.bot.id, round(minutes_left, 0)))
                     self.hunt_treasures(minutes_left)
+                elif task['name'] == 'huntGather':
+                    if not self.bot.connected:
+                        self.bot.interface.connect()
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to hunt and gather for {} minutes'.format(
+                        self.bot.id, round(minutes_left, 0)))
+                    self.hunt_treasures(minutes_left, harvest=True)
                 elif task['name'] == 'sell':
                     if not self.bot.connected:
                         self.bot.interface.connect()
