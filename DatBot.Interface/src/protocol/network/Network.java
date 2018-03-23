@@ -1285,9 +1285,11 @@ public class Network extends DisplayInfo implements Runnable {
 		treasureHuntDigRequestAnswerMessage.Deserialize(dataReader);
 		if (treasureHuntDigRequestAnswerMessage.getResult() == 1) {
 			this.getInfo().setStepSuccess(true);
-		} else if(treasureHuntDigRequestAnswerMessage.getResult() == 3) {
+		} else if(treasureHuntDigRequestAnswerMessage.getResult() == 2) {
+			this.getInfo().setStepSuccess(true);
 			this.hunt.setRdyToFight(true);
 		} else {
+			this.hunt.digResult = treasureHuntDigRequestAnswerMessage.getResult();
 			this.getInfo().setStepFailed(true);
 		}
 	}
