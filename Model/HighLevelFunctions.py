@@ -263,7 +263,10 @@ class HighLevelFunctions:
                 if time.time() - start > duration:
                     continue
                 if not full:
-                    self.goto(tile, target_cell=target_cell, worldmap=worldmap)
+                    try:
+                        self.goto(tile, target_cell=target_cell, worldmap=worldmap)
+                    except Exception:
+                        self.llf.log(self.bot, str(traceback.format_exc()))
                     full = not self.harvest_map(harvest_only, do_not_harvest)
                 else:
                     self.goto((4, -16))
