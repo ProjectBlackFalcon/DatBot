@@ -4,7 +4,7 @@ from Model.Bot import Bot
 from threading import Thread
 import random
 
-pipe = PipeToJava(headless=True)
+pipe = PipeToJava(headless=False)
 bot_id = 0
 llf = LowLevelFunctions()
 
@@ -61,11 +61,8 @@ random.shuffle(colors)
 
 
 credentials = [
-    {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'server': 'Julith'},
-    # {'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'},
-    # {'username': 'wublel12', 'password': 'notabot0', 'name': 'Draideac', 'server': 'Julith'},
-    # {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'},
-    # {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
+    {'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'},
+    {'username': 'wublel12', 'password': 'notabot0', 'name': 'Draideac', 'server': 'Julith'}
 ]
 
 bots = []
