@@ -1,2 +1,7 @@
 /bin/
 log_network0.txt
+log_network1.txt
+log_network2.txt
+log_network3.txt
+log_network4.txt
+packetErrors.txt

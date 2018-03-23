@@ -123,3 +123,231 @@ Failed to validate step because of clue "Squelette d'humanoïde assis" going w fr
 
 2018-03-05 01:05:06.361064
 Could not go to [-3, -59] from ((-3, -58), 1) to find Phorreur sournois
+
+2018-03-16 10:40:47.717789
+Failed to validate step because of clue "Silo" going n from [7, -6] (bot pos : [3, -6])Clue was supposed to be at [3, -6]
+
+2018-03-16 10:41:15.492642
+Could not go to [-19, 34] from ((-31, 32), 1) to find Phorreur sournois
+
+2018-03-16 10:46:20.667873
+Failed to validate step because of clue "Banc" going s from [0, -7] (bot pos : [0, -1])Clue was supposed to be at [0, -1]
+
+2018-03-16 10:59:33.993828
+Could not go to [8, -18] from ((8, -17), 1) to find Phorreur sournois
+
+2018-03-16 11:08:17.700273
+Could not go to [-9, -8] from ((-8, -8), 1) to find Phorreur sournois
+
+2018-03-16 11:19:03.502371
+Could not go to [14, 0] from ((13, 0), 1) to find Phorreur baveux
+
+2018-03-16 11:25:21.510475
+Non existing clue : Caisse d'outils, going w from [-26, -44]
+
+2018-03-16 12:03:40.748906
+Interface returned false on move command. Position : ((6, 28), 1), Cell : 9, Direction : n
+
+2018-03-17 21:02:57.863544
+Non existing clue : Chaloupe avec une étoile, going e from [11, -18]
+
+2018-03-18 05:06:51.224546
+Failed to validate step because of clue "Roseaux" going n from [11, -2] (bot pos : [10, -2])Clue was supposed to be at [10, -2]
+
+2018-03-18 05:07:43.906714
+Non existing clue : Chaloupe avec une étoile, going e from (11, -18)
+
+2018-03-18 05:24:28.169204
+Interface returned false on move command. Position : ((17, 24), 1), Cell : 251, Direction : e
+
+2018-03-18 05:52:32.481907
+Interface returned false on move command. Position : ((6, 28), 1), Cell : 9, Direction : n
+
+2018-03-18 06:05:57.360981
+Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+2018-03-18 11:32:26.873679
+Could not go to [-14, -23] from ((-13, -23), 1) to find Phorreur sournois
+
+2018-03-18 12:18:05.856320
+Failed to validate clue "Tonneau" on map None (bot pos : [7, -5])Clue was supposed to be at [7, -5]
+
+2018-03-18 13:17:20.276831
+Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+2018-03-18 13:31:45.836819
+Non existing clue : Corbac, going s from [3, -8]
+
+2018-03-18 13:43:12.965089
+Could not generate path from (11, 25) cell 537 to [8, 25] cell 293
+
+2018-03-18 13:44:43.648272
+Could not go to [-30, -8] from ((-29, -8), 1) to find Phorreur chafouin
+
+2018-03-18 14:00:48.445959
+Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+2018-03-18 17:24:56.077018
+Failed to validate clue "Sac" on map None (bot pos : [-1, -17])Clue was supposed to be at [-1, -17]
+
+2018-03-18 17:33:01.116714
+Failed to validate clue "Zaapi" on map None (bot pos : [-27, -58])Clue was supposed to be at [-27, -58]
+
+2018-03-18 20:21:01.908764
+Interface returned false on move command. Position : ((-24, 36), 1), Cell : 252, Direction : w
+
+2018-03-18 21:04:41.477473
+Could not go to [2, 17] from ((3, 17), 1) to find Phorreur sournois
+
+2018-03-18 21:05:07.876884
+Failed to validate clue "Tofu épinglé" on map None (bot pos : [-23, 35])Clue was supposed to be at [-23, 35]
+
+2018-03-18 21:30:39.588573
+Failed to validate step because of clue "Epouvantail" going n from [9, 12] (bot pos : [9, 3])Clue was supposed to be at [9, 12]
+
+2018-03-18 22:10:24.694991
+Non existing clue : Caisse, going e from [13, 1]
+
+2018-03-18 22:32:19.154170
+Could not go to [-30, -8] from ((-29, -8), 1) to find Phorreur baveux
+
+2018-03-18 22:40:42.829441
+Could not go to [-30, -8] from ((-29, -8), 1) to find Phorreur sournois
+
+2018-03-19 02:12:32.566827
+Interface returned false on move command. Position : ((-36, -56), 1), Cell : 549, Direction : s
+
+2018-03-19 02:18:27.535684
+Failed to validate step because of clue "Outil" going w from [-26, -40] (bot pos : [-30, -40])Clue was supposed to be at [-30, -40]
+
+2018-03-19 05:15:33.177282
+Expecting value: line 1 column 1 (char 0)
+
+2018-03-19 05:32:56.817512
+Non existing clue : Bandeau, going w from [5, -8]
+
+2018-03-19 06:02:36.212235
+Could not go to [-26, 30] from ((-31, 32), 1) to find Phorreur sournois
+
+2018-03-19 06:03:04.047748
+Non existing clue : Grand coquillage, going w from [15, 20]
+
+2018-03-19 06:04:39.188855
+Non existing clue : Sac suspendu, going s from [-1, -16]
+
+2018-03-19 06:26:13.586896
+Non existing clue : Sac, going w from [-30, 39]
+
+2018-03-19 06:28:16.915423
+Non existing clue : Boîte à outils, going e from [-33, -60]
+
+2018-03-19 06:58:57.129374
+Non existing clue : Voleur de coquille, going w from [11, -19]
+
+2018-03-19 07:02:31.272668
+Non existing clue : Caisse cassée, going e from [3, -16]
+
+2018-03-19 11:48:03.064039
+Failed to validate step because of clue "Charrette" going n from [3, -7] (bot pos : [3, -14])Clue was supposed to be at [3, -14]
+
+2018-03-19 11:50:57.944707
+Could not go to [8, 26] from ((9, 26), 1) to find Phorreur sournois
+
+2018-03-19 12:03:16.914491
+Non existing clue : Bombe, going e from [2, -19]
+
+2018-03-19 13:02:32.884236
+Non existing clue : Outil, going e from [-6, -46]
+
+2018-03-19 13:22:42.726815
+Non existing clue : Boîte aux lettres, going w from [6, -8]
+
+2018-03-19 13:24:47.321752
+Failed to validate clue "Phorreur sournois" on map [-9, -52] (bot pos : [-9, -52])Clue was supposed to be at [-11, -52]
+
+2018-03-19 13:45:39.655453
+Could not go to [-19, 34] from ((-31, 32), 1) to find Phorreur sournois
+
+2018-03-19 16:19:54.506387
+Could not go to [-29, -12] from ((-28, -12), 1) to find Phorreur baveux
+
+2018-03-19 16:29:07.634482
+Could not go to [-19, 34] from ((-31, 32), 1) to find Phorreur sournois
+
+2018-03-19 16:55:03.659099
+Failed to validate step because of clue "Canne à pêche" going s from [-20, 33] (bot pos : [-20, 36])Clue was supposed to be at [-20, 36]
+
+2018-03-19 16:58:47.578552
+Could not go to [-30, -8] from ((-29, -8), 1) to find Phorreur sournois
+
+2018-03-19 17:19:07.076999
+Could not go to [-30, -8] from ((-29, -8), 1) to find Phorreur baveux
+
+2018-03-19 17:26:11.651934
+Could not go to [13, -17] from ((12, -17), 1) to find Phorreur baveux
+
+2018-03-22 16:27:18.409150
+Failed to validate step because of clue "Panneau" going s from [-25, 31] (bot pos : [-24, 31])Clue was supposed to be at [-24, 31]
+
+2018-03-22 16:29:18.571336
+Failed to validate step because of clue "Sac" going n from [-23, 35] (bot pos : [-25, 35])Clue was supposed to be at [-23, 35]
+
+2018-03-22 16:50:02.857210
+Failed to validate step because of clue "Panneau de pêcheur" going s from [-20, 37] (bot pos : [-20, 38])Clue was supposed to be at [-20, 38]
+
+2018-03-22 16:52:33.552629
+Failed to validate step because of clue "Plante éventail" going e from [-13, -18] (bot pos : [-13, -28])Clue was supposed to be at [-13, -28]
+
+2018-03-22 17:00:09.536529
+Failed to validate step because of clue "Cawotte plantée" going s from [8, -17] (bot pos : [9, -17])Clue was supposed to be at [9, -17]
+
+2018-03-22 17:03:34.184710
+Failed to validate step because of clue "Ossements" going w from [-19, -58] (bot pos : [-19, -59])Clue was supposed to be at [-19, -59]
+
+2018-03-22 17:11:27.580817
+Failed to validate step because of clue "Phorreur sournois" going e from [3, 11] (bot pos : [4, 11])Clue was supposed to be at [4, 11]
+
+2018-03-22 17:13:56.574401
+Failed to validate step because of clue "Souche qui ne repousse pas" going e from [8, 14] (bot pos : [8, 11])Clue was supposed to be at [8, 11]
+
+2018-03-22 17:22:38.721136
+Failed to validate step because of clue "Tonneau" going e from [-36, -56] (bot pos : [-36, -54])Clue was supposed to be at [-36, -54]
+
+2018-03-22 17:26:59.917060
+Failed to validate step because of clue "Croix tombale" going w from [-21, -62] (bot pos : [-22, -62])Clue was supposed to be at [-22, -62]
+
+2018-03-22 18:09:28.348994
+Failed to validate step because of clue "Phorreur baveux" going n from [13, 8] (bot pos : [10, 8])Clue was supposed to be at [10, 8]
+
+2018-03-22 18:09:58.754805
+Failed to validate step because of clue "Rondin de bois" going n from [-1, -1] (bot pos : [-3, -1])Clue was supposed to be at [-3, -1]
+
+2018-03-22 18:16:05.555125
+Failed to validate step because of clue "Paille" going s from [-26, -49] (bot pos : [-29, -49])Clue was supposed to be at [-29, -49]
+
+2018-03-22 19:17:07.680459
+Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+2018-03-22 19:17:25.493011
+Interface returned false on move command. Position : ((17, 24), 1), Cell : 251, Direction : e
+
+2018-03-22 19:48:34.732982
+Non existing clue : Caisse, going s from [2, 8]
+
+2018-03-22 20:06:11.870380
+Could not go to [-30, -8] from ((-29, -8), 1) to find Phorreur baveux
+
+2018-03-22 20:12:33.758215
+Non existing clue : Boîte aux lettres, going w from [6, -8]
+
+2018-03-22 20:19:47.344859
+Failed to validate step because of clue "Tofu enfourché" going w from [-29, -57] (bot pos : [-29, -56])Clue was supposed to be at [-29, -57]
+
+2018-03-22 20:35:55.167564
+Failed to validate step because of clue "Tombe ouverte" going w from [-19, -59] (bot pos : [-21, -59])Clue was supposed to be at [-21, -59]
+
+2018-03-22 21:34:58.545304
+unexpected EOF while parsing
+
+2018-03-22 21:35:04.615334
+Could not go to [11, -19] from ((11, -18), 1) to find Phorreur chafouin

@@ -4,7 +4,7 @@ from Model.Bot import Bot
 from threading import Thread
 import random
 
-pipe = PipeToJava(headless=True)
+pipe = PipeToJava(headless=False)
 bot_id = 0
 llf = LowLevelFunctions()
 
@@ -65,6 +65,8 @@ cred = {'username': 'wublel5', 'password': 'notabot0', 'name': 'Ilancelet', 'ser
 bot = Bot(pipe, 0, cred, llf, False, color='\033[92m')
 
 bot.interface.connect()
+time.sleep(5)
+bot.interface.disconnect()
 
 pipe.t.join()
 __author__ = 'Alexis'

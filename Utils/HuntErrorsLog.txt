@@ -874,3 +874,566 @@ Traceback (most recent call last):
   File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 91, in goto
     raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
 ValueError: Interface returned false on move command. Position : ((-3, -58), 1), Cell : 9, Direction : n
+
+
+2018-03-16 10:41:15.491640
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 350, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-16 10:59:33.848410
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 350, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 12, in __init__
+    self.llf = LowLevelFunctions()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 11, in __init__
+    self.disc_zaaps = json.load(f)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+
+2018-03-16 11:08:17.641116
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 350, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 12, in __init__
+    self.llf = LowLevelFunctions()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 11, in __init__
+    self.disc_zaaps = json.load(f)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+
+2018-03-16 11:19:03.501368
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 350, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-16 11:25:21.509471
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 362, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Caisse d'outils, going w from [-26, -44]
+
+
+2018-03-16 12:03:40.747903
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 363, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((6, 28), 1), Cell : 9, Direction : n
+
+
+2018-03-17 21:02:57.854737
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 362, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Chaloupe avec une étoile, going e from [11, -18]
+
+
+2018-03-18 05:07:43.904709
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 362, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Chaloupe avec une étoile, going e from (11, -18)
+
+
+2018-03-18 05:24:28.168252
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 363, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((17, 24), 1), Cell : 251, Direction : e
+
+
+2018-03-18 05:52:32.480933
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 363, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((6, 28), 1), Cell : 9, Direction : n
+
+
+2018-03-18 06:05:57.359979
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 363, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-18 11:32:26.871674
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 350, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-18 13:17:20.275327
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 363, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-18 13:31:45.834840
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 362, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Corbac, going s from [3, -8]
+
+
+2018-03-18 13:43:12.964085
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 363, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (11, 25) cell 537 to [8, 25] cell 293
+
+
+2018-03-18 13:44:43.647269
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 350, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (-29, -8) cell 489 to [-30, -8] cell 540
+
+
+2018-03-18 14:00:48.411376
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 363, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-18 20:21:01.863143
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 365, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-24, 36), 1), Cell : 252, Direction : w
+
+
+2018-03-18 21:04:41.017742
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 12, in __init__
+    self.llf = LowLevelFunctions()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 11, in __init__
+    self.disc_zaaps = json.load(f)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+
+2018-03-18 22:10:24.694991
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Caisse, going e from [13, 1]
+
+
+2018-03-18 22:32:19.138571
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (-29, -8) cell 111 to [-30, -8] cell 280
+
+
+2018-03-18 22:40:42.829441
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (-29, -8) cell 153 to [-30, -8] cell 533
+
+
+2018-03-19 02:12:32.565824
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 365, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-36, -56), 1), Cell : 549, Direction : s
+
+
+2018-03-19 05:15:32.907674
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 365, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 12, in __init__
+    self.llf = LowLevelFunctions()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 11, in __init__
+    self.disc_zaaps = json.load(f)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 299, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+
+2018-03-19 05:32:56.632546
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Bandeau, going w from [5, -8]
+
+
+2018-03-19 06:02:36.208223
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-19 06:03:04.047748
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Grand coquillage, going w from [15, 20]
+
+
+2018-03-19 06:04:39.101357
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Sac suspendu, going s from [-1, -16]
+
+
+2018-03-19 06:26:13.455360
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Sac, going w from [-30, 39]
+
+
+2018-03-19 06:28:16.725274
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Boîte à outils, going e from [-33, -60]
+
+
+2018-03-19 06:58:57.129374
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Voleur de coquille, going w from [11, -19]
+
+
+2018-03-19 07:02:31.257008
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Caisse cassée, going e from [3, -16]
+
+
+2018-03-19 11:50:57.943704
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (9, 26) cell 307 to [8, 26] cell 6
+
+
+2018-03-19 12:03:16.757604
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Bombe, going e from [2, -19]
+
+
+2018-03-19 13:02:32.882231
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Outil, going e from [-6, -46]
+
+
+2018-03-19 13:22:42.685693
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 364, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Boîte aux lettres, going w from [6, -8]
+
+
+2018-03-19 13:45:39.653482
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-19 16:19:54.454608
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-19 16:29:07.633480
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-19 16:58:47.577077
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (-29, -8) cell 489 to [-30, -8] cell 552
+
+
+2018-03-19 17:19:07.075995
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (-29, -8) cell 489 to [-30, -8] cell 550
+
+
+2018-03-19 17:26:11.650932
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 352, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 19, in __init__
+    self.end_cell = self.pick_end_cell()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 292, in pick_end_cell
+    if end_map_cells[y][x] == 0:
+TypeError: 'NoneType' object is not subscriptable
+
+
+2018-03-22 19:17:07.677982
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 367, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((-31, 32), 1), Cell : 0, Direction : n
+
+
+2018-03-22 19:17:25.491505
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 367, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 117, in goto
+    raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
+ValueError: Interface returned false on move command. Position : ((17, 24), 1), Cell : 251, Direction : e
+
+
+2018-03-22 19:48:34.656776
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 366, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Caisse, going s from [2, 8]
+
+
+2018-03-22 20:06:11.868374
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 353, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 109, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (-29, -8) cell 489 to [-30, -8] cell 420
+
+
+2018-03-22 20:12:33.757212
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 366, in tresure_hunt
+    clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 137, in get_next_clue_pos
+    raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
+RuntimeError: Non existing clue : Boîte aux lettres, going w from [6, -8]
+
+
+2018-03-22 21:34:58.541822
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 367, in tresure_hunt
+    self.goto(clue_pos)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 12, in __init__
+    self.llf = LowLevelFunctions()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 11, in __init__
+    self.disc_zaaps = self.get_discovered_zaaps()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 176, in get_discovered_zaaps
+    zaaps[row[1]] = ast.literal_eval(row[0])
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\ast.py", line 48, in literal_eval
+    node_or_string = parse(node_or_string, mode='eval')
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\ast.py", line 35, in parse
+    return compile(source, filename, mode, PyCF_ONLY_AST)
+  File "<unknown>", line 0
+    
+    ^
+SyntaxError: unexpected EOF while parsing
+
+
+2018-03-22 21:35:04.614331
+Traceback (most recent call last):
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 353, in tresure_hunt
+    self.goto(destination)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\HighLevelFunctions.py", line 108, in goto
+    pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\Pathfinder.py", line 12, in __init__
+    self.llf = LowLevelFunctions()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 11, in __init__
+    self.disc_zaaps = self.get_discovered_zaaps()
+  File "C:\Users\baptiste\Documents\DofusBot\DatBot\Model\LowLevelFunctions.py", line 176, in get_discovered_zaaps
+    zaaps[row[1]] = ast.literal_eval(row[0])
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\ast.py", line 48, in literal_eval
+    node_or_string = parse(node_or_string, mode='eval')
+  File "C:\Users\baptiste\AppData\Local\Programs\Python\Python36-32\Lib\ast.py", line 35, in parse
+    return compile(source, filename, mode, PyCF_ONLY_AST)
+  File "<unknown>", line 0
+    
+    ^
+SyntaxError: unexpected EOF while parsing

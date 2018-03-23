@@ -28,6 +28,6 @@ public class testMap {
 //		double test = ((double)148)/200;
 //		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
 //		System.out.println(GameData.getMountBehaviorName(3));
-        System.out.println("IntelliJ c'est génial !");
+        System.out.println("IntelliJ c'est génial 2!");
 	}
 }

@@ -311,7 +311,6 @@ public class Main {
 							varSetter += "void" + " set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1) + "(" + field.getType() + " " + field.getName() + ") { this." + field.getName() + " = " + field.getName() + "; };";
 						}
 					}
-					varGetter += ";";
 					data.set(index, "\t" + varGetter);
 					index++;
 					data.set(index, "\t" + varSetter);
@@ -846,7 +845,6 @@ public class Main {
 							}
 						}
 					}
-					var += ";";
 					if (j != msg.getFields().size() - 1) varCons += ", ";
 					data.set(index, "\t" + var);
 					index++;
