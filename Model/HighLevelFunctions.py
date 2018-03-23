@@ -252,6 +252,7 @@ class HighLevelFunctions:
         duration = duration_minutes * 60
         start = time.time()
         full = False
+        path = self.llf.fetch_harvest_path(self.bot.credentials['name']) if path is None else path
         while time.time() - start < duration:
             for tile, target_cell, worldmap in path:
                 if time.time() - start > duration:
