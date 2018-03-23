@@ -21,12 +21,6 @@ class HighLevelFunctions:
             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
             f.write('Going from map {}, cell {} to map {}, worldmap : {}'.format(current_map, current_cell, target_coord, worldmap))
 
-        if self.llf.distance_coords(current_map, target_coord) > 3:
-            # self.bot.position = (current_map, current_worldmap)
-            # self.bot.occupation = 'Moving to {}, worldmap {}'.format(target_coord, worldmap)
-            # self.update_db()
-            pass
-
         if current_worldmap != worldmap:
             # Incarnam to Astrub
             if current_worldmap == 2 and worldmap == 1:
@@ -62,7 +56,10 @@ class HighLevelFunctions:
                         if tuple(current_map) != tuple(closest_zaap):
                             raise RuntimeError('Unable to use Zaap to go to {}'.format(closest_zaap))
                     else:
-                        raise RuntimeError('Unable to enter heavenbag to go from {}, worldmap -1 to {}'.format(current_map, closest_zaap))
+                        if self.bot.interface.get_player_stats()[0]['Lvl'] < 10:
+                            raise RuntimeError('Bot is not level 10 an can not enter heavenbag')
+                        else:
+                            raise RuntimeError('Unable to enter heavenbag to go from {}, worldmap -1 to {}'.format(current_map, closest_zaap))
 
             # TODO manage more worldmap changing
             else:
@@ -72,7 +69,7 @@ class HighLevelFunctions:
         if closest_zaap is not None:
             distance_zaap_target = self.llf.distance_coords(closest_zaap, tuple(target_coord))
             if worldmap == current_worldmap and self.llf.distance_coords(current_map, tuple(target_coord)) > distance_zaap_target+5:
-                if self.bot.interface.enter_heavenbag():
+                if self.bot.interface.enter_heavenbag()[0]:
                     self.bot.interface.use_zaap(closest_zaap)
                     while tuple(current_map) != tuple(closest_zaap):
                         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
@@ -80,7 +77,7 @@ class HighLevelFunctions:
 
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
             # Bot needs to enter brak
-            if self.bot.interface.enter_heavenbag():
+            if self.bot.interface.enter_heavenbag()[0]:
                 self.bot.interface.use_zaap((-26, 35))
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.brak_maps and list(target_coord) not in self.brak_maps:
@@ -251,12 +248,14 @@ class HighLevelFunctions:
             self.llf.log(self.bot, '[Harvest {}] Done'.format(self.bot.id))
             return True
 
-    def harvest_path(self, path, number_of_loops=-1, harvest_only=None, do_not_harvest=None, sell=False):
-        n_loops = 0
+    def harvest_path(self, duration_minutes, path=None, harvest_only=None, do_not_harvest=None, sell=False):
+        duration = duration_minutes * 60
+        start = time.time()
         full = False
-        while number_of_loops == -1 or n_loops < number_of_loops:
-            n_loops += 1
+        while time.time() - start < duration:
             for tile, target_cell, worldmap in path:
+                if time.time() - start > duration:
+                    continue
                 if not full:
                     self.goto(tile, target_cell=target_cell, worldmap=worldmap)
                     full = not self.harvest_map(harvest_only, do_not_harvest)
@@ -406,8 +405,8 @@ class HighLevelFunctions:
             in_hb = False
             while not self.bot.interface.abandon_hunt()[0]:
                 if not in_hb:
-                    self.bot.interface.enter_heavenbag()
-                    in_hb = True
+                    if self.bot.interface.enter_heavenbag()[0]:
+                        in_hb = True
                 time.sleep(30)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
@@ -416,8 +415,8 @@ class HighLevelFunctions:
             in_hb = False
             while self.bot.interface.get_player_stats()[0]['Health'] < 100:
                 if not in_hb:
-                    self.bot.interface.enter_heavenbag()
-                    in_hb = True
+                    if self.bot.interface.enter_heavenbag()[0]:
+                        in_hb = True
                 time.sleep(10)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
@@ -432,7 +431,7 @@ class HighLevelFunctions:
 
             if not self.bot.interface.hunt_is_active()[0]:
                 self.llf.log(self.bot, '[Treasure Hunt {}] Hunt successful'.format(self.bot.id))
-                return True
+                return True, 'Stronk Af'
             else:
                 return False, 'Lost against chest'
 
@@ -447,7 +446,7 @@ class HighLevelFunctions:
                 hunt_start = time.time()
                 self.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
                 success, reason = self.tresure_hunt(level)
-                self.llf.hunts_to_db(self.bot.credentials['name'], round((hunt_start-time.time())/60, 1), success, reason)
+                self.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), success, reason)
                 n_success = n_success+1 if success else n_success
             except Exception:
                 with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
@@ -466,8 +465,8 @@ class HighLevelFunctions:
             in_hb = False
             while self.bot.interface.get_player_stats()[0]['Health'] < hp_threshold:
                 if not in_hb and self.bot.interface.get_player_stats()[0]['Lvl'] >= 10:
-                    self.bot.interface.enter_heavenbag()
-                    in_hb = True
+                    if self.bot.interface.enter_heavenbag()[0]:
+                        in_hb = True
                 time.sleep(10)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
@@ -718,6 +717,10 @@ class HighLevelFunctions:
             schedule = self.bot.schedule
 
         while 1:
+            if schedule_name is None:
+                self.bot.schedule = self.llf.get_schedule(self.bot.credentials['name'])
+                schedule = self.bot.schedule
+
             caught_up = False
             for task in schedule:
                 if (time.localtime().tm_hour + time.localtime().tm_min/60) - task['end'] < 0 or caught_up:
@@ -743,26 +746,31 @@ class HighLevelFunctions:
                 if task['name'] == 'dd':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id) + self.bot.interface.end_color)
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id))
                     self.manage_dds_duration(minutes_left)
                 elif task['name'] == 'hunt':
                     if not self.bot.connected:
                         self.bot.interface.connect()
                     self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
-                        self.bot.id, round(minutes_left, 0)) + self.bot.interface.end_color)
+                        self.bot.id, round(minutes_left, 0)))
                     self.hunt_treasures(minutes_left)
                 elif task['name'] == 'sell':
                     if not self.bot.connected:
                         self.bot.interface.connect()
                     self.llf.log(self.bot, '[Scheduler {}] Starting to sell items'.format(
-                        self.bot.id) + self.bot.interface.end_color)
+                        self.bot.id))
                     self.drop_to_bank('all', True)
                     self.sell_all(self.bot.subscribed)
                 elif task['name'] == 'sleep':
                     self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
-                        self.bot.id, round(minutes_left)) + self.bot.interface.end_color)
+                        self.bot.id, round(minutes_left)))
                     self.bot.interface.disconnect()
                     time.sleep(60 * minutes_left)
+                elif task['name'] == 'harvest':
+                    if not self.bot.connected:
+                        self.bot.interface.connect()
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to harvest resources'.format(self.bot.id))
+                    self.harvest_path(minutes_left, sell=True)
 
     def drop_bot_mobile(self, idx):
         self.goto((-32, 37), 271)
@@ -801,7 +809,8 @@ class HighLevelFunctions:
 
     def update_db(self):
         try:
-            self.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
+            self.llf.log(self.bot,
+                         '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
             self.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
@@ -811,6 +820,17 @@ class HighLevelFunctions:
                 self.bot.occupation,
                 self.bot.position[0],
                 self.bot.position[1]
+            )
+        except TypeError:
+            # Degraded upload
+            self.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name']))
+            self.llf.update_db(
+                self.bot.id,
+                self.bot.credentials['server'],
+                self.bot.credentials['name'],
+                self.bot.kamas,
+                self.bot.level,
+                self.bot.occupation
             )
         except Exception:
             with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:
