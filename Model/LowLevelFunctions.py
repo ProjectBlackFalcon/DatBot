@@ -173,7 +173,10 @@ class LowLevelFunctions:
             conn.close()
             zaaps = {}
             for row in cursor:
-                zaaps[row[1]] = ast.literal_eval(row[0])
+                if row[0]:
+                    zaaps[row[1]] = ast.literal_eval(row[0])
+                else:
+                    zaaps[row[1]] = []
             return copy.deepcopy(zaaps)
 
     def get_closest_known_zaap(self, bot_name, pos):
