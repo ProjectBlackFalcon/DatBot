@@ -39,7 +39,7 @@ import utils.GameData;
 public class ModelConnexion {
 	
 	boolean actionFinished = true;
-	private boolean bankOppened;
+	private boolean bankOpened;
 	int botInstance;
 
 	private Network network;
@@ -169,13 +169,13 @@ public class ModelConnexion {
 
 	private Object[] closeBank() throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
 			if (this.waitToSendLeaveExchange()) {
 				toSend = new Object[] { "True" };
 			}
 			else {
-				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Bank oppened : " + bankOppened);
+				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Bank oppened : " + bankOpened);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -183,7 +183,7 @@ public class ModelConnexion {
 			DisplayInfo.appendDebugLog("Open bank error", "Bank was not open");
 			toSend = new Object[] { "False" };
 		}
-		bankOppened = false;
+		bankOpened = false;
 		return toSend;
 	}
 
@@ -300,14 +300,14 @@ public class ModelConnexion {
 
 	private Object[] dropBank(String param) throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			String[] toBank = param.split(",");
 			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item bank");
 			if (this.waitToSendBank("move")) {
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("Drop bank error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				DisplayInfo.appendDebugLog("Drop bank error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -321,14 +321,14 @@ public class ModelConnexion {
 
 	private Object[] dropBankAll() throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
 			getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
 			if (this.waitToSendBank("move")) {
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("dropBankAll error, server returned false", "Bank oppened : " + bankOppened);
+				DisplayInfo.appendDebugLog("dropBankAll error, server returned false", "Bank oppened : " + bankOpened);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -342,14 +342,14 @@ public class ModelConnexion {
 
 	private Object[] dropBankKamas(String param) throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in this.network.getBank()");
 			if (this.waitToSendBank("move")) {
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("dropBankKamas error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				DisplayInfo.appendDebugLog("dropBankKamas error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -363,7 +363,7 @@ public class ModelConnexion {
 
 	private Object[] dropBankList(String param) throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			String[] toBankList = param.split(",");
 			List<Integer> ids = new ArrayList<Integer>();
 			for (String string : toBankList) {
@@ -375,7 +375,7 @@ public class ModelConnexion {
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("dropBankList error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				DisplayInfo.appendDebugLog("dropBankList error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -520,14 +520,14 @@ public class ModelConnexion {
 
 	private Object[] getBank(String param) throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			String[] fromBank = param.split(",");
 			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Get item bank");
 			if (this.waitToSendBank("move")) {
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("Get bank error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				DisplayInfo.appendDebugLog("Get bank error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -559,14 +559,14 @@ public class ModelConnexion {
 
 	private Object[] getBankKamas(String param) throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from this.network.getBank()");
 			if (this.waitToSendBank("move")) {
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("getBankKamas error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				DisplayInfo.appendDebugLog("getBankKamas error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -580,7 +580,7 @@ public class ModelConnexion {
 
 	private Object[] getBankList(String param) throws Exception {
 		Object[] toSend;
-		if (bankOppened) {
+		if (bankOpened) {
 			String[] fromBankList = param.split(",");
 			List<Integer> ids1 = new ArrayList<Integer>();
 			for (String string : fromBankList) {
@@ -592,7 +592,7 @@ public class ModelConnexion {
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("getBankList error, server returned false", "Bank oppened : " + bankOppened + " param : " + param);
+				DisplayInfo.appendDebugLog("getBankList error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -1347,7 +1347,7 @@ public class ModelConnexion {
 				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
 				toSend = new Object[] { "False" };
 			}
-			bankOppened = true;
+			bankOpened = true;
 		}
 		else {
 			DisplayInfo.appendDebugLog("Open bank error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
@@ -1770,10 +1770,10 @@ public class ModelConnexion {
 
 	public boolean waitToSendValidateStep() throws InterruptedException{
 		long index =  System.currentTimeMillis();
-		while (!this.network.getInfo().isStepSuccess() || !this.network.getInfo().isStepFailed()) {
+		while (!this.network.getInfo().isStepSuccess() && !this.network.getInfo().isStepFailed()) {
 			Thread.sleep(50);
 			if(System.currentTimeMillis() - index > 2000){
-				DisplayInfo.appendDebugLog("validateStep error, server returned false", "No response error");
+				DisplayInfo.appendDebugLog("validateStep error, server returned false", "Dig result : " + this.network.getHunt().digResult);
 				return false;
 			}
 		}

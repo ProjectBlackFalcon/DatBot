@@ -13,6 +13,8 @@ public class Hunt {
 	private boolean phorror;
 	private String phorrorName;
 	
+	public int digResult;
+	
 	/**
 	 * Get the maximum hunt for the lvl
 	 * @param lvl int : level of the character
