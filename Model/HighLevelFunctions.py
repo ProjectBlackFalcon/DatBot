@@ -14,7 +14,7 @@ class HighLevelFunctions:
         self.brak_maps = self.llf.get_brak_maps()
         self.bwork_maps = self.llf.get_bwork_maps()
 
-    def goto(self, target_coord, target_cell=None, worldmap=1):
+    def goto(self, target_coord, target_cell=None, worldmap=1, harvest=False):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
         with open('..//Utils//gotos.txt', 'a') as f:
@@ -110,6 +110,8 @@ class HighLevelFunctions:
                 self.bot.position = current_map, current_worldmap
                 if current_worldmap == 1:
                     self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
+                if harvest:
+                    self.harvest_map()
             else:
                 raise ValueError('Interface returned false on move command. Position : {}, Cell : {}, Direction : {}'.format(self.bot.position, path_directions[i][0], path_directions[i][1]))
 
@@ -132,6 +134,9 @@ class HighLevelFunctions:
             closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
+        stats = self.bot.interface.get_player_stats()[0]
+        if stats['WeightMax'] - stats['Weight'] < 200:
+            return False
         self.bot.occupation = 'Harvesting map'
         self.update_db()
         with open('..//Utils//resourcesIDs.json', 'r') as f:
@@ -252,6 +257,7 @@ class HighLevelFunctions:
         duration = duration_minutes * 60
         start = time.time()
         full = False
+        path = self.llf.fetch_harvest_path(self.bot.credentials['name']) if path is None else path
         while time.time() - start < duration:
             for tile, target_cell, worldmap in path:
                 if time.time() - start > duration:
@@ -349,7 +355,7 @@ class HighLevelFunctions:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
-                            self.goto(destination)
+                            self.goto(destination, harvest=True)
                         except Exception as e:
                             with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
@@ -363,7 +369,7 @@ class HighLevelFunctions:
                 else:
                     try:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
-                        self.goto(clue_pos)
+                        self.goto(clue_pos, harvest=True)
                     except Exception as e:
                         with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
