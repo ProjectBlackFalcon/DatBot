@@ -316,7 +316,7 @@ class HighLevelFunctions:
         else:
             raise Exception('Not a map with a bank')
 
-    def tresure_hunt(self, level='max'):
+    def tresure_hunt(self, level='max', harvest=False):
         def get_hunt(level):
             self.bot.occupation = 'Getting a new hunt'
             self.update_db()
@@ -355,7 +355,7 @@ class HighLevelFunctions:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
-                            self.goto(destination, harvest=True)
+                            self.goto(destination, harvest)
                         except Exception as e:
                             with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
@@ -369,7 +369,7 @@ class HighLevelFunctions:
                 else:
                     try:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
-                        self.goto(clue_pos, harvest=True)
+                        self.goto(clue_pos)
                     except Exception as e:
                         with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
@@ -441,7 +441,7 @@ class HighLevelFunctions:
             else:
                 return False, 'Lost against chest'
 
-    def hunt_treasures(self, duration_minutes, level='max'):
+    def hunt_treasures(self, duration_minutes, level='max', harvest=False):
         duration = duration_minutes * 60
         start = time.time()
         n_hunts = 0
@@ -451,7 +451,7 @@ class HighLevelFunctions:
                 n_hunts += 1
                 hunt_start = time.time()
                 self.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
-                success, reason = self.tresure_hunt(level)
+                success, reason = self.tresure_hunt(level, harvest)
                 self.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), success, reason)
                 n_success = n_success+1 if success else n_success
             except Exception:
@@ -760,6 +760,12 @@ class HighLevelFunctions:
                     self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
                         self.bot.id, round(minutes_left, 0)))
                     self.hunt_treasures(minutes_left)
+                elif task['name'] == 'huntGather':
+                    if not self.bot.connected:
+                        self.bot.interface.connect()
+                    self.llf.log(self.bot, '[Scheduler {}] Starting to hunt and gather for {} minutes'.format(
+                        self.bot.id, round(minutes_left, 0)))
+                    self.hunt_treasures(minutes_left, harvest=True)
                 elif task['name'] == 'sell':
                     if not self.bot.connected:
                         self.bot.interface.connect()
