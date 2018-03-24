@@ -11,13 +11,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -89,7 +88,7 @@ public class DisplayInfo {
 			// log = System.out;
 			fileOutputStream = new FileOutputStream("log_network" + botInstance + ".txt");
 			log = new PrintStream(fileOutputStream);
-//			debug = new PrintStream(new FileOutputStream("debug.txt"));
+			//			debug = new PrintStream(new FileOutputStream("debug.txt"));
 			debug = System.out;
 			log = System.out;
 		}
@@ -97,23 +96,23 @@ public class DisplayInfo {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * @return String timestamp
 	 */
-	public static String getTiming(){
+	public static String getTiming() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
 		LocalTime time = LocalTime.now();
 		String timing = formatter.format(time);
 		return timing;
 	}
-	
-	public static void appendDebugLog(String errorType, String s){
+
+	public static void appendDebugLog(String errorType, String s) {
 		File file = new File(GameData.getPathDatBot() + "//packetErrors.txt");
-		if(!file.exists()){
+		if (!file.exists()) {
 			try {
 				file.createNewFile();
-				
+
 			}
 			catch (IOException e) {
 				System.out.println("File not created");
@@ -122,19 +121,16 @@ public class DisplayInfo {
 		}
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
+			writer = new PrintWriter(new FileOutputStream(new File(file.getAbsolutePath()),
+				true));
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("File not found");
 			e.printStackTrace();
 		}
-		catch (UnsupportedEncodingException e) {
-			System.out.println("Cannot write into file");
-			e.printStackTrace();
-		}
-		writer.println(getTiming() + " : " + errorType);
-		writer.println(s);
-		writer.println();
+		writer.append(LocalDateTime.now() + " : " + errorType + "\n");
+		writer.append("\t" + s + "\n");
+		writer.append("\n");
 		writer.close();
 	}
 
@@ -212,11 +208,11 @@ public class DisplayInfo {
 		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
 		debug.println(newSt);
 	}
-	
-	public static String cleanString(String s){
+
+	public static String cleanString(String s) {
 		s = s.toLowerCase();
 		s = s.replaceAll("\"", "");
-		 return s == null ? null : Normalizer.normalize(s, Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+		return s == null ? null : Normalizer.normalize(s, Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 	}
 
 	public int getBotInstance() {
