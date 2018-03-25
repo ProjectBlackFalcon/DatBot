@@ -30,10 +30,11 @@ public class CellMovement {
 		if (path == null) return;
 
 		this.network.getInfo().setWaitForMov(false);
-
+		
+		this.network.append("Moving to " + endCell);
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path);
 
-		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "Moving to " + keys.get(keys.size() - 1));
+		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "Moving to " + endCell);
 		if (!this.network.getInfo().isJoinedFight()){
 			if (path.Cells.size() >= 4)
 			{

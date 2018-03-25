@@ -1,6 +1,7 @@
 package game.movement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -71,64 +72,57 @@ public class Movement {
 		return new MapMovement(move, neighbourId, this.getNetwork());
 	}
 
-	public MapMovement ChangeMap(int cellId, String direction) throws Exception{
-        int neighbourId = -1;
-        int num2 = -1;
-        switch (direction)
-        {
-            case "n":
-                neighbourId = (int) this.network.getMap().getTopNeighbourId();
-                num2 = 64;
-                break;
-            case "s":
-                neighbourId = (int) this.network.getMap().getBottomNeighbourId();
-                num2 = 4;
-                break;
-            case "e":
-                neighbourId = (int) this.network.getMap().getRightNeighbourId();
-                num2 = 1;
-                break;
-            case "w":
-                neighbourId = (int) this.network.getMap().getLeftNeighbourId();
-                num2 = 16;
-                break;
-        }
-        if (num2 == -1 || neighbourId < 0) return null;
-        if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId) && this.network.getMap().getCells().get(cellId).getMapChangeData() != 0 && cellId != 0 && cellId != 13 && cellId != 546 && cellId != 559){ 
-            CellMovement move = MoveToCell(cellId);
-            return new MapMovement(move, neighbourId,this.getNetwork());
-        } else if (this.network.getMap().NothingOnCell(cellId) && noObstacle(cellId) && this.network.getMap().getCells().get(cellId).getMapChangeData() != 0 && (cellId == 0 || cellId == 13 || cellId == 546 || cellId == 559)){
-        	if((this.network.getMap().getCells().get(cellId).getMapChangeData() & num2) > 0){
-                CellMovement move = MoveToCell(cellId);
-                return new MapMovement(move, neighbourId,this.getNetwork());
-        	} else {
-        		return null;
-        	}
-        	
-        } else if (this.network.getInfo().getCellId() == cellId){
-            return new MapMovement(null, neighbourId,this.getNetwork());
-        } else {
-        	// Get available cell for the direction choosed
-            List<Integer> list = new ArrayList<Integer>();
-            for (int i = 0; i < this.network.getMap().getCells().size() - 1; i++){
-                if ((this.network.getMap().getCells().get(i).getMapChangeData() & num2) > 0 && this.network.getMap().NothingOnCell(i) && noObstacle(i)){
-                	list.add(i);
-                }
-            }
-            if(list.size() == 0 ){
-            	return null;
-            }
-        	int closestCellId = getClosetChangedMapAvailableCell(cellId, list);
-        	if(closestCellId == -1){
-        		return null;
-        	}
-        	
-        	this.network.append("Cell " + cellId + " can't be used to change map : now using cell " + closestCellId);
-            CellMovement move = MoveToCell(closestCellId);
-            if(move.path == null){
-            	return null;
-            }
-            return new MapMovement(move, neighbourId,this.getNetwork());        }
+	public MapMovement ChangeMap(int cellId, String direction) throws Exception {
+		int neighbourId = -1;
+		int num2 = -1;
+		switch (direction) {
+			case "n":
+				neighbourId = (int) this.network.getMap().getTopNeighbourId();
+				num2 = 64;
+				break;
+			case "s":
+				neighbourId = (int) this.network.getMap().getBottomNeighbourId();
+				num2 = 4;
+				break;
+			case "e":
+				neighbourId = (int) this.network.getMap().getRightNeighbourId();
+				num2 = 1;
+				break;
+			case "w":
+				neighbourId = (int) this.network.getMap().getLeftNeighbourId();
+				num2 = 16;
+				break;
+		}
+		if (num2 == -1 || neighbourId < 0) return null;
+
+		if (this.network.getInfo().getCellId() == cellId) {
+			return new MapMovement(null, neighbourId, this.getNetwork());
+		}
+		else if (canChangeMap(cellId) && canMoveTo(cellId) && isDirection(cellId, direction) && isAvalaibleCorner(cellId, num2)) {
+			CellMovement move = MoveToCell(cellId);
+			return new MapMovement(move, neighbourId, this.getNetwork());
+		}
+		else {
+			List<Integer> list = new ArrayList<>();
+			for (int i = 0; i < this.network.getMap().getCells().size(); i++) {
+				if (canChangeMap(i) && isDirection(i, direction) && isAvalaibleCorner(i, num2) && canMoveTo(i)) {
+					list.add(i);
+				}
+			}
+			if (list.isEmpty()) {
+				System.out.println("No available cell");
+				return null;
+			}
+			int closestCellId = getClosetChangedMapAvailableCell(cellId, list);
+			if (closestCellId == -1) {
+				System.out.println("No closest available cell");
+				return null;
+			}
+			CellMovement move = MoveToCell(closestCellId);
+			if (move.path == null) { return null; }
+			this.network.append(String.format("Cell %s not valid, choosing %s",cellId,closestCellId));
+			return new MapMovement(move, neighbourId, this.getNetwork());
+		}
 	}
 
 	public boolean moveOver() throws InterruptedException {
@@ -139,6 +133,64 @@ public class Movement {
 			if (indexTimeout == 30) { return false; }
 		}
 		return true;
+	}
+	
+	public boolean canChangeMap(int cellId){
+		return this.network.getMap().getCells().get(cellId).getMapChangeData() != 0;
+	}
+
+	/**
+	 * Verifiy that the cell can lead to the right direction
+	 * 
+	 * @param cellId
+	 * @param dir
+	 * @return boolean : true if direction and cell are good
+	 */
+	public boolean isDirection(int cellId, String dir) {
+		boolean b = false;
+		switch (dir) {
+			case "n":
+				if (cellId <= 27) b = true;
+				break;
+			case "s":
+				if (546 <= cellId && cellId <= 559) b = true;
+				break;
+			case "w":
+				if (cellId % 14 == 0) b = true;
+				break;
+			case "e":
+				if (cellId % 14 == 13) b = true;
+				break;
+		}
+		return b;
+	}
+
+	/**
+	 * Check if the cell is a corner and return if it can be used in that
+	 * direction
+	 * 
+	 * @param cellId
+	 * @param dir
+	 * @return true if usable cell in that direction
+	 */
+	private boolean isAvalaibleCorner(int cellId, int dir) {
+		List<Integer> cellsCornered = Arrays.asList(0, 13, 546, 559);
+		if (cellsCornered.contains(cellId)) {
+			return (this.network.getMap().getCells().get(cellId).getMapChangeData() & dir) > 0;
+		}
+		else {
+			return true;
+		}
+	}
+
+	/**
+	 * Player can move to cell
+	 * 
+	 * @param cellId
+	 * @return boolean
+	 */
+	public boolean canMoveTo(int cellId) {
+		return this.network.getMap().getCells().get(cellId).isMov() && noObstacle(cellId);
 	}
 
 	/**
@@ -152,7 +204,7 @@ public class Movement {
 		int min = 9999;
 		int newCell = -1;
 		for (Integer integer : listCellAvailable) {
-			if (Math.abs(integer - cell) < min && noObstacle(integer)) {
+			if (Math.abs(integer - cell) < min) {
 				min = Math.abs(integer - cell);
 				newCell = integer;
 			}
@@ -161,7 +213,7 @@ public class Movement {
 	}
 
 	private boolean noObstacle(int random) {
-		List<int[]> blocked = new ArrayList<int[]>();
+		List<int[]> blocked = new ArrayList<>();
 		for (int i = 0; i < this.network.getMap().getCells().size(); i++) {
 			if (!this.network.getMap().getCells().get(i).isMov()) {
 				blocked.add(new int[] { i % 14, i / 14 });
@@ -173,11 +225,14 @@ public class Movement {
 				blocked.add(new int[] { cellId % 14, cellId / 14 });
 			}
 		}
-		new Astar(this.network.getInfo().getCellId() % 14, this.network.getInfo().getCellId() / 14, random % 14, random / 14, blocked, false);
-		if (Astar.path == null)
-			return false; // Can't go in this direction (Obstacles)
-		else
-			return true;
+		Astar a;
+		if (this.getNetwork().getInfo().isJoinedFight()) {
+			a = new Astar(this.network.getInfo().getCellId() % 14, this.network.getInfo().getCellId() / 14, random % 14, random / 14, blocked, false);
+		}
+		else {
+			a = new Astar(this.network.getInfo().getCellId() % 14, this.network.getInfo().getCellId() / 14, random % 14, random / 14, blocked, true);
+		}
+		return a.getPath() != null;
 	}
 
 	public Network getNetwork() {

@@ -70,7 +70,7 @@ public class CellData {
             }
 
             Speed = Reader.readByte();
-            MapChangeData = Reader.readByte();
+            MapChangeData = Reader.readUnsignedByte();
 
             if (MapVersion > 5)
                 MoveZone = Reader.readUnsignedByte();

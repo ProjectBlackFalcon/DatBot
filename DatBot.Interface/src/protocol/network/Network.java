@@ -175,7 +175,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Movement movement;
 	private Npc npc;
 	private Dragodinde dragodinde;
-	public int port = 5555;
+	public int port = 443;
 	private Socket socket;
 	boolean packetSent = false;
 	long timeout;
@@ -199,18 +199,8 @@ public class Network extends DisplayInfo implements Runnable {
 			this.npc = new Npc(this);
 			socket = new Socket(this.ip, this.port);
 		}
-		catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		catch (Exception e) {
-			e.printStackTrace();
-		}
+			System.out.println(e);		}
 	}
 
 	public void buildMessage(DofusDataReader reader) throws Exception {

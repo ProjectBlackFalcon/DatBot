@@ -40,8 +40,7 @@ public class MapManager {
             return map;
         }
         return null;
-    }
-    
+    }    
     
     public MapManager(String directory) throws IOException
     {
