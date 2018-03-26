@@ -119,6 +119,7 @@ class HighLevelFunctions:
             self.goto(target_coord, target_cell, worldmap)
 
         if target_cell is not None:
+            print(target_cell)
             self.bot.interface.move(target_cell)
         self.bot.position = (target_coord, worldmap)
 
@@ -358,7 +359,7 @@ class HighLevelFunctions:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
-                            self.goto(destination, harvest)
+                            self.goto(destination, harvest=harvest)
                         except Exception as e:
                             with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
@@ -372,7 +373,7 @@ class HighLevelFunctions:
                 else:
                     try:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
-                        self.goto(clue_pos)
+                        self.goto(clue_pos, harvest=harvest)
                     except Exception as e:
                         with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
