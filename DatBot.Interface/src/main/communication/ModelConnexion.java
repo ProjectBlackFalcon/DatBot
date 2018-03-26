@@ -660,7 +660,7 @@ public class ModelConnexion {
 			ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
 			if (this.waitToSendHdv()) {
-				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+				toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
@@ -1140,17 +1140,20 @@ public class ModelConnexion {
 
 	private Object[] harvest(String param) throws Exception {
 		Object[] toSend;
-		if(isCloseToCell(this.network.getInfo().getCellId(), Integer.parseInt(param))){
-			if (this.network.getInteractive().harvestCell(Integer.parseInt(param))) {
+		int [] harvestCell = this.network.getInteractive().getHarvestCell(Integer.parseInt(param));
+		if (harvestCell.length > 0) {
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(harvestCell[0],harvestCell[1]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting " + param);
+			if (this.waitToSendHarvest(Integer.parseInt(param))) {
 				toSend = new Object[] { this.network.getInteractive().getLastItemHarvestedId(), this.network.getInteractive().getQuantityLastItemHarvested(), this.network.getInfo().getWeight(), this.network.getInfo().getWeigthMax() };
 			}
 			else {
 				toSend = new Object[] { "False" };
-			}	
-		} else {
-			DisplayInfo.appendDebugLog("Harvest error", "Bot not on the right position, cannot harvest the cellId : " + Integer.parseInt(param));
-			toSend = new Object[] { "False" };
+			}
 		}
+		else {
+			toSend = new Object[] { "False" };
+		}	
 		return toSend;
 	}
 
@@ -1619,6 +1622,18 @@ public class ModelConnexion {
 			}
 		}
 		return this.network.getInfo().isHuntAnswered();
+	}
+	
+	public boolean waitToSendHarvest(int cellId) throws InterruptedException{
+		long index =  System.currentTimeMillis();
+		while (!this.network.getInfo().isHarvestSuccess()) {
+			Thread.sleep(50);
+			if (System.currentTimeMillis() - index > 10000) {
+				DisplayInfo.appendDebugLog("Harvesting error, server returned false", "CellId : " + this.network.getInfo().getCellId() + ", cellIdToHarvest : " + cellId);
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean waitToSendBank(String s) throws InterruptedException{

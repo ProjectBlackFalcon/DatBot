@@ -51,6 +51,8 @@ public class Info {
 	private boolean waitForMov = true;
 	private boolean waitForHarvestSuccess = false;
 	private boolean waitForHarvestFailure = false;
+	private boolean harvestSuccess = false;
+	private boolean harvestFailure = false;
 	private boolean inHunt = false;
 	private boolean inExchange = false;
 
@@ -80,6 +82,8 @@ public class Info {
 
 	public void setBooleanToFalse()
 	{
+		harvestSuccess = false;
+		harvestFailure = false;
 		exchangeBidSeller = false;
 		interactiveUsed = false;
 		newMap = false;
@@ -543,6 +547,22 @@ public class Info {
 
 	public void setStepFailed(boolean stepFailed) {
 		this.stepFailed = stepFailed;
+	}
+
+	public boolean isHarvestSuccess() {
+		return harvestSuccess;
+	}
+
+	public void setHarvestSuccess(boolean harvestSuccess) {
+		this.harvestSuccess = harvestSuccess;
+	}
+
+	public boolean isHarvestFailure() {
+		return harvestFailure;
+	}
+
+	public void setHarvestFailure(boolean harvestFailure) {
+		this.harvestFailure = harvestFailure;
 	}
 
 }
