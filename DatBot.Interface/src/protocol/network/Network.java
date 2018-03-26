@@ -970,6 +970,7 @@ public class Network extends DisplayInfo implements Runnable {
 		weight.Deserialize(dataReader);
 		info.setWeight(weight.getWeight());
 		info.setWeigthMax(weight.getWeightMax());
+		info.setWaitForHarvestSuccess(true);
 		info.setObjectUse(true);
 	}
 
@@ -1125,6 +1126,8 @@ public class Network extends DisplayInfo implements Runnable {
 		itemMessage.Deserialize(dataReader);
 		getInteractive().setLastItemHarvestedId(itemMessage.getGenericId());
 		getInteractive().setQuantityLastItemHarvested(itemMessage.getBaseQuantity());
+		System.out.println("test");
+		info.setHarvestSuccess(true);
 	}
 
 	private void HandleRawDataMessage() throws Exception {
@@ -1536,10 +1539,9 @@ public class Network extends DisplayInfo implements Runnable {
 				handleInteractiveElementUpdatedMessage(dataReader);
 				break;
 			case 6112:
-				info.setWaitForHarvestSuccess(true);
 				break;
 			case 6384:
-				info.setWaitForHarvestFailure(true);
+				info.setHarvestFailure(true);
 				break;
 			case 3009:
 				handleInventoryWeightMessage(dataReader);
