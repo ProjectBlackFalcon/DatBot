@@ -86,11 +86,10 @@ public class DisplayInfo {
 	private void initLogs() {
 		try {
 			// log = System.out;
-			fileOutputStream = new FileOutputStream("log_network" + botInstance + ".txt");
+			fileOutputStream = new FileOutputStream(GameData.getPathDatBot() + "//log_network" + botInstance + ".txt");
 			log = new PrintStream(fileOutputStream);
 			//			debug = new PrintStream(new FileOutputStream("debug.txt"));
 			debug = System.out;
-			log = System.out;
 		}
 		catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -156,8 +155,8 @@ public class DisplayInfo {
 		else {
 			List<String> lines;
 			try {
-				lines = Files.readAllLines(Paths.get("log_network" + botInstance + ".txt"), Charset.defaultCharset());
-				if (lines.size() > 20) {
+				lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "//log_network" + botInstance + ".txt"), Charset.defaultCharset());
+				if (lines.size() > 1000) {
 					clearTheFile();
 				}
 			}
