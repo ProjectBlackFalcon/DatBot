@@ -38,7 +38,6 @@ import utils.GameData;
 
 public class ModelConnexion {
 	
-	boolean actionFinished = true;
 	private boolean bankOpened;
 	int botInstance;
 
@@ -951,10 +950,6 @@ public class ModelConnexion {
 			@Override
 			public void run() {
 				try {
-					while(!actionFinished){
-						Thread.sleep(1000);
-					}
-					actionFinished = false;
 					if(message[4].equals("connect")){
 						while(Communication.isConnecting){
 							Thread.sleep(1000);
@@ -962,7 +957,6 @@ public class ModelConnexion {
 						Communication.isConnecting = true;
 					}
 					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], getReturn(message[4], message[5]));
-					actionFinished = true;
 				}
 				catch (NumberFormatException e) {
 					e.printStackTrace();
@@ -1141,7 +1135,7 @@ public class ModelConnexion {
 	private Object[] harvest(String param) throws Exception {
 		Object[] toSend;
 		int [] harvestCell = this.network.getInteractive().getHarvestCell(Integer.parseInt(param));
-		if (harvestCell.length > 0) {
+		if (harvestCell != null) {
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(harvestCell[0],harvestCell[1]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting " + param);
 			if (this.waitToSendHarvest(Integer.parseInt(param))) {
@@ -1233,7 +1227,7 @@ public class ModelConnexion {
 				}
 			}
 			if (this.waitToSendHdv()) {
-				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+				toSend = new Object[] { "True" };
 			}
 			else {
 				DisplayInfo.appendDebugLog("modifyPrice error, server returned false", param);
@@ -1417,7 +1411,7 @@ public class ModelConnexion {
 				}
 			}
 			if (this.waitToSendHdv()) {
-				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+				toSend = new Object[] { "True" };
 			}
 			else {
 				DisplayInfo.appendDebugLog("sellItem error, server returned false", param);
@@ -1814,7 +1808,7 @@ public class ModelConnexion {
 					}
 				}
 				if (this.waitToSendHdv()) {
-					toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+					toSend = new Object[] { "True" };
 				}
 				else {
 					DisplayInfo.appendDebugLog("withdrawItem error, server returned false", param);

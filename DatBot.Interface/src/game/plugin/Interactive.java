@@ -122,7 +122,6 @@ public class Interactive {
 						if (this.getMap().getLayers().get(i).getCells().get(j).getCellId() == element.getElementCellId()) {
 							if (((GraphicalElement) this.getMap().getLayers().get(i).getCells().get(j).getElements().get(k)).getIdentifier() == element.getElementId()) {
 								farmCell += "(" + element.getElementCellId() + "," + ((GraphicalElement) this.getMap().getLayers().get(i).getCells().get(j).getElements().get(k)).getElementId() + "," + element.getElementState() + "), ";
-								//								this.network.append(getRessourceName(Map.Layers.get(i).getCells().get(j).Elements.get(k)) + " : " + element.elementCellId + " - Id : " + Map.Layers.get(i).getCells().get(j).Elements.get(k).ElementId +  " - State : " + element.elementState);
 							}
 						}
 					}
@@ -138,7 +137,7 @@ public class Interactive {
 	private int quantityLastItemHarvested = 0;
 
 	public int[] getHarvestCell(int cellId) {
-		int[] h = new int[0];
+		int[] h = null;
 		for (int i = 0; i < getStatedElements().size(); i++) {
 			if (cellId == getStatedElements().get(i).getElementCellId()) {
 				if (getStatedElements().get(i).getElementState() == 0) {
@@ -151,7 +150,7 @@ public class Interactive {
 				}
 				else {
 					System.out.println("State != 0");
-					return new int[0];
+					return null;
 				}
 			}
 		}
