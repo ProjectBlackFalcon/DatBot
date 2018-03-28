@@ -19,7 +19,6 @@ public class Communication implements Runnable {
 
 	public Communication(boolean arg) {
 		Communication.displayPacket = arg;
-		System.out.println(Communication.displayPacket);
 	}
 
 	public void run() {
