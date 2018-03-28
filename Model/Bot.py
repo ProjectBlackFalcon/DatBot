@@ -1,6 +1,6 @@
-from Model.Interface import Interface
-from Model.HighLevelFunctions import HighLevelFunctions
-from Model.LowLevelFunctions import LowLevelFunctions
+from Interface import Interface
+from HighLevelFunctions import HighLevelFunctions
+from LowLevelFunctions import LowLevelFunctions
 
 
 class Bot:
