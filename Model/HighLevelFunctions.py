@@ -1,6 +1,6 @@
-from Model.Pathfinder import PathFinder
-from Model.LowLevelFunctions import LowLevelFunctions
-from Model.DD import DD
+from Pathfinder import PathFinder
+from LowLevelFunctions import LowLevelFunctions
+from DD import DD
 import json
 import time
 import datetime
