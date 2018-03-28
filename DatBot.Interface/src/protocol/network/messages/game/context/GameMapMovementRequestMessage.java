@@ -19,9 +19,9 @@ public class GameMapMovementRequestMessage extends NetworkMessage {
 	private List<Integer> keyMovements;
 	private double mapId;
 
-	public List<Integer> getKeyMovements() { return this.keyMovements; };
+	public List<Integer> getKeyMovements() { return this.keyMovements; }
 	public void setKeyMovements(List<Integer> keyMovements) { this.keyMovements = keyMovements; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
 
 	public GameMapMovementRequestMessage(){

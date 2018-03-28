@@ -18,7 +18,7 @@ public class IdentificationSuccessWithLoginTokenMessage extends IdentificationSu
 
 	private String loginToken;
 
-	public String getLoginToken() { return this.loginToken; };
+	public String getLoginToken() { return this.loginToken; }
 	public void setLoginToken(String loginToken) { this.loginToken = loginToken; };
 
 	public IdentificationSuccessWithLoginTokenMessage(){

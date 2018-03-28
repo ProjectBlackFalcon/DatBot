@@ -19,9 +19,9 @@ public class TreasureHuntFlag extends NetworkMessage {
 	private double mapId;
 	private int state;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getState() { return this.state; };
+	public int getState() { return this.state; }
 	public void setState(int state) { this.state = state; };
 
 	public TreasureHuntFlag(){

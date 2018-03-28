@@ -18,7 +18,7 @@ public class FightAllianceTeamInformations extends FightTeamInformations {
 
 	private int relation;
 
-	public int getRelation() { return this.relation; };
+	public int getRelation() { return this.relation; }
 	public void setRelation(int relation) { this.relation = relation; };
 
 	public FightAllianceTeamInformations(){

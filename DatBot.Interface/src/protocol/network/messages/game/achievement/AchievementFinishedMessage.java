@@ -19,7 +19,7 @@ public class AchievementFinishedMessage extends NetworkMessage {
 
 	private AchievementAchievedRewardable achievement;
 
-	public AchievementAchievedRewardable getAchievement() { return this.achievement; };
+	public AchievementAchievedRewardable getAchievement() { return this.achievement; }
 	public void setAchievement(AchievementAchievedRewardable achievement) { this.achievement = achievement; };
 
 	public AchievementFinishedMessage(){

@@ -18,7 +18,7 @@ public class FightTemporaryBoostStateEffect extends FightTemporaryBoostEffect {
 
 	private int stateId;
 
-	public int getStateId() { return this.stateId; };
+	public int getStateId() { return this.stateId; }
 	public void setStateId(int stateId) { this.stateId = stateId; };
 
 	public FightTemporaryBoostStateEffect(){

@@ -19,9 +19,9 @@ public class ChallengeTargetUpdateMessage extends NetworkMessage {
 	private int challengeId;
 	private double targetId;
 
-	public int getChallengeId() { return this.challengeId; };
+	public int getChallengeId() { return this.challengeId; }
 	public void setChallengeId(int challengeId) { this.challengeId = challengeId; };
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
 
 	public ChallengeTargetUpdateMessage(){

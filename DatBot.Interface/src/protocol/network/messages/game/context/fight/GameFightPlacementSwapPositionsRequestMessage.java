@@ -18,7 +18,7 @@ public class GameFightPlacementSwapPositionsRequestMessage extends GameFightPlac
 
 	private double requestedId;
 
-	public double getRequestedId() { return this.requestedId; };
+	public double getRequestedId() { return this.requestedId; }
 	public void setRequestedId(double requestedId) { this.requestedId = requestedId; };
 
 	public GameFightPlacementSwapPositionsRequestMessage(){

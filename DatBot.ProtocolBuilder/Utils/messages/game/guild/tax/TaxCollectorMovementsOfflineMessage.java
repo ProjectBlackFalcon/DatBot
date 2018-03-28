@@ -19,7 +19,7 @@ public class TaxCollectorMovementsOfflineMessage extends NetworkMessage {
 
 	private List<TaxCollectorMovement> movements;
 
-	public List<TaxCollectorMovement> getMovements() { return this.movements; };
+	public List<TaxCollectorMovement> getMovements() { return this.movements; }
 	public void setMovements(List<TaxCollectorMovement> movements) { this.movements = movements; };
 
 	public TaxCollectorMovementsOfflineMessage(){

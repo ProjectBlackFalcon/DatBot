@@ -18,7 +18,7 @@ public class MountInformationInPaddockRequestMessage extends NetworkMessage {
 
 	private int mapRideId;
 
-	public int getMapRideId() { return this.mapRideId; };
+	public int getMapRideId() { return this.mapRideId; }
 	public void setMapRideId(int mapRideId) { this.mapRideId = mapRideId; };
 
 	public MountInformationInPaddockRequestMessage(){

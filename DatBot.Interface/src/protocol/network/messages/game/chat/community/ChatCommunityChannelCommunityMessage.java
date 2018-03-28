@@ -18,7 +18,7 @@ public class ChatCommunityChannelCommunityMessage extends NetworkMessage {
 
 	private int communityId;
 
-	public int getCommunityId() { return this.communityId; };
+	public int getCommunityId() { return this.communityId; }
 	public void setCommunityId(int communityId) { this.communityId = communityId; };
 
 	public ChatCommunityChannelCommunityMessage(){

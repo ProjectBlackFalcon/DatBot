@@ -19,7 +19,7 @@ public class CharactersListWithRemodelingMessage extends CharactersListMessage {
 
 	private List<CharacterToRemodelInformations> charactersToRemodel;
 
-	public List<CharacterToRemodelInformations> getCharactersToRemodel() { return this.charactersToRemodel; };
+	public List<CharacterToRemodelInformations> getCharactersToRemodel() { return this.charactersToRemodel; }
 	public void setCharactersToRemodel(List<CharacterToRemodelInformations> charactersToRemodel) { this.charactersToRemodel = charactersToRemodel; };
 
 	public CharactersListWithRemodelingMessage(){

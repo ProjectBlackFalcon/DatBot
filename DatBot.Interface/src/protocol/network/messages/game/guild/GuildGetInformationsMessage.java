@@ -18,7 +18,7 @@ public class GuildGetInformationsMessage extends NetworkMessage {
 
 	private int infoType;
 
-	public int getInfoType() { return this.infoType; };
+	public int getInfoType() { return this.infoType; }
 	public void setInfoType(int infoType) { this.infoType = infoType; };
 
 	public GuildGetInformationsMessage(){

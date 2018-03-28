@@ -23,15 +23,15 @@ public class InteractiveElement extends NetworkMessage {
 	private List<InteractiveElementSkill> disabledSkills;
 	private boolean onCurrentMap;
 
-	public int getElementId() { return this.elementId; };
+	public int getElementId() { return this.elementId; }
 	public void setElementId(int elementId) { this.elementId = elementId; };
-	public int getElementTypeId() { return this.elementTypeId; };
+	public int getElementTypeId() { return this.elementTypeId; }
 	public void setElementTypeId(int elementTypeId) { this.elementTypeId = elementTypeId; };
-	public List<InteractiveElementSkill> getEnabledSkills() { return this.enabledSkills; };
+	public List<InteractiveElementSkill> getEnabledSkills() { return this.enabledSkills; }
 	public void setEnabledSkills(List<InteractiveElementSkill> enabledSkills) { this.enabledSkills = enabledSkills; };
-	public List<InteractiveElementSkill> getDisabledSkills() { return this.disabledSkills; };
+	public List<InteractiveElementSkill> getDisabledSkills() { return this.disabledSkills; }
 	public void setDisabledSkills(List<InteractiveElementSkill> disabledSkills) { this.disabledSkills = disabledSkills; };
-	public boolean isOnCurrentMap() { return this.onCurrentMap; };
+	public boolean isOnCurrentMap() { return this.onCurrentMap; }
 	public void setOnCurrentMap(boolean onCurrentMap) { this.onCurrentMap = onCurrentMap; };
 
 	public InteractiveElement(){

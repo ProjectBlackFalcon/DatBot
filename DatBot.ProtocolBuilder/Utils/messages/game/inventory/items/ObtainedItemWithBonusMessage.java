@@ -18,7 +18,7 @@ public class ObtainedItemWithBonusMessage extends ObtainedItemMessage {
 
 	private int bonusQuantity;
 
-	public int getBonusQuantity() { return this.bonusQuantity; };
+	public int getBonusQuantity() { return this.bonusQuantity; }
 	public void setBonusQuantity(int bonusQuantity) { this.bonusQuantity = bonusQuantity; };
 
 	public ObtainedItemWithBonusMessage(){

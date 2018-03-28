@@ -19,9 +19,9 @@ public class PrismSetSabotagedRefusedMessage extends NetworkMessage {
 	private int subAreaId;
 	private int reason;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public int getReason() { return this.reason; };
+	public int getReason() { return this.reason; }
 	public void setReason(int reason) { this.reason = reason; };
 
 	public PrismSetSabotagedRefusedMessage(){

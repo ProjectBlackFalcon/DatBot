@@ -19,9 +19,9 @@ public class DebugHighlightCellsMessage extends NetworkMessage {
 	private double color;
 	private List<Integer> cells;
 
-	public double getColor() { return this.color; };
+	public double getColor() { return this.color; }
 	public void setColor(double color) { this.color = color; };
-	public List<Integer> getCells() { return this.cells; };
+	public List<Integer> getCells() { return this.cells; }
 	public void setCells(List<Integer> cells) { this.cells = cells; };
 
 	public DebugHighlightCellsMessage(){

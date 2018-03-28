@@ -19,9 +19,9 @@ public class ObjectItemGenericQuantity extends Item {
 	private int objectGID;
 	private int quantity;
 
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
 
 	public ObjectItemGenericQuantity(){

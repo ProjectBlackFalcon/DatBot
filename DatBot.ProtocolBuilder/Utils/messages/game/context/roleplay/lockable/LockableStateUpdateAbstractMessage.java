@@ -18,7 +18,7 @@ public class LockableStateUpdateAbstractMessage extends NetworkMessage {
 
 	private boolean locked;
 
-	public boolean isLocked() { return this.locked; };
+	public boolean isLocked() { return this.locked; }
 	public void setLocked(boolean locked) { this.locked = locked; };
 
 	public LockableStateUpdateAbstractMessage(){

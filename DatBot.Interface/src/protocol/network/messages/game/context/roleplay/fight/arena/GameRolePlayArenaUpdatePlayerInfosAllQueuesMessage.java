@@ -20,9 +20,9 @@ public class GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage extends GameRole
 	private ArenaRankInfos team;
 	private ArenaRankInfos duel;
 
-	public ArenaRankInfos getTeam() { return this.team; };
+	public ArenaRankInfos getTeam() { return this.team; }
 	public void setTeam(ArenaRankInfos team) { this.team = team; };
-	public ArenaRankInfos getDuel() { return this.duel; };
+	public ArenaRankInfos getDuel() { return this.duel; }
 	public void setDuel(ArenaRankInfos duel) { this.duel = duel; };
 
 	public GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage(){

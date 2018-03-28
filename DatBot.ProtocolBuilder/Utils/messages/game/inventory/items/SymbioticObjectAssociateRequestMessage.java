@@ -21,13 +21,13 @@ public class SymbioticObjectAssociateRequestMessage extends NetworkMessage {
 	private int hostUID;
 	private int hostPos;
 
-	public int getSymbioteUID() { return this.symbioteUID; };
+	public int getSymbioteUID() { return this.symbioteUID; }
 	public void setSymbioteUID(int symbioteUID) { this.symbioteUID = symbioteUID; };
-	public int getSymbiotePos() { return this.symbiotePos; };
+	public int getSymbiotePos() { return this.symbiotePos; }
 	public void setSymbiotePos(int symbiotePos) { this.symbiotePos = symbiotePos; };
-	public int getHostUID() { return this.hostUID; };
+	public int getHostUID() { return this.hostUID; }
 	public void setHostUID(int hostUID) { this.hostUID = hostUID; };
-	public int getHostPos() { return this.hostPos; };
+	public int getHostPos() { return this.hostPos; }
 	public void setHostPos(int hostPos) { this.hostPos = hostPos; };
 
 	public SymbioticObjectAssociateRequestMessage(){

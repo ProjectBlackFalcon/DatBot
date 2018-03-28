@@ -20,9 +20,9 @@ public class CompassUpdateMessage extends NetworkMessage {
 	private int type;
 	private MapCoordinates coords;
 
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public MapCoordinates getCoords() { return this.coords; };
+	public MapCoordinates getCoords() { return this.coords; }
 	public void setCoords(MapCoordinates coords) { this.coords = coords; };
 
 	public CompassUpdateMessage(){

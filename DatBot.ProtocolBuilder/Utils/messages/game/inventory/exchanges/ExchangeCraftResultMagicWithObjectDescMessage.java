@@ -18,7 +18,7 @@ public class ExchangeCraftResultMagicWithObjectDescMessage extends ExchangeCraft
 
 	private int magicPoolStatus;
 
-	public int getMagicPoolStatus() { return this.magicPoolStatus; };
+	public int getMagicPoolStatus() { return this.magicPoolStatus; }
 	public void setMagicPoolStatus(int magicPoolStatus) { this.magicPoolStatus = magicPoolStatus; };
 
 	public ExchangeCraftResultMagicWithObjectDescMessage(){

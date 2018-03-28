@@ -18,7 +18,7 @@ public class PlayerStatus extends NetworkMessage {
 
 	private int statusId;
 
-	public int getStatusId() { return this.statusId; };
+	public int getStatusId() { return this.statusId; }
 	public void setStatusId(int statusId) { this.statusId = statusId; };
 
 	public PlayerStatus(){

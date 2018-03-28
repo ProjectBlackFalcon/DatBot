@@ -19,7 +19,7 @@ public class StartupActionsListMessage extends NetworkMessage {
 
 	private List<StartupActionAddObject> actions;
 
-	public List<StartupActionAddObject> getActions() { return this.actions; };
+	public List<StartupActionAddObject> getActions() { return this.actions; }
 	public void setActions(List<StartupActionAddObject> actions) { this.actions = actions; };
 
 	public StartupActionsListMessage(){

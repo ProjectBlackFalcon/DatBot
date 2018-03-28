@@ -21,13 +21,13 @@ public class GameActionFightTriggerGlyphTrapMessage extends AbstractGameActionMe
 	private double triggeringCharacterId;
 	private int triggeredSpellId;
 
-	public int getMarkId() { return this.markId; };
+	public int getMarkId() { return this.markId; }
 	public void setMarkId(int markId) { this.markId = markId; };
-	public int getMarkImpactCell() { return this.markImpactCell; };
+	public int getMarkImpactCell() { return this.markImpactCell; }
 	public void setMarkImpactCell(int markImpactCell) { this.markImpactCell = markImpactCell; };
-	public double getTriggeringCharacterId() { return this.triggeringCharacterId; };
+	public double getTriggeringCharacterId() { return this.triggeringCharacterId; }
 	public void setTriggeringCharacterId(double triggeringCharacterId) { this.triggeringCharacterId = triggeringCharacterId; };
-	public int getTriggeredSpellId() { return this.triggeredSpellId; };
+	public int getTriggeredSpellId() { return this.triggeredSpellId; }
 	public void setTriggeredSpellId(int triggeredSpellId) { this.triggeredSpellId = triggeredSpellId; };
 
 	public GameActionFightTriggerGlyphTrapMessage(){

@@ -19,9 +19,9 @@ public class FightTeamMemberMonsterInformations extends FightTeamMemberInformati
 	private int monsterId;
 	private int grade;
 
-	public int getMonsterId() { return this.monsterId; };
+	public int getMonsterId() { return this.monsterId; }
 	public void setMonsterId(int monsterId) { this.monsterId = monsterId; };
-	public int getGrade() { return this.grade; };
+	public int getGrade() { return this.grade; }
 	public void setGrade(int grade) { this.grade = grade; };
 
 	public FightTeamMemberMonsterInformations(){

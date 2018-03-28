@@ -23,15 +23,15 @@ public class EntityLook extends NetworkMessage {
 	private List<Integer> scales;
 	private List<SubEntity> subentities;
 
-	public int getBonesId() { return this.bonesId; };
+	public int getBonesId() { return this.bonesId; }
 	public void setBonesId(int bonesId) { this.bonesId = bonesId; };
-	public List<Integer> getSkins() { return this.skins; };
+	public List<Integer> getSkins() { return this.skins; }
 	public void setSkins(List<Integer> skins) { this.skins = skins; };
-	public List<Integer> getIndexedColors() { return this.indexedColors; };
+	public List<Integer> getIndexedColors() { return this.indexedColors; }
 	public void setIndexedColors(List<Integer> indexedColors) { this.indexedColors = indexedColors; };
-	public List<Integer> getScales() { return this.scales; };
+	public List<Integer> getScales() { return this.scales; }
 	public void setScales(List<Integer> scales) { this.scales = scales; };
-	public List<SubEntity> getSubentities() { return this.subentities; };
+	public List<SubEntity> getSubentities() { return this.subentities; }
 	public void setSubentities(List<SubEntity> subentities) { this.subentities = subentities; };
 
 	public EntityLook(){

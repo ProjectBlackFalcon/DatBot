@@ -18,7 +18,7 @@ public class GuildModificationNameValidMessage extends NetworkMessage {
 
 	private String guildName;
 
-	public String getGuildName() { return this.guildName; };
+	public String getGuildName() { return this.guildName; }
 	public void setGuildName(String guildName) { this.guildName = guildName; };
 
 	public GuildModificationNameValidMessage(){

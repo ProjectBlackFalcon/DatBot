@@ -20,9 +20,9 @@ public class GameFightUpdateTeamMessage extends NetworkMessage {
 	private int fightId;
 	private FightTeamInformations team;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public FightTeamInformations getTeam() { return this.team; };
+	public FightTeamInformations getTeam() { return this.team; }
 	public void setTeam(FightTeamInformations team) { this.team = team; };
 
 	public GameFightUpdateTeamMessage(){

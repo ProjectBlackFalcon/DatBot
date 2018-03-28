@@ -18,7 +18,7 @@ public class PartyCompanionUpdateLightMessage extends PartyUpdateLightMessage {
 
 	private int indexId;
 
-	public int getIndexId() { return this.indexId; };
+	public int getIndexId() { return this.indexId; }
 	public void setIndexId(int indexId) { this.indexId = indexId; };
 
 	public PartyCompanionUpdateLightMessage(){

@@ -22,11 +22,11 @@ public class HumanInformations extends NetworkMessage {
 	private boolean sex;
 	private List<HumanOption> options;
 
-	public ActorRestrictionsInformations getRestrictions() { return this.restrictions; };
+	public ActorRestrictionsInformations getRestrictions() { return this.restrictions; }
 	public void setRestrictions(ActorRestrictionsInformations restrictions) { this.restrictions = restrictions; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public List<HumanOption> getOptions() { return this.options; };
+	public List<HumanOption> getOptions() { return this.options; }
 	public void setOptions(List<HumanOption> options) { this.options = options; };
 
 	public HumanInformations(){

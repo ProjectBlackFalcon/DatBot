@@ -18,7 +18,7 @@ public class FightTemporaryBoostEffect extends AbstractFightDispellableEffect {
 
 	private int delta;
 
-	public int getDelta() { return this.delta; };
+	public int getDelta() { return this.delta; }
 	public void setDelta(int delta) { this.delta = delta; };
 
 	public FightTemporaryBoostEffect(){

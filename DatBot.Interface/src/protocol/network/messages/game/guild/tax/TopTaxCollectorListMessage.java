@@ -18,7 +18,7 @@ public class TopTaxCollectorListMessage extends AbstractTaxCollectorListMessage 
 
 	private boolean isDungeon;
 
-	public boolean isIsDungeon() { return this.isDungeon; };
+	public boolean isIsDungeon() { return this.isDungeon; }
 	public void setIsDungeon(boolean isDungeon) { this.isDungeon = isDungeon; };
 
 	public TopTaxCollectorListMessage(){

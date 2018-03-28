@@ -19,9 +19,9 @@ public class TeleportOnSameMapMessage extends NetworkMessage {
 	private double targetId;
 	private int cellId;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
 
 	public TeleportOnSameMapMessage(){

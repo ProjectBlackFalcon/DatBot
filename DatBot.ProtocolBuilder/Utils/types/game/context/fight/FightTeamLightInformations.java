@@ -24,19 +24,19 @@ public class FightTeamLightInformations extends AbstractFightTeamInformations {
 	private boolean hasGroupMember;
 	private boolean hasMyTaxCollector;
 
-	public int getTeamMembersCount() { return this.teamMembersCount; };
+	public int getTeamMembersCount() { return this.teamMembersCount; }
 	public void setTeamMembersCount(int teamMembersCount) { this.teamMembersCount = teamMembersCount; };
-	public int getMeanLevel() { return this.meanLevel; };
+	public int getMeanLevel() { return this.meanLevel; }
 	public void setMeanLevel(int meanLevel) { this.meanLevel = meanLevel; };
-	public boolean isHasFriend() { return this.hasFriend; };
+	public boolean isHasFriend() { return this.hasFriend; }
 	public void setHasFriend(boolean hasFriend) { this.hasFriend = hasFriend; };
-	public boolean isHasGuildMember() { return this.hasGuildMember; };
+	public boolean isHasGuildMember() { return this.hasGuildMember; }
 	public void setHasGuildMember(boolean hasGuildMember) { this.hasGuildMember = hasGuildMember; };
-	public boolean isHasAllianceMember() { return this.hasAllianceMember; };
+	public boolean isHasAllianceMember() { return this.hasAllianceMember; }
 	public void setHasAllianceMember(boolean hasAllianceMember) { this.hasAllianceMember = hasAllianceMember; };
-	public boolean isHasGroupMember() { return this.hasGroupMember; };
+	public boolean isHasGroupMember() { return this.hasGroupMember; }
 	public void setHasGroupMember(boolean hasGroupMember) { this.hasGroupMember = hasGroupMember; };
-	public boolean isHasMyTaxCollector() { return this.hasMyTaxCollector; };
+	public boolean isHasMyTaxCollector() { return this.hasMyTaxCollector; }
 	public void setHasMyTaxCollector(boolean hasMyTaxCollector) { this.hasMyTaxCollector = hasMyTaxCollector; };
 
 	public FightTeamLightInformations(){

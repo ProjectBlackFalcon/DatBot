@@ -26,23 +26,23 @@ public class HouseInformationsForGuild extends HouseInformations {
 	private List<Integer> skillListIds;
 	private int guildshareParams;
 
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public boolean isSecondHand() { return this.secondHand; };
+	public boolean isSecondHand() { return this.secondHand; }
 	public void setSecondHand(boolean secondHand) { this.secondHand = secondHand; };
-	public String getOwnerName() { return this.ownerName; };
+	public String getOwnerName() { return this.ownerName; }
 	public void setOwnerName(String ownerName) { this.ownerName = ownerName; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public List<Integer> getSkillListIds() { return this.skillListIds; };
+	public List<Integer> getSkillListIds() { return this.skillListIds; }
 	public void setSkillListIds(List<Integer> skillListIds) { this.skillListIds = skillListIds; };
-	public int getGuildshareParams() { return this.guildshareParams; };
+	public int getGuildshareParams() { return this.guildshareParams; }
 	public void setGuildshareParams(int guildshareParams) { this.guildshareParams = guildshareParams; };
 
 	public HouseInformationsForGuild(){

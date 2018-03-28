@@ -20,11 +20,11 @@ public class PartyFollowStatusUpdateMessage extends AbstractPartyMessage {
 	private boolean isFollowed;
 	private long followedId;
 
-	public boolean isSuccess() { return this.success; };
+	public boolean isSuccess() { return this.success; }
 	public void setSuccess(boolean success) { this.success = success; };
-	public boolean isIsFollowed() { return this.isFollowed; };
+	public boolean isIsFollowed() { return this.isFollowed; }
 	public void setIsFollowed(boolean isFollowed) { this.isFollowed = isFollowed; };
-	public long getFollowedId() { return this.followedId; };
+	public long getFollowedId() { return this.followedId; }
 	public void setFollowedId(long followedId) { this.followedId = followedId; };
 
 	public PartyFollowStatusUpdateMessage(){

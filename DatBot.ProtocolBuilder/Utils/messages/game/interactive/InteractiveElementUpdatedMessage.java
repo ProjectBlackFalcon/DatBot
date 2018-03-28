@@ -19,7 +19,7 @@ public class InteractiveElementUpdatedMessage extends NetworkMessage {
 
 	private InteractiveElement interactiveElement;
 
-	public InteractiveElement getInteractiveElement() { return this.interactiveElement; };
+	public InteractiveElement getInteractiveElement() { return this.interactiveElement; }
 	public void setInteractiveElement(InteractiveElement interactiveElement) { this.interactiveElement = interactiveElement; };
 
 	public InteractiveElementUpdatedMessage(){

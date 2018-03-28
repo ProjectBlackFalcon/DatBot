@@ -18,7 +18,7 @@ public class AchievementDetailedListRequestMessage extends NetworkMessage {
 
 	private int categoryId;
 
-	public int getCategoryId() { return this.categoryId; };
+	public int getCategoryId() { return this.categoryId; }
 	public void setCategoryId(int categoryId) { this.categoryId = categoryId; };
 
 	public AchievementDetailedListRequestMessage(){

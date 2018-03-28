@@ -19,9 +19,9 @@ public class PrismFightJoinLeaveRequestMessage extends NetworkMessage {
 	private int subAreaId;
 	private boolean join;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public boolean isJoin() { return this.join; };
+	public boolean isJoin() { return this.join; }
 	public void setJoin(boolean join) { this.join = join; };
 
 	public PrismFightJoinLeaveRequestMessage(){

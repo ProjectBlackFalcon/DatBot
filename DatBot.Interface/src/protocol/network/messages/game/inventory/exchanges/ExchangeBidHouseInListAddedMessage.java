@@ -22,13 +22,13 @@ public class ExchangeBidHouseInListAddedMessage extends NetworkMessage {
 	private List<ObjectEffect> effects;
 	private List<Long> prices;
 
-	public int getItemUID() { return this.itemUID; };
+	public int getItemUID() { return this.itemUID; }
 	public void setItemUID(int itemUID) { this.itemUID = itemUID; };
-	public int getObjGenericId() { return this.objGenericId; };
+	public int getObjGenericId() { return this.objGenericId; }
 	public void setObjGenericId(int objGenericId) { this.objGenericId = objGenericId; };
-	public List<ObjectEffect> getEffects() { return this.effects; };
+	public List<ObjectEffect> getEffects() { return this.effects; }
 	public void setEffects(List<ObjectEffect> effects) { this.effects = effects; };
-	public List<Long> getPrices() { return this.prices; };
+	public List<Long> getPrices() { return this.prices; }
 	public void setPrices(List<Long> prices) { this.prices = prices; };
 
 	public ExchangeBidHouseInListAddedMessage(){

@@ -19,9 +19,9 @@ public class AccountInformationsUpdateMessage extends NetworkMessage {
 	private double subscriptionEndDate;
 	private double unlimitedRestatEndDate;
 
-	public double getSubscriptionEndDate() { return this.subscriptionEndDate; };
+	public double getSubscriptionEndDate() { return this.subscriptionEndDate; }
 	public void setSubscriptionEndDate(double subscriptionEndDate) { this.subscriptionEndDate = subscriptionEndDate; };
-	public double getUnlimitedRestatEndDate() { return this.unlimitedRestatEndDate; };
+	public double getUnlimitedRestatEndDate() { return this.unlimitedRestatEndDate; }
 	public void setUnlimitedRestatEndDate(double unlimitedRestatEndDate) { this.unlimitedRestatEndDate = unlimitedRestatEndDate; };
 
 	public AccountInformationsUpdateMessage(){

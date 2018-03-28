@@ -18,7 +18,7 @@ public class GameActionFightLifeAndShieldPointsLostMessage extends GameActionFig
 
 	private int shieldLoss;
 
-	public int getShieldLoss() { return this.shieldLoss; };
+	public int getShieldLoss() { return this.shieldLoss; }
 	public void setShieldLoss(int shieldLoss) { this.shieldLoss = shieldLoss; };
 
 	public GameActionFightLifeAndShieldPointsLostMessage(){

@@ -20,11 +20,11 @@ public class GameActionFightLifePointsLostMessage extends AbstractGameActionMess
 	private int loss;
 	private int permanentDamages;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getLoss() { return this.loss; };
+	public int getLoss() { return this.loss; }
 	public void setLoss(int loss) { this.loss = loss; };
-	public int getPermanentDamages() { return this.permanentDamages; };
+	public int getPermanentDamages() { return this.permanentDamages; }
 	public void setPermanentDamages(int permanentDamages) { this.permanentDamages = permanentDamages; };
 
 	public GameActionFightLifePointsLostMessage(){

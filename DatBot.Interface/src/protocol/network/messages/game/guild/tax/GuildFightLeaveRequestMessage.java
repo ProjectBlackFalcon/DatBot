@@ -19,9 +19,9 @@ public class GuildFightLeaveRequestMessage extends NetworkMessage {
 	private double taxCollectorId;
 	private long characterId;
 
-	public double getTaxCollectorId() { return this.taxCollectorId; };
+	public double getTaxCollectorId() { return this.taxCollectorId; }
 	public void setTaxCollectorId(double taxCollectorId) { this.taxCollectorId = taxCollectorId; };
-	public long getCharacterId() { return this.characterId; };
+	public long getCharacterId() { return this.characterId; }
 	public void setCharacterId(long characterId) { this.characterId = characterId; };
 
 	public GuildFightLeaveRequestMessage(){

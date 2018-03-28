@@ -21,13 +21,13 @@ public class PaddockToSellFilterMessage extends NetworkMessage {
 	private int atLeastNbMachine;
 	private long maxPrice;
 
-	public int getAreaId() { return this.areaId; };
+	public int getAreaId() { return this.areaId; }
 	public void setAreaId(int areaId) { this.areaId = areaId; };
-	public int getAtLeastNbMount() { return this.atLeastNbMount; };
+	public int getAtLeastNbMount() { return this.atLeastNbMount; }
 	public void setAtLeastNbMount(int atLeastNbMount) { this.atLeastNbMount = atLeastNbMount; };
-	public int getAtLeastNbMachine() { return this.atLeastNbMachine; };
+	public int getAtLeastNbMachine() { return this.atLeastNbMachine; }
 	public void setAtLeastNbMachine(int atLeastNbMachine) { this.atLeastNbMachine = atLeastNbMachine; };
-	public long getMaxPrice() { return this.maxPrice; };
+	public long getMaxPrice() { return this.maxPrice; }
 	public void setMaxPrice(long maxPrice) { this.maxPrice = maxPrice; };
 
 	public PaddockToSellFilterMessage(){

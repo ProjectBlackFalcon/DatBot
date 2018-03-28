@@ -19,7 +19,7 @@ public class FriendsListMessage extends NetworkMessage {
 
 	private List<FriendInformations> friendsList;
 
-	public List<FriendInformations> getFriendsList() { return this.friendsList; };
+	public List<FriendInformations> getFriendsList() { return this.friendsList; }
 	public void setFriendsList(List<FriendInformations> friendsList) { this.friendsList = friendsList; };
 
 	public FriendsListMessage(){

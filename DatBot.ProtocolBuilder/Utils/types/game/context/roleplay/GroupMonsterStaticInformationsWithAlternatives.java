@@ -19,7 +19,7 @@ public class GroupMonsterStaticInformationsWithAlternatives extends GroupMonster
 
 	private List<AlternativeMonstersInGroupLightInformations> alternatives;
 
-	public List<AlternativeMonstersInGroupLightInformations> getAlternatives() { return this.alternatives; };
+	public List<AlternativeMonstersInGroupLightInformations> getAlternatives() { return this.alternatives; }
 	public void setAlternatives(List<AlternativeMonstersInGroupLightInformations> alternatives) { this.alternatives = alternatives; };
 
 	public GroupMonsterStaticInformationsWithAlternatives(){

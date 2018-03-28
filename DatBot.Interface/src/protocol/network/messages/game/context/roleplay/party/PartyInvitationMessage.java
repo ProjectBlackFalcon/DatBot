@@ -23,17 +23,17 @@ public class PartyInvitationMessage extends AbstractPartyMessage {
 	private String fromName;
 	private long toId;
 
-	public int getPartyType() { return this.partyType; };
+	public int getPartyType() { return this.partyType; }
 	public void setPartyType(int partyType) { this.partyType = partyType; };
-	public String getPartyName() { return this.partyName; };
+	public String getPartyName() { return this.partyName; }
 	public void setPartyName(String partyName) { this.partyName = partyName; };
-	public int getMaxParticipants() { return this.maxParticipants; };
+	public int getMaxParticipants() { return this.maxParticipants; }
 	public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; };
-	public long getFromId() { return this.fromId; };
+	public long getFromId() { return this.fromId; }
 	public void setFromId(long fromId) { this.fromId = fromId; };
-	public String getFromName() { return this.fromName; };
+	public String getFromName() { return this.fromName; }
 	public void setFromName(String fromName) { this.fromName = fromName; };
-	public long getToId() { return this.toId; };
+	public long getToId() { return this.toId; }
 	public void setToId(long toId) { this.toId = toId; };
 
 	public PartyInvitationMessage(){

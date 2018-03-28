@@ -19,9 +19,9 @@ public class UpdateSelfAgressableStatusMessage extends NetworkMessage {
 	private int status;
 	private int probationTime;
 
-	public int getStatus() { return this.status; };
+	public int getStatus() { return this.status; }
 	public void setStatus(int status) { this.status = status; };
-	public int getProbationTime() { return this.probationTime; };
+	public int getProbationTime() { return this.probationTime; }
 	public void setProbationTime(int probationTime) { this.probationTime = probationTime; };
 
 	public UpdateSelfAgressableStatusMessage(){

@@ -19,7 +19,7 @@ public class GuildPaddockBoughtMessage extends NetworkMessage {
 
 	private PaddockContentInformations paddockInfo;
 
-	public PaddockContentInformations getPaddockInfo() { return this.paddockInfo; };
+	public PaddockContentInformations getPaddockInfo() { return this.paddockInfo; }
 	public void setPaddockInfo(PaddockContentInformations paddockInfo) { this.paddockInfo = paddockInfo; };
 
 	public GuildPaddockBoughtMessage(){

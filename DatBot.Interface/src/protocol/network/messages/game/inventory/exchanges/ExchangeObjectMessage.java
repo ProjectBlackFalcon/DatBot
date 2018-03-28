@@ -18,7 +18,7 @@ public class ExchangeObjectMessage extends NetworkMessage {
 
 	private boolean remote;
 
-	public boolean isRemote() { return this.remote; };
+	public boolean isRemote() { return this.remote; }
 	public void setRemote(boolean remote) { this.remote = remote; };
 
 	public ExchangeObjectMessage(){

@@ -21,11 +21,11 @@ public class MapRunningFightDetailsMessage extends NetworkMessage {
 	private List<GameFightFighterLightInformations> attackers;
 	private List<GameFightFighterLightInformations> defenders;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public List<GameFightFighterLightInformations> getAttackers() { return this.attackers; };
+	public List<GameFightFighterLightInformations> getAttackers() { return this.attackers; }
 	public void setAttackers(List<GameFightFighterLightInformations> attackers) { this.attackers = attackers; };
-	public List<GameFightFighterLightInformations> getDefenders() { return this.defenders; };
+	public List<GameFightFighterLightInformations> getDefenders() { return this.defenders; }
 	public void setDefenders(List<GameFightFighterLightInformations> defenders) { this.defenders = defenders; };
 
 	public MapRunningFightDetailsMessage(){

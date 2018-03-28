@@ -19,7 +19,7 @@ public class GameRolePlayArenaUpdatePlayerInfosMessage extends NetworkMessage {
 
 	private ArenaRankInfos solo;
 
-	public ArenaRankInfos getSolo() { return this.solo; };
+	public ArenaRankInfos getSolo() { return this.solo; }
 	public void setSolo(ArenaRankInfos solo) { this.solo = solo; };
 
 	public GameRolePlayArenaUpdatePlayerInfosMessage(){

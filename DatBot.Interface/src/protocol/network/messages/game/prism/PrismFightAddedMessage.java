@@ -19,7 +19,7 @@ public class PrismFightAddedMessage extends NetworkMessage {
 
 	private PrismFightersInformation fight;
 
-	public PrismFightersInformation getFight() { return this.fight; };
+	public PrismFightersInformation getFight() { return this.fight; }
 	public void setFight(PrismFightersInformation fight) { this.fight = fight; };
 
 	public PrismFightAddedMessage(){

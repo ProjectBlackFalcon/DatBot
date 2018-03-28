@@ -23,17 +23,17 @@ public class TaxCollectorBasicInformations extends NetworkMessage {
 	private double mapId;
 	private int subAreaId;
 
-	public int getFirstNameId() { return this.firstNameId; };
+	public int getFirstNameId() { return this.firstNameId; }
 	public void setFirstNameId(int firstNameId) { this.firstNameId = firstNameId; };
-	public int getLastNameId() { return this.lastNameId; };
+	public int getLastNameId() { return this.lastNameId; }
 	public void setLastNameId(int lastNameId) { this.lastNameId = lastNameId; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
 
 	public TaxCollectorBasicInformations(){

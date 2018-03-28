@@ -32,33 +32,33 @@ public class GuildMember extends CharacterMinimalInformations {
 	private PlayerStatus status;
 	private boolean havenBagShared;
 
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public int getRank() { return this.rank; };
+	public int getRank() { return this.rank; }
 	public void setRank(int rank) { this.rank = rank; };
-	public long getGivenExperience() { return this.givenExperience; };
+	public long getGivenExperience() { return this.givenExperience; }
 	public void setGivenExperience(long givenExperience) { this.givenExperience = givenExperience; };
-	public int getExperienceGivenPercent() { return this.experienceGivenPercent; };
+	public int getExperienceGivenPercent() { return this.experienceGivenPercent; }
 	public void setExperienceGivenPercent(int experienceGivenPercent) { this.experienceGivenPercent = experienceGivenPercent; };
-	public int getRights() { return this.rights; };
+	public int getRights() { return this.rights; }
 	public void setRights(int rights) { this.rights = rights; };
-	public int getConnected() { return this.connected; };
+	public int getConnected() { return this.connected; }
 	public void setConnected(int connected) { this.connected = connected; };
-	public int getAlignmentSide() { return this.alignmentSide; };
+	public int getAlignmentSide() { return this.alignmentSide; }
 	public void setAlignmentSide(int alignmentSide) { this.alignmentSide = alignmentSide; };
-	public int getHoursSinceLastConnection() { return this.hoursSinceLastConnection; };
+	public int getHoursSinceLastConnection() { return this.hoursSinceLastConnection; }
 	public void setHoursSinceLastConnection(int hoursSinceLastConnection) { this.hoursSinceLastConnection = hoursSinceLastConnection; };
-	public int getMoodSmileyId() { return this.moodSmileyId; };
+	public int getMoodSmileyId() { return this.moodSmileyId; }
 	public void setMoodSmileyId(int moodSmileyId) { this.moodSmileyId = moodSmileyId; };
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public int getAchievementPoints() { return this.achievementPoints; };
+	public int getAchievementPoints() { return this.achievementPoints; }
 	public void setAchievementPoints(int achievementPoints) { this.achievementPoints = achievementPoints; };
-	public PlayerStatus getStatus() { return this.status; };
+	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
-	public boolean isHavenBagShared() { return this.havenBagShared; };
+	public boolean isHavenBagShared() { return this.havenBagShared; }
 	public void setHavenBagShared(boolean havenBagShared) { this.havenBagShared = havenBagShared; };
 
 	public GuildMember(){

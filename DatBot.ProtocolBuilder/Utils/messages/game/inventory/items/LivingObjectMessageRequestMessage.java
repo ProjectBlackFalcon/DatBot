@@ -20,11 +20,11 @@ public class LivingObjectMessageRequestMessage extends NetworkMessage {
 	private List<String> parameters;
 	private int livingObject;
 
-	public int getMsgId() { return this.msgId; };
+	public int getMsgId() { return this.msgId; }
 	public void setMsgId(int msgId) { this.msgId = msgId; };
-	public List<String> getParameters() { return this.parameters; };
+	public List<String> getParameters() { return this.parameters; }
 	public void setParameters(List<String> parameters) { this.parameters = parameters; };
-	public int getLivingObject() { return this.livingObject; };
+	public int getLivingObject() { return this.livingObject; }
 	public void setLivingObject(int livingObject) { this.livingObject = livingObject; };
 
 	public LivingObjectMessageRequestMessage(){

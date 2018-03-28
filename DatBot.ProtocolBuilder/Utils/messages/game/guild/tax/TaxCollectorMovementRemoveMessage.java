@@ -18,7 +18,7 @@ public class TaxCollectorMovementRemoveMessage extends NetworkMessage {
 
 	private double collectorId;
 
-	public double getCollectorId() { return this.collectorId; };
+	public double getCollectorId() { return this.collectorId; }
 	public void setCollectorId(double collectorId) { this.collectorId = collectorId; };
 
 	public TaxCollectorMovementRemoveMessage(){

@@ -18,7 +18,7 @@ public class ExchangeShopStockMovementRemovedMessage extends NetworkMessage {
 
 	private int objectId;
 
-	public int getObjectId() { return this.objectId; };
+	public int getObjectId() { return this.objectId; }
 	public void setObjectId(int objectId) { this.objectId = objectId; };
 
 	public ExchangeShopStockMovementRemovedMessage(){

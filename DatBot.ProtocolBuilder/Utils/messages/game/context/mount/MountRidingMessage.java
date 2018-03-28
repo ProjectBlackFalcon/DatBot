@@ -19,9 +19,9 @@ public class MountRidingMessage extends NetworkMessage {
 	private boolean isRiding;
 	private boolean isAutopilot;
 
-	public boolean isIsRiding() { return this.isRiding; };
+	public boolean isIsRiding() { return this.isRiding; }
 	public void setIsRiding(boolean isRiding) { this.isRiding = isRiding; };
-	public boolean isIsAutopilot() { return this.isAutopilot; };
+	public boolean isIsAutopilot() { return this.isAutopilot; }
 	public void setIsAutopilot(boolean isAutopilot) { this.isAutopilot = isAutopilot; };
 
 	public MountRidingMessage(){

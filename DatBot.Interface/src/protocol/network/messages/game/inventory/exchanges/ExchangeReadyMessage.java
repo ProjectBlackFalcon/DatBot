@@ -19,9 +19,9 @@ public class ExchangeReadyMessage extends NetworkMessage {
 	private boolean ready;
 	private int step;
 
-	public boolean isReady() { return this.ready; };
+	public boolean isReady() { return this.ready; }
 	public void setReady(boolean ready) { this.ready = ready; };
-	public int getStep() { return this.step; };
+	public int getStep() { return this.step; }
 	public void setStep(int step) { this.step = step; };
 
 	public ExchangeReadyMessage(){

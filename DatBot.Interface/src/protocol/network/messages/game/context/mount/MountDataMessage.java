@@ -19,7 +19,7 @@ public class MountDataMessage extends NetworkMessage {
 
 	private MountClientData mountData;
 
-	public MountClientData getMountData() { return this.mountData; };
+	public MountClientData getMountData() { return this.mountData; }
 	public void setMountData(MountClientData mountData) { this.mountData = mountData; };
 
 	public MountDataMessage(){

@@ -18,7 +18,7 @@ public class GameDataPaddockObjectRemoveMessage extends NetworkMessage {
 
 	private int cellId;
 
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
 
 	public GameDataPaddockObjectRemoveMessage(){

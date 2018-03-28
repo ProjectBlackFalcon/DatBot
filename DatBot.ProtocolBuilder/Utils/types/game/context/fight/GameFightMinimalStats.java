@@ -60,91 +60,91 @@ public class GameFightMinimalStats extends NetworkMessage {
 	private int weaponDamageReceivedPercent;
 	private int spellDamageReceivedPercent;
 
-	public int getLifePoints() { return this.lifePoints; };
+	public int getLifePoints() { return this.lifePoints; }
 	public void setLifePoints(int lifePoints) { this.lifePoints = lifePoints; };
-	public int getMaxLifePoints() { return this.maxLifePoints; };
+	public int getMaxLifePoints() { return this.maxLifePoints; }
 	public void setMaxLifePoints(int maxLifePoints) { this.maxLifePoints = maxLifePoints; };
-	public int getBaseMaxLifePoints() { return this.baseMaxLifePoints; };
+	public int getBaseMaxLifePoints() { return this.baseMaxLifePoints; }
 	public void setBaseMaxLifePoints(int baseMaxLifePoints) { this.baseMaxLifePoints = baseMaxLifePoints; };
-	public int getPermanentDamagePercent() { return this.permanentDamagePercent; };
+	public int getPermanentDamagePercent() { return this.permanentDamagePercent; }
 	public void setPermanentDamagePercent(int permanentDamagePercent) { this.permanentDamagePercent = permanentDamagePercent; };
-	public int getShieldPoints() { return this.shieldPoints; };
+	public int getShieldPoints() { return this.shieldPoints; }
 	public void setShieldPoints(int shieldPoints) { this.shieldPoints = shieldPoints; };
-	public int getActionPoints() { return this.actionPoints; };
+	public int getActionPoints() { return this.actionPoints; }
 	public void setActionPoints(int actionPoints) { this.actionPoints = actionPoints; };
-	public int getMaxActionPoints() { return this.maxActionPoints; };
+	public int getMaxActionPoints() { return this.maxActionPoints; }
 	public void setMaxActionPoints(int maxActionPoints) { this.maxActionPoints = maxActionPoints; };
-	public int getMovementPoints() { return this.movementPoints; };
+	public int getMovementPoints() { return this.movementPoints; }
 	public void setMovementPoints(int movementPoints) { this.movementPoints = movementPoints; };
-	public int getMaxMovementPoints() { return this.maxMovementPoints; };
+	public int getMaxMovementPoints() { return this.maxMovementPoints; }
 	public void setMaxMovementPoints(int maxMovementPoints) { this.maxMovementPoints = maxMovementPoints; };
-	public double getSummoner() { return this.summoner; };
+	public double getSummoner() { return this.summoner; }
 	public void setSummoner(double summoner) { this.summoner = summoner; };
-	public boolean isSummoned() { return this.summoned; };
+	public boolean isSummoned() { return this.summoned; }
 	public void setSummoned(boolean summoned) { this.summoned = summoned; };
-	public int getNeutralElementResistPercent() { return this.neutralElementResistPercent; };
+	public int getNeutralElementResistPercent() { return this.neutralElementResistPercent; }
 	public void setNeutralElementResistPercent(int neutralElementResistPercent) { this.neutralElementResistPercent = neutralElementResistPercent; };
-	public int getEarthElementResistPercent() { return this.earthElementResistPercent; };
+	public int getEarthElementResistPercent() { return this.earthElementResistPercent; }
 	public void setEarthElementResistPercent(int earthElementResistPercent) { this.earthElementResistPercent = earthElementResistPercent; };
-	public int getWaterElementResistPercent() { return this.waterElementResistPercent; };
+	public int getWaterElementResistPercent() { return this.waterElementResistPercent; }
 	public void setWaterElementResistPercent(int waterElementResistPercent) { this.waterElementResistPercent = waterElementResistPercent; };
-	public int getAirElementResistPercent() { return this.airElementResistPercent; };
+	public int getAirElementResistPercent() { return this.airElementResistPercent; }
 	public void setAirElementResistPercent(int airElementResistPercent) { this.airElementResistPercent = airElementResistPercent; };
-	public int getFireElementResistPercent() { return this.fireElementResistPercent; };
+	public int getFireElementResistPercent() { return this.fireElementResistPercent; }
 	public void setFireElementResistPercent(int fireElementResistPercent) { this.fireElementResistPercent = fireElementResistPercent; };
-	public int getNeutralElementReduction() { return this.neutralElementReduction; };
+	public int getNeutralElementReduction() { return this.neutralElementReduction; }
 	public void setNeutralElementReduction(int neutralElementReduction) { this.neutralElementReduction = neutralElementReduction; };
-	public int getEarthElementReduction() { return this.earthElementReduction; };
+	public int getEarthElementReduction() { return this.earthElementReduction; }
 	public void setEarthElementReduction(int earthElementReduction) { this.earthElementReduction = earthElementReduction; };
-	public int getWaterElementReduction() { return this.waterElementReduction; };
+	public int getWaterElementReduction() { return this.waterElementReduction; }
 	public void setWaterElementReduction(int waterElementReduction) { this.waterElementReduction = waterElementReduction; };
-	public int getAirElementReduction() { return this.airElementReduction; };
+	public int getAirElementReduction() { return this.airElementReduction; }
 	public void setAirElementReduction(int airElementReduction) { this.airElementReduction = airElementReduction; };
-	public int getFireElementReduction() { return this.fireElementReduction; };
+	public int getFireElementReduction() { return this.fireElementReduction; }
 	public void setFireElementReduction(int fireElementReduction) { this.fireElementReduction = fireElementReduction; };
-	public int getCriticalDamageFixedResist() { return this.criticalDamageFixedResist; };
+	public int getCriticalDamageFixedResist() { return this.criticalDamageFixedResist; }
 	public void setCriticalDamageFixedResist(int criticalDamageFixedResist) { this.criticalDamageFixedResist = criticalDamageFixedResist; };
-	public int getPushDamageFixedResist() { return this.pushDamageFixedResist; };
+	public int getPushDamageFixedResist() { return this.pushDamageFixedResist; }
 	public void setPushDamageFixedResist(int pushDamageFixedResist) { this.pushDamageFixedResist = pushDamageFixedResist; };
-	public int getPvpNeutralElementResistPercent() { return this.pvpNeutralElementResistPercent; };
+	public int getPvpNeutralElementResistPercent() { return this.pvpNeutralElementResistPercent; }
 	public void setPvpNeutralElementResistPercent(int pvpNeutralElementResistPercent) { this.pvpNeutralElementResistPercent = pvpNeutralElementResistPercent; };
-	public int getPvpEarthElementResistPercent() { return this.pvpEarthElementResistPercent; };
+	public int getPvpEarthElementResistPercent() { return this.pvpEarthElementResistPercent; }
 	public void setPvpEarthElementResistPercent(int pvpEarthElementResistPercent) { this.pvpEarthElementResistPercent = pvpEarthElementResistPercent; };
-	public int getPvpWaterElementResistPercent() { return this.pvpWaterElementResistPercent; };
+	public int getPvpWaterElementResistPercent() { return this.pvpWaterElementResistPercent; }
 	public void setPvpWaterElementResistPercent(int pvpWaterElementResistPercent) { this.pvpWaterElementResistPercent = pvpWaterElementResistPercent; };
-	public int getPvpAirElementResistPercent() { return this.pvpAirElementResistPercent; };
+	public int getPvpAirElementResistPercent() { return this.pvpAirElementResistPercent; }
 	public void setPvpAirElementResistPercent(int pvpAirElementResistPercent) { this.pvpAirElementResistPercent = pvpAirElementResistPercent; };
-	public int getPvpFireElementResistPercent() { return this.pvpFireElementResistPercent; };
+	public int getPvpFireElementResistPercent() { return this.pvpFireElementResistPercent; }
 	public void setPvpFireElementResistPercent(int pvpFireElementResistPercent) { this.pvpFireElementResistPercent = pvpFireElementResistPercent; };
-	public int getPvpNeutralElementReduction() { return this.pvpNeutralElementReduction; };
+	public int getPvpNeutralElementReduction() { return this.pvpNeutralElementReduction; }
 	public void setPvpNeutralElementReduction(int pvpNeutralElementReduction) { this.pvpNeutralElementReduction = pvpNeutralElementReduction; };
-	public int getPvpEarthElementReduction() { return this.pvpEarthElementReduction; };
+	public int getPvpEarthElementReduction() { return this.pvpEarthElementReduction; }
 	public void setPvpEarthElementReduction(int pvpEarthElementReduction) { this.pvpEarthElementReduction = pvpEarthElementReduction; };
-	public int getPvpWaterElementReduction() { return this.pvpWaterElementReduction; };
+	public int getPvpWaterElementReduction() { return this.pvpWaterElementReduction; }
 	public void setPvpWaterElementReduction(int pvpWaterElementReduction) { this.pvpWaterElementReduction = pvpWaterElementReduction; };
-	public int getPvpAirElementReduction() { return this.pvpAirElementReduction; };
+	public int getPvpAirElementReduction() { return this.pvpAirElementReduction; }
 	public void setPvpAirElementReduction(int pvpAirElementReduction) { this.pvpAirElementReduction = pvpAirElementReduction; };
-	public int getPvpFireElementReduction() { return this.pvpFireElementReduction; };
+	public int getPvpFireElementReduction() { return this.pvpFireElementReduction; }
 	public void setPvpFireElementReduction(int pvpFireElementReduction) { this.pvpFireElementReduction = pvpFireElementReduction; };
-	public int getDodgePALostProbability() { return this.dodgePALostProbability; };
+	public int getDodgePALostProbability() { return this.dodgePALostProbability; }
 	public void setDodgePALostProbability(int dodgePALostProbability) { this.dodgePALostProbability = dodgePALostProbability; };
-	public int getDodgePMLostProbability() { return this.dodgePMLostProbability; };
+	public int getDodgePMLostProbability() { return this.dodgePMLostProbability; }
 	public void setDodgePMLostProbability(int dodgePMLostProbability) { this.dodgePMLostProbability = dodgePMLostProbability; };
-	public int getTackleBlock() { return this.tackleBlock; };
+	public int getTackleBlock() { return this.tackleBlock; }
 	public void setTackleBlock(int tackleBlock) { this.tackleBlock = tackleBlock; };
-	public int getTackleEvade() { return this.tackleEvade; };
+	public int getTackleEvade() { return this.tackleEvade; }
 	public void setTackleEvade(int tackleEvade) { this.tackleEvade = tackleEvade; };
-	public int getFixedDamageReflection() { return this.fixedDamageReflection; };
+	public int getFixedDamageReflection() { return this.fixedDamageReflection; }
 	public void setFixedDamageReflection(int fixedDamageReflection) { this.fixedDamageReflection = fixedDamageReflection; };
-	public int getInvisibilityState() { return this.invisibilityState; };
+	public int getInvisibilityState() { return this.invisibilityState; }
 	public void setInvisibilityState(int invisibilityState) { this.invisibilityState = invisibilityState; };
-	public int getMeleeDamageReceivedPercent() { return this.meleeDamageReceivedPercent; };
+	public int getMeleeDamageReceivedPercent() { return this.meleeDamageReceivedPercent; }
 	public void setMeleeDamageReceivedPercent(int meleeDamageReceivedPercent) { this.meleeDamageReceivedPercent = meleeDamageReceivedPercent; };
-	public int getRangedDamageReceivedPercent() { return this.rangedDamageReceivedPercent; };
+	public int getRangedDamageReceivedPercent() { return this.rangedDamageReceivedPercent; }
 	public void setRangedDamageReceivedPercent(int rangedDamageReceivedPercent) { this.rangedDamageReceivedPercent = rangedDamageReceivedPercent; };
-	public int getWeaponDamageReceivedPercent() { return this.weaponDamageReceivedPercent; };
+	public int getWeaponDamageReceivedPercent() { return this.weaponDamageReceivedPercent; }
 	public void setWeaponDamageReceivedPercent(int weaponDamageReceivedPercent) { this.weaponDamageReceivedPercent = weaponDamageReceivedPercent; };
-	public int getSpellDamageReceivedPercent() { return this.spellDamageReceivedPercent; };
+	public int getSpellDamageReceivedPercent() { return this.spellDamageReceivedPercent; }
 	public void setSpellDamageReceivedPercent(int spellDamageReceivedPercent) { this.spellDamageReceivedPercent = spellDamageReceivedPercent; };
 
 	public GameFightMinimalStats(){

@@ -18,6 +18,7 @@ public class GameServerInformations extends NetworkMessage {
 
 	private int id;
 	private int type;
+	private boolean isMonoAccount;
 	private int status;
 	private int completion;
 	private boolean isSelectable;
@@ -25,29 +26,32 @@ public class GameServerInformations extends NetworkMessage {
 	private int charactersSlots;
 	private double date;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public int getStatus() { return this.status; };
+	public boolean isIsMonoAccount() { return this.isMonoAccount; }
+	public void setIsMonoAccount(boolean isMonoAccount) { this.isMonoAccount = isMonoAccount; };
+	public int getStatus() { return this.status; }
 	public void setStatus(int status) { this.status = status; };
-	public int getCompletion() { return this.completion; };
+	public int getCompletion() { return this.completion; }
 	public void setCompletion(int completion) { this.completion = completion; };
-	public boolean isIsSelectable() { return this.isSelectable; };
+	public boolean isIsSelectable() { return this.isSelectable; }
 	public void setIsSelectable(boolean isSelectable) { this.isSelectable = isSelectable; };
-	public int getCharactersCount() { return this.charactersCount; };
+	public int getCharactersCount() { return this.charactersCount; }
 	public void setCharactersCount(int charactersCount) { this.charactersCount = charactersCount; };
-	public int getCharactersSlots() { return this.charactersSlots; };
+	public int getCharactersSlots() { return this.charactersSlots; }
 	public void setCharactersSlots(int charactersSlots) { this.charactersSlots = charactersSlots; };
-	public double getDate() { return this.date; };
+	public double getDate() { return this.date; }
 	public void setDate(double date) { this.date = date; };
 
 	public GameServerInformations(){
 	}
 
-	public GameServerInformations(int id, int type, int status, int completion, boolean isSelectable, int charactersCount, int charactersSlots, double date){
+	public GameServerInformations(int id, int type, boolean isMonoAccount, int status, int completion, boolean isSelectable, int charactersCount, int charactersSlots, double date){
 		this.id = id;
 		this.type = type;
+		this.isMonoAccount = isMonoAccount;
 		this.status = status;
 		this.completion = completion;
 		this.isSelectable = isSelectable;
@@ -59,11 +63,14 @@ public class GameServerInformations extends NetworkMessage {
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
+			byte flag = 0;
+			flag = BooleanByteWrapper.SetFlag(0, flag, isMonoAccount);
+			flag = BooleanByteWrapper.SetFlag(1, flag, isSelectable);
+			writer.writeByte(flag);
 			writer.writeVarShort(this.id);
 			writer.writeByte(this.type);
 			writer.writeByte(this.status);
 			writer.writeByte(this.completion);
-			writer.writeBoolean(this.isSelectable);
 			writer.writeByte(this.charactersCount);
 			writer.writeByte(this.charactersSlots);
 			writer.writeDouble(this.date);
@@ -75,11 +82,14 @@ public class GameServerInformations extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
+			byte flag;
+			flag = (byte) reader.readUnsignedByte();
+			this.isMonoAccount = BooleanByteWrapper.GetFlag(flag, (byte) 0);
+			this.isSelectable = BooleanByteWrapper.GetFlag(flag, (byte) 1);
 			this.id = reader.readVarShort();
 			this.type = reader.readByte();
 			this.status = reader.readByte();
 			this.completion = reader.readByte();
-			this.isSelectable = reader.readBoolean();
 			this.charactersCount = reader.readByte();
 			this.charactersSlots = reader.readByte();
 			this.date = reader.readDouble();

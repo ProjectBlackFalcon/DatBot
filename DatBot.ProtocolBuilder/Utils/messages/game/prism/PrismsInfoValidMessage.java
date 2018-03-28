@@ -19,7 +19,7 @@ public class PrismsInfoValidMessage extends NetworkMessage {
 
 	private List<PrismFightersInformation> fights;
 
-	public List<PrismFightersInformation> getFights() { return this.fights; };
+	public List<PrismFightersInformation> getFights() { return this.fights; }
 	public void setFights(List<PrismFightersInformation> fights) { this.fights = fights; };
 
 	public PrismsInfoValidMessage(){

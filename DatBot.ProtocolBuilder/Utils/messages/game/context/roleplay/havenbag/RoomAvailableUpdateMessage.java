@@ -18,7 +18,7 @@ public class RoomAvailableUpdateMessage extends NetworkMessage {
 
 	private int nbRoom;
 
-	public int getNbRoom() { return this.nbRoom; };
+	public int getNbRoom() { return this.nbRoom; }
 	public void setNbRoom(int nbRoom) { this.nbRoom = nbRoom; };
 
 	public RoomAvailableUpdateMessage(){

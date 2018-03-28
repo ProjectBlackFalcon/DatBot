@@ -19,9 +19,9 @@ public class SpellItem extends Item {
 	private int spellId;
 	private int spellLevel;
 
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public int getSpellLevel() { return this.spellLevel; };
+	public int getSpellLevel() { return this.spellLevel; }
 	public void setSpellLevel(int spellLevel) { this.spellLevel = spellLevel; };
 
 	public SpellItem(){

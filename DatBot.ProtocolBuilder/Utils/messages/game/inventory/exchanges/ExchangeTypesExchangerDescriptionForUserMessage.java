@@ -18,7 +18,7 @@ public class ExchangeTypesExchangerDescriptionForUserMessage extends NetworkMess
 
 	private List<Integer> typeDescription;
 
-	public List<Integer> getTypeDescription() { return this.typeDescription; };
+	public List<Integer> getTypeDescription() { return this.typeDescription; }
 	public void setTypeDescription(List<Integer> typeDescription) { this.typeDescription = typeDescription; };
 
 	public ExchangeTypesExchangerDescriptionForUserMessage(){

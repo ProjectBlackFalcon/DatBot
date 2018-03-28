@@ -19,7 +19,7 @@ public class AccountHouseMessage extends NetworkMessage {
 
 	private List<AccountHouseInformations> houses;
 
-	public List<AccountHouseInformations> getHouses() { return this.houses; };
+	public List<AccountHouseInformations> getHouses() { return this.houses; }
 	public void setHouses(List<AccountHouseInformations> houses) { this.houses = houses; };
 
 	public AccountHouseMessage(){

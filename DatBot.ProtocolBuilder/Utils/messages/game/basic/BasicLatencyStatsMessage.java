@@ -20,11 +20,11 @@ public class BasicLatencyStatsMessage extends NetworkMessage {
 	private int sampleCount;
 	private int max;
 
-	public int getLatency() { return this.latency; };
+	public int getLatency() { return this.latency; }
 	public void setLatency(int latency) { this.latency = latency; };
-	public int getSampleCount() { return this.sampleCount; };
+	public int getSampleCount() { return this.sampleCount; }
 	public void setSampleCount(int sampleCount) { this.sampleCount = sampleCount; };
-	public int getMax() { return this.max; };
+	public int getMax() { return this.max; }
 	public void setMax(int max) { this.max = max; };
 
 	public BasicLatencyStatsMessage(){

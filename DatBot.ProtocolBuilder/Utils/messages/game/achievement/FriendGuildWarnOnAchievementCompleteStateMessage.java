@@ -18,7 +18,7 @@ public class FriendGuildWarnOnAchievementCompleteStateMessage extends NetworkMes
 
 	private boolean enable;
 
-	public boolean isEnable() { return this.enable; };
+	public boolean isEnable() { return this.enable; }
 	public void setEnable(boolean enable) { this.enable = enable; };
 
 	public FriendGuildWarnOnAchievementCompleteStateMessage(){

@@ -19,7 +19,7 @@ public class GameRolePlayPrismInformations extends GameRolePlayActorInformations
 
 	private PrismInformation prism;
 
-	public PrismInformation getPrism() { return this.prism; };
+	public PrismInformation getPrism() { return this.prism; }
 	public void setPrism(PrismInformation prism) { this.prism = prism; };
 
 	public GameRolePlayPrismInformations(){

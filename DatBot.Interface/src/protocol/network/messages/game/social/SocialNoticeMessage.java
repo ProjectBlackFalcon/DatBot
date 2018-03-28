@@ -21,13 +21,13 @@ public class SocialNoticeMessage extends NetworkMessage {
 	private long memberId;
 	private String memberName;
 
-	public String getContent() { return this.content; };
+	public String getContent() { return this.content; }
 	public void setContent(String content) { this.content = content; };
-	public int getTimestamp() { return this.timestamp; };
+	public int getTimestamp() { return this.timestamp; }
 	public void setTimestamp(int timestamp) { this.timestamp = timestamp; };
-	public long getMemberId() { return this.memberId; };
+	public long getMemberId() { return this.memberId; }
 	public void setMemberId(long memberId) { this.memberId = memberId; };
-	public String getMemberName() { return this.memberName; };
+	public String getMemberName() { return this.memberName; }
 	public void setMemberName(String memberName) { this.memberName = memberName; };
 
 	public SocialNoticeMessage(){

@@ -18,7 +18,7 @@ public class DocumentReadingBeginMessage extends NetworkMessage {
 
 	private int documentId;
 
-	public int getDocumentId() { return this.documentId; };
+	public int getDocumentId() { return this.documentId; }
 	public void setDocumentId(int documentId) { this.documentId = documentId; };
 
 	public DocumentReadingBeginMessage(){

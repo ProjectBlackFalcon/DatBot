@@ -21,11 +21,11 @@ public class HouseToSellListMessage extends NetworkMessage {
 	private int totalPage;
 	private List<HouseInformationsForSell> houseList;
 
-	public int getPageIndex() { return this.pageIndex; };
+	public int getPageIndex() { return this.pageIndex; }
 	public void setPageIndex(int pageIndex) { this.pageIndex = pageIndex; };
-	public int getTotalPage() { return this.totalPage; };
+	public int getTotalPage() { return this.totalPage; }
 	public void setTotalPage(int totalPage) { this.totalPage = totalPage; };
-	public List<HouseInformationsForSell> getHouseList() { return this.houseList; };
+	public List<HouseInformationsForSell> getHouseList() { return this.houseList; }
 	public void setHouseList(List<HouseInformationsForSell> houseList) { this.houseList = houseList; };
 
 	public HouseToSellListMessage(){

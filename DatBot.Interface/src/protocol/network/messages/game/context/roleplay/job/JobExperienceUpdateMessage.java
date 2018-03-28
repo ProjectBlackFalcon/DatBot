@@ -19,7 +19,7 @@ public class JobExperienceUpdateMessage extends NetworkMessage {
 
 	private JobExperience experiencesUpdate;
 
-	public JobExperience getExperiencesUpdate() { return this.experiencesUpdate; };
+	public JobExperience getExperiencesUpdate() { return this.experiencesUpdate; }
 	public void setExperiencesUpdate(JobExperience experiencesUpdate) { this.experiencesUpdate = experiencesUpdate; };
 
 	public JobExperienceUpdateMessage(){

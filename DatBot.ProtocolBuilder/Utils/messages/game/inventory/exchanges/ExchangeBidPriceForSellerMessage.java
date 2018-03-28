@@ -19,9 +19,9 @@ public class ExchangeBidPriceForSellerMessage extends ExchangeBidPriceMessage {
 	private boolean allIdentical;
 	private List<Long> minimalPrices;
 
-	public boolean isAllIdentical() { return this.allIdentical; };
+	public boolean isAllIdentical() { return this.allIdentical; }
 	public void setAllIdentical(boolean allIdentical) { this.allIdentical = allIdentical; };
-	public List<Long> getMinimalPrices() { return this.minimalPrices; };
+	public List<Long> getMinimalPrices() { return this.minimalPrices; }
 	public void setMinimalPrices(List<Long> minimalPrices) { this.minimalPrices = minimalPrices; };
 
 	public ExchangeBidPriceForSellerMessage(){

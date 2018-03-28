@@ -20,11 +20,11 @@ public class PopupWarningMessage extends NetworkMessage {
 	private String author;
 	private String content;
 
-	public int getLockDuration() { return this.lockDuration; };
+	public int getLockDuration() { return this.lockDuration; }
 	public void setLockDuration(int lockDuration) { this.lockDuration = lockDuration; };
-	public String getAuthor() { return this.author; };
+	public String getAuthor() { return this.author; }
 	public void setAuthor(String author) { this.author = author; };
-	public String getContent() { return this.content; };
+	public String getContent() { return this.content; }
 	public void setContent(String content) { this.content = content; };
 
 	public PopupWarningMessage(){

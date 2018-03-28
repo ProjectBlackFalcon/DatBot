@@ -19,7 +19,7 @@ public class GameFightMonsterWithAlignmentInformations extends GameFightMonsterI
 
 	private ActorAlignmentInformations alignmentInfos;
 
-	public ActorAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; };
+	public ActorAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; }
 	public void setAlignmentInfos(ActorAlignmentInformations alignmentInfos) { this.alignmentInfos = alignmentInfos; };
 
 	public GameFightMonsterWithAlignmentInformations(){

@@ -20,11 +20,11 @@ public class GameRolePlayArenaFightPropositionMessage extends NetworkMessage {
 	private List<Double> alliesId;
 	private int duration;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public List<Double> getAlliesId() { return this.alliesId; };
+	public List<Double> getAlliesId() { return this.alliesId; }
 	public void setAlliesId(List<Double> alliesId) { this.alliesId = alliesId; };
-	public int getDuration() { return this.duration; };
+	public int getDuration() { return this.duration; }
 	public void setDuration(int duration) { this.duration = duration; };
 
 	public GameRolePlayArenaFightPropositionMessage(){

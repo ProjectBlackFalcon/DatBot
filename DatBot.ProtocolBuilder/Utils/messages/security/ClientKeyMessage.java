@@ -18,7 +18,7 @@ public class ClientKeyMessage extends NetworkMessage {
 
 	private String key;
 
-	public String getKey() { return this.key; };
+	public String getKey() { return this.key; }
 	public void setKey(String key) { this.key = key; };
 
 	public ClientKeyMessage(){

@@ -24,19 +24,19 @@ public class AbstractFightDispellableEffect extends NetworkMessage {
 	private int effectId;
 	private int parentBoostUid;
 
-	public int getUid() { return this.uid; };
+	public int getUid() { return this.uid; }
 	public void setUid(int uid) { this.uid = uid; };
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getTurnDuration() { return this.turnDuration; };
+	public int getTurnDuration() { return this.turnDuration; }
 	public void setTurnDuration(int turnDuration) { this.turnDuration = turnDuration; };
-	public int getDispelable() { return this.dispelable; };
+	public int getDispelable() { return this.dispelable; }
 	public void setDispelable(int dispelable) { this.dispelable = dispelable; };
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public int getEffectId() { return this.effectId; };
+	public int getEffectId() { return this.effectId; }
 	public void setEffectId(int effectId) { this.effectId = effectId; };
-	public int getParentBoostUid() { return this.parentBoostUid; };
+	public int getParentBoostUid() { return this.parentBoostUid; }
 	public void setParentBoostUid(int parentBoostUid) { this.parentBoostUid = parentBoostUid; };
 
 	public AbstractFightDispellableEffect(){

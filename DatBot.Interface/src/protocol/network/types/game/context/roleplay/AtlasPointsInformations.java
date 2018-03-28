@@ -20,9 +20,9 @@ public class AtlasPointsInformations extends NetworkMessage {
 	private int type;
 	private List<MapCoordinatesExtended> coords;
 
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public List<MapCoordinatesExtended> getCoords() { return this.coords; };
+	public List<MapCoordinatesExtended> getCoords() { return this.coords; }
 	public void setCoords(List<MapCoordinatesExtended> coords) { this.coords = coords; };
 
 	public AtlasPointsInformations(){

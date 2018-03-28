@@ -23,11 +23,11 @@ public class AllianceInsiderInfoMessage extends NetworkMessage {
 	private List<GuildInsiderFactSheetInformations> guilds;
 	private List<PrismSubareaEmptyInfo> prisms;
 
-	public AllianceFactSheetInformations getAllianceInfos() { return this.allianceInfos; };
+	public AllianceFactSheetInformations getAllianceInfos() { return this.allianceInfos; }
 	public void setAllianceInfos(AllianceFactSheetInformations allianceInfos) { this.allianceInfos = allianceInfos; };
-	public List<GuildInsiderFactSheetInformations> getGuilds() { return this.guilds; };
+	public List<GuildInsiderFactSheetInformations> getGuilds() { return this.guilds; }
 	public void setGuilds(List<GuildInsiderFactSheetInformations> guilds) { this.guilds = guilds; };
-	public List<PrismSubareaEmptyInfo> getPrisms() { return this.prisms; };
+	public List<PrismSubareaEmptyInfo> getPrisms() { return this.prisms; }
 	public void setPrisms(List<PrismSubareaEmptyInfo> prisms) { this.prisms = prisms; };
 
 	public AllianceInsiderInfoMessage(){

@@ -18,7 +18,7 @@ public class BasicWhoIsNoMatchMessage extends NetworkMessage {
 
 	private String search;
 
-	public String getSearch() { return this.search; };
+	public String getSearch() { return this.search; }
 	public void setSearch(String search) { this.search = search; };
 
 	public BasicWhoIsNoMatchMessage(){

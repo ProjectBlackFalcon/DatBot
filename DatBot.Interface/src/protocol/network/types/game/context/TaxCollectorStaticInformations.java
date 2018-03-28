@@ -21,11 +21,11 @@ public class TaxCollectorStaticInformations extends NetworkMessage {
 	private int lastNameId;
 	private GuildInformations guildIdentity;
 
-	public int getFirstNameId() { return this.firstNameId; };
+	public int getFirstNameId() { return this.firstNameId; }
 	public void setFirstNameId(int firstNameId) { this.firstNameId = firstNameId; };
-	public int getLastNameId() { return this.lastNameId; };
+	public int getLastNameId() { return this.lastNameId; }
 	public void setLastNameId(int lastNameId) { this.lastNameId = lastNameId; };
-	public GuildInformations getGuildIdentity() { return this.guildIdentity; };
+	public GuildInformations getGuildIdentity() { return this.guildIdentity; }
 	public void setGuildIdentity(GuildInformations guildIdentity) { this.guildIdentity = guildIdentity; };
 
 	public TaxCollectorStaticInformations(){

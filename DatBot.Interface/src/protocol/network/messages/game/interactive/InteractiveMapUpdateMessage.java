@@ -19,7 +19,7 @@ public class InteractiveMapUpdateMessage extends NetworkMessage {
 
 	private List<InteractiveElement> interactiveElements;
 
-	public List<InteractiveElement> getInteractiveElements() { return this.interactiveElements; };
+	public List<InteractiveElement> getInteractiveElements() { return this.interactiveElements; }
 	public void setInteractiveElements(List<InteractiveElement> interactiveElements) { this.interactiveElements = interactiveElements; };
 
 	public InteractiveMapUpdateMessage(){

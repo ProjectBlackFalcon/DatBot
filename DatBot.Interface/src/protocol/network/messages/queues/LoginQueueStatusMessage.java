@@ -19,9 +19,9 @@ public class LoginQueueStatusMessage extends NetworkMessage {
 	private int position;
 	private int total;
 
-	public int getPosition() { return this.position; };
+	public int getPosition() { return this.position; }
 	public void setPosition(int position) { this.position = position; };
-	public int getTotal() { return this.total; };
+	public int getTotal() { return this.total; }
 	public void setTotal(int total) { this.total = total; };
 
 	public LoginQueueStatusMessage(){

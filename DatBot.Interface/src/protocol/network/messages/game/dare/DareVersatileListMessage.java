@@ -19,7 +19,7 @@ public class DareVersatileListMessage extends NetworkMessage {
 
 	private List<DareVersatileInformations> dares;
 
-	public List<DareVersatileInformations> getDares() { return this.dares; };
+	public List<DareVersatileInformations> getDares() { return this.dares; }
 	public void setDares(List<DareVersatileInformations> dares) { this.dares = dares; };
 
 	public DareVersatileListMessage(){

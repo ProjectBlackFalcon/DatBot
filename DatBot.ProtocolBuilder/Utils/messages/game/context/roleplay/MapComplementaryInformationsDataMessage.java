@@ -34,25 +34,25 @@ public class MapComplementaryInformationsDataMessage extends NetworkMessage {
 	private boolean hasAggressiveMonsters;
 	private FightStartingPositions fightStartPositions;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public List<HouseInformations> getHouses() { return this.houses; };
+	public List<HouseInformations> getHouses() { return this.houses; }
 	public void setHouses(List<HouseInformations> houses) { this.houses = houses; };
-	public List<GameRolePlayActorInformations> getActors() { return this.actors; };
+	public List<GameRolePlayActorInformations> getActors() { return this.actors; }
 	public void setActors(List<GameRolePlayActorInformations> actors) { this.actors = actors; };
-	public List<InteractiveElement> getInteractiveElements() { return this.interactiveElements; };
+	public List<InteractiveElement> getInteractiveElements() { return this.interactiveElements; }
 	public void setInteractiveElements(List<InteractiveElement> interactiveElements) { this.interactiveElements = interactiveElements; };
-	public List<StatedElement> getStatedElements() { return this.statedElements; };
+	public List<StatedElement> getStatedElements() { return this.statedElements; }
 	public void setStatedElements(List<StatedElement> statedElements) { this.statedElements = statedElements; };
-	public List<MapObstacle> getObstacles() { return this.obstacles; };
+	public List<MapObstacle> getObstacles() { return this.obstacles; }
 	public void setObstacles(List<MapObstacle> obstacles) { this.obstacles = obstacles; };
-	public List<FightCommonInformations> getFights() { return this.fights; };
+	public List<FightCommonInformations> getFights() { return this.fights; }
 	public void setFights(List<FightCommonInformations> fights) { this.fights = fights; };
-	public boolean isHasAggressiveMonsters() { return this.hasAggressiveMonsters; };
+	public boolean isHasAggressiveMonsters() { return this.hasAggressiveMonsters; }
 	public void setHasAggressiveMonsters(boolean hasAggressiveMonsters) { this.hasAggressiveMonsters = hasAggressiveMonsters; };
-	public FightStartingPositions getFightStartPositions() { return this.fightStartPositions; };
+	public FightStartingPositions getFightStartPositions() { return this.fightStartPositions; }
 	public void setFightStartPositions(FightStartingPositions fightStartPositions) { this.fightStartPositions = fightStartPositions; };
 
 	public MapComplementaryInformationsDataMessage(){

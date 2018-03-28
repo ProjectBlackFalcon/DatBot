@@ -19,9 +19,9 @@ public class MonsterInGroupLightInformations extends NetworkMessage {
 	private int creatureGenericId;
 	private int grade;
 
-	public int getCreatureGenericId() { return this.creatureGenericId; };
+	public int getCreatureGenericId() { return this.creatureGenericId; }
 	public void setCreatureGenericId(int creatureGenericId) { this.creatureGenericId = creatureGenericId; };
-	public int getGrade() { return this.grade; };
+	public int getGrade() { return this.grade; }
 	public void setGrade(int grade) { this.grade = grade; };
 
 	public MonsterInGroupLightInformations(){

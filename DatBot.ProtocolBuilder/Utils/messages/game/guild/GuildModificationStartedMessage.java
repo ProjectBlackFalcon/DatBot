@@ -19,9 +19,9 @@ public class GuildModificationStartedMessage extends NetworkMessage {
 	private boolean canChangeName;
 	private boolean canChangeEmblem;
 
-	public boolean isCanChangeName() { return this.canChangeName; };
+	public boolean isCanChangeName() { return this.canChangeName; }
 	public void setCanChangeName(boolean canChangeName) { this.canChangeName = canChangeName; };
-	public boolean isCanChangeEmblem() { return this.canChangeEmblem; };
+	public boolean isCanChangeEmblem() { return this.canChangeEmblem; }
 	public void setCanChangeEmblem(boolean canChangeEmblem) { this.canChangeEmblem = canChangeEmblem; };
 
 	public GuildModificationStartedMessage(){

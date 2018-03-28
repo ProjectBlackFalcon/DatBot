@@ -18,7 +18,7 @@ public class ExchangeCraftResultMessage extends NetworkMessage {
 
 	private int craftResult;
 
-	public int getCraftResult() { return this.craftResult; };
+	public int getCraftResult() { return this.craftResult; }
 	public void setCraftResult(int craftResult) { this.craftResult = craftResult; };
 
 	public ExchangeCraftResultMessage(){

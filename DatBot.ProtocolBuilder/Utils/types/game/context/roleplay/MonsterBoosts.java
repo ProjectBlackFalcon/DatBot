@@ -20,11 +20,11 @@ public class MonsterBoosts extends NetworkMessage {
 	private int xpBoost;
 	private int dropBoost;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public int getXpBoost() { return this.xpBoost; };
+	public int getXpBoost() { return this.xpBoost; }
 	public void setXpBoost(int xpBoost) { this.xpBoost = xpBoost; };
-	public int getDropBoost() { return this.dropBoost; };
+	public int getDropBoost() { return this.dropBoost; }
 	public void setDropBoost(int dropBoost) { this.dropBoost = dropBoost; };
 
 	public MonsterBoosts(){

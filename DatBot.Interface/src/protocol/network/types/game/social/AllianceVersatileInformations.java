@@ -21,13 +21,13 @@ public class AllianceVersatileInformations extends NetworkMessage {
 	private int nbMembers;
 	private int nbSubarea;
 
-	public int getAllianceId() { return this.allianceId; };
+	public int getAllianceId() { return this.allianceId; }
 	public void setAllianceId(int allianceId) { this.allianceId = allianceId; };
-	public int getNbGuilds() { return this.nbGuilds; };
+	public int getNbGuilds() { return this.nbGuilds; }
 	public void setNbGuilds(int nbGuilds) { this.nbGuilds = nbGuilds; };
-	public int getNbMembers() { return this.nbMembers; };
+	public int getNbMembers() { return this.nbMembers; }
 	public void setNbMembers(int nbMembers) { this.nbMembers = nbMembers; };
-	public int getNbSubarea() { return this.nbSubarea; };
+	public int getNbSubarea() { return this.nbSubarea; }
 	public void setNbSubarea(int nbSubarea) { this.nbSubarea = nbSubarea; };
 
 	public AllianceVersatileInformations(){

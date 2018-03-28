@@ -21,11 +21,11 @@ public class PlayerStatusUpdateMessage extends NetworkMessage {
 	private long playerId;
 	private PlayerStatus status;
 
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public PlayerStatus getStatus() { return this.status; };
+	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
 
 	public PlayerStatusUpdateMessage(){

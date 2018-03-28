@@ -20,11 +20,11 @@ public class ObjectSetPositionMessage extends NetworkMessage {
 	private int position;
 	private int quantity;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public int getPosition() { return this.position; };
+	public int getPosition() { return this.position; }
 	public void setPosition(int position) { this.position = position; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
 
 	public ObjectSetPositionMessage(){
@@ -40,7 +40,7 @@ public class ObjectSetPositionMessage extends NetworkMessage {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			writer.writeVarInt(this.objectUID);
-			writer.writeByte(this.position);
+			writer.writeShort(this.position);
 			writer.writeVarInt(this.quantity);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class ObjectSetPositionMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			this.objectUID = reader.readVarInt();
-			this.position = reader.readByte();
+			this.position = reader.readShort();
 			this.quantity = reader.readVarInt();
 		} catch (Exception e){
 			e.printStackTrace();

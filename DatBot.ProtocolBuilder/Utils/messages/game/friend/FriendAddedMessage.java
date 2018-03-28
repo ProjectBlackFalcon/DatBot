@@ -19,7 +19,7 @@ public class FriendAddedMessage extends NetworkMessage {
 
 	private FriendInformations friendAdded;
 
-	public FriendInformations getFriendAdded() { return this.friendAdded; };
+	public FriendInformations getFriendAdded() { return this.friendAdded; }
 	public void setFriendAdded(FriendInformations friendAdded) { this.friendAdded = friendAdded; };
 
 	public FriendAddedMessage(){

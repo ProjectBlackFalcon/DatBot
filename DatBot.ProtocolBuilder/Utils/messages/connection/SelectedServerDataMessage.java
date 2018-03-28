@@ -22,15 +22,15 @@ public class SelectedServerDataMessage extends NetworkMessage {
 	private boolean canCreateNewCharacter;
 	private List<Integer> ticket;
 
-	public int getServerId() { return this.serverId; };
+	public int getServerId() { return this.serverId; }
 	public void setServerId(int serverId) { this.serverId = serverId; };
-	public String getAddress() { return this.address; };
+	public String getAddress() { return this.address; }
 	public void setAddress(String address) { this.address = address; };
-	public int getPort() { return this.port; };
+	public int getPort() { return this.port; }
 	public void setPort(int port) { this.port = port; };
-	public boolean isCanCreateNewCharacter() { return this.canCreateNewCharacter; };
+	public boolean isCanCreateNewCharacter() { return this.canCreateNewCharacter; }
 	public void setCanCreateNewCharacter(boolean canCreateNewCharacter) { this.canCreateNewCharacter = canCreateNewCharacter; };
-	public List<Integer> getTicket() { return this.ticket; };
+	public List<Integer> getTicket() { return this.ticket; }
 	public void setTicket(List<Integer> ticket) { this.ticket = ticket; };
 
 	public SelectedServerDataMessage(){

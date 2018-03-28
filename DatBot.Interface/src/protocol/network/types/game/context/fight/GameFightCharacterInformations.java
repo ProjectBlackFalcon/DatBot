@@ -22,13 +22,13 @@ public class GameFightCharacterInformations extends GameFightFighterNamedInforma
 	private int breed;
 	private boolean sex;
 
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public ActorAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; };
+	public ActorAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; }
 	public void setAlignmentInfos(ActorAlignmentInformations alignmentInfos) { this.alignmentInfos = alignmentInfos; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
 
 	public GameFightCharacterInformations(){

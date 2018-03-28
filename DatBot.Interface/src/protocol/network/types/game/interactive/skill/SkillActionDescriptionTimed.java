@@ -18,7 +18,7 @@ public class SkillActionDescriptionTimed extends SkillActionDescription {
 
 	private int time;
 
-	public int getTime() { return this.time; };
+	public int getTime() { return this.time; }
 	public void setTime(int time) { this.time = time; };
 
 	public SkillActionDescriptionTimed(){

@@ -19,7 +19,7 @@ public class JobBookSubscriptionMessage extends NetworkMessage {
 
 	private List<JobBookSubscription> subscriptions;
 
-	public List<JobBookSubscription> getSubscriptions() { return this.subscriptions; };
+	public List<JobBookSubscription> getSubscriptions() { return this.subscriptions; }
 	public void setSubscriptions(List<JobBookSubscription> subscriptions) { this.subscriptions = subscriptions; };
 
 	public JobBookSubscriptionMessage(){

@@ -22,15 +22,15 @@ public class HouseSellingUpdateMessage extends NetworkMessage {
 	private long realPrice;
 	private String buyerName;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public boolean isSecondHand() { return this.secondHand; };
+	public boolean isSecondHand() { return this.secondHand; }
 	public void setSecondHand(boolean secondHand) { this.secondHand = secondHand; };
-	public long getRealPrice() { return this.realPrice; };
+	public long getRealPrice() { return this.realPrice; }
 	public void setRealPrice(long realPrice) { this.realPrice = realPrice; };
-	public String getBuyerName() { return this.buyerName; };
+	public String getBuyerName() { return this.buyerName; }
 	public void setBuyerName(String buyerName) { this.buyerName = buyerName; };
 
 	public HouseSellingUpdateMessage(){

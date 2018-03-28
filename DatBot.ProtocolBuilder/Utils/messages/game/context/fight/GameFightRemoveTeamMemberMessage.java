@@ -20,11 +20,11 @@ public class GameFightRemoveTeamMemberMessage extends NetworkMessage {
 	private int teamId;
 	private double charId;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public int getTeamId() { return this.teamId; };
+	public int getTeamId() { return this.teamId; }
 	public void setTeamId(int teamId) { this.teamId = teamId; };
-	public double getCharId() { return this.charId; };
+	public double getCharId() { return this.charId; }
 	public void setCharId(double charId) { this.charId = charId; };
 
 	public GameFightRemoveTeamMemberMessage(){

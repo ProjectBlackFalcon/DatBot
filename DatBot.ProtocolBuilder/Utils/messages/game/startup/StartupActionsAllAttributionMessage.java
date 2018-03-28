@@ -18,7 +18,7 @@ public class StartupActionsAllAttributionMessage extends NetworkMessage {
 
 	private long characterId;
 
-	public long getCharacterId() { return this.characterId; };
+	public long getCharacterId() { return this.characterId; }
 	public void setCharacterId(long characterId) { this.characterId = characterId; };
 
 	public StartupActionsAllAttributionMessage(){

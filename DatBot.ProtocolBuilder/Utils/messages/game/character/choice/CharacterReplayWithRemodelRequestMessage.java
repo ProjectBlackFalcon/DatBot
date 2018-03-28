@@ -19,7 +19,7 @@ public class CharacterReplayWithRemodelRequestMessage extends CharacterReplayReq
 
 	private RemodelingInformation remodel;
 
-	public RemodelingInformation getRemodel() { return this.remodel; };
+	public RemodelingInformation getRemodel() { return this.remodel; }
 	public void setRemodel(RemodelingInformation remodel) { this.remodel = remodel; };
 
 	public CharacterReplayWithRemodelRequestMessage(){

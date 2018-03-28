@@ -18,21 +18,26 @@ public class ObjectAddedMessage extends NetworkMessage {
 	public static final int ProtocolId = 3025;
 
 	private ObjectItem object;
+	private int origin;
 
-	public ObjectItem getObject() { return this.object; };
+	public ObjectItem getObject() { return this.object; }
 	public void setObject(ObjectItem object) { this.object = object; };
+	public int getOrigin() { return this.origin; }
+	public void setOrigin(int origin) { this.origin = origin; };
 
 	public ObjectAddedMessage(){
 	}
 
-	public ObjectAddedMessage(ObjectItem object){
+	public ObjectAddedMessage(ObjectItem object, int origin){
 		this.object = object;
+		this.origin = origin;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			object.Serialize(writer);
+			writer.writeByte(this.origin);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -43,6 +48,7 @@ public class ObjectAddedMessage extends NetworkMessage {
 		try {
 			this.object = new ObjectItem();
 			this.object.Deserialize(reader);
+			this.origin = reader.readByte();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

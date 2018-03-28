@@ -19,9 +19,9 @@ public class GuildFactSheetInformations extends GuildInformations {
 	private long leaderId;
 	private int nbMembers;
 
-	public long getLeaderId() { return this.leaderId; };
+	public long getLeaderId() { return this.leaderId; }
 	public void setLeaderId(long leaderId) { this.leaderId = leaderId; };
-	public int getNbMembers() { return this.nbMembers; };
+	public int getNbMembers() { return this.nbMembers; }
 	public void setNbMembers(int nbMembers) { this.nbMembers = nbMembers; };
 
 	public GuildFactSheetInformations(){

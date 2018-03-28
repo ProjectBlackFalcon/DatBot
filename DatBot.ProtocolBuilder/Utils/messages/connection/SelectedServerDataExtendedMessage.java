@@ -19,7 +19,7 @@ public class SelectedServerDataExtendedMessage extends SelectedServerDataMessage
 
 	private List<GameServerInformations> servers;
 
-	public List<GameServerInformations> getServers() { return this.servers; };
+	public List<GameServerInformations> getServers() { return this.servers; }
 	public void setServers(List<GameServerInformations> servers) { this.servers = servers; };
 
 	public SelectedServerDataExtendedMessage(){

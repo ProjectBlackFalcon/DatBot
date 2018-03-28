@@ -18,7 +18,7 @@ public class IdentificationAccountForceMessage extends IdentificationMessage {
 
 	private String forcedAccountLogin;
 
-	public String getForcedAccountLogin() { return this.forcedAccountLogin; };
+	public String getForcedAccountLogin() { return this.forcedAccountLogin; }
 	public void setForcedAccountLogin(String forcedAccountLogin) { this.forcedAccountLogin = forcedAccountLogin; };
 
 	public IdentificationAccountForceMessage(){

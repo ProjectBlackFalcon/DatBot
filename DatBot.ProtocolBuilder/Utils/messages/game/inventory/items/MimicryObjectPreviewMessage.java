@@ -19,7 +19,7 @@ public class MimicryObjectPreviewMessage extends NetworkMessage {
 
 	private ObjectItem result;
 
-	public ObjectItem getResult() { return this.result; };
+	public ObjectItem getResult() { return this.result; }
 	public void setResult(ObjectItem result) { this.result = result; };
 
 	public MimicryObjectPreviewMessage(){

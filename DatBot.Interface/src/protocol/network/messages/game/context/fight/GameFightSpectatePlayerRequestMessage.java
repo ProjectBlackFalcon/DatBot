@@ -18,7 +18,7 @@ public class GameFightSpectatePlayerRequestMessage extends NetworkMessage {
 
 	private long playerId;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
 
 	public GameFightSpectatePlayerRequestMessage(){

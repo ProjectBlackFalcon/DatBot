@@ -21,13 +21,13 @@ public class StatedElement extends NetworkMessage {
 	private int elementState;
 	private boolean onCurrentMap;
 
-	public int getElementId() { return this.elementId; };
+	public int getElementId() { return this.elementId; }
 	public void setElementId(int elementId) { this.elementId = elementId; };
-	public int getElementCellId() { return this.elementCellId; };
+	public int getElementCellId() { return this.elementCellId; }
 	public void setElementCellId(int elementCellId) { this.elementCellId = elementCellId; };
-	public int getElementState() { return this.elementState; };
+	public int getElementState() { return this.elementState; }
 	public void setElementState(int elementState) { this.elementState = elementState; };
-	public boolean isOnCurrentMap() { return this.onCurrentMap; };
+	public boolean isOnCurrentMap() { return this.onCurrentMap; }
 	public void setOnCurrentMap(boolean onCurrentMap) { this.onCurrentMap = onCurrentMap; };
 
 	public StatedElement(){

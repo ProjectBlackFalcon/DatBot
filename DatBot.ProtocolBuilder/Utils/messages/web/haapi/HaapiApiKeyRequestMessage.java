@@ -16,34 +16,11 @@ import protocol.network.NetworkMessage;
 public class HaapiApiKeyRequestMessage extends NetworkMessage {
 	public static final int ProtocolId = 6648;
 
-	private int keyType;
-
-	public int getKeyType() { return this.keyType; };
-	public void setKeyType(int keyType) { this.keyType = keyType; };
-
-	public HaapiApiKeyRequestMessage(){
-	}
-
-	public HaapiApiKeyRequestMessage(int keyType){
-		this.keyType = keyType;
-	}
-
 	@Override
 	public void Serialize(DofusDataWriter writer) {
-		try {
-			writer.writeByte(this.keyType);
-		} catch (Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public void Deserialize(DofusDataReader reader) {
-		try {
-			this.keyType = reader.readByte();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
 	}
-
 }

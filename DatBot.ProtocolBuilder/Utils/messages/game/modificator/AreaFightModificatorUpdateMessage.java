@@ -18,7 +18,7 @@ public class AreaFightModificatorUpdateMessage extends NetworkMessage {
 
 	private int spellPairId;
 
-	public int getSpellPairId() { return this.spellPairId; };
+	public int getSpellPairId() { return this.spellPairId; }
 	public void setSpellPairId(int spellPairId) { this.spellPairId = spellPairId; };
 
 	public AreaFightModificatorUpdateMessage(){

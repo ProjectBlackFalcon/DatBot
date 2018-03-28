@@ -18,7 +18,7 @@ public class CharacterNameSuggestionSuccessMessage extends NetworkMessage {
 
 	private String suggestion;
 
-	public String getSuggestion() { return this.suggestion; };
+	public String getSuggestion() { return this.suggestion; }
 	public void setSuggestion(String suggestion) { this.suggestion = suggestion; };
 
 	public CharacterNameSuggestionSuccessMessage(){

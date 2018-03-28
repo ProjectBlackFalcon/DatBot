@@ -21,9 +21,9 @@ public class GroupMonsterStaticInformations extends NetworkMessage {
 	private MonsterInGroupLightInformations mainCreatureLightInfos;
 	private List<MonsterInGroupInformations> underlings;
 
-	public MonsterInGroupLightInformations getMainCreatureLightInfos() { return this.mainCreatureLightInfos; };
+	public MonsterInGroupLightInformations getMainCreatureLightInfos() { return this.mainCreatureLightInfos; }
 	public void setMainCreatureLightInfos(MonsterInGroupLightInformations mainCreatureLightInfos) { this.mainCreatureLightInfos = mainCreatureLightInfos; };
-	public List<MonsterInGroupInformations> getUnderlings() { return this.underlings; };
+	public List<MonsterInGroupInformations> getUnderlings() { return this.underlings; }
 	public void setUnderlings(List<MonsterInGroupInformations> underlings) { this.underlings = underlings; };
 
 	public GroupMonsterStaticInformations(){

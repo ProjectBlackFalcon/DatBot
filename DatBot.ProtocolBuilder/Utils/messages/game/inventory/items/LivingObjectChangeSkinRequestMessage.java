@@ -20,11 +20,11 @@ public class LivingObjectChangeSkinRequestMessage extends NetworkMessage {
 	private int livingPosition;
 	private int skinId;
 
-	public int getLivingUID() { return this.livingUID; };
+	public int getLivingUID() { return this.livingUID; }
 	public void setLivingUID(int livingUID) { this.livingUID = livingUID; };
-	public int getLivingPosition() { return this.livingPosition; };
+	public int getLivingPosition() { return this.livingPosition; }
 	public void setLivingPosition(int livingPosition) { this.livingPosition = livingPosition; };
-	public int getSkinId() { return this.skinId; };
+	public int getSkinId() { return this.skinId; }
 	public void setSkinId(int skinId) { this.skinId = skinId; };
 
 	public LivingObjectChangeSkinRequestMessage(){

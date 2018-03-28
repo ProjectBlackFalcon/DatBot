@@ -19,9 +19,9 @@ public class CompassUpdatePartyMemberMessage extends CompassUpdateMessage {
 	private long memberId;
 	private boolean active;
 
-	public long getMemberId() { return this.memberId; };
+	public long getMemberId() { return this.memberId; }
 	public void setMemberId(long memberId) { this.memberId = memberId; };
-	public boolean isActive() { return this.active; };
+	public boolean isActive() { return this.active; }
 	public void setActive(boolean active) { this.active = active; };
 
 	public CompassUpdatePartyMemberMessage(){

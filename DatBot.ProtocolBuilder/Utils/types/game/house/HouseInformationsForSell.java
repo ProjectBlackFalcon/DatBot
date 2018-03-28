@@ -30,31 +30,31 @@ public class HouseInformationsForSell extends NetworkMessage {
 	private boolean isLocked;
 	private long price;
 
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public boolean isSecondHand() { return this.secondHand; };
+	public boolean isSecondHand() { return this.secondHand; }
 	public void setSecondHand(boolean secondHand) { this.secondHand = secondHand; };
-	public int getModelId() { return this.modelId; };
+	public int getModelId() { return this.modelId; }
 	public void setModelId(int modelId) { this.modelId = modelId; };
-	public String getOwnerName() { return this.ownerName; };
+	public String getOwnerName() { return this.ownerName; }
 	public void setOwnerName(String ownerName) { this.ownerName = ownerName; };
-	public boolean isOwnerConnected() { return this.ownerConnected; };
+	public boolean isOwnerConnected() { return this.ownerConnected; }
 	public void setOwnerConnected(boolean ownerConnected) { this.ownerConnected = ownerConnected; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public int getNbRoom() { return this.nbRoom; };
+	public int getNbRoom() { return this.nbRoom; }
 	public void setNbRoom(int nbRoom) { this.nbRoom = nbRoom; };
-	public int getNbChest() { return this.nbChest; };
+	public int getNbChest() { return this.nbChest; }
 	public void setNbChest(int nbChest) { this.nbChest = nbChest; };
-	public List<Integer> getSkillListIds() { return this.skillListIds; };
+	public List<Integer> getSkillListIds() { return this.skillListIds; }
 	public void setSkillListIds(List<Integer> skillListIds) { this.skillListIds = skillListIds; };
-	public boolean isIsLocked() { return this.isLocked; };
+	public boolean isIsLocked() { return this.isLocked; }
 	public void setIsLocked(boolean isLocked) { this.isLocked = isLocked; };
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
 
 	public HouseInformationsForSell(){

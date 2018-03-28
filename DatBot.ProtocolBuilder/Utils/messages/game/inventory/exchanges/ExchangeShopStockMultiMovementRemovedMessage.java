@@ -18,7 +18,7 @@ public class ExchangeShopStockMultiMovementRemovedMessage extends NetworkMessage
 
 	private List<Integer> objectIdList;
 
-	public List<Integer> getObjectIdList() { return this.objectIdList; };
+	public List<Integer> getObjectIdList() { return this.objectIdList; }
 	public void setObjectIdList(List<Integer> objectIdList) { this.objectIdList = objectIdList; };
 
 	public ExchangeShopStockMultiMovementRemovedMessage(){

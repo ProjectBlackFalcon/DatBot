@@ -19,7 +19,7 @@ public class GuildInformationsMembersMessage extends NetworkMessage {
 
 	private List<GuildMember> members;
 
-	public List<GuildMember> getMembers() { return this.members; };
+	public List<GuildMember> getMembers() { return this.members; }
 	public void setMembers(List<GuildMember> members) { this.members = members; };
 
 	public GuildInformationsMembersMessage(){

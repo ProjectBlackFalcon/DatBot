@@ -20,11 +20,11 @@ public class NpcDialogQuestionMessage extends NetworkMessage {
 	private List<String> dialogParams;
 	private List<Integer> visibleReplies;
 
-	public int getMessageId() { return this.messageId; };
+	public int getMessageId() { return this.messageId; }
 	public void setMessageId(int messageId) { this.messageId = messageId; };
-	public List<String> getDialogParams() { return this.dialogParams; };
+	public List<String> getDialogParams() { return this.dialogParams; }
 	public void setDialogParams(List<String> dialogParams) { this.dialogParams = dialogParams; };
-	public List<Integer> getVisibleReplies() { return this.visibleReplies; };
+	public List<Integer> getVisibleReplies() { return this.visibleReplies; }
 	public void setVisibleReplies(List<Integer> visibleReplies) { this.visibleReplies = visibleReplies; };
 
 	public NpcDialogQuestionMessage(){

@@ -20,9 +20,9 @@ public class IndexedEntityLook extends NetworkMessage {
 	private EntityLook look;
 	private int index;
 
-	public EntityLook getLook() { return this.look; };
+	public EntityLook getLook() { return this.look; }
 	public void setLook(EntityLook look) { this.look = look; };
-	public int getIndex() { return this.index; };
+	public int getIndex() { return this.index; }
 	public void setIndex(int index) { this.index = index; };
 
 	public IndexedEntityLook(){

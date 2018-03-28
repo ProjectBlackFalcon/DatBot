@@ -19,9 +19,9 @@ public class GameActionFightInvisibilityMessage extends AbstractGameActionMessag
 	private double targetId;
 	private int state;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getState() { return this.state; };
+	public int getState() { return this.state; }
 	public void setState(int state) { this.state = state; };
 
 	public GameActionFightInvisibilityMessage(){

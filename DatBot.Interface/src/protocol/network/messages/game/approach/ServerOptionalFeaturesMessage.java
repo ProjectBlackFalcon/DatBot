@@ -18,7 +18,7 @@ public class ServerOptionalFeaturesMessage extends NetworkMessage {
 
 	private List<Integer> features;
 
-	public List<Integer> getFeatures() { return this.features; };
+	public List<Integer> getFeatures() { return this.features; }
 	public void setFeatures(List<Integer> features) { this.features = features; };
 
 	public ServerOptionalFeaturesMessage(){

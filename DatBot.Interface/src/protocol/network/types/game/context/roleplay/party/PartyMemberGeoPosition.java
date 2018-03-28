@@ -22,15 +22,15 @@ public class PartyMemberGeoPosition extends NetworkMessage {
 	private double mapId;
 	private int subAreaId;
 
-	public int getMemberId() { return this.memberId; };
+	public int getMemberId() { return this.memberId; }
 	public void setMemberId(int memberId) { this.memberId = memberId; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
 
 	public PartyMemberGeoPosition(){

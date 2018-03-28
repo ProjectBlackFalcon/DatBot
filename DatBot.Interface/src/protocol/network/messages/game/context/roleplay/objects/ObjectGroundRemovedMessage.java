@@ -18,7 +18,7 @@ public class ObjectGroundRemovedMessage extends NetworkMessage {
 
 	private int cell;
 
-	public int getCell() { return this.cell; };
+	public int getCell() { return this.cell; }
 	public void setCell(int cell) { this.cell = cell; };
 
 	public ObjectGroundRemovedMessage(){

@@ -19,7 +19,7 @@ public class GuildInformationsMemberUpdateMessage extends NetworkMessage {
 
 	private GuildMember member;
 
-	public GuildMember getMember() { return this.member; };
+	public GuildMember getMember() { return this.member; }
 	public void setMember(GuildMember member) { this.member = member; };
 
 	public GuildInformationsMemberUpdateMessage(){

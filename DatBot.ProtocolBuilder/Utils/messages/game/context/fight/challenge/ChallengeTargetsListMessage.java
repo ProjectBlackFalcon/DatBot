@@ -19,9 +19,9 @@ public class ChallengeTargetsListMessage extends NetworkMessage {
 	private List<Double> targetIds;
 	private List<Integer> targetCells;
 
-	public List<Double> getTargetIds() { return this.targetIds; };
+	public List<Double> getTargetIds() { return this.targetIds; }
 	public void setTargetIds(List<Double> targetIds) { this.targetIds = targetIds; };
-	public List<Integer> getTargetCells() { return this.targetCells; };
+	public List<Integer> getTargetCells() { return this.targetCells; }
 	public void setTargetCells(List<Integer> targetCells) { this.targetCells = targetCells; };
 
 	public ChallengeTargetsListMessage(){

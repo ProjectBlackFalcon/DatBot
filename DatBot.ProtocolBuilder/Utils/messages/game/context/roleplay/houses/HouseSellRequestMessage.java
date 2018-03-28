@@ -20,11 +20,11 @@ public class HouseSellRequestMessage extends NetworkMessage {
 	private long amount;
 	private boolean forSale;
 
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public long getAmount() { return this.amount; };
+	public long getAmount() { return this.amount; }
 	public void setAmount(long amount) { this.amount = amount; };
-	public boolean isForSale() { return this.forSale; };
+	public boolean isForSale() { return this.forSale; }
 	public void setForSale(boolean forSale) { this.forSale = forSale; };
 
 	public HouseSellRequestMessage(){

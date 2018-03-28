@@ -26,23 +26,23 @@ public class TaxCollectorDialogQuestionExtendedMessage extends TaxCollectorDialo
 	private int pods;
 	private long itemsValue;
 
-	public int getMaxPods() { return this.maxPods; };
+	public int getMaxPods() { return this.maxPods; }
 	public void setMaxPods(int maxPods) { this.maxPods = maxPods; };
-	public int getProspecting() { return this.prospecting; };
+	public int getProspecting() { return this.prospecting; }
 	public void setProspecting(int prospecting) { this.prospecting = prospecting; };
-	public int getWisdom() { return this.wisdom; };
+	public int getWisdom() { return this.wisdom; }
 	public void setWisdom(int wisdom) { this.wisdom = wisdom; };
-	public int getTaxCollectorsCount() { return this.taxCollectorsCount; };
+	public int getTaxCollectorsCount() { return this.taxCollectorsCount; }
 	public void setTaxCollectorsCount(int taxCollectorsCount) { this.taxCollectorsCount = taxCollectorsCount; };
-	public int getTaxCollectorAttack() { return this.taxCollectorAttack; };
+	public int getTaxCollectorAttack() { return this.taxCollectorAttack; }
 	public void setTaxCollectorAttack(int taxCollectorAttack) { this.taxCollectorAttack = taxCollectorAttack; };
-	public long getKamas() { return this.kamas; };
+	public long getKamas() { return this.kamas; }
 	public void setKamas(long kamas) { this.kamas = kamas; };
-	public long getExperience() { return this.experience; };
+	public long getExperience() { return this.experience; }
 	public void setExperience(long experience) { this.experience = experience; };
-	public int getPods() { return this.pods; };
+	public int getPods() { return this.pods; }
 	public void setPods(int pods) { this.pods = pods; };
-	public long getItemsValue() { return this.itemsValue; };
+	public long getItemsValue() { return this.itemsValue; }
 	public void setItemsValue(long itemsValue) { this.itemsValue = itemsValue; };
 
 	public TaxCollectorDialogQuestionExtendedMessage(){

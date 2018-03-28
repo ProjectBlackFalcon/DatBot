@@ -18,7 +18,7 @@ public class FightTemporarySpellImmunityEffect extends AbstractFightDispellableE
 
 	private int immuneSpellId;
 
-	public int getImmuneSpellId() { return this.immuneSpellId; };
+	public int getImmuneSpellId() { return this.immuneSpellId; }
 	public void setImmuneSpellId(int immuneSpellId) { this.immuneSpellId = immuneSpellId; };
 
 	public FightTemporarySpellImmunityEffect(){

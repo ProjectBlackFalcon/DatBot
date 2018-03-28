@@ -19,9 +19,9 @@ public class TreasureHuntStepFollowDirectionToHint extends TreasureHuntStep {
 	private int direction;
 	private int npcId;
 
-	public int getDirection() { return this.direction; };
+	public int getDirection() { return this.direction; }
 	public void setDirection(int direction) { this.direction = direction; };
-	public int getNpcId() { return this.npcId; };
+	public int getNpcId() { return this.npcId; }
 	public void setNpcId(int npcId) { this.npcId = npcId; };
 
 	public TreasureHuntStepFollowDirectionToHint(){

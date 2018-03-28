@@ -21,13 +21,13 @@ public class JobCrafterDirectoryEntryJobInfo extends NetworkMessage {
 	private boolean free;
 	private int minLevel;
 
-	public int getJobId() { return this.jobId; };
+	public int getJobId() { return this.jobId; }
 	public void setJobId(int jobId) { this.jobId = jobId; };
-	public int getJobLevel() { return this.jobLevel; };
+	public int getJobLevel() { return this.jobLevel; }
 	public void setJobLevel(int jobLevel) { this.jobLevel = jobLevel; };
-	public boolean isFree() { return this.free; };
+	public boolean isFree() { return this.free; }
 	public void setFree(boolean free) { this.free = free; };
-	public int getMinLevel() { return this.minLevel; };
+	public int getMinLevel() { return this.minLevel; }
 	public void setMinLevel(int minLevel) { this.minLevel = minLevel; };
 
 	public JobCrafterDirectoryEntryJobInfo(){

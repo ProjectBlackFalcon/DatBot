@@ -22,15 +22,15 @@ public class FightTeamMemberTaxCollectorInformations extends FightTeamMemberInfo
 	private int guildId;
 	private double uid;
 
-	public int getFirstNameId() { return this.firstNameId; };
+	public int getFirstNameId() { return this.firstNameId; }
 	public void setFirstNameId(int firstNameId) { this.firstNameId = firstNameId; };
-	public int getLastNameId() { return this.lastNameId; };
+	public int getLastNameId() { return this.lastNameId; }
 	public void setLastNameId(int lastNameId) { this.lastNameId = lastNameId; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
-	public double getUid() { return this.uid; };
+	public double getUid() { return this.uid; }
 	public void setUid(double uid) { this.uid = uid; };
 
 	public FightTeamMemberTaxCollectorInformations(){

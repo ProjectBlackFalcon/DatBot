@@ -18,7 +18,7 @@ public class GameFightFighterMonsterLightInformations extends GameFightFighterLi
 
 	private int creatureGenericId;
 
-	public int getCreatureGenericId() { return this.creatureGenericId; };
+	public int getCreatureGenericId() { return this.creatureGenericId; }
 	public void setCreatureGenericId(int creatureGenericId) { this.creatureGenericId = creatureGenericId; };
 
 	public GameFightFighterMonsterLightInformations(){

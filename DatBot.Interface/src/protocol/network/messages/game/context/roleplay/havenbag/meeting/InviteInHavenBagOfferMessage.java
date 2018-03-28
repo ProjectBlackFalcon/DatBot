@@ -20,9 +20,9 @@ public class InviteInHavenBagOfferMessage extends NetworkMessage {
 	private CharacterMinimalInformations hostInformations;
 	private int timeLeftBeforeCancel;
 
-	public CharacterMinimalInformations getHostInformations() { return this.hostInformations; };
+	public CharacterMinimalInformations getHostInformations() { return this.hostInformations; }
 	public void setHostInformations(CharacterMinimalInformations hostInformations) { this.hostInformations = hostInformations; };
-	public int getTimeLeftBeforeCancel() { return this.timeLeftBeforeCancel; };
+	public int getTimeLeftBeforeCancel() { return this.timeLeftBeforeCancel; }
 	public void setTimeLeftBeforeCancel(int timeLeftBeforeCancel) { this.timeLeftBeforeCancel = timeLeftBeforeCancel; };
 
 	public InviteInHavenBagOfferMessage(){

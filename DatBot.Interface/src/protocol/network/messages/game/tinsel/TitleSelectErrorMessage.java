@@ -18,7 +18,7 @@ public class TitleSelectErrorMessage extends NetworkMessage {
 
 	private int reason;
 
-	public int getReason() { return this.reason; };
+	public int getReason() { return this.reason; }
 	public void setReason(int reason) { this.reason = reason; };
 
 	public TitleSelectErrorMessage(){

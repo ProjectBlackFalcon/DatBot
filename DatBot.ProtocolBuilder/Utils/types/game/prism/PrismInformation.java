@@ -22,15 +22,15 @@ public class PrismInformation extends NetworkMessage {
 	private int placementDate;
 	private int rewardTokenCount;
 
-	public int getTypeId() { return this.typeId; };
+	public int getTypeId() { return this.typeId; }
 	public void setTypeId(int typeId) { this.typeId = typeId; };
-	public int getState() { return this.state; };
+	public int getState() { return this.state; }
 	public void setState(int state) { this.state = state; };
-	public int getNextVulnerabilityDate() { return this.nextVulnerabilityDate; };
+	public int getNextVulnerabilityDate() { return this.nextVulnerabilityDate; }
 	public void setNextVulnerabilityDate(int nextVulnerabilityDate) { this.nextVulnerabilityDate = nextVulnerabilityDate; };
-	public int getPlacementDate() { return this.placementDate; };
+	public int getPlacementDate() { return this.placementDate; }
 	public void setPlacementDate(int placementDate) { this.placementDate = placementDate; };
-	public int getRewardTokenCount() { return this.rewardTokenCount; };
+	public int getRewardTokenCount() { return this.rewardTokenCount; }
 	public void setRewardTokenCount(int rewardTokenCount) { this.rewardTokenCount = rewardTokenCount; };
 
 	public PrismInformation(){

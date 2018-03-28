@@ -19,9 +19,9 @@ public class ChannelEnablingMessage extends NetworkMessage {
 	private int channel;
 	private boolean enable;
 
-	public int getChannel() { return this.channel; };
+	public int getChannel() { return this.channel; }
 	public void setChannel(int channel) { this.channel = channel; };
-	public boolean isEnable() { return this.enable; };
+	public boolean isEnable() { return this.enable; }
 	public void setEnable(boolean enable) { this.enable = enable; };
 
 	public ChannelEnablingMessage(){

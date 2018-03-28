@@ -26,21 +26,21 @@ public class GameRolePlayGroupMonsterInformations extends GameRolePlayActorInfor
 	private boolean hasHardcoreDrop;
 	private boolean hasAVARewardToken;
 
-	public GroupMonsterStaticInformations getStaticInfos() { return this.staticInfos; };
+	public GroupMonsterStaticInformations getStaticInfos() { return this.staticInfos; }
 	public void setStaticInfos(GroupMonsterStaticInformations staticInfos) { this.staticInfos = staticInfos; };
-	public double getCreationTime() { return this.creationTime; };
+	public double getCreationTime() { return this.creationTime; }
 	public void setCreationTime(double creationTime) { this.creationTime = creationTime; };
-	public int getAgeBonusRate() { return this.ageBonusRate; };
+	public int getAgeBonusRate() { return this.ageBonusRate; }
 	public void setAgeBonusRate(int ageBonusRate) { this.ageBonusRate = ageBonusRate; };
-	public int getLootShare() { return this.lootShare; };
+	public int getLootShare() { return this.lootShare; }
 	public void setLootShare(int lootShare) { this.lootShare = lootShare; };
-	public int getAlignmentSide() { return this.alignmentSide; };
+	public int getAlignmentSide() { return this.alignmentSide; }
 	public void setAlignmentSide(int alignmentSide) { this.alignmentSide = alignmentSide; };
-	public boolean isKeyRingBonus() { return this.keyRingBonus; };
+	public boolean isKeyRingBonus() { return this.keyRingBonus; }
 	public void setKeyRingBonus(boolean keyRingBonus) { this.keyRingBonus = keyRingBonus; };
-	public boolean isHasHardcoreDrop() { return this.hasHardcoreDrop; };
+	public boolean isHasHardcoreDrop() { return this.hasHardcoreDrop; }
 	public void setHasHardcoreDrop(boolean hasHardcoreDrop) { this.hasHardcoreDrop = hasHardcoreDrop; };
-	public boolean isHasAVARewardToken() { return this.hasAVARewardToken; };
+	public boolean isHasAVARewardToken() { return this.hasAVARewardToken; }
 	public void setHasAVARewardToken(boolean hasAVARewardToken) { this.hasAVARewardToken = hasAVARewardToken; };
 
 	public GameRolePlayGroupMonsterInformations(){

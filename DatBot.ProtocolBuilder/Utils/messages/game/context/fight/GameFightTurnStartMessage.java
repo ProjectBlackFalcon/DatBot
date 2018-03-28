@@ -19,9 +19,9 @@ public class GameFightTurnStartMessage extends NetworkMessage {
 	private double id;
 	private int waitTime;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public int getWaitTime() { return this.waitTime; };
+	public int getWaitTime() { return this.waitTime; }
 	public void setWaitTime(int waitTime) { this.waitTime = waitTime; };
 
 	public GameFightTurnStartMessage(){

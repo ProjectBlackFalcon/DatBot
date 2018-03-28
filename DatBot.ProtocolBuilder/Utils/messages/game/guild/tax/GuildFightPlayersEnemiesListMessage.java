@@ -20,9 +20,9 @@ public class GuildFightPlayersEnemiesListMessage extends NetworkMessage {
 	private double fightId;
 	private List<CharacterMinimalPlusLookInformations> playerInfo;
 
-	public double getFightId() { return this.fightId; };
+	public double getFightId() { return this.fightId; }
 	public void setFightId(double fightId) { this.fightId = fightId; };
-	public List<CharacterMinimalPlusLookInformations> getPlayerInfo() { return this.playerInfo; };
+	public List<CharacterMinimalPlusLookInformations> getPlayerInfo() { return this.playerInfo; }
 	public void setPlayerInfo(List<CharacterMinimalPlusLookInformations> playerInfo) { this.playerInfo = playerInfo; };
 
 	public GuildFightPlayersEnemiesListMessage(){

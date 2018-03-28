@@ -25,17 +25,17 @@ public class FightExternalInformations extends NetworkMessage {
 	private List<FightTeamLightInformations> fightTeams;
 	private List<FightOptionsInformations> fightTeamsOptions;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public int getFightType() { return this.fightType; };
+	public int getFightType() { return this.fightType; }
 	public void setFightType(int fightType) { this.fightType = fightType; };
-	public int getFightStart() { return this.fightStart; };
+	public int getFightStart() { return this.fightStart; }
 	public void setFightStart(int fightStart) { this.fightStart = fightStart; };
-	public boolean isFightSpectatorLocked() { return this.fightSpectatorLocked; };
+	public boolean isFightSpectatorLocked() { return this.fightSpectatorLocked; }
 	public void setFightSpectatorLocked(boolean fightSpectatorLocked) { this.fightSpectatorLocked = fightSpectatorLocked; };
-	public List<FightTeamLightInformations> getFightTeams() { return this.fightTeams; };
+	public List<FightTeamLightInformations> getFightTeams() { return this.fightTeams; }
 	public void setFightTeams(List<FightTeamLightInformations> fightTeams) { this.fightTeams = fightTeams; };
-	public List<FightOptionsInformations> getFightTeamsOptions() { return this.fightTeamsOptions; };
+	public List<FightOptionsInformations> getFightTeamsOptions() { return this.fightTeamsOptions; }
 	public void setFightTeamsOptions(List<FightOptionsInformations> fightTeamsOptions) { this.fightTeamsOptions = fightTeamsOptions; };
 
 	public FightExternalInformations(){

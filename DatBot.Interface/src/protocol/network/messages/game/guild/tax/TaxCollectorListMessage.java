@@ -20,9 +20,9 @@ public class TaxCollectorListMessage extends AbstractTaxCollectorListMessage {
 	private int nbcollectorMax;
 	private List<TaxCollectorFightersInformation> fightersInformations;
 
-	public int getNbcollectorMax() { return this.nbcollectorMax; };
+	public int getNbcollectorMax() { return this.nbcollectorMax; }
 	public void setNbcollectorMax(int nbcollectorMax) { this.nbcollectorMax = nbcollectorMax; };
-	public List<TaxCollectorFightersInformation> getFightersInformations() { return this.fightersInformations; };
+	public List<TaxCollectorFightersInformation> getFightersInformations() { return this.fightersInformations; }
 	public void setFightersInformations(List<TaxCollectorFightersInformation> fightersInformations) { this.fightersInformations = fightersInformations; };
 
 	public TaxCollectorListMessage(){

@@ -19,7 +19,7 @@ public class ExchangeStartedBidBuyerMessage extends NetworkMessage {
 
 	private SellerBuyerDescriptor buyerDescriptor;
 
-	public SellerBuyerDescriptor getBuyerDescriptor() { return this.buyerDescriptor; };
+	public SellerBuyerDescriptor getBuyerDescriptor() { return this.buyerDescriptor; }
 	public void setBuyerDescriptor(SellerBuyerDescriptor buyerDescriptor) { this.buyerDescriptor = buyerDescriptor; };
 
 	public ExchangeStartedBidBuyerMessage(){

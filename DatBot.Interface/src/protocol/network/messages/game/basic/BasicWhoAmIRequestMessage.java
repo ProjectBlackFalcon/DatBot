@@ -18,7 +18,7 @@ public class BasicWhoAmIRequestMessage extends NetworkMessage {
 
 	private boolean verbose;
 
-	public boolean isVerbose() { return this.verbose; };
+	public boolean isVerbose() { return this.verbose; }
 	public void setVerbose(boolean verbose) { this.verbose = verbose; };
 
 	public BasicWhoAmIRequestMessage(){

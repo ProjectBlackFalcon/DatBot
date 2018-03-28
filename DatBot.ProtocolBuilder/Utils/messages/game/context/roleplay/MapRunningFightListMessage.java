@@ -19,7 +19,7 @@ public class MapRunningFightListMessage extends NetworkMessage {
 
 	private List<FightExternalInformations> fights;
 
-	public List<FightExternalInformations> getFights() { return this.fights; };
+	public List<FightExternalInformations> getFights() { return this.fights; }
 	public void setFights(List<FightExternalInformations> fights) { this.fights = fights; };
 
 	public MapRunningFightListMessage(){

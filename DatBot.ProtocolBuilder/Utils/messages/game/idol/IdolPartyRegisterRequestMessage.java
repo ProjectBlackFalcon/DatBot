@@ -18,7 +18,7 @@ public class IdolPartyRegisterRequestMessage extends NetworkMessage {
 
 	private boolean register;
 
-	public boolean isRegister() { return this.register; };
+	public boolean isRegister() { return this.register; }
 	public void setRegister(boolean register) { this.register = register; };
 
 	public IdolPartyRegisterRequestMessage(){

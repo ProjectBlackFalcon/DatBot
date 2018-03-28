@@ -18,7 +18,7 @@ public class ExchangeBidHousePriceMessage extends NetworkMessage {
 
 	private int genId;
 
-	public int getGenId() { return this.genId; };
+	public int getGenId() { return this.genId; }
 	public void setGenId(int genId) { this.genId = genId; };
 
 	public ExchangeBidHousePriceMessage(){

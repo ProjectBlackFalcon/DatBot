@@ -19,7 +19,7 @@ public class FinishMoveListMessage extends NetworkMessage {
 
 	private List<FinishMoveInformations> finishMoves;
 
-	public List<FinishMoveInformations> getFinishMoves() { return this.finishMoves; };
+	public List<FinishMoveInformations> getFinishMoves() { return this.finishMoves; }
 	public void setFinishMoves(List<FinishMoveInformations> finishMoves) { this.finishMoves = finishMoves; };
 
 	public FinishMoveListMessage(){

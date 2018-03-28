@@ -19,9 +19,9 @@ public class FriendDeleteResultMessage extends NetworkMessage {
 	private boolean success;
 	private String name;
 
-	public boolean isSuccess() { return this.success; };
+	public boolean isSuccess() { return this.success; }
 	public void setSuccess(boolean success) { this.success = success; };
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
 
 	public FriendDeleteResultMessage(){

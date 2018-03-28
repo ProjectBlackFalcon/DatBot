@@ -19,9 +19,9 @@ public class JobMultiCraftAvailableSkillsMessage extends JobAllowMultiCraftReque
 	private long playerId;
 	private List<Integer> skills;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public List<Integer> getSkills() { return this.skills; };
+	public List<Integer> getSkills() { return this.skills; }
 	public void setSkills(List<Integer> skills) { this.skills = skills; };
 
 	public JobMultiCraftAvailableSkillsMessage(){

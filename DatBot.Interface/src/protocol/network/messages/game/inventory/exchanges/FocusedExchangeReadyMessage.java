@@ -18,7 +18,7 @@ public class FocusedExchangeReadyMessage extends ExchangeReadyMessage {
 
 	private int focusActionId;
 
-	public int getFocusActionId() { return this.focusActionId; };
+	public int getFocusActionId() { return this.focusActionId; }
 	public void setFocusActionId(int focusActionId) { this.focusActionId = focusActionId; };
 
 	public FocusedExchangeReadyMessage(){

@@ -19,9 +19,9 @@ public class AllianceBulletinSetRequestMessage extends SocialNoticeSetRequestMes
 	private String content;
 	private boolean notifyMembers;
 
-	public String getContent() { return this.content; };
+	public String getContent() { return this.content; }
 	public void setContent(String content) { this.content = content; };
-	public boolean isNotifyMembers() { return this.notifyMembers; };
+	public boolean isNotifyMembers() { return this.notifyMembers; }
 	public void setNotifyMembers(boolean notifyMembers) { this.notifyMembers = notifyMembers; };
 
 	public AllianceBulletinSetRequestMessage(){

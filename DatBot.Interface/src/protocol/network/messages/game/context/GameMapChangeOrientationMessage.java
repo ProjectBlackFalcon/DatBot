@@ -19,7 +19,7 @@ public class GameMapChangeOrientationMessage extends NetworkMessage {
 
 	private ActorOrientation orientation;
 
-	public ActorOrientation getOrientation() { return this.orientation; };
+	public ActorOrientation getOrientation() { return this.orientation; }
 	public void setOrientation(ActorOrientation orientation) { this.orientation = orientation; };
 
 	public GameMapChangeOrientationMessage(){

@@ -18,7 +18,7 @@ public class GuildFightJoinRequestMessage extends NetworkMessage {
 
 	private double taxCollectorId;
 
-	public double getTaxCollectorId() { return this.taxCollectorId; };
+	public double getTaxCollectorId() { return this.taxCollectorId; }
 	public void setTaxCollectorId(double taxCollectorId) { this.taxCollectorId = taxCollectorId; };
 
 	public GuildFightJoinRequestMessage(){

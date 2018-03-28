@@ -18,7 +18,7 @@ public class DareErrorMessage extends NetworkMessage {
 
 	private int error;
 
-	public int getError() { return this.error; };
+	public int getError() { return this.error; }
 	public void setError(int error) { this.error = error; };
 
 	public DareErrorMessage(){

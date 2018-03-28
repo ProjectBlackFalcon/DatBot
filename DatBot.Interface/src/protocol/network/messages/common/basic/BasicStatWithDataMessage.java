@@ -19,7 +19,7 @@ public class BasicStatWithDataMessage extends BasicStatMessage {
 
 	private List<StatisticData> datas;
 
-	public List<StatisticData> getDatas() { return this.datas; };
+	public List<StatisticData> getDatas() { return this.datas; }
 	public void setDatas(List<StatisticData> datas) { this.datas = datas; };
 
 	public BasicStatWithDataMessage(){

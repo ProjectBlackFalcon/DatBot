@@ -23,11 +23,11 @@ public class JobCrafterDirectoryEntryMessage extends NetworkMessage {
 	private List<JobCrafterDirectoryEntryJobInfo> jobInfoList;
 	private EntityLook playerLook;
 
-	public JobCrafterDirectoryEntryPlayerInfo getPlayerInfo() { return this.playerInfo; };
+	public JobCrafterDirectoryEntryPlayerInfo getPlayerInfo() { return this.playerInfo; }
 	public void setPlayerInfo(JobCrafterDirectoryEntryPlayerInfo playerInfo) { this.playerInfo = playerInfo; };
-	public List<JobCrafterDirectoryEntryJobInfo> getJobInfoList() { return this.jobInfoList; };
+	public List<JobCrafterDirectoryEntryJobInfo> getJobInfoList() { return this.jobInfoList; }
 	public void setJobInfoList(List<JobCrafterDirectoryEntryJobInfo> jobInfoList) { this.jobInfoList = jobInfoList; };
-	public EntityLook getPlayerLook() { return this.playerLook; };
+	public EntityLook getPlayerLook() { return this.playerLook; }
 	public void setPlayerLook(EntityLook playerLook) { this.playerLook = playerLook; };
 
 	public JobCrafterDirectoryEntryMessage(){

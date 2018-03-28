@@ -19,9 +19,9 @@ public class GameActionAcknowledgementMessage extends NetworkMessage {
 	private boolean valid;
 	private int actionId;
 
-	public boolean isValid() { return this.valid; };
+	public boolean isValid() { return this.valid; }
 	public void setValid(boolean valid) { this.valid = valid; };
-	public int getActionId() { return this.actionId; };
+	public int getActionId() { return this.actionId; }
 	public void setActionId(int actionId) { this.actionId = actionId; };
 
 	public GameActionAcknowledgementMessage(){

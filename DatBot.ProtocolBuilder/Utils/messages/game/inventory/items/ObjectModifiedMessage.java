@@ -19,7 +19,7 @@ public class ObjectModifiedMessage extends NetworkMessage {
 
 	private ObjectItem object;
 
-	public ObjectItem getObject() { return this.object; };
+	public ObjectItem getObject() { return this.object; }
 	public void setObject(ObjectItem object) { this.object = object; };
 
 	public ObjectModifiedMessage(){

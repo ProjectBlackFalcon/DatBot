@@ -20,11 +20,11 @@ public class ConsoleCommandsListMessage extends NetworkMessage {
 	private List<String> args;
 	private List<String> descriptions;
 
-	public List<String> getAliases() { return this.aliases; };
+	public List<String> getAliases() { return this.aliases; }
 	public void setAliases(List<String> aliases) { this.aliases = aliases; };
-	public List<String> getArgs() { return this.args; };
+	public List<String> getArgs() { return this.args; }
 	public void setArgs(List<String> args) { this.args = args; };
-	public List<String> getDescriptions() { return this.descriptions; };
+	public List<String> getDescriptions() { return this.descriptions; }
 	public void setDescriptions(List<String> descriptions) { this.descriptions = descriptions; };
 
 	public ConsoleCommandsListMessage(){

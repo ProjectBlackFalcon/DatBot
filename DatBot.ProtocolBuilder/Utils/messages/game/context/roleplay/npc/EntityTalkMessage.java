@@ -20,11 +20,11 @@ public class EntityTalkMessage extends NetworkMessage {
 	private int textId;
 	private List<String> parameters;
 
-	public double getEntityId() { return this.entityId; };
+	public double getEntityId() { return this.entityId; }
 	public void setEntityId(double entityId) { this.entityId = entityId; };
-	public int getTextId() { return this.textId; };
+	public int getTextId() { return this.textId; }
 	public void setTextId(int textId) { this.textId = textId; };
-	public List<String> getParameters() { return this.parameters; };
+	public List<String> getParameters() { return this.parameters; }
 	public void setParameters(List<String> parameters) { this.parameters = parameters; };
 
 	public EntityTalkMessage(){

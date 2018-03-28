@@ -21,11 +21,11 @@ public class GuildInvitedMessage extends NetworkMessage {
 	private String recruterName;
 	private BasicGuildInformations guildInfo;
 
-	public long getRecruterId() { return this.recruterId; };
+	public long getRecruterId() { return this.recruterId; }
 	public void setRecruterId(long recruterId) { this.recruterId = recruterId; };
-	public String getRecruterName() { return this.recruterName; };
+	public String getRecruterName() { return this.recruterName; }
 	public void setRecruterName(String recruterName) { this.recruterName = recruterName; };
-	public BasicGuildInformations getGuildInfo() { return this.guildInfo; };
+	public BasicGuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(BasicGuildInformations guildInfo) { this.guildInfo = guildInfo; };
 
 	public GuildInvitedMessage(){

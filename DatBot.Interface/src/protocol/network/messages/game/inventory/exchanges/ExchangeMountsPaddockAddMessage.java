@@ -19,7 +19,7 @@ public class ExchangeMountsPaddockAddMessage extends NetworkMessage {
 
 	private List<MountClientData> mountDescription;
 
-	public List<MountClientData> getMountDescription() { return this.mountDescription; };
+	public List<MountClientData> getMountDescription() { return this.mountDescription; }
 	public void setMountDescription(List<MountClientData> mountDescription) { this.mountDescription = mountDescription; };
 
 	public ExchangeMountsPaddockAddMessage(){

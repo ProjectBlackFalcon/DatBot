@@ -19,9 +19,9 @@ public class FightResultFighterListEntry extends FightResultListEntry {
 	private double id;
 	private boolean alive;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public boolean isAlive() { return this.alive; };
+	public boolean isAlive() { return this.alive; }
 	public void setAlive(boolean alive) { this.alive = alive; };
 
 	public FightResultFighterListEntry(){

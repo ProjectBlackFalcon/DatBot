@@ -18,7 +18,7 @@ public class MapFightCountMessage extends NetworkMessage {
 
 	private int fightCount;
 
-	public int getFightCount() { return this.fightCount; };
+	public int getFightCount() { return this.fightCount; }
 	public void setFightCount(int fightCount) { this.fightCount = fightCount; };
 
 	public MapFightCountMessage(){

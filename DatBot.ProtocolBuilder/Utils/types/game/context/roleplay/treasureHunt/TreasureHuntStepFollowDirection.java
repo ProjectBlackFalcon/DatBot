@@ -19,9 +19,9 @@ public class TreasureHuntStepFollowDirection extends TreasureHuntStep {
 	private int direction;
 	private int mapCount;
 
-	public int getDirection() { return this.direction; };
+	public int getDirection() { return this.direction; }
 	public void setDirection(int direction) { this.direction = direction; };
-	public int getMapCount() { return this.mapCount; };
+	public int getMapCount() { return this.mapCount; }
 	public void setMapCount(int mapCount) { this.mapCount = mapCount; };
 
 	public TreasureHuntStepFollowDirection(){

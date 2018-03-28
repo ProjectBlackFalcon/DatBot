@@ -20,11 +20,11 @@ public class BasicGuildInformations extends AbstractSocialGroupInfos {
 	private String guildName;
 	private int guildLevel;
 
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
-	public String getGuildName() { return this.guildName; };
+	public String getGuildName() { return this.guildName; }
 	public void setGuildName(String guildName) { this.guildName = guildName; };
-	public int getGuildLevel() { return this.guildLevel; };
+	public int getGuildLevel() { return this.guildLevel; }
 	public void setGuildLevel(int guildLevel) { this.guildLevel = guildLevel; };
 
 	public BasicGuildInformations(){

@@ -20,11 +20,11 @@ public class HavenBagFurnitureInformation extends NetworkMessage {
 	private int funitureId;
 	private int orientation;
 
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
-	public int getFunitureId() { return this.funitureId; };
+	public int getFunitureId() { return this.funitureId; }
 	public void setFunitureId(int funitureId) { this.funitureId = funitureId; };
-	public int getOrientation() { return this.orientation; };
+	public int getOrientation() { return this.orientation; }
 	public void setOrientation(int orientation) { this.orientation = orientation; };
 
 	public HavenBagFurnitureInformation(){

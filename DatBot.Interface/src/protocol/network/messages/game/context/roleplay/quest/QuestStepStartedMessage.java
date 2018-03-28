@@ -19,9 +19,9 @@ public class QuestStepStartedMessage extends NetworkMessage {
 	private int questId;
 	private int stepId;
 
-	public int getQuestId() { return this.questId; };
+	public int getQuestId() { return this.questId; }
 	public void setQuestId(int questId) { this.questId = questId; };
-	public int getStepId() { return this.stepId; };
+	public int getStepId() { return this.stepId; }
 	public void setStepId(int stepId) { this.stepId = stepId; };
 
 	public QuestStepStartedMessage(){

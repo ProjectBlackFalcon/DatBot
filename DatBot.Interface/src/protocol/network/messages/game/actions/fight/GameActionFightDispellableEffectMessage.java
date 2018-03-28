@@ -19,7 +19,7 @@ public class GameActionFightDispellableEffectMessage extends AbstractGameActionM
 
 	private AbstractFightDispellableEffect effect;
 
-	public AbstractFightDispellableEffect getEffect() { return this.effect; };
+	public AbstractFightDispellableEffect getEffect() { return this.effect; }
 	public void setEffect(AbstractFightDispellableEffect effect) { this.effect = effect; };
 
 	public GameActionFightDispellableEffectMessage(){

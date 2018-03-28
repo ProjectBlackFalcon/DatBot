@@ -18,18 +18,22 @@ public class ObjectQuantityMessage extends NetworkMessage {
 
 	private int objectUID;
 	private int quantity;
+	private int origin;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
+	public int getOrigin() { return this.origin; }
+	public void setOrigin(int origin) { this.origin = origin; };
 
 	public ObjectQuantityMessage(){
 	}
 
-	public ObjectQuantityMessage(int objectUID, int quantity){
+	public ObjectQuantityMessage(int objectUID, int quantity, int origin){
 		this.objectUID = objectUID;
 		this.quantity = quantity;
+		this.origin = origin;
 	}
 
 	@Override
@@ -37,6 +41,7 @@ public class ObjectQuantityMessage extends NetworkMessage {
 		try {
 			writer.writeVarInt(this.objectUID);
 			writer.writeVarInt(this.quantity);
+			writer.writeByte(this.origin);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -47,6 +52,7 @@ public class ObjectQuantityMessage extends NetworkMessage {
 		try {
 			this.objectUID = reader.readVarInt();
 			this.quantity = reader.readVarInt();
+			this.origin = reader.readByte();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

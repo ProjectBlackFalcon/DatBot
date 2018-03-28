@@ -19,7 +19,7 @@ public class ExchangeObjectsModifiedMessage extends ExchangeObjectMessage {
 
 	private List<ObjectItem> object;
 
-	public List<ObjectItem> getObject() { return this.object; };
+	public List<ObjectItem> getObject() { return this.object; }
 	public void setObject(List<ObjectItem> object) { this.object = object; };
 
 	public ExchangeObjectsModifiedMessage(){

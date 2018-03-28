@@ -18,7 +18,7 @@ public class ChatSmileyExtraPackListMessage extends NetworkMessage {
 
 	private List<Integer> packIds;
 
-	public List<Integer> getPackIds() { return this.packIds; };
+	public List<Integer> getPackIds() { return this.packIds; }
 	public void setPackIds(List<Integer> packIds) { this.packIds = packIds; };
 
 	public ChatSmileyExtraPackListMessage(){

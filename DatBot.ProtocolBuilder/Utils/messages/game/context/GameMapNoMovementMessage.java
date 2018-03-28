@@ -19,9 +19,9 @@ public class GameMapNoMovementMessage extends NetworkMessage {
 	private int cellX;
 	private int cellY;
 
-	public int getCellX() { return this.cellX; };
+	public int getCellX() { return this.cellX; }
 	public void setCellX(int cellX) { this.cellX = cellX; };
-	public int getCellY() { return this.cellY; };
+	public int getCellY() { return this.cellY; }
 	public void setCellY(int cellY) { this.cellY = cellY; };
 
 	public GameMapNoMovementMessage(){

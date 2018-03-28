@@ -18,7 +18,7 @@ public class AcquaintanceServerListMessage extends NetworkMessage {
 
 	private List<Integer> servers;
 
-	public List<Integer> getServers() { return this.servers; };
+	public List<Integer> getServers() { return this.servers; }
 	public void setServers(List<Integer> servers) { this.servers = servers; };
 
 	public AcquaintanceServerListMessage(){

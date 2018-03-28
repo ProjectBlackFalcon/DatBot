@@ -19,7 +19,7 @@ public class CharacterMinimalAllianceInformations extends CharacterMinimalGuildI
 
 	private BasicAllianceInformations alliance;
 
-	public BasicAllianceInformations getAlliance() { return this.alliance; };
+	public BasicAllianceInformations getAlliance() { return this.alliance; }
 	public void setAlliance(BasicAllianceInformations alliance) { this.alliance = alliance; };
 
 	public CharacterMinimalAllianceInformations(){

@@ -20,9 +20,9 @@ public class ObjectItemMinimalInformation extends Item {
 	private int objectGID;
 	private List<ObjectEffect> effects;
 
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
-	public List<ObjectEffect> getEffects() { return this.effects; };
+	public List<ObjectEffect> getEffects() { return this.effects; }
 	public void setEffects(List<ObjectEffect> effects) { this.effects = effects; };
 
 	public ObjectItemMinimalInformation(){

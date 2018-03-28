@@ -18,7 +18,7 @@ public class ExchangePlayerRequestMessage extends ExchangeRequestMessage {
 
 	private long target;
 
-	public long getTarget() { return this.target; };
+	public long getTarget() { return this.target; }
 	public void setTarget(long target) { this.target = target; };
 
 	public ExchangePlayerRequestMessage(){

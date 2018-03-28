@@ -18,7 +18,7 @@ public class PrismUseRequestMessage extends NetworkMessage {
 
 	private int moduleToUse;
 
-	public int getModuleToUse() { return this.moduleToUse; };
+	public int getModuleToUse() { return this.moduleToUse; }
 	public void setModuleToUse(int moduleToUse) { this.moduleToUse = moduleToUse; };
 
 	public PrismUseRequestMessage(){

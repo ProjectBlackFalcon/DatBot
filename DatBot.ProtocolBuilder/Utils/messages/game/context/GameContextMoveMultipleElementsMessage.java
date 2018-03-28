@@ -19,7 +19,7 @@ public class GameContextMoveMultipleElementsMessage extends NetworkMessage {
 
 	private List<EntityMovementInformations> movements;
 
-	public List<EntityMovementInformations> getMovements() { return this.movements; };
+	public List<EntityMovementInformations> getMovements() { return this.movements; }
 	public void setMovements(List<EntityMovementInformations> movements) { this.movements = movements; };
 
 	public GameContextMoveMultipleElementsMessage(){

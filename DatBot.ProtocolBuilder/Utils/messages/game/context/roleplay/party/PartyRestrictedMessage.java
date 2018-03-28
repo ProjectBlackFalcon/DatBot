@@ -18,7 +18,7 @@ public class PartyRestrictedMessage extends AbstractPartyMessage {
 
 	private boolean restricted;
 
-	public boolean isRestricted() { return this.restricted; };
+	public boolean isRestricted() { return this.restricted; }
 	public void setRestricted(boolean restricted) { this.restricted = restricted; };
 
 	public PartyRestrictedMessage(){

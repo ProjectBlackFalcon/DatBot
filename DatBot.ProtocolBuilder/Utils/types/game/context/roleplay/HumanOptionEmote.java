@@ -19,9 +19,9 @@ public class HumanOptionEmote extends HumanOption {
 	private int emoteId;
 	private double emoteStartTime;
 
-	public int getEmoteId() { return this.emoteId; };
+	public int getEmoteId() { return this.emoteId; }
 	public void setEmoteId(int emoteId) { this.emoteId = emoteId; };
-	public double getEmoteStartTime() { return this.emoteStartTime; };
+	public double getEmoteStartTime() { return this.emoteStartTime; }
 	public void setEmoteStartTime(double emoteStartTime) { this.emoteStartTime = emoteStartTime; };
 
 	public HumanOptionEmote(){

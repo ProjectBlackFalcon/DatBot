@@ -24,15 +24,15 @@ public class GameFightEndMessage extends NetworkMessage {
 	private List<FightResultListEntry> results;
 	private List<NamedPartyTeamWithOutcome> namedPartyTeamsOutcomes;
 
-	public int getDuration() { return this.duration; };
+	public int getDuration() { return this.duration; }
 	public void setDuration(int duration) { this.duration = duration; };
-	public int getAgeBonus() { return this.ageBonus; };
+	public int getAgeBonus() { return this.ageBonus; }
 	public void setAgeBonus(int ageBonus) { this.ageBonus = ageBonus; };
-	public int getLootShareLimitMalus() { return this.lootShareLimitMalus; };
+	public int getLootShareLimitMalus() { return this.lootShareLimitMalus; }
 	public void setLootShareLimitMalus(int lootShareLimitMalus) { this.lootShareLimitMalus = lootShareLimitMalus; };
-	public List<FightResultListEntry> getResults() { return this.results; };
+	public List<FightResultListEntry> getResults() { return this.results; }
 	public void setResults(List<FightResultListEntry> results) { this.results = results; };
-	public List<NamedPartyTeamWithOutcome> getNamedPartyTeamsOutcomes() { return this.namedPartyTeamsOutcomes; };
+	public List<NamedPartyTeamWithOutcome> getNamedPartyTeamsOutcomes() { return this.namedPartyTeamsOutcomes; }
 	public void setNamedPartyTeamsOutcomes(List<NamedPartyTeamWithOutcome> namedPartyTeamsOutcomes) { this.namedPartyTeamsOutcomes = namedPartyTeamsOutcomes; };
 
 	public GameFightEndMessage(){

@@ -19,9 +19,9 @@ public class ObjectGroundListAddedMessage extends NetworkMessage {
 	private List<Integer> cells;
 	private List<Integer> referenceIds;
 
-	public List<Integer> getCells() { return this.cells; };
+	public List<Integer> getCells() { return this.cells; }
 	public void setCells(List<Integer> cells) { this.cells = cells; };
-	public List<Integer> getReferenceIds() { return this.referenceIds; };
+	public List<Integer> getReferenceIds() { return this.referenceIds; }
 	public void setReferenceIds(List<Integer> referenceIds) { this.referenceIds = referenceIds; };
 
 	public ObjectGroundListAddedMessage(){

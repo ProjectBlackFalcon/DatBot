@@ -19,9 +19,9 @@ public class AllianceModificationNameAndTagValidMessage extends NetworkMessage {
 	private String allianceName;
 	private String allianceTag;
 
-	public String getAllianceName() { return this.allianceName; };
+	public String getAllianceName() { return this.allianceName; }
 	public void setAllianceName(String allianceName) { this.allianceName = allianceName; };
-	public String getAllianceTag() { return this.allianceTag; };
+	public String getAllianceTag() { return this.allianceTag; }
 	public void setAllianceTag(String allianceTag) { this.allianceTag = allianceTag; };
 
 	public AllianceModificationNameAndTagValidMessage(){

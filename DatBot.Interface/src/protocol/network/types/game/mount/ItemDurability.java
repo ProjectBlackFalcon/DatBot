@@ -19,9 +19,9 @@ public class ItemDurability extends NetworkMessage {
 	private int durability;
 	private int durabilityMax;
 
-	public int getDurability() { return this.durability; };
+	public int getDurability() { return this.durability; }
 	public void setDurability(int durability) { this.durability = durability; };
-	public int getDurabilityMax() { return this.durabilityMax; };
+	public int getDurabilityMax() { return this.durabilityMax; }
 	public void setDurabilityMax(int durabilityMax) { this.durabilityMax = durabilityMax; };
 
 	public ItemDurability(){

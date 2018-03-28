@@ -18,7 +18,7 @@ public class GameFightOptionToggleMessage extends NetworkMessage {
 
 	private int option;
 
-	public int getOption() { return this.option; };
+	public int getOption() { return this.option; }
 	public void setOption(int option) { this.option = option; };
 
 	public GameFightOptionToggleMessage(){

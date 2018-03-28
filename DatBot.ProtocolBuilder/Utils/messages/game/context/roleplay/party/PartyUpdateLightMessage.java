@@ -22,15 +22,15 @@ public class PartyUpdateLightMessage extends AbstractPartyEventMessage {
 	private int prospecting;
 	private int regenRate;
 
-	public long getId() { return this.id; };
+	public long getId() { return this.id; }
 	public void setId(long id) { this.id = id; };
-	public int getLifePoints() { return this.lifePoints; };
+	public int getLifePoints() { return this.lifePoints; }
 	public void setLifePoints(int lifePoints) { this.lifePoints = lifePoints; };
-	public int getMaxLifePoints() { return this.maxLifePoints; };
+	public int getMaxLifePoints() { return this.maxLifePoints; }
 	public void setMaxLifePoints(int maxLifePoints) { this.maxLifePoints = maxLifePoints; };
-	public int getProspecting() { return this.prospecting; };
+	public int getProspecting() { return this.prospecting; }
 	public void setProspecting(int prospecting) { this.prospecting = prospecting; };
-	public int getRegenRate() { return this.regenRate; };
+	public int getRegenRate() { return this.regenRate; }
 	public void setRegenRate(int regenRate) { this.regenRate = regenRate; };
 
 	public PartyUpdateLightMessage(){

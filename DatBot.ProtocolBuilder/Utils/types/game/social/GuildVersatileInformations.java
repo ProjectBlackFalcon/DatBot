@@ -21,13 +21,13 @@ public class GuildVersatileInformations extends NetworkMessage {
 	private int guildLevel;
 	private int nbMembers;
 
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
-	public long getLeaderId() { return this.leaderId; };
+	public long getLeaderId() { return this.leaderId; }
 	public void setLeaderId(long leaderId) { this.leaderId = leaderId; };
-	public int getGuildLevel() { return this.guildLevel; };
+	public int getGuildLevel() { return this.guildLevel; }
 	public void setGuildLevel(int guildLevel) { this.guildLevel = guildLevel; };
-	public int getNbMembers() { return this.nbMembers; };
+	public int getNbMembers() { return this.nbMembers; }
 	public void setNbMembers(int nbMembers) { this.nbMembers = nbMembers; };
 
 	public GuildVersatileInformations(){

@@ -20,9 +20,9 @@ public class GameRolePlayHumanoidInformations extends GameRolePlayNamedActorInfo
 	private HumanInformations humanoidInfo;
 	private int accountId;
 
-	public HumanInformations getHumanoidInfo() { return this.humanoidInfo; };
+	public HumanInformations getHumanoidInfo() { return this.humanoidInfo; }
 	public void setHumanoidInfo(HumanInformations humanoidInfo) { this.humanoidInfo = humanoidInfo; };
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
 
 	public GameRolePlayHumanoidInformations(){

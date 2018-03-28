@@ -18,7 +18,7 @@ public class ShowCellSpectatorMessage extends ShowCellMessage {
 
 	private String playerName;
 
-	public String getPlayerName() { return this.playerName; };
+	public String getPlayerName() { return this.playerName; }
 	public void setPlayerName(String playerName) { this.playerName = playerName; };
 
 	public ShowCellSpectatorMessage(){

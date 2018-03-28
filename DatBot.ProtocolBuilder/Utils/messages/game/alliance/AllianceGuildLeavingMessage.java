@@ -19,9 +19,9 @@ public class AllianceGuildLeavingMessage extends NetworkMessage {
 	private boolean kicked;
 	private int guildId;
 
-	public boolean isKicked() { return this.kicked; };
+	public boolean isKicked() { return this.kicked; }
 	public void setKicked(boolean kicked) { this.kicked = kicked; };
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
 
 	public AllianceGuildLeavingMessage(){

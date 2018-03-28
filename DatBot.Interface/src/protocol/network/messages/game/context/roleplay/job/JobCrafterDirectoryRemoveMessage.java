@@ -19,9 +19,9 @@ public class JobCrafterDirectoryRemoveMessage extends NetworkMessage {
 	private int jobId;
 	private long playerId;
 
-	public int getJobId() { return this.jobId; };
+	public int getJobId() { return this.jobId; }
 	public void setJobId(int jobId) { this.jobId = jobId; };
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
 
 	public JobCrafterDirectoryRemoveMessage(){

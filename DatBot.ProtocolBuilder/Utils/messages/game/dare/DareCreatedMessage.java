@@ -20,9 +20,9 @@ public class DareCreatedMessage extends NetworkMessage {
 	private DareInformations dareInfos;
 	private boolean needNotifications;
 
-	public DareInformations getDareInfos() { return this.dareInfos; };
+	public DareInformations getDareInfos() { return this.dareInfos; }
 	public void setDareInfos(DareInformations dareInfos) { this.dareInfos = dareInfos; };
-	public boolean isNeedNotifications() { return this.needNotifications; };
+	public boolean isNeedNotifications() { return this.needNotifications; }
 	public void setNeedNotifications(boolean needNotifications) { this.needNotifications = needNotifications; };
 
 	public DareCreatedMessage(){

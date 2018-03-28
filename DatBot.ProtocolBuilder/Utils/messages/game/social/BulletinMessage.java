@@ -18,7 +18,7 @@ public class BulletinMessage extends SocialNoticeMessage {
 
 	private int lastNotifiedTimestamp;
 
-	public int getLastNotifiedTimestamp() { return this.lastNotifiedTimestamp; };
+	public int getLastNotifiedTimestamp() { return this.lastNotifiedTimestamp; }
 	public void setLastNotifiedTimestamp(int lastNotifiedTimestamp) { this.lastNotifiedTimestamp = lastNotifiedTimestamp; };
 
 	public BulletinMessage(){

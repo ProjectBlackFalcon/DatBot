@@ -19,7 +19,7 @@ public class GameFightRefreshFighterMessage extends NetworkMessage {
 
 	private GameContextActorInformations informations;
 
-	public GameContextActorInformations getInformations() { return this.informations; };
+	public GameContextActorInformations getInformations() { return this.informations; }
 	public void setInformations(GameContextActorInformations informations) { this.informations = informations; };
 
 	public GameFightRefreshFighterMessage(){

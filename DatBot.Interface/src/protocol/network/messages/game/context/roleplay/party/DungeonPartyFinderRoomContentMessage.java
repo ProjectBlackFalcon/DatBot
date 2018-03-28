@@ -20,9 +20,9 @@ public class DungeonPartyFinderRoomContentMessage extends NetworkMessage {
 	private int dungeonId;
 	private List<DungeonPartyFinderPlayer> players;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
-	public List<DungeonPartyFinderPlayer> getPlayers() { return this.players; };
+	public List<DungeonPartyFinderPlayer> getPlayers() { return this.players; }
 	public void setPlayers(List<DungeonPartyFinderPlayer> players) { this.players = players; };
 
 	public DungeonPartyFinderRoomContentMessage(){

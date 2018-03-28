@@ -21,11 +21,11 @@ public class IdolListMessage extends NetworkMessage {
 	private List<Integer> partyChosenIdols;
 	private List<PartyIdol> partyIdols;
 
-	public List<Integer> getChosenIdols() { return this.chosenIdols; };
+	public List<Integer> getChosenIdols() { return this.chosenIdols; }
 	public void setChosenIdols(List<Integer> chosenIdols) { this.chosenIdols = chosenIdols; };
-	public List<Integer> getPartyChosenIdols() { return this.partyChosenIdols; };
+	public List<Integer> getPartyChosenIdols() { return this.partyChosenIdols; }
 	public void setPartyChosenIdols(List<Integer> partyChosenIdols) { this.partyChosenIdols = partyChosenIdols; };
-	public List<PartyIdol> getPartyIdols() { return this.partyIdols; };
+	public List<PartyIdol> getPartyIdols() { return this.partyIdols; }
 	public void setPartyIdols(List<PartyIdol> partyIdols) { this.partyIdols = partyIdols; };
 
 	public IdolListMessage(){

@@ -19,7 +19,7 @@ public class ExchangeBidHouseItemAddOkMessage extends NetworkMessage {
 
 	private ObjectItemToSellInBid itemInfo;
 
-	public ObjectItemToSellInBid getItemInfo() { return this.itemInfo; };
+	public ObjectItemToSellInBid getItemInfo() { return this.itemInfo; }
 	public void setItemInfo(ObjectItemToSellInBid itemInfo) { this.itemInfo = itemInfo; };
 
 	public ExchangeBidHouseItemAddOkMessage(){

@@ -19,7 +19,7 @@ public class PartyNewGuestMessage extends AbstractPartyEventMessage {
 
 	private PartyGuestInformations guest;
 
-	public PartyGuestInformations getGuest() { return this.guest; };
+	public PartyGuestInformations getGuest() { return this.guest; }
 	public void setGuest(PartyGuestInformations guest) { this.guest = guest; };
 
 	public PartyNewGuestMessage(){

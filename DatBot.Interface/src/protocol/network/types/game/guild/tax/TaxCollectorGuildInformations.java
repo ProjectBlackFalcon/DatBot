@@ -19,7 +19,7 @@ public class TaxCollectorGuildInformations extends TaxCollectorComplementaryInfo
 
 	private BasicGuildInformations guild;
 
-	public BasicGuildInformations getGuild() { return this.guild; };
+	public BasicGuildInformations getGuild() { return this.guild; }
 	public void setGuild(BasicGuildInformations guild) { this.guild = guild; };
 
 	public TaxCollectorGuildInformations(){

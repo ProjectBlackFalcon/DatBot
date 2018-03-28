@@ -20,11 +20,11 @@ public class FriendInformations extends AbstractContactInformations {
 	private int lastConnection;
 	private int achievementPoints;
 
-	public int getPlayerState() { return this.playerState; };
+	public int getPlayerState() { return this.playerState; }
 	public void setPlayerState(int playerState) { this.playerState = playerState; };
-	public int getLastConnection() { return this.lastConnection; };
+	public int getLastConnection() { return this.lastConnection; }
 	public void setLastConnection(int lastConnection) { this.lastConnection = lastConnection; };
-	public int getAchievementPoints() { return this.achievementPoints; };
+	public int getAchievementPoints() { return this.achievementPoints; }
 	public void setAchievementPoints(int achievementPoints) { this.achievementPoints = achievementPoints; };
 
 	public FriendInformations(){

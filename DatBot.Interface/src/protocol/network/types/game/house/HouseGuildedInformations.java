@@ -19,7 +19,7 @@ public class HouseGuildedInformations extends HouseInstanceInformations {
 
 	private GuildInformations guildInfo;
 
-	public GuildInformations getGuildInfo() { return this.guildInfo; };
+	public GuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(GuildInformations guildInfo) { this.guildInfo = guildInfo; };
 
 	public HouseGuildedInformations(){

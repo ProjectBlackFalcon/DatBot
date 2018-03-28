@@ -19,7 +19,7 @@ public class HumanOptionFollowers extends HumanOption {
 
 	private List<IndexedEntityLook> followingCharactersLook;
 
-	public List<IndexedEntityLook> getFollowingCharactersLook() { return this.followingCharactersLook; };
+	public List<IndexedEntityLook> getFollowingCharactersLook() { return this.followingCharactersLook; }
 	public void setFollowingCharactersLook(List<IndexedEntityLook> followingCharactersLook) { this.followingCharactersLook = followingCharactersLook; };
 
 	public HumanOptionFollowers(){

@@ -20,9 +20,9 @@ public class SpellListMessage extends NetworkMessage {
 	private boolean spellPrevisualization;
 	private List<SpellItem> spells;
 
-	public boolean isSpellPrevisualization() { return this.spellPrevisualization; };
+	public boolean isSpellPrevisualization() { return this.spellPrevisualization; }
 	public void setSpellPrevisualization(boolean spellPrevisualization) { this.spellPrevisualization = spellPrevisualization; };
-	public List<SpellItem> getSpells() { return this.spells; };
+	public List<SpellItem> getSpells() { return this.spells; }
 	public void setSpells(List<SpellItem> spells) { this.spells = spells; };
 
 	public SpellListMessage(){

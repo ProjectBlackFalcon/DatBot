@@ -19,7 +19,7 @@ public class AlliancedGuildFactSheetInformations extends GuildInformations {
 
 	private BasicNamedAllianceInformations allianceInfos;
 
-	public BasicNamedAllianceInformations getAllianceInfos() { return this.allianceInfos; };
+	public BasicNamedAllianceInformations getAllianceInfos() { return this.allianceInfos; }
 	public void setAllianceInfos(BasicNamedAllianceInformations allianceInfos) { this.allianceInfos = allianceInfos; };
 
 	public AlliancedGuildFactSheetInformations(){

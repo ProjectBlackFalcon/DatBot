@@ -19,7 +19,7 @@ public class StatedMapUpdateMessage extends NetworkMessage {
 
 	private List<StatedElement> statedElements;
 
-	public List<StatedElement> getStatedElements() { return this.statedElements; };
+	public List<StatedElement> getStatedElements() { return this.statedElements; }
 	public void setStatedElements(List<StatedElement> statedElements) { this.statedElements = statedElements; };
 
 	public StatedMapUpdateMessage(){

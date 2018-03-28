@@ -27,23 +27,23 @@ public class IdentificationMessage extends NetworkMessage {
 	private long sessionOptionalSalt;
 	private List<Integer> failedAttempts;
 
-	public VersionExtended getVersion() { return this.version; };
+	public VersionExtended getVersion() { return this.version; }
 	public void setVersion(VersionExtended version) { this.version = version; };
-	public String getLang() { return this.lang; };
+	public String getLang() { return this.lang; }
 	public void setLang(String lang) { this.lang = lang; };
-	public List<Integer> getCredentials() { return this.credentials; };
+	public List<Integer> getCredentials() { return this.credentials; }
 	public void setCredentials(List<Integer> credentials) { this.credentials = credentials; };
-	public int getServerId() { return this.serverId; };
+	public int getServerId() { return this.serverId; }
 	public void setServerId(int serverId) { this.serverId = serverId; };
-	public boolean isAutoconnect() { return this.autoconnect; };
+	public boolean isAutoconnect() { return this.autoconnect; }
 	public void setAutoconnect(boolean autoconnect) { this.autoconnect = autoconnect; };
-	public boolean isUseCertificate() { return this.useCertificate; };
+	public boolean isUseCertificate() { return this.useCertificate; }
 	public void setUseCertificate(boolean useCertificate) { this.useCertificate = useCertificate; };
-	public boolean isUseLoginToken() { return this.useLoginToken; };
+	public boolean isUseLoginToken() { return this.useLoginToken; }
 	public void setUseLoginToken(boolean useLoginToken) { this.useLoginToken = useLoginToken; };
-	public long getSessionOptionalSalt() { return this.sessionOptionalSalt; };
+	public long getSessionOptionalSalt() { return this.sessionOptionalSalt; }
 	public void setSessionOptionalSalt(long sessionOptionalSalt) { this.sessionOptionalSalt = sessionOptionalSalt; };
-	public List<Integer> getFailedAttempts() { return this.failedAttempts; };
+	public List<Integer> getFailedAttempts() { return this.failedAttempts; }
 	public void setFailedAttempts(List<Integer> failedAttempts) { this.failedAttempts = failedAttempts; };
 
 	public IdentificationMessage(){

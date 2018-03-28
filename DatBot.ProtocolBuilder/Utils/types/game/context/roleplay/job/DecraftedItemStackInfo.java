@@ -22,15 +22,15 @@ public class DecraftedItemStackInfo extends NetworkMessage {
 	private List<Integer> runesId;
 	private List<Integer> runesQty;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public double getBonusMin() { return this.bonusMin; };
+	public double getBonusMin() { return this.bonusMin; }
 	public void setBonusMin(double bonusMin) { this.bonusMin = bonusMin; };
-	public double getBonusMax() { return this.bonusMax; };
+	public double getBonusMax() { return this.bonusMax; }
 	public void setBonusMax(double bonusMax) { this.bonusMax = bonusMax; };
-	public List<Integer> getRunesId() { return this.runesId; };
+	public List<Integer> getRunesId() { return this.runesId; }
 	public void setRunesId(List<Integer> runesId) { this.runesId = runesId; };
-	public List<Integer> getRunesQty() { return this.runesQty; };
+	public List<Integer> getRunesQty() { return this.runesQty; }
 	public void setRunesQty(List<Integer> runesQty) { this.runesQty = runesQty; };
 
 	public DecraftedItemStackInfo(){

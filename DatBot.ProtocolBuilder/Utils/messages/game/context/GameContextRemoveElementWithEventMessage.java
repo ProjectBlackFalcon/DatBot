@@ -18,7 +18,7 @@ public class GameContextRemoveElementWithEventMessage extends GameContextRemoveE
 
 	private int elementEventId;
 
-	public int getElementEventId() { return this.elementEventId; };
+	public int getElementEventId() { return this.elementEventId; }
 	public void setElementEventId(int elementEventId) { this.elementEventId = elementEventId; };
 
 	public GameContextRemoveElementWithEventMessage(){

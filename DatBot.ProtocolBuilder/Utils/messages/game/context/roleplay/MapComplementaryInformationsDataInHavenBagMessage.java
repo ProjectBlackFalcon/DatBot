@@ -22,13 +22,13 @@ public class MapComplementaryInformationsDataInHavenBagMessage extends MapComple
 	private int roomId;
 	private int maxRoomId;
 
-	public CharacterMinimalInformations getOwnerInformations() { return this.ownerInformations; };
+	public CharacterMinimalInformations getOwnerInformations() { return this.ownerInformations; }
 	public void setOwnerInformations(CharacterMinimalInformations ownerInformations) { this.ownerInformations = ownerInformations; };
-	public int getTheme() { return this.theme; };
+	public int getTheme() { return this.theme; }
 	public void setTheme(int theme) { this.theme = theme; };
-	public int getRoomId() { return this.roomId; };
+	public int getRoomId() { return this.roomId; }
 	public void setRoomId(int roomId) { this.roomId = roomId; };
-	public int getMaxRoomId() { return this.maxRoomId; };
+	public int getMaxRoomId() { return this.maxRoomId; }
 	public void setMaxRoomId(int maxRoomId) { this.maxRoomId = maxRoomId; };
 
 	public MapComplementaryInformationsDataInHavenBagMessage(){

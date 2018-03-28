@@ -19,9 +19,9 @@ public class AbstractContactInformations extends NetworkMessage {
 	private int accountId;
 	private String accountName;
 
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public String getAccountName() { return this.accountName; };
+	public String getAccountName() { return this.accountName; }
 	public void setAccountName(String accountName) { this.accountName = accountName; };
 
 	public AbstractContactInformations(){

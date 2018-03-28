@@ -18,7 +18,7 @@ public class JobBookSubscribeRequestMessage extends NetworkMessage {
 
 	private List<Integer> jobIds;
 
-	public List<Integer> getJobIds() { return this.jobIds; };
+	public List<Integer> getJobIds() { return this.jobIds; }
 	public void setJobIds(List<Integer> jobIds) { this.jobIds = jobIds; };
 
 	public JobBookSubscribeRequestMessage(){

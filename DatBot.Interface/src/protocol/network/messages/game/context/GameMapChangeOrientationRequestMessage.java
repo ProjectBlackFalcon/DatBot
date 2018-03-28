@@ -18,7 +18,7 @@ public class GameMapChangeOrientationRequestMessage extends NetworkMessage {
 
 	private int direction;
 
-	public int getDirection() { return this.direction; };
+	public int getDirection() { return this.direction; }
 	public void setDirection(int direction) { this.direction = direction; };
 
 	public GameMapChangeOrientationRequestMessage(){

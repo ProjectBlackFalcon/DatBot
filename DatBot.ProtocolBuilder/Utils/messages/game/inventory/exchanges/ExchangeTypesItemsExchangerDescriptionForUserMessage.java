@@ -19,7 +19,7 @@ public class ExchangeTypesItemsExchangerDescriptionForUserMessage extends Networ
 
 	private List<BidExchangerObjectInfo> itemTypeDescriptions;
 
-	public List<BidExchangerObjectInfo> getItemTypeDescriptions() { return this.itemTypeDescriptions; };
+	public List<BidExchangerObjectInfo> getItemTypeDescriptions() { return this.itemTypeDescriptions; }
 	public void setItemTypeDescriptions(List<BidExchangerObjectInfo> itemTypeDescriptions) { this.itemTypeDescriptions = itemTypeDescriptions; };
 
 	public ExchangeTypesItemsExchangerDescriptionForUserMessage(){

@@ -18,7 +18,7 @@ public class PartyLeaderUpdateMessage extends AbstractPartyEventMessage {
 
 	private long partyLeaderId;
 
-	public long getPartyLeaderId() { return this.partyLeaderId; };
+	public long getPartyLeaderId() { return this.partyLeaderId; }
 	public void setPartyLeaderId(long partyLeaderId) { this.partyLeaderId = partyLeaderId; };
 
 	public PartyLeaderUpdateMessage(){

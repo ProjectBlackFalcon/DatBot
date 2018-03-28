@@ -19,9 +19,9 @@ public class DareSubscribeRequestMessage extends NetworkMessage {
 	private double dareId;
 	private boolean subscribe;
 
-	public double getDareId() { return this.dareId; };
+	public double getDareId() { return this.dareId; }
 	public void setDareId(double dareId) { this.dareId = dareId; };
-	public boolean isSubscribe() { return this.subscribe; };
+	public boolean isSubscribe() { return this.subscribe; }
 	public void setSubscribe(boolean subscribe) { this.subscribe = subscribe; };
 
 	public DareSubscribeRequestMessage(){

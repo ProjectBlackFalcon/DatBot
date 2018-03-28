@@ -19,9 +19,9 @@ public class ObjectAveragePricesMessage extends NetworkMessage {
 	private List<Integer> ids;
 	private List<Long> avgPrices;
 
-	public List<Integer> getIds() { return this.ids; };
+	public List<Integer> getIds() { return this.ids; }
 	public void setIds(List<Integer> ids) { this.ids = ids; };
-	public List<Long> getAvgPrices() { return this.avgPrices; };
+	public List<Long> getAvgPrices() { return this.avgPrices; }
 	public void setAvgPrices(List<Long> avgPrices) { this.avgPrices = avgPrices; };
 
 	public ObjectAveragePricesMessage(){

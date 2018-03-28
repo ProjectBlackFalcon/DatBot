@@ -19,7 +19,7 @@ public class TaxCollectorDialogQuestionBasicMessage extends NetworkMessage {
 
 	private BasicGuildInformations guildInfo;
 
-	public BasicGuildInformations getGuildInfo() { return this.guildInfo; };
+	public BasicGuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(BasicGuildInformations guildInfo) { this.guildInfo = guildInfo; };
 
 	public TaxCollectorDialogQuestionBasicMessage(){

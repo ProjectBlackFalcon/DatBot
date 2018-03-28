@@ -22,11 +22,11 @@ public class GameContextActorInformations extends NetworkMessage {
 	private EntityLook look;
 	private EntityDispositionInformations disposition;
 
-	public double getContextualId() { return this.contextualId; };
+	public double getContextualId() { return this.contextualId; }
 	public void setContextualId(double contextualId) { this.contextualId = contextualId; };
-	public EntityLook getLook() { return this.look; };
+	public EntityLook getLook() { return this.look; }
 	public void setLook(EntityLook look) { this.look = look; };
-	public EntityDispositionInformations getDisposition() { return this.disposition; };
+	public EntityDispositionInformations getDisposition() { return this.disposition; }
 	public void setDisposition(EntityDispositionInformations disposition) { this.disposition = disposition; };
 
 	public GameContextActorInformations(){

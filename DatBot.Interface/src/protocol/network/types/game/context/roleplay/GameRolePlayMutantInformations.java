@@ -19,9 +19,9 @@ public class GameRolePlayMutantInformations extends GameRolePlayHumanoidInformat
 	private int monsterId;
 	private int powerLevel;
 
-	public int getMonsterId() { return this.monsterId; };
+	public int getMonsterId() { return this.monsterId; }
 	public void setMonsterId(int monsterId) { this.monsterId = monsterId; };
-	public int getPowerLevel() { return this.powerLevel; };
+	public int getPowerLevel() { return this.powerLevel; }
 	public void setPowerLevel(int powerLevel) { this.powerLevel = powerLevel; };
 
 	public GameRolePlayMutantInformations(){

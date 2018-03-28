@@ -18,7 +18,7 @@ public class EnterHavenBagRequestMessage extends NetworkMessage {
 
 	private long havenBagOwner;
 
-	public long getHavenBagOwner() { return this.havenBagOwner; };
+	public long getHavenBagOwner() { return this.havenBagOwner; }
 	public void setHavenBagOwner(long havenBagOwner) { this.havenBagOwner = havenBagOwner; };
 
 	public EnterHavenBagRequestMessage(){

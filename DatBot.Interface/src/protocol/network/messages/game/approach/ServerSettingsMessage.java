@@ -19,24 +19,28 @@ public class ServerSettingsMessage extends NetworkMessage {
 	private String lang;
 	private int community;
 	private int gameType;
+	private boolean isMonoAccount;
 	private int arenaLeaveBanTime;
 
-	public String getLang() { return this.lang; };
+	public String getLang() { return this.lang; }
 	public void setLang(String lang) { this.lang = lang; };
-	public int getCommunity() { return this.community; };
+	public int getCommunity() { return this.community; }
 	public void setCommunity(int community) { this.community = community; };
-	public int getGameType() { return this.gameType; };
+	public int getGameType() { return this.gameType; }
 	public void setGameType(int gameType) { this.gameType = gameType; };
-	public int getArenaLeaveBanTime() { return this.arenaLeaveBanTime; };
+	public boolean isIsMonoAccount() { return this.isMonoAccount; }
+	public void setIsMonoAccount(boolean isMonoAccount) { this.isMonoAccount = isMonoAccount; };
+	public int getArenaLeaveBanTime() { return this.arenaLeaveBanTime; }
 	public void setArenaLeaveBanTime(int arenaLeaveBanTime) { this.arenaLeaveBanTime = arenaLeaveBanTime; };
 
 	public ServerSettingsMessage(){
 	}
 
-	public ServerSettingsMessage(String lang, int community, int gameType, int arenaLeaveBanTime){
+	public ServerSettingsMessage(String lang, int community, int gameType, boolean isMonoAccount, int arenaLeaveBanTime){
 		this.lang = lang;
 		this.community = community;
 		this.gameType = gameType;
+		this.isMonoAccount = isMonoAccount;
 		this.arenaLeaveBanTime = arenaLeaveBanTime;
 	}
 
@@ -46,6 +50,7 @@ public class ServerSettingsMessage extends NetworkMessage {
 			writer.writeUTF(this.lang);
 			writer.writeByte(this.community);
 			writer.writeByte(this.gameType);
+			writer.writeBoolean(this.isMonoAccount);
 			writer.writeVarShort(this.arenaLeaveBanTime);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -58,6 +63,7 @@ public class ServerSettingsMessage extends NetworkMessage {
 			this.lang = reader.readUTF();
 			this.community = reader.readByte();
 			this.gameType = reader.readByte();
+			this.isMonoAccount = reader.readBoolean();
 			this.arenaLeaveBanTime = reader.readVarShort();
 		} catch (Exception e){
 			e.printStackTrace();

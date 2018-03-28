@@ -18,7 +18,7 @@ public class GuildKickRequestMessage extends NetworkMessage {
 
 	private long kickedId;
 
-	public long getKickedId() { return this.kickedId; };
+	public long getKickedId() { return this.kickedId; }
 	public void setKickedId(long kickedId) { this.kickedId = kickedId; };
 
 	public GuildKickRequestMessage(){

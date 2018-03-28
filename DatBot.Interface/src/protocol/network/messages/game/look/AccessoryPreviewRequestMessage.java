@@ -18,7 +18,7 @@ public class AccessoryPreviewRequestMessage extends NetworkMessage {
 
 	private List<Integer> genericId;
 
-	public List<Integer> getGenericId() { return this.genericId; };
+	public List<Integer> getGenericId() { return this.genericId; }
 	public void setGenericId(List<Integer> genericId) { this.genericId = genericId; };
 
 	public AccessoryPreviewRequestMessage(){

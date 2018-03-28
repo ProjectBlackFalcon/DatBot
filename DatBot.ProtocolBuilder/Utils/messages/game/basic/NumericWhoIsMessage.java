@@ -19,9 +19,9 @@ public class NumericWhoIsMessage extends NetworkMessage {
 	private long playerId;
 	private int accountId;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
 
 	public NumericWhoIsMessage(){

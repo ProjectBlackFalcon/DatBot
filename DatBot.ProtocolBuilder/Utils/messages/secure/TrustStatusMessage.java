@@ -19,9 +19,9 @@ public class TrustStatusMessage extends NetworkMessage {
 	private boolean trusted;
 	private boolean certified;
 
-	public boolean isTrusted() { return this.trusted; };
+	public boolean isTrusted() { return this.trusted; }
 	public void setTrusted(boolean trusted) { this.trusted = trusted; };
-	public boolean isCertified() { return this.certified; };
+	public boolean isCertified() { return this.certified; }
 	public void setCertified(boolean certified) { this.certified = certified; };
 
 	public TrustStatusMessage(){

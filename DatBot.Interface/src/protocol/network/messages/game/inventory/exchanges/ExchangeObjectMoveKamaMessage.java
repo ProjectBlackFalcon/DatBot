@@ -18,7 +18,7 @@ public class ExchangeObjectMoveKamaMessage extends NetworkMessage {
 
 	private long quantity;
 
-	public long getQuantity() { return this.quantity; };
+	public long getQuantity() { return this.quantity; }
 	public void setQuantity(long quantity) { this.quantity = quantity; };
 
 	public ExchangeObjectMoveKamaMessage(){

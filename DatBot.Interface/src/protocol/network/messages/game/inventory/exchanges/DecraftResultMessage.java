@@ -19,7 +19,7 @@ public class DecraftResultMessage extends NetworkMessage {
 
 	private List<DecraftedItemStackInfo> results;
 
-	public List<DecraftedItemStackInfo> getResults() { return this.results; };
+	public List<DecraftedItemStackInfo> getResults() { return this.results; }
 	public void setResults(List<DecraftedItemStackInfo> results) { this.results = results; };
 
 	public DecraftResultMessage(){

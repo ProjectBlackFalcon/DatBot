@@ -20,9 +20,9 @@ public class InviteInHavenBagMessage extends NetworkMessage {
 	private CharacterMinimalInformations guestInformations;
 	private boolean accept;
 
-	public CharacterMinimalInformations getGuestInformations() { return this.guestInformations; };
+	public CharacterMinimalInformations getGuestInformations() { return this.guestInformations; }
 	public void setGuestInformations(CharacterMinimalInformations guestInformations) { this.guestInformations = guestInformations; };
-	public boolean isAccept() { return this.accept; };
+	public boolean isAccept() { return this.accept; }
 	public void setAccept(boolean accept) { this.accept = accept; };
 
 	public InviteInHavenBagMessage(){

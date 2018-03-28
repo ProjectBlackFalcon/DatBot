@@ -19,7 +19,7 @@ public class PaddockItem extends ObjectItemInRolePlay {
 
 	private ItemDurability durability;
 
-	public ItemDurability getDurability() { return this.durability; };
+	public ItemDurability getDurability() { return this.durability; }
 	public void setDurability(ItemDurability durability) { this.durability = durability; };
 
 	public PaddockItem(){

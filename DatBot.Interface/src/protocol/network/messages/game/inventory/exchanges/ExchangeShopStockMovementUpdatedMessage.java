@@ -19,7 +19,7 @@ public class ExchangeShopStockMovementUpdatedMessage extends NetworkMessage {
 
 	private ObjectItemToSell objectInfo;
 
-	public ObjectItemToSell getObjectInfo() { return this.objectInfo; };
+	public ObjectItemToSell getObjectInfo() { return this.objectInfo; }
 	public void setObjectInfo(ObjectItemToSell objectInfo) { this.objectInfo = objectInfo; };
 
 	public ExchangeShopStockMovementUpdatedMessage(){

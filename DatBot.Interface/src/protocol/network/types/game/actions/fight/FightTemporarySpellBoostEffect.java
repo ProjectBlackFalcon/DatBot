@@ -18,7 +18,7 @@ public class FightTemporarySpellBoostEffect extends FightTemporaryBoostEffect {
 
 	private int boostedSpellId;
 
-	public int getBoostedSpellId() { return this.boostedSpellId; };
+	public int getBoostedSpellId() { return this.boostedSpellId; }
 	public void setBoostedSpellId(int boostedSpellId) { this.boostedSpellId = boostedSpellId; };
 
 	public FightTemporarySpellBoostEffect(){

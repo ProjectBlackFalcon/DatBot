@@ -19,9 +19,9 @@ public class PartyInvitationDungeonDetailsMessage extends PartyInvitationDetails
 	private int dungeonId;
 	private List<Boolean> playersDungeonReady;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
-	public List<Boolean> getPlayersDungeonReady() { return this.playersDungeonReady; };
+	public List<Boolean> getPlayersDungeonReady() { return this.playersDungeonReady; }
 	public void setPlayersDungeonReady(List<Boolean> playersDungeonReady) { this.playersDungeonReady = playersDungeonReady; };
 
 	public PartyInvitationDungeonDetailsMessage(){

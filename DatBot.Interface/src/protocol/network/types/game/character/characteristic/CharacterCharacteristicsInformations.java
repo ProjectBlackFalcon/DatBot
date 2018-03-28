@@ -105,175 +105,175 @@ public class CharacterCharacteristicsInformations extends NetworkMessage {
 	private List<CharacterSpellModification> spellModifications;
 	private int probationTime;
 
-	public long getExperience() { return this.experience; };
+	public long getExperience() { return this.experience; }
 	public void setExperience(long experience) { this.experience = experience; };
-	public long getExperienceLevelFloor() { return this.experienceLevelFloor; };
+	public long getExperienceLevelFloor() { return this.experienceLevelFloor; }
 	public void setExperienceLevelFloor(long experienceLevelFloor) { this.experienceLevelFloor = experienceLevelFloor; };
-	public long getExperienceNextLevelFloor() { return this.experienceNextLevelFloor; };
+	public long getExperienceNextLevelFloor() { return this.experienceNextLevelFloor; }
 	public void setExperienceNextLevelFloor(long experienceNextLevelFloor) { this.experienceNextLevelFloor = experienceNextLevelFloor; };
-	public long getExperienceBonusLimit() { return this.experienceBonusLimit; };
+	public long getExperienceBonusLimit() { return this.experienceBonusLimit; }
 	public void setExperienceBonusLimit(long experienceBonusLimit) { this.experienceBonusLimit = experienceBonusLimit; };
-	public long getKamas() { return this.kamas; };
+	public long getKamas() { return this.kamas; }
 	public void setKamas(long kamas) { this.kamas = kamas; };
-	public int getStatsPoints() { return this.statsPoints; };
+	public int getStatsPoints() { return this.statsPoints; }
 	public void setStatsPoints(int statsPoints) { this.statsPoints = statsPoints; };
-	public int getAdditionnalPoints() { return this.additionnalPoints; };
+	public int getAdditionnalPoints() { return this.additionnalPoints; }
 	public void setAdditionnalPoints(int additionnalPoints) { this.additionnalPoints = additionnalPoints; };
-	public int getSpellsPoints() { return this.spellsPoints; };
+	public int getSpellsPoints() { return this.spellsPoints; }
 	public void setSpellsPoints(int spellsPoints) { this.spellsPoints = spellsPoints; };
-	public ActorExtendedAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; };
+	public ActorExtendedAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; }
 	public void setAlignmentInfos(ActorExtendedAlignmentInformations alignmentInfos) { this.alignmentInfos = alignmentInfos; };
-	public int getLifePoints() { return this.lifePoints; };
+	public int getLifePoints() { return this.lifePoints; }
 	public void setLifePoints(int lifePoints) { this.lifePoints = lifePoints; };
-	public int getMaxLifePoints() { return this.maxLifePoints; };
+	public int getMaxLifePoints() { return this.maxLifePoints; }
 	public void setMaxLifePoints(int maxLifePoints) { this.maxLifePoints = maxLifePoints; };
-	public int getEnergyPoints() { return this.energyPoints; };
+	public int getEnergyPoints() { return this.energyPoints; }
 	public void setEnergyPoints(int energyPoints) { this.energyPoints = energyPoints; };
-	public int getMaxEnergyPoints() { return this.maxEnergyPoints; };
+	public int getMaxEnergyPoints() { return this.maxEnergyPoints; }
 	public void setMaxEnergyPoints(int maxEnergyPoints) { this.maxEnergyPoints = maxEnergyPoints; };
-	public int getActionPointsCurrent() { return this.actionPointsCurrent; };
+	public int getActionPointsCurrent() { return this.actionPointsCurrent; }
 	public void setActionPointsCurrent(int actionPointsCurrent) { this.actionPointsCurrent = actionPointsCurrent; };
-	public int getMovementPointsCurrent() { return this.movementPointsCurrent; };
+	public int getMovementPointsCurrent() { return this.movementPointsCurrent; }
 	public void setMovementPointsCurrent(int movementPointsCurrent) { this.movementPointsCurrent = movementPointsCurrent; };
-	public CharacterBaseCharacteristic getInitiative() { return this.initiative; };
+	public CharacterBaseCharacteristic getInitiative() { return this.initiative; }
 	public void setInitiative(CharacterBaseCharacteristic initiative) { this.initiative = initiative; };
-	public CharacterBaseCharacteristic getProspecting() { return this.prospecting; };
+	public CharacterBaseCharacteristic getProspecting() { return this.prospecting; }
 	public void setProspecting(CharacterBaseCharacteristic prospecting) { this.prospecting = prospecting; };
-	public CharacterBaseCharacteristic getActionPoints() { return this.actionPoints; };
+	public CharacterBaseCharacteristic getActionPoints() { return this.actionPoints; }
 	public void setActionPoints(CharacterBaseCharacteristic actionPoints) { this.actionPoints = actionPoints; };
-	public CharacterBaseCharacteristic getMovementPoints() { return this.movementPoints; };
+	public CharacterBaseCharacteristic getMovementPoints() { return this.movementPoints; }
 	public void setMovementPoints(CharacterBaseCharacteristic movementPoints) { this.movementPoints = movementPoints; };
-	public CharacterBaseCharacteristic getStrength() { return this.strength; };
+	public CharacterBaseCharacteristic getStrength() { return this.strength; }
 	public void setStrength(CharacterBaseCharacteristic strength) { this.strength = strength; };
-	public CharacterBaseCharacteristic getVitality() { return this.vitality; };
+	public CharacterBaseCharacteristic getVitality() { return this.vitality; }
 	public void setVitality(CharacterBaseCharacteristic vitality) { this.vitality = vitality; };
-	public CharacterBaseCharacteristic getWisdom() { return this.wisdom; };
+	public CharacterBaseCharacteristic getWisdom() { return this.wisdom; }
 	public void setWisdom(CharacterBaseCharacteristic wisdom) { this.wisdom = wisdom; };
-	public CharacterBaseCharacteristic getChance() { return this.chance; };
+	public CharacterBaseCharacteristic getChance() { return this.chance; }
 	public void setChance(CharacterBaseCharacteristic chance) { this.chance = chance; };
-	public CharacterBaseCharacteristic getAgility() { return this.agility; };
+	public CharacterBaseCharacteristic getAgility() { return this.agility; }
 	public void setAgility(CharacterBaseCharacteristic agility) { this.agility = agility; };
-	public CharacterBaseCharacteristic getIntelligence() { return this.intelligence; };
+	public CharacterBaseCharacteristic getIntelligence() { return this.intelligence; }
 	public void setIntelligence(CharacterBaseCharacteristic intelligence) { this.intelligence = intelligence; };
-	public CharacterBaseCharacteristic getRange() { return this.range; };
+	public CharacterBaseCharacteristic getRange() { return this.range; }
 	public void setRange(CharacterBaseCharacteristic range) { this.range = range; };
-	public CharacterBaseCharacteristic getSummonableCreaturesBoost() { return this.summonableCreaturesBoost; };
+	public CharacterBaseCharacteristic getSummonableCreaturesBoost() { return this.summonableCreaturesBoost; }
 	public void setSummonableCreaturesBoost(CharacterBaseCharacteristic summonableCreaturesBoost) { this.summonableCreaturesBoost = summonableCreaturesBoost; };
-	public CharacterBaseCharacteristic getReflect() { return this.reflect; };
+	public CharacterBaseCharacteristic getReflect() { return this.reflect; }
 	public void setReflect(CharacterBaseCharacteristic reflect) { this.reflect = reflect; };
-	public CharacterBaseCharacteristic getCriticalHit() { return this.criticalHit; };
+	public CharacterBaseCharacteristic getCriticalHit() { return this.criticalHit; }
 	public void setCriticalHit(CharacterBaseCharacteristic criticalHit) { this.criticalHit = criticalHit; };
-	public int getCriticalHitWeapon() { return this.criticalHitWeapon; };
+	public int getCriticalHitWeapon() { return this.criticalHitWeapon; }
 	public void setCriticalHitWeapon(int criticalHitWeapon) { this.criticalHitWeapon = criticalHitWeapon; };
-	public CharacterBaseCharacteristic getCriticalMiss() { return this.criticalMiss; };
+	public CharacterBaseCharacteristic getCriticalMiss() { return this.criticalMiss; }
 	public void setCriticalMiss(CharacterBaseCharacteristic criticalMiss) { this.criticalMiss = criticalMiss; };
-	public CharacterBaseCharacteristic getHealBonus() { return this.healBonus; };
+	public CharacterBaseCharacteristic getHealBonus() { return this.healBonus; }
 	public void setHealBonus(CharacterBaseCharacteristic healBonus) { this.healBonus = healBonus; };
-	public CharacterBaseCharacteristic getAllDamagesBonus() { return this.allDamagesBonus; };
+	public CharacterBaseCharacteristic getAllDamagesBonus() { return this.allDamagesBonus; }
 	public void setAllDamagesBonus(CharacterBaseCharacteristic allDamagesBonus) { this.allDamagesBonus = allDamagesBonus; };
-	public CharacterBaseCharacteristic getWeaponDamagesBonusPercent() { return this.weaponDamagesBonusPercent; };
+	public CharacterBaseCharacteristic getWeaponDamagesBonusPercent() { return this.weaponDamagesBonusPercent; }
 	public void setWeaponDamagesBonusPercent(CharacterBaseCharacteristic weaponDamagesBonusPercent) { this.weaponDamagesBonusPercent = weaponDamagesBonusPercent; };
-	public CharacterBaseCharacteristic getDamagesBonusPercent() { return this.damagesBonusPercent; };
+	public CharacterBaseCharacteristic getDamagesBonusPercent() { return this.damagesBonusPercent; }
 	public void setDamagesBonusPercent(CharacterBaseCharacteristic damagesBonusPercent) { this.damagesBonusPercent = damagesBonusPercent; };
-	public CharacterBaseCharacteristic getTrapBonus() { return this.trapBonus; };
+	public CharacterBaseCharacteristic getTrapBonus() { return this.trapBonus; }
 	public void setTrapBonus(CharacterBaseCharacteristic trapBonus) { this.trapBonus = trapBonus; };
-	public CharacterBaseCharacteristic getTrapBonusPercent() { return this.trapBonusPercent; };
+	public CharacterBaseCharacteristic getTrapBonusPercent() { return this.trapBonusPercent; }
 	public void setTrapBonusPercent(CharacterBaseCharacteristic trapBonusPercent) { this.trapBonusPercent = trapBonusPercent; };
-	public CharacterBaseCharacteristic getGlyphBonusPercent() { return this.glyphBonusPercent; };
+	public CharacterBaseCharacteristic getGlyphBonusPercent() { return this.glyphBonusPercent; }
 	public void setGlyphBonusPercent(CharacterBaseCharacteristic glyphBonusPercent) { this.glyphBonusPercent = glyphBonusPercent; };
-	public CharacterBaseCharacteristic getRuneBonusPercent() { return this.runeBonusPercent; };
+	public CharacterBaseCharacteristic getRuneBonusPercent() { return this.runeBonusPercent; }
 	public void setRuneBonusPercent(CharacterBaseCharacteristic runeBonusPercent) { this.runeBonusPercent = runeBonusPercent; };
-	public CharacterBaseCharacteristic getPermanentDamagePercent() { return this.permanentDamagePercent; };
+	public CharacterBaseCharacteristic getPermanentDamagePercent() { return this.permanentDamagePercent; }
 	public void setPermanentDamagePercent(CharacterBaseCharacteristic permanentDamagePercent) { this.permanentDamagePercent = permanentDamagePercent; };
-	public CharacterBaseCharacteristic getTackleBlock() { return this.tackleBlock; };
+	public CharacterBaseCharacteristic getTackleBlock() { return this.tackleBlock; }
 	public void setTackleBlock(CharacterBaseCharacteristic tackleBlock) { this.tackleBlock = tackleBlock; };
-	public CharacterBaseCharacteristic getTackleEvade() { return this.tackleEvade; };
+	public CharacterBaseCharacteristic getTackleEvade() { return this.tackleEvade; }
 	public void setTackleEvade(CharacterBaseCharacteristic tackleEvade) { this.tackleEvade = tackleEvade; };
-	public CharacterBaseCharacteristic getPAAttack() { return this.PAAttack; };
+	public CharacterBaseCharacteristic getPAAttack() { return this.PAAttack; }
 	public void setPAAttack(CharacterBaseCharacteristic PAAttack) { this.PAAttack = PAAttack; };
-	public CharacterBaseCharacteristic getPMAttack() { return this.PMAttack; };
+	public CharacterBaseCharacteristic getPMAttack() { return this.PMAttack; }
 	public void setPMAttack(CharacterBaseCharacteristic PMAttack) { this.PMAttack = PMAttack; };
-	public CharacterBaseCharacteristic getPushDamageBonus() { return this.pushDamageBonus; };
+	public CharacterBaseCharacteristic getPushDamageBonus() { return this.pushDamageBonus; }
 	public void setPushDamageBonus(CharacterBaseCharacteristic pushDamageBonus) { this.pushDamageBonus = pushDamageBonus; };
-	public CharacterBaseCharacteristic getCriticalDamageBonus() { return this.criticalDamageBonus; };
+	public CharacterBaseCharacteristic getCriticalDamageBonus() { return this.criticalDamageBonus; }
 	public void setCriticalDamageBonus(CharacterBaseCharacteristic criticalDamageBonus) { this.criticalDamageBonus = criticalDamageBonus; };
-	public CharacterBaseCharacteristic getNeutralDamageBonus() { return this.neutralDamageBonus; };
+	public CharacterBaseCharacteristic getNeutralDamageBonus() { return this.neutralDamageBonus; }
 	public void setNeutralDamageBonus(CharacterBaseCharacteristic neutralDamageBonus) { this.neutralDamageBonus = neutralDamageBonus; };
-	public CharacterBaseCharacteristic getEarthDamageBonus() { return this.earthDamageBonus; };
+	public CharacterBaseCharacteristic getEarthDamageBonus() { return this.earthDamageBonus; }
 	public void setEarthDamageBonus(CharacterBaseCharacteristic earthDamageBonus) { this.earthDamageBonus = earthDamageBonus; };
-	public CharacterBaseCharacteristic getWaterDamageBonus() { return this.waterDamageBonus; };
+	public CharacterBaseCharacteristic getWaterDamageBonus() { return this.waterDamageBonus; }
 	public void setWaterDamageBonus(CharacterBaseCharacteristic waterDamageBonus) { this.waterDamageBonus = waterDamageBonus; };
-	public CharacterBaseCharacteristic getAirDamageBonus() { return this.airDamageBonus; };
+	public CharacterBaseCharacteristic getAirDamageBonus() { return this.airDamageBonus; }
 	public void setAirDamageBonus(CharacterBaseCharacteristic airDamageBonus) { this.airDamageBonus = airDamageBonus; };
-	public CharacterBaseCharacteristic getFireDamageBonus() { return this.fireDamageBonus; };
+	public CharacterBaseCharacteristic getFireDamageBonus() { return this.fireDamageBonus; }
 	public void setFireDamageBonus(CharacterBaseCharacteristic fireDamageBonus) { this.fireDamageBonus = fireDamageBonus; };
-	public CharacterBaseCharacteristic getDodgePALostProbability() { return this.dodgePALostProbability; };
+	public CharacterBaseCharacteristic getDodgePALostProbability() { return this.dodgePALostProbability; }
 	public void setDodgePALostProbability(CharacterBaseCharacteristic dodgePALostProbability) { this.dodgePALostProbability = dodgePALostProbability; };
-	public CharacterBaseCharacteristic getDodgePMLostProbability() { return this.dodgePMLostProbability; };
+	public CharacterBaseCharacteristic getDodgePMLostProbability() { return this.dodgePMLostProbability; }
 	public void setDodgePMLostProbability(CharacterBaseCharacteristic dodgePMLostProbability) { this.dodgePMLostProbability = dodgePMLostProbability; };
-	public CharacterBaseCharacteristic getNeutralElementResistPercent() { return this.neutralElementResistPercent; };
+	public CharacterBaseCharacteristic getNeutralElementResistPercent() { return this.neutralElementResistPercent; }
 	public void setNeutralElementResistPercent(CharacterBaseCharacteristic neutralElementResistPercent) { this.neutralElementResistPercent = neutralElementResistPercent; };
-	public CharacterBaseCharacteristic getEarthElementResistPercent() { return this.earthElementResistPercent; };
+	public CharacterBaseCharacteristic getEarthElementResistPercent() { return this.earthElementResistPercent; }
 	public void setEarthElementResistPercent(CharacterBaseCharacteristic earthElementResistPercent) { this.earthElementResistPercent = earthElementResistPercent; };
-	public CharacterBaseCharacteristic getWaterElementResistPercent() { return this.waterElementResistPercent; };
+	public CharacterBaseCharacteristic getWaterElementResistPercent() { return this.waterElementResistPercent; }
 	public void setWaterElementResistPercent(CharacterBaseCharacteristic waterElementResistPercent) { this.waterElementResistPercent = waterElementResistPercent; };
-	public CharacterBaseCharacteristic getAirElementResistPercent() { return this.airElementResistPercent; };
+	public CharacterBaseCharacteristic getAirElementResistPercent() { return this.airElementResistPercent; }
 	public void setAirElementResistPercent(CharacterBaseCharacteristic airElementResistPercent) { this.airElementResistPercent = airElementResistPercent; };
-	public CharacterBaseCharacteristic getFireElementResistPercent() { return this.fireElementResistPercent; };
+	public CharacterBaseCharacteristic getFireElementResistPercent() { return this.fireElementResistPercent; }
 	public void setFireElementResistPercent(CharacterBaseCharacteristic fireElementResistPercent) { this.fireElementResistPercent = fireElementResistPercent; };
-	public CharacterBaseCharacteristic getNeutralElementReduction() { return this.neutralElementReduction; };
+	public CharacterBaseCharacteristic getNeutralElementReduction() { return this.neutralElementReduction; }
 	public void setNeutralElementReduction(CharacterBaseCharacteristic neutralElementReduction) { this.neutralElementReduction = neutralElementReduction; };
-	public CharacterBaseCharacteristic getEarthElementReduction() { return this.earthElementReduction; };
+	public CharacterBaseCharacteristic getEarthElementReduction() { return this.earthElementReduction; }
 	public void setEarthElementReduction(CharacterBaseCharacteristic earthElementReduction) { this.earthElementReduction = earthElementReduction; };
-	public CharacterBaseCharacteristic getWaterElementReduction() { return this.waterElementReduction; };
+	public CharacterBaseCharacteristic getWaterElementReduction() { return this.waterElementReduction; }
 	public void setWaterElementReduction(CharacterBaseCharacteristic waterElementReduction) { this.waterElementReduction = waterElementReduction; };
-	public CharacterBaseCharacteristic getAirElementReduction() { return this.airElementReduction; };
+	public CharacterBaseCharacteristic getAirElementReduction() { return this.airElementReduction; }
 	public void setAirElementReduction(CharacterBaseCharacteristic airElementReduction) { this.airElementReduction = airElementReduction; };
-	public CharacterBaseCharacteristic getFireElementReduction() { return this.fireElementReduction; };
+	public CharacterBaseCharacteristic getFireElementReduction() { return this.fireElementReduction; }
 	public void setFireElementReduction(CharacterBaseCharacteristic fireElementReduction) { this.fireElementReduction = fireElementReduction; };
-	public CharacterBaseCharacteristic getPushDamageReduction() { return this.pushDamageReduction; };
+	public CharacterBaseCharacteristic getPushDamageReduction() { return this.pushDamageReduction; }
 	public void setPushDamageReduction(CharacterBaseCharacteristic pushDamageReduction) { this.pushDamageReduction = pushDamageReduction; };
-	public CharacterBaseCharacteristic getCriticalDamageReduction() { return this.criticalDamageReduction; };
+	public CharacterBaseCharacteristic getCriticalDamageReduction() { return this.criticalDamageReduction; }
 	public void setCriticalDamageReduction(CharacterBaseCharacteristic criticalDamageReduction) { this.criticalDamageReduction = criticalDamageReduction; };
-	public CharacterBaseCharacteristic getPvpNeutralElementResistPercent() { return this.pvpNeutralElementResistPercent; };
+	public CharacterBaseCharacteristic getPvpNeutralElementResistPercent() { return this.pvpNeutralElementResistPercent; }
 	public void setPvpNeutralElementResistPercent(CharacterBaseCharacteristic pvpNeutralElementResistPercent) { this.pvpNeutralElementResistPercent = pvpNeutralElementResistPercent; };
-	public CharacterBaseCharacteristic getPvpEarthElementResistPercent() { return this.pvpEarthElementResistPercent; };
+	public CharacterBaseCharacteristic getPvpEarthElementResistPercent() { return this.pvpEarthElementResistPercent; }
 	public void setPvpEarthElementResistPercent(CharacterBaseCharacteristic pvpEarthElementResistPercent) { this.pvpEarthElementResistPercent = pvpEarthElementResistPercent; };
-	public CharacterBaseCharacteristic getPvpWaterElementResistPercent() { return this.pvpWaterElementResistPercent; };
+	public CharacterBaseCharacteristic getPvpWaterElementResistPercent() { return this.pvpWaterElementResistPercent; }
 	public void setPvpWaterElementResistPercent(CharacterBaseCharacteristic pvpWaterElementResistPercent) { this.pvpWaterElementResistPercent = pvpWaterElementResistPercent; };
-	public CharacterBaseCharacteristic getPvpAirElementResistPercent() { return this.pvpAirElementResistPercent; };
+	public CharacterBaseCharacteristic getPvpAirElementResistPercent() { return this.pvpAirElementResistPercent; }
 	public void setPvpAirElementResistPercent(CharacterBaseCharacteristic pvpAirElementResistPercent) { this.pvpAirElementResistPercent = pvpAirElementResistPercent; };
-	public CharacterBaseCharacteristic getPvpFireElementResistPercent() { return this.pvpFireElementResistPercent; };
+	public CharacterBaseCharacteristic getPvpFireElementResistPercent() { return this.pvpFireElementResistPercent; }
 	public void setPvpFireElementResistPercent(CharacterBaseCharacteristic pvpFireElementResistPercent) { this.pvpFireElementResistPercent = pvpFireElementResistPercent; };
-	public CharacterBaseCharacteristic getPvpNeutralElementReduction() { return this.pvpNeutralElementReduction; };
+	public CharacterBaseCharacteristic getPvpNeutralElementReduction() { return this.pvpNeutralElementReduction; }
 	public void setPvpNeutralElementReduction(CharacterBaseCharacteristic pvpNeutralElementReduction) { this.pvpNeutralElementReduction = pvpNeutralElementReduction; };
-	public CharacterBaseCharacteristic getPvpEarthElementReduction() { return this.pvpEarthElementReduction; };
+	public CharacterBaseCharacteristic getPvpEarthElementReduction() { return this.pvpEarthElementReduction; }
 	public void setPvpEarthElementReduction(CharacterBaseCharacteristic pvpEarthElementReduction) { this.pvpEarthElementReduction = pvpEarthElementReduction; };
-	public CharacterBaseCharacteristic getPvpWaterElementReduction() { return this.pvpWaterElementReduction; };
+	public CharacterBaseCharacteristic getPvpWaterElementReduction() { return this.pvpWaterElementReduction; }
 	public void setPvpWaterElementReduction(CharacterBaseCharacteristic pvpWaterElementReduction) { this.pvpWaterElementReduction = pvpWaterElementReduction; };
-	public CharacterBaseCharacteristic getPvpAirElementReduction() { return this.pvpAirElementReduction; };
+	public CharacterBaseCharacteristic getPvpAirElementReduction() { return this.pvpAirElementReduction; }
 	public void setPvpAirElementReduction(CharacterBaseCharacteristic pvpAirElementReduction) { this.pvpAirElementReduction = pvpAirElementReduction; };
-	public CharacterBaseCharacteristic getPvpFireElementReduction() { return this.pvpFireElementReduction; };
+	public CharacterBaseCharacteristic getPvpFireElementReduction() { return this.pvpFireElementReduction; }
 	public void setPvpFireElementReduction(CharacterBaseCharacteristic pvpFireElementReduction) { this.pvpFireElementReduction = pvpFireElementReduction; };
-	public CharacterBaseCharacteristic getMeleeDamageDonePercent() { return this.meleeDamageDonePercent; };
+	public CharacterBaseCharacteristic getMeleeDamageDonePercent() { return this.meleeDamageDonePercent; }
 	public void setMeleeDamageDonePercent(CharacterBaseCharacteristic meleeDamageDonePercent) { this.meleeDamageDonePercent = meleeDamageDonePercent; };
-	public CharacterBaseCharacteristic getMeleeDamageReceivedPercent() { return this.meleeDamageReceivedPercent; };
+	public CharacterBaseCharacteristic getMeleeDamageReceivedPercent() { return this.meleeDamageReceivedPercent; }
 	public void setMeleeDamageReceivedPercent(CharacterBaseCharacteristic meleeDamageReceivedPercent) { this.meleeDamageReceivedPercent = meleeDamageReceivedPercent; };
-	public CharacterBaseCharacteristic getRangedDamageDonePercent() { return this.rangedDamageDonePercent; };
+	public CharacterBaseCharacteristic getRangedDamageDonePercent() { return this.rangedDamageDonePercent; }
 	public void setRangedDamageDonePercent(CharacterBaseCharacteristic rangedDamageDonePercent) { this.rangedDamageDonePercent = rangedDamageDonePercent; };
-	public CharacterBaseCharacteristic getRangedDamageReceivedPercent() { return this.rangedDamageReceivedPercent; };
+	public CharacterBaseCharacteristic getRangedDamageReceivedPercent() { return this.rangedDamageReceivedPercent; }
 	public void setRangedDamageReceivedPercent(CharacterBaseCharacteristic rangedDamageReceivedPercent) { this.rangedDamageReceivedPercent = rangedDamageReceivedPercent; };
-	public CharacterBaseCharacteristic getWeaponDamageDonePercent() { return this.weaponDamageDonePercent; };
+	public CharacterBaseCharacteristic getWeaponDamageDonePercent() { return this.weaponDamageDonePercent; }
 	public void setWeaponDamageDonePercent(CharacterBaseCharacteristic weaponDamageDonePercent) { this.weaponDamageDonePercent = weaponDamageDonePercent; };
-	public CharacterBaseCharacteristic getWeaponDamageReceivedPercent() { return this.weaponDamageReceivedPercent; };
+	public CharacterBaseCharacteristic getWeaponDamageReceivedPercent() { return this.weaponDamageReceivedPercent; }
 	public void setWeaponDamageReceivedPercent(CharacterBaseCharacteristic weaponDamageReceivedPercent) { this.weaponDamageReceivedPercent = weaponDamageReceivedPercent; };
-	public CharacterBaseCharacteristic getSpellDamageDonePercent() { return this.spellDamageDonePercent; };
+	public CharacterBaseCharacteristic getSpellDamageDonePercent() { return this.spellDamageDonePercent; }
 	public void setSpellDamageDonePercent(CharacterBaseCharacteristic spellDamageDonePercent) { this.spellDamageDonePercent = spellDamageDonePercent; };
-	public CharacterBaseCharacteristic getSpellDamageReceivedPercent() { return this.spellDamageReceivedPercent; };
+	public CharacterBaseCharacteristic getSpellDamageReceivedPercent() { return this.spellDamageReceivedPercent; }
 	public void setSpellDamageReceivedPercent(CharacterBaseCharacteristic spellDamageReceivedPercent) { this.spellDamageReceivedPercent = spellDamageReceivedPercent; };
-	public List<CharacterSpellModification> getSpellModifications() { return this.spellModifications; };
+	public List<CharacterSpellModification> getSpellModifications() { return this.spellModifications; }
 	public void setSpellModifications(List<CharacterSpellModification> spellModifications) { this.spellModifications = spellModifications; };
-	public int getProbationTime() { return this.probationTime; };
+	public int getProbationTime() { return this.probationTime; }
 	public void setProbationTime(int probationTime) { this.probationTime = probationTime; };
 
 	public CharacterCharacteristicsInformations(){

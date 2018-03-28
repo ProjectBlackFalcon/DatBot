@@ -19,7 +19,7 @@ public class FightTeamMemberWithAllianceCharacterInformations extends FightTeamM
 
 	private BasicAllianceInformations allianceInfos;
 
-	public BasicAllianceInformations getAllianceInfos() { return this.allianceInfos; };
+	public BasicAllianceInformations getAllianceInfos() { return this.allianceInfos; }
 	public void setAllianceInfos(BasicAllianceInformations allianceInfos) { this.allianceInfos = allianceInfos; };
 
 	public FightTeamMemberWithAllianceCharacterInformations(){

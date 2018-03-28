@@ -21,13 +21,13 @@ public class GuildChangeMemberParametersMessage extends NetworkMessage {
 	private int experienceGivenPercent;
 	private int rights;
 
-	public long getMemberId() { return this.memberId; };
+	public long getMemberId() { return this.memberId; }
 	public void setMemberId(long memberId) { this.memberId = memberId; };
-	public int getRank() { return this.rank; };
+	public int getRank() { return this.rank; }
 	public void setRank(int rank) { this.rank = rank; };
-	public int getExperienceGivenPercent() { return this.experienceGivenPercent; };
+	public int getExperienceGivenPercent() { return this.experienceGivenPercent; }
 	public void setExperienceGivenPercent(int experienceGivenPercent) { this.experienceGivenPercent = experienceGivenPercent; };
-	public int getRights() { return this.rights; };
+	public int getRights() { return this.rights; }
 	public void setRights(int rights) { this.rights = rights; };
 
 	public GuildChangeMemberParametersMessage(){

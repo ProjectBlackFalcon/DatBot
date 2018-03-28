@@ -19,7 +19,7 @@ public class ExchangeCraftResultWithObjectDescMessage extends ExchangeCraftResul
 
 	private ObjectItemNotInContainer objectInfo;
 
-	public ObjectItemNotInContainer getObjectInfo() { return this.objectInfo; };
+	public ObjectItemNotInContainer getObjectInfo() { return this.objectInfo; }
 	public void setObjectInfo(ObjectItemNotInContainer objectInfo) { this.objectInfo = objectInfo; };
 
 	public ExchangeCraftResultWithObjectDescMessage(){

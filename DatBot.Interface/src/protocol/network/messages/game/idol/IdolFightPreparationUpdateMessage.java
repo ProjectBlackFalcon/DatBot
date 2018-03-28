@@ -20,9 +20,9 @@ public class IdolFightPreparationUpdateMessage extends NetworkMessage {
 	private int idolSource;
 	private List<Idol> idols;
 
-	public int getIdolSource() { return this.idolSource; };
+	public int getIdolSource() { return this.idolSource; }
 	public void setIdolSource(int idolSource) { this.idolSource = idolSource; };
-	public List<Idol> getIdols() { return this.idols; };
+	public List<Idol> getIdols() { return this.idols; }
 	public void setIdols(List<Idol> idols) { this.idols = idols; };
 
 	public IdolFightPreparationUpdateMessage(){

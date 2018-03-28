@@ -20,11 +20,11 @@ public class QuestObjectiveInformations extends NetworkMessage {
 	private boolean objectiveStatus;
 	private List<String> dialogParams;
 
-	public int getObjectiveId() { return this.objectiveId; };
+	public int getObjectiveId() { return this.objectiveId; }
 	public void setObjectiveId(int objectiveId) { this.objectiveId = objectiveId; };
-	public boolean isObjectiveStatus() { return this.objectiveStatus; };
+	public boolean isObjectiveStatus() { return this.objectiveStatus; }
 	public void setObjectiveStatus(boolean objectiveStatus) { this.objectiveStatus = objectiveStatus; };
-	public List<String> getDialogParams() { return this.dialogParams; };
+	public List<String> getDialogParams() { return this.dialogParams; }
 	public void setDialogParams(List<String> dialogParams) { this.dialogParams = dialogParams; };
 
 	public QuestObjectiveInformations(){

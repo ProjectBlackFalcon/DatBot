@@ -19,7 +19,7 @@ public class AccessoryPreviewMessage extends NetworkMessage {
 
 	private EntityLook look;
 
-	public EntityLook getLook() { return this.look; };
+	public EntityLook getLook() { return this.look; }
 	public void setLook(EntityLook look) { this.look = look; };
 
 	public AccessoryPreviewMessage(){

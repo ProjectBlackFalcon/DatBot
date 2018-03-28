@@ -18,7 +18,7 @@ public class NetworkDataContainerMessage extends NetworkMessage {
 
 	private List<Integer> content;
 
-	public List<Integer> getContent() { return this.content; };
+	public List<Integer> getContent() { return this.content; }
 	public void setContent(List<Integer> content) { this.content = content; };
 
 	public NetworkDataContainerMessage(){

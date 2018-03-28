@@ -19,9 +19,9 @@ public class BasicWhoIsRequestMessage extends NetworkMessage {
 	private boolean verbose;
 	private String search;
 
-	public boolean isVerbose() { return this.verbose; };
+	public boolean isVerbose() { return this.verbose; }
 	public void setVerbose(boolean verbose) { this.verbose = verbose; };
-	public String getSearch() { return this.search; };
+	public String getSearch() { return this.search; }
 	public void setSearch(String search) { this.search = search; };
 
 	public BasicWhoIsRequestMessage(){

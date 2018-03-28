@@ -19,9 +19,9 @@ public class ActorOrientation extends NetworkMessage {
 	private double id;
 	private int direction;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public int getDirection() { return this.direction; };
+	public int getDirection() { return this.direction; }
 	public void setDirection(int direction) { this.direction = direction; };
 
 	public ActorOrientation(){

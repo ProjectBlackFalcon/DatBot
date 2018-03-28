@@ -20,11 +20,11 @@ public class MountInformationsForPaddock extends NetworkMessage {
 	private String name;
 	private String ownerName;
 
-	public int getModelId() { return this.modelId; };
+	public int getModelId() { return this.modelId; }
 	public void setModelId(int modelId) { this.modelId = modelId; };
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public String getOwnerName() { return this.ownerName; };
+	public String getOwnerName() { return this.ownerName; }
 	public void setOwnerName(String ownerName) { this.ownerName = ownerName; };
 
 	public MountInformationsForPaddock(){

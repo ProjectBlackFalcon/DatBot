@@ -19,9 +19,9 @@ public class AlignmentRankUpdateMessage extends NetworkMessage {
 	private int alignmentRank;
 	private boolean verbose;
 
-	public int getAlignmentRank() { return this.alignmentRank; };
+	public int getAlignmentRank() { return this.alignmentRank; }
 	public void setAlignmentRank(int alignmentRank) { this.alignmentRank = alignmentRank; };
-	public boolean isVerbose() { return this.verbose; };
+	public boolean isVerbose() { return this.verbose; }
 	public void setVerbose(boolean verbose) { this.verbose = verbose; };
 
 	public AlignmentRankUpdateMessage(){

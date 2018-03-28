@@ -18,7 +18,7 @@ public class CharacterBaseInformations extends CharacterMinimalPlusLookInformati
 
 	private boolean sex;
 
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
 
 	public CharacterBaseInformations(){

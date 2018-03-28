@@ -20,9 +20,9 @@ public class ShortcutBarContentMessage extends NetworkMessage {
 	private int barType;
 	private List<Shortcut> shortcuts;
 
-	public int getBarType() { return this.barType; };
+	public int getBarType() { return this.barType; }
 	public void setBarType(int barType) { this.barType = barType; };
-	public List<Shortcut> getShortcuts() { return this.shortcuts; };
+	public List<Shortcut> getShortcuts() { return this.shortcuts; }
 	public void setShortcuts(List<Shortcut> shortcuts) { this.shortcuts = shortcuts; };
 
 	public ShortcutBarContentMessage(){

@@ -20,11 +20,11 @@ public class TeleportBuddiesRequestedMessage extends NetworkMessage {
 	private long inviterId;
 	private List<Long> invalidBuddiesIds;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
-	public long getInviterId() { return this.inviterId; };
+	public long getInviterId() { return this.inviterId; }
 	public void setInviterId(long inviterId) { this.inviterId = inviterId; };
-	public List<Long> getInvalidBuddiesIds() { return this.invalidBuddiesIds; };
+	public List<Long> getInvalidBuddiesIds() { return this.invalidBuddiesIds; }
 	public void setInvalidBuddiesIds(List<Long> invalidBuddiesIds) { this.invalidBuddiesIds = invalidBuddiesIds; };
 
 	public TeleportBuddiesRequestedMessage(){

@@ -18,7 +18,7 @@ public class GameRolePlayShowActorWithEventMessage extends GameRolePlayShowActor
 
 	private int actorEventId;
 
-	public int getActorEventId() { return this.actorEventId; };
+	public int getActorEventId() { return this.actorEventId; }
 	public void setActorEventId(int actorEventId) { this.actorEventId = actorEventId; };
 
 	public GameRolePlayShowActorWithEventMessage(){

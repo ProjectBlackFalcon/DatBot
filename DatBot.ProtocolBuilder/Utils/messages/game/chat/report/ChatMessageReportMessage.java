@@ -23,17 +23,17 @@ public class ChatMessageReportMessage extends NetworkMessage {
 	private String fingerprint;
 	private int reason;
 
-	public String getSenderName() { return this.senderName; };
+	public String getSenderName() { return this.senderName; }
 	public void setSenderName(String senderName) { this.senderName = senderName; };
-	public String getContent() { return this.content; };
+	public String getContent() { return this.content; }
 	public void setContent(String content) { this.content = content; };
-	public int getTimestamp() { return this.timestamp; };
+	public int getTimestamp() { return this.timestamp; }
 	public void setTimestamp(int timestamp) { this.timestamp = timestamp; };
-	public int getChannel() { return this.channel; };
+	public int getChannel() { return this.channel; }
 	public void setChannel(int channel) { this.channel = channel; };
-	public String getFingerprint() { return this.fingerprint; };
+	public String getFingerprint() { return this.fingerprint; }
 	public void setFingerprint(String fingerprint) { this.fingerprint = fingerprint; };
-	public int getReason() { return this.reason; };
+	public int getReason() { return this.reason; }
 	public void setReason(int reason) { this.reason = reason; };
 
 	public ChatMessageReportMessage(){

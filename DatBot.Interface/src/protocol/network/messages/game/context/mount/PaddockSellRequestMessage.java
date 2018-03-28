@@ -19,9 +19,9 @@ public class PaddockSellRequestMessage extends NetworkMessage {
 	private long price;
 	private boolean forSale;
 
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
-	public boolean isForSale() { return this.forSale; };
+	public boolean isForSale() { return this.forSale; }
 	public void setForSale(boolean forSale) { this.forSale = forSale; };
 
 	public PaddockSellRequestMessage(){

@@ -19,9 +19,9 @@ public class EntityDispositionInformations extends NetworkMessage {
 	private int cellId;
 	private int direction;
 
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
-	public int getDirection() { return this.direction; };
+	public int getDirection() { return this.direction; }
 	public void setDirection(int direction) { this.direction = direction; };
 
 	public EntityDispositionInformations(){

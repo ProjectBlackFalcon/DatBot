@@ -18,7 +18,7 @@ public class FightEntityDispositionInformations extends EntityDispositionInforma
 
 	private double carryingCharacterId;
 
-	public double getCarryingCharacterId() { return this.carryingCharacterId; };
+	public double getCarryingCharacterId() { return this.carryingCharacterId; }
 	public void setCarryingCharacterId(double carryingCharacterId) { this.carryingCharacterId = carryingCharacterId; };
 
 	public FightEntityDispositionInformations(){

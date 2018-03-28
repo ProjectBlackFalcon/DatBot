@@ -18,7 +18,7 @@ public class InteractiveElementNamedSkill extends InteractiveElementSkill {
 
 	private int nameId;
 
-	public int getNameId() { return this.nameId; };
+	public int getNameId() { return this.nameId; }
 	public void setNameId(int nameId) { this.nameId = nameId; };
 
 	public InteractiveElementNamedSkill(){

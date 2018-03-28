@@ -19,9 +19,9 @@ public class PrismSubareaEmptyInfo extends NetworkMessage {
 	private int subAreaId;
 	private int allianceId;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public int getAllianceId() { return this.allianceId; };
+	public int getAllianceId() { return this.allianceId; }
 	public void setAllianceId(int allianceId) { this.allianceId = allianceId; };
 
 	public PrismSubareaEmptyInfo(){

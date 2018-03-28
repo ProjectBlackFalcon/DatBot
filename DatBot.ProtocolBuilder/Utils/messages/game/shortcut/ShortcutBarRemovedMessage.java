@@ -19,9 +19,9 @@ public class ShortcutBarRemovedMessage extends NetworkMessage {
 	private int barType;
 	private int slot;
 
-	public int getBarType() { return this.barType; };
+	public int getBarType() { return this.barType; }
 	public void setBarType(int barType) { this.barType = barType; };
-	public int getSlot() { return this.slot; };
+	public int getSlot() { return this.slot; }
 	public void setSlot(int slot) { this.slot = slot; };
 
 	public ShortcutBarRemovedMessage(){

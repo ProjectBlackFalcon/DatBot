@@ -21,11 +21,11 @@ public class ServersListMessage extends NetworkMessage {
 	private int alreadyConnectedToServerId;
 	private boolean canCreateNewCharacter;
 
-	public List<GameServerInformations> getServers() { return this.servers; };
+	public List<GameServerInformations> getServers() { return this.servers; }
 	public void setServers(List<GameServerInformations> servers) { this.servers = servers; };
-	public int getAlreadyConnectedToServerId() { return this.alreadyConnectedToServerId; };
+	public int getAlreadyConnectedToServerId() { return this.alreadyConnectedToServerId; }
 	public void setAlreadyConnectedToServerId(int alreadyConnectedToServerId) { this.alreadyConnectedToServerId = alreadyConnectedToServerId; };
-	public boolean isCanCreateNewCharacter() { return this.canCreateNewCharacter; };
+	public boolean isCanCreateNewCharacter() { return this.canCreateNewCharacter; }
 	public void setCanCreateNewCharacter(boolean canCreateNewCharacter) { this.canCreateNewCharacter = canCreateNewCharacter; };
 
 	public ServersListMessage(){

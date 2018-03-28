@@ -23,17 +23,17 @@ public class GameFightFighterLightInformations extends NetworkMessage {
 	private boolean sex;
 	private boolean alive;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public int getWave() { return this.wave; };
+	public int getWave() { return this.wave; }
 	public void setWave(int wave) { this.wave = wave; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public boolean isAlive() { return this.alive; };
+	public boolean isAlive() { return this.alive; }
 	public void setAlive(boolean alive) { this.alive = alive; };
 
 	public GameFightFighterLightInformations(){

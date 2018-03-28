@@ -20,11 +20,11 @@ public class GameFightPlacementPossiblePositionsMessage extends NetworkMessage {
 	private List<Integer> positionsForDefenders;
 	private int teamNumber;
 
-	public List<Integer> getPositionsForChallengers() { return this.positionsForChallengers; };
+	public List<Integer> getPositionsForChallengers() { return this.positionsForChallengers; }
 	public void setPositionsForChallengers(List<Integer> positionsForChallengers) { this.positionsForChallengers = positionsForChallengers; };
-	public List<Integer> getPositionsForDefenders() { return this.positionsForDefenders; };
+	public List<Integer> getPositionsForDefenders() { return this.positionsForDefenders; }
 	public void setPositionsForDefenders(List<Integer> positionsForDefenders) { this.positionsForDefenders = positionsForDefenders; };
-	public int getTeamNumber() { return this.teamNumber; };
+	public int getTeamNumber() { return this.teamNumber; }
 	public void setTeamNumber(int teamNumber) { this.teamNumber = teamNumber; };
 
 	public GameFightPlacementPossiblePositionsMessage(){

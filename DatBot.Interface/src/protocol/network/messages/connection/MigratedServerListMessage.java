@@ -18,7 +18,7 @@ public class MigratedServerListMessage extends NetworkMessage {
 
 	private List<Integer> migratedServerIds;
 
-	public List<Integer> getMigratedServerIds() { return this.migratedServerIds; };
+	public List<Integer> getMigratedServerIds() { return this.migratedServerIds; }
 	public void setMigratedServerIds(List<Integer> migratedServerIds) { this.migratedServerIds = migratedServerIds; };
 
 	public MigratedServerListMessage(){

@@ -19,9 +19,9 @@ public class MailStatusMessage extends NetworkMessage {
 	private int unread;
 	private int total;
 
-	public int getUnread() { return this.unread; };
+	public int getUnread() { return this.unread; }
 	public void setUnread(int unread) { this.unread = unread; };
-	public int getTotal() { return this.total; };
+	public int getTotal() { return this.total; }
 	public void setTotal(int total) { this.total = total; };
 
 	public MailStatusMessage(){

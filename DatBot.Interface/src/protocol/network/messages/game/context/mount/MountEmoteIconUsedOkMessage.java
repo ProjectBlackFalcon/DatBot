@@ -19,9 +19,9 @@ public class MountEmoteIconUsedOkMessage extends NetworkMessage {
 	private int mountId;
 	private int reactionType;
 
-	public int getMountId() { return this.mountId; };
+	public int getMountId() { return this.mountId; }
 	public void setMountId(int mountId) { this.mountId = mountId; };
-	public int getReactionType() { return this.reactionType; };
+	public int getReactionType() { return this.reactionType; }
 	public void setReactionType(int reactionType) { this.reactionType = reactionType; };
 
 	public MountEmoteIconUsedOkMessage(){

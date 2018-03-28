@@ -20,11 +20,11 @@ public class TextInformationMessage extends NetworkMessage {
 	private int msgId;
 	private List<String> parameters;
 
-	public int getMsgType() { return this.msgType; };
+	public int getMsgType() { return this.msgType; }
 	public void setMsgType(int msgType) { this.msgType = msgType; };
-	public int getMsgId() { return this.msgId; };
+	public int getMsgId() { return this.msgId; }
 	public void setMsgId(int msgId) { this.msgId = msgId; };
-	public List<String> getParameters() { return this.parameters; };
+	public List<String> getParameters() { return this.parameters; }
 	public void setParameters(List<String> parameters) { this.parameters = parameters; };
 
 	public TextInformationMessage(){

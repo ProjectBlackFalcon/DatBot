@@ -19,7 +19,7 @@ public class AllianceVersatileInfoListMessage extends NetworkMessage {
 
 	private List<AllianceVersatileInformations> alliances;
 
-	public List<AllianceVersatileInformations> getAlliances() { return this.alliances; };
+	public List<AllianceVersatileInformations> getAlliances() { return this.alliances; }
 	public void setAlliances(List<AllianceVersatileInformations> alliances) { this.alliances = alliances; };
 
 	public AllianceVersatileInfoListMessage(){

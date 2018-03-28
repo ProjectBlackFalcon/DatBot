@@ -19,9 +19,9 @@ public class GameFightTurnListMessage extends NetworkMessage {
 	private List<Double> ids;
 	private List<Double> deadsIds;
 
-	public List<Double> getIds() { return this.ids; };
+	public List<Double> getIds() { return this.ids; }
 	public void setIds(List<Double> ids) { this.ids = ids; };
-	public List<Double> getDeadsIds() { return this.deadsIds; };
+	public List<Double> getDeadsIds() { return this.deadsIds; }
 	public void setDeadsIds(List<Double> deadsIds) { this.deadsIds = deadsIds; };
 
 	public GameFightTurnListMessage(){

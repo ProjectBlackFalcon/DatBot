@@ -19,9 +19,9 @@ public class AuthenticationTicketMessage extends NetworkMessage {
 	private String lang;
 	private String ticket;
 
-	public String getLang() { return this.lang; };
+	public String getLang() { return this.lang; }
 	public void setLang(String lang) { this.lang = lang; };
-	public String getTicket() { return this.ticket; };
+	public String getTicket() { return this.ticket; }
 	public void setTicket(String ticket) { this.ticket = ticket; };
 
 	public AuthenticationTicketMessage(){

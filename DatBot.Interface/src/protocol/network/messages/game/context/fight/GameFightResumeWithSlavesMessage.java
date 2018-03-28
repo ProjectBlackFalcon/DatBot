@@ -19,7 +19,7 @@ public class GameFightResumeWithSlavesMessage extends GameFightResumeMessage {
 
 	private List<GameFightResumeSlaveInfo> slavesInfo;
 
-	public List<GameFightResumeSlaveInfo> getSlavesInfo() { return this.slavesInfo; };
+	public List<GameFightResumeSlaveInfo> getSlavesInfo() { return this.slavesInfo; }
 	public void setSlavesInfo(List<GameFightResumeSlaveInfo> slavesInfo) { this.slavesInfo = slavesInfo; };
 
 	public GameFightResumeWithSlavesMessage(){

@@ -18,7 +18,7 @@ public class PartyRefuseInvitationNotificationMessage extends AbstractPartyEvent
 
 	private long guestId;
 
-	public long getGuestId() { return this.guestId; };
+	public long getGuestId() { return this.guestId; }
 	public void setGuestId(long guestId) { this.guestId = guestId; };
 
 	public PartyRefuseInvitationNotificationMessage(){

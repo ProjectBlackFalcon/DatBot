@@ -19,7 +19,7 @@ public class JobCrafterDirectoryAddMessage extends NetworkMessage {
 
 	private JobCrafterDirectoryListEntry listEntry;
 
-	public JobCrafterDirectoryListEntry getListEntry() { return this.listEntry; };
+	public JobCrafterDirectoryListEntry getListEntry() { return this.listEntry; }
 	public void setListEntry(JobCrafterDirectoryListEntry listEntry) { this.listEntry = listEntry; };
 
 	public JobCrafterDirectoryAddMessage(){

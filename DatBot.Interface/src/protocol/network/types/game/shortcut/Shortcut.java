@@ -18,7 +18,7 @@ public class Shortcut extends NetworkMessage {
 
 	private int slot;
 
-	public int getSlot() { return this.slot; };
+	public int getSlot() { return this.slot; }
 	public void setSlot(int slot) { this.slot = slot; };
 
 	public Shortcut(){

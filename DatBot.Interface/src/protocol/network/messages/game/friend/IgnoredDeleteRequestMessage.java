@@ -19,9 +19,9 @@ public class IgnoredDeleteRequestMessage extends NetworkMessage {
 	private int accountId;
 	private boolean session;
 
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public boolean isSession() { return this.session; };
+	public boolean isSession() { return this.session; }
 	public void setSession(boolean session) { this.session = session; };
 
 	public IgnoredDeleteRequestMessage(){

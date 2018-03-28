@@ -27,23 +27,23 @@ public class GameActionMark extends NetworkMessage {
 	private List<GameActionMarkedCell> cells;
 	private boolean active;
 
-	public double getMarkAuthorId() { return this.markAuthorId; };
+	public double getMarkAuthorId() { return this.markAuthorId; }
 	public void setMarkAuthorId(double markAuthorId) { this.markAuthorId = markAuthorId; };
-	public int getMarkTeamId() { return this.markTeamId; };
+	public int getMarkTeamId() { return this.markTeamId; }
 	public void setMarkTeamId(int markTeamId) { this.markTeamId = markTeamId; };
-	public int getMarkSpellId() { return this.markSpellId; };
+	public int getMarkSpellId() { return this.markSpellId; }
 	public void setMarkSpellId(int markSpellId) { this.markSpellId = markSpellId; };
-	public int getMarkSpellLevel() { return this.markSpellLevel; };
+	public int getMarkSpellLevel() { return this.markSpellLevel; }
 	public void setMarkSpellLevel(int markSpellLevel) { this.markSpellLevel = markSpellLevel; };
-	public int getMarkId() { return this.markId; };
+	public int getMarkId() { return this.markId; }
 	public void setMarkId(int markId) { this.markId = markId; };
-	public int getMarkType() { return this.markType; };
+	public int getMarkType() { return this.markType; }
 	public void setMarkType(int markType) { this.markType = markType; };
-	public int getMarkimpactCell() { return this.markimpactCell; };
+	public int getMarkimpactCell() { return this.markimpactCell; }
 	public void setMarkimpactCell(int markimpactCell) { this.markimpactCell = markimpactCell; };
-	public List<GameActionMarkedCell> getCells() { return this.cells; };
+	public List<GameActionMarkedCell> getCells() { return this.cells; }
 	public void setCells(List<GameActionMarkedCell> cells) { this.cells = cells; };
-	public boolean isActive() { return this.active; };
+	public boolean isActive() { return this.active; }
 	public void setActive(boolean active) { this.active = active; };
 
 	public GameActionMark(){

@@ -18,7 +18,7 @@ public class CharacterCapabilitiesMessage extends NetworkMessage {
 
 	private int guildEmblemSymbolCategories;
 
-	public int getGuildEmblemSymbolCategories() { return this.guildEmblemSymbolCategories; };
+	public int getGuildEmblemSymbolCategories() { return this.guildEmblemSymbolCategories; }
 	public void setGuildEmblemSymbolCategories(int guildEmblemSymbolCategories) { this.guildEmblemSymbolCategories = guildEmblemSymbolCategories; };
 
 	public CharacterCapabilitiesMessage(){

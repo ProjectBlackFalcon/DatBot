@@ -20,11 +20,11 @@ public class StartupActionFinishedMessage extends NetworkMessage {
 	private int actionId;
 	private boolean automaticAction;
 
-	public boolean isSuccess() { return this.success; };
+	public boolean isSuccess() { return this.success; }
 	public void setSuccess(boolean success) { this.success = success; };
-	public int getActionId() { return this.actionId; };
+	public int getActionId() { return this.actionId; }
 	public void setActionId(int actionId) { this.actionId = actionId; };
-	public boolean isAutomaticAction() { return this.automaticAction; };
+	public boolean isAutomaticAction() { return this.automaticAction; }
 	public void setAutomaticAction(boolean automaticAction) { this.automaticAction = automaticAction; };
 
 	public StartupActionFinishedMessage(){

@@ -29,27 +29,27 @@ public class ExchangeGuildTaxCollectorGetMessage extends NetworkMessage {
 	private int pods;
 	private List<ObjectItemGenericQuantity> objectsInfos;
 
-	public String getCollectorName() { return this.collectorName; };
+	public String getCollectorName() { return this.collectorName; }
 	public void setCollectorName(String collectorName) { this.collectorName = collectorName; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public String getUserName() { return this.userName; };
+	public String getUserName() { return this.userName; }
 	public void setUserName(String userName) { this.userName = userName; };
-	public long getCallerId() { return this.callerId; };
+	public long getCallerId() { return this.callerId; }
 	public void setCallerId(long callerId) { this.callerId = callerId; };
-	public String getCallerName() { return this.callerName; };
+	public String getCallerName() { return this.callerName; }
 	public void setCallerName(String callerName) { this.callerName = callerName; };
-	public double getExperience() { return this.experience; };
+	public double getExperience() { return this.experience; }
 	public void setExperience(double experience) { this.experience = experience; };
-	public int getPods() { return this.pods; };
+	public int getPods() { return this.pods; }
 	public void setPods(int pods) { this.pods = pods; };
-	public List<ObjectItemGenericQuantity> getObjectsInfos() { return this.objectsInfos; };
+	public List<ObjectItemGenericQuantity> getObjectsInfos() { return this.objectsInfos; }
 	public void setObjectsInfos(List<ObjectItemGenericQuantity> objectsInfos) { this.objectsInfos = objectsInfos; };
 
 	public ExchangeGuildTaxCollectorGetMessage(){

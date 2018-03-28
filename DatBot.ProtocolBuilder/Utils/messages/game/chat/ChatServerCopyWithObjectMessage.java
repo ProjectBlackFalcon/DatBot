@@ -19,7 +19,7 @@ public class ChatServerCopyWithObjectMessage extends ChatServerCopyMessage {
 
 	private List<ObjectItem> objects;
 
-	public List<ObjectItem> getObjects() { return this.objects; };
+	public List<ObjectItem> getObjects() { return this.objects; }
 	public void setObjects(List<ObjectItem> objects) { this.objects = objects; };
 
 	public ChatServerCopyWithObjectMessage(){

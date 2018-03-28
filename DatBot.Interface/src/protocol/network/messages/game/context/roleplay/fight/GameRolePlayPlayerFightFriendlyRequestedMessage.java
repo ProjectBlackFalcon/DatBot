@@ -20,11 +20,11 @@ public class GameRolePlayPlayerFightFriendlyRequestedMessage extends NetworkMess
 	private long sourceId;
 	private long targetId;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public long getSourceId() { return this.sourceId; };
+	public long getSourceId() { return this.sourceId; }
 	public void setSourceId(long sourceId) { this.sourceId = sourceId; };
-	public long getTargetId() { return this.targetId; };
+	public long getTargetId() { return this.targetId; }
 	public void setTargetId(long targetId) { this.targetId = targetId; };
 
 	public GameRolePlayPlayerFightFriendlyRequestedMessage(){

@@ -20,11 +20,11 @@ public class GameRolePlayNpcInformations extends GameRolePlayActorInformations {
 	private boolean sex;
 	private int specialArtworkId;
 
-	public int getNpcId() { return this.npcId; };
+	public int getNpcId() { return this.npcId; }
 	public void setNpcId(int npcId) { this.npcId = npcId; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public int getSpecialArtworkId() { return this.specialArtworkId; };
+	public int getSpecialArtworkId() { return this.specialArtworkId; }
 	public void setSpecialArtworkId(int specialArtworkId) { this.specialArtworkId = specialArtworkId; };
 
 	public GameRolePlayNpcInformations(){

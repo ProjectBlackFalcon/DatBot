@@ -19,7 +19,7 @@ public class GameEntityDispositionMessage extends NetworkMessage {
 
 	private IdentifiedEntityDispositionInformations disposition;
 
-	public IdentifiedEntityDispositionInformations getDisposition() { return this.disposition; };
+	public IdentifiedEntityDispositionInformations getDisposition() { return this.disposition; }
 	public void setDisposition(IdentifiedEntityDispositionInformations disposition) { this.disposition = disposition; };
 
 	public GameEntityDispositionMessage(){

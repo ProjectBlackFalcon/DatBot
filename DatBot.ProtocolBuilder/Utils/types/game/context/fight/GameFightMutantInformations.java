@@ -18,7 +18,7 @@ public class GameFightMutantInformations extends GameFightFighterNamedInformatio
 
 	private int powerLevel;
 
-	public int getPowerLevel() { return this.powerLevel; };
+	public int getPowerLevel() { return this.powerLevel; }
 	public void setPowerLevel(int powerLevel) { this.powerLevel = powerLevel; };
 
 	public GameFightMutantInformations(){

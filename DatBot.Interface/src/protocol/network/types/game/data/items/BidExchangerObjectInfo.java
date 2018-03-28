@@ -21,11 +21,11 @@ public class BidExchangerObjectInfo extends NetworkMessage {
 	private List<ObjectEffect> effects;
 	private List<Long> prices;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public List<ObjectEffect> getEffects() { return this.effects; };
+	public List<ObjectEffect> getEffects() { return this.effects; }
 	public void setEffects(List<ObjectEffect> effects) { this.effects = effects; };
-	public List<Long> getPrices() { return this.prices; };
+	public List<Long> getPrices() { return this.prices; }
 	public void setPrices(List<Long> prices) { this.prices = prices; };
 
 	public BidExchangerObjectInfo(){

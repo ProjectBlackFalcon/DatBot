@@ -25,19 +25,19 @@ public class PaddockContentInformations extends PaddockInformations {
 	private boolean abandonned;
 	private List<MountInformationsForPaddock> mountsInformations;
 
-	public double getPaddockId() { return this.paddockId; };
+	public double getPaddockId() { return this.paddockId; }
 	public void setPaddockId(double paddockId) { this.paddockId = paddockId; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public boolean isAbandonned() { return this.abandonned; };
+	public boolean isAbandonned() { return this.abandonned; }
 	public void setAbandonned(boolean abandonned) { this.abandonned = abandonned; };
-	public List<MountInformationsForPaddock> getMountsInformations() { return this.mountsInformations; };
+	public List<MountInformationsForPaddock> getMountsInformations() { return this.mountsInformations; }
 	public void setMountsInformations(List<MountInformationsForPaddock> mountsInformations) { this.mountsInformations = mountsInformations; };
 
 	public PaddockContentInformations(){

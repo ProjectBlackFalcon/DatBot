@@ -18,7 +18,7 @@ public class GuildInvitationStateRecrutedMessage extends NetworkMessage {
 
 	private int invitationState;
 
-	public int getInvitationState() { return this.invitationState; };
+	public int getInvitationState() { return this.invitationState; }
 	public void setInvitationState(int invitationState) { this.invitationState = invitationState; };
 
 	public GuildInvitationStateRecrutedMessage(){

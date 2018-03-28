@@ -28,25 +28,25 @@ public class DareCreationRequestMessage extends NetworkMessage {
 	private boolean needNotifications;
 	private List<DareCriteria> criterions;
 
-	public long getSubscriptionFee() { return this.subscriptionFee; };
+	public long getSubscriptionFee() { return this.subscriptionFee; }
 	public void setSubscriptionFee(long subscriptionFee) { this.subscriptionFee = subscriptionFee; };
-	public long getJackpot() { return this.jackpot; };
+	public long getJackpot() { return this.jackpot; }
 	public void setJackpot(long jackpot) { this.jackpot = jackpot; };
-	public int getMaxCountWinners() { return this.maxCountWinners; };
+	public int getMaxCountWinners() { return this.maxCountWinners; }
 	public void setMaxCountWinners(int maxCountWinners) { this.maxCountWinners = maxCountWinners; };
-	public int getDelayBeforeStart() { return this.delayBeforeStart; };
+	public int getDelayBeforeStart() { return this.delayBeforeStart; }
 	public void setDelayBeforeStart(int delayBeforeStart) { this.delayBeforeStart = delayBeforeStart; };
-	public int getDuration() { return this.duration; };
+	public int getDuration() { return this.duration; }
 	public void setDuration(int duration) { this.duration = duration; };
-	public boolean isIsPrivate() { return this.isPrivate; };
+	public boolean isIsPrivate() { return this.isPrivate; }
 	public void setIsPrivate(boolean isPrivate) { this.isPrivate = isPrivate; };
-	public boolean isIsForGuild() { return this.isForGuild; };
+	public boolean isIsForGuild() { return this.isForGuild; }
 	public void setIsForGuild(boolean isForGuild) { this.isForGuild = isForGuild; };
-	public boolean isIsForAlliance() { return this.isForAlliance; };
+	public boolean isIsForAlliance() { return this.isForAlliance; }
 	public void setIsForAlliance(boolean isForAlliance) { this.isForAlliance = isForAlliance; };
-	public boolean isNeedNotifications() { return this.needNotifications; };
+	public boolean isNeedNotifications() { return this.needNotifications; }
 	public void setNeedNotifications(boolean needNotifications) { this.needNotifications = needNotifications; };
-	public List<DareCriteria> getCriterions() { return this.criterions; };
+	public List<DareCriteria> getCriterions() { return this.criterions; }
 	public void setCriterions(List<DareCriteria> criterions) { this.criterions = criterions; };
 
 	public DareCreationRequestMessage(){

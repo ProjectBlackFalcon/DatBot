@@ -18,7 +18,7 @@ public class GameContextCreateMessage extends NetworkMessage {
 
 	private int context;
 
-	public int getContext() { return this.context; };
+	public int getContext() { return this.context; }
 	public void setContext(int context) { this.context = context; };
 
 	public GameContextCreateMessage(){

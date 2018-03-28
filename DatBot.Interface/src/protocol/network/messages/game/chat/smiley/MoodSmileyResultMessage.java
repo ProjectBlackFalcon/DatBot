@@ -19,9 +19,9 @@ public class MoodSmileyResultMessage extends NetworkMessage {
 	private int resultCode;
 	private int smileyId;
 
-	public int getResultCode() { return this.resultCode; };
+	public int getResultCode() { return this.resultCode; }
 	public void setResultCode(int resultCode) { this.resultCode = resultCode; };
-	public int getSmileyId() { return this.smileyId; };
+	public int getSmileyId() { return this.smileyId; }
 	public void setSmileyId(int smileyId) { this.smileyId = smileyId; };
 
 	public MoodSmileyResultMessage(){

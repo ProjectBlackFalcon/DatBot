@@ -19,9 +19,9 @@ public class MountRenamedMessage extends NetworkMessage {
 	private int mountId;
 	private String name;
 
-	public int getMountId() { return this.mountId; };
+	public int getMountId() { return this.mountId; }
 	public void setMountId(int mountId) { this.mountId = mountId; };
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
 
 	public MountRenamedMessage(){

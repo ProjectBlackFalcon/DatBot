@@ -19,9 +19,9 @@ public class ExchangeIsReadyMessage extends NetworkMessage {
 	private double id;
 	private boolean ready;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public boolean isReady() { return this.ready; };
+	public boolean isReady() { return this.ready; }
 	public void setReady(boolean ready) { this.ready = ready; };
 
 	public ExchangeIsReadyMessage(){

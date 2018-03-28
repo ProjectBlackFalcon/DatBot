@@ -19,9 +19,9 @@ public class ExchangeStartOkMulticraftCustomerMessage extends NetworkMessage {
 	private int skillId;
 	private int crafterJobLevel;
 
-	public int getSkillId() { return this.skillId; };
+	public int getSkillId() { return this.skillId; }
 	public void setSkillId(int skillId) { this.skillId = skillId; };
-	public int getCrafterJobLevel() { return this.crafterJobLevel; };
+	public int getCrafterJobLevel() { return this.crafterJobLevel; }
 	public void setCrafterJobLevel(int crafterJobLevel) { this.crafterJobLevel = crafterJobLevel; };
 
 	public ExchangeStartOkMulticraftCustomerMessage(){

@@ -18,7 +18,7 @@ public class CharacterCanBeCreatedResultMessage extends NetworkMessage {
 
 	private boolean yesYouCan;
 
-	public boolean isYesYouCan() { return this.yesYouCan; };
+	public boolean isYesYouCan() { return this.yesYouCan; }
 	public void setYesYouCan(boolean yesYouCan) { this.yesYouCan = yesYouCan; };
 
 	public CharacterCanBeCreatedResultMessage(){

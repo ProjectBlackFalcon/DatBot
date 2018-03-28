@@ -20,11 +20,11 @@ public class GameActionFightSlideMessage extends AbstractGameActionMessage {
 	private int startCellId;
 	private int endCellId;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getStartCellId() { return this.startCellId; };
+	public int getStartCellId() { return this.startCellId; }
 	public void setStartCellId(int startCellId) { this.startCellId = startCellId; };
-	public int getEndCellId() { return this.endCellId; };
+	public int getEndCellId() { return this.endCellId; }
 	public void setEndCellId(int endCellId) { this.endCellId = endCellId; };
 
 	public GameActionFightSlideMessage(){

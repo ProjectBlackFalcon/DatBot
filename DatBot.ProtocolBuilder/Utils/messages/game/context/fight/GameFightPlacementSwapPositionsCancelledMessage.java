@@ -19,9 +19,9 @@ public class GameFightPlacementSwapPositionsCancelledMessage extends NetworkMess
 	private int requestId;
 	private double cancellerId;
 
-	public int getRequestId() { return this.requestId; };
+	public int getRequestId() { return this.requestId; }
 	public void setRequestId(int requestId) { this.requestId = requestId; };
-	public double getCancellerId() { return this.cancellerId; };
+	public double getCancellerId() { return this.cancellerId; }
 	public void setCancellerId(double cancellerId) { this.cancellerId = cancellerId; };
 
 	public GameFightPlacementSwapPositionsCancelledMessage(){

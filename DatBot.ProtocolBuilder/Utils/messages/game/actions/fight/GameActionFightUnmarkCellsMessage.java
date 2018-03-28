@@ -18,7 +18,7 @@ public class GameActionFightUnmarkCellsMessage extends AbstractGameActionMessage
 
 	private int markId;
 
-	public int getMarkId() { return this.markId; };
+	public int getMarkId() { return this.markId; }
 	public void setMarkId(int markId) { this.markId = markId; };
 
 	public GameActionFightUnmarkCellsMessage(){

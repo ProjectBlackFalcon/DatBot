@@ -17,15 +17,19 @@ public class GameActionFightDispellMessage extends AbstractGameActionMessage {
 	public static final int ProtocolId = 5533;
 
 	private double targetId;
+	private boolean verboseCast;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
+	public boolean isVerboseCast() { return this.verboseCast; }
+	public void setVerboseCast(boolean verboseCast) { this.verboseCast = verboseCast; };
 
 	public GameActionFightDispellMessage(){
 	}
 
-	public GameActionFightDispellMessage(double targetId){
+	public GameActionFightDispellMessage(double targetId, boolean verboseCast){
 		this.targetId = targetId;
+		this.verboseCast = verboseCast;
 	}
 
 	@Override
@@ -33,6 +37,7 @@ public class GameActionFightDispellMessage extends AbstractGameActionMessage {
 		try {
 			super.Serialize(writer);
 			writer.writeDouble(this.targetId);
+			writer.writeBoolean(this.verboseCast);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -43,6 +48,7 @@ public class GameActionFightDispellMessage extends AbstractGameActionMessage {
 		try {
 			super.Deserialize(reader);
 			this.targetId = reader.readDouble();
+			this.verboseCast = reader.readBoolean();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

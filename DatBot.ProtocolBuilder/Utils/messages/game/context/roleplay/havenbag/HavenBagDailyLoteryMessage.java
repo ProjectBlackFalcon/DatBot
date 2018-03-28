@@ -17,26 +17,26 @@ public class HavenBagDailyLoteryMessage extends NetworkMessage {
 	public static final int ProtocolId = 6644;
 
 	private int returnType;
-	private String tokenId;
+	private String gameActionId;
 
-	public int getReturnType() { return this.returnType; };
+	public int getReturnType() { return this.returnType; }
 	public void setReturnType(int returnType) { this.returnType = returnType; };
-	public String getTokenId() { return this.tokenId; };
-	public void setTokenId(String tokenId) { this.tokenId = tokenId; };
+	public String getGameActionId() { return this.gameActionId; }
+	public void setGameActionId(String gameActionId) { this.gameActionId = gameActionId; };
 
 	public HavenBagDailyLoteryMessage(){
 	}
 
-	public HavenBagDailyLoteryMessage(int returnType, String tokenId){
+	public HavenBagDailyLoteryMessage(int returnType, String gameActionId){
 		this.returnType = returnType;
-		this.tokenId = tokenId;
+		this.gameActionId = gameActionId;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			writer.writeByte(this.returnType);
-			writer.writeUTF(this.tokenId);
+			writer.writeUTF(this.gameActionId);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -46,7 +46,7 @@ public class HavenBagDailyLoteryMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			this.returnType = reader.readByte();
-			this.tokenId = reader.readUTF();
+			this.gameActionId = reader.readUTF();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

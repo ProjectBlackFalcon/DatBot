@@ -21,11 +21,11 @@ public class AllianceInvitedMessage extends NetworkMessage {
 	private String recruterName;
 	private BasicNamedAllianceInformations allianceInfo;
 
-	public long getRecruterId() { return this.recruterId; };
+	public long getRecruterId() { return this.recruterId; }
 	public void setRecruterId(long recruterId) { this.recruterId = recruterId; };
-	public String getRecruterName() { return this.recruterName; };
+	public String getRecruterName() { return this.recruterName; }
 	public void setRecruterName(String recruterName) { this.recruterName = recruterName; };
-	public BasicNamedAllianceInformations getAllianceInfo() { return this.allianceInfo; };
+	public BasicNamedAllianceInformations getAllianceInfo() { return this.allianceInfo; }
 	public void setAllianceInfo(BasicNamedAllianceInformations allianceInfo) { this.allianceInfo = allianceInfo; };
 
 	public AllianceInvitedMessage(){

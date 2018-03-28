@@ -18,7 +18,7 @@ public class GameActionFightDispellEffectMessage extends GameActionFightDispellM
 
 	private int boostUID;
 
-	public int getBoostUID() { return this.boostUID; };
+	public int getBoostUID() { return this.boostUID; }
 	public void setBoostUID(int boostUID) { this.boostUID = boostUID; };
 
 	public GameActionFightDispellEffectMessage(){

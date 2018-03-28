@@ -21,11 +21,11 @@ public class HouseInformationsInside extends HouseInformations {
 	private int worldX;
 	private int worldY;
 
-	public HouseInstanceInformations getHouseInfos() { return this.houseInfos; };
+	public HouseInstanceInformations getHouseInfos() { return this.houseInfos; }
 	public void setHouseInfos(HouseInstanceInformations houseInfos) { this.houseInfos = houseInfos; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
 
 	public HouseInformationsInside(){

@@ -21,11 +21,11 @@ public class ExchangeStartOkNpcShopMessage extends NetworkMessage {
 	private int tokenId;
 	private List<ObjectItemToSellInNpcShop> objectsInfos;
 
-	public double getNpcSellerId() { return this.npcSellerId; };
+	public double getNpcSellerId() { return this.npcSellerId; }
 	public void setNpcSellerId(double npcSellerId) { this.npcSellerId = npcSellerId; };
-	public int getTokenId() { return this.tokenId; };
+	public int getTokenId() { return this.tokenId; }
 	public void setTokenId(int tokenId) { this.tokenId = tokenId; };
-	public List<ObjectItemToSellInNpcShop> getObjectsInfos() { return this.objectsInfos; };
+	public List<ObjectItemToSellInNpcShop> getObjectsInfos() { return this.objectsInfos; }
 	public void setObjectsInfos(List<ObjectItemToSellInNpcShop> objectsInfos) { this.objectsInfos = objectsInfos; };
 
 	public ExchangeStartOkNpcShopMessage(){

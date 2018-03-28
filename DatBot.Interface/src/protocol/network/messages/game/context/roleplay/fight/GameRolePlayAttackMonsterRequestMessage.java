@@ -18,7 +18,7 @@ public class GameRolePlayAttackMonsterRequestMessage extends NetworkMessage {
 
 	private double monsterGroupId;
 
-	public double getMonsterGroupId() { return this.monsterGroupId; };
+	public double getMonsterGroupId() { return this.monsterGroupId; }
 	public void setMonsterGroupId(double monsterGroupId) { this.monsterGroupId = monsterGroupId; };
 
 	public GameRolePlayAttackMonsterRequestMessage(){

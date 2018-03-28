@@ -30,29 +30,29 @@ public class BasicWhoIsMessage extends NetworkMessage {
 	private boolean verbose;
 	private int playerState;
 
-	public boolean isSelf() { return this.self; };
+	public boolean isSelf() { return this.self; }
 	public void setSelf(boolean self) { this.self = self; };
-	public int getPosition() { return this.position; };
+	public int getPosition() { return this.position; }
 	public void setPosition(int position) { this.position = position; };
-	public String getAccountNickname() { return this.accountNickname; };
+	public String getAccountNickname() { return this.accountNickname; }
 	public void setAccountNickname(String accountNickname) { this.accountNickname = accountNickname; };
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public String getPlayerName() { return this.playerName; };
+	public String getPlayerName() { return this.playerName; }
 	public void setPlayerName(String playerName) { this.playerName = playerName; };
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public int getAreaId() { return this.areaId; };
+	public int getAreaId() { return this.areaId; }
 	public void setAreaId(int areaId) { this.areaId = areaId; };
-	public int getServerId() { return this.serverId; };
+	public int getServerId() { return this.serverId; }
 	public void setServerId(int serverId) { this.serverId = serverId; };
-	public int getOriginServerId() { return this.originServerId; };
+	public int getOriginServerId() { return this.originServerId; }
 	public void setOriginServerId(int originServerId) { this.originServerId = originServerId; };
-	public List<AbstractSocialGroupInfos> getSocialGroups() { return this.socialGroups; };
+	public List<AbstractSocialGroupInfos> getSocialGroups() { return this.socialGroups; }
 	public void setSocialGroups(List<AbstractSocialGroupInfos> socialGroups) { this.socialGroups = socialGroups; };
-	public boolean isVerbose() { return this.verbose; };
+	public boolean isVerbose() { return this.verbose; }
 	public void setVerbose(boolean verbose) { this.verbose = verbose; };
-	public int getPlayerState() { return this.playerState; };
+	public int getPlayerState() { return this.playerState; }
 	public void setPlayerState(int playerState) { this.playerState = playerState; };
 
 	public BasicWhoIsMessage(){

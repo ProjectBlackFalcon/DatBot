@@ -18,7 +18,7 @@ public class ExchangeMountsStableRemoveMessage extends NetworkMessage {
 
 	private List<Integer> mountsId;
 
-	public List<Integer> getMountsId() { return this.mountsId; };
+	public List<Integer> getMountsId() { return this.mountsId; }
 	public void setMountsId(List<Integer> mountsId) { this.mountsId = mountsId; };
 
 	public ExchangeMountsStableRemoveMessage(){

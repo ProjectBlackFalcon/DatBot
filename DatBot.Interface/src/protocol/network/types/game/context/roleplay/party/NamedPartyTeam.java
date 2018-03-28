@@ -19,9 +19,9 @@ public class NamedPartyTeam extends NetworkMessage {
 	private int teamId;
 	private String partyName;
 
-	public int getTeamId() { return this.teamId; };
+	public int getTeamId() { return this.teamId; }
 	public void setTeamId(int teamId) { this.teamId = teamId; };
-	public String getPartyName() { return this.partyName; };
+	public String getPartyName() { return this.partyName; }
 	public void setPartyName(String partyName) { this.partyName = partyName; };
 
 	public NamedPartyTeam(){

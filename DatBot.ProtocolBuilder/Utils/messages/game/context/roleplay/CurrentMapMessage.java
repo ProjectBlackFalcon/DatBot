@@ -19,9 +19,9 @@ public class CurrentMapMessage extends NetworkMessage {
 	private double mapId;
 	private String mapKey;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public String getMapKey() { return this.mapKey; };
+	public String getMapKey() { return this.mapKey; }
 	public void setMapKey(String mapKey) { this.mapKey = mapKey; };
 
 	public CurrentMapMessage(){

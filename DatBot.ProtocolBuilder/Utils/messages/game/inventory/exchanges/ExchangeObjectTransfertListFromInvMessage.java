@@ -18,7 +18,7 @@ public class ExchangeObjectTransfertListFromInvMessage extends NetworkMessage {
 
 	private List<Integer> ids;
 
-	public List<Integer> getIds() { return this.ids; };
+	public List<Integer> getIds() { return this.ids; }
 	public void setIds(List<Integer> ids) { this.ids = ids; };
 
 	public ExchangeObjectTransfertListFromInvMessage(){

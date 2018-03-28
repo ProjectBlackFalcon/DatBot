@@ -21,11 +21,11 @@ public class PartyCompanionBaseInformations extends NetworkMessage {
 	private int companionGenericId;
 	private EntityLook entityLook;
 
-	public int getIndexId() { return this.indexId; };
+	public int getIndexId() { return this.indexId; }
 	public void setIndexId(int indexId) { this.indexId = indexId; };
-	public int getCompanionGenericId() { return this.companionGenericId; };
+	public int getCompanionGenericId() { return this.companionGenericId; }
 	public void setCompanionGenericId(int companionGenericId) { this.companionGenericId = companionGenericId; };
-	public EntityLook getEntityLook() { return this.entityLook; };
+	public EntityLook getEntityLook() { return this.entityLook; }
 	public void setEntityLook(EntityLook entityLook) { this.entityLook = entityLook; };
 
 	public PartyCompanionBaseInformations(){

@@ -20,11 +20,11 @@ public class DareVersatileInformations extends NetworkMessage {
 	private int countEntrants;
 	private int countWinners;
 
-	public double getDareId() { return this.dareId; };
+	public double getDareId() { return this.dareId; }
 	public void setDareId(double dareId) { this.dareId = dareId; };
-	public int getCountEntrants() { return this.countEntrants; };
+	public int getCountEntrants() { return this.countEntrants; }
 	public void setCountEntrants(int countEntrants) { this.countEntrants = countEntrants; };
-	public int getCountWinners() { return this.countWinners; };
+	public int getCountWinners() { return this.countWinners; }
 	public void setCountWinners(int countWinners) { this.countWinners = countWinners; };
 
 	public DareVersatileInformations(){

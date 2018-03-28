@@ -27,25 +27,25 @@ public class GuildInfosUpgradeMessage extends NetworkMessage {
 	private List<Integer> spellId;
 	private List<Integer> spellLevel;
 
-	public int getMaxTaxCollectorsCount() { return this.maxTaxCollectorsCount; };
+	public int getMaxTaxCollectorsCount() { return this.maxTaxCollectorsCount; }
 	public void setMaxTaxCollectorsCount(int maxTaxCollectorsCount) { this.maxTaxCollectorsCount = maxTaxCollectorsCount; };
-	public int getTaxCollectorsCount() { return this.taxCollectorsCount; };
+	public int getTaxCollectorsCount() { return this.taxCollectorsCount; }
 	public void setTaxCollectorsCount(int taxCollectorsCount) { this.taxCollectorsCount = taxCollectorsCount; };
-	public int getTaxCollectorLifePoints() { return this.taxCollectorLifePoints; };
+	public int getTaxCollectorLifePoints() { return this.taxCollectorLifePoints; }
 	public void setTaxCollectorLifePoints(int taxCollectorLifePoints) { this.taxCollectorLifePoints = taxCollectorLifePoints; };
-	public int getTaxCollectorDamagesBonuses() { return this.taxCollectorDamagesBonuses; };
+	public int getTaxCollectorDamagesBonuses() { return this.taxCollectorDamagesBonuses; }
 	public void setTaxCollectorDamagesBonuses(int taxCollectorDamagesBonuses) { this.taxCollectorDamagesBonuses = taxCollectorDamagesBonuses; };
-	public int getTaxCollectorPods() { return this.taxCollectorPods; };
+	public int getTaxCollectorPods() { return this.taxCollectorPods; }
 	public void setTaxCollectorPods(int taxCollectorPods) { this.taxCollectorPods = taxCollectorPods; };
-	public int getTaxCollectorProspecting() { return this.taxCollectorProspecting; };
+	public int getTaxCollectorProspecting() { return this.taxCollectorProspecting; }
 	public void setTaxCollectorProspecting(int taxCollectorProspecting) { this.taxCollectorProspecting = taxCollectorProspecting; };
-	public int getTaxCollectorWisdom() { return this.taxCollectorWisdom; };
+	public int getTaxCollectorWisdom() { return this.taxCollectorWisdom; }
 	public void setTaxCollectorWisdom(int taxCollectorWisdom) { this.taxCollectorWisdom = taxCollectorWisdom; };
-	public int getBoostPoints() { return this.boostPoints; };
+	public int getBoostPoints() { return this.boostPoints; }
 	public void setBoostPoints(int boostPoints) { this.boostPoints = boostPoints; };
-	public List<Integer> getSpellId() { return this.spellId; };
+	public List<Integer> getSpellId() { return this.spellId; }
 	public void setSpellId(List<Integer> spellId) { this.spellId = spellId; };
-	public List<Integer> getSpellLevel() { return this.spellLevel; };
+	public List<Integer> getSpellLevel() { return this.spellLevel; }
 	public void setSpellLevel(List<Integer> spellLevel) { this.spellLevel = spellLevel; };
 
 	public GuildInfosUpgradeMessage(){

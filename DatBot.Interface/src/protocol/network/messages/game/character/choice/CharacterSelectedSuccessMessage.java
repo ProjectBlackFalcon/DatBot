@@ -20,9 +20,9 @@ public class CharacterSelectedSuccessMessage extends NetworkMessage {
 	private CharacterBaseInformations infos;
 	private boolean isCollectingStats;
 
-	public CharacterBaseInformations getInfos() { return this.infos; };
+	public CharacterBaseInformations getInfos() { return this.infos; }
 	public void setInfos(CharacterBaseInformations infos) { this.infos = infos; };
-	public boolean isIsCollectingStats() { return this.isCollectingStats; };
+	public boolean isIsCollectingStats() { return this.isCollectingStats; }
 	public void setIsCollectingStats(boolean isCollectingStats) { this.isCollectingStats = isCollectingStats; };
 
 	public CharacterSelectedSuccessMessage(){

@@ -19,9 +19,9 @@ public class ChatServerCopyMessage extends ChatAbstractServerMessage {
 	private long receiverId;
 	private String receiverName;
 
-	public long getReceiverId() { return this.receiverId; };
+	public long getReceiverId() { return this.receiverId; }
 	public void setReceiverId(long receiverId) { this.receiverId = receiverId; };
-	public String getReceiverName() { return this.receiverName; };
+	public String getReceiverName() { return this.receiverName; }
 	public void setReceiverName(String receiverName) { this.receiverName = receiverName; };
 
 	public ChatServerCopyMessage(){

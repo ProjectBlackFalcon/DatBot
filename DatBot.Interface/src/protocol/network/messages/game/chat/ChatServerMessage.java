@@ -20,11 +20,11 @@ public class ChatServerMessage extends ChatAbstractServerMessage {
 	private String senderName;
 	private int senderAccountId;
 
-	public double getSenderId() { return this.senderId; };
+	public double getSenderId() { return this.senderId; }
 	public void setSenderId(double senderId) { this.senderId = senderId; };
-	public String getSenderName() { return this.senderName; };
+	public String getSenderName() { return this.senderName; }
 	public void setSenderName(String senderName) { this.senderName = senderName; };
-	public int getSenderAccountId() { return this.senderAccountId; };
+	public int getSenderAccountId() { return this.senderAccountId; }
 	public void setSenderAccountId(int senderAccountId) { this.senderAccountId = senderAccountId; };
 
 	public ChatServerMessage(){

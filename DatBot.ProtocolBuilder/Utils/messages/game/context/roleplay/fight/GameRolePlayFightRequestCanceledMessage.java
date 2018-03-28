@@ -20,11 +20,11 @@ public class GameRolePlayFightRequestCanceledMessage extends NetworkMessage {
 	private double sourceId;
 	private double targetId;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public double getSourceId() { return this.sourceId; };
+	public double getSourceId() { return this.sourceId; }
 	public void setSourceId(double sourceId) { this.sourceId = sourceId; };
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
 
 	public GameRolePlayFightRequestCanceledMessage(){

@@ -18,7 +18,7 @@ public class GameFightLeaveMessage extends NetworkMessage {
 
 	private double charId;
 
-	public double getCharId() { return this.charId; };
+	public double getCharId() { return this.charId; }
 	public void setCharId(double charId) { this.charId = charId; };
 
 	public GameFightLeaveMessage(){

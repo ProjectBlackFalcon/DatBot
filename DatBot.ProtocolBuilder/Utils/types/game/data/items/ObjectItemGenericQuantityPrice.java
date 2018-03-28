@@ -18,7 +18,7 @@ public class ObjectItemGenericQuantityPrice extends ObjectItemGenericQuantity {
 
 	private long price;
 
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
 
 	public ObjectItemGenericQuantityPrice(){

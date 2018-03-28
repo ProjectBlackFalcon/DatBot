@@ -18,7 +18,7 @@ public class GameContextRemoveMultipleElementsMessage extends NetworkMessage {
 
 	private List<Double> elementsIds;
 
-	public List<Double> getElementsIds() { return this.elementsIds; };
+	public List<Double> getElementsIds() { return this.elementsIds; }
 	public void setElementsIds(List<Double> elementsIds) { this.elementsIds = elementsIds; };
 
 	public GameContextRemoveMultipleElementsMessage(){

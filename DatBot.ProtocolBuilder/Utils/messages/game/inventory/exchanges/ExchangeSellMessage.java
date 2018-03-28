@@ -19,9 +19,9 @@ public class ExchangeSellMessage extends NetworkMessage {
 	private int objectToSellId;
 	private int quantity;
 
-	public int getObjectToSellId() { return this.objectToSellId; };
+	public int getObjectToSellId() { return this.objectToSellId; }
 	public void setObjectToSellId(int objectToSellId) { this.objectToSellId = objectToSellId; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
 
 	public ExchangeSellMessage(){

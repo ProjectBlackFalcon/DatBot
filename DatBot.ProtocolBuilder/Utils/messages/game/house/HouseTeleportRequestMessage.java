@@ -19,9 +19,9 @@ public class HouseTeleportRequestMessage extends NetworkMessage {
 	private int houseId;
 	private int houseInstanceId;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public int getHouseInstanceId() { return this.houseInstanceId; };
+	public int getHouseInstanceId() { return this.houseInstanceId; }
 	public void setHouseInstanceId(int houseInstanceId) { this.houseInstanceId = houseInstanceId; };
 
 	public HouseTeleportRequestMessage(){

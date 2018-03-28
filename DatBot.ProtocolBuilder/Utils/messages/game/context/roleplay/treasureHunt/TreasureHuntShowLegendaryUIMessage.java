@@ -18,7 +18,7 @@ public class TreasureHuntShowLegendaryUIMessage extends NetworkMessage {
 
 	private List<Integer> availableLegendaryIds;
 
-	public List<Integer> getAvailableLegendaryIds() { return this.availableLegendaryIds; };
+	public List<Integer> getAvailableLegendaryIds() { return this.availableLegendaryIds; }
 	public void setAvailableLegendaryIds(List<Integer> availableLegendaryIds) { this.availableLegendaryIds = availableLegendaryIds; };
 
 	public TreasureHuntShowLegendaryUIMessage(){

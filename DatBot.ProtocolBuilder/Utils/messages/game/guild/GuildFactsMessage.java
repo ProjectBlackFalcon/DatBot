@@ -23,13 +23,13 @@ public class GuildFactsMessage extends NetworkMessage {
 	private int nbTaxCollectors;
 	private List<CharacterMinimalInformations> members;
 
-	public GuildFactSheetInformations getInfos() { return this.infos; };
+	public GuildFactSheetInformations getInfos() { return this.infos; }
 	public void setInfos(GuildFactSheetInformations infos) { this.infos = infos; };
-	public int getCreationDate() { return this.creationDate; };
+	public int getCreationDate() { return this.creationDate; }
 	public void setCreationDate(int creationDate) { this.creationDate = creationDate; };
-	public int getNbTaxCollectors() { return this.nbTaxCollectors; };
+	public int getNbTaxCollectors() { return this.nbTaxCollectors; }
 	public void setNbTaxCollectors(int nbTaxCollectors) { this.nbTaxCollectors = nbTaxCollectors; };
-	public List<CharacterMinimalInformations> getMembers() { return this.members; };
+	public List<CharacterMinimalInformations> getMembers() { return this.members; }
 	public void setMembers(List<CharacterMinimalInformations> members) { this.members = members; };
 
 	public GuildFactsMessage(){

@@ -22,13 +22,13 @@ public class TaxCollectorMovement extends NetworkMessage {
 	private long playerId;
 	private String playerName;
 
-	public int getMovementType() { return this.movementType; };
+	public int getMovementType() { return this.movementType; }
 	public void setMovementType(int movementType) { this.movementType = movementType; };
-	public TaxCollectorBasicInformations getBasicInfos() { return this.basicInfos; };
+	public TaxCollectorBasicInformations getBasicInfos() { return this.basicInfos; }
 	public void setBasicInfos(TaxCollectorBasicInformations basicInfos) { this.basicInfos = basicInfos; };
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public String getPlayerName() { return this.playerName; };
+	public String getPlayerName() { return this.playerName; }
 	public void setPlayerName(String playerName) { this.playerName = playerName; };
 
 	public TaxCollectorMovement(){

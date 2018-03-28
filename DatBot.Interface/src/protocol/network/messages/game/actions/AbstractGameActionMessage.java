@@ -19,9 +19,9 @@ public class AbstractGameActionMessage extends NetworkMessage {
 	private int actionId;
 	private double sourceId;
 
-	public int getActionId() { return this.actionId; };
+	public int getActionId() { return this.actionId; }
 	public void setActionId(int actionId) { this.actionId = actionId; };
-	public double getSourceId() { return this.sourceId; };
+	public double getSourceId() { return this.sourceId; }
 	public void setSourceId(double sourceId) { this.sourceId = sourceId; };
 
 	public AbstractGameActionMessage(){

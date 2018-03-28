@@ -18,7 +18,7 @@ public class IdolPartyLostMessage extends NetworkMessage {
 
 	private int idolId;
 
-	public int getIdolId() { return this.idolId; };
+	public int getIdolId() { return this.idolId; }
 	public void setIdolId(int idolId) { this.idolId = idolId; };
 
 	public IdolPartyLostMessage(){

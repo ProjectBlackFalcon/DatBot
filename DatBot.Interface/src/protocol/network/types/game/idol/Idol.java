@@ -20,11 +20,11 @@ public class Idol extends NetworkMessage {
 	private int xpBonusPercent;
 	private int dropBonusPercent;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public int getXpBonusPercent() { return this.xpBonusPercent; };
+	public int getXpBonusPercent() { return this.xpBonusPercent; }
 	public void setXpBonusPercent(int xpBonusPercent) { this.xpBonusPercent = xpBonusPercent; };
-	public int getDropBonusPercent() { return this.dropBonusPercent; };
+	public int getDropBonusPercent() { return this.dropBonusPercent; }
 	public void setDropBonusPercent(int dropBonusPercent) { this.dropBonusPercent = dropBonusPercent; };
 
 	public Idol(){

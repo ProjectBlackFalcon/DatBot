@@ -19,7 +19,7 @@ public class ServerSessionConstantsMessage extends NetworkMessage {
 
 	private List<ServerSessionConstant> variables;
 
-	public List<ServerSessionConstant> getVariables() { return this.variables; };
+	public List<ServerSessionConstant> getVariables() { return this.variables; }
 	public void setVariables(List<ServerSessionConstant> variables) { this.variables = variables; };
 
 	public ServerSessionConstantsMessage(){

@@ -21,13 +21,13 @@ public class LivingObjectMessageMessage extends NetworkMessage {
 	private String owner;
 	private int objectGenericId;
 
-	public int getMsgId() { return this.msgId; };
+	public int getMsgId() { return this.msgId; }
 	public void setMsgId(int msgId) { this.msgId = msgId; };
-	public int getTimeStamp() { return this.timeStamp; };
+	public int getTimeStamp() { return this.timeStamp; }
 	public void setTimeStamp(int timeStamp) { this.timeStamp = timeStamp; };
-	public String getOwner() { return this.owner; };
+	public String getOwner() { return this.owner; }
 	public void setOwner(String owner) { this.owner = owner; };
-	public int getObjectGenericId() { return this.objectGenericId; };
+	public int getObjectGenericId() { return this.objectGenericId; }
 	public void setObjectGenericId(int objectGenericId) { this.objectGenericId = objectGenericId; };
 
 	public LivingObjectMessageMessage(){

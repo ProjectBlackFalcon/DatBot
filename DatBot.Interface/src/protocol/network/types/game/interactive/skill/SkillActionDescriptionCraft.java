@@ -18,7 +18,7 @@ public class SkillActionDescriptionCraft extends SkillActionDescription {
 
 	private int probability;
 
-	public int getProbability() { return this.probability; };
+	public int getProbability() { return this.probability; }
 	public void setProbability(int probability) { this.probability = probability; };
 
 	public SkillActionDescriptionCraft(){

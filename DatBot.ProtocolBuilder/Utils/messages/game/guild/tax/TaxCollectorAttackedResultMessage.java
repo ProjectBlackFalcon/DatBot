@@ -22,11 +22,11 @@ public class TaxCollectorAttackedResultMessage extends NetworkMessage {
 	private TaxCollectorBasicInformations basicInfos;
 	private BasicGuildInformations guild;
 
-	public boolean isDeadOrAlive() { return this.deadOrAlive; };
+	public boolean isDeadOrAlive() { return this.deadOrAlive; }
 	public void setDeadOrAlive(boolean deadOrAlive) { this.deadOrAlive = deadOrAlive; };
-	public TaxCollectorBasicInformations getBasicInfos() { return this.basicInfos; };
+	public TaxCollectorBasicInformations getBasicInfos() { return this.basicInfos; }
 	public void setBasicInfos(TaxCollectorBasicInformations basicInfos) { this.basicInfos = basicInfos; };
-	public BasicGuildInformations getGuild() { return this.guild; };
+	public BasicGuildInformations getGuild() { return this.guild; }
 	public void setGuild(BasicGuildInformations guild) { this.guild = guild; };
 
 	public TaxCollectorAttackedResultMessage(){

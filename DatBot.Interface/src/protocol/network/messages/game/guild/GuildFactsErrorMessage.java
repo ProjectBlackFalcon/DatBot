@@ -18,7 +18,7 @@ public class GuildFactsErrorMessage extends NetworkMessage {
 
 	private int guildId;
 
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
 
 	public GuildFactsErrorMessage(){

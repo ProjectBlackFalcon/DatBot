@@ -18,7 +18,7 @@ public class AdminCommandMessage extends NetworkMessage {
 
 	private String content;
 
-	public String getContent() { return this.content; };
+	public String getContent() { return this.content; }
 	public void setContent(String content) { this.content = content; };
 
 	public AdminCommandMessage(){

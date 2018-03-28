@@ -20,11 +20,11 @@ public class DisplayNumericalValuePaddockMessage extends NetworkMessage {
 	private int value;
 	private int type;
 
-	public int getRideId() { return this.rideId; };
+	public int getRideId() { return this.rideId; }
 	public void setRideId(int rideId) { this.rideId = rideId; };
-	public int getValue() { return this.value; };
+	public int getValue() { return this.value; }
 	public void setValue(int value) { this.value = value; };
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
 
 	public DisplayNumericalValuePaddockMessage(){

@@ -20,11 +20,11 @@ public class ObjectEffectDice extends ObjectEffect {
 	private int diceSide;
 	private int diceConst;
 
-	public int getDiceNum() { return this.diceNum; };
+	public int getDiceNum() { return this.diceNum; }
 	public void setDiceNum(int diceNum) { this.diceNum = diceNum; };
-	public int getDiceSide() { return this.diceSide; };
+	public int getDiceSide() { return this.diceSide; }
 	public void setDiceSide(int diceSide) { this.diceSide = diceSide; };
-	public int getDiceConst() { return this.diceConst; };
+	public int getDiceConst() { return this.diceConst; }
 	public void setDiceConst(int diceConst) { this.diceConst = diceConst; };
 
 	public ObjectEffectDice(){

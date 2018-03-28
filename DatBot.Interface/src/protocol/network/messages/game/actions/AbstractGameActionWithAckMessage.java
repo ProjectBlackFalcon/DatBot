@@ -18,7 +18,7 @@ public class AbstractGameActionWithAckMessage extends AbstractGameActionMessage 
 
 	private int waitAckId;
 
-	public int getWaitAckId() { return this.waitAckId; };
+	public int getWaitAckId() { return this.waitAckId; }
 	public void setWaitAckId(int waitAckId) { this.waitAckId = waitAckId; };
 
 	public AbstractGameActionWithAckMessage(){

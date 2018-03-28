@@ -19,9 +19,9 @@ public class ShowCellMessage extends NetworkMessage {
 	private double sourceId;
 	private int cellId;
 
-	public double getSourceId() { return this.sourceId; };
+	public double getSourceId() { return this.sourceId; }
 	public void setSourceId(double sourceId) { this.sourceId = sourceId; };
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
 
 	public ShowCellMessage(){

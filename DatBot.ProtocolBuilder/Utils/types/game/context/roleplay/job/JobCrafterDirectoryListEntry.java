@@ -21,9 +21,9 @@ public class JobCrafterDirectoryListEntry extends NetworkMessage {
 	private JobCrafterDirectoryEntryPlayerInfo playerInfo;
 	private JobCrafterDirectoryEntryJobInfo jobInfo;
 
-	public JobCrafterDirectoryEntryPlayerInfo getPlayerInfo() { return this.playerInfo; };
+	public JobCrafterDirectoryEntryPlayerInfo getPlayerInfo() { return this.playerInfo; }
 	public void setPlayerInfo(JobCrafterDirectoryEntryPlayerInfo playerInfo) { this.playerInfo = playerInfo; };
-	public JobCrafterDirectoryEntryJobInfo getJobInfo() { return this.jobInfo; };
+	public JobCrafterDirectoryEntryJobInfo getJobInfo() { return this.jobInfo; }
 	public void setJobInfo(JobCrafterDirectoryEntryJobInfo jobInfo) { this.jobInfo = jobInfo; };
 
 	public JobCrafterDirectoryListEntry(){

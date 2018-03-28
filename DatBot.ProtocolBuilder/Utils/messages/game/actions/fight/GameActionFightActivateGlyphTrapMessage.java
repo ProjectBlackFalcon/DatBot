@@ -19,9 +19,9 @@ public class GameActionFightActivateGlyphTrapMessage extends AbstractGameActionM
 	private int markId;
 	private boolean active;
 
-	public int getMarkId() { return this.markId; };
+	public int getMarkId() { return this.markId; }
 	public void setMarkId(int markId) { this.markId = markId; };
-	public boolean isActive() { return this.active; };
+	public boolean isActive() { return this.active; }
 	public void setActive(boolean active) { this.active = active; };
 
 	public GameActionFightActivateGlyphTrapMessage(){

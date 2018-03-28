@@ -21,11 +21,11 @@ public class AllianceCreationValidMessage extends NetworkMessage {
 	private String allianceTag;
 	private GuildEmblem allianceEmblem;
 
-	public String getAllianceName() { return this.allianceName; };
+	public String getAllianceName() { return this.allianceName; }
 	public void setAllianceName(String allianceName) { this.allianceName = allianceName; };
-	public String getAllianceTag() { return this.allianceTag; };
+	public String getAllianceTag() { return this.allianceTag; }
 	public void setAllianceTag(String allianceTag) { this.allianceTag = allianceTag; };
-	public GuildEmblem getAllianceEmblem() { return this.allianceEmblem; };
+	public GuildEmblem getAllianceEmblem() { return this.allianceEmblem; }
 	public void setAllianceEmblem(GuildEmblem allianceEmblem) { this.allianceEmblem = allianceEmblem; };
 
 	public AllianceCreationValidMessage(){

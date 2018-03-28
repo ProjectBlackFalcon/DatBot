@@ -20,11 +20,11 @@ public class GameRolePlayArenaRegistrationStatusMessage extends NetworkMessage {
 	private int step;
 	private int battleMode;
 
-	public boolean isRegistered() { return this.registered; };
+	public boolean isRegistered() { return this.registered; }
 	public void setRegistered(boolean registered) { this.registered = registered; };
-	public int getStep() { return this.step; };
+	public int getStep() { return this.step; }
 	public void setStep(int step) { this.step = step; };
-	public int getBattleMode() { return this.battleMode; };
+	public int getBattleMode() { return this.battleMode; }
 	public void setBattleMode(int battleMode) { this.battleMode = battleMode; };
 
 	public GameRolePlayArenaRegistrationStatusMessage(){

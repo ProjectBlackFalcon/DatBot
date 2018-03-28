@@ -19,7 +19,7 @@ public class ExchangeObjectPutInBagMessage extends ExchangeObjectMessage {
 
 	private ObjectItem object;
 
-	public ObjectItem getObject() { return this.object; };
+	public ObjectItem getObject() { return this.object; }
 	public void setObject(ObjectItem object) { this.object = object; };
 
 	public ExchangeObjectPutInBagMessage(){

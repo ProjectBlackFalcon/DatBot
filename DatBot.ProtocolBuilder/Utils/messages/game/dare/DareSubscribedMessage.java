@@ -22,13 +22,13 @@ public class DareSubscribedMessage extends NetworkMessage {
 	private boolean subscribe;
 	private DareVersatileInformations dareVersatilesInfos;
 
-	public double getDareId() { return this.dareId; };
+	public double getDareId() { return this.dareId; }
 	public void setDareId(double dareId) { this.dareId = dareId; };
-	public boolean isSuccess() { return this.success; };
+	public boolean isSuccess() { return this.success; }
 	public void setSuccess(boolean success) { this.success = success; };
-	public boolean isSubscribe() { return this.subscribe; };
+	public boolean isSubscribe() { return this.subscribe; }
 	public void setSubscribe(boolean subscribe) { this.subscribe = subscribe; };
-	public DareVersatileInformations getDareVersatilesInfos() { return this.dareVersatilesInfos; };
+	public DareVersatileInformations getDareVersatilesInfos() { return this.dareVersatilesInfos; }
 	public void setDareVersatilesInfos(DareVersatileInformations dareVersatilesInfos) { this.dareVersatilesInfos = dareVersatilesInfos; };
 
 	public DareSubscribedMessage(){

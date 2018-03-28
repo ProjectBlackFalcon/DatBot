@@ -23,17 +23,17 @@ public class HouseInstanceInformations extends NetworkMessage {
 	private long price;
 	private boolean isSaleLocked;
 
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public boolean isSecondHand() { return this.secondHand; };
+	public boolean isSecondHand() { return this.secondHand; }
 	public void setSecondHand(boolean secondHand) { this.secondHand = secondHand; };
-	public boolean isIsLocked() { return this.isLocked; };
+	public boolean isIsLocked() { return this.isLocked; }
 	public void setIsLocked(boolean isLocked) { this.isLocked = isLocked; };
-	public String getOwnerName() { return this.ownerName; };
+	public String getOwnerName() { return this.ownerName; }
 	public void setOwnerName(String ownerName) { this.ownerName = ownerName; };
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
-	public boolean isIsSaleLocked() { return this.isSaleLocked; };
+	public boolean isIsSaleLocked() { return this.isSaleLocked; }
 	public void setIsSaleLocked(boolean isSaleLocked) { this.isSaleLocked = isSaleLocked; };
 
 	public HouseInstanceInformations(){

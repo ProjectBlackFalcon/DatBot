@@ -19,9 +19,9 @@ public class ExchangeRequestedTradeMessage extends ExchangeRequestedMessage {
 	private long source;
 	private long target;
 
-	public long getSource() { return this.source; };
+	public long getSource() { return this.source; }
 	public void setSource(long source) { this.source = source; };
-	public long getTarget() { return this.target; };
+	public long getTarget() { return this.target; }
 	public void setTarget(long target) { this.target = target; };
 
 	public ExchangeRequestedTradeMessage(){

@@ -23,15 +23,15 @@ public class PartyInvitationMemberInformations extends CharacterBaseInformations
 	private int subAreaId;
 	private List<PartyCompanionBaseInformations> companions;
 
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public List<PartyCompanionBaseInformations> getCompanions() { return this.companions; };
+	public List<PartyCompanionBaseInformations> getCompanions() { return this.companions; }
 	public void setCompanions(List<PartyCompanionBaseInformations> companions) { this.companions = companions; };
 
 	public PartyInvitationMemberInformations(){

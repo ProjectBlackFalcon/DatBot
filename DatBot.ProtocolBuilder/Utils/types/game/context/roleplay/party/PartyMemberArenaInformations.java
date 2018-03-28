@@ -18,7 +18,7 @@ public class PartyMemberArenaInformations extends PartyMemberInformations {
 
 	private int rank;
 
-	public int getRank() { return this.rank; };
+	public int getRank() { return this.rank; }
 	public void setRank(int rank) { this.rank = rank; };
 
 	public PartyMemberArenaInformations(){

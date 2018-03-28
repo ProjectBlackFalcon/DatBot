@@ -22,13 +22,13 @@ public class ObjectItemNotInContainer extends Item {
 	private int objectUID;
 	private int quantity;
 
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
-	public List<ObjectEffect> getEffects() { return this.effects; };
+	public List<ObjectEffect> getEffects() { return this.effects; }
 	public void setEffects(List<ObjectEffect> effects) { this.effects = effects; };
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
 
 	public ObjectItemNotInContainer(){

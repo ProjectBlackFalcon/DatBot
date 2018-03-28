@@ -19,9 +19,9 @@ public class PrismSettingsRequestMessage extends NetworkMessage {
 	private int subAreaId;
 	private int startDefenseTime;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public int getStartDefenseTime() { return this.startDefenseTime; };
+	public int getStartDefenseTime() { return this.startDefenseTime; }
 	public void setStartDefenseTime(int startDefenseTime) { this.startDefenseTime = startDefenseTime; };
 
 	public PrismSettingsRequestMessage(){

@@ -21,13 +21,13 @@ public class DareReward extends NetworkMessage {
 	private long kamas;
 	private double dareId;
 
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public int getMonsterId() { return this.monsterId; };
+	public int getMonsterId() { return this.monsterId; }
 	public void setMonsterId(int monsterId) { this.monsterId = monsterId; };
-	public long getKamas() { return this.kamas; };
+	public long getKamas() { return this.kamas; }
 	public void setKamas(long kamas) { this.kamas = kamas; };
-	public double getDareId() { return this.dareId; };
+	public double getDareId() { return this.dareId; }
 	public void setDareId(double dareId) { this.dareId = dareId; };
 
 	public DareReward(){

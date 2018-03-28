@@ -19,9 +19,9 @@ public class SequenceStartMessage extends NetworkMessage {
 	private int sequenceType;
 	private double authorId;
 
-	public int getSequenceType() { return this.sequenceType; };
+	public int getSequenceType() { return this.sequenceType; }
 	public void setSequenceType(int sequenceType) { this.sequenceType = sequenceType; };
-	public double getAuthorId() { return this.authorId; };
+	public double getAuthorId() { return this.authorId; }
 	public void setAuthorId(double authorId) { this.authorId = authorId; };
 
 	public SequenceStartMessage(){

@@ -20,9 +20,9 @@ public class PaddockGuildedInformations extends PaddockBuyableInformations {
 	private boolean deserted;
 	private GuildInformations guildInfo;
 
-	public boolean isDeserted() { return this.deserted; };
+	public boolean isDeserted() { return this.deserted; }
 	public void setDeserted(boolean deserted) { this.deserted = deserted; };
-	public GuildInformations getGuildInfo() { return this.guildInfo; };
+	public GuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(GuildInformations guildInfo) { this.guildInfo = guildInfo; };
 
 	public PaddockGuildedInformations(){

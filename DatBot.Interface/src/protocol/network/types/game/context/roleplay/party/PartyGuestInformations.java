@@ -28,21 +28,21 @@ public class PartyGuestInformations extends NetworkMessage {
 	private PlayerStatus status;
 	private List<PartyCompanionBaseInformations> companions;
 
-	public long getGuestId() { return this.guestId; };
+	public long getGuestId() { return this.guestId; }
 	public void setGuestId(long guestId) { this.guestId = guestId; };
-	public long getHostId() { return this.hostId; };
+	public long getHostId() { return this.hostId; }
 	public void setHostId(long hostId) { this.hostId = hostId; };
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public EntityLook getGuestLook() { return this.guestLook; };
+	public EntityLook getGuestLook() { return this.guestLook; }
 	public void setGuestLook(EntityLook guestLook) { this.guestLook = guestLook; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public PlayerStatus getStatus() { return this.status; };
+	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
-	public List<PartyCompanionBaseInformations> getCompanions() { return this.companions; };
+	public List<PartyCompanionBaseInformations> getCompanions() { return this.companions; }
 	public void setCompanions(List<PartyCompanionBaseInformations> companions) { this.companions = companions; };
 
 	public PartyGuestInformations(){

@@ -19,7 +19,7 @@ public class PartyUpdateMessage extends AbstractPartyEventMessage {
 
 	private PartyMemberInformations memberInformations;
 
-	public PartyMemberInformations getMemberInformations() { return this.memberInformations; };
+	public PartyMemberInformations getMemberInformations() { return this.memberInformations; }
 	public void setMemberInformations(PartyMemberInformations memberInformations) { this.memberInformations = memberInformations; };
 
 	public PartyUpdateMessage(){

@@ -19,7 +19,7 @@ public class GameRolePlayShowMultipleActorsMessage extends NetworkMessage {
 
 	private List<GameRolePlayActorInformations> informationsList;
 
-	public List<GameRolePlayActorInformations> getInformationsList() { return this.informationsList; };
+	public List<GameRolePlayActorInformations> getInformationsList() { return this.informationsList; }
 	public void setInformationsList(List<GameRolePlayActorInformations> informationsList) { this.informationsList = informationsList; };
 
 	public GameRolePlayShowMultipleActorsMessage(){

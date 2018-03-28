@@ -21,13 +21,13 @@ public class ChatAbstractServerMessage extends NetworkMessage {
 	private int timestamp;
 	private String fingerprint;
 
-	public int getChannel() { return this.channel; };
+	public int getChannel() { return this.channel; }
 	public void setChannel(int channel) { this.channel = channel; };
-	public String getContent() { return this.content; };
+	public String getContent() { return this.content; }
 	public void setContent(String content) { this.content = content; };
-	public int getTimestamp() { return this.timestamp; };
+	public int getTimestamp() { return this.timestamp; }
 	public void setTimestamp(int timestamp) { this.timestamp = timestamp; };
-	public String getFingerprint() { return this.fingerprint; };
+	public String getFingerprint() { return this.fingerprint; }
 	public void setFingerprint(String fingerprint) { this.fingerprint = fingerprint; };
 
 	public ChatAbstractServerMessage(){

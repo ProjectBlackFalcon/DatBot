@@ -19,9 +19,9 @@ public class HumanOptionOrnament extends HumanOption {
 	private int ornamentId;
 	private int level;
 
-	public int getOrnamentId() { return this.ornamentId; };
+	public int getOrnamentId() { return this.ornamentId; }
 	public void setOrnamentId(int ornamentId) { this.ornamentId = ornamentId; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
 
 	public HumanOptionOrnament(){

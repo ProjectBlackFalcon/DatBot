@@ -19,7 +19,7 @@ public class TaxCollectorWaitingForHelpInformations extends TaxCollectorCompleme
 
 	private ProtectedEntityWaitingForHelpInfo waitingForHelpInfo;
 
-	public ProtectedEntityWaitingForHelpInfo getWaitingForHelpInfo() { return this.waitingForHelpInfo; };
+	public ProtectedEntityWaitingForHelpInfo getWaitingForHelpInfo() { return this.waitingForHelpInfo; }
 	public void setWaitingForHelpInfo(ProtectedEntityWaitingForHelpInfo waitingForHelpInfo) { this.waitingForHelpInfo = waitingForHelpInfo; };
 
 	public TaxCollectorWaitingForHelpInformations(){

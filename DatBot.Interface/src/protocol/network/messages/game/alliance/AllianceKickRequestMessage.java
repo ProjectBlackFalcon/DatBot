@@ -18,7 +18,7 @@ public class AllianceKickRequestMessage extends NetworkMessage {
 
 	private int kickedId;
 
-	public int getKickedId() { return this.kickedId; };
+	public int getKickedId() { return this.kickedId; }
 	public void setKickedId(int kickedId) { this.kickedId = kickedId; };
 
 	public AllianceKickRequestMessage(){

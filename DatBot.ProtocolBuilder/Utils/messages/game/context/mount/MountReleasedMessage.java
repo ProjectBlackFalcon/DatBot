@@ -18,7 +18,7 @@ public class MountReleasedMessage extends NetworkMessage {
 
 	private int mountId;
 
-	public int getMountId() { return this.mountId; };
+	public int getMountId() { return this.mountId; }
 	public void setMountId(int mountId) { this.mountId = mountId; };
 
 	public MountReleasedMessage(){

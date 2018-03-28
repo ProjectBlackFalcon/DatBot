@@ -19,7 +19,7 @@ public class ExchangeBidHouseUnsoldItemsMessage extends NetworkMessage {
 
 	private List<ObjectItemGenericQuantity> items;
 
-	public List<ObjectItemGenericQuantity> getItems() { return this.items; };
+	public List<ObjectItemGenericQuantity> getItems() { return this.items; }
 	public void setItems(List<ObjectItemGenericQuantity> items) { this.items = items; };
 
 	public ExchangeBidHouseUnsoldItemsMessage(){

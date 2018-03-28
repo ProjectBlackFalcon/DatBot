@@ -19,9 +19,9 @@ public class ExchangeBidPriceMessage extends NetworkMessage {
 	private int genericId;
 	private long averagePrice;
 
-	public int getGenericId() { return this.genericId; };
+	public int getGenericId() { return this.genericId; }
 	public void setGenericId(int genericId) { this.genericId = genericId; };
-	public long getAveragePrice() { return this.averagePrice; };
+	public long getAveragePrice() { return this.averagePrice; }
 	public void setAveragePrice(long averagePrice) { this.averagePrice = averagePrice; };
 
 	public ExchangeBidPriceMessage(){

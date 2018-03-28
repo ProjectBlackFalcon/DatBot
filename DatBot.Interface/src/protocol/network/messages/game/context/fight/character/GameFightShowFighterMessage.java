@@ -19,7 +19,7 @@ public class GameFightShowFighterMessage extends NetworkMessage {
 
 	private GameFightFighterInformations informations;
 
-	public GameFightFighterInformations getInformations() { return this.informations; };
+	public GameFightFighterInformations getInformations() { return this.informations; }
 	public void setInformations(GameFightFighterInformations informations) { this.informations = informations; };
 
 	public GameFightShowFighterMessage(){

@@ -20,9 +20,9 @@ public class GuildInformationsPaddocksMessage extends NetworkMessage {
 	private int nbPaddockMax;
 	private List<PaddockContentInformations> paddocksInformations;
 
-	public int getNbPaddockMax() { return this.nbPaddockMax; };
+	public int getNbPaddockMax() { return this.nbPaddockMax; }
 	public void setNbPaddockMax(int nbPaddockMax) { this.nbPaddockMax = nbPaddockMax; };
-	public List<PaddockContentInformations> getPaddocksInformations() { return this.paddocksInformations; };
+	public List<PaddockContentInformations> getPaddocksInformations() { return this.paddocksInformations; }
 	public void setPaddocksInformations(List<PaddockContentInformations> paddocksInformations) { this.paddocksInformations = paddocksInformations; };
 
 	public GuildInformationsPaddocksMessage(){

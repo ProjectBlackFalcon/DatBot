@@ -18,7 +18,7 @@ public class LifePointsRegenBeginMessage extends NetworkMessage {
 
 	private int regenRate;
 
-	public int getRegenRate() { return this.regenRate; };
+	public int getRegenRate() { return this.regenRate; }
 	public void setRegenRate(int regenRate) { this.regenRate = regenRate; };
 
 	public LifePointsRegenBeginMessage(){

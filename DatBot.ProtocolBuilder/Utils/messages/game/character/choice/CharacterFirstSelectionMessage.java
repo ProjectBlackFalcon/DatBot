@@ -18,7 +18,7 @@ public class CharacterFirstSelectionMessage extends CharacterSelectionMessage {
 
 	private boolean doTutorial;
 
-	public boolean isDoTutorial() { return this.doTutorial; };
+	public boolean isDoTutorial() { return this.doTutorial; }
 	public void setDoTutorial(boolean doTutorial) { this.doTutorial = doTutorial; };
 
 	public CharacterFirstSelectionMessage(){

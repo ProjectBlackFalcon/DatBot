@@ -19,9 +19,9 @@ public class AdditionalTaxCollectorInformations extends NetworkMessage {
 	private String collectorCallerName;
 	private int date;
 
-	public String getCollectorCallerName() { return this.collectorCallerName; };
+	public String getCollectorCallerName() { return this.collectorCallerName; }
 	public void setCollectorCallerName(String collectorCallerName) { this.collectorCallerName = collectorCallerName; };
-	public int getDate() { return this.date; };
+	public int getDate() { return this.date; }
 	public void setDate(int date) { this.date = date; };
 
 	public AdditionalTaxCollectorInformations(){

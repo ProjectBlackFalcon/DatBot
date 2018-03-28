@@ -19,9 +19,9 @@ public class ChallengeFightJoinRefusedMessage extends NetworkMessage {
 	private long playerId;
 	private int reason;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public int getReason() { return this.reason; };
+	public int getReason() { return this.reason; }
 	public void setReason(int reason) { this.reason = reason; };
 
 	public ChallengeFightJoinRefusedMessage(){

@@ -19,7 +19,7 @@ public class HavenBagFurnituresMessage extends NetworkMessage {
 
 	private List<HavenBagFurnitureInformation> furnituresInfos;
 
-	public List<HavenBagFurnitureInformation> getFurnituresInfos() { return this.furnituresInfos; };
+	public List<HavenBagFurnitureInformation> getFurnituresInfos() { return this.furnituresInfos; }
 	public void setFurnituresInfos(List<HavenBagFurnitureInformation> furnituresInfos) { this.furnituresInfos = furnituresInfos; };
 
 	public HavenBagFurnituresMessage(){

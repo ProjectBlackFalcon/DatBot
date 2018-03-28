@@ -20,9 +20,9 @@ public class CharacterMinimalPlusLookInformations extends CharacterMinimalInform
 	private EntityLook entityLook;
 	private int breed;
 
-	public EntityLook getEntityLook() { return this.entityLook; };
+	public EntityLook getEntityLook() { return this.entityLook; }
 	public void setEntityLook(EntityLook entityLook) { this.entityLook = entityLook; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
 
 	public CharacterMinimalPlusLookInformations(){

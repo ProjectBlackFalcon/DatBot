@@ -21,13 +21,13 @@ public class MountFeedRequestMessage extends NetworkMessage {
 	private int mountFoodUid;
 	private int quantity;
 
-	public int getMountUid() { return this.mountUid; };
+	public int getMountUid() { return this.mountUid; }
 	public void setMountUid(int mountUid) { this.mountUid = mountUid; };
-	public int getMountLocation() { return this.mountLocation; };
+	public int getMountLocation() { return this.mountLocation; }
 	public void setMountLocation(int mountLocation) { this.mountLocation = mountLocation; };
-	public int getMountFoodUid() { return this.mountFoodUid; };
+	public int getMountFoodUid() { return this.mountFoodUid; }
 	public void setMountFoodUid(int mountFoodUid) { this.mountFoodUid = mountFoodUid; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
 
 	public MountFeedRequestMessage(){

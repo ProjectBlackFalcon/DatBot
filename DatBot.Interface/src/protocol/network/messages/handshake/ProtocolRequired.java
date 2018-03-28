@@ -19,9 +19,9 @@ public class ProtocolRequired extends NetworkMessage {
 	private int requiredVersion;
 	private int currentVersion;
 
-	public int getRequiredVersion() { return this.requiredVersion; };
+	public int getRequiredVersion() { return this.requiredVersion; }
 	public void setRequiredVersion(int requiredVersion) { this.requiredVersion = requiredVersion; };
-	public int getCurrentVersion() { return this.currentVersion; };
+	public int getCurrentVersion() { return this.currentVersion; }
 	public void setCurrentVersion(int currentVersion) { this.currentVersion = currentVersion; };
 
 	public ProtocolRequired(){

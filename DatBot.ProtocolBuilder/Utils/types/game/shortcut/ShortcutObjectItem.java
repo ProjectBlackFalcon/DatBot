@@ -19,9 +19,9 @@ public class ShortcutObjectItem extends ShortcutObject {
 	private int itemUID;
 	private int itemGID;
 
-	public int getItemUID() { return this.itemUID; };
+	public int getItemUID() { return this.itemUID; }
 	public void setItemUID(int itemUID) { this.itemUID = itemUID; };
-	public int getItemGID() { return this.itemGID; };
+	public int getItemGID() { return this.itemGID; }
 	public void setItemGID(int itemGID) { this.itemGID = itemGID; };
 
 	public ShortcutObjectItem(){

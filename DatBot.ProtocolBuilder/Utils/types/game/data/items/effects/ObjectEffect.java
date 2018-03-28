@@ -18,7 +18,7 @@ public class ObjectEffect extends NetworkMessage {
 
 	private int actionId;
 
-	public int getActionId() { return this.actionId; };
+	public int getActionId() { return this.actionId; }
 	public void setActionId(int actionId) { this.actionId = actionId; };
 
 	public ObjectEffect(){

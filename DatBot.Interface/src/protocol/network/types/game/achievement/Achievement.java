@@ -22,11 +22,11 @@ public class Achievement extends NetworkMessage {
 	private List<AchievementObjective> finishedObjective;
 	private List<AchievementStartedObjective> startedObjectives;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public List<AchievementObjective> getFinishedObjective() { return this.finishedObjective; };
+	public List<AchievementObjective> getFinishedObjective() { return this.finishedObjective; }
 	public void setFinishedObjective(List<AchievementObjective> finishedObjective) { this.finishedObjective = finishedObjective; };
-	public List<AchievementStartedObjective> getStartedObjectives() { return this.startedObjectives; };
+	public List<AchievementStartedObjective> getStartedObjectives() { return this.startedObjectives; }
 	public void setStartedObjectives(List<AchievementStartedObjective> startedObjectives) { this.startedObjectives = startedObjectives; };
 
 	public Achievement(){

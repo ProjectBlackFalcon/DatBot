@@ -23,17 +23,17 @@ public class GameFightJoinMessage extends NetworkMessage {
 	private int timeMaxBeforeFightStart;
 	private int fightType;
 
-	public boolean isIsTeamPhase() { return this.isTeamPhase; };
+	public boolean isIsTeamPhase() { return this.isTeamPhase; }
 	public void setIsTeamPhase(boolean isTeamPhase) { this.isTeamPhase = isTeamPhase; };
-	public boolean isCanBeCancelled() { return this.canBeCancelled; };
+	public boolean isCanBeCancelled() { return this.canBeCancelled; }
 	public void setCanBeCancelled(boolean canBeCancelled) { this.canBeCancelled = canBeCancelled; };
-	public boolean isCanSayReady() { return this.canSayReady; };
+	public boolean isCanSayReady() { return this.canSayReady; }
 	public void setCanSayReady(boolean canSayReady) { this.canSayReady = canSayReady; };
-	public boolean isIsFightStarted() { return this.isFightStarted; };
+	public boolean isIsFightStarted() { return this.isFightStarted; }
 	public void setIsFightStarted(boolean isFightStarted) { this.isFightStarted = isFightStarted; };
-	public int getTimeMaxBeforeFightStart() { return this.timeMaxBeforeFightStart; };
+	public int getTimeMaxBeforeFightStart() { return this.timeMaxBeforeFightStart; }
 	public void setTimeMaxBeforeFightStart(int timeMaxBeforeFightStart) { this.timeMaxBeforeFightStart = timeMaxBeforeFightStart; };
-	public int getFightType() { return this.fightType; };
+	public int getFightType() { return this.fightType; }
 	public void setFightType(int fightType) { this.fightType = fightType; };
 
 	public GameFightJoinMessage(){

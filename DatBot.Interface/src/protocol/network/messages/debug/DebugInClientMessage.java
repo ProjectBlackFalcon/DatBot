@@ -19,9 +19,9 @@ public class DebugInClientMessage extends NetworkMessage {
 	private int level;
 	private String message;
 
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public String getMessage() { return this.message; };
+	public String getMessage() { return this.message; }
 	public void setMessage(String message) { this.message = message; };
 
 	public DebugInClientMessage(){

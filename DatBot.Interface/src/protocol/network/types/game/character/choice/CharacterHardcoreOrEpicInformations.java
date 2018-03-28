@@ -20,11 +20,11 @@ public class CharacterHardcoreOrEpicInformations extends CharacterBaseInformatio
 	private int deathCount;
 	private int deathMaxLevel;
 
-	public int getDeathState() { return this.deathState; };
+	public int getDeathState() { return this.deathState; }
 	public void setDeathState(int deathState) { this.deathState = deathState; };
-	public int getDeathCount() { return this.deathCount; };
+	public int getDeathCount() { return this.deathCount; }
 	public void setDeathCount(int deathCount) { this.deathCount = deathCount; };
-	public int getDeathMaxLevel() { return this.deathMaxLevel; };
+	public int getDeathMaxLevel() { return this.deathMaxLevel; }
 	public void setDeathMaxLevel(int deathMaxLevel) { this.deathMaxLevel = deathMaxLevel; };
 
 	public CharacterHardcoreOrEpicInformations(){

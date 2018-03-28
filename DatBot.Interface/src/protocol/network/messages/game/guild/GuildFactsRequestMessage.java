@@ -18,7 +18,7 @@ public class GuildFactsRequestMessage extends NetworkMessage {
 
 	private int guildId;
 
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
 
 	public GuildFactsRequestMessage(){

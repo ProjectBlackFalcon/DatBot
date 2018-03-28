@@ -22,15 +22,15 @@ public class AbstractGameActionFightTargetedAbilityMessage extends AbstractGameA
 	private boolean silentCast;
 	private boolean verboseCast;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getDestinationCellId() { return this.destinationCellId; };
+	public int getDestinationCellId() { return this.destinationCellId; }
 	public void setDestinationCellId(int destinationCellId) { this.destinationCellId = destinationCellId; };
-	public int getCritical() { return this.critical; };
+	public int getCritical() { return this.critical; }
 	public void setCritical(int critical) { this.critical = critical; };
-	public boolean isSilentCast() { return this.silentCast; };
+	public boolean isSilentCast() { return this.silentCast; }
 	public void setSilentCast(boolean silentCast) { this.silentCast = silentCast; };
-	public boolean isVerboseCast() { return this.verboseCast; };
+	public boolean isVerboseCast() { return this.verboseCast; }
 	public void setVerboseCast(boolean verboseCast) { this.verboseCast = verboseCast; };
 
 	public AbstractGameActionFightTargetedAbilityMessage(){

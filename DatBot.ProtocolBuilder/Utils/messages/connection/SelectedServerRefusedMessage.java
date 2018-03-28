@@ -20,11 +20,11 @@ public class SelectedServerRefusedMessage extends NetworkMessage {
 	private int error;
 	private int serverStatus;
 
-	public int getServerId() { return this.serverId; };
+	public int getServerId() { return this.serverId; }
 	public void setServerId(int serverId) { this.serverId = serverId; };
-	public int getError() { return this.error; };
+	public int getError() { return this.error; }
 	public void setError(int error) { this.error = error; };
-	public int getServerStatus() { return this.serverStatus; };
+	public int getServerStatus() { return this.serverStatus; }
 	public void setServerStatus(int serverStatus) { this.serverStatus = serverStatus; };
 
 	public SelectedServerRefusedMessage(){

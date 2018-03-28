@@ -18,7 +18,7 @@ public class InteractiveElementWithAgeBonus extends InteractiveElement {
 
 	private int ageBonus;
 
-	public int getAgeBonus() { return this.ageBonus; };
+	public int getAgeBonus() { return this.ageBonus; }
 	public void setAgeBonus(int ageBonus) { this.ageBonus = ageBonus; };
 
 	public InteractiveElementWithAgeBonus(){

@@ -19,7 +19,7 @@ public class PaddockPropertiesMessage extends NetworkMessage {
 
 	private PaddockInstancesInformations properties;
 
-	public PaddockInstancesInformations getProperties() { return this.properties; };
+	public PaddockInstancesInformations getProperties() { return this.properties; }
 	public void setProperties(PaddockInstancesInformations properties) { this.properties = properties; };
 
 	public PaddockPropertiesMessage(){

@@ -18,7 +18,7 @@ public class ExchangeCraftPaymentModifiedMessage extends NetworkMessage {
 
 	private long goldSum;
 
-	public long getGoldSum() { return this.goldSum; };
+	public long getGoldSum() { return this.goldSum; }
 	public void setGoldSum(long goldSum) { this.goldSum = goldSum; };
 
 	public ExchangeCraftPaymentModifiedMessage(){

@@ -18,7 +18,7 @@ public class AlmanachCalendarDateMessage extends NetworkMessage {
 
 	private int date;
 
-	public int getDate() { return this.date; };
+	public int getDate() { return this.date; }
 	public void setDate(int date) { this.date = date; };
 
 	public AlmanachCalendarDateMessage(){

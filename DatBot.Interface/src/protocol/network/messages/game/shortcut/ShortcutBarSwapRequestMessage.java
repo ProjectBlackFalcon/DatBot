@@ -20,11 +20,11 @@ public class ShortcutBarSwapRequestMessage extends NetworkMessage {
 	private int firstSlot;
 	private int secondSlot;
 
-	public int getBarType() { return this.barType; };
+	public int getBarType() { return this.barType; }
 	public void setBarType(int barType) { this.barType = barType; };
-	public int getFirstSlot() { return this.firstSlot; };
+	public int getFirstSlot() { return this.firstSlot; }
 	public void setFirstSlot(int firstSlot) { this.firstSlot = firstSlot; };
-	public int getSecondSlot() { return this.secondSlot; };
+	public int getSecondSlot() { return this.secondSlot; }
 	public void setSecondSlot(int secondSlot) { this.secondSlot = secondSlot; };
 
 	public ShortcutBarSwapRequestMessage(){

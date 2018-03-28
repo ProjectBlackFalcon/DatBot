@@ -19,9 +19,9 @@ public class TreasureHuntFlagRequestMessage extends NetworkMessage {
 	private int questType;
 	private int index;
 
-	public int getQuestType() { return this.questType; };
+	public int getQuestType() { return this.questType; }
 	public void setQuestType(int questType) { this.questType = questType; };
-	public int getIndex() { return this.index; };
+	public int getIndex() { return this.index; }
 	public void setIndex(int index) { this.index = index; };
 
 	public TreasureHuntFlagRequestMessage(){

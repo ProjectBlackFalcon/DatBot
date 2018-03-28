@@ -18,7 +18,7 @@ public class PaddockBuyRequestMessage extends NetworkMessage {
 
 	private long proposedPrice;
 
-	public long getProposedPrice() { return this.proposedPrice; };
+	public long getProposedPrice() { return this.proposedPrice; }
 	public void setProposedPrice(long proposedPrice) { this.proposedPrice = proposedPrice; };
 
 	public PaddockBuyRequestMessage(){

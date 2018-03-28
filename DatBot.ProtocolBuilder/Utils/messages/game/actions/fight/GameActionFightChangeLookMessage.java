@@ -20,9 +20,9 @@ public class GameActionFightChangeLookMessage extends AbstractGameActionMessage 
 	private double targetId;
 	private EntityLook entityLook;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public EntityLook getEntityLook() { return this.entityLook; };
+	public EntityLook getEntityLook() { return this.entityLook; }
 	public void setEntityLook(EntityLook entityLook) { this.entityLook = entityLook; };
 
 	public GameActionFightChangeLookMessage(){

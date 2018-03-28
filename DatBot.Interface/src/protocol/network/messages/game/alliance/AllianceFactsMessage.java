@@ -24,15 +24,15 @@ public class AllianceFactsMessage extends NetworkMessage {
 	private long leaderCharacterId;
 	private String leaderCharacterName;
 
-	public AllianceFactSheetInformations getInfos() { return this.infos; };
+	public AllianceFactSheetInformations getInfos() { return this.infos; }
 	public void setInfos(AllianceFactSheetInformations infos) { this.infos = infos; };
-	public List<GuildInAllianceInformations> getGuilds() { return this.guilds; };
+	public List<GuildInAllianceInformations> getGuilds() { return this.guilds; }
 	public void setGuilds(List<GuildInAllianceInformations> guilds) { this.guilds = guilds; };
-	public List<Integer> getControlledSubareaIds() { return this.controlledSubareaIds; };
+	public List<Integer> getControlledSubareaIds() { return this.controlledSubareaIds; }
 	public void setControlledSubareaIds(List<Integer> controlledSubareaIds) { this.controlledSubareaIds = controlledSubareaIds; };
-	public long getLeaderCharacterId() { return this.leaderCharacterId; };
+	public long getLeaderCharacterId() { return this.leaderCharacterId; }
 	public void setLeaderCharacterId(long leaderCharacterId) { this.leaderCharacterId = leaderCharacterId; };
-	public String getLeaderCharacterName() { return this.leaderCharacterName; };
+	public String getLeaderCharacterName() { return this.leaderCharacterName; }
 	public void setLeaderCharacterName(String leaderCharacterName) { this.leaderCharacterName = leaderCharacterName; };
 
 	public AllianceFactsMessage(){

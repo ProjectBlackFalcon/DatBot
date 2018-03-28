@@ -18,7 +18,7 @@ public class PartyKickedByMessage extends AbstractPartyMessage {
 
 	private long kickerId;
 
-	public long getKickerId() { return this.kickerId; };
+	public long getKickerId() { return this.kickerId; }
 	public void setKickerId(long kickerId) { this.kickerId = kickerId; };
 
 	public PartyKickedByMessage(){

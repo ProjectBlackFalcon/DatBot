@@ -18,7 +18,7 @@ public class ExchangeBidHouseGenericItemAddedMessage extends NetworkMessage {
 
 	private int objGenericId;
 
-	public int getObjGenericId() { return this.objGenericId; };
+	public int getObjGenericId() { return this.objGenericId; }
 	public void setObjGenericId(int objGenericId) { this.objGenericId = objGenericId; };
 
 	public ExchangeBidHouseGenericItemAddedMessage(){

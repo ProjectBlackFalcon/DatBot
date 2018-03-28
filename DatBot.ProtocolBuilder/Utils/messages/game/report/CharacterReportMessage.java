@@ -19,9 +19,9 @@ public class CharacterReportMessage extends NetworkMessage {
 	private long reportedId;
 	private int reason;
 
-	public long getReportedId() { return this.reportedId; };
+	public long getReportedId() { return this.reportedId; }
 	public void setReportedId(long reportedId) { this.reportedId = reportedId; };
-	public int getReason() { return this.reason; };
+	public int getReason() { return this.reason; }
 	public void setReason(int reason) { this.reason = reason; };
 
 	public CharacterReportMessage(){

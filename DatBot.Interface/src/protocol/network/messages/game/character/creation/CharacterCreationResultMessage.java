@@ -18,7 +18,7 @@ public class CharacterCreationResultMessage extends NetworkMessage {
 
 	private int result;
 
-	public int getResult() { return this.result; };
+	public int getResult() { return this.result; }
 	public void setResult(int result) { this.result = result; };
 
 	public CharacterCreationResultMessage(){

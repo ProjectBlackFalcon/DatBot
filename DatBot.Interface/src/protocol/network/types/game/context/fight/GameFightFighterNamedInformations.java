@@ -20,9 +20,9 @@ public class GameFightFighterNamedInformations extends GameFightFighterInformati
 	private String name;
 	private PlayerStatus status;
 
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public PlayerStatus getStatus() { return this.status; };
+	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
 
 	public GameFightFighterNamedInformations(){

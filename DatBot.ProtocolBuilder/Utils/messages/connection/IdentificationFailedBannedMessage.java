@@ -18,7 +18,7 @@ public class IdentificationFailedBannedMessage extends IdentificationFailedMessa
 
 	private double banEndDate;
 
-	public double getBanEndDate() { return this.banEndDate; };
+	public double getBanEndDate() { return this.banEndDate; }
 	public void setBanEndDate(double banEndDate) { this.banEndDate = banEndDate; };
 
 	public IdentificationFailedBannedMessage(){

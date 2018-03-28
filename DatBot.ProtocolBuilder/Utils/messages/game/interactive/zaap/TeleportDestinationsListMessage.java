@@ -22,15 +22,15 @@ public class TeleportDestinationsListMessage extends NetworkMessage {
 	private List<Integer> costs;
 	private List<Integer> destTeleporterType;
 
-	public int getTeleporterType() { return this.teleporterType; };
+	public int getTeleporterType() { return this.teleporterType; }
 	public void setTeleporterType(int teleporterType) { this.teleporterType = teleporterType; };
-	public List<Double> getMapIds() { return this.mapIds; };
+	public List<Double> getMapIds() { return this.mapIds; }
 	public void setMapIds(List<Double> mapIds) { this.mapIds = mapIds; };
-	public List<Integer> getSubAreaIds() { return this.subAreaIds; };
+	public List<Integer> getSubAreaIds() { return this.subAreaIds; }
 	public void setSubAreaIds(List<Integer> subAreaIds) { this.subAreaIds = subAreaIds; };
-	public List<Integer> getCosts() { return this.costs; };
+	public List<Integer> getCosts() { return this.costs; }
 	public void setCosts(List<Integer> costs) { this.costs = costs; };
-	public List<Integer> getDestTeleporterType() { return this.destTeleporterType; };
+	public List<Integer> getDestTeleporterType() { return this.destTeleporterType; }
 	public void setDestTeleporterType(List<Integer> destTeleporterType) { this.destTeleporterType = destTeleporterType; };
 
 	public TeleportDestinationsListMessage(){

@@ -19,9 +19,9 @@ public class BasicAckMessage extends NetworkMessage {
 	private int seq;
 	private int lastPacketId;
 
-	public int getSeq() { return this.seq; };
+	public int getSeq() { return this.seq; }
 	public void setSeq(int seq) { this.seq = seq; };
-	public int getLastPacketId() { return this.lastPacketId; };
+	public int getLastPacketId() { return this.lastPacketId; }
 	public void setLastPacketId(int lastPacketId) { this.lastPacketId = lastPacketId; };
 
 	public BasicAckMessage(){

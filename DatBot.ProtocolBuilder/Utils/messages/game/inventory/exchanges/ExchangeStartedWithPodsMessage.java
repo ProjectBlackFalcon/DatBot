@@ -23,17 +23,17 @@ public class ExchangeStartedWithPodsMessage extends ExchangeStartedMessage {
 	private int secondCharacterCurrentWeight;
 	private int secondCharacterMaxWeight;
 
-	public double getFirstCharacterId() { return this.firstCharacterId; };
+	public double getFirstCharacterId() { return this.firstCharacterId; }
 	public void setFirstCharacterId(double firstCharacterId) { this.firstCharacterId = firstCharacterId; };
-	public int getFirstCharacterCurrentWeight() { return this.firstCharacterCurrentWeight; };
+	public int getFirstCharacterCurrentWeight() { return this.firstCharacterCurrentWeight; }
 	public void setFirstCharacterCurrentWeight(int firstCharacterCurrentWeight) { this.firstCharacterCurrentWeight = firstCharacterCurrentWeight; };
-	public int getFirstCharacterMaxWeight() { return this.firstCharacterMaxWeight; };
+	public int getFirstCharacterMaxWeight() { return this.firstCharacterMaxWeight; }
 	public void setFirstCharacterMaxWeight(int firstCharacterMaxWeight) { this.firstCharacterMaxWeight = firstCharacterMaxWeight; };
-	public double getSecondCharacterId() { return this.secondCharacterId; };
+	public double getSecondCharacterId() { return this.secondCharacterId; }
 	public void setSecondCharacterId(double secondCharacterId) { this.secondCharacterId = secondCharacterId; };
-	public int getSecondCharacterCurrentWeight() { return this.secondCharacterCurrentWeight; };
+	public int getSecondCharacterCurrentWeight() { return this.secondCharacterCurrentWeight; }
 	public void setSecondCharacterCurrentWeight(int secondCharacterCurrentWeight) { this.secondCharacterCurrentWeight = secondCharacterCurrentWeight; };
-	public int getSecondCharacterMaxWeight() { return this.secondCharacterMaxWeight; };
+	public int getSecondCharacterMaxWeight() { return this.secondCharacterMaxWeight; }
 	public void setSecondCharacterMaxWeight(int secondCharacterMaxWeight) { this.secondCharacterMaxWeight = secondCharacterMaxWeight; };
 
 	public ExchangeStartedWithPodsMessage(){
