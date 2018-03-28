@@ -1,10 +1,10 @@
-from Model.Interface import PipeToJava
-from Model.LowLevelFunctions import LowLevelFunctions
-from Model.Bot import Bot
+from Interface import PipeToJava
+from LowLevelFunctions import LowLevelFunctions
+from Bot import Bot
 from threading import Thread
 import random
 
-pipe = PipeToJava(headless=False)
+pipe = PipeToJava(headless=True)
 bot_id = 0
 llf = LowLevelFunctions()
 
@@ -62,8 +62,9 @@ random.shuffle(colors)
 
 credentials = [
     {'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'},
-    {'username': 'wublel12', 'password': 'notabot0', 'name': 'Draideac', 'server': 'Julith'},
-    {'username': 'wublel11', 'password': 'notabot0', 'name': 'Alvestana', 'server': 'Furye'}
+    # {'username': 'wublel12', 'password': 'notabot0', 'name': 'Draideac', 'server': 'Julith'},
+    # {'username': 'wublel6', 'password': 'notabot0', 'name': 'Holle-holla-hollu', 'server': 'Julith'},
+    # {'username': 'wublel9', 'password': 'notabot0', 'name': 'Sayerses', 'server': 'Julith'}
 ]
 
 bots = []

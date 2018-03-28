@@ -1,4 +1,4 @@
-from Model.Pathfinder import PathFinder
+from Pathfinder import PathFinder
 
 
 class Main:
