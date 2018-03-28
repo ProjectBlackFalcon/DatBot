@@ -1,10 +1,9 @@
-import json
 import numpy as np
 from PIL import Image
 from heapq import *
 import time
 from random import randint
-from Model.LowLevelFunctions import LowLevelFunctions
+from LowLevelFunctions import LowLevelFunctions
 
 
 class PathFinder:

@@ -1,7 +1,5 @@
-from Model.Pathfinder import PathFinder
-import time
+from Pathfinder import PathFinder
 import numpy as np
-import json
 import winsound
 
 
