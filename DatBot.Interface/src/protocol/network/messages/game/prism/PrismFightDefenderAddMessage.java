@@ -21,11 +21,11 @@ public class PrismFightDefenderAddMessage extends NetworkMessage {
 	private int fightId;
 	private CharacterMinimalPlusLookInformations defender;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public CharacterMinimalPlusLookInformations getDefender() { return this.defender; };
+	public CharacterMinimalPlusLookInformations getDefender() { return this.defender; }
 	public void setDefender(CharacterMinimalPlusLookInformations defender) { this.defender = defender; };
 
 	public PrismFightDefenderAddMessage(){

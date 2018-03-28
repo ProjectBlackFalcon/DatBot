@@ -18,7 +18,7 @@ public class GameFightTurnResumeMessage extends GameFightTurnStartMessage {
 
 	private int remainingTime;
 
-	public int getRemainingTime() { return this.remainingTime; };
+	public int getRemainingTime() { return this.remainingTime; }
 	public void setRemainingTime(int remainingTime) { this.remainingTime = remainingTime; };
 
 	public GameFightTurnResumeMessage(){

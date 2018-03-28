@@ -21,13 +21,13 @@ public class GameRolePlaySpellAnimMessage extends NetworkMessage {
 	private int spellId;
 	private int spellLevel;
 
-	public long getCasterId() { return this.casterId; };
+	public long getCasterId() { return this.casterId; }
 	public void setCasterId(long casterId) { this.casterId = casterId; };
-	public int getTargetCellId() { return this.targetCellId; };
+	public int getTargetCellId() { return this.targetCellId; }
 	public void setTargetCellId(int targetCellId) { this.targetCellId = targetCellId; };
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public int getSpellLevel() { return this.spellLevel; };
+	public int getSpellLevel() { return this.spellLevel; }
 	public void setSpellLevel(int spellLevel) { this.spellLevel = spellLevel; };
 
 	public GameRolePlaySpellAnimMessage(){

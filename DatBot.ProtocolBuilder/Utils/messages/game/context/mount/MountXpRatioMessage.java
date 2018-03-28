@@ -18,7 +18,7 @@ public class MountXpRatioMessage extends NetworkMessage {
 
 	private int ratio;
 
-	public int getRatio() { return this.ratio; };
+	public int getRatio() { return this.ratio; }
 	public void setRatio(int ratio) { this.ratio = ratio; };
 
 	public MountXpRatioMessage(){

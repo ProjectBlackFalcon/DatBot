@@ -20,11 +20,11 @@ public class HumanOptionSkillUse extends HumanOption {
 	private int skillId;
 	private double skillEndTime;
 
-	public int getElementId() { return this.elementId; };
+	public int getElementId() { return this.elementId; }
 	public void setElementId(int elementId) { this.elementId = elementId; };
-	public int getSkillId() { return this.skillId; };
+	public int getSkillId() { return this.skillId; }
 	public void setSkillId(int skillId) { this.skillId = skillId; };
-	public double getSkillEndTime() { return this.skillEndTime; };
+	public double getSkillEndTime() { return this.skillEndTime; }
 	public void setSkillEndTime(double skillEndTime) { this.skillEndTime = skillEndTime; };
 
 	public HumanOptionSkillUse(){

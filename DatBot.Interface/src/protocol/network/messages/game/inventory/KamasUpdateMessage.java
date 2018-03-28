@@ -18,7 +18,7 @@ public class KamasUpdateMessage extends NetworkMessage {
 
 	private long kamasTotal;
 
-	public long getKamasTotal() { return this.kamasTotal; };
+	public long getKamasTotal() { return this.kamasTotal; }
 	public void setKamasTotal(long kamasTotal) { this.kamasTotal = kamasTotal; };
 
 	public KamasUpdateMessage(){

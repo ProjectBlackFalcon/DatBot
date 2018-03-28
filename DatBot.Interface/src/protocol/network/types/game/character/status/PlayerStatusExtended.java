@@ -18,7 +18,7 @@ public class PlayerStatusExtended extends PlayerStatus {
 
 	private String message;
 
-	public String getMessage() { return this.message; };
+	public String getMessage() { return this.message; }
 	public void setMessage(String message) { this.message = message; };
 
 	public PlayerStatusExtended(){

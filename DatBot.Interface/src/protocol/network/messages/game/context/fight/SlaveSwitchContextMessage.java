@@ -25,15 +25,15 @@ public class SlaveSwitchContextMessage extends NetworkMessage {
 	private CharacterCharacteristicsInformations slaveStats;
 	private List<Shortcut> shortcuts;
 
-	public double getMasterId() { return this.masterId; };
+	public double getMasterId() { return this.masterId; }
 	public void setMasterId(double masterId) { this.masterId = masterId; };
-	public double getSlaveId() { return this.slaveId; };
+	public double getSlaveId() { return this.slaveId; }
 	public void setSlaveId(double slaveId) { this.slaveId = slaveId; };
-	public List<SpellItem> getSlaveSpells() { return this.slaveSpells; };
+	public List<SpellItem> getSlaveSpells() { return this.slaveSpells; }
 	public void setSlaveSpells(List<SpellItem> slaveSpells) { this.slaveSpells = slaveSpells; };
-	public CharacterCharacteristicsInformations getSlaveStats() { return this.slaveStats; };
+	public CharacterCharacteristicsInformations getSlaveStats() { return this.slaveStats; }
 	public void setSlaveStats(CharacterCharacteristicsInformations slaveStats) { this.slaveStats = slaveStats; };
-	public List<Shortcut> getShortcuts() { return this.shortcuts; };
+	public List<Shortcut> getShortcuts() { return this.shortcuts; }
 	public void setShortcuts(List<Shortcut> shortcuts) { this.shortcuts = shortcuts; };
 
 	public SlaveSwitchContextMessage(){

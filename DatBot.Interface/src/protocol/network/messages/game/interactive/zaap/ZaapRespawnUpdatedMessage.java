@@ -18,7 +18,7 @@ public class ZaapRespawnUpdatedMessage extends NetworkMessage {
 
 	private double mapId;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
 
 	public ZaapRespawnUpdatedMessage(){

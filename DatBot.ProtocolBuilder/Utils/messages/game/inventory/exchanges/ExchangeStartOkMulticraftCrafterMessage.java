@@ -18,7 +18,7 @@ public class ExchangeStartOkMulticraftCrafterMessage extends NetworkMessage {
 
 	private int skillId;
 
-	public int getSkillId() { return this.skillId; };
+	public int getSkillId() { return this.skillId; }
 	public void setSkillId(int skillId) { this.skillId = skillId; };
 
 	public ExchangeStartOkMulticraftCrafterMessage(){

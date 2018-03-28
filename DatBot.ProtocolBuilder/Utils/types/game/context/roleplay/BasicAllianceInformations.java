@@ -19,9 +19,9 @@ public class BasicAllianceInformations extends AbstractSocialGroupInfos {
 	private int allianceId;
 	private String allianceTag;
 
-	public int getAllianceId() { return this.allianceId; };
+	public int getAllianceId() { return this.allianceId; }
 	public void setAllianceId(int allianceId) { this.allianceId = allianceId; };
-	public String getAllianceTag() { return this.allianceTag; };
+	public String getAllianceTag() { return this.allianceTag; }
 	public void setAllianceTag(String allianceTag) { this.allianceTag = allianceTag; };
 
 	public BasicAllianceInformations(){

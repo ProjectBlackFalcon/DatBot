@@ -19,9 +19,9 @@ public class ObjectItemToSellInNpcShop extends ObjectItemMinimalInformation {
 	private long objectPrice;
 	private String buyCriterion;
 
-	public long getObjectPrice() { return this.objectPrice; };
+	public long getObjectPrice() { return this.objectPrice; }
 	public void setObjectPrice(long objectPrice) { this.objectPrice = objectPrice; };
-	public String getBuyCriterion() { return this.buyCriterion; };
+	public String getBuyCriterion() { return this.buyCriterion; }
 	public void setBuyCriterion(String buyCriterion) { this.buyCriterion = buyCriterion; };
 
 	public ObjectItemToSellInNpcShop(){

@@ -18,7 +18,7 @@ public class CharacterMinimalPlusLookAndGradeInformations extends CharacterMinim
 
 	private int grade;
 
-	public int getGrade() { return this.grade; };
+	public int getGrade() { return this.grade; }
 	public void setGrade(int grade) { this.grade = grade; };
 
 	public CharacterMinimalPlusLookAndGradeInformations(){

@@ -18,7 +18,7 @@ public class ExchangeObjectRemovedFromBagMessage extends ExchangeObjectMessage {
 
 	private int objectUID;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
 
 	public ExchangeObjectRemovedFromBagMessage(){

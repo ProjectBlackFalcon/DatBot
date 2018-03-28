@@ -30,27 +30,27 @@ public class DareInformations extends NetworkMessage {
 	private List<DareCriteria> criterions;
 	private double startDate;
 
-	public double getDareId() { return this.dareId; };
+	public double getDareId() { return this.dareId; }
 	public void setDareId(double dareId) { this.dareId = dareId; };
-	public CharacterBasicMinimalInformations getCreator() { return this.creator; };
+	public CharacterBasicMinimalInformations getCreator() { return this.creator; }
 	public void setCreator(CharacterBasicMinimalInformations creator) { this.creator = creator; };
-	public long getSubscriptionFee() { return this.subscriptionFee; };
+	public long getSubscriptionFee() { return this.subscriptionFee; }
 	public void setSubscriptionFee(long subscriptionFee) { this.subscriptionFee = subscriptionFee; };
-	public long getJackpot() { return this.jackpot; };
+	public long getJackpot() { return this.jackpot; }
 	public void setJackpot(long jackpot) { this.jackpot = jackpot; };
-	public int getMaxCountWinners() { return this.maxCountWinners; };
+	public int getMaxCountWinners() { return this.maxCountWinners; }
 	public void setMaxCountWinners(int maxCountWinners) { this.maxCountWinners = maxCountWinners; };
-	public double getEndDate() { return this.endDate; };
+	public double getEndDate() { return this.endDate; }
 	public void setEndDate(double endDate) { this.endDate = endDate; };
-	public boolean isIsPrivate() { return this.isPrivate; };
+	public boolean isIsPrivate() { return this.isPrivate; }
 	public void setIsPrivate(boolean isPrivate) { this.isPrivate = isPrivate; };
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
-	public int getAllianceId() { return this.allianceId; };
+	public int getAllianceId() { return this.allianceId; }
 	public void setAllianceId(int allianceId) { this.allianceId = allianceId; };
-	public List<DareCriteria> getCriterions() { return this.criterions; };
+	public List<DareCriteria> getCriterions() { return this.criterions; }
 	public void setCriterions(List<DareCriteria> criterions) { this.criterions = criterions; };
-	public double getStartDate() { return this.startDate; };
+	public double getStartDate() { return this.startDate; }
 	public void setStartDate(double startDate) { this.startDate = startDate; };
 
 	public DareInformations(){

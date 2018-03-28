@@ -19,9 +19,9 @@ public class GameRolePlayMonsterNotAngryAtPlayerMessage extends NetworkMessage {
 	private long playerId;
 	private double monsterGroupId;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public double getMonsterGroupId() { return this.monsterGroupId; };
+	public double getMonsterGroupId() { return this.monsterGroupId; }
 	public void setMonsterGroupId(double monsterGroupId) { this.monsterGroupId = monsterGroupId; };
 
 	public GameRolePlayMonsterNotAngryAtPlayerMessage(){

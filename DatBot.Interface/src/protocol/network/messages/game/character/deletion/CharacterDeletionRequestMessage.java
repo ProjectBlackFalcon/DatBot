@@ -19,9 +19,9 @@ public class CharacterDeletionRequestMessage extends NetworkMessage {
 	private long characterId;
 	private String secretAnswerHash;
 
-	public long getCharacterId() { return this.characterId; };
+	public long getCharacterId() { return this.characterId; }
 	public void setCharacterId(long characterId) { this.characterId = characterId; };
-	public String getSecretAnswerHash() { return this.secretAnswerHash; };
+	public String getSecretAnswerHash() { return this.secretAnswerHash; }
 	public void setSecretAnswerHash(String secretAnswerHash) { this.secretAnswerHash = secretAnswerHash; };
 
 	public CharacterDeletionRequestMessage(){

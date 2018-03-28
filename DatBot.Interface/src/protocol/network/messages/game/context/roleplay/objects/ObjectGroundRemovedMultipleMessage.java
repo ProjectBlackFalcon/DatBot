@@ -18,7 +18,7 @@ public class ObjectGroundRemovedMultipleMessage extends NetworkMessage {
 
 	private List<Integer> cells;
 
-	public List<Integer> getCells() { return this.cells; };
+	public List<Integer> getCells() { return this.cells; }
 	public void setCells(List<Integer> cells) { this.cells = cells; };
 
 	public ObjectGroundRemovedMultipleMessage(){

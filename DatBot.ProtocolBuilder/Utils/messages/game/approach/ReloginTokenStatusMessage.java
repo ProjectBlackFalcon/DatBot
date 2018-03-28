@@ -19,9 +19,9 @@ public class ReloginTokenStatusMessage extends NetworkMessage {
 	private boolean validToken;
 	private List<Integer> ticket;
 
-	public boolean isValidToken() { return this.validToken; };
+	public boolean isValidToken() { return this.validToken; }
 	public void setValidToken(boolean validToken) { this.validToken = validToken; };
-	public List<Integer> getTicket() { return this.ticket; };
+	public List<Integer> getTicket() { return this.ticket; }
 	public void setTicket(List<Integer> ticket) { this.ticket = ticket; };
 
 	public ReloginTokenStatusMessage(){

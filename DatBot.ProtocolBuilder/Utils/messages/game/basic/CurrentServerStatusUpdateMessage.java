@@ -18,7 +18,7 @@ public class CurrentServerStatusUpdateMessage extends NetworkMessage {
 
 	private int status;
 
-	public int getStatus() { return this.status; };
+	public int getStatus() { return this.status; }
 	public void setStatus(int status) { this.status = status; };
 
 	public CurrentServerStatusUpdateMessage(){

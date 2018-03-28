@@ -22,15 +22,15 @@ public class InteractiveUsedMessage extends NetworkMessage {
 	private int duration;
 	private boolean canMove;
 
-	public long getEntityId() { return this.entityId; };
+	public long getEntityId() { return this.entityId; }
 	public void setEntityId(long entityId) { this.entityId = entityId; };
-	public int getElemId() { return this.elemId; };
+	public int getElemId() { return this.elemId; }
 	public void setElemId(int elemId) { this.elemId = elemId; };
-	public int getSkillId() { return this.skillId; };
+	public int getSkillId() { return this.skillId; }
 	public void setSkillId(int skillId) { this.skillId = skillId; };
-	public int getDuration() { return this.duration; };
+	public int getDuration() { return this.duration; }
 	public void setDuration(int duration) { this.duration = duration; };
-	public boolean isCanMove() { return this.canMove; };
+	public boolean isCanMove() { return this.canMove; }
 	public void setCanMove(boolean canMove) { this.canMove = canMove; };
 
 	public InteractiveUsedMessage(){

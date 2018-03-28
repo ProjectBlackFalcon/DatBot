@@ -24,19 +24,19 @@ public class AccountCapabilitiesMessage extends NetworkMessage {
 	private boolean canCreateNewCharacter;
 	private double unlimitedRestatEndDate;
 
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public boolean isTutorialAvailable() { return this.tutorialAvailable; };
+	public boolean isTutorialAvailable() { return this.tutorialAvailable; }
 	public void setTutorialAvailable(boolean tutorialAvailable) { this.tutorialAvailable = tutorialAvailable; };
-	public int getBreedsVisible() { return this.breedsVisible; };
+	public int getBreedsVisible() { return this.breedsVisible; }
 	public void setBreedsVisible(int breedsVisible) { this.breedsVisible = breedsVisible; };
-	public int getBreedsAvailable() { return this.breedsAvailable; };
+	public int getBreedsAvailable() { return this.breedsAvailable; }
 	public void setBreedsAvailable(int breedsAvailable) { this.breedsAvailable = breedsAvailable; };
-	public int getStatus() { return this.status; };
+	public int getStatus() { return this.status; }
 	public void setStatus(int status) { this.status = status; };
-	public boolean isCanCreateNewCharacter() { return this.canCreateNewCharacter; };
+	public boolean isCanCreateNewCharacter() { return this.canCreateNewCharacter; }
 	public void setCanCreateNewCharacter(boolean canCreateNewCharacter) { this.canCreateNewCharacter = canCreateNewCharacter; };
-	public double getUnlimitedRestatEndDate() { return this.unlimitedRestatEndDate; };
+	public double getUnlimitedRestatEndDate() { return this.unlimitedRestatEndDate; }
 	public void setUnlimitedRestatEndDate(double unlimitedRestatEndDate) { this.unlimitedRestatEndDate = unlimitedRestatEndDate; };
 
 	public AccountCapabilitiesMessage(){

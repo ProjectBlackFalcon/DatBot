@@ -18,7 +18,7 @@ public class FriendDeleteRequestMessage extends NetworkMessage {
 
 	private int accountId;
 
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
 
 	public FriendDeleteRequestMessage(){

@@ -21,13 +21,13 @@ public class HouseGuildShareRequestMessage extends NetworkMessage {
 	private boolean enable;
 	private int rights;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public boolean isEnable() { return this.enable; };
+	public boolean isEnable() { return this.enable; }
 	public void setEnable(boolean enable) { this.enable = enable; };
-	public int getRights() { return this.rights; };
+	public int getRights() { return this.rights; }
 	public void setRights(int rights) { this.rights = rights; };
 
 	public HouseGuildShareRequestMessage(){

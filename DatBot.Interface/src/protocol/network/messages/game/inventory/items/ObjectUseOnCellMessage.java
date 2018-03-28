@@ -18,7 +18,7 @@ public class ObjectUseOnCellMessage extends ObjectUseMessage {
 
 	private int cells;
 
-	public int getCells() { return this.cells; };
+	public int getCells() { return this.cells; }
 	public void setCells(int cells) { this.cells = cells; };
 
 	public ObjectUseOnCellMessage(){

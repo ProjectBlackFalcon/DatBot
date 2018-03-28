@@ -19,9 +19,9 @@ public class QuestObjectiveValidatedMessage extends NetworkMessage {
 	private int questId;
 	private int objectiveId;
 
-	public int getQuestId() { return this.questId; };
+	public int getQuestId() { return this.questId; }
 	public void setQuestId(int questId) { this.questId = questId; };
-	public int getObjectiveId() { return this.objectiveId; };
+	public int getObjectiveId() { return this.objectiveId; }
 	public void setObjectiveId(int objectiveId) { this.objectiveId = objectiveId; };
 
 	public QuestObjectiveValidatedMessage(){

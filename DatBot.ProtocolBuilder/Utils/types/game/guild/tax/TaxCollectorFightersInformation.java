@@ -21,11 +21,11 @@ public class TaxCollectorFightersInformation extends NetworkMessage {
 	private List<CharacterMinimalPlusLookInformations> allyCharactersInformations;
 	private List<CharacterMinimalPlusLookInformations> enemyCharactersInformations;
 
-	public double getCollectorId() { return this.collectorId; };
+	public double getCollectorId() { return this.collectorId; }
 	public void setCollectorId(double collectorId) { this.collectorId = collectorId; };
-	public List<CharacterMinimalPlusLookInformations> getAllyCharactersInformations() { return this.allyCharactersInformations; };
+	public List<CharacterMinimalPlusLookInformations> getAllyCharactersInformations() { return this.allyCharactersInformations; }
 	public void setAllyCharactersInformations(List<CharacterMinimalPlusLookInformations> allyCharactersInformations) { this.allyCharactersInformations = allyCharactersInformations; };
-	public List<CharacterMinimalPlusLookInformations> getEnemyCharactersInformations() { return this.enemyCharactersInformations; };
+	public List<CharacterMinimalPlusLookInformations> getEnemyCharactersInformations() { return this.enemyCharactersInformations; }
 	public void setEnemyCharactersInformations(List<CharacterMinimalPlusLookInformations> enemyCharactersInformations) { this.enemyCharactersInformations = enemyCharactersInformations; };
 
 	public TaxCollectorFightersInformation(){

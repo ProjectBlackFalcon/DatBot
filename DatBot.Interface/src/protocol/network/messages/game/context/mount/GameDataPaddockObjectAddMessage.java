@@ -19,7 +19,7 @@ public class GameDataPaddockObjectAddMessage extends NetworkMessage {
 
 	private PaddockItem paddockItemDescription;
 
-	public PaddockItem getPaddockItemDescription() { return this.paddockItemDescription; };
+	public PaddockItem getPaddockItemDescription() { return this.paddockItemDescription; }
 	public void setPaddockItemDescription(PaddockItem paddockItemDescription) { this.paddockItemDescription = paddockItemDescription; };
 
 	public GameDataPaddockObjectAddMessage(){

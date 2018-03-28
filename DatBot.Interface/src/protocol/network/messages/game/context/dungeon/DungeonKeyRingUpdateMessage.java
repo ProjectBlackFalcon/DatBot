@@ -19,9 +19,9 @@ public class DungeonKeyRingUpdateMessage extends NetworkMessage {
 	private int dungeonId;
 	private boolean available;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
-	public boolean isAvailable() { return this.available; };
+	public boolean isAvailable() { return this.available; }
 	public void setAvailable(boolean available) { this.available = available; };
 
 	public DungeonKeyRingUpdateMessage(){

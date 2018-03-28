@@ -18,7 +18,7 @@ public class ClientUIOpenedMessage extends NetworkMessage {
 
 	private int type;
 
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
 
 	public ClientUIOpenedMessage(){

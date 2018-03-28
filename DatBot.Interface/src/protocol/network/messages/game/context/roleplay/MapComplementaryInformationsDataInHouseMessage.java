@@ -19,7 +19,7 @@ public class MapComplementaryInformationsDataInHouseMessage extends MapComplemen
 
 	private HouseInformationsInside currentHouse;
 
-	public HouseInformationsInside getCurrentHouse() { return this.currentHouse; };
+	public HouseInformationsInside getCurrentHouse() { return this.currentHouse; }
 	public void setCurrentHouse(HouseInformationsInside currentHouse) { this.currentHouse = currentHouse; };
 
 	public MapComplementaryInformationsDataInHouseMessage(){

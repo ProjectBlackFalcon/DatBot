@@ -12,7 +12,7 @@ public class Test {
 		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
 		new MapManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
 
-		boolean arg = true;
+		boolean arg = false;
 		if (args.length != 0) {
 			if ((args[0].equals("true") || args[0].equals("True"))) {
 				arg = true;
@@ -27,8 +27,13 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,kezaropod11,Faoy,Julith]");
 //		communication.getReturn("2;0;i;cmd;connect;[wublel9,notabot0,Sayerses,Julith]");
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Scalpelementaire','Julith']");
-		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
+//		communication.getReturn("0;0;i;cmd;connect;['wublel12','notabot0','Draideac','Furye']");
+		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
+//		communication.getReturn("0;0;i;cmd;getMap;[None]");
+//		communication.getReturn("0;0;i;cmd;openHdv;[None]");
+//		communication.getReturn("0;0;i;cmd;getHdvItemStats;[289]");
+
+//		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 
 		// TESTS FOR INPUTS
 

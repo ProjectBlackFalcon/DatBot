@@ -19,7 +19,7 @@ public class AllianceTaxCollectorDialogQuestionExtendedMessage extends TaxCollec
 
 	private BasicNamedAllianceInformations alliance;
 
-	public BasicNamedAllianceInformations getAlliance() { return this.alliance; };
+	public BasicNamedAllianceInformations getAlliance() { return this.alliance; }
 	public void setAlliance(BasicNamedAllianceInformations alliance) { this.alliance = alliance; };
 
 	public AllianceTaxCollectorDialogQuestionExtendedMessage(){

@@ -19,9 +19,9 @@ public class PaddockMoveItemRequestMessage extends NetworkMessage {
 	private int oldCellId;
 	private int newCellId;
 
-	public int getOldCellId() { return this.oldCellId; };
+	public int getOldCellId() { return this.oldCellId; }
 	public void setOldCellId(int oldCellId) { this.oldCellId = oldCellId; };
-	public int getNewCellId() { return this.newCellId; };
+	public int getNewCellId() { return this.newCellId; }
 	public void setNewCellId(int newCellId) { this.newCellId = newCellId; };
 
 	public PaddockMoveItemRequestMessage(){

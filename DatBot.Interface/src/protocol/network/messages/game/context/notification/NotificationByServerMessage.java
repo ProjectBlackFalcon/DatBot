@@ -20,11 +20,11 @@ public class NotificationByServerMessage extends NetworkMessage {
 	private List<String> parameters;
 	private boolean forceOpen;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public List<String> getParameters() { return this.parameters; };
+	public List<String> getParameters() { return this.parameters; }
 	public void setParameters(List<String> parameters) { this.parameters = parameters; };
-	public boolean isForceOpen() { return this.forceOpen; };
+	public boolean isForceOpen() { return this.forceOpen; }
 	public void setForceOpen(boolean forceOpen) { this.forceOpen = forceOpen; };
 
 	public NotificationByServerMessage(){

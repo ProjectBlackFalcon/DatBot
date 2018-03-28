@@ -19,7 +19,7 @@ public class PlayerStatusUpdateRequestMessage extends NetworkMessage {
 
 	private PlayerStatus status;
 
-	public PlayerStatus getStatus() { return this.status; };
+	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
 
 	public PlayerStatusUpdateRequestMessage(){

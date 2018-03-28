@@ -22,15 +22,15 @@ public class PartyCompanionMemberInformations extends PartyCompanionBaseInformat
 	private int prospecting;
 	private int regenRate;
 
-	public int getInitiative() { return this.initiative; };
+	public int getInitiative() { return this.initiative; }
 	public void setInitiative(int initiative) { this.initiative = initiative; };
-	public int getLifePoints() { return this.lifePoints; };
+	public int getLifePoints() { return this.lifePoints; }
 	public void setLifePoints(int lifePoints) { this.lifePoints = lifePoints; };
-	public int getMaxLifePoints() { return this.maxLifePoints; };
+	public int getMaxLifePoints() { return this.maxLifePoints; }
 	public void setMaxLifePoints(int maxLifePoints) { this.maxLifePoints = maxLifePoints; };
-	public int getProspecting() { return this.prospecting; };
+	public int getProspecting() { return this.prospecting; }
 	public void setProspecting(int prospecting) { this.prospecting = prospecting; };
-	public int getRegenRate() { return this.regenRate; };
+	public int getRegenRate() { return this.regenRate; }
 	public void setRegenRate(int regenRate) { this.regenRate = regenRate; };
 
 	public PartyCompanionMemberInformations(){

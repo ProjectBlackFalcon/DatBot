@@ -18,7 +18,7 @@ public class ExchangeWaitingResultMessage extends NetworkMessage {
 
 	private boolean bwait;
 
-	public boolean isBwait() { return this.bwait; };
+	public boolean isBwait() { return this.bwait; }
 	public void setBwait(boolean bwait) { this.bwait = bwait; };
 
 	public ExchangeWaitingResultMessage(){

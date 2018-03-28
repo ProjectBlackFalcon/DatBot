@@ -18,7 +18,7 @@ public class GameRolePlayArenaRegisterMessage extends NetworkMessage {
 
 	private int battleMode;
 
-	public int getBattleMode() { return this.battleMode; };
+	public int getBattleMode() { return this.battleMode; }
 	public void setBattleMode(int battleMode) { this.battleMode = battleMode; };
 
 	public GameRolePlayArenaRegisterMessage(){

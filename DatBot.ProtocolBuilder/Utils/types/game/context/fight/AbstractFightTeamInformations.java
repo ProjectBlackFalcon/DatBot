@@ -22,15 +22,15 @@ public class AbstractFightTeamInformations extends NetworkMessage {
 	private int teamTypeId;
 	private int nbWaves;
 
-	public int getTeamId() { return this.teamId; };
+	public int getTeamId() { return this.teamId; }
 	public void setTeamId(int teamId) { this.teamId = teamId; };
-	public double getLeaderId() { return this.leaderId; };
+	public double getLeaderId() { return this.leaderId; }
 	public void setLeaderId(double leaderId) { this.leaderId = leaderId; };
-	public int getTeamSide() { return this.teamSide; };
+	public int getTeamSide() { return this.teamSide; }
 	public void setTeamSide(int teamSide) { this.teamSide = teamSide; };
-	public int getTeamTypeId() { return this.teamTypeId; };
+	public int getTeamTypeId() { return this.teamTypeId; }
 	public void setTeamTypeId(int teamTypeId) { this.teamTypeId = teamTypeId; };
-	public int getNbWaves() { return this.nbWaves; };
+	public int getNbWaves() { return this.nbWaves; }
 	public void setNbWaves(int nbWaves) { this.nbWaves = nbWaves; };
 
 	public AbstractFightTeamInformations(){

@@ -20,9 +20,9 @@ public class GameRolePlayMerchantInformations extends GameRolePlayNamedActorInfo
 	private int sellType;
 	private List<HumanOption> options;
 
-	public int getSellType() { return this.sellType; };
+	public int getSellType() { return this.sellType; }
 	public void setSellType(int sellType) { this.sellType = sellType; };
-	public List<HumanOption> getOptions() { return this.options; };
+	public List<HumanOption> getOptions() { return this.options; }
 	public void setOptions(List<HumanOption> options) { this.options = options; };
 
 	public GameRolePlayMerchantInformations(){

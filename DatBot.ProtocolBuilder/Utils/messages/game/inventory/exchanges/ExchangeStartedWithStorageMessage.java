@@ -18,7 +18,7 @@ public class ExchangeStartedWithStorageMessage extends ExchangeStartedMessage {
 
 	private int storageMaxSlot;
 
-	public int getStorageMaxSlot() { return this.storageMaxSlot; };
+	public int getStorageMaxSlot() { return this.storageMaxSlot; }
 	public void setStorageMaxSlot(int storageMaxSlot) { this.storageMaxSlot = storageMaxSlot; };
 
 	public ExchangeStartedWithStorageMessage(){

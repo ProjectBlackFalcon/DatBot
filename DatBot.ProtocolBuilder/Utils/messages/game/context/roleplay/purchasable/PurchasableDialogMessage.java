@@ -22,15 +22,15 @@ public class PurchasableDialogMessage extends NetworkMessage {
 	private boolean secondHand;
 	private long price;
 
-	public boolean isBuyOrSell() { return this.buyOrSell; };
+	public boolean isBuyOrSell() { return this.buyOrSell; }
 	public void setBuyOrSell(boolean buyOrSell) { this.buyOrSell = buyOrSell; };
-	public double getPurchasableId() { return this.purchasableId; };
+	public double getPurchasableId() { return this.purchasableId; }
 	public void setPurchasableId(double purchasableId) { this.purchasableId = purchasableId; };
-	public int getPurchasableInstanceId() { return this.purchasableInstanceId; };
+	public int getPurchasableInstanceId() { return this.purchasableInstanceId; }
 	public void setPurchasableInstanceId(int purchasableInstanceId) { this.purchasableInstanceId = purchasableInstanceId; };
-	public boolean isSecondHand() { return this.secondHand; };
+	public boolean isSecondHand() { return this.secondHand; }
 	public void setSecondHand(boolean secondHand) { this.secondHand = secondHand; };
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
 
 	public PurchasableDialogMessage(){

@@ -18,7 +18,7 @@ public class ExchangeMultiCraftSetCrafterCanUseHisRessourcesMessage extends Netw
 
 	private boolean allow;
 
-	public boolean isAllow() { return this.allow; };
+	public boolean isAllow() { return this.allow; }
 	public void setAllow(boolean allow) { this.allow = allow; };
 
 	public ExchangeMultiCraftSetCrafterCanUseHisRessourcesMessage(){

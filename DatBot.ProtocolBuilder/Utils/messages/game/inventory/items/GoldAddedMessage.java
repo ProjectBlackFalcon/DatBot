@@ -19,7 +19,7 @@ public class GoldAddedMessage extends NetworkMessage {
 
 	private GoldItem gold;
 
-	public GoldItem getGold() { return this.gold; };
+	public GoldItem getGold() { return this.gold; }
 	public void setGold(GoldItem gold) { this.gold = gold; };
 
 	public GoldAddedMessage(){

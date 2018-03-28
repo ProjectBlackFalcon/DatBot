@@ -19,7 +19,7 @@ public class StartupActionAddMessage extends NetworkMessage {
 
 	private StartupActionAddObject newAction;
 
-	public StartupActionAddObject getNewAction() { return this.newAction; };
+	public StartupActionAddObject getNewAction() { return this.newAction; }
 	public void setNewAction(StartupActionAddObject newAction) { this.newAction = newAction; };
 
 	public StartupActionAddMessage(){

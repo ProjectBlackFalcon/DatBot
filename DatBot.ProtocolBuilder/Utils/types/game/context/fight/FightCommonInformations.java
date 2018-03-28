@@ -24,15 +24,15 @@ public class FightCommonInformations extends NetworkMessage {
 	private List<Integer> fightTeamsPositions;
 	private List<FightOptionsInformations> fightTeamsOptions;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public int getFightType() { return this.fightType; };
+	public int getFightType() { return this.fightType; }
 	public void setFightType(int fightType) { this.fightType = fightType; };
-	public List<FightTeamInformations> getFightTeams() { return this.fightTeams; };
+	public List<FightTeamInformations> getFightTeams() { return this.fightTeams; }
 	public void setFightTeams(List<FightTeamInformations> fightTeams) { this.fightTeams = fightTeams; };
-	public List<Integer> getFightTeamsPositions() { return this.fightTeamsPositions; };
+	public List<Integer> getFightTeamsPositions() { return this.fightTeamsPositions; }
 	public void setFightTeamsPositions(List<Integer> fightTeamsPositions) { this.fightTeamsPositions = fightTeamsPositions; };
-	public List<FightOptionsInformations> getFightTeamsOptions() { return this.fightTeamsOptions; };
+	public List<FightOptionsInformations> getFightTeamsOptions() { return this.fightTeamsOptions; }
 	public void setFightTeamsOptions(List<FightOptionsInformations> fightTeamsOptions) { this.fightTeamsOptions = fightTeamsOptions; };
 
 	public FightCommonInformations(){

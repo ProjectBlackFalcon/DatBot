@@ -18,7 +18,7 @@ public class MountEquipedErrorMessage extends NetworkMessage {
 
 	private int errorType;
 
-	public int getErrorType() { return this.errorType; };
+	public int getErrorType() { return this.errorType; }
 	public void setErrorType(int errorType) { this.errorType = errorType; };
 
 	public MountEquipedErrorMessage(){

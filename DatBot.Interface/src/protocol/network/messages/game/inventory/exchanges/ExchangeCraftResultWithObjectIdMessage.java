@@ -18,7 +18,7 @@ public class ExchangeCraftResultWithObjectIdMessage extends ExchangeCraftResultM
 
 	private int objectGenericId;
 
-	public int getObjectGenericId() { return this.objectGenericId; };
+	public int getObjectGenericId() { return this.objectGenericId; }
 	public void setObjectGenericId(int objectGenericId) { this.objectGenericId = objectGenericId; };
 
 	public ExchangeCraftResultWithObjectIdMessage(){

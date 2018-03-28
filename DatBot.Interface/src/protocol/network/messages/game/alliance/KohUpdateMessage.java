@@ -27,21 +27,21 @@ public class KohUpdateMessage extends NetworkMessage {
 	private int allianceMapMyAllianceScore;
 	private double nextTickTime;
 
-	public List<AllianceInformations> getAlliances() { return this.alliances; };
+	public List<AllianceInformations> getAlliances() { return this.alliances; }
 	public void setAlliances(List<AllianceInformations> alliances) { this.alliances = alliances; };
-	public List<Integer> getAllianceNbMembers() { return this.allianceNbMembers; };
+	public List<Integer> getAllianceNbMembers() { return this.allianceNbMembers; }
 	public void setAllianceNbMembers(List<Integer> allianceNbMembers) { this.allianceNbMembers = allianceNbMembers; };
-	public List<Integer> getAllianceRoundWeigth() { return this.allianceRoundWeigth; };
+	public List<Integer> getAllianceRoundWeigth() { return this.allianceRoundWeigth; }
 	public void setAllianceRoundWeigth(List<Integer> allianceRoundWeigth) { this.allianceRoundWeigth = allianceRoundWeigth; };
-	public List<Integer> getAllianceMatchScore() { return this.allianceMatchScore; };
+	public List<Integer> getAllianceMatchScore() { return this.allianceMatchScore; }
 	public void setAllianceMatchScore(List<Integer> allianceMatchScore) { this.allianceMatchScore = allianceMatchScore; };
-	public List<BasicAllianceInformations> getAllianceMapWinners() { return this.allianceMapWinners; };
+	public List<BasicAllianceInformations> getAllianceMapWinners() { return this.allianceMapWinners; }
 	public void setAllianceMapWinners(List<BasicAllianceInformations> allianceMapWinners) { this.allianceMapWinners = allianceMapWinners; };
-	public int getAllianceMapWinnerScore() { return this.allianceMapWinnerScore; };
+	public int getAllianceMapWinnerScore() { return this.allianceMapWinnerScore; }
 	public void setAllianceMapWinnerScore(int allianceMapWinnerScore) { this.allianceMapWinnerScore = allianceMapWinnerScore; };
-	public int getAllianceMapMyAllianceScore() { return this.allianceMapMyAllianceScore; };
+	public int getAllianceMapMyAllianceScore() { return this.allianceMapMyAllianceScore; }
 	public void setAllianceMapMyAllianceScore(int allianceMapMyAllianceScore) { this.allianceMapMyAllianceScore = allianceMapMyAllianceScore; };
-	public double getNextTickTime() { return this.nextTickTime; };
+	public double getNextTickTime() { return this.nextTickTime; }
 	public void setNextTickTime(double nextTickTime) { this.nextTickTime = nextTickTime; };
 
 	public KohUpdateMessage(){

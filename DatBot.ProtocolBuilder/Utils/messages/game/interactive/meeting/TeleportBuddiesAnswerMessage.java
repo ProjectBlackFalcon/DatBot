@@ -18,7 +18,7 @@ public class TeleportBuddiesAnswerMessage extends NetworkMessage {
 
 	private boolean accept;
 
-	public boolean isAccept() { return this.accept; };
+	public boolean isAccept() { return this.accept; }
 	public void setAccept(boolean accept) { this.accept = accept; };
 
 	public TeleportBuddiesAnswerMessage(){

@@ -18,7 +18,7 @@ public class QuestStartRequestMessage extends NetworkMessage {
 
 	private int questId;
 
-	public int getQuestId() { return this.questId; };
+	public int getQuestId() { return this.questId; }
 	public void setQuestId(int questId) { this.questId = questId; };
 
 	public QuestStartRequestMessage(){

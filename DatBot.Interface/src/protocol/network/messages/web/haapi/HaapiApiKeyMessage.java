@@ -16,31 +16,21 @@ import protocol.network.NetworkMessage;
 public class HaapiApiKeyMessage extends NetworkMessage {
 	public static final int ProtocolId = 6649;
 
-	private int returnType;
-	private int keyType;
 	private String token;
 
-	public int getReturnType() { return this.returnType; };
-	public void setReturnType(int returnType) { this.returnType = returnType; };
-	public int getKeyType() { return this.keyType; };
-	public void setKeyType(int keyType) { this.keyType = keyType; };
-	public String getToken() { return this.token; };
+	public String getToken() { return this.token; }
 	public void setToken(String token) { this.token = token; };
 
 	public HaapiApiKeyMessage(){
 	}
 
-	public HaapiApiKeyMessage(int returnType, int keyType, String token){
-		this.returnType = returnType;
-		this.keyType = keyType;
+	public HaapiApiKeyMessage(String token){
 		this.token = token;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeByte(this.returnType);
-			writer.writeByte(this.keyType);
 			writer.writeUTF(this.token);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -50,8 +40,6 @@ public class HaapiApiKeyMessage extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.returnType = reader.readByte();
-			this.keyType = reader.readByte();
 			this.token = reader.readUTF();
 		} catch (Exception e){
 			e.printStackTrace();

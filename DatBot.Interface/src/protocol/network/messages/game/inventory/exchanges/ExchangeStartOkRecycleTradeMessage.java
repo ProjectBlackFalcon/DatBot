@@ -19,9 +19,9 @@ public class ExchangeStartOkRecycleTradeMessage extends NetworkMessage {
 	private int percentToPrism;
 	private int percentToPlayer;
 
-	public int getPercentToPrism() { return this.percentToPrism; };
+	public int getPercentToPrism() { return this.percentToPrism; }
 	public void setPercentToPrism(int percentToPrism) { this.percentToPrism = percentToPrism; };
-	public int getPercentToPlayer() { return this.percentToPlayer; };
+	public int getPercentToPlayer() { return this.percentToPlayer; }
 	public void setPercentToPlayer(int percentToPlayer) { this.percentToPlayer = percentToPlayer; };
 
 	public ExchangeStartOkRecycleTradeMessage(){

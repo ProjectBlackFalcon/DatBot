@@ -20,11 +20,11 @@ public class ExchangeOkMultiCraftMessage extends NetworkMessage {
 	private long otherId;
 	private int role;
 
-	public long getInitiatorId() { return this.initiatorId; };
+	public long getInitiatorId() { return this.initiatorId; }
 	public void setInitiatorId(long initiatorId) { this.initiatorId = initiatorId; };
-	public long getOtherId() { return this.otherId; };
+	public long getOtherId() { return this.otherId; }
 	public void setOtherId(long otherId) { this.otherId = otherId; };
-	public int getRole() { return this.role; };
+	public int getRole() { return this.role; }
 	public void setRole(int role) { this.role = role; };
 
 	public ExchangeOkMultiCraftMessage(){

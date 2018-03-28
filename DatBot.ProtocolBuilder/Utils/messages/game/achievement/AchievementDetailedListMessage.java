@@ -20,9 +20,9 @@ public class AchievementDetailedListMessage extends NetworkMessage {
 	private List<Achievement> startedAchievements;
 	private List<Achievement> finishedAchievements;
 
-	public List<Achievement> getStartedAchievements() { return this.startedAchievements; };
+	public List<Achievement> getStartedAchievements() { return this.startedAchievements; }
 	public void setStartedAchievements(List<Achievement> startedAchievements) { this.startedAchievements = startedAchievements; };
-	public List<Achievement> getFinishedAchievements() { return this.finishedAchievements; };
+	public List<Achievement> getFinishedAchievements() { return this.finishedAchievements; }
 	public void setFinishedAchievements(List<Achievement> finishedAchievements) { this.finishedAchievements = finishedAchievements; };
 
 	public AchievementDetailedListMessage(){

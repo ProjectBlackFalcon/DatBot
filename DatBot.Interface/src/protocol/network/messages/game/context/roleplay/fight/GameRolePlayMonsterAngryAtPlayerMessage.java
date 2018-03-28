@@ -21,13 +21,13 @@ public class GameRolePlayMonsterAngryAtPlayerMessage extends NetworkMessage {
 	private double angryStartTime;
 	private double attackTime;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public double getMonsterGroupId() { return this.monsterGroupId; };
+	public double getMonsterGroupId() { return this.monsterGroupId; }
 	public void setMonsterGroupId(double monsterGroupId) { this.monsterGroupId = monsterGroupId; };
-	public double getAngryStartTime() { return this.angryStartTime; };
+	public double getAngryStartTime() { return this.angryStartTime; }
 	public void setAngryStartTime(double angryStartTime) { this.angryStartTime = angryStartTime; };
-	public double getAttackTime() { return this.attackTime; };
+	public double getAttackTime() { return this.attackTime; }
 	public void setAttackTime(double attackTime) { this.attackTime = attackTime; };
 
 	public GameRolePlayMonsterAngryAtPlayerMessage(){

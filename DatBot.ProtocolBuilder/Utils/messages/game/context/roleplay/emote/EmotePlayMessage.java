@@ -19,9 +19,9 @@ public class EmotePlayMessage extends EmotePlayAbstractMessage {
 	private double actorId;
 	private int accountId;
 
-	public double getActorId() { return this.actorId; };
+	public double getActorId() { return this.actorId; }
 	public void setActorId(double actorId) { this.actorId = actorId; };
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
 
 	public EmotePlayMessage(){

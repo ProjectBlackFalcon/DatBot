@@ -19,9 +19,9 @@ public class InventoryWeightMessage extends NetworkMessage {
 	private int weight;
 	private int weightMax;
 
-	public int getWeight() { return this.weight; };
+	public int getWeight() { return this.weight; }
 	public void setWeight(int weight) { this.weight = weight; };
-	public int getWeightMax() { return this.weightMax; };
+	public int getWeightMax() { return this.weightMax; }
 	public void setWeightMax(int weightMax) { this.weightMax = weightMax; };
 
 	public InventoryWeightMessage(){

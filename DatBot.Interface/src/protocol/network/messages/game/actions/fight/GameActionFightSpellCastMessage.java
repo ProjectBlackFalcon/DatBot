@@ -20,11 +20,11 @@ public class GameActionFightSpellCastMessage extends AbstractGameActionFightTarg
 	private int spellLevel;
 	private List<Integer> portalsIds;
 
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public int getSpellLevel() { return this.spellLevel; };
+	public int getSpellLevel() { return this.spellLevel; }
 	public void setSpellLevel(int spellLevel) { this.spellLevel = spellLevel; };
-	public List<Integer> getPortalsIds() { return this.portalsIds; };
+	public List<Integer> getPortalsIds() { return this.portalsIds; }
 	public void setPortalsIds(List<Integer> portalsIds) { this.portalsIds = portalsIds; };
 
 	public GameActionFightSpellCastMessage(){

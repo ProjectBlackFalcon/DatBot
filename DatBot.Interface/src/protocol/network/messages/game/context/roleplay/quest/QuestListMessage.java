@@ -22,13 +22,13 @@ public class QuestListMessage extends NetworkMessage {
 	private List<QuestActiveInformations> activeQuests;
 	private List<Integer> reinitDoneQuestsIds;
 
-	public List<Integer> getFinishedQuestsIds() { return this.finishedQuestsIds; };
+	public List<Integer> getFinishedQuestsIds() { return this.finishedQuestsIds; }
 	public void setFinishedQuestsIds(List<Integer> finishedQuestsIds) { this.finishedQuestsIds = finishedQuestsIds; };
-	public List<Integer> getFinishedQuestsCounts() { return this.finishedQuestsCounts; };
+	public List<Integer> getFinishedQuestsCounts() { return this.finishedQuestsCounts; }
 	public void setFinishedQuestsCounts(List<Integer> finishedQuestsCounts) { this.finishedQuestsCounts = finishedQuestsCounts; };
-	public List<QuestActiveInformations> getActiveQuests() { return this.activeQuests; };
+	public List<QuestActiveInformations> getActiveQuests() { return this.activeQuests; }
 	public void setActiveQuests(List<QuestActiveInformations> activeQuests) { this.activeQuests = activeQuests; };
-	public List<Integer> getReinitDoneQuestsIds() { return this.reinitDoneQuestsIds; };
+	public List<Integer> getReinitDoneQuestsIds() { return this.reinitDoneQuestsIds; }
 	public void setReinitDoneQuestsIds(List<Integer> reinitDoneQuestsIds) { this.reinitDoneQuestsIds = reinitDoneQuestsIds; };
 
 	public QuestListMessage(){

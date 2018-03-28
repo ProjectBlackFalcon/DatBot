@@ -19,7 +19,7 @@ public class GameRolePlayPortalInformations extends GameRolePlayActorInformation
 
 	private PortalInformation portal;
 
-	public PortalInformation getPortal() { return this.portal; };
+	public PortalInformation getPortal() { return this.portal; }
 	public void setPortal(PortalInformation portal) { this.portal = portal; };
 
 	public GameRolePlayPortalInformations(){

@@ -18,7 +18,7 @@ public class NicknameChoiceRequestMessage extends NetworkMessage {
 
 	private String nickname;
 
-	public String getNickname() { return this.nickname; };
+	public String getNickname() { return this.nickname; }
 	public void setNickname(String nickname) { this.nickname = nickname; };
 
 	public NicknameChoiceRequestMessage(){

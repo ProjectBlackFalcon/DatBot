@@ -22,13 +22,13 @@ public class PrismGeolocalizedInformation extends PrismSubareaEmptyInfo {
 	private double mapId;
 	private PrismInformation prism;
 
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public PrismInformation getPrism() { return this.prism; };
+	public PrismInformation getPrism() { return this.prism; }
 	public void setPrism(PrismInformation prism) { this.prism = prism; };
 
 	public PrismGeolocalizedInformation(){

@@ -20,9 +20,9 @@ public class FightResultPlayerListEntry extends FightResultFighterListEntry {
 	private int level;
 	private List<FightResultAdditionalData> additional;
 
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public List<FightResultAdditionalData> getAdditional() { return this.additional; };
+	public List<FightResultAdditionalData> getAdditional() { return this.additional; }
 	public void setAdditional(List<FightResultAdditionalData> additional) { this.additional = additional; };
 
 	public FightResultPlayerListEntry(){

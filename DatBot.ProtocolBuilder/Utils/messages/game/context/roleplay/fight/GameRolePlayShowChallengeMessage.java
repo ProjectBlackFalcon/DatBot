@@ -19,7 +19,7 @@ public class GameRolePlayShowChallengeMessage extends NetworkMessage {
 
 	private FightCommonInformations commonsInfos;
 
-	public FightCommonInformations getCommonsInfos() { return this.commonsInfos; };
+	public FightCommonInformations getCommonsInfos() { return this.commonsInfos; }
 	public void setCommonsInfos(FightCommonInformations commonsInfos) { this.commonsInfos = commonsInfos; };
 
 	public GameRolePlayShowChallengeMessage(){

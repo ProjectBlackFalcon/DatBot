@@ -19,9 +19,9 @@ public class ExchangePodsModifiedMessage extends ExchangeObjectMessage {
 	private int currentWeight;
 	private int maxWeight;
 
-	public int getCurrentWeight() { return this.currentWeight; };
+	public int getCurrentWeight() { return this.currentWeight; }
 	public void setCurrentWeight(int currentWeight) { this.currentWeight = currentWeight; };
-	public int getMaxWeight() { return this.maxWeight; };
+	public int getMaxWeight() { return this.maxWeight; }
 	public void setMaxWeight(int maxWeight) { this.maxWeight = maxWeight; };
 
 	public ExchangePodsModifiedMessage(){

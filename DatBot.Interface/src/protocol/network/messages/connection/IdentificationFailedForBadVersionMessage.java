@@ -19,7 +19,7 @@ public class IdentificationFailedForBadVersionMessage extends IdentificationFail
 
 	private Version requiredVersion;
 
-	public Version getRequiredVersion() { return this.requiredVersion; };
+	public Version getRequiredVersion() { return this.requiredVersion; }
 	public void setRequiredVersion(Version requiredVersion) { this.requiredVersion = requiredVersion; };
 
 	public IdentificationFailedForBadVersionMessage(){

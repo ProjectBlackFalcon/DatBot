@@ -19,7 +19,7 @@ public class GameFightSynchronizeMessage extends NetworkMessage {
 
 	private List<GameFightFighterInformations> fighters;
 
-	public List<GameFightFighterInformations> getFighters() { return this.fighters; };
+	public List<GameFightFighterInformations> getFighters() { return this.fighters; }
 	public void setFighters(List<GameFightFighterInformations> fighters) { this.fighters = fighters; };
 
 	public GameFightSynchronizeMessage(){

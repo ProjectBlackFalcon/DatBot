@@ -18,7 +18,7 @@ public class GameFightMinimalStatsPreparation extends GameFightMinimalStats {
 
 	private int initiative;
 
-	public int getInitiative() { return this.initiative; };
+	public int getInitiative() { return this.initiative; }
 	public void setInitiative(int initiative) { this.initiative = initiative; };
 
 	public GameFightMinimalStatsPreparation(){

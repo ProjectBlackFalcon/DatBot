@@ -18,7 +18,7 @@ public class GuildFightTakePlaceRequestMessage extends GuildFightJoinRequestMess
 
 	private int replacedCharacterId;
 
-	public int getReplacedCharacterId() { return this.replacedCharacterId; };
+	public int getReplacedCharacterId() { return this.replacedCharacterId; }
 	public void setReplacedCharacterId(int replacedCharacterId) { this.replacedCharacterId = replacedCharacterId; };
 
 	public GuildFightTakePlaceRequestMessage(){

@@ -19,7 +19,7 @@ public class GuildVersatileInfoListMessage extends NetworkMessage {
 
 	private List<GuildVersatileInformations> guilds;
 
-	public List<GuildVersatileInformations> getGuilds() { return this.guilds; };
+	public List<GuildVersatileInformations> getGuilds() { return this.guilds; }
 	public void setGuilds(List<GuildVersatileInformations> guilds) { this.guilds = guilds; };
 
 	public GuildVersatileInfoListMessage(){

@@ -19,7 +19,7 @@ public class GameFightPlacementSwapPositionsMessage extends NetworkMessage {
 
 	private List<IdentifiedEntityDispositionInformations> dispositions;
 
-	public List<IdentifiedEntityDispositionInformations> getDispositions() { return this.dispositions; };
+	public List<IdentifiedEntityDispositionInformations> getDispositions() { return this.dispositions; }
 	public void setDispositions(List<IdentifiedEntityDispositionInformations> dispositions) { this.dispositions = dispositions; };
 
 	public GameFightPlacementSwapPositionsMessage(){

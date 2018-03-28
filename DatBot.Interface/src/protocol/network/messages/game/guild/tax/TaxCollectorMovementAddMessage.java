@@ -19,7 +19,7 @@ public class TaxCollectorMovementAddMessage extends NetworkMessage {
 
 	private TaxCollectorInformations informations;
 
-	public TaxCollectorInformations getInformations() { return this.informations; };
+	public TaxCollectorInformations getInformations() { return this.informations; }
 	public void setInformations(TaxCollectorInformations informations) { this.informations = informations; };
 
 	public TaxCollectorMovementAddMessage(){

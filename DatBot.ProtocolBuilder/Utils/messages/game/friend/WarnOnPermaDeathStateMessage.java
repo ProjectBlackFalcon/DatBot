@@ -18,7 +18,7 @@ public class WarnOnPermaDeathStateMessage extends NetworkMessage {
 
 	private boolean enable;
 
-	public boolean isEnable() { return this.enable; };
+	public boolean isEnable() { return this.enable; }
 	public void setEnable(boolean enable) { this.enable = enable; };
 
 	public WarnOnPermaDeathStateMessage(){

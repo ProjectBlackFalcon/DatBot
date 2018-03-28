@@ -19,9 +19,9 @@ public class HelloConnectMessage extends NetworkMessage {
 	private String salt;
 	private List<Integer> key;
 
-	public String getSalt() { return this.salt; };
+	public String getSalt() { return this.salt; }
 	public void setSalt(String salt) { this.salt = salt; };
-	public List<Integer> getKey() { return this.key; };
+	public List<Integer> getKey() { return this.key; }
 	public void setKey(List<Integer> key) { this.key = key; };
 
 	public HelloConnectMessage(){

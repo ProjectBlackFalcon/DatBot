@@ -20,9 +20,9 @@ public class ExchangeStartOkHumanVendorMessage extends NetworkMessage {
 	private double sellerId;
 	private List<ObjectItemToSellInHumanVendorShop> objectsInfos;
 
-	public double getSellerId() { return this.sellerId; };
+	public double getSellerId() { return this.sellerId; }
 	public void setSellerId(double sellerId) { this.sellerId = sellerId; };
-	public List<ObjectItemToSellInHumanVendorShop> getObjectsInfos() { return this.objectsInfos; };
+	public List<ObjectItemToSellInHumanVendorShop> getObjectsInfos() { return this.objectsInfos; }
 	public void setObjectsInfos(List<ObjectItemToSellInHumanVendorShop> objectsInfos) { this.objectsInfos = objectsInfos; };
 
 	public ExchangeStartOkHumanVendorMessage(){

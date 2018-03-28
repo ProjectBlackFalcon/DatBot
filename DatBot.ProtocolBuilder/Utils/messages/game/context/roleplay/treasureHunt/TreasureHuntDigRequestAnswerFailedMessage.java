@@ -18,7 +18,7 @@ public class TreasureHuntDigRequestAnswerFailedMessage extends TreasureHuntDigRe
 
 	private int wrongFlagCount;
 
-	public int getWrongFlagCount() { return this.wrongFlagCount; };
+	public int getWrongFlagCount() { return this.wrongFlagCount; }
 	public void setWrongFlagCount(int wrongFlagCount) { this.wrongFlagCount = wrongFlagCount; };
 
 	public TreasureHuntDigRequestAnswerFailedMessage(){

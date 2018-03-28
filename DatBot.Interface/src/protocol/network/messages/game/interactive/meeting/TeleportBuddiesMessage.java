@@ -18,7 +18,7 @@ public class TeleportBuddiesMessage extends NetworkMessage {
 
 	private int dungeonId;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
 
 	public TeleportBuddiesMessage(){

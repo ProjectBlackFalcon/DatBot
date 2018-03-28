@@ -19,9 +19,9 @@ public class RecycleResultMessage extends NetworkMessage {
 	private int nuggetsForPrism;
 	private int nuggetsForPlayer;
 
-	public int getNuggetsForPrism() { return this.nuggetsForPrism; };
+	public int getNuggetsForPrism() { return this.nuggetsForPrism; }
 	public void setNuggetsForPrism(int nuggetsForPrism) { this.nuggetsForPrism = nuggetsForPrism; };
-	public int getNuggetsForPlayer() { return this.nuggetsForPlayer; };
+	public int getNuggetsForPlayer() { return this.nuggetsForPlayer; }
 	public void setNuggetsForPlayer(int nuggetsForPlayer) { this.nuggetsForPlayer = nuggetsForPlayer; };
 
 	public RecycleResultMessage(){

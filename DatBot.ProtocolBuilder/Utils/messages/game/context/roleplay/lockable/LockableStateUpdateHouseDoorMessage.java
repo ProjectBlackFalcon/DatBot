@@ -20,11 +20,11 @@ public class LockableStateUpdateHouseDoorMessage extends LockableStateUpdateAbst
 	private int instanceId;
 	private boolean secondHand;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public boolean isSecondHand() { return this.secondHand; };
+	public boolean isSecondHand() { return this.secondHand; }
 	public void setSecondHand(boolean secondHand) { this.secondHand = secondHand; };
 
 	public LockableStateUpdateHouseDoorMessage(){

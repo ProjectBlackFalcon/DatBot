@@ -19,9 +19,9 @@ public class AchievementObjective extends NetworkMessage {
 	private int id;
 	private int maxValue;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public int getMaxValue() { return this.maxValue; };
+	public int getMaxValue() { return this.maxValue; }
 	public void setMaxValue(int maxValue) { this.maxValue = maxValue; };
 
 	public AchievementObjective(){

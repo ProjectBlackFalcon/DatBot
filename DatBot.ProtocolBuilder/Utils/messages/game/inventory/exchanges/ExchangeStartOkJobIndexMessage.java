@@ -18,7 +18,7 @@ public class ExchangeStartOkJobIndexMessage extends NetworkMessage {
 
 	private List<Integer> jobs;
 
-	public List<Integer> getJobs() { return this.jobs; };
+	public List<Integer> getJobs() { return this.jobs; }
 	public void setJobs(List<Integer> jobs) { this.jobs = jobs; };
 
 	public ExchangeStartOkJobIndexMessage(){

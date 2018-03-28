@@ -19,7 +19,7 @@ public class GameRolePlayNpcWithQuestInformations extends GameRolePlayNpcInforma
 
 	private GameRolePlayNpcQuestFlag questFlag;
 
-	public GameRolePlayNpcQuestFlag getQuestFlag() { return this.questFlag; };
+	public GameRolePlayNpcQuestFlag getQuestFlag() { return this.questFlag; }
 	public void setQuestFlag(GameRolePlayNpcQuestFlag questFlag) { this.questFlag = questFlag; };
 
 	public GameRolePlayNpcWithQuestInformations(){

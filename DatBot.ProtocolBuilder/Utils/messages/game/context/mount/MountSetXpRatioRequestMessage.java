@@ -18,7 +18,7 @@ public class MountSetXpRatioRequestMessage extends NetworkMessage {
 
 	private int xpRatio;
 
-	public int getXpRatio() { return this.xpRatio; };
+	public int getXpRatio() { return this.xpRatio; }
 	public void setXpRatio(int xpRatio) { this.xpRatio = xpRatio; };
 
 	public MountSetXpRatioRequestMessage(){

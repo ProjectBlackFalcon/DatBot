@@ -18,7 +18,7 @@ public class LifePointsRegenEndMessage extends UpdateLifePointsMessage {
 
 	private int lifePointsGained;
 
-	public int getLifePointsGained() { return this.lifePointsGained; };
+	public int getLifePointsGained() { return this.lifePointsGained; }
 	public void setLifePointsGained(int lifePointsGained) { this.lifePointsGained = lifePointsGained; };
 
 	public LifePointsRegenEndMessage(){

@@ -18,7 +18,7 @@ public class GameContextRemoveMultipleElementsWithEventsMessage extends GameCont
 
 	private List<Integer> elementEventIds;
 
-	public List<Integer> getElementEventIds() { return this.elementEventIds; };
+	public List<Integer> getElementEventIds() { return this.elementEventIds; }
 	public void setElementEventIds(List<Integer> elementEventIds) { this.elementEventIds = elementEventIds; };
 
 	public GameContextRemoveMultipleElementsWithEventsMessage(){

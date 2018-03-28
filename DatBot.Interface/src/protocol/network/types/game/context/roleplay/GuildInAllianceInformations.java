@@ -18,7 +18,7 @@ public class GuildInAllianceInformations extends GuildInformations {
 
 	private int nbMembers;
 
-	public int getNbMembers() { return this.nbMembers; };
+	public int getNbMembers() { return this.nbMembers; }
 	public void setNbMembers(int nbMembers) { this.nbMembers = nbMembers; };
 
 	public GuildInAllianceInformations(){

@@ -19,9 +19,9 @@ public class PrismFightSwapRequestMessage extends NetworkMessage {
 	private int subAreaId;
 	private long targetId;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public long getTargetId() { return this.targetId; };
+	public long getTargetId() { return this.targetId; }
 	public void setTargetId(long targetId) { this.targetId = targetId; };
 
 	public PrismFightSwapRequestMessage(){

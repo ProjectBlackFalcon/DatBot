@@ -19,9 +19,9 @@ public class PaddockBuyableInformations extends NetworkMessage {
 	private long price;
 	private boolean locked;
 
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
-	public boolean isLocked() { return this.locked; };
+	public boolean isLocked() { return this.locked; }
 	public void setLocked(boolean locked) { this.locked = locked; };
 
 	public PaddockBuyableInformations(){

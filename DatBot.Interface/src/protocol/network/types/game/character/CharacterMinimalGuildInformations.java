@@ -19,7 +19,7 @@ public class CharacterMinimalGuildInformations extends CharacterMinimalPlusLookI
 
 	private BasicGuildInformations guild;
 
-	public BasicGuildInformations getGuild() { return this.guild; };
+	public BasicGuildInformations getGuild() { return this.guild; }
 	public void setGuild(BasicGuildInformations guild) { this.guild = guild; };
 
 	public CharacterMinimalGuildInformations(){

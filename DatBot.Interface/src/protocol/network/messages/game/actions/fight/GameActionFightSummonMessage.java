@@ -19,7 +19,7 @@ public class GameActionFightSummonMessage extends AbstractGameActionMessage {
 
 	private List<GameFightFighterInformations> summons;
 
-	public List<GameFightFighterInformations> getSummons() { return this.summons; };
+	public List<GameFightFighterInformations> getSummons() { return this.summons; }
 	public void setSummons(List<GameFightFighterInformations> summons) { this.summons = summons; };
 
 	public GameActionFightSummonMessage(){

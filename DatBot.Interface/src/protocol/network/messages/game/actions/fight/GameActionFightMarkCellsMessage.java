@@ -19,7 +19,7 @@ public class GameActionFightMarkCellsMessage extends AbstractGameActionMessage {
 
 	private GameActionMark mark;
 
-	public GameActionMark getMark() { return this.mark; };
+	public GameActionMark getMark() { return this.mark; }
 	public void setMark(GameActionMark mark) { this.mark = mark; };
 
 	public GameActionFightMarkCellsMessage(){

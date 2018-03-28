@@ -19,7 +19,7 @@ public class HumanOptionGuild extends HumanOption {
 
 	private GuildInformations guildInformations;
 
-	public GuildInformations getGuildInformations() { return this.guildInformations; };
+	public GuildInformations getGuildInformations() { return this.guildInformations; }
 	public void setGuildInformations(GuildInformations guildInformations) { this.guildInformations = guildInformations; };
 
 	public HumanOptionGuild(){

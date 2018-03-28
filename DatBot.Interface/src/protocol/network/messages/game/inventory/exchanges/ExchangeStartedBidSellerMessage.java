@@ -21,9 +21,9 @@ public class ExchangeStartedBidSellerMessage extends NetworkMessage {
 	private SellerBuyerDescriptor sellerDescriptor;
 	private List<ObjectItemToSellInBid> objectsInfos;
 
-	public SellerBuyerDescriptor getSellerDescriptor() { return this.sellerDescriptor; };
+	public SellerBuyerDescriptor getSellerDescriptor() { return this.sellerDescriptor; }
 	public void setSellerDescriptor(SellerBuyerDescriptor sellerDescriptor) { this.sellerDescriptor = sellerDescriptor; };
-	public List<ObjectItemToSellInBid> getObjectsInfos() { return this.objectsInfos; };
+	public List<ObjectItemToSellInBid> getObjectsInfos() { return this.objectsInfos; }
 	public void setObjectsInfos(List<ObjectItemToSellInBid> objectsInfos) { this.objectsInfos = objectsInfos; };
 
 	public ExchangeStartedBidSellerMessage(){

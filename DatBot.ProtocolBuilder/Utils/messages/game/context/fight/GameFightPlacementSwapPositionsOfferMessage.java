@@ -22,15 +22,15 @@ public class GameFightPlacementSwapPositionsOfferMessage extends NetworkMessage 
 	private double requestedId;
 	private int requestedCellId;
 
-	public int getRequestId() { return this.requestId; };
+	public int getRequestId() { return this.requestId; }
 	public void setRequestId(int requestId) { this.requestId = requestId; };
-	public double getRequesterId() { return this.requesterId; };
+	public double getRequesterId() { return this.requesterId; }
 	public void setRequesterId(double requesterId) { this.requesterId = requesterId; };
-	public int getRequesterCellId() { return this.requesterCellId; };
+	public int getRequesterCellId() { return this.requesterCellId; }
 	public void setRequesterCellId(int requesterCellId) { this.requesterCellId = requesterCellId; };
-	public double getRequestedId() { return this.requestedId; };
+	public double getRequestedId() { return this.requestedId; }
 	public void setRequestedId(double requestedId) { this.requestedId = requestedId; };
-	public int getRequestedCellId() { return this.requestedCellId; };
+	public int getRequestedCellId() { return this.requestedCellId; }
 	public void setRequestedCellId(int requestedCellId) { this.requestedCellId = requestedCellId; };
 
 	public GameFightPlacementSwapPositionsOfferMessage(){

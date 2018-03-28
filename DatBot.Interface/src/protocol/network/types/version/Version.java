@@ -23,17 +23,17 @@ public class Version extends NetworkMessage {
 	private int patch;
 	private int buildType;
 
-	public int getMajor() { return this.major; };
+	public int getMajor() { return this.major; }
 	public void setMajor(int major) { this.major = major; };
-	public int getMinor() { return this.minor; };
+	public int getMinor() { return this.minor; }
 	public void setMinor(int minor) { this.minor = minor; };
-	public int getRelease() { return this.release; };
+	public int getRelease() { return this.release; }
 	public void setRelease(int release) { this.release = release; };
-	public int getRevision() { return this.revision; };
+	public int getRevision() { return this.revision; }
 	public void setRevision(int revision) { this.revision = revision; };
-	public int getPatch() { return this.patch; };
+	public int getPatch() { return this.patch; }
 	public void setPatch(int patch) { this.patch = patch; };
-	public int getBuildType() { return this.buildType; };
+	public int getBuildType() { return this.buildType; }
 	public void setBuildType(int buildType) { this.buildType = buildType; };
 
 	public Version(){

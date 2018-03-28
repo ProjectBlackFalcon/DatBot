@@ -20,11 +20,11 @@ public class TreasureHuntFlagRequestAnswerMessage extends NetworkMessage {
 	private int result;
 	private int index;
 
-	public int getQuestType() { return this.questType; };
+	public int getQuestType() { return this.questType; }
 	public void setQuestType(int questType) { this.questType = questType; };
-	public int getResult() { return this.result; };
+	public int getResult() { return this.result; }
 	public void setResult(int result) { this.result = result; };
-	public int getIndex() { return this.index; };
+	public int getIndex() { return this.index; }
 	public void setIndex(int index) { this.index = index; };
 
 	public TreasureHuntFlagRequestAnswerMessage(){

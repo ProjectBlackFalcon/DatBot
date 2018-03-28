@@ -21,13 +21,13 @@ public class ChallengeInfoMessage extends NetworkMessage {
 	private int xpBonus;
 	private int dropBonus;
 
-	public int getChallengeId() { return this.challengeId; };
+	public int getChallengeId() { return this.challengeId; }
 	public void setChallengeId(int challengeId) { this.challengeId = challengeId; };
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getXpBonus() { return this.xpBonus; };
+	public int getXpBonus() { return this.xpBonus; }
 	public void setXpBonus(int xpBonus) { this.xpBonus = xpBonus; };
-	public int getDropBonus() { return this.dropBonus; };
+	public int getDropBonus() { return this.dropBonus; }
 	public void setDropBonus(int dropBonus) { this.dropBonus = dropBonus; };
 
 	public ChallengeInfoMessage(){

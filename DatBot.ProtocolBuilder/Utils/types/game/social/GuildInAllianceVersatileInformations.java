@@ -18,7 +18,7 @@ public class GuildInAllianceVersatileInformations extends GuildVersatileInformat
 
 	private int allianceId;
 
-	public int getAllianceId() { return this.allianceId; };
+	public int getAllianceId() { return this.allianceId; }
 	public void setAllianceId(int allianceId) { this.allianceId = allianceId; };
 
 	public GuildInAllianceVersatileInformations(){

@@ -20,9 +20,9 @@ public class GameRefreshMonsterBoostsMessage extends NetworkMessage {
 	private List<MonsterBoosts> monsterBoosts;
 	private List<MonsterBoosts> familyBoosts;
 
-	public List<MonsterBoosts> getMonsterBoosts() { return this.monsterBoosts; };
+	public List<MonsterBoosts> getMonsterBoosts() { return this.monsterBoosts; }
 	public void setMonsterBoosts(List<MonsterBoosts> monsterBoosts) { this.monsterBoosts = monsterBoosts; };
-	public List<MonsterBoosts> getFamilyBoosts() { return this.familyBoosts; };
+	public List<MonsterBoosts> getFamilyBoosts() { return this.familyBoosts; }
 	public void setFamilyBoosts(List<MonsterBoosts> familyBoosts) { this.familyBoosts = familyBoosts; };
 
 	public GameRefreshMonsterBoostsMessage(){

@@ -18,7 +18,7 @@ public class CurrentMapInstanceMessage extends CurrentMapMessage {
 
 	private double instantiatedMapId;
 
-	public double getInstantiatedMapId() { return this.instantiatedMapId; };
+	public double getInstantiatedMapId() { return this.instantiatedMapId; }
 	public void setInstantiatedMapId(double instantiatedMapId) { this.instantiatedMapId = instantiatedMapId; };
 
 	public CurrentMapInstanceMessage(){

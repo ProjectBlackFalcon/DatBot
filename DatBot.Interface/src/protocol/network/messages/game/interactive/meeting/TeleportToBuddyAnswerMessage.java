@@ -20,11 +20,11 @@ public class TeleportToBuddyAnswerMessage extends NetworkMessage {
 	private long buddyId;
 	private boolean accept;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
-	public long getBuddyId() { return this.buddyId; };
+	public long getBuddyId() { return this.buddyId; }
 	public void setBuddyId(long buddyId) { this.buddyId = buddyId; };
-	public boolean isAccept() { return this.accept; };
+	public boolean isAccept() { return this.accept; }
 	public void setAccept(boolean accept) { this.accept = accept; };
 
 	public TeleportToBuddyAnswerMessage(){

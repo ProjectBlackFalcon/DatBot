@@ -21,13 +21,13 @@ public class ActorExtendedAlignmentInformations extends ActorAlignmentInformatio
 	private int honorNextGradeFloor;
 	private int aggressable;
 
-	public int getHonor() { return this.honor; };
+	public int getHonor() { return this.honor; }
 	public void setHonor(int honor) { this.honor = honor; };
-	public int getHonorGradeFloor() { return this.honorGradeFloor; };
+	public int getHonorGradeFloor() { return this.honorGradeFloor; }
 	public void setHonorGradeFloor(int honorGradeFloor) { this.honorGradeFloor = honorGradeFloor; };
-	public int getHonorNextGradeFloor() { return this.honorNextGradeFloor; };
+	public int getHonorNextGradeFloor() { return this.honorNextGradeFloor; }
 	public void setHonorNextGradeFloor(int honorNextGradeFloor) { this.honorNextGradeFloor = honorNextGradeFloor; };
-	public int getAggressable() { return this.aggressable; };
+	public int getAggressable() { return this.aggressable; }
 	public void setAggressable(int aggressable) { this.aggressable = aggressable; };
 
 	public ActorExtendedAlignmentInformations(){

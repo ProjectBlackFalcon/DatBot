@@ -19,9 +19,9 @@ public class DungeonKeyRingMessage extends NetworkMessage {
 	private List<Integer> availables;
 	private List<Integer> unavailables;
 
-	public List<Integer> getAvailables() { return this.availables; };
+	public List<Integer> getAvailables() { return this.availables; }
 	public void setAvailables(List<Integer> availables) { this.availables = availables; };
-	public List<Integer> getUnavailables() { return this.unavailables; };
+	public List<Integer> getUnavailables() { return this.unavailables; }
 	public void setUnavailables(List<Integer> unavailables) { this.unavailables = unavailables; };
 
 	public DungeonKeyRingMessage(){

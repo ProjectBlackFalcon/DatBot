@@ -28,23 +28,23 @@ public class FriendSpouseInformations extends NetworkMessage {
 	private GuildInformations guildInfo;
 	private int alignmentSide;
 
-	public int getSpouseAccountId() { return this.spouseAccountId; };
+	public int getSpouseAccountId() { return this.spouseAccountId; }
 	public void setSpouseAccountId(int spouseAccountId) { this.spouseAccountId = spouseAccountId; };
-	public long getSpouseId() { return this.spouseId; };
+	public long getSpouseId() { return this.spouseId; }
 	public void setSpouseId(long spouseId) { this.spouseId = spouseId; };
-	public String getSpouseName() { return this.spouseName; };
+	public String getSpouseName() { return this.spouseName; }
 	public void setSpouseName(String spouseName) { this.spouseName = spouseName; };
-	public int getSpouseLevel() { return this.spouseLevel; };
+	public int getSpouseLevel() { return this.spouseLevel; }
 	public void setSpouseLevel(int spouseLevel) { this.spouseLevel = spouseLevel; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public int getSex() { return this.sex; };
+	public int getSex() { return this.sex; }
 	public void setSex(int sex) { this.sex = sex; };
-	public EntityLook getSpouseEntityLook() { return this.spouseEntityLook; };
+	public EntityLook getSpouseEntityLook() { return this.spouseEntityLook; }
 	public void setSpouseEntityLook(EntityLook spouseEntityLook) { this.spouseEntityLook = spouseEntityLook; };
-	public GuildInformations getGuildInfo() { return this.guildInfo; };
+	public GuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(GuildInformations guildInfo) { this.guildInfo = guildInfo; };
-	public int getAlignmentSide() { return this.alignmentSide; };
+	public int getAlignmentSide() { return this.alignmentSide; }
 	public void setAlignmentSide(int alignmentSide) { this.alignmentSide = alignmentSide; };
 
 	public FriendSpouseInformations(){

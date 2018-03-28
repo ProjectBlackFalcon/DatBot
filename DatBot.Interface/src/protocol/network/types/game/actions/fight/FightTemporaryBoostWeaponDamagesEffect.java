@@ -18,7 +18,7 @@ public class FightTemporaryBoostWeaponDamagesEffect extends FightTemporaryBoostE
 
 	private int weaponTypeId;
 
-	public int getWeaponTypeId() { return this.weaponTypeId; };
+	public int getWeaponTypeId() { return this.weaponTypeId; }
 	public void setWeaponTypeId(int weaponTypeId) { this.weaponTypeId = weaponTypeId; };
 
 	public FightTemporaryBoostWeaponDamagesEffect(){

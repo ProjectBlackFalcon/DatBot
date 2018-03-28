@@ -18,7 +18,7 @@ public class EmotePlayMassiveMessage extends EmotePlayAbstractMessage {
 
 	private List<Double> actorIds;
 
-	public List<Double> getActorIds() { return this.actorIds; };
+	public List<Double> getActorIds() { return this.actorIds; }
 	public void setActorIds(List<Double> actorIds) { this.actorIds = actorIds; };
 
 	public EmotePlayMassiveMessage(){

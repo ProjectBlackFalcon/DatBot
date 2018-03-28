@@ -19,9 +19,9 @@ public class NpcDialogCreationMessage extends NetworkMessage {
 	private double mapId;
 	private int npcId;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getNpcId() { return this.npcId; };
+	public int getNpcId() { return this.npcId; }
 	public void setNpcId(int npcId) { this.npcId = npcId; };
 
 	public NpcDialogCreationMessage(){

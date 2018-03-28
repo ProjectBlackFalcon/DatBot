@@ -20,9 +20,9 @@ public class GameRolePlayGroupMonsterWaveInformations extends GameRolePlayGroupM
 	private int nbWaves;
 	private List<GroupMonsterStaticInformations> alternatives;
 
-	public int getNbWaves() { return this.nbWaves; };
+	public int getNbWaves() { return this.nbWaves; }
 	public void setNbWaves(int nbWaves) { this.nbWaves = nbWaves; };
-	public List<GroupMonsterStaticInformations> getAlternatives() { return this.alternatives; };
+	public List<GroupMonsterStaticInformations> getAlternatives() { return this.alternatives; }
 	public void setAlternatives(List<GroupMonsterStaticInformations> alternatives) { this.alternatives = alternatives; };
 
 	public GameRolePlayGroupMonsterWaveInformations(){

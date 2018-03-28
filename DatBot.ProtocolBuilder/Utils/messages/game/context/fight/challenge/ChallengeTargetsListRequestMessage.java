@@ -18,7 +18,7 @@ public class ChallengeTargetsListRequestMessage extends NetworkMessage {
 
 	private int challengeId;
 
-	public int getChallengeId() { return this.challengeId; };
+	public int getChallengeId() { return this.challengeId; }
 	public void setChallengeId(int challengeId) { this.challengeId = challengeId; };
 
 	public ChallengeTargetsListRequestMessage(){

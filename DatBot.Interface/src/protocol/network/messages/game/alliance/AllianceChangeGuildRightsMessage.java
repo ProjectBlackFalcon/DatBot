@@ -19,9 +19,9 @@ public class AllianceChangeGuildRightsMessage extends NetworkMessage {
 	private int guildId;
 	private int rights;
 
-	public int getGuildId() { return this.guildId; };
+	public int getGuildId() { return this.guildId; }
 	public void setGuildId(int guildId) { this.guildId = guildId; };
-	public int getRights() { return this.rights; };
+	public int getRights() { return this.rights; }
 	public void setRights(int rights) { this.rights = rights; };
 
 	public AllianceChangeGuildRightsMessage(){

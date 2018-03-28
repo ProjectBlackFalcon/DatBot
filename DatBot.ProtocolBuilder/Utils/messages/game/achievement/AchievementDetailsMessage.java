@@ -19,7 +19,7 @@ public class AchievementDetailsMessage extends NetworkMessage {
 
 	private Achievement achievement;
 
-	public Achievement getAchievement() { return this.achievement; };
+	public Achievement getAchievement() { return this.achievement; }
 	public void setAchievement(Achievement achievement) { this.achievement = achievement; };
 
 	public AchievementDetailsMessage(){

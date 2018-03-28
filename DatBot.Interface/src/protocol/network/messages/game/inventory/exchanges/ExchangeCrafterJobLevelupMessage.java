@@ -18,7 +18,7 @@ public class ExchangeCrafterJobLevelupMessage extends NetworkMessage {
 
 	private int crafterJobLevel;
 
-	public int getCrafterJobLevel() { return this.crafterJobLevel; };
+	public int getCrafterJobLevel() { return this.crafterJobLevel; }
 	public void setCrafterJobLevel(int crafterJobLevel) { this.crafterJobLevel = crafterJobLevel; };
 
 	public ExchangeCrafterJobLevelupMessage(){

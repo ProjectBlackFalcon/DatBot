@@ -20,11 +20,11 @@ public class JobCrafterDirectorySettings extends NetworkMessage {
 	private int minLevel;
 	private boolean free;
 
-	public int getJobId() { return this.jobId; };
+	public int getJobId() { return this.jobId; }
 	public void setJobId(int jobId) { this.jobId = jobId; };
-	public int getMinLevel() { return this.minLevel; };
+	public int getMinLevel() { return this.minLevel; }
 	public void setMinLevel(int minLevel) { this.minLevel = minLevel; };
-	public boolean isFree() { return this.free; };
+	public boolean isFree() { return this.free; }
 	public void setFree(boolean free) { this.free = free; };
 
 	public JobCrafterDirectorySettings(){

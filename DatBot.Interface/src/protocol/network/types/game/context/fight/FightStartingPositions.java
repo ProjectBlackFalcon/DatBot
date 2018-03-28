@@ -19,9 +19,9 @@ public class FightStartingPositions extends NetworkMessage {
 	private List<Integer> positionsForChallengers;
 	private List<Integer> positionsForDefenders;
 
-	public List<Integer> getPositionsForChallengers() { return this.positionsForChallengers; };
+	public List<Integer> getPositionsForChallengers() { return this.positionsForChallengers; }
 	public void setPositionsForChallengers(List<Integer> positionsForChallengers) { this.positionsForChallengers = positionsForChallengers; };
-	public List<Integer> getPositionsForDefenders() { return this.positionsForDefenders; };
+	public List<Integer> getPositionsForDefenders() { return this.positionsForDefenders; }
 	public void setPositionsForDefenders(List<Integer> positionsForDefenders) { this.positionsForDefenders = positionsForDefenders; };
 
 	public FightStartingPositions(){

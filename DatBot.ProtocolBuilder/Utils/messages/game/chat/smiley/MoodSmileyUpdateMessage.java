@@ -20,11 +20,11 @@ public class MoodSmileyUpdateMessage extends NetworkMessage {
 	private long playerId;
 	private int smileyId;
 
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public int getSmileyId() { return this.smileyId; };
+	public int getSmileyId() { return this.smileyId; }
 	public void setSmileyId(int smileyId) { this.smileyId = smileyId; };
 
 	public MoodSmileyUpdateMessage(){

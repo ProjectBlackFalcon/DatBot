@@ -19,9 +19,9 @@ public class GameFightJoinRequestMessage extends NetworkMessage {
 	private double fighterId;
 	private int fightId;
 
-	public double getFighterId() { return this.fighterId; };
+	public double getFighterId() { return this.fighterId; }
 	public void setFighterId(double fighterId) { this.fighterId = fighterId; };
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
 
 	public GameFightJoinRequestMessage(){

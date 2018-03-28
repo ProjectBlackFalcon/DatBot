@@ -19,9 +19,9 @@ public class TeleportRequestMessage extends NetworkMessage {
 	private int teleporterType;
 	private double mapId;
 
-	public int getTeleporterType() { return this.teleporterType; };
+	public int getTeleporterType() { return this.teleporterType; }
 	public void setTeleporterType(int teleporterType) { this.teleporterType = teleporterType; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
 
 	public TeleportRequestMessage(){

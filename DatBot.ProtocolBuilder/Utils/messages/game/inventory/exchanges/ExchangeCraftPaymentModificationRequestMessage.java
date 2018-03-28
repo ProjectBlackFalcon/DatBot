@@ -18,7 +18,7 @@ public class ExchangeCraftPaymentModificationRequestMessage extends NetworkMessa
 
 	private long quantity;
 
-	public long getQuantity() { return this.quantity; };
+	public long getQuantity() { return this.quantity; }
 	public void setQuantity(long quantity) { this.quantity = quantity; };
 
 	public ExchangeCraftPaymentModificationRequestMessage(){

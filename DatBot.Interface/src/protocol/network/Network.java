@@ -937,7 +937,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 45, 30, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 46, 1, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -1126,7 +1126,6 @@ public class Network extends DisplayInfo implements Runnable {
 		itemMessage.Deserialize(dataReader);
 		getInteractive().setLastItemHarvestedId(itemMessage.getGenericId());
 		getInteractive().setQuantityLastItemHarvested(itemMessage.getBaseQuantity());
-		System.out.println("test");
 		info.setHarvestSuccess(true);
 	}
 
@@ -1342,8 +1341,10 @@ public class Network extends DisplayInfo implements Runnable {
 							data.read(buffer, 0, available);
 							DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
 							buildMessage(reader);
-						} 			catch (Exception e) {
+						} 			
+						catch (Exception e) {
 							System.out.println("Socket error");
+							e.printStackTrace();
 						}
 					}	
 				}

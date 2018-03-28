@@ -20,11 +20,11 @@ public class StatsUpgradeRequestMessage extends NetworkMessage {
 	private int statId;
 	private int boostPoint;
 
-	public boolean isUseAdditionnal() { return this.useAdditionnal; };
+	public boolean isUseAdditionnal() { return this.useAdditionnal; }
 	public void setUseAdditionnal(boolean useAdditionnal) { this.useAdditionnal = useAdditionnal; };
-	public int getStatId() { return this.statId; };
+	public int getStatId() { return this.statId; }
 	public void setStatId(int statId) { this.statId = statId; };
-	public int getBoostPoint() { return this.boostPoint; };
+	public int getBoostPoint() { return this.boostPoint; }
 	public void setBoostPoint(int boostPoint) { this.boostPoint = boostPoint; };
 
 	public StatsUpgradeRequestMessage(){

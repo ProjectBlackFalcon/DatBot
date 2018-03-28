@@ -21,11 +21,11 @@ public class PaddockToSellListMessage extends NetworkMessage {
 	private int totalPage;
 	private List<PaddockInformationsForSell> paddockList;
 
-	public int getPageIndex() { return this.pageIndex; };
+	public int getPageIndex() { return this.pageIndex; }
 	public void setPageIndex(int pageIndex) { this.pageIndex = pageIndex; };
-	public int getTotalPage() { return this.totalPage; };
+	public int getTotalPage() { return this.totalPage; }
 	public void setTotalPage(int totalPage) { this.totalPage = totalPage; };
-	public List<PaddockInformationsForSell> getPaddockList() { return this.paddockList; };
+	public List<PaddockInformationsForSell> getPaddockList() { return this.paddockList; }
 	public void setPaddockList(List<PaddockInformationsForSell> paddockList) { this.paddockList = paddockList; };
 
 	public PaddockToSellListMessage(){

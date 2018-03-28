@@ -21,13 +21,13 @@ public class GameActionMarkedCell extends NetworkMessage {
 	private int cellColor;
 	private int cellsType;
 
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
-	public int getZoneSize() { return this.zoneSize; };
+	public int getZoneSize() { return this.zoneSize; }
 	public void setZoneSize(int zoneSize) { this.zoneSize = zoneSize; };
-	public int getCellColor() { return this.cellColor; };
+	public int getCellColor() { return this.cellColor; }
 	public void setCellColor(int cellColor) { this.cellColor = cellColor; };
-	public int getCellsType() { return this.cellsType; };
+	public int getCellsType() { return this.cellsType; }
 	public void setCellsType(int cellsType) { this.cellsType = cellsType; };
 
 	public GameActionMarkedCell(){

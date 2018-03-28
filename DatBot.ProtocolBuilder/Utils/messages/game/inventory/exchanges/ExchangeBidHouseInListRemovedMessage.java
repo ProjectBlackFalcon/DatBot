@@ -18,7 +18,7 @@ public class ExchangeBidHouseInListRemovedMessage extends NetworkMessage {
 
 	private int itemUID;
 
-	public int getItemUID() { return this.itemUID; };
+	public int getItemUID() { return this.itemUID; }
 	public void setItemUID(int itemUID) { this.itemUID = itemUID; };
 
 	public ExchangeBidHouseInListRemovedMessage(){

@@ -19,9 +19,9 @@ public class CompassUpdatePvpSeekMessage extends CompassUpdateMessage {
 	private long memberId;
 	private String memberName;
 
-	public long getMemberId() { return this.memberId; };
+	public long getMemberId() { return this.memberId; }
 	public void setMemberId(long memberId) { this.memberId = memberId; };
-	public String getMemberName() { return this.memberName; };
+	public String getMemberName() { return this.memberName; }
 	public void setMemberName(String memberName) { this.memberName = memberName; };
 
 	public CompassUpdatePvpSeekMessage(){

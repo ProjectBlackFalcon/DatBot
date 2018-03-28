@@ -18,7 +18,7 @@ public class HouseToSellListRequestMessage extends NetworkMessage {
 
 	private int pageIndex;
 
-	public int getPageIndex() { return this.pageIndex; };
+	public int getPageIndex() { return this.pageIndex; }
 	public void setPageIndex(int pageIndex) { this.pageIndex = pageIndex; };
 
 	public HouseToSellListRequestMessage(){

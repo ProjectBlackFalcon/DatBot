@@ -18,7 +18,7 @@ public class DareWonMessage extends NetworkMessage {
 
 	private double dareId;
 
-	public double getDareId() { return this.dareId; };
+	public double getDareId() { return this.dareId; }
 	public void setDareId(double dareId) { this.dareId = dareId; };
 
 	public DareWonMessage(){

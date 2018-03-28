@@ -19,7 +19,7 @@ public class StorageObjectsUpdateMessage extends NetworkMessage {
 
 	private List<ObjectItem> objectList;
 
-	public List<ObjectItem> getObjectList() { return this.objectList; };
+	public List<ObjectItem> getObjectList() { return this.objectList; }
 	public void setObjectList(List<ObjectItem> objectList) { this.objectList = objectList; };
 
 	public StorageObjectsUpdateMessage(){

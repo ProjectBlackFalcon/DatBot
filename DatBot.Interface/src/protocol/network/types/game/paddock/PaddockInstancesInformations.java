@@ -19,7 +19,7 @@ public class PaddockInstancesInformations extends PaddockInformations {
 
 	private List<PaddockBuyableInformations> paddocks;
 
-	public List<PaddockBuyableInformations> getPaddocks() { return this.paddocks; };
+	public List<PaddockBuyableInformations> getPaddocks() { return this.paddocks; }
 	public void setPaddocks(List<PaddockBuyableInformations> paddocks) { this.paddocks = paddocks; };
 
 	public PaddockInstancesInformations(){

@@ -19,7 +19,7 @@ public class DareRewardWonMessage extends NetworkMessage {
 
 	private DareReward reward;
 
-	public DareReward getReward() { return this.reward; };
+	public DareReward getReward() { return this.reward; }
 	public void setReward(DareReward reward) { this.reward = reward; };
 
 	public DareRewardWonMessage(){

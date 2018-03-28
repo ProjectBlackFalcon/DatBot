@@ -20,11 +20,11 @@ public class IdolSelectRequestMessage extends NetworkMessage {
 	private boolean activate;
 	private boolean party;
 
-	public int getIdolId() { return this.idolId; };
+	public int getIdolId() { return this.idolId; }
 	public void setIdolId(int idolId) { this.idolId = idolId; };
-	public boolean isActivate() { return this.activate; };
+	public boolean isActivate() { return this.activate; }
 	public void setActivate(boolean activate) { this.activate = activate; };
-	public boolean isParty() { return this.party; };
+	public boolean isParty() { return this.party; }
 	public void setParty(boolean party) { this.party = party; };
 
 	public IdolSelectRequestMessage(){

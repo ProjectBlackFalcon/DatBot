@@ -26,19 +26,19 @@ public class PartyInvitationDetailsMessage extends AbstractPartyMessage {
 	private List<PartyInvitationMemberInformations> members;
 	private List<PartyGuestInformations> guests;
 
-	public int getPartyType() { return this.partyType; };
+	public int getPartyType() { return this.partyType; }
 	public void setPartyType(int partyType) { this.partyType = partyType; };
-	public String getPartyName() { return this.partyName; };
+	public String getPartyName() { return this.partyName; }
 	public void setPartyName(String partyName) { this.partyName = partyName; };
-	public long getFromId() { return this.fromId; };
+	public long getFromId() { return this.fromId; }
 	public void setFromId(long fromId) { this.fromId = fromId; };
-	public String getFromName() { return this.fromName; };
+	public String getFromName() { return this.fromName; }
 	public void setFromName(String fromName) { this.fromName = fromName; };
-	public long getLeaderId() { return this.leaderId; };
+	public long getLeaderId() { return this.leaderId; }
 	public void setLeaderId(long leaderId) { this.leaderId = leaderId; };
-	public List<PartyInvitationMemberInformations> getMembers() { return this.members; };
+	public List<PartyInvitationMemberInformations> getMembers() { return this.members; }
 	public void setMembers(List<PartyInvitationMemberInformations> members) { this.members = members; };
-	public List<PartyGuestInformations> getGuests() { return this.guests; };
+	public List<PartyGuestInformations> getGuests() { return this.guests; }
 	public void setGuests(List<PartyGuestInformations> guests) { this.guests = guests; };
 
 	public PartyInvitationDetailsMessage(){
@@ -66,6 +66,7 @@ public class PartyInvitationDetailsMessage extends AbstractPartyMessage {
 			writer.writeShort(this.members.size());
 			int _loc2_ = 0;
 			while( _loc2_ < this.members.size()){
+				writer.writeShort(PartyInvitationMemberInformations.ProtocolId);
 				this.members.get(_loc2_).Serialize(writer);
 				_loc2_++;
 			}
@@ -93,7 +94,7 @@ public class PartyInvitationDetailsMessage extends AbstractPartyMessage {
 			int _loc3_  = 0;
 			this.members = new ArrayList<PartyInvitationMemberInformations>();
 			while( _loc3_ <  _loc2_){
-				PartyInvitationMemberInformations _loc15_ = new PartyInvitationMemberInformations();
+				PartyInvitationMemberInformations _loc15_ = (PartyInvitationMemberInformations) ProtocolTypeManager.getInstance(reader.readShort());
 				_loc15_.Deserialize(reader);
 				this.members.add(_loc15_);
 				_loc3_++;

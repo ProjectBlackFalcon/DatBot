@@ -18,7 +18,7 @@ public class ExchangeObjectMovePricedMessage extends ExchangeObjectMoveMessage {
 
 	private long price;
 
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
 
 	public ExchangeObjectMovePricedMessage(){

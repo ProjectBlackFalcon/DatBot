@@ -19,9 +19,9 @@ public class UpdateMapPlayersAgressableStatusMessage extends NetworkMessage {
 	private List<Long> playerIds;
 	private List<Integer> enable;
 
-	public List<Long> getPlayerIds() { return this.playerIds; };
+	public List<Long> getPlayerIds() { return this.playerIds; }
 	public void setPlayerIds(List<Long> playerIds) { this.playerIds = playerIds; };
-	public List<Integer> getEnable() { return this.enable; };
+	public List<Integer> getEnable() { return this.enable; }
 	public void setEnable(List<Integer> enable) { this.enable = enable; };
 
 	public UpdateMapPlayersAgressableStatusMessage(){

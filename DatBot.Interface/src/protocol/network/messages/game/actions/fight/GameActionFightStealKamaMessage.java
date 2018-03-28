@@ -19,9 +19,9 @@ public class GameActionFightStealKamaMessage extends AbstractGameActionMessage {
 	private double targetId;
 	private long amount;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public long getAmount() { return this.amount; };
+	public long getAmount() { return this.amount; }
 	public void setAmount(long amount) { this.amount = amount; };
 
 	public GameActionFightStealKamaMessage(){

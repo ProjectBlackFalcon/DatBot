@@ -19,7 +19,7 @@ public class FollowedQuestsMessage extends NetworkMessage {
 
 	private List<QuestActiveDetailedInformations> quests;
 
-	public List<QuestActiveDetailedInformations> getQuests() { return this.quests; };
+	public List<QuestActiveDetailedInformations> getQuests() { return this.quests; }
 	public void setQuests(List<QuestActiveDetailedInformations> quests) { this.quests = quests; };
 
 	public FollowedQuestsMessage(){

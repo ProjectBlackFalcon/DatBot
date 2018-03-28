@@ -18,7 +18,7 @@ public class PortalUseRequestMessage extends NetworkMessage {
 
 	private int portalId;
 
-	public int getPortalId() { return this.portalId; };
+	public int getPortalId() { return this.portalId; }
 	public void setPortalId(int portalId) { this.portalId = portalId; };
 
 	public PortalUseRequestMessage(){

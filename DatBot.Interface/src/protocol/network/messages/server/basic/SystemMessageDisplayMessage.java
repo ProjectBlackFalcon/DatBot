@@ -20,11 +20,11 @@ public class SystemMessageDisplayMessage extends NetworkMessage {
 	private int msgId;
 	private List<String> parameters;
 
-	public boolean isHangUp() { return this.hangUp; };
+	public boolean isHangUp() { return this.hangUp; }
 	public void setHangUp(boolean hangUp) { this.hangUp = hangUp; };
-	public int getMsgId() { return this.msgId; };
+	public int getMsgId() { return this.msgId; }
 	public void setMsgId(int msgId) { this.msgId = msgId; };
-	public List<String> getParameters() { return this.parameters; };
+	public List<String> getParameters() { return this.parameters; }
 	public void setParameters(List<String> parameters) { this.parameters = parameters; };
 
 	public SystemMessageDisplayMessage(){

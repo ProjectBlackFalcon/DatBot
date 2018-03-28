@@ -20,11 +20,11 @@ public class GameRolePlayPlayerFightRequestMessage extends NetworkMessage {
 	private int targetCellId;
 	private boolean friendly;
 
-	public long getTargetId() { return this.targetId; };
+	public long getTargetId() { return this.targetId; }
 	public void setTargetId(long targetId) { this.targetId = targetId; };
-	public int getTargetCellId() { return this.targetCellId; };
+	public int getTargetCellId() { return this.targetCellId; }
 	public void setTargetCellId(int targetCellId) { this.targetCellId = targetCellId; };
-	public boolean isFriendly() { return this.friendly; };
+	public boolean isFriendly() { return this.friendly; }
 	public void setFriendly(boolean friendly) { this.friendly = friendly; };
 
 	public GameRolePlayPlayerFightRequestMessage(){

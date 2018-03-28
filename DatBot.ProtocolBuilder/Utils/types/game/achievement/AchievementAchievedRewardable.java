@@ -18,7 +18,7 @@ public class AchievementAchievedRewardable extends AchievementAchieved {
 
 	private int finishedlevel;
 
-	public int getFinishedlevel() { return this.finishedlevel; };
+	public int getFinishedlevel() { return this.finishedlevel; }
 	public void setFinishedlevel(int finishedlevel) { this.finishedlevel = finishedlevel; };
 
 	public AchievementAchievedRewardable(){

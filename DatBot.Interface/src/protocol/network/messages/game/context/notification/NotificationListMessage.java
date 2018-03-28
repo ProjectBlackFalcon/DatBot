@@ -18,7 +18,7 @@ public class NotificationListMessage extends NetworkMessage {
 
 	private List<Integer> flags;
 
-	public List<Integer> getFlags() { return this.flags; };
+	public List<Integer> getFlags() { return this.flags; }
 	public void setFlags(List<Integer> flags) { this.flags = flags; };
 
 	public NotificationListMessage(){

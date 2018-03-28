@@ -18,7 +18,7 @@ public class IdentifiedEntityDispositionInformations extends EntityDispositionIn
 
 	private double id;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
 
 	public IdentifiedEntityDispositionInformations(){

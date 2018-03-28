@@ -20,9 +20,9 @@ public class RefreshCharacterStatsMessage extends NetworkMessage {
 	private double fighterId;
 	private GameFightMinimalStats stats;
 
-	public double getFighterId() { return this.fighterId; };
+	public double getFighterId() { return this.fighterId; }
 	public void setFighterId(double fighterId) { this.fighterId = fighterId; };
-	public GameFightMinimalStats getStats() { return this.stats; };
+	public GameFightMinimalStats getStats() { return this.stats; }
 	public void setStats(GameFightMinimalStats stats) { this.stats = stats; };
 
 	public RefreshCharacterStatsMessage(){

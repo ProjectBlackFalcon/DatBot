@@ -18,7 +18,7 @@ public class StorageObjectsRemoveMessage extends NetworkMessage {
 
 	private List<Integer> objectUIDList;
 
-	public List<Integer> getObjectUIDList() { return this.objectUIDList; };
+	public List<Integer> getObjectUIDList() { return this.objectUIDList; }
 	public void setObjectUIDList(List<Integer> objectUIDList) { this.objectUIDList = objectUIDList; };
 
 	public StorageObjectsRemoveMessage(){

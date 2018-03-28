@@ -20,11 +20,11 @@ public class PaddockSellBuyDialogMessage extends NetworkMessage {
 	private int ownerId;
 	private long price;
 
-	public boolean isBsell() { return this.bsell; };
+	public boolean isBsell() { return this.bsell; }
 	public void setBsell(boolean bsell) { this.bsell = bsell; };
-	public int getOwnerId() { return this.ownerId; };
+	public int getOwnerId() { return this.ownerId; }
 	public void setOwnerId(int ownerId) { this.ownerId = ownerId; };
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
 
 	public PaddockSellBuyDialogMessage(){

@@ -20,11 +20,11 @@ public class ExchangeBidHouseBuyMessage extends NetworkMessage {
 	private int qty;
 	private long price;
 
-	public int getUid() { return this.uid; };
+	public int getUid() { return this.uid; }
 	public void setUid(int uid) { this.uid = uid; };
-	public int getQty() { return this.qty; };
+	public int getQty() { return this.qty; }
 	public void setQty(int qty) { this.qty = qty; };
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
 
 	public ExchangeBidHouseBuyMessage(){

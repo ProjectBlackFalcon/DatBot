@@ -19,7 +19,7 @@ public class ObjectsQuantityMessage extends NetworkMessage {
 
 	private List<ObjectItemQuantity> objectsUIDAndQty;
 
-	public List<ObjectItemQuantity> getObjectsUIDAndQty() { return this.objectsUIDAndQty; };
+	public List<ObjectItemQuantity> getObjectsUIDAndQty() { return this.objectsUIDAndQty; }
 	public void setObjectsUIDAndQty(List<ObjectItemQuantity> objectsUIDAndQty) { this.objectsUIDAndQty = objectsUIDAndQty; };
 
 	public ObjectsQuantityMessage(){

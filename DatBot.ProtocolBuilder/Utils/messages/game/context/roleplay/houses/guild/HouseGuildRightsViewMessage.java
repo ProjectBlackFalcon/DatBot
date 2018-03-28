@@ -19,9 +19,9 @@ public class HouseGuildRightsViewMessage extends NetworkMessage {
 	private int houseId;
 	private int instanceId;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
 
 	public HouseGuildRightsViewMessage(){

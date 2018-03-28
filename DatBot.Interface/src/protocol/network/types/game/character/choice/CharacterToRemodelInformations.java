@@ -19,9 +19,9 @@ public class CharacterToRemodelInformations extends CharacterRemodelingInformati
 	private int possibleChangeMask;
 	private int mandatoryChangeMask;
 
-	public int getPossibleChangeMask() { return this.possibleChangeMask; };
+	public int getPossibleChangeMask() { return this.possibleChangeMask; }
 	public void setPossibleChangeMask(int possibleChangeMask) { this.possibleChangeMask = possibleChangeMask; };
-	public int getMandatoryChangeMask() { return this.mandatoryChangeMask; };
+	public int getMandatoryChangeMask() { return this.mandatoryChangeMask; }
 	public void setMandatoryChangeMask(int mandatoryChangeMask) { this.mandatoryChangeMask = mandatoryChangeMask; };
 
 	public CharacterToRemodelInformations(){

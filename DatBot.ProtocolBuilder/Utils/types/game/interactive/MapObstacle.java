@@ -19,9 +19,9 @@ public class MapObstacle extends NetworkMessage {
 	private int obstacleCellId;
 	private int state;
 
-	public int getObstacleCellId() { return this.obstacleCellId; };
+	public int getObstacleCellId() { return this.obstacleCellId; }
 	public void setObstacleCellId(int obstacleCellId) { this.obstacleCellId = obstacleCellId; };
-	public int getState() { return this.state; };
+	public int getState() { return this.state; }
 	public void setState(int state) { this.state = state; };
 
 	public MapObstacle(){

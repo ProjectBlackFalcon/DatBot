@@ -20,11 +20,11 @@ public class GameFightCompanionInformations extends GameFightFighterInformations
 	private int level;
 	private double masterId;
 
-	public int getCompanionGenericId() { return this.companionGenericId; };
+	public int getCompanionGenericId() { return this.companionGenericId; }
 	public void setCompanionGenericId(int companionGenericId) { this.companionGenericId = companionGenericId; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public double getMasterId() { return this.masterId; };
+	public double getMasterId() { return this.masterId; }
 	public void setMasterId(double masterId) { this.masterId = masterId; };
 
 	public GameFightCompanionInformations(){

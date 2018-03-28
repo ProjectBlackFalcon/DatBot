@@ -18,7 +18,7 @@ public class AchievementRewardErrorMessage extends NetworkMessage {
 
 	private int achievementId;
 
-	public int getAchievementId() { return this.achievementId; };
+	public int getAchievementId() { return this.achievementId; }
 	public void setAchievementId(int achievementId) { this.achievementId = achievementId; };
 
 	public AchievementRewardErrorMessage(){

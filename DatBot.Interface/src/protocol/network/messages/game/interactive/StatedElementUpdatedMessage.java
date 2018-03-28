@@ -19,7 +19,7 @@ public class StatedElementUpdatedMessage extends NetworkMessage {
 
 	private StatedElement statedElement;
 
-	public StatedElement getStatedElement() { return this.statedElement; };
+	public StatedElement getStatedElement() { return this.statedElement; }
 	public void setStatedElement(StatedElement statedElement) { this.statedElement = statedElement; };
 
 	public StatedElementUpdatedMessage(){

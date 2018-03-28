@@ -19,7 +19,7 @@ public class GuildModificationEmblemValidMessage extends NetworkMessage {
 
 	private GuildEmblem guildEmblem;
 
-	public GuildEmblem getGuildEmblem() { return this.guildEmblem; };
+	public GuildEmblem getGuildEmblem() { return this.guildEmblem; }
 	public void setGuildEmblem(GuildEmblem guildEmblem) { this.guildEmblem = guildEmblem; };
 
 	public GuildModificationEmblemValidMessage(){

@@ -18,7 +18,7 @@ public class NewMailMessage extends MailStatusMessage {
 
 	private List<Integer> sendersAccountId;
 
-	public List<Integer> getSendersAccountId() { return this.sendersAccountId; };
+	public List<Integer> getSendersAccountId() { return this.sendersAccountId; }
 	public void setSendersAccountId(List<Integer> sendersAccountId) { this.sendersAccountId = sendersAccountId; };
 
 	public NewMailMessage(){

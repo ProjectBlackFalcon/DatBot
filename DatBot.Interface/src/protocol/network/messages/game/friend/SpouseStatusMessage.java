@@ -18,7 +18,7 @@ public class SpouseStatusMessage extends NetworkMessage {
 
 	private boolean hasSpouse;
 
-	public boolean isHasSpouse() { return this.hasSpouse; };
+	public boolean isHasSpouse() { return this.hasSpouse; }
 	public void setHasSpouse(boolean hasSpouse) { this.hasSpouse = hasSpouse; };
 
 	public SpouseStatusMessage(){

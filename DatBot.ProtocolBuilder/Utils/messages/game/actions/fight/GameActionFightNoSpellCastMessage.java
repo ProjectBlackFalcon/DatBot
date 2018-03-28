@@ -18,7 +18,7 @@ public class GameActionFightNoSpellCastMessage extends NetworkMessage {
 
 	private int spellLevelId;
 
-	public int getSpellLevelId() { return this.spellLevelId; };
+	public int getSpellLevelId() { return this.spellLevelId; }
 	public void setSpellLevelId(int spellLevelId) { this.spellLevelId = spellLevelId; };
 
 	public GameActionFightNoSpellCastMessage(){

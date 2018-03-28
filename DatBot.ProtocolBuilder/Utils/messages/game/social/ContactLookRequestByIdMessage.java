@@ -18,7 +18,7 @@ public class ContactLookRequestByIdMessage extends ContactLookRequestMessage {
 
 	private long playerId;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
 
 	public ContactLookRequestByIdMessage(){

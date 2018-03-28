@@ -18,7 +18,7 @@ public class GuestModeMessage extends NetworkMessage {
 
 	private boolean active;
 
-	public boolean isActive() { return this.active; };
+	public boolean isActive() { return this.active; }
 	public void setActive(boolean active) { this.active = active; };
 
 	public GuestModeMessage(){

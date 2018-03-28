@@ -18,7 +18,7 @@ public class MountHarnessColorsUpdateRequestMessage extends NetworkMessage {
 
 	private boolean useHarnessColors;
 
-	public boolean isUseHarnessColors() { return this.useHarnessColors; };
+	public boolean isUseHarnessColors() { return this.useHarnessColors; }
 	public void setUseHarnessColors(boolean useHarnessColors) { this.useHarnessColors = useHarnessColors; };
 
 	public MountHarnessColorsUpdateRequestMessage(){

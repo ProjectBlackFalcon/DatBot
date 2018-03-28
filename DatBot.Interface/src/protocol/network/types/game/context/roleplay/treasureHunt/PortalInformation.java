@@ -19,9 +19,9 @@ public class PortalInformation extends NetworkMessage {
 	private int portalId;
 	private int areaId;
 
-	public int getPortalId() { return this.portalId; };
+	public int getPortalId() { return this.portalId; }
 	public void setPortalId(int portalId) { this.portalId = portalId; };
-	public int getAreaId() { return this.areaId; };
+	public int getAreaId() { return this.areaId; }
 	public void setAreaId(int areaId) { this.areaId = areaId; };
 
 	public PortalInformation(){

@@ -20,9 +20,9 @@ public class HumanOptionAlliance extends HumanOption {
 	private AllianceInformations allianceInformations;
 	private int aggressable;
 
-	public AllianceInformations getAllianceInformations() { return this.allianceInformations; };
+	public AllianceInformations getAllianceInformations() { return this.allianceInformations; }
 	public void setAllianceInformations(AllianceInformations allianceInformations) { this.allianceInformations = allianceInformations; };
-	public int getAggressable() { return this.aggressable; };
+	public int getAggressable() { return this.aggressable; }
 	public void setAggressable(int aggressable) { this.aggressable = aggressable; };
 
 	public HumanOptionAlliance(){

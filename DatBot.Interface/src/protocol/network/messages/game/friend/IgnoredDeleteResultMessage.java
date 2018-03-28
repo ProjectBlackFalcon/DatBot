@@ -20,11 +20,11 @@ public class IgnoredDeleteResultMessage extends NetworkMessage {
 	private String name;
 	private boolean session;
 
-	public boolean isSuccess() { return this.success; };
+	public boolean isSuccess() { return this.success; }
 	public void setSuccess(boolean success) { this.success = success; };
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public boolean isSession() { return this.session; };
+	public boolean isSession() { return this.session; }
 	public void setSession(boolean session) { this.session = session; };
 
 	public IgnoredDeleteResultMessage(){

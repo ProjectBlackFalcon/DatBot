@@ -19,9 +19,9 @@ public class GameActionFightSpellImmunityMessage extends AbstractGameActionMessa
 	private double targetId;
 	private int spellId;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
 
 	public GameActionFightSpellImmunityMessage(){

@@ -18,7 +18,7 @@ public class ShortcutSpell extends Shortcut {
 
 	private int spellId;
 
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
 
 	public ShortcutSpell(){

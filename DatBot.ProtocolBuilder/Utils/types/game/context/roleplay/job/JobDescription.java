@@ -20,9 +20,9 @@ public class JobDescription extends NetworkMessage {
 	private int jobId;
 	private List<SkillActionDescription> skills;
 
-	public int getJobId() { return this.jobId; };
+	public int getJobId() { return this.jobId; }
 	public void setJobId(int jobId) { this.jobId = jobId; };
-	public List<SkillActionDescription> getSkills() { return this.skills; };
+	public List<SkillActionDescription> getSkills() { return this.skills; }
 	public void setSkills(List<SkillActionDescription> skills) { this.skills = skills; };
 
 	public JobDescription(){

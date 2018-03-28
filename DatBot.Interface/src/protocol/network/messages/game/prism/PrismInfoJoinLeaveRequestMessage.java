@@ -18,7 +18,7 @@ public class PrismInfoJoinLeaveRequestMessage extends NetworkMessage {
 
 	private boolean join;
 
-	public boolean isJoin() { return this.join; };
+	public boolean isJoin() { return this.join; }
 	public void setJoin(boolean join) { this.join = join; };
 
 	public PrismInfoJoinLeaveRequestMessage(){

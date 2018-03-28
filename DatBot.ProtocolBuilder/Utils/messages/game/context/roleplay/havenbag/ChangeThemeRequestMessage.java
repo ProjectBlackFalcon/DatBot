@@ -18,7 +18,7 @@ public class ChangeThemeRequestMessage extends NetworkMessage {
 
 	private int theme;
 
-	public int getTheme() { return this.theme; };
+	public int getTheme() { return this.theme; }
 	public void setTheme(int theme) { this.theme = theme; };
 
 	public ChangeThemeRequestMessage(){

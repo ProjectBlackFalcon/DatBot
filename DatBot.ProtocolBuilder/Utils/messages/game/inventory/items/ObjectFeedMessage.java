@@ -20,11 +20,11 @@ public class ObjectFeedMessage extends NetworkMessage {
 	private int foodUID;
 	private int foodQuantity;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public int getFoodUID() { return this.foodUID; };
+	public int getFoodUID() { return this.foodUID; }
 	public void setFoodUID(int foodUID) { this.foodUID = foodUID; };
-	public int getFoodQuantity() { return this.foodQuantity; };
+	public int getFoodQuantity() { return this.foodQuantity; }
 	public void setFoodQuantity(int foodQuantity) { this.foodQuantity = foodQuantity; };
 
 	public ObjectFeedMessage(){

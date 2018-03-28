@@ -19,9 +19,9 @@ public class UpdateLifePointsMessage extends NetworkMessage {
 	private int lifePoints;
 	private int maxLifePoints;
 
-	public int getLifePoints() { return this.lifePoints; };
+	public int getLifePoints() { return this.lifePoints; }
 	public void setLifePoints(int lifePoints) { this.lifePoints = lifePoints; };
-	public int getMaxLifePoints() { return this.maxLifePoints; };
+	public int getMaxLifePoints() { return this.maxLifePoints; }
 	public void setMaxLifePoints(int maxLifePoints) { this.maxLifePoints = maxLifePoints; };
 
 	public UpdateLifePointsMessage(){

@@ -18,7 +18,7 @@ public class TreasureHuntLegendaryRequestMessage extends NetworkMessage {
 
 	private int legendaryId;
 
-	public int getLegendaryId() { return this.legendaryId; };
+	public int getLegendaryId() { return this.legendaryId; }
 	public void setLegendaryId(int legendaryId) { this.legendaryId = legendaryId; };
 
 	public TreasureHuntLegendaryRequestMessage(){

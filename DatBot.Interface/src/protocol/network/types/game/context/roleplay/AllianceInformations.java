@@ -19,7 +19,7 @@ public class AllianceInformations extends BasicNamedAllianceInformations {
 
 	private GuildEmblem allianceEmblem;
 
-	public GuildEmblem getAllianceEmblem() { return this.allianceEmblem; };
+	public GuildEmblem getAllianceEmblem() { return this.allianceEmblem; }
 	public void setAllianceEmblem(GuildEmblem allianceEmblem) { this.allianceEmblem = allianceEmblem; };
 
 	public AllianceInformations(){

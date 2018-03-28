@@ -18,7 +18,7 @@ public class CheckIntegrityMessage extends NetworkMessage {
 
 	private List<Integer> data;
 
-	public List<Integer> getData() { return this.data; };
+	public List<Integer> getData() { return this.data; }
 	public void setData(List<Integer> data) { this.data = data; };
 
 	public CheckIntegrityMessage(){

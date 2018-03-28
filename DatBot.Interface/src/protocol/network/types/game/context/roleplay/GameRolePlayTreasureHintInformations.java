@@ -18,7 +18,7 @@ public class GameRolePlayTreasureHintInformations extends GameRolePlayActorInfor
 
 	private int npcId;
 
-	public int getNpcId() { return this.npcId; };
+	public int getNpcId() { return this.npcId; }
 	public void setNpcId(int npcId) { this.npcId = npcId; };
 
 	public GameRolePlayTreasureHintInformations(){

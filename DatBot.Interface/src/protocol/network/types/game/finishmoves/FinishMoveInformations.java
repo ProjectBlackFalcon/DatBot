@@ -19,9 +19,9 @@ public class FinishMoveInformations extends NetworkMessage {
 	private int finishMoveId;
 	private boolean finishMoveState;
 
-	public int getFinishMoveId() { return this.finishMoveId; };
+	public int getFinishMoveId() { return this.finishMoveId; }
 	public void setFinishMoveId(int finishMoveId) { this.finishMoveId = finishMoveId; };
-	public boolean isFinishMoveState() { return this.finishMoveState; };
+	public boolean isFinishMoveState() { return this.finishMoveState; }
 	public void setFinishMoveState(boolean finishMoveState) { this.finishMoveState = finishMoveState; };
 
 	public FinishMoveInformations(){

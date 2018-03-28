@@ -20,11 +20,11 @@ public class GameRolePlayArenaFighterStatusMessage extends NetworkMessage {
 	private int playerId;
 	private boolean accepted;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public int getPlayerId() { return this.playerId; };
+	public int getPlayerId() { return this.playerId; }
 	public void setPlayerId(int playerId) { this.playerId = playerId; };
-	public boolean isAccepted() { return this.accepted; };
+	public boolean isAccepted() { return this.accepted; }
 	public void setAccepted(boolean accepted) { this.accepted = accepted; };
 
 	public GameRolePlayArenaFighterStatusMessage(){

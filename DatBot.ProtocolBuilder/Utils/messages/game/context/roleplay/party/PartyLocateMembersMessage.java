@@ -19,7 +19,7 @@ public class PartyLocateMembersMessage extends AbstractPartyMessage {
 
 	private List<PartyMemberGeoPosition> geopositions;
 
-	public List<PartyMemberGeoPosition> getGeopositions() { return this.geopositions; };
+	public List<PartyMemberGeoPosition> getGeopositions() { return this.geopositions; }
 	public void setGeopositions(List<PartyMemberGeoPosition> geopositions) { this.geopositions = geopositions; };
 
 	public PartyLocateMembersMessage(){

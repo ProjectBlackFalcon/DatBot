@@ -19,7 +19,7 @@ public class GameRolePlayCharacterInformations extends GameRolePlayHumanoidInfor
 
 	private ActorAlignmentInformations alignmentInfos;
 
-	public ActorAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; };
+	public ActorAlignmentInformations getAlignmentInfos() { return this.alignmentInfos; }
 	public void setAlignmentInfos(ActorAlignmentInformations alignmentInfos) { this.alignmentInfos = alignmentInfos; };
 
 	public GameRolePlayCharacterInformations(){

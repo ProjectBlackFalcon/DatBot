@@ -18,7 +18,7 @@ public class ExchangeSetCraftRecipeMessage extends NetworkMessage {
 
 	private int objectGID;
 
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
 
 	public ExchangeSetCraftRecipeMessage(){

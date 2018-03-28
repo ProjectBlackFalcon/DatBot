@@ -21,13 +21,13 @@ public class ActorAlignmentInformations extends NetworkMessage {
 	private int alignmentGrade;
 	private double characterPower;
 
-	public int getAlignmentSide() { return this.alignmentSide; };
+	public int getAlignmentSide() { return this.alignmentSide; }
 	public void setAlignmentSide(int alignmentSide) { this.alignmentSide = alignmentSide; };
-	public int getAlignmentValue() { return this.alignmentValue; };
+	public int getAlignmentValue() { return this.alignmentValue; }
 	public void setAlignmentValue(int alignmentValue) { this.alignmentValue = alignmentValue; };
-	public int getAlignmentGrade() { return this.alignmentGrade; };
+	public int getAlignmentGrade() { return this.alignmentGrade; }
 	public void setAlignmentGrade(int alignmentGrade) { this.alignmentGrade = alignmentGrade; };
-	public double getCharacterPower() { return this.characterPower; };
+	public double getCharacterPower() { return this.characterPower; }
 	public void setCharacterPower(double characterPower) { this.characterPower = characterPower; };
 
 	public ActorAlignmentInformations(){

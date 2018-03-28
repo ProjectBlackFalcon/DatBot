@@ -19,7 +19,7 @@ public class JobCrafterDirectorySettingsMessage extends NetworkMessage {
 
 	private List<JobCrafterDirectorySettings> craftersSettings;
 
-	public List<JobCrafterDirectorySettings> getCraftersSettings() { return this.craftersSettings; };
+	public List<JobCrafterDirectorySettings> getCraftersSettings() { return this.craftersSettings; }
 	public void setCraftersSettings(List<JobCrafterDirectorySettings> craftersSettings) { this.craftersSettings = craftersSettings; };
 
 	public JobCrafterDirectorySettingsMessage(){

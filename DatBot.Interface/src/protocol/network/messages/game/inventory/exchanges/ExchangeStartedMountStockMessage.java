@@ -19,7 +19,7 @@ public class ExchangeStartedMountStockMessage extends NetworkMessage {
 
 	private List<ObjectItem> objectsInfos;
 
-	public List<ObjectItem> getObjectsInfos() { return this.objectsInfos; };
+	public List<ObjectItem> getObjectsInfos() { return this.objectsInfos; }
 	public void setObjectsInfos(List<ObjectItem> objectsInfos) { this.objectsInfos = objectsInfos; };
 
 	public ExchangeStartedMountStockMessage(){

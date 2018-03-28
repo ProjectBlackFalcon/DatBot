@@ -21,13 +21,13 @@ public class CharacterExperienceGainMessage extends NetworkMessage {
 	private long experienceGuild;
 	private long experienceIncarnation;
 
-	public long getExperienceCharacter() { return this.experienceCharacter; };
+	public long getExperienceCharacter() { return this.experienceCharacter; }
 	public void setExperienceCharacter(long experienceCharacter) { this.experienceCharacter = experienceCharacter; };
-	public long getExperienceMount() { return this.experienceMount; };
+	public long getExperienceMount() { return this.experienceMount; }
 	public void setExperienceMount(long experienceMount) { this.experienceMount = experienceMount; };
-	public long getExperienceGuild() { return this.experienceGuild; };
+	public long getExperienceGuild() { return this.experienceGuild; }
 	public void setExperienceGuild(long experienceGuild) { this.experienceGuild = experienceGuild; };
-	public long getExperienceIncarnation() { return this.experienceIncarnation; };
+	public long getExperienceIncarnation() { return this.experienceIncarnation; }
 	public void setExperienceIncarnation(long experienceIncarnation) { this.experienceIncarnation = experienceIncarnation; };
 
 	public CharacterExperienceGainMessage(){

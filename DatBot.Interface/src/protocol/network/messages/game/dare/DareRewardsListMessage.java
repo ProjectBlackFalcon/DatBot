@@ -19,7 +19,7 @@ public class DareRewardsListMessage extends NetworkMessage {
 
 	private List<DareReward> rewards;
 
-	public List<DareReward> getRewards() { return this.rewards; };
+	public List<DareReward> getRewards() { return this.rewards; }
 	public void setRewards(List<DareReward> rewards) { this.rewards = rewards; };
 
 	public DareRewardsListMessage(){

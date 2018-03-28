@@ -18,7 +18,7 @@ public class GuildLevelUpMessage extends NetworkMessage {
 
 	private int newLevel;
 
-	public int getNewLevel() { return this.newLevel; };
+	public int getNewLevel() { return this.newLevel; }
 	public void setNewLevel(int newLevel) { this.newLevel = newLevel; };
 
 	public GuildLevelUpMessage(){

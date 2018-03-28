@@ -19,7 +19,7 @@ public class BasicCharactersListMessage extends NetworkMessage {
 
 	private List<CharacterBaseInformations> characters;
 
-	public List<CharacterBaseInformations> getCharacters() { return this.characters; };
+	public List<CharacterBaseInformations> getCharacters() { return this.characters; }
 	public void setCharacters(List<CharacterBaseInformations> characters) { this.characters = characters; };
 
 	public BasicCharactersListMessage(){

@@ -20,11 +20,11 @@ public class HumanOptionObjectUse extends HumanOption {
 	private double delayEndTime;
 	private int objectGID;
 
-	public int getDelayTypeId() { return this.delayTypeId; };
+	public int getDelayTypeId() { return this.delayTypeId; }
 	public void setDelayTypeId(int delayTypeId) { this.delayTypeId = delayTypeId; };
-	public double getDelayEndTime() { return this.delayEndTime; };
+	public double getDelayEndTime() { return this.delayEndTime; }
 	public void setDelayEndTime(double delayEndTime) { this.delayEndTime = delayEndTime; };
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
 
 	public HumanOptionObjectUse(){

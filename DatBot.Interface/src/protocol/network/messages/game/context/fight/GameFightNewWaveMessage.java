@@ -20,11 +20,11 @@ public class GameFightNewWaveMessage extends NetworkMessage {
 	private int teamId;
 	private int nbTurnBeforeNextWave;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public int getTeamId() { return this.teamId; };
+	public int getTeamId() { return this.teamId; }
 	public void setTeamId(int teamId) { this.teamId = teamId; };
-	public int getNbTurnBeforeNextWave() { return this.nbTurnBeforeNextWave; };
+	public int getNbTurnBeforeNextWave() { return this.nbTurnBeforeNextWave; }
 	public void setNbTurnBeforeNextWave(int nbTurnBeforeNextWave) { this.nbTurnBeforeNextWave = nbTurnBeforeNextWave; };
 
 	public GameFightNewWaveMessage(){

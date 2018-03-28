@@ -18,7 +18,7 @@ public class ExchangeStartOkNpcTradeMessage extends NetworkMessage {
 
 	private double npcId;
 
-	public double getNpcId() { return this.npcId; };
+	public double getNpcId() { return this.npcId; }
 	public void setNpcId(double npcId) { this.npcId = npcId; };
 
 	public ExchangeStartOkNpcTradeMessage(){

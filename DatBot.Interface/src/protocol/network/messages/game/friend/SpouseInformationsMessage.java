@@ -19,7 +19,7 @@ public class SpouseInformationsMessage extends NetworkMessage {
 
 	private FriendSpouseInformations spouse;
 
-	public FriendSpouseInformations getSpouse() { return this.spouse; };
+	public FriendSpouseInformations getSpouse() { return this.spouse; }
 	public void setSpouse(FriendSpouseInformations spouse) { this.spouse = spouse; };
 
 	public SpouseInformationsMessage(){

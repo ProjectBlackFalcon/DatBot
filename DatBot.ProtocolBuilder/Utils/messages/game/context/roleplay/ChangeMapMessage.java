@@ -19,9 +19,9 @@ public class ChangeMapMessage extends NetworkMessage {
 	private double mapId;
 	private boolean autopilot;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public boolean isAutopilot() { return this.autopilot; };
+	public boolean isAutopilot() { return this.autopilot; }
 	public void setAutopilot(boolean autopilot) { this.autopilot = autopilot; };
 
 	public ChangeMapMessage(){

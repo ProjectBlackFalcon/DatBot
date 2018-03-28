@@ -19,9 +19,9 @@ public class PartyCancelInvitationNotificationMessage extends AbstractPartyEvent
 	private long cancelerId;
 	private long guestId;
 
-	public long getCancelerId() { return this.cancelerId; };
+	public long getCancelerId() { return this.cancelerId; }
 	public void setCancelerId(long cancelerId) { this.cancelerId = cancelerId; };
-	public long getGuestId() { return this.guestId; };
+	public long getGuestId() { return this.guestId; }
 	public void setGuestId(long guestId) { this.guestId = guestId; };
 
 	public PartyCancelInvitationNotificationMessage(){

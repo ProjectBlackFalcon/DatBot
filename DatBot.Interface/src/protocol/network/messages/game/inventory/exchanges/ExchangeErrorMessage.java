@@ -18,7 +18,7 @@ public class ExchangeErrorMessage extends NetworkMessage {
 
 	private int errorType;
 
-	public int getErrorType() { return this.errorType; };
+	public int getErrorType() { return this.errorType; }
 	public void setErrorType(int errorType) { this.errorType = errorType; };
 
 	public ExchangeErrorMessage(){

@@ -19,9 +19,9 @@ public class PaddockInformations extends NetworkMessage {
 	private int maxOutdoorMount;
 	private int maxItems;
 
-	public int getMaxOutdoorMount() { return this.maxOutdoorMount; };
+	public int getMaxOutdoorMount() { return this.maxOutdoorMount; }
 	public void setMaxOutdoorMount(int maxOutdoorMount) { this.maxOutdoorMount = maxOutdoorMount; };
-	public int getMaxItems() { return this.maxItems; };
+	public int getMaxItems() { return this.maxItems; }
 	public void setMaxItems(int maxItems) { this.maxItems = maxItems; };
 
 	public PaddockInformations(){

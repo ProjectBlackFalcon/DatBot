@@ -21,9 +21,9 @@ public class DareSubscribedListMessage extends NetworkMessage {
 	private List<DareInformations> daresFixedInfos;
 	private List<DareVersatileInformations> daresVersatilesInfos;
 
-	public List<DareInformations> getDaresFixedInfos() { return this.daresFixedInfos; };
+	public List<DareInformations> getDaresFixedInfos() { return this.daresFixedInfos; }
 	public void setDaresFixedInfos(List<DareInformations> daresFixedInfos) { this.daresFixedInfos = daresFixedInfos; };
-	public List<DareVersatileInformations> getDaresVersatilesInfos() { return this.daresVersatilesInfos; };
+	public List<DareVersatileInformations> getDaresVersatilesInfos() { return this.daresVersatilesInfos; }
 	public void setDaresVersatilesInfos(List<DareVersatileInformations> daresVersatilesInfos) { this.daresVersatilesInfos = daresVersatilesInfos; };
 
 	public DareSubscribedListMessage(){

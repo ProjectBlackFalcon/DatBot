@@ -18,7 +18,7 @@ public class ExchangeRequestMessage extends NetworkMessage {
 
 	private int exchangeType;
 
-	public int getExchangeType() { return this.exchangeType; };
+	public int getExchangeType() { return this.exchangeType; }
 	public void setExchangeType(int exchangeType) { this.exchangeType = exchangeType; };
 
 	public ExchangeRequestMessage(){

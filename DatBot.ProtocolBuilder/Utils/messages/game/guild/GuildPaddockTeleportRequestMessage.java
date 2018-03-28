@@ -18,7 +18,7 @@ public class GuildPaddockTeleportRequestMessage extends NetworkMessage {
 
 	private double paddockId;
 
-	public double getPaddockId() { return this.paddockId; };
+	public double getPaddockId() { return this.paddockId; }
 	public void setPaddockId(double paddockId) { this.paddockId = paddockId; };
 
 	public GuildPaddockTeleportRequestMessage(){

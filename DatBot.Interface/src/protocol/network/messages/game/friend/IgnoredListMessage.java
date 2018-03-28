@@ -19,7 +19,7 @@ public class IgnoredListMessage extends NetworkMessage {
 
 	private List<IgnoredInformations> ignoredList;
 
-	public List<IgnoredInformations> getIgnoredList() { return this.ignoredList; };
+	public List<IgnoredInformations> getIgnoredList() { return this.ignoredList; }
 	public void setIgnoredList(List<IgnoredInformations> ignoredList) { this.ignoredList = ignoredList; };
 
 	public IgnoredListMessage(){

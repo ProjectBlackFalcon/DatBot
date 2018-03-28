@@ -18,7 +18,7 @@ public class LockableUseCodeMessage extends NetworkMessage {
 
 	private String code;
 
-	public String getCode() { return this.code; };
+	public String getCode() { return this.code; }
 	public void setCode(String code) { this.code = code; };
 
 	public LockableUseCodeMessage(){

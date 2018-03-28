@@ -19,9 +19,9 @@ public class IgnoredAddRequestMessage extends NetworkMessage {
 	private String name;
 	private boolean session;
 
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public boolean isSession() { return this.session; };
+	public boolean isSession() { return this.session; }
 	public void setSession(boolean session) { this.session = session; };
 
 	public IgnoredAddRequestMessage(){

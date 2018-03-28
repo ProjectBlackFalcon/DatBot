@@ -52,73 +52,73 @@ public class MountClientData extends NetworkMessage {
 	private boolean useHarnessColors;
 	private List<ObjectEffectInteger> effectList;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public int getModel() { return this.model; };
+	public int getModel() { return this.model; }
 	public void setModel(int model) { this.model = model; };
-	public List<Integer> getAncestor() { return this.ancestor; };
+	public List<Integer> getAncestor() { return this.ancestor; }
 	public void setAncestor(List<Integer> ancestor) { this.ancestor = ancestor; };
-	public List<Integer> getBehaviors() { return this.behaviors; };
+	public List<Integer> getBehaviors() { return this.behaviors; }
 	public void setBehaviors(List<Integer> behaviors) { this.behaviors = behaviors; };
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public int getOwnerId() { return this.ownerId; };
+	public int getOwnerId() { return this.ownerId; }
 	public void setOwnerId(int ownerId) { this.ownerId = ownerId; };
-	public long getExperience() { return this.experience; };
+	public long getExperience() { return this.experience; }
 	public void setExperience(long experience) { this.experience = experience; };
-	public long getExperienceForLevel() { return this.experienceForLevel; };
+	public long getExperienceForLevel() { return this.experienceForLevel; }
 	public void setExperienceForLevel(long experienceForLevel) { this.experienceForLevel = experienceForLevel; };
-	public double getExperienceForNextLevel() { return this.experienceForNextLevel; };
+	public double getExperienceForNextLevel() { return this.experienceForNextLevel; }
 	public void setExperienceForNextLevel(double experienceForNextLevel) { this.experienceForNextLevel = experienceForNextLevel; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public boolean isIsRideable() { return this.isRideable; };
+	public boolean isIsRideable() { return this.isRideable; }
 	public void setIsRideable(boolean isRideable) { this.isRideable = isRideable; };
-	public int getMaxPods() { return this.maxPods; };
+	public int getMaxPods() { return this.maxPods; }
 	public void setMaxPods(int maxPods) { this.maxPods = maxPods; };
-	public boolean isIsWild() { return this.isWild; };
+	public boolean isIsWild() { return this.isWild; }
 	public void setIsWild(boolean isWild) { this.isWild = isWild; };
-	public int getStamina() { return this.stamina; };
+	public int getStamina() { return this.stamina; }
 	public void setStamina(int stamina) { this.stamina = stamina; };
-	public int getStaminaMax() { return this.staminaMax; };
+	public int getStaminaMax() { return this.staminaMax; }
 	public void setStaminaMax(int staminaMax) { this.staminaMax = staminaMax; };
-	public int getMaturity() { return this.maturity; };
+	public int getMaturity() { return this.maturity; }
 	public void setMaturity(int maturity) { this.maturity = maturity; };
-	public int getMaturityForAdult() { return this.maturityForAdult; };
+	public int getMaturityForAdult() { return this.maturityForAdult; }
 	public void setMaturityForAdult(int maturityForAdult) { this.maturityForAdult = maturityForAdult; };
-	public int getEnergy() { return this.energy; };
+	public int getEnergy() { return this.energy; }
 	public void setEnergy(int energy) { this.energy = energy; };
-	public int getEnergyMax() { return this.energyMax; };
+	public int getEnergyMax() { return this.energyMax; }
 	public void setEnergyMax(int energyMax) { this.energyMax = energyMax; };
-	public int getSerenity() { return this.serenity; };
+	public int getSerenity() { return this.serenity; }
 	public void setSerenity(int serenity) { this.serenity = serenity; };
-	public int getAggressivityMax() { return this.aggressivityMax; };
+	public int getAggressivityMax() { return this.aggressivityMax; }
 	public void setAggressivityMax(int aggressivityMax) { this.aggressivityMax = aggressivityMax; };
-	public int getSerenityMax() { return this.serenityMax; };
+	public int getSerenityMax() { return this.serenityMax; }
 	public void setSerenityMax(int serenityMax) { this.serenityMax = serenityMax; };
-	public int getLove() { return this.love; };
+	public int getLove() { return this.love; }
 	public void setLove(int love) { this.love = love; };
-	public int getLoveMax() { return this.loveMax; };
+	public int getLoveMax() { return this.loveMax; }
 	public void setLoveMax(int loveMax) { this.loveMax = loveMax; };
-	public int getFecondationTime() { return this.fecondationTime; };
+	public int getFecondationTime() { return this.fecondationTime; }
 	public void setFecondationTime(int fecondationTime) { this.fecondationTime = fecondationTime; };
-	public boolean isIsFecondationReady() { return this.isFecondationReady; };
+	public boolean isIsFecondationReady() { return this.isFecondationReady; }
 	public void setIsFecondationReady(boolean isFecondationReady) { this.isFecondationReady = isFecondationReady; };
-	public int getBoostLimiter() { return this.boostLimiter; };
+	public int getBoostLimiter() { return this.boostLimiter; }
 	public void setBoostLimiter(int boostLimiter) { this.boostLimiter = boostLimiter; };
-	public double getBoostMax() { return this.boostMax; };
+	public double getBoostMax() { return this.boostMax; }
 	public void setBoostMax(double boostMax) { this.boostMax = boostMax; };
-	public int getReproductionCount() { return this.reproductionCount; };
+	public int getReproductionCount() { return this.reproductionCount; }
 	public void setReproductionCount(int reproductionCount) { this.reproductionCount = reproductionCount; };
-	public int getReproductionCountMax() { return this.reproductionCountMax; };
+	public int getReproductionCountMax() { return this.reproductionCountMax; }
 	public void setReproductionCountMax(int reproductionCountMax) { this.reproductionCountMax = reproductionCountMax; };
-	public int getHarnessGID() { return this.harnessGID; };
+	public int getHarnessGID() { return this.harnessGID; }
 	public void setHarnessGID(int harnessGID) { this.harnessGID = harnessGID; };
-	public boolean isUseHarnessColors() { return this.useHarnessColors; };
+	public boolean isUseHarnessColors() { return this.useHarnessColors; }
 	public void setUseHarnessColors(boolean useHarnessColors) { this.useHarnessColors = useHarnessColors; };
-	public List<ObjectEffectInteger> getEffectList() { return this.effectList; };
+	public List<ObjectEffectInteger> getEffectList() { return this.effectList; }
 	public void setEffectList(List<ObjectEffectInteger> effectList) { this.effectList = effectList; };
 
 	public MountClientData(){

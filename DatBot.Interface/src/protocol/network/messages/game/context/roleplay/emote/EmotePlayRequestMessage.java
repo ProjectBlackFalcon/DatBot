@@ -18,7 +18,7 @@ public class EmotePlayRequestMessage extends NetworkMessage {
 
 	private int emoteId;
 
-	public int getEmoteId() { return this.emoteId; };
+	public int getEmoteId() { return this.emoteId; }
 	public void setEmoteId(int emoteId) { this.emoteId = emoteId; };
 
 	public EmotePlayRequestMessage(){

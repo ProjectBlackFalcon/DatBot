@@ -19,9 +19,9 @@ public class ExchangeOnHumanVendorRequestMessage extends NetworkMessage {
 	private long humanVendorId;
 	private int humanVendorCell;
 
-	public long getHumanVendorId() { return this.humanVendorId; };
+	public long getHumanVendorId() { return this.humanVendorId; }
 	public void setHumanVendorId(long humanVendorId) { this.humanVendorId = humanVendorId; };
-	public int getHumanVendorCell() { return this.humanVendorCell; };
+	public int getHumanVendorCell() { return this.humanVendorCell; }
 	public void setHumanVendorCell(int humanVendorCell) { this.humanVendorCell = humanVendorCell; };
 
 	public ExchangeOnHumanVendorRequestMessage(){

@@ -22,15 +22,15 @@ public class JobExperience extends NetworkMessage {
 	private long jobXpLevelFloor;
 	private long jobXpNextLevelFloor;
 
-	public int getJobId() { return this.jobId; };
+	public int getJobId() { return this.jobId; }
 	public void setJobId(int jobId) { this.jobId = jobId; };
-	public int getJobLevel() { return this.jobLevel; };
+	public int getJobLevel() { return this.jobLevel; }
 	public void setJobLevel(int jobLevel) { this.jobLevel = jobLevel; };
-	public long getJobXP() { return this.jobXP; };
+	public long getJobXP() { return this.jobXP; }
 	public void setJobXP(long jobXP) { this.jobXP = jobXP; };
-	public long getJobXpLevelFloor() { return this.jobXpLevelFloor; };
+	public long getJobXpLevelFloor() { return this.jobXpLevelFloor; }
 	public void setJobXpLevelFloor(long jobXpLevelFloor) { this.jobXpLevelFloor = jobXpLevelFloor; };
-	public long getJobXpNextLevelFloor() { return this.jobXpNextLevelFloor; };
+	public long getJobXpNextLevelFloor() { return this.jobXpNextLevelFloor; }
 	public void setJobXpNextLevelFloor(long jobXpNextLevelFloor) { this.jobXpNextLevelFloor = jobXpNextLevelFloor; };
 
 	public JobExperience(){

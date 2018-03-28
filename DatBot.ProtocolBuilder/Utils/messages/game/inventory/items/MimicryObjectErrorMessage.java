@@ -18,7 +18,7 @@ public class MimicryObjectErrorMessage extends SymbioticObjectErrorMessage {
 
 	private boolean preview;
 
-	public boolean isPreview() { return this.preview; };
+	public boolean isPreview() { return this.preview; }
 	public void setPreview(boolean preview) { this.preview = preview; };
 
 	public MimicryObjectErrorMessage(){

@@ -18,7 +18,7 @@ public class DungeonPartyFinderRegisterRequestMessage extends NetworkMessage {
 
 	private List<Integer> dungeonIds;
 
-	public List<Integer> getDungeonIds() { return this.dungeonIds; };
+	public List<Integer> getDungeonIds() { return this.dungeonIds; }
 	public void setDungeonIds(List<Integer> dungeonIds) { this.dungeonIds = dungeonIds; };
 
 	public DungeonPartyFinderRegisterRequestMessage(){

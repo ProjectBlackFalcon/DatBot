@@ -21,13 +21,13 @@ public class IgnoredOnlineInformations extends IgnoredInformations {
 	private int breed;
 	private boolean sex;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public String getPlayerName() { return this.playerName; };
+	public String getPlayerName() { return this.playerName; }
 	public void setPlayerName(String playerName) { this.playerName = playerName; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
 
 	public IgnoredOnlineInformations(){

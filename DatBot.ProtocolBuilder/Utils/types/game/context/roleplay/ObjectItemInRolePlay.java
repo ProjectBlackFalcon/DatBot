@@ -19,9 +19,9 @@ public class ObjectItemInRolePlay extends NetworkMessage {
 	private int cellId;
 	private int objectGID;
 
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
 
 	public ObjectItemInRolePlay(){

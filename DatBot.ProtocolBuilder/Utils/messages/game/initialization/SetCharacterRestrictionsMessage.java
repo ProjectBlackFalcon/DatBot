@@ -20,9 +20,9 @@ public class SetCharacterRestrictionsMessage extends NetworkMessage {
 	private double actorId;
 	private ActorRestrictionsInformations restrictions;
 
-	public double getActorId() { return this.actorId; };
+	public double getActorId() { return this.actorId; }
 	public void setActorId(double actorId) { this.actorId = actorId; };
-	public ActorRestrictionsInformations getRestrictions() { return this.restrictions; };
+	public ActorRestrictionsInformations getRestrictions() { return this.restrictions; }
 	public void setRestrictions(ActorRestrictionsInformations restrictions) { this.restrictions = restrictions; };
 
 	public SetCharacterRestrictionsMessage(){

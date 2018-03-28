@@ -19,9 +19,9 @@ public class TrustCertificate extends NetworkMessage {
 	private int id;
 	private String hash;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public String getHash() { return this.hash; };
+	public String getHash() { return this.hash; }
 	public void setHash(String hash) { this.hash = hash; };
 
 	public TrustCertificate(){

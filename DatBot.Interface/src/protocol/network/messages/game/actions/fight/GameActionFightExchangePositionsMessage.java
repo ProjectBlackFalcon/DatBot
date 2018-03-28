@@ -20,11 +20,11 @@ public class GameActionFightExchangePositionsMessage extends AbstractGameActionM
 	private int casterCellId;
 	private int targetCellId;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getCasterCellId() { return this.casterCellId; };
+	public int getCasterCellId() { return this.casterCellId; }
 	public void setCasterCellId(int casterCellId) { this.casterCellId = casterCellId; };
-	public int getTargetCellId() { return this.targetCellId; };
+	public int getTargetCellId() { return this.targetCellId; }
 	public void setTargetCellId(int targetCellId) { this.targetCellId = targetCellId; };
 
 	public GameActionFightExchangePositionsMessage(){

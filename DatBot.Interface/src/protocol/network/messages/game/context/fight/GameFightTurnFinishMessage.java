@@ -18,7 +18,7 @@ public class GameFightTurnFinishMessage extends NetworkMessage {
 
 	private boolean isAfk;
 
-	public boolean isIsAfk() { return this.isAfk; };
+	public boolean isIsAfk() { return this.isAfk; }
 	public void setIsAfk(boolean isAfk) { this.isAfk = isAfk; };
 
 	public GameFightTurnFinishMessage(){

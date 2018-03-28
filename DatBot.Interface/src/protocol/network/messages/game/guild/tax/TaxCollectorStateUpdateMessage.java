@@ -19,9 +19,9 @@ public class TaxCollectorStateUpdateMessage extends NetworkMessage {
 	private double uniqueId;
 	private int state;
 
-	public double getUniqueId() { return this.uniqueId; };
+	public double getUniqueId() { return this.uniqueId; }
 	public void setUniqueId(double uniqueId) { this.uniqueId = uniqueId; };
-	public int getState() { return this.state; };
+	public int getState() { return this.state; }
 	public void setState(int state) { this.state = state; };
 
 	public TaxCollectorStateUpdateMessage(){

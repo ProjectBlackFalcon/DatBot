@@ -20,11 +20,11 @@ public class NpcGenericActionRequestMessage extends NetworkMessage {
 	private int npcActionId;
 	private double npcMapId;
 
-	public int getNpcId() { return this.npcId; };
+	public int getNpcId() { return this.npcId; }
 	public void setNpcId(int npcId) { this.npcId = npcId; };
-	public int getNpcActionId() { return this.npcActionId; };
+	public int getNpcActionId() { return this.npcActionId; }
 	public void setNpcActionId(int npcActionId) { this.npcActionId = npcActionId; };
-	public double getNpcMapId() { return this.npcMapId; };
+	public double getNpcMapId() { return this.npcMapId; }
 	public void setNpcMapId(double npcMapId) { this.npcMapId = npcMapId; };
 
 	public NpcGenericActionRequestMessage(){

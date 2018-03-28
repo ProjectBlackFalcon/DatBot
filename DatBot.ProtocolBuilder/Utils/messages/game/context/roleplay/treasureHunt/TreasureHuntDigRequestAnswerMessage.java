@@ -19,9 +19,9 @@ public class TreasureHuntDigRequestAnswerMessage extends NetworkMessage {
 	private int questType;
 	private int result;
 
-	public int getQuestType() { return this.questType; };
+	public int getQuestType() { return this.questType; }
 	public void setQuestType(int questType) { this.questType = questType; };
-	public int getResult() { return this.result; };
+	public int getResult() { return this.result; }
 	public void setResult(int result) { this.result = result; };
 
 	public TreasureHuntDigRequestAnswerMessage(){

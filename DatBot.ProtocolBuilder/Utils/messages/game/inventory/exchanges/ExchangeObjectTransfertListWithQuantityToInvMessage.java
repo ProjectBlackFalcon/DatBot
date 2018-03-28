@@ -19,9 +19,9 @@ public class ExchangeObjectTransfertListWithQuantityToInvMessage extends Network
 	private List<Integer> ids;
 	private List<Integer> qtys;
 
-	public List<Integer> getIds() { return this.ids; };
+	public List<Integer> getIds() { return this.ids; }
 	public void setIds(List<Integer> ids) { this.ids = ids; };
-	public List<Integer> getQtys() { return this.qtys; };
+	public List<Integer> getQtys() { return this.qtys; }
 	public void setQtys(List<Integer> qtys) { this.qtys = qtys; };
 
 	public ExchangeObjectTransfertListWithQuantityToInvMessage(){

@@ -19,9 +19,9 @@ public class DareCriteria extends NetworkMessage {
 	private int type;
 	private List<Integer> params;
 
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public List<Integer> getParams() { return this.params; };
+	public List<Integer> getParams() { return this.params; }
 	public void setParams(List<Integer> params) { this.params = params; };
 
 	public DareCriteria(){

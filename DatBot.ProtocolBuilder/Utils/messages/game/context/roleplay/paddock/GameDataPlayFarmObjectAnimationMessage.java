@@ -18,7 +18,7 @@ public class GameDataPlayFarmObjectAnimationMessage extends NetworkMessage {
 
 	private List<Integer> cellId;
 
-	public List<Integer> getCellId() { return this.cellId; };
+	public List<Integer> getCellId() { return this.cellId; }
 	public void setCellId(List<Integer> cellId) { this.cellId = cellId; };
 
 	public GameDataPlayFarmObjectAnimationMessage(){

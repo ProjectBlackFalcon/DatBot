@@ -18,7 +18,7 @@ public class GameFightPlacementSwapPositionsCancelMessage extends NetworkMessage
 
 	private int requestId;
 
-	public int getRequestId() { return this.requestId; };
+	public int getRequestId() { return this.requestId; }
 	public void setRequestId(int requestId) { this.requestId = requestId; };
 
 	public GameFightPlacementSwapPositionsCancelMessage(){

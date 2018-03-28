@@ -18,7 +18,7 @@ public class PartyInvitationCancelledForGuestMessage extends AbstractPartyMessag
 
 	private long cancelerId;
 
-	public long getCancelerId() { return this.cancelerId; };
+	public long getCancelerId() { return this.cancelerId; }
 	public void setCancelerId(long cancelerId) { this.cancelerId = cancelerId; };
 
 	public PartyInvitationCancelledForGuestMessage(){

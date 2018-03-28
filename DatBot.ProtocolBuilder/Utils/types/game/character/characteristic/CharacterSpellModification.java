@@ -21,11 +21,11 @@ public class CharacterSpellModification extends NetworkMessage {
 	private int spellId;
 	private CharacterBaseCharacteristic value;
 
-	public int getModificationType() { return this.modificationType; };
+	public int getModificationType() { return this.modificationType; }
 	public void setModificationType(int modificationType) { this.modificationType = modificationType; };
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public CharacterBaseCharacteristic getValue() { return this.value; };
+	public CharacterBaseCharacteristic getValue() { return this.value; }
 	public void setValue(CharacterBaseCharacteristic value) { this.value = value; };
 
 	public CharacterSpellModification(){

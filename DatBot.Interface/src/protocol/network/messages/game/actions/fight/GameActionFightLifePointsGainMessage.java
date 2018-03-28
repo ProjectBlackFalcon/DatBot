@@ -19,9 +19,9 @@ public class GameActionFightLifePointsGainMessage extends AbstractGameActionMess
 	private double targetId;
 	private int delta;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getDelta() { return this.delta; };
+	public int getDelta() { return this.delta; }
 	public void setDelta(int delta) { this.delta = delta; };
 
 	public GameActionFightLifePointsGainMessage(){

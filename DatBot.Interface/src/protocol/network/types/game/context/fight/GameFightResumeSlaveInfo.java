@@ -22,13 +22,13 @@ public class GameFightResumeSlaveInfo extends NetworkMessage {
 	private int summonCount;
 	private int bombCount;
 
-	public double getSlaveId() { return this.slaveId; };
+	public double getSlaveId() { return this.slaveId; }
 	public void setSlaveId(double slaveId) { this.slaveId = slaveId; };
-	public List<GameFightSpellCooldown> getSpellCooldowns() { return this.spellCooldowns; };
+	public List<GameFightSpellCooldown> getSpellCooldowns() { return this.spellCooldowns; }
 	public void setSpellCooldowns(List<GameFightSpellCooldown> spellCooldowns) { this.spellCooldowns = spellCooldowns; };
-	public int getSummonCount() { return this.summonCount; };
+	public int getSummonCount() { return this.summonCount; }
 	public void setSummonCount(int summonCount) { this.summonCount = summonCount; };
-	public int getBombCount() { return this.bombCount; };
+	public int getBombCount() { return this.bombCount; }
 	public void setBombCount(int bombCount) { this.bombCount = bombCount; };
 
 	public GameFightResumeSlaveInfo(){

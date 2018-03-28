@@ -21,13 +21,13 @@ public class GuildEmblem extends NetworkMessage {
 	private int backgroundShape;
 	private int backgroundColor;
 
-	public int getSymbolShape() { return this.symbolShape; };
+	public int getSymbolShape() { return this.symbolShape; }
 	public void setSymbolShape(int symbolShape) { this.symbolShape = symbolShape; };
-	public int getSymbolColor() { return this.symbolColor; };
+	public int getSymbolColor() { return this.symbolColor; }
 	public void setSymbolColor(int symbolColor) { this.symbolColor = symbolColor; };
-	public int getBackgroundShape() { return this.backgroundShape; };
+	public int getBackgroundShape() { return this.backgroundShape; }
 	public void setBackgroundShape(int backgroundShape) { this.backgroundShape = backgroundShape; };
-	public int getBackgroundColor() { return this.backgroundColor; };
+	public int getBackgroundColor() { return this.backgroundColor; }
 	public void setBackgroundColor(int backgroundColor) { this.backgroundColor = backgroundColor; };
 
 	public GuildEmblem(){

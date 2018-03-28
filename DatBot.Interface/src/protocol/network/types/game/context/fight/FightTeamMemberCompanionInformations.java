@@ -20,11 +20,11 @@ public class FightTeamMemberCompanionInformations extends FightTeamMemberInforma
 	private int level;
 	private double masterId;
 
-	public int getCompanionId() { return this.companionId; };
+	public int getCompanionId() { return this.companionId; }
 	public void setCompanionId(int companionId) { this.companionId = companionId; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public double getMasterId() { return this.masterId; };
+	public double getMasterId() { return this.masterId; }
 	public void setMasterId(double masterId) { this.masterId = masterId; };
 
 	public FightTeamMemberCompanionInformations(){

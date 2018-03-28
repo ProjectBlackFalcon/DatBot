@@ -19,7 +19,7 @@ public class GuildHouseUpdateInformationMessage extends NetworkMessage {
 
 	private HouseInformationsForGuild housesInformations;
 
-	public HouseInformationsForGuild getHousesInformations() { return this.housesInformations; };
+	public HouseInformationsForGuild getHousesInformations() { return this.housesInformations; }
 	public void setHousesInformations(HouseInformationsForGuild housesInformations) { this.housesInformations = housesInformations; };
 
 	public GuildHouseUpdateInformationMessage(){

@@ -19,9 +19,9 @@ public class BasicTimeMessage extends NetworkMessage {
 	private double timestamp;
 	private int timezoneOffset;
 
-	public double getTimestamp() { return this.timestamp; };
+	public double getTimestamp() { return this.timestamp; }
 	public void setTimestamp(double timestamp) { this.timestamp = timestamp; };
-	public int getTimezoneOffset() { return this.timezoneOffset; };
+	public int getTimezoneOffset() { return this.timezoneOffset; }
 	public void setTimezoneOffset(int timezoneOffset) { this.timezoneOffset = timezoneOffset; };
 
 	public BasicTimeMessage(){

@@ -19,9 +19,9 @@ public class LockableShowCodeDialogMessage extends NetworkMessage {
 	private boolean changeOrUse;
 	private int codeSize;
 
-	public boolean isChangeOrUse() { return this.changeOrUse; };
+	public boolean isChangeOrUse() { return this.changeOrUse; }
 	public void setChangeOrUse(boolean changeOrUse) { this.changeOrUse = changeOrUse; };
-	public int getCodeSize() { return this.codeSize; };
+	public int getCodeSize() { return this.codeSize; }
 	public void setCodeSize(int codeSize) { this.codeSize = codeSize; };
 
 	public LockableShowCodeDialogMessage(){

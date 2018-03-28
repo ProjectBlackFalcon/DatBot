@@ -18,7 +18,7 @@ public class OnConnectionEventMessage extends NetworkMessage {
 
 	private int eventType;
 
-	public int getEventType() { return this.eventType; };
+	public int getEventType() { return this.eventType; }
 	public void setEventType(int eventType) { this.eventType = eventType; };
 
 	public OnConnectionEventMessage(){

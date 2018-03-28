@@ -19,9 +19,9 @@ public class WrapperObjectDissociateRequestMessage extends NetworkMessage {
 	private int hostUID;
 	private int hostPos;
 
-	public int getHostUID() { return this.hostUID; };
+	public int getHostUID() { return this.hostUID; }
 	public void setHostUID(int hostUID) { this.hostUID = hostUID; };
-	public int getHostPos() { return this.hostPos; };
+	public int getHostPos() { return this.hostPos; }
 	public void setHostPos(int hostPos) { this.hostPos = hostPos; };
 
 	public WrapperObjectDissociateRequestMessage(){

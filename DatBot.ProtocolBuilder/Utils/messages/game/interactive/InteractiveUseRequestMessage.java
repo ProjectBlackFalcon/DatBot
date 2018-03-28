@@ -19,9 +19,9 @@ public class InteractiveUseRequestMessage extends NetworkMessage {
 	private int elemId;
 	private int skillInstanceUid;
 
-	public int getElemId() { return this.elemId; };
+	public int getElemId() { return this.elemId; }
 	public void setElemId(int elemId) { this.elemId = elemId; };
-	public int getSkillInstanceUid() { return this.skillInstanceUid; };
+	public int getSkillInstanceUid() { return this.skillInstanceUid; }
 	public void setSkillInstanceUid(int skillInstanceUid) { this.skillInstanceUid = skillInstanceUid; };
 
 	public InteractiveUseRequestMessage(){

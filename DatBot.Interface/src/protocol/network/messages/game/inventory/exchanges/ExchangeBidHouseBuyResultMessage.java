@@ -19,9 +19,9 @@ public class ExchangeBidHouseBuyResultMessage extends NetworkMessage {
 	private int uid;
 	private boolean bought;
 
-	public int getUid() { return this.uid; };
+	public int getUid() { return this.uid; }
 	public void setUid(int uid) { this.uid = uid; };
-	public boolean isBought() { return this.bought; };
+	public boolean isBought() { return this.bought; }
 	public void setBought(boolean bought) { this.bought = bought; };
 
 	public ExchangeBidHouseBuyResultMessage(){

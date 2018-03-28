@@ -18,7 +18,7 @@ public class ObjectEffectLadder extends ObjectEffectCreature {
 
 	private int monsterCount;
 
-	public int getMonsterCount() { return this.monsterCount; };
+	public int getMonsterCount() { return this.monsterCount; }
 	public void setMonsterCount(int monsterCount) { this.monsterCount = monsterCount; };
 
 	public ObjectEffectLadder(){

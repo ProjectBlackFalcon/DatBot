@@ -19,9 +19,9 @@ public class GameRolePlayAggressionMessage extends NetworkMessage {
 	private long attackerId;
 	private long defenderId;
 
-	public long getAttackerId() { return this.attackerId; };
+	public long getAttackerId() { return this.attackerId; }
 	public void setAttackerId(long attackerId) { this.attackerId = attackerId; };
-	public long getDefenderId() { return this.defenderId; };
+	public long getDefenderId() { return this.defenderId; }
 	public void setDefenderId(long defenderId) { this.defenderId = defenderId; };
 
 	public GameRolePlayAggressionMessage(){

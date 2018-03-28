@@ -18,7 +18,7 @@ public class ChangeHavenBagRoomRequestMessage extends NetworkMessage {
 
 	private int roomId;
 
-	public int getRoomId() { return this.roomId; };
+	public int getRoomId() { return this.roomId; }
 	public void setRoomId(int roomId) { this.roomId = roomId; };
 
 	public ChangeHavenBagRoomRequestMessage(){

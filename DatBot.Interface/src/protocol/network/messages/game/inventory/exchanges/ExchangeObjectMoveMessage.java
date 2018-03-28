@@ -19,9 +19,9 @@ public class ExchangeObjectMoveMessage extends NetworkMessage {
 	private int objectUID;
 	private int quantity;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
 
 	public ExchangeObjectMoveMessage(){

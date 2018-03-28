@@ -19,9 +19,9 @@ public class MountInformationRequestMessage extends NetworkMessage {
 	private double id;
 	private double time;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public double getTime() { return this.time; };
+	public double getTime() { return this.time; }
 	public void setTime(double time) { this.time = time; };
 
 	public MountInformationRequestMessage(){

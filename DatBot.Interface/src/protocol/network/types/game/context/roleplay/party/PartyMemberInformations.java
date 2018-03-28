@@ -12,7 +12,7 @@ import protocol.network.util.DofusDataWriter;
 import protocol.network.Network;
 import protocol.network.types.game.character.choice.CharacterBaseInformations;
 import protocol.network.types.game.character.status.PlayerStatus;
-import protocol.network.types.game.context.roleplay.party.companion.PartyCompanionMemberInformations;
+import protocol.network.types.game.context.roleplay.party.companion.PartyCompanionBaseInformations;
 
 @SuppressWarnings("unused")
 public class PartyMemberInformations extends CharacterBaseInformations {
@@ -29,37 +29,37 @@ public class PartyMemberInformations extends CharacterBaseInformations {
 	private double mapId;
 	private int subAreaId;
 	private PlayerStatus status;
-	private List<PartyCompanionMemberInformations> companions;
+	private List<PartyCompanionBaseInformations> companions;
 
-	public int getLifePoints() { return this.lifePoints; };
+	public int getLifePoints() { return this.lifePoints; }
 	public void setLifePoints(int lifePoints) { this.lifePoints = lifePoints; };
-	public int getMaxLifePoints() { return this.maxLifePoints; };
+	public int getMaxLifePoints() { return this.maxLifePoints; }
 	public void setMaxLifePoints(int maxLifePoints) { this.maxLifePoints = maxLifePoints; };
-	public int getProspecting() { return this.prospecting; };
+	public int getProspecting() { return this.prospecting; }
 	public void setProspecting(int prospecting) { this.prospecting = prospecting; };
-	public int getRegenRate() { return this.regenRate; };
+	public int getRegenRate() { return this.regenRate; }
 	public void setRegenRate(int regenRate) { this.regenRate = regenRate; };
-	public int getInitiative() { return this.initiative; };
+	public int getInitiative() { return this.initiative; }
 	public void setInitiative(int initiative) { this.initiative = initiative; };
-	public int getAlignmentSide() { return this.alignmentSide; };
+	public int getAlignmentSide() { return this.alignmentSide; }
 	public void setAlignmentSide(int alignmentSide) { this.alignmentSide = alignmentSide; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public PlayerStatus getStatus() { return this.status; };
+	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
-	public List<PartyCompanionMemberInformations> getCompanions() { return this.companions; };
-	public void setCompanions(List<PartyCompanionMemberInformations> companions) { this.companions = companions; };
+	public List<PartyCompanionBaseInformations> getCompanions() { return this.companions; }
+	public void setCompanions(List<PartyCompanionBaseInformations> companions) { this.companions = companions; };
 
 	public PartyMemberInformations(){
 	}
 
-	public PartyMemberInformations(int lifePoints, int maxLifePoints, int prospecting, int regenRate, int initiative, int alignmentSide, int worldX, int worldY, double mapId, int subAreaId, PlayerStatus status, List<PartyCompanionMemberInformations> companions){
+	public PartyMemberInformations(int lifePoints, int maxLifePoints, int prospecting, int regenRate, int initiative, int alignmentSide, int worldX, int worldY, double mapId, int subAreaId, PlayerStatus status, List<PartyCompanionBaseInformations> companions){
 		this.lifePoints = lifePoints;
 		this.maxLifePoints = maxLifePoints;
 		this.prospecting = prospecting;
@@ -92,6 +92,7 @@ public class PartyMemberInformations extends CharacterBaseInformations {
 			writer.writeShort(this.companions.size());
 			int _loc2_ = 0;
 			while( _loc2_ < this.companions.size()){
+				writer.writeShort(PartyCompanionBaseInformations.ProtocolId);
 				this.companions.get(_loc2_).Serialize(writer);
 				_loc2_++;
 			}
@@ -118,9 +119,9 @@ public class PartyMemberInformations extends CharacterBaseInformations {
 			this.status.Deserialize(reader);
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
-			this.companions = new ArrayList<PartyCompanionMemberInformations>();
+			this.companions = new ArrayList<PartyCompanionBaseInformations>();
 			while( _loc3_ <  _loc2_){
-				PartyCompanionMemberInformations _loc15_ = new PartyCompanionMemberInformations();
+				PartyCompanionBaseInformations _loc15_ = (PartyCompanionBaseInformations) ProtocolTypeManager.getInstance(reader.readShort());
 				_loc15_.Deserialize(reader);
 				this.companions.add(_loc15_);
 				_loc3_++;

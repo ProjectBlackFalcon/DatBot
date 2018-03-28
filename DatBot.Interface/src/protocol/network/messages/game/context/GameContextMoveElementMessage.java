@@ -19,7 +19,7 @@ public class GameContextMoveElementMessage extends NetworkMessage {
 
 	private EntityMovementInformations movement;
 
-	public EntityMovementInformations getMovement() { return this.movement; };
+	public EntityMovementInformations getMovement() { return this.movement; }
 	public void setMovement(EntityMovementInformations movement) { this.movement = movement; };
 
 	public GameContextMoveElementMessage(){

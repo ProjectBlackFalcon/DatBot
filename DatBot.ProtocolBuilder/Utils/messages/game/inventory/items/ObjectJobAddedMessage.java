@@ -18,7 +18,7 @@ public class ObjectJobAddedMessage extends NetworkMessage {
 
 	private int jobId;
 
-	public int getJobId() { return this.jobId; };
+	public int getJobId() { return this.jobId; }
 	public void setJobId(int jobId) { this.jobId = jobId; };
 
 	public ObjectJobAddedMessage(){

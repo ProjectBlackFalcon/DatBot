@@ -18,7 +18,7 @@ public class StorageObjectRemoveMessage extends NetworkMessage {
 
 	private int objectUID;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
 
 	public StorageObjectRemoveMessage(){

@@ -18,7 +18,7 @@ public class PartyIdol extends Idol {
 
 	private List<Long> ownersIds;
 
-	public List<Long> getOwnersIds() { return this.ownersIds; };
+	public List<Long> getOwnersIds() { return this.ownersIds; }
 	public void setOwnersIds(List<Long> ownersIds) { this.ownersIds = ownersIds; };
 
 	public PartyIdol(){

@@ -19,9 +19,9 @@ public class MapCoordinates extends NetworkMessage {
 	private int worldX;
 	private int worldY;
 
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
 
 	public MapCoordinates(){

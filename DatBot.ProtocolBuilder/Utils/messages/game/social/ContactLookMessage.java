@@ -22,13 +22,13 @@ public class ContactLookMessage extends NetworkMessage {
 	private long playerId;
 	private EntityLook look;
 
-	public int getRequestId() { return this.requestId; };
+	public int getRequestId() { return this.requestId; }
 	public void setRequestId(int requestId) { this.requestId = requestId; };
-	public String getPlayerName() { return this.playerName; };
+	public String getPlayerName() { return this.playerName; }
 	public void setPlayerName(String playerName) { this.playerName = playerName; };
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public EntityLook getLook() { return this.look; };
+	public EntityLook getLook() { return this.look; }
 	public void setLook(EntityLook look) { this.look = look; };
 
 	public ContactLookMessage(){

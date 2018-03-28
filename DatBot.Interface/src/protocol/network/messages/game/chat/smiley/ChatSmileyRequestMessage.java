@@ -18,7 +18,7 @@ public class ChatSmileyRequestMessage extends NetworkMessage {
 
 	private int smileyId;
 
-	public int getSmileyId() { return this.smileyId; };
+	public int getSmileyId() { return this.smileyId; }
 	public void setSmileyId(int smileyId) { this.smileyId = smileyId; };
 
 	public ChatSmileyRequestMessage(){

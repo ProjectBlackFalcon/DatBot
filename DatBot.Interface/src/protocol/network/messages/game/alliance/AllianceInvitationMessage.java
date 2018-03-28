@@ -18,7 +18,7 @@ public class AllianceInvitationMessage extends NetworkMessage {
 
 	private long targetId;
 
-	public long getTargetId() { return this.targetId; };
+	public long getTargetId() { return this.targetId; }
 	public void setTargetId(long targetId) { this.targetId = targetId; };
 
 	public AllianceInvitationMessage(){

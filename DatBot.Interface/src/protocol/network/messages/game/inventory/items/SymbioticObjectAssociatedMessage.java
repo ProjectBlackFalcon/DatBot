@@ -18,7 +18,7 @@ public class SymbioticObjectAssociatedMessage extends NetworkMessage {
 
 	private int hostUID;
 
-	public int getHostUID() { return this.hostUID; };
+	public int getHostUID() { return this.hostUID; }
 	public void setHostUID(int hostUID) { this.hostUID = hostUID; };
 
 	public SymbioticObjectAssociatedMessage(){

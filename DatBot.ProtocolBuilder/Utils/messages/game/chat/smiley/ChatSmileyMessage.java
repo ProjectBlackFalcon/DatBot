@@ -20,11 +20,11 @@ public class ChatSmileyMessage extends NetworkMessage {
 	private int smileyId;
 	private int accountId;
 
-	public double getEntityId() { return this.entityId; };
+	public double getEntityId() { return this.entityId; }
 	public void setEntityId(double entityId) { this.entityId = entityId; };
-	public int getSmileyId() { return this.smileyId; };
+	public int getSmileyId() { return this.smileyId; }
 	public void setSmileyId(int smileyId) { this.smileyId = smileyId; };
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
 
 	public ChatSmileyMessage(){

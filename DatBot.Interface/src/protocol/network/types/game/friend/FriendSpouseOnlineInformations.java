@@ -21,13 +21,13 @@ public class FriendSpouseOnlineInformations extends FriendSpouseInformations {
 	private boolean inFight;
 	private boolean followSpouse;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public boolean isInFight() { return this.inFight; };
+	public boolean isInFight() { return this.inFight; }
 	public void setInFight(boolean inFight) { this.inFight = inFight; };
-	public boolean isFollowSpouse() { return this.followSpouse; };
+	public boolean isFollowSpouse() { return this.followSpouse; }
 	public void setFollowSpouse(boolean followSpouse) { this.followSpouse = followSpouse; };
 
 	public FriendSpouseOnlineInformations(){

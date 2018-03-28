@@ -19,7 +19,7 @@ public class TaxCollectorStaticExtendedInformations extends TaxCollectorStaticIn
 
 	private AllianceInformations allianceIdentity;
 
-	public AllianceInformations getAllianceIdentity() { return this.allianceIdentity; };
+	public AllianceInformations getAllianceIdentity() { return this.allianceIdentity; }
 	public void setAllianceIdentity(AllianceInformations allianceIdentity) { this.allianceIdentity = allianceIdentity; };
 
 	public TaxCollectorStaticExtendedInformations(){

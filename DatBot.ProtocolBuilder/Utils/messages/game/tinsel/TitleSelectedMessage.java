@@ -18,7 +18,7 @@ public class TitleSelectedMessage extends NetworkMessage {
 
 	private int titleId;
 
-	public int getTitleId() { return this.titleId; };
+	public int getTitleId() { return this.titleId; }
 	public void setTitleId(int titleId) { this.titleId = titleId; };
 
 	public TitleSelectedMessage(){

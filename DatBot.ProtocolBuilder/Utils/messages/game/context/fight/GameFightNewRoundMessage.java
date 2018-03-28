@@ -18,7 +18,7 @@ public class GameFightNewRoundMessage extends NetworkMessage {
 
 	private int roundNumber;
 
-	public int getRoundNumber() { return this.roundNumber; };
+	public int getRoundNumber() { return this.roundNumber; }
 	public void setRoundNumber(int roundNumber) { this.roundNumber = roundNumber; };
 
 	public GameFightNewRoundMessage(){

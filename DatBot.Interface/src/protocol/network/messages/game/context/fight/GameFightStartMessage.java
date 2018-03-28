@@ -19,7 +19,7 @@ public class GameFightStartMessage extends NetworkMessage {
 
 	private List<Idol> idols;
 
-	public List<Idol> getIdols() { return this.idols; };
+	public List<Idol> getIdols() { return this.idols; }
 	public void setIdols(List<Idol> idols) { this.idols = idols; };
 
 	public GameFightStartMessage(){

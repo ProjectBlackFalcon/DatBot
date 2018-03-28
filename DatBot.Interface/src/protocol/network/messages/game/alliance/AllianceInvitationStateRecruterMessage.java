@@ -19,9 +19,9 @@ public class AllianceInvitationStateRecruterMessage extends NetworkMessage {
 	private String recrutedName;
 	private int invitationState;
 
-	public String getRecrutedName() { return this.recrutedName; };
+	public String getRecrutedName() { return this.recrutedName; }
 	public void setRecrutedName(String recrutedName) { this.recrutedName = recrutedName; };
-	public int getInvitationState() { return this.invitationState; };
+	public int getInvitationState() { return this.invitationState; }
 	public void setInvitationState(int invitationState) { this.invitationState = invitationState; };
 
 	public AllianceInvitationStateRecruterMessage(){

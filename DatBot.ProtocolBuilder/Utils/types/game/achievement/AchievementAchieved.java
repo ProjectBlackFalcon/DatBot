@@ -19,9 +19,9 @@ public class AchievementAchieved extends NetworkMessage {
 	private int id;
 	private long achievedBy;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public long getAchievedBy() { return this.achievedBy; };
+	public long getAchievedBy() { return this.achievedBy; }
 	public void setAchievedBy(long achievedBy) { this.achievedBy = achievedBy; };
 
 	public AchievementAchieved(){

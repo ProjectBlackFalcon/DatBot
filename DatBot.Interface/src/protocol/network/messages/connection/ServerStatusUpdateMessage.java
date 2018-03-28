@@ -19,7 +19,7 @@ public class ServerStatusUpdateMessage extends NetworkMessage {
 
 	private GameServerInformations server;
 
-	public GameServerInformations getServer() { return this.server; };
+	public GameServerInformations getServer() { return this.server; }
 	public void setServer(GameServerInformations server) { this.server = server; };
 
 	public ServerStatusUpdateMessage(){

@@ -19,9 +19,9 @@ public class QuestObjectiveInformationsWithCompletion extends QuestObjectiveInfo
 	private int curCompletion;
 	private int maxCompletion;
 
-	public int getCurCompletion() { return this.curCompletion; };
+	public int getCurCompletion() { return this.curCompletion; }
 	public void setCurCompletion(int curCompletion) { this.curCompletion = curCompletion; };
-	public int getMaxCompletion() { return this.maxCompletion; };
+	public int getMaxCompletion() { return this.maxCompletion; }
 	public void setMaxCompletion(int maxCompletion) { this.maxCompletion = maxCompletion; };
 
 	public QuestObjectiveInformationsWithCompletion(){

@@ -21,13 +21,13 @@ public class ExchangeMountFreeFromPaddockMessage extends NetworkMessage {
 	private int worldY;
 	private String liberator;
 
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public String getLiberator() { return this.liberator; };
+	public String getLiberator() { return this.liberator; }
 	public void setLiberator(String liberator) { this.liberator = liberator; };
 
 	public ExchangeMountFreeFromPaddockMessage(){

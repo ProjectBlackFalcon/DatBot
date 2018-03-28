@@ -20,9 +20,9 @@ public class NamedPartyTeamWithOutcome extends NetworkMessage {
 	private NamedPartyTeam team;
 	private int outcome;
 
-	public NamedPartyTeam getTeam() { return this.team; };
+	public NamedPartyTeam getTeam() { return this.team; }
 	public void setTeam(NamedPartyTeam team) { this.team = team; };
-	public int getOutcome() { return this.outcome; };
+	public int getOutcome() { return this.outcome; }
 	public void setOutcome(int outcome) { this.outcome = outcome; };
 
 	public NamedPartyTeamWithOutcome(){

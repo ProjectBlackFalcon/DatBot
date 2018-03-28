@@ -22,15 +22,15 @@ public class HouseToSellFilterMessage extends NetworkMessage {
 	private int skillRequested;
 	private long maxPrice;
 
-	public int getAreaId() { return this.areaId; };
+	public int getAreaId() { return this.areaId; }
 	public void setAreaId(int areaId) { this.areaId = areaId; };
-	public int getAtLeastNbRoom() { return this.atLeastNbRoom; };
+	public int getAtLeastNbRoom() { return this.atLeastNbRoom; }
 	public void setAtLeastNbRoom(int atLeastNbRoom) { this.atLeastNbRoom = atLeastNbRoom; };
-	public int getAtLeastNbChest() { return this.atLeastNbChest; };
+	public int getAtLeastNbChest() { return this.atLeastNbChest; }
 	public void setAtLeastNbChest(int atLeastNbChest) { this.atLeastNbChest = atLeastNbChest; };
-	public int getSkillRequested() { return this.skillRequested; };
+	public int getSkillRequested() { return this.skillRequested; }
 	public void setSkillRequested(int skillRequested) { this.skillRequested = skillRequested; };
-	public long getMaxPrice() { return this.maxPrice; };
+	public long getMaxPrice() { return this.maxPrice; }
 	public void setMaxPrice(long maxPrice) { this.maxPrice = maxPrice; };
 
 	public HouseToSellFilterMessage(){

@@ -18,7 +18,7 @@ public class GoldItem extends Item {
 
 	private long sum;
 
-	public long getSum() { return this.sum; };
+	public long getSum() { return this.sum; }
 	public void setSum(long sum) { this.sum = sum; };
 
 	public GoldItem(){

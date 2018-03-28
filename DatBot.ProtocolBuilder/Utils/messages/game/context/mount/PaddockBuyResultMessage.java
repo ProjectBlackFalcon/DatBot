@@ -20,11 +20,11 @@ public class PaddockBuyResultMessage extends NetworkMessage {
 	private boolean bought;
 	private long realPrice;
 
-	public double getPaddockId() { return this.paddockId; };
+	public double getPaddockId() { return this.paddockId; }
 	public void setPaddockId(double paddockId) { this.paddockId = paddockId; };
-	public boolean isBought() { return this.bought; };
+	public boolean isBought() { return this.bought; }
 	public void setBought(boolean bought) { this.bought = bought; };
-	public long getRealPrice() { return this.realPrice; };
+	public long getRealPrice() { return this.realPrice; }
 	public void setRealPrice(long realPrice) { this.realPrice = realPrice; };
 
 	public PaddockBuyResultMessage(){

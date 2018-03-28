@@ -23,13 +23,13 @@ public class PrismFightersInformation extends NetworkMessage {
 	private List<CharacterMinimalPlusLookInformations> allyCharactersInformations;
 	private List<CharacterMinimalPlusLookInformations> enemyCharactersInformations;
 
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public ProtectedEntityWaitingForHelpInfo getWaitingForHelpInfo() { return this.waitingForHelpInfo; };
+	public ProtectedEntityWaitingForHelpInfo getWaitingForHelpInfo() { return this.waitingForHelpInfo; }
 	public void setWaitingForHelpInfo(ProtectedEntityWaitingForHelpInfo waitingForHelpInfo) { this.waitingForHelpInfo = waitingForHelpInfo; };
-	public List<CharacterMinimalPlusLookInformations> getAllyCharactersInformations() { return this.allyCharactersInformations; };
+	public List<CharacterMinimalPlusLookInformations> getAllyCharactersInformations() { return this.allyCharactersInformations; }
 	public void setAllyCharactersInformations(List<CharacterMinimalPlusLookInformations> allyCharactersInformations) { this.allyCharactersInformations = allyCharactersInformations; };
-	public List<CharacterMinimalPlusLookInformations> getEnemyCharactersInformations() { return this.enemyCharactersInformations; };
+	public List<CharacterMinimalPlusLookInformations> getEnemyCharactersInformations() { return this.enemyCharactersInformations; }
 	public void setEnemyCharactersInformations(List<CharacterMinimalPlusLookInformations> enemyCharactersInformations) { this.enemyCharactersInformations = enemyCharactersInformations; };
 
 	public PrismFightersInformation(){

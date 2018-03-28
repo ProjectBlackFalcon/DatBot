@@ -23,15 +23,15 @@ public class GameFightFighterInformations extends GameContextActorInformations {
 	private GameFightMinimalStats stats;
 	private List<Integer> previousPositions;
 
-	public int getTeamId() { return this.teamId; };
+	public int getTeamId() { return this.teamId; }
 	public void setTeamId(int teamId) { this.teamId = teamId; };
-	public int getWave() { return this.wave; };
+	public int getWave() { return this.wave; }
 	public void setWave(int wave) { this.wave = wave; };
-	public boolean isAlive() { return this.alive; };
+	public boolean isAlive() { return this.alive; }
 	public void setAlive(boolean alive) { this.alive = alive; };
-	public GameFightMinimalStats getStats() { return this.stats; };
+	public GameFightMinimalStats getStats() { return this.stats; }
 	public void setStats(GameFightMinimalStats stats) { this.stats = stats; };
-	public List<Integer> getPreviousPositions() { return this.previousPositions; };
+	public List<Integer> getPreviousPositions() { return this.previousPositions; }
 	public void setPreviousPositions(List<Integer> previousPositions) { this.previousPositions = previousPositions; };
 
 	public GameFightFighterInformations(){

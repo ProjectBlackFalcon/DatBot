@@ -18,7 +18,7 @@ public class GameRolePlayDelayedObjectUseMessage extends GameRolePlayDelayedActi
 
 	private int objectGID;
 
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
 
 	public GameRolePlayDelayedObjectUseMessage(){

@@ -21,11 +21,11 @@ public class FightDispellableEffectExtendedInformations extends NetworkMessage {
 	private double sourceId;
 	private AbstractFightDispellableEffect effect;
 
-	public int getActionId() { return this.actionId; };
+	public int getActionId() { return this.actionId; }
 	public void setActionId(int actionId) { this.actionId = actionId; };
-	public double getSourceId() { return this.sourceId; };
+	public double getSourceId() { return this.sourceId; }
 	public void setSourceId(double sourceId) { this.sourceId = sourceId; };
-	public AbstractFightDispellableEffect getEffect() { return this.effect; };
+	public AbstractFightDispellableEffect getEffect() { return this.effect; }
 	public void setEffect(AbstractFightDispellableEffect effect) { this.effect = effect; };
 
 	public FightDispellableEffectExtendedInformations(){

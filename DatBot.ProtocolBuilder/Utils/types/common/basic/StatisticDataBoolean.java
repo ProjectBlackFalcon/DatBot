@@ -18,7 +18,7 @@ public class StatisticDataBoolean extends StatisticData {
 
 	private boolean value;
 
-	public boolean isValue() { return this.value; };
+	public boolean isValue() { return this.value; }
 	public void setValue(boolean value) { this.value = value; };
 
 	public StatisticDataBoolean(){

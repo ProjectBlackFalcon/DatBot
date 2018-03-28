@@ -19,9 +19,9 @@ public class GameRolePlayPlayerLifeStatusMessage extends NetworkMessage {
 	private int state;
 	private double phenixMapId;
 
-	public int getState() { return this.state; };
+	public int getState() { return this.state; }
 	public void setState(int state) { this.state = state; };
-	public double getPhenixMapId() { return this.phenixMapId; };
+	public double getPhenixMapId() { return this.phenixMapId; }
 	public void setPhenixMapId(double phenixMapId) { this.phenixMapId = phenixMapId; };
 
 	public GameRolePlayPlayerLifeStatusMessage(){

@@ -18,7 +18,7 @@ public class GuildCharacsUpgradeRequestMessage extends NetworkMessage {
 
 	private int charaTypeTarget;
 
-	public int getCharaTypeTarget() { return this.charaTypeTarget; };
+	public int getCharaTypeTarget() { return this.charaTypeTarget; }
 	public void setCharaTypeTarget(int charaTypeTarget) { this.charaTypeTarget = charaTypeTarget; };
 
 	public GuildCharacsUpgradeRequestMessage(){

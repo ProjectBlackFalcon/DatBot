@@ -18,7 +18,7 @@ public class AbstractPartyMessage extends NetworkMessage {
 
 	private int partyId;
 
-	public int getPartyId() { return this.partyId; };
+	public int getPartyId() { return this.partyId; }
 	public void setPartyId(int partyId) { this.partyId = partyId; };
 
 	public AbstractPartyMessage(){

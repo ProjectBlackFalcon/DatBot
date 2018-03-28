@@ -20,11 +20,11 @@ public class TeleportToBuddyOfferMessage extends NetworkMessage {
 	private long buddyId;
 	private int timeLeft;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
-	public long getBuddyId() { return this.buddyId; };
+	public long getBuddyId() { return this.buddyId; }
 	public void setBuddyId(long buddyId) { this.buddyId = buddyId; };
-	public int getTimeLeft() { return this.timeLeft; };
+	public int getTimeLeft() { return this.timeLeft; }
 	public void setTimeLeft(int timeLeft) { this.timeLeft = timeLeft; };
 
 	public TeleportToBuddyOfferMessage(){

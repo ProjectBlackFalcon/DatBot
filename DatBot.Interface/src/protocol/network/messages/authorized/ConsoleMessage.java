@@ -19,9 +19,9 @@ public class ConsoleMessage extends NetworkMessage {
 	private int type;
 	private String content;
 
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public String getContent() { return this.content; };
+	public String getContent() { return this.content; }
 	public void setContent(String content) { this.content = content; };
 
 	public ConsoleMessage(){

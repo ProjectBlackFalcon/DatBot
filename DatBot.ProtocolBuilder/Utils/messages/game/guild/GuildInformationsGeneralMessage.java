@@ -25,21 +25,21 @@ public class GuildInformationsGeneralMessage extends NetworkMessage {
 	private int nbTotalMembers;
 	private int nbConnectedMembers;
 
-	public boolean isAbandonnedPaddock() { return this.abandonnedPaddock; };
+	public boolean isAbandonnedPaddock() { return this.abandonnedPaddock; }
 	public void setAbandonnedPaddock(boolean abandonnedPaddock) { this.abandonnedPaddock = abandonnedPaddock; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public long getExpLevelFloor() { return this.expLevelFloor; };
+	public long getExpLevelFloor() { return this.expLevelFloor; }
 	public void setExpLevelFloor(long expLevelFloor) { this.expLevelFloor = expLevelFloor; };
-	public long getExperience() { return this.experience; };
+	public long getExperience() { return this.experience; }
 	public void setExperience(long experience) { this.experience = experience; };
-	public long getExpNextLevelFloor() { return this.expNextLevelFloor; };
+	public long getExpNextLevelFloor() { return this.expNextLevelFloor; }
 	public void setExpNextLevelFloor(long expNextLevelFloor) { this.expNextLevelFloor = expNextLevelFloor; };
-	public int getCreationDate() { return this.creationDate; };
+	public int getCreationDate() { return this.creationDate; }
 	public void setCreationDate(int creationDate) { this.creationDate = creationDate; };
-	public int getNbTotalMembers() { return this.nbTotalMembers; };
+	public int getNbTotalMembers() { return this.nbTotalMembers; }
 	public void setNbTotalMembers(int nbTotalMembers) { this.nbTotalMembers = nbTotalMembers; };
-	public int getNbConnectedMembers() { return this.nbConnectedMembers; };
+	public int getNbConnectedMembers() { return this.nbConnectedMembers; }
 	public void setNbConnectedMembers(int nbConnectedMembers) { this.nbConnectedMembers = nbConnectedMembers; };
 
 	public GuildInformationsGeneralMessage(){

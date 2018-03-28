@@ -18,7 +18,7 @@ public class RefreshFollowedQuestsOrderRequestMessage extends NetworkMessage {
 
 	private List<Integer> quests;
 
-	public List<Integer> getQuests() { return this.quests; };
+	public List<Integer> getQuests() { return this.quests; }
 	public void setQuests(List<Integer> quests) { this.quests = quests; };
 
 	public RefreshFollowedQuestsOrderRequestMessage(){

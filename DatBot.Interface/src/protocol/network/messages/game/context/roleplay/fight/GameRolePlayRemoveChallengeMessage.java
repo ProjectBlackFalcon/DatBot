@@ -18,7 +18,7 @@ public class GameRolePlayRemoveChallengeMessage extends NetworkMessage {
 
 	private int fightId;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
 
 	public GameRolePlayRemoveChallengeMessage(){

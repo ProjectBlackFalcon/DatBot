@@ -18,7 +18,7 @@ public class ChatClientMultiMessage extends ChatAbstractClientMessage {
 
 	private int channel;
 
-	public int getChannel() { return this.channel; };
+	public int getChannel() { return this.channel; }
 	public void setChannel(int channel) { this.channel = channel; };
 
 	public ChatClientMultiMessage(){

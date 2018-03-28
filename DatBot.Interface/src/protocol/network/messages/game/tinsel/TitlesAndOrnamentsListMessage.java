@@ -21,13 +21,13 @@ public class TitlesAndOrnamentsListMessage extends NetworkMessage {
 	private int activeTitle;
 	private int activeOrnament;
 
-	public List<Integer> getTitles() { return this.titles; };
+	public List<Integer> getTitles() { return this.titles; }
 	public void setTitles(List<Integer> titles) { this.titles = titles; };
-	public List<Integer> getOrnaments() { return this.ornaments; };
+	public List<Integer> getOrnaments() { return this.ornaments; }
 	public void setOrnaments(List<Integer> ornaments) { this.ornaments = ornaments; };
-	public int getActiveTitle() { return this.activeTitle; };
+	public int getActiveTitle() { return this.activeTitle; }
 	public void setActiveTitle(int activeTitle) { this.activeTitle = activeTitle; };
-	public int getActiveOrnament() { return this.activeOrnament; };
+	public int getActiveOrnament() { return this.activeOrnament; }
 	public void setActiveOrnament(int activeOrnament) { this.activeOrnament = activeOrnament; };
 
 	public TitlesAndOrnamentsListMessage(){

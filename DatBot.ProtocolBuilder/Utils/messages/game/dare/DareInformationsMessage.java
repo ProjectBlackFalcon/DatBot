@@ -21,9 +21,9 @@ public class DareInformationsMessage extends NetworkMessage {
 	private DareInformations dareFixedInfos;
 	private DareVersatileInformations dareVersatilesInfos;
 
-	public DareInformations getDareFixedInfos() { return this.dareFixedInfos; };
+	public DareInformations getDareFixedInfos() { return this.dareFixedInfos; }
 	public void setDareFixedInfos(DareInformations dareFixedInfos) { this.dareFixedInfos = dareFixedInfos; };
-	public DareVersatileInformations getDareVersatilesInfos() { return this.dareVersatilesInfos; };
+	public DareVersatileInformations getDareVersatilesInfos() { return this.dareVersatilesInfos; }
 	public void setDareVersatilesInfos(DareVersatileInformations dareVersatilesInfos) { this.dareVersatilesInfos = dareVersatilesInfos; };
 
 	public DareInformationsMessage(){

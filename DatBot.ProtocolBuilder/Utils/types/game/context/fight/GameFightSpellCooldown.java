@@ -19,9 +19,9 @@ public class GameFightSpellCooldown extends NetworkMessage {
 	private int spellId;
 	private int cooldown;
 
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public int getCooldown() { return this.cooldown; };
+	public int getCooldown() { return this.cooldown; }
 	public void setCooldown(int cooldown) { this.cooldown = cooldown; };
 
 	public GameFightSpellCooldown(){

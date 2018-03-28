@@ -18,7 +18,7 @@ public class PartyPledgeLoyaltyRequestMessage extends AbstractPartyMessage {
 
 	private boolean loyal;
 
-	public boolean isLoyal() { return this.loyal; };
+	public boolean isLoyal() { return this.loyal; }
 	public void setLoyal(boolean loyal) { this.loyal = loyal; };
 
 	public PartyPledgeLoyaltyRequestMessage(){

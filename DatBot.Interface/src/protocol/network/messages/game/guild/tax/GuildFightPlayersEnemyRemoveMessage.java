@@ -19,9 +19,9 @@ public class GuildFightPlayersEnemyRemoveMessage extends NetworkMessage {
 	private double fightId;
 	private long playerId;
 
-	public double getFightId() { return this.fightId; };
+	public double getFightId() { return this.fightId; }
 	public void setFightId(double fightId) { this.fightId = fightId; };
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
 
 	public GuildFightPlayersEnemyRemoveMessage(){

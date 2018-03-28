@@ -18,7 +18,7 @@ public class ObjectEffectCreature extends ObjectEffect {
 
 	private int monsterFamilyId;
 
-	public int getMonsterFamilyId() { return this.monsterFamilyId; };
+	public int getMonsterFamilyId() { return this.monsterFamilyId; }
 	public void setMonsterFamilyId(int monsterFamilyId) { this.monsterFamilyId = monsterFamilyId; };
 
 	public ObjectEffectCreature(){

@@ -19,9 +19,9 @@ public class GameRolePlayDelayedActionFinishedMessage extends NetworkMessage {
 	private double delayedCharacterId;
 	private int delayTypeId;
 
-	public double getDelayedCharacterId() { return this.delayedCharacterId; };
+	public double getDelayedCharacterId() { return this.delayedCharacterId; }
 	public void setDelayedCharacterId(double delayedCharacterId) { this.delayedCharacterId = delayedCharacterId; };
-	public int getDelayTypeId() { return this.delayTypeId; };
+	public int getDelayTypeId() { return this.delayTypeId; }
 	public void setDelayTypeId(int delayTypeId) { this.delayTypeId = delayTypeId; };
 
 	public GameRolePlayDelayedActionFinishedMessage(){

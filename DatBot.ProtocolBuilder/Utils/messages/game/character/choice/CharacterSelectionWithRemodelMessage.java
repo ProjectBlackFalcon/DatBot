@@ -19,7 +19,7 @@ public class CharacterSelectionWithRemodelMessage extends CharacterSelectionMess
 
 	private RemodelingInformation remodel;
 
-	public RemodelingInformation getRemodel() { return this.remodel; };
+	public RemodelingInformation getRemodel() { return this.remodel; }
 	public void setRemodel(RemodelingInformation remodel) { this.remodel = remodel; };
 
 	public CharacterSelectionWithRemodelMessage(){

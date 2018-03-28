@@ -18,7 +18,7 @@ public class GameFightReadyMessage extends NetworkMessage {
 
 	private boolean isReady;
 
-	public boolean isIsReady() { return this.isReady; };
+	public boolean isIsReady() { return this.isReady; }
 	public void setIsReady(boolean isReady) { this.isReady = isReady; };
 
 	public GameFightReadyMessage(){

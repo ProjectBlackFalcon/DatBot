@@ -18,7 +18,7 @@ public class FightTeamMemberInformations extends NetworkMessage {
 
 	private double id;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
 
 	public FightTeamMemberInformations(){

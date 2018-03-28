@@ -21,11 +21,11 @@ public class SubEntity extends NetworkMessage {
 	private int bindingPointIndex;
 	private EntityLook subEntityLook;
 
-	public int getBindingPointCategory() { return this.bindingPointCategory; };
+	public int getBindingPointCategory() { return this.bindingPointCategory; }
 	public void setBindingPointCategory(int bindingPointCategory) { this.bindingPointCategory = bindingPointCategory; };
-	public int getBindingPointIndex() { return this.bindingPointIndex; };
+	public int getBindingPointIndex() { return this.bindingPointIndex; }
 	public void setBindingPointIndex(int bindingPointIndex) { this.bindingPointIndex = bindingPointIndex; };
-	public EntityLook getSubEntityLook() { return this.subEntityLook; };
+	public EntityLook getSubEntityLook() { return this.subEntityLook; }
 	public void setSubEntityLook(EntityLook subEntityLook) { this.subEntityLook = subEntityLook; };
 
 	public SubEntity(){

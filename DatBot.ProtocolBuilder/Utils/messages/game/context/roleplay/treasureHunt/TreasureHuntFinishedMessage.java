@@ -18,7 +18,7 @@ public class TreasureHuntFinishedMessage extends NetworkMessage {
 
 	private int questType;
 
-	public int getQuestType() { return this.questType; };
+	public int getQuestType() { return this.questType; }
 	public void setQuestType(int questType) { this.questType = questType; };
 
 	public TreasureHuntFinishedMessage(){

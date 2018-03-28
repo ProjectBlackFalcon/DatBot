@@ -20,11 +20,11 @@ public class ObjectEffectDuration extends ObjectEffect {
 	private int hours;
 	private int minutes;
 
-	public int getDays() { return this.days; };
+	public int getDays() { return this.days; }
 	public void setDays(int days) { this.days = days; };
-	public int getHours() { return this.hours; };
+	public int getHours() { return this.hours; }
 	public void setHours(int hours) { this.hours = hours; };
-	public int getMinutes() { return this.minutes; };
+	public int getMinutes() { return this.minutes; }
 	public void setMinutes(int minutes) { this.minutes = minutes; };
 
 	public ObjectEffectDuration(){

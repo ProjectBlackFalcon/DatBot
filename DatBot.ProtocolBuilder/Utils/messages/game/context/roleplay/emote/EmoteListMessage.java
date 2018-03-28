@@ -18,7 +18,7 @@ public class EmoteListMessage extends NetworkMessage {
 
 	private List<Integer> emoteIds;
 
-	public List<Integer> getEmoteIds() { return this.emoteIds; };
+	public List<Integer> getEmoteIds() { return this.emoteIds; }
 	public void setEmoteIds(List<Integer> emoteIds) { this.emoteIds = emoteIds; };
 
 	public EmoteListMessage(){

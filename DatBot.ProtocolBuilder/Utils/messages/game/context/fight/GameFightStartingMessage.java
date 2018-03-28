@@ -21,13 +21,13 @@ public class GameFightStartingMessage extends NetworkMessage {
 	private double attackerId;
 	private double defenderId;
 
-	public int getFightType() { return this.fightType; };
+	public int getFightType() { return this.fightType; }
 	public void setFightType(int fightType) { this.fightType = fightType; };
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public double getAttackerId() { return this.attackerId; };
+	public double getAttackerId() { return this.attackerId; }
 	public void setAttackerId(double attackerId) { this.attackerId = attackerId; };
-	public double getDefenderId() { return this.defenderId; };
+	public double getDefenderId() { return this.defenderId; }
 	public void setDefenderId(double defenderId) { this.defenderId = defenderId; };
 
 	public GameFightStartingMessage(){

@@ -18,7 +18,7 @@ public class AllianceFactSheetInformations extends AllianceInformations {
 
 	private int creationDate;
 
-	public int getCreationDate() { return this.creationDate; };
+	public int getCreationDate() { return this.creationDate; }
 	public void setCreationDate(int creationDate) { this.creationDate = creationDate; };
 
 	public AllianceFactSheetInformations(){

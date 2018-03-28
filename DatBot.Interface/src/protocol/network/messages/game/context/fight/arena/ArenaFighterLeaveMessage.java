@@ -19,7 +19,7 @@ public class ArenaFighterLeaveMessage extends NetworkMessage {
 
 	private CharacterBasicMinimalInformations leaver;
 
-	public CharacterBasicMinimalInformations getLeaver() { return this.leaver; };
+	public CharacterBasicMinimalInformations getLeaver() { return this.leaver; }
 	public void setLeaver(CharacterBasicMinimalInformations leaver) { this.leaver = leaver; };
 
 	public ArenaFighterLeaveMessage(){

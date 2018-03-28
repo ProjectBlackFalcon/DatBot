@@ -20,9 +20,9 @@ public class GuildJoinedMessage extends NetworkMessage {
 	private GuildInformations guildInfo;
 	private int memberRights;
 
-	public GuildInformations getGuildInfo() { return this.guildInfo; };
+	public GuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(GuildInformations guildInfo) { this.guildInfo = guildInfo; };
-	public int getMemberRights() { return this.memberRights; };
+	public int getMemberRights() { return this.memberRights; }
 	public void setMemberRights(int memberRights) { this.memberRights = memberRights; };
 
 	public GuildJoinedMessage(){

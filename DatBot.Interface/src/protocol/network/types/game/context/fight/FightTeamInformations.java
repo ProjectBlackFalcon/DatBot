@@ -19,7 +19,7 @@ public class FightTeamInformations extends AbstractFightTeamInformations {
 
 	private List<FightTeamMemberInformations> teamMembers;
 
-	public List<FightTeamMemberInformations> getTeamMembers() { return this.teamMembers; };
+	public List<FightTeamMemberInformations> getTeamMembers() { return this.teamMembers; }
 	public void setTeamMembers(List<FightTeamMemberInformations> teamMembers) { this.teamMembers = teamMembers; };
 
 	public FightTeamInformations(){

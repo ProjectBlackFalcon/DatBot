@@ -18,7 +18,7 @@ public class ShortcutObjectPreset extends ShortcutObject {
 
 	private int presetId;
 
-	public int getPresetId() { return this.presetId; };
+	public int getPresetId() { return this.presetId; }
 	public void setPresetId(int presetId) { this.presetId = presetId; };
 
 	public ShortcutObjectPreset(){
@@ -32,7 +32,7 @@ public class ShortcutObjectPreset extends ShortcutObject {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			super.Serialize(writer);
-			writer.writeByte(this.presetId);
+			writer.writeShort(this.presetId);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -42,7 +42,7 @@ public class ShortcutObjectPreset extends ShortcutObject {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			super.Deserialize(reader);
-			this.presetId = reader.readByte();
+			this.presetId = reader.readShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

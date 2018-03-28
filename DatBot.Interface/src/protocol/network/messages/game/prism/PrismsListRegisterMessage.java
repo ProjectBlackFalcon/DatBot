@@ -18,7 +18,7 @@ public class PrismsListRegisterMessage extends NetworkMessage {
 
 	private int listen;
 
-	public int getListen() { return this.listen; };
+	public int getListen() { return this.listen; }
 	public void setListen(int listen) { this.listen = listen; };
 
 	public PrismsListRegisterMessage(){

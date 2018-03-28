@@ -19,9 +19,9 @@ public class ExchangeReplyTaxVendorMessage extends NetworkMessage {
 	private long objectValue;
 	private long totalTaxValue;
 
-	public long getObjectValue() { return this.objectValue; };
+	public long getObjectValue() { return this.objectValue; }
 	public void setObjectValue(long objectValue) { this.objectValue = objectValue; };
-	public long getTotalTaxValue() { return this.totalTaxValue; };
+	public long getTotalTaxValue() { return this.totalTaxValue; }
 	public void setTotalTaxValue(long totalTaxValue) { this.totalTaxValue = totalTaxValue; };
 
 	public ExchangeReplyTaxVendorMessage(){

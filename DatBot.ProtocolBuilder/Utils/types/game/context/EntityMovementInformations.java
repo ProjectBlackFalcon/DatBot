@@ -19,9 +19,9 @@ public class EntityMovementInformations extends NetworkMessage {
 	private int id;
 	private List<Integer> steps;
 
-	public int getId() { return this.id; };
+	public int getId() { return this.id; }
 	public void setId(int id) { this.id = id; };
-	public List<Integer> getSteps() { return this.steps; };
+	public List<Integer> getSteps() { return this.steps; }
 	public void setSteps(List<Integer> steps) { this.steps = steps; };
 
 	public EntityMovementInformations(){

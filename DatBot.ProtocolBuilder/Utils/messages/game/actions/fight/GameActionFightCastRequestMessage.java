@@ -19,9 +19,9 @@ public class GameActionFightCastRequestMessage extends NetworkMessage {
 	private int spellId;
 	private int cellId;
 
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public int getCellId() { return this.cellId; };
+	public int getCellId() { return this.cellId; }
 	public void setCellId(int cellId) { this.cellId = cellId; };
 
 	public GameActionFightCastRequestMessage(){

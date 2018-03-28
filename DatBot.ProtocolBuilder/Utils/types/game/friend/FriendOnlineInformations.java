@@ -29,25 +29,25 @@ public class FriendOnlineInformations extends FriendInformations {
 	private PlayerStatus status;
 	private boolean havenBagShared;
 
-	public long getPlayerId() { return this.playerId; };
+	public long getPlayerId() { return this.playerId; }
 	public void setPlayerId(long playerId) { this.playerId = playerId; };
-	public String getPlayerName() { return this.playerName; };
+	public String getPlayerName() { return this.playerName; }
 	public void setPlayerName(String playerName) { this.playerName = playerName; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public int getAlignmentSide() { return this.alignmentSide; };
+	public int getAlignmentSide() { return this.alignmentSide; }
 	public void setAlignmentSide(int alignmentSide) { this.alignmentSide = alignmentSide; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public GuildInformations getGuildInfo() { return this.guildInfo; };
+	public GuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(GuildInformations guildInfo) { this.guildInfo = guildInfo; };
-	public int getMoodSmileyId() { return this.moodSmileyId; };
+	public int getMoodSmileyId() { return this.moodSmileyId; }
 	public void setMoodSmileyId(int moodSmileyId) { this.moodSmileyId = moodSmileyId; };
-	public PlayerStatus getStatus() { return this.status; };
+	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
-	public boolean isHavenBagShared() { return this.havenBagShared; };
+	public boolean isHavenBagShared() { return this.havenBagShared; }
 	public void setHavenBagShared(boolean havenBagShared) { this.havenBagShared = havenBagShared; };
 
 	public FriendOnlineInformations(){

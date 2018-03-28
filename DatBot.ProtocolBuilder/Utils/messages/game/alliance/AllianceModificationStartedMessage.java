@@ -20,11 +20,11 @@ public class AllianceModificationStartedMessage extends NetworkMessage {
 	private boolean canChangeTag;
 	private boolean canChangeEmblem;
 
-	public boolean isCanChangeName() { return this.canChangeName; };
+	public boolean isCanChangeName() { return this.canChangeName; }
 	public void setCanChangeName(boolean canChangeName) { this.canChangeName = canChangeName; };
-	public boolean isCanChangeTag() { return this.canChangeTag; };
+	public boolean isCanChangeTag() { return this.canChangeTag; }
 	public void setCanChangeTag(boolean canChangeTag) { this.canChangeTag = canChangeTag; };
-	public boolean isCanChangeEmblem() { return this.canChangeEmblem; };
+	public boolean isCanChangeEmblem() { return this.canChangeEmblem; }
 	public void setCanChangeEmblem(boolean canChangeEmblem) { this.canChangeEmblem = canChangeEmblem; };
 
 	public AllianceModificationStartedMessage(){

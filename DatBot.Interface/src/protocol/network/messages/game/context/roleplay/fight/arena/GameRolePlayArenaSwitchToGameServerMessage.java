@@ -20,11 +20,11 @@ public class GameRolePlayArenaSwitchToGameServerMessage extends NetworkMessage {
 	private List<Integer> ticket;
 	private int homeServerId;
 
-	public boolean isValidToken() { return this.validToken; };
+	public boolean isValidToken() { return this.validToken; }
 	public void setValidToken(boolean validToken) { this.validToken = validToken; };
-	public List<Integer> getTicket() { return this.ticket; };
+	public List<Integer> getTicket() { return this.ticket; }
 	public void setTicket(List<Integer> ticket) { this.ticket = ticket; };
-	public int getHomeServerId() { return this.homeServerId; };
+	public int getHomeServerId() { return this.homeServerId; }
 	public void setHomeServerId(int homeServerId) { this.homeServerId = homeServerId; };
 
 	public GameRolePlayArenaSwitchToGameServerMessage(){

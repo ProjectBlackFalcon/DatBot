@@ -19,9 +19,9 @@ public class StatsUpgradeResultMessage extends NetworkMessage {
 	private int result;
 	private int nbCharacBoost;
 
-	public int getResult() { return this.result; };
+	public int getResult() { return this.result; }
 	public void setResult(int result) { this.result = result; };
-	public int getNbCharacBoost() { return this.nbCharacBoost; };
+	public int getNbCharacBoost() { return this.nbCharacBoost; }
 	public void setNbCharacBoost(int nbCharacBoost) { this.nbCharacBoost = nbCharacBoost; };
 
 	public StatsUpgradeResultMessage(){

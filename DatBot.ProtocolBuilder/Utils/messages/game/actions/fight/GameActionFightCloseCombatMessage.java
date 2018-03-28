@@ -18,7 +18,7 @@ public class GameActionFightCloseCombatMessage extends AbstractGameActionFightTa
 
 	private int weaponGenericId;
 
-	public int getWeaponGenericId() { return this.weaponGenericId; };
+	public int getWeaponGenericId() { return this.weaponGenericId; }
 	public void setWeaponGenericId(int weaponGenericId) { this.weaponGenericId = weaponGenericId; };
 
 	public GameActionFightCloseCombatMessage(){

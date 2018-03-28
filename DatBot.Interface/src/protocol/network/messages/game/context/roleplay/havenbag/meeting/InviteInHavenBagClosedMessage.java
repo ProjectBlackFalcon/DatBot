@@ -19,7 +19,7 @@ public class InviteInHavenBagClosedMessage extends NetworkMessage {
 
 	private CharacterMinimalInformations hostInformations;
 
-	public CharacterMinimalInformations getHostInformations() { return this.hostInformations; };
+	public CharacterMinimalInformations getHostInformations() { return this.hostInformations; }
 	public void setHostInformations(CharacterMinimalInformations hostInformations) { this.hostInformations = hostInformations; };
 
 	public InviteInHavenBagClosedMessage(){

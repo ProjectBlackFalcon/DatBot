@@ -19,9 +19,9 @@ public class GameFightHumanReadyStateMessage extends NetworkMessage {
 	private long characterId;
 	private boolean isReady;
 
-	public long getCharacterId() { return this.characterId; };
+	public long getCharacterId() { return this.characterId; }
 	public void setCharacterId(long characterId) { this.characterId = characterId; };
-	public boolean isIsReady() { return this.isReady; };
+	public boolean isIsReady() { return this.isReady; }
 	public void setIsReady(boolean isReady) { this.isReady = isReady; };
 
 	public GameFightHumanReadyStateMessage(){

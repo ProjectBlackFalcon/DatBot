@@ -19,9 +19,9 @@ public class GuildMemberLeavingMessage extends NetworkMessage {
 	private boolean kicked;
 	private long memberId;
 
-	public boolean isKicked() { return this.kicked; };
+	public boolean isKicked() { return this.kicked; }
 	public void setKicked(boolean kicked) { this.kicked = kicked; };
-	public long getMemberId() { return this.memberId; };
+	public long getMemberId() { return this.memberId; }
 	public void setMemberId(long memberId) { this.memberId = memberId; };
 
 	public GuildMemberLeavingMessage(){

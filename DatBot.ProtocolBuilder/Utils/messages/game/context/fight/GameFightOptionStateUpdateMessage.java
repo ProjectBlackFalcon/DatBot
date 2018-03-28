@@ -21,13 +21,13 @@ public class GameFightOptionStateUpdateMessage extends NetworkMessage {
 	private int option;
 	private boolean state;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public int getTeamId() { return this.teamId; };
+	public int getTeamId() { return this.teamId; }
 	public void setTeamId(int teamId) { this.teamId = teamId; };
-	public int getOption() { return this.option; };
+	public int getOption() { return this.option; }
 	public void setOption(int option) { this.option = option; };
-	public boolean isState() { return this.state; };
+	public boolean isState() { return this.state; }
 	public void setState(boolean state) { this.state = state; };
 
 	public GameFightOptionStateUpdateMessage(){

@@ -28,27 +28,27 @@ public class IdentificationSuccessMessage extends NetworkMessage {
 	private boolean wasAlreadyConnected;
 	private int havenbagAvailableRoom;
 
-	public String getLogin() { return this.login; };
+	public String getLogin() { return this.login; }
 	public void setLogin(String login) { this.login = login; };
-	public String getNickname() { return this.nickname; };
+	public String getNickname() { return this.nickname; }
 	public void setNickname(String nickname) { this.nickname = nickname; };
-	public int getAccountId() { return this.accountId; };
+	public int getAccountId() { return this.accountId; }
 	public void setAccountId(int accountId) { this.accountId = accountId; };
-	public int getCommunityId() { return this.communityId; };
+	public int getCommunityId() { return this.communityId; }
 	public void setCommunityId(int communityId) { this.communityId = communityId; };
-	public boolean isHasRights() { return this.hasRights; };
+	public boolean isHasRights() { return this.hasRights; }
 	public void setHasRights(boolean hasRights) { this.hasRights = hasRights; };
-	public String getSecretQuestion() { return this.secretQuestion; };
+	public String getSecretQuestion() { return this.secretQuestion; }
 	public void setSecretQuestion(String secretQuestion) { this.secretQuestion = secretQuestion; };
-	public double getAccountCreation() { return this.accountCreation; };
+	public double getAccountCreation() { return this.accountCreation; }
 	public void setAccountCreation(double accountCreation) { this.accountCreation = accountCreation; };
-	public double getSubscriptionElapsedDuration() { return this.subscriptionElapsedDuration; };
+	public double getSubscriptionElapsedDuration() { return this.subscriptionElapsedDuration; }
 	public void setSubscriptionElapsedDuration(double subscriptionElapsedDuration) { this.subscriptionElapsedDuration = subscriptionElapsedDuration; };
-	public double getSubscriptionEndDate() { return this.subscriptionEndDate; };
+	public double getSubscriptionEndDate() { return this.subscriptionEndDate; }
 	public void setSubscriptionEndDate(double subscriptionEndDate) { this.subscriptionEndDate = subscriptionEndDate; };
-	public boolean isWasAlreadyConnected() { return this.wasAlreadyConnected; };
+	public boolean isWasAlreadyConnected() { return this.wasAlreadyConnected; }
 	public void setWasAlreadyConnected(boolean wasAlreadyConnected) { this.wasAlreadyConnected = wasAlreadyConnected; };
-	public int getHavenbagAvailableRoom() { return this.havenbagAvailableRoom; };
+	public int getHavenbagAvailableRoom() { return this.havenbagAvailableRoom; }
 	public void setHavenbagAvailableRoom(int havenbagAvailableRoom) { this.havenbagAvailableRoom = havenbagAvailableRoom; };
 
 	public IdentificationSuccessMessage(){

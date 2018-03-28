@@ -26,19 +26,19 @@ public class PartyJoinMessage extends AbstractPartyMessage {
 	private boolean restricted;
 	private String partyName;
 
-	public int getPartyType() { return this.partyType; };
+	public int getPartyType() { return this.partyType; }
 	public void setPartyType(int partyType) { this.partyType = partyType; };
-	public long getPartyLeaderId() { return this.partyLeaderId; };
+	public long getPartyLeaderId() { return this.partyLeaderId; }
 	public void setPartyLeaderId(long partyLeaderId) { this.partyLeaderId = partyLeaderId; };
-	public int getMaxParticipants() { return this.maxParticipants; };
+	public int getMaxParticipants() { return this.maxParticipants; }
 	public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; };
-	public List<PartyMemberInformations> getMembers() { return this.members; };
+	public List<PartyMemberInformations> getMembers() { return this.members; }
 	public void setMembers(List<PartyMemberInformations> members) { this.members = members; };
-	public List<PartyGuestInformations> getGuests() { return this.guests; };
+	public List<PartyGuestInformations> getGuests() { return this.guests; }
 	public void setGuests(List<PartyGuestInformations> guests) { this.guests = guests; };
-	public boolean isRestricted() { return this.restricted; };
+	public boolean isRestricted() { return this.restricted; }
 	public void setRestricted(boolean restricted) { this.restricted = restricted; };
-	public String getPartyName() { return this.partyName; };
+	public String getPartyName() { return this.partyName; }
 	public void setPartyName(String partyName) { this.partyName = partyName; };
 
 	public PartyJoinMessage(){

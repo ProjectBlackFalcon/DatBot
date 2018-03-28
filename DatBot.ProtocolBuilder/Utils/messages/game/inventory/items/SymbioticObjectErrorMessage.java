@@ -18,7 +18,7 @@ public class SymbioticObjectErrorMessage extends ObjectErrorMessage {
 
 	private int errorCode;
 
-	public int getErrorCode() { return this.errorCode; };
+	public int getErrorCode() { return this.errorCode; }
 	public void setErrorCode(int errorCode) { this.errorCode = errorCode; };
 
 	public SymbioticObjectErrorMessage(){

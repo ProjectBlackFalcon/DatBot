@@ -22,15 +22,15 @@ public class RemodelingInformation extends NetworkMessage {
 	private int cosmeticId;
 	private List<Integer> colors;
 
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public int getBreed() { return this.breed; };
+	public int getBreed() { return this.breed; }
 	public void setBreed(int breed) { this.breed = breed; };
-	public boolean isSex() { return this.sex; };
+	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
-	public int getCosmeticId() { return this.cosmeticId; };
+	public int getCosmeticId() { return this.cosmeticId; }
 	public void setCosmeticId(int cosmeticId) { this.cosmeticId = cosmeticId; };
-	public List<Integer> getColors() { return this.colors; };
+	public List<Integer> getColors() { return this.colors; }
 	public void setColors(List<Integer> colors) { this.colors = colors; };
 
 	public RemodelingInformation(){

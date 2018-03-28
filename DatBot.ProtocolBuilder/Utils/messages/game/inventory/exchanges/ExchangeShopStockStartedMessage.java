@@ -19,7 +19,7 @@ public class ExchangeShopStockStartedMessage extends NetworkMessage {
 
 	private List<ObjectItemToSell> objectsInfos;
 
-	public List<ObjectItemToSell> getObjectsInfos() { return this.objectsInfos; };
+	public List<ObjectItemToSell> getObjectsInfos() { return this.objectsInfos; }
 	public void setObjectsInfos(List<ObjectItemToSell> objectsInfos) { this.objectsInfos = objectsInfos; };
 
 	public ExchangeShopStockStartedMessage(){

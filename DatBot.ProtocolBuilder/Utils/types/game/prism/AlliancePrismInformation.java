@@ -19,7 +19,7 @@ public class AlliancePrismInformation extends PrismInformation {
 
 	private AllianceInformations alliance;
 
-	public AllianceInformations getAlliance() { return this.alliance; };
+	public AllianceInformations getAlliance() { return this.alliance; }
 	public void setAlliance(AllianceInformations alliance) { this.alliance = alliance; };
 
 	public AlliancePrismInformation(){

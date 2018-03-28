@@ -18,7 +18,7 @@ public class GameActionFightKillMessage extends AbstractGameActionMessage {
 
 	private double targetId;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
 
 	public GameActionFightKillMessage(){

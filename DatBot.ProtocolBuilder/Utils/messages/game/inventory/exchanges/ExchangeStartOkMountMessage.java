@@ -19,7 +19,7 @@ public class ExchangeStartOkMountMessage extends ExchangeStartOkMountWithOutPadd
 
 	private List<MountClientData> paddockedMountsDescription;
 
-	public List<MountClientData> getPaddockedMountsDescription() { return this.paddockedMountsDescription; };
+	public List<MountClientData> getPaddockedMountsDescription() { return this.paddockedMountsDescription; }
 	public void setPaddockedMountsDescription(List<MountClientData> paddockedMountsDescription) { this.paddockedMountsDescription = paddockedMountsDescription; };
 
 	public ExchangeStartOkMountMessage(){

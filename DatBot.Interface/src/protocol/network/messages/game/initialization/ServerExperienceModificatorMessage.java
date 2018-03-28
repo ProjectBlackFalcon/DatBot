@@ -18,7 +18,7 @@ public class ServerExperienceModificatorMessage extends NetworkMessage {
 
 	private int experiencePercent;
 
-	public int getExperiencePercent() { return this.experiencePercent; };
+	public int getExperiencePercent() { return this.experiencePercent; }
 	public void setExperiencePercent(int experiencePercent) { this.experiencePercent = experiencePercent; };
 
 	public ServerExperienceModificatorMessage(){

@@ -19,9 +19,9 @@ public class TreasureHuntStepFollowDirectionToPOI extends TreasureHuntStep {
 	private int direction;
 	private int poiLabelId;
 
-	public int getDirection() { return this.direction; };
+	public int getDirection() { return this.direction; }
 	public void setDirection(int direction) { this.direction = direction; };
-	public int getPoiLabelId() { return this.poiLabelId; };
+	public int getPoiLabelId() { return this.poiLabelId; }
 	public void setPoiLabelId(int poiLabelId) { this.poiLabelId = poiLabelId; };
 
 	public TreasureHuntStepFollowDirectionToPOI(){

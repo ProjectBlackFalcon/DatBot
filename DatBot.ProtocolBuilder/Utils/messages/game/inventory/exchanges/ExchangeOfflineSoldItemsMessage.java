@@ -20,9 +20,9 @@ public class ExchangeOfflineSoldItemsMessage extends NetworkMessage {
 	private List<ObjectItemGenericQuantityPrice> bidHouseItems;
 	private List<ObjectItemGenericQuantityPrice> merchantItems;
 
-	public List<ObjectItemGenericQuantityPrice> getBidHouseItems() { return this.bidHouseItems; };
+	public List<ObjectItemGenericQuantityPrice> getBidHouseItems() { return this.bidHouseItems; }
 	public void setBidHouseItems(List<ObjectItemGenericQuantityPrice> bidHouseItems) { this.bidHouseItems = bidHouseItems; };
-	public List<ObjectItemGenericQuantityPrice> getMerchantItems() { return this.merchantItems; };
+	public List<ObjectItemGenericQuantityPrice> getMerchantItems() { return this.merchantItems; }
 	public void setMerchantItems(List<ObjectItemGenericQuantityPrice> merchantItems) { this.merchantItems = merchantItems; };
 
 	public ExchangeOfflineSoldItemsMessage(){

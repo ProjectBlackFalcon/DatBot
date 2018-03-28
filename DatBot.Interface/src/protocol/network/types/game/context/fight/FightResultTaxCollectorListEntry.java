@@ -21,11 +21,11 @@ public class FightResultTaxCollectorListEntry extends FightResultFighterListEntr
 	private BasicGuildInformations guildInfo;
 	private int experienceForGuild;
 
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
-	public BasicGuildInformations getGuildInfo() { return this.guildInfo; };
+	public BasicGuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(BasicGuildInformations guildInfo) { this.guildInfo = guildInfo; };
-	public int getExperienceForGuild() { return this.experienceForGuild; };
+	public int getExperienceForGuild() { return this.experienceForGuild; }
 	public void setExperienceForGuild(int experienceForGuild) { this.experienceForGuild = experienceForGuild; };
 
 	public FightResultTaxCollectorListEntry(){

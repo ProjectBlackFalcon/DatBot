@@ -18,7 +18,7 @@ public class ClientUIOpenedByObjectMessage extends ClientUIOpenedMessage {
 
 	private int uid;
 
-	public int getUid() { return this.uid; };
+	public int getUid() { return this.uid; }
 	public void setUid(int uid) { this.uid = uid; };
 
 	public ClientUIOpenedByObjectMessage(){

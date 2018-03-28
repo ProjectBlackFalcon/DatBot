@@ -19,9 +19,9 @@ public class InteractiveElementSkill extends NetworkMessage {
 	private int skillId;
 	private int skillInstanceUid;
 
-	public int getSkillId() { return this.skillId; };
+	public int getSkillId() { return this.skillId; }
 	public void setSkillId(int skillId) { this.skillId = skillId; };
-	public int getSkillInstanceUid() { return this.skillInstanceUid; };
+	public int getSkillInstanceUid() { return this.skillInstanceUid; }
 	public void setSkillInstanceUid(int skillInstanceUid) { this.skillInstanceUid = skillInstanceUid; };
 
 	public InteractiveElementSkill(){

@@ -18,7 +18,7 @@ public class SpellVariantActivationRequestMessage extends NetworkMessage {
 
 	private int spellId;
 
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
 
 	public SpellVariantActivationRequestMessage(){

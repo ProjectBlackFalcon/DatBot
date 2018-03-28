@@ -19,9 +19,9 @@ public class EnabledChannelsMessage extends NetworkMessage {
 	private List<Integer> channels;
 	private List<Integer> disallowed;
 
-	public List<Integer> getChannels() { return this.channels; };
+	public List<Integer> getChannels() { return this.channels; }
 	public void setChannels(List<Integer> channels) { this.channels = channels; };
-	public List<Integer> getDisallowed() { return this.disallowed; };
+	public List<Integer> getDisallowed() { return this.disallowed; }
 	public void setDisallowed(List<Integer> disallowed) { this.disallowed = disallowed; };
 
 	public EnabledChannelsMessage(){

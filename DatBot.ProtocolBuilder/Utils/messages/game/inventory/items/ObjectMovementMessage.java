@@ -19,9 +19,9 @@ public class ObjectMovementMessage extends NetworkMessage {
 	private int objectUID;
 	private int position;
 
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public int getPosition() { return this.position; };
+	public int getPosition() { return this.position; }
 	public void setPosition(int position) { this.position = position; };
 
 	public ObjectMovementMessage(){
@@ -36,7 +36,7 @@ public class ObjectMovementMessage extends NetworkMessage {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			writer.writeVarInt(this.objectUID);
-			writer.writeByte(this.position);
+			writer.writeShort(this.position);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -46,7 +46,7 @@ public class ObjectMovementMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			this.objectUID = reader.readVarInt();
-			this.position = reader.readByte();
+			this.position = reader.readShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

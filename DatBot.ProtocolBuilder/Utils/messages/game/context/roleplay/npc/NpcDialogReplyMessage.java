@@ -18,7 +18,7 @@ public class NpcDialogReplyMessage extends NetworkMessage {
 
 	private int replyId;
 
-	public int getReplyId() { return this.replyId; };
+	public int getReplyId() { return this.replyId; }
 	public void setReplyId(int replyId) { this.replyId = replyId; };
 
 	public NpcDialogReplyMessage(){

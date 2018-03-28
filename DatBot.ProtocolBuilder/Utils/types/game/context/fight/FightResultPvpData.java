@@ -22,15 +22,15 @@ public class FightResultPvpData extends FightResultAdditionalData {
 	private int honor;
 	private int honorDelta;
 
-	public int getGrade() { return this.grade; };
+	public int getGrade() { return this.grade; }
 	public void setGrade(int grade) { this.grade = grade; };
-	public int getMinHonorForGrade() { return this.minHonorForGrade; };
+	public int getMinHonorForGrade() { return this.minHonorForGrade; }
 	public void setMinHonorForGrade(int minHonorForGrade) { this.minHonorForGrade = minHonorForGrade; };
-	public int getMaxHonorForGrade() { return this.maxHonorForGrade; };
+	public int getMaxHonorForGrade() { return this.maxHonorForGrade; }
 	public void setMaxHonorForGrade(int maxHonorForGrade) { this.maxHonorForGrade = maxHonorForGrade; };
-	public int getHonor() { return this.honor; };
+	public int getHonor() { return this.honor; }
 	public void setHonor(int honor) { this.honor = honor; };
-	public int getHonorDelta() { return this.honorDelta; };
+	public int getHonorDelta() { return this.honorDelta; }
 	public void setHonorDelta(int honorDelta) { this.honorDelta = honorDelta; };
 
 	public FightResultPvpData(){

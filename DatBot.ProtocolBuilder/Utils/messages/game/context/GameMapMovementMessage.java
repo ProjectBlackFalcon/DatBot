@@ -20,11 +20,11 @@ public class GameMapMovementMessage extends NetworkMessage {
 	private int forcedDirection;
 	private double actorId;
 
-	public List<Integer> getKeyMovements() { return this.keyMovements; };
+	public List<Integer> getKeyMovements() { return this.keyMovements; }
 	public void setKeyMovements(List<Integer> keyMovements) { this.keyMovements = keyMovements; };
-	public int getForcedDirection() { return this.forcedDirection; };
+	public int getForcedDirection() { return this.forcedDirection; }
 	public void setForcedDirection(int forcedDirection) { this.forcedDirection = forcedDirection; };
-	public double getActorId() { return this.actorId; };
+	public double getActorId() { return this.actorId; }
 	public void setActorId(double actorId) { this.actorId = actorId; };
 
 	public GameMapMovementMessage(){

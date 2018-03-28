@@ -21,11 +21,11 @@ public class SetUpdateMessage extends NetworkMessage {
 	private List<Integer> setObjects;
 	private List<ObjectEffect> setEffects;
 
-	public int getSetId() { return this.setId; };
+	public int getSetId() { return this.setId; }
 	public void setSetId(int setId) { this.setId = setId; };
-	public List<Integer> getSetObjects() { return this.setObjects; };
+	public List<Integer> getSetObjects() { return this.setObjects; }
 	public void setSetObjects(List<Integer> setObjects) { this.setObjects = setObjects; };
-	public List<ObjectEffect> getSetEffects() { return this.setEffects; };
+	public List<ObjectEffect> getSetEffects() { return this.setEffects; }
 	public void setSetEffects(List<ObjectEffect> setEffects) { this.setEffects = setEffects; };
 
 	public SetUpdateMessage(){

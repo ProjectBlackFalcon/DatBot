@@ -20,9 +20,9 @@ public class ExchangeStartedTaxCollectorShopMessage extends NetworkMessage {
 	private List<ObjectItem> objects;
 	private long kamas;
 
-	public List<ObjectItem> getObjects() { return this.objects; };
+	public List<ObjectItem> getObjects() { return this.objects; }
 	public void setObjects(List<ObjectItem> objects) { this.objects = objects; };
-	public long getKamas() { return this.kamas; };
+	public long getKamas() { return this.kamas; }
 	public void setKamas(long kamas) { this.kamas = kamas; };
 
 	public ExchangeStartedTaxCollectorShopMessage(){

@@ -19,9 +19,9 @@ public class StartupActionsObjetAttributionMessage extends NetworkMessage {
 	private int actionId;
 	private long characterId;
 
-	public int getActionId() { return this.actionId; };
+	public int getActionId() { return this.actionId; }
 	public void setActionId(int actionId) { this.actionId = actionId; };
-	public long getCharacterId() { return this.characterId; };
+	public long getCharacterId() { return this.characterId; }
 	public void setCharacterId(long characterId) { this.characterId = characterId; };
 
 	public StartupActionsObjetAttributionMessage(){

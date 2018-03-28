@@ -18,7 +18,7 @@ public class PartyMemberRemoveMessage extends AbstractPartyEventMessage {
 
 	private long leavingPlayerId;
 
-	public long getLeavingPlayerId() { return this.leavingPlayerId; };
+	public long getLeavingPlayerId() { return this.leavingPlayerId; }
 	public void setLeavingPlayerId(long leavingPlayerId) { this.leavingPlayerId = leavingPlayerId; };
 
 	public PartyMemberRemoveMessage(){

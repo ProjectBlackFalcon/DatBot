@@ -19,9 +19,9 @@ public class GameFightMonsterInformations extends GameFightAIInformations {
 	private int creatureGenericId;
 	private int creatureGrade;
 
-	public int getCreatureGenericId() { return this.creatureGenericId; };
+	public int getCreatureGenericId() { return this.creatureGenericId; }
 	public void setCreatureGenericId(int creatureGenericId) { this.creatureGenericId = creatureGenericId; };
-	public int getCreatureGrade() { return this.creatureGrade; };
+	public int getCreatureGrade() { return this.creatureGrade; }
 	public void setCreatureGrade(int creatureGrade) { this.creatureGrade = creatureGrade; };
 
 	public GameFightMonsterInformations(){

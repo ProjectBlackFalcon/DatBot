@@ -19,7 +19,7 @@ public class ExchangeStartOkMountWithOutPaddockMessage extends NetworkMessage {
 
 	private List<MountClientData> stabledMountsDescription;
 
-	public List<MountClientData> getStabledMountsDescription() { return this.stabledMountsDescription; };
+	public List<MountClientData> getStabledMountsDescription() { return this.stabledMountsDescription; }
 	public void setStabledMountsDescription(List<MountClientData> stabledMountsDescription) { this.stabledMountsDescription = stabledMountsDescription; };
 
 	public ExchangeStartOkMountWithOutPaddockMessage(){

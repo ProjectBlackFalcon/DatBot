@@ -19,9 +19,9 @@ public class HumanOptionTitle extends HumanOption {
 	private int titleId;
 	private String titleParam;
 
-	public int getTitleId() { return this.titleId; };
+	public int getTitleId() { return this.titleId; }
 	public void setTitleId(int titleId) { this.titleId = titleId; };
-	public String getTitleParam() { return this.titleParam; };
+	public String getTitleParam() { return this.titleParam; }
 	public void setTitleParam(String titleParam) { this.titleParam = titleParam; };
 
 	public HumanOptionTitle(){

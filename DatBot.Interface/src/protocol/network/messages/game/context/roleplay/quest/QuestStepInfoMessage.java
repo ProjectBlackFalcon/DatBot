@@ -19,7 +19,7 @@ public class QuestStepInfoMessage extends NetworkMessage {
 
 	private QuestActiveInformations infos;
 
-	public QuestActiveInformations getInfos() { return this.infos; };
+	public QuestActiveInformations getInfos() { return this.infos; }
 	public void setInfos(QuestActiveInformations infos) { this.infos = infos; };
 
 	public QuestStepInfoMessage(){

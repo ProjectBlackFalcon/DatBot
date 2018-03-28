@@ -18,7 +18,7 @@ public class PauseDialogMessage extends NetworkMessage {
 
 	private int dialogType;
 
-	public int getDialogType() { return this.dialogType; };
+	public int getDialogType() { return this.dialogType; }
 	public void setDialogType(int dialogType) { this.dialogType = dialogType; };
 
 	public PauseDialogMessage(){

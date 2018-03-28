@@ -20,9 +20,9 @@ public class JobLevelUpMessage extends NetworkMessage {
 	private int newLevel;
 	private JobDescription jobsDescription;
 
-	public int getNewLevel() { return this.newLevel; };
+	public int getNewLevel() { return this.newLevel; }
 	public void setNewLevel(int newLevel) { this.newLevel = newLevel; };
-	public JobDescription getJobsDescription() { return this.jobsDescription; };
+	public JobDescription getJobsDescription() { return this.jobsDescription; }
 	public void setJobsDescription(JobDescription jobsDescription) { this.jobsDescription = jobsDescription; };
 
 	public JobLevelUpMessage(){

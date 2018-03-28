@@ -24,19 +24,19 @@ public class PaddockInformationsForSell extends NetworkMessage {
 	private int nbObject;
 	private long price;
 
-	public String getGuildOwner() { return this.guildOwner; };
+	public String getGuildOwner() { return this.guildOwner; }
 	public void setGuildOwner(String guildOwner) { this.guildOwner = guildOwner; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public int getNbMount() { return this.nbMount; };
+	public int getNbMount() { return this.nbMount; }
 	public void setNbMount(int nbMount) { this.nbMount = nbMount; };
-	public int getNbObject() { return this.nbObject; };
+	public int getNbObject() { return this.nbObject; }
 	public void setNbObject(int nbObject) { this.nbObject = nbObject; };
-	public long getPrice() { return this.price; };
+	public long getPrice() { return this.price; }
 	public void setPrice(long price) { this.price = price; };
 
 	public PaddockInformationsForSell(){

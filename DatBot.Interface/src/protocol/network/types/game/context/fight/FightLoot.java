@@ -19,9 +19,9 @@ public class FightLoot extends NetworkMessage {
 	private List<Integer> objects;
 	private long kamas;
 
-	public List<Integer> getObjects() { return this.objects; };
+	public List<Integer> getObjects() { return this.objects; }
 	public void setObjects(List<Integer> objects) { this.objects = objects; };
-	public long getKamas() { return this.kamas; };
+	public long getKamas() { return this.kamas; }
 	public void setKamas(long kamas) { this.kamas = kamas; };
 
 	public FightLoot(){

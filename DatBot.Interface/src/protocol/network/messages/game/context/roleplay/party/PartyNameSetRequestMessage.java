@@ -18,7 +18,7 @@ public class PartyNameSetRequestMessage extends AbstractPartyMessage {
 
 	private String partyName;
 
-	public String getPartyName() { return this.partyName; };
+	public String getPartyName() { return this.partyName; }
 	public void setPartyName(String partyName) { this.partyName = partyName; };
 
 	public PartyNameSetRequestMessage(){

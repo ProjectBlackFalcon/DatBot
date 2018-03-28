@@ -19,7 +19,7 @@ public class ExchangeShopStockMultiMovementUpdatedMessage extends NetworkMessage
 
 	private List<ObjectItemToSell> objectInfoList;
 
-	public List<ObjectItemToSell> getObjectInfoList() { return this.objectInfoList; };
+	public List<ObjectItemToSell> getObjectInfoList() { return this.objectInfoList; }
 	public void setObjectInfoList(List<ObjectItemToSell> objectInfoList) { this.objectInfoList = objectInfoList; };
 
 	public ExchangeShopStockMultiMovementUpdatedMessage(){

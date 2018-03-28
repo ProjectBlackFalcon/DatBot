@@ -18,7 +18,7 @@ public class GameActionFightTackledMessage extends AbstractGameActionMessage {
 
 	private List<Double> tacklersIds;
 
-	public List<Double> getTacklersIds() { return this.tacklersIds; };
+	public List<Double> getTacklersIds() { return this.tacklersIds; }
 	public void setTacklersIds(List<Double> tacklersIds) { this.tacklersIds = tacklersIds; };
 
 	public GameActionFightTackledMessage(){

@@ -18,7 +18,7 @@ public class ExchangeLeaveMessage extends LeaveDialogMessage {
 
 	private boolean success;
 
-	public boolean isSuccess() { return this.success; };
+	public boolean isSuccess() { return this.success; }
 	public void setSuccess(boolean success) { this.success = success; };
 
 	public ExchangeLeaveMessage(){

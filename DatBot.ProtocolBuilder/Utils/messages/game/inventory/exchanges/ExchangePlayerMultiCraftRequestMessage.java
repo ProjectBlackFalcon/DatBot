@@ -19,9 +19,9 @@ public class ExchangePlayerMultiCraftRequestMessage extends ExchangeRequestMessa
 	private long target;
 	private int skillId;
 
-	public long getTarget() { return this.target; };
+	public long getTarget() { return this.target; }
 	public void setTarget(long target) { this.target = target; };
-	public int getSkillId() { return this.skillId; };
+	public int getSkillId() { return this.skillId; }
 	public void setSkillId(int skillId) { this.skillId = skillId; };
 
 	public ExchangePlayerMultiCraftRequestMessage(){

@@ -18,7 +18,7 @@ public class ChatClientPrivateMessage extends ChatAbstractClientMessage {
 
 	private String receiver;
 
-	public String getReceiver() { return this.receiver; };
+	public String getReceiver() { return this.receiver; }
 	public void setReceiver(String receiver) { this.receiver = receiver; };
 
 	public ChatClientPrivateMessage(){

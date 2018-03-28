@@ -19,7 +19,7 @@ public class MapObstacleUpdateMessage extends NetworkMessage {
 
 	private List<MapObstacle> obstacles;
 
-	public List<MapObstacle> getObstacles() { return this.obstacles; };
+	public List<MapObstacle> getObstacles() { return this.obstacles; }
 	public void setObstacles(List<MapObstacle> obstacles) { this.obstacles = obstacles; };
 
 	public MapObstacleUpdateMessage(){

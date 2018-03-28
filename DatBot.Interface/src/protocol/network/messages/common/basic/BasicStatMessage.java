@@ -19,9 +19,9 @@ public class BasicStatMessage extends NetworkMessage {
 	private double timeSpent;
 	private int statId;
 
-	public double getTimeSpent() { return this.timeSpent; };
+	public double getTimeSpent() { return this.timeSpent; }
 	public void setTimeSpent(double timeSpent) { this.timeSpent = timeSpent; };
-	public int getStatId() { return this.statId; };
+	public int getStatId() { return this.statId; }
 	public void setStatId(int statId) { this.statId = statId; };
 
 	public BasicStatMessage(){

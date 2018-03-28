@@ -20,9 +20,9 @@ public class IgnoredAddedMessage extends NetworkMessage {
 	private IgnoredInformations ignoreAdded;
 	private boolean session;
 
-	public IgnoredInformations getIgnoreAdded() { return this.ignoreAdded; };
+	public IgnoredInformations getIgnoreAdded() { return this.ignoreAdded; }
 	public void setIgnoreAdded(IgnoredInformations ignoreAdded) { this.ignoreAdded = ignoreAdded; };
-	public boolean isSession() { return this.session; };
+	public boolean isSession() { return this.session; }
 	public void setSession(boolean session) { this.session = session; };
 
 	public IgnoredAddedMessage(){

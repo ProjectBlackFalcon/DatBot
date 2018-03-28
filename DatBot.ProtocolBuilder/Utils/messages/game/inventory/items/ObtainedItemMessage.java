@@ -19,9 +19,9 @@ public class ObtainedItemMessage extends NetworkMessage {
 	private int genericId;
 	private int baseQuantity;
 
-	public int getGenericId() { return this.genericId; };
+	public int getGenericId() { return this.genericId; }
 	public void setGenericId(int genericId) { this.genericId = genericId; };
-	public int getBaseQuantity() { return this.baseQuantity; };
+	public int getBaseQuantity() { return this.baseQuantity; }
 	public void setBaseQuantity(int baseQuantity) { this.baseQuantity = baseQuantity; };
 
 	public ObtainedItemMessage(){

@@ -21,13 +21,13 @@ public class GuildInsiderFactSheetInformations extends GuildFactSheetInformation
 	private int nbTaxCollectors;
 	private int lastActivity;
 
-	public String getLeaderName() { return this.leaderName; };
+	public String getLeaderName() { return this.leaderName; }
 	public void setLeaderName(String leaderName) { this.leaderName = leaderName; };
-	public int getNbConnectedMembers() { return this.nbConnectedMembers; };
+	public int getNbConnectedMembers() { return this.nbConnectedMembers; }
 	public void setNbConnectedMembers(int nbConnectedMembers) { this.nbConnectedMembers = nbConnectedMembers; };
-	public int getNbTaxCollectors() { return this.nbTaxCollectors; };
+	public int getNbTaxCollectors() { return this.nbTaxCollectors; }
 	public void setNbTaxCollectors(int nbTaxCollectors) { this.nbTaxCollectors = nbTaxCollectors; };
-	public int getLastActivity() { return this.lastActivity; };
+	public int getLastActivity() { return this.lastActivity; }
 	public void setLastActivity(int lastActivity) { this.lastActivity = lastActivity; };
 
 	public GuildInsiderFactSheetInformations(){

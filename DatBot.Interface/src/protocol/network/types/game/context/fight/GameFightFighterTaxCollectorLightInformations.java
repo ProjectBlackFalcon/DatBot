@@ -19,9 +19,9 @@ public class GameFightFighterTaxCollectorLightInformations extends GameFightFigh
 	private int firstNameId;
 	private int lastNameId;
 
-	public int getFirstNameId() { return this.firstNameId; };
+	public int getFirstNameId() { return this.firstNameId; }
 	public void setFirstNameId(int firstNameId) { this.firstNameId = firstNameId; };
-	public int getLastNameId() { return this.lastNameId; };
+	public int getLastNameId() { return this.lastNameId; }
 	public void setLastNameId(int lastNameId) { this.lastNameId = lastNameId; };
 
 	public GameFightFighterTaxCollectorLightInformations(){

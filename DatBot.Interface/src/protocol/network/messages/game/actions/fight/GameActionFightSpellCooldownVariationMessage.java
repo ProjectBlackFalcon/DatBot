@@ -20,11 +20,11 @@ public class GameActionFightSpellCooldownVariationMessage extends AbstractGameAc
 	private int spellId;
 	private int value;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getSpellId() { return this.spellId; };
+	public int getSpellId() { return this.spellId; }
 	public void setSpellId(int spellId) { this.spellId = spellId; };
-	public int getValue() { return this.value; };
+	public int getValue() { return this.value; }
 	public void setValue(int value) { this.value = value; };
 
 	public GameActionFightSpellCooldownVariationMessage(){

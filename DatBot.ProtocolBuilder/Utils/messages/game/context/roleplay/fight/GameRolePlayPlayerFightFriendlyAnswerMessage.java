@@ -19,9 +19,9 @@ public class GameRolePlayPlayerFightFriendlyAnswerMessage extends NetworkMessage
 	private int fightId;
 	private boolean accept;
 
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public boolean isAccept() { return this.accept; };
+	public boolean isAccept() { return this.accept; }
 	public void setAccept(boolean accept) { this.accept = accept; };
 
 	public GameRolePlayPlayerFightFriendlyAnswerMessage(){

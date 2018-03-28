@@ -19,7 +19,7 @@ public class GameRolePlayShowActorMessage extends NetworkMessage {
 
 	private GameRolePlayActorInformations informations;
 
-	public GameRolePlayActorInformations getInformations() { return this.informations; };
+	public GameRolePlayActorInformations getInformations() { return this.informations; }
 	public void setInformations(GameRolePlayActorInformations informations) { this.informations = informations; };
 
 	public GameRolePlayShowActorMessage(){

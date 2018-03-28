@@ -19,7 +19,7 @@ public class AtlasPointInformationsMessage extends NetworkMessage {
 
 	private AtlasPointsInformations type;
 
-	public AtlasPointsInformations getType() { return this.type; };
+	public AtlasPointsInformations getType() { return this.type; }
 	public void setType(AtlasPointsInformations type) { this.type = type; };
 
 	public AtlasPointInformationsMessage(){

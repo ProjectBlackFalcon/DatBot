@@ -20,9 +20,9 @@ public class GameContextRefreshEntityLookMessage extends NetworkMessage {
 	private double id;
 	private EntityLook look;
 
-	public double getId() { return this.id; };
+	public double getId() { return this.id; }
 	public void setId(double id) { this.id = id; };
-	public EntityLook getLook() { return this.look; };
+	public EntityLook getLook() { return this.look; }
 	public void setLook(EntityLook look) { this.look = look; };
 
 	public GameContextRefreshEntityLookMessage(){

@@ -18,7 +18,7 @@ public class BasicNamedAllianceInformations extends BasicAllianceInformations {
 
 	private String allianceName;
 
-	public String getAllianceName() { return this.allianceName; };
+	public String getAllianceName() { return this.allianceName; }
 	public void setAllianceName(String allianceName) { this.allianceName = allianceName; };
 
 	public BasicNamedAllianceInformations(){

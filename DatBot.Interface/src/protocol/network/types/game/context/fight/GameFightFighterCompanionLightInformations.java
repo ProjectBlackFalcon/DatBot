@@ -19,9 +19,9 @@ public class GameFightFighterCompanionLightInformations extends GameFightFighter
 	private int companionId;
 	private double masterId;
 
-	public int getCompanionId() { return this.companionId; };
+	public int getCompanionId() { return this.companionId; }
 	public void setCompanionId(int companionId) { this.companionId = companionId; };
-	public double getMasterId() { return this.masterId; };
+	public double getMasterId() { return this.masterId; }
 	public void setMasterId(double masterId) { this.masterId = masterId; };
 
 	public GameFightFighterCompanionLightInformations(){

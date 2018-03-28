@@ -19,9 +19,9 @@ public class GameActionFightDodgePointLossMessage extends AbstractGameActionMess
 	private double targetId;
 	private int amount;
 
-	public double getTargetId() { return this.targetId; };
+	public double getTargetId() { return this.targetId; }
 	public void setTargetId(double targetId) { this.targetId = targetId; };
-	public int getAmount() { return this.amount; };
+	public int getAmount() { return this.amount; }
 	public void setAmount(int amount) { this.amount = amount; };
 
 	public GameActionFightDodgePointLossMessage(){

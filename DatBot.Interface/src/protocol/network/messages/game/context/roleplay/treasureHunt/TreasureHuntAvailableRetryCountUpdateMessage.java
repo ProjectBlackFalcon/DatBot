@@ -19,9 +19,9 @@ public class TreasureHuntAvailableRetryCountUpdateMessage extends NetworkMessage
 	private int questType;
 	private int availableRetryCount;
 
-	public int getQuestType() { return this.questType; };
+	public int getQuestType() { return this.questType; }
 	public void setQuestType(int questType) { this.questType = questType; };
-	public int getAvailableRetryCount() { return this.availableRetryCount; };
+	public int getAvailableRetryCount() { return this.availableRetryCount; }
 	public void setAvailableRetryCount(int availableRetryCount) { this.availableRetryCount = availableRetryCount; };
 
 	public TreasureHuntAvailableRetryCountUpdateMessage(){

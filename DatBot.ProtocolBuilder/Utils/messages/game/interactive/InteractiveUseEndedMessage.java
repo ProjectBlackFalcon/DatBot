@@ -19,9 +19,9 @@ public class InteractiveUseEndedMessage extends NetworkMessage {
 	private int elemId;
 	private int skillId;
 
-	public int getElemId() { return this.elemId; };
+	public int getElemId() { return this.elemId; }
 	public void setElemId(int elemId) { this.elemId = elemId; };
-	public int getSkillId() { return this.skillId; };
+	public int getSkillId() { return this.skillId; }
 	public void setSkillId(int skillId) { this.skillId = skillId; };
 
 	public InteractiveUseEndedMessage(){

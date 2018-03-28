@@ -18,7 +18,7 @@ public class OrnamentSelectRequestMessage extends NetworkMessage {
 
 	private int ornamentId;
 
-	public int getOrnamentId() { return this.ornamentId; };
+	public int getOrnamentId() { return this.ornamentId; }
 	public void setOrnamentId(int ornamentId) { this.ornamentId = ornamentId; };
 
 	public OrnamentSelectRequestMessage(){

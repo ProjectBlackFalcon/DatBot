@@ -19,7 +19,7 @@ public class JobDescriptionMessage extends NetworkMessage {
 
 	private List<JobDescription> jobsDescription;
 
-	public List<JobDescription> getJobsDescription() { return this.jobsDescription; };
+	public List<JobDescription> getJobsDescription() { return this.jobsDescription; }
 	public void setJobsDescription(List<JobDescription> jobsDescription) { this.jobsDescription = jobsDescription; };
 
 	public JobDescriptionMessage(){

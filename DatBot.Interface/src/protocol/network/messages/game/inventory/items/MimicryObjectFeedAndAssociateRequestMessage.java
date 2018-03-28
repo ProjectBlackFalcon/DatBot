@@ -20,11 +20,11 @@ public class MimicryObjectFeedAndAssociateRequestMessage extends SymbioticObject
 	private int foodPos;
 	private boolean preview;
 
-	public int getFoodUID() { return this.foodUID; };
+	public int getFoodUID() { return this.foodUID; }
 	public void setFoodUID(int foodUID) { this.foodUID = foodUID; };
-	public int getFoodPos() { return this.foodPos; };
+	public int getFoodPos() { return this.foodPos; }
 	public void setFoodPos(int foodPos) { this.foodPos = foodPos; };
-	public boolean isPreview() { return this.preview; };
+	public boolean isPreview() { return this.preview; }
 	public void setPreview(boolean preview) { this.preview = preview; };
 
 	public MimicryObjectFeedAndAssociateRequestMessage(){

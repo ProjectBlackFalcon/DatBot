@@ -20,11 +20,11 @@ public class CheckFileMessage extends NetworkMessage {
 	private int type;
 	private String value;
 
-	public String getFilenameHash() { return this.filenameHash; };
+	public String getFilenameHash() { return this.filenameHash; }
 	public void setFilenameHash(String filenameHash) { this.filenameHash = filenameHash; };
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public String getValue() { return this.value; };
+	public String getValue() { return this.value; }
 	public void setValue(String value) { this.value = value; };
 
 	public CheckFileMessage(){

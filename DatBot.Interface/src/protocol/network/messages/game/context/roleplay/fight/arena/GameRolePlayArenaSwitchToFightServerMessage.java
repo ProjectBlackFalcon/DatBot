@@ -20,11 +20,11 @@ public class GameRolePlayArenaSwitchToFightServerMessage extends NetworkMessage 
 	private List<Integer> ports;
 	private List<Integer> ticket;
 
-	public String getAddress() { return this.address; };
+	public String getAddress() { return this.address; }
 	public void setAddress(String address) { this.address = address; };
-	public List<Integer> getPorts() { return this.ports; };
+	public List<Integer> getPorts() { return this.ports; }
 	public void setPorts(List<Integer> ports) { this.ports = ports; };
-	public List<Integer> getTicket() { return this.ticket; };
+	public List<Integer> getTicket() { return this.ticket; }
 	public void setTicket(List<Integer> ticket) { this.ticket = ticket; };
 
 	public GameRolePlayArenaSwitchToFightServerMessage(){

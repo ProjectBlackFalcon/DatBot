@@ -19,9 +19,9 @@ public class GameRolePlayNpcQuestFlag extends NetworkMessage {
 	private List<Integer> questsToValidId;
 	private List<Integer> questsToStartId;
 
-	public List<Integer> getQuestsToValidId() { return this.questsToValidId; };
+	public List<Integer> getQuestsToValidId() { return this.questsToValidId; }
 	public void setQuestsToValidId(List<Integer> questsToValidId) { this.questsToValidId = questsToValidId; };
-	public List<Integer> getQuestsToStartId() { return this.questsToStartId; };
+	public List<Integer> getQuestsToStartId() { return this.questsToStartId; }
 	public void setQuestsToStartId(List<Integer> questsToStartId) { this.questsToStartId = questsToStartId; };
 
 	public GameRolePlayNpcQuestFlag(){

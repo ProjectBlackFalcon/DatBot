@@ -21,13 +21,13 @@ public class ExchangeMountsTakenFromPaddockMessage extends NetworkMessage {
 	private int worldY;
 	private String ownername;
 
-	public String getName() { return this.name; };
+	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public String getOwnername() { return this.ownername; };
+	public String getOwnername() { return this.ownername; }
 	public void setOwnername(String ownername) { this.ownername = ownername; };
 
 	public ExchangeMountsTakenFromPaddockMessage(){

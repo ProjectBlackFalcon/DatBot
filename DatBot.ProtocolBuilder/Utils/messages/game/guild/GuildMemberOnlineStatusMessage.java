@@ -19,9 +19,9 @@ public class GuildMemberOnlineStatusMessage extends NetworkMessage {
 	private long memberId;
 	private boolean online;
 
-	public long getMemberId() { return this.memberId; };
+	public long getMemberId() { return this.memberId; }
 	public void setMemberId(long memberId) { this.memberId = memberId; };
-	public boolean isOnline() { return this.online; };
+	public boolean isOnline() { return this.online; }
 	public void setOnline(boolean online) { this.online = online; };
 
 	public GuildMemberOnlineStatusMessage(){

@@ -21,11 +21,11 @@ public class GameRolePlayTaxCollectorInformations extends GameRolePlayActorInfor
 	private int guildLevel;
 	private int taxCollectorAttack;
 
-	public TaxCollectorStaticInformations getIdentification() { return this.identification; };
+	public TaxCollectorStaticInformations getIdentification() { return this.identification; }
 	public void setIdentification(TaxCollectorStaticInformations identification) { this.identification = identification; };
-	public int getGuildLevel() { return this.guildLevel; };
+	public int getGuildLevel() { return this.guildLevel; }
 	public void setGuildLevel(int guildLevel) { this.guildLevel = guildLevel; };
-	public int getTaxCollectorAttack() { return this.taxCollectorAttack; };
+	public int getTaxCollectorAttack() { return this.taxCollectorAttack; }
 	public void setTaxCollectorAttack(int taxCollectorAttack) { this.taxCollectorAttack = taxCollectorAttack; };
 
 	public GameRolePlayTaxCollectorInformations(){

@@ -21,11 +21,11 @@ public class DungeonPartyFinderRoomContentUpdateMessage extends NetworkMessage {
 	private List<DungeonPartyFinderPlayer> addedPlayers;
 	private List<Long> removedPlayersIds;
 
-	public int getDungeonId() { return this.dungeonId; };
+	public int getDungeonId() { return this.dungeonId; }
 	public void setDungeonId(int dungeonId) { this.dungeonId = dungeonId; };
-	public List<DungeonPartyFinderPlayer> getAddedPlayers() { return this.addedPlayers; };
+	public List<DungeonPartyFinderPlayer> getAddedPlayers() { return this.addedPlayers; }
 	public void setAddedPlayers(List<DungeonPartyFinderPlayer> addedPlayers) { this.addedPlayers = addedPlayers; };
-	public List<Long> getRemovedPlayersIds() { return this.removedPlayersIds; };
+	public List<Long> getRemovedPlayersIds() { return this.removedPlayersIds; }
 	public void setRemovedPlayersIds(List<Long> removedPlayersIds) { this.removedPlayersIds = removedPlayersIds; };
 
 	public DungeonPartyFinderRoomContentUpdateMessage(){

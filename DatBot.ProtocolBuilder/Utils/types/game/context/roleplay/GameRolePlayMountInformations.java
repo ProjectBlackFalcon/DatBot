@@ -19,9 +19,9 @@ public class GameRolePlayMountInformations extends GameRolePlayNamedActorInforma
 	private String ownerName;
 	private int level;
 
-	public String getOwnerName() { return this.ownerName; };
+	public String getOwnerName() { return this.ownerName; }
 	public void setOwnerName(String ownerName) { this.ownerName = ownerName; };
-	public int getLevel() { return this.level; };
+	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
 
 	public GameRolePlayMountInformations(){

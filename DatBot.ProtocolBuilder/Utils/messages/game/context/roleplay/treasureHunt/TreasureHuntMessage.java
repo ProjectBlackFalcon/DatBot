@@ -27,21 +27,21 @@ public class TreasureHuntMessage extends NetworkMessage {
 	private int availableRetryCount;
 	private List<TreasureHuntFlag> flags;
 
-	public int getQuestType() { return this.questType; };
+	public int getQuestType() { return this.questType; }
 	public void setQuestType(int questType) { this.questType = questType; };
-	public double getStartMapId() { return this.startMapId; };
+	public double getStartMapId() { return this.startMapId; }
 	public void setStartMapId(double startMapId) { this.startMapId = startMapId; };
-	public List<TreasureHuntStep> getKnownStepsList() { return this.knownStepsList; };
+	public List<TreasureHuntStep> getKnownStepsList() { return this.knownStepsList; }
 	public void setKnownStepsList(List<TreasureHuntStep> knownStepsList) { this.knownStepsList = knownStepsList; };
-	public int getTotalStepCount() { return this.totalStepCount; };
+	public int getTotalStepCount() { return this.totalStepCount; }
 	public void setTotalStepCount(int totalStepCount) { this.totalStepCount = totalStepCount; };
-	public int getCheckPointCurrent() { return this.checkPointCurrent; };
+	public int getCheckPointCurrent() { return this.checkPointCurrent; }
 	public void setCheckPointCurrent(int checkPointCurrent) { this.checkPointCurrent = checkPointCurrent; };
-	public int getCheckPointTotal() { return this.checkPointTotal; };
+	public int getCheckPointTotal() { return this.checkPointTotal; }
 	public void setCheckPointTotal(int checkPointTotal) { this.checkPointTotal = checkPointTotal; };
-	public int getAvailableRetryCount() { return this.availableRetryCount; };
+	public int getAvailableRetryCount() { return this.availableRetryCount; }
 	public void setAvailableRetryCount(int availableRetryCount) { this.availableRetryCount = availableRetryCount; };
-	public List<TreasureHuntFlag> getFlags() { return this.flags; };
+	public List<TreasureHuntFlag> getFlags() { return this.flags; }
 	public void setFlags(List<TreasureHuntFlag> flags) { this.flags = flags; };
 
 	public TreasureHuntMessage(){

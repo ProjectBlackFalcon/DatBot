@@ -19,9 +19,9 @@ public class ExchangeBidHouseSearchMessage extends NetworkMessage {
 	private int type;
 	private int genId;
 
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
-	public int getGenId() { return this.genId; };
+	public int getGenId() { return this.genId; }
 	public void setGenId(int genId) { this.genId = genId; };
 
 	public ExchangeBidHouseSearchMessage(){

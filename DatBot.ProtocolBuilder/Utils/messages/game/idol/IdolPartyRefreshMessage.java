@@ -19,7 +19,7 @@ public class IdolPartyRefreshMessage extends NetworkMessage {
 
 	private PartyIdol partyIdol;
 
-	public PartyIdol getPartyIdol() { return this.partyIdol; };
+	public PartyIdol getPartyIdol() { return this.partyIdol; }
 	public void setPartyIdol(PartyIdol partyIdol) { this.partyIdol = partyIdol; };
 
 	public IdolPartyRefreshMessage(){

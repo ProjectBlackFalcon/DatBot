@@ -19,9 +19,9 @@ public class ChallengeResultMessage extends NetworkMessage {
 	private int challengeId;
 	private boolean success;
 
-	public int getChallengeId() { return this.challengeId; };
+	public int getChallengeId() { return this.challengeId; }
 	public void setChallengeId(int challengeId) { this.challengeId = challengeId; };
-	public boolean isSuccess() { return this.success; };
+	public boolean isSuccess() { return this.success; }
 	public void setSuccess(boolean success) { this.success = success; };
 
 	public ChallengeResultMessage(){

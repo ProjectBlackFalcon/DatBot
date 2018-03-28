@@ -19,9 +19,9 @@ public class LivingObjectDissociateMessage extends NetworkMessage {
 	private int livingUID;
 	private int livingPosition;
 
-	public int getLivingUID() { return this.livingUID; };
+	public int getLivingUID() { return this.livingUID; }
 	public void setLivingUID(int livingUID) { this.livingUID = livingUID; };
-	public int getLivingPosition() { return this.livingPosition; };
+	public int getLivingPosition() { return this.livingPosition; }
 	public void setLivingPosition(int livingPosition) { this.livingPosition = livingPosition; };
 
 	public LivingObjectDissociateMessage(){

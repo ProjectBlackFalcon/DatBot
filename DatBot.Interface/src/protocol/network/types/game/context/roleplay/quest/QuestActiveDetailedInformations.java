@@ -20,9 +20,9 @@ public class QuestActiveDetailedInformations extends QuestActiveInformations {
 	private int stepId;
 	private List<QuestObjectiveInformations> objectives;
 
-	public int getStepId() { return this.stepId; };
+	public int getStepId() { return this.stepId; }
 	public void setStepId(int stepId) { this.stepId = stepId; };
-	public List<QuestObjectiveInformations> getObjectives() { return this.objectives; };
+	public List<QuestObjectiveInformations> getObjectives() { return this.objectives; }
 	public void setObjectives(List<QuestObjectiveInformations> objectives) { this.objectives = objectives; };
 
 	public QuestActiveDetailedInformations(){

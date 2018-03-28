@@ -20,11 +20,11 @@ public class ProtectedEntityWaitingForHelpInfo extends NetworkMessage {
 	private int waitTimeForPlacement;
 	private int nbPositionForDefensors;
 
-	public int getTimeLeftBeforeFight() { return this.timeLeftBeforeFight; };
+	public int getTimeLeftBeforeFight() { return this.timeLeftBeforeFight; }
 	public void setTimeLeftBeforeFight(int timeLeftBeforeFight) { this.timeLeftBeforeFight = timeLeftBeforeFight; };
-	public int getWaitTimeForPlacement() { return this.waitTimeForPlacement; };
+	public int getWaitTimeForPlacement() { return this.waitTimeForPlacement; }
 	public void setWaitTimeForPlacement(int waitTimeForPlacement) { this.waitTimeForPlacement = waitTimeForPlacement; };
-	public int getNbPositionForDefensors() { return this.nbPositionForDefensors; };
+	public int getNbPositionForDefensors() { return this.nbPositionForDefensors; }
 	public void setNbPositionForDefensors(int nbPositionForDefensors) { this.nbPositionForDefensors = nbPositionForDefensors; };
 
 	public ProtectedEntityWaitingForHelpInfo(){

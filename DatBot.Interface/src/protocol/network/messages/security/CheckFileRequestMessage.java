@@ -19,9 +19,9 @@ public class CheckFileRequestMessage extends NetworkMessage {
 	private String filename;
 	private int type;
 
-	public String getFilename() { return this.filename; };
+	public String getFilename() { return this.filename; }
 	public void setFilename(String filename) { this.filename = filename; };
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
 
 	public CheckFileRequestMessage(){

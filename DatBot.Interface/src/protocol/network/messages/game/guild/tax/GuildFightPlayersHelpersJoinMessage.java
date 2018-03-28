@@ -20,9 +20,9 @@ public class GuildFightPlayersHelpersJoinMessage extends NetworkMessage {
 	private double fightId;
 	private CharacterMinimalPlusLookInformations playerInfo;
 
-	public double getFightId() { return this.fightId; };
+	public double getFightId() { return this.fightId; }
 	public void setFightId(double fightId) { this.fightId = fightId; };
-	public CharacterMinimalPlusLookInformations getPlayerInfo() { return this.playerInfo; };
+	public CharacterMinimalPlusLookInformations getPlayerInfo() { return this.playerInfo; }
 	public void setPlayerInfo(CharacterMinimalPlusLookInformations playerInfo) { this.playerInfo = playerInfo; };
 
 	public GuildFightPlayersHelpersJoinMessage(){

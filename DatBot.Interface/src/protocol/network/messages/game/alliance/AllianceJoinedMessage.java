@@ -21,11 +21,11 @@ public class AllianceJoinedMessage extends NetworkMessage {
 	private boolean enabled;
 	private int leadingGuildId;
 
-	public AllianceInformations getAllianceInfo() { return this.allianceInfo; };
+	public AllianceInformations getAllianceInfo() { return this.allianceInfo; }
 	public void setAllianceInfo(AllianceInformations allianceInfo) { this.allianceInfo = allianceInfo; };
-	public boolean isEnabled() { return this.enabled; };
+	public boolean isEnabled() { return this.enabled; }
 	public void setEnabled(boolean enabled) { this.enabled = enabled; };
-	public int getLeadingGuildId() { return this.leadingGuildId; };
+	public int getLeadingGuildId() { return this.leadingGuildId; }
 	public void setLeadingGuildId(int leadingGuildId) { this.leadingGuildId = leadingGuildId; };
 
 	public AllianceJoinedMessage(){

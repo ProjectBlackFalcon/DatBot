@@ -20,11 +20,11 @@ public class HavenBagFurnituresRequestMessage extends NetworkMessage {
 	private List<Integer> funitureIds;
 	private List<Integer> orientations;
 
-	public List<Integer> getCellIds() { return this.cellIds; };
+	public List<Integer> getCellIds() { return this.cellIds; }
 	public void setCellIds(List<Integer> cellIds) { this.cellIds = cellIds; };
-	public List<Integer> getFunitureIds() { return this.funitureIds; };
+	public List<Integer> getFunitureIds() { return this.funitureIds; }
 	public void setFunitureIds(List<Integer> funitureIds) { this.funitureIds = funitureIds; };
-	public List<Integer> getOrientations() { return this.orientations; };
+	public List<Integer> getOrientations() { return this.orientations; }
 	public void setOrientations(List<Integer> orientations) { this.orientations = orientations; };
 
 	public HavenBagFurnituresRequestMessage(){

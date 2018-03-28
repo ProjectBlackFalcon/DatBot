@@ -25,15 +25,15 @@ public class GameFightSpectateMessage extends NetworkMessage {
 	private int fightStart;
 	private List<Idol> idols;
 
-	public List<FightDispellableEffectExtendedInformations> getEffects() { return this.effects; };
+	public List<FightDispellableEffectExtendedInformations> getEffects() { return this.effects; }
 	public void setEffects(List<FightDispellableEffectExtendedInformations> effects) { this.effects = effects; };
-	public List<GameActionMark> getMarks() { return this.marks; };
+	public List<GameActionMark> getMarks() { return this.marks; }
 	public void setMarks(List<GameActionMark> marks) { this.marks = marks; };
-	public int getGameTurn() { return this.gameTurn; };
+	public int getGameTurn() { return this.gameTurn; }
 	public void setGameTurn(int gameTurn) { this.gameTurn = gameTurn; };
-	public int getFightStart() { return this.fightStart; };
+	public int getFightStart() { return this.fightStart; }
 	public void setFightStart(int fightStart) { this.fightStart = fightStart; };
-	public List<Idol> getIdols() { return this.idols; };
+	public List<Idol> getIdols() { return this.idols; }
 	public void setIdols(List<Idol> idols) { this.idols = idols; };
 
 	public GameFightSpectateMessage(){

@@ -19,7 +19,7 @@ public class AllianceModificationEmblemValidMessage extends NetworkMessage {
 
 	private GuildEmblem Alliancemblem;
 
-	public GuildEmblem getAlliancemblem() { return this.Alliancemblem; };
+	public GuildEmblem getAlliancemblem() { return this.Alliancemblem; }
 	public void setAlliancemblem(GuildEmblem Alliancemblem) { this.Alliancemblem = Alliancemblem; };
 
 	public AllianceModificationEmblemValidMessage(){

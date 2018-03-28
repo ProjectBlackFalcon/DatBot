@@ -20,9 +20,9 @@ public class MapFightStartPositionsUpdateMessage extends NetworkMessage {
 	private double mapId;
 	private FightStartingPositions fightStartPositions;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public FightStartingPositions getFightStartPositions() { return this.fightStartPositions; };
+	public FightStartingPositions getFightStartPositions() { return this.fightStartPositions; }
 	public void setFightStartPositions(FightStartingPositions fightStartPositions) { this.fightStartPositions = fightStartPositions; };
 
 	public MapFightStartPositionsUpdateMessage(){

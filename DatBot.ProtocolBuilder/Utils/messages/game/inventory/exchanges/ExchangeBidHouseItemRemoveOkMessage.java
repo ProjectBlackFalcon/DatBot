@@ -18,7 +18,7 @@ public class ExchangeBidHouseItemRemoveOkMessage extends NetworkMessage {
 
 	private int sellerId;
 
-	public int getSellerId() { return this.sellerId; };
+	public int getSellerId() { return this.sellerId; }
 	public void setSellerId(int sellerId) { this.sellerId = sellerId; };
 
 	public ExchangeBidHouseItemRemoveOkMessage(){

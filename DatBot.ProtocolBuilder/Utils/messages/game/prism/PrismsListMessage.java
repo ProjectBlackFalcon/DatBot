@@ -19,7 +19,7 @@ public class PrismsListMessage extends NetworkMessage {
 
 	private List<PrismSubareaEmptyInfo> prisms;
 
-	public List<PrismSubareaEmptyInfo> getPrisms() { return this.prisms; };
+	public List<PrismSubareaEmptyInfo> getPrisms() { return this.prisms; }
 	public void setPrisms(List<PrismSubareaEmptyInfo> prisms) { this.prisms = prisms; };
 
 	public PrismsListMessage(){

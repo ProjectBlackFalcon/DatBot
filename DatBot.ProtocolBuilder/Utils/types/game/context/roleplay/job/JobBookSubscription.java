@@ -19,9 +19,9 @@ public class JobBookSubscription extends NetworkMessage {
 	private int jobId;
 	private boolean subscribed;
 
-	public int getJobId() { return this.jobId; };
+	public int getJobId() { return this.jobId; }
 	public void setJobId(int jobId) { this.jobId = jobId; };
-	public boolean isSubscribed() { return this.subscribed; };
+	public boolean isSubscribed() { return this.subscribed; }
 	public void setSubscribed(boolean subscribed) { this.subscribed = subscribed; };
 
 	public JobBookSubscription(){

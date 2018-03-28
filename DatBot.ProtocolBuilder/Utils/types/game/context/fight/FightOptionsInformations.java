@@ -21,13 +21,13 @@ public class FightOptionsInformations extends NetworkMessage {
 	private boolean isClosed;
 	private boolean isAskingForHelp;
 
-	public boolean isIsSecret() { return this.isSecret; };
+	public boolean isIsSecret() { return this.isSecret; }
 	public void setIsSecret(boolean isSecret) { this.isSecret = isSecret; };
-	public boolean isIsRestrictedToPartyOnly() { return this.isRestrictedToPartyOnly; };
+	public boolean isIsRestrictedToPartyOnly() { return this.isRestrictedToPartyOnly; }
 	public void setIsRestrictedToPartyOnly(boolean isRestrictedToPartyOnly) { this.isRestrictedToPartyOnly = isRestrictedToPartyOnly; };
-	public boolean isIsClosed() { return this.isClosed; };
+	public boolean isIsClosed() { return this.isClosed; }
 	public void setIsClosed(boolean isClosed) { this.isClosed = isClosed; };
-	public boolean isIsAskingForHelp() { return this.isAskingForHelp; };
+	public boolean isIsAskingForHelp() { return this.isAskingForHelp; }
 	public void setIsAskingForHelp(boolean isAskingForHelp) { this.isAskingForHelp = isAskingForHelp; };
 
 	public FightOptionsInformations(){

@@ -24,17 +24,17 @@ public class StartupActionAddObject extends NetworkMessage {
 	private String pictureUrl;
 	private List<ObjectItemInformationWithQuantity> items;
 
-	public int getUid() { return this.uid; };
+	public int getUid() { return this.uid; }
 	public void setUid(int uid) { this.uid = uid; };
-	public String getTitle() { return this.title; };
+	public String getTitle() { return this.title; }
 	public void setTitle(String title) { this.title = title; };
-	public String getText() { return this.text; };
+	public String getText() { return this.text; }
 	public void setText(String text) { this.text = text; };
-	public String getDescUrl() { return this.descUrl; };
+	public String getDescUrl() { return this.descUrl; }
 	public void setDescUrl(String descUrl) { this.descUrl = descUrl; };
-	public String getPictureUrl() { return this.pictureUrl; };
+	public String getPictureUrl() { return this.pictureUrl; }
 	public void setPictureUrl(String pictureUrl) { this.pictureUrl = pictureUrl; };
-	public List<ObjectItemInformationWithQuantity> getItems() { return this.items; };
+	public List<ObjectItemInformationWithQuantity> getItems() { return this.items; }
 	public void setItems(List<ObjectItemInformationWithQuantity> items) { this.items = items; };
 
 	public StartupActionAddObject(){

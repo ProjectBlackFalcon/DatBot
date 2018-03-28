@@ -19,7 +19,7 @@ public class AbstractTaxCollectorListMessage extends NetworkMessage {
 
 	private List<TaxCollectorInformations> informations;
 
-	public List<TaxCollectorInformations> getInformations() { return this.informations; };
+	public List<TaxCollectorInformations> getInformations() { return this.informations; }
 	public void setInformations(List<TaxCollectorInformations> informations) { this.informations = informations; };
 
 	public AbstractTaxCollectorListMessage(){

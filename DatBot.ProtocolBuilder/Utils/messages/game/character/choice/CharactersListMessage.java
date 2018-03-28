@@ -18,7 +18,7 @@ public class CharactersListMessage extends BasicCharactersListMessage {
 
 	private boolean hasStartupActions;
 
-	public boolean isHasStartupActions() { return this.hasStartupActions; };
+	public boolean isHasStartupActions() { return this.hasStartupActions; }
 	public void setHasStartupActions(boolean hasStartupActions) { this.hasStartupActions = hasStartupActions; };
 
 	public CharactersListMessage(){

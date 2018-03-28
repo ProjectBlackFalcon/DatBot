@@ -25,19 +25,19 @@ public class PartyMemberInFightMessage extends AbstractPartyMessage {
 	private MapCoordinatesExtended fightMap;
 	private int timeBeforeFightStart;
 
-	public int getReason() { return this.reason; };
+	public int getReason() { return this.reason; }
 	public void setReason(int reason) { this.reason = reason; };
-	public long getMemberId() { return this.memberId; };
+	public long getMemberId() { return this.memberId; }
 	public void setMemberId(long memberId) { this.memberId = memberId; };
-	public int getMemberAccountId() { return this.memberAccountId; };
+	public int getMemberAccountId() { return this.memberAccountId; }
 	public void setMemberAccountId(int memberAccountId) { this.memberAccountId = memberAccountId; };
-	public String getMemberName() { return this.memberName; };
+	public String getMemberName() { return this.memberName; }
 	public void setMemberName(String memberName) { this.memberName = memberName; };
-	public int getFightId() { return this.fightId; };
+	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public MapCoordinatesExtended getFightMap() { return this.fightMap; };
+	public MapCoordinatesExtended getFightMap() { return this.fightMap; }
 	public void setFightMap(MapCoordinatesExtended fightMap) { this.fightMap = fightMap; };
-	public int getTimeBeforeFightStart() { return this.timeBeforeFightStart; };
+	public int getTimeBeforeFightStart() { return this.timeBeforeFightStart; }
 	public void setTimeBeforeFightStart(int timeBeforeFightStart) { this.timeBeforeFightStart = timeBeforeFightStart; };
 
 	public PartyMemberInFightMessage(){

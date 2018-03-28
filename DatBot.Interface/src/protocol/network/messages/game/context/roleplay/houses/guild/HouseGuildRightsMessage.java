@@ -23,15 +23,15 @@ public class HouseGuildRightsMessage extends NetworkMessage {
 	private GuildInformations guildInfo;
 	private int rights;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public int getInstanceId() { return this.instanceId; };
+	public int getInstanceId() { return this.instanceId; }
 	public void setInstanceId(int instanceId) { this.instanceId = instanceId; };
-	public boolean isSecondHand() { return this.secondHand; };
+	public boolean isSecondHand() { return this.secondHand; }
 	public void setSecondHand(boolean secondHand) { this.secondHand = secondHand; };
-	public GuildInformations getGuildInfo() { return this.guildInfo; };
+	public GuildInformations getGuildInfo() { return this.guildInfo; }
 	public void setGuildInfo(GuildInformations guildInfo) { this.guildInfo = guildInfo; };
-	public int getRights() { return this.rights; };
+	public int getRights() { return this.rights; }
 	public void setRights(int rights) { this.rights = rights; };
 
 	public HouseGuildRightsMessage(){

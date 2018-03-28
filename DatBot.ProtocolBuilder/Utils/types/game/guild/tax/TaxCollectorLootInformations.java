@@ -21,13 +21,13 @@ public class TaxCollectorLootInformations extends TaxCollectorComplementaryInfor
 	private int pods;
 	private long itemsValue;
 
-	public long getKamas() { return this.kamas; };
+	public long getKamas() { return this.kamas; }
 	public void setKamas(long kamas) { this.kamas = kamas; };
-	public long getExperience() { return this.experience; };
+	public long getExperience() { return this.experience; }
 	public void setExperience(long experience) { this.experience = experience; };
-	public int getPods() { return this.pods; };
+	public int getPods() { return this.pods; }
 	public void setPods(int pods) { this.pods = pods; };
-	public long getItemsValue() { return this.itemsValue; };
+	public long getItemsValue() { return this.itemsValue; }
 	public void setItemsValue(long itemsValue) { this.itemsValue = itemsValue; };
 
 	public TaxCollectorLootInformations(){

@@ -38,47 +38,47 @@ public class ActorRestrictionsInformations extends NetworkMessage {
 	private boolean cantAttackMonster;
 	private boolean cantWalk8Directions;
 
-	public boolean isCantBeAggressed() { return this.cantBeAggressed; };
+	public boolean isCantBeAggressed() { return this.cantBeAggressed; }
 	public void setCantBeAggressed(boolean cantBeAggressed) { this.cantBeAggressed = cantBeAggressed; };
-	public boolean isCantBeChallenged() { return this.cantBeChallenged; };
+	public boolean isCantBeChallenged() { return this.cantBeChallenged; }
 	public void setCantBeChallenged(boolean cantBeChallenged) { this.cantBeChallenged = cantBeChallenged; };
-	public boolean isCantTrade() { return this.cantTrade; };
+	public boolean isCantTrade() { return this.cantTrade; }
 	public void setCantTrade(boolean cantTrade) { this.cantTrade = cantTrade; };
-	public boolean isCantBeAttackedByMutant() { return this.cantBeAttackedByMutant; };
+	public boolean isCantBeAttackedByMutant() { return this.cantBeAttackedByMutant; }
 	public void setCantBeAttackedByMutant(boolean cantBeAttackedByMutant) { this.cantBeAttackedByMutant = cantBeAttackedByMutant; };
-	public boolean isCantRun() { return this.cantRun; };
+	public boolean isCantRun() { return this.cantRun; }
 	public void setCantRun(boolean cantRun) { this.cantRun = cantRun; };
-	public boolean isForceSlowWalk() { return this.forceSlowWalk; };
+	public boolean isForceSlowWalk() { return this.forceSlowWalk; }
 	public void setForceSlowWalk(boolean forceSlowWalk) { this.forceSlowWalk = forceSlowWalk; };
-	public boolean isCantMinimize() { return this.cantMinimize; };
+	public boolean isCantMinimize() { return this.cantMinimize; }
 	public void setCantMinimize(boolean cantMinimize) { this.cantMinimize = cantMinimize; };
-	public boolean isCantMove() { return this.cantMove; };
+	public boolean isCantMove() { return this.cantMove; }
 	public void setCantMove(boolean cantMove) { this.cantMove = cantMove; };
-	public boolean isCantAggress() { return this.cantAggress; };
+	public boolean isCantAggress() { return this.cantAggress; }
 	public void setCantAggress(boolean cantAggress) { this.cantAggress = cantAggress; };
-	public boolean isCantChallenge() { return this.cantChallenge; };
+	public boolean isCantChallenge() { return this.cantChallenge; }
 	public void setCantChallenge(boolean cantChallenge) { this.cantChallenge = cantChallenge; };
-	public boolean isCantExchange() { return this.cantExchange; };
+	public boolean isCantExchange() { return this.cantExchange; }
 	public void setCantExchange(boolean cantExchange) { this.cantExchange = cantExchange; };
-	public boolean isCantAttack() { return this.cantAttack; };
+	public boolean isCantAttack() { return this.cantAttack; }
 	public void setCantAttack(boolean cantAttack) { this.cantAttack = cantAttack; };
-	public boolean isCantChat() { return this.cantChat; };
+	public boolean isCantChat() { return this.cantChat; }
 	public void setCantChat(boolean cantChat) { this.cantChat = cantChat; };
-	public boolean isCantBeMerchant() { return this.cantBeMerchant; };
+	public boolean isCantBeMerchant() { return this.cantBeMerchant; }
 	public void setCantBeMerchant(boolean cantBeMerchant) { this.cantBeMerchant = cantBeMerchant; };
-	public boolean isCantUseObject() { return this.cantUseObject; };
+	public boolean isCantUseObject() { return this.cantUseObject; }
 	public void setCantUseObject(boolean cantUseObject) { this.cantUseObject = cantUseObject; };
-	public boolean isCantUseTaxCollector() { return this.cantUseTaxCollector; };
+	public boolean isCantUseTaxCollector() { return this.cantUseTaxCollector; }
 	public void setCantUseTaxCollector(boolean cantUseTaxCollector) { this.cantUseTaxCollector = cantUseTaxCollector; };
-	public boolean isCantUseInteractive() { return this.cantUseInteractive; };
+	public boolean isCantUseInteractive() { return this.cantUseInteractive; }
 	public void setCantUseInteractive(boolean cantUseInteractive) { this.cantUseInteractive = cantUseInteractive; };
-	public boolean isCantSpeakToNPC() { return this.cantSpeakToNPC; };
+	public boolean isCantSpeakToNPC() { return this.cantSpeakToNPC; }
 	public void setCantSpeakToNPC(boolean cantSpeakToNPC) { this.cantSpeakToNPC = cantSpeakToNPC; };
-	public boolean isCantChangeZone() { return this.cantChangeZone; };
+	public boolean isCantChangeZone() { return this.cantChangeZone; }
 	public void setCantChangeZone(boolean cantChangeZone) { this.cantChangeZone = cantChangeZone; };
-	public boolean isCantAttackMonster() { return this.cantAttackMonster; };
+	public boolean isCantAttackMonster() { return this.cantAttackMonster; }
 	public void setCantAttackMonster(boolean cantAttackMonster) { this.cantAttackMonster = cantAttackMonster; };
-	public boolean isCantWalk8Directions() { return this.cantWalk8Directions; };
+	public boolean isCantWalk8Directions() { return this.cantWalk8Directions; }
 	public void setCantWalk8Directions(boolean cantWalk8Directions) { this.cantWalk8Directions = cantWalk8Directions; };
 
 	public ActorRestrictionsInformations(){

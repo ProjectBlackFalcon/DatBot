@@ -18,7 +18,7 @@ public class CinematicMessage extends NetworkMessage {
 
 	private int cinematicId;
 
-	public int getCinematicId() { return this.cinematicId; };
+	public int getCinematicId() { return this.cinematicId; }
 	public void setCinematicId(int cinematicId) { this.cinematicId = cinematicId; };
 
 	public CinematicMessage(){

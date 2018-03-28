@@ -19,9 +19,9 @@ public class LockableStateUpdateStorageMessage extends LockableStateUpdateAbstra
 	private double mapId;
 	private int elementId;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public int getElementId() { return this.elementId; };
+	public int getElementId() { return this.elementId; }
 	public void setElementId(int elementId) { this.elementId = elementId; };
 
 	public LockableStateUpdateStorageMessage(){

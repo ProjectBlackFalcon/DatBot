@@ -18,7 +18,7 @@ public class URLOpenMessage extends NetworkMessage {
 
 	private int urlId;
 
-	public int getUrlId() { return this.urlId; };
+	public int getUrlId() { return this.urlId; }
 	public void setUrlId(int urlId) { this.urlId = urlId; };
 
 	public URLOpenMessage(){

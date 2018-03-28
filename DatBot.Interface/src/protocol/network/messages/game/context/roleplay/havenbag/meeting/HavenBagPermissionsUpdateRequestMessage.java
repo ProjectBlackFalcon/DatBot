@@ -18,7 +18,7 @@ public class HavenBagPermissionsUpdateRequestMessage extends NetworkMessage {
 
 	private int permissions;
 
-	public int getPermissions() { return this.permissions; };
+	public int getPermissions() { return this.permissions; }
 	public void setPermissions(int permissions) { this.permissions = permissions; };
 
 	public HavenBagPermissionsUpdateRequestMessage(){

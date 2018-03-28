@@ -18,7 +18,7 @@ public class ObjectItemToSellInBid extends ObjectItemToSell {
 
 	private int unsoldDelay;
 
-	public int getUnsoldDelay() { return this.unsoldDelay; };
+	public int getUnsoldDelay() { return this.unsoldDelay; }
 	public void setUnsoldDelay(int unsoldDelay) { this.unsoldDelay = unsoldDelay; };
 
 	public ObjectItemToSellInBid(){

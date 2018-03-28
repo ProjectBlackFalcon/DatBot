@@ -30,25 +30,25 @@ public class TaxCollectorInformations extends NetworkMessage {
 	private EntityLook look;
 	private List<TaxCollectorComplementaryInformations> complements;
 
-	public double getUniqueId() { return this.uniqueId; };
+	public double getUniqueId() { return this.uniqueId; }
 	public void setUniqueId(double uniqueId) { this.uniqueId = uniqueId; };
-	public int getFirtNameId() { return this.firtNameId; };
+	public int getFirtNameId() { return this.firtNameId; }
 	public void setFirtNameId(int firtNameId) { this.firtNameId = firtNameId; };
-	public int getLastNameId() { return this.lastNameId; };
+	public int getLastNameId() { return this.lastNameId; }
 	public void setLastNameId(int lastNameId) { this.lastNameId = lastNameId; };
-	public AdditionalTaxCollectorInformations getAdditionalInfos() { return this.additionalInfos; };
+	public AdditionalTaxCollectorInformations getAdditionalInfos() { return this.additionalInfos; }
 	public void setAdditionalInfos(AdditionalTaxCollectorInformations additionalInfos) { this.additionalInfos = additionalInfos; };
-	public int getWorldX() { return this.worldX; };
+	public int getWorldX() { return this.worldX; }
 	public void setWorldX(int worldX) { this.worldX = worldX; };
-	public int getWorldY() { return this.worldY; };
+	public int getWorldY() { return this.worldY; }
 	public void setWorldY(int worldY) { this.worldY = worldY; };
-	public int getSubAreaId() { return this.subAreaId; };
+	public int getSubAreaId() { return this.subAreaId; }
 	public void setSubAreaId(int subAreaId) { this.subAreaId = subAreaId; };
-	public int getState() { return this.state; };
+	public int getState() { return this.state; }
 	public void setState(int state) { this.state = state; };
-	public EntityLook getLook() { return this.look; };
+	public EntityLook getLook() { return this.look; }
 	public void setLook(EntityLook look) { this.look = look; };
-	public List<TaxCollectorComplementaryInformations> getComplements() { return this.complements; };
+	public List<TaxCollectorComplementaryInformations> getComplements() { return this.complements; }
 	public void setComplements(List<TaxCollectorComplementaryInformations> complements) { this.complements = complements; };
 
 	public TaxCollectorInformations(){

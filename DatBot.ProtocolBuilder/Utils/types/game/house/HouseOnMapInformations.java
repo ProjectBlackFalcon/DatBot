@@ -20,9 +20,9 @@ public class HouseOnMapInformations extends HouseInformations {
 	private List<Integer> doorsOnMap;
 	private List<HouseInstanceInformations> houseInstances;
 
-	public List<Integer> getDoorsOnMap() { return this.doorsOnMap; };
+	public List<Integer> getDoorsOnMap() { return this.doorsOnMap; }
 	public void setDoorsOnMap(List<Integer> doorsOnMap) { this.doorsOnMap = doorsOnMap; };
-	public List<HouseInstanceInformations> getHouseInstances() { return this.houseInstances; };
+	public List<HouseInstanceInformations> getHouseInstances() { return this.houseInstances; }
 	public void setHouseInstances(List<HouseInstanceInformations> houseInstances) { this.houseInstances = houseInstances; };
 
 	public HouseOnMapInformations(){

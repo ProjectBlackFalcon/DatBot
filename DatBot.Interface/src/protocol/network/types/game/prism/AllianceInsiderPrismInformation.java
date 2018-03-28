@@ -23,15 +23,15 @@ public class AllianceInsiderPrismInformation extends PrismInformation {
 	private String lastTimeSlotModificationAuthorName;
 	private List<ObjectItem> modulesObjects;
 
-	public int getLastTimeSlotModificationDate() { return this.lastTimeSlotModificationDate; };
+	public int getLastTimeSlotModificationDate() { return this.lastTimeSlotModificationDate; }
 	public void setLastTimeSlotModificationDate(int lastTimeSlotModificationDate) { this.lastTimeSlotModificationDate = lastTimeSlotModificationDate; };
-	public int getLastTimeSlotModificationAuthorGuildId() { return this.lastTimeSlotModificationAuthorGuildId; };
+	public int getLastTimeSlotModificationAuthorGuildId() { return this.lastTimeSlotModificationAuthorGuildId; }
 	public void setLastTimeSlotModificationAuthorGuildId(int lastTimeSlotModificationAuthorGuildId) { this.lastTimeSlotModificationAuthorGuildId = lastTimeSlotModificationAuthorGuildId; };
-	public long getLastTimeSlotModificationAuthorId() { return this.lastTimeSlotModificationAuthorId; };
+	public long getLastTimeSlotModificationAuthorId() { return this.lastTimeSlotModificationAuthorId; }
 	public void setLastTimeSlotModificationAuthorId(long lastTimeSlotModificationAuthorId) { this.lastTimeSlotModificationAuthorId = lastTimeSlotModificationAuthorId; };
-	public String getLastTimeSlotModificationAuthorName() { return this.lastTimeSlotModificationAuthorName; };
+	public String getLastTimeSlotModificationAuthorName() { return this.lastTimeSlotModificationAuthorName; }
 	public void setLastTimeSlotModificationAuthorName(String lastTimeSlotModificationAuthorName) { this.lastTimeSlotModificationAuthorName = lastTimeSlotModificationAuthorName; };
-	public List<ObjectItem> getModulesObjects() { return this.modulesObjects; };
+	public List<ObjectItem> getModulesObjects() { return this.modulesObjects; }
 	public void setModulesObjects(List<ObjectItem> modulesObjects) { this.modulesObjects = modulesObjects; };
 
 	public AllianceInsiderPrismInformation(){

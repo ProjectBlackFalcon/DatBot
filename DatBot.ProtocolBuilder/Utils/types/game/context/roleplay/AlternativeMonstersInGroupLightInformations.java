@@ -20,9 +20,9 @@ public class AlternativeMonstersInGroupLightInformations extends NetworkMessage 
 	private int playerCount;
 	private List<MonsterInGroupLightInformations> monsters;
 
-	public int getPlayerCount() { return this.playerCount; };
+	public int getPlayerCount() { return this.playerCount; }
 	public void setPlayerCount(int playerCount) { this.playerCount = playerCount; };
-	public List<MonsterInGroupLightInformations> getMonsters() { return this.monsters; };
+	public List<MonsterInGroupLightInformations> getMonsters() { return this.monsters; }
 	public void setMonsters(List<MonsterInGroupLightInformations> monsters) { this.monsters = monsters; };
 
 	public AlternativeMonstersInGroupLightInformations(){

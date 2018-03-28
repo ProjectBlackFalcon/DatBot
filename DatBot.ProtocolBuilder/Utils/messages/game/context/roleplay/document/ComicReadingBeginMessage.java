@@ -18,7 +18,7 @@ public class ComicReadingBeginMessage extends NetworkMessage {
 
 	private int comicId;
 
-	public int getComicId() { return this.comicId; };
+	public int getComicId() { return this.comicId; }
 	public void setComicId(int comicId) { this.comicId = comicId; };
 
 	public ComicReadingBeginMessage(){

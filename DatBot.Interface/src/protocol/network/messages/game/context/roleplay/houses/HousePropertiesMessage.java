@@ -21,11 +21,11 @@ public class HousePropertiesMessage extends NetworkMessage {
 	private List<Integer> doorsOnMap;
 	private HouseInstanceInformations properties;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public List<Integer> getDoorsOnMap() { return this.doorsOnMap; };
+	public List<Integer> getDoorsOnMap() { return this.doorsOnMap; }
 	public void setDoorsOnMap(List<Integer> doorsOnMap) { this.doorsOnMap = doorsOnMap; };
-	public HouseInstanceInformations getProperties() { return this.properties; };
+	public HouseInstanceInformations getProperties() { return this.properties; }
 	public void setProperties(HouseInstanceInformations properties) { this.properties = properties; };
 
 	public HousePropertiesMessage(){

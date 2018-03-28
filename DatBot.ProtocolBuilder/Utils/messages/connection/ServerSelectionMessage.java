@@ -18,7 +18,7 @@ public class ServerSelectionMessage extends NetworkMessage {
 
 	private int serverId;
 
-	public int getServerId() { return this.serverId; };
+	public int getServerId() { return this.serverId; }
 	public void setServerId(int serverId) { this.serverId = serverId; };
 
 	public ServerSelectionMessage(){

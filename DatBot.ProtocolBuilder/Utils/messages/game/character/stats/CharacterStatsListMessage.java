@@ -19,7 +19,7 @@ public class CharacterStatsListMessage extends NetworkMessage {
 
 	private CharacterCharacteristicsInformations stats;
 
-	public CharacterCharacteristicsInformations getStats() { return this.stats; };
+	public CharacterCharacteristicsInformations getStats() { return this.stats; }
 	public void setStats(CharacterCharacteristicsInformations stats) { this.stats = stats; };
 
 	public CharacterStatsListMessage(){

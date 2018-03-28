@@ -18,7 +18,7 @@ public class ObjectsDeletedMessage extends NetworkMessage {
 
 	private List<Integer> objectUID;
 
-	public List<Integer> getObjectUID() { return this.objectUID; };
+	public List<Integer> getObjectUID() { return this.objectUID; }
 	public void setObjectUID(List<Integer> objectUID) { this.objectUID = objectUID; };
 
 	public ObjectsDeletedMessage(){

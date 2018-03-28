@@ -19,7 +19,7 @@ public class GameFightSpectatorJoinMessage extends GameFightJoinMessage {
 
 	private List<NamedPartyTeam> namedPartyTeams;
 
-	public List<NamedPartyTeam> getNamedPartyTeams() { return this.namedPartyTeams; };
+	public List<NamedPartyTeam> getNamedPartyTeams() { return this.namedPartyTeams; }
 	public void setNamedPartyTeams(List<NamedPartyTeam> namedPartyTeams) { this.namedPartyTeams = namedPartyTeams; };
 
 	public GameFightSpectatorJoinMessage(){

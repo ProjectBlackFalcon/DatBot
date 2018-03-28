@@ -31,33 +31,33 @@ public class FightResultExperienceData extends FightResultAdditionalData {
 	private boolean isIncarnationExperience;
 	private int rerollExperienceMul;
 
-	public long getExperience() { return this.experience; };
+	public long getExperience() { return this.experience; }
 	public void setExperience(long experience) { this.experience = experience; };
-	public boolean isShowExperience() { return this.showExperience; };
+	public boolean isShowExperience() { return this.showExperience; }
 	public void setShowExperience(boolean showExperience) { this.showExperience = showExperience; };
-	public long getExperienceLevelFloor() { return this.experienceLevelFloor; };
+	public long getExperienceLevelFloor() { return this.experienceLevelFloor; }
 	public void setExperienceLevelFloor(long experienceLevelFloor) { this.experienceLevelFloor = experienceLevelFloor; };
-	public boolean isShowExperienceLevelFloor() { return this.showExperienceLevelFloor; };
+	public boolean isShowExperienceLevelFloor() { return this.showExperienceLevelFloor; }
 	public void setShowExperienceLevelFloor(boolean showExperienceLevelFloor) { this.showExperienceLevelFloor = showExperienceLevelFloor; };
-	public long getExperienceNextLevelFloor() { return this.experienceNextLevelFloor; };
+	public long getExperienceNextLevelFloor() { return this.experienceNextLevelFloor; }
 	public void setExperienceNextLevelFloor(long experienceNextLevelFloor) { this.experienceNextLevelFloor = experienceNextLevelFloor; };
-	public boolean isShowExperienceNextLevelFloor() { return this.showExperienceNextLevelFloor; };
+	public boolean isShowExperienceNextLevelFloor() { return this.showExperienceNextLevelFloor; }
 	public void setShowExperienceNextLevelFloor(boolean showExperienceNextLevelFloor) { this.showExperienceNextLevelFloor = showExperienceNextLevelFloor; };
-	public long getExperienceFightDelta() { return this.experienceFightDelta; };
+	public long getExperienceFightDelta() { return this.experienceFightDelta; }
 	public void setExperienceFightDelta(long experienceFightDelta) { this.experienceFightDelta = experienceFightDelta; };
-	public boolean isShowExperienceFightDelta() { return this.showExperienceFightDelta; };
+	public boolean isShowExperienceFightDelta() { return this.showExperienceFightDelta; }
 	public void setShowExperienceFightDelta(boolean showExperienceFightDelta) { this.showExperienceFightDelta = showExperienceFightDelta; };
-	public long getExperienceForGuild() { return this.experienceForGuild; };
+	public long getExperienceForGuild() { return this.experienceForGuild; }
 	public void setExperienceForGuild(long experienceForGuild) { this.experienceForGuild = experienceForGuild; };
-	public boolean isShowExperienceForGuild() { return this.showExperienceForGuild; };
+	public boolean isShowExperienceForGuild() { return this.showExperienceForGuild; }
 	public void setShowExperienceForGuild(boolean showExperienceForGuild) { this.showExperienceForGuild = showExperienceForGuild; };
-	public long getExperienceForMount() { return this.experienceForMount; };
+	public long getExperienceForMount() { return this.experienceForMount; }
 	public void setExperienceForMount(long experienceForMount) { this.experienceForMount = experienceForMount; };
-	public boolean isShowExperienceForMount() { return this.showExperienceForMount; };
+	public boolean isShowExperienceForMount() { return this.showExperienceForMount; }
 	public void setShowExperienceForMount(boolean showExperienceForMount) { this.showExperienceForMount = showExperienceForMount; };
-	public boolean isIsIncarnationExperience() { return this.isIncarnationExperience; };
+	public boolean isIsIncarnationExperience() { return this.isIncarnationExperience; }
 	public void setIsIncarnationExperience(boolean isIncarnationExperience) { this.isIncarnationExperience = isIncarnationExperience; };
-	public int getRerollExperienceMul() { return this.rerollExperienceMul; };
+	public int getRerollExperienceMul() { return this.rerollExperienceMul; }
 	public void setRerollExperienceMul(int rerollExperienceMul) { this.rerollExperienceMul = rerollExperienceMul; };
 
 	public FightResultExperienceData(){

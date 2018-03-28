@@ -19,9 +19,9 @@ public class DareRewardConsumeRequestMessage extends NetworkMessage {
 	private double dareId;
 	private int type;
 
-	public double getDareId() { return this.dareId; };
+	public double getDareId() { return this.dareId; }
 	public void setDareId(double dareId) { this.dareId = dareId; };
-	public int getType() { return this.type; };
+	public int getType() { return this.type; }
 	public void setType(int type) { this.type = type; };
 
 	public DareRewardConsumeRequestMessage(){

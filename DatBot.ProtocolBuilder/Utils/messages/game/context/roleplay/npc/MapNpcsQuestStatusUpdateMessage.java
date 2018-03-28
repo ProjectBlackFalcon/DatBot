@@ -22,13 +22,13 @@ public class MapNpcsQuestStatusUpdateMessage extends NetworkMessage {
 	private List<GameRolePlayNpcQuestFlag> questFlags;
 	private List<Integer> npcsIdsWithoutQuest;
 
-	public double getMapId() { return this.mapId; };
+	public double getMapId() { return this.mapId; }
 	public void setMapId(double mapId) { this.mapId = mapId; };
-	public List<Integer> getNpcsIdsWithQuest() { return this.npcsIdsWithQuest; };
+	public List<Integer> getNpcsIdsWithQuest() { return this.npcsIdsWithQuest; }
 	public void setNpcsIdsWithQuest(List<Integer> npcsIdsWithQuest) { this.npcsIdsWithQuest = npcsIdsWithQuest; };
-	public List<GameRolePlayNpcQuestFlag> getQuestFlags() { return this.questFlags; };
+	public List<GameRolePlayNpcQuestFlag> getQuestFlags() { return this.questFlags; }
 	public void setQuestFlags(List<GameRolePlayNpcQuestFlag> questFlags) { this.questFlags = questFlags; };
-	public List<Integer> getNpcsIdsWithoutQuest() { return this.npcsIdsWithoutQuest; };
+	public List<Integer> getNpcsIdsWithoutQuest() { return this.npcsIdsWithoutQuest; }
 	public void setNpcsIdsWithoutQuest(List<Integer> npcsIdsWithoutQuest) { this.npcsIdsWithoutQuest = npcsIdsWithoutQuest; };
 
 	public MapNpcsQuestStatusUpdateMessage(){

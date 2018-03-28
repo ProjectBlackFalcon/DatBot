@@ -18,7 +18,7 @@ public class ZaapListMessage extends TeleportDestinationsListMessage {
 
 	private double spawnMapId;
 
-	public double getSpawnMapId() { return this.spawnMapId; };
+	public double getSpawnMapId() { return this.spawnMapId; }
 	public void setSpawnMapId(double spawnMapId) { this.spawnMapId = spawnMapId; };
 
 	public ZaapListMessage(){

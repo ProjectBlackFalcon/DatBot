@@ -19,9 +19,9 @@ public class HouseInformations extends NetworkMessage {
 	private int houseId;
 	private int modelId;
 
-	public int getHouseId() { return this.houseId; };
+	public int getHouseId() { return this.houseId; }
 	public void setHouseId(int houseId) { this.houseId = houseId; };
-	public int getModelId() { return this.modelId; };
+	public int getModelId() { return this.modelId; }
 	public void setModelId(int modelId) { this.modelId = modelId; };
 
 	public HouseInformations(){

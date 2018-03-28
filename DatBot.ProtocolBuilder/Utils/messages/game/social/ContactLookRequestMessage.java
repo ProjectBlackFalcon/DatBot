@@ -19,9 +19,9 @@ public class ContactLookRequestMessage extends NetworkMessage {
 	private int requestId;
 	private int contactType;
 
-	public int getRequestId() { return this.requestId; };
+	public int getRequestId() { return this.requestId; }
 	public void setRequestId(int requestId) { this.requestId = requestId; };
-	public int getContactType() { return this.contactType; };
+	public int getContactType() { return this.contactType; }
 	public void setContactType(int contactType) { this.contactType = contactType; };
 
 	public ContactLookRequestMessage(){

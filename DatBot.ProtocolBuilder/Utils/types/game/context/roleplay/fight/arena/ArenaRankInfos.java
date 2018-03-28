@@ -22,15 +22,15 @@ public class ArenaRankInfos extends NetworkMessage {
 	private int fightcount;
 	private boolean validForLadder;
 
-	public int getRank() { return this.rank; };
+	public int getRank() { return this.rank; }
 	public void setRank(int rank) { this.rank = rank; };
-	public int getBestRank() { return this.bestRank; };
+	public int getBestRank() { return this.bestRank; }
 	public void setBestRank(int bestRank) { this.bestRank = bestRank; };
-	public int getVictoryCount() { return this.victoryCount; };
+	public int getVictoryCount() { return this.victoryCount; }
 	public void setVictoryCount(int victoryCount) { this.victoryCount = victoryCount; };
-	public int getFightcount() { return this.fightcount; };
+	public int getFightcount() { return this.fightcount; }
 	public void setFightcount(int fightcount) { this.fightcount = fightcount; };
-	public boolean isValidForLadder() { return this.validForLadder; };
+	public boolean isValidForLadder() { return this.validForLadder; }
 	public void setValidForLadder(boolean validForLadder) { this.validForLadder = validForLadder; };
 
 	public ArenaRankInfos(){

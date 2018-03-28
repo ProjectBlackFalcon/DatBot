@@ -23,15 +23,15 @@ public class ObjectItem extends Item {
 	private int objectUID;
 	private int quantity;
 
-	public int getPosition() { return this.position; };
+	public int getPosition() { return this.position; }
 	public void setPosition(int position) { this.position = position; };
-	public int getObjectGID() { return this.objectGID; };
+	public int getObjectGID() { return this.objectGID; }
 	public void setObjectGID(int objectGID) { this.objectGID = objectGID; };
-	public List<ObjectEffect> getEffects() { return this.effects; };
+	public List<ObjectEffect> getEffects() { return this.effects; }
 	public void setEffects(List<ObjectEffect> effects) { this.effects = effects; };
-	public int getObjectUID() { return this.objectUID; };
+	public int getObjectUID() { return this.objectUID; }
 	public void setObjectUID(int objectUID) { this.objectUID = objectUID; };
-	public int getQuantity() { return this.quantity; };
+	public int getQuantity() { return this.quantity; }
 	public void setQuantity(int quantity) { this.quantity = quantity; };
 
 	public ObjectItem(){
@@ -49,7 +49,7 @@ public class ObjectItem extends Item {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			super.Serialize(writer);
-			writer.writeByte(this.position);
+			writer.writeShort(this.position);
 			writer.writeVarShort(this.objectGID);
 			writer.writeShort(this.effects.size());
 			int _loc2_ = 0;
@@ -69,7 +69,7 @@ public class ObjectItem extends Item {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			super.Deserialize(reader);
-			this.position = reader.readByte();
+			this.position = reader.readShort();
 			this.objectGID = reader.readVarShort();
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
