@@ -37,11 +37,15 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void gameActionDispellEffect(GameActionFightDispellEffectMessage message){
+    public void gameActionFightDispellEffect(GameActionFightDispellEffectMessage message){
 
     }
 
-    public void gameActionDispell(GameActionFightDispellMessage message){
+    public void gameActionFightDispell(GameActionFightDispellMessage message){
+
+    }
+
+    public void gameActionFightDispellSpell(GameActionFightDispellSpellMessage message){
 
     }
 
