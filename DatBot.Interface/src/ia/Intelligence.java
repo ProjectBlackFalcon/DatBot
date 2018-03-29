@@ -24,6 +24,7 @@ public class Intelligence {
 	public void treatPacket(NetworkMessage packet){
 		switch (packet.getClass().getSimpleName()){
 			System.out.println("jacques");
+			System.out.println("Bonsoir");
 		}
 	}
 }
