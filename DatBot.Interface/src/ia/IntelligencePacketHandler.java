@@ -1,6 +1,8 @@
 package ia;
 
 import protocol.network.messages.game.actions.fight.*;
+import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
+import protocol.network.messages.game.context.GameMapMovementMessage;
 import protocol.network.messages.game.context.fight.*;
 import protocol.network.messages.game.context.fight.arena.ArenaFighterLeaveMessage;
 import protocol.network.messages.game.context.fight.challenge.ChallengeInfoMessage;
@@ -337,6 +339,13 @@ public class IntelligencePacketHandler {
 
     }
 
+    public void GameEntitiesDisposition(GameEntitiesDispositionMessage message){
+
+    }
+
+    public void GameMapMovement(GameMapMovementMessage message){
+
+    }
 
 
 }
