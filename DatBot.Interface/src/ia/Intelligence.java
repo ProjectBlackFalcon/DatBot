@@ -18,6 +18,7 @@ public class Intelligence {
 	public void init(List<Entity> entities, MapIA map) {
 		this.entities = entities;
 		this.map = map;
+		System.out.println("Bonsoir");
 	}
 	
 	//TODO gérer les paquets
