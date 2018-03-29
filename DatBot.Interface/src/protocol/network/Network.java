@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 import ia.Intelligence;
+import ia.IntelligencePacketHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -396,7 +397,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleGameActionFightLifePointsLostMessage(DofusDataReader dataReader) {
 		GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 		gameActionFightLifePointsLostMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightLifePointsGain(gameActionFightLifePointsGainMessage);
+        iaPacket.gameActionFightLifePointsLost(gameActionFightLifePointsLostMessage);
 	}
 
 	private void handleGameActionFightMarkCellsMessage(DofusDataReader dataReader) {
@@ -1395,9 +1396,9 @@ public class Network extends DisplayInfo implements Runnable {
 				iaPacket.gameActionFightDispellEffect(gameActionFightDispellEffectMessage);
 				break;
 			case 5533:
-				GameActionFightDispellMessage gameActionFightEffectMessage = new GameActionFightDispellMessage();
-				gameActionFightEffectMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightEffect(gameActionFightEffectMessage);
+				GameActionFightDispellMessage gameActionFightDispellMessage = new GameActionFightDispellMessage();
+                gameActionFightDispellMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightDispell(gameActionFightDispellMessage);
 				break;
 			case 6176:
 				GameActionFightDispellSpellMessage gameActionFightDispellSpellMessage = new GameActionFightDispellSpellMessage();
