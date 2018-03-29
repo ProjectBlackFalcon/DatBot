@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ia.Intelligence;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -39,21 +40,7 @@ import protocol.network.messages.connection.SelectedServerRefusedMessage;
 import protocol.network.messages.connection.ServerSelectionMessage;
 import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightActivateGlyphTrapMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightCloseCombatMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightDeathMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightDispellableEffectMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightDodgePointLossMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightLifeAndShieldPointsLostMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightLifePointsGainMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightMarkCellsMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightModifyEffectsDurationMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightNoSpellCastMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightPointsVariationMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
-import protocol.network.messages.game.actions.fight.GameActionFightSummonMessage;
+import protocol.network.messages.game.actions.fight.*;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
@@ -175,6 +162,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Movement movement;
 	private Npc npc;
 	private Dragodinde dragodinde;
+	private IntelligencePacketHandler iaPacket;
 	public int port = 443;
 	private Socket socket;
 	boolean packetSent = false;
@@ -194,6 +182,7 @@ public class Network extends DisplayInfo implements Runnable {
 		this.monsters = new Monsters();
 		this.hunt = new Hunt();
 		this.dragodinde = new Dragodinde();
+		this.iaPacket = new IntelligencePacketHandler();
 		latencyFrame = new LatencyFrame();
 		try {
 			this.npc = new Npc(this);
@@ -369,220 +358,63 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void handleGameActionFightCloseCombatMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightCloseCombatMessage gameActionFightCloseCombatMessage = new GameActionFightCloseCombatMessage();
 		gameActionFightCloseCombatMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightCloseCombatMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightCloseCombatMessage.getTargetId()));
-		jsonObject.put("weaponGeneric", d2iManager.getText(GameData.getWeaponNameId(gameActionFightCloseCombatMessage.getWeaponGenericId())));
-		jsonObject.put("critical", gameActionFightCloseCombatMessage.getCritical());
-		jsonObject.put("destinationCellId", gameActionFightCloseCombatMessage.getDestinationCellId());
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("closeCombat", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+        iaPacket.gameActionFightCloseCombat(gameActionFightCloseCombatMessage);
 	}
 
 	private void handleGameActionFightDeathMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
 		gameActionFightDeathMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightDeathMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightDeathMessage.getTargetId()));
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("death", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
-		for (int i = 0; i < this.getFight().getMonsters().size(); i++) {
-			if (this.getFight().getMonsters().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId()) {
-				this.getFight().getMonsters().get(i).setAlive(false);
-			}
-		}
-		for (int i = 0; i < this.getFight().getPlayers().size(); i++) {
-			if (this.getFight().getPlayers().get(i).getContextualId() == gameActionFightDeathMessage.getTargetId()) {
-				this.getFight().getPlayers().get(i).setAlive(false);
-			}
-		}
+        iaPacket.gameActionFightDeath(gameActionFightDeathMessage);
 	}
 
 	private void handleGameActionFightDispellableEffectMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 		gameActionFightDispellableEffectMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightDispellableEffectMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightDispellableEffectMessage.getEffect().getTargetId()));
-		jsonObject.put("effectId", gameActionFightDispellableEffectMessage.getEffect().getEffectId());
-		jsonObject.put("spellId", gameActionFightDispellableEffectMessage.getEffect().getSpellId());
-		jsonObject.put("turnDuration", gameActionFightDispellableEffectMessage.getEffect().getTurnDuration());
-		jsonObject.put("dispelable", gameActionFightDispellableEffectMessage.getEffect().getDispelable()); 
-		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostEffect")) {
-			if(gameActionFightDispellableEffectMessage.getActionId() == 168){
-				jsonObject.put("pa", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
-			} else if(gameActionFightDispellableEffectMessage.getActionId() == 169){
-				jsonObject.put("pm", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
-			} else {
-				jsonObject.put("amount", ((FightTemporaryBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getDelta());
-			}
-		}
-		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostStateEffect")) {
-			jsonObject.put("stateId", ((FightTemporaryBoostStateEffect) gameActionFightDispellableEffectMessage.getEffect()).getStateId());
-		}
-		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporaryBoostWeaponDamagesEffect")) {
-			jsonObject.put("weaponTypeId", ((FightTemporaryBoostWeaponDamagesEffect) gameActionFightDispellableEffectMessage.getEffect()).getWeaponTypeId());
-		}
-		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellBoostEffect")) {
-			jsonObject.put("boostedSpellId", ((FightTemporarySpellBoostEffect) gameActionFightDispellableEffectMessage.getEffect()).getBoostedSpellId());
-
-		}
-		if (gameActionFightDispellableEffectMessage.getEffect().getClass().getSimpleName().equals("FightTemporarySpellImmunityEffect")) {
-			jsonObject.put("immuneSpellId", ((FightTemporarySpellImmunityEffect) gameActionFightDispellableEffectMessage.getEffect()).getImmuneSpellId());
-
-		}
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("dispellableEffect", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+        iaPacket.gameActionFightDispellableEffect(gameActionFightDispellableEffectMessage);
 	}
 
 	private void handleGameActionFightDodgePointLossMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightDodgePointLossMessage dodgePointLossMessage = new GameActionFightDodgePointLossMessage();
 		dodgePointLossMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(dodgePointLossMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(dodgePointLossMessage.getTargetId()));
-		jsonObject.put("amount", dodgePointLossMessage.getAmount());
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("dodgePointLoss", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+        iaPacket.gameActionFightDodgePointLoss(dodgePointLossMessage);
 	}
 
 	private void handleGameActionFightLifeAndShieldPointsLostMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightLifeAndShieldPointsLostMessage gameActionFightLifeAndShieldPointsLostMessage = new GameActionFightLifeAndShieldPointsLostMessage();
 		gameActionFightLifeAndShieldPointsLostMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightLifeAndShieldPointsLostMessage.getTargetId()));
-		jsonObject.put("shieldLoss", gameActionFightLifeAndShieldPointsLostMessage.getShieldLoss());
-		jsonObject.put("lpLoss", gameActionFightLifeAndShieldPointsLostMessage.getLoss());
-		jsonObject.put("lpMaxLoss", gameActionFightLifeAndShieldPointsLostMessage.getPermanentDamages());
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("shieldLpLoss", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+        iaPacket.gameActionFightLifeAndShieldPointsLost(gameActionFightLifeAndShieldPointsLostMessage);
 	}
 
 	private void handleGameActionFightLifePointsGainMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightLifePointsGainMessage gameActionFightLifePointsGainMessage = new GameActionFightLifePointsGainMessage();
 		gameActionFightLifePointsGainMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightLifePointsGainMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightLifePointsGainMessage.getTargetId()));
-		jsonObject.put("lpGain", gameActionFightLifePointsGainMessage.getDelta());
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("lifePointsGain", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+        iaPacket.gameActionFightLifePointsGain(gameActionFightLifePointsGainMessage);
 	}
 
 	private void handleGameActionFightLifePointsLostMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 		gameActionFightLifePointsLostMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightLifePointsLostMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightLifePointsLostMessage.getTargetId()));
-		jsonObject.put("lpLost", gameActionFightLifePointsLostMessage.getLoss());
-		jsonObject.put("lpMaxLost", gameActionFightLifePointsLostMessage.getPermanentDamages());
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("lifePointsLost", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+        iaPacket.gameActionFightLifePointsGain(gameActionFightLifePointsGainMessage);
 	}
 
 	private void handleGameActionFightMarkCellsMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightMarkCellsMessage gameActionFightMarkCellsMessage = new GameActionFightMarkCellsMessage();
 		gameActionFightMarkCellsMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightMarkCellsMessage.getSourceId()));
-		jsonObject.put("markSpellId", gameActionFightMarkCellsMessage.getMark().getMarkSpellId());
-		jsonObject.put("markImpactCellId", gameActionFightMarkCellsMessage.getMark().getMarkimpactCell());
-		JSONArray jsonArray = new JSONArray();
-		for (GameActionMarkedCell object : gameActionFightMarkCellsMessage.getMark().getCells()) {
-			JSONObject jsonCells = new JSONObject();
-			jsonCells.put("cellId", object.getCellId());
-			jsonCells.put("zoneSize", object.getZoneSize());
-			jsonArray.add(jsonCells);
-		}
-		jsonObject.put("cells", jsonArray);
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("markCells", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+		iaPacket.gameActionFightMarkCells(gameActionFightMarkCellsMessage);
 	}
 
 	private void handleGameActionFightSlideMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightSlideMessage gameActionFightSlideMessage = new GameActionFightSlideMessage();
 		gameActionFightSlideMessage.Deserialize(dataReader);
-		if(gameActionFightSlideMessage.getTargetId() == this.info.getActorId()){
-			this.info.setCellId(gameActionFightSlideMessage.getEndCellId());
-		}
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightSlideMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightSlideMessage.getTargetId()));
-		
-		int startCellId = gameActionFightSlideMessage.getStartCellId();
-		int startX = CreateMap.rotate(new int[] { startCellId % 14, startCellId / 14 })[0];
-		int startY = CreateMap.rotate(new int[] { startCellId % 14, startCellId / 14 })[1];
-		JSONObject startCell = new JSONObject();
-		startCell.put("x", startX);
-		startCell.put("y", startY);
-		
-		jsonObject.put("startCell", startCell);
-		
-		int endCellId = gameActionFightSlideMessage.getEndCellId();
-		int endX = CreateMap.rotate(new int[] { endCellId % 14, endCellId / 14 })[0];
-		int endY = CreateMap.rotate(new int[] { endCellId % 14, endCellId / 14 })[1];
-		JSONObject endCell = new JSONObject();
-		endCell.put("x", endX);
-		endCell.put("y", endY);
-		
-		jsonObject.put("endCell", endCell);
-		
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("slide", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+		iaPacket.gameActionFightSlide(gameActionFightSlideMessage);
 	}
 
 	private void handleGameActionFightSpellCastMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
-		JSONObject jsonObject2;
 		GameActionFightSpellCastMessage gameActionFightSpellCastMessage = new GameActionFightSpellCastMessage();
 		gameActionFightSpellCastMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("spellId", gameActionFightSpellCastMessage.getSpellId());
-		jsonObject.put("targetId", getFight().getId(gameActionFightSpellCastMessage.getTargetId()));
-
-		int cellId = gameActionFightSpellCastMessage.getDestinationCellId();
-		int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
-		int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
-
-		jsonObject.put("x", x);
-		jsonObject.put("y", y);
-		jsonObject.put("critical", gameActionFightSpellCastMessage.getCritical());
-		jsonObject.put("sourceId", getFight().getId(gameActionFightSpellCastMessage.getSourceId()));
-		jsonObject2 = new JSONObject();
-		jsonObject2.put("spellCast", jsonObject);
-		getFight().getSpellJson().add(jsonObject2);
+		iaPacket.gameActionFightSpellCast(gameActionFightSpellCastMessage);
 	}
 
 	private void HandleGameContextCreateMessage() throws Exception {
@@ -602,303 +434,49 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleGameFightJoinMessage(DofusDataReader dataReader) throws InterruptedException {
 		GameFightJoinMessage gameFightJoinMessage = new GameFightJoinMessage();
 		gameFightJoinMessage.Deserialize(dataReader);
-		info.setJoinedFight(true);
-		info.setTurn(false);
-		info.setInitFight(false);
-		Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "combat", new Object[] { "\"start\"" });
-		JSONObject mapJSONObject = new JSONObject();
-		mapJSONObject.put("mapID", (int) info.getMapId());
-		mapJSONObject.put("name", info.getName());
-		JSONArray tempArr = new JSONArray();
-		tempArr.add(mapJSONObject);
-		getFight().sendToFightAlgo("startfight", tempArr);
+		iaPacket.gameFightJoin(gameFightJoinMessage);
 	}
 	
 	private void handleGameEntitiesDispositionMessage(DofusDataReader dataReader) throws Exception {
-		getFight().gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
-		getFight().gameEntitiesDispositionMessage.Deserialize(dataReader);
-		this.fight.fightToggleAdvancedRdy(false);
-		this.fight.incrementMoving();
-		
-		List<IdentifiedEntityDispositionInformations> identifiedPositions = getFight().gameEntitiesDispositionMessage.getDispositions();
-		ArrayList<Position> positions = new ArrayList<>();
-		for(int i = 0; i < identifiedPositions.size(); i++) {
-			if(identifiedPositions.get(i).getId() == this.info.getActorId()){
-				this.info.setCellId(identifiedPositions.get(i).getCellId());
-			}
-			int x = CreateMap.rotate(new int[] { identifiedPositions.get(i).getCellId() % 14, identifiedPositions.get(i).getCellId() / 14 })[0];
-			int y = CreateMap.rotate(new int[] { identifiedPositions.get(i).getCellId() % 14, identifiedPositions.get(i).getCellId() / 14 })[1];
-			positions.add(new Position(x, y));
-		}
-		
-		JSONArray arr = new JSONArray();
-		JSONObject posJSON = new JSONObject();
-		
-		posJSON.put("positions", positions);
-		arr.add(posJSON);
-		
-		String newPosition = getFight().sendToFightAlgo("startPosAltered", arr);
-		int cellID = Fight.rotateToCellId(Integer.parseInt(newPosition.split(",")[0]), Integer.parseInt(newPosition.split(",")[1]));
-
-		if(cellID != this.info.getCellId()){
-			if(this.fight.isRdy()) {
-				getFight().fightNotReady();
-				this.fight.setRdy(false);
-			}
-			
-			Game.setTimeout(() -> {
-				try{
-					if(this.fight.isMoving() <= 1) {
-						System.out.println(this.fight.isMoving());
-						GameFightPlacementPositionRequestMessage gameFightPlacementPositionRequestMessage = new GameFightPlacementPositionRequestMessage(cellID);
-						sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Fight placement to " + cellID);
-						this.fight.setMovingToZero();
-					}else {
-						this.fight.decrementMoving();
-					}
-					
-				}catch(Exception e) {e.printStackTrace();}
-			}, 500);
-		}
-		if(!this.fight.isRdy()){
-			this.fight.fightToggleAdvancedRdy(true);
-			Game.setTimeout(() -> {
-				try {
-					if(this.fight.isAdvancedRdy()) {
-						if(!this.fight.isRdy()) {
-							getFight().fightReady();
-							this.fight.setRdy(true);
-						}
-						
-						this.fight.setMovingToZero();
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}, 1000);
-		}
+		GameEntitiesDispositionMessage gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
+		gameEntitiesDispositionMessage.Deserialize(dataReader);
+		iaPacket.gameEntitiesDisposition(gameEntitiesDispositionMessage);
 	}
 
 	private void handleGameFightPlacementPossiblePositionsMessage(DofusDataReader dataReader) {
-		getFight().gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
-		getFight().gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
-		
-		List<Integer> challengerCells = getFight().gameFightPlacementPossiblePositionsMessage.getPositionsForChallengers();
-		List<Integer> defenderCells = getFight().gameFightPlacementPossiblePositionsMessage.getPositionsForDefenders();
-		
-		
-		ArrayList<Position> challengerPositions = new ArrayList<>();
-		
-		for(int i = 0; i < challengerCells.size(); i++) {
-			int x = CreateMap.rotate(new int[] { challengerCells.get(i) % 14, challengerCells.get(i) / 14 })[0];
-			int y = CreateMap.rotate(new int[] { challengerCells.get(i) % 14, challengerCells.get(i) / 14 })[1];
-			challengerPositions.add(new Position(x, y));
-		}
-		
-		ArrayList<Position> defenderPositions = new ArrayList<>();
-		
-		for(int i = 0; i < defenderCells.size(); i++) {
-			int x = CreateMap.rotate(new int[] { defenderCells.get(i) % 14, defenderCells.get(i) / 14 })[0];
-			int y = CreateMap.rotate(new int[] { defenderCells.get(i) % 14, defenderCells.get(i) / 14 })[1];
-			defenderPositions.add(new Position(x, y));
-		}
-		
-		JSONArray arr = new JSONArray();
-		JSONObject posJSON = new JSONObject();
-		
-		posJSON.put("challengerPositions", challengerPositions);
-		posJSON.put("defenderPositions", defenderPositions);
-		
-		posJSON.put("team", getFight().gameFightPlacementPossiblePositionsMessage.getTeamNumber());
-		arr.add(posJSON);
-		
-		getFight().sendToFightAlgo("fightPositionInitialization", arr);
+		GameFightPlacementPossiblePositionsMessage gameFightPlacementPossiblePositionsMessage = new GameFightPlacementPossiblePositionsMessage();
+		gameFightPlacementPossiblePositionsMessage.Deserialize(dataReader);
+		iaPacket.gameFightPlacementPossiblePositions(gameFightPlacementPossiblePositionsMessage);
 	}
 
 	private void handleGameFightSynchronizeMessage(DofusDataReader dataReader) {
-		getFight().setGameFightSynchronizeMessage(new GameFightSynchronizeMessage());
-		getFight().getGameFightSynchronizeMessage().Deserialize(dataReader);
-		if (!info.isInitFight()) {
-			JSONObject startFight = new JSONObject();
-			startFight.put("misc", getFight().init());
-			
-			ArrayList<Player> playingEntities = getFight().getEntities();
-			Player bot = null;
-			
-			for(int i = 0; i < playingEntities.size(); i++) {
-				if(playingEntities.get(i).getName().equals(info.getName())) {
-					bot = playingEntities.get(i);
-				}
-			}
-			
-			CharacterCharacteristicsInformations botStats = stats.getStats().getStats();
-			
-			int totalAgility = botStats.getAgility().getTotal();
-			int totalIntelligence = botStats.getIntelligence().getTotal();
-			int totalStrength = botStats.getStrength().getTotal();
-			int totalLuck = botStats.getChance().getTotal();
-			int[] stats = new int[] {totalAgility, totalStrength, totalLuck, totalIntelligence, totalStrength};
-			int[] elementaryDamage = new int[] {botStats.getAirDamageBonus().getTotal(), botStats.getEarthDamageBonus().getTotal(), botStats.getWaterDamageBonus().getTotal(), botStats.getFireDamageBonus().getTotal(), botStats.getNeutralDamageBonus().getTotal()};
-			
-			bot.setInitiative(botStats.getInitiative().getTotal());
-			bot.setProspection(botStats.getProspecting().getTotal());
-			bot.setRange(botStats.getRange().getTotal());
-			bot.setCriticalChance(botStats.getCriticalHit().getTotal());
-			bot.setHeals(botStats.getHealBonus().getTotal());
-			bot.setFixedDamages(botStats.getAllDamagesBonus().getTotal());
-			bot.setPower(botStats.getDamagesBonusPercent().getTotal());
-			bot.setCriticalDamage(botStats.getCriticalDamageBonus().getTotal());
-			bot.setElementaryDamage(elementaryDamage);
-			bot.setDamageReturn(botStats.getReflect().getTotal());
-			bot.setWeaponPower(botStats.getWeaponDamagesBonusPercent().getTotal());
-			bot.setTrapDamage(botStats.getTrapBonus().getTotal());
-			bot.setTrapPower(botStats.getTrapBonusPercent().getTotal());
-			bot.setPushbackDamage(botStats.getPushDamageBonus().getTotal());
-			bot.setSpellPowerPrcnt(botStats.getSpellDamageDonePercent().getTotal());
-			bot.setWeaponPowerPrcnt(botStats.getWeaponDamageDonePercent().getTotal());
-			bot.setDistancePowerPrcnt(botStats.getRangedDamageDonePercent().getTotal());
-			bot.setCloseCombatPowerPrcnt(botStats.getMeleeDamageDonePercent().getTotal());
-			bot.setStats(stats);
-			
-			startFight.put("entities", playingEntities);
-
-			JSONArray arr2 = new JSONArray();
-			arr2.add(startFight);
-			getFight().sendToFightAlgo("s", arr2);
-			info.setInitFight(true);
-		}
+		GameFightSynchronizeMessage gameFightSynchronizeMessage = new GameFightSynchronizeMessage();
+		gameFightSynchronizeMessage.Deserialize(dataReader);
+		iaPacket.gameFightSynchronize(gameFightSynchronizeMessage);
 	}
 	
 	private void handleGameActionFightSummonMessage(DofusDataReader dataReader) {
 		GameActionFightSummonMessage gameActionFightSummonMessage = new GameActionFightSummonMessage();
 		gameActionFightSummonMessage.Deserialize(dataReader);
-		
-		for(int i = 0; i < gameActionFightSummonMessage.getSummons().size(); i++) {
-			System.out.println();
-			System.out.println();
-			System.out.println(gameActionFightSummonMessage.getSummons().get(i));
-			System.out.println();
-		}
-		
-		for(int i = 0; i < getFight().getGameFightSynchronizeMessage().getFighters().size(); i++) {
-			GameFightCharacterInformations p = (GameFightCharacterInformations) getFight().getGameFightSynchronizeMessage().getFighters().get(i);
-			double id = p.getContextualId();
-			/*
-			if(id == gameActionFightSummonMessage.getSourceId()) {
-				p.setSummons(gameActionFightSummonMessage.getSummons());
-			}
-			*/
-		}
-		
+		iaPacket.gameActionFightSummon(gameActionFightSummonMessage);
 	}
 
 	private void handleGameFightTurnEndMessage(DofusDataReader dataReader) {
 		GameFightTurnEndMessage gameFightTurnEndMessage = new GameFightTurnEndMessage();
 		gameFightTurnEndMessage.Deserialize(dataReader);
-		if (gameFightTurnEndMessage.getId() == info.getActorId()) {
-			info.setTurn(false);
-		}
-		for (int i = 0; i < this.getFight().getMonsters().size(); i++) {
-			if (this.getFight().getMonsters().get(i).getContextualId() == gameFightTurnEndMessage.getId()) {
-				if (this.getFight().getMonsters().get(i).isAlive()) {
-					JSONObject passTurn = new JSONObject();
-					passTurn.put("id", getFight().getId(gameFightTurnEndMessage.getId()));
-					JSONArray arr = new JSONArray();
-					arr.add(passTurn);
-					getFight().sendToFightAlgo("p", arr);
-				}
-			}
-		}
-		for (int i = 0; i < this.getFight().getPlayers().size(); i++) {
-			if (this.getFight().getPlayers().get(i).getContextualId() == gameFightTurnEndMessage.getId()) {
-				if (this.getFight().getPlayers().get(i).isAlive()) {
-					JSONObject passTurn = new JSONObject();
-					passTurn.put("id", getFight().getId(gameFightTurnEndMessage.getId()));
-					JSONArray arr = new JSONArray();
-					arr.add(passTurn);
-					getFight().sendToFightAlgo("p", arr);
-				}
-			}
-		}
+		iaPacket.gameFightTurnEnd(gameFightTurnEndMessage);
 	}
 
 	private void handleGameFightTurnListMessage(DofusDataReader dataReader) {
 		GameFightTurnListMessage gameFightTurnListMessage = new GameFightTurnListMessage();
 		gameFightTurnListMessage.Deserialize(dataReader);
-		if (!info.isInitFight()) {
-			getFight().turnListId = gameFightTurnListMessage.getIds();
-		}else {
-			/*
-			List<Double> IDs = gameFightTurnListMessage.getIds();
-			JSONArray arr = new JSONArray();
-			for(int i = 0; i < getFight().getGameFightSynchronizeMessage().getFighters().size(); i++) {
-				GameFightCharacterInformations p = (GameFightCharacterInformations) getFight().getGameFightSynchronizeMessage().getFighters().get(i);
-				JSONObject obj = new JSONObject();
-				obj.put("name", p.getName());
-				obj.put("id", p.getContextualId());
-				obj.put("otherId", i);
-				JSONArray summons = new JSONArray();
-				
-				if(p.getSummons() != null) {
-					for(int j = 0; j < p.getSummons().size(); j++) {
-						JSONObject summon = new JSONObject();
-						System.out.println();
-						System.out.println(p.getSummons().get(j));
-						summon.put("id", p.getSummons().get(j).getContextualId());
-						
-						int cell = p.getSummons().get(j).getDisposition().getCellId();
-						int x = CreateMap.rotate(new int[] { cell % 14, cell / 14 })[0];
-						int y = CreateMap.rotate(new int[] { cell % 14, cell / 14 })[1];
-						
-						summon.put("x", x);
-						summon.put("y", y);
-						
-						summons.add(summon);
-					}
-				}
-				
-				
-				obj.put("summons", summons);
-				
-				arr.add(obj);
-			}
-			
-			getFight().sendToFightAlgo("updateEntities", arr);
-			*/
-		}
+		iaPacket.gameFightTurnList(gameFightTurnListMessage);
 	}
 
 	private void handleGameMapMovementMessage(DofusDataReader dataReader) {
 		GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
 		gameMapMovementMessage.Deserialize(dataReader);
-		if (gameMapMovementMessage.getActorId() == info.getActorId()) {
-			info.setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-		}
-		for (int i = 0; i < this.getMonsters().getMonsters().size(); i++) {
-			if (this.getMonsters().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId()) {
-				this.getMonsters().getMonsters().get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-			}
-		}
-		if (info.isJoinedFight()) {
-			for (int i = 0; i < this.getFight().getMonsters().size(); i++) {
-				if (this.getFight().getMonsters().get(i).getContextualId() == gameMapMovementMessage.getActorId()) {
-					this.getFight().getMonsters().get(i).getDisposition().setCellId(gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1));
-				}
-			}
-			int cellId = gameMapMovementMessage.getKeyMovements().get(gameMapMovementMessage.getKeyMovements().size() - 1);
-			int x = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[0];
-			int y = CreateMap.rotate(new int[] { cellId % 14, cellId / 14 })[1];
-
-			JSONObject object = new JSONObject();
-			object.put("id", getFight().getId(gameMapMovementMessage.getActorId()));
-			object.put("x", x);
-			object.put("y", y);
-			JSONArray arr = new JSONArray();
-			arr.add(object);
-
-			getFight().sendToFightAlgo("m", arr);
-		}
+		iaPacket.gameMapMovement(gameMapMovementMessage);
 	}
 
 	private void handleGameRolePlayArenaSwitchToFightServerMessage(DofusDataReader dataReader) throws IOException, UnknownHostException {
@@ -1649,7 +1227,8 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 6132:
 				GameActionFightNoSpellCastMessage gameActionFightNoSpellCastMessage = new GameActionFightNoSpellCastMessage();
-				super.debug.println(getTiming() + "Can't send spell " + gameActionFightNoSpellCastMessage.getSpellLevelId());
+				gameActionFightNoSpellCastMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightNoSpellCast(gameActionFightNoSpellCastMessage);
 				break;
 			case 6312:
 				handleGameActionFightLifePointsLostMessage(dataReader);
@@ -1805,6 +1384,117 @@ public class Network extends DisplayInfo implements Runnable {
 					this.interactive.setZaapiList(destinationsListMessage.getMapIds());
 				}
 				break;
+			case 5830:
+				GameActionFightCarryCharacterMessage gameActionFightCarryCharacterMessage = new GameActionFightCarryCharacterMessage();
+				gameActionFightCarryCharacterMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightCarryCharacter(gameActionFightCarryCharacterMessage);
+				break;
+			case 6113:
+				GameActionFightDispellEffectMessage gameActionFightDispellEffectMessage = new GameActionFightDispellEffectMessage();
+				gameActionFightDispellEffectMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightDispellEffect(gameActionFightDispellEffectMessage);
+				break;
+			case 5533:
+				GameActionFightDispellMessage gameActionFightEffectMessage = new GameActionFightDispellMessage();
+				gameActionFightEffectMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightEffect(gameActionFightEffectMessage);
+				break;
+			case 6176:
+				GameActionFightDispellSpellMessage gameActionFightDispellSpellMessage = new GameActionFightDispellSpellMessage();
+				gameActionFightDispellSpellMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightDispellSpell(gameActionFightDispellSpellMessage);
+				break;
+			case 5826:
+				GameActionFightDropCharacterMessage gameActionFightDropCharacterMessage = new GameActionFightDropCharacterMessage();
+				gameActionFightDropCharacterMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightDropCharacter(gameActionFightDropCharacterMessage);
+				break;
+			case 5527:
+				GameActionFightExchangePositionsMessage gameActionFightExchangePositionsMessage = new GameActionFightExchangePositionsMessage();
+				gameActionFightExchangePositionsMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightExchangePositions(gameActionFightExchangePositionsMessage);
+				break;
+			case 5821:
+				GameActionFightInvisibilityMessage gameActionFightInvisibilityMessage = new GameActionFightInvisibilityMessage();
+				gameActionFightInvisibilityMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightInvisibility(gameActionFightInvisibilityMessage);
+				break;
+			case 6320:
+				GameActionFightInvisibleDetectedMessage gameActionFightInvisibleDetectedMessage = new GameActionFightInvisibleDetectedMessage();
+				gameActionFightInvisibleDetectedMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightInvisibleDetected(gameActionFightInvisibleDetectedMessage);
+				break;
+			case 5571:
+				GameActionFightKillMessage gameActionFightKillMessage = new GameActionFightKillMessage();
+				gameActionFightKillMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightKill(gameActionFightKillMessage);
+				break;
+			case 5526:
+				GameActionFightReduceDamagesMessage gameActionFightReduceDamagesMessage = new GameActionFightReduceDamagesMessage();
+				gameActionFightReduceDamagesMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightReduceDamages(gameActionFightReduceDamagesMessage);
+				break;
+			case 5530:
+				GameActionFightReflectDamagesMessage gameActionFightReflectDamagesMessage = new GameActionFightReflectDamagesMessage();
+				gameActionFightReflectDamagesMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightReflectDamages(gameActionFightReflectDamagesMessage);
+				break;
+			case 5531:
+				GameActionFightReflectSpellMessage gameActionFightReflectSpellMessage = new GameActionFightReflectSpellMessage();
+				gameActionFightReflectSpellMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightReflectSpell(gameActionFightReflectSpellMessage);
+				break;
+			case 6219:
+				GameActionFightSpellCooldownVariationMessage gameActionFightSpellCooldownVariationMessage = new GameActionFightSpellCooldownVariationMessage();
+				gameActionFightSpellCooldownVariationMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightSpellCooldownVariation(gameActionFightSpellCooldownVariationMessage);
+				break;
+			case 6221:
+				GameActionFightSpellImmunityMessage gameActionFightSpellImmunityMessage = new GameActionFightSpellImmunityMessage();
+				gameActionFightSpellImmunityMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightSpellImmunity(gameActionFightSpellImmunityMessage);
+				break;
+			case 5535:
+				GameActionFightStealKamaMessage gameActionFightStealKamaMessage = new GameActionFightStealKamaMessage();
+				gameActionFightStealKamaMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightStealKama(gameActionFightStealKamaMessage);
+				break;
+			case 1004:
+				GameActionFightTackledMessage gameActionFightTackledMessage = new GameActionFightTackledMessage();
+				gameActionFightTackledMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightTackled(gameActionFightTackledMessage);
+				break;
+			case 5528:
+				GameActionFightTeleportOnSameMapMessage gameActionFightTeleportOnSameMapMessage = new GameActionFightTeleportOnSameMapMessage();
+				gameActionFightTeleportOnSameMapMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightTeleportOnSameMap(gameActionFightTeleportOnSameMapMessage);
+				break;
+			case 5829:
+				GameActionFightThrowCharacterMessage gameActionFightThrowCharacterMessage = new GameActionFightThrowCharacterMessage();
+				gameActionFightThrowCharacterMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightThrowCharacter(gameActionFightThrowCharacterMessage);
+				break;
+			case 6147:
+				GameActionFightTriggerEffectMessage gameActionFightTriggerEffectMessage = new GameActionFightTriggerEffectMessage();
+				gameActionFightTriggerEffectMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightTriggerEffect(gameActionFightTriggerEffectMessage);
+				break;
+			case 5741:
+				GameActionFightTriggerGlyphTrapMessage gameActionFightTriggerGlyphTrapMessage = new GameActionFightTriggerGlyphTrapMessage();
+				gameActionFightTriggerGlyphTrapMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightTriggerGlyphTrap(gameActionFightTriggerGlyphTrapMessage);
+				break;
+			case 5570:
+				GameActionFightUnmarkCellsMessage gameActionFightUnmarkCellsMessage = new GameActionFightUnmarkCellsMessage();
+				gameActionFightUnmarkCellsMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightUnmarkCells(gameActionFightUnmarkCellsMessage);
+				break;
+			case 6217:
+				GameActionFightVanishMessage gameActionFightVanishMessage = new GameActionFightVanishMessage();
+				gameActionFightVanishMessage.Deserialize(dataReader);
+				iaPacket.gameActionFightVanish(gameActionFightVanishMessage);
+				break;
+
 		}
 		packet_content = null;
 		dataReader.bis.close();
@@ -1822,15 +1512,7 @@ public class Network extends DisplayInfo implements Runnable {
 	{
 		GameActionFightActivateGlyphTrapMessage gameActionFightActivateGlyphTrapMessage = new GameActionFightActivateGlyphTrapMessage();
 		gameActionFightActivateGlyphTrapMessage.Deserialize(dataReader);
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("cellId", gameActionFightActivateGlyphTrapMessage.getMarkId());
-		jsonObject.put("actionId", gameActionFightActivateGlyphTrapMessage.getActionId());
-		jsonObject.put("sourceId", getFight().getId(gameActionFightActivateGlyphTrapMessage.getSourceId()));
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("activateGlyph", jsonObject);
-		JSONArray arr = new JSONArray();
-		arr.add(jsonObject2);
-		getFight().sendToFightAlgo("i", arr);
+		iaPacket.gameActionFightActivateGlyphTrap(gameActionFightActivateGlyphTrapMessage);
 	}
 
 	/**
@@ -1843,17 +1525,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleGameActionFightModifyEffectsDurationMessage(DofusDataReader dataReader) {
 		GameActionFightModifyEffectsDurationMessage gameActionFightModifyEffectsDurationMessage = new GameActionFightModifyEffectsDurationMessage();
 		gameActionFightModifyEffectsDurationMessage.Deserialize(dataReader);
-		JSONObject jsonObject;
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightModifyEffectsDurationMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightModifyEffectsDurationMessage.getTargetId()));
-		jsonObject.put("actionId", gameActionFightModifyEffectsDurationMessage.getActionId());
-		jsonObject.put("amount", gameActionFightModifyEffectsDurationMessage.getDelta());
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("modifyEffectDuration", jsonObject);
-		JSONArray arr = new JSONArray();
-		arr.add(jsonObject2);
-		getFight().sendToFightAlgo("i", arr);
+		iaPacket.gameActionFightModifyEffectsDuration(gameActionFightModifyEffectsDurationMessage);
 	}
 
 	/**
@@ -1864,26 +1536,9 @@ public class Network extends DisplayInfo implements Runnable {
 	 * @param dataReader
 	 */
 	private void handleGameActionFightPointsVariationMessage(DofusDataReader dataReader) {
-		JSONObject jsonObject;
 		GameActionFightPointsVariationMessage gameActionFightPointsVariationMessage = new GameActionFightPointsVariationMessage();
 		gameActionFightPointsVariationMessage.Deserialize(dataReader);
-		jsonObject = new JSONObject();
-		jsonObject.put("sourceId", getFight().getId(gameActionFightPointsVariationMessage.getSourceId()));
-		jsonObject.put("targetId", getFight().getId(gameActionFightPointsVariationMessage.getTargetId()));
-		if(gameActionFightPointsVariationMessage.getActionId() == 102){
-			jsonObject.put("pa", gameActionFightPointsVariationMessage.getDelta());
-		} else if (gameActionFightPointsVariationMessage.getActionId() == 129){
-			jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
-		} else if (gameActionFightPointsVariationMessage.getActionId() == 127){
-            jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
-        } else if (gameActionFightPointsVariationMessage.getActionId() == 78){
-            jsonObject.put("pm", gameActionFightPointsVariationMessage.getDelta());
-        }
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("pointsVariation", jsonObject);
-		JSONArray arr = new JSONArray();
-		arr.add(jsonObject2);
-		getFight().sendToFightAlgo("i", arr);
+		iaPacket.gameActionFightPointsVariation(gameActionFightPointsVariationMessage);
 	}
 
 	private void handleGameRolePlayPlayerFightFriendlyRequestedMessage(DofusDataReader dataReader) throws Exception {
