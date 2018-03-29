@@ -4,6 +4,7 @@ import java.util.List;
 
 import ia.entities.entity.Entity;
 import ia.map.MapIA;
+import protocol.network.NetworkMessage;
 
 public class Intelligence {
 	
@@ -20,4 +21,9 @@ public class Intelligence {
 	}
 	
 	//TODO gérer les paquets
+	public void treatPacket(NetworkMessage packet){
+		switch (packet.getClass().getSimpleName()){
+
+		}
+	}
 }
