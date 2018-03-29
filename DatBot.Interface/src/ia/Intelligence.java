@@ -23,8 +23,7 @@ public class Intelligence {
 	//TODO gérer les paquets
 	public void treatPacket(NetworkMessage packet){
 		switch (packet.getClass().getSimpleName()){
-			System.out.println("jacques");
-			System.out.println("Bonsoir");
+			case "GameFight"
 		}
 	}
 }
