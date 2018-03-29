@@ -1324,7 +1324,7 @@ public class Network extends DisplayInfo implements Runnable {
 				return;
 			}
 			while (!this.socket.isClosed()) {
-				Thread.sleep(250);
+				Thread.sleep(400);
 				if(!this.socket.isClosed()){
 					InputStream data = this.socket.getInputStream();
 					int available = data.available();
@@ -1384,16 +1384,9 @@ public class Network extends DisplayInfo implements Runnable {
 		appendLog("[" + id + "]	[Envoi] " + s);
 	}
 
-	public void setBank(Bank bank) {
-		this.bank = bank;
-	}
 
 	public void setFight(Fight fight) {
 		this.fight = fight;
-	}
-
-	public void setHunt(Hunt hunt) {
-		this.hunt = hunt;
 	}
 
 	public void setInfo(Info info) {
@@ -1408,20 +1401,12 @@ public class Network extends DisplayInfo implements Runnable {
 		this.map = map;
 	}
 
-	public void setMonsters(Monsters monsters) {
-		this.monsters = monsters;
-	}
-
 	public void setMovement(Movement movement) {
 		this.movement = movement;
 	}
 
 	public void setNpc(Npc npc) {
 		this.npc = npc;
-	}
-
-	public void setSocket(Socket socket) {
-		this.socket = socket;
 	}
 
 	public void setStats(Stats stats) {
@@ -1434,9 +1419,6 @@ public class Network extends DisplayInfo implements Runnable {
 
 	/**
 	 * Packet manager
-	 * 
-	 * @param int packet_id
-	 * @param byte[] packet_content
 	 */
 	@SuppressWarnings("unchecked")
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
