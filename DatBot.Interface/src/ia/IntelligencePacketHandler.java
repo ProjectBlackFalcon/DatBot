@@ -339,11 +339,11 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void GameEntitiesDisposition(GameEntitiesDispositionMessage message){
+    public void gameEntitiesDisposition(GameEntitiesDispositionMessage message){
 
     }
 
-    public void GameMapMovement(GameMapMovementMessage message){
+    public void gameMapMovement(GameMapMovementMessage message){
 
     }
 

@@ -4,15 +4,17 @@ import java.util.List;
 
 import ia.entities.entity.Entity;
 import ia.map.MapIA;
+import protocol.network.Network;
 import protocol.network.NetworkMessage;
 
 public class Intelligence {
 	
 	List<Entity> entities;
 	MapIA map;
+	Network network;
 
-	public Intelligence() {
-		
+	public Intelligence(Network network) {
+		this.network = network;
 	}
 	
 	public void init(List<Entity> entities, MapIA map) {
@@ -25,5 +27,9 @@ public class Intelligence {
 		switch (packet.getClass().getSimpleName()){
 
 		}
+	}
+
+	public void getTurn(){
+
 	}
 }
