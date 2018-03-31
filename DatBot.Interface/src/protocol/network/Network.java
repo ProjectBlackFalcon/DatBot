@@ -1497,9 +1497,7 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 
 		}
-		packet_content = null;
 		dataReader.bis.close();
-		return;
 	}
 
 	/**

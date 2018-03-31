@@ -1,11 +1,12 @@
 package utils.d2o;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import protocol.network.util.DofusDataReader;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
-
-import protocol.network.Network;
-import protocol.network.util.DofusDataReader;
 
 public class JsonUnpacker {
 
@@ -126,6 +127,78 @@ public class JsonUnpacker {
 
         return fieldBuilder.toString();
     }
+
+    public JSONObject generateJson(int id){
+        int objectPointer = objectPointerTable.get(id);
+        reader.setPosition(objectPointer);
+        int objectClassId = 0;
+        JSONObject jsonObject = null;
+        try
+        {
+            objectClassId = reader.readInt();
+            jsonObject = getObjectBuilderJson(objectClassId);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    private JSONObject getObjectBuilderJson(int objectClassId) throws IOException {
+        JSONObject jsonObject = new JSONObject();
+        GameDataClassDefinition classDefinition = classDefinitions.get(objectClassId);
+        int numberOfFields = classDefinition.Fields.size();
+        for (int i = 0; i < numberOfFields; i++)
+        {
+            String name = classDefinition.Fields.get(i).fieldName;
+            Object value = getFieldValueBuilderForJson(classDefinition.Fields.get(i));
+//            System.out.println(name + ": " + value);
+            jsonObject.put(name,value);
+        }
+        return jsonObject;
+    }
+
+    private Object getFieldValueBuilderForJson(GameDataField field) throws IOException
+    {
+        switch (field.fieldType) {
+            case "Vector":
+                JSONArray jsonArray = new JSONArray();
+                int vectorLength = reader.readInt();
+                for (int i = 0; i < vectorLength; i++) {
+                    jsonArray.add(getFieldValueBuilderForJson(field.innerField));
+                }
+                return jsonArray;
+            case "Int":
+                return reader.readInt();
+            case "UInt":
+                return reader.readInt();
+            case "I18N":
+                return reader.readInt();
+            case "String":
+                return reader.readUTF();
+            case "Bool":
+                return reader.readBoolean(); //in json bool is true/false not True/False
+            case "Double":
+                return reader.readDouble(); //handling the "," vs "." problem of the culture specifics
+            default:
+                if (field.getValue() > 0) //if type is an object
+                {
+                    int classId = reader.readInt();
+                    if (classDefinitions.containsKey(classId))
+                    {
+                        return (getObjectBuilderJson(classId));
+                    } else {
+                        return "";
+                    }
+                }
+                else
+                {
+                    return "";
+                }
+            }
+    }
+
     private String getFieldValueBuilder(GameDataField field) throws IOException
     {
         StringBuilder fieldValueBuilder = new StringBuilder();

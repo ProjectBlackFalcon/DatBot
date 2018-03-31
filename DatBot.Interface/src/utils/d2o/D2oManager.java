@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import protocol.network.Network;
 import protocol.network.util.DofusDataReader;
 
@@ -56,13 +58,13 @@ public class D2oManager {
 //		 searchObjectById(0); //call after unpackObjectsAsJson();
 	}
 	
-	public List<String> returnJsonString(){
-		List<String> s = new ArrayList<String>();
+	public JSONArray returnJsonString(){
+		JSONArray array = new JSONArray();
 		for (Entry<Integer, Integer> objectPointer : this.objectPointerTable.entrySet())
 		{
-			s.add(unpacker.getObjectJsonString(objectPointer.getKey()));
+			array.add(unpacker.generateJson(objectPointer.getKey()));
 		}
-		return s;
+		return array;
 	}
 	
     public String searchObjectById(int objectId)
