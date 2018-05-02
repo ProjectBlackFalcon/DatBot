@@ -207,6 +207,7 @@ public class ModelConnexion {
 
 
 	private Object[] closeHdv() throws Exception {
+		//TODO Update 2.46
 		Object[] toSend;
 		if(this.network.getInfo().isInExchange()){
 			LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
@@ -771,8 +772,8 @@ public class ModelConnexion {
 			case "goIncarnam":
 				toSend = goIncarnam();
 				break;
-			case "getStatue":
-				toSend = getStatue();
+			case "enterGate":
+				toSend = enterGate();
 				break;
 			case "getBankDoor":
 				toSend = getBankDoor();
@@ -944,6 +945,15 @@ public class ModelConnexion {
 	}
 
 
+	/**
+	 * Returns the cell id of the current map class statue, or False if there is none
+	 * @return [cell] or [False]
+	 */
+	private Object[] enterGate() {
+		// TODO Enters the gate thing to go to Incarnam
+		return null;
+	}
+
 	public void getReturn(String[] message) throws InterruptedException {
 		Thread.sleep(100);
 		new Thread(new Runnable() {
@@ -973,20 +983,6 @@ public class ModelConnexion {
 	private Object[] getStats() {
 		return new Object[] { this.network.getStats() };
 	}
-
-
-	private Object[] getStatue() {
-		Object[] toSend;
-		int statueCellId = this.network.getInteractive().getStatue();
-		if (statueCellId != -1) {
-			toSend = new Object[] { statueCellId };
-		}
-		else {
-			toSend = new Object[] { "False" };
-		}
-		return toSend;
-	}
-
 
 	private Object[] getStepsLeft() {
 		Object[] toSend;
@@ -1025,6 +1021,7 @@ public class ModelConnexion {
 
 
 	private Object[] goAstrub() throws Exception {
+		//TODO Patch 2.46
 		Object[] toSend;
 		if (this.network.getMap().getId() == 153880835) {
 			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
@@ -1112,22 +1109,7 @@ public class ModelConnexion {
 
 	private Object[] goIncarnam() throws Exception {
 		Object[] toSend;
-		int r = this.network.getInteractive().getStatue();
-		if (r != -1) {
-			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getInteractive().getElementIdStatue(), this.network.getInteractive().getSkillInstanceUidStatue());
-			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using statue");
-			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-				toSend = new Object[] { "True" };
-			}
-			else {
-				DisplayInfo.appendDebugLog("Incarnam change error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
-				toSend = new Object[] { "False" };
-			}
-		}
-		else {
-			DisplayInfo.appendDebugLog("Incarnam change error", "No statue, wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
-			toSend = new Object[] { "False" };
-		}
+		toSend = new Object[] { "False" }; //TODO Use the gate to incarnam
 		return toSend;
 	}
 
@@ -1376,6 +1358,7 @@ public class ModelConnexion {
 
 
 	private Object[] openHdv() throws Exception {
+		//TODO Update 2.46
 		Object[] toSend;
 		this.network.getInfo().setInExchange(true);
 		int idSeller = (int) this.getNetwork().getNpc().getSeller();
@@ -1397,6 +1380,7 @@ public class ModelConnexion {
 
 
 	private Object[] sellItem(String param) throws Exception {
+		//TODO Update 2.46
 		Object[] toSend;
 		if(this.network.getInfo().isInExchange()){
 			String[] paramItems = param.split(",");
