@@ -24,7 +24,7 @@ public class Test {
 		communication2.start();
 
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
-//		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,***REMOVED***11,Faoy,Julith]");
+//		communication.getReturn("0;0;i;cmd;connect;[jikiwa221,kezaropod11,Faoy,Julith]");
 //		communication.getReturn("2;0;i;cmd;connect;[wublel9,notabot0,Sayerses,Julith]");
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel12','notabot0','Draideac','Furye']");
