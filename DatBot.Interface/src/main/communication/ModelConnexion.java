@@ -1027,8 +1027,11 @@ public class ModelConnexion {
 	private Object[] goAstrub() throws Exception {
 		Object[] toSend;
 		if (this.network.getMap().getId() == 153880835) {
-			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20001, 3, 153880835);
-			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request Npc to go to Astrub");
+			if(this.network.getInfo().getCellId() != 300){
+				move(300);
+			}
+			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20000, 3, 153880835);
+			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request gate to go to Astrub");
 			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 				toSend = new Object[] { "True" };
 			}
