@@ -948,6 +948,7 @@ public class ModelConnexion {
 	/**
 	 * Returns the cell id of the current map class statue, or False if there is none
 	 * @return [cell] or [False]
+<<<<<<< HEAD
 	 * @throws Exception 
 	 */
 	private Object[] enterGate() throws Exception {
@@ -1419,7 +1420,6 @@ public class ModelConnexion {
 				}			} else {
 				toSend = new Object[] { "False" };
 			}
-
 		} else {
 			toSend = new Object[] { "False" };
 		}

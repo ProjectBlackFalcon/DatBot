@@ -144,10 +144,10 @@ public class Npc {
 	public List<ObjectItemToSellInBid> getItemsToSell() {
 		return itemsToSell;
 	}
-
-	public void removeItemToSell(int id) {
-		for (int i = 0; i < itemsToSell.size(); i++) {
-			if (itemsToSell.get(i).getObjectUID() == id) {
+	
+	public void removeItemToSell(int id){
+		for (int i = 0 ; i < itemsToSell.size() ; i++){
+			if(itemsToSell.get(i).getObjectUID() == id){
 				itemsToSell.remove(i);
 			}
 		}
