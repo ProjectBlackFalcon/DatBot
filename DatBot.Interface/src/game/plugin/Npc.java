@@ -62,22 +62,6 @@ public class Npc {
 	}
 
 	/**
-	 * Check if there is a Seller on the map
-	 * 
-	 * @return double contextualId of the seller
-	 * @return double -1 if none
-	 */
-	public double getSeller() {
-		double npcCoords = -1;
-		for (GameRolePlayNpcInformations gameRolePlayNpcInformations : npc) {
-			if (GameData.getNpcName(gameRolePlayNpcInformations.getNpcId()).contains("Vendeur")) {
-				npcCoords = gameRolePlayNpcInformations.getContextualId();
-			}
-		}
-		return npcCoords;
-	}
-
-	/**
 	 * Transform the list into json string
 	 * 
 	 * @return String : Items selling

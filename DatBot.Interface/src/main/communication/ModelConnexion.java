@@ -25,6 +25,7 @@ import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHousePriceMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeHandleMountsStableMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectModifyPricedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
@@ -207,7 +208,6 @@ public class ModelConnexion {
 
 
 	private Object[] closeHdv() throws Exception {
-		//TODO Update 2.46
 		Object[] toSend;
 		if(this.network.getInfo().isInExchange()){
 			LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
@@ -948,10 +948,28 @@ public class ModelConnexion {
 	/**
 	 * Returns the cell id of the current map class statue, or False if there is none
 	 * @return [cell] or [False]
+	 * @throws Exception 
 	 */
-	private Object[] enterGate() {
-		// TODO Enters the gate thing to go to Incarnam
-		return null;
+	private Object[] enterGate() throws Exception {
+		Object[] toSend;
+		if(this.network.getMap().getId() == 191106048){
+			if(this.network.getInfo().getCellId() != 397){
+				move(397);
+			}
+			int[] interactive2 = this.network.getInteractive().getInteractive(184);
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				toSend = new Object[] { "true" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("enterGate error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : "  + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		} else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
 	}
 
 	public void getReturn(String[] message) throws InterruptedException {
@@ -1021,7 +1039,6 @@ public class ModelConnexion {
 
 
 	private Object[] goAstrub() throws Exception {
-		//TODO Patch 2.46
 		Object[] toSend;
 		if (this.network.getMap().getId() == 153880835) {
 			if(this.network.getInfo().getCellId() != 300){
@@ -1112,7 +1129,25 @@ public class ModelConnexion {
 
 	private Object[] goIncarnam() throws Exception {
 		Object[] toSend;
-		toSend = new Object[] { "False" }; //TODO Use the gate to incarnam
+		if (this.network.getMap().getId() == 192416776) {
+			if(this.network.getInfo().getCellId() != 468){
+				move(300);
+			}
+			int[] interactive2 = this.network.getInteractive().getInteractive(184);
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering incarnam");
+			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("Astrub change error, server returned false", "MapId : " + this.network.getMap().getId() + " cellId : " + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			toSend = new Object[] { "False" };
+		}
 		return toSend;
 	}
 
@@ -1361,20 +1396,30 @@ public class ModelConnexion {
 
 
 	private Object[] openHdv() throws Exception {
-		//TODO Update 2.46
 		Object[] toSend;
 		this.network.getInfo().setInExchange(true);
-		int idSeller = (int) this.getNetwork().getNpc().getSeller();
-		if(idSeller != -1){
-			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(idSeller, 5, this.getNetwork().getMap().getId());
-			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
+		int[] interactive1 = this.network.getInteractive().getInteractive(355);
+		if(interactive1 != null){
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive1[1], interactive1[2]);
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Open hdv");
 			if (this.waitToSendHdv()) {
-				toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
-			}
-			else {
-				DisplayInfo.appendDebugLog("openHdv error, server returned false", "No response from server");
+				ExchangeBidHouseTypeMessage bidHouseTypeMessage = new ExchangeBidHouseTypeMessage(1);
+				getNetwork().sendToServer(bidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Set hdv type to 1");
+				if (this.waitToSendHdv()) {
+					NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 5, this.getNetwork().getMap().getId());
+					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
+					if (this.waitToSendHdv()) {
+						toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+					} else {
+						toSend = new Object[] { "False" };
+					}
+				} else {
+					DisplayInfo.appendDebugLog("openHdv error, server returned false", "No response from server");
+					toSend = new Object[] { "False" };
+				}			} else {
 				toSend = new Object[] { "False" };
 			}
+
 		} else {
 			toSend = new Object[] { "False" };
 		}
@@ -1383,7 +1428,6 @@ public class ModelConnexion {
 
 
 	private Object[] sellItem(String param) throws Exception {
-		//TODO Update 2.46
 		Object[] toSend;
 		if(this.network.getInfo().isInExchange()){
 			String[] paramItems = param.split(",");

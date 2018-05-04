@@ -1727,6 +1727,12 @@ public class Network extends DisplayInfo implements Runnable {
 			case 5945:
 				this.info.setExchangeBidSeller(true);
 				break;
+			case 5765:
+				this.info.setExchangeBidSeller(true);
+				break;
+			case 5904:
+				this.info.setExchangeBidSeller(true);
+				break;
 			case 5946:
 				ExchangeBidHouseItemRemoveOkMessage exchangeBidHouseItemRemoveOkMessage = new ExchangeBidHouseItemRemoveOkMessage();
 				exchangeBidHouseItemRemoveOkMessage.Deserialize(dataReader);

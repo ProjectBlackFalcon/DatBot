@@ -64,7 +64,7 @@ public class Interactive {
 				}
 			}
 		}
-		return new int[] { -1, -1, -1 };
+		return null;
 	}
 
 	private List<Integer> cellsIdRosette;

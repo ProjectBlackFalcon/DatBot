@@ -30,7 +30,8 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;['wublel12','notabot0','Draideac','Furye']");
 		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
 //		communication.getReturn("0;0;i;cmd;getMap;[None]");
-//		communication.getReturn("0;0;i;cmd;openHdv;[None]");
+		Thread.sleep(15000);
+		communication.getReturn("0;0;i;cmd;openHdv;[None]");
 //		communication.getReturn("0;0;i;cmd;getHdvItemStats;[289]");
 
 //		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
