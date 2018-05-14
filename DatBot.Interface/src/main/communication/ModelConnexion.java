@@ -62,7 +62,12 @@ public class ModelConnexion {
 				toSend = new Object[] { "True" };
 			}
 			else {
-				toSend = new Object[] { "False" };
+				int timeLeft = this.getNetwork().getHunt().getAbTimeLeft();
+				if(timeLeft > 0){
+					toSend = new Object[] { timeLeft };
+				} else {
+					toSend = new Object[] { "False" };
+				}
 			}
 		} else {
 			toSend = new Object[] { "False" };
@@ -544,7 +549,7 @@ public class ModelConnexion {
 		if (this.network.getMap().getId() == 144931) {
 			toSend = new Object[] { this.network.getBank().cellIdBrakmarIN, this.network.getBank().cellIdBrakmarOUT };
 		}
-		else if (this.network.getMap().getId() == 84674566) {
+		else if (this.network.getMap().getId() == 191104002) {
 			toSend = new Object[] { this.network.getBank().cellIdAstrubIN, this.network.getBank().cellIdAstrubOUT };
 		}
 		else if (this.network.getMap().getId() == 147254) {
@@ -1076,9 +1081,9 @@ public class ModelConnexion {
 				toSend = new Object[] { "False" };
 			}
 		}
-		else if (this.network.getMap().getId() == 84674566) { // Astrub
+		else if (this.network.getMap().getId() == 191104002) { // Astrub
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveAstrubIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveAstrubIN));
-			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
 			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 				toSend = new Object[] { "True" };
 			}
@@ -1089,7 +1094,7 @@ public class ModelConnexion {
 		}
 		else if (this.network.getMap().getId() == 147254) { // Bonta
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBontaIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBontaIN));
-			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using this.network.getBank() door");
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
 			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 				toSend = new Object[] { "True" };
 			}
@@ -1355,7 +1360,7 @@ public class ModelConnexion {
 
 	private Object[] openBank() throws Exception {
 		Object[] toSend;
-		if (this.network.getMap().getId() == 83887104 || this.network.getMap().getId() == 2884617 || this.network.getMap().getId() == 8912911) {
+		if (this.network.getMap().getId() == 83887104 || this.network.getMap().getId() == 2884617 || this.network.getMap().getId() == 8912911 || this.network.getMap().getId() == 19241575) {
 			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.network.getNpc().getNpc().get(0).getContextualId(), 3, this.network.getMap().getId());
 			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
 			if (this.waitToSendBank("open")) {

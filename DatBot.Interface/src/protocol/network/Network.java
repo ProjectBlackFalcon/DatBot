@@ -58,6 +58,7 @@ import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
+import protocol.network.messages.game.basic.TextInformationMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectionMessage;
 import protocol.network.messages.game.character.choice.CharactersListMessage;
@@ -1551,6 +1552,11 @@ public class Network extends DisplayInfo implements Runnable {
 				info.setInteractiveUsed(true);
 				break;
 			case 780:
+				TextInformationMessage informationMessage = new TextInformationMessage();
+				informationMessage.Deserialize(dataReader);
+				if(informationMessage.getMsgId() == 436){
+					this.hunt.setAbTimeLeft(Integer.parseInt(informationMessage.getParameters().get(0)));
+				}
 				info.setTextMessage(true);
 				break;
 			case 5646:

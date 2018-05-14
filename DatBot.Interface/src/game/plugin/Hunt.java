@@ -13,6 +13,8 @@ public class Hunt {
 	private boolean phorror;
 	private String phorrorName;
 	
+	private int abTimeLeft = -1;
+	
 	public int digResult;
 	
 	/**
@@ -154,5 +156,13 @@ public class Hunt {
 
 	public void setRdyToFight(boolean rdyToFight) {
 		this.rdyToFight = rdyToFight;
+	}
+
+	public int getAbTimeLeft() {
+		return abTimeLeft;
+	}
+
+	public void setAbTimeLeft(int abTimeLeft) {
+		this.abTimeLeft = abTimeLeft;
 	}
 }
