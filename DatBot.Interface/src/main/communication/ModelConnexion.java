@@ -118,7 +118,7 @@ public class ModelConnexion {
 			mapMovement.PerformChangement();
 			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 				if (Integer.parseInt(infoMov[0]) != this.network.getInfo().getCellId()) {
-					stop(1);
+					stop(0.5);
 					toSend = new Object[] { "True" };
 				}
 				else {
@@ -238,8 +238,8 @@ public class ModelConnexion {
 		threadNetwork.start();
 		int index = 0;
 		while (!info.isConnected()) {
-			stop(3);
 			index += 1;
+			Thread.sleep(1000);
 			if (index == 60) {
 				System.out.println("Connection timed out");
 				DisplayInfo.appendDebugLog("Connection error", param);
@@ -247,7 +247,7 @@ public class ModelConnexion {
 			}
 		}
 		if (info.isConnected()) {
-			stop(1);
+			stop(2);
 			toSend = new Object[] { "True" };
 		}
 		else {
@@ -302,7 +302,7 @@ public class ModelConnexion {
 			String[] toBank = param.split(",");
 			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item bank");
 			if (this.waitToSendBank("move")) {
-				stop(0.25);
+				stop(1);
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
@@ -323,7 +323,7 @@ public class ModelConnexion {
 			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
 			getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
 			if (this.waitToSendBank("move")) {
-				stop(0.25);
+				stop(1);
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
@@ -344,7 +344,7 @@ public class ModelConnexion {
 			ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in this.network.getBank()");
 			if (this.waitToSendBank("move")) {
-				stop(0.25);
+				stop(1);
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
@@ -370,7 +370,7 @@ public class ModelConnexion {
 			ExchangeObjectTransfertListFromInvMessage exchangeObjectTransfertListFromInvMessage = new ExchangeObjectTransfertListFromInvMessage(ids);
 			getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list bank");
 			if (this.waitToSendBank("move")) {
-				stop(0.25);
+				stop(1);
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
@@ -526,7 +526,7 @@ public class ModelConnexion {
 			String[] fromBank = param.split(",");
 			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Get item bank");
 			if (this.waitToSendBank("move")) {
-				stop(0.25);
+				stop(1);
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
@@ -564,7 +564,7 @@ public class ModelConnexion {
 			ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage = new ExchangeObjectMoveKamaMessage(-Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from this.network.getBank()");
 			if (this.waitToSendBank("move")) {
-				stop(0.25);
+				stop(1);
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
@@ -590,7 +590,7 @@ public class ModelConnexion {
 			ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
 			getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from this.network.getBank()");
 			if (this.waitToSendBank("move")) {
-				stop(0.25);
+				stop(1);
 				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
 			}
 			else {
@@ -658,7 +658,7 @@ public class ModelConnexion {
 			ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
 			if (this.waitToSendHdv()) {
-				stop(0.1);
+				stop(0.25);
 				toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
 			}
 			else {
@@ -1859,6 +1859,8 @@ public class ModelConnexion {
 
 	private void stop(double deviation) throws InterruptedException {
 		double gauss = new Random().nextGaussian();
-		Thread.sleep((long) (Math.abs(gauss * deviation) * 1000));
+		long timeStoped = (long) (Math.abs(gauss * deviation) * 1000);
+		System.out.println("---- Sleeping : " + timeStoped + " ----");
+		Thread.sleep(timeStoped);
 	}
 }

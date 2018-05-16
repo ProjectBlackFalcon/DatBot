@@ -333,12 +333,10 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void handleCharacterSelectionMessage(DofusDataReader dataReader) throws Exception, Error {
-		try {
-			Thread.sleep(4000 + new Random().nextInt(3000));
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		double gauss = new Random().nextGaussian();
+		long timeStoped = (long) (Math.abs(gauss * 3) * 1000);
+		System.out.println("---- Sleeping : " + timeStoped + " ----");
+		Thread.sleep(timeStoped);
 		CharactersListMessage charactersListMessage = new CharactersListMessage();
 		charactersListMessage.Deserialize(dataReader);
 		int j = 0;
@@ -938,7 +936,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 46, 14, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 46, 15, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
