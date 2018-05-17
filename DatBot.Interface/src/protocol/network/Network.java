@@ -1,48 +1,20 @@
 package protocol.network;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import ia.Intelligence;
-import ia.IntelligencePacketHandler;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import game.Info;
 import game.combat.Fight;
 import game.movement.Movement;
-import game.plugin.Bank;
-import game.plugin.Dragodinde;
-import game.plugin.Hunt;
-import game.plugin.Interactive;
-import game.plugin.Monsters;
-import game.plugin.Npc;
-import game.plugin.Stats;
-import ia.fight.brain.Game;
-import ia.fight.brain.Position;
-import ia.fight.map.CreateMap;
-import ia.fight.structure.Player;
-import io.netty.util.internal.ThreadLocalRandom;
+import game.plugin.*;
+import ia.IntelligencePacketHandler;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import protocol.frames.LatencyFrame;
-import protocol.network.messages.connection.HelloConnectMessage;
-import protocol.network.messages.connection.IdentificationMessage;
-import protocol.network.messages.connection.SelectedServerDataMessage;
-import protocol.network.messages.connection.SelectedServerRefusedMessage;
-import protocol.network.messages.connection.ServerSelectionMessage;
-import protocol.network.messages.connection.ServersListMessage;
+import protocol.network.messages.connection.*;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
 import protocol.network.messages.game.actions.fight.*;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
+import protocol.network.messages.game.actions.sequence.SequenceStartMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
@@ -51,27 +23,19 @@ import protocol.network.messages.game.character.choice.CharacterSelectionMessage
 import protocol.network.messages.game.character.choice.CharactersListMessage;
 import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
-import protocol.network.messages.game.context.GameContextCreateRequestMessage;
-import protocol.network.messages.game.context.GameContextReadyMessage;
-import protocol.network.messages.game.context.GameContextRemoveElementMessage;
-import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
-import protocol.network.messages.game.context.GameMapMovementMessage;
-import protocol.network.messages.game.context.GameMapNoMovementMessage;
-import protocol.network.messages.game.context.fight.GameFightJoinMessage;
-import protocol.network.messages.game.context.fight.GameFightPlacementPositionRequestMessage;
-import protocol.network.messages.game.context.fight.GameFightPlacementPossiblePositionsMessage;
-import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
-import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
-import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
-import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
+import protocol.network.messages.game.context.*;
+import protocol.network.messages.game.context.fight.*;
+import protocol.network.messages.game.context.fight.arena.ArenaFighterLeaveMessage;
+import protocol.network.messages.game.context.fight.challenge.ChallengeInfoMessage;
+import protocol.network.messages.game.context.fight.challenge.ChallengeResultMessage;
+import protocol.network.messages.game.context.fight.challenge.ChallengeTargetUpdateMessage;
+import protocol.network.messages.game.context.fight.challenge.ChallengeTargetsListMessage;
+import protocol.network.messages.game.context.fight.character.GameFightRefreshFighterMessage;
+import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
 import protocol.network.messages.game.context.mount.MountRidingMessage;
 import protocol.network.messages.game.context.mount.MountSetMessage;
 import protocol.network.messages.game.context.mount.MountXpRatioMessage;
-import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
-import protocol.network.messages.game.context.roleplay.GameRolePlayShowActorMessage;
-import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
-import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
-import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
+import protocol.network.messages.game.context.roleplay.*;
 import protocol.network.messages.game.context.roleplay.emote.EmoteListMessage;
 import protocol.network.messages.game.context.roleplay.emote.EmotePlayMessage;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyAnswerMessage;
@@ -92,34 +56,12 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRe
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidSellerMessage;
-import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
-import protocol.network.messages.game.inventory.items.InventoryContentMessage;
-import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
-import protocol.network.messages.game.inventory.items.ObjectAddedMessage;
-import protocol.network.messages.game.inventory.items.ObjectDeletedMessage;
-import protocol.network.messages.game.inventory.items.ObjectQuantityMessage;
-import protocol.network.messages.game.inventory.items.ObjectsAddedMessage;
-import protocol.network.messages.game.inventory.items.ObjectsDeletedMessage;
-import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
-import protocol.network.messages.game.inventory.storage.StorageInventoryContentMessage;
-import protocol.network.messages.game.inventory.storage.StorageKamasUpdateMessage;
-import protocol.network.messages.game.inventory.storage.StorageObjectRemoveMessage;
-import protocol.network.messages.game.inventory.storage.StorageObjectUpdateMessage;
-import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMessage;
-import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
+import protocol.network.messages.game.inventory.items.*;
+import protocol.network.messages.game.inventory.storage.*;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
 import protocol.network.messages.server.basic.SystemMessageDisplayMessage;
 import protocol.network.types.connection.GameServerInformations;
-import protocol.network.types.game.actions.fight.FightTemporaryBoostEffect;
-import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
-import protocol.network.types.game.actions.fight.FightTemporaryBoostWeaponDamagesEffect;
-import protocol.network.types.game.actions.fight.FightTemporarySpellBoostEffect;
-import protocol.network.types.game.actions.fight.FightTemporarySpellImmunityEffect;
-import protocol.network.types.game.actions.fight.GameActionMarkedCell;
-import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
-import protocol.network.types.game.context.IdentifiedEntityDispositionInformations;
-import protocol.network.types.game.context.fight.GameFightCharacterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
@@ -128,15 +70,22 @@ import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntSte
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
 import protocol.network.types.version.VersionExtended;
-import protocol.network.util.DofusDataReader;
-import protocol.network.util.DofusDataWriter;
-import protocol.network.util.FlashKeyGenerator;
-import protocol.network.util.MessageUtil;
-import protocol.network.util.SwitchNameClass;
+import protocol.network.util.*;
 import utils.GameData;
-import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("unchecked")
 public class Network extends DisplayInfo implements Runnable {
@@ -432,13 +381,13 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 	}
 
-	private void handleGameFightJoinMessage(DofusDataReader dataReader) throws InterruptedException {
+	private void handleGameFightJoinMessage(DofusDataReader dataReader) {
 		GameFightJoinMessage gameFightJoinMessage = new GameFightJoinMessage();
 		gameFightJoinMessage.Deserialize(dataReader);
 		iaPacket.gameFightJoin(gameFightJoinMessage);
 	}
 	
-	private void handleGameEntitiesDispositionMessage(DofusDataReader dataReader) throws Exception {
+	private void handleGameEntitiesDispositionMessage(DofusDataReader dataReader) {
 		GameEntitiesDispositionMessage gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
 		gameEntitiesDispositionMessage.Deserialize(dataReader);
 		iaPacket.gameEntitiesDisposition(gameEntitiesDispositionMessage);
@@ -480,7 +429,7 @@ public class Network extends DisplayInfo implements Runnable {
 		iaPacket.gameMapMovement(gameMapMovementMessage);
 	}
 
-	private void handleGameRolePlayArenaSwitchToFightServerMessage(DofusDataReader dataReader) throws IOException, UnknownHostException {
+	private void handleGameRolePlayArenaSwitchToFightServerMessage(DofusDataReader dataReader) throws IOException {
 		connectionToKoli = true;
 		GameRolePlayArenaSwitchToFightServerMessage arenaSwitchToFightServerMessage = new GameRolePlayArenaSwitchToFightServerMessage();
 		arenaSwitchToFightServerMessage.Deserialize(dataReader);
@@ -490,7 +439,7 @@ public class Network extends DisplayInfo implements Runnable {
 		this.socket = new Socket(arenaSwitchToFightServerMessage.getAddress(), 5555);
 	}
 
-	private void handleGameRolePlayArenaSwitchToGameServerMessage(DofusDataReader dataReader) throws IOException, UnknownHostException {
+	private void handleGameRolePlayArenaSwitchToGameServerMessage(DofusDataReader dataReader) throws IOException {
 		connectionToKoli = false;
 		latencyFrame.Sequence = 1;
 		GameRolePlayArenaSwitchToGameServerMessage arenaSwitchToGameServerMessage = new GameRolePlayArenaSwitchToGameServerMessage();
@@ -509,14 +458,14 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 	}
 
-	private void handleHelloConnectMessage(DofusDataReader dataReader) throws IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, Exception {
+	private void handleHelloConnectMessage(DofusDataReader dataReader) throws Exception {
 		HelloConnectMessage hello = new HelloConnectMessage();
 		hello.Deserialize(dataReader);
 		byte[] key = new byte[hello.getKey().size()];
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 46, 1, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 46, 15, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -629,7 +578,7 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 	}
 
-	private void handleMapRequestMessage(DofusDataReader dataReader) throws Exception, IOException {
+	private void handleMapRequestMessage(DofusDataReader dataReader) throws Exception {
 		CurrentMapMessage currentMapMessage = new CurrentMapMessage();
 		currentMapMessage.Deserialize(dataReader);
 		info.setMapId(currentMapMessage.getMapId());
@@ -718,7 +667,7 @@ public class Network extends DisplayInfo implements Runnable {
 		sendToServer(RDM, CheckIntegrityMessage.ProtocolId, "Check Integrity Message...");
 	}
 
-	private void handleSelectedServerDataMessage(DofusDataReader dataReader) throws IOException, UnknownHostException {
+	private void handleSelectedServerDataMessage(DofusDataReader dataReader) throws IOException {
 		SelectedServerDataMessage selectServer = new SelectedServerDataMessage();
 		selectServer.Deserialize(dataReader);
 		Ticket = selectServer.getTicket();
@@ -726,23 +675,15 @@ public class Network extends DisplayInfo implements Runnable {
 		this.socket = new Socket(selectServer.getAddress(), selectServer.getPort());
 	}
 
-	private void handleSequenceEndMessage(DofusDataReader dataReader) throws InterruptedException, Exception {
+	private void handleSequenceEndMessage(DofusDataReader dataReader) throws Exception {
 		SequenceEndMessage sequenceEndMessage = new SequenceEndMessage();
 		sequenceEndMessage.Deserialize(dataReader);
 		if (sequenceEndMessage.getAuthorId() == info.getActorId()) {
-			Thread.sleep(1500);
+			Thread.sleep(1000);
 			sendToServer(new GameActionAcknowledgementMessage(true, sequenceEndMessage.getActionId()), GameActionAcknowledgementMessage.ProtocolId, "Game Action Acknowledgement Message");
 			this.getInfo().setAcknowledged(true);
 		}
-		if (!getFight().getSpellJson().isEmpty()) {
-			/**
-			 * FOR LYSANDRE Use getFight().getSpellJson() in a function
-			 */
-			getFight().sendToFightAlgo("c", getFight().getSpellJson());
-		}
-		if (info.isTurn()) {
-			getFight().fightTurn();
-		}
+		iaPacket.sequenceEndMessage(sequenceEndMessage);
 	}
 
 	private void handleSequenceNumberMessage() throws Exception {
@@ -764,6 +705,7 @@ public class Network extends DisplayInfo implements Runnable {
 					this.socket.close();
 					return;
 				}
+				break;
 			}
 		}
 		if(serverId == -1){
@@ -1193,9 +1135,9 @@ public class Network extends DisplayInfo implements Runnable {
 				handleGameFightTurnEndMessage(dataReader);
 				break;
 			case 720:
-				info.setJoinedFight(false);
-				info.setTurn(false);
-				getFight().sendToFightAlgo("endFight", null);
+                GameFightEndMessage gameFightEndMessage = new GameFightEndMessage();
+                gameFightEndMessage.Deserialize(dataReader);
+                iaPacket.gameFightEnd(gameFightEndMessage);
 				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"end\"" });
 				break;
 			case 703:
@@ -1209,10 +1151,12 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 6465:
 				info.setTurn(true);
-				getFight().fightTurn();
+				iaPacket.gameFightTurnStartPlaying();
 				break;
 			case 955:
-				getFight().setSpellJson(new JSONArray());
+				SequenceStartMessage sequenceStartMessage = new SequenceStartMessage();
+				sequenceStartMessage.Deserialize(dataReader);
+				iaPacket.sequenceStartMessage(sequenceStartMessage);
 				break;
 			case 5825:
 				handleGameActionFightSummonMessage(dataReader);
@@ -1494,6 +1438,146 @@ public class Network extends DisplayInfo implements Runnable {
 				GameActionFightVanishMessage gameActionFightVanishMessage = new GameActionFightVanishMessage();
 				gameActionFightVanishMessage.Deserialize(dataReader);
 				iaPacket.gameActionFightVanish(gameActionFightVanishMessage);
+				break;
+            case 6700:
+                ArenaFighterLeaveMessage arenaFighterLeaveMessage = new ArenaFighterLeaveMessage();
+                arenaFighterLeaveMessage.Deserialize(dataReader);
+                iaPacket.arenaFighterLeave(arenaFighterLeaveMessage);
+                break;
+            case 6022:
+                ChallengeInfoMessage challengeInfoMessage = new ChallengeInfoMessage();
+                challengeInfoMessage.Deserialize(dataReader);
+                iaPacket.challengeInfo(challengeInfoMessage);
+                break;
+            case 6019:
+                ChallengeResultMessage challengeResultMessage = new ChallengeResultMessage();
+                challengeResultMessage.Deserialize(dataReader);
+                iaPacket.challengeResult(challengeResultMessage);
+                break;
+            case 5613:
+                ChallengeTargetsListMessage challengeTargetsListMessage = new ChallengeTargetsListMessage();
+                challengeTargetsListMessage.Deserialize(dataReader);
+                iaPacket.challengeTargetsList(challengeTargetsListMessage);
+                break;
+            case 6123:
+                ChallengeTargetUpdateMessage challengeTargetUpdateMessage = new ChallengeTargetUpdateMessage();
+                challengeTargetUpdateMessage.Deserialize(dataReader);
+                iaPacket.challengeTargetUpdate(challengeTargetUpdateMessage);
+                break;
+            case 6309:
+                GameFightRefreshFighterMessage gameFightRefreshFighterMessage = new GameFightRefreshFighterMessage();
+                gameFightRefreshFighterMessage.Deserialize(dataReader);
+                iaPacket.gameFightRefreshFighter(gameFightRefreshFighterMessage);
+                break;
+            case 740:
+                GameFightHumanReadyStateMessage gameFightHumanReadyStateMessage = new GameFightHumanReadyStateMessage();
+                gameFightHumanReadyStateMessage.Deserialize(dataReader);
+                iaPacket.gameFightHumanReadyState(gameFightHumanReadyStateMessage);
+                break;
+            case 721:
+                GameFightLeaveMessage gameFightLeaveMessage = new GameFightLeaveMessage();
+                gameFightLeaveMessage.Deserialize(dataReader);
+                iaPacket.gameFightLeave(gameFightLeaveMessage);
+                break;
+            case 6239:
+                GameFightNewRoundMessage gameFightNewRoundMessage = new GameFightNewRoundMessage();
+                gameFightNewRoundMessage.Deserialize(dataReader);
+                iaPacket.gameFightNewRound(gameFightNewRoundMessage);
+                break;
+            case 6490:
+                GameFightNewWaveMessage gameFightNewWaveMessage = new GameFightNewWaveMessage();
+                gameFightNewWaveMessage.Deserialize(dataReader);
+                iaPacket.gameFightNewWave(gameFightNewWaveMessage);
+                break;
+			case 5927:
+				GameFightOptionStateUpdateMessage gameFightOptionStateUpdateMessage = new GameFightOptionStateUpdateMessage();
+				gameFightOptionStateUpdateMessage.Deserialize(dataReader);
+				iaPacket.gameFightOptionStateUpdate(gameFightOptionStateUpdateMessage);
+				break;
+			case 707:
+				GameFightOptionToggleMessage gameFightOptionToggleMessage = new GameFightOptionToggleMessage();
+				gameFightOptionToggleMessage.Deserialize(dataReader);
+				iaPacket.gameFightOptionToggle(gameFightOptionToggleMessage);
+				break;
+			case 6754:
+				GameFightPauseMessage gameFightPauseMessage = new GameFightPauseMessage();
+				gameFightPauseMessage.Deserialize(dataReader);
+				iaPacket.gameFightPause(gameFightPauseMessage);
+				break;
+			case 6547:
+				GameFightPlacementSwapPositionsAcceptMessage gameFightPlacementSwapPositionsAcceptMessage = new GameFightPlacementSwapPositionsAcceptMessage();
+				gameFightPlacementSwapPositionsAcceptMessage.Deserialize(dataReader);
+				iaPacket.gameFightPlacementSwapPositionsAccept(gameFightPlacementSwapPositionsAcceptMessage);
+				break;
+			case 6546:
+				GameFightPlacementSwapPositionsCancelledMessage gameFightPlacementSwapPositionsCancelledMessage = new GameFightPlacementSwapPositionsCancelledMessage();
+				gameFightPlacementSwapPositionsCancelledMessage.Deserialize(dataReader);
+				iaPacket.gameFightPlacementSwapPositionsCancelled(gameFightPlacementSwapPositionsCancelledMessage);
+				break;
+			case 6543:
+				GameFightPlacementSwapPositionsCancelMessage gameFightPlacementSwapPositionsCancelMessage = new GameFightPlacementSwapPositionsCancelMessage();
+				gameFightPlacementSwapPositionsCancelMessage.Deserialize(dataReader);
+				iaPacket.gameFightPlacementSwapPositionsCancel(gameFightPlacementSwapPositionsCancelMessage);
+				break;
+			case 6544:
+				GameFightPlacementSwapPositionsMessage gameFightPlacementSwapPositionsMessage = new GameFightPlacementSwapPositionsMessage();
+				gameFightPlacementSwapPositionsMessage.Deserialize(dataReader);
+				iaPacket.gameFightPlacementSwapPositions(gameFightPlacementSwapPositionsMessage);
+				break;
+			case 6542:
+				GameFightPlacementSwapPositionsOfferMessage gameFightPlacementSwapPositionsOfferMessage = new GameFightPlacementSwapPositionsOfferMessage();
+				gameFightPlacementSwapPositionsOfferMessage.Deserialize(dataReader);
+				iaPacket.gameFightPlacementSwapPositionsOffer(gameFightPlacementSwapPositionsOfferMessage);
+				break;
+			case 711:
+				GameFightRemoveTeamMemberMessage gameFightRemoveTeamMemberMessage = new GameFightRemoveTeamMemberMessage();
+				gameFightRemoveTeamMemberMessage.Deserialize(dataReader);
+				iaPacket.gameFightRemoveTeamMember(gameFightRemoveTeamMemberMessage);
+				break;
+			case 6067:
+				GameFightResumeMessage gameFightResumeMessage = new GameFightResumeMessage();
+				gameFightResumeMessage.Deserialize(dataReader);
+				iaPacket.gameFightResume(gameFightResumeMessage);
+				break;
+			case 700:
+				GameFightStartingMessage gameFightStartingMessage = new GameFightStartingMessage();
+				gameFightStartingMessage.Deserialize(dataReader);
+				iaPacket.gameFightStarting(gameFightStartingMessage);
+				break;
+			case 712:
+				GameFightStartMessage gameFightStartMessage =  new GameFightStartMessage();
+				gameFightStartMessage.Deserialize(dataReader);
+				iaPacket.gameFightStart(gameFightStartMessage);
+				break;
+			case 718:
+				GameFightTurnFinishMessage gameFightTurnFinishMessage = new GameFightTurnFinishMessage();
+				gameFightTurnFinishMessage.Deserialize(dataReader);
+				iaPacket.gameFightTurnFinish(gameFightTurnFinishMessage);
+				break;
+			case 716:
+				GameFightTurnReadyMessage gameFightTurnReadyMessage = new GameFightTurnReadyMessage();
+				gameFightTurnReadyMessage.Deserialize(dataReader);
+				iaPacket.gameFightTurnReady(gameFightTurnReadyMessage);
+				break;
+			case 6307:
+				GameFightTurnResumeMessage gameFightTurnResumeMessage = new GameFightTurnResumeMessage();
+				gameFightTurnResumeMessage.Deserialize(dataReader);
+				iaPacket.gameFightTurnResume(gameFightTurnResumeMessage);
+				break;
+			case 714:
+				GameFightTurnStartMessage gameFightTurnStartMessage = new GameFightTurnStartMessage();
+				gameFightTurnStartMessage.Deserialize(dataReader);
+				iaPacket.gameFightTurnStart(gameFightTurnStartMessage);
+				break;
+			case 5572:
+				GameFightUpdateTeamMessage gameFightUpdateTeamMessage = new GameFightUpdateTeamMessage();
+				gameFightUpdateTeamMessage.Deserialize(dataReader);
+				iaPacket.gameFightUpdateTeam(gameFightUpdateTeamMessage);
+				break;
+			case 6699:
+				RefreshCharacterStatsMessage refreshCharacterStatsMessage = new RefreshCharacterStatsMessage();
+				refreshCharacterStatsMessage.Deserialize(dataReader);
+				iaPacket.refreshCharacterStats(refreshCharacterStatsMessage);
 				break;
 
 		}

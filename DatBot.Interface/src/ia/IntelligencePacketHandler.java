@@ -1,6 +1,8 @@
 package ia;
 
 import protocol.network.messages.game.actions.fight.*;
+import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
+import protocol.network.messages.game.actions.sequence.SequenceStartMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
 import protocol.network.messages.game.context.fight.*;
@@ -15,9 +17,6 @@ import protocol.network.messages.game.context.fight.character.GameFightShowFight
 
 public class IntelligencePacketHandler {
 
-    public void abstractGameActionFightTargetedAbility(AbstractGameActionFightTargetedAbilityMessage message){
-
-    }
 
     public void gameActionFightActivateGlyphTrap(GameActionFightActivateGlyphTrapMessage message){
 
@@ -191,14 +190,6 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void gameFightShowFighter(GameFightShowFighterMessage message){
-
-    }
-
-    public void gameFightShowFighterRandomStaticPose(GameFightShowFighterRandomStaticPoseMessage message){
-
-    }
-
     public void gameFightEnd(GameFightEndMessage message){
 
     }
@@ -251,9 +242,6 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void gameFightPlacementSwapPositionsError(GameFightPlacementSwapPositionsErrorMessage message){
-
-    }
 
     public void gameFightPlacementSwapPositions(GameFightPlacementSwapPositionsMessage message){
 
@@ -263,27 +251,11 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void gameFightReady(GameFightReadyMessage message){
-
-    }
-
     public void gameFightRemoveTeamMember(GameFightRemoveTeamMemberMessage message){
 
     }
 
     public void gameFightResume(GameFightResumeMessage message){
-
-    }
-
-    public void gameFightResumeWithSlaves(GameFightResumeWithSlavesMessage message){
-
-    }
-
-    public void gameFightSpectate(GameFightSpectateMessage message){
-
-    }
-
-    public void gameFightSpectatorJoin(GameFightSpectatorJoinMessage message){
 
     }
 
@@ -323,7 +295,7 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void gameFightTurnStartPlaying(GameFightTurnStartPlayingMessage message) {
+    public void gameFightTurnStartPlaying() {
 
     }
 
@@ -335,10 +307,6 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void slaveSwitchContext(SlaveSwitchContextMessage message){
-
-    }
-
     public void gameEntitiesDisposition(GameEntitiesDispositionMessage message){
 
     }
@@ -347,7 +315,13 @@ public class IntelligencePacketHandler {
 
     }
 
+    public void sequenceEndMessage(SequenceEndMessage message){
 
+    }
+
+    public void sequenceStartMessage(SequenceStartMessage message){
+
+    }
 }
 
 

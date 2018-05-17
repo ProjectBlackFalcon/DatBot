@@ -1,14 +1,5 @@
 package game.combat;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.swing.SwingUtilities;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import game.Info;
 import game.movement.CellMovement;
 import ia.fight.brain.Game;
@@ -16,17 +7,19 @@ import ia.fight.brain.classes.Cra;
 import ia.fight.brain.classes.Monster;
 import ia.fight.map.CreateMap;
 import ia.fight.structure.Player;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import protocol.network.Network;
 import protocol.network.messages.game.actions.fight.GameActionFightCastRequestMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
-import protocol.network.messages.game.context.fight.GameFightPlacementPositionRequestMessage;
-import protocol.network.messages.game.context.fight.GameFightPlacementPossiblePositionsMessage;
-import protocol.network.messages.game.context.fight.GameFightReadyMessage;
-import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
-import protocol.network.messages.game.context.fight.GameFightTurnFinishMessage;
+import protocol.network.messages.game.context.fight.*;
 import protocol.network.types.game.context.fight.GameFightCharacterInformations;
 import protocol.network.types.game.context.fight.GameFightMinimalStats;
 import protocol.network.types.game.context.fight.GameFightMonsterInformations;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Fight {
 	
@@ -62,7 +55,7 @@ public class Fight {
 	/**
 	 * Communicate with the fight algo and the results, modified by jikiw
 	 * 
-	 * @param String command, Ojbect [] parameters
+	 * @param string command, Ojbect [] parameters
 	 * @return String results
 	 * @author baptiste & jikiw
 	 */
@@ -114,7 +107,7 @@ public class Fight {
 	/**
 	 * Move the player during fight using MP
 	 * 
-	 * @param int cellId
+	 * @param : int cellId
 	 * @return boolean moved
 	 * @author baptiste
 	 */
@@ -141,7 +134,7 @@ public class Fight {
 	/**
 	 * Cast spell
 	 * 
-	 * @param int id, int cellId
+	 * @param : int id, int cellId
 	 * @author baptiste
 	 */
 	public void castSpell(int id, int cellId) throws Exception {
@@ -262,7 +255,7 @@ public class Fight {
 	/**
 	 * Id position of the entity
 	 * 
-	 * @param Id of the entity
+	 * @param id of the entity
 	 * @return Fight position of the entity
 	 */
 	public int getId(double id) {
