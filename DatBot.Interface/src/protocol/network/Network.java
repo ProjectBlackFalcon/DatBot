@@ -5,6 +5,7 @@ import game.combat.Fight;
 import game.movement.Movement;
 import game.plugin.*;
 import ia.IntelligencePacketHandler;
+import ia.entities.Spell;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
 import org.json.simple.JSONArray;
@@ -57,6 +58,7 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSel
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidSellerMessage;
 import protocol.network.messages.game.inventory.items.*;
+import protocol.network.messages.game.inventory.spells.SpellListMessage;
 import protocol.network.messages.game.inventory.storage.*;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
@@ -69,6 +71,7 @@ import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
+import protocol.network.types.game.data.items.SpellItem;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.*;
 import utils.GameData;
@@ -1579,7 +1582,15 @@ public class Network extends DisplayInfo implements Runnable {
 				refreshCharacterStatsMessage.Deserialize(dataReader);
 				iaPacket.refreshCharacterStats(refreshCharacterStatsMessage);
 				break;
-
+			case 1200:
+				SpellListMessage spellListMessage = new SpellListMessage();
+				spellListMessage.Deserialize(dataReader);
+				List<Spell> spells = new ArrayList<>();
+				for (SpellItem si : spellListMessage.getSpells()){
+					spells.add(GameData.getSpell(si.getSpellId(),si.getSpellLevel()));
+				}
+				info.setSpells(spells);
+				break;
 		}
 		dataReader.bis.close();
 	}

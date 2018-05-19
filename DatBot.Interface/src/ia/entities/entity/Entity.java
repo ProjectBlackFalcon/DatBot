@@ -1,13 +1,17 @@
 package ia.entities.entity;
 
-import ia.entities.Effects;
+import ia.entities.FightEffects;
+import ia.entities.Spell;
 import protocol.network.types.game.context.fight.GameFightCharacterInformations;
+
+import java.util.List;
 
 public abstract class Entity {
 
 	private GameFightCharacterInformations info;
-	private Effects effects;
-	
+	private FightEffects effects;
+	private List<Spell> spells;
+
 	public Entity(GameFightCharacterInformations info) {
 		this.info = info;
 	}
@@ -20,11 +24,11 @@ public abstract class Entity {
 		this.info = info;
 	}
 
-	public Effects getEffects() {
+	public FightEffects getEffects() {
 		return effects;
 	}
 
-	public void setEffects(Effects effects) {
+	public void setEffects(FightEffects effects) {
 		this.effects = effects;
 	}
 	
@@ -37,4 +41,12 @@ public abstract class Entity {
 	}
 	
 	public abstract String toString();
+
+	public List<Spell> getSpells() {
+		return spells;
+	}
+
+	public void setSpells(List<Spell> spells) {
+		this.spells = spells;
+	}
 }
