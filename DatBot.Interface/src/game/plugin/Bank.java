@@ -10,9 +10,9 @@ import utils.GameData;
 
 public class Bank {
 
-	public int cellIdAstrubIN = 317;
-	public int interactiveAstrubIN = 465440;
-	public int cellIdAstrubOUT = 396;
+	public int cellIdAstrubIN = 302;
+	public int interactiveAstrubIN = 515308;
+	public int cellIdAstrubOUT = 409;
 
 	public int cellIdBontaIN = 353;
 	public int interactiveBontaIN = 433934;

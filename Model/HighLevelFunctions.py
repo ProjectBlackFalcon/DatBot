@@ -26,16 +26,14 @@ class HighLevelFunctions:
             if current_worldmap == 2 and worldmap == 1:
                 self.goto((4, -3), worldmap=2)
                 self.bot.interface.go_to_astrub()
+                self.bot.interface.change_map(549, 's')
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
             # Astrub to Incarnam
             elif current_worldmap == 1 and worldmap == 2:
-                statue_map = tuple(self.llf.get_closest_statue(current_map))
-                while current_map != statue_map:
-                    self.goto(statue_map)
-                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-                statue_cell = self.bot.interface.get_class_statue_cell()[0]
-                teleport_cell = self.llf.get_closest_walkable_cell(statue_cell, statue_map, current_worldmap)
-                self.bot.interface.move(teleport_cell)
+                gate_map = (6, -19)
+                self.goto(gate_map, target_cell=397)
+                self.bot.interface.enter_gate()
+                self.bot.interface.move(468)
                 self.bot.interface.go_to_incarnam()
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
@@ -270,7 +268,6 @@ class HighLevelFunctions:
                         self.llf.log(self.bot, str(traceback.format_exc()))
                     full = not self.harvest_map(harvest_only, do_not_harvest)
                 else:
-                    self.goto((4, -16))
                     self.drop_to_bank('all', withdraw_items_to_sell=sell)
                     if sell:
                         self.sell_all(self.bot.subscribed)
@@ -303,8 +300,8 @@ class HighLevelFunctions:
     def drop_to_bank(self, item_id_list='all', withdraw_items_to_sell=False):
         self.bot.occupation = 'Dropping to bank'
         self.update_db()
-        if not tuple(self.bot.position[0]) == (4, -16):
-            self.goto((4, -16))
+        if not tuple(self.bot.position[0]) == (4, -18):
+            self.goto((4, -18))
         bank_entrance, bank_exit = self.bot.interface.get_bank_door_cell()
         if bank_entrance:
             self.bot.interface.move(bank_entrance)
@@ -493,6 +490,8 @@ class HighLevelFunctions:
     def update_hdv(self, close_after=True):
         self.bot.occupation = 'Updating HDV'
         self.update_db()
+        hdv_sign_cell = self.bot.interface.get_hdv_sign()
+        self.bot.interface.move(self.llf.get_closest_walkable_cell(hdv_sign_cell, self.bot.position[0], self.bot.position[1]))
         hdv_content = self.bot.interface.open_hdv()
         items_for_sale = []
         if hdv_content and hdv_content[0] != 'empty':

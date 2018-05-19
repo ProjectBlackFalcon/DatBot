@@ -43,30 +43,6 @@ public class Interactive {
 		return -1;
 	}
 
-	private int elementIdStatue = -1;
-	private int skillInstanceUidStatue = -1;
-
-	public int getStatue() {
-		for (int i = 0; i < getInteractiveElements().size(); i++) {
-			if (getInteractiveElements().get(i).getEnabledSkills().size() != 0) {
-				if (getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillId() == 302 && getInteractiveElements().get(i).isOnCurrentMap()) {
-					for (int j = 0; j < this.getMap().getLayersCount(); j++) {
-						for (int k = 0; k < this.getMap().getLayers().get(j).getCellsCount(); k++) {
-							for (int l = 0; l < this.getMap().getLayers().get(j).getCells().get(k).getElementsCount(); l++) {
-								if (((GraphicalElement) this.getMap().getLayers().get(j).getCells().get(k).getElements().get(l)).getIdentifier() == getInteractiveElements().get(i).getElementId()) {
-									setElementIdStatue(getInteractiveElements().get(i).getElementId());
-									setSkillInstanceUidStatue(getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillInstanceUid());
-									return (int) this.getMap().getLayers().get(j).getCells().get(k).getCellId();
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return -1;
-	}
-
 	/**
 	 * Get the interactive informations If no interactive : null Case skillId :
 	 * Zaap : 114 Statue : 302 Enclo : 175
@@ -88,7 +64,7 @@ public class Interactive {
 				}
 			}
 		}
-		return new int[] { -1, -1, -1 };
+		return null;
 	}
 
 	private List<Integer> cellsIdRosette;
@@ -234,22 +210,6 @@ public class Interactive {
 
 	public void setQuantityLastItemHarvested(int quantityLastItemHarvested) {
 		this.quantityLastItemHarvested = quantityLastItemHarvested;
-	}
-
-	public int getElementIdStatue() {
-		return elementIdStatue;
-	}
-
-	public void setElementIdStatue(int elementIdStatue) {
-		this.elementIdStatue = elementIdStatue;
-	}
-
-	public int getSkillInstanceUidStatue() {
-		return skillInstanceUidStatue;
-	}
-
-	public void setSkillInstanceUidStatue(int skillInstanceUidStatue) {
-		this.skillInstanceUidStatue = skillInstanceUidStatue;
 	}
 
 	public Map getMap() {

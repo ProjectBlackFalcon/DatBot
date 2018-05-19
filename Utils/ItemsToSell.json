@@ -1,26 +1,14 @@
 {
   "Default": {
-    "Animaux": {},
-    "Cordonniers": {},
-    "Documents": {},
     "Ressources": {
       "311": {"name": "eau potable", "quantity": 100},
       "2239": {"name": "poudre d'eniripsa", "quantity": 10},
-      "8012": {"name": "poudre de resurrection", "quantity": 1}
+      "8012": {"name": "poudre de resurrection", "quantity": 1},
+      "15263": {"name": "rose des sables", "quantity": 100},
+      "289": {"name": "ble", "quantity": 100},
+      "1782": {"name": "goujon", "quantity": 100}
     },
-    "Runes": {},
-    "Alchimistes": {},
-    "Ames": {},
-    "Bijoutiers": {},
-    "Bricoleurs": {},
-    "Bucherons": {},
-    "Chasseurs": {},
-    "Faconneurs": {},
-    "Forgerons": {},
-    "Mineurs": {"15263": {"name": "rose des sables", "quantity": 100}},
-    "Paysans": {"289": {"name": "ble", "quantity": 100}},
-    "Pecheurs": {"1782": {"name": "goujon", "quantity": 100}},
-    "Sculpteurs": {},
-    "Tailleurs": {}
+    "Consommables":{},
+    "Equipements": {}
   }
 }

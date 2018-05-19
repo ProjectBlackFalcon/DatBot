@@ -238,6 +238,7 @@ class Interface:
         return self.execute_command('harvest', [cell])
 
     def go_to_astrub(self):
+        # TODO
         """
         Talks to the PNJ to go to Astrub
         :return: Boolean
@@ -245,20 +246,23 @@ class Interface:
         return self.execute_command('goAstrub')
 
     def go_to_incarnam(self):
+        # TODO
         """
-        Uses a statue to go to Incarnam
+        Uses the gate to go to Incarnam
         :return: Boolean
         """
         return self.execute_command('goIncarnam')
 
-    def get_class_statue_cell(self):
+    def enter_gate(self):
+        # TODO
         """
-        Returns the cell id of the current map class statue, or False if there is none
-        :return: [cell] or [False]
+        Enters the gate thing to go to Incarnam
+        :return: Boolean
         """
-        return self.execute_command('getStatue')
+        return self.execute_command('enterGate')
 
     def get_bank_door_cell(self):
+        # TODO
         """
         Returns the cell id of the current map bank door, or False if there is none
         :return: [cell_in, cell_out] or [False]
@@ -266,6 +270,7 @@ class Interface:
         return self.execute_command('getBankDoor')
 
     def enter_bank(self):
+        # TODO
         """
         Uses a door to enter bank
         :return: Boolean
@@ -273,6 +278,7 @@ class Interface:
         return self.execute_command('goBank')
 
     def open_bank(self):
+        # TODO
         """
         Opens bank
         :return: items json / False
@@ -282,6 +288,7 @@ class Interface:
         return bank_content
 
     def close_bank(self):
+        # TODO
         """
         Closes Bank
         :return: Boolean
@@ -509,7 +516,16 @@ class Interface:
         """
         return self.execute_command('attackMonster', [mob_id])
 
+    def get_hdv_sign(self):
+        # TODO
+        """
+        Returns the cell of the hdv sign
+        :return: False / cell_id
+        """
+        return self.execute_command('getHdvSign')
+
     def open_hdv(self):
+        # TODO
         """
         Tries to open the map's hdv. If sucessful, returns what items are being sold.
         :return: False / "empty" / [[name, id, batch_size, price], [...]]
@@ -517,6 +533,7 @@ class Interface:
         return self.execute_command('openHdv')
 
     def close_hdv(self):
+        # TODO
         """
         Closes the hdv
         :return: Boolean

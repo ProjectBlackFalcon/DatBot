@@ -14,8 +14,10 @@ public class Communication implements Runnable {
 	// <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
 
 	static boolean displayPacket;
-	List<ModelConnexion> models = new ArrayList<>();
+	public List<ModelConnexion> models = new ArrayList<>();
 	static boolean isConnecting = false;
+	
+	public static String answer;
 
 	public Communication(boolean arg) {
 		Communication.displayPacket = arg;
@@ -55,7 +57,9 @@ public class Communication implements Runnable {
 				newParam += param[i] + ", ";
 			}
 		}
-		System.out.println(String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam));
+		String result = String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam);
+		Communication.answer = result;
+		System.out.println(result);
 	}
 
 	/**
@@ -68,6 +72,7 @@ public class Communication implements Runnable {
 	 */
 	public void getReturn(String s) throws NumberFormatException, Exception {
 		Thread.sleep(500);
+		answer = s;
 		System.out.println(s);
 		s = s.replaceAll(" ", "");
 		String[] message = s.split(";");
@@ -82,5 +87,13 @@ public class Communication implements Runnable {
 			if (modelConnexion.botInstance == botId) { return modelConnexion; }
 		}
 		return null;
+	}
+
+	public List<ModelConnexion> getModels() {
+		return models;
+	}
+
+	public void setModels(List<ModelConnexion> models) {
+		this.models = models;
 	}
 }

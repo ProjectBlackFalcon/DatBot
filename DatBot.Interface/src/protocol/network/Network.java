@@ -46,6 +46,7 @@ import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
+import protocol.network.messages.game.basic.TextInformationMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectionMessage;
 import protocol.network.messages.game.character.choice.CharactersListMessage;
@@ -322,12 +323,10 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void handleCharacterSelectionMessage(DofusDataReader dataReader) throws Exception, Error {
-		try {
-			Thread.sleep(4000 + new Random().nextInt(3000));
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		double gauss = new Random().nextGaussian();
+		long timeStoped = (long) (Math.abs(gauss * 3) * 1000);
+		System.out.println("---- Sleeping : " + timeStoped + " ----");
+		Thread.sleep(timeStoped);
 		CharactersListMessage charactersListMessage = new CharactersListMessage();
 		charactersListMessage.Deserialize(dataReader);
 		int j = 0;
@@ -516,7 +515,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 46, 1, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 46, 15, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -1130,6 +1129,11 @@ public class Network extends DisplayInfo implements Runnable {
 				info.setInteractiveUsed(true);
 				break;
 			case 780:
+				TextInformationMessage informationMessage = new TextInformationMessage();
+				informationMessage.Deserialize(dataReader);
+				if(informationMessage.getMsgId() == 436){
+					this.hunt.setAbTimeLeft(Integer.parseInt(informationMessage.getParameters().get(0)));
+				}
 				info.setTextMessage(true);
 				break;
 			case 5646:
@@ -1305,6 +1309,12 @@ public class Network extends DisplayInfo implements Runnable {
 				this.info.setExchangeBidSeller(true);
 				break;
 			case 5945:
+				this.info.setExchangeBidSeller(true);
+				break;
+			case 5765:
+				this.info.setExchangeBidSeller(true);
+				break;
+			case 5904:
 				this.info.setExchangeBidSeller(true);
 				break;
 			case 5946:
