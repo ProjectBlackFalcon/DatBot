@@ -35,9 +35,13 @@ public class Effects {
 		}
 	}
 	
-	//TODO remove from list when <= 0
+	//TODO TEST
 	public void removeTurnDuration(AbstractFightDispellableEffect effect, int duration) {
-		
+	    if(effect.getTurnDuration() <= 1){
+	        effects.remove(effect);
+        }else{
+            effect.setTurnDuration(effect.getTurnDuration()-1);
+        }
 	}
 	
 	public void removeEffect(AbstractFightDispellableEffect effect) {
