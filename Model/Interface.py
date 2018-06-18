@@ -240,7 +240,7 @@ class Interface:
     def go_to_astrub(self):
         # TODO
         """
-        Talks to the PNJ to go to Astrub
+        Goes to Astrub and makes the player exit the building (should arrive at 6, -19, cell 397, worldmap 1)
         :return: Boolean
         """
         return self.execute_command('goAstrub')
@@ -248,31 +248,15 @@ class Interface:
     def go_to_incarnam(self):
         # TODO
         """
-        Uses the gate to go to Incarnam
+        Enters the building and uses the gate to go to Incarnam
         :return: Boolean
         """
         return self.execute_command('goIncarnam')
 
-    def enter_gate(self):
-        # TODO
-        """
-        Enters the gate thing to go to Incarnam
-        :return: Boolean
-        """
-        return self.execute_command('enterGate')
-
-    def get_bank_door_cell(self):
-        # TODO
-        """
-        Returns the cell id of the current map bank door, or False if there is none
-        :return: [cell_in, cell_out] or [False]
-        """
-        return self.execute_command('getBankDoor')
-
     def enter_bank(self):
         # TODO
         """
-        Uses a door to enter bank
+        Enters the bank on the map if there is one
         :return: Boolean
         """
         return self.execute_command('goBank')

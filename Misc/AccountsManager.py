@@ -1,10 +1,9 @@
 import mysql.connector
 from tkinter import filedialog
 from tkinter import *
-import datetime
 import json
 import copy
-import ast
+import Database_credentials as dc
 
 
 class Bot:
@@ -38,7 +37,9 @@ class Scheduler:
             'sleep': '#aaaaaa',
             'hunt': '#cc5555',
             'dd': '#55cc55',
-            'sell': '#5555cc'
+            'sell': '#5555cc',
+            'harvest': '#ffad2b',
+            'huntGather': '#ff3097'
         }
         self.tk = Tk()
         self.tk.title('Schedule creator')
@@ -166,8 +167,8 @@ class Scheduler:
     def assign_schedule(self, schedule_name, bot_name):
         with open('..//Utils//Schedules//{}.json'.format(schedule_name), 'r') as f:
             schedule = json.load(f)[0]
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
 
         cursor = conn.cursor()
         cursor.execute('''UPDATE BotAccounts SET schedule="{}" WHERE name="{}"'''.format(str(schedule), bot_name))
@@ -298,8 +299,8 @@ class AccountManager:
         self.add_bot_cancel_btn.pack(side='left')
 
     def get_bots_db(self):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""SELECT * FROM BotAccounts""")
         for bot in cursor:
@@ -326,8 +327,8 @@ class AccountManager:
         conn.close()
 
     def add_bot_db(self, username, password, name, server):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         put = (username, password, name, server)
         cursor.execute("""SELECT * FROM BotAccounts WHERE username = %s""", (username,))
@@ -341,8 +342,8 @@ class AccountManager:
         conn.close()
 
     def del_bot_db(self, username):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""DELETE FROM BotAccounts WHERE username = %s""", (username,))
         conn.commit()

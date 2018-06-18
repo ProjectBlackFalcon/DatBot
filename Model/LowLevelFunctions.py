@@ -3,6 +3,7 @@ import mysql.connector
 import copy
 import ast
 import datetime
+import Database_credentials as dc
 
 
 class LowLevelFunctions:
@@ -109,8 +110,8 @@ class LowLevelFunctions:
 
     def update_db(self, bot_id, server, name, kamas, level, occupation, current_map='OFFLINE', worldmap=1):
         try:
-            conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                           database="wz3xj6_spec")
+            conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
             cursor = conn.cursor()
             put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap)
             cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", put)
@@ -144,16 +145,16 @@ class LowLevelFunctions:
             else:
                 self.disc_zaaps[bot_name] = [zaap_pos]
 
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""UPDATE BotAccounts SET zaaps='{}' WHERE name='{}'""".format(self.disc_zaaps[bot_name], bot_name))
         conn.commit()
         conn.close()
 
     def get_discovered_zaaps(self, bot_name=None):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
 
         cursor = conn.cursor()
         if bot_name is not None:
@@ -282,7 +283,8 @@ class LowLevelFunctions:
         return bm_id
 
     def get_schedule(self, bot_name):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec", database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""SELECT schedule FROM BotAccounts WHERE name='{}'""".format(bot_name))
         schedule = ''
@@ -305,8 +307,8 @@ class LowLevelFunctions:
             raise RuntimeError('Error fetching schedule')
 
     def get_mount_situation(self, bot_name):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""SELECT mount FROM BotAccounts WHERE Name='{}'""".format(bot_name))
         conn.close()
@@ -316,8 +318,8 @@ class LowLevelFunctions:
         return mount_situation
 
     def set_mount_situation(self, bot_name, situation):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""UPDATE BotAccounts SET mount='{}' WHERE name='{}'""".format(situation, bot_name))
         conn.commit()
@@ -329,8 +331,8 @@ class LowLevelFunctions:
         print(color + message + '\033[0m')
         with open('..//Utils//BotsLogs//{}.txt'.format(name), 'a') as f:
             f.write(str(datetime.datetime.now()) + '  ' + message + '\n')
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         try:
             cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
@@ -340,8 +342,8 @@ class LowLevelFunctions:
         conn.close()
 
     def dds_to_db(self, bot_name, dds):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         db_dd_ids = set()
         cursor.execute("""SELECT dd_id FROM DDs""")
@@ -358,16 +360,16 @@ class LowLevelFunctions:
         conn.close()
 
     def hunts_to_db(self, bot_name, duration, success, reason=''):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration) VALUES ('{}', '{}', '{}', '{}')""".format(bot_name, int(success), reason, duration))
         conn.commit()
         conn.close()
 
     def fetch_harvest_path(self, bot_name):
-        conn = mysql.connector.connect(host="154.49.211.32", user="wz3xj6_spec", password="specspec",
-                                       database="wz3xj6_spec")
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""SELECT * FROM HarvestPaths""")
         conn.close()

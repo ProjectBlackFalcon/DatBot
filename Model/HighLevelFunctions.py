@@ -213,6 +213,7 @@ class HighLevelFunctions:
                 selected_cell = self.llf.closest_cell(player_pos, [spot[0] for spot in harvest_spots])
                 if not self.bot.interface.move(selected_cell)[0]:
                     success = False
+                    # TODO
                 resource_cell = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
                 resource_name = harvestable_match_res_name[harvestable.index(resource_cell)]
                 ret_val = self.bot.interface.harvest_resource(resource_cell)
