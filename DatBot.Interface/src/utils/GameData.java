@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ia.Intelligence;
 import ia.entities.Effect;
 import ia.entities.Spell;
 import org.json.simple.JSONArray;
@@ -102,6 +103,49 @@ public class GameData {
 	public static String getNameServer(int id){
 		return d2iManager.getText(getDataFromFile(id,"Servers"));
 	}
+
+	public static int getMonsterLvl(int id, int grade){
+        D2oManager d2oManager;
+        List<Spell> spellList = new ArrayList<>();
+        boolean isGrade = false;
+        try {
+            d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Monsters.d2o");
+            String s = d2oManager.searchObjectById(id);
+            s = s.replace("{", "");
+            s = s.replace(" ", "");
+            s = s.replace("}", "");
+            s = s.replaceAll("\n", "");
+            String[] cmd = s.split(",(?![^\\(\\[]*[\\]\\)])");
+            for (String si : cmd) {
+                String[] cmd2 = si.split(":(?![^\\(\\[]*[\\]\\)])");
+                if (cmd2[0].equals("grades")) {
+                    String[] grades = cmd2[1].substring(1,cmd2[1].length()-1).split(",grade:");
+                    for(int i = 0 ; i < grades.length ; i++){
+                        if(i>0) grades[i] = "grade:" + grades[i];
+
+                        System.out.println(grades[i]);
+                        String[] gradesSplit = grades[i].split(",");
+
+                        for (String sgs : gradesSplit) {
+                            System.out.println(sgs);
+                            String[] sgs2 = sgs.split(":(?![^\\(\\[]*[\\]\\)])");
+                            if (sgs2[0].equals("level")) {
+                                if(isGrade)
+                                    return Integer.parseInt(sgs2[1]);
+                            }
+                            if (sgs2[0].equals("grade") && sgs2[1].equals(String.valueOf(grade))) {
+                                isGrade = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
 	public static List<Spell> getMonsterSpells(int id, int lvl){
 		D2oManager d2oManager;

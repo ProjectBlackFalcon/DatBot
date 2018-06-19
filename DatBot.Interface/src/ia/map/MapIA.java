@@ -8,6 +8,16 @@ import utils.d2p.map.CellData;
 
 public class MapIA {
 	TransformedCell[][] cells;
+
+    public List<Integer> getStartPosAvailable() {
+        return startPosAvailable;
+    }
+
+    public void setStartPosAvailable(List<Integer> startPosAvailable) {
+        this.startPosAvailable = startPosAvailable;
+    }
+
+    private List<Integer> startPosAvailable;
 	
 	public MapIA(List<CellData> cells) {
 		this.cells = reshapeToIA(cells);
@@ -21,14 +31,14 @@ public class MapIA {
 	public TransformedCell[][] reshapeToIA(List<CellData> cells){
 		TransformedCell[][] transformedCells = new TransformedCell[33][33];
 		for(int i = 0; i < cells.size(); i++) {
-			int[] pos = reshapeToIA(i);
-			transformedCells[pos[0]][pos[1]] = new TransformedCell(pos[0], pos[1], cells.get(i).isLos(), cells.get(i).isMov());
+			Position pos = reshapeToIA(i);
+			transformedCells[pos.getX()][pos.getY()] = new TransformedCell(pos.getX(), pos.getY(), cells.get(i).isLos(), cells.get(i).isMov());
 		}
 		
 		return transformedCells;
 	}
 	
-	public static int[] reshapeToIA(int startCellId) {
+	public static Position reshapeToIA(int startCellId) {
 		int input_i = startCellId % 14;
 		int input_j = startCellId / 14;
 		
@@ -43,9 +53,9 @@ public class MapIA {
 		}
 
 		if(output_i < 33 & output_j < 33) {
-			return new int[] {output_i, output_j};
+			return new Position(output_i,output_j);
 		}else {
-			return new int[] {0, 0};
+			return null;
 		}
 	}
 	

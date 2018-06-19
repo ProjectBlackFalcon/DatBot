@@ -4,6 +4,7 @@ import game.Info;
 import game.combat.Fight;
 import game.movement.Movement;
 import game.plugin.*;
+import ia.Intelligence;
 import ia.IntelligencePacketHandler;
 import ia.entities.Spell;
 import main.communication.Communication;
@@ -24,6 +25,7 @@ import protocol.network.messages.game.character.choice.CharacterSelectionMessage
 import protocol.network.messages.game.character.choice.CharactersListMessage;
 import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
+import protocol.network.messages.game.character.stats.FighterStatsListMessage;
 import protocol.network.messages.game.context.*;
 import protocol.network.messages.game.context.fight.*;
 import protocol.network.messages.game.context.fight.arena.ArenaFighterLeaveMessage;
@@ -103,6 +105,7 @@ public class Network extends DisplayInfo implements Runnable {
 	 */
 	public boolean connectionToKoli = false;
 	private Fight fight;
+	private Intelligence intelligence;
 	private Hunt hunt;
 	private Info info;
 	private Interactive interactive;
@@ -135,7 +138,8 @@ public class Network extends DisplayInfo implements Runnable {
 		this.monsters = new Monsters();
 		this.hunt = new Hunt();
 		this.dragodinde = new Dragodinde();
-		this.iaPacket = new IntelligencePacketHandler();
+		this.intelligence = new Intelligence(this);
+		this.iaPacket = new IntelligencePacketHandler(this.intelligence);
 		latencyFrame = new LatencyFrame();
 		try {
 			this.npc = new Npc(this);
@@ -1004,6 +1008,7 @@ public class Network extends DisplayInfo implements Runnable {
 				handleMapRequestMessage(dataReader);
 				break;
 			case 176:
+			    this.intelligence.setInit(true);
 				info.setBasicNoOperationMsg(true);
 				break;
 			case 226:
@@ -1591,6 +1596,16 @@ public class Network extends DisplayInfo implements Runnable {
 				}
 				info.setSpells(spells);
 				break;
+            case 5864:
+                GameFightShowFighterMessage gameFightShowFighterMessage = new GameFightShowFighterMessage();
+                gameFightShowFighterMessage.Deserialize(dataReader);
+                iaPacket.gameFightShowFighter(gameFightShowFighterMessage);
+                break;
+            case 6322:
+                FighterStatsListMessage fighterStatsListMessage = new FighterStatsListMessage();
+                fighterStatsListMessage.Deserialize(dataReader);
+                iaPacket.fighterStatsList(fighterStatsListMessage);
+                break;
 		}
 		dataReader.bis.close();
 	}
@@ -1686,4 +1701,12 @@ public class Network extends DisplayInfo implements Runnable {
 	public void setLatencyFrame(LatencyFrame latencyFrame) {
 		this.latencyFrame = latencyFrame;
 	}
+
+    public Intelligence getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(Intelligence intelligence) {
+        this.intelligence = intelligence;
+    }
 }

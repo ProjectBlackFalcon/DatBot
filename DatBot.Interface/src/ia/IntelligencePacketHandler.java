@@ -1,8 +1,14 @@
 package ia;
 
+import ia.entities.entity.Entity;
+import ia.entities.entity.MainEntity;
+import ia.entities.entity.OtherEntity;
+import ia.map.MapIA;
+import ia.map.Position;
 import protocol.network.messages.game.actions.fight.*;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.actions.sequence.SequenceStartMessage;
+import protocol.network.messages.game.character.stats.FighterStatsListMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
 import protocol.network.messages.game.context.fight.*;
@@ -13,10 +19,20 @@ import protocol.network.messages.game.context.fight.challenge.ChallengeTargetUpd
 import protocol.network.messages.game.context.fight.challenge.ChallengeTargetsListMessage;
 import protocol.network.messages.game.context.fight.character.GameFightRefreshFighterMessage;
 import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
-import protocol.network.messages.game.context.fight.character.GameFightShowFighterRandomStaticPoseMessage;
+import protocol.network.types.game.context.IdentifiedEntityDispositionInformations;
+import protocol.network.types.game.context.fight.GameFightCharacterInformations;
+import protocol.network.types.game.context.fight.GameFightMonsterInformations;
+import utils.GameData;
+
+import java.util.ArrayList;
 
 public class IntelligencePacketHandler {
 
+    private Intelligence ia;
+
+    public IntelligencePacketHandler(Intelligence ia) {
+        this.ia = ia;
+    }
 
     public void gameActionFightActivateGlyphTrap(GameActionFightActivateGlyphTrapMessage message){
 
@@ -195,7 +211,13 @@ public class IntelligencePacketHandler {
     }
 
     public void gameFightHumanReadyState(GameFightHumanReadyStateMessage message){
-
+        int index = ia.entityExists(message.getCharacterId());
+        if(index != -1){
+            Entity entity = ia.getEntities().get(index);
+            entity.setRdy(true);
+        } else {
+            Log.writeLogErrorMessage("Character id : " + message.getCharacterId() + " should have been initialized !");
+        }
     }
 
     public void gameFightJoin(GameFightJoinMessage message){
@@ -227,7 +249,11 @@ public class IntelligencePacketHandler {
     }
 
     public void gameFightPlacementPossiblePositions(GameFightPlacementPossiblePositionsMessage message){
-
+        if(message.getTeamNumber() == 0){
+            this.ia.getMap().setStartPosAvailable(message.getPositionsForChallengers());
+        } else {
+            this.ia.getMap().setStartPosAvailable(message.getPositionsForDefenders());
+        }
     }
 
     public void gameFightPlacementSwapPositionsAccept(GameFightPlacementSwapPositionsAcceptMessage message){
@@ -242,6 +268,31 @@ public class IntelligencePacketHandler {
 
     }
 
+    public void gameFightShowFighter(GameFightShowFighterMessage message){
+        int index = ia.entityExists(message.getInformations().getContextualId());
+        Entity entity;
+        if(index != -1){
+           entity = ia.getEntities().get(index);
+        } else {
+            if(message.getInformations().getContextualId() == this.ia.getNetwork().getInfo().getActorId()){
+                entity = new MainEntity();
+            } else {
+                entity = new OtherEntity();
+            }
+        }
+        entity.setInfo(message.getInformations());
+        if(message.getClass().getSimpleName().equals("GameFightCharacterInformations")){
+            entity.setLvl(((GameFightCharacterInformations) message.getInformations()).getLevel());
+            entity.setBreed(((GameFightCharacterInformations) message.getInformations()).getBreed());
+        } else {
+            entity.setLvl(GameData.getMonsterLvl(((GameFightMonsterInformations) message.getInformations()).getCreatureGenericId(),((GameFightMonsterInformations) message.getInformations()).getCreatureGrade()));
+            entity.setBreed(-1);
+        }
+        if(index == -1){
+            this.ia.addEntity(entity);
+        }
+
+    }
 
     public void gameFightPlacementSwapPositions(GameFightPlacementSwapPositionsMessage message){
 
@@ -260,7 +311,8 @@ public class IntelligencePacketHandler {
     }
 
     public void gameFightStarting(GameFightStartingMessage message){
-
+        this.ia.init(new ArrayList<>(),new MapIA(this.ia.getNetwork().getMap().getCells()));
+        this.ia.setInit(false); //All init packets will arrived after, until BasioNoOperationMessage
     }
 
     public void gameFightStart(GameFightStartMessage message){
@@ -268,7 +320,22 @@ public class IntelligencePacketHandler {
     }
 
     public void gameFightSynchronize(GameFightSynchronizeMessage message){
+        for (int i = 0 ; i < this.ia.getEntities().size() ; i++){
+            for (int j = 0 ; j < message.getFighters().size() ; j++){
+                if(message.getFighters().get(j).getContextualId() == this.ia.getEntities().get(i).getInfo().getContextualId()){
+                    this.ia.getEntities().get(i).setInfo(message.getFighters().get(j));
+                }
+            }
+        }
 
+    }
+
+    public void fighterStatsList(FighterStatsListMessage message){
+        for (int i = 0 ; i < this.ia.getEntities().size() ; i++){
+            if(this.ia.getEntities().get(i).getInfo().getContextualId() == this.ia.getNetwork().getInfo().getActorId()){
+                ((MainEntity) this.ia.getEntities().get(i)).setAdditionalInfo(message.getStats());
+            }
+        }
     }
 
     public void gameFightTurnEnd(GameFightTurnEndMessage message){
@@ -280,7 +347,7 @@ public class IntelligencePacketHandler {
     }
 
     public void gameFightTurnList(GameFightTurnListMessage message){
-
+        this.ia.setTurnList(message.getIds());
     }
 
     public void gameFightTurnReady(GameFightTurnReadyMessage message){
@@ -308,7 +375,31 @@ public class IntelligencePacketHandler {
     }
 
     public void gameEntitiesDisposition(GameEntitiesDispositionMessage message){
-
+        boolean samePos = true; // Permet de savoir si le packet est utile ou non, si quelqu'un a changé de place
+        for(IdentifiedEntityDispositionInformations e : message.getDispositions()){
+            int index = ia.entityExists(e.getId());
+            Position position = MapIA.reshapeToIA(e.getCellId());
+            if(index != -1){
+                if(position != ia.getEntities().get(index).getPosition()){
+                    ia.getEntities().get(index).setPosition(position);
+                    samePos = false;
+                }
+            } else {
+                if(e.getId() == this.ia.getNetwork().getInfo().getActorId()){
+                    Entity entity = new MainEntity();
+                    entity.setPosition(position);
+                    this.ia.addEntity(entity);
+                } else {
+                    Entity entity = new OtherEntity();
+                    entity.setPosition(position);
+                    this.ia.addEntity(entity);
+                }
+            }
+        }
+        if(this.ia.isInit() && !samePos){
+            //TODO HANDLE BEST POSITION :
+            // Attendre gaussienne -> déplacer
+        }
     }
 
     public void gameMapMovement(GameMapMovementMessage message){

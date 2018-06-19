@@ -2,25 +2,34 @@ package ia.entities.entity;
 
 import ia.entities.FightEffects;
 import ia.entities.Spell;
-import protocol.network.types.game.context.fight.GameFightCharacterInformations;
+import ia.map.Position;
+import protocol.network.types.game.context.fight.GameFightFighterInformations;
 
 import java.util.List;
 
 public abstract class Entity {
 
-	private GameFightCharacterInformations info;
+    private boolean isRdy;
+	private Position position;
+	private int breed;
+	private int lvl;
+    private GameFightFighterInformations info;
 	private FightEffects effects;
 	private List<Spell> spells;
 
-	public Entity(GameFightCharacterInformations info) {
+	public Entity(GameFightFighterInformations info) {
 		this.info = info;
 	}
 
-	public GameFightCharacterInformations getInfo() {
+    public Entity() {
+
+    }
+
+    public GameFightFighterInformations getInfo() {
 		return info;
 	}
 
-	public void setInfo(GameFightCharacterInformations info) {
+	public void setInfo(GameFightFighterInformations info) {
 		this.info = info;
 	}
 
@@ -49,4 +58,36 @@ public abstract class Entity {
 	public void setSpells(List<Spell> spells) {
 		this.spells = spells;
 	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+    public int getBreed() {
+        return breed;
+    }
+
+    public void setBreed(int breed) {
+        this.breed = breed;
+    }
+
+    public int getLvl() {
+        return lvl;
+    }
+
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
+    }
+
+    public boolean isRdy() {
+        return isRdy;
+    }
+
+    public void setRdy(boolean rdy) {
+        isRdy = rdy;
+    }
 }

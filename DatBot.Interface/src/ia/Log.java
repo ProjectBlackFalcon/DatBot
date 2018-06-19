@@ -1,4 +1,4 @@
-package fr.main.sniffer.tools;
+package ia;
 
 public class Log {
 
@@ -9,14 +9,9 @@ public class Log {
         System.out.println("--- "+ msg +" ---");
     }
 
-    public static void writeLogIdDebugMessage (String msg)
+    public static void writeLogErrorMessage (String msg)
     {
-        System.out.println("\n-------- "+ msg +" --------\n");
-    }
-
-    public static void writePacketMessage (String msg)
-    {
-        System.out.println("Packet : "+ msg);
+        System.out.println("!!!!!!!!!! "+ msg +" !!!!!!!!!!");
     }
 
 }
