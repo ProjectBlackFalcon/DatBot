@@ -1302,6 +1302,7 @@ public class ModelConnexion {
 								toSend = new Object[] { "True" };
 							}
 							else {
+								System.out.println("What");
 								toSend = new Object[] { "False" };
 							}
 						}
@@ -1311,6 +1312,8 @@ public class ModelConnexion {
 						}
 					}
 					else {
+						System.out.println("What2");
+
 						toSend = new Object[] { "False" };
 					}
 				}
