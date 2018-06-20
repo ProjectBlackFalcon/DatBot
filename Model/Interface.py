@@ -168,14 +168,14 @@ class Interface:
         Disconnects the bot instance
         :return:
         """
-        success = [True]
+        success = [False]
         if self.bot.connected:
             dd_stats = self.bot.interface.get_dd_stat()
             if dd_stats[0]:
                 level, energy, idx = dd_stats
                 if energy < 1000:
                     self.bot.hf.drop_bot_mobile(idx)
-            success = self.execute_command('disconnect')
+            success = [self.execute_command('disconnect')[0]]
             if success[0]:
                 self.bot.llf.log(self.bot, '[Position {}] {}'.format(self.bot.id, 'OFFLINE'))
                 self.bot.connected = False

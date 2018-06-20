@@ -312,9 +312,9 @@ class LowLevelFunctions:
         cursor = conn.cursor()
         cursor.execute("""SELECT mount FROM BotAccounts WHERE Name='{}'""".format(bot_name))
         conn.close()
-        mount_situation = ''
+        mount_situation = None
         for row in cursor:
-            mount_situation = row[0] if row[0] else 'None'
+            mount_situation = row[0] if row[0] else None
         return mount_situation
 
     def set_mount_situation(self, bot_name, situation):
