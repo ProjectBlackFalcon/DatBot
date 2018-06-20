@@ -9,8 +9,8 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 
-		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
-		new MapManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
+		new d2iManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/gamedata/i18n_fr.d2i");
+		new MapManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/maps");
 
 		boolean arg = false;
 		if (args.length != 0) {
@@ -27,8 +27,8 @@ public class Test {
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['wublel12','notabot0','Draideac','Furye']");
 		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
-		Thread.sleep(15000);
-		communication.getReturn("0;0;i;cmd;move;[256]");
+//		Thread.sleep(15000);
+//		communication.getReturn("0;0;i;cmd;move;[256]");
 
 //		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 

@@ -21,7 +21,7 @@ public class GameData {
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
 		if(i == -1){
-            s = Paths.get("").toAbsolutePath().toString()+"\\DatBot";
+            s = Paths.get("").toAbsolutePath().toString()+"/DatBot";
         }else{
             s = s.substring(0, i + 6);
         }
@@ -30,7 +30,7 @@ public class GameData {
 
 	public static int getWorldMap(double mapId) {
 		try {
-			D2oManager d2oManager = new D2oManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
+			D2oManager d2oManager = new D2oManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/gamedata/MapPositions.d2o");
 			String s = d2oManager.searchObjectById((int) mapId);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
@@ -51,7 +51,7 @@ public class GameData {
 	
 	public static int[] getCoordMap(int mapId){
 		try {
-			D2oManager d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\MapPositions.d2o");
+			D2oManager d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/MapPositions.d2o");
 			String s = d2oManager.searchObjectById((int) mapId);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
@@ -105,7 +105,7 @@ public class GameData {
 	private static String getDataFromFile(int id, String file, String value) {
 		D2oManager d2oManager;
 		try {
-			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\" + file + ".d2o");
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/" + file + ".d2o");
 			String s = d2oManager.searchObjectById(id);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
@@ -126,7 +126,7 @@ public class GameData {
 	private static int getDataFromFile(int id, String file) {
 		D2oManager d2oManager;
 		try {
-			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\" + file + ".d2o");
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/" + file + ".d2o");
 			String s = d2oManager.searchObjectById(id);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
