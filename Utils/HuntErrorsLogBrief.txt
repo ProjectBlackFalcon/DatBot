@@ -351,3 +351,12 @@ unexpected EOF while parsing
 
 2018-03-22 21:35:04.615334
 Could not go to [11, -19] from ((11, -18), 1) to find Phorreur chafouin
+
+2018-03-26 17:45:23.624047
+Could not go to [11, 26] from ((10, 26), 1) to find Phorreur sournois
+
+2018-03-26 18:01:22.816452
+Could not go to [-1, -11] from ((-1, -12), 1) to find Phorreur sournois
+
+2018-03-27 18:00:05.431118
+Could not go to [-15, -58] from ((-15, -58), 1) to find Phorreur baveux

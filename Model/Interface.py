@@ -12,7 +12,7 @@ class PipeToJava:
     def __init__(self, headless=True):
         self.buffer = []
         on_posix = 'posix' in sys.builtin_module_names
-        args = ['java', '-jar', '..//BotTest.jar']
+        args = ['java', '-jar', '../BotTest.jar']
         if not headless:
             args.append("true")
 
@@ -123,7 +123,7 @@ class Interface:
             return self.wait_for_return(msg_id)
         except Exception as e:
             self.bot.llf.log(self.bot, '[Interface {}] ERROR : \n{}'.format(self.bot.id, traceback.format_exc()))
-            with open('..//Utils//InterfaceErrors.txt', 'a') as f:
+            with open('../Utils/InterfaceErrors.txt', 'a') as f:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
 
@@ -168,14 +168,14 @@ class Interface:
         Disconnects the bot instance
         :return:
         """
-        success = [True]
+        success = [False]
         if self.bot.connected:
             dd_stats = self.bot.interface.get_dd_stat()
             if dd_stats[0]:
                 level, energy, idx = dd_stats
                 if energy < 1000:
                     self.bot.hf.drop_bot_mobile(idx)
-            success = self.execute_command('disconnect')
+            success = [self.execute_command('disconnect')[0]]
             if success[0]:
                 self.bot.llf.log(self.bot, '[Position {}] {}'.format(self.bot.id, 'OFFLINE'))
                 self.bot.connected = False

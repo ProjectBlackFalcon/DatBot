@@ -1437,3 +1437,42 @@ Traceback (most recent call last):
     
     ^
 SyntaxError: unexpected EOF while parsing
+
+
+2018-03-26 17:45:23.620039
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 361, in tresure_hunt
+    self.goto(destination, harvest)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 106, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (10, 26) cell 223 to [11, 26] cell False
+
+
+2018-03-26 18:01:22.812449
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 362, in tresure_hunt
+    self.goto(destination, harvest)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 106, in goto
+    path_directions = pf.get_map_change_cells()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 229, in get_map_change_cells
+    self.get_path()
+  File "C:\Python35\DatBot\Model\Pathfinder.py", line 224, in get_path
+    raise RuntimeError('Could not generate path from {} cell {} to {} cell {}'.format(self.start, self.start_cell, self.end, self.end_cell))
+RuntimeError: Could not generate path from (-1, -12) cell 536 to [-1, -11] cell False
+
+
+2018-03-27 18:00:05.424111
+Traceback (most recent call last):
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 362, in tresure_hunt
+    self.goto(destination, harvest=harvest)
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 114, in goto
+    self.harvest_map()
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 242, in harvest_map
+    ret_val = harvest_one()
+  File "C:\Python35\DatBot\Model\HighLevelFunctions.py", line 221, in harvest_one
+    if len(ret_val) == 1:
+TypeError: object of type 'NoneType' has no len()

@@ -1,0 +1,16 @@
+[19:34:52] [BOT 0] [1]	Taille : 8  -  ProtocolRequired
+[19:34:52] [BOT 0] [3]	Taille : 341  -  HelloConnectMessage
+[19:34:52] [BOT 0] [4]	[Envoi] Identification...
+[19:34:52] [BOT 0] [10]	Taille : 4  -  LoginQueueStatusMessage
+[19:34:52] [BOT 0] [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+[19:34:52] [BOT 0] [10]	Taille : 4  -  LoginQueueStatusMessage
+[19:34:52] [BOT 0] [22]	Taille : 64  -  IdentificationSuccessMessage
+[19:34:52] [BOT 0] [30]	Taille : 304  -  ServersListMessage
+[19:34:52] [BOT 0] [40]	[Envoi] Selection du serveur...
+[19:34:53] [BOT 0] [42]	Taille : 54  -  SelectedServerDataMessage
+[19:34:53] [BOT 0] [1]	Taille : 8  -  ProtocolRequired
+[19:34:53] [BOT 0] [101]	Taille : 0  -  HelloGameMessage
+[19:34:53] [BOT 0] [110]	[Envoi] Authentification du ticket...
+[19:34:54] [BOT 0] [6362]	Taille : 2  -  BasicAckMessage
+[19:34:54] [BOT 0] [6253]	Taille : 82626  -  RawDataMessage
+[19:34:54] [BOT 0] [6372]	[Envoi] Check Integrity Message...

@@ -10,11 +10,11 @@ class LowLevelFunctions:
     def __init__(self, map_info=None):
         self.map_info = [] if map_info is None else map_info
         self.disc_zaaps = self.get_discovered_zaaps()
-        with open('..//Utils//zaapList.json', 'r') as f:
+        with open('../Utils/zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
 
     def cell2coord(self, cell):
-        return cell % 14 + int((cell//14)/2+0.5), (13 - cell % 14 + int((cell//14)/2))
+        return cell % 14 + int((cell/14)/2+0.5), (13 - cell % 14 + int((cell/14)/2))
 
     def coord2cell(self, coord):
         i = 0
@@ -74,7 +74,7 @@ class LowLevelFunctions:
         return closest[0]
 
     def load_map_info(self):
-        with open('..//Utils//MapInfo.json', 'r') as f:
+        with open('../Utils/MapInfo.json', 'r') as f:
             mapinfo = json.load(f)
         return mapinfo
 
@@ -100,7 +100,7 @@ class LowLevelFunctions:
         return flattened
 
     def get_closest_statue(self, pos):
-        with open('..//Utils//classStatues.json', 'r') as f:
+        with open('../Utils/classStatues.json', 'r') as f:
             class_statues = json.load(f)
         closest = None, 100000
         for class_name, statue_pos in class_statues.items():
@@ -122,7 +122,7 @@ class LowLevelFunctions:
             # Eww
 
     def get_next_clue_pos(self, clue, current_pos, direction):
-        with open('..//Utils//TresureHuntClues.json', 'r') as f:
+        with open('../Utils/TresureHuntClues.json', 'r') as f:
             clues = json.load(f, encoding='latin-1')
         clue_possible_pos = clues[clue.lower()]
         direction_vector = {'n': (0, -1), 's': (0, 1), 'w': (-1, 0), 'e': (1, 0)}[direction]
@@ -231,17 +231,17 @@ class LowLevelFunctions:
         return weight
 
     def get_brak_maps(self):
-        with open('..//Utils//BrakMaps.json', 'r') as f:
+        with open('../Utils/BrakMaps.json', 'r') as f:
             brak_maps = json.load(f)
         return brak_maps
 
     def get_bwork_maps(self):
-        with open('..//Utils//bworkMaps.json', 'r') as f:
+        with open('../Utils/bworkMaps.json', 'r') as f:
             bwork_maps = json.load(f)
         return bwork_maps
 
     def get_map_dd_tool(self, position):
-        with open('..//Utils//ddTools.json', 'r') as f:
+        with open('../Utils/ddTools.json', 'r') as f:
             tools = json.load(f)
         return tools[str(tuple(position))]
 
@@ -294,7 +294,7 @@ class LowLevelFunctions:
         if schedule:
             schedules = [ast.literal_eval(schedule)]
         else:
-            with open('..//Utils//Schedules//default.json', 'r') as f:
+            with open('../Utils/Schedules/default.json', 'r') as f:
                 schedules = json.load(f)
 
         schedule = []
@@ -312,9 +312,9 @@ class LowLevelFunctions:
         cursor = conn.cursor()
         cursor.execute("""SELECT mount FROM BotAccounts WHERE Name='{}'""".format(bot_name))
         conn.close()
-        mount_situation = ''
+        mount_situation = None
         for row in cursor:
-            mount_situation = row[0] if row[0] else 'None'
+            mount_situation = row[0] if row[0] else None
         return mount_situation
 
     def set_mount_situation(self, bot_name, situation):
@@ -329,7 +329,7 @@ class LowLevelFunctions:
         name = bot.credentials['name']
         color = bot.interface.color
         print(color + message + '\033[0m')
-        with open('..//Utils//BotsLogs//{}.txt'.format(name), 'a') as f:
+        with open('../Utils/BotsLogs/{}.txt'.format(name), 'a') as f:
             f.write(str(datetime.datetime.now()) + '  ' + message + '\n')
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                        database=dc.database)
