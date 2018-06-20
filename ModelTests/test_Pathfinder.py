@@ -43,7 +43,7 @@ path = generate_path()
 
 
 print('Done !')
-winsound.PlaySound('..//Utils//sound.wav', winsound.SND_FILENAME)
+winsound.PlaySound('../Utils/sound.wav', winsound.SND_FILENAME)
 
 
 __author__ = 'Alexis'

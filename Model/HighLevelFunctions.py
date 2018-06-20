@@ -17,7 +17,7 @@ class HighLevelFunctions:
     def goto(self, target_coord, target_cell=None, worldmap=1, harvest=False):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
-        with open('..//Utils//gotos.txt', 'a') as f:
+        with open('../Utils/gotos.txt', 'a') as f:
             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
             f.write('Going from map {}, cell {} to map {}, worldmap : {}'.format(current_map, current_cell, target_coord, worldmap))
 
@@ -138,10 +138,10 @@ class HighLevelFunctions:
             return False
         self.bot.occupation = 'Harvesting map'
         self.update_db()
-        with open('..//Utils//resourcesIDs.json', 'r') as f:
+        with open('../Utils/resourcesIDs.json', 'r') as f:
             resources_ids = json.load(f)
 
-        with open('..//Utils//resourcesLevels.json', 'r') as f:
+        with open('../Utils/resourcesLevels.json', 'r') as f:
             resources_levels = json.load(f)
 
         local_blacklist = []
@@ -157,7 +157,7 @@ class HighLevelFunctions:
                     else:
                         map_resources[resources_ids[str(res_id)]] = [(cell_id, status)]
                 else:
-                    with open('..//Utils//unknownResourceID.txt', 'a') as f:
+                    with open('../Utils/unknownResourceID.txt', 'a') as f:
                         f.write('Map : {}, ID : {}, Cell : {}\n'.format(map_coords, res_id, cell_id))
             # print('[Harvest] map_resources : {}'.format(map_resources))
 
@@ -243,7 +243,7 @@ class HighLevelFunctions:
                 full = False if ret_val[3] < ret_val[4] else True
                 harvest.append(ret_val)
 
-        with open('..//Utils//HarvestLog_{}.txt'.format(self.bot.id), 'a') as f:
+        with open('../Utils/HarvestLog_{}.txt'.format(self.bot.id), 'a') as f:
             for item in harvest:
                 f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
         if type(ret_val) is tuple and ret_val[3]+5 >= ret_val[4]:
@@ -278,7 +278,7 @@ class HighLevelFunctions:
     def withdraw_items_to_sell_from_bank(self, player_stats, bank_contents):
         self.bot.occupation = 'Withdrawing items from bank'
         self.update_db()
-        with open('..//Utils//ItemsToSell.json', 'r') as f:
+        with open('../Utils/ItemsToSell.json', 'r') as f:
             items_to_sell = json.load(f)
         if self.bot.credentials['name'] in items_to_sell.keys():
             items_to_sell = items_to_sell[self.bot.credentials['name']]
@@ -294,7 +294,7 @@ class HighLevelFunctions:
             inv_space = player_stats['WeightMax'] - player_stats['Weight']
             quantity_to_withdraw = min(number, int(inv_space / weight)) if weight else number
             batch_size = item_to_sell_batch_size[item_to_sell_ids.index(item_id)]
-            round_quantity_to_withdraw = quantity_to_withdraw//batch_size*batch_size
+            round_quantity_to_withdraw = quantity_to_withdraw/batch_size*batch_size
             if round_quantity_to_withdraw:
                 player_stats, bank_contents = self.bot.interface.get_from_bank_unique(unique_id, round_quantity_to_withdraw)
 
@@ -359,10 +359,10 @@ class HighLevelFunctions:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
                             self.goto(destination, harvest=harvest)
                         except Exception as e:
-                            with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
+                            with open('../Utils/HuntErrorsLog.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write(traceback.format_exc())
-                            with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                            with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write('Could not go to {} from {} to find {}'.format(destination, self.bot.position, clue))
                             hunt_error_flag = True
@@ -373,11 +373,11 @@ class HighLevelFunctions:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
                         self.goto(clue_pos, harvest=harvest)
                     except Exception as e:
-                        with open('..//Utils//HuntErrorsLog.txt', 'a') as f:
+                        with open('../Utils/HuntErrorsLog.txt', 'a') as f:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                             f.write(traceback.format_exc())
 
-                        with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                        with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                             f.write(e.args[0])
 
@@ -386,7 +386,7 @@ class HighLevelFunctions:
                         break
 
                 if not self.bot.interface.validate_hunt_clue()[0] and not hunt_error_flag:
-                    with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                    with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
                         f.write('Clue was supposed to be at {}'.format(clue_pos))
@@ -398,7 +398,7 @@ class HighLevelFunctions:
 
             if not self.bot.interface.validate_hunt_step()[0] and not hunt_error_flag:
                 clue, direction = self.bot.interface.get_hunt_clue()
-                with open('..//Utils//HuntErrorsLogBrief.txt', 'a') as f:
+                with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, start_pos, self.bot.position[0]))
                     f.write('Clue was supposed to be at {}'.format(clue_pos))
@@ -457,7 +457,7 @@ class HighLevelFunctions:
                 self.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), success, reason)
                 n_success = n_success+1 if success else n_success
             except Exception:
-                with open('..//Utils//24botHoursTestRun.txt', 'a') as f:
+                with open('../Utils/24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
         self.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
@@ -515,9 +515,9 @@ class HighLevelFunctions:
     def sell_hdv(self, hdv_position=None):
         self.bot.occupation = 'Selling items'
         self.update_db()
-        with open('..//Utils//hdv_pos.json', 'r') as f:
+        with open('../Utils/hdv_pos.json', 'r') as f:
             hdv_pos = json.load(f)
-        with open('..//Utils//ItemsToSell.json', 'r') as f:
+        with open('../Utils/ItemsToSell.json', 'r') as f:
             items_to_sell = json.load(f)
 
         if self.bot.credentials['name'] in items_to_sell.keys():
@@ -559,8 +559,8 @@ class HighLevelFunctions:
                             price = item_hdv_stats[batch_size_index] - 1
                             player_lvl = self.bot.interface.get_player_stats()[0]['Lvl']
                             if hdv_position is None and price > 0:
-                                self.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
-                                self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
+                                self.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] / batch_size, player_lvl-len(selling)), batch_size, item[0], price))
+                                self.bot.interface.sell_item(item[2], batch_size, min(item[3] / batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
                         return True
             if hdv_position is None:
@@ -571,7 +571,7 @@ class HighLevelFunctions:
     def sell_all(self, subscribed):
         if not self.bot.connected:
             self.bot.interface.connect()
-        with open('..//Utils//hdv_pos.json', 'r') as f:
+        with open('../Utils/hdv_pos.json', 'r') as f:
             all_hdvs = json.load(f)
 
         hdvs = []
@@ -595,7 +595,7 @@ class HighLevelFunctions:
     def manage_dds(self):
         self.bot.occupation = 'Managing DDs'
         self.update_db()
-        with open('..//Utils//ddPath.json', 'r') as f:
+        with open('../Utils/ddPath.json', 'r') as f:
             path = json.load(f)
 
         dd_to_pex_id = None
@@ -717,7 +717,7 @@ class HighLevelFunctions:
 
     def use_schedule(self, schedule_name=None):
         if schedule_name is not None:
-            with open('..//Utils//Schedules//{}.json'.format(schedule_name), 'r') as f:
+            with open('../Utils/Schedules/{}.json'.format(schedule_name), 'r') as f:
                 schedules = json.load(f)
             schedule = []
             for schedule_curr in schedules:
@@ -849,7 +849,7 @@ class HighLevelFunctions:
                 self.bot.occupation
             )
         except Exception:
-            with open('..//Utils//DatabaseErrorLog.txt', 'a') as f:
+            with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
 
