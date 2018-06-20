@@ -4,6 +4,7 @@ import copy
 import ast
 import datetime
 import Database_credentials as dc
+import os
 
 
 class LowLevelFunctions:
@@ -236,6 +237,7 @@ class LowLevelFunctions:
         return brak_maps
 
     def get_bwork_maps(self):
+        print(os.getcwd())
         with open('../Utils/bworkMaps.json', 'r') as f:
             bwork_maps = json.load(f)
         return bwork_maps
