@@ -1,9 +1,0 @@
-[21:12:05] [BOT 0] Connection...
-[21:12:09] [BOT 0] Map : [-2;8]
-[21:12:09] [BOT 0] CellId : 274
-[21:12:09] [BOT 0] Connected !
-[21:12:09] [BOT 0] Name : Ilancelet
-[21:12:09] [BOT 0] Level : 62
-[21:12:09] [BOT 0] Moving to cellId : 260
-[21:12:15] [BOT 0] Map : [-1;8]
-[21:12:15] [BOT 0] CellId : 397
