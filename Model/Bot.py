@@ -18,8 +18,9 @@ class Bot:
         self.subscribed = subscribed
         self.kamas = None
         self.level = None
-        self.schedule = self.llf.get_schedule(self.credentials['name'])
         self.mount = None
+        self.llf.add_bot_db(self.credentials['username'], self.credentials['password'], self.credentials['name'], self.credentials['server'])
+        self.schedule = self.llf.get_schedule(self.credentials['name'])
 
     def run(self, schedule_name=None):
         self.hf.use_schedule(schedule_name)

@@ -336,8 +336,7 @@ class AccountManager:
         for thing in cursor:
             things.append(thing)
         if not things:
-            cursor.execute("""INSERT INTO BotAccounts (username, password, name, server) VALUES (%s, %s, %s, %s)""",
-                           put)
+            cursor.execute("""INSERT INTO BotAccounts (username, password, name, server) VALUES (%s, %s, %s, %s)""", put)
             conn.commit()
         conn.close()
 
