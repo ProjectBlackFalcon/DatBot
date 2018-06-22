@@ -226,7 +226,7 @@ class LowLevelFunctions:
 
     def get_bwork_maps(self):
         print(os.getcwd())
-        with open('../Utils/bworkMaps.json', 'r') as f:
+        with open('../Utils/BworkMaps.json', 'r') as f:
             bwork_maps = json.load(f)
         return bwork_maps
 
