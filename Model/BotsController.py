@@ -40,7 +40,7 @@ for cred in credentials:
     bots.append(Bot(pipe, credentials.index(cred), cred, llf, False, color=colors[credentials.index(cred)]))
 
 for bot in bots:
-    threads.append(Thread(target=bot.run, args=('fullhunt', )))
+    threads.append(Thread(target=bot.run))
     threads[-1].name = bot.credentials['name']
     threads[-1].start()
 for thread in threads:
