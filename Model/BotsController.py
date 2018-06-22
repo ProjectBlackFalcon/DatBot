@@ -8,36 +8,6 @@ pipe = PipeToJava(headless=True)
 bot_id = 0
 llf = LowLevelFunctions()
 
-path = (
-    ((-2, -4), None, 2),
-    ((-2, -5), None, 2),
-    ((-3, -5), None, 2),
-    ((-3, -6), None, 2),
-    ((-2, -6), None, 2),
-    ((-1, -6), None, 2),
-    ((-1, -5), None, 2),
-    ((0, -5), None, 2),
-    ((0, -4), None, 2),
-    ((-1, -4), None, 2),
-    ((1, -2), None, 2),
-    ((2, -2), None, 2),
-    ((3, -2), None, 2),
-    ((3, -1), None, 2),
-    ((2, -1), None, 2),
-    ((2, -0), None, 2),
-    ((1, 0), None, 2),
-    ((1, -1), None, 2),
-    ((0, -1), 516, 2),
-    ((0, -1), 139, 2),
-    ((0, -2), None, 2),
-    ((-1, -2), None, 2),
-    ((-1, -1), 8, 2),
-    ((-2, -1), None, 2),
-    ((-2, -0), None, 2),
-    ((-1, 0), None, 2),
-    ((0, 0), None, 2),
-)
-
 colors = [
     '\033[92m',
     '\033[94m',
@@ -61,7 +31,7 @@ random.shuffle(colors)
 
 
 credentials = [
-    {'username': 'democraticamnesiac', 'password': 'answerflash2', 'name': 'Cadissa', 'server': 'Julith'},
+    {'username': 'democraticamnesiac', 'password': 'answerflash2', 'name': 'Maxitreur', 'server': 'Julith'},
 ]
 
 bots = []
