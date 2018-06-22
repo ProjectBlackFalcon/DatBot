@@ -52,6 +52,7 @@ class Scheduler:
         Label(self.frame, text='Add bar1 to bar 2 : add <bar1 id> <bar2 id> <offset>').pack()
         Label(self.frame, text='Save : save <file name>').pack()
         Label(self.frame, text='Load : load <file name (optionnal)>').pack()
+        Label(self.frame, text='Assign : assign <shedule name> <bot_name>').pack()
         Label(self.frame, text='TASKS : ').pack()
         Label(self.frame, text=str(list(self.tasks.keys()))).pack()
         self.command_field = Entry(self.frame, width=40)
