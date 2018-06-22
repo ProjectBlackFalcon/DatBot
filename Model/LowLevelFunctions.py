@@ -10,10 +10,26 @@ import traceback
 
 class LowLevelFunctions:
     def __init__(self, map_info=None):
+        self.full_map_info = None
+        self.load_map_info()
+        self.full_item_names = None
+        self.load_item_names()
         self.map_info = [] if map_info is None else map_info
         self.disc_zaaps = self.get_discovered_zaaps()
         with open('../Utils/zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
+
+    def load_map_info(self):
+        if self.full_map_info is None:
+            with open('../Utils/MapInfo.json', 'r') as f:
+                self.full_map_info = json.load(f)
+        return self.full_map_info
+
+    def load_item_names(self):
+        if self.full_item_names is None:
+            with open('../Utils/Items.json', 'r') as f:
+                self.full_item_names = json.load(f)
+        return self.full_item_names
 
     def cell2coord(self, cell):
         return cell % 14 + int((cell//14)/2+0.5), (13 - cell % 14 + int((cell//14)/2))
@@ -74,11 +90,6 @@ class LowLevelFunctions:
             if (0 < self.distance_cell(target_cell, n_tile) < closest[1]) and map_info[n_tile] == 0:
                 closest = n_tile, self.distance_cell(target_cell, n_tile)
         return closest[0]
-
-    def load_map_info(self):
-        with open('../Utils/MapInfo.json', 'r') as f:
-            mapinfo = json.load(f)
-        return mapinfo
 
     def coord_fetch_map(self, coord, worldmap):
         # print('Fetching : {}'.format(coord))
@@ -276,13 +287,13 @@ class LowLevelFunctions:
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                        database=dc.database)
         cursor = conn.cursor()
-        put = (username, password, name, server, [])
+        put = (username, password, name, server, [], [], [])
         cursor.execute("""SELECT * FROM BotAccounts WHERE username = %s""", (username,))
         things = []
         for thing in cursor:
             things.append(thing)
         if not things:
-            cursor.execute("""INSERT INTO BotAccounts (username, password, name, server, zaaps) VALUES (%s, %s, %s, %s, %s)""", put)
+            cursor.execute("""INSERT INTO BotAccounts (username, password, name, server, zaaps, stuff, stats) VALUES (%s, %s, %s, %s, %s, %s, %s)""", put)
             conn.commit()
         conn.close()
 
