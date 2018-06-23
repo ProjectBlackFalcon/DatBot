@@ -11,6 +11,7 @@ class Bot:
         self.interface = Interface(self, color=color)
         self.llf = llf  # type: LowLevelFunctions
         self.hf = HighLevelFunctions(self)
+        self.stats = None
         self.occupation = None
         self.position = None
         self.connected = False
