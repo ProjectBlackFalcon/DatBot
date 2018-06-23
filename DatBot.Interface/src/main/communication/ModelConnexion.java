@@ -407,7 +407,7 @@ public class ModelConnexion {
 	private Object[] enterBag() throws Exception {
 		Object[] toSend;
 		if(this.network.getInfo().isHavenBag())
-			return new Object[] { "False" };
+			return new Object[] { "True" };
 		EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 		getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
 		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
@@ -444,7 +444,7 @@ public class ModelConnexion {
 	private Object[] exitBag() throws Exception {
 		Object[] toSend;
 		if(!this.network.getInfo().isHavenBag())
-			return new Object[] { "False" };
+			return new Object[] { "True" };
 		EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 		getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
 		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
@@ -1572,6 +1572,7 @@ public class ModelConnexion {
 					}
 					else {
 						DisplayInfo.appendDebugLog("useZaap error", "Map not found in the list");
+						getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Leaving zaap list");
 						toSend = new Object[] { "False" };
 					}
 				}
@@ -1615,6 +1616,7 @@ public class ModelConnexion {
 						}
 					}
 					else {
+						getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Leaving zaap list");
 						DisplayInfo.appendDebugLog("useZaapi error", "Map not found in the list");
 						toSend = new Object[] { "False" };
 					}
