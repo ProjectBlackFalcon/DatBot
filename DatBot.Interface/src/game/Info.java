@@ -78,6 +78,7 @@ public class Info {
 	private boolean mountRiding = false;
 	private boolean objectUse = false;
 	private boolean textMessage = false;
+	private boolean caracsAffected = false;
 
 
 	public void setBooleanToFalse()
@@ -103,6 +104,7 @@ public class Info {
 		mountRiding = false;
 		objectUse = false;
 		textMessage = false;
+		caracsAffected = true;
 	}
 	
 	public boolean threadDone = true;
@@ -563,6 +565,14 @@ public class Info {
 
 	public void setHarvestFailure(boolean harvestFailure) {
 		this.harvestFailure = harvestFailure;
+	}
+
+	public boolean isCaracsAffected() {
+		return caracsAffected;
+	}
+
+	public void setCaracsAffected(boolean caracsAffected) {
+		this.caracsAffected = caracsAffected;
 	}
 
 }

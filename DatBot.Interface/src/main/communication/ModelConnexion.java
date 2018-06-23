@@ -115,7 +115,7 @@ public class ModelConnexion {
 		int boostPoint = Integer.parseInt(infoCaracs[1]);
 		StatsUpgradeRequestMessage statsUpgradeRequestMessage = new StatsUpgradeRequestMessage(false, statId, boostPoint);
 		getNetwork().sendToServer(statsUpgradeRequestMessage, StatsUpgradeRequestMessage.ProtocolId, String.format("Put %s points in %s",boostPoint,infoCaracs[0]));
-		if (this.waitForPacket(5609)) {
+		if (this.waitForCaracs()) {
 			toSend = new Object[] { "True" };
 		} else {
 			DisplayInfo.appendDebugLog("assignCaracPoints error, server returned false", param);
@@ -1740,9 +1740,9 @@ public class ModelConnexion {
 		return true;
 	}
 	
-	public boolean waitForPacket(int id) {
+	public boolean waitForCaracs() {
 		long index = System.currentTimeMillis();
-		while (!this.network.lastClassId.contains(id)) {
+		while (!this.network.getInfo().isCaracsAffected()) {
 			if (System.currentTimeMillis() - index > 2000) {
 				System.out.println("Timed out");
 				return false; }

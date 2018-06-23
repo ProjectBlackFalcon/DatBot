@@ -155,7 +155,6 @@ import utils.d2p.map.Map;
 @SuppressWarnings("unchecked")
 public class Network extends DisplayInfo implements Runnable {
 
-	public List<Integer> lastClassId = new ArrayList<>();
 	private Bank bank;
 	private byte[] bigPacketData;
 	private int bigPacketId;
@@ -1357,7 +1356,6 @@ public class Network extends DisplayInfo implements Runnable {
 	 */
 	public void sendToServer(NetworkMessage message, int id, String s) throws Exception {
 		info.setBooleanToFalse();
-		this.lastClassId = new ArrayList<>();
 		latencyFrame.latestSent();
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DofusDataWriter writer = new DofusDataWriter(bous);
@@ -1413,7 +1411,6 @@ public class Network extends DisplayInfo implements Runnable {
 	 */
 	@SuppressWarnings("unchecked")
 	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
-		lastClassId.add(packet_id);
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
 		appendLog("[" + packet_id + "]\tTaille : " + packet_content.length + "  -  " + name.name);
@@ -1446,6 +1443,9 @@ public class Network extends DisplayInfo implements Runnable {
 				if (connectionToKoli) {
 					HandleCharacterListRequestMessage();
 				}
+				break;
+			case 5609:
+				info.setCaracsAffected(true);
 				break;
 			case 6253:
 				HandleRawDataMessage();
