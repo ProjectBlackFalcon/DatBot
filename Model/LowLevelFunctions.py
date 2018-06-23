@@ -438,4 +438,25 @@ class LowLevelFunctions:
 
         return assigned_path
 
+    def get_caracs_to_augment(self, bot):
+        caracs_names = ['Vi', 'Int', 'Agi', 'Cha', 'Fo', 'Sa']
+        caracs = bot.stats['Caracs']
+        native_caracs = [caracs[name][0] for name in caracs.keys() if name != "Available"]
+        with open('../Utils/CaracLevel.json', 'r') as f:
+            goal_caracs = json.load(f)[bot.level]
+        difference = [goal_caracs[i] - native_caracs[i] for i in range(len(native_caracs))]
+        costs = [1000]
+
+        dec_index = 0
+        while sum(costs) > caracs['Available']:
+            if difference[dec_index % (len(difference)-1)] > 0:
+                difference[dec_index % (len(difference)-1)] -= 1
+            costs = [difference[0]] + \
+                   [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
+                   [difference[-1] * 3]
+            dec_index += 1
+
+        return [(caracs_names[i], costs[i]) for i in range(len(costs)) if costs[i]]
+
+
 __author__ = 'Alexis'

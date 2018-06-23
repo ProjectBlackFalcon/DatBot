@@ -147,7 +147,7 @@ class Interface:
             self.bot.connected = success[0]
             if self.bot.connected:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-                bot_stats = self.bot.interface.get_player_stats()
+                bot_stats = self.get_player_stats()
                 bot_stats = bot_stats[0]
                 self.bot.kamas = bot_stats['Inventory']['Kamas']
                 self.bot.level = bot_stats['Lvl']
@@ -227,6 +227,10 @@ class Interface:
         self.bot.stats = stats[0]
         self.bot.kamas = stats[0]['Inventory']['Kamas']
         self.bot.level = stats[0]['Lvl']
+        if self.bot.stats['Caracs']['Available']:
+            caracs_to_augment = self.bot.get_caracs_to_augment(self.bot)
+            for carac in caracs_to_augment:
+                self.assign_carac_points(carac[0], carac[1])
         return stats
 
     def harvest_resource(self, cell):
