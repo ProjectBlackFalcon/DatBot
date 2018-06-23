@@ -26,14 +26,11 @@ class HighLevelFunctions:
             if current_worldmap == 2 and worldmap == 1:
                 self.goto((4, -3), worldmap=2)
                 self.bot.interface.go_to_astrub()
-                self.bot.interface.change_map(549, 's')
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
             # Astrub to Incarnam
             elif current_worldmap == 1 and worldmap == 2:
                 gate_map = (6, -19)
                 self.goto(gate_map, target_cell=397)
-                self.bot.interface.enter_gate()
-                self.bot.interface.move(468)
                 self.bot.interface.go_to_incarnam()
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
@@ -349,7 +346,6 @@ class HighLevelFunctions:
             clue, direction, start_pos, clue_pos = None, None, None, None
             while self.bot.interface.get_clues_left()[0] and not hunt_error_flag:
                 clue, direction = self.bot.interface.get_hunt_clue()
-                start_pos = self.bot.position[0]
                 destination = None
                 if 'Phorreur' in clue:
                     n_steps = 0
