@@ -224,7 +224,7 @@ class Interface:
         """
         stats = self.execute_command('getStats')
         time.sleep(0.5)
-        print(self.bot.id, stats)
+        self.bot.stats = stats[0]
         self.bot.kamas = stats[0]['Inventory']['Kamas']
         self.bot.level = stats[0]['Lvl']
         return stats
