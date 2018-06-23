@@ -55,6 +55,7 @@ public class Info {
 	private boolean harvestFailure = false;
 	private boolean inHunt = false;
 	private boolean inExchange = false;
+	private boolean havenBag = false;
 
 	private boolean interactiveUsed = false;
 	private boolean newMap = false;
@@ -573,6 +574,14 @@ public class Info {
 
 	public void setCaracsAffected(boolean caracsAffected) {
 		this.caracsAffected = caracsAffected;
+	}
+
+	public boolean isHavenBag() {
+		return havenBag;
+	}
+
+	public void setHavenBag(boolean havenBag) {
+		this.havenBag = havenBag;
 	}
 
 }

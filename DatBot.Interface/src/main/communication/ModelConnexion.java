@@ -406,10 +406,13 @@ public class ModelConnexion {
 
 	private Object[] enterBag() throws Exception {
 		Object[] toSend;
+		if(this.network.getInfo().isHavenBag())
+			return new Object[] { "False" };
 		EnterHavenBagRequestMessage enterHavenBagRequestMessage = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 		getNetwork().sendToServer(enterHavenBagRequestMessage, EnterHavenBagRequestMessage.ProtocolId, "Entering havenBag");
 		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 			stop(1);
+			this.network.getInfo().setHavenBag(true);
 			toSend = new Object[] { "True" };
 		}
 		else {
@@ -440,10 +443,13 @@ public class ModelConnexion {
 
 	private Object[] exitBag() throws Exception {
 		Object[] toSend;
+		if(!this.network.getInfo().isHavenBag())
+			return new Object[] { "False" };
 		EnterHavenBagRequestMessage enterHavenBagRequestMessage2 = new EnterHavenBagRequestMessage(this.network.getInfo().getActorId());
 		getNetwork().sendToServer(enterHavenBagRequestMessage2, EnterHavenBagRequestMessage.ProtocolId, "Exiting havenBag");
 		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 			stop(1);
+			this.network.getInfo().setHavenBag(false);
 			toSend = new Object[] { "True" };
 		}
 		else {
