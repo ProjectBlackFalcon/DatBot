@@ -10,7 +10,9 @@ import game.map.MapMovement;
 import game.movement.CellMovement;
 import game.plugin.Dragodinde;
 import game.plugin.Hunt;
+import protocol.enums.BoostableCharacteristicEnum;
 import protocol.network.Network;
+import protocol.network.NetworkMessage;
 import protocol.network.messages.game.context.mount.MountFeedRequestMessage;
 import protocol.network.messages.game.context.mount.MountSetXpRatioRequestMessage;
 import protocol.network.messages.game.context.mount.MountToggleRidingRequestMessage;
@@ -18,6 +20,7 @@ import protocol.network.messages.game.context.roleplay.emote.EmotePlayRequestMes
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayAttackMonsterRequestMessage;
 import protocol.network.messages.game.context.roleplay.havenbag.EnterHavenBagRequestMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcGenericActionRequestMessage;
+import protocol.network.messages.game.context.roleplay.stats.StatsUpgradeRequestMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntDigRequestMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntFlagRequestMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntGiveUpRequestMessage;
@@ -101,6 +104,22 @@ public class ModelConnexion {
 		else {
 			DisplayInfo.appendDebugLog("attackMonster error", "CellId invalid : " + this.network.getInfo().getCellId() + " Monsters : " + this.network.getMonsters());
 			toSend = getMonsters();
+		}
+		return toSend;
+	}
+	
+	private Object[] assignCaracPoints(String param) throws Exception {
+		Object[] toSend;
+		String[] infoCaracs = param.split(",");
+		int statId = BoostableCharacteristicEnum.valueOf(infoCaracs[0]).getId();
+		int boostPoint = Integer.parseInt(infoCaracs[1]);
+		StatsUpgradeRequestMessage statsUpgradeRequestMessage = new StatsUpgradeRequestMessage(false, statId, boostPoint);
+		getNetwork().sendToServer(statsUpgradeRequestMessage, StatsUpgradeRequestMessage.ProtocolId, String.format("Put %s points in %s",boostPoint,infoCaracs[0]));
+		if (this.waitForPacket(5609)) {
+			toSend = new Object[] { "True" };
+		} else {
+			DisplayInfo.appendDebugLog("assignCaracPoints error, server returned false", param);
+			toSend = new Object[] { "False" };
 		}
 		return toSend;
 	}
@@ -932,6 +951,9 @@ public class ModelConnexion {
 			case "useItem":
 				toSend = useItem(param);
 				break;
+			case "assignCaracPoints":
+				toSend = assignCaracPoints(param);
+				break;
 		}
 		return toSend;
 	}
@@ -1714,6 +1736,16 @@ public class ModelConnexion {
 		while (!this.network.getInfo().isJoinedFight()) {
 			Thread.sleep(50);
 			if (System.currentTimeMillis() - index > 2000) { return false; }
+		}
+		return true;
+	}
+	
+	public boolean waitForPacket(int id) {
+		long index = System.currentTimeMillis();
+		while (!this.network.lastClassId.contains(id)) {
+			if (System.currentTimeMillis() - index > 2000) {
+				System.out.println("Timed out");
+				return false; }
 		}
 		return true;
 	}

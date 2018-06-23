@@ -60,13 +60,13 @@ public class Stats {
 		CharacterCharacteristicsInformations caracs = stats.getStats();
 		
 		// Stats 
-		str += "\"Caracs\" : {";
+		str += ",\"Caracs\" : {";
 		str += addCarac("Int",caracs.getIntelligence()) + ",";
-		str += addCarac("Agi",caracs.getIntelligence()) + ",";
-		str += addCarac("Cha",caracs.getIntelligence()) + ",";
-		str += addCarac("Fo",caracs.getIntelligence()) + ",";
-		str += addCarac("Vi",caracs.getIntelligence()) + ",";
-		str += addCarac("Sa",caracs.getIntelligence()) + ",";
+		str += addCarac("Agi",caracs.getAgility()) + ",";
+		str += addCarac("Cha",caracs.getChance()) + ",";
+		str += addCarac("Fo",caracs.getStrength()) + ",";
+		str += addCarac("Vi",caracs.getVitality()) + ",";
+		str += addCarac("Sa",caracs.getWisdom()) + ",";
 		str += "\"Available\" : " + caracs.getStatsPoints() + "}";
 
 		// Inventory
