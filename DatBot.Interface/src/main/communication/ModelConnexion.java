@@ -1039,7 +1039,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request gate to go to Astrub");
 			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 				stop(1);
-				toSend = new Object[] { "True" };
+				return changeMap("511,s");
 			}
 			else {
 				DisplayInfo.appendDebugLog("Astrub change error, server returned false", "MapId : " + this.network.getMap().getId() + " cellId : " + this.network.getInfo().getCellId());
@@ -1120,21 +1120,16 @@ public class ModelConnexion {
 
 	private Object[] goIncarnam() throws Exception {
 		Object[] toSend;
+		if(!onMapAndCell(191106048, 397)){
+			return new Object[] { "False" };		
+		} 
+		if(useInteractive(184)[0].equals("False"))
+			return new Object[] { "False" };		
 		if (this.network.getMap().getId() == 192416776) {
 			if (this.network.getInfo().getCellId() != 468) {
 				move(300);
 			}
-			int[] interactive2 = this.network.getInteractive().getInteractive(184);
-			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
-			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering incarnam");
-			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-				stop(1);
-				toSend = new Object[] { "True" };
-			}
-			else {
-				DisplayInfo.appendDebugLog("Astrub change error, server returned false", "MapId : " + this.network.getMap().getId() + " cellId : " + this.network.getInfo().getCellId());
-				toSend = new Object[] { "False" };
-			}
+			toSend = useInteractive(184);
 		}
 		else {
 			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
@@ -1302,7 +1297,6 @@ public class ModelConnexion {
 								toSend = new Object[] { "True" };
 							}
 							else {
-								System.out.println("What");
 								toSend = new Object[] { "False" };
 							}
 						}
@@ -1312,8 +1306,6 @@ public class ModelConnexion {
 						}
 					}
 					else {
-						System.out.println("What2");
-
 						toSend = new Object[] { "False" };
 					}
 				}
@@ -1855,6 +1847,33 @@ public class ModelConnexion {
 			}
 		}
 		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	public boolean onMapAndCell(int mapId, int cellId){
+		if(this.network.getInfo().getMapId() == mapId){
+			if(this.network.getInfo().getCellId() == cellId){
+				return true;
+			} else {
+				return move(cellId)[0].equals("True");				
+			}
+		}
+		return false;
+	}
+	
+	private Object[] useInteractive(int id) throws Exception, InterruptedException {
+		Object[] toSend;
+		int[] interactive2 = this.network.getInteractive().getInteractive(id);
+		InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
+		getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "using interactive : " +id);
+		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
+			stop(1);
+			toSend = new Object[] { "True" };
+		}
+		else {
+			DisplayInfo.appendDebugLog("Astrub change error, server returned false", "MapId : " + this.network.getMap().getId() + " cellId : " + this.network.getInfo().getCellId());
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
