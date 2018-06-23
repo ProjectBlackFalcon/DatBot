@@ -59,7 +59,7 @@ public class Communication implements Runnable {
 		}
 		String result = String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam);
 		Communication.answer = result;
-		System.out.println(result);
+		System.out.println(DisplayInfo.stripAccents(result));
 	}
 
 	/**

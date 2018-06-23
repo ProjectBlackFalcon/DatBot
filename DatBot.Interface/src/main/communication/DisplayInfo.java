@@ -105,6 +105,13 @@ public class DisplayInfo {
 		String timing = formatter.format(time);
 		return timing;
 	}
+	
+	public static String stripAccents(String s) 
+	{
+	    s = Normalizer.normalize(s, Normalizer.Form.NFD);
+	    s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+	    return s;
+	}
 
 	public static void appendDebugLog(String errorType, String s) {
 		File file = new File(GameData.getPathDatBot() + "//packetErrors.txt");
