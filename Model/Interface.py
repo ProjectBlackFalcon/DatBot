@@ -727,4 +727,13 @@ class Interface:
         """
         return self.execute_command('useItem', [inv_id])
 
+    def assign_carac_points(self, carac_name, number):
+        """
+        Assigns carac points for the character
+        :param carac_name: Int, Agi, Cha, Fo, Vi, Sa
+        :param number: Number of points to use
+        :return: Boolean
+        """
+        return self.execute_command('assignCaracPoints', [carac_name, number])
+
 __author__ = 'Alexis'
