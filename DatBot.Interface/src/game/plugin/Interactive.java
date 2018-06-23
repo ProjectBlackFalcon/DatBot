@@ -7,6 +7,7 @@ import main.communication.DisplayInfo;
 import protocol.network.Network;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
+import protocol.network.types.game.interactive.InteractiveElementSkill;
 import protocol.network.types.game.interactive.StatedElement;
 import utils.GameData;
 import utils.d2p.map.Map;
@@ -52,12 +53,14 @@ public class Interactive {
 	public int[] getInteractive(int skillId) {
 		for (int i = 0; i < getInteractiveElements().size(); i++) {
 			if (getInteractiveElements().get(i).getEnabledSkills().size() != 0) {
-				if (getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillId() == skillId) {
-					for (int j = 0; j < this.getMap().getLayersCount(); j++) {
-						for (int k = 0; k < this.getMap().getLayers().get(j).getCellsCount(); k++) {
-							for (int l = 0; l < this.getMap().getLayers().get(j).getCells().get(k).getElementsCount(); l++) {
-								if (((GraphicalElement) this.getMap().getLayers().get(j).getCells().get(k).getElements().get(l)).getIdentifier() == getInteractiveElements().get(i).getElementId()
-									&& getInteractiveElements().get(i).isOnCurrentMap()) { return new int[] { this.getMap().getLayers().get(j).getCells().get(k).getCellId(), getInteractiveElements().get(i).getElementId(), getInteractiveElements().get(i).getEnabledSkills().get(0).getSkillInstanceUid() }; }
+				for (InteractiveElementSkill skill : getInteractiveElements().get(i).getEnabledSkills()) {
+					if (skill.getSkillId() == skillId) {
+						for (int j = 0; j < this.getMap().getLayersCount(); j++) {
+							for (int k = 0; k < this.getMap().getLayers().get(j).getCellsCount(); k++) {
+								for (int l = 0; l < this.getMap().getLayers().get(j).getCells().get(k).getElementsCount(); l++) {
+									if (((GraphicalElement) this.getMap().getLayers().get(j).getCells().get(k).getElements().get(l)).getIdentifier() == getInteractiveElements().get(i).getElementId()
+										&& getInteractiveElements().get(i).isOnCurrentMap()) { return new int[] { this.getMap().getLayers().get(j).getCells().get(k).getCellId(), getInteractiveElements().get(i).getElementId(), skill.getSkillInstanceUid() }; }
+								}
 							}
 						}
 					}

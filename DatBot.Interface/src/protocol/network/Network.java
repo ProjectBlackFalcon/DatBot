@@ -140,6 +140,7 @@ import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
+import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.version.VersionExtended;
 import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
@@ -1028,15 +1029,12 @@ public class Network extends DisplayInfo implements Runnable {
 			}
 			getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 			getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
-			/*
-			 * for (InteractiveElement interactiveElement :
-			 * this.interactive.getInteractiveElements()) {
-			 * if(interactiveElement.getEnabledSkills().size() > 0 &&
-			 * interactiveElement.isOnCurrentMap())
-			 * System.out.println(interactiveElement + " cell : " +
-			 * this.interactive.getInteractive(interactiveElement.
-			 * getEnabledSkills().get(0).getSkillId())[0]); }
-			 */
+
+//			for (InteractiveElement interactiveElement : this.interactive.getInteractiveElements()) {
+//				System.out.println(interactiveElement.getElementId());
+//				System.out.println(interactiveElement.getEnabledSkills());
+//			}
+
 			//			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
 			//			append("CellId : " + info.getCellId());
 			info.setWaitForMov(true);

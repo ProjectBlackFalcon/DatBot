@@ -1127,7 +1127,7 @@ public class ModelConnexion {
 			return new Object[] { "False" };		
 		if (this.network.getMap().getId() == 192416776) {
 			if (this.network.getInfo().getCellId() != 468) {
-				move(300);
+				move(468);
 			}
 			toSend = useInteractive(184);
 		}
@@ -1867,7 +1867,7 @@ public class ModelConnexion {
 		Object[] toSend;
 		int[] interactive2 = this.network.getInteractive().getInteractive(id);
 		InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
-		getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "using interactive : " +id);
+		getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "using interactive : " + interactive2[1] + " - " + interactive2[2]);
 		if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 			stop(1);
 			toSend = new Object[] { "True" };

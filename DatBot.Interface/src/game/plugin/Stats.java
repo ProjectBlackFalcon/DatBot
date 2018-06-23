@@ -8,6 +8,8 @@ import main.communication.DisplayInfo;
 import protocol.network.Network;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
+import protocol.network.types.game.character.characteristic.CharacterBaseCharacteristic;
+import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
 import utils.GameData;
 
@@ -54,6 +56,18 @@ public class Stats {
 						+ "," + job.get(i).getJobXpLevelFloor() + "," + job.get(i).getJobXpNextLevelFloor() + "],";
 			}
 		}
+		
+		CharacterCharacteristicsInformations caracs = stats.getStats();
+		
+		// Stats 
+		str += "\"Caracs\" : {";
+		str += addCarac("Int",caracs.getIntelligence()) + ",";
+		str += addCarac("Agi",caracs.getIntelligence()) + ",";
+		str += addCarac("Cha",caracs.getIntelligence()) + ",";
+		str += addCarac("Fo",caracs.getIntelligence()) + ",";
+		str += addCarac("Vi",caracs.getIntelligence()) + ",";
+		str += addCarac("Sa",caracs.getIntelligence()) + ",";
+		str += "\"Available\" : " + caracs.getStatsPoints() + "}";
 
 		// Inventory
 
@@ -82,6 +96,11 @@ public class Stats {
 
 	}
 	
+	private String addCarac(String string, CharacterBaseCharacteristic intelligence) {
+		return "\"" + string + "\" : [" + intelligence.getBase() + "," + intelligence.getAdditionnal()
+			+ "," + intelligence.getObjectsAndMountBonus() + "]";
+	}
+
 	/**
 	 * Check if the player has the item or not
 	 * @param int : id of the item
