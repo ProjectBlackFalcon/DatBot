@@ -5,6 +5,7 @@ import ast
 import datetime
 import Database_credentials as dc
 import os
+import traceback
 
 
 class LowLevelFunctions:
@@ -15,7 +16,7 @@ class LowLevelFunctions:
             self.zaaps = json.load(f)
 
     def cell2coord(self, cell):
-        return cell % 14 + int((cell/14)/2+0.5), (13 - cell % 14 + int((cell/14)/2))
+        return cell % 14 + int((cell//14)/2+0.5), (13 - cell % 14 + int((cell//14)/2))
 
     def coord2cell(self, coord):
         i = 0
@@ -108,19 +109,6 @@ class LowLevelFunctions:
             if self.distance_coords(pos, statue_pos) < closest[1]:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
-
-    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map='OFFLINE', worldmap=1):
-        try:
-            conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
-                                       database=dc.database)
-            cursor = conn.cursor()
-            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap)
-            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", put)
-            conn.commit()
-            conn.close()
-        except Exception:
-            print('Could not upload')
-            # Eww
 
     def get_next_clue_pos(self, clue, current_pos, direction):
         with open('../Utils/TresureHuntClues.json', 'r') as f:
@@ -238,7 +226,7 @@ class LowLevelFunctions:
 
     def get_bwork_maps(self):
         print(os.getcwd())
-        with open('../Utils/bworkMaps.json', 'r') as f:
+        with open('../Utils/BworkMaps.json', 'r') as f:
             bwork_maps = json.load(f)
         return bwork_maps
 
@@ -283,6 +271,35 @@ class LowLevelFunctions:
             if dd['name'] == 'Bot-Mobile':
                 bm_id = dd['id']
         return bm_id
+
+    def add_bot_db(self, username, password, name, server):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
+        cursor = conn.cursor()
+        put = (username, password, name, server, [])
+        cursor.execute("""SELECT * FROM BotAccounts WHERE username = %s""", (username,))
+        things = []
+        for thing in cursor:
+            things.append(thing)
+        if not things:
+            cursor.execute("""INSERT INTO BotAccounts (username, password, name, server, zaaps) VALUES (%s, %s, %s, %s, %s)""", put)
+            conn.commit()
+        conn.close()
+
+    def update_db(self, bot_id, server, name, kamas, level, occupation, current_map='OFFLINE', worldmap=1):
+        try:
+            conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
+            cursor = conn.cursor()
+            put = (bot_id, server, name, kamas, level, occupation, str(current_map), worldmap)
+            cursor.execute("""INSERT INTO Bots (BotId, Server, Name, Kamas, Level, Occupation, Pos, Worldmap) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", put)
+            conn.commit()
+            conn.close()
+        except Exception:
+            print('Could not upload')
+            with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
+                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                f.write(traceback.format_exc())
 
     def get_schedule(self, bot_name):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
@@ -340,6 +357,10 @@ class LowLevelFunctions:
             cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
         except TypeError as e:
             print("Not uploading that")
+        except Exception:
+            with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
+                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                f.write(traceback.format_exc())
         conn.commit()
         conn.close()
 

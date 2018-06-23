@@ -101,10 +101,10 @@ class PathFinder:
         maps = np.array(maps)
         shape = maps.shape
         flattened = maps.flatten()
-        new_base = np.zeros((14*shape[1]/14 + 20*shape[0]/40-1, 14*shape[1]/14 + 20*shape[0]/40))
+        new_base = np.zeros((14*shape[1]//14 + 20*shape[0]//40-1, 14*shape[1]//14 + 20*shape[0]//40))
         new_base[new_base == 0] = -1
         for i in range(len(flattened)):
-            coord = i % shape[1] + int((i/shape[1])/2+0.5), (shape[1]-1 - i % shape[1] + int((i/shape[1])/2))
+            coord = i % shape[1] + int((i//shape[1])/2+0.5), (shape[1]-1 - i % shape[1] + int((i//shape[1])/2))
             new_base[coord[1]][coord[0]] = flattened[i]
         self.adapted_maps = new_base[:]
         return new_base[:]
@@ -242,8 +242,8 @@ class PathFinder:
 
         path_cells.append(self.end_cell)
         for i in range(len(path_cells)-1):
-            current = (path_cells[i] - width*((path_cells[i] / width) % (total_width/width)) - (total_width-width)*(path_cells[i]/total_width)) % 560
-            nxt = (path_cells[i+1] - width*((path_cells[i+1] / width) % (total_width/width)) - (total_width-width)*(path_cells[i+1]/total_width)) % 560
+            current = (path_cells[i] - width*((path_cells[i] // width) % (total_width//width)) - (total_width-width)*(path_cells[i]//total_width)) % 560
+            nxt = (path_cells[i+1] - width*((path_cells[i+1] // width) % (total_width//width)) - (total_width-width)*(path_cells[i+1]//total_width)) % 560
             if current in top_map_change_cells and nxt in bottom_map_change_cells:
                 path_map_change_cells.append(current)
                 self.map_change_directions.append('n')
@@ -261,7 +261,7 @@ class PathFinder:
         return out[:]
 
     def cell2coord(self, cell):
-        return (cell % 14), cell/14
+        return (cell % 14), cell//14
 
     def coord2cell(self, coord):
         coord = coord[1] % 14, coord[0] % 40
@@ -270,15 +270,15 @@ class PathFinder:
     def coord2cell_diag(self, coord):
         width = len(self.glued_maps[0])
         i = 0
-        result = i % width + int((i/width)/2+0.5), (width-1 - i % width + int((i/width)/2))
+        result = i % width + int((i//width)/2+0.5), (width-1 - i % width + int((i//width)/2))
         while result != coord:
             i += 1
-            result = i % width + int((i/width)/2+0.5), (width-1 - i % width + int((i/width)/2))
+            result = i % width + int((i//width)/2+0.5), (width-1 - i % width + int((i//width)/2))
         return i
 
     def cell2coord_diag(self, cell):
         width = len(self.glued_maps[0])
-        return cell % width + int((cell/width)/2+0.5), (width-1 - cell % width + int((cell/width)/2))
+        return cell % width + int((cell//width)/2+0.5), (width-1 - cell % width + int((cell//width)/2))
 
     def pick_end_cell(self):
         if self.end_cell is None:
@@ -287,7 +287,6 @@ class PathFinder:
             found_walkable = False
             while not found_walkable:
                 x, y = self.cell2coord(map_change_cells[randint(0, len(map_change_cells)-1)])
-                # print(self.coord2cell((x, y)), end_map_cells[y][x])
                 if end_map_cells[y][x] == 0:
                     found_walkable = True
                 self.end_cell = self.coord2cell((y, x))

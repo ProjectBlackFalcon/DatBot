@@ -1,0 +1,230 @@
+2018-03-26 17:43:44.319183  [Database 1] Uploading 1, Julith, Draideac
+2018-03-26 17:43:45.237765  [Interface 1] Sending : 1;0;i;cmd;connect;['wublel12', 'notabot0', 'Draideac', 'Julith']
+2018-03-26 17:43:55.932389  [Interface 1] Recieved : 1;0;m;rtn;connect;[True]
+2018-03-26 17:43:56.413838  [Interface 1] Sending : 1;1;i;cmd;getMap;None
+2018-03-26 17:43:57.030446  [Interface 1] Recieved : 1;1;m;rtn;getMap;[(6,-12), 56, 1, 84675594]
+2018-03-26 17:43:57.534045  [Position 1] (6, -12)
+2018-03-26 17:43:58.031809  [Interface 1] Sending : 1;2;i;cmd;getStats;None
+2018-03-26 17:43:58.909952  [Interface 1] Recieved : 1;2;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 229,"WeightMax" : 2319,"Health" : 100,"Job" : {"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"26" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 167577,"Items" : [["boufbottes",2422,188501245,1,5],["anneau champetre",6791,188501246,1,2],["cape zombique",19146,188501247,1,7],["anneau de bouze le clerc",2419,188501248,1,4],["marteau du bouftou",2416,188501249,1,1],["coiffe zombique",19147,188501250,1,6],["ceinture du bouftou",2428,188501251,1,3],["amulette du bouftou",2425,188501252,1,0],["trousseau de clefs",10207,188501253,1,63],["poudre d'eniripsa",2239,188501254,6,63],["rose des sables",15263,188501255,56,63],["langue d'epouvanteur",374,188501256,2,63],["parchemin blanc",679,188501257,64,63],["parchemin d'ivoire",678,188501258,27,63],["biere de bwork",8145,188501259,1,63],["biere d'astrub",6857,188501260,1,63],["coiffe du bouftou",2411,188501261,1,63],["cape bouffante",2414,188501262,1,63],["fragment de carte de frakacia 3/3",15381,188501263,1,63],["fragment de carte de kongoku 4/8",17225,188501264,1,63],["fragment de carte d'anatak 5/5",17253,188501265,1,63],["siffler",15884,188501266,5,63]]}}]
+2018-03-26 17:44:00.058338  [Interface 1] Sending : 1;3;i;cmd;getDDStat;None
+2018-03-26 17:44:00.667805  [Interface 1] Recieved : 1;3;m;rtn;getDDStat;[False]
+2018-03-26 17:44:01.772283  [Scheduler 1] Starting to hunt for 376.0 minutes
+2018-03-26 17:44:02.243589  [Treasure Hunt 1] Starting hunt #1
+2018-03-26 17:44:02.724919  [Interface 1] Sending : 1;4;i;cmd;getStats;None
+2018-03-26 17:44:03.594902  [Interface 1] Recieved : 1;4;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 229,"WeightMax" : 2319,"Health" : 100,"Job" : {"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"26" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 167577,"Items" : [["boufbottes",2422,188501245,1,5],["anneau champetre",6791,188501246,1,2],["cape zombique",19146,188501247,1,7],["anneau de bouze le clerc",2419,188501248,1,4],["marteau du bouftou",2416,188501249,1,1],["coiffe zombique",19147,188501250,1,6],["ceinture du bouftou",2428,188501251,1,3],["amulette du bouftou",2425,188501252,1,0],["trousseau de clefs",10207,188501253,1,63],["poudre d'eniripsa",2239,188501254,6,63],["rose des sables",15263,188501255,56,63],["langue d'epouvanteur",374,188501256,2,63],["parchemin blanc",679,188501257,64,63],["parchemin d'ivoire",678,188501258,27,63],["biere de bwork",8145,188501259,1,63],["biere d'astrub",6857,188501260,1,63],["coiffe du bouftou",2411,188501261,1,63],["cape bouffante",2414,188501262,1,63],["fragment de carte de frakacia 3/3",15381,188501263,1,63],["fragment de carte de kongoku 4/8",17225,188501264,1,63],["fragment de carte d'anatak 5/5",17253,188501265,1,63],["siffler",15884,188501266,5,63]]}}]
+2018-03-26 17:44:04.764388  [Interface 1] Sending : 1;5;i;cmd;huntActive;None
+2018-03-26 17:44:05.513736  [Interface 1] Recieved : 1;5;m;rtn;huntActive;[True]
+2018-03-26 17:44:06.101577  [Interface 1] Sending : 1;6;i;cmd;getHuntStart;None
+2018-03-26 17:44:06.782385  [Interface 1] Recieved : 1;6;m;rtn;getHuntStart;[(5,-12)]
+2018-03-26 17:44:07.415012  [Interface 1] Sending : 1;7;i;cmd;getMap;None
+2018-03-26 17:44:08.110182  [Interface 1] Recieved : 1;7;m;rtn;getMap;[(6,-12), 56, 1, 84675594]
+2018-03-26 17:44:08.739467  [Position 1] (6, -12)
+2018-03-26 17:44:12.758460  [Interface 1] Sending : 1;8;i;cmd;changeMap;[70, 'w']
+2018-03-26 17:44:14.840590  [Interface 1] Recieved : 1;8;m;rtn;changeMap;[True]
+2018-03-26 17:44:15.430281  [Interface 1] Sending : 1;9;i;cmd;getMap;None
+2018-03-26 17:44:16.003422  [Interface 1] Recieved : 1;9;m;rtn;getMap;[(5,-12), 83, 1, 84675082]
+2018-03-26 17:44:16.609409  [Position 1] (5, -12)
+2018-03-26 17:44:17.726664  [Database 1] Uploading 1, Julith, Draideac, 167577, 49, Treasure Hunting, (5, -12), 1
+2018-03-26 17:44:18.803337  [Interface 1] Sending : 1;10;i;cmd;getStepsLeft;None
+2018-03-26 17:44:19.461191  [Interface 1] Recieved : 1;10;m;rtn;getStepsLeft;[3]
+2018-03-26 17:44:20.084078  [Interface 1] Sending : 1;11;i;cmd;getCluesLeft;None
+2018-03-26 17:44:23.563921  [Interface 1] Recieved : 1;11;m;rtn;getCluesLeft;[4]
+2018-03-26 17:44:24.238732  [Interface 1] Sending : 1;12;i;cmd;getClue;None
+2018-03-26 17:44:24.979280  [Interface 1] Recieved : 1;12;m;rtn;getClue;["Phorreur sournois", "e"]
+2018-03-26 17:44:25.509806  [Interface 1] Sending : 1;13;i;cmd;checkPhorror;None
+2018-03-26 17:44:26.222040  [Interface 1] Recieved : 1;13;m;rtn;checkPhorror;[False]
+2018-03-26 17:44:26.665448  [Interface 1] Sending : 1;14;i;cmd;getMap;None
+2018-03-26 17:44:27.276220  [Interface 1] Recieved : 1;14;m;rtn;getMap;[(5,-12), 83, 1, 84675082]
+2018-03-26 17:44:28.106382  [Position 1] (5, -12)
+2018-03-26 17:44:32.088442  [Interface 1] Sending : 1;15;i;cmd;changeMap;[69, 'e']
+2018-03-26 17:44:34.739192  [Interface 1] Recieved : 1;15;m;rtn;changeMap;[True]
+2018-03-26 17:44:41.404261  [Interface 1] Sending : 1;16;i;cmd;getMap;None
+2018-03-26 17:44:44.552909  [Interface 1] Recieved : 1;16;m;rtn;getMap;[(6,-12), 56, 1, 84675594]
+2018-03-26 17:44:46.727588  [Position 1] (6, -12)
+2018-03-26 17:44:50.929887  [Interface 1] Sending : 1;17;i;cmd;move;[False]
+2018-03-26 17:57:37.220974  [Database 1] Uploading 1, Julith, Draideac
+2018-03-26 17:57:38.134971  [Interface 1] Sending : 1;0;i;cmd;connect;['wublel12', 'notabot0', 'Draideac', 'Julith']
+2018-03-26 17:57:59.898697  [Interface 1] Recieved : 1;0;m;rtn;connect;[True]
+2018-03-26 17:58:00.411069  [Interface 1] Sending : 1;1;i;cmd;getMap;None
+2018-03-26 17:58:01.099294  [Interface 1] Recieved : 1;1;m;rtn;getMap;[(6,-12), 56, 1, 84675594]
+2018-03-26 17:58:01.630133  [Position 1] (6, -12)
+2018-03-26 17:58:02.156344  [Interface 1] Sending : 1;2;i;cmd;getStats;None
+2018-03-26 17:58:04.351177  [Interface 1] Recieved : 1;2;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 229,"WeightMax" : 2319,"Health" : 100,"Job" : {"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"26" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 167577,"Items" : [["boufbottes",2422,188972067,1,5],["anneau champetre",6791,188972068,1,2],["cape zombique",19146,188972069,1,7],["anneau de bouze le clerc",2419,188972070,1,4],["marteau du bouftou",2416,188972071,1,1],["coiffe zombique",19147,188972072,1,6],["ceinture du bouftou",2428,188972073,1,3],["amulette du bouftou",2425,188972074,1,0],["trousseau de clefs",10207,188972075,1,63],["poudre d'eniripsa",2239,188972076,6,63],["rose des sables",15263,188972077,56,63],["langue d'epouvanteur",374,188972078,2,63],["parchemin blanc",679,188972079,64,63],["parchemin d'ivoire",678,188972080,27,63],["biere de bwork",8145,188972081,1,63],["biere d'astrub",6857,188972082,1,63],["coiffe du bouftou",2411,188972083,1,63],["cape bouffante",2414,188972084,1,63],["fragment de carte de frakacia 3/3",15381,188972085,1,63],["fragment de carte de kongoku 4/8",17225,188972086,1,63],["fragment de carte d'anatak 5/5",17253,188972087,1,63],["siffler",15884,188972088,5,63]]}}]
+2018-03-26 17:58:06.984205  [Interface 1] Sending : 1;3;i;cmd;getDDStat;None
+2018-03-26 17:58:07.887123  [Interface 1] Recieved : 1;3;m;rtn;getDDStat;[False]
+2018-03-26 17:58:09.104175  [Scheduler 1] Starting to hunt for 362.0 minutes
+2018-03-26 17:58:09.795836  [Treasure Hunt 1] Starting hunt #1
+2018-03-26 17:58:10.377405  [Interface 1] Sending : 1;4;i;cmd;getStats;None
+2018-03-26 17:58:11.502054  [Interface 1] Recieved : 1;4;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 229,"WeightMax" : 2319,"Health" : 100,"Job" : {"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"26" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 167577,"Items" : [["boufbottes",2422,188972067,1,5],["anneau champetre",6791,188972068,1,2],["cape zombique",19146,188972069,1,7],["anneau de bouze le clerc",2419,188972070,1,4],["marteau du bouftou",2416,188972071,1,1],["coiffe zombique",19147,188972072,1,6],["ceinture du bouftou",2428,188972073,1,3],["amulette du bouftou",2425,188972074,1,0],["trousseau de clefs",10207,188972075,1,63],["poudre d'eniripsa",2239,188972076,6,63],["rose des sables",15263,188972077,56,63],["langue d'epouvanteur",374,188972078,2,63],["parchemin blanc",679,188972079,64,63],["parchemin d'ivoire",678,188972080,27,63],["biere de bwork",8145,188972081,1,63],["biere d'astrub",6857,188972082,1,63],["coiffe du bouftou",2411,188972083,1,63],["cape bouffante",2414,188972084,1,63],["fragment de carte de frakacia 3/3",15381,188972085,1,63],["fragment de carte de kongoku 4/8",17225,188972086,1,63],["fragment de carte d'anatak 5/5",17253,188972087,1,63],["siffler",15884,188972088,5,63]]}}]
+2018-03-26 17:58:12.805160  [Interface 1] Sending : 1;5;i;cmd;huntActive;None
+2018-03-26 17:58:13.539971  [Interface 1] Recieved : 1;5;m;rtn;huntActive;[True]
+2018-03-26 17:58:14.221331  [Interface 1] Sending : 1;6;i;cmd;getHuntStart;None
+2018-03-26 17:58:14.959643  [Interface 1] Recieved : 1;6;m;rtn;getHuntStart;[(5,-12)]
+2018-03-26 17:58:15.600801  [Interface 1] Sending : 1;7;i;cmd;getMap;None
+2018-03-26 17:58:16.339747  [Interface 1] Recieved : 1;7;m;rtn;getMap;[(6,-12), 56, 1, 84675594]
+2018-03-26 17:58:16.919707  [Position 1] (6, -12)
+2018-03-26 17:58:21.469593  [Interface 1] Sending : 1;8;i;cmd;changeMap;[196, 'w']
+2018-03-26 17:58:24.698591  [Interface 1] Recieved : 1;8;m;rtn;changeMap;[True]
+2018-03-26 17:58:25.437616  [Interface 1] Sending : 1;9;i;cmd;getMap;None
+2018-03-26 17:58:26.090223  [Interface 1] Recieved : 1;9;m;rtn;getMap;[(5,-12), 209, 1, 84675082]
+2018-03-26 17:58:26.705811  [Position 1] (5, -12)
+2018-03-26 17:58:27.841323  [Database 1] Uploading 1, Julith, Draideac, 167577, 49, Treasure Hunting, (5, -12), 1
+2018-03-26 17:58:28.808428  [Interface 1] Sending : 1;10;i;cmd;getStepsLeft;None
+2018-03-26 17:58:29.550867  [Interface 1] Recieved : 1;10;m;rtn;getStepsLeft;[3]
+2018-03-26 17:58:30.106261  [Interface 1] Sending : 1;11;i;cmd;getCluesLeft;None
+2018-03-26 17:58:30.711413  [Interface 1] Recieved : 1;11;m;rtn;getCluesLeft;[4]
+2018-03-26 17:58:31.412391  [Interface 1] Sending : 1;12;i;cmd;getClue;None
+2018-03-26 17:58:32.108998  [Interface 1] Recieved : 1;12;m;rtn;getClue;["Phorreur sournois", "e"]
+2018-03-26 17:58:32.697883  [Interface 1] Sending : 1;13;i;cmd;checkPhorror;None
+2018-03-26 17:58:33.391384  [Interface 1] Recieved : 1;13;m;rtn;checkPhorror;[False]
+2018-03-26 17:58:34.119401  [Interface 1] Sending : 1;14;i;cmd;getMap;None
+2018-03-26 17:58:34.794863  [Interface 1] Recieved : 1;14;m;rtn;getMap;[(5,-12), 209, 1, 84675082]
+2018-03-26 17:58:35.434709  [Position 1] (5, -12)
+2018-03-26 17:58:39.298838  [Interface 1] Sending : 1;15;i;cmd;changeMap;[111, 'e']
+2018-03-26 17:58:41.691521  [Interface 1] Recieved : 1;15;m;rtn;changeMap;[True]
+2018-03-26 17:58:42.283215  [Interface 1] Sending : 1;16;i;cmd;getMap;None
+2018-03-26 17:58:42.969947  [Interface 1] Recieved : 1;16;m;rtn;getMap;[(6,-12), 84, 1, 84675594]
+2018-03-26 17:58:43.599324  [Position 1] (6, -12)
+2018-03-26 17:58:44.738751  [Interface 1] Sending : 1;17;i;cmd;move;[False]
+2018-03-26 17:59:58.597538  [Database 1] Uploading 1, Julith, Draideac
+2018-03-26 17:59:59.494504  [Interface 1] Sending : 1;0;i;cmd;connect;['wublel12', 'notabot0', 'Draideac', 'Julith']
+2018-03-26 18:02:11.457106  [Interface 1] Recieved : 1;0;m;rtn;connect;[False]
+2018-03-26 18:02:27.107181  [Database 1] Uploading 1, Julith, Draideac
+2018-03-26 18:02:28.117596  [Interface 1] Sending : 1;1;i;cmd;connect;['wublel12', 'notabot0', 'Draideac', 'Julith']
+2018-03-27 17:30:56.454392  [Database 1] Uploading 1, Julith, Draideac
+2018-03-27 17:30:57.329804  [Interface 1] Sending : 1;0;i;cmd;connect;['wublel12', 'notabot0', 'Draideac', 'Julith']
+2018-03-27 17:31:20.081299  [Interface 1] Recieved : 1;0;m;rtn;connect;[True]
+2018-03-27 17:31:20.627974  [Interface 1] Sending : 1;1;i;cmd;getMap;None
+2018-03-27 17:31:21.140033  [Interface 1] Recieved : 1;1;m;rtn;getMap;[(4,-16), 317, 1, 84674566]
+2018-03-27 17:31:21.686844  [Position 1] (4, -16)
+2018-03-27 17:31:22.218109  [Interface 1] Sending : 1;2;i;cmd;getStats;None
+2018-03-27 17:31:23.096390  [Interface 1] Recieved : 1;2;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:31:24.179244  [Interface 1] Sending : 1;3;i;cmd;getDDStat;None
+2018-03-27 17:31:24.857207  [Interface 1] Recieved : 1;3;m;rtn;getDDStat;[False]
+2018-03-27 17:31:25.873294  [Scheduler 1] Starting to hunt and gather for 389.0 minutes
+2018-03-27 17:31:26.367396  [Treasure Hunt 1] Starting hunt #1
+2018-03-27 17:31:26.897406  [Interface 1] Sending : 1;4;i;cmd;getStats;None
+2018-03-27 17:31:27.854988  [Interface 1] Recieved : 1;4;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:31:28.971364  [Interface 1] Sending : 1;5;i;cmd;huntActive;None
+2018-03-27 17:31:29.625366  [Interface 1] Recieved : 1;5;m;rtn;huntActive;[True]
+2018-03-27 17:31:30.444726  [Interface 1] Sending : 1;6;i;cmd;getHuntStart;None
+2018-03-27 17:31:31.156645  [Interface 1] Recieved : 1;6;m;rtn;getHuntStart;[(9,-12)]
+2018-03-27 17:31:31.784004  [Interface 1] Sending : 1;7;i;cmd;getMap;None
+2018-03-27 17:31:32.454953  [Interface 1] Recieved : 1;7;m;rtn;getMap;[(4,-16), 317, 1, 84674566]
+2018-03-27 17:31:33.094304  [Position 1] (4, -16)
+2018-03-27 17:31:52.138173  [Interface 1] Sending : 1;8;i;cmd;changeMap;[541, 's']
+2018-03-27 17:31:54.742439  [Interface 1] Recieved : 1;8;m;rtn;changeMap;[True]
+2018-03-27 17:31:55.490167  [Interface 1] Sending : 1;9;i;cmd;getMap;None
+2018-03-27 17:31:56.304933  [Interface 1] Recieved : 1;9;m;rtn;getMap;[(4,-15), 9, 1, 84674567]
+2018-03-27 17:31:57.048431  [Position 1] (4, -15)
+2018-03-27 17:31:58.384729  [Interface 1] Sending : 1;10;i;cmd;changeMap;[475, 'e']
+2018-03-27 17:32:03.982228  [Interface 1] Recieved : 1;10;m;rtn;changeMap;[True]
+2018-03-27 17:32:04.732945  [Interface 1] Sending : 1;11;i;cmd;getMap;None
+2018-03-27 17:32:05.540436  [Interface 1] Recieved : 1;11;m;rtn;getMap;[(5,-15), 462, 1, 84675079]
+2018-03-27 17:32:06.265129  [Position 1] (5, -15)
+2018-03-27 17:32:07.534331  [Interface 1] Sending : 1;12;i;cmd;changeMap;[475, 'e']
+2018-03-27 17:32:13.246838  [Interface 1] Recieved : 1;12;m;rtn;changeMap;[True]
+2018-03-27 17:32:13.985561  [Interface 1] Sending : 1;13;i;cmd;getMap;None
+2018-03-27 17:32:14.821898  [Interface 1] Recieved : 1;13;m;rtn;getMap;[(6,-15), 462, 1, 84675591]
+2018-03-27 17:32:15.564591  [Position 1] (6, -15)
+2018-03-27 17:32:16.716503  [Interface 1] Sending : 1;14;i;cmd;changeMap;[548, 's']
+2018-03-27 17:32:20.795125  [Interface 1] Recieved : 1;14;m;rtn;changeMap;[True]
+2018-03-27 17:32:21.451752  [Interface 1] Sending : 1;15;i;cmd;getMap;None
+2018-03-27 17:32:22.222542  [Interface 1] Recieved : 1;15;m;rtn;getMap;[(6,-14), 16, 1, 84675592]
+2018-03-27 17:32:22.903977  [Position 1] (6, -14)
+2018-03-27 17:32:24.106126  [Interface 1] Sending : 1;16;i;cmd;changeMap;[251, 'e']
+2018-03-27 17:32:29.057817  [Interface 1] Recieved : 1;16;m;rtn;changeMap;[True]
+2018-03-27 17:32:29.829253  [Interface 1] Sending : 1;17;i;cmd;getMap;None
+2018-03-27 17:32:30.547978  [Interface 1] Recieved : 1;17;m;rtn;getMap;[(7,-14), 252, 1, 84676104]
+2018-03-27 17:32:31.255670  [Position 1] (7, -14)
+2018-03-27 17:32:32.466971  [Interface 1] Sending : 1;18;i;cmd;changeMap;[558, 's']
+2018-03-27 17:32:38.055504  [Interface 1] Recieved : 1;18;m;rtn;changeMap;[True]
+2018-03-27 17:32:38.804220  [Interface 1] Sending : 1;19;i;cmd;getMap;None
+2018-03-27 17:32:39.661039  [Interface 1] Recieved : 1;19;m;rtn;getMap;[(7,-13), 26, 1, 84676105]
+2018-03-27 17:32:40.390385  [Position 1] (7, -13)
+2018-03-27 17:32:41.552497  [Interface 1] Sending : 1;20;i;cmd;changeMap;[13, 'e']
+2018-03-27 17:32:43.814236  [Interface 1] Recieved : 1;20;m;rtn;changeMap;[True]
+2018-03-27 17:32:44.456559  [Interface 1] Sending : 1;21;i;cmd;getMap;None
+2018-03-27 17:32:45.265345  [Interface 1] Recieved : 1;21;m;rtn;getMap;[(8,-13), 14, 1, 84676617]
+2018-03-27 17:32:45.968022  [Position 1] (8, -13)
+2018-03-27 17:32:47.438101  [Interface 1] Sending : 1;22;i;cmd;changeMap;[307, 'e']
+2018-03-27 17:32:53.103387  [Interface 1] Recieved : 1;22;m;rtn;changeMap;[True]
+2018-03-27 17:32:53.730565  [Interface 1] Sending : 1;23;i;cmd;getMap;None
+2018-03-27 17:32:54.238055  [Interface 1] Recieved : 1;23;m;rtn;getMap;[(9,-13), 294, 1, 84677129]
+2018-03-27 17:32:55.130623  [Position 1] (9, -13)
+2018-03-27 17:32:56.094506  [Interface 1] Sending : 1;24;i;cmd;changeMap;[554, 's']
+2018-03-27 17:33:00.331116  [Interface 1] Recieved : 1;24;m;rtn;changeMap;[True]
+2018-03-27 17:33:00.923982  [Interface 1] Sending : 1;25;i;cmd;getMap;None
+2018-03-27 17:33:01.624320  [Interface 1] Recieved : 1;25;m;rtn;getMap;[(9,-12), 22, 1, 84677130]
+2018-03-27 17:33:02.198440  [Position 1] (9, -12)
+2018-03-27 17:33:03.419557  [Database 1] Uploading 1, Julith, Draideac, 465863, 49, Treasure Hunting, (9, -12), 1
+2018-03-27 17:33:04.453281  [Interface 1] Sending : 1;26;i;cmd;getStepsLeft;None
+2018-03-27 17:33:05.204869  [Interface 1] Recieved : 1;26;m;rtn;getStepsLeft;[3]
+2018-03-27 17:33:05.764919  [Interface 1] Sending : 1;27;i;cmd;getCluesLeft;None
+2018-03-27 17:33:06.508617  [Interface 1] Recieved : 1;27;m;rtn;getCluesLeft;[3]
+2018-03-27 17:33:07.085302  [Interface 1] Sending : 1;28;i;cmd;getClue;None
+2018-03-27 17:33:07.779789  [Interface 1] Recieved : 1;28;m;rtn;getClue;["Seau", "n"]
+2018-03-27 17:33:08.406555  [Interface 1] Sending : 1;29;i;cmd;getMap;None
+2018-03-27 17:33:09.055809  [Interface 1] Recieved : 1;29;m;rtn;getMap;[(9,-12), 22, 1, 84677130]
+2018-03-27 17:33:09.654617  [Position 1] (9, -12)
+2018-03-27 17:33:16.217425  [Interface 1] Sending : 1;30;i;cmd;changeMap;[9, 'n']
+2018-03-27 17:33:18.436418  [Interface 1] Recieved : 1;30;m;rtn;changeMap;[True]
+2018-03-27 17:33:18.997222  [Interface 1] Sending : 1;31;i;cmd;getMap;None
+2018-03-27 17:33:19.655518  [Interface 1] Recieved : 1;31;m;rtn;getMap;[(9,-13), 541, 1, 84677129]
+2018-03-27 17:33:20.253858  [Position 1] (9, -13)
+2018-03-27 17:33:21.275467  [Interface 1] Sending : 1;32;i;cmd;getStats;None
+2018-03-27 17:33:22.182430  [Interface 1] Recieved : 1;32;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:33:23.247048  [Database 1] Uploading 1, Julith, Draideac, 465863, 49, Harvesting map, (9, -13), 1
+2018-03-27 17:33:24.282285  [Interface 1] Sending : 1;33;i;cmd;getResources;None
+2018-03-27 17:33:25.002358  [Interface 1] Recieved : 1;33;m;rtn;getResources;[]
+2018-03-27 17:33:25.588171  [Interface 1] Sending : 1;34;i;cmd;getMap;None
+2018-03-27 17:33:26.160698  [Interface 1] Recieved : 1;34;m;rtn;getMap;[(9,-13), 541, 1, 84677129]
+2018-03-27 17:33:26.759271  [Position 1] (9, -13)
+2018-03-27 17:33:27.255823  [Interface 1] Sending : 1;35;i;cmd;getStats;None
+2018-03-27 17:33:28.207326  [Interface 1] Recieved : 1;35;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:33:29.281370  [Harvest 1] Done
+2018-03-27 17:33:29.798778  [Interface 1] Sending : 1;36;i;cmd;changeMap;[26, 'n']
+2018-03-27 17:33:34.932216  [Interface 1] Recieved : 1;36;m;rtn;changeMap;[True]
+2018-03-27 17:33:35.578970  [Interface 1] Sending : 1;37;i;cmd;getMap;None
+2018-03-27 17:33:36.155252  [Interface 1] Recieved : 1;37;m;rtn;getMap;[(9,-14), 558, 1, 84677128]
+2018-03-27 17:33:36.807497  [Position 1] (9, -14)
+2018-03-27 17:33:37.804734  [Interface 1] Sending : 1;38;i;cmd;getStats;None
+2018-03-27 17:33:38.762565  [Interface 1] Recieved : 1;38;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:33:39.857171  [Database 1] Uploading 1, Julith, Draideac, 465863, 49, Harvesting map, (9, -14), 1
+2018-03-27 17:33:40.897265  [Interface 1] Sending : 1;39;i;cmd;getResources;None
+2018-03-27 17:33:41.611086  [Interface 1] Recieved : 1;39;m;rtn;getResources;[(109,30739,0)]
+2018-03-27 17:33:42.218900  [Interface 1] Sending : 1;40;i;cmd;getMap;None
+2018-03-27 17:33:42.935965  [Interface 1] Recieved : 1;40;m;rtn;getMap;[(9,-14), 558, 1, 84677128]
+2018-03-27 17:33:43.496129  [Position 1] (9, -14)
+2018-03-27 17:33:43.988056  [Interface 1] Sending : 1;41;i;cmd;getStats;None
+2018-03-27 17:33:45.209273  [Interface 1] Recieved : 1;41;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:33:46.308327  [Harvest 1] Done
+2018-03-27 17:33:46.781935  [Interface 1] Sending : 1;42;i;cmd;changeMap;[9, 'n']
+2018-03-27 17:33:51.778781  [Interface 1] Recieved : 1;42;m;rtn;changeMap;[True]
+2018-03-27 17:33:52.385582  [Interface 1] Sending : 1;43;i;cmd;getMap;None
+2018-03-27 17:33:53.077023  [Interface 1] Recieved : 1;43;m;rtn;getMap;[(9,-15), 541, 1, 84677127]
+2018-03-27 17:33:53.721659  [Position 1] (9, -15)
+2018-03-27 17:33:54.707387  [Interface 1] Sending : 1;44;i;cmd;getStats;None
+2018-03-27 17:33:55.552163  [Interface 1] Recieved : 1;44;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:33:56.710645  [Database 1] Uploading 1, Julith, Draideac, 465863, 49, Harvesting map, (9, -15), 1
+2018-03-27 17:33:57.724582  [Interface 1] Sending : 1;45;i;cmd;getResources;None
+2018-03-27 17:33:58.451374  [Interface 1] Recieved : 1;45;m;rtn;getResources;[(409,67475,0), (423,67475,0)]
+2018-03-27 17:33:59.089293  [Interface 1] Sending : 1;46;i;cmd;getMap;None
+2018-03-27 17:33:59.734608  [Interface 1] Recieved : 1;46;m;rtn;getMap;[(9,-15), 541, 1, 84677127]
+2018-03-27 17:34:00.334107  [Position 1] (9, -15)
+2018-03-27 17:34:00.826293  [Interface 1] Sending : 1;47;i;cmd;getStats;None
+2018-03-27 17:34:01.770374  [Interface 1] Recieved : 1;47;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 235,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,5,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,6,63]]}}]
+2018-03-27 17:34:04.442886  [Interface 1] Sending : 1;48;i;cmd;move;[424]
+2018-03-27 17:34:07.031097  [Interface 1] Recieved : 1;48;m;rtn;move;[True]
+2018-03-27 17:34:07.608110  [Interface 1] Sending : 1;49;i;cmd;harvest;[409]
+2018-03-27 17:34:10.202829  [Interface 1] Recieved : 1;49;m;rtn;harvest;[False]
+2018-03-27 17:34:10.769429  [Interface 1] Sending : 1;50;i;cmd;getResources;None
+2018-03-27 17:34:11.475943  [Interface 1] Recieved : 1;50;m;rtn;getResources;[(409,67475,2), (423,67475,0)]
+2018-03-27 17:34:12.064991  [Interface 1] Sending : 1;51;i;cmd;getMap;None
+2018-03-27 17:34:12.760405  [Interface 1] Recieved : 1;51;m;rtn;getMap;[(9,-15), 424, 1, 84677127]
+2018-03-27 17:34:13.338387  [Position 1] (9, -15)
+2018-03-27 17:34:13.798484  [Interface 1] Sending : 1;52;i;cmd;getStats;None
+2018-03-27 17:34:14.699472  [Interface 1] Recieved : 1;52;m;rtn;getStats;[{"Lvl" : 49,"Xp" : 4879956,"XpNextLevelFloor" : 5350000,"Weight" : 239,"WeightMax" : 2319,"Health" : 100,"Job" : {"26" : [1,10,0,20],"36" : [1,0,0,20],"11" : [1,0,0,20],"65" : [1,0,0,20],"15" : [1,0,0,20],"62" : [1,0,0,20],"48" : [1,0,0,20],"41" : [1,0,0,20],"16" : [1,0,0,20],"27" : [1,0,0,20],"2" : [1,0,0,20],"63" : [1,0,0,20],"13" : [1,0,0,20],"74" : [1,0,0,20],"24" : [1,0,0,20],"60" : [1,0,0,20],"28" : [1,0,0,20],"44" : [1,0,0,20],"64" : [1,0,0,20]},"Inventory" : {"Kamas" : 465863,"Items" : [["boufbottes",2422,216801391,1,5],["anneau champetre",6791,216801392,1,2],["cape zombique",19146,216801393,1,7],["anneau de bouze le clerc",2419,216801394,1,4],["marteau du bouftou",2416,216801395,1,1],["coiffe zombique",19147,216801396,1,6],["ceinture du bouftou",2428,216801397,1,3],["amulette du bouftou",2425,216801398,1,0],["trousseau de clefs",10207,216801399,1,63],["poudre d'eniripsa",2239,216801400,6,63],["rose des sables",15263,216801401,56,63],["langue d'epouvanteur",374,216801402,2,63],["parchemin blanc",679,216801403,64,63],["parchemin d'ivoire",678,216801404,27,63],["biere de bwork",8145,216801405,1,63],["biere d'astrub",6857,216801406,1,63],["coiffe du bouftou",2411,216801407,1,63],["cape bouffante",2414,216801408,1,63],["fragment de carte de frakacia 3/3",15381,216801409,1,63],["fragment de carte de kongoku 4/8",17225,216801410,1,63],["fragment de carte d'anatak 5/5",17253,216801411,1,63],["siffler",15884,216801412,5,63],["ortie",421,216801413,10,63]]}}]
+2018-03-27 17:34:15.877945  [Interface 1] Sending : 1;53;i;cmd;move;[409]
+2018-03-27 17:34:17.509021  [Interface 1] Recieved : 1;53;m;rtn;move;[True]
+2018-03-27 17:34:18.077763  [Interface 1] Sending : 1;54;i;cmd;harvest;[423]

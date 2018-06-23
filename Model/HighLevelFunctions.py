@@ -294,7 +294,7 @@ class HighLevelFunctions:
             inv_space = player_stats['WeightMax'] - player_stats['Weight']
             quantity_to_withdraw = min(number, int(inv_space / weight)) if weight else number
             batch_size = item_to_sell_batch_size[item_to_sell_ids.index(item_id)]
-            round_quantity_to_withdraw = quantity_to_withdraw/batch_size*batch_size
+            round_quantity_to_withdraw = quantity_to_withdraw//batch_size*batch_size
             if round_quantity_to_withdraw:
                 player_stats, bank_contents = self.bot.interface.get_from_bank_unique(unique_id, round_quantity_to_withdraw)
 
@@ -366,8 +366,7 @@ class HighLevelFunctions:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write('Could not go to {} from {} to find {}'.format(destination, self.bot.position, clue))
                             hunt_error_flag = True
-                            reason = 'Goto fail'
-                            break
+                            reason = 'Goto failed'
                 else:
                     try:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
@@ -382,10 +381,12 @@ class HighLevelFunctions:
                             f.write(e.args[0])
 
                         hunt_error_flag = True
-                        reason = 'Could not find clue'
-                        break
+                        if 'Non existing clue' in e.args[0]:
+                            reason = e.args[0]
+                        else:
+                            reason = 'Goto failed'
 
-                if not self.bot.interface.validate_hunt_clue()[0] and not hunt_error_flag:
+                if not hunt_error_flag and not self.bot.interface.validate_hunt_clue()[0]:
                     with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
@@ -396,11 +397,13 @@ class HighLevelFunctions:
                 elif hunt_error_flag:
                     break
 
-            if not self.bot.interface.validate_hunt_step()[0] and not hunt_error_flag:
+            if not hunt_error_flag and not self.bot.interface.validate_hunt_step()[0]:
                 clue, direction = self.bot.interface.get_hunt_clue()
+                last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
+                clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
                 with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-                    f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, start_pos, self.bot.position[0]))
+                    f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, last_valid_clue_pos, self.bot.position[0]))
                     f.write('Clue was supposed to be at {}'.format(clue_pos))
                 hunt_error_flag = True
                 reason = 'Could not validate step'
@@ -411,11 +414,11 @@ class HighLevelFunctions:
         if hunt_error_flag:
             self.llf.log(self.bot, '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
             in_hb = False
-            while not self.bot.interface.abandon_hunt()[0]:
-                if not in_hb:
-                    if self.bot.interface.enter_heavenbag()[0]:
-                        in_hb = True
-                time.sleep(30)
+            result = self.bot.interface.abandon_hunt()[0]
+            if type(result) is not bool:
+                if self.bot.interface.enter_heavenbag()[0]:
+                    in_hb = True
+                time.sleep(result*60)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
             return False, reason
@@ -559,8 +562,8 @@ class HighLevelFunctions:
                             price = item_hdv_stats[batch_size_index] - 1
                             player_lvl = self.bot.interface.get_player_stats()[0]['Lvl']
                             if hdv_position is None and price > 0:
-                                self.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] / batch_size, player_lvl-len(selling)), batch_size, item[0], price))
-                                self.bot.interface.sell_item(item[2], batch_size, min(item[3] / batch_size, player_lvl-len(selling)), price)
+                                self.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
+                                self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
                         return True
             if hdv_position is None:
@@ -824,18 +827,22 @@ class HighLevelFunctions:
         self.llf.set_mount_situation(self.bot.credentials['name'], 'equipped')
 
     def update_db(self):
+        kamas = -1 if self.bot.kamas is None else self.bot.kamas
+        level = -1 if self.bot.level is None else self.bot.level
+        occupation = "Unknown" if self.bot.occupation is None else self.bot.occupation
+        position = ((0, 0), 0) if self.bot.position is None else self.bot.position
         try:
             self.llf.log(self.bot,
-                         '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], self.bot.kamas, self.bot.level, self.bot.occupation, self.bot.position[0], self.bot.position[1]))
+                         '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], kamas, level, occupation, position[0], position[1]))
             self.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
                 self.bot.credentials['name'],
-                self.bot.kamas,
-                self.bot.level,
-                self.bot.occupation,
-                self.bot.position[0],
-                self.bot.position[1]
+                kamas,
+                level,
+                occupation,
+                position[0],
+                position[1]
             )
         except TypeError:
             # Degraded upload
@@ -844,9 +851,9 @@ class HighLevelFunctions:
                 self.bot.id,
                 self.bot.credentials['server'],
                 self.bot.credentials['name'],
-                self.bot.kamas,
-                self.bot.level,
-                self.bot.occupation
+                kamas,
+                level,
+                occupation
             )
         except Exception:
             with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
