@@ -445,7 +445,9 @@ class LowLevelFunctions:
         with open('../Utils/CaracLevel.json', 'r') as f:
             goal_caracs = json.load(f)[bot.level]
         difference = [goal_caracs[i] - native_caracs[i] for i in range(len(native_caracs))]
-        costs = [1000]
+        costs = [difference[0]] + \
+                [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
+                [difference[-1] * 3]
 
         dec_index = 0
         while sum(costs) > caracs['Available']:

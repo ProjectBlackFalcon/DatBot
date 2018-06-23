@@ -228,7 +228,7 @@ class Interface:
         self.bot.kamas = stats[0]['Inventory']['Kamas']
         self.bot.level = stats[0]['Lvl']
         if self.bot.stats['Caracs']['Available']:
-            caracs_to_augment = self.bot.get_caracs_to_augment(self.bot)
+            caracs_to_augment = self.bot.llf.get_caracs_to_augment(self.bot)
             for carac in caracs_to_augment:
                 self.assign_carac_points(carac[0], carac[1])
         return stats
