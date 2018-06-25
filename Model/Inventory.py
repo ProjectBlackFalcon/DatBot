@@ -1,5 +1,6 @@
 import json
 
+
 class Inventory:
     def __init__(self, bot):
         self.bot = bot
