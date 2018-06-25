@@ -96,6 +96,7 @@ class Interface:
                     self.bot.in_fight = False
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
+                    self.get_player_stats()
                 elif 'info;disconnect;[True]' in message:
                     self.bot.llf.log(self.bot, '[Interface {}] Disconnected'.format(self.bot.id))
                     self.bot.connected = False
@@ -146,11 +147,8 @@ class Interface:
             tries += 1
             self.bot.connected = success[0]
             if self.bot.connected:
+                self.get_player_stats()
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-                bot_stats = self.get_player_stats()
-                bot_stats = bot_stats[0]
-                self.bot.kamas = bot_stats['Inventory']['Kamas']
-                self.bot.level = bot_stats['Lvl']
                 self.bot.position = (current_map, current_worldmap)
                 if self.get_dd_stat()[0]:
                     self.bot.mount = 'equipped'
@@ -177,6 +175,7 @@ class Interface:
                     self.bot.hf.drop_bot_mobile(idx)
             success = [self.execute_command('disconnect')[0]]
             if success[0]:
+                self.get_player_stats()
                 self.bot.llf.log(self.bot, '[Position {}] {}'.format(self.bot.id, 'OFFLINE'))
                 self.bot.connected = False
                 self.bot.occupation = 'Sleeping'
@@ -224,10 +223,25 @@ class Interface:
         """
         stats = self.execute_command('getStats')
         time.sleep(0.5)
-        self.bot.stats = stats[0]
-        self.bot.kamas = stats[0]['Inventory']['Kamas']
-        self.bot.level = stats[0]['Lvl']
-        if self.bot.stats['Caracs']['Available']:
+        stats = stats[0]
+        self.bot.inventory.kamas = stats['Inventory']['Kamas']
+        self.bot.inventory.items = stats['Inventory']['Items']
+        self.bot.characteristics.level = stats['Lvl']
+        self.bot.characteristics.health_percent = stats['Health']
+        self.bot.characteristics.xp = stats['Xp']
+        self.bot.characteristics.xp_next_level_floor = stats['XpNextLevelFloor']
+        self.bot.characteristics.weight = stats['Weight']
+        self.bot.characteristics.weight_max = stats['WeightMax']
+        self.bot.characteristics.jobs = stats['Job']
+        self.bot.characteristics.int = stats['Caracs']['Int']
+        self.bot.characteristics.agi = stats['Caracs']['Agi']
+        self.bot.characteristics.cha = stats['Caracs']['Cha']
+        self.bot.characteristics.fo = stats['Caracs']['Fo']
+        self.bot.characteristics.vi = stats['Caracs']['Vi']
+        self.bot.characteristics.sa = stats['Caracs']['Sa']
+        self.bot.characteristics.available_stat_points = stats['Caracs']['Available']
+
+        if self.bot.characteristics.available_stat_points:
             caracs_to_augment = self.bot.llf.get_caracs_to_augment(self.bot)
             for carac in caracs_to_augment:
                 self.assign_carac_points(carac[0], carac[1])
@@ -239,10 +253,11 @@ class Interface:
         :param cell: cell number
         :return: [id, number_harvested, new_pods, max_pods], or combat or false
         """
-        return self.execute_command('harvest', [cell])
+        ret_val = self.execute_command('harvest', [cell])
+        self.get_player_stats()
+        return ret_val
 
     def go_to_astrub(self):
-        # TODO
         """
         Goes to Astrub and makes the player exit the building (should arrive at 6, -19, cell 397, worldmap 1)
         :return: Boolean
@@ -250,7 +265,6 @@ class Interface:
         return self.execute_command('goAstrub')
 
     def go_to_incarnam(self):
-        # TODO
         """
         Enters the building and uses the gate to go to Incarnam
         :return: Boolean
@@ -295,6 +309,7 @@ class Interface:
         else:
             inventory_content, bank_content = self.execute_command('dropBankList', item_id_list)
         self.bank_info = bank_content
+        self.get_player_stats()
         return inventory_content, bank_content
 
     def drop_in_bank_unique(self, item_id, quantity):
@@ -306,6 +321,7 @@ class Interface:
         """
         inventory_content, bank_content = self.execute_command('dropBank', [item_id, quantity])
         self.bank_info = bank_content
+        self.get_player_stats()
         return inventory_content, bank_content
 
     def get_from_bank_list(self, item_id_list):
@@ -316,6 +332,7 @@ class Interface:
         """
         inventory_content, bank_content = self.execute_command('getBankList', item_id_list)
         self.bank_info = bank_content
+        self.get_player_stats()
         return inventory_content, bank_content
 
     def get_from_bank_unique(self, item_id, quantity):
@@ -327,6 +344,7 @@ class Interface:
         """
         inventory_content, bank_content = self.execute_command('getBank', [item_id, quantity])
         self.bank_info = bank_content
+        self.get_player_stats()
         return inventory_content, bank_content
 
     def put_kamas_in_bank(self, quantity):
@@ -335,11 +353,12 @@ class Interface:
         :param quantity: quantity of kamas to drop
         :return: New bank content, new inventory content
         """
-        kamas = self.get_player_stats()[0]['Kamas']
+        kamas = self.bot.inventory.kamas
         if quantity in ['all', 'All'] or quantity > kamas:
             quantity = kamas
         inventory_content, bank_content = self.execute_command('dropBankKamas', [quantity])
         self.bank_info = bank_content
+        self.get_player_stats()
         return inventory_content, bank_content
 
     def get_kamas_from_bank(self, quantity):
@@ -348,13 +367,13 @@ class Interface:
         :param quantity: quantity of kamas to drop
         :return: New bank content, new inventory content
         """
-        print(self.bank_info)
         kamas = self.bank_info['Kamas']
         if quantity in ['all', 'All'] or quantity > kamas:
             quantity = kamas
         if quantity:
             inventory_content, bank_content = self.execute_command('getBankKamas', [quantity])
             self.bank_info = bank_content
+            self.get_player_stats()
             return inventory_content, bank_content
 
     def get_hunting_hall_door_cell(self):
@@ -544,7 +563,9 @@ class Interface:
         :param batch_number: Number of batches to sell
         :return: Boolaen
         """
-        return self.execute_command('sellItem', [item_id, batch_size, batch_number, price])
+        ret_val = self.execute_command('sellItem', [item_id, batch_size, batch_number, price])
+        self.get_player_stats()
+        return ret_val
 
     def modify_price(self, item_id, batch_size, new_price):
         """
@@ -554,7 +575,9 @@ class Interface:
         :param new_price: New price
         :return: Boolean
         """
-        return self.execute_command('modifyPrice', [item_id, batch_size, new_price])
+        ret_val = self.execute_command('modifyPrice', [item_id, batch_size, new_price])
+        self.get_player_stats()
+        return ret_val
 
     def withdraw_item(self, item_id, batch_size, batch_number):
         """
@@ -564,7 +587,9 @@ class Interface:
         :param batch_number: Number of batches to withdraw
         :return: Boolean
         """
-        return self.execute_command('withdrawItem', [item_id, batch_size, batch_number])
+        ret_val = self.execute_command('withdrawItem', [item_id, batch_size, batch_number])
+        self.get_player_stats()
+        return ret_val
 
     def enter_bwork(self):
         """
@@ -649,7 +674,9 @@ class Interface:
         :param id: DD's id
         :return: Boolean
         """
-        return self.execute_command('putInInventory', [id, source])
+        ret_val = self.execute_command('putInInventory', [id, source])
+        self.get_player_stats()
+        return ret_val
 
     def equip_dd(self, id, source):
         """
@@ -667,7 +694,6 @@ class Interface:
         """
         if not 0 <= xp <= 90:
             raise ValueError("Xp to give a DD must be between 0 and 90")
-            # Dumb fuck
         return self.execute_command('setXpDD', [xp])
 
     def feed_dd(self, inv_id, quantity):
@@ -677,7 +703,9 @@ class Interface:
         :param quantity:
         :return:
         """
-        return self.execute_command('feedDD', [inv_id, quantity])
+        ret_val = self.execute_command('feedDD', [inv_id, quantity])
+        self.get_player_stats()
+        return ret_val
 
     def mount_dd(self):
         """
@@ -729,7 +757,9 @@ class Interface:
         :param inv_id: inventory id of the item to use
         :return: Boolean
         """
-        return self.execute_command('useItem', [inv_id])
+        ret_val = self.execute_command('useItem', [inv_id])
+        self.get_player_stats()
+        return ret_val
 
     def assign_carac_points(self, carac_name, number):
         """
@@ -738,6 +768,9 @@ class Interface:
         :param number: Number of points to use
         :return: Boolean
         """
-        return self.execute_command('assignCaracPoints', [carac_name, number])
+        ret_val = self.execute_command('assignCaracPoints', [carac_name, number])
+        self.get_player_stats()
+        return ret_val
+
 
 __author__ = 'Alexis'

@@ -20,8 +20,8 @@ class a_Connection(unittest.TestCase):
         self.assertTrue(self.bot.connected)
         self.assertEqual('Connecting', self.bot.occupation)
         self.assertIsNotNone(self.bot.position)
-        self.assertIsNotNone(self.bot.level)
-        self.assertIsNotNone(self.bot.kamas)
+        self.assertIsNotNone(self.bot.characteristics.level)
+        self.assertIsNotNone(self.bot.inventory.kamas)
         self.assertFalse(self.bot.in_fight)
         self.assertIsNone(self.bot.mount)
 
@@ -66,14 +66,7 @@ class b_MoveAround(unittest.TestCase):
         self.assertEqual(397, cell)
         self.assertEqual(1, worldmap)
 
-    def test_e_go_to_incaranm(self):
-        self.bot.interface.go_to_incarnam()
-        curr_map, cell, worldmap, map_id = self.bot.interface.get_map()
-        self.assertEqual((3, -4), curr_map)
-        self.assertEqual(300, cell)
-        self.assertEqual(2, worldmap)
-
-    def test_f_heavenbag(self):
+    def test_e_heavenbag(self):
         self.assertEqual(True, self.bot.interface.enter_heavenbag()[0])
         curr_map, cell, worldmap, map_id = self.bot.interface.get_map()
         self.assertEqual((0, 0), curr_map)
@@ -88,33 +81,40 @@ class b_MoveAround(unittest.TestCase):
 
         self.assertEqual(True, self.bot.interface.exit_heavenbag()[0])
         curr_map, cell, worldmap, map_id = self.bot.interface.get_map()
-        self.assertEqual((3, -4), curr_map)
-        self.assertEqual(300, cell)
-        self.assertEqual(2, worldmap)
+        self.assertEqual((6, -19), curr_map)
+        self.assertEqual(397, cell)
+        self.assertEqual(1, worldmap)
 
         self.assertEqual(True, self.bot.interface.exit_heavenbag()[0])
         curr_map, cell, worldmap, map_id = self.bot.interface.get_map()
-        self.assertEqual((3, -4), curr_map)
-        self.assertEqual(300, cell)
-        self.assertEqual(2, worldmap)
+        self.assertEqual((6, -19), curr_map)
+        self.assertEqual(397, cell)
+        self.assertEqual(1, worldmap)
 
-    def test_g_zaap(self):
-        self.bot.interface.go_to_astrub()
+    def test_f_zaap(self):
         self.bot.interface.enter_heavenbag()
 
-        self.assertEqual([False], self.bot.interface.use_zaap((0, 0)))
-        self.assertEqual([True], self.bot.interface.use_zaap((5, -18)))
+        self.assertEqual(False, self.bot.interface.use_zaap((0, 0))[0])
+        self.assertEqual(((5,-18), 260, 1, 191105026), self.bot.interface.use_zaap((5, -18)))
 
         curr_map, cell, worldmap, map_id = self.bot.interface.get_map()
         self.assertEqual((5, -18), curr_map)
         self.assertEqual(260, cell)
         self.assertEqual(1, worldmap)
 
+    def test_g_go_to_incaranm(self):
+        self.bot.hf.goto((6, -19))
+        self.bot.interface.go_to_incarnam()
+        curr_map, cell, worldmap, map_id = self.bot.interface.get_map()
+        self.assertEqual((4, -3), curr_map)
+        self.assertEqual(300, cell)
+        self.assertEqual(2, worldmap)
+
     @classmethod
     def tearDownClass(self):
         self.pipe.p.terminate()
 
-
+'''
 class c_Bank(unittest.TestCase):
     @classmethod
     def setUpClass(self):
@@ -123,7 +123,6 @@ class c_Bank(unittest.TestCase):
         self.pipe = PipeToJava(headless=True)
         self.bot = Bot(self.pipe, 0, test_account_credentials, llf, False)
         self.bot.interface.connect(max_tries=1)
-        print(self.bot.position[0])
         assert (4, -18) == self.bot.position[0]
 
     def test_enter_bank(self):
@@ -137,7 +136,7 @@ class c_Bank(unittest.TestCase):
     @classmethod
     def tearDownClass(self):
         pass
-
+'''
 
 if __name__ == '__main__':
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

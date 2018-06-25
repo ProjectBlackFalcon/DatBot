@@ -51,7 +51,7 @@ class HighLevelFunctions:
                         if tuple(current_map) != tuple(closest_zaap):
                             raise RuntimeError('Unable to use Zaap to go to {}'.format(closest_zaap))
                     else:
-                        if self.bot.interface.get_player_stats()[0]['Lvl'] < 10:
+                        if self.bot.characteristics.level < 10:
                             raise RuntimeError('Bot is not level 10 an can not enter heavenbag')
                         else:
                             raise RuntimeError('Unable to enter heavenbag to go from {}, worldmap -1 to {}'.format(current_map, closest_zaap))
@@ -130,8 +130,7 @@ class HighLevelFunctions:
             closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
-        stats = self.bot.interface.get_player_stats()[0]
-        if stats['WeightMax'] - stats['Weight'] < 200:
+        if self.bot.characteristics.weight_max - self.bot.characteristics.weight < 200:
             return False
         self.bot.occupation = 'Harvesting map'
         self.update_db()
@@ -176,7 +175,7 @@ class HighLevelFunctions:
             # print('[Harvest] filtered_map_resources2 : {}'.format(filtered_map_resources2))
 
             filtered_map_resources3 = {}
-            job_levels = self.bot.interface.get_player_stats()[0]['Job']
+            job_levels = self.bot.characteristics.jobs
             for resource, spots in filtered_map_resources2.items():
                 if resource == "Eau" or resources_levels[resource][0] <= job_levels[resources_levels[resource][1]][0]:
                     filtered_map_resources3[resource] = spots
@@ -329,7 +328,7 @@ class HighLevelFunctions:
             self.bot.interface.exit_hunting_hall()
 
         if level == 'max':
-            level = self.bot.interface.get_player_stats()[0]['Lvl']
+            level = self.bot.characteristics.level
         level = int(level/20)*20
 
         if not self.bot.interface.hunt_is_active()[0]:
@@ -420,7 +419,7 @@ class HighLevelFunctions:
             return False, reason
         else:
             in_hb = False
-            while self.bot.interface.get_player_stats()[0]['Health'] < 100:
+            while self.bot.characteristics.health_percent < 100:
                 if not in_hb:
                     if self.bot.interface.enter_heavenbag()[0]:
                         in_hb = True
@@ -430,7 +429,7 @@ class HighLevelFunctions:
             self.bot.interface.start_hunt_fight()
 
             chest_ids = [15248, 15260, 15261, 15262, 15264, 15265, 15266, 15267, 15268, 15269, 15270]
-            inventory = self.bot.interface.get_player_stats()[0]['Inventory']['Items']
+            inventory = self.bot.inventory.items
             for chest_id in chest_ids:
                 number = self.llf.get_number_of_item_in_inventory(inventory, chest_id)
                 for i in range(number):
@@ -470,8 +469,8 @@ class HighLevelFunctions:
         while time.time()-start < duration:
 
             in_hb = False
-            while self.bot.interface.get_player_stats()[0]['Health'] < hp_threshold:
-                if not in_hb and self.bot.interface.get_player_stats()[0]['Lvl'] >= 10:
+            while self.bot.characteristics.health_percent < hp_threshold:
+                if not in_hb and self.bot.characteristics.level >= 10:
                     if self.bot.interface.enter_heavenbag()[0]:
                         in_hb = True
                 time.sleep(10)
@@ -536,7 +535,7 @@ class HighLevelFunctions:
         if valid_map:
             if hdv_position is None:
                 selling = self.update_hdv()
-            items = self.bot.interface.get_player_stats()[0]['Inventory']['Items']
+            items = self.bot.inventory.items
             items_to_sell = items_to_sell[hdv_type]
             # print('[SELL HDV] Items : {},\n[SELL HDV] Items to sell {}'.format(items, items_to_sell))
             for item in items:
@@ -556,7 +555,7 @@ class HighLevelFunctions:
                             batch_size_index = [1, 10, 100].index(items_to_sell[str(item[1])]["quantity"])
                             batch_size = [1, 10, 100][batch_size_index]
                             price = item_hdv_stats[batch_size_index] - 1
-                            player_lvl = self.bot.interface.get_player_stats()[0]['Lvl']
+                            player_lvl = self.bot.characteristics.level
                             if hdv_position is None and price > 0:
                                 self.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
                                 self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
@@ -692,7 +691,7 @@ class HighLevelFunctions:
             self.manage_dds()
 
     def pex_dd(self, dd_id):
-        if self.bot.interface.get_player_stats()[0]['Lvl'] >= 80:
+        if self.bot.characteristics.level >= 60:
             dd_stats = self.bot.interface.get_dd_stat()
             if dd_stats[0]:
                 self.bot.interface.put_dd_in_stable(dd_stats[2], 'equip')
@@ -823,8 +822,8 @@ class HighLevelFunctions:
         self.llf.set_mount_situation(self.bot.credentials['name'], 'equipped')
 
     def update_db(self):
-        kamas = -1 if self.bot.kamas is None else self.bot.kamas
-        level = -1 if self.bot.level is None else self.bot.level
+        kamas = -1 if self.bot.inventory.kamas is None else self.bot.inventory.kamas
+        level = -1 if self.bot.characteristics.level is None else self.bot.characteristics.level
         occupation = "Unknown" if self.bot.occupation is None else self.bot.occupation
         position = ((0, 0), 0) if self.bot.position is None else self.bot.position
         try:

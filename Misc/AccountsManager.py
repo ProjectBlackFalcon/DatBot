@@ -321,7 +321,7 @@ class AccountManager:
                 (bot.credentials['name'], bot.credentials['name']))
             for data in cursor:
                 bot.kamas = data[3]
-                bot.level = data[4]
+                bot.characteristics.level = data[4]
                 bot.occupation = data[5]
                 bot.position = (data[6], data[7])
                 bot.last_update = str(data[8])

@@ -1,6 +1,8 @@
 from Interface import Interface
 from HighLevelFunctions import HighLevelFunctions
 from LowLevelFunctions import LowLevelFunctions
+from Inventory import Inventory
+from Characteristics import Characteristics
 
 
 class Bot:
@@ -11,13 +13,13 @@ class Bot:
         self.interface = Interface(self, color=color)
         self.llf = llf  # type: LowLevelFunctions
         self.hf = HighLevelFunctions(self)
-        self.stats = None
         self.occupation = None
         self.position = None
         self.connected = False
         self.in_fight = False
         self.subscribed = subscribed
-        self.kamas = None
+        self.inventory = Inventory()
+        self.characteristics = Characteristics()
         self.level = None
         self.mount = None
         self.llf.add_bot_db(self.credentials['username'], self.credentials['password'], self.credentials['name'], self.credentials['server'])
