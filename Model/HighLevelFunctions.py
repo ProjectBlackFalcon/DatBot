@@ -566,7 +566,7 @@ class HighLevelFunctions:
         else:
             return False
 
-    def sell_all(self, subscribed):
+    def sell_all(self):
         if not self.bot.connected:
             self.bot.interface.connect()
         with open('../Utils/hdv_pos.json', 'r') as f:
@@ -574,7 +574,7 @@ class HighLevelFunctions:
 
         hdvs = []
         for position in all_hdvs.values():
-            if subscribed:
+            if self.bot.subscribed:
                 hdvs.append(position[0])
             else:
                 if len(position) == 3:
