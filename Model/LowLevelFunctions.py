@@ -217,8 +217,7 @@ class LowLevelFunctions:
 
     def format_worn_stuff(self, inventory):
         worn_repr = []
-        items = inventory['Items']
-        for item in items:
+        for item in inventory.items:
             if item[4] != 63:
                 worn_repr.append([self.get_item_iconid(item[1]), str(item[1]) + '-' + item[0].replace(' ', '-').replace("'", '')])
         return str(worn_repr).replace("'", '"')
@@ -379,13 +378,12 @@ class LowLevelFunctions:
                                        database=dc.database)
         cursor = conn.cursor()
         try:
-            if bot.stats is not None:
-                stats_no_inv = copy.deepcopy(bot.stats)
-                del stats_no_inv['Inventory']
-                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.stats['Inventory']), str(stats_no_inv).replace("'", '"'), name))
+            if bot.characteristics is not None:
+                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.inventory), str(bot.characteristics).replace("'", '"'), name))
             else:
                 cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
         except TypeError as e:
+            # print(traceback.format_exc())
             print("Not uploading that")
         except Exception:
             with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
@@ -440,10 +438,10 @@ class LowLevelFunctions:
 
     def get_caracs_to_augment(self, bot):
         caracs_names = ['Vi', 'Int', 'Agi', 'Cha', 'Fo', 'Sa']
-        caracs = bot.stats['Caracs']
+        caracs = bot.characteristics.get_primary_characs()
         native_caracs = [caracs[name][0] for name in caracs.keys() if name != "Available"]
         with open('../Utils/CaracLevel.json', 'r') as f:
-            goal_caracs = json.load(f)[bot.level]
+            goal_caracs = json.load(f)[bot.characteristics.level]
         difference = [goal_caracs[i] - native_caracs[i] for i in range(len(native_caracs))]
         costs = [difference[0]] + \
                 [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
