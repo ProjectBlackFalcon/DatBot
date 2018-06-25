@@ -85,5 +85,9 @@ public class GameFightFighterInformations extends GameContextActorInformations {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "GameFightFighterInformations [teamId=" + teamId + ", wave=" + wave + ", alive=" + alive + ", stats=" + stats + ", previousPositions=" + previousPositions + ", getContextualId()=" + getContextualId() +  ", toString()=" + super.toString() + "]";
+	}
 
 }

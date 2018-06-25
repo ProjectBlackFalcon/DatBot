@@ -12,8 +12,4 @@ public class OtherEntity extends Entity{
 		super(info);
 	}
 
-	@Override
-	public String toString() {
-		return "OtherEntity : "+getInfo().getContextualId();
-	}
 }

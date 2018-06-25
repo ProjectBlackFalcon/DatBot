@@ -21,6 +21,7 @@ import protocol.network.messages.game.context.fight.character.GameFightRefreshFi
 import protocol.network.messages.game.context.fight.character.GameFightShowFighterMessage;
 import protocol.network.types.game.context.IdentifiedEntityDispositionInformations;
 import protocol.network.types.game.context.fight.GameFightCharacterInformations;
+import protocol.network.types.game.context.fight.GameFightFighterInformations;
 import protocol.network.types.game.context.fight.GameFightMonsterInformations;
 import utils.GameData;
 
@@ -210,14 +211,12 @@ public class IntelligencePacketHandler {
 
     }
 
+    //Tested
     public void gameFightHumanReadyState(GameFightHumanReadyStateMessage message){
-        int index = ia.entityExists(message.getCharacterId());
-        if(index != -1){
-            Entity entity = ia.getEntities().get(index);
-            entity.setRdy(true);
-        } else {
-            Log.writeLogErrorMessage("Character id : " + message.getCharacterId() + " should have been initialized !");
-        }
+    	if(message.getCharacterId() == this.ia.getNetwork().getInfo().getActorId()){
+    		this.ia.getMain().setRdy(true);
+    		Log.writeLogDebugMessage("Setting rdy");
+    	}
     }
 
     public void gameFightJoin(GameFightJoinMessage message){
@@ -248,6 +247,7 @@ public class IntelligencePacketHandler {
 
     }
 
+    //Tested
     public void gameFightPlacementPossiblePositions(GameFightPlacementPossiblePositionsMessage message){
         if(message.getTeamNumber() == 0){
             this.ia.getMap().setStartPosAvailable(message.getPositionsForChallengers());
@@ -268,8 +268,9 @@ public class IntelligencePacketHandler {
 
     }
 
+    //Tested
     public void gameFightShowFighter(GameFightShowFighterMessage message){
-        int index = ia.entityExists(message.getInformations().getContextualId());
+        int index = ia.entityExists( message.getInformations().getContextualId());
         Entity entity;
         if(index != -1){
            entity = ia.getEntities().get(index);
@@ -281,7 +282,8 @@ public class IntelligencePacketHandler {
             }
         }
         entity.setInfo(message.getInformations());
-        if(message.getClass().getSimpleName().equals("GameFightCharacterInformations")){
+        entity.setPosition(MapIA.reshapeToIA(message.getInformations().getDisposition().getCellId()));
+        if(message.getInformations().getClass().getSimpleName().equals("GameFightCharacterInformations")){
             entity.setLvl(((GameFightCharacterInformations) message.getInformations()).getLevel());
             entity.setBreed(((GameFightCharacterInformations) message.getInformations()).getBreed());
         } else {
@@ -291,7 +293,7 @@ public class IntelligencePacketHandler {
         if(index == -1){
             this.ia.addEntity(entity);
         }
-
+        Log.writeLogDebugMessage("Entity updating");
     }
 
     public void gameFightPlacementSwapPositions(GameFightPlacementSwapPositionsMessage message){
@@ -306,11 +308,13 @@ public class IntelligencePacketHandler {
 
     }
 
+    //Tested
     public void gameFightResume(GameFightResumeMessage message){
-
+    	this.ia.setInitResume(true);
     }
 
-    public void gameFightStarting(GameFightStartingMessage message){
+    //Tested
+    public void gameFightStarting(GameFightStartingMessage message) throws Exception{
         this.ia.init(new ArrayList<>(),new MapIA(this.ia.getNetwork().getMap().getCells()));
         this.ia.setInit(false); //All init packets will arrived after, until BasioNoOperationMessage
     }
@@ -319,17 +323,21 @@ public class IntelligencePacketHandler {
 
     }
 
+    //Tested
     public void gameFightSynchronize(GameFightSynchronizeMessage message){
         for (int i = 0 ; i < this.ia.getEntities().size() ; i++){
             for (int j = 0 ; j < message.getFighters().size() ; j++){
                 if(message.getFighters().get(j).getContextualId() == this.ia.getEntities().get(i).getInfo().getContextualId()){
                     this.ia.getEntities().get(i).setInfo(message.getFighters().get(j));
+                    this.ia.getEntities().get(i).setPosition(MapIA.reshapeToIA(message.getFighters().get(j).getDisposition().getCellId()));
+
                 }
             }
         }
-
+        this.ia.visualizeEntity();
     }
 
+    //Tested
     public void fighterStatsList(FighterStatsListMessage message){
         for (int i = 0 ; i < this.ia.getEntities().size() ; i++){
             if(this.ia.getEntities().get(i).getInfo().getContextualId() == this.ia.getNetwork().getInfo().getActorId()){
@@ -374,32 +382,41 @@ public class IntelligencePacketHandler {
 
     }
 
-    public void gameEntitiesDisposition(GameEntitiesDispositionMessage message){
+    //Tested
+    public void gameEntitiesDisposition(GameEntitiesDispositionMessage message) throws Exception{
         boolean samePos = true; // Permet de savoir si le packet est utile ou non, si quelqu'un a changé de place
         for(IdentifiedEntityDispositionInformations e : message.getDispositions()){
             int index = ia.entityExists(e.getId());
             Position position = MapIA.reshapeToIA(e.getCellId());
             if(index != -1){
-                if(position != ia.getEntities().get(index).getPosition()){
+                if(!position.deepEquals(ia.getEntities().get(index).getPosition())){
                     ia.getEntities().get(index).setPosition(position);
-                    samePos = false;
+                    ia.getEntities().get(index).getInfo().getDisposition().setCellId(e.getCellId());
+                    if(e.getId() != this.ia.getNetwork().getInfo().getActorId())
+                    	samePos = false;
                 }
             } else {
+            	Entity entity;
                 if(e.getId() == this.ia.getNetwork().getInfo().getActorId()){
-                    Entity entity = new MainEntity();
-                    entity.setPosition(position);
-                    this.ia.addEntity(entity);
+                	entity = new MainEntity();
                 } else {
-                    Entity entity = new OtherEntity();
-                    entity.setPosition(position);
-                    this.ia.addEntity(entity);
+                    entity = new OtherEntity();
                 }
+                GameFightFighterInformations info = new GameFightFighterInformations();
+                info.setContextualId(e.getId());
+                entity.setInfo(info);
+                entity.setPosition(position);
+                this.ia.addEntity(entity);
             }
         }
+        
         if(this.ia.isInit() && !samePos){
+        	Log.writeLogDebugMessage("Finding best position from gameEntitiesDispositions");
+        	this.ia.getBestPlacement();
             //TODO HANDLE BEST POSITION :
             // Attendre gaussienne -> déplacer
         }
+        this.ia.visualizeEntity();
     }
 
     public void gameMapMovement(GameMapMovementMessage message){

@@ -394,7 +394,7 @@ public class Network extends DisplayInfo implements Runnable {
 		iaPacket.gameFightJoin(gameFightJoinMessage);
 	}
 	
-	private void handleGameEntitiesDispositionMessage(DofusDataReader dataReader) {
+	private void handleGameEntitiesDispositionMessage(DofusDataReader dataReader) throws Exception {
 		GameEntitiesDispositionMessage gameEntitiesDispositionMessage = new GameEntitiesDispositionMessage();
 		gameEntitiesDispositionMessage.Deserialize(dataReader);
 		iaPacket.gameEntitiesDisposition(gameEntitiesDispositionMessage);
@@ -472,7 +472,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 46, 15, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 46, 18, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -1008,7 +1008,8 @@ public class Network extends DisplayInfo implements Runnable {
 				handleMapRequestMessage(dataReader);
 				break;
 			case 176:
-			    this.intelligence.setInit(true);
+				if(this.getInfo().isJoinedFight())
+					this.intelligence.setInit(true);
 				info.setBasicNoOperationMsg(true);
 				break;
 			case 226:
@@ -1143,6 +1144,7 @@ public class Network extends DisplayInfo implements Runnable {
 				handleGameFightTurnEndMessage(dataReader);
 				break;
 			case 720:
+				this.getInfo().setJoinedFight(false);
                 GameFightEndMessage gameFightEndMessage = new GameFightEndMessage();
                 gameFightEndMessage.Deserialize(dataReader);
                 iaPacket.gameFightEnd(gameFightEndMessage);
@@ -1548,6 +1550,7 @@ public class Network extends DisplayInfo implements Runnable {
 				iaPacket.gameFightResume(gameFightResumeMessage);
 				break;
 			case 700:
+				this.getInfo().setJoinedFight(true);
 				GameFightStartingMessage gameFightStartingMessage = new GameFightStartingMessage();
 				gameFightStartingMessage.Deserialize(dataReader);
 				iaPacket.gameFightStarting(gameFightStartingMessage);

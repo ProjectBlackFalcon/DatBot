@@ -13,11 +13,6 @@ public class MainEntity extends Entity{
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "MainEntity : "+getInfo().getContextualId();
-	}
-
     public CharacterCharacteristicsInformations getAdditionalInfo() {
         return additionalInfo;
     }
@@ -25,4 +20,12 @@ public class MainEntity extends Entity{
     public void setAdditionalInfo(CharacterCharacteristicsInformations additionalInfo) {
         this.additionalInfo = additionalInfo;
     }
+
+	@Override
+	public String toString() {
+		return "MainEntity [additionalInfo=" + additionalInfo + "]" + super.toString();
+	}
+    
+    
+
 }

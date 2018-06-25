@@ -49,7 +49,10 @@ public abstract class Entity {
 		
 	}
 	
-	public abstract String toString();
+	@Override
+	public String toString() {
+		return "Entity [isRdy=" + isRdy + ", position=" + position + ", breed=" + breed + ", lvl=" + lvl + ", info=" + info + ", effects=" + effects + ", spells=" + spells + "]";
+	}
 
 	public List<Spell> getSpells() {
 		return spells;

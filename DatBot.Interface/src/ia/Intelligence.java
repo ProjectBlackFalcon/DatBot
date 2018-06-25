@@ -3,9 +3,11 @@ package ia;
 import java.util.List;
 
 import ia.entities.entity.Entity;
+import ia.entities.entity.MainEntity;
 import ia.map.MapIA;
+import ia.map.Position;
+import ia.utils.UtilsProtocol;
 import protocol.network.Network;
-import protocol.network.NetworkMessage;
 
 public class Intelligence {
 	
@@ -13,6 +15,7 @@ public class Intelligence {
 	private List<Double> turnList;
 	private MapIA map;
 	private Network network;
+	public UtilsProtocol utils;
 
 	private boolean isInit;
 
@@ -23,19 +26,71 @@ public class Intelligence {
 	public void init(List<Entity> entities, MapIA map) {
 		this.entities = entities;
 		this.map = map;
+		utils = new UtilsProtocol(network);
+	}
+	
+	public void getBestPlacement() throws Exception{
+		int bestCell = getBestCell();
+		if(bestCell == getMain().getInfo().getDisposition().getCellId()){
+			if(!getMain().isRdy()){
+				utils.stop(0.30);
+				utils.fightReady();
+			}
+			Log.writeLogDebugMessage("Same cell, not moving");
+			return;
+		}
+		Log.writeLogDebugMessage("Cell found : " + bestCell);
+		if(getMain().isRdy()){
+			utils.stop(0.30);
+			utils.fightNotReady();
+		}
+		utils.stop(0.20);
+		utils.setBeginingPosition(bestCell);
+		getMain().setRdy(true);
+		utils.stop(0.25);
+		utils.fightReady();
 	}
 
-	public void getTurn(){
-
+	private int getBestCell() {
+		int cell = -1;
+		int max = Integer.MAX_VALUE;
+		for (Integer cellAvailable : this.map.getStartPosAvailable()) {
+			int temp = getTotalDistance(MapIA.reshapeToIA(cellAvailable));
+			if(temp < max){
+				max = temp;
+				cell = cellAvailable;
+			}
+		}
+		return cell;
 	}
+
+	private int getTotalDistance(Position cellPos) {
+		int total = 0;
+		Entity main = getMain();
+		for (Entity entity : entities) {
+			if(entity.getInfo().getTeamId() != main.getInfo().getTeamId()){
+				total += Position.distance(entity.getPosition(), cellPos);
+			}
+		}
+		return total;
+	}
+
 
 	public int entityExists(double id){
 		for (int i = 0 ; i < this.entities.size() ; i++){
-			if(entities.get(i).getInfo().getContextualId() == id){
+			if(entities.get(i).getInfo() != null && entities.get(i).getInfo().getContextualId() == id){
 				return i;
 			}
 		}
 		return -1;
+	}
+	
+	public Entity getMain(){
+		for (Entity entity : entities) {
+			if(entity.getClass().equals(MainEntity.class))
+				return entity;
+		}
+		return null;
 	}
 
 	public void addEntity(Entity entity){
@@ -70,13 +125,27 @@ public class Intelligence {
         return isInit;
     }
 
-    public void setInit(boolean init) {
-	    if(!init){
+    public void setInit(boolean init) throws Exception {
+	    if(!isInit && init){
 	        //TODO HANDLE BEST POSITION
             //init should only be false when the fightStarting packet is received and then be always true
+	    	getBestPlacement();
+	    	Log.writeLogDebugMessage("Finding best position from init");
+	    	visualizeEntity();
         }
         isInit = init;
     }
+    
+    public void setInitResume(boolean init) {
+        isInit = init;
+    }
+
+	public void visualizeEntity() {
+		System.out.println("Number of entity : " +entities.size());
+		for (Entity e :  getEntities()) {
+			System.out.println(e);
+		}
+	}
 
     public List<Double> getTurnList() {
         return turnList;

@@ -70,5 +70,9 @@ public class CharacterBaseCharacteristic extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "CharacterBaseCharacteristic [base=" + base + ", additionnal=" + additionnal + ", objectsAndMountBonus=" + objectsAndMountBonus + ", alignGiftBonus=" + alignGiftBonus + ", contextModif=" + contextModif + "]";
+	}
 
 }

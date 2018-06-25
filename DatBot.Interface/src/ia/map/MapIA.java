@@ -27,9 +27,8 @@ public class MapIA {
 		
 	}
 	
-	//TODO Do the stuff
 	public TransformedCell[][] reshapeToIA(List<CellData> cells){
-		TransformedCell[][] transformedCells = new TransformedCell[33][33];
+		TransformedCell[][] transformedCells = new TransformedCell[34][34];
 		for(int i = 0; i < cells.size(); i++) {
 			Position pos = reshapeToIA(i);
 			transformedCells[pos.getX()][pos.getY()] = new TransformedCell(pos.getX(), pos.getY(), cells.get(i).isLos(), cells.get(i).isMov());
@@ -52,12 +51,13 @@ public class MapIA {
 			output_j = 13 + input_j / 2 - input_i;
 		}
 
-		if(output_i < 33 & output_j < 33) {
+		if(output_i <= 33 & output_j <= 33) {
 			return new Position(output_i,output_j);
 		}else {
-			return null;
+			return new Position(0,0);
 		}
 	}
+	
 	
 	boolean hasLineOfSight(Position p1, Position p2) {
 		return false;
