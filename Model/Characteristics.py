@@ -16,3 +16,7 @@ class Characteristics:
         self.fo = None
         self.sa = None
         self.available_stat_points = None
+
+    def get_primary_characs(self):
+        names = ['Vi', 'Int', 'Agi', 'Cha', 'Fo', 'Sa', 'Available']
+        return dict(zip(names, [self.vi, self.int, self.agi, self.cha, self.fo, self.sa, self.available_stat_points]))
