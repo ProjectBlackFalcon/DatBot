@@ -34,6 +34,7 @@ public class Intelligence {
 		if(bestCell == getMain().getInfo().getDisposition().getCellId()){
 			if(!getMain().isRdy()){
 				utils.stop(0.30);
+				getMain().setRdy(true);
 				utils.fightReady();
 			}
 			Log.writeLogDebugMessage("Same cell, not moving");
@@ -44,7 +45,7 @@ public class Intelligence {
 			utils.stop(0.30);
 			utils.fightNotReady();
 		}
-		utils.stop(0.20);
+		utils.stop(1);
 		utils.setBeginingPosition(bestCell);
 		getMain().setRdy(true);
 		utils.stop(0.25);
@@ -129,6 +130,7 @@ public class Intelligence {
 	    if(!isInit && init){
 	        //TODO HANDLE BEST POSITION
             //init should only be false when the fightStarting packet is received and then be always true
+			utils.stop(1.32);
 	    	getBestPlacement();
 	    	Log.writeLogDebugMessage("Finding best position from init");
 	    	visualizeEntity();

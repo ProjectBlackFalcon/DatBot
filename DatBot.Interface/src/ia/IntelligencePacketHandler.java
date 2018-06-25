@@ -413,8 +413,6 @@ public class IntelligencePacketHandler {
         if(this.ia.isInit() && !samePos){
         	Log.writeLogDebugMessage("Finding best position from gameEntitiesDispositions");
         	this.ia.getBestPlacement();
-            //TODO HANDLE BEST POSITION :
-            // Attendre gaussienne -> déplacer
         }
         this.ia.visualizeEntity();
     }
