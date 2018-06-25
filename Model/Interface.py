@@ -523,14 +523,6 @@ class Interface:
         """
         return self.execute_command('attackMonster', [mob_id])
 
-    def get_hdv_sign(self):
-        # TODO
-        """
-        Returns the cell of the hdv sign
-        :return: False / cell_id
-        """
-        return self.execute_command('getHdvSign')
-
     def open_hdv(self):
         # TODO
         """
