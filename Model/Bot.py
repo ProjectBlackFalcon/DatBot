@@ -18,7 +18,7 @@ class Bot:
         self.connected = False
         self.in_fight = False
         self.subscribed = subscribed
-        self.inventory = Inventory()
+        self.inventory = Inventory(self)
         self.characteristics = Characteristics()
         self.level = None
         self.mount = None

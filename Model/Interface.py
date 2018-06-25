@@ -772,5 +772,26 @@ class Interface:
         self.get_player_stats()
         return ret_val
 
+    def equip_item(self, inv_id, slot):
+        """
+        Equips the selected item in the slot
+        :param inv_id: Inventory id if the selected item
+        :param slot: Slot the item should go to
+        :return: Boolean
+        """
+        ret_val = self.execute_command('equipItem', [inv_id, slot])
+        self.get_player_stats()
+        return ret_val
+
+    def de_equip_item(self, slot):
+        """
+        De-equips the item in the slot
+        :param slot: Slot the item should go to
+        :return: Boolean
+        """
+        ret_val = self.execute_command('equipItem', [slot])
+        self.get_player_stats()
+        return ret_val
+
 
 __author__ = 'Alexis'
