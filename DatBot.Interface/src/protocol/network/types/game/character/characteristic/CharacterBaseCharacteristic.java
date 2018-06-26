@@ -32,8 +32,9 @@ public class CharacterBaseCharacteristic extends NetworkMessage {
 	public void setAlignGiftBonus(int alignGiftBonus) { this.alignGiftBonus = alignGiftBonus; };
 	public int getContextModif() { return this.contextModif; };
 	public void setContextModif(int contextModif) { this.contextModif = contextModif; };
-	public int getTotal() {return this.base+this.additionnal+this.objectsAndMountBonus; };
+	public int getTotal() { return this.base + this.additionnal + this.objectsAndMountBonus + this.alignGiftBonus + this.contextModif; };
 
+	
 	public CharacterBaseCharacteristic(){
 	}
 
