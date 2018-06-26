@@ -6,6 +6,7 @@ import datetime
 import Database_credentials as dc
 import os
 import traceback
+import bz2
 
 
 class LowLevelFunctions:
@@ -392,16 +393,17 @@ class LowLevelFunctions:
         conn.commit()
         conn.close()
 
-    def push_log_file(self, file_path):
+    def push_log_file(self, file_path, logtype, compress=False):
         with open(file_path, 'r') as f:
             contents = ''.join(f.readlines())
-        print(contents)
         if contents:
             try:
+                if compress:
+                    contents = bz2.compress(contents)
                 conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                                database=dc.database)
                 cursor = conn.cursor()
-                cursor.execute("""INSERT INTO PacketErrors (log) VALUES ('{}')""".format(contents))
+                cursor.execute("""INSERT INTO {} (log) VALUES ('{}')""".format(logtype, contents))
                 conn.commit()
                 conn.close()
                 with open(file_path, 'w') as f:
