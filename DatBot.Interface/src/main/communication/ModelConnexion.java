@@ -12,7 +12,6 @@ import game.plugin.Dragodinde;
 import game.plugin.Hunt;
 import protocol.enums.BoostableCharacteristicEnum;
 import protocol.network.Network;
-import protocol.network.NetworkMessage;
 import protocol.network.messages.game.context.mount.MountFeedRequestMessage;
 import protocol.network.messages.game.context.mount.MountSetXpRatioRequestMessage;
 import protocol.network.messages.game.context.mount.MountToggleRidingRequestMessage;
@@ -1562,6 +1561,7 @@ public class ModelConnexion {
 						TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
 						getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
 						if (this.waitToSendMap(this.network.getMap().getId())) {
+							this.network.getInfo().setHavenBag(false);
 							stop(1);
 							toSend = getMap();
 						}
