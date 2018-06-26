@@ -10,6 +10,5 @@ bot = Bot(pipe, 0, test_account_credentials, llf, True)
 
 bot.interface.connect()
 time.sleep(2)
-bot.interface.get_hunt_clue()
 bot.interface.disconnect()
 pipe.p.terminate()
