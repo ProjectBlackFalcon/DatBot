@@ -66,8 +66,10 @@ class HighLevelFunctions:
             if worldmap == current_worldmap and self.llf.distance_coords(current_map, tuple(target_coord)) > distance_zaap_target+5:
                 if self.bot.interface.enter_heavenbag()[0]:
                     self.bot.interface.use_zaap(closest_zaap)
+                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                     while tuple(current_map) != tuple(closest_zaap):
                         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+                        self.bot.interface.enter_heavenbag()
                         self.bot.interface.use_zaap(closest_zaap)
                         time.sleep(2)
 
