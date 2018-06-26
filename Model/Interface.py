@@ -180,6 +180,7 @@ class Interface:
                 self.bot.connected = False
                 self.bot.occupation = 'Sleeping'
                 self.bot.hf.update_db()
+                self.bot.llf.push_log_file('../packetErrors.txt')
         return success
 
     def get_map(self):

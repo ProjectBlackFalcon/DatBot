@@ -392,6 +392,25 @@ class LowLevelFunctions:
         conn.commit()
         conn.close()
 
+    def push_log_file(self, file_path):
+        with open(file_path, 'r') as f:
+            contents = ''.join(f.readlines())
+        print(contents)
+        if contents:
+            try:
+                conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                               database=dc.database)
+                cursor = conn.cursor()
+                cursor.execute("""INSERT INTO PacketErrors (log) VALUES ('{}')""".format(contents))
+                conn.commit()
+                conn.close()
+                with open(file_path, 'w') as f:
+                    f.write('')
+            except Exception:
+                with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
+                    f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                    f.write(traceback.format_exc())
+
     def dds_to_db(self, bot_name, dds):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                        database=dc.database)
