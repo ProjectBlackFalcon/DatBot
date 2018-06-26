@@ -101,8 +101,8 @@ public class SellerBuyerDescriptor extends NetworkMessage {
 				this.types.add(_loc16_);
 				_loc5_++;
 			}
-			this.taxPercentage = reader.readDouble();
-			this.taxModificationPercentage = reader.readDouble();
+			this.taxPercentage = reader.readFloat();
+			this.taxModificationPercentage = reader.readFloat();
 			this.maxItemLevel = reader.readByte();
 			this.maxItemPerAccount = reader.readVarInt();
 			this.npcContextualId = reader.readInt();

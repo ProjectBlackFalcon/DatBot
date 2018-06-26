@@ -143,9 +143,15 @@ public class Interactive {
 	 * @return int skillUid
 	 * @return -1 else
 	 */
-	public int getSkill(int idInteractive) {
+	public int getSkill(int idInteractive, int skillId) {
 		for (InteractiveElement i : this.getInteractiveElements()) {
-			if (i.getElementId() == idInteractive) { return i.getEnabledSkills().get(0).getSkillInstanceUid(); }
+			if (i.getElementId() == idInteractive) { 
+				for (InteractiveElementSkill skill : i.getEnabledSkills()) {
+					if(skill.getSkillId() == skillId){
+						return skill.getSkillInstanceUid();
+					}
+				}
+			}
 		}
 		return -1;
 	}
