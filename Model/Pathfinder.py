@@ -285,11 +285,15 @@ class PathFinder:
             end_map_cells = self.llf.coord_fetch_map('{};{}'.format(self.end[0], self.end[1]), self.worldmap)
             map_change_cells = list(set([i for i in range(28)] + [i for i in range(560) if i % 14 == 0] + [i for i in range(560) if i % 14 == 13] + [i for i in range(532, 560)]))
             found_walkable = False
-            while not found_walkable:
+            timeout = 10
+            timer = time.time()
+            while not found_walkable and (time.time()-timer < timeout):
                 x, y = self.cell2coord(map_change_cells[randint(0, len(map_change_cells)-1)])
                 if end_map_cells[y][x] == 0:
                     found_walkable = True
                 self.end_cell = self.coord2cell((y, x))
+            if not found_walkable:
+                raise Exception('Map is innacessible')
         return self.end_cell
 
     def pick_start_cell(self):
