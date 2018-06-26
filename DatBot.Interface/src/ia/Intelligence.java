@@ -6,6 +6,7 @@ import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.map.MapIA;
 import ia.map.Position;
+import ia.utils.UtilsMath;
 import ia.utils.UtilsProtocol;
 import protocol.network.Network;
 
@@ -16,6 +17,7 @@ public class Intelligence {
 	private MapIA map;
 	private Network network;
 	public UtilsProtocol utils;
+	public UtilsMath math;
 
 	private boolean isInit;
 
@@ -27,6 +29,7 @@ public class Intelligence {
 		this.entities = entities;
 		this.map = map;
 		utils = new UtilsProtocol(network);
+		math = new UtilsMath(network,this);
 	}
 	
 	public void getBestPlacement() throws Exception{
@@ -70,7 +73,7 @@ public class Intelligence {
 		Entity main = getMain();
 		for (Entity entity : entities) {
 			if(entity.getInfo().getTeamId() != main.getInfo().getTeamId()){
-				total += Position.distance(entity.getPosition(), cellPos);
+				total += math.getPath(entity.getPosition(), cellPos, false).size();
 			}
 		}
 		return total;
@@ -85,6 +88,15 @@ public class Intelligence {
 		}
 		return -1;
 	}
+	
+	public Entity getEntity(double id){
+		for (Entity entity : entities) {
+			if(entity.getInfo().getContextualId() == id)
+				return entity;
+		}
+		return null;
+	}
+	
 	
 	public Entity getMain(){
 		for (Entity entity : entities) {

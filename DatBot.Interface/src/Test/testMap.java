@@ -27,7 +27,10 @@ public class testMap {
 	public static void main(String[] args) throws IOException, InterruptedException {
 //		double test = ((double)148)/200;
 //		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
-//		System.out.println(GameData.getMountBehaviorName(3));
-        System.out.println("IntelliJ c'est génial 2!");
+		System.out.println(GameData.getKeyCaracs(GameData.getCharacFromEffect(GameData.getEffectIdFromSpell(161,76945).intValue())));
+		for(int i = 1; i <= 110;i++){
+			System.out.println(GameData.getKeyCaracs(i));
+		}
 	}
 }
+		

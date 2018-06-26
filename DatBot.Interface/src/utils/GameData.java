@@ -100,6 +100,39 @@ public class GameData {
 		return getDataFromFile(id,"Items","realWeight");
 	}
 	
+	public static String getKeyCaracs(int id){
+		return getDataFromFile(id,"Characteristics","keyword");
+	}
+	
+	public static Integer getEffectIdFromSpell(int id, int uid){
+		List<Spell> spells = new ArrayList<>();
+		Spell s1 = getSpell(id, 1); if (s1 != null) spells.add(s1);
+		Spell s2 = getSpell(id, 2); if (s2 != null) spells.add(s2);
+		Spell s3 = getSpell(id, 3); if (s3 != null) spells.add(s3);
+		for (Spell spell : spells)
+		{
+			Effect[] e = spell.getEffects();
+			for (Effect effect : e)
+			{
+				if(effect.getEffectUid() == uid){
+					return effect.getEffectId();
+				}
+			}
+			Effect[] ce = spell.getCriticalEffect();
+			for (Effect effect : ce)
+			{
+				if(effect.getEffectUid() == uid){
+					return effect.getEffectId();
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static int getCharacFromEffect(int id){
+		return Integer.parseInt(getDataFromFile(id,"Effects","characteristic"));
+	}
+	
 	public static String getNameServer(int id){
 		return d2iManager.getText(getDataFromFile(id,"Servers"));
 	}
@@ -186,6 +219,7 @@ public class GameData {
 		try {
 			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\SpellLevels.d2o");
 			String s = d2oManager.searchObjectById(idSpell);
+			if(s == "") return null;
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
 			s = s.replace("}", "");

@@ -48,11 +48,12 @@ public class IntelligencePacketHandler {
     }
 
     public void gameActionFightDeath(GameActionFightDeathMessage message){
-
+    	Entity e = this.ia.getEntity(message.getTargetId());
+    	e.getInfo().setAlive(false);
     }
 
     public void gameActionFightDispellableEffect(GameActionFightDispellableEffectMessage message){
-
+    	    	
     }
 
     public void gameActionFightDispellEffect(GameActionFightDispellEffectMessage message){
@@ -100,7 +101,6 @@ public class IntelligencePacketHandler {
     }
 
     public void gameActionFightLifePointsLost(GameActionFightLifePointsLostMessage message){
-
     }
 
     public void gameActionFightMarkCells(GameActionFightMarkCellsMessage message){
@@ -116,7 +116,12 @@ public class IntelligencePacketHandler {
     }
 
     public void gameActionFightPointsVariation(GameActionFightPointsVariationMessage message){
-
+    	Entity e = this.ia.getEntity(message.getTargetId());
+    	if(message.getActionId() == 102){
+    		e.getInfo().getStats().setActionPoints(e.getInfo().getStats().getActionPoints() + message.getDelta());
+    	} else if(message.getActionId() == 129){
+    		e.getInfo().getStats().setMovementPoints(e.getInfo().getStats().getMovementPoints() + message.getDelta());
+    	}
     }
 
     public void gameActionFightReduceDamages(GameActionFightReduceDamagesMessage message){
@@ -132,7 +137,9 @@ public class IntelligencePacketHandler {
     }
 
     public void gameActionFightSlide(GameActionFightSlideMessage message){
-
+    	Entity e = this.ia.getEntity(message.getTargetId());
+    	e.setPosition(MapIA.reshapeToIA(message.getEndCellId()));
+    	e.getInfo().getDisposition().setCellId(message.getEndCellId());
     }
 
     public void gameActionFightSpellCast(GameActionFightSpellCastMessage message){
