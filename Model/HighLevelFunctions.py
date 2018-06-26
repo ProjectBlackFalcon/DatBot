@@ -68,6 +68,7 @@ class HighLevelFunctions:
                     self.bot.interface.use_zaap(closest_zaap)
                     while tuple(current_map) != tuple(closest_zaap):
                         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+                        self.bot.interface.use_zaap(closest_zaap)
                         time.sleep(2)
 
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
