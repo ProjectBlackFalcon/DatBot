@@ -21,6 +21,7 @@ import protocol.network.messages.game.approach.AuthenticationTicketMessage;
 import protocol.network.messages.game.basic.BasicLatencyStatsMessage;
 import protocol.network.messages.game.basic.SequenceNumberMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectedForceReadyMessage;
+import protocol.network.messages.game.character.choice.CharacterSelectedSuccessMessage;
 import protocol.network.messages.game.character.choice.CharacterSelectionMessage;
 import protocol.network.messages.game.character.choice.CharactersListMessage;
 import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
@@ -472,7 +473,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 46, 18, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 47, 3, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -983,6 +984,9 @@ public class Network extends DisplayInfo implements Runnable {
 					HandleCharacterListRequestMessage();
 				}
 				break;
+			case 6072:
+				sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Logging back into combat");
+				break;
 			case 6253:
 				HandleRawDataMessage();
 				break;
@@ -991,6 +995,12 @@ public class Network extends DisplayInfo implements Runnable {
 				break;
 			case 151:
 				handleCharacterSelectionMessage(dataReader);
+				break;
+			case 153:
+				CharacterSelectedSuccessMessage selectedSuccessMessage = new CharacterSelectedSuccessMessage();
+				selectedSuccessMessage.Deserialize(dataReader);
+				this.info.setActorId(selectedSuccessMessage.getInfos().getId());
+				info.setLvl(selectedSuccessMessage.getInfos().getLevel());
 				break;
 			case 1301:
 				HandleFriendIgnoreSpouseMessages();

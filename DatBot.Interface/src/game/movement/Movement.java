@@ -23,7 +23,7 @@ public class Movement {
 	public CellMovement MoveToCell(int cellId) throws Exception {
 		if (this.network.getMap().getCells().get(cellId).isMov()) {
 			if (this.network.getInfo().isJoinedFight()) {
-				CellMovement mov = new CellMovement(new Pathfinder(this.network).findPath(this.network.getInfo().getCellId(), cellId, false, false), this.getNetwork());
+				CellMovement mov = new CellMovement(new Pathfinder(this.network).findPath(this.network.getIntelligence().getMain().getInfo().getDisposition().getCellId(), cellId, false, false), this.getNetwork());
 				return mov;
 			}
 			else {

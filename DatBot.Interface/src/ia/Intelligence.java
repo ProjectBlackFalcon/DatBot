@@ -145,7 +145,7 @@ public class Intelligence {
 			utils.stop(1.32);
 	    	getBestPlacement();
 	    	Log.writeLogDebugMessage("Finding best position from init");
-	    	visualizeEntity();
+	    	visualizeEntity("Init");
         }
         isInit = init;
     }
@@ -154,11 +154,13 @@ public class Intelligence {
         isInit = init;
     }
 
-	public void visualizeEntity() {
+	public void visualizeEntity(String whatIsTested) {
+		System.out.println("-----------------Testing "+ whatIsTested + "-----------------");
 		System.out.println("Number of entity : " +entities.size());
 		for (Entity e :  getEntities()) {
 			System.out.println(e);
 		}
+		System.out.println("");
 	}
 
     public List<Double> getTurnList() {

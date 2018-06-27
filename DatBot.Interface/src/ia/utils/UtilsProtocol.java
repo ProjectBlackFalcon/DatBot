@@ -5,18 +5,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
+import game.movement.CellMovement;
+import game.movement.PathElement;
 import ia.Log;
 import ia.entities.entity.MainEntity;
 import protocol.network.Network;
 import protocol.network.messages.game.context.fight.GameFightPlacementPositionRequestMessage;
 import protocol.network.messages.game.context.fight.GameFightReadyMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnFinishMessage;
 
 public class UtilsProtocol {
 
 	Network network;
 
-	public UtilsProtocol(Network network)
-	{
+	public UtilsProtocol(Network network) {
 		this.network = network;
 	}
 
@@ -25,8 +27,7 @@ public class UtilsProtocol {
 	 * 
 	 * @author baptiste
 	 */
-	public void fightReady() throws Exception
-	{
+	public void fightReady() throws Exception {
 		network.sendToServer(new GameFightReadyMessage(true), GameFightReadyMessage.ProtocolId, "Ready");
 	}
 
@@ -35,8 +36,7 @@ public class UtilsProtocol {
 	 * 
 	 * @author jikiw
 	 */
-	public void fightNotReady() throws Exception
-	{
+	public void fightNotReady() throws Exception {
 		network.sendToServer(new GameFightReadyMessage(false), GameFightReadyMessage.ProtocolId, "Not ready");
 	}
 
@@ -45,43 +45,52 @@ public class UtilsProtocol {
 	 * 
 	 * @author baptiste
 	 */
-	public void setBeginingPosition(int cellId) throws Exception
-	{
+	public void setBeginingPosition(int cellId) throws Exception {
 		GameFightPlacementPositionRequestMessage gameFightPlacementPositionRequestMessage = new GameFightPlacementPositionRequestMessage(cellId);
 		network.sendToServer(gameFightPlacementPositionRequestMessage, GameFightPlacementPositionRequestMessage.ProtocolId, "Placement position : " + cellId);
 	}
 
-	public void stop(double deviation) throws InterruptedException
-	{
+	/**
+	 * End the turn
+	 * 
+	 * @author baptiste
+	 */
+	public void endTurn() throws Exception {
+		network.append("Ending turn");
+		network.sendToServer(new GameFightTurnFinishMessage(false), GameFightTurnFinishMessage.ProtocolId, "End turn");
+	}
+
+	/**
+	 * Move the player during fight using MP
+	 * 
+	 * @param : int cellId
+	 * @return boolean moved
+	 * @author baptiste
+	 */
+	public boolean moveTo(int cellId) throws Exception {
+		CellMovement mov = this.network.getMovement().MoveToCell(cellId);
+		if (mov == null || mov.path == null) {
+			return false;
+		}
+		else if (this.network.getInfo().getCellId() == cellId) {
+			return true;
+		}
+		else {
+			mov.performMovement();
+			if (this.network.getInfo().getCellId() == cellId) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	public void stop(double deviation) throws InterruptedException {
 		double gauss = new Random().nextGaussian();
 		long timeStoped = (long) (Math.abs(gauss * deviation) * 1000);
 		System.out.println("---- Sleeping : " + timeStoped + " ----");
 		Thread.sleep(timeStoped);
-	}
-
-	public void service(String request, Integer value, MainEntity e)
-	{
-		try
-		{
-			LinkedHashMap<String, Runnable> map = new LinkedHashMap<>();
-			map.put("lifePoints", () -> e.getAdditionalInfo().setLifePoints(e.getAdditionalInfo().getLifePoints() + value));
-			mapRequest(request, map);
-		}
-		catch (Exception ex)
-		{
-			Log.writeLogErrorMessage(ex.getMessage());
-		}
-	}
-
-	private void mapRequest(String request, HashMap<String, Runnable> map)
-	{
-		for (Map.Entry<String, Runnable> entry : map.entrySet())
-		{
-			if (entry.getKey().equals(request))
-			{
-				entry.getValue().run();
-			}
-		}
 	}
 
 }
