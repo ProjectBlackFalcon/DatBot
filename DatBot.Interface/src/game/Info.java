@@ -526,7 +526,7 @@ public class Info {
 	public void setObjectUse(boolean objectUse) {
 		this.objectUse = objectUse;
 	}
-
+	
 	public boolean isPrintDc() {
 		return printDc;
 	}
