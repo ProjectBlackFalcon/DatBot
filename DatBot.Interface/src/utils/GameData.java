@@ -142,7 +142,7 @@ public class GameData {
         List<Spell> spellList = new ArrayList<>();
         boolean isGrade = false;
         try {
-            d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Monsters.d2o");
+            d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/Monsters.d2o");
             String s = d2oManager.searchObjectById(id);
             s = s.replace("{", "");
             s = s.replace(" ", "");
@@ -184,7 +184,7 @@ public class GameData {
 		D2oManager d2oManager;
 		List<Spell> spellList = new ArrayList<>();
 		try {
-			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Monsters.d2o");
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/Monsters.d2o");
 			String s = d2oManager.searchObjectById(id);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
@@ -217,7 +217,7 @@ public class GameData {
 		spell.setGrade(lvl);
 		spell.setSpellId(id);
 		try {
-			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\SpellLevels.d2o");
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/SpellLevels.d2o");
 			String s = d2oManager.searchObjectById(idSpell);
 			if(s == "") return null;
 			s = s.replace("{", "");
@@ -302,7 +302,7 @@ public class GameData {
 	public static int getSpellId(int id, int lvl) {
 		D2oManager d2oManager;
 		try {
-			d2oManager = new D2oManager(getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\Spells.d2o");
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/Spells.d2o");
 			String s = d2oManager.searchObjectById(id);
 			s = s.replace("{", "");
 			s = s.replace(" ", "");
