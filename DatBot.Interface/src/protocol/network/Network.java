@@ -139,8 +139,6 @@ public class Network extends DisplayInfo implements Runnable {
 		this.monsters = new Monsters();
 		this.hunt = new Hunt();
 		this.dragodinde = new Dragodinde();
-		this.intelligence = new Intelligence(this);
-		this.iaPacket = new IntelligencePacketHandler(this.intelligence);
 		latencyFrame = new LatencyFrame();
 		try {
 			this.npc = new Npc(this);
@@ -432,9 +430,11 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void handleGameMapMovementMessage(DofusDataReader dataReader) {
-		GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
-		gameMapMovementMessage.Deserialize(dataReader);
-		iaPacket.gameMapMovement(gameMapMovementMessage);
+		if(this.info.isJoinedFight()){
+			GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
+			gameMapMovementMessage.Deserialize(dataReader);
+			iaPacket.gameMapMovement(gameMapMovementMessage);
+		}
 	}
 
 	private void handleGameRolePlayArenaSwitchToFightServerMessage(DofusDataReader dataReader) throws IOException {
@@ -1560,6 +1560,8 @@ public class Network extends DisplayInfo implements Runnable {
 				iaPacket.gameFightResume(gameFightResumeMessage);
 				break;
 			case 700:
+				this.intelligence = new Intelligence(this);
+				this.iaPacket = new IntelligencePacketHandler(this.intelligence);
 				this.getInfo().setJoinedFight(true);
 				GameFightStartingMessage gameFightStartingMessage = new GameFightStartingMessage();
 				gameFightStartingMessage.Deserialize(dataReader);

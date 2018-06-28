@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.entities.entity.OtherEntity;
+import ia.fight.ChestIntelligence;
 import ia.map.MapIA;
 import ia.map.Position;
 import protocol.network.messages.game.actions.fight.GameActionFightActivateGlyphTrapMessage;
@@ -442,7 +443,7 @@ public class IntelligencePacketHandler {
 
 	//Tested
 	public void gameFightStarting(GameFightStartingMessage message) throws Exception {
-		this.ia.init(new ArrayList<>(), new MapIA(this.ia.getNetwork().getMap().getCells()));
+		this.ia.init(new ArrayList<>(), new MapIA(this.ia.getNetwork().getMap().getCells()), new ChestIntelligence(this.ia.utils));
 		this.ia.setInit(false); //All init packets will arrived after, until BasioNoOperationMessage
 	}
 
@@ -490,13 +491,23 @@ public class IntelligencePacketHandler {
 
 	public void gameFightTurnResume(GameFightTurnResumeMessage message) throws Exception {
 		//TODO TURN STARTING
+		if(this.ia.getMain().getSpells() == null){
+			this.ia.getMain().setSpells(this.ia.getNetwork().getInfo().getSpells());
+		}
+		this.ia.utils.stop(0.56);
+		this.ia.getFight().getBestTurn(this.ia.getMain(), this.ia.getEntities(), this.ia.getNetwork().getMap().getCells());
 	}
 
 	public void gameFightTurnStart(GameFightTurnStartMessage message) {
 	}
 
 	public void gameFightTurnStartPlaying() throws Exception {
+		if(this.ia.getMain().getSpells() == null){
+			this.ia.getMain().setSpells(this.ia.getNetwork().getInfo().getSpells());
+		}
 		//TODO TURN STARTING
+		this.ia.utils.stop(0.56);
+		this.ia.getFight().getBestTurn(this.ia.getMain(), this.ia.getEntities(), this.ia.getNetwork().getMap().getCells());
 	}
 
 	public void gameFightUpdateTeam(GameFightUpdateTeamMessage message) {
@@ -508,10 +519,15 @@ public class IntelligencePacketHandler {
 	}
 
 	//Tested
-	public void gameEntitiesDisposition(GameEntitiesDispositionMessage message) throws Exception {
+	public void gameEntitiesDisposition(GameEntitiesDispositionMessage message) throws Exception {		
 		boolean samePos = true; // Permet de savoir si le packet est utile ou non, si quelqu'un a changé de place
 		for (IdentifiedEntityDispositionInformations e : message.getDispositions()) {
 			int index = ia.entityExists(e.getId());
+			if(e.getCellId() < 0 | e.getCellId() > 599){
+				Log.writeLogDebugMessage("Spectator detected");
+				continue;
+			}
+			System.out.println("Updating entity");
 			Position position = MapIA.reshapeToIA(e.getCellId());
 			if (index != -1) {
 				if (!position.deepEquals(ia.getEntities().get(index).getPosition())) {
@@ -544,11 +560,19 @@ public class IntelligencePacketHandler {
 	}
 
 	public void gameMapMovement(GameMapMovementMessage message) {
-
+		Entity e = this.ia.getEntity(message.getActorId());
+		
+		if(e != null){
+			e.getInfo().getDisposition().setCellId(message.getKeyMovements().get(message.getKeyMovements().size() - 1));
+			e.setPosition(MapIA.reshapeToIA((message.getKeyMovements().get(message.getKeyMovements().size() - 1))));
+		}
 	}
 
-	public void sequenceEndMessage(SequenceEndMessage message) {
-
+	public void sequenceEndMessage(SequenceEndMessage message) throws Exception {
+		if((message.getSequenceType() == 1 || message.getSequenceType() == 5) && message.getAuthorId() == this.ia.getNetwork().getInfo().getActorId()){
+			this.ia.utils.stop(0.56);
+			this.ia.getFight().getBestTurn(this.ia.getMain(), this.ia.getEntities(), this.ia.getNetwork().getMap().getCells());
+		}
 	}
 
 	public void sequenceStartMessage(SequenceStartMessage message) {

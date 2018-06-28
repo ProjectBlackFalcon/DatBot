@@ -10,49 +10,34 @@ import ia.fight.astar.ExampleFactory;
 import ia.fight.astar.ExampleNode;
 import ia.map.MapIA;
 import ia.map.Position;
+import ia.map.TransformedCell;
 import protocol.network.Network;
 
 public class UtilsMath {
 
-	Network network;
-	Intelligence ia;
+	public static List<Position> getPath(TransformedCell[][] cells, Position start, Position target, boolean diagonal) {
+		AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(34, 34, new ExampleFactory(), diagonal);
 
-	public UtilsMath(Network network, Intelligence ia)
-	{
-		this.network = network;
-		this.ia = ia;
-	}
-
-	public List<Position> getPath(Position start, Position target, boolean DIAGONAL)
-	{
-		if (DIAGONAL) AStarMap.CANMOVEDIAGONALY = true;
-		AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(34, 34, new ExampleFactory());
-
-		for (int i = 0; i < this.network.getMap().getCells().size(); i++) {
-			if (!this.network.getMap().getCells().get(i).isMov()) {
-				Position pos = MapIA.reshapeToIA(i);
-				myMap.setWalkable(pos.getX(), pos.getY(), false);
-			}
-		}
-		
-		for (Entity i : ia.getEntities())
-		{
-			if(i != ia.getMain()){
-				myMap.setWalkable(i.getPosition().getX(), i.getPosition().getY(), false);
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells.length; j++) {
+				if (!cells[i][j].isMov() && (start.getX() != i || start.getY() != j) && (target.getX() != i || target.getY() != j)) {
+					myMap.setWalkable(i, j, false);
+				}
 			}
 		}
 
 		List<ExampleNode> path = myMap.findPath(start.getX(), start.getY(), target.getX(), target.getY());
 
-		if (DIAGONAL) AStarMap.CANMOVEDIAGONALY = false;
-
 		ArrayList<Position> positions = new ArrayList<>();
 
-		for (ExampleNode aPath : path)
-		{
+		for (ExampleNode aPath : path) {
 			positions.add(new Position(aPath.getxPosition(), aPath.getyPosition()));
 		}
 
 		return positions;
+	}
+	
+	public static boolean isPositionAccessible(List<Position> path, Entity entity){
+		return !(path.size() > entity.getInfo().getStats().getMovementPoints()) && path.size() > 0;
 	}
 }

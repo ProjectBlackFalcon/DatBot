@@ -4,6 +4,7 @@ import java.util.List;
 
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
+import ia.fight.FightIntelligence;
 import ia.map.MapIA;
 import ia.map.Position;
 import ia.utils.UtilsMath;
@@ -16,27 +17,26 @@ public class Intelligence {
 	private List<Double> turnList;
 	private MapIA map;
 	private Network network;
+	private FightIntelligence fight;
 	public UtilsProtocol utils;
-	public UtilsMath math;
 
 	private boolean isInit;
 
 	public Intelligence(Network network) {
 		this.network = network;
+		utils = new UtilsProtocol(network);
 	}
 	
-	public void init(List<Entity> entities, MapIA map) {
+	public void init(List<Entity> entities, MapIA map, FightIntelligence fight) {
 		this.entities = entities;
 		this.map = map;
-		utils = new UtilsProtocol(network);
-		math = new UtilsMath(network,this);
+		this.fight = fight;
 	}
 	
 	public void getBestPlacement() throws Exception{
 		int bestCell = getBestCell();
 		if(bestCell == getMain().getInfo().getDisposition().getCellId()){
 			if(!getMain().isRdy()){
-				utils.stop(0.30);
 				getMain().setRdy(true);
 				utils.fightReady();
 			}
@@ -45,13 +45,10 @@ public class Intelligence {
 		}
 		Log.writeLogDebugMessage("Cell found : " + bestCell);
 		if(getMain().isRdy()){
-			utils.stop(0.30);
 			utils.fightNotReady();
 		}
-		utils.stop(1);
 		utils.setBeginingPosition(bestCell);
 		getMain().setRdy(true);
-		utils.stop(0.25);
 		utils.fightReady();
 	}
 
@@ -73,7 +70,7 @@ public class Intelligence {
 		Entity main = getMain();
 		for (Entity entity : entities) {
 			if(entity.getInfo().getTeamId() != main.getInfo().getTeamId()){
-				total += math.getPath(entity.getPosition(), cellPos, false).size();
+				total += UtilsMath.getPath(MapIA.getCleanCells(network.getMap().getCells(), entities), entity.getPosition(), cellPos, false).size();
 			}
 		}
 		return total;
@@ -142,7 +139,6 @@ public class Intelligence {
 	    if(!isInit && init){
 	        //TODO HANDLE BEST POSITION
             //init should only be false when the fightStarting packet is received and then be always true
-			utils.stop(1.32);
 	    	getBestPlacement();
 	    	Log.writeLogDebugMessage("Finding best position from init");
 	    	visualizeEntity("Init");
@@ -155,12 +151,12 @@ public class Intelligence {
     }
 
 	public void visualizeEntity(String whatIsTested) {
-		System.out.println("-----------------Testing "+ whatIsTested + "-----------------");
-		System.out.println("Number of entity : " +entities.size());
-		for (Entity e :  getEntities()) {
-			System.out.println(e);
-		}
-		System.out.println("");
+//		System.out.println("-----------------Testing "+ whatIsTested + "-----------------");
+//		System.out.println("Number of entity : " +entities.size());
+//		for (Entity e :  getEntities()) {
+//			System.out.println(e);
+//		}
+//		System.out.println("");
 	}
 
     public List<Double> getTurnList() {
@@ -170,4 +166,8 @@ public class Intelligence {
     public void setTurnList(List<Double> turnList) {
         this.turnList = turnList;
     }
+
+	public FightIntelligence getFight() {
+		return fight;
+	}
 }

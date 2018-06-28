@@ -3,11 +3,16 @@ package ia.map;
 import java.util.List;
 
 import ia.entities.entity.Entity;
+import ia.entities.entity.MainEntity;
 import ia.fight.astar.ExampleNode;
 import utils.d2p.map.CellData;
 
 public class MapIA {
 	TransformedCell[][] cells;
+	
+	public MapIA() {
+		
+	}
 
     public List<Integer> getStartPosAvailable() {
         return startPosAvailable;
@@ -27,14 +32,34 @@ public class MapIA {
 		
 	}
 	
-	public TransformedCell[][] reshapeToIA(List<CellData> cells){
+	private static TransformedCell[][] reshapeToIA(List<CellData> cells){
 		TransformedCell[][] transformedCells = new TransformedCell[34][34];
+		
+		for(int i = 0; i < transformedCells.length; i++) {
+			for(int j = 0; j < transformedCells[0].length; j++) {
+				transformedCells[i][j] = new TransformedCell(i, j, true, false);
+			}
+		}
+		
 		for(int i = 0; i < cells.size(); i++) {
 			Position pos = reshapeToIA(i);
 			transformedCells[pos.getX()][pos.getY()] = new TransformedCell(pos.getX(), pos.getY(), cells.get(i).isLos(), cells.get(i).isMov());
 		}
 		
+		
 		return transformedCells;
+	}
+	
+	public static TransformedCell[][] getCleanCells(List<CellData> cells, List<Entity> entities){
+		
+		TransformedCell[][] cleanCells = MapIA.reshapeToIA(cells);
+		
+		for(Entity entity : entities){
+			cleanCells[entity.getPosition().getX()][entity.getPosition().getY()].setLos(false);
+			cleanCells[entity.getPosition().getX()][entity.getPosition().getY()].setMov(false);
+		}
+		
+		return cleanCells;
 	}
 	
 	public static Position reshapeToIA(int startCellId) {
@@ -67,19 +92,22 @@ public class MapIA {
 		return null;
 	}
 	
-	public class TransformedCell{
-		Position pos;
-		private boolean Los;
-		private boolean Mov;
-		
-		public TransformedCell(int x, int y, boolean Los, boolean Mov) {
-			pos = new Position(x, y);
-			this.Los = Los;
-			this.Mov = Mov;
-		}
-	}
+
 	
 	public static int reshapeToNetwork(int i, int j) {
+		int result = 0;
+		if (i + j / 2 == 0) {
+			result = i + 13 * (i + j - 13) + (i + j - 14) / 2;
+		}
+		else {
+			result = i + 13 * (i + j - 13) + (i + j - 13) / 2;
+		}
+		return result;
+	}
+	
+	public static int reshapeToNetwork(Position pos) {
+		int i = pos.getX();
+		int j = pos.getY();
 		int result = 0;
 		if (i + j / 2 == 0) {
 			result = i + 13 * (i + j - 13) + (i + j - 14) / 2;

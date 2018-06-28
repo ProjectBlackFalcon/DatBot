@@ -55,7 +55,7 @@ import ia.fight.brain.Game;
 public class AStarMap<T extends AbstractNode> {
 
     /** weather or not it is possible to walk diagonally on the map in general. */
-	public static boolean CANMOVEDIAGONALY = false;
+	public boolean diagonal = false;
     public static final boolean DIAGONAL = true;
     public static final boolean NONDIAGONAL = false;
 
@@ -64,8 +64,8 @@ public class AStarMap<T extends AbstractNode> {
 
     /** width + 1 is size of first dimension of nodes. */
     protected int width;
-    /** higth + 1 is size of second dimension of nodes. */
-    protected int higth;
+    /** height + 1 is size of second dimension of nodes. */
+    protected int height;
 
     /** a Factory to create instances of specified nodes. */
     private NodeFactory nodeFactory;
@@ -76,16 +76,17 @@ public class AStarMap<T extends AbstractNode> {
      * The nodes will be instanciated througth the given nodeFactory.
      *
      * @param width
-     * @param higth
+     * @param height
      * @param nodeFactory 
      */
-    public AStarMap(int width, int higth, NodeFactory nodeFactory) {
-        // TODO check parameters. width and higth should be > 0.
+    public AStarMap(int width, int height, NodeFactory nodeFactory, boolean diagonal) {
+        // TODO check parameters. width and height should be > 0.
         this.nodeFactory = nodeFactory;        
-        nodes = (T[][]) new AbstractNode[width][higth];
+        nodes = (T[][]) new AbstractNode[width][height];
         this.width = width - 1;
-        this.higth = higth - 1;
+        this.height = height - 1;
         initEmptyNodes();
+        this.diagonal = diagonal;
     }
 
     /**
@@ -93,7 +94,7 @@ public class AStarMap<T extends AbstractNode> {
      */
     private void initEmptyNodes() {
         for (int i = 0; i <= width; i++) {
-            for (int j = 0; j <= higth; j++) {
+            for (int j = 0; j <= height; j++) {
                 nodes[i][j] = (T) nodeFactory.createNode(i, j);
             }
         }
@@ -139,7 +140,7 @@ public class AStarMap<T extends AbstractNode> {
         }
         print("\n");
 
-        for (int j = higth; j >= 0; j--) {
+        for (int j = height; j >= 0; j--) {
             print("|"); // boarder of map
             for (int i = 0; i <= width; i++) {
                 if (nodes[i][j].isWalkable()) {
@@ -204,6 +205,11 @@ public class AStarMap<T extends AbstractNode> {
         openList.add(nodes[oldX][oldY]); // add starting node to open list
 
         done = false;
+        
+        if(oldX == newX && oldY == newY){
+        	return new LinkedList<T>();
+        }
+        
         T current;
         while (!done) {
             current = lowestFInOpen(); // get node with lowest fCosts from openList
@@ -317,7 +323,7 @@ public class AStarMap<T extends AbstractNode> {
             }
         }
 
-        if (y < higth) {
+        if (y < height) {
             temp = this.getNode(x, (y + 1));
             if (temp.isWalkable() && !closedList.contains(temp)) {
                 temp.setIsDiagonaly(false);
@@ -327,8 +333,8 @@ public class AStarMap<T extends AbstractNode> {
 
 
         // add nodes that are diagonaly adjacent too:
-        if (CANMOVEDIAGONALY) {
-            if (x < width && y < higth) {
+        if (this.diagonal) {
+            if (x < width && y < height) {
                 temp = this.getNode((x + 1), (y + 1));
                 if (temp.isWalkable() && !closedList.contains(temp)) {
                     temp.setIsDiagonaly(true);
@@ -344,7 +350,7 @@ public class AStarMap<T extends AbstractNode> {
                 }
             }
 
-            if (x > 0 && y < higth) {
+            if (x > 0 && y < height) {
                 temp = this.getNode((x - 1), (y + 1));
                 if (temp.isWalkable() && !closedList.contains(temp)) {
                     temp.setIsDiagonaly(true);

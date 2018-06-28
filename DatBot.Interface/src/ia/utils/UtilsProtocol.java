@@ -10,6 +10,7 @@ import game.movement.PathElement;
 import ia.Log;
 import ia.entities.entity.MainEntity;
 import protocol.network.Network;
+import protocol.network.messages.game.actions.fight.GameActionFightCastRequestMessage;
 import protocol.network.messages.game.context.fight.GameFightPlacementPositionRequestMessage;
 import protocol.network.messages.game.context.fight.GameFightReadyMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnFinishMessage;
@@ -69,6 +70,11 @@ public class UtilsProtocol {
 	 */
 	public boolean moveTo(int cellId) throws Exception {
 		CellMovement mov = this.network.getMovement().MoveToCell(cellId);
+		
+		System.out.println("Mov movTo: " + mov +" to cellId " + cellId + " from " +  this.network.getIntelligence().getMain().getInfo().getDisposition().getCellId());
+		System.out.println(mov.path);
+		
+		
 		if (mov == null || mov.path == null) {
 			return false;
 		}
@@ -86,6 +92,18 @@ public class UtilsProtocol {
 		}
 	}
 
+	/**
+	 * Cast spell
+	 * 
+	 * @param : int id, int cellId
+	 * @author baptiste
+	 */
+	public void castSpell(int id, int cellId) throws Exception {
+		network.append("Casting " + id + " to " + cellId);
+		GameActionFightCastRequestMessage gameActionFightCastRequestMessage = new GameActionFightCastRequestMessage(id, cellId);
+		network.sendToServer(gameActionFightCastRequestMessage, GameActionFightCastRequestMessage.ProtocolId, "Cast spell");
+	}
+	
 	public void stop(double deviation) throws InterruptedException {
 		double gauss = new Random().nextGaussian();
 		long timeStoped = (long) (Math.abs(gauss * deviation) * 1000);
