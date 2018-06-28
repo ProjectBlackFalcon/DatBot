@@ -92,7 +92,7 @@ class Interface:
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
                 elif 'info;combat;["end"]' in message:
-                    self.bot.llf.log(self.bot, '[Fight {}] Ended in {} mins'.format(self.bot.id, round((start_fight-time.time())/60, 1)))
+                    self.bot.llf.log(self.bot, '[Fight {}] Ended in {} mins'.format(self.bot.id, round((time.time()-start_fight)/60, 1)))
                     self.bot.in_fight = False
                     self.pipe.remove_from_buffer(self.bot.id, int(message.split(';')[1]))
                     del message_queue[message_queue.index(message)]
