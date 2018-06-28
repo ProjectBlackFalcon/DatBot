@@ -429,7 +429,7 @@ class HighLevelFunctions:
                 time.sleep(10)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
-            # self.bot.interface.start_hunt_fight()
+            self.bot.interface.start_hunt_fight()
 
             chest_ids = [15248, 15260, 15261, 15262, 15264, 15265, 15266, 15267, 15268, 15269, 15270]
             inventory = self.bot.inventory.items

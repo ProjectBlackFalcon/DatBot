@@ -272,13 +272,21 @@ class Interface:
         """
         return self.execute_command('goIncarnam')
 
+    def get_bank_door(self):
+        return self.execute_command('getBankDoor')
+
     def enter_bank(self):
         # TODO
         """
         Enters the bank on the map if there is one
         :return: Boolean
         """
-        return self.execute_command('goBank')
+        bank_door_cell = self.get_bank_door()[0]
+        if bank_door_cell:
+            self.move(bank_door_cell)
+            return self.execute_command('goBank')
+        else:
+            return [False]
 
     def open_bank(self):
         # TODO
@@ -298,6 +306,20 @@ class Interface:
         """
         self.bank_info = {}
         return self.execute_command('closeBank')
+
+    def exit_bank(self):
+        """
+        Exits bank
+        :return: Boolean
+        """
+        banks = {
+            "(4, -18)": 409,
+            "(-31, -54)": 409,
+            "(-27, 35)": 409,
+            "(2, -2)": 410,
+            "(14, 25)": 480
+        }
+        return self.move(banks[str(self.bot.position[0])])
 
     def drop_in_bank_list(self, item_id_list):
         """
