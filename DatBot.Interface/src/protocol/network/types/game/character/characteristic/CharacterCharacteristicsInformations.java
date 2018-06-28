@@ -633,5 +633,20 @@ public class CharacterCharacteristicsInformations extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "CharacterCharacteristicsInformations [experience=" + experience + ", experienceLevelFloor=" + experienceLevelFloor + ", experienceNextLevelFloor=" + experienceNextLevelFloor + ", experienceBonusLimit=" + experienceBonusLimit + ", kamas=" + kamas + ", statsPoints=" + statsPoints + ", additionnalPoints=" + additionnalPoints
+			+ ", spellsPoints=" + spellsPoints + ", alignmentInfos=" + alignmentInfos + ", lifePoints=" + lifePoints + ", maxLifePoints=" + maxLifePoints + ", energyPoints=" + energyPoints + ", maxEnergyPoints=" + maxEnergyPoints + ", actionPointsCurrent=" + actionPointsCurrent + ", movementPointsCurrent=" + movementPointsCurrent + ", initiative="
+			+ initiative + ", prospecting=" + prospecting + ", actionPoints=" + actionPoints + ", movementPoints=" + movementPoints + ", strength=" + strength + ", vitality=" + vitality + ", wisdom=" + wisdom + ", chance=" + chance + ", agility=" + agility + ", intelligence=" + intelligence + ", range=" + range + ", summonableCreaturesBoost="
+			+ summonableCreaturesBoost + ", reflect=" + reflect + ", criticalHit=" + criticalHit + ", criticalHitWeapon=" + criticalHitWeapon + ", criticalMiss=" + criticalMiss + ", healBonus=" + healBonus + ", allDamagesBonus=" + allDamagesBonus + ", weaponDamagesBonusPercent=" + weaponDamagesBonusPercent + ", damagesBonusPercent="
+			+ damagesBonusPercent + ", trapBonus=" + trapBonus + ", trapBonusPercent=" + trapBonusPercent + ", glyphBonusPercent=" + glyphBonusPercent + ", runeBonusPercent=" + runeBonusPercent + ", permanentDamagePercent=" + permanentDamagePercent + ", tackleBlock=" + tackleBlock + ", tackleEvade=" + tackleEvade + ", PAAttack=" + PAAttack
+			+ ", PMAttack=" + PMAttack + ", pushDamageBonus=" + pushDamageBonus + ", criticalDamageBonus=" + criticalDamageBonus + ", neutralDamageBonus=" + neutralDamageBonus + ", earthDamageBonus=" + earthDamageBonus + ", waterDamageBonus=" + waterDamageBonus + ", airDamageBonus=" + airDamageBonus + ", fireDamageBonus=" + fireDamageBonus
+			+ ", dodgePALostProbability=" + dodgePALostProbability + ", dodgePMLostProbability=" + dodgePMLostProbability + ", neutralElementResistPercent=" + neutralElementResistPercent + ", earthElementResistPercent=" + earthElementResistPercent + ", waterElementResistPercent=" + waterElementResistPercent + ", airElementResistPercent="
+			+ airElementResistPercent + ", fireElementResistPercent=" + fireElementResistPercent + ", neutralElementReduction=" + neutralElementReduction + ", earthElementReduction=" + earthElementReduction + ", waterElementReduction=" + waterElementReduction + ", airElementReduction=" + airElementReduction + ", fireElementReduction="
+			+ fireElementReduction + ", pushDamageReduction=" + pushDamageReduction + ", criticalDamageReduction=" + criticalDamageReduction + ", pvpNeutralElementResistPercent=" + pvpNeutralElementResistPercent + ", pvpEarthElementResistPercent=" + pvpEarthElementResistPercent + ", pvpWaterElementResistPercent=" + pvpWaterElementResistPercent
+			+ ", pvpAirElementResistPercent=" + pvpAirElementResistPercent + ", pvpFireElementResistPercent=" + pvpFireElementResistPercent + ", pvpNeutralElementReduction=" + pvpNeutralElementReduction + ", pvpEarthElementReduction=" + pvpEarthElementReduction + ", pvpWaterElementReduction=" + pvpWaterElementReduction + ", pvpAirElementReduction="
+			+ pvpAirElementReduction + ", pvpFireElementReduction=" + pvpFireElementReduction + ", meleeDamageDonePercent=" + meleeDamageDonePercent + ", meleeDamageReceivedPercent=" + meleeDamageReceivedPercent + ", rangedDamageDonePercent=" + rangedDamageDonePercent + ", rangedDamageReceivedPercent=" + rangedDamageReceivedPercent
+			+ ", weaponDamageDonePercent=" + weaponDamageDonePercent + ", weaponDamageReceivedPercent=" + weaponDamageReceivedPercent + ", spellDamageDonePercent=" + spellDamageDonePercent + ", spellDamageReceivedPercent=" + spellDamageReceivedPercent + ", spellModifications=" + spellModifications + ", probationTime=" + probationTime + "]";
+	}
 
 }

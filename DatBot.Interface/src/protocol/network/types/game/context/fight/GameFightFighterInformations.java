@@ -75,7 +75,7 @@ public class GameFightFighterInformations extends GameContextActorInformations {
 			this.stats.Deserialize(reader);
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
-			this.previousPositions = new ArrayList<Integer>();
+			this.previousPositions = new ArrayList<>();
 			while( _loc3_ <  _loc2_){
 				int _loc15_ = reader.readVarShort();
 				this.previousPositions.add(_loc15_);
@@ -84,6 +84,10 @@ public class GameFightFighterInformations extends GameContextActorInformations {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public String toString() {
+		return "GameFightFighterInformations [teamId=" + teamId + ", wave=" + wave + ", alive=" + alive + ", stats=" + stats + ", previousPositions=" + previousPositions + ", getContextualId()=" + getContextualId() +  ", toString()=" + super.toString() + "]";
 	}
 
 }

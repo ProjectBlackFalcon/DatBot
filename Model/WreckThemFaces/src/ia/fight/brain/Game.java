@@ -595,30 +595,7 @@ public class Game {
 	}
 	
 	private ArrayList<Position> getPath(Position caster, Position target, boolean DIAGONAL) {
-		if(DIAGONAL)
-			AStarMap.CANMOVEDIAGONALY = true;
-		AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
-        for(int i = 0; i < 33; i++){
-        	for(int j = 0; j < 33; j++){
-        		myMap.setWalkable(i, j, map.isPositionWalkable(new Position(i, j)));
-        	}
-        }
-        
-        myMap.setWalkable(caster.getX(), caster.getY(), true);
-        myMap.setWalkable(target.getX(), target.getY(), true);
-        
-        List<ExampleNode> path = myMap.findPath(caster.getX(), caster.getY(), target.getX(), target.getY());
-        
-        if(DIAGONAL)
-			AStarMap.CANMOVEDIAGONALY = false;
-        
-        ArrayList<Position> positions = new ArrayList<>();
-
-        for (ExampleNode aPath : path) {
-            positions.add(new Position(aPath.getxPosition(), aPath.getyPosition()));
-        }
-        
-        return positions;
+		return null;
 	}
 	
 	private Position getBestPositionDiagOptimization(Position caster, Position target, int MP) {

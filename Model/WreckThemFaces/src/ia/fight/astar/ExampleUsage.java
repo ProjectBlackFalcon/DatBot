@@ -33,7 +33,7 @@ public class ExampleUsage {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(50, 50, new ExampleFactory());
+        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(50, 50, new ExampleFactory(), false);
         myMap.setWalkable(40, 39, false);
         myMap.setWalkable(39, 39, false);
         myMap.setWalkable(39, 40, false);

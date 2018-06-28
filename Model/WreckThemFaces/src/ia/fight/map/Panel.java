@@ -61,7 +61,7 @@ public class Panel extends JPanel{
 	
 	Panel(Map map) {
 		
-		myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+		myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory(), false);
         for(int i = 0; i < 33; i++){
         	for(int j = 0; j < 33; j++){
         		myMap.setWalkable(i, j, map.isPositionWalkable(new Position(i, j)));
@@ -206,7 +206,7 @@ public class Panel extends JPanel{
 				}
 			}
 			
-			myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+			myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory(), false);
 	        for(int i = 0; i < 33; i++){
 	        	for(int j = 0; j < 33; j++){
 	        		myMap.setWalkable(i, j, mapObject.isPositionWalkable(new Position(i, j)));
