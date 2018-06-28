@@ -317,43 +317,43 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleGameActionFightCloseCombatMessage(DofusDataReader dataReader) {
 		GameActionFightCloseCombatMessage gameActionFightCloseCombatMessage = new GameActionFightCloseCombatMessage();
 		gameActionFightCloseCombatMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightCloseCombat(gameActionFightCloseCombatMessage);
+		iaPacket.gameActionFightCloseCombat(gameActionFightCloseCombatMessage);
 	}
 
 	private void handleGameActionFightDeathMessage(DofusDataReader dataReader) {
 		GameActionFightDeathMessage gameActionFightDeathMessage = new GameActionFightDeathMessage();
 		gameActionFightDeathMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightDeath(gameActionFightDeathMessage);
+		iaPacket.gameActionFightDeath(gameActionFightDeathMessage);
 	}
 
 	private void handleGameActionFightDispellableEffectMessage(DofusDataReader dataReader) {
 		GameActionFightDispellableEffectMessage gameActionFightDispellableEffectMessage = new GameActionFightDispellableEffectMessage();
 		gameActionFightDispellableEffectMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightDispellableEffect(gameActionFightDispellableEffectMessage);
+		iaPacket.gameActionFightDispellableEffect(gameActionFightDispellableEffectMessage);
 	}
 
 	private void handleGameActionFightDodgePointLossMessage(DofusDataReader dataReader) {
 		GameActionFightDodgePointLossMessage dodgePointLossMessage = new GameActionFightDodgePointLossMessage();
 		dodgePointLossMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightDodgePointLoss(dodgePointLossMessage);
+		iaPacket.gameActionFightDodgePointLoss(dodgePointLossMessage);
 	}
 
 	private void handleGameActionFightLifeAndShieldPointsLostMessage(DofusDataReader dataReader) {
 		GameActionFightLifeAndShieldPointsLostMessage gameActionFightLifeAndShieldPointsLostMessage = new GameActionFightLifeAndShieldPointsLostMessage();
 		gameActionFightLifeAndShieldPointsLostMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightLifeAndShieldPointsLost(gameActionFightLifeAndShieldPointsLostMessage);
+		iaPacket.gameActionFightLifeAndShieldPointsLost(gameActionFightLifeAndShieldPointsLostMessage);
 	}
 
 	private void handleGameActionFightLifePointsGainMessage(DofusDataReader dataReader) {
 		GameActionFightLifePointsGainMessage gameActionFightLifePointsGainMessage = new GameActionFightLifePointsGainMessage();
 		gameActionFightLifePointsGainMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightLifePointsGain(gameActionFightLifePointsGainMessage);
+		iaPacket.gameActionFightLifePointsGain(gameActionFightLifePointsGainMessage);
 	}
 
 	private void handleGameActionFightLifePointsLostMessage(DofusDataReader dataReader) {
 		GameActionFightLifePointsLostMessage gameActionFightLifePointsLostMessage = new GameActionFightLifePointsLostMessage();
 		gameActionFightLifePointsLostMessage.Deserialize(dataReader);
-        iaPacket.gameActionFightLifePointsLost(gameActionFightLifePointsLostMessage);
+		iaPacket.gameActionFightLifePointsLost(gameActionFightLifePointsLostMessage);
 	}
 
 	private void handleGameActionFightMarkCellsMessage(DofusDataReader dataReader) {
@@ -431,11 +431,12 @@ public class Network extends DisplayInfo implements Runnable {
 	}
 
 	private void handleGameMapMovementMessage(DofusDataReader dataReader) {
-		if(this.info.isJoinedFight()){
+		if (this.info.isJoinedFight()) {
 			GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
 			gameMapMovementMessage.Deserialize(dataReader);
 			iaPacket.gameMapMovement(gameMapMovementMessage);
-		} else {
+		}
+		else {
 			GameMapMovementMessage gameMapMovementMessage = new GameMapMovementMessage();
 			gameMapMovementMessage.Deserialize(dataReader);
 			if (gameMapMovementMessage.getActorId() == info.getActorId()) {
@@ -587,10 +588,10 @@ public class Network extends DisplayInfo implements Runnable {
 			getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 			getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
 
-//			for (InteractiveElement interactiveElement : this.interactive.getInteractiveElements()) {
-//				System.out.println(interactiveElement.getElementId());
-//				System.out.println(interactiveElement.getEnabledSkills());
-//			}
+			//			for (InteractiveElement interactiveElement : this.interactive.getInteractiveElements()) {
+			//				System.out.println(interactiveElement.getElementId());
+			//				System.out.println(interactiveElement.getEnabledSkills());
+			//			}
 
 			//			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
 			//			append("CellId : " + info.getCellId());
@@ -960,692 +961,697 @@ public class Network extends DisplayInfo implements Runnable {
 	 * Packet manager
 	 */
 	@SuppressWarnings("unchecked")
-	private void TreatPacket(int packet_id, byte[] packet_content) throws Exception {
+	private void TreatPacket(int packet_id, byte[] packet_content) {
 		DofusDataReader dataReader = new DofusDataReader(new ByteArrayInputStream(packet_content));
 		SwitchNameClass name = new SwitchNameClass(packet_id);
 		appendLog("[" + packet_id + "]\tTaille : " + packet_content.length + "  -  " + name.name);
 		JSONObject jsonObject = null;
 		JSONObject jsonObject2;
-		switch (packet_id) {
-			case 3:
-				handleHelloConnectMessage(dataReader);
-				break;
-			case 189:
-				SystemMessageDisplayMessage systemMessageDisplayMessage = new SystemMessageDisplayMessage();
-				systemMessageDisplayMessage.Deserialize(dataReader);
-				System.out.println(systemMessageDisplayMessage.getMsgId());
-				break;
-			case 30:
-				handleServersListMessage(dataReader);
-				break;
-			case 41:
-				SelectedServerRefusedMessage selectedServerRefusedMessage = new SelectedServerRefusedMessage();
-				selectedServerRefusedMessage.Deserialize(dataReader);
-				System.out.println(selectedServerRefusedMessage.getError());
-				System.out.println(selectedServerRefusedMessage.getServerId());
-				System.out.println(selectedServerRefusedMessage.getServerStatus());
-				break;
-			case 42:
-				handleSelectedServerDataMessage(dataReader);
-				break;
-			case 101:
-				HandleAuthentificationTicketMessage();
-				if (connectionToKoli) {
-					HandleCharacterListRequestMessage();
-				}
-				break;
-			case 5609:
-				info.setCaracsAffected(true);
-			case 6072:
-				sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Logging back into combat");
-				break;
-			case 6253:
-				HandleRawDataMessage();
-				break;
-			case 6267:
-				HandleCharacterListRequestMessage();
-				break;
-			case 151:
-				handleCharacterSelectionMessage(dataReader);
-				break;
-			case 153:
-				CharacterSelectedSuccessMessage selectedSuccessMessage = new CharacterSelectedSuccessMessage();
-				selectedSuccessMessage.Deserialize(dataReader);
-				this.info.setActorId(selectedSuccessMessage.getInfos().getId());
-				info.setLvl(selectedSuccessMessage.getInfos().getLevel());
-				break;
-			case 1301:
-				HandleFriendIgnoreSpouseMessages();
-				break;
-			case 4002:
-				HandleClientKeyMessage(FlashKeyGenerator.GetRandomFlashKey(info.getName()));
-				HandleGameContextCreateMessage();
-				break;
-			case 500:
-				stats.setStats(new CharacterStatsListMessage());
-				stats.getStats().Deserialize(dataReader);
-				stats.setTimePacketRecv(System.currentTimeMillis() / 1000);
-				break;
-			case 220:
-				handleMapRequestMessage(dataReader);
-				break;
-			case 176:
-				if(this.getInfo().isJoinedFight())
-					this.intelligence.setInit(true);
-				info.setBasicNoOperationMsg(true);
-				break;
-			case 226:
-				handleMapComplementaryInformationsDataMessage(dataReader);
-				break;
-			case 6622:
-				handleMapComplementaryInformationsDataInHavenBagMessage(dataReader);
-				break;
-			case 950:
-				GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
-				super.debug.println(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
-				break;
-			case 951:
-				handleGameMapMovementMessage(dataReader);
-				break;
-			case 6316:
-				handleSequenceNumberMessage();
-				break;
-			case 5816:
-				HandleLatencyMessage();
-				break;
-			case 6575:
-				handleGameRolePlayArenaSwitchToFightServerMessage(dataReader);
-				break;
-			case 6574:
-				handleGameRolePlayArenaSwitchToGameServerMessage(dataReader);
-				break;
-			case 6068:
-				sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Character force selection");
-				break;
-			case 6471:
-				if (connectionToKoli) {
-					sendToServer(new GameContextCreateRequestMessage(), GameContextCreateRequestMessage.ProtocolId, "Context creation request");
-				}
-				break;
-			case 5709:
-				handleStatedElementUpdatedMessage(dataReader);
-				break;
-			case 5708:
-				handleInteractiveElementUpdatedMessage(dataReader);
-				break;
-			case 6112:
-				break;
-			case 6384:
-				info.setHarvestFailure(true);
-				break;
-			case 3009:
-				handleInventoryWeightMessage(dataReader);
-				break;
-			case 6519:
-				handleObtainedItemMessage(dataReader);
-				break;
-			case 5809:
-				handleJobExperienceMultiUpdateMessage(dataReader);
-				break;
-			case 5654:
-				handleJobExperienceUpdateMessage(dataReader);
-				break;
-			case 5670:
-				handleCharacterLevelUpMessage(dataReader);
-				break;
-			case 5617:
-				handleNpcDialogQuestionMessage(dataReader);
-				break;
-			case 5502:
-				this.npc.setDialogOver(true);
-				break;
-			case 5745:
-				info.setInteractiveUsed(true);
-				break;
-			case 780:
-				TextInformationMessage informationMessage = new TextInformationMessage();
-				informationMessage.Deserialize(dataReader);
-				if (informationMessage.getMsgId() == 436) {
-					this.hunt.setAbTimeLeft(Integer.parseInt(informationMessage.getParameters().get(0)));
-				}
-				info.setTextMessage(true);
-				break;
-			case 5646:
-				getBank().setStorage(new StorageInventoryContentMessage());
-				getBank().getStorage().Deserialize(dataReader);
-				info.setStorage(true);
-				break;
-			case 6162:
-				this.stats.setInventoryContentMessage(new InventoryContentAndPresetMessage());
-				this.stats.getInventoryContentMessage().Deserialize(dataReader);
-				break;
-			case 3023:
-				handleObjectQuantityMessage(dataReader);
-				break;
-			case 3025:
-				handleObjectAddedMessage(dataReader);
-				break;
-			case 3024:
-				handleObjectDeletedMessage(dataReader);
-				break;
-			case 6034:
-				handleObjectsDeletedMessage(dataReader);
-				break;
-			case 6033:
-				handleObjectsAddedMessage(dataReader);
-				break;
-			case 3016:
-				handleInventoryContentMessage(dataReader);
-				break;
-			case 6036:
-				handleStorageObjectsUpdateMessage(dataReader);
-				break;
-			case 6035:
-				handleStorageObjectsRemoveMessage(dataReader);
-				break;
-			case 5647:
-				handleStorageObjectUpdateMessage(dataReader);
-				break;
-			case 5648:
-				handleStorageObjectRemoveMessage(dataReader);
-				break;
-			case 5628:
-				info.setLeaveExchange(true);
-				break;
-			case 5537:
-				handleKamasUpdateMessage(dataReader);
-				break;
-			case 5645:
-				handleStorageKamasUpdateMessage(dataReader);
-				break;
-			case 702:
-				handleGameFightJoinMessage(dataReader);
-				break;
-			case 956:
-				handleSequenceEndMessage(dataReader);
-				break;
-			case 715:
-				sendToServer(new GameFightTurnReadyMessage(true), GameFightTurnReadyMessage.ProtocolId, "Turn ready");
-				break;
-			case 719:
-				handleGameFightTurnEndMessage(dataReader);
-				break;
-			case 720:
-				this.getInfo().setJoinedFight(false);
-                GameFightEndMessage gameFightEndMessage = new GameFightEndMessage();
-                gameFightEndMessage.Deserialize(dataReader);
-                iaPacket.gameFightEnd(gameFightEndMessage);
-				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"end\"" });
-				break;
-			case 703:
-				handleGameFightPlacementPossiblePositionsMessage(dataReader);
-				break;
-			case 5696:
-				handleGameEntitiesDispositionMessage(dataReader);
-				break;
-			case 5921:
-				handleGameFightSynchronizeMessage(dataReader);
-				break;
-			case 6465:
-				info.setTurn(true);
-				iaPacket.gameFightTurnStartPlaying();
-				break;
-			case 955:
-				SequenceStartMessage sequenceStartMessage = new SequenceStartMessage();
-				sequenceStartMessage.Deserialize(dataReader);
-				iaPacket.sequenceStartMessage(sequenceStartMessage);
-				break;
-			case 5825:
-				handleGameActionFightSummonMessage(dataReader);
-				break;
-			/**
-			 * LYSANDRE FIGHT // case 1010 to case 6310 Each sequence can
-			 * contain multiple jsonObject Each case contains one jsonObject
-			 * jsonObject : key of the variable jsonObject : key of the packet
-			 * sourceId : caster targetId : target
-			 */
-			case 1010:
-				handleGameActionFightSpellCastMessage(dataReader);
-				break;
-			case 6132:
-				GameActionFightNoSpellCastMessage gameActionFightNoSpellCastMessage = new GameActionFightNoSpellCastMessage();
-				gameActionFightNoSpellCastMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightNoSpellCast(gameActionFightNoSpellCastMessage);
-				break;
-			case 6312:
-				handleGameActionFightLifePointsLostMessage(dataReader);
-				break;
-			case 5828:
-				handleGameActionFightDodgePointLossMessage(dataReader);
-				break;
-			/**
-			 * Depending on the packet received it will give a JsonObject with
-			 * diferent key the first are in common for every packet
-			 */
-			case 6070:
-				handleGameActionFightDispellableEffectMessage(dataReader);
-				break;
-			case 5540:
-				handleGameActionFightMarkCellsMessage(dataReader);
-				break;
-			case 6311:
-				handleGameActionFightLifePointsGainMessage(dataReader);
-				break;
-			case 1099:
-				handleGameActionFightDeathMessage(dataReader);
-				break;
-			case 6116:
-				handleGameActionFightCloseCombatMessage(dataReader);
-				break;
-			case 5525:
-				handleGameActionFightSlideMessage(dataReader);
-				break;
-			case 6310:
-				handleGameActionFightLifeAndShieldPointsLostMessage(dataReader);
-				break;
-			case 713:
-				handleGameFightTurnListMessage(dataReader);
-				break;
-			case 1604:
-				handleZaapListMessage(dataReader);
-				break;
-			case 5632:
-				handleGameRolePlayShowActorMessage(dataReader);
-				break;
-			case 251:
-				handleGameContextRemoveElementMessage(dataReader);
-				break;
-			case 6483:
-				this.info.setHuntAnswered(true);
-				this.info.setInHunt(false);
-				this.hunt.setRdyToFight(false);
-				break;
-			case 6484:
-				handleTreasureHuntDigRequestAnswerMessage(dataReader);
-				break;
-			case 6486:
-				handleTreasureHuntMessage(dataReader);
-				break;
-			case 5937:
-				handleGameRolePlayPlayerFightFriendlyRequestedMessage(dataReader);
-				break;
-			case 1030:
-				handleGameActionFightPointsVariationMessage(dataReader);
-				break;
-			case 5905:
-				ExchangeStartedBidSellerMessage exchangeStartedBidSellerMessage = new ExchangeStartedBidSellerMessage();
-				exchangeStartedBidSellerMessage.Deserialize(dataReader);
-				this.getNpc().setItemsToSell(exchangeStartedBidSellerMessage.getObjectsInfos());
-				this.npc.setCanSell(exchangeStartedBidSellerMessage.getSellerDescriptor().getTypes());
-				this.info.setExchangeBidSeller(true);
-				break;
-			case 6464:
-				ExchangeBidPriceForSellerMessage exchangeBidPriceForSellerMessage = new ExchangeBidPriceForSellerMessage();
-				exchangeBidPriceForSellerMessage.Deserialize(dataReader);
-				this.npc.setCurrentPrice(exchangeBidPriceForSellerMessage.getMinimalPrices());
-				this.info.setExchangeBidSeller(true);
-				break;
-			case 5945:
-				this.info.setExchangeBidSeller(true);
-				break;
-			case 5765:
-				this.info.setExchangeBidSeller(true);
-				break;
-			case 5904:
-				this.info.setExchangeBidSeller(true);
-				break;
-			case 5946:
-				ExchangeBidHouseItemRemoveOkMessage exchangeBidHouseItemRemoveOkMessage = new ExchangeBidHouseItemRemoveOkMessage();
-				exchangeBidHouseItemRemoveOkMessage.Deserialize(dataReader);
-				if (this.npc.getItemsToSell() != null) {
-					this.npc.removeItemToSell(exchangeBidHouseItemRemoveOkMessage.getSellerId());
-				}
-				this.info.setExchangeBidSeller(true);
-				break;
-			case 6304:
-				handleGameActionFightModifyEffectsDurationMessage(dataReader);
-				break;
-			case 6545:
-				handleGameActionFightActivateGlyphTrapMessage(dataReader);
-				break;
-			case 5967:
-				MountRidingMessage mountRidingMessage = new MountRidingMessage();
-				mountRidingMessage.Deserialize(dataReader);
-				this.info.setMountRiding(true);
-				this.info.setRiding(mountRidingMessage.isIsRiding());
-				break;
-			case 5968:
-				MountSetMessage mountSetMessage = new MountSetMessage();
-				mountSetMessage.Deserialize(dataReader);
-				this.dragodinde.setHavingDd(true);
-				this.dragodinde.setId((int) mountSetMessage.getMountData().getId());
-				this.dragodinde.setEnergy(mountSetMessage.getMountData().getEnergy());
-				this.dragodinde.setLevelEquipedDD(mountSetMessage.getMountData().getLevel());
-				this.info.setMountSet(true);
-				break;
-			case 5970:
-				MountXpRatioMessage mountXpRatioMessage = new MountXpRatioMessage();
-				mountXpRatioMessage.Deserialize(dataReader);
-				this.dragodinde.setRatioXp(mountXpRatioMessage.getRatio());
-				this.info.setMountxpmsg(true);
-				break;
-			case 5979:
-				ExchangeStartOkMountMessage exchangeStartOkMountMessage = new ExchangeStartOkMountMessage();
-				exchangeStartOkMountMessage.Deserialize(dataReader);
-				this.dragodinde.setPaddock(exchangeStartOkMountMessage.getPaddockedMountsDescription());
-				this.dragodinde.setStable(exchangeStartOkMountMessage.getStabledMountsDescription());
-				this.dragodinde.setInStable(true);
-				break;
-			case 6555:
-				this.info.setExchangeDD(true);
-				break;
-			case 6559:
-				this.info.setExchangeDD(true);
-				break;
-			case 5982:
-				this.dragodinde.setHavingDd(false);
-				this.info.setExchangeDD(true);
-				break;
-			case 2970:
-				this.info.setExchangeDD(true);
-				break;
-			case 5689:
-				EmoteListMessage emoteListMessage = new EmoteListMessage();
-				emoteListMessage.Deserialize(dataReader);
-				for (Integer b : emoteListMessage.getEmoteIds()) {
-					if (b == 8) {
-						this.getDragodinde().setFart(true);
+		try {
+			switch (packet_id) {
+				case 3:
+					handleHelloConnectMessage(dataReader);
+					break;
+				case 189:
+					SystemMessageDisplayMessage systemMessageDisplayMessage = new SystemMessageDisplayMessage();
+					systemMessageDisplayMessage.Deserialize(dataReader);
+					System.out.println(systemMessageDisplayMessage.getMsgId());
+					break;
+				case 30:
+					handleServersListMessage(dataReader);
+					break;
+				case 41:
+					SelectedServerRefusedMessage selectedServerRefusedMessage = new SelectedServerRefusedMessage();
+					selectedServerRefusedMessage.Deserialize(dataReader);
+					System.out.println(selectedServerRefusedMessage.getError());
+					System.out.println(selectedServerRefusedMessage.getServerId());
+					System.out.println(selectedServerRefusedMessage.getServerStatus());
+					break;
+				case 42:
+					handleSelectedServerDataMessage(dataReader);
+					break;
+				case 101:
+					HandleAuthentificationTicketMessage();
+					if (connectionToKoli) {
+						HandleCharacterListRequestMessage();
 					}
-				}
-				break;
-			case 5683:
-				EmotePlayMessage emote = new EmotePlayMessage();
-				emote.Deserialize(dataReader);
-				if (emote.getActorId() == this.info.getActorId()) {
-					this.info.setEmoteLaunched(true);
-				}
-				break;
-			case 5960:
-				TeleportDestinationsListMessage destinationsListMessage = new TeleportDestinationsListMessage();
-				destinationsListMessage.Deserialize(dataReader);
-				if (destinationsListMessage.getTeleporterType() == 1) {
-					this.interactive.setZaapiList(destinationsListMessage.getMapIds());
-				}
-				break;
-			case 5830:
-				GameActionFightCarryCharacterMessage gameActionFightCarryCharacterMessage = new GameActionFightCarryCharacterMessage();
-				gameActionFightCarryCharacterMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightCarryCharacter(gameActionFightCarryCharacterMessage);
-				break;
-			case 6113:
-				GameActionFightDispellEffectMessage gameActionFightDispellEffectMessage = new GameActionFightDispellEffectMessage();
-				gameActionFightDispellEffectMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightDispellEffect(gameActionFightDispellEffectMessage);
-				break;
-			case 5533:
-				GameActionFightDispellMessage gameActionFightDispellMessage = new GameActionFightDispellMessage();
-                gameActionFightDispellMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightDispell(gameActionFightDispellMessage);
-				break;
-			case 6176:
-				GameActionFightDispellSpellMessage gameActionFightDispellSpellMessage = new GameActionFightDispellSpellMessage();
-				gameActionFightDispellSpellMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightDispellSpell(gameActionFightDispellSpellMessage);
-				break;
-			case 5826:
-				GameActionFightDropCharacterMessage gameActionFightDropCharacterMessage = new GameActionFightDropCharacterMessage();
-				gameActionFightDropCharacterMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightDropCharacter(gameActionFightDropCharacterMessage);
-				break;
-			case 5527:
-				GameActionFightExchangePositionsMessage gameActionFightExchangePositionsMessage = new GameActionFightExchangePositionsMessage();
-				gameActionFightExchangePositionsMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightExchangePositions(gameActionFightExchangePositionsMessage);
-				break;
-			case 5821:
-				GameActionFightInvisibilityMessage gameActionFightInvisibilityMessage = new GameActionFightInvisibilityMessage();
-				gameActionFightInvisibilityMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightInvisibility(gameActionFightInvisibilityMessage);
-				break;
-			case 6320:
-				GameActionFightInvisibleDetectedMessage gameActionFightInvisibleDetectedMessage = new GameActionFightInvisibleDetectedMessage();
-				gameActionFightInvisibleDetectedMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightInvisibleDetected(gameActionFightInvisibleDetectedMessage);
-				break;
-			case 5571:
-				GameActionFightKillMessage gameActionFightKillMessage = new GameActionFightKillMessage();
-				gameActionFightKillMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightKill(gameActionFightKillMessage);
-				break;
-			case 5526:
-				GameActionFightReduceDamagesMessage gameActionFightReduceDamagesMessage = new GameActionFightReduceDamagesMessage();
-				gameActionFightReduceDamagesMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightReduceDamages(gameActionFightReduceDamagesMessage);
-				break;
-			case 5530:
-				GameActionFightReflectDamagesMessage gameActionFightReflectDamagesMessage = new GameActionFightReflectDamagesMessage();
-				gameActionFightReflectDamagesMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightReflectDamages(gameActionFightReflectDamagesMessage);
-				break;
-			case 5531:
-				GameActionFightReflectSpellMessage gameActionFightReflectSpellMessage = new GameActionFightReflectSpellMessage();
-				gameActionFightReflectSpellMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightReflectSpell(gameActionFightReflectSpellMessage);
-				break;
-			case 6219:
-				GameActionFightSpellCooldownVariationMessage gameActionFightSpellCooldownVariationMessage = new GameActionFightSpellCooldownVariationMessage();
-				gameActionFightSpellCooldownVariationMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightSpellCooldownVariation(gameActionFightSpellCooldownVariationMessage);
-				break;
-			case 6221:
-				GameActionFightSpellImmunityMessage gameActionFightSpellImmunityMessage = new GameActionFightSpellImmunityMessage();
-				gameActionFightSpellImmunityMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightSpellImmunity(gameActionFightSpellImmunityMessage);
-				break;
-			case 5535:
-				GameActionFightStealKamaMessage gameActionFightStealKamaMessage = new GameActionFightStealKamaMessage();
-				gameActionFightStealKamaMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightStealKama(gameActionFightStealKamaMessage);
-				break;
-			case 1004:
-				GameActionFightTackledMessage gameActionFightTackledMessage = new GameActionFightTackledMessage();
-				gameActionFightTackledMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightTackled(gameActionFightTackledMessage);
-				break;
-			case 5528:
-				GameActionFightTeleportOnSameMapMessage gameActionFightTeleportOnSameMapMessage = new GameActionFightTeleportOnSameMapMessage();
-				gameActionFightTeleportOnSameMapMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightTeleportOnSameMap(gameActionFightTeleportOnSameMapMessage);
-				break;
-			case 5829:
-				GameActionFightThrowCharacterMessage gameActionFightThrowCharacterMessage = new GameActionFightThrowCharacterMessage();
-				gameActionFightThrowCharacterMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightThrowCharacter(gameActionFightThrowCharacterMessage);
-				break;
-			case 6147:
-				GameActionFightTriggerEffectMessage gameActionFightTriggerEffectMessage = new GameActionFightTriggerEffectMessage();
-				gameActionFightTriggerEffectMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightTriggerEffect(gameActionFightTriggerEffectMessage);
-				break;
-			case 5741:
-				GameActionFightTriggerGlyphTrapMessage gameActionFightTriggerGlyphTrapMessage = new GameActionFightTriggerGlyphTrapMessage();
-				gameActionFightTriggerGlyphTrapMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightTriggerGlyphTrap(gameActionFightTriggerGlyphTrapMessage);
-				break;
-			case 5570:
-				GameActionFightUnmarkCellsMessage gameActionFightUnmarkCellsMessage = new GameActionFightUnmarkCellsMessage();
-				gameActionFightUnmarkCellsMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightUnmarkCells(gameActionFightUnmarkCellsMessage);
-				break;
-			case 6217:
-				GameActionFightVanishMessage gameActionFightVanishMessage = new GameActionFightVanishMessage();
-				gameActionFightVanishMessage.Deserialize(dataReader);
-				iaPacket.gameActionFightVanish(gameActionFightVanishMessage);
-				break;
-            case 6700:
-                ArenaFighterLeaveMessage arenaFighterLeaveMessage = new ArenaFighterLeaveMessage();
-                arenaFighterLeaveMessage.Deserialize(dataReader);
-                iaPacket.arenaFighterLeave(arenaFighterLeaveMessage);
-                break;
-            case 6022:
-                ChallengeInfoMessage challengeInfoMessage = new ChallengeInfoMessage();
-                challengeInfoMessage.Deserialize(dataReader);
-                iaPacket.challengeInfo(challengeInfoMessage);
-                break;
-            case 6019:
-                ChallengeResultMessage challengeResultMessage = new ChallengeResultMessage();
-                challengeResultMessage.Deserialize(dataReader);
-                iaPacket.challengeResult(challengeResultMessage);
-                break;
-            case 5613:
-                ChallengeTargetsListMessage challengeTargetsListMessage = new ChallengeTargetsListMessage();
-                challengeTargetsListMessage.Deserialize(dataReader);
-                iaPacket.challengeTargetsList(challengeTargetsListMessage);
-                break;
-            case 6123:
-                ChallengeTargetUpdateMessage challengeTargetUpdateMessage = new ChallengeTargetUpdateMessage();
-                challengeTargetUpdateMessage.Deserialize(dataReader);
-                iaPacket.challengeTargetUpdate(challengeTargetUpdateMessage);
-                break;
-            case 6309:
-                GameFightRefreshFighterMessage gameFightRefreshFighterMessage = new GameFightRefreshFighterMessage();
-                gameFightRefreshFighterMessage.Deserialize(dataReader);
-                iaPacket.gameFightRefreshFighter(gameFightRefreshFighterMessage);
-                break;
-            case 740:
-                GameFightHumanReadyStateMessage gameFightHumanReadyStateMessage = new GameFightHumanReadyStateMessage();
-                gameFightHumanReadyStateMessage.Deserialize(dataReader);
-                iaPacket.gameFightHumanReadyState(gameFightHumanReadyStateMessage);
-                break;
-            case 721:
-                GameFightLeaveMessage gameFightLeaveMessage = new GameFightLeaveMessage();
-                gameFightLeaveMessage.Deserialize(dataReader);
-                iaPacket.gameFightLeave(gameFightLeaveMessage);
-                break;
-            case 6239:
-                GameFightNewRoundMessage gameFightNewRoundMessage = new GameFightNewRoundMessage();
-                gameFightNewRoundMessage.Deserialize(dataReader);
-                iaPacket.gameFightNewRound(gameFightNewRoundMessage);
-                break;
-            case 6490:
-                GameFightNewWaveMessage gameFightNewWaveMessage = new GameFightNewWaveMessage();
-                gameFightNewWaveMessage.Deserialize(dataReader);
-                iaPacket.gameFightNewWave(gameFightNewWaveMessage);
-                break;
-			case 5927:
-				GameFightOptionStateUpdateMessage gameFightOptionStateUpdateMessage = new GameFightOptionStateUpdateMessage();
-				gameFightOptionStateUpdateMessage.Deserialize(dataReader);
-				iaPacket.gameFightOptionStateUpdate(gameFightOptionStateUpdateMessage);
-				break;
-			case 707:
-				GameFightOptionToggleMessage gameFightOptionToggleMessage = new GameFightOptionToggleMessage();
-				gameFightOptionToggleMessage.Deserialize(dataReader);
-				iaPacket.gameFightOptionToggle(gameFightOptionToggleMessage);
-				break;
-			case 6754:
-				GameFightPauseMessage gameFightPauseMessage = new GameFightPauseMessage();
-				gameFightPauseMessage.Deserialize(dataReader);
-				iaPacket.gameFightPause(gameFightPauseMessage);
-				break;
-			case 6547:
-				GameFightPlacementSwapPositionsAcceptMessage gameFightPlacementSwapPositionsAcceptMessage = new GameFightPlacementSwapPositionsAcceptMessage();
-				gameFightPlacementSwapPositionsAcceptMessage.Deserialize(dataReader);
-				iaPacket.gameFightPlacementSwapPositionsAccept(gameFightPlacementSwapPositionsAcceptMessage);
-				break;
-			case 6546:
-				GameFightPlacementSwapPositionsCancelledMessage gameFightPlacementSwapPositionsCancelledMessage = new GameFightPlacementSwapPositionsCancelledMessage();
-				gameFightPlacementSwapPositionsCancelledMessage.Deserialize(dataReader);
-				iaPacket.gameFightPlacementSwapPositionsCancelled(gameFightPlacementSwapPositionsCancelledMessage);
-				break;
-			case 6543:
-				GameFightPlacementSwapPositionsCancelMessage gameFightPlacementSwapPositionsCancelMessage = new GameFightPlacementSwapPositionsCancelMessage();
-				gameFightPlacementSwapPositionsCancelMessage.Deserialize(dataReader);
-				iaPacket.gameFightPlacementSwapPositionsCancel(gameFightPlacementSwapPositionsCancelMessage);
-				break;
-			case 6544:
-				GameFightPlacementSwapPositionsMessage gameFightPlacementSwapPositionsMessage = new GameFightPlacementSwapPositionsMessage();
-				gameFightPlacementSwapPositionsMessage.Deserialize(dataReader);
-				iaPacket.gameFightPlacementSwapPositions(gameFightPlacementSwapPositionsMessage);
-				break;
-			case 6542:
-				GameFightPlacementSwapPositionsOfferMessage gameFightPlacementSwapPositionsOfferMessage = new GameFightPlacementSwapPositionsOfferMessage();
-				gameFightPlacementSwapPositionsOfferMessage.Deserialize(dataReader);
-				iaPacket.gameFightPlacementSwapPositionsOffer(gameFightPlacementSwapPositionsOfferMessage);
-				break;
-			case 711:
-				GameFightRemoveTeamMemberMessage gameFightRemoveTeamMemberMessage = new GameFightRemoveTeamMemberMessage();
-				gameFightRemoveTeamMemberMessage.Deserialize(dataReader);
-				iaPacket.gameFightRemoveTeamMember(gameFightRemoveTeamMemberMessage);
-				break;
-			case 6067:
-				GameFightResumeMessage gameFightResumeMessage = new GameFightResumeMessage();
-				gameFightResumeMessage.Deserialize(dataReader);
-				iaPacket.gameFightResume(gameFightResumeMessage);
-				break;
-			case 700:
-				this.intelligence = new Intelligence(this);
-				this.iaPacket = new IntelligencePacketHandler(this.intelligence);
-				this.getInfo().setJoinedFight(true);
-				GameFightStartingMessage gameFightStartingMessage = new GameFightStartingMessage();
-				gameFightStartingMessage.Deserialize(dataReader);
-				iaPacket.gameFightStarting(gameFightStartingMessage);
-				break;
-			case 712:
-				GameFightStartMessage gameFightStartMessage =  new GameFightStartMessage();
-				gameFightStartMessage.Deserialize(dataReader);
-				iaPacket.gameFightStart(gameFightStartMessage);
-				break;
-			case 718:
-				GameFightTurnFinishMessage gameFightTurnFinishMessage = new GameFightTurnFinishMessage();
-				gameFightTurnFinishMessage.Deserialize(dataReader);
-				iaPacket.gameFightTurnFinish(gameFightTurnFinishMessage);
-				break;
-			case 716:
-				GameFightTurnReadyMessage gameFightTurnReadyMessage = new GameFightTurnReadyMessage();
-				gameFightTurnReadyMessage.Deserialize(dataReader);
-				iaPacket.gameFightTurnReady(gameFightTurnReadyMessage);
-				break;
-			case 6307:
-				GameFightTurnResumeMessage gameFightTurnResumeMessage = new GameFightTurnResumeMessage();
-				gameFightTurnResumeMessage.Deserialize(dataReader);
-				iaPacket.gameFightTurnResume(gameFightTurnResumeMessage);
-				break;
-			case 714:
-				GameFightTurnStartMessage gameFightTurnStartMessage = new GameFightTurnStartMessage();
-				gameFightTurnStartMessage.Deserialize(dataReader);
-				iaPacket.gameFightTurnStart(gameFightTurnStartMessage);
-				break;
-			case 5572:
-				GameFightUpdateTeamMessage gameFightUpdateTeamMessage = new GameFightUpdateTeamMessage();
-				gameFightUpdateTeamMessage.Deserialize(dataReader);
-				iaPacket.gameFightUpdateTeam(gameFightUpdateTeamMessage);
-				break;
-			case 6699:
-				RefreshCharacterStatsMessage refreshCharacterStatsMessage = new RefreshCharacterStatsMessage();
-				refreshCharacterStatsMessage.Deserialize(dataReader);
-				iaPacket.refreshCharacterStats(refreshCharacterStatsMessage);
-				break;
-			case 1200:
-				SpellListMessage spellListMessage = new SpellListMessage();
-				spellListMessage.Deserialize(dataReader);
-				List<Spell> spells = new ArrayList<>();
-				for (SpellItem si : spellListMessage.getSpells()){
-					spells.add(GameData.getSpell(si.getSpellId(),si.getSpellLevel()));
-				}
-				info.setSpells(spells);
-				break;
-            case 5864:
-                GameFightShowFighterMessage gameFightShowFighterMessage = new GameFightShowFighterMessage();
-                gameFightShowFighterMessage.Deserialize(dataReader);
-                iaPacket.gameFightShowFighter(gameFightShowFighterMessage);
-                break;
-            case 6322:
-                FighterStatsListMessage fighterStatsListMessage = new FighterStatsListMessage();
-                fighterStatsListMessage.Deserialize(dataReader);
-                iaPacket.fighterStatsList(fighterStatsListMessage);
-                break;
+					break;
+				case 5609:
+					info.setCaracsAffected(true);
+				case 6072:
+					sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Logging back into combat");
+					break;
+				case 6253:
+					HandleRawDataMessage();
+					break;
+				case 6267:
+					HandleCharacterListRequestMessage();
+					break;
+				case 151:
+					handleCharacterSelectionMessage(dataReader);
+					break;
+				case 153:
+					CharacterSelectedSuccessMessage selectedSuccessMessage = new CharacterSelectedSuccessMessage();
+					selectedSuccessMessage.Deserialize(dataReader);
+					this.info.setActorId(selectedSuccessMessage.getInfos().getId());
+					info.setLvl(selectedSuccessMessage.getInfos().getLevel());
+					break;
+				case 1301:
+					HandleFriendIgnoreSpouseMessages();
+					break;
+				case 4002:
+					HandleClientKeyMessage(FlashKeyGenerator.GetRandomFlashKey(info.getName()));
+					HandleGameContextCreateMessage();
+					break;
+				case 500:
+					stats.setStats(new CharacterStatsListMessage());
+					stats.getStats().Deserialize(dataReader);
+					stats.setTimePacketRecv(System.currentTimeMillis() / 1000);
+					break;
+				case 220:
+					handleMapRequestMessage(dataReader);
+					break;
+				case 176:
+					if (this.getInfo().isJoinedFight()) this.intelligence.setInit(true);
+					info.setBasicNoOperationMsg(true);
+					break;
+				case 226:
+					handleMapComplementaryInformationsDataMessage(dataReader);
+					break;
+				case 6622:
+					handleMapComplementaryInformationsDataInHavenBagMessage(dataReader);
+					break;
+				case 950:
+					GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
+					super.debug.println(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
+					break;
+				case 951:
+					handleGameMapMovementMessage(dataReader);
+					break;
+				case 6316:
+					handleSequenceNumberMessage();
+					break;
+				case 5816:
+					HandleLatencyMessage();
+					break;
+				case 6575:
+					handleGameRolePlayArenaSwitchToFightServerMessage(dataReader);
+					break;
+				case 6574:
+					handleGameRolePlayArenaSwitchToGameServerMessage(dataReader);
+					break;
+				case 6068:
+					sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Character force selection");
+					break;
+				case 6471:
+					if (connectionToKoli) {
+						sendToServer(new GameContextCreateRequestMessage(), GameContextCreateRequestMessage.ProtocolId, "Context creation request");
+					}
+					break;
+				case 5709:
+					handleStatedElementUpdatedMessage(dataReader);
+					break;
+				case 5708:
+					handleInteractiveElementUpdatedMessage(dataReader);
+					break;
+				case 6112:
+					break;
+				case 6384:
+					info.setHarvestFailure(true);
+					break;
+				case 3009:
+					handleInventoryWeightMessage(dataReader);
+					break;
+				case 6519:
+					handleObtainedItemMessage(dataReader);
+					break;
+				case 5809:
+					handleJobExperienceMultiUpdateMessage(dataReader);
+					break;
+				case 5654:
+					handleJobExperienceUpdateMessage(dataReader);
+					break;
+				case 5670:
+					handleCharacterLevelUpMessage(dataReader);
+					break;
+				case 5617:
+					handleNpcDialogQuestionMessage(dataReader);
+					break;
+				case 5502:
+					this.npc.setDialogOver(true);
+					break;
+				case 5745:
+					info.setInteractiveUsed(true);
+					break;
+				case 780:
+					TextInformationMessage informationMessage = new TextInformationMessage();
+					informationMessage.Deserialize(dataReader);
+					if (informationMessage.getMsgId() == 436) {
+						this.hunt.setAbTimeLeft(Integer.parseInt(informationMessage.getParameters().get(0)));
+					}
+					info.setTextMessage(true);
+					break;
+				case 5646:
+					getBank().setStorage(new StorageInventoryContentMessage());
+					getBank().getStorage().Deserialize(dataReader);
+					info.setStorage(true);
+					break;
+				case 6162:
+					this.stats.setInventoryContentMessage(new InventoryContentAndPresetMessage());
+					this.stats.getInventoryContentMessage().Deserialize(dataReader);
+					break;
+				case 3023:
+					handleObjectQuantityMessage(dataReader);
+					break;
+				case 3025:
+					handleObjectAddedMessage(dataReader);
+					break;
+				case 3024:
+					handleObjectDeletedMessage(dataReader);
+					break;
+				case 6034:
+					handleObjectsDeletedMessage(dataReader);
+					break;
+				case 6033:
+					handleObjectsAddedMessage(dataReader);
+					break;
+				case 3016:
+					handleInventoryContentMessage(dataReader);
+					break;
+				case 6036:
+					handleStorageObjectsUpdateMessage(dataReader);
+					break;
+				case 6035:
+					handleStorageObjectsRemoveMessage(dataReader);
+					break;
+				case 5647:
+					handleStorageObjectUpdateMessage(dataReader);
+					break;
+				case 5648:
+					handleStorageObjectRemoveMessage(dataReader);
+					break;
+				case 5628:
+					info.setLeaveExchange(true);
+					break;
+				case 5537:
+					handleKamasUpdateMessage(dataReader);
+					break;
+				case 5645:
+					handleStorageKamasUpdateMessage(dataReader);
+					break;
+				case 702:
+					handleGameFightJoinMessage(dataReader);
+					break;
+				case 956:
+					handleSequenceEndMessage(dataReader);
+					break;
+				case 715:
+					sendToServer(new GameFightTurnReadyMessage(true), GameFightTurnReadyMessage.ProtocolId, "Turn ready");
+					break;
+				case 719:
+					handleGameFightTurnEndMessage(dataReader);
+					break;
+				case 720:
+					this.getInfo().setJoinedFight(false);
+					GameFightEndMessage gameFightEndMessage = new GameFightEndMessage();
+					gameFightEndMessage.Deserialize(dataReader);
+					iaPacket.gameFightEnd(gameFightEndMessage);
+					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"end\"" });
+					break;
+				case 703:
+					handleGameFightPlacementPossiblePositionsMessage(dataReader);
+					break;
+				case 5696:
+					handleGameEntitiesDispositionMessage(dataReader);
+					break;
+				case 5921:
+					handleGameFightSynchronizeMessage(dataReader);
+					break;
+				case 6465:
+					info.setTurn(true);
+					iaPacket.gameFightTurnStartPlaying();
+					break;
+				case 955:
+					SequenceStartMessage sequenceStartMessage = new SequenceStartMessage();
+					sequenceStartMessage.Deserialize(dataReader);
+					iaPacket.sequenceStartMessage(sequenceStartMessage);
+					break;
+				case 5825:
+					handleGameActionFightSummonMessage(dataReader);
+					break;
+				/**
+				 * LYSANDRE FIGHT // case 1010 to case 6310 Each sequence can
+				 * contain multiple jsonObject Each case contains one jsonObject
+				 * jsonObject : key of the variable jsonObject : key of the
+				 * packet sourceId : caster targetId : target
+				 */
+				case 1010:
+					handleGameActionFightSpellCastMessage(dataReader);
+					break;
+				case 6132:
+					GameActionFightNoSpellCastMessage gameActionFightNoSpellCastMessage = new GameActionFightNoSpellCastMessage();
+					gameActionFightNoSpellCastMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightNoSpellCast(gameActionFightNoSpellCastMessage);
+					break;
+				case 6312:
+					handleGameActionFightLifePointsLostMessage(dataReader);
+					break;
+				case 5828:
+					handleGameActionFightDodgePointLossMessage(dataReader);
+					break;
+				/**
+				 * Depending on the packet received it will give a JsonObject
+				 * with diferent key the first are in common for every packet
+				 */
+				case 6070:
+					handleGameActionFightDispellableEffectMessage(dataReader);
+					break;
+				case 5540:
+					handleGameActionFightMarkCellsMessage(dataReader);
+					break;
+				case 6311:
+					handleGameActionFightLifePointsGainMessage(dataReader);
+					break;
+				case 1099:
+					handleGameActionFightDeathMessage(dataReader);
+					break;
+				case 6116:
+					handleGameActionFightCloseCombatMessage(dataReader);
+					break;
+				case 5525:
+					handleGameActionFightSlideMessage(dataReader);
+					break;
+				case 6310:
+					handleGameActionFightLifeAndShieldPointsLostMessage(dataReader);
+					break;
+				case 713:
+					handleGameFightTurnListMessage(dataReader);
+					break;
+				case 1604:
+					handleZaapListMessage(dataReader);
+					break;
+				case 5632:
+					handleGameRolePlayShowActorMessage(dataReader);
+					break;
+				case 251:
+					handleGameContextRemoveElementMessage(dataReader);
+					break;
+				case 6483:
+					this.info.setHuntAnswered(true);
+					this.info.setInHunt(false);
+					this.hunt.setRdyToFight(false);
+					break;
+				case 6484:
+					handleTreasureHuntDigRequestAnswerMessage(dataReader);
+					break;
+				case 6486:
+					handleTreasureHuntMessage(dataReader);
+					break;
+				case 5937:
+					handleGameRolePlayPlayerFightFriendlyRequestedMessage(dataReader);
+					break;
+				case 1030:
+					handleGameActionFightPointsVariationMessage(dataReader);
+					break;
+				case 5905:
+					ExchangeStartedBidSellerMessage exchangeStartedBidSellerMessage = new ExchangeStartedBidSellerMessage();
+					exchangeStartedBidSellerMessage.Deserialize(dataReader);
+					this.getNpc().setItemsToSell(exchangeStartedBidSellerMessage.getObjectsInfos());
+					this.npc.setCanSell(exchangeStartedBidSellerMessage.getSellerDescriptor().getTypes());
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 6464:
+					ExchangeBidPriceForSellerMessage exchangeBidPriceForSellerMessage = new ExchangeBidPriceForSellerMessage();
+					exchangeBidPriceForSellerMessage.Deserialize(dataReader);
+					this.npc.setCurrentPrice(exchangeBidPriceForSellerMessage.getMinimalPrices());
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 5945:
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 5765:
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 5904:
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 5946:
+					ExchangeBidHouseItemRemoveOkMessage exchangeBidHouseItemRemoveOkMessage = new ExchangeBidHouseItemRemoveOkMessage();
+					exchangeBidHouseItemRemoveOkMessage.Deserialize(dataReader);
+					if (this.npc.getItemsToSell() != null) {
+						this.npc.removeItemToSell(exchangeBidHouseItemRemoveOkMessage.getSellerId());
+					}
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 6304:
+					handleGameActionFightModifyEffectsDurationMessage(dataReader);
+					break;
+				case 6545:
+					handleGameActionFightActivateGlyphTrapMessage(dataReader);
+					break;
+				case 5967:
+					MountRidingMessage mountRidingMessage = new MountRidingMessage();
+					mountRidingMessage.Deserialize(dataReader);
+					this.info.setMountRiding(true);
+					this.info.setRiding(mountRidingMessage.isIsRiding());
+					break;
+				case 5968:
+					MountSetMessage mountSetMessage = new MountSetMessage();
+					mountSetMessage.Deserialize(dataReader);
+					this.dragodinde.setHavingDd(true);
+					this.dragodinde.setId((int) mountSetMessage.getMountData().getId());
+					this.dragodinde.setEnergy(mountSetMessage.getMountData().getEnergy());
+					this.dragodinde.setLevelEquipedDD(mountSetMessage.getMountData().getLevel());
+					this.info.setMountSet(true);
+					break;
+				case 5970:
+					MountXpRatioMessage mountXpRatioMessage = new MountXpRatioMessage();
+					mountXpRatioMessage.Deserialize(dataReader);
+					this.dragodinde.setRatioXp(mountXpRatioMessage.getRatio());
+					this.info.setMountxpmsg(true);
+					break;
+				case 5979:
+					ExchangeStartOkMountMessage exchangeStartOkMountMessage = new ExchangeStartOkMountMessage();
+					exchangeStartOkMountMessage.Deserialize(dataReader);
+					this.dragodinde.setPaddock(exchangeStartOkMountMessage.getPaddockedMountsDescription());
+					this.dragodinde.setStable(exchangeStartOkMountMessage.getStabledMountsDescription());
+					this.dragodinde.setInStable(true);
+					break;
+				case 6555:
+					this.info.setExchangeDD(true);
+					break;
+				case 6559:
+					this.info.setExchangeDD(true);
+					break;
+				case 5982:
+					this.dragodinde.setHavingDd(false);
+					this.info.setExchangeDD(true);
+					break;
+				case 2970:
+					this.info.setExchangeDD(true);
+					break;
+				case 5689:
+					EmoteListMessage emoteListMessage = new EmoteListMessage();
+					emoteListMessage.Deserialize(dataReader);
+					for (Integer b : emoteListMessage.getEmoteIds()) {
+						if (b == 8) {
+							this.getDragodinde().setFart(true);
+						}
+					}
+					break;
+				case 5683:
+					EmotePlayMessage emote = new EmotePlayMessage();
+					emote.Deserialize(dataReader);
+					if (emote.getActorId() == this.info.getActorId()) {
+						this.info.setEmoteLaunched(true);
+					}
+					break;
+				case 5960:
+					TeleportDestinationsListMessage destinationsListMessage = new TeleportDestinationsListMessage();
+					destinationsListMessage.Deserialize(dataReader);
+					if (destinationsListMessage.getTeleporterType() == 1) {
+						this.interactive.setZaapiList(destinationsListMessage.getMapIds());
+					}
+					break;
+				case 5830:
+					GameActionFightCarryCharacterMessage gameActionFightCarryCharacterMessage = new GameActionFightCarryCharacterMessage();
+					gameActionFightCarryCharacterMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightCarryCharacter(gameActionFightCarryCharacterMessage);
+					break;
+				case 6113:
+					GameActionFightDispellEffectMessage gameActionFightDispellEffectMessage = new GameActionFightDispellEffectMessage();
+					gameActionFightDispellEffectMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightDispellEffect(gameActionFightDispellEffectMessage);
+					break;
+				case 5533:
+					GameActionFightDispellMessage gameActionFightDispellMessage = new GameActionFightDispellMessage();
+					gameActionFightDispellMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightDispell(gameActionFightDispellMessage);
+					break;
+				case 6176:
+					GameActionFightDispellSpellMessage gameActionFightDispellSpellMessage = new GameActionFightDispellSpellMessage();
+					gameActionFightDispellSpellMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightDispellSpell(gameActionFightDispellSpellMessage);
+					break;
+				case 5826:
+					GameActionFightDropCharacterMessage gameActionFightDropCharacterMessage = new GameActionFightDropCharacterMessage();
+					gameActionFightDropCharacterMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightDropCharacter(gameActionFightDropCharacterMessage);
+					break;
+				case 5527:
+					GameActionFightExchangePositionsMessage gameActionFightExchangePositionsMessage = new GameActionFightExchangePositionsMessage();
+					gameActionFightExchangePositionsMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightExchangePositions(gameActionFightExchangePositionsMessage);
+					break;
+				case 5821:
+					GameActionFightInvisibilityMessage gameActionFightInvisibilityMessage = new GameActionFightInvisibilityMessage();
+					gameActionFightInvisibilityMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightInvisibility(gameActionFightInvisibilityMessage);
+					break;
+				case 6320:
+					GameActionFightInvisibleDetectedMessage gameActionFightInvisibleDetectedMessage = new GameActionFightInvisibleDetectedMessage();
+					gameActionFightInvisibleDetectedMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightInvisibleDetected(gameActionFightInvisibleDetectedMessage);
+					break;
+				case 5571:
+					GameActionFightKillMessage gameActionFightKillMessage = new GameActionFightKillMessage();
+					gameActionFightKillMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightKill(gameActionFightKillMessage);
+					break;
+				case 5526:
+					GameActionFightReduceDamagesMessage gameActionFightReduceDamagesMessage = new GameActionFightReduceDamagesMessage();
+					gameActionFightReduceDamagesMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightReduceDamages(gameActionFightReduceDamagesMessage);
+					break;
+				case 5530:
+					GameActionFightReflectDamagesMessage gameActionFightReflectDamagesMessage = new GameActionFightReflectDamagesMessage();
+					gameActionFightReflectDamagesMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightReflectDamages(gameActionFightReflectDamagesMessage);
+					break;
+				case 5531:
+					GameActionFightReflectSpellMessage gameActionFightReflectSpellMessage = new GameActionFightReflectSpellMessage();
+					gameActionFightReflectSpellMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightReflectSpell(gameActionFightReflectSpellMessage);
+					break;
+				case 6219:
+					GameActionFightSpellCooldownVariationMessage gameActionFightSpellCooldownVariationMessage = new GameActionFightSpellCooldownVariationMessage();
+					gameActionFightSpellCooldownVariationMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightSpellCooldownVariation(gameActionFightSpellCooldownVariationMessage);
+					break;
+				case 6221:
+					GameActionFightSpellImmunityMessage gameActionFightSpellImmunityMessage = new GameActionFightSpellImmunityMessage();
+					gameActionFightSpellImmunityMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightSpellImmunity(gameActionFightSpellImmunityMessage);
+					break;
+				case 5535:
+					GameActionFightStealKamaMessage gameActionFightStealKamaMessage = new GameActionFightStealKamaMessage();
+					gameActionFightStealKamaMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightStealKama(gameActionFightStealKamaMessage);
+					break;
+				case 1004:
+					GameActionFightTackledMessage gameActionFightTackledMessage = new GameActionFightTackledMessage();
+					gameActionFightTackledMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightTackled(gameActionFightTackledMessage);
+					break;
+				case 5528:
+					GameActionFightTeleportOnSameMapMessage gameActionFightTeleportOnSameMapMessage = new GameActionFightTeleportOnSameMapMessage();
+					gameActionFightTeleportOnSameMapMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightTeleportOnSameMap(gameActionFightTeleportOnSameMapMessage);
+					break;
+				case 5829:
+					GameActionFightThrowCharacterMessage gameActionFightThrowCharacterMessage = new GameActionFightThrowCharacterMessage();
+					gameActionFightThrowCharacterMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightThrowCharacter(gameActionFightThrowCharacterMessage);
+					break;
+				case 6147:
+					GameActionFightTriggerEffectMessage gameActionFightTriggerEffectMessage = new GameActionFightTriggerEffectMessage();
+					gameActionFightTriggerEffectMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightTriggerEffect(gameActionFightTriggerEffectMessage);
+					break;
+				case 5741:
+					GameActionFightTriggerGlyphTrapMessage gameActionFightTriggerGlyphTrapMessage = new GameActionFightTriggerGlyphTrapMessage();
+					gameActionFightTriggerGlyphTrapMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightTriggerGlyphTrap(gameActionFightTriggerGlyphTrapMessage);
+					break;
+				case 5570:
+					GameActionFightUnmarkCellsMessage gameActionFightUnmarkCellsMessage = new GameActionFightUnmarkCellsMessage();
+					gameActionFightUnmarkCellsMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightUnmarkCells(gameActionFightUnmarkCellsMessage);
+					break;
+				case 6217:
+					GameActionFightVanishMessage gameActionFightVanishMessage = new GameActionFightVanishMessage();
+					gameActionFightVanishMessage.Deserialize(dataReader);
+					iaPacket.gameActionFightVanish(gameActionFightVanishMessage);
+					break;
+				case 6700:
+					ArenaFighterLeaveMessage arenaFighterLeaveMessage = new ArenaFighterLeaveMessage();
+					arenaFighterLeaveMessage.Deserialize(dataReader);
+					iaPacket.arenaFighterLeave(arenaFighterLeaveMessage);
+					break;
+				case 6022:
+					ChallengeInfoMessage challengeInfoMessage = new ChallengeInfoMessage();
+					challengeInfoMessage.Deserialize(dataReader);
+					iaPacket.challengeInfo(challengeInfoMessage);
+					break;
+				case 6019:
+					ChallengeResultMessage challengeResultMessage = new ChallengeResultMessage();
+					challengeResultMessage.Deserialize(dataReader);
+					iaPacket.challengeResult(challengeResultMessage);
+					break;
+				case 5613:
+					ChallengeTargetsListMessage challengeTargetsListMessage = new ChallengeTargetsListMessage();
+					challengeTargetsListMessage.Deserialize(dataReader);
+					iaPacket.challengeTargetsList(challengeTargetsListMessage);
+					break;
+				case 6123:
+					ChallengeTargetUpdateMessage challengeTargetUpdateMessage = new ChallengeTargetUpdateMessage();
+					challengeTargetUpdateMessage.Deserialize(dataReader);
+					iaPacket.challengeTargetUpdate(challengeTargetUpdateMessage);
+					break;
+				case 6309:
+					GameFightRefreshFighterMessage gameFightRefreshFighterMessage = new GameFightRefreshFighterMessage();
+					gameFightRefreshFighterMessage.Deserialize(dataReader);
+					iaPacket.gameFightRefreshFighter(gameFightRefreshFighterMessage);
+					break;
+				case 740:
+					GameFightHumanReadyStateMessage gameFightHumanReadyStateMessage = new GameFightHumanReadyStateMessage();
+					gameFightHumanReadyStateMessage.Deserialize(dataReader);
+					iaPacket.gameFightHumanReadyState(gameFightHumanReadyStateMessage);
+					break;
+				case 721:
+					GameFightLeaveMessage gameFightLeaveMessage = new GameFightLeaveMessage();
+					gameFightLeaveMessage.Deserialize(dataReader);
+					iaPacket.gameFightLeave(gameFightLeaveMessage);
+					break;
+				case 6239:
+					GameFightNewRoundMessage gameFightNewRoundMessage = new GameFightNewRoundMessage();
+					gameFightNewRoundMessage.Deserialize(dataReader);
+					iaPacket.gameFightNewRound(gameFightNewRoundMessage);
+					break;
+				case 6490:
+					GameFightNewWaveMessage gameFightNewWaveMessage = new GameFightNewWaveMessage();
+					gameFightNewWaveMessage.Deserialize(dataReader);
+					iaPacket.gameFightNewWave(gameFightNewWaveMessage);
+					break;
+				case 5927:
+					GameFightOptionStateUpdateMessage gameFightOptionStateUpdateMessage = new GameFightOptionStateUpdateMessage();
+					gameFightOptionStateUpdateMessage.Deserialize(dataReader);
+					iaPacket.gameFightOptionStateUpdate(gameFightOptionStateUpdateMessage);
+					break;
+				case 707:
+					GameFightOptionToggleMessage gameFightOptionToggleMessage = new GameFightOptionToggleMessage();
+					gameFightOptionToggleMessage.Deserialize(dataReader);
+					iaPacket.gameFightOptionToggle(gameFightOptionToggleMessage);
+					break;
+				case 6754:
+					GameFightPauseMessage gameFightPauseMessage = new GameFightPauseMessage();
+					gameFightPauseMessage.Deserialize(dataReader);
+					iaPacket.gameFightPause(gameFightPauseMessage);
+					break;
+				case 6547:
+					GameFightPlacementSwapPositionsAcceptMessage gameFightPlacementSwapPositionsAcceptMessage = new GameFightPlacementSwapPositionsAcceptMessage();
+					gameFightPlacementSwapPositionsAcceptMessage.Deserialize(dataReader);
+					iaPacket.gameFightPlacementSwapPositionsAccept(gameFightPlacementSwapPositionsAcceptMessage);
+					break;
+				case 6546:
+					GameFightPlacementSwapPositionsCancelledMessage gameFightPlacementSwapPositionsCancelledMessage = new GameFightPlacementSwapPositionsCancelledMessage();
+					gameFightPlacementSwapPositionsCancelledMessage.Deserialize(dataReader);
+					iaPacket.gameFightPlacementSwapPositionsCancelled(gameFightPlacementSwapPositionsCancelledMessage);
+					break;
+				case 6543:
+					GameFightPlacementSwapPositionsCancelMessage gameFightPlacementSwapPositionsCancelMessage = new GameFightPlacementSwapPositionsCancelMessage();
+					gameFightPlacementSwapPositionsCancelMessage.Deserialize(dataReader);
+					iaPacket.gameFightPlacementSwapPositionsCancel(gameFightPlacementSwapPositionsCancelMessage);
+					break;
+				case 6544:
+					GameFightPlacementSwapPositionsMessage gameFightPlacementSwapPositionsMessage = new GameFightPlacementSwapPositionsMessage();
+					gameFightPlacementSwapPositionsMessage.Deserialize(dataReader);
+					iaPacket.gameFightPlacementSwapPositions(gameFightPlacementSwapPositionsMessage);
+					break;
+				case 6542:
+					GameFightPlacementSwapPositionsOfferMessage gameFightPlacementSwapPositionsOfferMessage = new GameFightPlacementSwapPositionsOfferMessage();
+					gameFightPlacementSwapPositionsOfferMessage.Deserialize(dataReader);
+					iaPacket.gameFightPlacementSwapPositionsOffer(gameFightPlacementSwapPositionsOfferMessage);
+					break;
+				case 711:
+					GameFightRemoveTeamMemberMessage gameFightRemoveTeamMemberMessage = new GameFightRemoveTeamMemberMessage();
+					gameFightRemoveTeamMemberMessage.Deserialize(dataReader);
+					iaPacket.gameFightRemoveTeamMember(gameFightRemoveTeamMemberMessage);
+					break;
+				case 6067:
+					GameFightResumeMessage gameFightResumeMessage = new GameFightResumeMessage();
+					gameFightResumeMessage.Deserialize(dataReader);
+					iaPacket.gameFightResume(gameFightResumeMessage);
+					break;
+				case 700:
+					this.intelligence = new Intelligence(this);
+					this.iaPacket = new IntelligencePacketHandler(this.intelligence);
+					this.getInfo().setJoinedFight(true);
+					GameFightStartingMessage gameFightStartingMessage = new GameFightStartingMessage();
+					gameFightStartingMessage.Deserialize(dataReader);
+					iaPacket.gameFightStarting(gameFightStartingMessage);
+					break;
+				case 712:
+					GameFightStartMessage gameFightStartMessage = new GameFightStartMessage();
+					gameFightStartMessage.Deserialize(dataReader);
+					iaPacket.gameFightStart(gameFightStartMessage);
+					break;
+				case 718:
+					GameFightTurnFinishMessage gameFightTurnFinishMessage = new GameFightTurnFinishMessage();
+					gameFightTurnFinishMessage.Deserialize(dataReader);
+					iaPacket.gameFightTurnFinish(gameFightTurnFinishMessage);
+					break;
+				case 716:
+					GameFightTurnReadyMessage gameFightTurnReadyMessage = new GameFightTurnReadyMessage();
+					gameFightTurnReadyMessage.Deserialize(dataReader);
+					iaPacket.gameFightTurnReady(gameFightTurnReadyMessage);
+					break;
+				case 6307:
+					GameFightTurnResumeMessage gameFightTurnResumeMessage = new GameFightTurnResumeMessage();
+					gameFightTurnResumeMessage.Deserialize(dataReader);
+					iaPacket.gameFightTurnResume(gameFightTurnResumeMessage);
+					break;
+				case 714:
+					GameFightTurnStartMessage gameFightTurnStartMessage = new GameFightTurnStartMessage();
+					gameFightTurnStartMessage.Deserialize(dataReader);
+					iaPacket.gameFightTurnStart(gameFightTurnStartMessage);
+					break;
+				case 5572:
+					GameFightUpdateTeamMessage gameFightUpdateTeamMessage = new GameFightUpdateTeamMessage();
+					gameFightUpdateTeamMessage.Deserialize(dataReader);
+					iaPacket.gameFightUpdateTeam(gameFightUpdateTeamMessage);
+					break;
+				case 6699:
+					RefreshCharacterStatsMessage refreshCharacterStatsMessage = new RefreshCharacterStatsMessage();
+					refreshCharacterStatsMessage.Deserialize(dataReader);
+					iaPacket.refreshCharacterStats(refreshCharacterStatsMessage);
+					break;
+				case 1200:
+					SpellListMessage spellListMessage = new SpellListMessage();
+					spellListMessage.Deserialize(dataReader);
+					List<Spell> spells = new ArrayList<>();
+					for (SpellItem si : spellListMessage.getSpells()) {
+						spells.add(GameData.getSpell(si.getSpellId(), si.getSpellLevel()));
+					}
+					info.setSpells(spells);
+					break;
+				case 5864:
+					GameFightShowFighterMessage gameFightShowFighterMessage = new GameFightShowFighterMessage();
+					gameFightShowFighterMessage.Deserialize(dataReader);
+					iaPacket.gameFightShowFighter(gameFightShowFighterMessage);
+					break;
+				case 6322:
+					FighterStatsListMessage fighterStatsListMessage = new FighterStatsListMessage();
+					fighterStatsListMessage.Deserialize(dataReader);
+					iaPacket.fighterStatsList(fighterStatsListMessage);
+					break;
+			}
+			dataReader.bis.close();
 		}
-		dataReader.bis.close();
+		catch (Exception e) {
+			System.out.println("Id : " + packet_id);
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -1733,11 +1739,12 @@ public class Network extends DisplayInfo implements Runnable {
 	public void setLatencyFrame(LatencyFrame latencyFrame) {
 		this.latencyFrame = latencyFrame;
 	}
-    public Intelligence getIntelligence() {
-        return intelligence;
-    }
 
-    public void setIntelligence(Intelligence intelligence) {
-        this.intelligence = intelligence;
-    }
+	public Intelligence getIntelligence() {
+		return intelligence;
+	}
+
+	public void setIntelligence(Intelligence intelligence) {
+		this.intelligence = intelligence;
+	}
 }
