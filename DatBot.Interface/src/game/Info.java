@@ -3,8 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
-import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
-import protocol.network.types.game.context.roleplay.job.JobExperience;
+import ia.entities.Spell;
 
 public class Info {
 	/*
@@ -45,7 +44,7 @@ public class Info {
 	private int lvl = -1;
 	private int weigthMax;
 	private int weight;
-
+	private List<Spell> spells;
 	// Game utils
 	private boolean isRiding = false;
 	private boolean waitForMov = true;
@@ -584,4 +583,11 @@ public class Info {
 		this.havenBag = havenBag;
 	}
 
+	public List<Spell> getSpells() {
+		return spells;
+	}
+
+	public void setSpells(List<Spell> spells) {
+		this.spells = spells;
+	}
 }

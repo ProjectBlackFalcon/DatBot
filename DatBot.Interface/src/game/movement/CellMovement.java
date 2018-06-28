@@ -28,12 +28,14 @@ public class CellMovement {
 	public void performMovement() throws Exception
 	{
 		if (path == null) return;
+		
+		network.append("Moving to " + endCell + " from " + startCell);
+
 
 		this.network.getInfo().setWaitForMov(false);
 		
-		this.network.append("Moving to " + endCell);
 		List<Integer> keys = MapMovementAdapter.GetServerMovement(path);
-
+		
 		this.network.sendToServer(new GameMapMovementRequestMessage(keys, this.network.getInfo().getMapId()), GameMapMovementRequestMessage.ProtocolId, "Moving to " + endCell);
 		if (!this.network.getInfo().isJoinedFight()){
 			if (path.Cells.size() >= 4)

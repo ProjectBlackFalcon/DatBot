@@ -47,5 +47,9 @@ public class IdentifiedEntityDispositionInformations extends EntityDispositionIn
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "IdentifiedEntityDispositionInformations [id=" + id + "]" + super.toString();
+	}
 
 }

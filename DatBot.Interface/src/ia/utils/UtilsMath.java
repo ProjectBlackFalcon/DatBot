@@ -1,0 +1,43 @@
+package ia.utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ia.Intelligence;
+import ia.entities.entity.Entity;
+import ia.fight.astar.AStarMap;
+import ia.fight.astar.ExampleFactory;
+import ia.fight.astar.ExampleNode;
+import ia.map.MapIA;
+import ia.map.Position;
+import ia.map.TransformedCell;
+import protocol.network.Network;
+
+public class UtilsMath {
+
+	public static List<Position> getPath(TransformedCell[][] cells, Position start, Position target, boolean diagonal) {
+		AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(34, 34, new ExampleFactory(), diagonal);
+
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells.length; j++) {
+				if (!cells[i][j].isMov() && (start.getX() != i || start.getY() != j) && (target.getX() != i || target.getY() != j)) {
+					myMap.setWalkable(i, j, false);
+				}
+			}
+		}
+
+		List<ExampleNode> path = myMap.findPath(start.getX(), start.getY(), target.getX(), target.getY());
+
+		ArrayList<Position> positions = new ArrayList<>();
+
+		for (ExampleNode aPath : path) {
+			positions.add(new Position(aPath.getxPosition(), aPath.getyPosition()));
+		}
+
+		return positions;
+	}
+	
+	public static boolean isPositionAccessible(List<Position> path, Entity entity){
+		return !(path.size() > entity.getInfo().getStats().getMovementPoints()) && path.size() > 0;
+	}
+}

@@ -198,7 +198,7 @@ public class Map {
 			return false;
 		}
 		
-        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory(), false);
         for(int i = 0; i < 33; i++){
         	for(int j = 0; j < 33; j++){
         		myMap.setWalkable(i, j, map.isPositionWalkable(new Position(i, j)));
@@ -239,7 +239,7 @@ public class Map {
 			return null;
 		}
 		
-        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory());
+        AStarMap<ExampleNode> myMap = new AStarMap<ExampleNode>(33, 33, new ExampleFactory(), false);
         for(int i = 0; i < 33; i++){
         	for(int j = 0; j < 33; j++){
         		myMap.setWalkable(i, j, map.isPositionWalkable(team, new Position(i, j)));
