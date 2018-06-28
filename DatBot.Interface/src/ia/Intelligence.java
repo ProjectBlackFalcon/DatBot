@@ -37,6 +37,7 @@ public class Intelligence {
 		int bestCell = getBestCell();
 		if(bestCell == getMain().getInfo().getDisposition().getCellId()){
 			if(!getMain().isRdy()){
+				utils.stop(0.25);
 				getMain().setRdy(true);
 				utils.fightReady();
 			}
@@ -47,7 +48,9 @@ public class Intelligence {
 		if(getMain().isRdy()){
 			utils.fightNotReady();
 		}
+		utils.stop(0.25);
 		utils.setBeginingPosition(bestCell);
+		utils.stop(0.25);
 		getMain().setRdy(true);
 		utils.fightReady();
 	}

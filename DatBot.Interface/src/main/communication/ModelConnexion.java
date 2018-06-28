@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
 import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
@@ -1532,8 +1534,10 @@ public class ModelConnexion {
 
 	private Object[] useItem(String param) throws Exception {
 		Object[] toSend;
-		ObjectUseMessage objectUseMessage = new ObjectUseMessage(Integer.parseInt(param));
-		getNetwork().sendToServer(objectUseMessage, ObjectUseMessage.ProtocolId, "Using item");
+		int id = Integer.parseInt(param);
+		System.out.println("Using " + id);
+		ObjectUseMessage objectUseMessage = new ObjectUseMessage(id);
+		getNetwork().sendToServer(objectUseMessage, ObjectUseMessage.ProtocolId, "Using item " + id);
 		if (this.waitToSendObjectUse()) {
 			stop(0.25);
 			toSend = new Object[] { "True" };

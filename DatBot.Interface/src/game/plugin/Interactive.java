@@ -2,10 +2,7 @@ package game.plugin;
 
 import java.util.List;
 
-import game.Info;
-import main.communication.DisplayInfo;
 import protocol.network.Network;
-import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.InteractiveElementSkill;
 import protocol.network.types.game.interactive.StatedElement;

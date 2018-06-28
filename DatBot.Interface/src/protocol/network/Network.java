@@ -570,6 +570,7 @@ public class Network extends DisplayInfo implements Runnable {
 		this.hunt.setPhorror(false);
 		MapComplementaryInformationsDataMessage complementaryInformationsDataMessage = new MapComplementaryInformationsDataMessage();
 		complementaryInformationsDataMessage.Deserialize(dataReader);
+		npc.setNpc(new ArrayList<>());
 		if (!connectionToKoli) {
 			for (int i = 0; i < complementaryInformationsDataMessage.getActors().size(); i++) {
 				if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayNpcInformations")) {
@@ -998,8 +999,6 @@ public class Network extends DisplayInfo implements Runnable {
 					break;
 				case 5609:
 					info.setCaracsAffected(true);
-				case 6072:
-					sendToServer(new CharacterSelectedForceReadyMessage(), CharacterSelectedForceReadyMessage.ProtocolId, "Logging back into combat");
 					break;
 				case 6253:
 					HandleRawDataMessage();
@@ -1618,9 +1617,6 @@ public class Network extends DisplayInfo implements Runnable {
 					iaPacket.gameFightTurnStart(gameFightTurnStartMessage);
 					break;
 				case 5572:
-					GameFightUpdateTeamMessage gameFightUpdateTeamMessage = new GameFightUpdateTeamMessage();
-					gameFightUpdateTeamMessage.Deserialize(dataReader);
-					iaPacket.gameFightUpdateTeam(gameFightUpdateTeamMessage);
 					break;
 				case 6699:
 					RefreshCharacterStatsMessage refreshCharacterStatsMessage = new RefreshCharacterStatsMessage();
