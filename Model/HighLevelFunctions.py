@@ -422,6 +422,7 @@ class HighLevelFunctions:
                 time.sleep(result*60)
             if in_hb:
                 self.bot.interface.exit_heavenbag()
+                self.bot.interface.abandon_hunt()
             return False, reason
         else:
             in_hb = False
@@ -430,6 +431,7 @@ class HighLevelFunctions:
                     if self.bot.interface.enter_heavenbag()[0]:
                         in_hb = True
                 time.sleep(10)
+                self.bot.interface.get_player_stats()
             if in_hb:
                 self.bot.interface.exit_heavenbag()
             self.bot.interface.start_hunt_fight()
