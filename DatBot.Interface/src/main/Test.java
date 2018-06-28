@@ -28,6 +28,8 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;['democraticamnesiac','answerflash2','Maxitreur','Julith']");
 		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
 		Thread.sleep(15000);
+		communication.getReturn("0;0;i;cmd;goBank;[None]");
+		Thread.sleep(5000);
 		communication.getReturn("0;0;i;cmd;openBank;[None]");
 //		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 

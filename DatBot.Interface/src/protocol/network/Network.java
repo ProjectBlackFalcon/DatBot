@@ -1176,7 +1176,7 @@ public class Network extends DisplayInfo implements Runnable {
 					GameFightEndMessage gameFightEndMessage = new GameFightEndMessage();
 					gameFightEndMessage.Deserialize(dataReader);
 					iaPacket.gameFightEnd(gameFightEndMessage);
-					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(info.addAndGetMsgIdFight()), "m", "info", "combat", new Object[] { "\"end\"" });
+					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "combat", new Object[] { "\"end\"" });
 					break;
 				case 703:
 					handleGameFightPlacementPossiblePositionsMessage(dataReader);
@@ -1587,6 +1587,7 @@ public class Network extends DisplayInfo implements Runnable {
 					this.intelligence = new Intelligence(this);
 					this.iaPacket = new IntelligencePacketHandler(this.intelligence);
 					this.getInfo().setJoinedFight(true);
+					Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "combat", new Object[] { "\"start\"" });
 					GameFightStartingMessage gameFightStartingMessage = new GameFightStartingMessage();
 					gameFightStartingMessage.Deserialize(dataReader);
 					iaPacket.gameFightStarting(gameFightStartingMessage);
