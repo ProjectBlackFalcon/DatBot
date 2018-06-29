@@ -435,7 +435,7 @@ class LowLevelFunctions:
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                        database=dc.database)
         cursor = conn.cursor()
-        cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration, log) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(bot_name, int(success), reason, duration, log))
+        cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration, log) VALUES ('{}', '{}', '{}', '{}', "{}")""".format(bot_name, int(success), reason, duration, log))
         conn.commit()
         conn.close()
         with open('../Utils/HuntLogs.txt', 'w') as f:
