@@ -1,5 +1,6 @@
 from Pathfinder import PathFinder
 from LowLevelFunctions import LowLevelFunctions
+from Hunt import Hunt
 from DD import DD
 import json
 import time
@@ -337,21 +338,21 @@ class HighLevelFunctions:
         if not self.bot.interface.hunt_is_active()[0]:
             get_hunt(level)
         hunt_start = self.bot.interface.get_hunt_start()[0]
+        hunt = Hunt(level, hunt_start)
         self.goto(hunt_start)
 
         self.bot.occupation = 'Treasure Hunting'
         self.update_db()
 
-        hunt_error_flag = False
-        reason = ''
-        while self.bot.interface.get_steps_left()[0] and not hunt_error_flag:
-            clue, direction, start_pos, clue_pos = None, None, None, None
-            while self.bot.interface.get_clues_left()[0] and not hunt_error_flag:
+        while self.bot.interface.get_steps_left()[0] and not hunt.error:
+            hunt.add_new_step(self.bot.interface.get_clues_left()[0])
+            while self.bot.interface.get_clues_left()[0] and not hunt.error:
                 clue, direction = self.bot.interface.get_hunt_clue()
+                hunt.current_step().add_new_clue(clue, self.bot.position[0], direction)
                 destination = None
-                if 'Phorreur' in clue:
+                if 'phorreur' in clue.lower():
                     n_steps = 0
-                    while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11:
+                    while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11 and not hunt.error:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
@@ -363,11 +364,14 @@ class HighLevelFunctions:
                             with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write('Could not go to {} from {} to find {}'.format(destination, self.bot.position, clue))
-                            hunt_error_flag = True
-                            reason = 'Goto failed'
+                            hunt.error = True
+                            hunt.reason = 'Goto failed'
+                    if not hunt.error:
+                        hunt.current_clue().guessed_pos = self.bot.position[0]
                 else:
                     try:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+                        hunt.current_clue().guessed_pos = clue_pos
                         self.goto(clue_pos, harvest=harvest)
                     except Exception as e:
                         with open('../Utils/HuntErrorsLog.txt', 'a') as f:
@@ -378,13 +382,13 @@ class HighLevelFunctions:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                             f.write(e.args[0])
 
-                        hunt_error_flag = True
+                        hunt.error = True
                         if 'Non existing clue' in e.args[0]:
-                            reason = e.args[0]
+                            hunt.reason = e.args[0]
                         else:
-                            reason = 'Goto failed'
+                            hunt.reason = 'Goto failed'
 
-                if not hunt_error_flag and not self.bot.interface.validate_hunt_clue()[0]:
+                if not hunt.error and not self.bot.interface.validate_hunt_clue()[0]:
                     clue, direction = self.bot.interface.get_hunt_clue()
                     last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
                     clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
@@ -392,13 +396,17 @@ class HighLevelFunctions:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
                         f.write('Clue was supposed to be at {}'.format(clue_pos))
-                    hunt_error_flag = True
-                    reason = 'Could not validate clue'
+                    hunt.error = True
+                    hunt.reason = 'Could not validate clue'
                     break
-                elif hunt_error_flag:
+                elif hunt.error:
                     break
 
-            if not hunt_error_flag and not self.bot.interface.validate_hunt_step()[0]:
+            step_valid = self.bot.interface.validate_hunt_step()[0]
+            clues_left = self.bot.interface.get_clues_left()[0]
+            if step_valid:
+                clues_left = 0
+            if not hunt.error and not step_valid:
                 clue, direction = self.bot.interface.get_hunt_clue()
                 last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
                 clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
@@ -406,14 +414,19 @@ class HighLevelFunctions:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, last_valid_clue_pos, self.bot.position[0]))
                     f.write('Clue was supposed to be at {}'.format(clue_pos))
-                hunt_error_flag = True
-                reason = 'Could not validate step'
+                hunt.error = True
+                hunt.reason = 'Could not validate step'
+                hunt.current_step().validate(clues_left)
                 break
-            elif hunt_error_flag:
+            elif hunt.error:
+                hunt.current_step().validate(clues_left)
                 break
+            hunt.current_step().validate(clues_left)
 
-        if hunt_error_flag:
+        if hunt.error:
             self.llf.log(self.bot, '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
+            with open('../Utils/HuntLogs.txt', 'w') as f:
+                f.write(str(hunt))
             in_hb = False
             result = self.bot.interface.abandon_hunt()[0]
             if type(result) is not bool:
@@ -423,7 +436,6 @@ class HighLevelFunctions:
             if in_hb:
                 self.bot.interface.exit_heavenbag()
                 self.bot.interface.abandon_hunt()
-            return False, reason
         else:
             in_hb = False
             while self.bot.characteristics.health_percent < 100:
@@ -444,10 +456,14 @@ class HighLevelFunctions:
                     self.bot.interface.use_item(self.llf.get_inventory_id(inventory, chest_id))
 
             if not self.bot.interface.hunt_is_active()[0]:
+                hunt.success = True
+                hunt.reason = 'Stronk Af'
+                with open('../Utils/HuntLogs.txt', 'w') as f:
+                    f.write(str(hunt))
                 self.llf.log(self.bot, '[Treasure Hunt {}] Hunt successful'.format(self.bot.id))
-                return True, 'Stronk Af'
             else:
-                return False, 'Lost against chest'
+                hunt.reason = 'Lost against chest'
+        return hunt
 
     def hunt_treasures(self, duration_minutes, level='max', harvest=False):
         duration = duration_minutes * 60
@@ -459,9 +475,9 @@ class HighLevelFunctions:
                 n_hunts += 1
                 hunt_start = time.time()
                 self.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
-                success, reason = self.tresure_hunt(level, harvest)
-                self.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), success, reason)
-                n_success = n_success+1 if success else n_success
+                hunt = self.tresure_hunt(level, harvest)
+                self.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), hunt.success, str(hunt), hunt.reason)
+                n_success = n_success+1 if hunt.success else n_success
             except Exception:
                 with open('../Utils/24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')

@@ -431,13 +431,15 @@ class LowLevelFunctions:
         conn.commit()
         conn.close()
 
-    def hunts_to_db(self, bot_name, duration, success, reason=''):
+    def hunts_to_db(self, bot_name, duration, success, log, reason=''):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                        database=dc.database)
         cursor = conn.cursor()
-        cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration) VALUES ('{}', '{}', '{}', '{}')""".format(bot_name, int(success), reason, duration))
+        cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration, log) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(bot_name, int(success), reason, duration, log))
         conn.commit()
         conn.close()
+        with open('../Utils/HuntLogs.txt', 'w') as f:
+            f.write(log)
 
     def fetch_harvest_path(self, bot_name):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
