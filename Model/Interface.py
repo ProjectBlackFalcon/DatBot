@@ -276,7 +276,6 @@ class Interface:
         return self.execute_command('getBankDoor')
 
     def enter_bank(self):
-        # TODO
         """
         Enters the bank on the map if there is one
         :return: Boolean
@@ -289,7 +288,6 @@ class Interface:
             return [False]
 
     def open_bank(self):
-        # TODO
         """
         Opens bank
         :return: items json / False
@@ -299,7 +297,6 @@ class Interface:
         return bank_content
 
     def close_bank(self):
-        # TODO
         """
         Closes Bank
         :return: Boolean
@@ -501,6 +498,13 @@ class Interface:
         """
         return self.execute_command('huntFight')
 
+    def get_tries_left(self):
+        """
+        Return how many hunt tries remain
+        :return:
+        """
+        return self.execute_command('getTriesLeft')
+
     def enter_heavenbag(self):
         """
         Enters heavenbag
@@ -547,7 +551,6 @@ class Interface:
         return self.execute_command('attackMonster', [mob_id])
 
     def open_hdv(self):
-        # TODO
         """
         Tries to open the map's hdv. If sucessful, returns what items are being sold.
         :return: False / "empty" / [[name, id, batch_size, price], [...]]
@@ -555,7 +558,6 @@ class Interface:
         return self.execute_command('openHdv')
 
     def close_hdv(self):
-        # TODO
         """
         Closes the hdv
         :return: Boolean
