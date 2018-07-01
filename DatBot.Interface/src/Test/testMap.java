@@ -3,12 +3,15 @@ package Test;
 import java.io.IOException;
 import java.util.Random;
 
+import utils.GameData;
+import utils.d2p.MapManager;
+
 public class testMap {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		for (int i = 0; i < 200 ; i++){
-			System.out.println(stop(1));
-		}
+		new MapManager("D:/Ankama/Dofus2/app/content/gfx/world");
+		MapManager.FromId(32460);
+
 	}
 	
 	private static long stop(int deviation) throws InterruptedException{

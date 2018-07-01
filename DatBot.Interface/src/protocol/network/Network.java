@@ -612,6 +612,7 @@ public class Network extends DisplayInfo implements Runnable {
 		else {
 			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
 			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
+			System.out.println(map);
 			this.interactive.setMap(map);
 			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
 			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));
