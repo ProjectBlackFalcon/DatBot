@@ -22,38 +22,38 @@ public class Hunt {
 	 * @param lvl int : level of the character
 	 * @return result[0] : elemId, result[1] : skillId
 	 */
-	public static int[] getHuntFromLvl(int lvl){
+	public static int[] getHuntFromLvl(int lvl, Interactive interactive){
 		int[] result = new int[2];
 		if(lvl >= 20 && lvl < 40){
 			result[0] = 484993;
-			result[1] = 35426444;
+			result[1] = interactive.getSkill(result[0], 248);
 		} else if(lvl >= 40 && lvl < 60){
 			result[0] = 484993;
-			result[1] = 35426445;
+			result[1] = interactive.getSkill(result[0], 249);
 		} else if(lvl >= 60 && lvl < 80){
 			result[0] = 484993;
-			result[1] = 35426446;
+			result[1] = interactive.getSkill(result[0], 250);
 		} else if(lvl >= 80 && lvl < 100){
 			result[0] = 484993;
-			result[1] = 35426447;
+			result[1] = interactive.getSkill(result[0], 251);
 		} else if(lvl >= 100 && lvl < 120){
 			result[0] = 484993;
-			result[1] = 35426448;
+			result[1] = interactive.getSkill(result[0], 252);
 		} else if(lvl >= 120 && lvl < 140){
 			result[0] = 484993;
-			result[1] = 35426449;
+			result[1] = interactive.getSkill(result[0], 253);
 		} else if(lvl >= 140 && lvl < 160){
 			result[0] = 484993;
-			result[1] = 35426450;
+			result[1] = interactive.getSkill(result[0], 254);
 		} else if(lvl >= 160 && lvl < 180){
 			result[0] = 484993;
-			result[1] = 35426451;
+			result[1] = interactive.getSkill(result[0], 255);
 		} else if(lvl >= 180 && lvl < 200){
 			result[0] = 484993;
-			result[1] = 35426452;
+			result[1] = interactive.getSkill(result[0], 256);
 		} else if(lvl >= 200){
 			result[0] = 484993;
-			result[1] = 35426453;
+			result[1] = interactive.getSkill(result[0], 257);
 		}
 		return result;
 	}

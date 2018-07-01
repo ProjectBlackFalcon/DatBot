@@ -1356,8 +1356,8 @@ public class ModelConnexion {
 			if (this.network.getInfo().getCellId() != 304) {
 				move(304);
 			}
-			int[] interactiveHunt = Hunt.getHuntFromLvl(Integer.parseInt(param));
-			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], this.network.getInteractive().getSkill(interactiveHunt[0],248));
+			int[] interactiveHunt = Hunt.getHuntFromLvl(Integer.parseInt(param),this.network.getInteractive());
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
 			if (this.waitToSendHunt()) {
 				stop(1);
