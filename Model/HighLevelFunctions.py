@@ -345,8 +345,9 @@ class HighLevelFunctions:
         self.update_db()
 
         while self.bot.interface.get_steps_left()[0] and not hunt.error:
-            hunt.add_new_step(self.bot.interface.get_clues_left()[0])
-            while self.bot.interface.get_clues_left()[0] and not hunt.error:
+            clues_left = self.bot.interface.get_clues_left()[0]
+            hunt.add_new_step(clues_left)
+            while clues_left and not hunt.error:
                 clue, direction = self.bot.interface.get_hunt_clue()
                 hunt.current_step().add_new_clue(clue, self.bot.position[0], direction)
                 destination = None
@@ -382,10 +383,27 @@ class HighLevelFunctions:
                             f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                             f.write(e.args[0])
 
-                        hunt.error = True
                         if 'Non existing clue' in e.args[0]:
-                            hunt.reason = e.args[0]
+                            found = False
+                            clues_left = self.bot.interface.get_clues_left()[0]
+                            while not found and self.bot.interface.get_tries_left()[0]:
+                                direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
+                                destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
+                                self.goto(destination, harvest=harvest)
+                                if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
+                                    step_valid = self.bot.interface.validate_hunt_step()[0]
+                                    if self.bot.interface.get_clues_left()[0] != clues_left or step_valid:
+                                        found = True
+                                        hunt.add_to_clue_list(clue, self.bot.position)
+                                        self.llf.log(self.bot, 'Discovered clue')
+                                    else:
+                                        hunt.add_to_no_clue_list(clue, self.bot.position)
+
+                            if not found:
+                                hunt.error = True
+                                hunt.reason = e.args[0]
                         else:
+                            hunt.error = True
                             hunt.reason = 'Goto failed'
 
                 if not hunt.error and not self.bot.interface.validate_hunt_clue()[0]:
@@ -401,6 +419,7 @@ class HighLevelFunctions:
                     break
                 elif hunt.error:
                     break
+                clues_left = self.bot.interface.get_clues_left()[0]
 
             step_valid = self.bot.interface.validate_hunt_step()[0]
             clues_left = self.bot.interface.get_clues_left()[0]
@@ -427,15 +446,17 @@ class HighLevelFunctions:
             self.llf.log(self.bot, '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
             with open('../Utils/HuntLogs.txt', 'w') as f:
                 f.write(str(hunt))
-            in_hb = False
-            result = self.bot.interface.abandon_hunt()[0]
-            if type(result) is not bool:
-                if self.bot.interface.enter_heavenbag()[0]:
-                    in_hb = True
-                time.sleep(result*60)
-            if in_hb:
-                self.bot.interface.exit_heavenbag()
-                self.bot.interface.abandon_hunt()
+
+            if not ('Non existing clue' in hunt.reason):
+                in_hb = False
+                result = self.bot.interface.abandon_hunt()[0]
+                if type(result) is not bool:
+                    if self.bot.interface.enter_heavenbag()[0]:
+                        in_hb = True
+                    time.sleep(result*60)
+                if in_hb:
+                    self.bot.interface.exit_heavenbag()
+                    self.bot.interface.abandon_hunt()
         else:
             in_hb = False
             while self.bot.characteristics.health_percent < 100:

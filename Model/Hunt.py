@@ -1,5 +1,6 @@
 from typing import List
 import time
+import json
 
 
 class Hunt:
@@ -20,6 +21,27 @@ class Hunt:
 
     def current_clue(self):
         return self.current_step().clues[-1]
+
+    def add_to_no_clue_list(self, clue_name, pos):
+        with open('../Utils/TresureHuntNoClues.json', 'r') as f:
+            no_clues = json.load(f)
+        no_clues[clue_name].append([pos[0], pos[1]])
+        with open('../Utils/TresureHuntNoClues.json', 'w') as f:
+            json.dump(no_clues, f)
+
+    def add_to_clue_list(self, clue_name, pos):
+        with open('../Utils/TresureHuntClues.json', 'r') as f:
+            clues = json.load(f)
+        clues[clue_name].append([pos[0], pos[1]])
+        with open('../Utils/TresureHuntClues.json', 'w') as f:
+            json.dump(clues, f)
+        with open('../Utils/TresureHuntCluesAutoAdd.txt', 'a') as f:
+            f.write('{} | {}'.format(clue_name, pos))
+
+    def get_no_clue_list(self, clue_name):
+        with open('../Utils/TresureHuntNoClues.json', 'r') as f:
+            no_clues = json.load(f)[clue_name]
+        return no_clues
 
     def __str__(self):
         return '################## NEW HUNT ##################\n' \
