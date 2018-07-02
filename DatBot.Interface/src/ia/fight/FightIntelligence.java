@@ -30,6 +30,10 @@ public class FightIntelligence {
 	 * @author jikiw
 	 */
 	public static boolean isCellTargetableBySpell(MainEntity caster, Spell spell, Position cell,  TransformedCell[][] cells){
+		
+		if(spell == null){
+			return false;
+		}
 				
 		int distance = Position.distance(caster.getPosition(), cell);
 		
