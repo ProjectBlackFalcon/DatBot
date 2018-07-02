@@ -38,6 +38,7 @@ class HighLevelFunctions:
             elif list(current_map) == [-25, -36] and current_worldmap == -1:
                 # bot is in hunting hall
                 self.bot.interface.exit_hunting_hall()
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
             elif current_worldmap == -1:
                 closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
