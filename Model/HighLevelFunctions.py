@@ -350,9 +350,10 @@ class HighLevelFunctions:
             hunt.add_new_step(clues_left)
             while clues_left and not hunt.error:
                 clue, direction = self.bot.interface.get_hunt_clue()
+                clue = clue.lower()
                 hunt.current_step().add_new_clue(clue, self.bot.position[0], direction)
                 destination = None
-                if 'phorreur' in clue.lower():
+                if 'phorreur' in clue:
                     n_steps = 0
                     while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11 and not hunt.error:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
@@ -385,18 +386,20 @@ class HighLevelFunctions:
                             f.write(e.args[0])
 
                         if 'Non existing clue' in e.args[0]:
+                            self.llf.log(self.bot, '[Treasure Hunt {}] Clue is not referenced, trying to get to it...'.format(self.bot.id))
                             found = False
                             clues_left = self.bot.interface.get_clues_left()[0]
-                            while not found and self.bot.interface.get_tries_left()[0]:
+                            while not found and self.bot.interface.hunt_is_active()[0]:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                                 destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
                                 self.goto(destination, harvest=harvest)
                                 if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
+                                    self.bot.interface.validate_hunt_clue()
                                     step_valid = self.bot.interface.validate_hunt_step()[0]
-                                    if self.bot.interface.get_clues_left()[0] != clues_left or step_valid:
+                                    if step_valid or self.bot.interface.get_clues_left()[0] != clues_left:
                                         found = True
                                         hunt.add_to_clue_list(clue, self.bot.position)
-                                        self.llf.log(self.bot, 'Discovered clue')
+                                        self.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
                                     else:
                                         hunt.add_to_no_clue_list(clue, self.bot.position)
 
