@@ -8,6 +8,7 @@ public class Hunt {
 	private int numberOfIndex;
 	private int currentDir;
 	private int currentStep;
+	private int availableRetryCount;
 	private int numberOfSteps;
 	private boolean rdyToFight = false; //untested
 	private boolean phorror;
@@ -164,5 +165,13 @@ public class Hunt {
 
 	public void setAbTimeLeft(int abTimeLeft) {
 		this.abTimeLeft = abTimeLeft;
+	}
+
+	public int getAvailableRetryCount() {
+		return availableRetryCount;
+	}
+
+	public void setAvailableRetryCount(int availableRetryCount) {
+		this.availableRetryCount = availableRetryCount;
 	}
 }

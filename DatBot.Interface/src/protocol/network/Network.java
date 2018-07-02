@@ -838,6 +838,7 @@ public class Network extends DisplayInfo implements Runnable {
 		this.hunt.setNumberOfSteps(treasureHuntMessage.getCheckPointTotal());
 		this.hunt.setCurrentStep(treasureHuntMessage.getCheckPointCurrent());
 		this.hunt.setNumberOfIndex(treasureHuntMessage.getTotalStepCount());
+		this.hunt.setAvailableRetryCount(treasureHuntMessage.getAvailableRetryCount());
 		if (treasureHuntMessage.getFlags().size() == 0) {
 			this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getStartMapId()));
 		}
@@ -1259,6 +1260,7 @@ public class Network extends DisplayInfo implements Runnable {
 				case 6483:
 					this.info.setHuntAnswered(true);
 					this.info.setInHunt(false);
+					this.hunt.setAvailableRetryCount(0);
 					this.hunt.setRdyToFight(false);
 					break;
 				case 6484:
