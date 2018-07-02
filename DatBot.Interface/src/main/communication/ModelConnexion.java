@@ -962,7 +962,7 @@ public class ModelConnexion {
 				toSend = assignCaracPoints(param);
 				break;
 			case "getTriesLeft":
-				toSend = new Object[] {this.getNetwork().getHunt().getAbTimeLeft()};
+				toSend = new Object[] {this.getNetwork().getHunt().getAvailableRetryCount()};
 				break;
 		}
 		return toSend;
