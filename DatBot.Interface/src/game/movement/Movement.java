@@ -199,10 +199,11 @@ public class Movement {
 	 */
 	private boolean isAvalaibleCorner(int cellId, int dir)
 	{
-		List<Integer> cellsCornered = Arrays.asList(0, 13, 546, 559);
+		List<Integer> cellsCornered = Arrays.asList(0, 1, 12, 13, 14, 15, 26, 27, 542, 543, 546, 553, 554, 547, 558, 559);
 		if (cellsCornered.contains(cellId))
 		{
-			return (this.network.getMap().getCells().get(cellId).getMapChangeData() & dir) > 0;
+//			return (this.network.getMap().getCells().get(cellId).getMapChangeData() & dir) > 0;
+			return false;
 		}
 		else
 		{
