@@ -425,7 +425,7 @@ public class ModelConnexion {
 	private Object[] enterBwork() throws Exception {
 		Object[] toSend;
 		if (this.network.getMap().getId() == 88212751 && this.network.getInfo().getCellId() == 383) {
-			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(473020, 35416892);
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(473020, this.network.getInteractive().getSkill(473020, 184));
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter bwork");
 			if (this.waitToSendMap(this.network.getMap().getId())) {
 				stop(1);
@@ -462,7 +462,7 @@ public class ModelConnexion {
 	private Object[] exitBwork() throws Exception {
 		Object[] toSend;
 		if (this.network.getMap().getId() == 104073218 && this.network.getInfo().getCellId() == 260) {
-			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555, 35423772);
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555, this.network.getInteractive().getSkill(477555, 184));
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit bwork");
 			if (this.waitToSendMap(this.network.getMap().getId())) {
 				stop(1);
