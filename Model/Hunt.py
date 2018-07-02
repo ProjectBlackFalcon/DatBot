@@ -80,4 +80,4 @@ class Clue:
         self.valid = False
 
     def __str__(self):
-        return '{:30} | Start : {} | Direction : {} | Guessed pos : {} | Valid : {}\n'.format(self.name, self.start_pos, self.direction, self.guessed_pos, self.valid)
+        return '{:30} | Start : {} | Direction : {} | Guessed pos : {} | Valid : {}\n'.format(self.name, self.start_pos, self.direction, self.guessed_pos, self.valid).replace("'", '')
