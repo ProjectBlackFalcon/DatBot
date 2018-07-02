@@ -435,9 +435,14 @@ class LowLevelFunctions:
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                        database=dc.database)
         cursor = conn.cursor()
-        cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration, log) VALUES ('{}', '{}', '{}', '{}', "{}")""".format(bot_name, int(success), reason, duration, log))
-        conn.commit()
-        conn.close()
+        try:
+            cursor.execute("""INSERT INTO Hunts (bot, success, reason, duration, log) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(bot_name, int(success), reason, duration, log))
+            conn.commit()
+            conn.close()
+        except Exception:
+            with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
+                f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                f.write(traceback.format_exc())
         with open('../Utils/HuntLogs.txt', 'w') as f:
             f.write(log)
 

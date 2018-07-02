@@ -23,6 +23,7 @@ class Hunt:
         return self.current_step().clues[-1]
 
     def add_to_no_clue_list(self, clue_name, pos):
+        clue_name = clue_name.lower()
         with open('../Utils/TresureHuntNoClues.json', 'r') as f:
             no_clues = json.load(f)
         no_clues[clue_name].append([pos[0], pos[1]])
@@ -30,6 +31,7 @@ class Hunt:
             json.dump(no_clues, f)
 
     def add_to_clue_list(self, clue_name, pos):
+        clue_name = clue_name.lower()
         with open('../Utils/TresureHuntClues.json', 'r') as f:
             clues = json.load(f)
         clues[clue_name].append([pos[0], pos[1]])
@@ -39,6 +41,7 @@ class Hunt:
             f.write('{} | {}'.format(clue_name, pos))
 
     def get_no_clue_list(self, clue_name):
+        clue_name = clue_name.lower()
         with open('../Utils/TresureHuntNoClues.json', 'r') as f:
             no_clues = json.load(f)[clue_name]
         return no_clues
@@ -56,7 +59,7 @@ class Step:
         self.clues = []  # type: List[Clue]
 
     def add_new_clue(self, name, start_pos, direction):
-        self.clues.append(Clue(name, start_pos, direction))
+        self.clues.append(Clue(name.lower(), start_pos, direction))
 
     def validate(self, clues_left):
         for i in range(self.n_clues-clues_left):
@@ -77,4 +80,4 @@ class Clue:
         self.valid = False
 
     def __str__(self):
-        return '{:30} | Start : {} | Direction : {} | Guessed pos : {} | Valid : {}\n'.format(self.name, self.start_pos, self.direction, self.guessed_pos, self.valid)
+        return '{:30} | Start : {} | Direction : {} | Guessed pos : {} | Valid : {}\n'.format(self.name, self.start_pos, self.direction, self.guessed_pos, self.valid).replace("'", '')
