@@ -351,6 +351,7 @@ class HighLevelFunctions:
             while clues_left and not hunt.error:
                 clue, direction = self.bot.interface.get_hunt_clue()
                 hunt.current_step().add_new_clue(clue, self.bot.position[0], direction)
+                hunt.added_clue = False
                 destination = None
                 if 'Phorreur' in clue:
                     n_steps = 0
@@ -388,6 +389,7 @@ class HighLevelFunctions:
                         if 'Non existing clue' in e.args[0]:
                             self.llf.log(self.bot, '[Treasure Hunt {}] Clue is not referenced, trying to get to it...'.format(self.bot.id))
                             found = False
+                            self.bot.interface.validate_hunt_step()
                             clues_left = self.bot.interface.get_clues_left()[0]
                             while not found and self.bot.interface.hunt_is_active()[0]:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
@@ -396,8 +398,10 @@ class HighLevelFunctions:
                                 if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
                                     self.bot.interface.validate_hunt_clue()
                                     step_valid = self.bot.interface.validate_hunt_step()[0]
-                                    if step_valid or self.bot.interface.get_clues_left()[0] != clues_left:
+                                    new_clues_left = self.bot.interface.get_clues_left()[0]
+                                    if step_valid or (new_clues_left != clues_left and new_clues_left):
                                         found = True
+                                        hunt.added_clue = True
                                         hunt.add_to_clue_list(clue, self.bot.position)
                                         self.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
                                     else:
@@ -410,7 +414,7 @@ class HighLevelFunctions:
                             hunt.error = True
                             hunt.reason = 'Goto failed'
 
-                if not hunt.error and not self.bot.interface.validate_hunt_clue()[0]:
+                if not hunt.error and not hunt.added_clue and not self.bot.interface.validate_hunt_clue()[0]:
                     clue, direction = self.bot.interface.get_hunt_clue()
                     last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
                     clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)

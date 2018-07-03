@@ -12,6 +12,7 @@ class Hunt:
         self.reason = ''
         self.start_time = time.time()
         self.success = False
+        self.added_clue = False
 
     def add_new_step(self, n_clues):
         self.steps.append(Step(n_clues))
@@ -34,7 +35,7 @@ class Hunt:
         clue_name = clue_name.lower()
         with open('../Utils/TresureHuntClues.json', 'r') as f:
             clues = json.load(f)
-        clues[clue_name].append([pos[0], pos[1]])
+        clues[clue_name].append(pos[0])
         with open('../Utils/TresureHuntClues.json', 'w') as f:
             json.dump(clues, f)
         with open('../Utils/TresureHuntCluesAutoAdd.txt', 'a') as f:
