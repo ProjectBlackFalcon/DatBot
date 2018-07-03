@@ -350,10 +350,9 @@ class HighLevelFunctions:
             hunt.add_new_step(clues_left)
             while clues_left and not hunt.error:
                 clue, direction = self.bot.interface.get_hunt_clue()
-                clue = clue.lower()
                 hunt.current_step().add_new_clue(clue, self.bot.position[0], direction)
                 destination = None
-                if 'phorreur' in clue:
+                if 'Phorreur' in clue:
                     n_steps = 0
                     while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11 and not hunt.error:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
@@ -372,6 +371,7 @@ class HighLevelFunctions:
                     if not hunt.error:
                         hunt.current_clue().guessed_pos = self.bot.position[0]
                 else:
+                    clue = clue.lower()
                     try:
                         clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
                         hunt.current_clue().guessed_pos = clue_pos
