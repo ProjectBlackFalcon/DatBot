@@ -1230,7 +1230,7 @@ public class ModelConnexion {
 		int[] harvestCell = this.network.getInteractive().getHarvestCell(Integer.parseInt(param));
 		if (harvestCell != null) {
 			log.writeActionLogMessage("harvest", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), harvestCell[0], harvestCell[2]));
+				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), harvestCell[0], harvestCell[1]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(harvestCell[0], harvestCell[1]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting " + param);
 			if (this.waitToSendHarvest(Integer.parseInt(param))) {
@@ -1427,7 +1427,7 @@ public class ModelConnexion {
 			}
 			int[] interactiveHunt = Hunt.getHuntFromLvl(Integer.parseInt(param), this.network.getInteractive());
 			log.writeActionLogMessage("newHunt", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactiveHunt[0], interactiveHunt[2]));
+				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactiveHunt[0], interactiveHunt[1]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
 			if (this.waitToSendHunt()) {
@@ -1496,7 +1496,7 @@ public class ModelConnexion {
 		int[] interactive1 = this.network.getInteractive().getInteractive(355);
 		if (interactive1 != null) {
 			log.writeActionLogMessage("openHdv", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive1[0], interactive1[2]));
+				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive1[1], interactive1[2]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive1[1], interactive1[2]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Open hdv");
 			if (this.waitToSendHdv()) {
@@ -1632,7 +1632,7 @@ public class ModelConnexion {
 				newParam = newParam.replaceAll("\\)", "");
 				String[] paramZaap = newParam.split(",");
 				log.writeActionLogMessage("useZaap", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-					GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive[0], interactive[2]));
+					GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive[1], interactive[2]));
 				InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
 				getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
 				if (this.waitToInteractive()) {
@@ -1682,7 +1682,7 @@ public class ModelConnexion {
 			if (isCloseToCell(this.network.getInfo().getCellId(), interactiveZaapi[0])) {
 				String[] paramZaap = param.split(",");
 				log.writeActionLogMessage("useZaapi", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-					GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactiveZaapi[0], interactiveZaapi[2]));
+					GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactiveZaapi[1], interactiveZaapi[2]));
 				InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveZaapi[1], interactiveZaapi[2]);
 				getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaapi");
 				if (this.waitToInteractive()) {
