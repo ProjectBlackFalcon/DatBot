@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import main.communication.DisplayInfo;
 import utils.GameData;
@@ -16,10 +19,12 @@ public class Log {
 	private String name;
 	private FileOutputStream fightDebug;
 	private FileOutputStream actionsDebug;
+	File fileAction;
 
     public Log(int botInstance, String name)  { 
     	this.botInstance = botInstance;
     	this.name = name;
+    	this.fileAction = DisplayInfo.createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Actions.txt");
     }
     
 
@@ -39,10 +44,9 @@ public class Log {
 	}
 	
 	public void writeActionLogMessage(String method, String s){
-		File file = DisplayInfo.createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Actions.txt");
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter(new FileOutputStream(new File(file.getAbsolutePath()),
+			writer = new PrintWriter(new FileOutputStream(new File(fileAction.getAbsolutePath()),
 				true));
 		}
 		catch (FileNotFoundException e) {

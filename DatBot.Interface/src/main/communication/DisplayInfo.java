@@ -48,9 +48,11 @@ public class DisplayInfo {
 
 	private PrintStream log;
 	public PrintStream debug;
+	File fileNetwork;
 
 	public DisplayInfo(int botInstance, boolean displayPacket, String name) {
 		this.name = name;
+		this.fileNetwork = DisplayInfo.createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt");
 		this.botInstance = botInstance;
 		this.displayPacket = displayPacket;
 		if (displayPacket) {
@@ -89,14 +91,9 @@ public class DisplayInfo {
 	 * @author baptiste
 	 */
 	private void initLogs() {
-		try {
-			fileOutputStream = new FileOutputStream(createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"));
-			log = new PrintStream(fileOutputStream);
-			debug = System.out;
-		}
-		catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
+//					fileOutputStream = new FileOutputStream(createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"));
+//					log = new PrintStream(fileOutputStream);
+//					debug = System.out;
 	}
 
 	/**
@@ -170,19 +167,29 @@ public class DisplayInfo {
 				appendToPane(text, str + "\n", new Color(0, 110, 0));
 			}
 		}
-		List<String> lines;
+//		List<String> lines;
+//		try {
+//			lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"), Charset.defaultCharset());
+//			if (lines.size() > 100000) {
+//				clearTheFile();
+//			}
+//		}
+//		catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		PrintWriter writer = null;
 		try {
-			lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"), Charset.defaultCharset());
-			if (lines.size() > 100000) {
-				clearTheFile();
-			}
+			writer = new PrintWriter(new FileOutputStream(new File(fileNetwork.getAbsolutePath()),
+				true));
 		}
-		catch (IOException e) {
+		catch (FileNotFoundException e) {
+			System.out.println("File not found");
 			e.printStackTrace();
 		}
-		String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
-		log.println(newSt);
-	}
+		writer.append(LocalDateTime.now() + " : " + str + "\n");
+		writer.close();	
+		}
 
 	/**
 	 * Append the text on the panel depending on the String
