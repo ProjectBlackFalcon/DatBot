@@ -3,6 +3,8 @@ import Database_credentials as dc
 
 with open('Utils/BotsLogs/Maxitreur.txt', 'r') as f:
     master_log = ''.join(f.readlines()).replace("'", '"')
+with open('Utils/BotsLogs/Maxitreur.txt', 'w') as f:
+    f.write('')
 
 with open('log_network0.txt', 'r') as f:
     net_log = ''.join(f.readlines()).replace("'", '"')
