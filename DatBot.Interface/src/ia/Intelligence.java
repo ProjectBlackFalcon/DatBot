@@ -19,11 +19,13 @@ public class Intelligence {
 	private Network network;
 	private FightIntelligence fight;
 	public UtilsProtocol utils;
+	public Log log;
 
 	private boolean isInit;
 
 	public Intelligence(Network network) {
 		this.network = network;
+		this.log = network.getLog();
 		utils = new UtilsProtocol(network);
 	}
 	

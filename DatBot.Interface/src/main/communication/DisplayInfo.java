@@ -58,7 +58,7 @@ public class DisplayInfo {
 		}
 		initLogs();
 		this.logIa = new Log(botInstance, name);
-		this.logIa.initLogs();
+//		this.logIa.initLogs();
 	}
 
 	private void initComponent() {
@@ -136,6 +136,7 @@ public class DisplayInfo {
 	public static File createOrGetFile(String s) {
 		File file = new File(s);
 		if (!file.exists()) {
+			System.out.println("File do not exist : " +s);
 			try {
 				file.createNewFile();
 
@@ -144,6 +145,8 @@ public class DisplayInfo {
 				System.out.println("File not created");
 				e.printStackTrace();
 			}
+		} else {
+			System.out.println("File exist : " +s);
 		}
 		return file;
 	}
@@ -167,20 +170,18 @@ public class DisplayInfo {
 				appendToPane(text, str + "\n", new Color(0, 110, 0));
 			}
 		}
-		else {
-			List<String> lines;
-			try {
-				lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"), Charset.defaultCharset());
-				if (lines.size() > 50000) {
-					clearTheFile();
-				}
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"), Charset.defaultCharset());
+			if (lines.size() > 100000) {
+				clearTheFile();
 			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
-			log.println(newSt);
 		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
+		log.println(newSt);
 	}
 
 	/**
