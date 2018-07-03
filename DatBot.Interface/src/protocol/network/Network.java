@@ -130,7 +130,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private List<Integer> Ticket;
 
 	public Network(boolean displayPacket, Info info, int botInstance) {
-		super(botInstance, displayPacket);
+		super(botInstance, displayPacket, info.getName());
 		this.map = new Map();
 		this.info = info;
 		this.stats = new Stats(this);
@@ -486,7 +486,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 47, 3, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 47, 7, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -612,7 +612,6 @@ public class Network extends DisplayInfo implements Runnable {
 		else {
 			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
 			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
-			System.out.println(map);
 			this.interactive.setMap(map);
 			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
 			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));

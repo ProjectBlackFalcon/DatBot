@@ -32,11 +32,14 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import ia.Log;
 import utils.GameData;
 
 public class DisplayInfo {
 
 	private int botInstance;
+	private String name;
+	private Log logIa;
 	protected boolean displayPacket;
 
 	protected JFrame f;
@@ -46,14 +49,16 @@ public class DisplayInfo {
 	private PrintStream log;
 	public PrintStream debug;
 
-	public DisplayInfo(int botInstance, boolean displayPacket) {
+	public DisplayInfo(int botInstance, boolean displayPacket, String name) {
+		this.name = name;
 		this.botInstance = botInstance;
 		this.displayPacket = displayPacket;
 		if (displayPacket) {
 			initComponent();
 		}
-
 		initLogs();
+		this.logIa = new Log(botInstance, name);
+		this.logIa.initLogs();
 	}
 
 	private void initComponent() {
@@ -85,10 +90,8 @@ public class DisplayInfo {
 	 */
 	private void initLogs() {
 		try {
-			// log = System.out;
-			fileOutputStream = new FileOutputStream(GameData.getPathDatBot() + "//log_network" + botInstance + ".txt");
+			fileOutputStream = new FileOutputStream(createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"));
 			log = new PrintStream(fileOutputStream);
-			//			debug = new PrintStream(new FileOutputStream("debug.txt"));
 			debug = System.out;
 		}
 		catch (FileNotFoundException e1) {
@@ -114,17 +117,7 @@ public class DisplayInfo {
 	}
 
 	public static void appendDebugLog(String errorType, String s) {
-		File file = new File(GameData.getPathDatBot() + "//packetErrors.txt");
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-
-			}
-			catch (IOException e) {
-				System.out.println("File not created");
-				e.printStackTrace();
-			}
-		}
+		File file = createOrGetFile(GameData.getPathDatBot() + "//packetErrors.txt");
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(new FileOutputStream(new File(file.getAbsolutePath()),
@@ -138,6 +131,21 @@ public class DisplayInfo {
 		writer.append("\t" + s + "\n");
 		writer.append("\n");
 		writer.close();
+	}
+
+	public static File createOrGetFile(String s) {
+		File file = new File(s);
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+
+			}
+			catch (IOException e) {
+				System.out.println("File not created");
+				e.printStackTrace();
+			}
+		}
+		return file;
 	}
 
 	/**
@@ -162,8 +170,8 @@ public class DisplayInfo {
 		else {
 			List<String> lines;
 			try {
-				lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "//log_network" + botInstance + ".txt"), Charset.defaultCharset());
-				if (lines.size() > 1000) {
+				lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"), Charset.defaultCharset());
+				if (lines.size() > 50000) {
 					clearTheFile();
 				}
 			}
@@ -235,5 +243,9 @@ public class DisplayInfo {
 
 	public void setF(JFrame f) {
 		this.f = f;
+	}
+
+	public Log getLog() {
+		return logIa;
 	}
 }
