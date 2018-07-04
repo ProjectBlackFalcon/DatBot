@@ -1117,7 +1117,7 @@ public class ModelConnexion {
 			}
 			log.writeActionLogMessage("goAstrub_2", String.format("map : %s, mapid : %s, cellid : %s",
 				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
-			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20000, 3, 153880835);
+			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-100000, 3, 153880835);
 			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request gate to go to Astrub");
 			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
 				stop(1);
@@ -1769,7 +1769,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isInteractiveUsed()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) { return false; }
+			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
 	}
@@ -1778,7 +1778,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isTextMessage() && !this.network.getInfo().isHuntAnswered()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) {
+			if (System.currentTimeMillis() - index > 10000) {
 				DisplayInfo.appendDebugLog("abandonHunt error, server returned false", "No response error");
 				return false;
 			}
@@ -1804,13 +1804,13 @@ public class ModelConnexion {
 			case "open":
 				while (!this.network.getInfo().isStorage()) {
 					Thread.sleep(50);
-					if (System.currentTimeMillis() - index > 2000) { return false; }
+					if (System.currentTimeMillis() - index > 10000) { return false; }
 				}
 				break;
 			case "move":
 				while (!this.network.getInfo().isStorageUpdate()) {
 					Thread.sleep(50);
-					if (System.currentTimeMillis() - index > 2000) { return false; }
+					if (System.currentTimeMillis() - index > 10000) { return false; }
 				}
 				break;
 			default:
@@ -1823,7 +1823,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isEmoteLaunched()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) { return false; }
+			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
 	}
@@ -1832,7 +1832,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isJoinedFight()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) { return false; }
+			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
 	}
@@ -1840,7 +1840,7 @@ public class ModelConnexion {
 	public boolean waitForCaracs() {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isCaracsAffected()) {
-			if (System.currentTimeMillis() - index > 2000) {
+			if (System.currentTimeMillis() - index > 10000) {
 				System.out.println("Timed out");
 				return false;
 			}
@@ -1852,7 +1852,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isExchangeBidSeller()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) { return false; }
+			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
 	}
@@ -1861,7 +1861,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isHuntAnswered()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) { return false; }
+			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
 	}
@@ -1870,7 +1870,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isLeaveExchange()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) { return false; }
+			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
 	}
@@ -1897,25 +1897,25 @@ public class ModelConnexion {
 			case "xp":
 				while (!this.network.getInfo().isMountxpmsg()) {
 					Thread.sleep(50);
-					if (System.currentTimeMillis() - index > 2000) { return false; }
+					if (System.currentTimeMillis() - index > 10000) { return false; }
 				}
 				break;
 			case "set":
 				while (!this.network.getInfo().isMountSet()) {
 					Thread.sleep(50);
-					if (System.currentTimeMillis() - index > 2000) { return false; }
+					if (System.currentTimeMillis() - index > 10000) { return false; }
 				}
 				break;
 			case "ride":
 				while (!this.network.getInfo().isMountRiding()) {
 					Thread.sleep(50);
-					if (System.currentTimeMillis() - index > 2000) { return false; }
+					if (System.currentTimeMillis() - index > 10000) { return false; }
 				}
 				break;
 			case "exchange":
 				while (!this.network.getInfo().isExchangeDD()) {
 					Thread.sleep(50);
-					if (System.currentTimeMillis() - index > 2000) { return false; }
+					if (System.currentTimeMillis() - index > 10000) { return false; }
 				}
 				break;
 			default:
@@ -1928,7 +1928,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isObjectUse()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) { return false; }
+			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
 	}
@@ -1937,7 +1937,7 @@ public class ModelConnexion {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isStepSuccess() && !this.network.getInfo().isStepFailed()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 2000) {
+			if (System.currentTimeMillis() - index > 10000) {
 				DisplayInfo.appendDebugLog("validateStep error, server returned false", "Dig result : " + this.network.getHunt().digResult);
 				return false;
 			}
