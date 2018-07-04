@@ -38,6 +38,7 @@ public class ChestIntelligence extends FightIntelligence {
 			this.protocol.stop(0.2);
 		}
 		else if (optSpell != null) {
+			System.out.println("Casting spell : " + optSpell[0] + " to " + optSpell[1]);
 			this.protocol.castSpell(optSpell[0], optSpell[1]);
 			this.protocol.stop(0.2);
 		}
@@ -51,6 +52,7 @@ public class ChestIntelligence extends FightIntelligence {
 		List<Spell> spells = roxxor.getSpells();
 		Spell magicArrow = null;
 		Spell harcelante = null;
+		Spell tirPuissant = null;
 
 		for (Spell spell : spells) {
 			if (spell.getSpellId() == 161) {
@@ -59,13 +61,22 @@ public class ChestIntelligence extends FightIntelligence {
 			if (spell.getSpellId() == 173) {
 				harcelante = spell;
 			}
+			if (spell.getSpellId() == 166) {
+				tirPuissant = spell;
+			}
 		}
+		
+		System.out.println("Spell available :  tirPuissant : " + tirPuissant + " magicArrow : " + magicArrow + " harcelante : " + harcelante);
 
-		if (isCellTargetableBySpell(roxxor, magicArrow, victim.getPosition(), cells) && roxxor.getInfo().getStats().getActionPoints() >= magicArrow.getApCost()) {
-			return new int[] { 161, victim.getInfo().getDisposition().getCellId() };
+		if (isCellTargetableBySpell(roxxor, tirPuissant, roxxor.getPosition(), cells) && canCastSpell(roxxor, tirPuissant) && isCac(roxxor, victim, cells)) {
+			tirPuissant.setNumberCasted(tirPuissant.getNumberCasted() + 1);
+			tirPuissant.setTurnLeftBeforeCast(tirPuissant.getMinCastInterval());
+			return new int[] { tirPuissant.getSpellId(), roxxor.getInfo().getDisposition().getCellId() };
+		} else if (isCellTargetableBySpell(roxxor, magicArrow, victim.getPosition(), cells) && canCastSpell(roxxor, magicArrow)) {
+			return new int[] { magicArrow.getSpellId(), victim.getInfo().getDisposition().getCellId() };
 		}
-		else if (isCellTargetableBySpell(roxxor, harcelante, victim.getPosition(), cells) && roxxor.getInfo().getStats().getActionPoints() >= harcelante.getApCost()) {
-			return new int[] { 173, victim.getInfo().getDisposition().getCellId() };
+		else if (isCellTargetableBySpell(roxxor, harcelante, victim.getPosition(), cells) && canCastSpell(roxxor, harcelante)) {
+			return new int[] { harcelante.getSpellId(), victim.getInfo().getDisposition().getCellId() };
 		}
 		else {
 			return null;

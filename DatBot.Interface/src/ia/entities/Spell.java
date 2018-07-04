@@ -16,6 +16,7 @@ public class Spell
 
 	private int spellBreed;
 
+	private int numberCasted = 0;
 	private int maxCastPerTurn;
 
 	private int id;
@@ -52,6 +53,7 @@ public class Spell
 
 	private boolean castInLine;
 
+	private int turnLeftBeforeCast = 0;
 	private int minCastInterval;
 
 	private boolean hidden;
@@ -278,6 +280,22 @@ public class Spell
 
 	public void setNeedFreeCell(boolean needFreeCell) {
 		this.needFreeCell = needFreeCell;
+	}
+
+	public int getTurnLeftBeforeCast() {
+		return turnLeftBeforeCast;
+	}
+
+	public void setTurnLeftBeforeCast(int turnLeftBeforeCast) {
+		this.turnLeftBeforeCast = turnLeftBeforeCast;
+	}
+
+	public int getNumberCasted() {
+		return numberCasted;
+	}
+
+	public void setNumberCasted(int numberCasted) {
+		this.numberCasted = numberCasted;
 	}
 }
 

@@ -7,6 +7,7 @@ import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.map.Position;
 import ia.map.TransformedCell;
+import ia.utils.UtilsMath;
 import ia.utils.UtilsProtocol;
 import utils.d2p.map.CellData;
 
@@ -57,6 +58,24 @@ public class FightIntelligence {
 		}else {
 			return true;
 		}
+	}
+	
+	
+	public static boolean canCastSpell(MainEntity caster, Spell spell){
+		if(spell == null){
+			return false;
+		}
+		System.out.println("Spell name : " + spell.getSpellId());
+		System.out.println("Enough AP : " + (caster.getInfo().getStats().getActionPoints() >= spell.getApCost()));
+		System.out.println("TurnLeftBeforeCast : " + spell.getTurnLeftBeforeCast());
+		System.out.println("getNumberCasted : " + spell.getNumberCasted() + " maxPerTurn : " + spell.getMaxCastPerTurn());
+		System.out.println("if 0 : " + (spell.getMaxCastPerTurn() == 0 ? true : spell.getNumberCasted() < spell.getMaxCastPerTurn()));
+		return caster.getInfo().getStats().getActionPoints() >= spell.getApCost() && spell.getTurnLeftBeforeCast() == 0 && (spell.getMaxCastPerTurn() == 0 ? true : spell.getNumberCasted() < spell.getMaxCastPerTurn());
+	}
+	
+	
+	public static boolean isCac(MainEntity caster, Entity victim, TransformedCell[][] cells){
+		return UtilsMath.getPath(cells, caster.getPosition(), victim.getPosition(), false).size() == 1;
 	}
     
     

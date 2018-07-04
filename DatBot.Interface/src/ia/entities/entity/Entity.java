@@ -57,6 +57,15 @@ public abstract class Entity {
 	public List<Spell> getSpells() {
 		return spells;
 	}
+	
+	public Spell findSpell(int id){
+		for (Spell spell : spells) {
+			if(spell.getId() == id){
+				return spell;
+			}
+		}
+		return null;
+	}
 
 	public void setSpells(List<Spell> spells) {
 		this.spells = spells;
