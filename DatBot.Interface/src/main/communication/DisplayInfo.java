@@ -48,9 +48,11 @@ public class DisplayInfo {
 
 	private PrintStream log;
 	public PrintStream debug;
+	File fileNetwork;
 
 	public DisplayInfo(int botInstance, boolean displayPacket, String name) {
 		this.name = name;
+		this.fileNetwork = DisplayInfo.createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt");
 		this.botInstance = botInstance;
 		this.displayPacket = displayPacket;
 		if (displayPacket) {
@@ -58,7 +60,7 @@ public class DisplayInfo {
 		}
 		initLogs();
 		this.logIa = new Log(botInstance, name);
-		this.logIa.initLogs();
+//		this.logIa.initLogs();
 	}
 
 	private void initComponent() {
@@ -89,14 +91,9 @@ public class DisplayInfo {
 	 * @author baptiste
 	 */
 	private void initLogs() {
-		try {
-			fileOutputStream = new FileOutputStream(createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"));
-			log = new PrintStream(fileOutputStream);
-			debug = System.out;
-		}
-		catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
+//					fileOutputStream = new FileOutputStream(createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"));
+//					log = new PrintStream(fileOutputStream);
+//					debug = System.out;
 	}
 
 	/**
@@ -136,6 +133,7 @@ public class DisplayInfo {
 	public static File createOrGetFile(String s) {
 		File file = new File(s);
 		if (!file.exists()) {
+			System.out.println("File do not exist : " +s);
 			try {
 				file.createNewFile();
 
@@ -144,6 +142,8 @@ public class DisplayInfo {
 				System.out.println("File not created");
 				e.printStackTrace();
 			}
+		} else {
+			System.out.println("File exist : " +s);
 		}
 		return file;
 	}
@@ -167,21 +167,29 @@ public class DisplayInfo {
 				appendToPane(text, str + "\n", new Color(0, 110, 0));
 			}
 		}
-		else {
-			List<String> lines;
-			try {
-				lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"), Charset.defaultCharset());
-				if (lines.size() > 50000) {
-					clearTheFile();
-				}
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			String newSt = "[" + timing + "] [BOT " + this.botInstance + "] " + str;
-			log.println(newSt);
+//		List<String> lines;
+//		try {
+//			lines = Files.readAllLines(Paths.get(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Network.txt"), Charset.defaultCharset());
+//			if (lines.size() > 100000) {
+//				clearTheFile();
+//			}
+//		}
+//		catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(new FileOutputStream(new File(fileNetwork.getAbsolutePath()),
+				true));
 		}
-	}
+		catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			e.printStackTrace();
+		}
+		writer.append(LocalDateTime.now() + " : " + str + "\n");
+		writer.close();	
+		}
 
 	/**
 	 * Append the text on the panel depending on the String
@@ -216,11 +224,11 @@ public class DisplayInfo {
 	}
 
 	public void append(Object str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		String timing = formatter.format(time);
-		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
-		debug.println(newSt);
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+//		LocalTime time = LocalTime.now();
+//		String timing = formatter.format(time);
+//		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
+//		debug.println(newSt);
 	}
 
 	public static String cleanString(String s) {

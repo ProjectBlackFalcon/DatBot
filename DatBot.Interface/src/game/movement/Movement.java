@@ -109,6 +109,7 @@ public class Movement {
 
 		if (this.network.getInfo().getCellId() == cellId)
 		{
+			this.network.getLog().writeActionLogMessage("changeMap_1", "Already on cellId");
 			return new MapMovement(null, neighbourId, this.getNetwork());
 		}
 		else if (canChangeMap(cellId) && canMoveTo(cellId) && isDirection(cellId, direction) && isAvalaibleCorner(cellId, num2))
@@ -128,17 +129,18 @@ public class Movement {
 			}
 			if (list.isEmpty())
 			{
-				System.out.println("No available cell");
+				this.network.getLog().writeActionLogMessage("changeMap_1", "No available cell for this direction");
 				return null;
 			}
 			int closestCellId = getClosetChangedMapAvailableCell(cellId, list);
 			if (closestCellId == -1)
 			{
-				System.out.println("No closest available cell");
+				this.network.getLog().writeActionLogMessage("changeMap_1", "No closest available cell for this direction");
 				return null;
 			}
 			CellMovement move = MoveToCell(closestCellId);
 			if (move.path == null) { return null; }
+			this.network.getLog().writeActionLogMessage("changeMap_1", String.format("Cell %s not valid, choosing %s", cellId, closestCellId));
 			this.network.append(String.format("Cell %s not valid, choosing %s", cellId, closestCellId));
 			return new MapMovement(move, neighbourId, this.getNetwork());
 		}
@@ -202,6 +204,7 @@ public class Movement {
 		List<Integer> cellsCornered = Arrays.asList(0, 1, 12, 13, 14, 15, 26, 27, 542, 543, 546, 553, 554, 547, 558, 559);
 		if (cellsCornered.contains(cellId))
 		{
+			this.network.getLog().writeActionLogMessage("changeMap_1", "Cell is corner, changemap on corner denied");
 //			return (this.network.getMap().getCells().get(cellId).getMapChangeData() & dir) > 0;
 			return false;
 		}

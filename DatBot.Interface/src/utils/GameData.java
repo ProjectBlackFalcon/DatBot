@@ -71,6 +71,24 @@ public class GameData {
 		}
 		return null;
 	}
+	
+	public static String getCoordMapString(int mapId){
+		try {
+			D2oManager d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/MapPositions.d2o");
+			String s = d2oManager.searchObjectById((int) mapId);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			s = s.replaceAll(",", ":");
+			String[] cmd2 = s.split(":");
+			return "[" + Integer.parseInt(cmd2[3]) + "," + Integer.parseInt(cmd2[5]) + "]";
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public static int getSpellNameId(int id) {
 		return getDataFromFile(id,"Spells");

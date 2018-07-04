@@ -1,6 +1,8 @@
 package ia;
 
 import java.util.ArrayList;
+
+import ia.entities.Spell;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.entities.entity.OtherEntity;
@@ -91,6 +93,7 @@ import protocol.network.types.game.context.IdentifiedEntityDispositionInformatio
 import protocol.network.types.game.context.fight.GameFightCharacterInformations;
 import protocol.network.types.game.context.fight.GameFightFighterInformations;
 import protocol.network.types.game.context.fight.GameFightMonsterInformations;
+import protocol.network.types.game.context.fight.GameFightSpellCooldown;
 import utils.GameData;
 
 public class IntelligencePacketHandler {
@@ -438,6 +441,14 @@ public class IntelligencePacketHandler {
 	//Tested
 	public void gameFightResume(GameFightResumeMessage message) {
 		this.ia.setInitResume(true);
+		if(this.ia.getMain().getSpells() == null){
+			this.ia.getMain().setSpells(this.ia.getNetwork().getInfo().getSpells());
+		}
+		Entity e = this.ia.getMain();
+		for (GameFightSpellCooldown cd : message.getSpellCooldowns()) {
+			Spell spell = e.findSpell(cd.getSpellId());
+			spell.setTurnLeftBeforeCast(cd.getCooldown());
+		}
 	}
 
 	//Tested
@@ -489,7 +500,6 @@ public class IntelligencePacketHandler {
 	}
 
 	public void gameFightTurnResume(GameFightTurnResumeMessage message) throws Exception {
-		//TODO TURN STARTING
 		if(this.ia.getMain().getSpells() == null){
 			this.ia.getMain().setSpells(this.ia.getNetwork().getInfo().getSpells());
 		}
@@ -504,7 +514,7 @@ public class IntelligencePacketHandler {
 		if(this.ia.getMain().getSpells() == null){
 			this.ia.getMain().setSpells(this.ia.getNetwork().getInfo().getSpells());
 		}
-		//TODO TURN STARTING
+		this.ia.refreshCd();
 		this.ia.utils.stop(0.56);
 		this.ia.getFight().getBestTurn(this.ia.getMain(), this.ia.getEntities(), this.ia.getNetwork().getMap().getCells());
 	}

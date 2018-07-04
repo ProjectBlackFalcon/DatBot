@@ -1,8 +1,14 @@
 package ia;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import main.communication.DisplayInfo;
 import utils.GameData;
@@ -13,10 +19,12 @@ public class Log {
 	private String name;
 	private FileOutputStream fightDebug;
 	private FileOutputStream actionsDebug;
+	File fileAction;
 
     public Log(int botInstance, String name)  { 
     	this.botInstance = botInstance;
     	this.name = name;
+    	this.fileAction = DisplayInfo.createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Actions.txt");
     }
     
 
@@ -33,6 +41,20 @@ public class Log {
 		catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	public void writeActionLogMessage(String method, String s){
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(new FileOutputStream(new File(fileAction.getAbsolutePath()),
+				true));
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			e.printStackTrace();
+		}
+		writer.append(LocalDateTime.now() + " : [" + method + "] : " + s + "\n");
+		writer.close();
 	}
 	
 	
