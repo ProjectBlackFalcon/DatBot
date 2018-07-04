@@ -22,6 +22,11 @@ class LowLevelFunctions:
         if self.full_map_info is None:
             with open('../Utils/MapInfo.json', 'r') as f:
                 self.full_map_info = json.load(f)
+        corners = [(0, 0), (1, 0), (0, 1), (0, 2), (13, 0), (12, 1), (13, 1), (13, 2), (13, 37), (13, 38), (12, 39),
+                   (13, 39), (0, 37), (0, 38), (1, 38), (0, 39)]
+        for map in self.full_map_info:
+            for pos in corners:
+                map['cells'][pos[1]][pos[0]] = 2
         return self.full_map_info
 
     def load_item_names(self):
