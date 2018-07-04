@@ -224,11 +224,11 @@ public class DisplayInfo {
 	}
 
 	public void append(Object str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
-		LocalTime time = LocalTime.now();
-		String timing = formatter.format(time);
-		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
-		debug.println(newSt);
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.FRANCE);
+//		LocalTime time = LocalTime.now();
+//		String timing = formatter.format(time);
+//		String newSt = "[" + timing + "] [BOT " + botInstance + "] " + str;
+//		debug.println(newSt);
 	}
 
 	public static String cleanString(String s) {
