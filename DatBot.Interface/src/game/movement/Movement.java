@@ -201,7 +201,7 @@ public class Movement {
 	 */
 	private boolean isAvalaibleCorner(int cellId, int dir)
 	{
-		List<Integer> cellsCornered = Arrays.asList(0, 1, 12, 13, 14, 15, 26, 27, 542, 543, 546, 553, 554, 547, 558, 559);
+		List<Integer> cellsCornered = Arrays.asList(0, 1, 14, 28,13, 26, 27, 41,518, 532, 533, 546, 558, 559, 545, 531);
 		if (cellsCornered.contains(cellId))
 		{
 			this.network.getLog().writeActionLogMessage("changeMap_1", "Cell is corner, changemap on corner denied");
