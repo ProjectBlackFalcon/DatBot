@@ -120,7 +120,6 @@ public class GameData {
 			s = s.replaceAll("\n", "");
 			String[] cmd = s.split(",");
 			for (String si : cmd) {
-				System.out.println(si);
 				String[] cmd2 = si.split(":");
 				if (cmd2[0].equals("textId")) { return d2iManager.getText(Integer.parseInt(cmd2[1])); }
 			}
