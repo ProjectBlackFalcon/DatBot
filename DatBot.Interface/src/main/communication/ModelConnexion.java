@@ -1726,7 +1726,7 @@ public class ModelConnexion {
 
 	private Object[] validateClue() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("getClue", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s, currentIndex : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps(), this.network.getHunt().getCurrentIndex()));
+		log.writeActionLogMessage("validateClue", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s, currentIndex : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps(), this.network.getHunt().getCurrentIndex()));
 		if (this.network.getInfo().isInHunt() && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps() - 1) {
 			TreasureHuntFlagRequestMessage treasureHuntFlagRequestMessage = new TreasureHuntFlagRequestMessage(0, this.network.getHunt().getCurrentIndex());
 			getNetwork().sendToServer(treasureHuntFlagRequestMessage, TreasureHuntFlagRequestMessage.ProtocolId, "Validating clue");
@@ -1747,7 +1747,7 @@ public class ModelConnexion {
 
 	private Object[] validateStep() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("getClue", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps()));
+		log.writeActionLogMessage("validateStep", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps()));
 		if (this.network.getInfo().isInHunt() && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps() - 1) {
 			TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 			getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
