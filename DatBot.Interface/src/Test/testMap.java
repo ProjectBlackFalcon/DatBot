@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.util.Random;
 
 import utils.GameData;
+import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
 
 public class testMap {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		new MapManager("D:/Ankama/Dofus2/app/content/gfx/world");
-		MapManager.FromId(32460);
+		new d2iManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/gamedata/i18n_fr.d2i");
+
+		System.out.println(GameData.getTextInfo(46));
+		System.out.println(d2iManager.getText(325865));
 
 	}
 	

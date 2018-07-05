@@ -1112,9 +1112,9 @@ public class Network extends DisplayInfo implements Runnable {
 					info.setTextMessage(true);
 					String sfinal = "";
 					for (String s : informationMessage.getParameters()) {
-						sfinal += s;
+						sfinal += s + " ";
 					}
-					this.getLog().writeActionLogMessage("TextInformationMessage", sfinal);
+					this.getLog().writeActionLogMessage("TextInformationMessage : " + GameData.getTextInfo(informationMessage.getMsgId()), sfinal);
 					break;
 				case 5646:
 					getBank().setStorage(new StorageInventoryContentMessage());
