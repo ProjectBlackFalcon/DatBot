@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +32,7 @@ import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
 import protocol.network.messages.connection.IdentificationMessage;
+import protocol.network.messages.connection.IdentificationSuccessMessage;
 import protocol.network.messages.connection.SelectedServerDataMessage;
 import protocol.network.messages.connection.SelectedServerRefusedMessage;
 import protocol.network.messages.connection.ServerSelectionMessage;
@@ -143,6 +145,7 @@ import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayA
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
+import protocol.network.messages.game.context.roleplay.stats.StatsUpgradeResultMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntDigRequestAnswerMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntFlagRequestAnswerMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntMessage;
@@ -1072,10 +1075,19 @@ public class Network extends DisplayInfo implements Runnable {
 				case 3:
 					handleHelloConnectMessage(dataReader);
 					break;
+				case 22:
+					IdentificationSuccessMessage identificationSuccessMessage = new IdentificationSuccessMessage();
+					identificationSuccessMessage.Deserialize(dataReader);
+					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+					this.info.setTimeLeftSub(((long) identificationSuccessMessage.getSubscriptionEndDate() - timestamp.getTime())/1000);
+					break;
 				case 189:
 					SystemMessageDisplayMessage systemMessageDisplayMessage = new SystemMessageDisplayMessage();
 					systemMessageDisplayMessage.Deserialize(dataReader);
 					System.out.println(systemMessageDisplayMessage.getMsgId());
+					break;
+				case 3010:
+					info.setMovObject(true);
 					break;
 				case 30:
 					handleServersListMessage(dataReader);
@@ -1097,7 +1109,9 @@ public class Network extends DisplayInfo implements Runnable {
 					}
 					break;
 				case 5609:
-					info.setCaracsAffected(true);
+					StatsUpgradeResultMessage statsUpgradeResultMessage = new StatsUpgradeResultMessage();
+					if(statsUpgradeResultMessage.getResult() == 0)
+						info.setCaracsAffected(true);
 					break;
 				case 6253:
 					HandleRawDataMessage();

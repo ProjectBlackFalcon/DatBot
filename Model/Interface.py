@@ -792,7 +792,7 @@ class Interface:
     def equip_item(self, inv_id, slot):
         """
         Equips the selected item in the slot
-        :param inv_id: Inventory id if the selected item
+        :param inv_id: Inventory id of the selected item
         :param slot: Slot the item should go to
         :return: Boolean
         """
@@ -806,7 +806,7 @@ class Interface:
         :param slot: Slot the item should go to
         :return: Boolean
         """
-        ret_val = self.execute_command('equipItem', [slot])
+        ret_val = self.execute_command('deEquipItem', [slot])
         self.get_player_stats()
         return ret_val
 

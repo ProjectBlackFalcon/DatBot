@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
@@ -39,6 +37,7 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMovePric
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
+import protocol.network.messages.game.inventory.items.ObjectSetPositionMessage;
 import protocol.network.messages.game.inventory.items.ObjectUseMessage;
 import utils.GameData;
 
@@ -1007,6 +1006,47 @@ public class ModelConnexion {
 			case "getTriesLeft":
 				toSend = new Object[] { this.getNetwork().getHunt().getAvailableRetryCount() };
 				break;
+			case "getSubTime":
+				toSend = new Object[] { this.getNetwork().getInfo().getTimeLeftSub() };
+				break;
+			case "equipItem":
+				toSend = equipItem(param);
+				break;
+			case "deEquipItem":
+				toSend = deEquipItem(param);
+				break;
+		}
+		return toSend;
+	}
+
+	private Object[] equipItem(String param) throws Exception, InterruptedException {
+		Object[] toSend;
+		String[] infoItem  = param.split(",");
+		log.writeActionLogMessage("equipItem", String.format("id : %s, position : %s",
+			infoItem[0], infoItem[1]));
+		ObjectSetPositionMessage objectSetPositionMessage = new ObjectSetPositionMessage(Integer.parseInt(infoItem[0]), Integer.parseInt(infoItem[1]), 1);
+		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position "  + infoItem[1]);
+		if (this.waitToSendMovObject()) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	private Object[] deEquipItem(String param) throws Exception, InterruptedException {
+		Object[] toSend;
+		String[] infoItem  = param.split(",");
+		log.writeActionLogMessage("deEquipItem", String.format("id : %s, position : %s",
+			infoItem[0], infoItem[1]));
+		ObjectSetPositionMessage objectSetPositionMessage = new ObjectSetPositionMessage(Integer.parseInt(infoItem[0]), 63, 1);
+		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position "  + 63);
+		if (this.waitToSendMovObject()) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
 		}
 		return toSend;
 	}
@@ -1927,6 +1967,15 @@ public class ModelConnexion {
 	public boolean waitToSendObjectUse() throws InterruptedException {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isObjectUse()) {
+			Thread.sleep(50);
+			if (System.currentTimeMillis() - index > 10000) { return false; }
+		}
+		return true;
+	}
+	
+	public boolean waitToSendMovObject() throws InterruptedException {
+		long index = System.currentTimeMillis();
+		while (!this.network.getInfo().isMovObject()) {
 			Thread.sleep(50);
 			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}

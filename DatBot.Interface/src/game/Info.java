@@ -33,6 +33,7 @@ public class Info {
 	private long actorId = -1;
 	private boolean isConnected = false;
 	private boolean printDc = true;
+	private long timeLeftSub = -1;
 
 	// Bot info
 
@@ -79,6 +80,7 @@ public class Info {
 	private boolean objectUse = false;
 	private boolean textMessage = false;
 	private boolean caracsAffected = false;
+	private boolean movObject = false;
 
 
 	public void setBooleanToFalse()
@@ -105,6 +107,7 @@ public class Info {
 		objectUse = false;
 		textMessage = false;
 		caracsAffected = true;
+		movObject = false;
 	}
 	
 	public boolean threadDone = true;
@@ -589,5 +592,21 @@ public class Info {
 
 	public void setSpells(List<Spell> spells) {
 		this.spells = spells;
+	}
+
+	public long getTimeLeftSub() {
+		return timeLeftSub;
+	}
+
+	public void setTimeLeftSub(long timeLeftSub) {
+		this.timeLeftSub = timeLeftSub;
+	}
+
+	public boolean isMovObject() {
+		return movObject;
+	}
+
+	public void setMovObject(boolean movObject) {
+		this.movObject = movObject;
 	}
 }
