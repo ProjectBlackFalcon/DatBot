@@ -56,6 +56,7 @@ public class Info {
 	private boolean inHunt = false;
 	private boolean inExchange = false;
 	private boolean havenBag = false;
+	private boolean currentMapTrigger = false;
 
 	private boolean interactiveUsed = false;
 	private boolean newMap = false;
@@ -108,6 +109,7 @@ public class Info {
 		textMessage = false;
 		caracsAffected = true;
 		movObject = false;
+		currentMapTrigger = false;
 	}
 	
 	public boolean threadDone = true;
@@ -608,5 +610,13 @@ public class Info {
 
 	public void setMovObject(boolean movObject) {
 		this.movObject = movObject;
+	}
+
+	public boolean isCurrentMapTrigger() {
+		return currentMapTrigger;
+	}
+
+	public void setCurrentMapTrigger(boolean currentMapTrigger) {
+		this.currentMapTrigger = currentMapTrigger;
 	}
 }

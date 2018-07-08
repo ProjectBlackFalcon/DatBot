@@ -134,6 +134,7 @@ public class ModelConnexion {
 	private Object[] changeMap(String param) throws Exception {
 		Object[] toSend;
 		String[] infoMov = param.split(",");
+		int oldMapId = this.getNetwork().getMap().getId();
 		log.writeActionLogMessage("changeMap", String.format("actual map : %s - %s, actual cell : %s, direction : %s, cellChangeMap : %s", 
 					this.network.getMap().getId(), GameData.getCoordMapString(this.network.getMap().getId()), this.network.getInfo().getCellId(), infoMov[1], infoMov[0]));
 		MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
@@ -144,16 +145,9 @@ public class ModelConnexion {
 			this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 		}
 		else {
-			mapMovement.PerformChangement();
-			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-				if (Integer.parseInt(infoMov[0]) != this.network.getInfo().getCellId()) {
-					stop(0.5);
-					toSend = new Object[] { "True" };
-				}
-				else {
-					DisplayInfo.appendDebugLog("ChangeMap error after enterBag tactic", param);
-					toSend = new Object[] { "False" };
-				}
+			mapMovement.PerformChangement(this.network);
+			if (this.waitToSendMap(oldMapId)) {
+				toSend = new Object[] { "True" };
 			}
 			else {
 				DisplayInfo.appendDebugLog("ChangeMap error, server returned false", param);
@@ -171,7 +165,7 @@ public class ModelConnexion {
 			this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 		}
 		else {
-			mapMovement1.PerformChangement();
+			mapMovement1.PerformChangement(this.network);
 			if (this.network.getMovement().moveOver()) {
 				toSend = new Object[] { "True" };
 			}
@@ -1916,19 +1910,17 @@ public class ModelConnexion {
 	}
 
 	public boolean waitToSendMap(int actualMapId) throws InterruptedException {
+		if(this.network.getMap().getId() != actualMapId){
+			return true;
+		}
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isNewMap()) {
 			Thread.sleep(50);
 			if (System.currentTimeMillis() - index > 10000) {
-				if (this.network.getMap().getId() != actualMapId) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return this.network.getMap().getId() != actualMapId;
 			}
 		}
-		return true;
+		return this.network.getMap().getId() != actualMapId;
 	}
 
 	public boolean waitToSendMount(String s) throws InterruptedException {

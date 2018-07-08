@@ -37,13 +37,13 @@ public class MapIA {
 		
 		for(int i = 0; i < transformedCells.length; i++) {
 			for(int j = 0; j < transformedCells[0].length; j++) {
-				transformedCells[i][j] = new TransformedCell(i, j, true, false);
+				transformedCells[i][j] = new TransformedCell(i, j, true, false, false);
 			}
 		}
 		
 		for(int i = 0; i < cells.size(); i++) {
 			Position pos = reshapeToIA(i);
-			transformedCells[pos.getX()][pos.getY()] = new TransformedCell(pos.getX(), pos.getY(), cells.get(i).isLos(), cells.get(i).isMov());
+			transformedCells[pos.getX()][pos.getY()] = new TransformedCell(pos.getX(), pos.getY(), cells.get(i).isLos(), cells.get(i).isMov(), cells.get(i).isNonWalkableDuringFight());
 		}
 		
 		
@@ -58,7 +58,7 @@ public class MapIA {
 			cleanCells[entity.getPosition().getX()][entity.getPosition().getY()].setLos(false);
 			cleanCells[entity.getPosition().getX()][entity.getPosition().getY()].setMov(false);
 		}
-		
+				
 		return cleanCells;
 	}
 	

@@ -705,6 +705,7 @@ public class Network extends DisplayInfo implements Runnable {
 
 	private void handleMapRequestMessage(DofusDataReader dataReader) throws Exception {
 		CurrentMapMessage currentMapMessage = new CurrentMapMessage();
+		info.setCurrentMapTrigger(true);
 		currentMapMessage.Deserialize(dataReader);
 		info.setMapId(currentMapMessage.getMapId());
 		if (connectionToKoli) {
@@ -1155,7 +1156,7 @@ public class Network extends DisplayInfo implements Runnable {
 					break;
 				case 950:
 					GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
-					super.debug.println(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
+					getLog().writeLogErrorMessage(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
 					break;
 				case 951:
 					handleGameMapMovementMessage(dataReader);
@@ -1663,7 +1664,7 @@ public class Network extends DisplayInfo implements Runnable {
 				case 5927:
 					GameFightOptionStateUpdateMessage gameFightOptionStateUpdateMessage = new GameFightOptionStateUpdateMessage();
 					gameFightOptionStateUpdateMessage.Deserialize(dataReader);
-					iaPacket.gameFightOptionStateUpdate(gameFightOptionStateUpdateMessage);
+
 					break;
 				case 707:
 					GameFightOptionToggleMessage gameFightOptionToggleMessage = new GameFightOptionToggleMessage();

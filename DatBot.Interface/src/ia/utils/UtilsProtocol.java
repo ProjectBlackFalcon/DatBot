@@ -1,14 +1,8 @@
 package ia.utils;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Random;
 
 import game.movement.CellMovement;
-import game.movement.PathElement;
-import ia.Log;
-import ia.entities.entity.MainEntity;
 import protocol.network.Network;
 import protocol.network.messages.game.actions.fight.GameActionFightCastRequestMessage;
 import protocol.network.messages.game.context.fight.GameFightPlacementPositionRequestMessage;

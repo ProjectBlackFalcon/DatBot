@@ -1,17 +1,18 @@
 package Test;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+
+import utils.GameData;
+import utils.d2p.MapManager;
+import utils.d2p.map.Map;
 
 public class testMap {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		System.out.println(timestamp.getTime());
-		System.out.println(1531038532000L);
-		
-		System.out.println(((long) 1531038532000.0 - timestamp.getTime())/1000);
-
+		new MapManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/maps");
+		Map map = MapManager.FromId(191102980);
+		System.out.println(map.getCells().get(171));
+		System.out.println(map.getCells().get(156));
 	}
 
 }

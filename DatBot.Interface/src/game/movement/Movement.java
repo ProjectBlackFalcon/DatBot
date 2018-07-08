@@ -106,6 +106,29 @@ public class Movement {
 			break;
 		}
 		if (num2 == -1 || neighbourId < 0) return null;
+		
+		
+//		List<Integer> list = new ArrayList<>();
+//		for (int i = 0; i < this.network.getMap().getCells().size(); i++)
+//		{
+//			if((this.network.getMap().getCells().get(i).getMapChangeData() & num2) > 0 && canMoveTo(i)){
+//				list.add(i);
+//			}
+//		}
+//		
+//		if (list.isEmpty())
+//		{
+//			this.network.getLog().writeActionLogMessage("changeMap_1", "No available cell for this direction");
+//			return null;
+//		}
+//		
+//		int closestCellId = getClosetCell(cellId, list);
+//		if (closestCellId == -1)
+//		{
+//			this.network.getLog().writeActionLogMessage("changeMap_1", "No closest available cell for this direction");
+//			return null;
+//		}
+		
 
 		if (this.network.getInfo().getCellId() == cellId)
 		{
@@ -140,8 +163,7 @@ public class Movement {
 			}
 			CellMovement move = MoveToCell(closestCellId);
 			if (move.path == null) { return null; }
-			this.network.getLog().writeActionLogMessage("changeMap_1", String.format("Cell %s not valid, choosing %s", cellId, closestCellId));
-			this.network.append(String.format("Cell %s not valid, choosing %s", cellId, closestCellId));
+			this.network.getLog().writeActionLogMessage("changeMap_1", String.format("Cell %s not valid, choosing cell %s", cellId, closestCellId));
 			return new MapMovement(move, neighbourId, this.getNetwork());
 		}
 	}
@@ -242,13 +264,37 @@ public class Movement {
 		{
 			if (Math.abs(integer - cell) < min)
 			{
-				if (integer == 1 || integer == 12 || integer == 14 || integer == 15 || integer == 26 || integer == 27 
-					|| integer == 542 || integer == 543 || integer == 553 || integer == 554 || integer == 547 || integer == 558)
+				if (integer == 1 || integer == 13 || integer == 14 || integer == 28 || integer == 26 || integer == 27 || integer == 41 
+					|| integer == 518 || integer == 532 || integer == 533 || integer == 546 || integer == 559 || integer == 558 || integer == 545 || integer == 5 )
 				{
 					if(listCellAvailable.size() > 1) {
 						continue;
 					}
 				}
+				min = Math.abs(integer - cell);
+				newCell = integer;
+			}
+		}
+		return newCell;
+	}
+	
+	/**
+	 * Get the closest cellid from the original cellid
+	 * 
+	 * @param cell
+	 *            : int
+	 * @param listCellAvailable
+	 *            : List<int>
+	 * @return closestCell : int
+	 */
+	public int getClosetCell(int cell, List<Integer> listCellAvailable)
+	{
+		int min = 9999;
+		int newCell = -1;
+		for (Integer integer : listCellAvailable)
+		{
+			if (Math.abs(integer - cell) < min)
+			{
 				min = Math.abs(integer - cell);
 				newCell = integer;
 			}
