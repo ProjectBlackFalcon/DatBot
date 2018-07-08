@@ -1010,7 +1010,8 @@ public class Network extends DisplayInfo implements Runnable {
 	 * displayed on log
 	 */
 	public void sendToServer(NetworkMessage message, int id, String s) throws Exception {
-		info.setBooleanToFalse();
+		if(id != 6317 && id != 5663)
+			info.setBooleanToFalse();
 		latencyFrame.latestSent();
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DofusDataWriter writer = new DofusDataWriter(bous);
