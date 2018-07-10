@@ -110,6 +110,7 @@ public class DisplayInfo {
 	{
 	    s = Normalizer.normalize(s, Normalizer.Form.NFD);
 	    s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+	    s = s.replaceAll("œ", "oe");
 	    return s;
 	}
 

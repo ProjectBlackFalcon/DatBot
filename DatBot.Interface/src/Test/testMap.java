@@ -16,6 +16,7 @@ public class testMap {
 		System.out.println(map.getCells().get(171));
 		System.out.println(GameData.isMonsterArchi(2271));
 		System.out.println(GameData.getMonsterName(2271));
+		System.out.println("œ".replaceAll("œ", "oe"));
 	}
 
 }
