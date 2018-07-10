@@ -1032,8 +1032,8 @@ public class ModelConnexion {
 	private Object[] deEquipItem(String param) throws Exception, InterruptedException {
 		Object[] toSend;
 		String[] infoItem  = param.split(",");
-		log.writeActionLogMessage("deEquipItem", String.format("id : %s, position : %s",
-			infoItem[0], infoItem[1]));
+		log.writeActionLogMessage("deEquipItem", String.format("id : %s",
+			infoItem[0]));
 		ObjectSetPositionMessage objectSetPositionMessage = new ObjectSetPositionMessage(Integer.parseInt(infoItem[0]), 63, 1);
 		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position "  + 63);
 		if (this.waitToSendMovObject()) {
