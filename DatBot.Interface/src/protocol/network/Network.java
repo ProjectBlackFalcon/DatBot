@@ -163,6 +163,7 @@ import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
 import protocol.network.messages.game.inventory.items.ObjectAddedMessage;
 import protocol.network.messages.game.inventory.items.ObjectDeletedMessage;
+import protocol.network.messages.game.inventory.items.ObjectMovementMessage;
 import protocol.network.messages.game.inventory.items.ObjectQuantityMessage;
 import protocol.network.messages.game.inventory.items.ObjectsAddedMessage;
 import protocol.network.messages.game.inventory.items.ObjectsDeletedMessage;
@@ -1095,6 +1096,14 @@ public class Network extends DisplayInfo implements Runnable {
 					System.out.println(systemMessageDisplayMessage.getMsgId());
 					break;
 				case 3010:
+					ObjectMovementMessage objMessage = new ObjectMovementMessage();
+					objMessage.Deserialize(dataReader);
+					for (int i = 0; i < this.stats.getInventoryContentMessage().getObjects().size(); i++) {
+						if (this.stats.getInventoryContentMessage().getObjects().get(i).getObjectUID() == objMessage.getObjectUID()) {
+							ObjectItem object = this.stats.getInventoryContentMessage().getObjects().get(i);
+							this.stats.getInventoryContentMessage().getObjects().set(i, new ObjectItem(objMessage.getPosition(), object.getObjectGID(), object.getEffects(), object.getObjectUID(), object.getQuantity()));
+						}
+					}
 					info.setMovObject(true);
 					break;
 				case 30:
