@@ -249,6 +249,8 @@ class Interface:
         self.bot.characteristics.sa = stats['Caracs']['Sa']
         self.bot.characteristics.available_stat_points = stats['Caracs']['Available']
 
+        self.bot.inventory.equip_preferred_stuff()
+
         if self.bot.characteristics.available_stat_points:
             caracs_to_augment = self.bot.llf.get_caracs_to_augment(self.bot)
             for carac in caracs_to_augment:
