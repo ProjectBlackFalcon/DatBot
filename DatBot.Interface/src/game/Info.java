@@ -40,6 +40,10 @@ public class Info {
 	private int botInstance;
 	private int msgIdModel = -1;
 	private int msgIdFight = -1;
+	
+	// Archimonster
+	private boolean archiOnMap = false;
+	private String archiName = "";
 
 	// Stats info
 	private int lvl = -1;
@@ -110,6 +114,7 @@ public class Info {
 		caracsAffected = true;
 		movObject = false;
 		currentMapTrigger = false;
+		archiOnMap = false;
 	}
 	
 	public boolean threadDone = true;
@@ -618,5 +623,21 @@ public class Info {
 
 	public void setCurrentMapTrigger(boolean currentMapTrigger) {
 		this.currentMapTrigger = currentMapTrigger;
+	}
+
+	public boolean isArchiOnMap() {
+		return archiOnMap;
+	}
+
+	public void setArchiOnMap(boolean archiOnMap) {
+		this.archiOnMap = archiOnMap;
+	}
+
+	public String getArchiName() {
+		return archiName;
+	}
+
+	public void setArchiName(String archiName) {
+		this.archiName = archiName;
 	}
 }

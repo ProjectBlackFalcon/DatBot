@@ -181,6 +181,7 @@ import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
+import protocol.network.types.game.context.roleplay.MonsterInGroupInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
@@ -679,7 +680,20 @@ public class Network extends DisplayInfo implements Runnable {
 				}
 				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
 					this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
+					GameRolePlayGroupMonsterInformations monster = (GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i);
+					if(GameData.isMonsterArchi(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId())){
+						this.info.setArchiOnMap(true);
+						this.info.setArchiName(GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
+						System.out.println(true + "," + GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
+					}
+					for (MonsterInGroupInformations mster : monster.getStaticInfos().getUnderlings()) {
+						if(GameData.isMonsterArchi(mster.getCreatureGenericId())){
+							this.info.setArchiOnMap(true);
+							this.info.setArchiName(GameData.getMonsterName(mster.getCreatureGenericId()));
+							System.out.println(true + "," + GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
 
+						}
+					}
 				}
 				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")) {
 					this.hunt.setPhorrorName(GameData.getNpcName(((GameRolePlayTreasureHintInformations) complementaryInformationsDataMessage.getActors().get(i)).getNpcId()));
@@ -689,14 +703,6 @@ public class Network extends DisplayInfo implements Runnable {
 			}
 			getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 			getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
-
-			//			for (InteractiveElement interactiveElement : this.interactive.getInteractiveElements()) {
-			//				System.out.println(interactiveElement.getElementId());
-			//				System.out.println(interactiveElement.getEnabledSkills());
-			//			}
-
-			//			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
-			//			append("CellId : " + info.getCellId());
 			info.setWaitForMov(true);
 			info.setConnected(true);
 			info.setNewMap(true);

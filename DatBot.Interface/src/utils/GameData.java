@@ -213,6 +213,33 @@ public class GameData {
         }
         return -1;
     }
+	
+	public static boolean isMonsterArchi(int id){
+		D2oManager d2oManager;
+		try {
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/Monsters.d2o");
+			String s = d2oManager.searchObjectById(id);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			String[] cmd = s.split(",(?![^\\(\\[]*[\\]\\)])");
+			for (String si : cmd) {
+				String[] cmd2 = si.split(":(?![^\\(\\[]*[\\]\\)])");
+				if (cmd2[0].equals("isMiniBoss")) {
+					return cmd2[1].equals("true");
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static String getMonsterName(int id){
+		return d2iManager.getText(getDataFromFile(id,"Monsters"));
+	}
 
 	public static List<Spell> getMonsterSpells(int id, int lvl){
 		D2oManager d2oManager;
