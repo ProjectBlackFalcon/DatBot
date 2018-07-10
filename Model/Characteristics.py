@@ -22,7 +22,7 @@ class Characteristics:
         return dict(zip(names, [self.vi, self.int, self.agi, self.cha, self.fo, self.sa, self.available_stat_points]))
 
     def __str__(self):
-        return {
+        return str({
             'Level': self.level,
             'Xp': self.xp,
             'XpNextLevelFloor': self.xp_next_level_floor,
@@ -36,4 +36,4 @@ class Characteristics:
             'Luck': self.cha,
             'Strength': self.fo,
             'Wisdom': self.sa,
-        }
+        })
