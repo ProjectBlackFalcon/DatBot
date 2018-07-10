@@ -14,33 +14,33 @@
     {"Name": "anneau champetre", "Id": 6791, "Slot": 2},
     {"Name": "cape zombique", "Id": 19146, "Slot": 7},
     {"Name": "anneau des rocheuses", "Id": 278, "Slot": 4},
-    {"Name": "epee du garde royal", "Id": 17494, "Slot": 1},
     {"Name": "bouclier en mousse", "Id": 18659, "Slot": 15},
     {"Name": "coiffe zombique", "Id": 19147, "Slot": 6},
     {"Name": "ceinture dragocourse", "Id": 17734, "Slot": 3},
-    {"Name": "larvamulette", "Id": 7106, "Slot": 0}
+    {"Name": "larvamulette", "Id": 7106, "Slot": 0},
+    {"Name": "epee du garde royal", "Id": 17494, "Slot": 1}
   ],
   "60": [
     {"Name": "bottes du garde royal", "Id": 17507, "Slot": 5},
     {"Name": "anneau champetre", "Id": 6791, "Slot": 2},
     {"Name": "cape zombique", "Id": 19146, "Slot": 7},
     {"Name": "anneau des rocheuses", "Id": 278, "Slot": 4},
-    {"Name": "epee du garde royal", "Id": 17494, "Slot": 1},
     {"Name": "bouclier en mousse", "Id": 18659, "Slot": 15},
     {"Name": "coiffe zombique", "Id": 19147, "Slot": 6},
     {"Name": "ceinture dragocourse", "Id": 17734, "Slot": 3},
-    {"Name": "larvamulette", "Id": 7106, "Slot": 0}
+    {"Name": "larvamulette", "Id": 7106, "Slot": 0},
+    {"Name": "epee du garde royal", "Id": 17494, "Slot": 1}
   ],
   "80": [
     {"Name": "bloptes coco royales", "Id": 9164, "Slot": 5},
     {"Name": "anneau du koalak", "Id": 8004, "Slot": 2},
     {"Name": "cape du scorbute", "Id": 19082, "Slot": 7},
     {"Name": "anneau du kitsou", "Id": 7341, "Slot": 4},
-    {"Name": "la bidjiz", "Id": 8612, "Slot": 1},
     {"Name": "bouclier en mousse", "Id": 18659, "Slot": 15},
     {"Name": "casque du scorbute", "Id": 19081, "Slot": 6},
     {"Name": "ceinture aerdala", "Id": 7241, "Slot": 3},
-    {"Name": "amublop coco", "Id": 9151, "Slot": 0}
+    {"Name": "amublop coco", "Id": 9151, "Slot": 0},
+    {"Name": "la bidjiz", "Id": 8612, "Slot": 1}
   ],
   "100": [],
   "120": [],

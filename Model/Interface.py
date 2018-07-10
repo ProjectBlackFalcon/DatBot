@@ -810,9 +810,7 @@ class Interface:
         :param slot: Slot the item should go to
         :return: Boolean
         """
-        ret_val = self.execute_command('equipItem', [inv_id, slot])
-        self.get_player_stats()
-        return ret_val
+        return self.execute_command('equipItem', [inv_id, slot])
 
     def de_equip_item(self, inv_id):
         """
@@ -820,9 +818,7 @@ class Interface:
         :param inv_id: inventory id of the item to de-equip
         :return: Boolean
         """
-        ret_val = self.execute_command('deEquipItem', [inv_id])
-        self.get_player_stats()
-        return ret_val
+        return self.execute_command('deEquipItem', [inv_id])
 
 
 __author__ = 'Alexis'

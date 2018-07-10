@@ -25,7 +25,7 @@ class Inventory:
                     if self.item_in_slot(slot):
                         for item_equipped in self.items:
                             if item_equipped[4] == slot:
-                                self.bot.interface.de_equip_item(item_equipped[4])
+                                self.bot.interface.de_equip_item(item_equipped[2])
                     self.bot.interface.equip_item(item[2], slot)
 
     def equip_preferred_stuff(self):
