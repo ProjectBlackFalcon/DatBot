@@ -814,13 +814,13 @@ class Interface:
         self.get_player_stats()
         return ret_val
 
-    def de_equip_item(self, slot):
+    def de_equip_item(self, inv_id):
         """
-        De-equips the item in the slot
-        :param slot: Slot the item should go to
+        De-equips the item
+        :param inv_id: inventory id of the item to de-equip
         :return: Boolean
         """
-        ret_val = self.execute_command('deEquipItem', [slot])
+        ret_val = self.execute_command('deEquipItem', [inv_id])
         self.get_player_stats()
         return ret_val
 
