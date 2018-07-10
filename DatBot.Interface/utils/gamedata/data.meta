@@ -29,7 +29,7 @@
 		<file name="TaxCollectorFirstnames.d2o">aae094c8b9897fa76ccda687631956a4</file>
 		<file name="SmileyPacks.d2o">5a0b4c995952feefb907517a4028ec35</file>
 		<file name="Signs.d2o">d757638cbec6c315bad16d4ca5e13dec</file>
-		<file name="MapCoordinates.d2o">9b5e04bb91c3913a15349d5c8643e66d</file>
+		<file name="MapCoordinates.d2o">cce99a65dcd73e409c18b5dc7612d64a</file>
 		<file name="AchievementRewards.d2o">1119d7fdab4a71699fb207670a6be3f0</file>
 		<file name="IncarnationLevels.d2o">bed6d658547115dd8eb68c8214d2d812</file>
 		<file name="HintCategory.d2o">406e92557f0e81c2b1882c7d3abe1abb</file>
@@ -41,7 +41,7 @@
 		<file name="Appearances.d2o">34764d39b4bbf06be4cb8a644cbeede7</file>
 		<file name="IdolsPresetIcons.d2o">49d3fad51650a2319c6c985b35957c3e</file>
 		<file name="ChatChannels.d2o">1c1936aa8957480cb29d9eda38e279c4</file>
-		<file name="SubAreas.d2o">b139e40416fe53b9ab1c5a8f96f4bce4</file>
+		<file name="SubAreas.d2o">90ef14adee84ecb57d2f47db77173e3d</file>
 		<file name="NpcMessages.d2o">1e2ef432a7fd7e01bf41d4e2985c2231</file>
 		<file name="OptionalFeatures.d2o">3b6d32fe5d252dcfb474a2c0c560b187</file>
 		<file name="AlmanaxCalendars.d2o">b70e8974ab329848c051cc7b589e1628</file>
@@ -95,7 +95,7 @@
 		<file name="AlignmentSides.d2o">bc7652735d3e3613841c741eefa1f691</file>
 		<file name="SpellStates.d2o">1c5434ac679bfc9a4558cffbb6d6493e</file>
 		<file name="AlignmentRankJntGift.d2o">89edce01c8fda8733eeac084794d6e6b</file>
-		<file name="Spells.d2o">442f6decc7377999114da4a20b923c33</file>
+		<file name="Spells.d2o">a07ac1408eb8352dc9aa8be089c1f40d</file>
 		<file name="BreedRoles.d2o">0203bc9cd075b611679f69f2394e75d4</file>
 		<file name="Idols.d2o">28bfa801f13468501eb7ba501a47cacc</file>
 		<file name="Documents.d2o">a431e907c2e0b6ce048d9030f2894a04</file>
@@ -104,7 +104,7 @@
 		<file name="AlignmentRank.d2o">b1e8bcbbbc522beb390c46e8c0699aa2</file>
 		<file name="NpcActions.d2o">02904a950a7af5a48b47cf82390e90db</file>
 		<file name="CompanionSpells.d2o">58ae5e1bb720bd8d59568b50cbbb2d3a</file>
-		<file name="Items.d2o">73bdc9d44d1eabca32efb7708601be6c</file>
+		<file name="Items.d2o">c154e03d876531469a8bede724a430a9</file>
 		<file name="RideFood.d2o">838d0b4138991625aee7d948576c31d4</file>
 		<file name="Subhints.d2o">1902f8f134dac790e11baebc983ff3e5</file>
 		<file name="FinishMoves.d2o">c082accab8edbf157950b4439b92cb62</file>
@@ -112,7 +112,7 @@
 		<file name="Quests.d2o">4fcb3fdc6ab3d52bfdfcd2f98c1a6f5d</file>
 		<file name="Interactives.d2o">885572d5cd103f3230b92f8918b626a6</file>
 		<file name="SpeakingItemsTriggers.d2o">04dde2c3e2b30c15285457c7779ea150</file>
-		<file name="Recipes.d2o">f7ec85dc5d5f3181f3129b5c4edc70eb</file>
+		<file name="Recipes.d2o">59f3caae5cbc5098e21eef7346d2453a</file>
 		<file name="TypeActions.d2o">e970532a91a31e4443858bea98f1ede1</file>
 		<file name="ServerGameTypes.d2o">c1c70cc7a0b448367361423620b1414c</file>
 		<file name="Incarnation.d2o">a418ff7be01a3477976854c6c22d12db</file>
@@ -121,7 +121,7 @@
 		<file name="EmblemSymbols.d2o">c6bd5685f31bb6bc888b298820dc8978</file>
 		<file name="SpellBombs.d2o">33265aab214e95120b3cc9d303baa31d</file>
 		<file name="Bonuses.d2o">c9dcd44a31adc15d74f94049e5343d63</file>
-		<file name="Monsters.d2o">9e6aece1882da3d4f730890787bd0d5b</file>
+		<file name="Monsters.d2o">720834b36382481eb07d79af9321db57</file>
 		<file name="Waypoints.d2o">222657de1f0dd43618104461941843f4</file>
 		<file name="Mounts.d2o">83a294381bb7f6a2359a6cc1bdd4f886</file>
 		<file name="ItemSets.d2o">b54f83498d3b2e15fe58812bdb9c3fad</file>
