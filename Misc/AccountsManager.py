@@ -50,9 +50,9 @@ class Scheduler:
         Label(self.frame, text='Add task : <task> <bar id> <start> <end>').pack()
         Label(self.frame, text='Resize bar : resize <bar id> <new duration>').pack()
         Label(self.frame, text='Add bar1 to bar 2 : add <bar1 id> <bar2 id> <offset>').pack()
+        Label(self.frame, text='Assign : assign <shedule name> <bot_name>').pack()
         Label(self.frame, text='Save : save <file name>').pack()
         Label(self.frame, text='Load : load <file name (optionnal)>').pack()
-        Label(self.frame, text='Assign : assign <shedule name> <bot_name>').pack()
         Label(self.frame, text='TASKS : ').pack()
         Label(self.frame, text=str(list(self.tasks.keys()))).pack()
         self.command_field = Entry(self.frame, width=40)
@@ -321,7 +321,7 @@ class AccountManager:
                 (bot.credentials['name'], bot.credentials['name']))
             for data in cursor:
                 bot.kamas = data[3]
-                bot.characteristics.level = data[4]
+                bot.level = data[4]
                 bot.occupation = data[5]
                 bot.position = (data[6], data[7])
                 bot.last_update = str(data[8])
@@ -337,7 +337,8 @@ class AccountManager:
         for thing in cursor:
             things.append(thing)
         if not things:
-            cursor.execute("""INSERT INTO BotAccounts (username, password, name, server) VALUES (%s, %s, %s, %s)""", put)
+            cursor.execute("""INSERT INTO BotAccounts (username, password, name, server) VALUES (%s, %s, %s, %s)""",
+                           put)
             conn.commit()
         conn.close()
 
