@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import game.Info;
 import game.map.MapMovement;
 import game.movement.CellMovement;
@@ -39,6 +37,7 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMovePric
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertAllFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListFromInvMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectTransfertListToInvMessage;
+import protocol.network.messages.game.inventory.items.ObjectSetPositionMessage;
 import protocol.network.messages.game.inventory.items.ObjectUseMessage;
 import utils.GameData;
 
@@ -135,6 +134,7 @@ public class ModelConnexion {
 	private Object[] changeMap(String param) throws Exception {
 		Object[] toSend;
 		String[] infoMov = param.split(",");
+		int oldMapId = this.getNetwork().getMap().getId();
 		log.writeActionLogMessage("changeMap", String.format("actual map : %s - %s, actual cell : %s, direction : %s, cellChangeMap : %s", 
 					this.network.getMap().getId(), GameData.getCoordMapString(this.network.getMap().getId()), this.network.getInfo().getCellId(), infoMov[1], infoMov[0]));
 		MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
@@ -145,16 +145,9 @@ public class ModelConnexion {
 			this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 		}
 		else {
-			mapMovement.PerformChangement();
-			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
-				if (Integer.parseInt(infoMov[0]) != this.network.getInfo().getCellId()) {
-					stop(0.5);
-					toSend = new Object[] { "True" };
-				}
-				else {
-					DisplayInfo.appendDebugLog("ChangeMap error after enterBag tactic", param);
-					toSend = new Object[] { "False" };
-				}
+			mapMovement.PerformChangement(this.network);
+			if (this.waitToSendMap(oldMapId)) {
+				toSend = new Object[] { "True" };
 			}
 			else {
 				DisplayInfo.appendDebugLog("ChangeMap error, server returned false", param);
@@ -172,7 +165,7 @@ public class ModelConnexion {
 			this.network.append("Déplacement impossible ! Un obstacle bloque le chemin !");
 		}
 		else {
-			mapMovement1.PerformChangement();
+			mapMovement1.PerformChangement(this.network);
 			if (this.network.getMovement().moveOver()) {
 				toSend = new Object[] { "True" };
 			}
@@ -1007,6 +1000,47 @@ public class ModelConnexion {
 			case "getTriesLeft":
 				toSend = new Object[] { this.getNetwork().getHunt().getAvailableRetryCount() };
 				break;
+			case "getSubTime":
+				toSend = new Object[] { this.getNetwork().getInfo().getTimeLeftSub() };
+				break;
+			case "equipItem":
+				toSend = equipItem(param);
+				break;
+			case "deEquipItem":
+				toSend = deEquipItem(param);
+				break;
+		}
+		return toSend;
+	}
+
+	private Object[] equipItem(String param) throws Exception, InterruptedException {
+		Object[] toSend;
+		String[] infoItem  = param.split(",");
+		log.writeActionLogMessage("equipItem", String.format("id : %s, position : %s",
+			infoItem[0], infoItem[1]));
+		ObjectSetPositionMessage objectSetPositionMessage = new ObjectSetPositionMessage(Integer.parseInt(infoItem[0]), Integer.parseInt(infoItem[1]), 1);
+		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position "  + infoItem[1]);
+		if (this.waitToSendMovObject()) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	private Object[] deEquipItem(String param) throws Exception, InterruptedException {
+		Object[] toSend;
+		String[] infoItem  = param.split(",");
+		log.writeActionLogMessage("deEquipItem", String.format("id : %s, position : %s",
+			infoItem[0], infoItem[1]));
+		ObjectSetPositionMessage objectSetPositionMessage = new ObjectSetPositionMessage(Integer.parseInt(infoItem[0]), 63, 1);
+		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position "  + 63);
+		if (this.waitToSendMovObject()) {
+			toSend = new Object[] { "True" };
+		}
+		else {
+			toSend = new Object[] { "False" };
 		}
 		return toSend;
 	}
@@ -1726,7 +1760,7 @@ public class ModelConnexion {
 
 	private Object[] validateClue() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("getClue", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s, currentIndex : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps(), this.network.getHunt().getCurrentIndex()));
+		log.writeActionLogMessage("validateClue", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s, currentIndex : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps(), this.network.getHunt().getCurrentIndex()));
 		if (this.network.getInfo().isInHunt() && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps() - 1) {
 			TreasureHuntFlagRequestMessage treasureHuntFlagRequestMessage = new TreasureHuntFlagRequestMessage(0, this.network.getHunt().getCurrentIndex());
 			getNetwork().sendToServer(treasureHuntFlagRequestMessage, TreasureHuntFlagRequestMessage.ProtocolId, "Validating clue");
@@ -1747,7 +1781,7 @@ public class ModelConnexion {
 
 	private Object[] validateStep() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("getClue", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps()));
+		log.writeActionLogMessage("validateStep", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps()));
 		if (this.network.getInfo().isInHunt() && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps() - 1) {
 			TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 			getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Validating step");
@@ -1876,19 +1910,17 @@ public class ModelConnexion {
 	}
 
 	public boolean waitToSendMap(int actualMapId) throws InterruptedException {
+		if(this.network.getMap().getId() != actualMapId){
+			return true;
+		}
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isNewMap()) {
 			Thread.sleep(50);
 			if (System.currentTimeMillis() - index > 10000) {
-				if (this.network.getMap().getId() != actualMapId) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return this.network.getMap().getId() != actualMapId;
 			}
 		}
-		return true;
+		return this.network.getMap().getId() != actualMapId;
 	}
 
 	public boolean waitToSendMount(String s) throws InterruptedException {
@@ -1927,6 +1959,15 @@ public class ModelConnexion {
 	public boolean waitToSendObjectUse() throws InterruptedException {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isObjectUse()) {
+			Thread.sleep(50);
+			if (System.currentTimeMillis() - index > 10000) { return false; }
+		}
+		return true;
+	}
+	
+	public boolean waitToSendMovObject() throws InterruptedException {
+		long index = System.currentTimeMillis();
+		while (!this.network.getInfo().isMovObject()) {
 			Thread.sleep(50);
 			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}

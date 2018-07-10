@@ -55,6 +55,7 @@ public class Log {
 		}
 		writer.append(LocalDateTime.now() + " : [" + method + "] : " + s + "\n");
 		writer.close();
+		System.out.println(LocalDateTime.now() + " : [" + method + "] : " + s);
 	}
 	
 	

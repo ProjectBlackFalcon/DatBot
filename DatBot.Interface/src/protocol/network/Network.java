@@ -1,20 +1,80 @@
 package protocol.network;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.net.SocketException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.json.simple.JSONObject;
+
 import game.Info;
 import game.combat.Fight;
 import game.movement.Movement;
-import game.plugin.*;
+import game.plugin.Bank;
+import game.plugin.Dragodinde;
+import game.plugin.Hunt;
+import game.plugin.Interactive;
+import game.plugin.Monsters;
+import game.plugin.Npc;
+import game.plugin.Stats;
 import ia.Intelligence;
 import ia.IntelligencePacketHandler;
 import ia.entities.Spell;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import protocol.frames.LatencyFrame;
-import protocol.network.messages.connection.*;
+import protocol.network.messages.connection.HelloConnectMessage;
+import protocol.network.messages.connection.IdentificationMessage;
+import protocol.network.messages.connection.IdentificationSuccessMessage;
+import protocol.network.messages.connection.SelectedServerDataMessage;
+import protocol.network.messages.connection.SelectedServerRefusedMessage;
+import protocol.network.messages.connection.ServerSelectionMessage;
+import protocol.network.messages.connection.ServersListMessage;
 import protocol.network.messages.game.actions.GameActionAcknowledgementMessage;
-import protocol.network.messages.game.actions.fight.*;
+import protocol.network.messages.game.actions.fight.GameActionFightActivateGlyphTrapMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightCarryCharacterMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightCloseCombatMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDeathMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDispellEffectMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDispellMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDispellSpellMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDispellableEffectMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDodgePointLossMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightDropCharacterMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightExchangePositionsMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightInvisibilityMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightInvisibleDetectedMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightKillMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightLifeAndShieldPointsLostMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightLifePointsGainMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightLifePointsLostMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightMarkCellsMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightModifyEffectsDurationMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightNoSpellCastMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightPointsVariationMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightReduceDamagesMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightReflectDamagesMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightReflectSpellMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSlideMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSpellCastMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSpellCooldownVariationMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSpellImmunityMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightStealKamaMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightSummonMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightTackledMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightTeleportOnSameMapMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightThrowCharacterMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightTriggerEffectMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightTriggerGlyphTrapMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightUnmarkCellsMessage;
+import protocol.network.messages.game.actions.fight.GameActionFightVanishMessage;
 import protocol.network.messages.game.actions.sequence.SequenceEndMessage;
 import protocol.network.messages.game.actions.sequence.SequenceStartMessage;
 import protocol.network.messages.game.approach.AuthenticationTicketMessage;
@@ -28,8 +88,39 @@ import protocol.network.messages.game.character.choice.CharactersListMessage;
 import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.character.stats.FighterStatsListMessage;
-import protocol.network.messages.game.context.*;
-import protocol.network.messages.game.context.fight.*;
+import protocol.network.messages.game.context.GameContextCreateRequestMessage;
+import protocol.network.messages.game.context.GameContextReadyMessage;
+import protocol.network.messages.game.context.GameContextRemoveElementMessage;
+import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
+import protocol.network.messages.game.context.GameMapMovementMessage;
+import protocol.network.messages.game.context.GameMapNoMovementMessage;
+import protocol.network.messages.game.context.fight.GameFightEndMessage;
+import protocol.network.messages.game.context.fight.GameFightHumanReadyStateMessage;
+import protocol.network.messages.game.context.fight.GameFightJoinMessage;
+import protocol.network.messages.game.context.fight.GameFightLeaveMessage;
+import protocol.network.messages.game.context.fight.GameFightNewRoundMessage;
+import protocol.network.messages.game.context.fight.GameFightNewWaveMessage;
+import protocol.network.messages.game.context.fight.GameFightOptionStateUpdateMessage;
+import protocol.network.messages.game.context.fight.GameFightOptionToggleMessage;
+import protocol.network.messages.game.context.fight.GameFightPauseMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementPossiblePositionsMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementSwapPositionsAcceptMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementSwapPositionsCancelMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementSwapPositionsCancelledMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementSwapPositionsMessage;
+import protocol.network.messages.game.context.fight.GameFightPlacementSwapPositionsOfferMessage;
+import protocol.network.messages.game.context.fight.GameFightRemoveTeamMemberMessage;
+import protocol.network.messages.game.context.fight.GameFightResumeMessage;
+import protocol.network.messages.game.context.fight.GameFightStartMessage;
+import protocol.network.messages.game.context.fight.GameFightStartingMessage;
+import protocol.network.messages.game.context.fight.GameFightSynchronizeMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnEndMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnFinishMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnResumeMessage;
+import protocol.network.messages.game.context.fight.GameFightTurnStartMessage;
+import protocol.network.messages.game.context.fight.RefreshCharacterStatsMessage;
 import protocol.network.messages.game.context.fight.arena.ArenaFighterLeaveMessage;
 import protocol.network.messages.game.context.fight.challenge.ChallengeInfoMessage;
 import protocol.network.messages.game.context.fight.challenge.ChallengeResultMessage;
@@ -40,7 +131,11 @@ import protocol.network.messages.game.context.fight.character.GameFightShowFight
 import protocol.network.messages.game.context.mount.MountRidingMessage;
 import protocol.network.messages.game.context.mount.MountSetMessage;
 import protocol.network.messages.game.context.mount.MountXpRatioMessage;
-import protocol.network.messages.game.context.roleplay.*;
+import protocol.network.messages.game.context.roleplay.CurrentMapMessage;
+import protocol.network.messages.game.context.roleplay.GameRolePlayShowActorMessage;
+import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataInHavenBagMessage;
+import protocol.network.messages.game.context.roleplay.MapComplementaryInformationsDataMessage;
+import protocol.network.messages.game.context.roleplay.MapInformationsRequestMessage;
 import protocol.network.messages.game.context.roleplay.emote.EmoteListMessage;
 import protocol.network.messages.game.context.roleplay.emote.EmotePlayMessage;
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyAnswerMessage;
@@ -50,7 +145,9 @@ import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayA
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
+import protocol.network.messages.game.context.roleplay.stats.StatsUpgradeResultMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntDigRequestAnswerMessage;
+import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntFlagRequestAnswerMessage;
 import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHuntMessage;
 import protocol.network.messages.game.interactive.InteractiveElementUpdatedMessage;
 import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
@@ -61,9 +158,22 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRe
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidSellerMessage;
-import protocol.network.messages.game.inventory.items.*;
+import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
+import protocol.network.messages.game.inventory.items.InventoryContentMessage;
+import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
+import protocol.network.messages.game.inventory.items.ObjectAddedMessage;
+import protocol.network.messages.game.inventory.items.ObjectDeletedMessage;
+import protocol.network.messages.game.inventory.items.ObjectQuantityMessage;
+import protocol.network.messages.game.inventory.items.ObjectsAddedMessage;
+import protocol.network.messages.game.inventory.items.ObjectsDeletedMessage;
+import protocol.network.messages.game.inventory.items.ObtainedItemMessage;
 import protocol.network.messages.game.inventory.spells.SpellListMessage;
-import protocol.network.messages.game.inventory.storage.*;
+import protocol.network.messages.game.inventory.storage.StorageInventoryContentMessage;
+import protocol.network.messages.game.inventory.storage.StorageKamasUpdateMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectRemoveMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectUpdateMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectsRemoveMessage;
+import protocol.network.messages.game.inventory.storage.StorageObjectsUpdateMessage;
 import protocol.network.messages.security.CheckIntegrityMessage;
 import protocol.network.messages.security.ClientKeyMessage;
 import protocol.network.messages.server.basic.SystemMessageDisplayMessage;
@@ -71,29 +181,21 @@ import protocol.network.types.connection.GameServerInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
+import protocol.network.types.game.context.roleplay.MonsterInGroupInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
-import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.data.items.SpellItem;
 import protocol.network.types.version.VersionExtended;
-import protocol.network.util.*;
+import protocol.network.util.DofusDataReader;
+import protocol.network.util.DofusDataWriter;
+import protocol.network.util.FlashKeyGenerator;
+import protocol.network.util.MessageUtil;
+import protocol.network.util.SwitchNameClass;
 import utils.GameData;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("unchecked")
 public class Network extends DisplayInfo implements Runnable {
@@ -486,7 +588,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 47, 7, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 47, 12, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -578,7 +680,20 @@ public class Network extends DisplayInfo implements Runnable {
 				}
 				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
 					this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
+					GameRolePlayGroupMonsterInformations monster = (GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i);
+					if(GameData.isMonsterArchi(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId())){
+						this.info.setArchiOnMap(true);
+						this.info.setArchiName(GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
+						System.out.println(true + "," + GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
+					}
+					for (MonsterInGroupInformations mster : monster.getStaticInfos().getUnderlings()) {
+						if(GameData.isMonsterArchi(mster.getCreatureGenericId())){
+							this.info.setArchiOnMap(true);
+							this.info.setArchiName(GameData.getMonsterName(mster.getCreatureGenericId()));
+							System.out.println(true + "," + GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
 
+						}
+					}
 				}
 				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")) {
 					this.hunt.setPhorrorName(GameData.getNpcName(((GameRolePlayTreasureHintInformations) complementaryInformationsDataMessage.getActors().get(i)).getNpcId()));
@@ -588,14 +703,6 @@ public class Network extends DisplayInfo implements Runnable {
 			}
 			getInteractive().setStatedElements(complementaryInformationsDataMessage.getStatedElements());
 			getInteractive().setInteractiveElements(complementaryInformationsDataMessage.getInteractiveElements());
-
-			//			for (InteractiveElement interactiveElement : this.interactive.getInteractiveElements()) {
-			//				System.out.println(interactiveElement.getElementId());
-			//				System.out.println(interactiveElement.getEnabledSkills());
-			//			}
-
-			//			append("Map : [" + info.getCoords()[0] + ";" + info.getCoords()[1] + "]");
-			//			append("CellId : " + info.getCellId());
 			info.setWaitForMov(true);
 			info.setConnected(true);
 			info.setNewMap(true);
@@ -604,6 +711,7 @@ public class Network extends DisplayInfo implements Runnable {
 
 	private void handleMapRequestMessage(DofusDataReader dataReader) throws Exception {
 		CurrentMapMessage currentMapMessage = new CurrentMapMessage();
+		info.setCurrentMapTrigger(true);
 		currentMapMessage.Deserialize(dataReader);
 		info.setMapId(currentMapMessage.getMapId());
 		if (connectionToKoli) {
@@ -908,7 +1016,8 @@ public class Network extends DisplayInfo implements Runnable {
 	 * displayed on log
 	 */
 	public void sendToServer(NetworkMessage message, int id, String s) throws Exception {
-		info.setBooleanToFalse();
+		if(id != 6317 && id != 5663)
+			info.setBooleanToFalse();
 		latencyFrame.latestSent();
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DofusDataWriter writer = new DofusDataWriter(bous);
@@ -974,10 +1083,19 @@ public class Network extends DisplayInfo implements Runnable {
 				case 3:
 					handleHelloConnectMessage(dataReader);
 					break;
+				case 22:
+					IdentificationSuccessMessage identificationSuccessMessage = new IdentificationSuccessMessage();
+					identificationSuccessMessage.Deserialize(dataReader);
+					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+					this.info.setTimeLeftSub(((long) identificationSuccessMessage.getSubscriptionEndDate() - timestamp.getTime())/1000);
+					break;
 				case 189:
 					SystemMessageDisplayMessage systemMessageDisplayMessage = new SystemMessageDisplayMessage();
 					systemMessageDisplayMessage.Deserialize(dataReader);
 					System.out.println(systemMessageDisplayMessage.getMsgId());
+					break;
+				case 3010:
+					info.setMovObject(true);
 					break;
 				case 30:
 					handleServersListMessage(dataReader);
@@ -999,7 +1117,9 @@ public class Network extends DisplayInfo implements Runnable {
 					}
 					break;
 				case 5609:
-					info.setCaracsAffected(true);
+					StatsUpgradeResultMessage statsUpgradeResultMessage = new StatsUpgradeResultMessage();
+					if(statsUpgradeResultMessage.getResult() == 0)
+						info.setCaracsAffected(true);
 					break;
 				case 6253:
 					HandleRawDataMessage();
@@ -1043,7 +1163,7 @@ public class Network extends DisplayInfo implements Runnable {
 					break;
 				case 950:
 					GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
-					super.debug.println(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
+					getLog().writeLogErrorMessage(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
 					break;
 				case 951:
 					handleGameMapMovementMessage(dataReader);
@@ -1112,9 +1232,9 @@ public class Network extends DisplayInfo implements Runnable {
 					info.setTextMessage(true);
 					String sfinal = "";
 					for (String s : informationMessage.getParameters()) {
-						sfinal += s;
+						sfinal += s + " ";
 					}
-					this.getLog().writeActionLogMessage("TextInformationMessage", sfinal);
+					this.getLog().writeActionLogMessage("TextInformationMessage : " + GameData.getTextInfo(informationMessage.getMsgId()), sfinal);
 					break;
 				case 5646:
 					getBank().setStorage(new StorageInventoryContentMessage());
@@ -1266,6 +1386,15 @@ public class Network extends DisplayInfo implements Runnable {
 					this.info.setInHunt(false);
 					this.hunt.setAvailableRetryCount(0);
 					this.hunt.setRdyToFight(false);
+					break;
+				case 6507:
+					TreasureHuntFlagRequestAnswerMessage flagrequest = new TreasureHuntFlagRequestAnswerMessage();
+					flagrequest.Deserialize(dataReader);
+					String s = "Index : " + flagrequest.getIndex() + " questType : " + flagrequest.getQuestType() + " result : " + flagrequest.getResult();
+					this.getLog().writeActionLogMessage("TreasureHuntFlagRequestAnswerMessage",s);
+					if(flagrequest.getResult() == 1){
+						this.info.setHuntAnswered(true);
+					}
 					break;
 				case 6484:
 					handleTreasureHuntDigRequestAnswerMessage(dataReader);
@@ -1542,7 +1671,7 @@ public class Network extends DisplayInfo implements Runnable {
 				case 5927:
 					GameFightOptionStateUpdateMessage gameFightOptionStateUpdateMessage = new GameFightOptionStateUpdateMessage();
 					gameFightOptionStateUpdateMessage.Deserialize(dataReader);
-					iaPacket.gameFightOptionStateUpdate(gameFightOptionStateUpdateMessage);
+
 					break;
 				case 707:
 					GameFightOptionToggleMessage gameFightOptionToggleMessage = new GameFightOptionToggleMessage();

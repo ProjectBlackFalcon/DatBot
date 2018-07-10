@@ -33,12 +33,17 @@ public class Info {
 	private long actorId = -1;
 	private boolean isConnected = false;
 	private boolean printDc = true;
+	private long timeLeftSub = -1;
 
 	// Bot info
 
 	private int botInstance;
 	private int msgIdModel = -1;
 	private int msgIdFight = -1;
+	
+	// Archimonster
+	private boolean archiOnMap = false;
+	private String archiName = "";
 
 	// Stats info
 	private int lvl = -1;
@@ -55,6 +60,7 @@ public class Info {
 	private boolean inHunt = false;
 	private boolean inExchange = false;
 	private boolean havenBag = false;
+	private boolean currentMapTrigger = false;
 
 	private boolean interactiveUsed = false;
 	private boolean newMap = false;
@@ -79,6 +85,7 @@ public class Info {
 	private boolean objectUse = false;
 	private boolean textMessage = false;
 	private boolean caracsAffected = false;
+	private boolean movObject = false;
 
 
 	public void setBooleanToFalse()
@@ -105,6 +112,9 @@ public class Info {
 		objectUse = false;
 		textMessage = false;
 		caracsAffected = true;
+		movObject = false;
+		currentMapTrigger = false;
+		archiOnMap = false;
 	}
 	
 	public boolean threadDone = true;
@@ -589,5 +599,45 @@ public class Info {
 
 	public void setSpells(List<Spell> spells) {
 		this.spells = spells;
+	}
+
+	public long getTimeLeftSub() {
+		return timeLeftSub;
+	}
+
+	public void setTimeLeftSub(long timeLeftSub) {
+		this.timeLeftSub = timeLeftSub;
+	}
+
+	public boolean isMovObject() {
+		return movObject;
+	}
+
+	public void setMovObject(boolean movObject) {
+		this.movObject = movObject;
+	}
+
+	public boolean isCurrentMapTrigger() {
+		return currentMapTrigger;
+	}
+
+	public void setCurrentMapTrigger(boolean currentMapTrigger) {
+		this.currentMapTrigger = currentMapTrigger;
+	}
+
+	public boolean isArchiOnMap() {
+		return archiOnMap;
+	}
+
+	public void setArchiOnMap(boolean archiOnMap) {
+		this.archiOnMap = archiOnMap;
+	}
+
+	public String getArchiName() {
+		return archiName;
+	}
+
+	public void setArchiName(String archiName) {
+		this.archiName = archiName;
 	}
 }

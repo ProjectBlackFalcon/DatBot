@@ -53,6 +53,7 @@ public class CellMovement {
 				int time = MovementVelocity.GetPathVelocity(path, MovementTypeEnum.WALKING);
 				Thread.sleep(time);
 			}
+			
 			this.network.sendToServer(new GameMapMovementConfirmMessage(), GameMapMovementConfirmMessage.ProtocolId, "Confirm...");
 		} else {
 			if (path.Cells.size() >= 3)

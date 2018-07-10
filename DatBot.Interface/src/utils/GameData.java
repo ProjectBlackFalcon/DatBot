@@ -2,16 +2,11 @@ package utils;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import ia.Intelligence;
 import ia.entities.Effect;
 import ia.entities.Spell;
 import org.json.simple.JSONArray;
 
-import protocol.network.Network;
 import utils.d2i.d2iManager;
 import utils.d2o.D2oManager;
 
@@ -114,6 +109,27 @@ public class GameData {
 		return d2iManager.getText(getDataFromFile(id,"Npcs"));
 	}
 	
+	public static String getTextInfo(int id){
+		D2oManager d2oManager;
+		try {
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/InfoMessages.d2o");
+			String s = d2oManager.searchObjectById(id);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			String[] cmd = s.split(",");
+			for (String si : cmd) {
+				String[] cmd2 = si.split(":");
+				if (cmd2[0].equals("textId")) { return d2iManager.getText(Integer.parseInt(cmd2[1])); }
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static String getPodsFromItem(int id){
 		return getDataFromFile(id,"Items","realWeight");
 	}
@@ -197,6 +213,33 @@ public class GameData {
         }
         return -1;
     }
+	
+	public static boolean isMonsterArchi(int id){
+		D2oManager d2oManager;
+		try {
+			d2oManager = new D2oManager(getPathDatBot() + "/DatBot.Interface/utils/gamedata/Monsters.d2o");
+			String s = d2oManager.searchObjectById(id);
+			s = s.replace("{", "");
+			s = s.replace(" ", "");
+			s = s.replace("}", "");
+			s = s.replaceAll("\n", "");
+			String[] cmd = s.split(",(?![^\\(\\[]*[\\]\\)])");
+			for (String si : cmd) {
+				String[] cmd2 = si.split(":(?![^\\(\\[]*[\\]\\)])");
+				if (cmd2[0].equals("isMiniBoss")) {
+					return cmd2[1].equals("true");
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public static String getMonsterName(int id){
+		return d2iManager.getText(getDataFromFile(id,"Monsters"));
+	}
 
 	public static List<Spell> getMonsterSpells(int id, int lvl){
 		D2oManager d2oManager;

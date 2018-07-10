@@ -31,10 +31,7 @@ public class Display {
 		new MapManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
 //		Display.displayMap(MapIA.reshapeToIA(MapManager.FromId(153880322).getCells()));
 		List<Entity> entities = new ArrayList<>();
-		Entity e = new MainEntity();
-		e.setPosition(MapIA.reshapeToIA(354));
-		entities.add(e);
-		Display.displayPath(MapManager.FromId(153880322).getCells(), entities);
+		Display.displayPath(MapManager.FromId(191102980).getCells(), entities);
 	}
 
 	public static void displayMap(TransformedCell[][] cells){
@@ -139,17 +136,17 @@ public class Display {
 				for(int j = 0; j < 34; j++){
 					g.setColor(Color.CYAN);
 					g.drawRect(i*20, j*20, 20, 20);
-					if(this.cells[i][j].isLos() && !this.cells[i][j].isMov()){
+					if((this.cells[i][j].isLos() && !this.cells[i][j].isMov()) || this.cells[i][j].isNonWalkableDuringFight()){
 						g.setColor(Color.BLACK);
 						g.fillRect(i*20+1, j*20+1, 19, 19);
 					}
 					
-					if(!this.cells[i][j].isMov() && !this.cells[i][j].isLos()){
+					if(!this.cells[i][j].isMov() && !this.cells[i][j].isLos() && !this.cells[i][j].isNonWalkableDuringFight()){
 						g.setColor(Color.GRAY);
 						g.fillRect(i*20+1, j*20+1, 19, 19);
 					}
 					
-					if(this.cells[i][j].isMov() && this.cells[i][j].isLos()){
+					if(this.cells[i][j].isMov() && this.cells[i][j].isLos() && !this.cells[i][j].isNonWalkableDuringFight()){
 						g.setColor(Color.WHITE);
 						g.fillRect(i*20+1, j*20+1, 19, 19);
 					}

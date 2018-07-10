@@ -27,8 +27,10 @@ public class Test {
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['democraticamnesiac','answerflash2','Maxitreur','Julith']");
 		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
-//		Thread.sleep(30000);
-//		communication.getReturn("0;0;i;cmd;changeMap;[0,w]");
+		Thread.sleep(30000);
+//		communication.getReturn("0;0;i;cmd;changeMap;[3,n]");
+//		Thread.sleep(5000);
+//		communication.getReturn("0;0;i;cmd;changeMap;[3,n]");
 //		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 
 		// TESTS FOR INPUTS
