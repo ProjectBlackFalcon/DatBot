@@ -61,6 +61,7 @@ public class Info {
 	private boolean inExchange = false;
 	private boolean havenBag = false;
 	private boolean currentMapTrigger = false;
+	private boolean newStats = false;
 
 	private boolean interactiveUsed = false;
 	private boolean newMap = false;
@@ -101,6 +102,7 @@ public class Info {
 		basicNoOperationMsg = false;
 		leaveExchange = false;
 		acknowledged = false;
+		newStats = false;
 		huntAnswered = false;
 		stepSuccess = false;
 		stepFailed = false;
@@ -111,7 +113,7 @@ public class Info {
 		mountRiding = false;
 		objectUse = false;
 		textMessage = false;
-		caracsAffected = true;
+		caracsAffected = false;
 		movObject = false;
 		currentMapTrigger = false;
 		archiOnMap = false;
@@ -639,5 +641,15 @@ public class Info {
 
 	public void setArchiName(String archiName) {
 		this.archiName = archiName;
+	}
+
+	public boolean isNewStats()
+	{
+		return newStats;
+	}
+
+	public void setNewStats(boolean newStats)
+	{
+		this.newStats = newStats;
 	}
 }
