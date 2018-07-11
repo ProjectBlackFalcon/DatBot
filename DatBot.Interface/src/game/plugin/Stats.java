@@ -100,6 +100,9 @@ public class Stats {
 		return "\"" + string + "\" : [" + intelligence.getBase() + "," + intelligence.getAdditionnal()
 			+ "," + intelligence.getObjectsAndMountBonus() + "]";
 	}
+	
+	
+	
 
 	/**
 	 * Check if the player has the item or not
