@@ -665,7 +665,7 @@ public class ModelConnexion {
 			toSend = new Object[] { "\"" + this.network.getHunt().getCurrentClue() + "\", \"" + Hunt.getDirection(this.network.getHunt().getCurrentDir()) + "\"" };
 		}
 		else if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps() - 1)) {
-			toSend = new Object[] { "Fight" };
+			toSend = new Object[] { "\"Fight\"" };
 		}
 		else {
 			toSend = new Object[] { "False" };
