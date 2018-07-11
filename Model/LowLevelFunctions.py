@@ -255,7 +255,6 @@ class LowLevelFunctions:
         return brak_maps
 
     def get_bwork_maps(self):
-        print(os.getcwd())
         with open('../Utils/BworkMaps.json', 'r') as f:
             bwork_maps = json.load(f)
         return bwork_maps
@@ -306,7 +305,7 @@ class LowLevelFunctions:
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
                                        database=dc.database)
         cursor = conn.cursor()
-        put = (username, password, name, server, [], [], [])
+        put = (username, password, name, server, '[]', '[]', '[]')
         cursor.execute("""SELECT * FROM BotAccounts WHERE username = %s""", (username,))
         things = []
         for thing in cursor:
@@ -385,7 +384,7 @@ class LowLevelFunctions:
         cursor = conn.cursor()
         try:
             if bot.characteristics is not None:
-                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.inventory), str(bot.characteristics).replace("'", '"'), name))
+                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.inventory), str(bot.characteristics).replace("'", "''"), name))
             else:
                 cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
         except TypeError as e:
