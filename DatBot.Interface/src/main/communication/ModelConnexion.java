@@ -1871,9 +1871,10 @@ public class ModelConnexion {
 		return true;
 	}
 
-	public boolean waitForCaracs() {
+	public boolean waitForCaracs() throws InterruptedException {
 		long index = System.currentTimeMillis();
-		while (!this.network.getInfo().isCaracsAffected()) {
+		while (!this.network.getInfo().isNewStats()) {
+			Thread.sleep(50);
 			if (System.currentTimeMillis() - index > 10000) {
 				System.out.println("Timed out");
 				return false;

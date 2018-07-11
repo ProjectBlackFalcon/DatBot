@@ -1127,6 +1127,7 @@ public class Network extends DisplayInfo implements Runnable {
 					break;
 				case 5609:
 					StatsUpgradeResultMessage statsUpgradeResultMessage = new StatsUpgradeResultMessage();
+					this.getLog().writeActionLogMessage("StatsUpgradeResultMessage", String.format("Result : %s", statsUpgradeResultMessage.getResult()));
 					if(statsUpgradeResultMessage.getResult() == 0)
 						info.setCaracsAffected(true);
 					break;
@@ -1153,6 +1154,7 @@ public class Network extends DisplayInfo implements Runnable {
 					HandleGameContextCreateMessage();
 					break;
 				case 500:
+					info.setNewStats(true);
 					stats.setStats(new CharacterStatsListMessage());
 					stats.getStats().Deserialize(dataReader);
 					stats.setTimePacketRecv(System.currentTimeMillis() / 1000);
