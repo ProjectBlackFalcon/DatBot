@@ -55,6 +55,7 @@ class Interface:
         self.pipe = self.bot.pipe  # type: PipeToJava
         self.current_id = 0
         self.bank_info = {}
+        self.new_hunt_timer = 0
         self.color = color
         self.end_color = '\033[0m'
 
@@ -150,8 +151,14 @@ class Interface:
                 self.get_player_stats()
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                 self.bot.position = (current_map, current_worldmap)
-                if self.get_dd_stat()[0]:
+                dd_stats = self.get_dd_stat()
+                if dd_stats[0]:
                     self.bot.mount = 'equipped'
+                    self.mount_dd()
+                    if dd_stats[0] < 100:
+                        self.set_dd_xp(90)
+                    else:
+                        self.set_dd_xp(0)
                 else:
                     self.bot.mount = self.bot.llf.get_mount_situation(self.bot.credentials['name'])
                     if self.bot.mount == 'resting':
@@ -241,6 +248,8 @@ class Interface:
         self.bot.characteristics.vi = stats['Caracs']['Vi']
         self.bot.characteristics.sa = stats['Caracs']['Sa']
         self.bot.characteristics.available_stat_points = stats['Caracs']['Available']
+
+        self.bot.inventory.equip_preferred_stuff()
 
         if self.bot.characteristics.available_stat_points:
             caracs_to_augment = self.bot.llf.get_caracs_to_augment(self.bot)
@@ -423,10 +432,15 @@ class Interface:
         :param level:
         :return: Boolean
         """
+        if time.time()-self.new_hunt_timer < 10*60:
+            time.sleep(10*60 - time.time() + self.new_hunt_timer + 30)
         if level == 'max':
-            return self.execute_command('newHunt')
+            succes = self.execute_command('newHunt')
         else:
-            return self.execute_command('newHunt', [level])
+            succes = self.execute_command('newHunt', [level])
+        if succes[0]:
+            self.new_hunt_timer = time.time()
+        return succes
 
     def hunt_is_active(self):
         """
@@ -796,19 +810,15 @@ class Interface:
         :param slot: Slot the item should go to
         :return: Boolean
         """
-        ret_val = self.execute_command('equipItem', [inv_id, slot])
-        self.get_player_stats()
-        return ret_val
+        return self.execute_command('equipItem', [inv_id, slot])
 
-    def de_equip_item(self, slot):
+    def de_equip_item(self, inv_id):
         """
-        De-equips the item in the slot
-        :param slot: Slot the item should go to
+        De-equips the item
+        :param inv_id: inventory id of the item to de-equip
         :return: Boolean
         """
-        ret_val = self.execute_command('deEquipItem', [slot])
-        self.get_player_stats()
-        return ret_val
+        return self.execute_command('deEquipItem', [inv_id])
 
 
 __author__ = 'Alexis'
