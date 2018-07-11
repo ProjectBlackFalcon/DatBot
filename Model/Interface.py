@@ -800,7 +800,6 @@ class Interface:
         :return: Boolean
         """
         ret_val = self.execute_command('assignCaracPoints', [carac_name, number])
-        self.get_player_stats()
         return ret_val
 
     def equip_item(self, inv_id, slot):
