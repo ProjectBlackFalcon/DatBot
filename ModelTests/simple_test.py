@@ -10,7 +10,9 @@ bot = Bot(pipe, 0, test_account_credentials, llf, True)
 
 bot.interface.connect()
 while 1:
-    bot.interface.get_player_stats()
-    time.sleep(1)
+    bot.interface.open_bank()
+    time.sleep(0.5)
+    bot.interface.close_bank()
+    time.sleep(0.5)
 bot.interface.disconnect()
 pipe.p.terminate()
