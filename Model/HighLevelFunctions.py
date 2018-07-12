@@ -808,7 +808,7 @@ class HighLevelFunctions:
                 elif task == schedule[-1] and not caught_up:
                     sleeping_time = round(60 * (24 - (time.localtime().tm_hour + time.localtime().tm_min / 60)) + 2)
                     self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes, waking up at {}'.format(
-                        self.bot.id, sleeping_time, datetime.datetime.fromtimestamp(time.time() + 60 * sleeping_time)) + self.bot.interface.end_color)
+                        self.bot.id, sleeping_time, datetime.datetime.fromtimestamp(time.time() + 60 * sleeping_time).time()) + self.bot.interface.end_color)
                     self.bot.interface.disconnect()
                     time.sleep(60 * sleeping_time)
                 else:
@@ -819,7 +819,7 @@ class HighLevelFunctions:
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
                     self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes, waking up at {}'.format(
-                        self.bot.id, round(minutes_left), datetime.datetime.fromtimestamp(time.time() + round(minutes_left)*60)) + self.bot.interface.end_color)
+                        self.bot.id, round(minutes_left), datetime.datetime.fromtimestamp(time.time() + round(minutes_left)*60).time()) + self.bot.interface.end_color)
                     time.sleep(60 * minutes_left)
 
                 minutes_left = max(1, 60 * (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
