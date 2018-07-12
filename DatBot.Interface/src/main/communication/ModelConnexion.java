@@ -333,7 +333,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(toBank[0]), Integer.parseInt(toBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Drop item bank");
 			if (this.waitToSendBank("move")) {
 				stop(1);
-				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("Drop bank error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
@@ -355,7 +355,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
 			if (this.waitToSendBank("move")) {
 				stop(1);
-				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("dropBankAll error, server returned false", "Bank oppened : " + bankOpened);
@@ -378,7 +378,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in this.network.getBank()");
 			if (this.waitToSendBank("move")) {
 				stop(1);
-				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("dropBankKamas error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
@@ -404,7 +404,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(exchangeObjectTransfertListFromInvMessage, ExchangeObjectTransfertListFromInvMessage.ProtocolId, "Drop item list bank");
 			if (this.waitToSendBank("move")) {
 				stop(1);
-				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("dropBankList error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
@@ -577,7 +577,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(new ExchangeObjectMoveMessage(Integer.parseInt(fromBank[0]), -Integer.parseInt(fromBank[1])), ExchangeObjectMoveMessage.ProtocolId, "Get item bank");
 			if (this.waitToSendBank("move")) {
 				stop(1);
-				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("Get bank error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
@@ -617,7 +617,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(exchangeObjectMoveKamaMessage, ExchangeObjectMoveKamaMessage.ProtocolId, "Get kamas from this.network.getBank()");
 			if (this.waitToSendBank("move")) {
 				stop(1);
-				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("getBankKamas error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
@@ -643,7 +643,7 @@ public class ModelConnexion {
 			getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from this.network.getBank()");
 			if (this.waitToSendBank("move")) {
 				stop(1);
-				toSend = new Object[] { this.network.getStats(), this.network.getBank() };
+				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			else {
 				DisplayInfo.appendDebugLog("getBankList error, server returned false", "Bank oppened : " + bankOpened + " param : " + param);
@@ -1105,7 +1105,7 @@ public class ModelConnexion {
 	}
 
 	private Object[] getStats() {
-		return new Object[] { this.network.getStats() };
+		return new Object[] { this.network.getStats().getStatsBot() };
 	}
 
 	private Object[] getStepsLeft() {

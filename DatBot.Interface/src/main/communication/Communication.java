@@ -58,7 +58,6 @@ public class Communication implements Runnable {
 			}
 		}
 		String result = String.format("%s;%s;%s;%s;%s;[%s]", botInstance, msgId, dest, msgType, command, newParam);
-		Communication.answer = result;
 		System.out.println(DisplayInfo.stripAccents(result));
 	}
 
@@ -72,8 +71,6 @@ public class Communication implements Runnable {
 	 */
 	public void getReturn(String s) throws NumberFormatException, Exception {
 		Thread.sleep(500);
-		answer = s;
-		System.out.println(s);
 		s = s.replaceAll(" ", "");
 		String[] message = s.split(";");
 		int botId = Integer.parseInt(message[0]);
