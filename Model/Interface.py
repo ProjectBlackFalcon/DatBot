@@ -744,7 +744,9 @@ class Interface:
         Mounts DD
         :return: Boolean
         """
-        return self.execute_command('mountDD')
+        if self.bot.characteristics.level > 60:
+            return self.execute_command('mountDD')
+        return False
 
     def dismount_dd(self):
         """
