@@ -15,7 +15,7 @@ class HighLevelFunctions:
         self.brak_maps = self.llf.get_brak_maps()
         self.bwork_maps = self.llf.get_bwork_maps()
 
-    def goto(self, target_coord, target_cell=None, worldmap=1, harvest=False):
+    def goto(self, target_coord, target_cell=None, worldmap=1, harvest=False, forbid_zaaps=False):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
         with open('../Utils/gotos.txt', 'a') as f:
@@ -63,7 +63,7 @@ class HighLevelFunctions:
                 raise RuntimeError('Worldmap change not supported')
 
         closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
-        if closest_zaap is not None:
+        if closest_zaap is not None and not forbid_zaaps:
             distance_zaap_target = self.llf.distance_coords(closest_zaap, tuple(target_coord))
             if worldmap == current_worldmap and self.llf.distance_coords(current_map, tuple(target_coord)) > distance_zaap_target+5:
                 if self.bot.interface.enter_heavenbag()[0]:
@@ -74,6 +74,9 @@ class HighLevelFunctions:
                         self.bot.interface.enter_heavenbag()
                         self.bot.interface.use_zaap(closest_zaap)
                         time.sleep(2)
+                else:
+                    closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
+                    self.goto(closest_zaap, forbid_zaaps=True)
 
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
             # Bot needs to enter brak
