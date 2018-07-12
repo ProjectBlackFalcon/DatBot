@@ -9,9 +9,8 @@ pipe = PipeToJava(headless=True)
 bot = Bot(pipe, 0, test_account_credentials, llf, True)
 
 bot.interface.connect()
-time.sleep(2)
-with open('../Utils/HuntLogs.txt', 'r') as f:
-    log = ''.join(f.readlines())
-bot.llf.hunts_to_db('Test', 0, True, log, 'test')
+while 1:
+    bot.interface.get_player_stats()
+    time.sleep(1)
 bot.interface.disconnect()
 pipe.p.terminate()
