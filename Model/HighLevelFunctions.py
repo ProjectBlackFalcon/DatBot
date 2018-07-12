@@ -503,6 +503,7 @@ class HighLevelFunctions:
                     self.bot.interface.use_item(self.llf.get_inventory_id(inventory, chest_id))
 
             if not self.bot.interface.hunt_is_active()[0]:
+                self.bot.interface.new_hunt_timer = 0
                 hunt.success = True
                 hunt.reason = 'Stronk Af'
                 with open('../Utils/HuntLogs.txt', 'w') as f:
