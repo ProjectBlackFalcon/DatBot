@@ -9,6 +9,8 @@
       "1782": {"name": "goujon", "quantity": 100}
     },
     "Consommables":{},
-    "Equipements": {}
+    "Equipements": {},
+    "Runes": {},
+    "Animaux": {}
   }
 }
