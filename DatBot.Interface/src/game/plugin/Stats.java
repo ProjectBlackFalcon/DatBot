@@ -1,6 +1,5 @@
 package game.plugin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import game.Info;
@@ -17,17 +16,16 @@ public class Stats {
 
 	private InventoryContentMessage inventoryContentMessage;
 	private CharacterStatsListMessage stats;
-	private List<JobExperience> job = new ArrayList<JobExperience>();
-	private Network network;
+	private List<JobExperience> job;
 	private Info info;
 	private long timePacketRecv;
 
 	public Stats(Network network)
 	{
-		this.network = network;
 		this.info = network.getInfo();
 	}
-
+	
+	@Override
 	public String toString() {
 		String str = "{";
 		// Add weight
