@@ -331,7 +331,7 @@ class Interface:
     def drop_in_bank_list(self, item_id_list):
         """
         Drops some items in bank
-        :param item_id_list: [ItemID1, ItemID2...] / ['all']
+        :param item_id_list: [ItemID1, ItemID2...] / ['all']   Ids are inventory ids
         :return: New bank content, new inventory content
         """
         if item_id_list in ['All', 'all']:

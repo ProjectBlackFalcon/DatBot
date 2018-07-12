@@ -306,20 +306,33 @@ class HighLevelFunctions:
         self.update_db()
         if not tuple(self.bot.position[0]) == (4, -18):
             self.goto((4, -18))
-        bank_entrance, bank_exit = self.bot.interface.get_bank_door_cell()
-        if bank_entrance:
-            self.bot.interface.move(bank_entrance)
-            self.bot.interface.enter_bank()
+        if self.bot.interface.enter_bank()[0]:
             self.bot.interface.open_bank()
             player_stats, bank_contents = self.bot.interface.drop_in_bank_list(item_id_list)
+            player_stats, bank_contents = self.get_future_stuff_from_bank(bank_contents)
             if withdraw_items_to_sell:
                 self.withdraw_items_to_sell_from_bank(player_stats, bank_contents)
             self.bot.interface.get_kamas_from_bank('all')
             self.bot.interface.close_bank()
-            self.bot.interface.move(bank_exit)
+            self.bot.interface.exit_bank()
             return player_stats, bank_contents
         else:
             raise Exception('Not a map with a bank')
+
+    def get_future_stuff_from_bank(self, bank_contents=None):
+        stuff_level = int(self.bot.characteristics.level / 20) * 20
+        with open('../Utils/Preferred_stuff.json', 'r') as f:
+            preferred_stuffs = json.load(f)
+        future_preferred_stuffs = [preferred_stuffs[level] for level in preferred_stuffs.keys() if int(level) >= stuff_level]
+        ids = set([])
+        for stuff in future_preferred_stuffs:
+            for item in stuff:
+                ids.add(item['Id'])
+        items_to_retrieve = []
+        for item in bank_contents['Items']:
+            if item[1] in ids:
+                items_to_retrieve.append(item[2])
+        return self.bot.interface.get_from_bank_list(items_to_retrieve)
 
     def tresure_hunt(self, level='max', harvest=False):
         def get_hunt(level):
@@ -514,6 +527,8 @@ class HighLevelFunctions:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
         self.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
+        self.drop_to_bank(item_id_list='all', withdraw_items_to_sell=True)
+        self.sell_all()
 
     def fight_on_map(self, duration_minutes, hp_threshold=100):
         self.bot.occupation = 'Fighting'
@@ -544,8 +559,6 @@ class HighLevelFunctions:
     def update_hdv(self, close_after=True):
         self.bot.occupation = 'Updating HDV'
         self.update_db()
-        hdv_sign_cell = self.bot.interface.get_hdv_sign()
-        self.bot.interface.move(self.llf.get_closest_walkable_cell(hdv_sign_cell, self.bot.position[0], self.bot.position[1]))
         hdv_content = self.bot.interface.open_hdv()
         items_for_sale = []
         if hdv_content and hdv_content[0] != 'empty':
