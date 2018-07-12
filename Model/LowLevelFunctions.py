@@ -389,7 +389,8 @@ class LowLevelFunctions:
                 cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
         except TypeError as e:
             # print(traceback.format_exc())
-            print("Not uploading that")
+            # print("Not uploading that")
+            pass
         except Exception:
             with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
