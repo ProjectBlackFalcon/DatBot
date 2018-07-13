@@ -389,13 +389,11 @@ class HighLevelFunctions:
                             hunt.reason = 'Goto failed'
                     if not hunt.error:
                         hunt.current_clue().guessed_pos = self.bot.position[0]
-                        hunt.current_step().flags.append(self.bot.position[0])
                 else:
                     clue = clue.lower()
                     try:
-                        clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction, hunt.current_step().flags)
+                        clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
                         hunt.current_clue().guessed_pos = clue_pos
-                        hunt.current_step().flags.append(clue_pos)
                         self.goto(clue_pos, harvest=harvest)
                     except Exception as e:
                         with open('../Utils/HuntErrorsLog.txt', 'a') as f:
@@ -415,7 +413,7 @@ class HighLevelFunctions:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                                 destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
                                 self.goto(destination, harvest=harvest)
-                                if not (self.bot.position[0] in hunt.get_no_clue_list(clue)) and not (self.bot.position[0] in hunt.current_step().flags):
+                                if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
                                     self.bot.interface.validate_hunt_clue()
                                     step_valid = self.bot.interface.validate_hunt_step()[0]
                                     new_clues_left = self.bot.interface.get_clues_left()[0]
@@ -437,7 +435,7 @@ class HighLevelFunctions:
                 if not hunt.error and not hunt.added_clue and not self.bot.interface.validate_hunt_clue()[0]:
                     clue, direction = self.bot.interface.get_hunt_clue()
                     last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
-                    clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction, [])
+                    clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
                     with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
@@ -456,7 +454,7 @@ class HighLevelFunctions:
             if not hunt.error and not step_valid:
                 clue, direction = self.bot.interface.get_hunt_clue()
                 last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
-                wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction, hunt.current_step().flags[:-1])
+                wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
                 with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, last_valid_clue_pos, self.bot.position[0]))
@@ -471,7 +469,7 @@ class HighLevelFunctions:
                     direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                     destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
                     self.goto(destination, harvest=harvest)
-                    if not (self.bot.position[0] in hunt.get_no_clue_list(clue)) and not (self.bot.position[0] in hunt.current_step().flags) and self.bot.position[0] != wrong_clue_pos:
+                    if not (self.bot.position[0] in hunt.get_no_clue_list(clue)) and self.bot.position[0] != wrong_clue_pos:
                         self.bot.interface.validate_hunt_clue()
                         step_valid = self.bot.interface.validate_hunt_step()[0]
                         new_clues_left = self.bot.interface.get_clues_left()[0]
