@@ -78,8 +78,10 @@ class Step:
             if i <= len(self.clues)-clues_left:
                 self.clues[i].valid = True
             else:
-                del self.clues[-1]
-                del self.flags[-1]
+                if len(self.clues):
+                    del self.clues[-1]
+                if len(self.flags):
+                    del self.flags[-1]
 
     def __str__(self):
         header = '\n\n########### NEW STEP ###########\n{} Clues in this step \n'.format(self.n_clues)
