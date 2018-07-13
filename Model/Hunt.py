@@ -82,6 +82,7 @@ class Step:
                     del self.clues[-1]
                 if len(self.flags):
                     del self.flags[-1]
+        print('[DEBUG] FLAGS : ' + str(self.flags))
 
     def __str__(self):
         header = '\n\n########### NEW STEP ###########\n{} Clues in this step \n'.format(self.n_clues)

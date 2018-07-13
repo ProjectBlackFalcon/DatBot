@@ -437,7 +437,7 @@ class HighLevelFunctions:
                 if not hunt.error and not hunt.added_clue and not self.bot.interface.validate_hunt_clue()[0]:
                     clue, direction = self.bot.interface.get_hunt_clue()
                     last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
-                    clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction, hunt.current_step().flags)
+                    clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction, [])
                     with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
@@ -456,7 +456,7 @@ class HighLevelFunctions:
             if not hunt.error and not step_valid:
                 clue, direction = self.bot.interface.get_hunt_clue()
                 last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
-                wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction, hunt.current_step().flags)
+                wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction, hunt.current_step().flags[:-1])
                 with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, last_valid_clue_pos, self.bot.position[0]))
