@@ -75,8 +75,9 @@ class Step:
 
     def validate(self, clues_left):
         for i in range(self.n_clues-clues_left):
-            self.clues[i].valid = True
-            self.flags.append(self.clues[i].guessed_pos)
+            if i < len(self.clues):
+                self.clues[i].valid = True
+                self.flags.append(self.clues[i].guessed_pos)
 
     def __str__(self):
         header = '\n\n########### NEW STEP ###########\n{} Clues in this step \n'.format(self.n_clues)
