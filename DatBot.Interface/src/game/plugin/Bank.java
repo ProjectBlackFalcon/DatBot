@@ -24,6 +24,7 @@ public class Bank {
 
 	private StorageInventoryContentMessage storage;
 
+	@Override
 	public String toString() {
 		if (storage == null) {
 			return "";

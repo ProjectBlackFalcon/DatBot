@@ -1,6 +1,5 @@
 package game.plugin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import game.Info;
@@ -17,20 +16,18 @@ public class Stats {
 
 	private InventoryContentMessage inventoryContentMessage;
 	private CharacterStatsListMessage stats;
-	private List<JobExperience> job = new ArrayList<JobExperience>();
-	private Network network;
+	private List<JobExperience> job;
 	private Info info;
 	private long timePacketRecv;
 
 	public Stats(Network network)
 	{
-		this.network = network;
 		this.info = network.getInfo();
 	}
-
-	public String toString() {
+	
+	public String getStatsBot() {
 		String str = "{";
-		// Add weight
+//		// Add weight
 		str += "\"Lvl\" : " + this.info.getLvl() + ",";
 		str += "\"Xp\" : " + stats.getStats().getExperience() + ",";
 		str += "\"XpNextLevelFloor\" : " + stats.getStats().getExperienceNextLevelFloor() + ",";
@@ -39,8 +36,8 @@ public class Stats {
 
 		int hpPrct = 100;
 		long diffTime = System.currentTimeMillis() / 1000 - timePacketRecv;
-		if(2*diffTime + getStats().getStats().getLifePoints() < getStats().getStats().getMaxLifePoints()){
-			hpPrct = (int) ((double)(2*diffTime + getStats().getStats().getLifePoints()) / getStats().getStats().getMaxLifePoints() * 100) ;
+		if(2*diffTime + stats.getStats().getLifePoints() < stats.getStats().getMaxLifePoints()){
+			hpPrct = (int) ((double)(2*diffTime + stats.getStats().getLifePoints()) / stats.getStats().getMaxLifePoints() * 100) ;
 		}
 		
 		str += "\"Health\" : " + hpPrct + ",";
@@ -100,9 +97,6 @@ public class Stats {
 		return "\"" + string + "\" : [" + intelligence.getBase() + "," + intelligence.getAdditionnal()
 			+ "," + intelligence.getObjectsAndMountBonus() + "]";
 	}
-	
-	
-	
 
 	/**
 	 * Check if the player has the item or not
@@ -123,20 +117,20 @@ public class Stats {
 		this.inventoryContentMessage = inventoryContentMessage;
 	}
 
-	public CharacterStatsListMessage getStats() {
-		return stats;
-	}
-
-	public void setStats(CharacterStatsListMessage stats) {
-		this.stats = stats;
-	}
-
 	public List<JobExperience> getJob() {
 		return job;
 	}
 
 	public void setJob(List<JobExperience> job) {
 		this.job = job;
+	}
+	
+	public CharacterStatsListMessage getStats() {
+		return stats;
+	}
+
+	public void setStats(CharacterStatsListMessage stats) {
+		this.stats = stats;
 	}
 
 	public long getTimePacketRecv() {

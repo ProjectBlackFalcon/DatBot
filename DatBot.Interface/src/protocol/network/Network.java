@@ -142,6 +142,7 @@ import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerF
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyRequestedMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
+import protocol.network.messages.game.context.roleplay.job.JobDescriptionMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
@@ -629,9 +630,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleJobExperienceMultiUpdateMessage(DofusDataReader dataReader) {
 		JobExperienceMultiUpdateMessage experienceMultiUpdateMessage = new JobExperienceMultiUpdateMessage();
 		experienceMultiUpdateMessage.Deserialize(dataReader);
-		for (JobExperience b : experienceMultiUpdateMessage.getExperiencesUpdate()) {
-			stats.getJob().add(new JobExperience(b.getJobId(), b.getJobLevel(), b.getJobXP(), b.getJobXpLevelFloor(), b.getJobXpNextLevelFloor()));
-		}
+		this.stats.setJob(experienceMultiUpdateMessage.getExperiencesUpdate());
 	}
 
 	private void handleJobExperienceUpdateMessage(DofusDataReader dataReader) {
