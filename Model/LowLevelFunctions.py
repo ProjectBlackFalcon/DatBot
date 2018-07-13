@@ -133,7 +133,7 @@ class LowLevelFunctions:
                 closest = statue_pos, self.distance_coords(pos, statue_pos)
         return closest[0]
 
-    def get_next_clue_pos(self, clue, current_pos, direction):
+    def get_next_clue_pos(self, clue, current_pos, direction, flags):
         with open('../Utils/TresureHuntClues.json', 'r') as f:
             clues = json.load(f, encoding='latin-1')
         clue_possible_pos = clues[clue.lower()]
@@ -141,7 +141,7 @@ class LowLevelFunctions:
         found, i, checking_pos = False, 1, current_pos
         while not found and i <= 10:
             checking_pos = [checking_pos[j] + direction_vector[j] for j in range(2)]
-            if checking_pos in clue_possible_pos:
+            if checking_pos in clue_possible_pos and not (checking_pos in flags):
                 found = checking_pos
             i += 1
         if found:
