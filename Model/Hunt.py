@@ -27,7 +27,7 @@ class Hunt:
         clue_name = clue_name.lower()
         with open('../Utils/TresureHuntNoClues.json', 'r') as f:
             no_clues = json.load(f)
-        no_clues[clue_name].append([pos[0], pos[1]])
+        no_clues[clue_name].append(pos[0])
         with open('../Utils/TresureHuntNoClues.json', 'w') as f:
             json.dump(no_clues, f)
 
@@ -39,6 +39,16 @@ class Hunt:
         with open('../Utils/TresureHuntClues.json', 'w') as f:
             json.dump(clues, f)
         with open('../Utils/TresureHuntCluesAutoAdd.txt', 'a') as f:
+            f.write('\n{} | {}'.format(clue_name, pos))
+
+    def remove_from_clue_list(self, clue_name, pos):
+        clue_name = clue_name.lower()
+        with open('../Utils/TresureHuntClues.json', 'r') as f:
+            clues = json.load(f)
+        del clues[clue_name][clues[clue_name].index(pos[0])]
+        with open('../Utils/TresureHuntClues.json', 'w') as f:
+            json.dump(clues, f)
+        with open('../Utils/TresureHuntCluesAutoRemove.txt', 'a') as f:
             f.write('\n{} | {}'.format(clue_name, pos))
 
     def get_no_clue_list(self, clue_name):

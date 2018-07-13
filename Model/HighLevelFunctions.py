@@ -435,14 +435,40 @@ class HighLevelFunctions:
                 if not hunt.error and not hunt.added_clue and not self.bot.interface.validate_hunt_clue()[0]:
                     clue, direction = self.bot.interface.get_hunt_clue()
                     last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
-                    clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
+                    wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
                     with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
-                        f.write('Clue was supposed to be at {}'.format(clue_pos))
-                    hunt.error = True
-                    hunt.reason = 'Could not validate clue'
-                    break
+                        f.write('Clue was supposed to be at {}'.format(wrong_clue_pos))
+
+                    self.llf.log(self.bot, '[Treasure Hunt {}] Error with a clue, trying to get to it...'.format(self.bot.id))
+                    found = False
+                    clues_left = self.bot.interface.get_clues_left()[0]
+                    self.goto(last_valid_clue_pos)
+                    while not found and self.bot.interface.hunt_is_active()[0]:
+                        direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
+                        destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
+                        self.goto(destination, harvest=harvest)
+                        if not (self.bot.position[0] in hunt.get_no_clue_list(clue)) and not (self.bot.position[0] in hunt.current_step().flags) and self.bot.position[0] != wrong_clue_pos:
+                            self.bot.interface.validate_hunt_clue()
+                            step_valid = self.bot.interface.validate_hunt_step()[0]
+                            new_clues_left = self.bot.interface.get_clues_left()[0]
+                            if step_valid or (new_clues_left != clues_left and new_clues_left):
+                                found = True
+                                hunt.added_clue = True
+                                hunt.add_to_clue_list(clue, self.bot.position)
+                                self.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
+                            else:
+                                hunt.add_to_no_clue_list(clue, self.bot.position)
+                        elif self.bot.position[0] == wrong_clue_pos:
+                            self.llf.log(self.bot, '[Treasure Hunt {}] Removed clue'.format(self.bot.id))
+                            hunt.add_to_no_clue_list(clue, self.bot.position)
+                            hunt.remove_from_clue_list(clue, self.bot.position)
+
+                    if not found:
+                        hunt.error = True
+                        hunt.reason = 'Could not validate clue'
+                        break
                 elif hunt.error:
                     break
                 clues_left = self.bot.interface.get_clues_left()[0]
