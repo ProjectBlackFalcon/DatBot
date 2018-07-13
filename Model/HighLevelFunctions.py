@@ -413,7 +413,7 @@ class HighLevelFunctions:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                                 destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
                                 self.goto(destination, harvest=harvest)
-                                if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
+                                if not (self.bot.position[0] in hunt.get_no_clue_list(clue)) and not (self.bot.position[0] in hunt.current_step().flags):
                                     self.bot.interface.validate_hunt_clue()
                                     step_valid = self.bot.interface.validate_hunt_step()[0]
                                     new_clues_left = self.bot.interface.get_clues_left()[0]

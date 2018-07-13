@@ -39,7 +39,7 @@ class Hunt:
         with open('../Utils/TresureHuntClues.json', 'w') as f:
             json.dump(clues, f)
         with open('../Utils/TresureHuntCluesAutoAdd.txt', 'a') as f:
-            f.write('{} | {}'.format(clue_name, pos))
+            f.write('\n{} | {}'.format(clue_name, pos))
 
     def get_no_clue_list(self, clue_name):
         clue_name = clue_name.lower()
@@ -58,6 +58,7 @@ class Step:
     def __init__(self, n_clues):
         self.n_clues = n_clues
         self.clues = []  # type: List[Clue]
+        self.flags = []
 
     def add_new_clue(self, name, start_pos, direction):
         self.clues.append(Clue(name.lower(), start_pos, direction))
@@ -65,6 +66,7 @@ class Step:
     def validate(self, clues_left):
         for i in range(self.n_clues-clues_left):
             self.clues[i].valid = True
+            self.flags.append(self.clues[i].guessed_pos)
 
     def __str__(self):
         header = '\n\n########### NEW STEP ###########\n{} Clues in this step \n'.format(self.n_clues)
