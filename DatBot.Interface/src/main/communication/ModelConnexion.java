@@ -633,14 +633,19 @@ public class ModelConnexion {
 
 	private Object[] getBankList(String param) throws Exception {
 		Object[] toSend;
+		log.writeActionLogMessage("getBankList", String.format("bankOpened : %s, param : %s", bankOpened, param));
 		if (bankOpened) {
+			if(param == null || param.isEmpty()){
+				log.writeActionLogMessage("getBankList_empty", String.format("bankOpened : %s, param : %s", bankOpened, param));
+				return new Object[] { "True" };
+			}
 			String[] fromBankList = param.split(",");
 			List<Integer> ids1 = new ArrayList<Integer>();
 			for (String string : fromBankList) {
 				ids1.add(Integer.parseInt(string.replaceAll("\\s+", "")));
 			}
 			ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
-			getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from this.network.getBank()");
+			getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
 			if (this.waitToSendBank("move")) {
 				stop(1);
 				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
