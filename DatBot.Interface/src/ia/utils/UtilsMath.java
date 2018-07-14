@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ia.entities.entity.Entity;
-import ia.fight.astar.AStarMap;
-import ia.fight.astar.ExampleFactory;
-import ia.fight.astar.ExampleNode;
 import ia.map.Position;
 import ia.map.TransformedCell;
+import ia.utils.astar.AStarMap;
+import ia.utils.astar.ExampleFactory;
+import ia.utils.astar.ExampleNode;
 
 public class UtilsMath {
 

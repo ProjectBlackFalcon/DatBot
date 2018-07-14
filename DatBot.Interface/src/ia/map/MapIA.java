@@ -3,8 +3,7 @@ package ia.map;
 import java.util.List;
 
 import ia.entities.entity.Entity;
-import ia.entities.entity.MainEntity;
-import ia.fight.astar.ExampleNode;
+import ia.utils.astar.ExampleNode;
 import utils.d2p.map.CellData;
 
 public class MapIA {
