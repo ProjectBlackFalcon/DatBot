@@ -1,27 +1,11 @@
 package utils.d2o;
 
-public enum GameDataTypeEnum {
-	Int, Bool, String, Double, I18N, UInt, Vector;
-
-	public int getValue()
-	{
-		switch (this)
-		{
-			case Int:
-				return -1;
-			case Bool:
-				return -2;
-			case String:
-				return -3;
-			case Double:
-				return -4;
-			case I18N:
-				return -5;
-			case UInt:
-				return -6;
-			case Vector:
-				return -99;
-		}
-		return 0;
-	}
+public class GameDataTypeEnum {
+    public static final int INT = -1;
+    public static final int BOOLEAN = -2;
+    public static final int STRING = -3;
+    public static final int NUMBER = -4;
+    public static final int I18N = -5;
+    public static final int UINT = -6;
+    public static final int VECTOR = -99;
 }

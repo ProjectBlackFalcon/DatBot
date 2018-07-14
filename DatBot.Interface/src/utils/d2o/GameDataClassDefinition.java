@@ -1,26 +1,65 @@
 package utils.d2o;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.util.Vector;
 
-import protocol.network.util.DofusDataReader;
+import utils.d2o.utilities.ByteArray;
+
 
 public class GameDataClassDefinition {
-
-	 public String Name;
-     public List<GameDataField> Fields;
-
-     public GameDataClassDefinition(String packageName,String className)
-     {
-         Fields = new ArrayList<GameDataField>();
-         Name = className;
-     }
-
-     public void AddField(DofusDataReader reader) throws IOException
-     {
-         GameDataField field = new GameDataField(reader);
-         Fields.add(field);
-     }
-     
+	private Class<?> _class;
+	private Vector<GameDataField> _fields;
+	
+	public GameDataClassDefinition(String str1, String str2) {
+		try {
+			this._class = Class.forName(getClass().getPackage().getName() + ".modules." + str2);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+        this._fields = new Vector<GameDataField>();
+	}
+	
+	public Vector<GameDataField> getFields() {
+		return this._fields;
+	}
+	
+	public Object read(String str, ByteArray array) {
+		Object o = null;
+			try {
+				o = this._class.newInstance();
+			} catch(Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			for(GameDataField field : this._fields) {
+				Field f = getField(o.getClass(), field.name);
+				field.readData.setAccessible(true);
+				try {
+					f.set(o, field.readData.invoke(field, str, array, 0));
+				} catch(Exception e) {
+					//e.printStackTrace();
+				}
+			}
+		return o;
+	}
+	
+	public void addField(String str, ByteArray array) {
+		GameDataField field = new GameDataField(str);
+		field.readType(array);
+		this._fields.add(field);
+	}
+	
+	// fonction perso
+	public Field getField(Class<?> c, String fieldName) {
+		try {
+			return c.getDeclaredField(fieldName);
+		} catch (Exception e) {
+			Class<?> superClass = c.getSuperclass();
+			if(superClass != null)
+				return getField(superClass, fieldName);
+			e.printStackTrace();
+			System.exit(1);
+		}
+		return null; // dead code
+	}
 }

@@ -3,7 +3,6 @@ package game.plugin;
 import java.util.List;
 
 import game.Info;
-import gamedata.d2o.modules.Item;
 import main.communication.DisplayInfo;
 import protocol.network.Network;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
@@ -11,6 +10,7 @@ import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.types.game.character.characteristic.CharacterBaseCharacteristic;
 import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
+import utils.d2o.modules.Item;
 
 public class Stats {
 

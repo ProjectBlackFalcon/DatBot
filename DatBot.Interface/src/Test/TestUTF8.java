@@ -1,18 +1,12 @@
 package Test;
 
-import java.text.Normalizer;
-
-import gamedata.d2o.modules.Item;
-import gamedata.d2o.modules.MapPosition;
-import gamedata.d2o.modules.Monster;
-import gamedata.d2o.modules.MountBehavior;
-import gamedata.d2o.modules.Npc;
-import gamedata.d2o.modules.PointOfInterest;
-import gamedata.d2o.modules.Server;
-import gamedata.d2o.modules.Spell;
-import gamedata.d2o.modules.SpellLevel;
-import protocol.enums.BoostableCharacteristicEnum;
-import utils.d2i.d2iManager;
+import utils.d2o.modules.MapPosition;
+import utils.d2o.modules.Monster;
+import utils.d2o.modules.MountBehavior;
+import utils.d2o.modules.Npc;
+import utils.d2o.modules.PointOfInterest;
+import utils.d2o.modules.Server;
+import utils.d2o.modules.Spell;
 
 public class TestUTF8 {
 

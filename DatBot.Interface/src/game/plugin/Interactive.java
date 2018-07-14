@@ -2,12 +2,11 @@ package game.plugin;
 
 import java.util.List;
 
-import gamedata.d2o.modules.MapPosition;
 import protocol.network.Network;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.InteractiveElementSkill;
 import protocol.network.types.game.interactive.StatedElement;
-import utils.GameData;
+import utils.d2o.modules.MapPosition;
 import utils.d2p.map.Map;
 import utils.d2p.map.elements.GraphicalElement;
 

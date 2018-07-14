@@ -2,16 +2,14 @@ package utils;
 
 import java.nio.file.Paths;
 
-import org.json.simple.JSONArray;
-
-import gamedata.d2o.modules.InfoMessage;
-import gamedata.d2o.modules.Item;
-import gamedata.d2o.modules.MapPosition;
-import gamedata.d2o.modules.Monster;
-import gamedata.d2o.modules.MountBehavior;
-import gamedata.d2o.modules.Npc;
-import gamedata.d2o.modules.PointOfInterest;
-import gamedata.d2o.modules.Server;
+import utils.d2o.modules.InfoMessage;
+import utils.d2o.modules.Item;
+import utils.d2o.modules.MapPosition;
+import utils.d2o.modules.Monster;
+import utils.d2o.modules.MountBehavior;
+import utils.d2o.modules.Npc;
+import utils.d2o.modules.PointOfInterest;
+import utils.d2o.modules.Server;
 
 public class GameData {
 
@@ -19,7 +17,6 @@ public class GameData {
 	}
 	
 	public static String getPathDatBot() {
-		JSONArray a;
 		String s = Paths.get("").toAbsolutePath().toString();
 		int i = s.indexOf("DatBot");
 		if(i == -1){

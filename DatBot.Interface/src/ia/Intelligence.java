@@ -2,7 +2,6 @@ package ia;
 
 import java.util.List;
 
-import gamedata.d2o.modules.SpellLevel;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.fight.FightIntelligence;
@@ -11,6 +10,7 @@ import ia.map.Position;
 import ia.utils.UtilsMath;
 import ia.utils.UtilsProtocol;
 import protocol.network.Network;
+import utils.d2o.modules.SpellLevel;
 
 public class Intelligence {
 	

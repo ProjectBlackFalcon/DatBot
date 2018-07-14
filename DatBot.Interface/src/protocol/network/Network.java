@@ -15,7 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.json.simple.JSONObject;
 
 import game.Info;
-import game.combat.Fight;
 import game.movement.Movement;
 import game.plugin.Bank;
 import game.plugin.Dragodinde;
@@ -24,9 +23,6 @@ import game.plugin.Interactive;
 import game.plugin.Monsters;
 import game.plugin.Npc;
 import game.plugin.Stats;
-import gamedata.d2o.modules.MapPosition;
-import gamedata.d2o.modules.Spell;
-import gamedata.d2o.modules.SpellLevel;
 import ia.Intelligence;
 import ia.IntelligencePacketHandler;
 import main.communication.Communication;
@@ -144,7 +140,6 @@ import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerF
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyRequestedMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
-import protocol.network.messages.game.context.roleplay.job.JobDescriptionMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
@@ -186,7 +181,6 @@ import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInfo
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
 import protocol.network.types.game.context.roleplay.MonsterInGroupInformations;
-import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
@@ -198,6 +192,9 @@ import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
 import utils.GameData;
+import utils.d2o.modules.MapPosition;
+import utils.d2o.modules.Spell;
+import utils.d2o.modules.SpellLevel;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 
@@ -213,7 +210,6 @@ public class Network extends DisplayInfo implements Runnable {
 	 * Plugin variable
 	 */
 	public boolean connectionToKoli = false;
-	private Fight fight;
 	private Intelligence intelligence;
 	private Hunt hunt;
 	private Info info;
@@ -240,7 +236,6 @@ public class Network extends DisplayInfo implements Runnable {
 		this.map = new Map();
 		this.info = info;
 		this.stats = new Stats(this);
-		this.fight = new Fight(this);
 		this.interactive = new Interactive(this);
 		this.bank = new Bank();
 		this.movement = new Movement(this);
@@ -322,10 +317,6 @@ public class Network extends DisplayInfo implements Runnable {
 
 	public Bank getBank() {
 		return bank;
-	}
-
-	public Fight getFight() {
-		return fight;
 	}
 
 	public Hunt getHunt() {
@@ -1038,9 +1029,7 @@ public class Network extends DisplayInfo implements Runnable {
 		appendLog("[" + id + "]	[Envoi] " + s);
 	}
 
-	public void setFight(Fight fight) {
-		this.fight = fight;
-	}
+
 
 	public void setInfo(Info info) {
 		this.info = info;

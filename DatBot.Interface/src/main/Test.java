@@ -1,7 +1,6 @@
 package main;
 
 import main.communication.Communication;
-import utils.GameData;
 import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
 

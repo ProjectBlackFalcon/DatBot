@@ -2,9 +2,7 @@ package Test;
 
 import java.io.IOException;
 
-import gamedata.d2o.modules.Monster;
-import utils.GameData;
-import utils.d2i.d2iManager;
+import utils.d2o.modules.Monster;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 

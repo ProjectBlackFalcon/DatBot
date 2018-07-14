@@ -3,7 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
-import gamedata.d2o.modules.SpellLevel;
+import utils.d2o.modules.SpellLevel;
 
 public class Info {
 	/*

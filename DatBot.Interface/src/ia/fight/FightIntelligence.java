@@ -2,13 +2,13 @@ package ia.fight;
 
 import java.util.List;
 
-import gamedata.d2o.modules.SpellLevel;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.map.Position;
 import ia.map.TransformedCell;
 import ia.utils.UtilsMath;
 import ia.utils.UtilsProtocol;
+import utils.d2o.modules.SpellLevel;
 import utils.d2p.map.CellData;
 
 public class FightIntelligence {

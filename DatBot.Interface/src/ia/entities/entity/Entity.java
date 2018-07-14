@@ -1,12 +1,10 @@
 package ia.entities.entity;
 
-import ia.entities.FightEffects;
-import ia.map.Position;
-import protocol.network.types.game.context.fight.GameFightFighterInformations;
-
 import java.util.List;
 
-import gamedata.d2o.modules.SpellLevel;
+import ia.map.Position;
+import protocol.network.types.game.context.fight.GameFightFighterInformations;
+import utils.d2o.modules.SpellLevel;
 
 public abstract class Entity {
 
@@ -15,7 +13,6 @@ public abstract class Entity {
 	private int breed;
 	private int lvl;
     private GameFightFighterInformations info;
-	private FightEffects effects;
 	private List<SpellLevel> spells;
 
 	public Entity(GameFightFighterInformations info) {
@@ -33,18 +30,6 @@ public abstract class Entity {
 	public void setInfo(GameFightFighterInformations info) {
 		this.info = info;
 	}
-
-	public FightEffects getEffects() {
-		return effects;
-	}
-
-	public void setEffects(FightEffects effects) {
-		this.effects = effects;
-	}
-	
-	public void startTurn() {
-		effects.removeTurnDurationAll(1);
-	}
 	
 	public void endTurn() {
 		
@@ -52,7 +37,7 @@ public abstract class Entity {
 	
 	@Override
 	public String toString() {
-		return "Entity [isRdy=" + isRdy + ", position=" + position + ", breed=" + breed + ", lvl=" + lvl + ", info=" + info + ", effects=" + effects + ", spells=" + spells + "]";
+		return "Entity [isRdy=" + isRdy + ", position=" + position + ", breed=" + breed + ", lvl=" + lvl + ", info=" + info + ", spells=" + spells + "]";
 	}
 
 	public List<SpellLevel> getSpells() {

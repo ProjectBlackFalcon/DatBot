@@ -1,5 +1,13 @@
 package Test;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.entities.entity.OtherEntity;
@@ -7,26 +15,16 @@ import ia.fight.FightIntelligence;
 import ia.map.MapIA;
 import ia.map.Position;
 import ia.utils.UtilsMath;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import main.Main;
-
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import gamedata.d2o.modules.Spell;
-import gamedata.d2o.modules.SpellLevel;
 import protocol.network.types.game.character.characteristic.CharacterBaseCharacteristic;
 import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
 import protocol.network.types.game.context.fight.GameFightFighterInformations;
 import protocol.network.types.game.context.fight.GameFightMinimalStats;
 import utils.d2i.d2iManager;
+import utils.d2o.modules.Spell;
+import utils.d2o.modules.SpellLevel;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FightTest {
 
@@ -53,22 +51,6 @@ public class FightTest {
 		Assert.assertEquals(22, spell.getCriticalEffect().get(0).getDiceNum());
 		Assert.assertEquals(320, spell.getCriticalEffect().get(1).getEffectId());
 		Assert.assertEquals("Flèche Magique", spell.getSpell().getName());
-	}
-
-	@Test
-	@Ignore
-	public void getMonsterSpellsTest() {
-//		List<Spell> spells = GameData.getMonsterSpells(489, 1);
-//		System.out.println(spells.get(0));
-//		Assert.assertEquals(2, spells.size());
-//		Assert.assertEquals("Picore", spells.get(0).getName());
-//		Assert.assertEquals(121145, spells.get(1).getCriticalEffect()[0].getEffectUid());
-	}
-
-	@Test
-	@Ignore
-	public void getMonsterLevelTest() {
-//		Assert.assertEquals(11, GameData.getMonsterLvl(489, 1));
 	}
 
 	@Test

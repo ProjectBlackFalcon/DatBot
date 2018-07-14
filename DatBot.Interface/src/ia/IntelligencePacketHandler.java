@@ -2,7 +2,6 @@ package ia;
 
 import java.util.ArrayList;
 
-import gamedata.d2o.modules.SpellLevel;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.entities.entity.OtherEntity;
@@ -77,7 +76,6 @@ import protocol.network.messages.game.context.fight.GameFightTurnListMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnReadyMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnResumeMessage;
 import protocol.network.messages.game.context.fight.GameFightTurnStartMessage;
-import protocol.network.messages.game.context.fight.GameFightTurnStartPlayingMessage;
 import protocol.network.messages.game.context.fight.GameFightUpdateTeamMessage;
 import protocol.network.messages.game.context.fight.RefreshCharacterStatsMessage;
 import protocol.network.messages.game.context.fight.arena.ArenaFighterLeaveMessage;
@@ -92,9 +90,8 @@ import protocol.network.types.game.actions.fight.FightTemporaryBoostStateEffect;
 import protocol.network.types.game.context.IdentifiedEntityDispositionInformations;
 import protocol.network.types.game.context.fight.GameFightCharacterInformations;
 import protocol.network.types.game.context.fight.GameFightFighterInformations;
-import protocol.network.types.game.context.fight.GameFightMonsterInformations;
 import protocol.network.types.game.context.fight.GameFightSpellCooldown;
-import utils.GameData;
+import utils.d2o.modules.SpellLevel;
 
 public class IntelligencePacketHandler {
 

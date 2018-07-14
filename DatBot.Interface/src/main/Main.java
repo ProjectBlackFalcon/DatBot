@@ -7,10 +7,10 @@ import utils.d2p.MapManager;
 
 public class Main {
 	
-	public static final String CLIENT_PATH =  "E:/Ankama/Dofus/app/";
-	public static final String D2P_PATH = CLIENT_PATH + "content/maps/";
-	public static final String D2O_PATH = CLIENT_PATH + "data/common/";
-	public static final String D2I_PATH = CLIENT_PATH + "data/i18n/i18n_fr.d2i";
+	public static final String CLIENT_PATH =  GameData.getPathDatBot() + "/DatBot.Interface/utils/";
+	public static final String D2P_PATH = CLIENT_PATH + "maps/";
+	public static final String D2O_PATH = CLIENT_PATH + "common/";
+	public static final String D2I_PATH = CLIENT_PATH + "i18n/i18n_fr.d2i";
 
 	public static void main(String[] args) throws Exception {
 
@@ -29,3 +29,30 @@ public class Main {
 		communication2.start();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
