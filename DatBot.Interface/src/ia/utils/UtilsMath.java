@@ -35,6 +35,6 @@ public class UtilsMath {
 	}
 	
 	public static boolean isPositionAccessible(List<Position> path, Entity entity){
-		return path.size() <= entity.getInfo().getStats().getMovementPoints() && path.size() > 0;
+		return path.size() <= entity.getInfo().getStats().getMovementPoints() && path.size() > 1;
 	}
 }

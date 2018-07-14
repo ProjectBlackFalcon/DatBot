@@ -2,7 +2,7 @@ package ia.fight;
 
 import java.util.List;
 
-import ia.entities.Spell;
+import gamedata.d2o.modules.SpellLevel;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.map.Position;
@@ -30,11 +30,12 @@ public class FightIntelligence {
 	 * 
 	 * @author jikiw
 	 */
-	public static boolean isCellTargetableBySpell(MainEntity caster, Spell spell, Position cell,  TransformedCell[][] cells){
+	public static boolean isCellTargetableBySpell(MainEntity caster, SpellLevel spell, Position cell,  TransformedCell[][] cells){
 		
 		if(spell == null){
 			return false;
 		}
+		
 				
 		int distance = Position.distance(caster.getPosition(), cell);
 		
@@ -61,7 +62,7 @@ public class FightIntelligence {
 	}
 	
 	
-	public static boolean canCastSpell(MainEntity caster, Spell spell){
+	public static boolean canCastSpell(MainEntity caster, SpellLevel spell){
 		if(spell == null){
 			return false;
 		}

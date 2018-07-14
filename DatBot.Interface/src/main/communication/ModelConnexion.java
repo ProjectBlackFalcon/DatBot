@@ -518,7 +518,7 @@ public class ModelConnexion {
 				toSend = new Object[] { "True" };
 			}
 			else {
-				DisplayInfo.appendDebugLog("exitHuntingHall error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("exitHuntingHall error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -1069,7 +1069,7 @@ public class ModelConnexion {
 				toSend = new Object[] { "true" };
 			}
 			else {
-				DisplayInfo.appendDebugLog("enterGate error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("enterGate error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -1163,7 +1163,7 @@ public class ModelConnexion {
 			}
 		}
 		else {
-			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1210,7 +1210,7 @@ public class ModelConnexion {
 			}
 		}
 		else {
-			DisplayInfo.appendDebugLog("Bank error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Bank error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1228,7 +1228,7 @@ public class ModelConnexion {
 				toSend = move(292);
 			}
 			else {
-				DisplayInfo.appendDebugLog("goHuntingHall error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("goHuntingHall error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -1253,7 +1253,7 @@ public class ModelConnexion {
 			toSend = useInteractive(184);
 		}
 		else {
-			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1491,13 +1491,13 @@ public class ModelConnexion {
 				toSend = new Object[] { this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 				toSend = new Object[] { "False" };
 			}
 			bankOpened = true;
 		}
 		else {
-			DisplayInfo.appendDebugLog("Open bank error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Open bank error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1514,7 +1514,7 @@ public class ModelConnexion {
 				toSend = new Object[] { this.getNetwork().getDragodinde() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("closeDD error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("closeDD error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}

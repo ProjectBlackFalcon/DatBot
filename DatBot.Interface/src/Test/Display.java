@@ -14,10 +14,14 @@ import javax.swing.JPanel;
 
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
+import ia.entities.entity.OtherEntity;
 import ia.map.MapIA;
 import ia.map.Position;
 import ia.map.TransformedCell;
 import ia.utils.UtilsMath;
+import main.Main;
+import protocol.network.types.game.context.fight.GameFightFighterInformations;
+import protocol.network.types.game.context.fight.GameFightMinimalStats;
 import utils.GameData;
 import utils.d2p.MapManager;
 import utils.d2p.map.CellData;
@@ -28,10 +32,21 @@ public class Display {
 	static JFrame frame;
 	
 	public static void main(String[] args) throws IOException{
-		new MapManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
+		MapManager.init(Main.D2P_PATH);
 //		Display.displayMap(MapIA.reshapeToIA(MapManager.FromId(153880322).getCells()));
 		List<Entity> entities = new ArrayList<>();
-		Display.displayPath(MapManager.FromId(191102980).getCells(), entities);
+		MainEntity e = new MainEntity();
+		GameFightFighterInformations info = new GameFightFighterInformations();
+		info.setStats(new GameFightMinimalStats());
+		info.getStats().setMovementPoints(4);
+		e.setInfo(info);
+		e.setPosition(MapIA.reshapeToIA(369));
+		entities.add(e);
+		
+		OtherEntity e2 = new OtherEntity();
+		e2.setPosition(MapIA.reshapeToIA(354));
+		entities.add(e2);
+		Display.displayPath(MapManager.FromId(153880322).getCells(), entities);
 	}
 
 	public static void displayMap(TransformedCell[][] cells){

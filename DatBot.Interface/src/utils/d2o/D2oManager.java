@@ -26,8 +26,8 @@ public class D2oManager {
 
 	public D2oManager(String d2oFilePath) throws Exception
 	{
-		this.objectPointerTable = new HashMap<Integer, Integer>();
-		this.classDefinitions = new HashMap<Integer, GameDataClassDefinition>();
+		this.objectPointerTable = new HashMap<>();
+		this.classDefinitions = new HashMap<>();
 
 		byte[] bytesFile = Files.readAllBytes(Paths.get(d2oFilePath));
 		this.reader = new DofusDataReader(new ByteArrayInputStream(bytesFile));
@@ -48,14 +48,8 @@ public class D2oManager {
 		}
 		
 		readObjectPointerTable();
-		// printObjectPointerTable();
 		readClassTable();
-//		printClassTable();
-		// readGameDataProcessor(); //TODO: implement
 		unpackObjectsAsJson();
-		// writeJsonFile(true);
-//		printAllObjects(); // call after unpackObjectsAsJson();
-//		 searchObjectById(0); //call after unpackObjectsAsJson();
 	}
 	
 	public JSONArray returnJsonString(){

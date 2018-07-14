@@ -9,8 +9,9 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 
-		new d2iManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/gamedata/i18n_fr.d2i");
-		new MapManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/maps");
+		d2iManager.init(Main.D2I_PATH);
+		MapManager.init(Main.D2P_PATH);
+		
 
 		boolean arg = false;
 		if (args.length != 0) {

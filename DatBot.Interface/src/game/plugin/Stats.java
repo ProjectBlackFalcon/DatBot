@@ -3,6 +3,7 @@ package game.plugin;
 import java.util.List;
 
 import game.Info;
+import gamedata.d2o.modules.Item;
 import main.communication.DisplayInfo;
 import protocol.network.Network;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
@@ -10,7 +11,6 @@ import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.types.game.character.characteristic.CharacterBaseCharacteristic;
 import protocol.network.types.game.character.characteristic.CharacterCharacteristicsInformations;
 import protocol.network.types.game.context.roleplay.job.JobExperience;
-import utils.GameData;
 
 public class Stats {
 
@@ -73,13 +73,13 @@ public class Stats {
 		str += "\"Items\" : [";
 		for (int i = 0; i < this.getInventoryContentMessage().getObjects().size(); i++) {
 			if (i == this.getInventoryContentMessage().getObjects().size() - 1) {
-				str += "[" + "\"" + DisplayInfo.cleanString(GameData.getItemName(this.getInventoryContentMessage().getObjects().get(i).getObjectGID())) + "\"" + ","
+				str += "[" + "\"" + DisplayInfo.cleanString(Item.getItemById(this.getInventoryContentMessage().getObjects().get(i).getObjectGID()).getName()) + "\"" + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getObjectGID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getObjectUID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getQuantity() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getPosition() + "]";
 			} else {
-				str += "[" + "\"" + DisplayInfo.cleanString(GameData.getItemName(this.getInventoryContentMessage().getObjects().get(i).getObjectGID())) + "\"" + ","
+				str += "[" + "\"" + DisplayInfo.cleanString(Item.getItemById(this.getInventoryContentMessage().getObjects().get(i).getObjectGID()).getName()) + "\"" + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getObjectGID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getObjectUID() + ","
 						+ this.getInventoryContentMessage().getObjects().get(i).getQuantity() + ","

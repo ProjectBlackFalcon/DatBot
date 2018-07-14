@@ -24,9 +24,11 @@ import game.plugin.Interactive;
 import game.plugin.Monsters;
 import game.plugin.Npc;
 import game.plugin.Stats;
+import gamedata.d2o.modules.MapPosition;
+import gamedata.d2o.modules.Spell;
+import gamedata.d2o.modules.SpellLevel;
 import ia.Intelligence;
 import ia.IntelligencePacketHandler;
-import ia.entities.Spell;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;
@@ -721,8 +723,8 @@ public class Network extends DisplayInfo implements Runnable {
 			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
 			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
 			this.interactive.setMap(map);
-			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
-			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));
+			this.info.setCoords(MapPosition.getMapPositionById(currentMapMessage.getMapId()).getCoords());
+			this.info.setWorldmap(MapPosition.getMapPositionById(currentMapMessage.getMapId()).worldMap);
 			sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 		}
 	}
@@ -947,10 +949,10 @@ public class Network extends DisplayInfo implements Runnable {
 		this.hunt.setNumberOfIndex(treasureHuntMessage.getTotalStepCount());
 		this.hunt.setAvailableRetryCount(treasureHuntMessage.getAvailableRetryCount());
 		if (treasureHuntMessage.getFlags().size() == 0) {
-			this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getStartMapId()));
+			this.hunt.setStartMapCoords(MapPosition.getMapPositionById(treasureHuntMessage.getStartMapId()).getCoords());
 		}
 		else {
-			this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getFlags().get(treasureHuntMessage.getFlags().size() - 1).getMapId()));
+			this.hunt.setStartMapCoords(MapPosition.getMapPositionById(treasureHuntMessage.getFlags().get(treasureHuntMessage.getFlags().size() - 1).getMapId()).getCoords());
 		}
 		this.hunt.setCurrentIndex(treasureHuntMessage.getFlags().size());
 		if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToPOI")) {
@@ -1173,6 +1175,7 @@ public class Network extends DisplayInfo implements Runnable {
 					break;
 				case 950:
 					GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
+					DisplayInfo.appendDebugLog("GameMapNoMovement","Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId() + " , Fight : " + this.info.isJoinedFight());
 					getLog().writeLogErrorMessage(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
 					break;
 				case 951:
@@ -1346,7 +1349,7 @@ public class Network extends DisplayInfo implements Runnable {
 				case 6132:
 					GameActionFightNoSpellCastMessage gameActionFightNoSpellCastMessage = new GameActionFightNoSpellCastMessage();
 					gameActionFightNoSpellCastMessage.Deserialize(dataReader);
-					iaPacket.gameActionFightNoSpellCast(gameActionFightNoSpellCastMessage);
+					DisplayInfo.appendDebugLog("GameActionFightNoSpellCastMessage","Can't cast spell from " + this.info.getCellId() + " id : " + gameActionFightNoSpellCastMessage.getSpellLevelId() + " on map " + this.map.getId() + " , Fight : " + this.info.isJoinedFight());
 					break;
 				case 6312:
 					handleGameActionFightLifePointsLostMessage(dataReader);
@@ -1772,9 +1775,9 @@ public class Network extends DisplayInfo implements Runnable {
 				case 1200:
 					SpellListMessage spellListMessage = new SpellListMessage();
 					spellListMessage.Deserialize(dataReader);
-					List<Spell> spells = new ArrayList<>();
+					List<SpellLevel> spells = new ArrayList<>();
 					for (SpellItem si : spellListMessage.getSpells()) {
-						spells.add(GameData.getSpell(si.getSpellId(), si.getSpellLevel()));
+						spells.add(Spell.getSpellById(si.getSpellId()).getSpellLevel(si.getSpellLevel()));
 					}
 					info.setSpells(spells);
 					break;

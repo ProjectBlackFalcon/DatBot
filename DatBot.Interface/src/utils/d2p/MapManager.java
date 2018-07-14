@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.InflaterInputStream;
 
+import main.Main;
 import protocol.network.util.DofusDataReader;
 import utils.d2p.informations.D2pFileManager;
 import utils.d2p.map.Map;
@@ -13,9 +14,22 @@ import utils.d2p.map.Map;
 public class MapManager {
 
     private static D2pFileManager D2pFileManager;
+    private static boolean init = false;
+    
+    public static void init(String directory){
+    	try {
+			D2pFileManager = new D2pFileManager(directory);
+			init = true;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
     public static Map FromId(int id) throws IOException
     {
+    	if(!init)
+    		init(Main.D2P_PATH);
         String str = id % 10 + "/" + id + ".dlm";
         byte[] mapBytes = D2pFileManager.GetMapBytes(str);
         if (mapBytes != null)
@@ -42,10 +56,5 @@ public class MapManager {
         return null;
     }    
     
-    public MapManager(String directory) throws IOException
-    {
-        D2pFileManager = new D2pFileManager(directory);
-    }
-
 
 }

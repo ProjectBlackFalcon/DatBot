@@ -1,11 +1,12 @@
 package ia.entities.entity;
 
 import ia.entities.FightEffects;
-import ia.entities.Spell;
 import ia.map.Position;
 import protocol.network.types.game.context.fight.GameFightFighterInformations;
 
 import java.util.List;
+
+import gamedata.d2o.modules.SpellLevel;
 
 public abstract class Entity {
 
@@ -15,7 +16,7 @@ public abstract class Entity {
 	private int lvl;
     private GameFightFighterInformations info;
 	private FightEffects effects;
-	private List<Spell> spells;
+	private List<SpellLevel> spells;
 
 	public Entity(GameFightFighterInformations info) {
 		this.info = info;
@@ -54,21 +55,21 @@ public abstract class Entity {
 		return "Entity [isRdy=" + isRdy + ", position=" + position + ", breed=" + breed + ", lvl=" + lvl + ", info=" + info + ", effects=" + effects + ", spells=" + spells + "]";
 	}
 
-	public List<Spell> getSpells() {
+	public List<SpellLevel> getSpells() {
 		return spells;
 	}
+
+	public void setSpells(List<SpellLevel> spells) {
+		this.spells = spells;
+	}
 	
-	public Spell findSpell(int id){
-		for (Spell spell : spells) {
+	public SpellLevel findSpell(int id){
+		for (SpellLevel spell : spells) {
 			if(spell.getId() == id){
 				return spell;
 			}
 		}
 		return null;
-	}
-
-	public void setSpells(List<Spell> spells) {
-		this.spells = spells;
 	}
 
 	public Position getPosition() {

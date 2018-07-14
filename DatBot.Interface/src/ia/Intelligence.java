@@ -2,7 +2,7 @@ package ia;
 
 import java.util.List;
 
-import ia.entities.Spell;
+import gamedata.d2o.modules.SpellLevel;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.fight.FightIntelligence;
@@ -40,7 +40,7 @@ public class Intelligence {
 	 * Refresh all cooldowns, must be call at the start of the turn
 	 */
 	public void refreshCd(){
-		for (Spell spell : getMain().getSpells()) {
+		for (SpellLevel spell : getMain().getSpells()) {
 			spell.setNumberCasted(0);
 			if(spell.getTurnLeftBeforeCast() > 0){
 				spell.setTurnLeftBeforeCast(spell.getTurnLeftBeforeCast() - 1);

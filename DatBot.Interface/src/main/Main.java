@@ -1,17 +1,21 @@
 package main;
 
 import main.communication.Communication;
-import protocol.network.Network;
 import utils.GameData;
 import utils.d2i.d2iManager;
 import utils.d2p.MapManager;
 
 public class Main {
+	
+	public static final String CLIENT_PATH =  "E:/Ankama/Dofus/app/";
+	public static final String D2P_PATH = CLIENT_PATH + "content/maps/";
+	public static final String D2O_PATH = CLIENT_PATH + "data/common/";
+	public static final String D2I_PATH = CLIENT_PATH + "data/i18n/i18n_fr.d2i";
 
 	public static void main(String[] args) throws Exception {
 
-		new d2iManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/gamedata/i18n_fr.d2i");
-		new MapManager(GameData.getPathDatBot() + "/DatBot.Interface/utils/maps");
+		d2iManager.init(D2I_PATH);
+		MapManager.init(D2P_PATH);
 
 		boolean arg = false;
 		if (args.length != 0) {

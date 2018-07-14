@@ -2,6 +2,7 @@ package game.plugin;
 
 import java.util.List;
 
+import gamedata.d2o.modules.MapPosition;
 import protocol.network.Network;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.InteractiveElementSkill;
@@ -27,7 +28,7 @@ public class Interactive {
 
 	public double getMapIdZaap(int i, int j) {
 		for (Double d : zaapList) {
-			int[] coord = GameData.getCoordMap(d.intValue());
+			int[] coord = MapPosition.getMapPositionById(d.doubleValue()).getCoords();
 			if (coord[0] == i && coord[1] == j) { return d; }
 		}
 		return -1;
@@ -35,7 +36,7 @@ public class Interactive {
 
 	public double getMapIdZaapi(int i, int j) {
 		for (Double d : zaapiList) {
-			int[] coord = GameData.getCoordMap(d.intValue());
+			int[] coord = MapPosition.getMapPositionById(d.doubleValue()).getCoords();
 			if (coord[0] == i && coord[1] == j) { return d; }
 		}
 		return -1;

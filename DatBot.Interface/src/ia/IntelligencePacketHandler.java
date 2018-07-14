@@ -2,7 +2,7 @@ package ia;
 
 import java.util.ArrayList;
 
-import ia.entities.Spell;
+import gamedata.d2o.modules.SpellLevel;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.entities.entity.OtherEntity;
@@ -417,7 +417,6 @@ public class IntelligencePacketHandler {
 			entity.setBreed(((GameFightCharacterInformations) message.getInformations()).getBreed());
 		}
 		else {
-			entity.setLvl(GameData.getMonsterLvl(((GameFightMonsterInformations) message.getInformations()).getCreatureGenericId(), ((GameFightMonsterInformations) message.getInformations()).getCreatureGrade()));
 			entity.setBreed(-1);
 		}
 		if (index == -1) {
@@ -446,7 +445,7 @@ public class IntelligencePacketHandler {
 		}
 		Entity e = this.ia.getMain();
 		for (GameFightSpellCooldown cd : message.getSpellCooldowns()) {
-			Spell spell = e.findSpell(cd.getSpellId());
+			SpellLevel spell = e.findSpell(cd.getSpellId());
 			spell.setTurnLeftBeforeCast(cd.getCooldown());
 		}
 	}
