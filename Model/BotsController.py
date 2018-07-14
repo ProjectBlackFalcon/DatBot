@@ -33,7 +33,7 @@ random.shuffle(colors)
 credentials = [
     {'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'},
     {'username': 'blushinglocus', 'password': 'bulldistribution0', 'name': 'Hyrisson', 'server': 'Julith'},
-    {'username': 'disrupterjoypop', 'password': 'disrupterjoypop', 'name': 'Simos', 'server': 'Julith'}
+    {'username': 'disrupterjoypop', 'password': 'everytyrant0', 'name': 'Simos', 'server': 'Julith'}
 
 ]
 
