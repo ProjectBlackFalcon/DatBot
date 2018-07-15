@@ -637,7 +637,7 @@ public class ModelConnexion {
 		if (bankOpened) {
 			if(param == null || param.isEmpty()){
 				log.writeActionLogMessage("getBankList_empty", String.format("bankOpened : %s, param : %s", bankOpened, param));
-				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
+				return new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
 			String[] fromBankList = param.split(",");
 			List<Integer> ids1 = new ArrayList<Integer>();

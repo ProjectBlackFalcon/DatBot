@@ -28,31 +28,8 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;['democraticamnesiac','answerflash2','Maxitreur','Julith']");
 		communication.getReturn("0;0;i;cmd;connect;['disrupterjoypop','everytyrant0','Simos','Julith']");
 		Thread.sleep(30000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
-		Thread.sleep(1000);
-		communication.getReturn("0;0;i;cmd;getStats;[None]");
+		communication.getReturn("0;0;i;cmd;getBankList;[]");
+
 		
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;changeMap;[3,n]");
