@@ -44,6 +44,7 @@ import utils.GameData;
 public class ModelConnexion {
 
 	private boolean bankOpened;
+	private boolean hdvOpened;
 	int botInstance;
 
 	private Network network;
@@ -231,11 +232,14 @@ public class ModelConnexion {
 
 	private Object[] closeHdv() throws Exception {
 		Object[] toSend;
+		if(!hdvOpened)
+			return new Object[] { "True" };
 		log.writeActionLogMessage("closeHdv", String.format("isInExchange : %s, map : %s", this.network.getInfo().isInExchange(), GameData.getCoordMapString(this.getNetwork().getMap().getId())));
 		if (this.network.getInfo().isInExchange()) {
 			LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
 			getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave hdv");
 			if (this.waitToSendLeaveExchange()) {
+				hdvOpened = false;
 				toSend = new Object[] { "True" };
 			}
 			else {
@@ -1531,6 +1535,8 @@ public class ModelConnexion {
 
 	private Object[] openHdv() throws Exception {
 		Object[] toSend;
+		if(hdvOpened)
+			return toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
 		this.network.getInfo().setInExchange(true);
 		int[] interactive1 = this.network.getInteractive().getInteractive(355);
 		if (interactive1 != null) {
@@ -1547,6 +1553,7 @@ public class ModelConnexion {
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
 					if (this.waitToSendHdv()) {
 						stop(1);
+						hdvOpened = true;
 						toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
 					}
 					else {

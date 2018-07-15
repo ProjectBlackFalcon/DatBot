@@ -152,6 +152,7 @@ import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportDestinationsListMessage;
 import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemAddOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
@@ -1424,6 +1425,9 @@ public class Network extends DisplayInfo implements Runnable {
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5945:
+					ExchangeBidHouseItemAddOkMessage exchangeBidHouseItemAddOkMessage = new ExchangeBidHouseItemAddOkMessage();
+					exchangeBidHouseItemAddOkMessage.Deserialize(dataReader);
+					this.npc.getItemsToSell().add(exchangeBidHouseItemAddOkMessage.getItemInfo());
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5765:
