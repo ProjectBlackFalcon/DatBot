@@ -708,17 +708,19 @@ public class Network extends DisplayInfo implements Runnable {
 		info.setCurrentMapTrigger(true);
 		currentMapMessage.Deserialize(dataReader);
 		info.setMapId(currentMapMessage.getMapId());
-		if (connectionToKoli) {
-			sendToServer(new GameContextReadyMessage(currentMapMessage.getMapId()), GameContextReadyMessage.ProtocolId, "Context ready");
-		}
-		else {
-			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
-			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
-			this.interactive.setMap(map);
+		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
+		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
+		getLog().writeActionLogMessage("CurrentMapMessage", "Sending map request");
+		this.map = MapManager.FromId((int) currentMapMessage.getMapId());
+		this.interactive.setMap(map);
+		try {
 			this.info.setCoords(MapPosition.getMapPositionById(currentMapMessage.getMapId()).getCoords());
 			this.info.setWorldmap(MapPosition.getMapPositionById(currentMapMessage.getMapId()).worldMap);
-			sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 		}
+		catch (NullPointerException e) {
+			getLog().writeActionLogMessage("CurrentMapMessage", "Decryption failed : " + e.getMessage());
+		}
+
 	}
 
 	private void handleNpcDialogQuestionMessage(DofusDataReader dataReader) throws Exception {

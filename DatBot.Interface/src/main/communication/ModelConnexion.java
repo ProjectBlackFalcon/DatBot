@@ -1483,6 +1483,8 @@ public class ModelConnexion {
 			}
 		}
 		else {
+			log.writeActionLogMessage("newHunt_failed", String.format("map : %s, mapid : %s, cellid : %s, inHunt : %s",
+				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), this.network.getInfo().isInHunt()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
