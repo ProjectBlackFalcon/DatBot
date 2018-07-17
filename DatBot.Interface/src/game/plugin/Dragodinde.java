@@ -106,6 +106,8 @@ public class Dragodinde {
 	public String toString()
 	{
 		String s = "";
+		if (paddock == null || stable == null)
+			return "\"empty\"";
 		for (int i = 0 ; i < paddock.size() ; i++)
 		{
 			s += "{";

@@ -1525,7 +1525,7 @@ public class ModelConnexion {
 				toSend = new Object[] { this.getNetwork().getDragodinde() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("closeDD error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("openDD error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
