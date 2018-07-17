@@ -1493,6 +1493,9 @@ public class Network extends DisplayInfo implements Runnable {
 				case 2970:
 					this.info.setExchangeDD(true);
 					break;
+				case 5991:
+					this.info.setExchangeDD(true);
+					break;
 				case 5689:
 					EmoteListMessage emoteListMessage = new EmoteListMessage();
 					emoteListMessage.Deserialize(dataReader);
