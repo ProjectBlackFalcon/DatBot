@@ -3,6 +3,7 @@ package utils;
 import java.util.*;
 
 import game.Info;
+import main.Main;
 import protocol.network.Network;
 import utils.d2p.MapManager;
 
@@ -339,7 +340,7 @@ public class Astar {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new MapManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
+		MapManager.init(Main.D2P_PATH);
 		utils.d2p.map.Map map = MapManager.FromId(154010369);
 
 		List<int[]> blocked = new ArrayList<>();

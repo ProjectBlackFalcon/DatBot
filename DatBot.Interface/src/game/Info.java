@@ -3,7 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
-import ia.entities.Spell;
+import utils.d2o.modules.SpellLevel;
 
 public class Info {
 	/*
@@ -49,7 +49,7 @@ public class Info {
 	private int lvl = -1;
 	private int weigthMax;
 	private int weight;
-	private List<Spell> spells;
+	private List<SpellLevel> spells;
 	// Game utils
 	private boolean isRiding = false;
 	private boolean waitForMov = true;
@@ -595,11 +595,11 @@ public class Info {
 		this.havenBag = havenBag;
 	}
 
-	public List<Spell> getSpells() {
+	public List<SpellLevel> getSpells() {
 		return spells;
 	}
 
-	public void setSpells(List<Spell> spells) {
+	public void setSpells(List<SpellLevel> spells) {
 		this.spells = spells;
 	}
 

@@ -2,7 +2,6 @@ package ia.fight;
 
 import java.util.List;
 
-import ia.entities.Spell;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.map.MapIA;
@@ -10,6 +9,7 @@ import ia.map.Position;
 import ia.map.TransformedCell;
 import ia.utils.UtilsMath;
 import ia.utils.UtilsProtocol;
+import utils.d2o.modules.SpellLevel;
 import utils.d2p.map.CellData;
 
 public class ChestIntelligence extends FightIntelligence {
@@ -49,12 +49,12 @@ public class ChestIntelligence extends FightIntelligence {
 	}
 
 	private int[] getOptimizedSpell(TransformedCell[][] cells, MainEntity roxxor, Entity victim) {
-		List<Spell> spells = roxxor.getSpells();
-		Spell magicArrow = null;
-		Spell harcelante = null;
-		Spell tirPuissant = null;
+		List<SpellLevel> spells = roxxor.getSpells();
+		SpellLevel magicArrow = null;
+		SpellLevel harcelante = null;
+		SpellLevel tirPuissant = null;
 
-		for (Spell spell : spells) {
+		for (SpellLevel spell : spells) {
 			if (spell.getSpellId() == 161) {
 				magicArrow = spell;
 			}

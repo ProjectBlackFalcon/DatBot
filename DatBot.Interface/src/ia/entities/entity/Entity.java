@@ -1,11 +1,10 @@
 package ia.entities.entity;
 
-import ia.entities.FightEffects;
-import ia.entities.Spell;
+import java.util.List;
+
 import ia.map.Position;
 import protocol.network.types.game.context.fight.GameFightFighterInformations;
-
-import java.util.List;
+import utils.d2o.modules.SpellLevel;
 
 public abstract class Entity {
 
@@ -14,8 +13,7 @@ public abstract class Entity {
 	private int breed;
 	private int lvl;
     private GameFightFighterInformations info;
-	private FightEffects effects;
-	private List<Spell> spells;
+	private List<SpellLevel> spells;
 
 	public Entity(GameFightFighterInformations info) {
 		this.info = info;
@@ -32,18 +30,6 @@ public abstract class Entity {
 	public void setInfo(GameFightFighterInformations info) {
 		this.info = info;
 	}
-
-	public FightEffects getEffects() {
-		return effects;
-	}
-
-	public void setEffects(FightEffects effects) {
-		this.effects = effects;
-	}
-	
-	public void startTurn() {
-		effects.removeTurnDurationAll(1);
-	}
 	
 	public void endTurn() {
 		
@@ -51,24 +37,24 @@ public abstract class Entity {
 	
 	@Override
 	public String toString() {
-		return "Entity [isRdy=" + isRdy + ", position=" + position + ", breed=" + breed + ", lvl=" + lvl + ", info=" + info + ", effects=" + effects + ", spells=" + spells + "]";
+		return "Entity [isRdy=" + isRdy + ", position=" + position + ", breed=" + breed + ", lvl=" + lvl + ", info=" + info + ", spells=" + spells + "]";
 	}
 
-	public List<Spell> getSpells() {
+	public List<SpellLevel> getSpells() {
 		return spells;
 	}
+
+	public void setSpells(List<SpellLevel> spells) {
+		this.spells = spells;
+	}
 	
-	public Spell findSpell(int id){
-		for (Spell spell : spells) {
+	public SpellLevel findSpell(int id){
+		for (SpellLevel spell : spells) {
 			if(spell.getId() == id){
 				return spell;
 			}
 		}
 		return null;
-	}
-
-	public void setSpells(List<Spell> spells) {
-		this.spells = spells;
 	}
 
 	public Position getPosition() {

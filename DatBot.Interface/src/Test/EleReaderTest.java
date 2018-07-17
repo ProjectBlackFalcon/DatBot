@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import com.sun.media.sound.InvalidFormatException;
 
+import main.Main;
 import utils.d2p.EleReader;
 import utils.d2p.elements.EleRegistry;
 import utils.d2p.elements.NormalGraphicalElementData;
@@ -20,7 +21,7 @@ public class EleReaderTest {
 
     @Before
     public void setUp() throws Exception {
-        this.dofusPath = Paths.get("D:/Ankama/Dofus2/app/content/maps");
+        this.dofusPath = Paths.get(Main.D2P_PATH);
     }
 
     @Test

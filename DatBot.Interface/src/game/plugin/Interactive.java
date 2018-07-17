@@ -6,7 +6,7 @@ import protocol.network.Network;
 import protocol.network.types.game.interactive.InteractiveElement;
 import protocol.network.types.game.interactive.InteractiveElementSkill;
 import protocol.network.types.game.interactive.StatedElement;
-import utils.GameData;
+import utils.d2o.modules.MapPosition;
 import utils.d2p.map.Map;
 import utils.d2p.map.elements.GraphicalElement;
 
@@ -27,7 +27,7 @@ public class Interactive {
 
 	public double getMapIdZaap(int i, int j) {
 		for (Double d : zaapList) {
-			int[] coord = GameData.getCoordMap(d.intValue());
+			int[] coord = MapPosition.getMapPositionById(d.doubleValue()).getCoords();
 			if (coord[0] == i && coord[1] == j) { return d; }
 		}
 		return -1;
@@ -35,7 +35,7 @@ public class Interactive {
 
 	public double getMapIdZaapi(int i, int j) {
 		for (Double d : zaapiList) {
-			int[] coord = GameData.getCoordMap(d.intValue());
+			int[] coord = MapPosition.getMapPositionById(d.doubleValue()).getCoords();
 			if (coord[0] == i && coord[1] == j) { return d; }
 		}
 		return -1;

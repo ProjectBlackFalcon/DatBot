@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ia.entities.entity.Entity;
-import ia.fight.astar.AStarMap;
-import ia.fight.astar.ExampleFactory;
-import ia.fight.astar.ExampleNode;
 import ia.map.Position;
 import ia.map.TransformedCell;
+import ia.utils.astar.AStarMap;
+import ia.utils.astar.ExampleFactory;
+import ia.utils.astar.ExampleNode;
 
 public class UtilsMath {
 
@@ -35,6 +35,6 @@ public class UtilsMath {
 	}
 	
 	public static boolean isPositionAccessible(List<Position> path, Entity entity){
-		return path.size() <= entity.getInfo().getStats().getMovementPoints() && path.size() > 0;
+		return path.size() <= entity.getInfo().getStats().getMovementPoints() && path.size() > 1;
 	}
 }

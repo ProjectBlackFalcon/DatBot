@@ -44,6 +44,7 @@ import utils.GameData;
 public class ModelConnexion {
 
 	private boolean bankOpened;
+	private boolean hdvOpened;
 	int botInstance;
 
 	private Network network;
@@ -231,11 +232,14 @@ public class ModelConnexion {
 
 	private Object[] closeHdv() throws Exception {
 		Object[] toSend;
+		if(!hdvOpened)
+			return new Object[] { "True" };
 		log.writeActionLogMessage("closeHdv", String.format("isInExchange : %s, map : %s", this.network.getInfo().isInExchange(), GameData.getCoordMapString(this.getNetwork().getMap().getId())));
 		if (this.network.getInfo().isInExchange()) {
 			LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
 			getNetwork().sendToServer(leaveDialogRequestMessage, LeaveDialogRequestMessage.ProtocolId, "Leave hdv");
 			if (this.waitToSendLeaveExchange()) {
+				hdvOpened = false;
 				toSend = new Object[] { "True" };
 			}
 			else {
@@ -518,7 +522,7 @@ public class ModelConnexion {
 				toSend = new Object[] { "True" };
 			}
 			else {
-				DisplayInfo.appendDebugLog("exitHuntingHall error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("exitHuntingHall error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -633,14 +637,19 @@ public class ModelConnexion {
 
 	private Object[] getBankList(String param) throws Exception {
 		Object[] toSend;
+		log.writeActionLogMessage("getBankList", String.format("bankOpened : %s, param : %s", bankOpened, param));
 		if (bankOpened) {
+			if(param == null || param.isEmpty()){
+				log.writeActionLogMessage("getBankList_empty", String.format("bankOpened : %s, param : %s", bankOpened, param));
+				return new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
+			}
 			String[] fromBankList = param.split(",");
 			List<Integer> ids1 = new ArrayList<Integer>();
 			for (String string : fromBankList) {
 				ids1.add(Integer.parseInt(string.replaceAll("\\s+", "")));
 			}
 			ExchangeObjectTransfertListToInvMessage exchangeObjectTransfertListToInvMessage = new ExchangeObjectTransfertListToInvMessage(ids1);
-			getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from this.network.getBank()");
+			getNetwork().sendToServer(exchangeObjectTransfertListToInvMessage, ExchangeObjectTransfertListToInvMessage.ProtocolId, "Get item list from bank");
 			if (this.waitToSendBank("move")) {
 				stop(1);
 				toSend = new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
@@ -1069,7 +1078,7 @@ public class ModelConnexion {
 				toSend = new Object[] { "true" };
 			}
 			else {
-				DisplayInfo.appendDebugLog("enterGate error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("enterGate error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -1163,7 +1172,7 @@ public class ModelConnexion {
 			}
 		}
 		else {
-			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1210,7 +1219,7 @@ public class ModelConnexion {
 			}
 		}
 		else {
-			DisplayInfo.appendDebugLog("Bank error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Bank error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1228,7 +1237,7 @@ public class ModelConnexion {
 				toSend = move(292);
 			}
 			else {
-				DisplayInfo.appendDebugLog("goHuntingHall error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("goHuntingHall error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -1253,7 +1262,7 @@ public class ModelConnexion {
 			toSend = useInteractive(184);
 		}
 		else {
-			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Astrub change error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1474,6 +1483,8 @@ public class ModelConnexion {
 			}
 		}
 		else {
+			log.writeActionLogMessage("newHunt_failed", String.format("map : %s, mapid : %s, cellid : %s,  inHunt : %s",
+				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), this.network.getInfo().isInHunt()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1491,13 +1502,13 @@ public class ModelConnexion {
 				toSend = new Object[] { this.network.getBank() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+				DisplayInfo.appendDebugLog("Open bank error, server returned false", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 				toSend = new Object[] { "False" };
 			}
 			bankOpened = true;
 		}
 		else {
-			DisplayInfo.appendDebugLog("Open bank error", "Wrong map : " + GameData.getCoordMap(this.network.getMap().getId()));
+			DisplayInfo.appendDebugLog("Open bank error", "Wrong map : " + GameData.getCoordMapString(this.network.getMap().getId()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1514,7 +1525,7 @@ public class ModelConnexion {
 				toSend = new Object[] { this.getNetwork().getDragodinde() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("closeDD error, server returned false", "Map : " + GameData.getCoordMap(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				DisplayInfo.appendDebugLog("closeDD error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
 				toSend = new Object[] { "False" };
 			}
 		}
@@ -1526,6 +1537,8 @@ public class ModelConnexion {
 
 	private Object[] openHdv() throws Exception {
 		Object[] toSend;
+		if(hdvOpened)
+			return toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
 		this.network.getInfo().setInExchange(true);
 		int[] interactive1 = this.network.getInteractive().getInteractive(355);
 		if (interactive1 != null) {
@@ -1542,6 +1555,7 @@ public class ModelConnexion {
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
 					if (this.waitToSendHdv()) {
 						stop(1);
+						hdvOpened = true;
 						toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
 					}
 					else {

@@ -15,7 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.json.simple.JSONObject;
 
 import game.Info;
-import game.combat.Fight;
 import game.movement.Movement;
 import game.plugin.Bank;
 import game.plugin.Dragodinde;
@@ -26,7 +25,6 @@ import game.plugin.Npc;
 import game.plugin.Stats;
 import ia.Intelligence;
 import ia.IntelligencePacketHandler;
-import ia.entities.Spell;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;
@@ -142,7 +140,6 @@ import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerF
 import protocol.network.messages.game.context.roleplay.fight.GameRolePlayPlayerFightFriendlyRequestedMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToFightServerMessage;
 import protocol.network.messages.game.context.roleplay.fight.arena.GameRolePlayArenaSwitchToGameServerMessage;
-import protocol.network.messages.game.context.roleplay.job.JobDescriptionMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceMultiUpdateMessage;
 import protocol.network.messages.game.context.roleplay.job.JobExperienceUpdateMessage;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogQuestionMessage;
@@ -155,6 +152,7 @@ import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportDestinationsListMessage;
 import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemAddOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
@@ -184,7 +182,6 @@ import protocol.network.types.game.context.roleplay.GameRolePlayGroupMonsterInfo
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayTreasureHintInformations;
 import protocol.network.types.game.context.roleplay.MonsterInGroupInformations;
-import protocol.network.types.game.context.roleplay.job.JobExperience;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToHint;
 import protocol.network.types.game.context.roleplay.treasureHunt.TreasureHuntStepFollowDirectionToPOI;
 import protocol.network.types.game.data.items.ObjectItem;
@@ -196,6 +193,9 @@ import protocol.network.util.FlashKeyGenerator;
 import protocol.network.util.MessageUtil;
 import protocol.network.util.SwitchNameClass;
 import utils.GameData;
+import utils.d2o.modules.MapPosition;
+import utils.d2o.modules.Spell;
+import utils.d2o.modules.SpellLevel;
 import utils.d2p.MapManager;
 import utils.d2p.map.Map;
 
@@ -211,7 +211,6 @@ public class Network extends DisplayInfo implements Runnable {
 	 * Plugin variable
 	 */
 	public boolean connectionToKoli = false;
-	private Fight fight;
 	private Intelligence intelligence;
 	private Hunt hunt;
 	private Info info;
@@ -238,7 +237,6 @@ public class Network extends DisplayInfo implements Runnable {
 		this.map = new Map();
 		this.info = info;
 		this.stats = new Stats(this);
-		this.fight = new Fight(this);
 		this.interactive = new Interactive(this);
 		this.bank = new Bank();
 		this.movement = new Movement(this);
@@ -320,10 +318,6 @@ public class Network extends DisplayInfo implements Runnable {
 
 	public Bank getBank() {
 		return bank;
-	}
-
-	public Fight getFight() {
-		return fight;
 	}
 
 	public Hunt getHunt() {
@@ -590,7 +584,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 47, 12, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 47, 14, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -714,17 +708,19 @@ public class Network extends DisplayInfo implements Runnable {
 		info.setCurrentMapTrigger(true);
 		currentMapMessage.Deserialize(dataReader);
 		info.setMapId(currentMapMessage.getMapId());
-		if (connectionToKoli) {
-			sendToServer(new GameContextReadyMessage(currentMapMessage.getMapId()), GameContextReadyMessage.ProtocolId, "Context ready");
+		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
+		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
+		getLog().writeActionLogMessage("CurrentMapMessage", "Sending map request");
+		this.map = MapManager.FromId((int) currentMapMessage.getMapId());
+		this.interactive.setMap(map);
+		try {
+			this.info.setCoords(MapPosition.getMapPositionById(currentMapMessage.getMapId()).getCoords());
+			this.info.setWorldmap(MapPosition.getMapPositionById(currentMapMessage.getMapId()).worldMap);
 		}
-		else {
-			MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
-			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
-			this.interactive.setMap(map);
-			this.info.setCoords(GameData.getCoordMap((int) currentMapMessage.getMapId()));
-			this.info.setWorldmap(GameData.getWorldMap((int) currentMapMessage.getMapId()));
-			sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
+		catch (NullPointerException e) {
+			getLog().writeActionLogMessage("CurrentMapMessage", "Decryption failed : " + e.getMessage());
 		}
+
 	}
 
 	private void handleNpcDialogQuestionMessage(DofusDataReader dataReader) throws Exception {
@@ -947,10 +943,10 @@ public class Network extends DisplayInfo implements Runnable {
 		this.hunt.setNumberOfIndex(treasureHuntMessage.getTotalStepCount());
 		this.hunt.setAvailableRetryCount(treasureHuntMessage.getAvailableRetryCount());
 		if (treasureHuntMessage.getFlags().size() == 0) {
-			this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getStartMapId()));
+			this.hunt.setStartMapCoords(MapPosition.getMapPositionById(treasureHuntMessage.getStartMapId()).getCoords());
 		}
 		else {
-			this.hunt.setStartMapCoords(GameData.getCoordMap((int) treasureHuntMessage.getFlags().get(treasureHuntMessage.getFlags().size() - 1).getMapId()));
+			this.hunt.setStartMapCoords(MapPosition.getMapPositionById(treasureHuntMessage.getFlags().get(treasureHuntMessage.getFlags().size() - 1).getMapId()).getCoords());
 		}
 		this.hunt.setCurrentIndex(treasureHuntMessage.getFlags().size());
 		if (treasureHuntMessage.getKnownStepsList().get(sizeStep - 1).getClass().getSimpleName().equals("TreasureHuntStepFollowDirectionToPOI")) {
@@ -1036,9 +1032,7 @@ public class Network extends DisplayInfo implements Runnable {
 		appendLog("[" + id + "]	[Envoi] " + s);
 	}
 
-	public void setFight(Fight fight) {
-		this.fight = fight;
-	}
+
 
 	public void setInfo(Info info) {
 		this.info = info;
@@ -1173,6 +1167,7 @@ public class Network extends DisplayInfo implements Runnable {
 					break;
 				case 950:
 					GameMapNoMovementMessage gameMapNoMovementMessage = new GameMapNoMovementMessage();
+					DisplayInfo.appendDebugLog("GameMapNoMovement","Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId() + " , Fight : " + this.info.isJoinedFight());
 					getLog().writeLogErrorMessage(getTiming() + "Can't move from " + this.info.getCellId() + " to cell " + (gameMapNoMovementMessage.getCellX() + gameMapNoMovementMessage.getCellY() * 14) + " on map " + this.map.getId());
 					break;
 				case 951:
@@ -1346,7 +1341,7 @@ public class Network extends DisplayInfo implements Runnable {
 				case 6132:
 					GameActionFightNoSpellCastMessage gameActionFightNoSpellCastMessage = new GameActionFightNoSpellCastMessage();
 					gameActionFightNoSpellCastMessage.Deserialize(dataReader);
-					iaPacket.gameActionFightNoSpellCast(gameActionFightNoSpellCastMessage);
+					DisplayInfo.appendDebugLog("GameActionFightNoSpellCastMessage","Can't cast spell from " + this.info.getCellId() + " id : " + gameActionFightNoSpellCastMessage.getSpellLevelId() + " on map " + this.map.getId() + " , Fight : " + this.info.isJoinedFight());
 					break;
 				case 6312:
 					handleGameActionFightLifePointsLostMessage(dataReader);
@@ -1432,6 +1427,9 @@ public class Network extends DisplayInfo implements Runnable {
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5945:
+					ExchangeBidHouseItemAddOkMessage exchangeBidHouseItemAddOkMessage = new ExchangeBidHouseItemAddOkMessage();
+					exchangeBidHouseItemAddOkMessage.Deserialize(dataReader);
+					this.npc.getItemsToSell().add(exchangeBidHouseItemAddOkMessage.getItemInfo());
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5765:
@@ -1772,9 +1770,9 @@ public class Network extends DisplayInfo implements Runnable {
 				case 1200:
 					SpellListMessage spellListMessage = new SpellListMessage();
 					spellListMessage.Deserialize(dataReader);
-					List<Spell> spells = new ArrayList<>();
+					List<SpellLevel> spells = new ArrayList<>();
 					for (SpellItem si : spellListMessage.getSpells()) {
-						spells.add(GameData.getSpell(si.getSpellId(), si.getSpellLevel()));
+						spells.add(Spell.getSpellById(si.getSpellId()).getSpellLevel(si.getSpellLevel()));
 					}
 					info.setSpells(spells);
 					break;

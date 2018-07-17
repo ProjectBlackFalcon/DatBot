@@ -6,6 +6,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import main.Main;
 import main.communication.Communication;
 import protocol.network.Network;
 import utils.GameData;
@@ -22,8 +23,8 @@ public class ModelConnexionTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		new d2iManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\gamedata\\i18n_fr.d2i");
-		new MapManager(GameData.getPathDatBot() + "\\DatBot.Interface\\utils\\maps");
+		d2iManager.init(Main.D2I_PATH);
+		MapManager.init(Main.D2P_PATH);
 		communication = new Communication(true);
 		Thread communication2 = new Thread(communication);
 		communication2.start();
