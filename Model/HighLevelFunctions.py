@@ -80,11 +80,10 @@ class HighLevelFunctions:
 
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
             # Bot needs to enter brak
-            if self.bot.interface.enter_heavenbag()[0]:
-                disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
-                if [-26, 35] in disc_zaaps:
-                    self.bot.interface.use_zaap((-26, 35))
-                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+            disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
+            if self.bot.interface.enter_heavenbag()[0] and [-26, 35] in disc_zaaps:
+                self.bot.interface.use_zaap((-26, 35))
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.brak_maps and list(target_coord) not in self.brak_maps:
             # Bot needs to exit brak
             # TODO
