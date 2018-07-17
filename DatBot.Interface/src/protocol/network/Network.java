@@ -1494,6 +1494,7 @@ public class Network extends DisplayInfo implements Runnable {
 					this.info.setExchangeDD(true);
 					break;
 				case 5991:
+					this.dragodinde.setInStable(true);
 					this.info.setExchangeDD(true);
 					break;
 				case 5689:
