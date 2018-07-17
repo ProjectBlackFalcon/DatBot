@@ -29,7 +29,8 @@ public class Test {
 		communication.getReturn("0;0;i;cmd;connect;['blushinglocus','bulldistribution0','Hyrisson','Julith']");
 		Thread.sleep(30000);
 		communication.getReturn("0;0;i;cmd;openDD;[]");
-
+		Thread.sleep(2000);
+		communication.getReturn("0;0;i;cmd;closeDD;[]");
 		
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;changeMap;[3,n]");
