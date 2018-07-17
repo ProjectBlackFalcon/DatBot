@@ -81,7 +81,7 @@ class HighLevelFunctions:
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
             # Bot needs to enter brak
             disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
-            if self.bot.interface.enter_heavenbag()[0] and [-26, 35] in disc_zaaps:
+            if [-26, 35] in disc_zaaps and self.bot.interface.enter_heavenbag()[0]:
                 self.bot.interface.use_zaap((-26, 35))
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.brak_maps and list(target_coord) not in self.brak_maps:
@@ -411,7 +411,18 @@ class HighLevelFunctions:
                             while not found and self.bot.interface.hunt_is_active()[0]:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                                 destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
-                                self.goto(destination, harvest=harvest)
+                                try:
+                                    self.goto(destination, harvest=harvest)
+                                except Exception as e:
+                                    self.llf.log(self.bot, '[Treasure Hunt {}] Failed to get to clue. It might have been wrongly blacklisted in TresureHuntNoClues.json'.format(self.bot.id))
+                                    with open('../Utils/HuntErrorsLog.txt', 'a') as f:
+                                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                                        f.write(traceback.format_exc())
+
+                                    with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
+                                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                                        f.write(e.args[0])
+
                                 if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
                                     self.bot.interface.validate_hunt_clue()
                                     step_valid = self.bot.interface.validate_hunt_step()[0]
