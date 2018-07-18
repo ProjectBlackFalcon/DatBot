@@ -408,6 +408,7 @@ class HighLevelFunctions:
                             found = False
                             self.bot.interface.validate_hunt_step()
                             clues_left = self.bot.interface.get_clues_left()[0]
+                            clue, direction = self.bot.interface.get_hunt_clue()
                             while not found and self.bot.interface.hunt_is_active()[0]:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                                 destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
@@ -422,6 +423,7 @@ class HighLevelFunctions:
                                     with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                         f.write(e.args[0])
+                                    break
 
                                 if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
                                     self.bot.interface.validate_hunt_clue()
