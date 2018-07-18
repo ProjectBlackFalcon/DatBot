@@ -156,7 +156,7 @@ public class Movement {
 					list.add(i);
 				}
 			}
-			if (list.isEmpty())
+			if (list.isEmpty()) //TODO CHECK CORNER
 			{
 				this.network.getLog().writeActionLogMessage("changeMap_1", "No available cell for this direction");
 				return null;

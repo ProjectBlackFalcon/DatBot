@@ -25,6 +25,7 @@ import game.plugin.Npc;
 import game.plugin.Stats;
 import ia.Intelligence;
 import ia.IntelligencePacketHandler;
+import main.Main;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;
@@ -711,9 +712,9 @@ public class Network extends DisplayInfo implements Runnable {
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 		getLog().writeActionLogMessage("CurrentMapMessage", "Sending map request");
-		this.map = MapManager.FromId((int) currentMapMessage.getMapId());
-		this.interactive.setMap(map);
 		try {
+			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
+			this.interactive.setMap(map);
 			this.info.setCoords(MapPosition.getMapPositionById(currentMapMessage.getMapId()).getCoords());
 			this.info.setWorldmap(MapPosition.getMapPositionById(currentMapMessage.getMapId()).worldMap);
 		}
