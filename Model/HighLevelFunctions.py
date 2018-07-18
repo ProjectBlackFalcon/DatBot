@@ -75,16 +75,18 @@ class HighLevelFunctions:
                         self.bot.interface.use_zaap(closest_zaap)
                         time.sleep(2)
                 else:
-                    closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
-                    self.goto(closest_zaap, forbid_zaaps=True)
+                    closest_zaap_2 = self.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
+                    self.goto(closest_zaap_2, forbid_zaaps=True)
+                    self.bot.interface.enter_heavenbag()
+                    self.bot.interface.use_zaap(closest_zaap)
+                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
             # Bot needs to enter brak
-            if self.bot.interface.enter_heavenbag()[0]:
-                disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
-                if [-26, 35] in disc_zaaps:
-                    self.bot.interface.use_zaap((-26, 35))
-                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+            disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
+            if [-26, 35] in disc_zaaps and self.bot.interface.enter_heavenbag()[0]:
+                self.bot.interface.use_zaap((-26, 35))
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.brak_maps and list(target_coord) not in self.brak_maps:
             # Bot needs to exit brak
             # TODO
@@ -409,10 +411,23 @@ class HighLevelFunctions:
                             found = False
                             self.bot.interface.validate_hunt_step()
                             clues_left = self.bot.interface.get_clues_left()[0]
+                            clue, direction = self.bot.interface.get_hunt_clue()
                             while not found and self.bot.interface.hunt_is_active()[0]:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                                 destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
-                                self.goto(destination, harvest=harvest)
+                                try:
+                                    self.goto(destination, harvest=harvest)
+                                except Exception as e:
+                                    self.llf.log(self.bot, '[Treasure Hunt {}] Failed to get to clue. It might have been wrongly blacklisted in TresureHuntNoClues.json'.format(self.bot.id))
+                                    with open('../Utils/HuntErrorsLog.txt', 'a') as f:
+                                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                                        f.write(traceback.format_exc())
+
+                                    with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
+                                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                                        f.write(e.args[0])
+                                    break
+
                                 if not (self.bot.position[0] in hunt.get_no_clue_list(clue)):
                                     self.bot.interface.validate_hunt_clue()
                                     step_valid = self.bot.interface.validate_hunt_step()[0]
@@ -422,7 +437,7 @@ class HighLevelFunctions:
                                         hunt.added_clue = True
                                         hunt.add_to_clue_list(clue, self.bot.position)
                                         self.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
-                                    else:
+                                    elif not step_valid and self.bot.interface.hunt_is_active()[0]:
                                         hunt.add_to_no_clue_list(clue, self.bot.position)
 
                             if not found:
@@ -452,19 +467,25 @@ class HighLevelFunctions:
             if step_valid:
                 clues_left = 0
             if not hunt.error and not step_valid:
-                clue, direction = self.bot.interface.get_hunt_clue()
-                last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
-                wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
-                with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
-                    f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-                    f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, last_valid_clue_pos, self.bot.position[0]))
-                    f.write('Clue was supposed to be at {}'.format(wrong_clue_pos))
+                last_clue = self.bot.interface.get_hunt_clue()
+                if type(last_clue[0]) is str:
+                    clue, direction = last_clue
+                    last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
+                    wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
+                    with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
+                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                        f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, last_valid_clue_pos, self.bot.position[0]))
+                        f.write('Clue was supposed to be at {}'.format(wrong_clue_pos))
 
-                self.llf.log(self.bot, '[Treasure Hunt {}] Error with a clue, trying to get to it...'.format(self.bot.id))
+                    self.llf.log(self.bot, '[Treasure Hunt {}] Error with a clue, trying to get to it...'.format(self.bot.id))
+                    clues_left = self.bot.interface.get_clues_left()[0]
+                    self.goto(last_valid_clue_pos)
+                else:
+                    with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
+                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                        f.write('Failed to validate step because of clue "{}". No nore details available as hunt ended)'.format(clue, self.bot.position[0]))
+
                 found = False
-                clues_left = self.bot.interface.get_clues_left()[0]
-                self.goto(last_valid_clue_pos)
-
                 while not found and self.bot.interface.hunt_is_active()[0]:
                     direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                     destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
