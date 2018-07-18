@@ -58,6 +58,7 @@ class Interface:
         self.new_hunt_timer = 0
         self.color = color
         self.end_color = '\033[0m'
+        self.hdv_opended = False
 
     def add_command(self, command, parameters=None):
         # <botInstance>;<msgId>;<dest>;<msgType>;<command>;[param1, param2...]
@@ -570,14 +571,22 @@ class Interface:
         Tries to open the map's hdv. If sucessful, returns what items are being sold.
         :return: False / "empty" / [[name, id, batch_size, price], [...]]
         """
-        return self.execute_command('openHdv')
+        if not self.hdv_opended:
+            ret_val = self.execute_command('openHdv')
+            if ret_val[0]:
+                self.hdv_opended = True
+            return ret_val
 
     def close_hdv(self):
         """
         Closes the hdv
         :return: Boolean
         """
-        return self.execute_command('closeHdv')
+        if self.hdv_opended:
+            ret_val = self.execute_command('closeHdv')
+            if ret_val[0]:
+                self.hdv_opended = False
+            return ret_val
 
     def get_hdv_item_stats(self, item_id):
         """
