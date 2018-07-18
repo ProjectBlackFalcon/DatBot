@@ -75,8 +75,11 @@ class HighLevelFunctions:
                         self.bot.interface.use_zaap(closest_zaap)
                         time.sleep(2)
                 else:
-                    closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
-                    self.goto(closest_zaap, forbid_zaaps=True)
+                    closest_zaap_2 = self.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
+                    self.goto(closest_zaap_2, forbid_zaaps=True)
+                    self.bot.interface.enter_heavenbag()
+                    self.bot.interface.use_zaap(closest_zaap)
+                    current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
         if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
             # Bot needs to enter brak
