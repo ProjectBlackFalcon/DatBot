@@ -259,7 +259,7 @@ public class ModelConnexion {
 		String[] str = param.split(",");
 		Info info = new Info(str[0], str[1], str[2], str[3]);
 		if (this.network != null) {
-			this.network.getInfo().setPrintDc(false);
+			this.network.getInfo().setPrintDc(true);
 			if (this.network.displayPacket) {
 				this.network.getF().setVisible(false);
 			}
