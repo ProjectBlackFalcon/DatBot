@@ -292,7 +292,6 @@ class HighLevelFunctions:
             items_to_sell = items_to_sell[self.bot.credentials['name']]
         else:
             items_to_sell = items_to_sell['Default']
-
         item_to_sell_ids = [int(key) for hdv_name in items_to_sell.keys() for key in items_to_sell[hdv_name]]
         item_to_sell_batch_size = [items_to_sell[hdv_name][key]['quantity'] for hdv_name in items_to_sell.keys() for key in items_to_sell[hdv_name]]
         for item_id in item_to_sell_ids:
@@ -302,7 +301,7 @@ class HighLevelFunctions:
             inv_space = player_stats['WeightMax'] - player_stats['Weight']
             quantity_to_withdraw = min(number, int(inv_space / weight)) if weight else number
             batch_size = item_to_sell_batch_size[item_to_sell_ids.index(item_id)]
-            round_quantity_to_withdraw = quantity_to_withdraw//batch_size*batch_size
+            round_quantity_to_withdraw = quantity_to_withdraw // batch_size * batch_size
             if round_quantity_to_withdraw:
                 player_stats, bank_contents = self.bot.interface.get_from_bank_unique(unique_id, round_quantity_to_withdraw)
 
@@ -915,7 +914,7 @@ class HighLevelFunctions:
         dds_stable = []
         dds_paddock = []
         all_dds = self.bot.interface.open_dd()
-        if all_dds:
+        if all_dds != "empty":
             for dd in all_dds:
                 dd_obj = DD(dd)
                 if dd_obj.in_paddock:
