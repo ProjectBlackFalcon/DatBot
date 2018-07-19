@@ -354,6 +354,9 @@ public class ModelConnexion {
 	private Object[] dropBankAll() throws Exception {
 		Object[] toSend;
 		log.writeActionLogMessage("dropBankAll", String.format("map : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId())));
+		if(this.network.getStats().getInventoryContentMessage().getObjects().size() <= 1){
+			return new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
+		}
 		if (bankOpened) {
 			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
 			getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
