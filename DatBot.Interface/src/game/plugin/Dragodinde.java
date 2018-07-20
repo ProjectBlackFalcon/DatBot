@@ -107,7 +107,7 @@ public class Dragodinde {
 	{
 		String s = "";
 		if (paddock == null || stable == null)
-			return "\"empty\"";
+			return "";
 		for (int i = 0 ; i < paddock.size() ; i++)
 		{
 			s += "{";
