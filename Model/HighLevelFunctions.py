@@ -914,13 +914,12 @@ class HighLevelFunctions:
         dds_stable = []
         dds_paddock = []
         all_dds = self.bot.interface.open_dd()
-        if all_dds != "empty":
-            for dd in all_dds:
-                dd_obj = DD(dd)
-                if dd_obj.in_paddock:
-                    dds_paddock.append(dd_obj)
-                else:
-                    dds_stable.append(dd_obj)
+        for dd in all_dds:
+            dd_obj = DD(dd)
+            if dd_obj.in_paddock:
+                dds_paddock.append(dd_obj)
+            else:
+                dds_stable.append(dd_obj)
         if len(dds_paddock) == 10:
             self.bot.interface.put_dd_in_stable(dds_paddock[0].id, 'paddock')
         self.bot.interface.put_dd_in_paddock(idx, 'equip')
