@@ -30,9 +30,9 @@ public class Test {
 		Thread.sleep(30000);
 		communication.getReturn("0;0;i;cmd;openDD;[None]");
 		Thread.sleep(3000);
-		communication.getReturn("0;0;i;cmd;putInPaddock;["+ communication.getModels().get(0).getNetwork().getDragodinde().getId() +", 'equip']");
-		Thread.sleep(3000);
-		communication.getReturn("0;0;i;cmd;closeDD;[None]");
+//		communication.getReturn("0;0;i;cmd;putInPaddock;["+ communication.getModels().get(0).getNetwork().getDragodinde().getId() +", 'equip']");
+//		Thread.sleep(3000);
+//		communication.getReturn("0;0;i;cmd;closeDD;[None]");
 //		Thread.sleep(2000);
 //		communication.getReturn("0;0;i;cmd;closeDD;[]");
 		

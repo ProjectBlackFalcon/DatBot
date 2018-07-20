@@ -157,6 +157,7 @@ import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemAd
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountWithOutPaddockMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidSellerMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
@@ -1483,6 +1484,7 @@ public class Network extends DisplayInfo implements Runnable {
 					this.dragodinde.setPaddock(exchangeStartOkMountMessage.getPaddockedMountsDescription());
 					this.dragodinde.setStable(exchangeStartOkMountMessage.getStabledMountsDescription());
 					this.dragodinde.setInStable(true);
+					this.info.setExchangeDD(true);
 					break;
 				case 6555:
 					this.info.setExchangeDD(true);
@@ -1498,6 +1500,10 @@ public class Network extends DisplayInfo implements Runnable {
 					this.info.setExchangeDD(true);
 					break;
 				case 5991:
+					ExchangeStartOkMountWithOutPaddockMessage exchangeStartOkMountWithOutPaddockMessage = new ExchangeStartOkMountWithOutPaddockMessage();
+					exchangeStartOkMountWithOutPaddockMessage.Deserialize(dataReader);
+					if(exchangeStartOkMountWithOutPaddockMessage.getStabledMountsDescription() != null)
+						this.dragodinde.setStable(exchangeStartOkMountWithOutPaddockMessage.getStabledMountsDescription());
 					this.dragodinde.setInStable(true);
 					this.info.setExchangeDD(true);
 					break;
