@@ -26,7 +26,7 @@ public class MapManager {
 		}
     }
 
-    public static Map FromId(int id) throws IOException
+    public static synchronized Map FromId(int id) throws IOException
     {
     	if(!init)
     		init(Main.D2P_PATH);

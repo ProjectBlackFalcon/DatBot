@@ -29,6 +29,7 @@ import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHousePriceMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeHandleMountsMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeHandleMountsStableMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectModifyPricedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
@@ -354,6 +355,9 @@ public class ModelConnexion {
 	private Object[] dropBankAll() throws Exception {
 		Object[] toSend;
 		log.writeActionLogMessage("dropBankAll", String.format("map : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId())));
+		if(this.network.getStats().getInventoryContentMessage().getObjects().size() <= 1){
+			return new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
+		}
 		if (bankOpened) {
 			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
 			getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
@@ -1332,8 +1336,8 @@ public class ModelConnexion {
 			int actionId = Dragodinde.getActionId(to, newParamdd[1]);
 			List<Integer> listId = new ArrayList<>();
 			listId.add(Integer.parseInt(newParamdd[0]));
-			ExchangeHandleMountsStableMessage exchangeHandleMountsStableMessage = new ExchangeHandleMountsStableMessage(actionId, listId);
-			getNetwork().sendToServer(exchangeHandleMountsStableMessage, ExchangeHandleMountsStableMessage.ProtocolId, "Put in " + to);
+			ExchangeHandleMountsMessage exchangeHandleMountsMessage = new ExchangeHandleMountsMessage(actionId, listId);
+			getNetwork().sendToServer(exchangeHandleMountsMessage, ExchangeHandleMountsMessage.ProtocolId, "Put in " + to);
 			if (this.waitToSendMount("exchange")) {
 				stop(0.5);
 				toSend = new Object[] { "True" };

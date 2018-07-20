@@ -49,7 +49,7 @@ public class d2iManager {
     }
 
 
-    public static String getText(int key) {
+    public static synchronized String getText(int key) {
     	if(!init)
     		init(Main.D2I_PATH);
         try {

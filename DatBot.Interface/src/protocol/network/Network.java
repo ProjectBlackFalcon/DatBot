@@ -25,6 +25,7 @@ import game.plugin.Npc;
 import game.plugin.Stats;
 import ia.Intelligence;
 import ia.IntelligencePacketHandler;
+import main.Main;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;
@@ -711,9 +712,9 @@ public class Network extends DisplayInfo implements Runnable {
 		MapInformationsRequestMessage informationsRequestMessage = new MapInformationsRequestMessage(currentMapMessage.getMapId());
 		sendToServer(informationsRequestMessage, MapInformationsRequestMessage.ProtocolId, "Map info request");
 		getLog().writeActionLogMessage("CurrentMapMessage", "Sending map request");
-		this.map = MapManager.FromId((int) currentMapMessage.getMapId());
-		this.interactive.setMap(map);
 		try {
+			this.map = MapManager.FromId((int) currentMapMessage.getMapId());
+			this.interactive.setMap(map);
 			this.info.setCoords(MapPosition.getMapPositionById(currentMapMessage.getMapId()).getCoords());
 			this.info.setWorldmap(MapPosition.getMapPositionById(currentMapMessage.getMapId()).worldMap);
 		}
@@ -888,14 +889,14 @@ public class Network extends DisplayInfo implements Runnable {
 		StorageObjectsUpdateMessage storageObjectsUpdateMessage = new StorageObjectsUpdateMessage();
 		storageObjectsUpdateMessage.Deserialize(dataReader);
 		for (int i = 0; i < storageObjectsUpdateMessage.getObjectList().size(); i++) {
-			boolean isInBank = false;
+			boolean isNew = true;
 			for (int k = 0; k < getBank().getStorage().getObjects().size(); k++) {
 				if (storageObjectsUpdateMessage.getObjectList().get(i).getObjectUID() == getBank().getStorage().getObjects().get(k).getObjectUID()) {
-					getBank().getStorage().getObjects().set(i, storageObjectsUpdateMessage.getObjectList().get(i));
-					isInBank = true;
+					getBank().getStorage().getObjects().set(k, storageObjectsUpdateMessage.getObjectList().get(i));
+					isNew = false;
 				}
 			}
-			if (!isInBank) {
+			if(isNew){
 				getBank().getStorage().getObjects().add(storageObjectsUpdateMessage.getObjectList().get(i));
 			}
 		}
@@ -905,14 +906,14 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleStorageObjectUpdateMessage(DofusDataReader dataReader) {
 		StorageObjectUpdateMessage storageObjectUpdateMessage = new StorageObjectUpdateMessage();
 		storageObjectUpdateMessage.Deserialize(dataReader);
-		boolean isItem = false;
+		boolean isNew = true;
 		for (int i = 0; i < getBank().getStorage().getObjects().size(); i++) {
-			if (getBank().getStorage().getObjects().get(i).getObjectGID() == storageObjectUpdateMessage.getObject().getObjectGID() || getBank().getStorage().getObjects().get(i).getObjectUID() == storageObjectUpdateMessage.getObject().getObjectUID()) {
+			if (getBank().getStorage().getObjects().get(i).getObjectUID() == storageObjectUpdateMessage.getObject().getObjectUID()) {
 				getBank().getStorage().getObjects().set(i, storageObjectUpdateMessage.getObject());
-				isItem = true;
+				isNew = false;
 			}
 		}
-		if (!isItem) {
+		if(isNew){
 			getBank().getStorage().getObjects().add(storageObjectUpdateMessage.getObject());
 		}
 		info.setStorageUpdate(true);
@@ -999,7 +1000,10 @@ public class Network extends DisplayInfo implements Runnable {
 
 			}
 			System.out.println("Socket is closed");
-			if (this.info.isPrintDc() && this.info.isConnected()) Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
+			if (this.info.isPrintDc() && this.info.isConnected()){
+				this.info.setPrintDc(false);
+				Communication.sendToModel(String.valueOf(getBotInstance()), String.valueOf(-1), "m", "info", "disconnect", new Object[] { "True" });
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

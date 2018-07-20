@@ -76,7 +76,7 @@ public class Item {
 	private ItemSet _itemSet;
 	private double _nuggetsQuantity = 0;
 
-	public static Item getItemById(int id) {
+	public static synchronized Item getItemById(int id) {
 		Item item = (Item) GameData.getObject(MODULE, id);
 		if(item != null)
 			return item;
