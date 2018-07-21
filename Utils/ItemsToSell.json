@@ -6,9 +6,14 @@
       "8012": {"name": "poudre de resurrection", "quantity": 1},
       "15263": {"name": "rose des sables", "quantity": 100},
       "289": {"name": "ble", "quantity": 100},
-      "1782": {"name": "goujon", "quantity": 100}
+      "1782": {"name": "goujon", "quantity": 100},
+      "14998": {"name": "fragment d'ecaille d'endurance", "quantity": 1}
     },
-    "Consommables":{},
+    "Consommables":{
+      "679": {"name": "parchemin blanc", "quantity": 100},
+      "678": {"name": "parchemin d'ivoire", "quantity": 100},
+      "680": {"name": "parchemin dore", "quantity": 10}
+    },
     "Equipements": {},
     "Runes": {},
     "Animaux": {}
