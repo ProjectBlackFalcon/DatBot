@@ -168,7 +168,7 @@ class Interface:
                         self.bot.hf.fetch_bot_mobile()
                 return [True]
             else:
-                time.sleep(min(15, tries*30))
+                time.sleep(max(15, tries*30))
         return [False]
 
     def disconnect(self):
