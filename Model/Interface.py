@@ -69,7 +69,7 @@ class Interface:
         self.pipe.p.stdin.flush()
         return self.current_id-1
 
-    def wait_for_return(self, message_id, timeout=15*60):
+    def wait_for_return(self, message_id, timeout=2*60):
         # print('[Interface] Waiting for response...')
         ret_val = None
         message_queue = []
@@ -77,6 +77,7 @@ class Interface:
         while ret_val is None and time.time()-start < timeout:
             partial_message = '{};{};m;rtn'.format(self.bot.id, message_id)
             buffer = self.pipe.get_buffer()
+            start = time.time() if self.bot.in_fight else start  # prevent timeout if in fight
             for message in buffer:
                 if int(message.split(';')[0]) == self.bot.id and message not in message_queue:
                     self.bot.llf.log(self.bot, '[Interface {}] Recieved : {}'.format(self.bot.id, message))
