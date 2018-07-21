@@ -872,41 +872,42 @@ class HighLevelFunctions:
                         self.bot.id, round(minutes_left), datetime.datetime.fromtimestamp(time.time() + round(minutes_left)*60).time()) + self.bot.interface.end_color)
                     time.sleep(60 * minutes_left)
 
-                minutes_left = max(1, 60 * (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60)))
-                if task['name'] == 'dd':
-                    if not self.bot.connected:
-                        self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id))
-                    self.manage_dds_duration(minutes_left)
-                elif task['name'] == 'hunt':
-                    if not self.bot.connected:
-                        self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
-                        self.bot.id, round(minutes_left, 0)))
-                    self.hunt_treasures(minutes_left)
-                elif task['name'] == 'huntGather':
-                    if not self.bot.connected:
-                        self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to hunt and gather for {} minutes'.format(
-                        self.bot.id, round(minutes_left, 0)))
-                    self.hunt_treasures(minutes_left, harvest=True)
-                elif task['name'] == 'sell':
-                    if not self.bot.connected:
-                        self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to sell items'.format(
-                        self.bot.id))
-                    self.drop_to_bank('all', True)
-                    self.sell_all(self.bot.subscribed)
-                elif task['name'] == 'sleep':
-                    self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
-                        self.bot.id, round(minutes_left)))
-                    self.bot.interface.disconnect()
-                    time.sleep(60 * minutes_left)
-                elif task['name'] == 'harvest':
-                    if not self.bot.connected:
-                        self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to harvest resources'.format(self.bot.id))
-                    self.harvest_path(minutes_left, sell=True)
+                minutes_left = 60 * (task['end'] - (time.localtime().tm_hour + time.localtime().tm_min / 60))
+                if minutes_left > 1:
+                    if task['name'] == 'dd':
+                        if not self.bot.connected:
+                            self.bot.interface.connect()
+                        self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id))
+                        self.manage_dds_duration(minutes_left)
+                    elif task['name'] == 'hunt':
+                        if not self.bot.connected:
+                            self.bot.interface.connect()
+                        self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
+                            self.bot.id, round(minutes_left, 0)))
+                        self.hunt_treasures(minutes_left)
+                    elif task['name'] == 'huntGather':
+                        if not self.bot.connected:
+                            self.bot.interface.connect()
+                        self.llf.log(self.bot, '[Scheduler {}] Starting to hunt and gather for {} minutes'.format(
+                            self.bot.id, round(minutes_left, 0)))
+                        self.hunt_treasures(minutes_left, harvest=True)
+                    elif task['name'] == 'sell':
+                        if not self.bot.connected:
+                            self.bot.interface.connect()
+                        self.llf.log(self.bot, '[Scheduler {}] Starting to sell items'.format(
+                            self.bot.id))
+                        self.drop_to_bank('all', True)
+                        self.sell_all(self.bot.subscribed)
+                    elif task['name'] == 'sleep':
+                        self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
+                            self.bot.id, round(minutes_left)))
+                        self.bot.interface.disconnect()
+                        time.sleep(60 * minutes_left)
+                    elif task['name'] == 'harvest':
+                        if not self.bot.connected:
+                            self.bot.interface.connect()
+                        self.llf.log(self.bot, '[Scheduler {}] Starting to harvest resources'.format(self.bot.id))
+                        self.harvest_path(minutes_left, sell=True)
 
     def drop_bot_mobile(self, idx):
         self.goto((-32, 37), 271)
