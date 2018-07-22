@@ -13,7 +13,8 @@ class Scraper:
         start = time.time()
         options = webdriver.ChromeOptions()
         if headless:
-            options.add_argument('headless')
+            options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
         self.driver = webdriver.Chrome(chrome_options=options)
         print('Scraper initialized in ' + str(round(time.time() - start, 1)) + ' seconds\n')
 
@@ -49,6 +50,7 @@ if __name__ == '__main__':
             links = []
             for row in cursor:
                 if not row[2]:
+                    print("Getting image for " + row[0])
                     link = s.get_image_link(row[0], row[1])
                     if link is not None:
                         links.append((row[0], link))
