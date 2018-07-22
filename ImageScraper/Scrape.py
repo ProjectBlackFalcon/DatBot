@@ -39,23 +39,27 @@ class Scraper:
 
 if __name__ == '__main__':
     while 1:
-        s = Scraper()
+        try:
 
-        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
-        cursor = conn.cursor()
-        cursor.execute("""SELECT name, server, banned FROM BotAccounts""")
-        links = []
-        for row in cursor:
-            if not row[2]:
-                link = s.get_image_link(row[0], row[1])
-                if link is not None:
-                    links.append((row[0], link))
+            s = Scraper()
 
-        for link in links:
-            cursor.execute("""UPDATE BotAccounts SET characterpage='{}' WHERE name='{}'""".format(link[1].replace('270_361', '600_880'), link[0]))
+            conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+            cursor = conn.cursor()
+            cursor.execute("""SELECT name, server, banned FROM BotAccounts""")
+            links = []
+            for row in cursor:
+                if not row[2]:
+                    link = s.get_image_link(row[0], row[1])
+                    if link is not None:
+                        links.append((row[0], link))
 
-        conn.commit()
-        conn.close()
-        s.destroy()
+            for link in links:
+                cursor.execute("""UPDATE BotAccounts SET characterpage='{}' WHERE name='{}'""".format(link[1].replace('270_361', '600_880'), link[0]))
 
-        time.sleep(3600)
+            conn.commit()
+            conn.close()
+            s.destroy()
+
+            time.sleep(3600)
+        except Exception:
+            print("Error, trying again")
