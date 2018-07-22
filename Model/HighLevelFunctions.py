@@ -851,22 +851,22 @@ class HighLevelFunctions:
         while 1:
             current_task = schedule[task_number % len(schedule)]
             previous_task = schedule[(task_number - 1) % len(schedule)]
-            if not caught_up and (previous_task['end'] * 3600 < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < current_task['end'] * 3600 or time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < schedule[0]['end'] or time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec > schedule[-1]['end']):
+            if not caught_up and (previous_task['end'] * 3600 < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < current_task['end'] * 3600 or time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < schedule[0]['end'] * 3600 or time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec > schedule[-1]['end'] * 3600):
                 caught_up = True
 
             if caught_up:
-                if not (current_task['start'] < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < current_task['end']):
-                    secs_left = (current_task['start'] + (86400 - time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec)) % 86400
+                if not (current_task['start'] * 3600 < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < current_task['end'] * 3600):
+                    secs_left = (current_task['start'] * 3600 + (86400 - time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec)) % 86400
                     self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes, waking up at {}'.format(self.bot.id, secs_left//60, datetime.datetime.fromtimestamp(time.time() + secs_left).time()) + self.bot.interface.end_color)
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
                     self.bot.interface.disconnect()
                     time.sleep(secs_left)
 
-                if current_task['end'] < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec:
-                    secs_left = current_task['end'] + (86400 - time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec)
+                if current_task['end'] * 3600 < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec:
+                    secs_left = current_task['end'] * 3600 + (86400 - time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec)
                 else:
-                    secs_left = current_task['end'] - time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec
+                    secs_left = current_task['end'] * 3600 - time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec
 
                 minutes_left = secs_left // 60
                 if current_task['name'] == 'dd':
