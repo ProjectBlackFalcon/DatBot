@@ -831,5 +831,12 @@ class Interface:
         """
         return self.execute_command('deEquipItem', [inv_id])
 
+    def exit_brak_north(self):
+        """
+        Exits brak by using the interactive on map (-26, 31). The bot will already be on cell 110
+        :return: Boolean
+        """
+        return self.execute_command('exitBrak')
+
 
 __author__ = 'Alexis'
