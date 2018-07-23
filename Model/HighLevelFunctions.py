@@ -361,7 +361,7 @@ class HighLevelFunctions:
         if not self.bot.interface.hunt_is_active()[0]:
             get_hunt(level)
         hunt_start = self.bot.interface.get_hunt_start()[0]
-        hunt = Hunt(level, hunt_start)
+        hunt = Hunt(self.bot, level, hunt_start)
         self.goto(hunt_start)
 
         self.bot.occupation = 'Treasure Hunting'

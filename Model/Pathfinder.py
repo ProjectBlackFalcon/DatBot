@@ -8,7 +8,7 @@ from LowLevelFunctions import LowLevelFunctions
 
 class PathFinder:
     def __init__(self, bot, start_map, end_map, start_cell, end_cell, worldmap):
-        self.llf = bot.resources
+        self.llf = bot.llf
         self.start = start_map
         self.end = end_map
         self.worldmap = worldmap
