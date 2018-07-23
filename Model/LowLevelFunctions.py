@@ -17,6 +17,9 @@ class LowLevelFunctions:
         self.disc_zaaps = self.get_discovered_zaaps()
         with open('../Utils/zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
+        with open('../Utils/CaracLevel.json', 'r') as f:
+            self.goal_caracs = json.load(f)
+
 
     def load_map_info(self):
         if self.full_map_info is None:
@@ -473,8 +476,7 @@ class LowLevelFunctions:
         caracs_names = ['Vi', 'Int', 'Agi', 'Cha', 'Fo', 'Sa']
         caracs = bot.characteristics.get_primary_characs()
         native_caracs = [caracs[name][0] for name in caracs.keys() if name != "Available"]
-        with open('../Utils/CaracLevel.json', 'r') as f:
-            goal_caracs = json.load(f)[bot.characteristics.level]
+        goal_caracs = self.goal_caracs[bot.characteristics.level]
         difference = [goal_caracs[i] - native_caracs[i] for i in range(len(native_caracs))]
         costs = [difference[0]] + \
                 [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
