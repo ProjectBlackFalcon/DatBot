@@ -3,10 +3,12 @@ from LowLevelFunctions import LowLevelFunctions
 from Bot import Bot
 from threading import Thread
 import random
+from Resources import Resources
 
 pipe = PipeToJava(headless=True)
 bot_id = 0
-llf = LowLevelFunctions()
+resources = Resources()
+llf = LowLevelFunctions(resources)
 
 colors = [
     '\033[92m',
@@ -42,7 +44,7 @@ credentials = [
 bots = []
 threads = []
 for cred in credentials:
-    bots.append(Bot(pipe, credentials.index(cred), cred, llf, False, color=colors[credentials.index(cred)]))
+    bots.append(Bot(pipe, credentials.index(cred), cred, llf, resources, False, color=colors[credentials.index(cred)]))
 
 for bot in bots:
     threads.append(Thread(target=bot.run))

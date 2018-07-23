@@ -11,17 +11,9 @@ import traceback
 class HighLevelFunctions:
     def __init__(self, bot):
         self.bot = bot
-        self.llf = LowLevelFunctions()
-        self.brak_maps, self.north_brak, self.east_brak = self.llf.get_brak_maps()
-        self.bwork_maps = self.llf.get_bwork_maps()
-        self.castle_amakna = self.llf.get_castle_maps()
 
     def goto(self, target_coord, target_cell=None, worldmap=1, harvest=False, forbid_zaaps=False):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-
-        with open('../Utils/gotos.txt', 'a') as f:
-            f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-            f.write('Going from map {}, cell {} to map {}, worldmap : {}'.format(current_map, current_cell, target_coord, worldmap))
 
         if current_worldmap != worldmap:
             # Incarnam to Astrub
@@ -42,7 +34,7 @@ class HighLevelFunctions:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
             elif current_worldmap == -1:
-                closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
+                closest_zaap = self.bot.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
                 if closest_zaap is not None:
                     if self.bot.interface.enter_heavenbag()[0]:
                         tries = 0
@@ -63,10 +55,10 @@ class HighLevelFunctions:
             else:
                 raise RuntimeError('Worldmap change not supported')
 
-        closest_zaap = self.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
+        closest_zaap = self.bot.llf.get_closest_known_zaap(self.bot.credentials['name'], target_coord)
         if closest_zaap is not None and not forbid_zaaps:
-            distance_zaap_target = self.llf.distance_coords(closest_zaap, tuple(target_coord))
-            if worldmap == current_worldmap and self.llf.distance_coords(current_map, tuple(target_coord)) > distance_zaap_target+5:
+            distance_zaap_target = self.bot.llf.distance_coords(closest_zaap, tuple(target_coord))
+            if worldmap == current_worldmap and self.bot.llf.distance_coords(current_map, tuple(target_coord)) > distance_zaap_target+5:
                 if self.bot.interface.enter_heavenbag()[0]:
                     self.bot.interface.use_zaap(closest_zaap)
                     current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
@@ -76,47 +68,47 @@ class HighLevelFunctions:
                         self.bot.interface.use_zaap(closest_zaap)
                         time.sleep(2)
                 else:
-                    closest_zaap_2 = self.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
+                    closest_zaap_2 = self.bot.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
                     self.goto(closest_zaap_2, forbid_zaaps=True)
                     self.bot.interface.enter_heavenbag()
                     self.bot.interface.use_zaap(closest_zaap)
                     current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
-        if list(current_map) not in self.brak_maps and list(target_coord) in self.brak_maps:
+        if list(current_map) not in self.bot.resources.brak_maps and list(target_coord) in self.bot.resources.brak_maps:
             # Bot needs to enter brak
-            disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
+            disc_zaaps = self.bot.llf.get_discovered_zaaps(self.bot.credentials['name'])
             if [-26, 35] in disc_zaaps and self.bot.interface.enter_heavenbag()[0]:
                 self.bot.interface.use_zaap((-26, 35))
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-        if list(current_map) in self.brak_maps and list(target_coord) not in self.brak_maps:
+        if list(current_map) in self.bot.resources.brak_maps and list(target_coord) not in self.bot.resources.brak_maps:
             # Bot needs to exit brak
-            if list(target_coord) in self.east_brak:
+            if list(target_coord) in self.bot.resources.brak_east_maps:
                 self.goto((-20, 34))
                 self.bot.interface.change_map(307, 'e')
-            elif list(target_coord) in self.north_brak:
+            elif list(target_coord) in self.bot.resources.brak_north_maps:
                 self.goto((-26, 31), target_cell=110)
                 self.bot.interface.exit_brak_north()
             current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
-        if list(current_map) not in self.castle_amakna and list(target_coord) in self.castle_amakna:
+        if list(current_map) not in self.bot.resources.castle_maps and list(target_coord) in self.bot.resources.castle_maps:
             # Bot needs to enter the castle
-            disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
+            disc_zaaps = self.bot.llf.get_discovered_zaaps(self.bot.credentials['name'])
             if [3, -5] in disc_zaaps and self.bot.interface.enter_heavenbag()[0]:
                 self.bot.interface.use_zaap((3, -5))
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-        if list(current_map) in self.castle_amakna and list(target_coord) not in self.castle_amakna:
+        if list(current_map) in self.bot.resources.castle_maps and list(target_coord) not in self.bot.resources.castle_maps:
             # Bot needs to exit the castle through the northern gate
             if target_coord[1] < current_map[1]:
                 self.goto((4, -8))
                 self.bot.interface.change_map(140, 'w')
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
-        if list(current_map) not in self.bwork_maps and list(target_coord) in self.bwork_maps:
+        if list(current_map) not in self.bot.resources.bwork_maps and list(target_coord) in self.bot.resources.bwork_maps:
             # Bot needs to enter bwork village
             self.goto((-1, 8), target_cell=383)
             self.bot.interface.enter_bwork()
             current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
-        if list(current_map) in self.bwork_maps and list(target_coord) not in self.bwork_maps:
+        if list(current_map) in self.bot.resources.bwork_maps and list(target_coord) not in self.bot.resources.bwork_maps:
             # Bot needs to exit bwork village
             self.goto((-2, 8), target_cell=260)
             self.bot.interface.exit_bwork()
@@ -136,7 +128,7 @@ class HighLevelFunctions:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                 self.bot.position = current_map, current_worldmap
                 if current_worldmap == 1:
-                    self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
+                    self.bot.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position)
                 if harvest:
                     self.harvest_map()
             else:
@@ -155,22 +147,17 @@ class HighLevelFunctions:
             self.bot.interface.connect()
         self.bot.occupation = 'Discovering Zaaps'
         self.update_db()
-        closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
+        closest_unk_zaap = self.bot.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
         while closest_unk_zaap:
             self.goto(closest_unk_zaap)
-            self.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position[0])
-            closest_unk_zaap = self.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
+            self.bot.llf.add_discovered_zaap(self.bot.credentials['name'], self.bot.position[0])
+            closest_unk_zaap = self.bot.llf.get_closest_unknown_zaap(self.bot.credentials['name'], self.bot.position[0])
 
     def harvest_map(self, harvest_only=None, do_not_harvest=None):
         if self.bot.characteristics.weight_max - self.bot.characteristics.weight < 200:
             return False
         self.bot.occupation = 'Harvesting map'
         self.update_db()
-        with open('../Utils/resourcesIDs.json', 'r') as f:
-            resources_ids = json.load(f)
-
-        with open('../Utils/resourcesLevels.json', 'r') as f:
-            resources_levels = json.load(f)
 
         local_blacklist = []
 
@@ -179,11 +166,11 @@ class HighLevelFunctions:
             map_coords, player_pos, worldmap, _ = self.bot.interface.get_map()
             map_resources = {}
             for cell_id, res_id, status in map_resources_ids:
-                if str(res_id) in resources_ids.keys():
-                    if resources_ids[str(res_id)] in map_resources.keys():
-                        map_resources[resources_ids[str(res_id)]].append((cell_id, status))
+                if str(res_id) in self.bot.resources.resources_ids.keys():
+                    if self.bot.resources.resources_ids[str(res_id)] in map_resources.keys():
+                        map_resources[self.bot.resources.resources_ids[str(res_id)]].append((cell_id, status))
                     else:
-                        map_resources[resources_ids[str(res_id)]] = [(cell_id, status)]
+                        map_resources[self.bot.resources.resources_ids[str(res_id)]] = [(cell_id, status)]
                 else:
                     with open('../Utils/unknownResourceID.txt', 'a') as f:
                         f.write('Map : {}, ID : {}, Cell : {}\n'.format(map_coords, res_id, cell_id))
@@ -209,7 +196,7 @@ class HighLevelFunctions:
             filtered_map_resources3 = {}
             job_levels = self.bot.characteristics.jobs
             for resource, spots in filtered_map_resources2.items():
-                if resource == "Eau" or resources_levels[resource][0] <= job_levels[resources_levels[resource][1]][0]:
+                if resource == "Eau" or self.bot.resources.resources_levels[resource][0] <= job_levels[self.bot.resources.resources_levels[resource][1]][0]:
                     filtered_map_resources3[resource] = spots
 
             harvestable = []
@@ -229,20 +216,20 @@ class HighLevelFunctions:
 
             harvest_spots = []
             for cell in harvestable:
-                neighbour_cell = self.llf.get_closest_walkable_neighbour_cell(cell, player_pos, map_coords, worldmap)
+                neighbour_cell = self.bot.llf.get_closest_walkable_neighbour_cell(cell, player_pos, map_coords, worldmap)
                 if neighbour_cell:
                     harvest_spots.append((neighbour_cell, cell))
                 else:
-                    harvest_spots.append((self.llf.get_closest_walkable_cell(cell, map_coords, worldmap), cell))
+                    harvest_spots.append((self.bot.llf.get_closest_walkable_cell(cell, map_coords, worldmap), cell))
             # print('[Harvest] harvest spot : {}'.format(harvest_spots))
 
             if harvest_spots:
                 success = True
-                selected_cell = self.llf.closest_cell(player_pos, [spot[0] for spot in harvest_spots])
+                selected_cell = self.bot.llf.closest_cell(player_pos, [spot[0] for spot in harvest_spots])
                 if not self.bot.interface.move(selected_cell)[0]:
                     success = False
                     # TODO
-                resource_cell = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
+                resource_cell = self.bot.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
                 resource_name = harvestable_match_res_name[harvestable.index(resource_cell)]
                 ret_val = self.bot.interface.harvest_resource(resource_cell)
                 if len(ret_val) == 1:
@@ -251,7 +238,7 @@ class HighLevelFunctions:
                     ret_val = ret_val[0], resource_name, ret_val[1], ret_val[2], ret_val[3]
 
                 if not success:
-                    inacessible_res = self.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
+                    inacessible_res = self.bot.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
                     local_blacklist.append(inacessible_res)
                     # print('Black List : ', local_blacklist)
                     return -1
@@ -275,17 +262,17 @@ class HighLevelFunctions:
             for item in harvest:
                 f.write('ID : {}, Item : {}, Number : {}, Weight : {}\n'.format(item[0], item[1], item[2], int(item[3]*100/item[4])))
         if type(ret_val) is tuple and ret_val[3]+5 >= ret_val[4]:
-            self.llf.log(self.bot, '[Harvest {}] Full'.format(self.bot.id))
+            self.bot.llf.log(self.bot, '[Harvest {}] Full'.format(self.bot.id))
             return False
         else:
-            self.llf.log(self.bot, '[Harvest {}] Done'.format(self.bot.id))
+            self.bot.llf.log(self.bot, '[Harvest {}] Done'.format(self.bot.id))
             return True
 
     def harvest_path(self, duration_minutes, path=None, harvest_only=None, do_not_harvest=None, sell=False):
         duration = duration_minutes * 60
         start = time.time()
         full = False
-        path = self.llf.fetch_harvest_path(self.bot.credentials['name']) if path is None else path
+        path = self.bot.llf.fetch_harvest_path(self.bot.credentials['name']) if path is None else path
         while time.time() - start < duration:
             for tile, target_cell, worldmap in path:
                 if time.time() - start > duration:
@@ -294,30 +281,28 @@ class HighLevelFunctions:
                     try:
                         self.goto(tile, target_cell=target_cell, worldmap=worldmap)
                     except Exception:
-                        self.llf.log(self.bot, str(traceback.format_exc()))
+                        self.bot.llf.log(self.bot, str(traceback.format_exc()))
                     full = not self.harvest_map(harvest_only, do_not_harvest)
                 else:
                     self.drop_to_bank('all', withdraw_items_to_sell=sell)
                     if sell:
-                        self.sell_all(self.bot.subscribed)
+                        self.sell_all()
                     self.goto(tile, target_cell=target_cell, worldmap=worldmap)
                     full = not self.harvest_map(harvest_only, do_not_harvest)
 
     def withdraw_items_to_sell_from_bank(self, player_stats, bank_contents):
         self.bot.occupation = 'Withdrawing items from bank'
         self.update_db()
-        with open('../Utils/ItemsToSell.json', 'r') as f:
-            items_to_sell = json.load(f)
-        if self.bot.credentials['name'] in items_to_sell.keys():
-            items_to_sell = items_to_sell[self.bot.credentials['name']]
+        if self.bot.credentials['name'] in self.bot.resources.items_to_sell.keys():
+            items_to_sell = self.bot.resources.items_to_sell[self.bot.credentials['name']]
         else:
-            items_to_sell = items_to_sell['Default']
+            items_to_sell = self.bot.resources.items_to_sell['Default']
         item_to_sell_ids = [int(key) for hdv_name in items_to_sell.keys() for key in items_to_sell[hdv_name]]
         item_to_sell_batch_size = [items_to_sell[hdv_name][key]['quantity'] for hdv_name in items_to_sell.keys() for key in items_to_sell[hdv_name]]
         for item_id in item_to_sell_ids:
-            unique_id = self.llf.get_inventory_id(bank_contents['Items'], item_id)
-            number = self.llf.get_number_of_item_in_inventory(bank_contents['Items'], item_id)
-            weight = self.llf.get_weight_of_item_in_inventory(bank_contents['Items'], item_id)
+            unique_id = self.bot.llf.get_inventory_id(bank_contents['Items'], item_id)
+            number = self.bot.llf.get_number_of_item_in_inventory(bank_contents['Items'], item_id)
+            weight = self.bot.llf.get_weight_of_item_in_inventory(bank_contents['Items'], item_id)
             inv_space = player_stats['WeightMax'] - player_stats['Weight']
             quantity_to_withdraw = min(number, int(inv_space / weight)) if weight else number
             batch_size = item_to_sell_batch_size[item_to_sell_ids.index(item_id)]
@@ -345,9 +330,7 @@ class HighLevelFunctions:
 
     def get_future_stuff_from_bank(self, bank_contents=None):
         stuff_level = int(self.bot.characteristics.level / 20) * 20
-        with open('../Utils/Preferred_stuff.json', 'r') as f:
-            preferred_stuffs = json.load(f)
-        future_preferred_stuffs = [preferred_stuffs[level] for level in preferred_stuffs.keys() if int(level) >= stuff_level]
+        future_preferred_stuffs = [self.bot.resources.preferred_stuffs[level] for level in self.bot.resources.preferred_stuffs.keys() if int(level) >= stuff_level]
         ids = set([])
         for stuff in future_preferred_stuffs:
             for item in stuff:
@@ -364,10 +347,10 @@ class HighLevelFunctions:
             self.update_db()
             self.goto((-25, -36), worldmap=1)
             door = self.bot.interface.get_hunting_hall_door_cell()[0]
-            self.bot.interface.move(self.llf.get_closest_walkable_cell(door, self.bot.position[0], self.bot.position[1]))
+            self.bot.interface.move(self.bot.llf.get_closest_walkable_cell(door, self.bot.position[0], self.bot.position[1]))
             self.bot.interface.enter_hunting_hall()
             while not self.bot.interface.get_new_hunt(level)[0]:
-                self.llf.log(self.bot, '[Treasure Hunt {}] Getting new hunt'.format(self.bot.id))
+                self.bot.llf.log(self.bot, '[Treasure Hunt {}] Getting new hunt'.format(self.bot.id))
                 time.sleep(30)
             self.bot.interface.exit_hunting_hall()
 
@@ -413,7 +396,7 @@ class HighLevelFunctions:
                 else:
                     clue = clue.lower()
                     try:
-                        clue_pos = self.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
+                        clue_pos = self.bot.llf.get_next_clue_pos(clue, self.bot.position[0], direction)
                         hunt.current_clue().guessed_pos = clue_pos
                         self.goto(clue_pos, harvest=harvest)
                     except Exception as e:
@@ -426,7 +409,7 @@ class HighLevelFunctions:
                             f.write(e.args[0])
 
                         if 'Non existing clue' in e.args[0]:
-                            self.llf.log(self.bot, '[Treasure Hunt {}] Clue is not referenced, trying to get to it...'.format(self.bot.id))
+                            self.bot.llf.log(self.bot, '[Treasure Hunt {}] Clue is not referenced, trying to get to it...'.format(self.bot.id))
                             found = False
                             self.bot.interface.validate_hunt_step()
                             clues_left = self.bot.interface.get_clues_left()[0]
@@ -437,7 +420,7 @@ class HighLevelFunctions:
                                 try:
                                     self.goto(destination, harvest=harvest)
                                 except Exception as e:
-                                    self.llf.log(self.bot, '[Treasure Hunt {}] Failed to get to clue. It might have been wrongly blacklisted in TresureHuntNoClues.json'.format(self.bot.id))
+                                    self.bot.llf.log(self.bot, '[Treasure Hunt {}] Failed to get to clue. It might have been wrongly blacklisted in TresureHuntNoClues.json'.format(self.bot.id))
                                     with open('../Utils/HuntErrorsLog.txt', 'a') as f:
                                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                         f.write(traceback.format_exc())
@@ -455,7 +438,7 @@ class HighLevelFunctions:
                                         found = True
                                         hunt.added_clue = True
                                         hunt.add_to_clue_list(clue, self.bot.position)
-                                        self.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
+                                        self.bot.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
                                     elif not step_valid and self.bot.interface.hunt_is_active()[0]:
                                         hunt.add_to_no_clue_list(clue, self.bot.position)
 
@@ -470,7 +453,7 @@ class HighLevelFunctions:
                     clue, direction = self.bot.interface.get_hunt_clue()
                     last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
                     if 'Phorreur' not in clue:
-                        clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
+                        clue_pos = self.bot.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
                     with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate clue "{}" on map {} (bot pos : {})'.format(clue, destination, self.bot.position[0]))
@@ -492,13 +475,13 @@ class HighLevelFunctions:
                 if type(last_clue[0]) is str:
                     clue, direction = last_clue
                     last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
-                    wrong_clue_pos = self.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
+                    wrong_clue_pos = self.bot.llf.get_next_clue_pos(clue, last_valid_clue_pos, direction)
                     with open('../Utils/HuntErrorsLogBrief.txt', 'a') as f:
                         f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                         f.write('Failed to validate step because of clue "{}" going {} from {} (bot pos : {})'.format(clue, direction, last_valid_clue_pos, self.bot.position[0]))
                         f.write('Clue was supposed to be at {}'.format(wrong_clue_pos))
 
-                    self.llf.log(self.bot, '[Treasure Hunt {}] Error with a clue, trying to get to it...'.format(self.bot.id))
+                    self.bot.llf.log(self.bot, '[Treasure Hunt {}] Error with a clue, trying to get to it...'.format(self.bot.id))
                     clues_left = self.bot.interface.get_clues_left()[0]
                     self.goto(last_valid_clue_pos)
                 else:
@@ -519,11 +502,11 @@ class HighLevelFunctions:
                             found = True
                             hunt.added_clue = True
                             hunt.add_to_clue_list(clue, self.bot.position)
-                            self.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
+                            self.bot.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
                         else:
                             hunt.add_to_no_clue_list(clue, self.bot.position)
                     elif self.bot.position[0] == wrong_clue_pos:
-                        self.llf.log(self.bot, '[Treasure Hunt {}] Removed clue'.format(self.bot.id))
+                        self.bot.llf.log(self.bot, '[Treasure Hunt {}] Removed clue'.format(self.bot.id))
                         hunt.add_to_no_clue_list(clue, self.bot.position)
                         hunt.remove_from_clue_list(clue, self.bot.position)
 
@@ -538,7 +521,7 @@ class HighLevelFunctions:
             hunt.current_step().validate(clues_left)
 
         if hunt.error:
-            self.llf.log(self.bot, '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
+            self.bot.llf.log(self.bot, '[Treasure Hunt {}] Issue detected, abandoning hunt'.format(self.bot.id))
             with open('../Utils/HuntLogs.txt', 'w') as f:
                 f.write(str(hunt))
 
@@ -567,9 +550,9 @@ class HighLevelFunctions:
             chest_ids = [15248, 15260, 15261, 15262, 15264, 15265, 15266, 15267, 15268, 15269, 15270]
             inventory = self.bot.inventory.items
             for chest_id in chest_ids:
-                number = self.llf.get_number_of_item_in_inventory(inventory, chest_id)
+                number = self.bot.llf.get_number_of_item_in_inventory(inventory, chest_id)
                 for i in range(number):
-                    self.bot.interface.use_item(self.llf.get_inventory_id(inventory, chest_id))
+                    self.bot.interface.use_item(self.bot.llf.get_inventory_id(inventory, chest_id))
 
             if not self.bot.interface.hunt_is_active()[0]:
                 self.bot.interface.new_hunt_timer = 0
@@ -577,7 +560,7 @@ class HighLevelFunctions:
                 hunt.reason = 'Stronk Af'
                 with open('../Utils/HuntLogs.txt', 'w') as f:
                     f.write(str(hunt))
-                self.llf.log(self.bot, '[Treasure Hunt {}] Hunt successful'.format(self.bot.id))
+                self.bot.llf.log(self.bot, '[Treasure Hunt {}] Hunt successful'.format(self.bot.id))
             else:
                 hunt.reason = 'Lost against chest'
         return hunt
@@ -591,15 +574,15 @@ class HighLevelFunctions:
             try:
                 n_hunts += 1
                 hunt_start = time.time()
-                self.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
+                self.bot.llf.log(self.bot, '[Treasure Hunt {}] Starting hunt #{}'.format(self.bot.id, n_hunts))
                 hunt = self.tresure_hunt(level, harvest)
-                self.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), hunt.success, str(hunt), hunt.reason)
+                self.bot.llf.hunts_to_db(self.bot.credentials['name'], round((time.time()-hunt_start)/60, 1), hunt.success, str(hunt), hunt.reason)
                 n_success = n_success+1 if hunt.success else n_success
             except Exception:
                 with open('../Utils/24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
-        self.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
+        self.bot.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
         self.drop_to_bank(item_id_list='all', withdraw_items_to_sell=True)
         self.sell_all()
 
@@ -654,21 +637,17 @@ class HighLevelFunctions:
     def sell_hdv(self, hdv_position=None):
         self.bot.occupation = 'Selling items'
         self.update_db()
-        with open('../Utils/hdv_pos.json', 'r') as f:
-            hdv_pos = json.load(f)
-        with open('../Utils/ItemsToSell.json', 'r') as f:
-            items_to_sell = json.load(f)
 
-        if self.bot.credentials['name'] in items_to_sell.keys():
-            items_to_sell = items_to_sell[self.bot.credentials['name']]
+        if self.bot.credentials['name'] in self.bot.resources.items_to_sell.keys():
+            items_to_sell = self.bot.resources.items_to_sell[self.bot.credentials['name']]
         else:
-            items_to_sell = items_to_sell['Default']
+            items_to_sell = self.bot.resources.items_to_sell['Default']
 
         current_map = list(self.bot.position[0]) if hdv_position is None else list(hdv_position)
         valid_map = False
         hdv_type = None
 
-        for hdv, hdv_coords in hdv_pos.items():
+        for hdv, hdv_coords in self.bot.resources.hdv_pos.items():
             if current_map in hdv_coords and items_to_sell[hdv]:
                 valid_map = True
                 hdv_type = hdv
@@ -685,8 +664,8 @@ class HighLevelFunctions:
                 if str(item[1]) in items_to_sell.keys() and item[3] >= items_to_sell[str(item[1])]["quantity"]:
                     # print('[SELL HDV] Item going to be sold : {}'.format(item))
                     hdv_list = []
-                    for key in hdv_pos.keys():
-                        hdv_list += hdv_pos[key]
+                    for key in self.bot.resources.hdv_pos.keys():
+                        hdv_list += self.bot.resources.hdv_pos[key]
                     if self.bot.position[1] == 1 and self.bot.position[0] in hdv_list:
                         self.bot.interface.open_hdv()
                         item_hdv_stats = self.bot.interface.get_hdv_item_stats(item[1])
@@ -698,7 +677,7 @@ class HighLevelFunctions:
                             price = item_hdv_stats[batch_size_index] - 1
                             player_lvl = self.bot.characteristics.level
                             if hdv_position is None and price > 0:
-                                self.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
+                                self.bot.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
                                 self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
                         return True
@@ -710,11 +689,9 @@ class HighLevelFunctions:
     def sell_all(self):
         if not self.bot.connected:
             self.bot.interface.connect()
-        with open('../Utils/hdv_pos.json', 'r') as f:
-            all_hdvs = json.load(f)
 
         hdvs = []
-        for position in all_hdvs.values():
+        for position in self.bot.resources.hdv_pos.values():
             if self.bot.subscribed:
                 hdvs.append(position[0])
             else:
@@ -740,7 +717,7 @@ class HighLevelFunctions:
         dd_to_pex_id = None
         for tile, cell in path:
             self.goto(tile, cell)
-            tool = self.llf.get_map_dd_tool(self.bot.position[0])
+            tool = self.bot.llf.get_map_dd_tool(self.bot.position[0])
             dds_stable = []
             dds_paddock = []
             all_dds = self.bot.interface.open_dd()
@@ -752,9 +729,9 @@ class HighLevelFunctions:
                     else:
                         dds_stable.append(dd_obj)
 
-            self.llf.log(self.bot, '[DD Manager {}] Current tool : {}'.format(self.bot.id, tool))
-            self.llf.log(self.bot, '[DD Manager {}] DDs in stable : {}'.format(self.bot.id, len(dds_stable)))
-            self.llf.log(self.bot, '[DD Manager {}] DDs in paddock : {}'.format(self.bot.id, len(dds_paddock)))
+            self.bot.llf.log(self.bot, '[DD Manager {}] Current tool : {}'.format(self.bot.id, tool))
+            self.bot.llf.log(self.bot, '[DD Manager {}] DDs in stable : {}'.format(self.bot.id, len(dds_stable)))
+            self.bot.llf.log(self.bot, '[DD Manager {}] DDs in paddock : {}'.format(self.bot.id, len(dds_paddock)))
 
             # Pull sterile non pregnant dds
             for dd in dds_stable:
@@ -769,11 +746,11 @@ class HighLevelFunctions:
             for dd in dds_paddock:
                 n_dds_to_kick = len(dds_stable)-245 if len(dds_stable)-245 > 0 else 0
                 if n_dds_to_kick:
-                    self.llf.score_dds(dds_stable)
+                    self.bot.llf.score_dds(dds_stable)
                     score_sorted_dds = sorted(dds_stable, key=lambda one_dd: one_dd.score)
                     dds_to_kick = score_sorted_dds[:n_dds_to_kick]
                     for dd_to_kick in dds_to_kick:
-                        self.llf.log(self.bot, '[DD Manager{} ] Kicking dd {}. Score : {}'.format(self.bot.id, dd_to_kick.id, dd_to_kick.score))
+                        self.bot.llf.log(self.bot, '[DD Manager{} ] Kicking dd {}. Score : {}'.format(self.bot.id, dd_to_kick.id, dd_to_kick.score))
                         self.bot.interface.put_dd_in_inventory(dd_to_kick.id, "stable")
                         del dds_stable[dds_stable.index(dd_to_kick)]
 
@@ -849,7 +826,7 @@ class HighLevelFunctions:
         self.bot.interface.dismount_dd()
         dds = self.bot.interface.open_dd()
         self.bot.interface.put_dd_in_stable(dd_id, 'equip')
-        bot_mobile_id = self.llf.get_bot_mobile(dds)
+        bot_mobile_id = self.bot.llf.get_bot_mobile(dds)
         if bot_mobile_id:
             self.bot.interface.equip_dd(bot_mobile_id, 'stable')
             return True
@@ -877,7 +854,7 @@ class HighLevelFunctions:
             if caught_up:
                 if not (current_task['start'] * 3600 < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < current_task['end'] * 3600):
                     secs_left = (current_task['start'] * 3600 + (86400 - (time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec))) % 86400
-                    self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes, waking up at {}'.format(self.bot.id, secs_left//60, datetime.datetime.fromtimestamp(time.time() + secs_left).time()) + self.bot.interface.end_color)
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes, waking up at {}'.format(self.bot.id, secs_left//60, datetime.datetime.fromtimestamp(time.time() + secs_left).time()) + self.bot.interface.end_color)
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
                     self.bot.interface.disconnect()
@@ -892,36 +869,36 @@ class HighLevelFunctions:
                 if current_task['name'] == 'dd':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id))
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Starting to manage DDs'.format(self.bot.id))
                     self.manage_dds_duration(minutes_left)
                 elif current_task['name'] == 'hunt':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Starting to hunt for {} minutes'.format(
                         self.bot.id, round(minutes_left, 0)))
                     self.hunt_treasures(minutes_left)
                 elif current_task['name'] == 'huntGather':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to hunt and gather for {} minutes'.format(
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Starting to hunt and gather for {} minutes'.format(
                         self.bot.id, round(minutes_left, 0)))
                     self.hunt_treasures(minutes_left, harvest=True)
                 elif current_task['name'] == 'sell':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to sell items'.format(
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Starting to sell items'.format(
                         self.bot.id))
                     self.drop_to_bank('all', True)
-                    self.sell_all(self.bot.subscribed)
+                    self.sell_all()
                 elif current_task['name'] == 'sleep':
-                    self.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes'.format(
                         self.bot.id, round(minutes_left)))
                     self.bot.interface.disconnect()
                     time.sleep(60 * minutes_left)
                 elif current_task['name'] == 'harvest':
                     if not self.bot.connected:
                         self.bot.interface.connect()
-                    self.llf.log(self.bot, '[Scheduler {}] Starting to harvest resources'.format(self.bot.id))
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Starting to harvest resources'.format(self.bot.id))
                     self.harvest_path(minutes_left, sell=True)
 
             task_number += 1
@@ -943,7 +920,7 @@ class HighLevelFunctions:
         self.bot.interface.put_dd_in_paddock(idx, 'equip')
         self.bot.interface.close_dd()
         self.bot.mount = 'resting'
-        self.llf.set_mount_situation(self.bot.credentials['name'], 'resting')
+        self.bot.llf.set_mount_situation(self.bot.credentials['name'], 'resting')
         self.bot.occupation = 'Putting Bot-Mobile in paddock'
         self.update_db()
 
@@ -952,13 +929,13 @@ class HighLevelFunctions:
         self.update_db()
         self.goto((-32, 37), 271)
         all_dds = self.bot.interface.open_dd()
-        bm_id = self.llf.get_bot_mobile(all_dds)
+        bm_id = self.bot.llf.get_bot_mobile(all_dds)
         if bm_id:
             self.bot.interface.equip_dd(bm_id, 'paddock')
         self.bot.interface.close_dd()
         self.bot.interface.mount_dd()
         self.bot.mount = 'equipped'
-        self.llf.set_mount_situation(self.bot.credentials['name'], 'equipped')
+        self.bot.llf.set_mount_situation(self.bot.credentials['name'], 'equipped')
 
     def update_db(self):
         kamas = -1 if self.bot.inventory.kamas is None else self.bot.inventory.kamas
@@ -966,9 +943,9 @@ class HighLevelFunctions:
         occupation = "Unknown" if self.bot.occupation is None else self.bot.occupation
         position = ((0, 0), 0) if self.bot.position is None else self.bot.position
         try:
-            self.llf.log(self.bot,
+            self.bot.llf.log(self.bot,
                          '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], kamas, level, occupation, position[0], position[1]))
-            self.llf.update_db(
+            self.bot.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
                 self.bot.credentials['name'],
@@ -980,8 +957,8 @@ class HighLevelFunctions:
             )
         except TypeError:
             # Degraded upload
-            self.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name']))
-            self.llf.update_db(
+            self.bot.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name']))
+            self.bot.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
                 self.bot.credentials['name'],

@@ -30,7 +30,5 @@ class Inventory:
 
     def equip_preferred_stuff(self):
         stuff_level = int(self.bot.characteristics.level/20)*20
-        with open('../Utils/Preferred_stuff.json', 'r') as f:
-            preferred_stuff = json.load(f)[str(stuff_level)]
-        for item in preferred_stuff:
+        for item in self.bot.resources.preferred_stuffs[str(stuff_level)]:
             self.equip_item(item['Id'], item['Slot'])

@@ -4,7 +4,8 @@ import json
 
 
 class Hunt:
-    def __init__(self, level, start_pos):
+    def __init__(self, bot, level, start_pos):
+        self.bot = bot
         self.level = level
         self.start_pos = start_pos
         self.steps = []  # type: List[Step]
@@ -25,37 +26,28 @@ class Hunt:
 
     def add_to_no_clue_list(self, clue_name, pos):
         clue_name = clue_name.lower()
-        with open('../Utils/TresureHuntNoClues.json', 'r') as f:
-            no_clues = json.load(f)
-        no_clues[clue_name].append(pos[0])
+        self.bot.resources.no_clues[clue_name].append(pos[0])
         with open('../Utils/TresureHuntNoClues.json', 'w') as f:
-            json.dump(no_clues, f)
+            json.dump(self.bot.resources.no_clues, f)
 
     def add_to_clue_list(self, clue_name, pos):
         clue_name = clue_name.lower()
-        with open('../Utils/TresureHuntClues.json', 'r') as f:
-            clues = json.load(f)
-        clues[clue_name].append(pos[0])
+        self.bot.resources.clues[clue_name].append(pos[0])
         with open('../Utils/TresureHuntClues.json', 'w') as f:
-            json.dump(clues, f)
+            json.dump(self.bot.resources.clues, f)
         with open('../Utils/TresureHuntCluesAutoAdd.txt', 'a') as f:
             f.write('\n{} | {}'.format(clue_name, pos))
 
     def remove_from_clue_list(self, clue_name, pos):
         clue_name = clue_name.lower()
-        with open('../Utils/TresureHuntClues.json', 'r') as f:
-            clues = json.load(f)
-        del clues[clue_name][clues[clue_name].index(pos[0])]
+        del self.bot.resources.clues[clue_name][self.bot.resources.clues[clue_name].index(pos[0])]
         with open('../Utils/TresureHuntClues.json', 'w') as f:
-            json.dump(clues, f)
+            json.dump(self.bot.resources.clues, f)
         with open('../Utils/TresureHuntCluesAutoRemove.txt', 'a') as f:
             f.write('\n{} | {}'.format(clue_name, pos))
 
     def get_no_clue_list(self, clue_name):
-        clue_name = clue_name.lower()
-        with open('../Utils/TresureHuntNoClues.json', 'r') as f:
-            no_clues = json.load(f)[clue_name]
-        return no_clues
+        return self.bot.resources.no_clues[clue_name.lower()]
 
     def __str__(self):
         return '################## NEW HUNT ##################\n' \
