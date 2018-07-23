@@ -195,14 +195,14 @@ class LowLevelFunctions:
                     zaaps[row[1]] = []
             return copy.deepcopy(zaaps)
 
-    def get_closest_known_zaap(self, bot_name, pos):
+    def get_closest_known_zaap(self, bot_name, pos, forbid=[]):
         if bot_name in self.disc_zaaps.keys():
             disc_zaaps = self.disc_zaaps[bot_name]
         else:
             return None
         closest = None, 100000
         for zaap_pos in disc_zaaps:
-            if self.distance_coords(pos, zaap_pos) < closest[1]:
+            if self.distance_coords(pos, zaap_pos) < closest[1] and zaap_pos not in forbid:
                 closest = zaap_pos, self.distance_coords(pos, zaap_pos)
         return closest[0]
 
@@ -255,12 +255,21 @@ class LowLevelFunctions:
     def get_brak_maps(self):
         with open('../Utils/BrakMaps.json', 'r') as f:
             brak_maps = json.load(f)
-        return brak_maps
+        with open('../Utils/BrakNorth.json', 'r') as f:
+            north_maps = json.load(f)
+        with open('../Utils/BrakEast.json', 'r') as f:
+            east_maps = json.load(f)
+        return brak_maps, north_maps, east_maps
 
     def get_bwork_maps(self):
         with open('../Utils/BworkMaps.json', 'r') as f:
             bwork_maps = json.load(f)
         return bwork_maps
+
+    def get_castle_maps(self):
+        with open('../Utils/CastleAmakna.json', 'r') as f:
+            castle_maps = json.load(f)
+        return castle_maps
 
     def get_map_dd_tool(self, position):
         with open('../Utils/ddTools.json', 'r') as f:

@@ -12,8 +12,9 @@ class HighLevelFunctions:
     def __init__(self, bot):
         self.bot = bot
         self.llf = LowLevelFunctions()
-        self.brak_maps = self.llf.get_brak_maps()
+        self.brak_maps, self.north_brak, self.east_brak = self.llf.get_brak_maps()
         self.bwork_maps = self.llf.get_bwork_maps()
+        self.castle_amakna = self.llf.get_castle_maps()
 
     def goto(self, target_coord, target_cell=None, worldmap=1, harvest=False, forbid_zaaps=False):
         current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
@@ -89,8 +90,26 @@ class HighLevelFunctions:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.brak_maps and list(target_coord) not in self.brak_maps:
             # Bot needs to exit brak
-            # TODO
-            pass
+            if list(target_coord) in self.east_brak:
+                self.goto((-20, 34))
+                self.bot.interface.change_map(307, 'e')
+            elif list(target_coord) in self.north_brak:
+                self.goto((-26, 31), target_cell=110)
+                self.bot.interface.exit_brak_north()
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+
+        if list(current_map) not in self.castle_amakna and list(target_coord) in self.castle_amakna:
+            # Bot needs to enter the castle
+            self.bot.interface.enter_heavenbag()
+            self.bot.interface.use_zaap((3, -5))
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+        if list(current_map) in self.castle_amakna and list(target_coord) not in self.castle_amakna:
+            # Bot needs to exit the castle through the northern gate
+            if target_coord[1] < current_map[1]:
+                self.goto((4, -8))
+                self.bot.interface.change_map(140, 'w')
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+
         if list(current_map) not in self.bwork_maps and list(target_coord) in self.bwork_maps:
             # Bot needs to enter bwork village
             self.goto((-1, 8), target_cell=383)
