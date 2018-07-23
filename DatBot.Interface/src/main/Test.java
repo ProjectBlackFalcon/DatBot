@@ -28,13 +28,10 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
 		communication.getReturn("0;0;i;cmd;connect;['blushinglocus','bulldistribution0','Hyrisson','Julith']");
 		Thread.sleep(30000);
-		communication.getReturn("0;0;i;cmd;openDD;[None]");
-		Thread.sleep(3000);
-//		communication.getReturn("0;0;i;cmd;putInPaddock;["+ communication.getModels().get(0).getNetwork().getDragodinde().getId() +", 'equip']");
-//		Thread.sleep(3000);
-//		communication.getReturn("0;0;i;cmd;closeDD;[None]");
-//		Thread.sleep(2000);
-//		communication.getReturn("0;0;i;cmd;closeDD;[]");
+		communication.getReturn("0;0;i;cmd;move;[110]");
+		Thread.sleep(5000);
+		communication.getReturn("0;0;i;cmd;exitBrak;[]");
+		Thread.sleep(5000);
 		
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;changeMap;[3,n]");

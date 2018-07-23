@@ -1429,6 +1429,7 @@ public class Network extends DisplayInfo implements Runnable {
 					ExchangeBidPriceForSellerMessage exchangeBidPriceForSellerMessage = new ExchangeBidPriceForSellerMessage();
 					exchangeBidPriceForSellerMessage.Deserialize(dataReader);
 					this.npc.setCurrentPrice(exchangeBidPriceForSellerMessage.getMinimalPrices());
+					this.npc.setAveragePrice(exchangeBidPriceForSellerMessage.getAveragePrice());
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5945:

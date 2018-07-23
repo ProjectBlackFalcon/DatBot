@@ -30,7 +30,6 @@ import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHousePriceMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeHandleMountsMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeHandleMountsStableMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectModifyPricedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveKamaMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeObjectMoveMessage;
@@ -1022,9 +1021,35 @@ public class ModelConnexion {
 			case "deEquipItem":
 				toSend = deEquipItem(param);
 				break;
+			case "exitBrak":
+				toSend = exitBrak(param);
+				break;
 		}
 		return toSend;
 	}
+	
+	private Object[] exitBrak(String param) throws Exception {
+		Object[] toSend;
+		log.writeActionLogMessage("exitBrak", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
+			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), 406480, this.network.getInteractive().getSkill(406480, 184)));
+		if (this.network.getMap().getId() == 144415 && this.network.getInfo().getCellId() == 110) {
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(406480, this.network.getInteractive().getSkill(406480, 184));
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit brak");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				stop(1);
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("exitBrak error, server returned false", "ChangeMap error");
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
 
 	private Object[] equipItem(String param) throws Exception, InterruptedException {
 		Object[] toSend;

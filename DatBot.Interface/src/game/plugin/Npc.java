@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.json.simple.JSONObject;
-
 import main.communication.DisplayInfo;
 import protocol.network.Network;
 import protocol.network.messages.game.context.roleplay.npc.NpcDialogReplyMessage;
-import protocol.network.types.game.context.roleplay.GameRolePlayActorInformations;
 import protocol.network.types.game.context.roleplay.GameRolePlayNpcInformations;
-import protocol.network.types.game.data.items.ObjectItem;
 import protocol.network.types.game.data.items.ObjectItemToSellInBid;
 import utils.GameData;
 
@@ -23,6 +19,7 @@ public class Npc {
 	private List<ObjectItemToSellInBid> itemsToSell;
 	private List<Integer> canSell;
 	private List<Long> currentPrice;
+	private long averagePrice;
 
 	public Npc(Network network) throws Exception {
 		this.network = network;
@@ -106,7 +103,7 @@ public class Npc {
 	 * @return String : jsonarray of the prices
 	 */
 	public String getMinimalPrices() {
-		return "[" + currentPrice.get(0) + "," + currentPrice.get(1) + "," + currentPrice.get(2) + "]";
+		return "[" + currentPrice.get(0) + "," + currentPrice.get(1) + "," + currentPrice.get(2) + "," + averagePrice +"]";
 	}
 
 	/**
@@ -171,6 +168,14 @@ public class Npc {
 
 	public void setCurrentPrice(List<Long> currentprice) {
 		this.currentPrice = currentprice;
+	}
+
+	public long getAveragePrice() {
+		return averagePrice;
+	}
+
+	public void setAveragePrice(long averagePrice) {
+		this.averagePrice = averagePrice;
 	}
 
 }
