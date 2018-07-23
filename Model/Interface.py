@@ -592,7 +592,7 @@ class Interface:
         """
         Gathers data about the item given
         :param item_id: item id
-        :return: False / [price1, price 10, price 100]
+        :return: False / [price1, price 10, price 100, average price]
         """
         return self.execute_command('getHdvItemStats', [item_id])
 
