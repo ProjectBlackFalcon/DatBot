@@ -100,9 +100,10 @@ class HighLevelFunctions:
 
         if list(current_map) not in self.castle_amakna and list(target_coord) in self.castle_amakna:
             # Bot needs to enter the castle
-            self.bot.interface.enter_heavenbag()
-            self.bot.interface.use_zaap((3, -5))
-            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+            disc_zaaps = self.llf.get_discovered_zaaps(self.bot.credentials['name'])
+            if [3, -5] in disc_zaaps and self.bot.interface.enter_heavenbag()[0]:
+                self.bot.interface.use_zaap((3, -5))
+                current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.castle_amakna and list(target_coord) not in self.castle_amakna:
             # Bot needs to exit the castle through the northern gate
             if target_coord[1] < current_map[1]:
