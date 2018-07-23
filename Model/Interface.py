@@ -233,7 +233,6 @@ class Interface:
         :return: {"Weight": <>, "WeightMax": <>, "Lvl": <>, "Job": {"job_id": level, ...}}
         """
         stats = self.execute_command('getStats')
-        time.sleep(0.5)
         stats = stats[0]
         self.bot.inventory.kamas = stats['Inventory']['Kamas']
         self.bot.inventory.items = stats['Inventory']['Items']

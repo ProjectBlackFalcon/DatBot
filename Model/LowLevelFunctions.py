@@ -440,17 +440,13 @@ class LowLevelFunctions:
         native_caracs = [caracs[name][0] for name in caracs.keys() if name != "Available"]
         goal_caracs = self.resources.goal_caracs[bot.characteristics.level]
         difference = [goal_caracs[i] - native_caracs[i] for i in range(len(native_caracs))]
-        costs = [difference[0]] + \
-                [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
-                [difference[-1] * 3]
+        costs = [difference[0]] + [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + [difference[-1] * 3]
 
         dec_index = 0
         while sum(costs) > caracs['Available']:
-            if difference[dec_index % (len(difference)-1)] > 0:
-                difference[dec_index % (len(difference)-1)] -= 1
-            costs = [difference[0]] + \
-                   [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
-                   [difference[-1] * 3]
+            if difference[dec_index % len(difference)] > 0:
+                difference[dec_index % len(difference)] -= 1
+            costs = [difference[0]] + [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + [difference[-1] * 3]
             dec_index += 1
 
         return [(caracs_names[i], costs[i]) for i in range(len(costs)) if costs[i]]
