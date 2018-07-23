@@ -121,7 +121,7 @@ class HighLevelFunctions:
             if self.bot.interface.move(target_cell):
                 return
 
-        pf = PathFinder(current_map, target_coord, current_cell, target_cell, worldmap)
+        pf = PathFinder(self.bot, current_map, target_coord, current_cell, target_cell, worldmap)
         path_directions = pf.get_map_change_cells()
         for i in range(len(path_directions)):
             if self.bot.interface.change_map(path_directions[i][0], path_directions[i][1])[0]:
