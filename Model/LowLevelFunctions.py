@@ -435,9 +435,9 @@ class LowLevelFunctions:
         return assigned_path
 
     def get_caracs_to_augment(self, bot):
-        caracs_names = ['Vi', 'Int', 'Agi', 'Cha', 'Fo', 'Sa']
+        caracs_names = ['Vi', 'Agi', 'Cha', 'Fo', 'Int', 'Sa']
         caracs = bot.characteristics.get_primary_characs()
-        native_caracs = [caracs[name][0] for name in caracs.keys() if name != "Available"]
+        native_caracs = [caracs[name][0] for name in caracs_names if name != "Available"]
         goal_caracs = self.resources.goal_caracs[bot.characteristics.level]
         difference = [goal_caracs[i] - native_caracs[i] for i in range(len(native_caracs))]
         costs = [difference[0]] + [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + [difference[-1] * 3]
