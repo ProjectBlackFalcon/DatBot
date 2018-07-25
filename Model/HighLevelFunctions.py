@@ -503,7 +503,7 @@ class HighLevelFunctions:
                             hunt.added_clue = True
                             hunt.add_to_clue_list(clue, self.bot.position)
                             self.bot.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
-                        else:
+                        elif not step_valid and self.bot.interface.hunt_is_active()[0]:
                             hunt.add_to_no_clue_list(clue, self.bot.position)
                     elif self.bot.position[0] == wrong_clue_pos:
                         self.bot.llf.log(self.bot, '[Treasure Hunt {}] Removed clue'.format(self.bot.id))
