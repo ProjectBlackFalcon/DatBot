@@ -36,7 +36,7 @@ class Hunt:
         with open('../Utils/TresureHuntClues.json', 'w') as f:
             json.dump(self.bot.resources.clues, f)
         with open('../Utils/TresureHuntCluesAutoAdd.txt', 'a') as f:
-            f.write('\n{} | {}'.format(clue_name, pos))
+            f.write('\n{} | {}'.format(clue_name, pos[0]))
 
     def remove_from_clue_list(self, clue_name, pos):
         clue_name = clue_name.lower()
@@ -44,7 +44,7 @@ class Hunt:
         with open('../Utils/TresureHuntClues.json', 'w') as f:
             json.dump(self.bot.resources.clues, f)
         with open('../Utils/TresureHuntCluesAutoRemove.txt', 'a') as f:
-            f.write('\n{} | {}'.format(clue_name, pos))
+            f.write('\n{} | {}'.format(clue_name, pos[0]))
 
     def get_no_clue_list(self, clue_name):
         return self.bot.resources.no_clues[clue_name.lower()]

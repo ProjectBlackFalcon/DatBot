@@ -349,7 +349,7 @@ class LowLevelFunctions:
         cursor = conn.cursor()
         try:
             if bot.characteristics is not None:
-                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.inventory), str(bot.characteristics).replace("'", "''"), name))
+                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}', subLeft='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.inventory), str(bot.characteristics).replace("'", "''"), bot.subscribed, name))
             else:
                 cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
         except TypeError as e:

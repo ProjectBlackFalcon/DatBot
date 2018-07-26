@@ -6,7 +6,7 @@ from Characteristics import Characteristics
 
 
 class Bot:
-    def __init__(self, pipe, bot_id, credentials, llf, resources, subscribed, color=''):
+    def __init__(self, pipe, bot_id, credentials, llf, resources, color=''):
         self.pipe = pipe
         self.id = bot_id
         self.credentials = credentials
@@ -18,7 +18,7 @@ class Bot:
         self.position = None
         self.connected = False
         self.in_fight = False
-        self.subscribed = subscribed
+        self.subscribed = False
         self.inventory = Inventory(self)
         self.characteristics = Characteristics()
         self.level = None

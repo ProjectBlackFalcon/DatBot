@@ -11,13 +11,17 @@ resources = Resources()
 llf = LowLevelFunctions(resources)
 
 colors = [
-    '\033[92m',
-    '\033[94m',
-    '\033[93m',
-    '\033[95m',
-    '\033[91m',
-    '\033[96m',
-    '\033[99m'
+    '\33[31m',
+    '\33[33m',
+    '\33[34m',
+    '\33[35m',
+    '\33[36m',
+    '\33[91m',
+    '\33[92m',
+    '\33[93m',
+    '\33[94m',
+    '\33[95m',
+    '\33[96m',
 ]
 random.shuffle(colors)
 
@@ -39,7 +43,7 @@ credentials = [
 bots = []
 threads = []
 for cred in credentials:
-    bots.append(Bot(pipe, credentials.index(cred), cred, llf, resources, False, color=colors[credentials.index(cred)]))
+    bots.append(Bot(pipe, credentials.index(cred), cred, llf, resources, color=colors[credentials.index(cred)]))
 
 for bot in bots:
     threads.append(Thread(target=bot.run))

@@ -138,7 +138,6 @@ class HighLevelFunctions:
             self.goto(target_coord, target_cell, worldmap)
 
         if target_cell is not None:
-            print(target_cell)
             self.bot.interface.move(target_cell)
         self.bot.position = (target_coord, worldmap)
 
@@ -854,10 +853,10 @@ class HighLevelFunctions:
             if caught_up:
                 if not (current_task['start'] * 3600 < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec < current_task['end'] * 3600):
                     secs_left = (current_task['start'] * 3600 + (86400 - (time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec))) % 86400
-                    self.bot.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes, waking up at {}'.format(self.bot.id, secs_left//60, datetime.datetime.fromtimestamp(time.time() + secs_left).time()) + self.bot.interface.end_color)
                     self.bot.occupation = 'Sleeping'
                     self.update_db()
                     self.bot.interface.disconnect()
+                    self.bot.llf.log(self.bot, '[Scheduler {}] Sleeping for {} minutes, waking up at {}'.format(self.bot.id, secs_left // 60, str(datetime.datetime.fromtimestamp(time.time() + secs_left).time())[:-7]))
                     time.sleep(secs_left)
 
                 if current_task['end'] * 3600 < time.localtime().tm_hour * 3600 + time.localtime().tm_min * 60 + time.localtime().tm_sec:
