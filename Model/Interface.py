@@ -152,6 +152,7 @@ class Interface:
             self.bot.connected = success[0]
             if self.bot.connected:
                 self.get_player_stats()
+                self.get_sub_left()
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                 self.bot.position = (current_map, current_worldmap)
                 dd_stats = self.get_dd_stat()
@@ -233,7 +234,6 @@ class Interface:
         :return: {"Weight": <>, "WeightMax": <>, "Lvl": <>, "Job": {"job_id": level, ...}}
         """
         stats = self.execute_command('getStats')
-        time.sleep(0.5)
         stats = stats[0]
         self.bot.inventory.kamas = stats['Inventory']['Kamas']
         self.bot.inventory.items = stats['Inventory']['Items']
@@ -838,5 +838,13 @@ class Interface:
         """
         return self.execute_command('exitBrak')
 
+    def get_sub_left(self):
+        """
+        Returns the number of seconds of sub time left
+        :return: Int
+        """
+        ret_val = self.execute_command('getSubTime')
+        self.bot.subscribed = ret_val[0] if ret_val[0] else 0
+        return ret_val
 
 __author__ = 'Alexis'

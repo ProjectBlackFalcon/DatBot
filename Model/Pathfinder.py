@@ -7,8 +7,9 @@ from LowLevelFunctions import LowLevelFunctions
 
 
 class PathFinder:
-    def __init__(self, start_map, end_map, start_cell, end_cell, worldmap):
-        self.llf = LowLevelFunctions()
+    def __init__(self, bot, start_map, end_map, start_cell, end_cell, worldmap):
+        self.bot = bot
+        self.llf = bot.llf
         self.start = start_map
         self.end = end_map
         self.worldmap = worldmap
@@ -16,7 +17,7 @@ class PathFinder:
         self.start_cell = self.pick_start_cell()
         self.end_cell = end_cell
         self.end_cell = self.pick_end_cell()
-        print('[Pathfinder] Going from map {}, cell {} to map {}, cell {}, worldmap : {}'.format(start_map, start_cell, end_map, self.end_cell, worldmap))
+        self.bot.llf.log(self.bot, '[Pathfinder {}] Going from map {}, cell {} to map {}, cell {}, worldmap : {}'.format(self.bot.id, start_map, start_cell, end_map, self.end_cell, worldmap))
         self.bbox = (
             min(start_map[0], end_map[0]),
             min(start_map[1], end_map[1]),
@@ -36,7 +37,7 @@ class PathFinder:
 
     def enlarge(self):
         self.enlargement_n += 1
-        print('[Pathfinder] Enlarging')
+        self.bot.llf.log(self.bot, '[Pathfinder {}] Enlarging'.format(self.bot.id))
         self.bbox = (
             self.bbox[0]-1,
             self.bbox[1]-1,
@@ -130,7 +131,7 @@ class PathFinder:
 
     def astar(self, start_pos, goal_pos):
         start = time.time()
-        print('[Pathfinder] Generating path...')
+        self.bot.llf.log(self.bot, '[Pathfinder {}] Generating path...'.format(self.bot.id))
 
         start_pos = start_pos[1], start_pos[0]
         goal_pos = goal_pos[1], goal_pos[0]
@@ -179,9 +180,9 @@ class PathFinder:
                     fscore[neighbor] = tentative_g_score + self.heuristic(neighbor, goal_pos)
                     heappush(oheap, (fscore[neighbor], neighbor))
         if self.path_cells:
-            print('[Pathfinder] Done in {}s'.format(round(time.time()-start, 1)))
+            self.bot.llf.log(self.bot, '[Pathfinder {}] Done in {}s'.format(self.bot.id, round(time.time()-start, 1)))
         else:
-            print('[Pathfinder] Unable to get path')
+            self.bot.llf.log(self.bot, '[Pathfinder {}] Unable to get path'.format(self.bot.id))
         return False
 
     def add_path_to_adapted_maps(self):

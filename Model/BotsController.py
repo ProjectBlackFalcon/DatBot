@@ -3,19 +3,25 @@ from LowLevelFunctions import LowLevelFunctions
 from Bot import Bot
 from threading import Thread
 import random
+from Resources import Resources
 
 pipe = PipeToJava(headless=True)
 bot_id = 0
-llf = LowLevelFunctions()
+resources = Resources()
+llf = LowLevelFunctions(resources)
 
 colors = [
-    '\033[92m',
-    '\033[94m',
-    '\033[93m',
-    '\033[95m',
-    '\033[91m',
-    '\033[96m',
-    '\033[99m'
+    '\33[31m',
+    '\33[33m',
+    '\33[34m',
+    '\33[35m',
+    '\33[36m',
+    '\33[91m',
+    '\33[92m',
+    '\33[93m',
+    '\33[94m',
+    '\33[95m',
+    '\33[96m',
 ]
 random.shuffle(colors)
 
@@ -32,15 +38,12 @@ random.shuffle(colors)
 
 credentials = [
     {'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'},
-    {'username': 'blushinglocus', 'password': 'bulldistribution0', 'name': 'Hyrisson', 'server': 'Julith'},
-    {'username': 'disrupterjoypop', 'password': 'everytyrant0', 'name': 'Simos', 'server': 'Julith'},
-    {'username': 'futurestone', 'password': 'phaselegion0', 'name': 'Exodaro', 'server': 'Julith'}
 ]
 
 bots = []
 threads = []
 for cred in credentials:
-    bots.append(Bot(pipe, credentials.index(cred), cred, llf, False, color=colors[credentials.index(cred)]))
+    bots.append(Bot(pipe, credentials.index(cred), cred, llf, resources, color=colors[credentials.index(cred)]))
 
 for bot in bots:
     threads.append(Thread(target=bot.run))

@@ -10,40 +10,24 @@ import bz2
 
 
 class LowLevelFunctions:
-    def __init__(self, map_info=None):
-        self.full_map_info = None
-        self.full_item_names = None
+    def __init__(self, resources, map_info=None):
+        self.resources = resources
         self.map_info = [] if map_info is None else map_info
         self.disc_zaaps = self.get_discovered_zaaps()
-        with open('../Utils/zaapList.json', 'r') as f:
-            self.zaaps = json.load(f)
-        with open('../Utils/CaracLevel.json', 'r') as f:
-            self.goal_caracs = json.load(f)
-
 
     def load_map_info(self):
-        if self.full_map_info is None:
-            with open('../Utils/MapInfo.json', 'r') as f:
-                self.full_map_info = json.load(f)
         corners = [(0, 0), (1, 0), (0, 1), (0, 2), (13, 0), (12, 1), (13, 1), (13, 2), (13, 37), (13, 38), (12, 39),
                    (13, 39), (0, 37), (0, 38), (1, 38), (0, 39)]
-        for map in self.full_map_info:
+        for map in self.resources.full_map_info:
             for pos in corners:
                 map['cells'][pos[1]][pos[0]] = 2
-        return self.full_map_info
-
-    def load_item_names(self):
-        if self.full_item_names is None:
-            with open('../Utils/Items.json', 'r') as f:
-                self.full_item_names = json.load(f)
-        return self.full_item_names
+        return self.resources.full_map_info
 
     def get_item_iconid(self, item_id):
-        self.load_item_names()
         i = 0
-        while i < len(self.full_item_names):
-            if self.full_item_names[i]['id'] == item_id:
-                return self.full_item_names[i]['iconId']
+        while i < len(self.resources.full_item_names):
+            if self.resources.full_item_names[i]['id'] == item_id:
+                return self.resources.full_item_names[i]['iconId']
             i += 1
 
     def cell2coord(self, cell):
@@ -127,19 +111,8 @@ class LowLevelFunctions:
             flattened += line
         return flattened
 
-    def get_closest_statue(self, pos):
-        with open('../Utils/classStatues.json', 'r') as f:
-            class_statues = json.load(f)
-        closest = None, 100000
-        for class_name, statue_pos in class_statues.items():
-            if self.distance_coords(pos, statue_pos) < closest[1]:
-                closest = statue_pos, self.distance_coords(pos, statue_pos)
-        return closest[0]
-
     def get_next_clue_pos(self, clue, current_pos, direction):
-        with open('../Utils/TresureHuntClues.json', 'r') as f:
-            clues = json.load(f, encoding='latin-1')
-        clue_possible_pos = clues[clue.lower()]
+        clue_possible_pos = self.resources.clues[clue.lower()]
         direction_vector = {'n': (0, -1), 's': (0, 1), 'w': (-1, 0), 'e': (1, 0)}[direction]
         found, i, checking_pos = False, 1, current_pos
         while not found and i <= 10:
@@ -153,7 +126,7 @@ class LowLevelFunctions:
             raise RuntimeError('Non existing clue : {}, going {} from {}'.format(clue, direction, current_pos))
 
     def add_discovered_zaap(self, bot_name, zaap_pos):
-        if list(zaap_pos) in self.zaaps:
+        if list(zaap_pos) in self.resources.zaaps:
             if bot_name in self.disc_zaaps.keys():
                 if list(zaap_pos) not in self.disc_zaaps[bot_name]:
                     self.disc_zaaps[bot_name].append(zaap_pos)
@@ -213,7 +186,7 @@ class LowLevelFunctions:
         else:
             self.disc_zaaps[bot_name] = self.get_discovered_zaaps(bot_name)
 
-        zaaps = copy.deepcopy(self.zaaps)
+        zaaps = copy.deepcopy(self.resources.zaaps)
 
         for disc_zaap in disc_zaaps:
             del zaaps[zaaps.index(disc_zaap)]
@@ -252,25 +225,6 @@ class LowLevelFunctions:
                 weight = item[5]
         return weight
 
-    def get_brak_maps(self):
-        with open('../Utils/BrakMaps.json', 'r') as f:
-            brak_maps = json.load(f)
-        with open('../Utils/BrakNorth.json', 'r') as f:
-            north_maps = json.load(f)
-        with open('../Utils/BrakEast.json', 'r') as f:
-            east_maps = json.load(f)
-        return brak_maps, north_maps, east_maps
-
-    def get_bwork_maps(self):
-        with open('../Utils/BworkMaps.json', 'r') as f:
-            bwork_maps = json.load(f)
-        return bwork_maps
-
-    def get_castle_maps(self):
-        with open('../Utils/CastleAmakna.json', 'r') as f:
-            castle_maps = json.load(f)
-        return castle_maps
-
     def get_map_dd_tool(self, position):
         with open('../Utils/ddTools.json', 'r') as f:
             tools = json.load(f)
@@ -303,13 +257,13 @@ class LowLevelFunctions:
                 dd.score += 1
             if n_female > n_male and dd.sex == 'male':
                 dd.score += 1
-            if dd.name == 'Bot-Mobile':
+            if dd.name.lower() == 'bot-mobile':
                 dd.score += 100
 
     def get_bot_mobile(self, dd_list):
         bm_id = False
         for dd in dd_list:
-            if dd['name'] == 'Bot-Mobile':
+            if dd['name'].lower() == 'bot-mobile':
                 bm_id = dd['id']
         return bm_id
 
@@ -354,8 +308,7 @@ class LowLevelFunctions:
         if schedule:
             schedules = [ast.literal_eval(schedule)]
         else:
-            with open('../Utils/Schedules/default.json', 'r') as f:
-                schedules = json.load(f)
+            schedules = self.resources.default_schedule
 
         schedule = []
         for schedule_curr in schedules:
@@ -396,7 +349,7 @@ class LowLevelFunctions:
         cursor = conn.cursor()
         try:
             if bot.characteristics is not None:
-                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.inventory), str(bot.characteristics).replace("'", "''"), name))
+                cursor.execute("""UPDATE BotAccounts SET position='{}', stuff='{}', stats='{}', subLeft='{}' WHERE name='{}'""".format(list(bot.position[0]), self.format_worn_stuff(bot.inventory), str(bot.characteristics).replace("'", "''"), bot.subscribed, name))
             else:
                 cursor.execute("""UPDATE BotAccounts SET position='{}' WHERE name='{}'""".format(list(bot.position[0]), name))
         except TypeError as e:
@@ -482,22 +435,18 @@ class LowLevelFunctions:
         return assigned_path
 
     def get_caracs_to_augment(self, bot):
-        caracs_names = ['Vi', 'Int', 'Agi', 'Cha', 'Fo', 'Sa']
+        caracs_names = ['Vi', 'Agi', 'Cha', 'Fo', 'Int', 'Sa']
         caracs = bot.characteristics.get_primary_characs()
-        native_caracs = [caracs[name][0] for name in caracs.keys() if name != "Available"]
-        goal_caracs = self.goal_caracs[bot.characteristics.level]
+        native_caracs = [caracs[name][0] for name in caracs_names if name != "Available"]
+        goal_caracs = self.resources.goal_caracs[bot.characteristics.level]
         difference = [goal_caracs[i] - native_caracs[i] for i in range(len(native_caracs))]
-        costs = [difference[0]] + \
-                [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
-                [difference[-1] * 3]
+        costs = [difference[0]] + [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + [difference[-1] * 3]
 
         dec_index = 0
         while sum(costs) > caracs['Available']:
-            if difference[dec_index % (len(difference)-1)] > 0:
-                difference[dec_index % (len(difference)-1)] -= 1
-            costs = [difference[0]] + \
-                   [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + \
-                   [difference[-1] * 3]
+            if difference[dec_index % len(difference)] > 0:
+                difference[dec_index % len(difference)] -= 1
+            costs = [difference[0]] + [sum([(native_caracs[i] + j) // 100 + 1 for j in range(difference[i])]) for i in range(1, 5)] + [difference[-1] * 3]
             dec_index += 1
 
         return [(caracs_names[i], costs[i]) for i in range(len(costs)) if costs[i]]
