@@ -2,6 +2,7 @@ from selenium import webdriver
 import time
 import mysql.connector
 import Database_credentials as dc
+import json
 
 
 class Scraper:
@@ -16,7 +17,7 @@ class Scraper:
             options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         self.driver = webdriver.Chrome(chrome_options=options)
-        print('Scraper initialized in ' + str(round(time.time() - start, 1)) + ' seconds\n')
+        print('Scraper initialized in ' + str(round(time.time() - start, 1)) + ' seconds')
 
     def destroy(self):
         self.driver.quit()
@@ -29,19 +30,18 @@ class Scraper:
             if 'https://www.dofus.com/fr/mmorpg/communaute/annuaires/pages-persos/' in ii.get_attribute('href'):
                 return ii.get_attribute('href')
 
-    def get_image_link(self, name, server):
+    def get_images_link(self, name, server):
         link = self.get_link_to_profile(name, server)
         if link is not None:
             self.driver.get(link + '/caracteristiques')
             ids = self.driver.find_elements_by_class_name('ak-entitylook')
             if len(ids):
-                return ids[-1].get_attribute('style').split('"')[1]
+                return ids[-1].get_attribute('style').split('"')[1].replace('270_361', '600_880'), ids[-1].get_attribute('style').split('"')[1].replace('full/1/270_361-10', 'face/2/48_48-0')
 
 
 if __name__ == '__main__':
     while 1:
         try:
-
             s = Scraper()
 
             conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
@@ -50,18 +50,24 @@ if __name__ == '__main__':
             links = []
             for row in cursor:
                 if not row[2]:
-                    print("Getting image for " + row[0])
-                    link = s.get_image_link(row[0], row[1])
+                    print("Getting images for " + row[0])
+                    link = s.get_images_link(row[0], row[1])
+                    json_format = json.dumps({'Body': link[0], 'Head': link[1]})
                     if link is not None:
-                        links.append((row[0], link))
+                        links.append((row[0], json_format))
 
             for link in links:
-                cursor.execute("""UPDATE BotAccounts SET characterpage='{}' WHERE name='{}'""".format(link[1].replace('270_361', '600_880'), link[0]))
+                print("""UPDATE BotAccounts SET characterpage='{}' WHERE name='{}'""".format(link[1], link[0]))
+                cursor.execute("""UPDATE BotAccounts SET characterpage='{}' WHERE name='{}'""".format(link[1], link[0]))
+
+            print("Done\n")
 
             conn.commit()
             conn.close()
             s.destroy()
 
             time.sleep(3600)
-        except Exception:
+
+        except Exception as e:
+            print(e)
             print("Error, trying again")
