@@ -1087,6 +1087,7 @@ public class Network extends DisplayInfo implements Runnable {
 					identificationSuccessMessage.Deserialize(dataReader);
 					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 					this.info.setTimeLeftSub(((long) identificationSuccessMessage.getSubscriptionEndDate() - timestamp.getTime())/1000);
+					this.info.setCurrentTime(System.currentTimeMillis());
 					break;
 				case 189:
 					SystemMessageDisplayMessage systemMessageDisplayMessage = new SystemMessageDisplayMessage();

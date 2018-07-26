@@ -14,6 +14,10 @@ public class testMap {
 		System.out.println(Monster.getMonsterById(2271).isMiniBoss);
 		System.out.println(Monster.getMonsterById(2271).getName());
 		System.out.println("œ".replaceAll("œ", "oe"));
+				
+		long time = System.currentTimeMillis();
+		Thread.sleep(3000);
+		System.out.println((System.currentTimeMillis() - time) / 1000);
 	}
 
 }
