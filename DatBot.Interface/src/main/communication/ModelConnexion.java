@@ -1013,8 +1013,12 @@ public class ModelConnexion {
 				toSend = new Object[] { this.getNetwork().getHunt().getAvailableRetryCount() };
 				break;
 			case "getSubTime":
-				toSend = new Object[] { this.getNetwork().getInfo().getTimeLeftSub() - ((System.currentTimeMillis() - this.getNetwork().getInfo().getCurrentTime()) / 1000) };
-				break;
+				long time = this.getNetwork().getInfo().getTimeLeftSub() - ((System.currentTimeMillis() - this.getNetwork().getInfo().getCurrentTime()) / 1000);
+				if(time > 0){
+					return new Object[] { time };
+				} else {
+					return new Object[] { 0 };
+				}
 			case "equipItem":
 				toSend = equipItem(param);
 				break;
