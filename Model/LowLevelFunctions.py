@@ -257,13 +257,13 @@ class LowLevelFunctions:
                 dd.score += 1
             if n_female > n_male and dd.sex == 'male':
                 dd.score += 1
-            if dd.name == 'Bot-Mobile':
+            if dd.name.lower() == 'bot-mobile':
                 dd.score += 100
 
     def get_bot_mobile(self, dd_list):
         bm_id = False
         for dd in dd_list:
-            if dd['name'] == 'Bot-Mobile':
+            if dd['name'].lower() == 'bot-mobile':
                 bm_id = dd['id']
         return bm_id
 
