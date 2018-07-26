@@ -34,6 +34,7 @@ public class Info {
 	private boolean isConnected = false;
 	private boolean printDc = true;
 	private long timeLeftSub = -1;
+	private long currentTime = -1;
 
 	// Bot info
 
@@ -651,5 +652,13 @@ public class Info {
 	public void setNewStats(boolean newStats)
 	{
 		this.newStats = newStats;
+	}
+
+	public long getCurrentTime() {
+		return currentTime;
+	}
+
+	public void setCurrentTime(long currentTime) {
+		this.currentTime = currentTime;
 	}
 }
