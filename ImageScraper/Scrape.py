@@ -57,7 +57,6 @@ if __name__ == '__main__':
                         links.append((row[0], json_format))
 
             for link in links:
-                print("""UPDATE BotAccounts SET characterpage='{}' WHERE name='{}'""".format(link[1], link[0]))
                 cursor.execute("""UPDATE BotAccounts SET characterpage='{}' WHERE name='{}'""".format(link[1], link[0]))
 
             print("Done\n")
