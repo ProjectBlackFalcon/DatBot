@@ -51,6 +51,9 @@ public class MapManager {
             stream2.close();
             reader.bis.close();
             reader.dis.close();
+            if(map.getId() == 75499008){
+            	map.getCells().get(361).setMov(false);
+            }
             return map;
         }
         return null;
