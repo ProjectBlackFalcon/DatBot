@@ -1850,8 +1850,8 @@ public class Network extends DisplayInfo implements Runnable {
 	private void handleGameRolePlayPlayerFightFriendlyRequestedMessage(DofusDataReader dataReader) throws Exception {
 		GameRolePlayPlayerFightFriendlyRequestedMessage gameRolePlayPlayerFightFriendlyRequestedMessage = new GameRolePlayPlayerFightFriendlyRequestedMessage();
 		gameRolePlayPlayerFightFriendlyRequestedMessage.Deserialize(dataReader);
-		GameRolePlayPlayerFightFriendlyAnswerMessage gameRolePlayPlayerFightFriendlyAnswerMessage = new GameRolePlayPlayerFightFriendlyAnswerMessage(gameRolePlayPlayerFightFriendlyRequestedMessage.getFightId(), true);
-		sendToServer(gameRolePlayPlayerFightFriendlyAnswerMessage, GameRolePlayPlayerFightFriendlyAnswerMessage.ProtocolId, "Accept duel");
+		GameRolePlayPlayerFightFriendlyAnswerMessage gameRolePlayPlayerFightFriendlyAnswerMessage = new GameRolePlayPlayerFightFriendlyAnswerMessage(gameRolePlayPlayerFightFriendlyRequestedMessage.getFightId(), false);
+		sendToServer(gameRolePlayPlayerFightFriendlyAnswerMessage, GameRolePlayPlayerFightFriendlyAnswerMessage.ProtocolId, "Cancel duel");
 	}
 
 	private byte[] WritePacket(DofusDataWriter writer, ByteArrayOutputStream bous, int id) throws Exception {
