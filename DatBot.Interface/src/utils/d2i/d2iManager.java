@@ -19,12 +19,14 @@ public class d2iManager {
 
     public static void init(String filePath){
         byte[] binary = null;
+        System.out.println("Filepath : " +filePath);
 		try {
 			binary = Files.readAllBytes(Paths.get(filePath));
 		}
 		catch (IOException e) {
 			System.out.println("Cannot read file : " + e.getMessage());
 		}
+		System.out.println("Null ? " +binary);
         buf = IoBuffer.wrap(binary);
         int key = 0;
         int pointer = 0;
