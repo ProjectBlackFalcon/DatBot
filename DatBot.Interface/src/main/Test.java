@@ -25,13 +25,13 @@ public class Test {
 //		communication.getReturn("0;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 //		communication.getReturn("2;0;i;cmd;connect;[wublel9,notabot0,Sayerses,Julith]");
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
-//		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
-		communication.getReturn("0;0;i;cmd;connect;['blushinglocus','bulldistribution0','Hyrisson','Julith']");
-		Thread.sleep(30000);
-		communication.getReturn("0;0;i;cmd;move;[110]");
-		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;exitBrak;[]");
-		Thread.sleep(5000);
+		communication.getReturn("0;0;i;cmd;connect;['wublel2','notabot0','Gradopr','Julith']");
+//		communication.getReturn("0;0;i;cmd;connect;['blushinglocus','bulldistribution0','Hyrisson','Julith']");
+//		Thread.sleep(30000);
+//		communication.getReturn("0;0;i;cmd;move;[110]");
+//		Thread.sleep(5000);
+//		communication.getReturn("0;0;i;cmd;exitBrak;[]");
+//		Thread.sleep(5000);
 		
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;changeMap;[3,n]");
