@@ -29,6 +29,8 @@ class Inventory:
                     self.bot.interface.equip_item(item[2], slot)
 
     def equip_preferred_stuff(self):
-        stuff_level = int(self.bot.characteristics.level/20)*20
+        stuff_levels = sorted([int(level) for level in self.bot.resources.preferred_stuffs.keys()])
+        stuff_level = stuff_levels[len([level-self.bot.characteristics.level for level in stuff_levels if level-self.bot.characteristics.level <= 0])-1]
+        print('[DEBUG] stuff level : ' + str(stuff_level))
         for item in self.bot.resources.preferred_stuffs[str(stuff_level)]:
             self.equip_item(item['Id'], item['Slot'])
