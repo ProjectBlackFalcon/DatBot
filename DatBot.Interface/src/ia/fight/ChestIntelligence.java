@@ -53,6 +53,7 @@ public class ChestIntelligence extends FightIntelligence {
 		SpellLevel magicArrow = null;
 		SpellLevel harcelante = null;
 		SpellLevel tirPuissant = null;
+		SpellLevel abso = null;
 
 		for (SpellLevel spell : spells) {
 			if (spell.getSpellId() == 161) {
@@ -64,6 +65,9 @@ public class ChestIntelligence extends FightIntelligence {
 			if (spell.getSpellId() == 166) {
 				tirPuissant = spell;
 			}
+			if (spell.getSpellId() == 178) {
+				abso = spell;
+			}
 		}
 		
 		System.out.println("Spell available :  tirPuissant : " + tirPuissant + " magicArrow : " + magicArrow + " harcelante : " + harcelante);
@@ -72,6 +76,8 @@ public class ChestIntelligence extends FightIntelligence {
 			tirPuissant.setNumberCasted(tirPuissant.getNumberCasted() + 1);
 			tirPuissant.setTurnLeftBeforeCast(tirPuissant.getMinCastInterval());
 			return new int[] { tirPuissant.getSpellId(), roxxor.getInfo().getDisposition().getCellId() };
+		} else if (isCellTargetableBySpell(roxxor, abso, victim.getPosition(), cells) && canCastSpell(roxxor, abso)) {
+			return new int[] { abso.getSpellId(), victim.getInfo().getDisposition().getCellId() };
 		} else if (isCellTargetableBySpell(roxxor, magicArrow, victim.getPosition(), cells) && canCastSpell(roxxor, magicArrow)) {
 			return new int[] { magicArrow.getSpellId(), victim.getInfo().getDisposition().getCellId() };
 		}
