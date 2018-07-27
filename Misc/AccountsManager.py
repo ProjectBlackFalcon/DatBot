@@ -172,7 +172,7 @@ class Scheduler:
                                        database=dc.database)
 
         cursor = conn.cursor()
-        cursor.execute('''UPDATE BotAccounts SET schedule="{}" WHERE name="{}"'''.format(str(schedule), bot_name))
+        cursor.execute("""UPDATE BotAccounts SET schedule='{}' WHERE name='{}'""".format(json.dumps(schedule), bot_name))
         conn.commit()
         conn.close()
 

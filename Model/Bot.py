@@ -25,7 +25,7 @@ class Bot:
         self.mount = None
         self.llf.add_bot_db(self.credentials['username'], self.credentials['password'], self.credentials['name'], self.credentials['server'])
         self.schedule = self.llf.get_schedule(self.credentials['name'])
-        with open('../Utils/BotsLogs{}.txt'.format(self.credentials['name']), 'w') as f:
+        with open('../Utils/BotsLogs/{}.txt'.format(self.credentials['name']), 'w') as f:
             f.write('')
 
     def run(self, schedule_name=None):

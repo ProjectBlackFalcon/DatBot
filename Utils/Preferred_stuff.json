@@ -53,7 +53,28 @@
     {"Name": "amublop coco", "Id": 9151, "Slot": 0},
     {"Name": "la bidjiz", "Id": 8612, "Slot": 1}
   ],
-  "120": [],
+  "120": [
+    {"Name": "bottes du rat noir", "Id": 8446, "Slot": 5},
+    {"Name": "anneau du dragon cochon", "Id": 8271, "Slot": 2},
+    {"Name": "cape du scorbute", "Id": 19082, "Slot": 7},
+    {"Name": "gantelet du rat blanc", "Id": 8454, "Slot": 4},
+    {"Name": "bouclier en mousse", "Id": 18659, "Slot": 15},
+    {"Name": "solomonk", "Id": 7143, "Slot": 6},
+    {"Name": "pagne du muloubar", "Id": 19092, "Slot": 3},
+    {"Name": "amulette des huit yeux", "Id": 16176, "Slot": 0},
+    {"Name": "dagues maydhyn china", "Id": 7190, "Slot": 1}
+  ],
+    "121": [
+    {"Name": "bottes du rat noir", "Id": 8446, "Slot": 5},
+    {"Name": "anneau du dragon cochon", "Id": 8271, "Slot": 2},
+    {"Name": "caracape minotoris", "Id": 2629, "Slot": 7},
+    {"Name": "gantelet du rat blanc", "Id": 8454, "Slot": 4},
+    {"Name": "bouclier en mousse", "Id": 18659, "Slot": 15},
+    {"Name": "solomonk", "Id": 7143, "Slot": 6},
+    {"Name": "pagne du muloubar", "Id": 19092, "Slot": 3},
+    {"Name": "amulette des huit yeux", "Id": 16176, "Slot": 0},
+    {"Name": "dagues maydhyn china", "Id": 7190, "Slot": 1}
+  ],
   "140": [],
   "160": [],
   "180": [],
