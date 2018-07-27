@@ -98,7 +98,7 @@ class HighLevelFunctions:
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
         if list(current_map) in self.bot.resources.castle_maps and list(target_coord) not in self.bot.resources.castle_maps:
             # Bot needs to exit the castle through the northern gate
-            if target_coord[1] < current_map[1]:
+            if target_coord[1] <= current_map[1]:
                 self.goto((4, -8))
                 self.bot.interface.change_map(140, 'w')
                 current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
@@ -413,6 +413,8 @@ class HighLevelFunctions:
                             self.bot.interface.validate_hunt_step()
                             clues_left = self.bot.interface.get_clues_left()[0]
                             clue, direction = self.bot.interface.get_hunt_clue()
+                            last_valid_clue_pos = self.bot.interface.get_hunt_start()[0]
+                            self.goto(last_valid_clue_pos)
                             while not found and self.bot.interface.hunt_is_active()[0]:
                                 direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                                 destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
