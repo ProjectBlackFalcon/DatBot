@@ -36,7 +36,7 @@ class Scraper:
             self.driver.get(link + '/caracteristiques')
             ids = self.driver.find_elements_by_class_name('ak-entitylook')
             if len(ids):
-                return ids[-1].get_attribute('style').split('"')[1].replace('270_361', '600_880'), ids[-1].get_attribute('style').split('"')[1].replace('full/1/270_361-10', 'face/2/48_48-0')
+                return ids[-1].get_attribute('style').split('"')[1].replace('270_361', '600_880'), ids[-1].get_attribute('style').split('"')[1].replace('full/1/270_361-10', 'face/2/96_96-0')
 
 
 if __name__ == '__main__':

@@ -75,8 +75,28 @@
     {"Name": "amulette des huit yeux", "Id": 16176, "Slot": 0},
     {"Name": "dagues maydhyn china", "Id": 7190, "Slot": 1}
   ],
-  "140": [],
-  "160": [],
-  "180": [],
-  "200": []
+  "171": [
+    {"Name": "sandales binosse", "Id": 11619, "Slot": 5},
+    {"Name": "anneau de xlii", "Id": 15768, "Slot": 2},
+    {"Name": "caracape minotoris", "Id": 2629, "Slot": 7},
+    {"Name": "crochet de ben le ripate", "Id": 11578, "Slot": 4},
+    {"Name": "bouclier en mousse", "Id": 18659, "Slot": 15},
+    {"Name": "solomonk", "Id": 7143, "Slot": 6},
+    {"Name": "ceinture de xlii", "Id": 15764, "Slot": 3},
+    {"Name": "amulette de cantile", "Id": 12095, "Slot": 0},
+    {"Name": "furibond", "Id": 12723, "Slot": 9},
+    {"Name": "dagues maydhyn china", "Id": 7190, "Slot": 1}
+  ],
+    "184": [
+    {"Name": "sandales binosse", "Id": 11619, "Slot": 5},
+    {"Name": "anneau de xlii", "Id": 15768, "Slot": 2},
+    {"Name": "caracape minotoris", "Id": 2629, "Slot": 7},
+    {"Name": "crochet de ben le ripate", "Id": 11578, "Slot": 4},
+    {"Name": "bouclier en mousse", "Id": 18659, "Slot": 15},
+    {"Name": "chapeau lisson", "Id": 11724, "Slot": 6},
+    {"Name": "ceinture de xlii", "Id": 15764, "Slot": 3},
+    {"Name": "amulette de cantile", "Id": 12095, "Slot": 0},
+    {"Name": "furibond", "Id": 12723, "Slot": 9},
+    {"Name": "dagues maydhyn china", "Id": 7190, "Slot": 1}
+  ]
 }
