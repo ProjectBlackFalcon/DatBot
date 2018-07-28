@@ -37,3 +37,7 @@ class Resources:
             self.preferred_stuffs = json.load(f)
         with open('../Utils/hdv_pos.json', 'r') as f:
             self.hdv_pos = json.load(f)
+        with open('../Utils/DDTerr.json', 'r') as f:
+            self.dd_territory_maps = json.load(f)
+        with open('../Utils/WestDDTerr.json', 'r') as f:
+            self.west_dd_territory_maps = json.load(f)

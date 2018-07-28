@@ -90,6 +90,17 @@ class HighLevelFunctions:
                 self.bot.interface.exit_brak_north()
             current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
+        if list(current_map) in self.bot.resources.west_dd_territory_maps and list(target_coord) in self.bot.resources.dd_territory_maps:
+            # Bot needs to enter dd territory from west
+            self.goto((-23, -1), target_cell=387)
+            self.bot.interface.enter_dd_territory()
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+        if list(current_map) in self.bot.resources.dd_territory_maps and list(target_coord) in self.bot.resources.west_dd_territory_maps:
+            # Bot needs to exit dd territory to the west
+            self.goto((-22, -1))
+            self.bot.interface.change_map(294, 'w')
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+
         if list(current_map) not in self.bot.resources.castle_maps and list(target_coord) in self.bot.resources.castle_maps:
             # Bot needs to enter the castle
             disc_zaaps = self.bot.llf.get_discovered_zaaps(self.bot.credentials['name'])
