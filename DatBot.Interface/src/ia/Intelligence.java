@@ -48,6 +48,19 @@ public class Intelligence {
 		}
 	}
 	
+	/**
+	 * Refresh all cooldowns, must be call at the start of the turn
+	 */
+	public void resetCd(){
+		this.log.writeLogDebugMessage("Reset spell");
+		for (SpellLevel spell : getMain().getSpells()) {
+			spell.setNumberCasted(0);
+			if(spell.getTurnLeftBeforeCast() > 0){
+				spell.setTurnLeftBeforeCast(0);
+			}
+		}
+	}
+	
 	public void getBestPlacement() throws Exception{
 		int bestCell = getBestCell();
 		if(bestCell == getMain().getInfo().getDisposition().getCellId()){
@@ -56,10 +69,10 @@ public class Intelligence {
 				getMain().setRdy(true);
 				utils.fightReady();
 			}
-			Log.writeLogDebugMessage("Same cell, not moving");
+			this.log.writeLogDebugMessage("Same cell, not moving");
 			return;
 		}
-		Log.writeLogDebugMessage("Cell found : " + bestCell);
+		this.log.writeLogDebugMessage("Cell found : " + bestCell);
 		if(getMain().isRdy()){
 			utils.fightNotReady();
 		}
@@ -158,7 +171,7 @@ public class Intelligence {
 	        //TODO HANDLE BEST POSITION
             //init should only be false when the fightStarting packet is received and then be always true
 	    	getBestPlacement();
-	    	Log.writeLogDebugMessage("Finding best position from init");
+	    	this.log.writeLogDebugMessage("Finding best position from init");
 	    	visualizeEntity("Init");
         }
         isInit = init;

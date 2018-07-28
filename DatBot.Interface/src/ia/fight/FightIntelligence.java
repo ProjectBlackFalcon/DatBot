@@ -2,6 +2,7 @@ package ia.fight;
 
 import java.util.List;
 
+import ia.Log;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.map.Position;
@@ -14,10 +15,12 @@ import utils.d2p.map.CellData;
 public class FightIntelligence {
 	
 	UtilsProtocol protocol;
+	Log log;
 	
 	
-	public FightIntelligence(UtilsProtocol protocol) {
+	public FightIntelligence(UtilsProtocol protocol, Log log) {
 		this.protocol = protocol;
+		this.log = log;
 	}
 	
 	/**

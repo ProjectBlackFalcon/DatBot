@@ -27,14 +27,14 @@ public class Test {
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 		communication.getReturn("0;0;i;cmd;connect;['Suleimana','daniel1deux','Jedine','Julith']");
 //		communication.getReturn("0;0;i;cmd;connect;['blushinglocus','bulldistribution0','Hyrisson','Julith']");
-		Thread.sleep(30000);
+//		Thread.sleep(30000);
 //		communication.getReturn("0;0;i;cmd;move;[110]");
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;exitBrak;[]");
 //		Thread.sleep(5000);
 		
 //		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;changeMap;[555,s]");
+//		communication.getReturn("0;0;i;cmd;changeMap;[555,s]");
 //		communication.getReturn("1;0;i;cmd;connect;[ceciestuntest2,ceciestlemdp2,Eusei,Écho]");
 
 		// TESTS FOR INPUTS
