@@ -583,9 +583,10 @@ class HighLevelFunctions:
                 with open('../Utils/24botHoursTestRun.txt', 'a') as f:
                     f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                     f.write(traceback.format_exc())
-        self.bot.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success*100/n_hunts, 0)))
         self.drop_to_bank(item_id_list='all', withdraw_items_to_sell=True)
-        self.sell_all()
+        value_generated = self.sell_all()
+        self.bot.llf.log(self.bot, '[Treasure Hunt {}] {} were started, {} were successful. ({}%)'.format(self.bot.id, n_hunts, n_success, round(n_success * 100 / n_hunts, 0)))
+        self.bot.llf.log(self.bot, '[Treasure Hunt {}] Value generated : {}'.format(self.bot.id, value_generated))
 
     def fight_on_map(self, duration_minutes, hp_threshold=100):
         self.bot.occupation = 'Fighting'
@@ -665,6 +666,7 @@ class HighLevelFunctions:
                 if str(item[1]) in items_to_sell.keys() and item[3] >= items_to_sell[str(item[1])]["quantity"]:
                     # print('[SELL HDV] Item going to be sold : {}'.format(item))
                     hdv_list = []
+                    value = 0
                     for key in self.bot.resources.hdv_pos.keys():
                         hdv_list += self.bot.resources.hdv_pos[key]
                     if self.bot.position[1] == 1 and self.bot.position[0] in hdv_list:
@@ -679,9 +681,10 @@ class HighLevelFunctions:
                             player_lvl = self.bot.characteristics.level
                             if hdv_position is None and price > 0:
                                 self.bot.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
+                                value = min(item[3] // batch_size, player_lvl-len(selling)) * price
                                 self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
-                        return True
+                        return value
             if hdv_position is None:
                 self.bot.interface.close_hdv()
         else:
@@ -705,9 +708,12 @@ class HighLevelFunctions:
             if self.sell_hdv(hdv):
                 hdv_route.append(hdv)
 
+        total_value = 0
         for hdv in hdv_route:
             self.goto(hdv)
-            self.sell_hdv()
+            value = self.sell_hdv()
+            total_value = value + total_value if value else total_value
+        return total_value
 
     def manage_dds(self):
         self.bot.occupation = 'Managing DDs'
