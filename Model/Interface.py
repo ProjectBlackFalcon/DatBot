@@ -847,4 +847,11 @@ class Interface:
         self.bot.subscribed = ret_val[0] if ret_val[0] else 0
         return ret_val
 
+    def enter_dd_territory(self):
+        """
+        Enters dd territory by using the interactive on map (-23, -1). The bot will already be on cell 387
+        :return: Boolean
+        """
+        return self.execute_command('enterDDTerritory')
+
 __author__ = 'Alexis'
