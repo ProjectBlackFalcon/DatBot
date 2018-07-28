@@ -671,13 +671,13 @@ class HighLevelFunctions:
             items = self.bot.inventory.items
             items_to_sell = items_to_sell[hdv_type]
             # print('[SELL HDV] Items : {},\n[SELL HDV] Items to sell {}'.format(items, items_to_sell))
+            value = 0
             for item in items:
                 # item looks like ['name', item_id, inv_id, number, inv_slot]
 
                 if str(item[1]) in items_to_sell.keys() and item[3] >= items_to_sell[str(item[1])]["quantity"]:
                     # print('[SELL HDV] Item going to be sold : {}'.format(item))
                     hdv_list = []
-                    value = 0
                     for key in self.bot.resources.hdv_pos.keys():
                         hdv_list += self.bot.resources.hdv_pos[key]
                     if self.bot.position[1] == 1 and self.bot.position[0] in hdv_list:
@@ -692,12 +692,13 @@ class HighLevelFunctions:
                             player_lvl = self.bot.characteristics.level
                             if hdv_position is None and price > 0:
                                 self.bot.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
-                                value = min(item[3] // batch_size, player_lvl-len(selling)) * price
+                                value += min(item[3] // batch_size, player_lvl-len(selling)) * price
                                 self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
-                        return value
+                        return True
             if hdv_position is None:
                 self.bot.interface.close_hdv()
+            return value
         else:
             return False
 
