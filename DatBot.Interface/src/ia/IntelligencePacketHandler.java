@@ -338,7 +338,7 @@ public class IntelligencePacketHandler {
 	public void gameFightHumanReadyState(GameFightHumanReadyStateMessage message) {
 		if (message.getCharacterId() == this.ia.getNetwork().getInfo().getActorId()) {
 			this.ia.getMain().setRdy(true);
-			Log.writeLogDebugMessage("Setting rdy");
+			this.ia.log.writeLogDebugMessage("Setting rdy");
 		}
 	}
 
@@ -351,7 +351,12 @@ public class IntelligencePacketHandler {
 	}
 
 	public void gameFightNewRound(GameFightNewRoundMessage message) {
-
+		if(message.getRoundNumber() == 1){
+			if(this.ia.getMain().getSpells() == null){
+				this.ia.getMain().setSpells(this.ia.getNetwork().getInfo().getSpells());
+			}
+			this.ia.resetCd();
+		}
 	}
 
 	public void gameFightNewWave(GameFightNewWaveMessage message) {
@@ -419,7 +424,7 @@ public class IntelligencePacketHandler {
 		if (index == -1) {
 			this.ia.addEntity(entity);
 		}
-		Log.writeLogDebugMessage("Entity updating");
+		this.ia.log.writeLogDebugMessage("Entity updating");
 	}
 
 	public void gameFightPlacementSwapPositions(GameFightPlacementSwapPositionsMessage message) {
@@ -449,7 +454,7 @@ public class IntelligencePacketHandler {
 
 	//Tested
 	public void gameFightStarting(GameFightStartingMessage message) throws Exception {
-		this.ia.init(new ArrayList<>(), new MapIA(this.ia.getNetwork().getMap().getCells()), new ChestIntelligence(this.ia.utils));
+		this.ia.init(new ArrayList<>(), new MapIA(this.ia.getNetwork().getMap().getCells()), new ChestIntelligence(this.ia.utils, this.ia.log));
 		this.ia.setInit(false); //All init packets will arrived after, until BasioNoOperationMessage
 	}
 
@@ -507,11 +512,15 @@ public class IntelligencePacketHandler {
 	}
 
 	public void gameFightTurnStartPlaying() throws Exception {
+		this.ia.log.writeLogDebugMessage("-----Start turn-----");
 		if(this.ia.getMain().getSpells() == null){
+			this.ia.log.writeLogDebugMessage("Spells are null, getting spells");
 			this.ia.getMain().setSpells(this.ia.getNetwork().getInfo().getSpells());
 		}
+		this.ia.log.writeLogDebugMessage("Refresh cooldown");
 		this.ia.refreshCd();
 		this.ia.utils.stop(0.56);
+		this.ia.log.writeLogDebugMessage("Getting best turn");
 		this.ia.getFight().getBestTurn(this.ia.getMain(), this.ia.getEntities(), this.ia.getNetwork().getMap().getCells());
 	}
 
@@ -529,7 +538,7 @@ public class IntelligencePacketHandler {
 		for (IdentifiedEntityDispositionInformations e : message.getDispositions()) {
 			int index = ia.entityExists(e.getId());
 			if(e.getCellId() < 0 | e.getCellId() > 599){
-				Log.writeLogDebugMessage("Spectator detected");
+				this.ia.log.writeLogDebugMessage("Spectator detected");
 				continue;
 			}
 			System.out.println("Updating entity");
@@ -558,7 +567,7 @@ public class IntelligencePacketHandler {
 		}
 
 		if (this.ia.isInit() && !samePos) {
-			Log.writeLogDebugMessage("Finding best position from gameEntitiesDispositions");
+			this.ia.log.writeLogDebugMessage("Finding best position from gameEntitiesDispositions");
 			this.ia.getBestPlacement();
 		}
 		this.ia.visualizeEntity("Entities Disposition");

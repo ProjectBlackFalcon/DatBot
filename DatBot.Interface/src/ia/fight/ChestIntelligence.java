@@ -2,6 +2,7 @@ package ia.fight;
 
 import java.util.List;
 
+import ia.Log;
 import ia.entities.entity.Entity;
 import ia.entities.entity.MainEntity;
 import ia.map.MapIA;
@@ -14,41 +15,45 @@ import utils.d2p.map.CellData;
 
 public class ChestIntelligence extends FightIntelligence {
 
-	public ChestIntelligence(UtilsProtocol protocol) {
-		super(protocol);
+	public ChestIntelligence(UtilsProtocol protocol, Log log) {
+		super(protocol, log);
 	}
 
 	@Override
 	public void getBestTurn(Entity roxxor, List<Entity> entities, List<CellData> cells) throws Exception {
 		Entity victim = null;
-		System.out.println("Entity size : " + entities.size());
+		log.writeLogDebugMessage("Entity size : " + entities.size());
 		for (Entity e : entities) {
 			if (e != roxxor) victim = e;
 		}
 		if (!victim.getInfo().isAlive()) {
-			System.out.println(victim.getLvl() + " is dead");
+			log.writeLogDebugMessage(victim.getInfo().getContextualId() + " is dead");
 			return;
 		}
 		Position optPos = getOptimizedMovement(MapIA.getCleanCells(cells, entities), (MainEntity) roxxor, victim);
 		int[] optSpell = getOptimizedSpell(MapIA.getCleanCells(cells, entities), (MainEntity) roxxor, victim);
+		
+		log.writeLogDebugMessage("Optimal pos : " + optPos);
+		log.writeLogDebugMessage("Optimal spell : " + optSpell);
 
 		if (optPos != null) {
-			System.out.println("Moving to opt : " + optPos);
+			log.writeLogDebugMessage("Moving to opt : " + optPos);
 			this.protocol.moveTo(MapIA.reshapeToNetwork(optPos));
 			this.protocol.stop(0.2);
 		}
 		else if (optSpell != null) {
-			System.out.println("Casting spell : " + optSpell[0] + " to " + optSpell[1]);
+			log.writeLogDebugMessage("Casting spell : " + optSpell[0] + " to " + optSpell[1]);
 			this.protocol.castSpell(optSpell[0], optSpell[1]);
 			this.protocol.stop(0.2);
 		}
 		else {
-			System.out.println("Ending turn");
+			log.writeLogDebugMessage("Ending turn");
 			this.protocol.endTurn();
 		}
 	}
 
 	private int[] getOptimizedSpell(TransformedCell[][] cells, MainEntity roxxor, Entity victim) {
+		log.writeLogDebugMessage("Getting optimal spell");
 		List<SpellLevel> spells = roxxor.getSpells();
 		SpellLevel magicArrow = null;
 		SpellLevel harcelante = null;
@@ -70,8 +75,8 @@ public class ChestIntelligence extends FightIntelligence {
 			}
 		}
 		
-		System.out.println("Spell available :  tirPuissant : " + tirPuissant + " magicArrow : " + magicArrow + " harcelante : " + harcelante);
-
+		log.writeLogDebugMessage("Getting best spell");
+	
 		if (isCellTargetableBySpell(roxxor, tirPuissant, roxxor.getPosition(), cells) && canCastSpell(roxxor, tirPuissant) && isCac(roxxor, victim, cells)) {
 			tirPuissant.setNumberCasted(tirPuissant.getNumberCasted() + 1);
 			tirPuissant.setTurnLeftBeforeCast(tirPuissant.getMinCastInterval());
@@ -87,17 +92,17 @@ public class ChestIntelligence extends FightIntelligence {
 		else {
 			return null;
 		}
-
 	}
 
 	private Position getOptimizedMovement(TransformedCell[][] cells, MainEntity roxxor, Entity victim) {
+		log.writeLogDebugMessage("Getting optimal mvt");
 
 		if (roxxor.getInfo().getStats().getMovementPoints() == 0) { return null; }
 
-		System.out.println("Getting optimized movement. Initial positions : roxxor (" + roxxor.getPosition() + "), victim (" + victim.getPosition() + ")");
+//		log.writeLogDebugMessage("Getting optimized movement. Initial positions : roxxor (" + roxxor.getPosition() + "), victim (" + victim.getPosition() + ")");
 		List<Position> positions = UtilsMath.getPath(cells, roxxor.getPosition(), victim.getPosition(), true);
 
-		System.out.println("Path : " + positions);
+//		log.writeLogDebugMessage("Path : " + positions);
 
 		if (positions.size() == 1 && UtilsMath.getPath(cells, roxxor.getPosition(), positions.get(0), false).size() == 2) { return UtilsMath.getPath(cells, roxxor.getPosition(), positions.get(0), false).get(0); }
 
@@ -113,14 +118,14 @@ public class ChestIntelligence extends FightIntelligence {
 
 			Position actualPosition = positions.get(i);
 
-			System.out.println(positions.get(i));
+//			log.writeLogDebugMessage("" +positions.get(i));
 
 			int distancePrevious = UtilsMath.getPath(cells, previousPosition, victim.getPosition(), false).size();
 			int distanceActual = UtilsMath.getPath(cells, actualPosition, victim.getPosition(), false).size();
 
 			if (distanceActual >= distancePrevious) {
 
-				System.out.println("Previous distance was smaller or equal ! " + distanceActual + " " + distancePrevious);
+//				log.writeLogDebugMessage("Previous distance was smaller or equal ! " + distanceActual + " " + distancePrevious);
 
 				for (int j = positions.size() - 1; j >= i; j--) {
 					positions.remove(j);
@@ -128,48 +133,48 @@ public class ChestIntelligence extends FightIntelligence {
 			}
 		}
 
-		System.out.println("Better path : " + positions);
+//		log.writeLogDebugMessage("Better path : " + positions);
 		Position kept = roxxor.getPosition();
 		Position kept_ndo = null;
 		int MPLeft = roxxor.getInfo().getStats().getMovementPoints();
-		System.out.println("MP Left : " + MPLeft);
+//		log.writeLogDebugMessage("MP Left : " + MPLeft);
 
 		for (Position position1 : positions) {
-			System.out.println("Trying path from " + position1);
+//			log.writeLogDebugMessage("Trying path from " + position1);
 			if (UtilsMath.getPath(cells, roxxor.getPosition(), position1, false).size() <= MPLeft) {
-				System.out.println("Found path : " + UtilsMath.getPath(cells, roxxor.getPosition(), position1, false));
+//				log.writeLogDebugMessage("Found path : " + UtilsMath.getPath(cells, roxxor.getPosition(), position1, false));
 				if (position1.deepEquals(victim.getPosition())) {
-					System.out.println("Equals victim !!!!");
+//					log.writeLogDebugMessage("Equals victim !!!!");
 					break;
 				}
 				kept = position1;
 				kept_ndo = position1;
-				System.out.println("Updated positions.");
+//				log.writeLogDebugMessage("Updated positions.");
 			}
 			else {
 				break;
 			}
 		}
 
-		System.out.println("Kept : " + kept);
+//		log.writeLogDebugMessage("Kept : " + kept);
 
 		MPLeft -= UtilsMath.getPath(cells, roxxor.getPosition(), kept, false).size();
 
-		System.out.println("MP Left : " + MPLeft);
+//		log.writeLogDebugMessage("MP Left : " + MPLeft);
 
 		if (MPLeft > 0) {
 			positions = UtilsMath.getPath(cells, kept, victim.getPosition(), false);
-			System.out.println("Path : " + positions);
+//			log.writeLogDebugMessage("Path : " + positions);
 			for (Position position : positions) {
-				System.out.println("Trying path from " + position);
+//				log.writeLogDebugMessage("Trying path from " + position);
 				if (UtilsMath.getPath(cells, kept, position, false).size() <= MPLeft) {
-					System.out.println("Found path : " + UtilsMath.getPath(cells, roxxor.getPosition(), position, false));
+//					log.writeLogDebugMessage("Found path : " + UtilsMath.getPath(cells, roxxor.getPosition(), position, false));
 					if (position.deepEquals(victim.getPosition())) {
-						System.out.println("Equals victim !!!!");
+//						log.writeLogDebugMessage("Equals victim !!!!");
 						break;
 					}
 					kept_ndo = position;
-					System.out.println("Updated positions.");
+//					log.writeLogDebugMessage("Updated positions.");
 				}
 				else {
 					break;

@@ -15,11 +15,13 @@ public class Log {
 	private FileOutputStream fightDebug;
 	private FileOutputStream actionsDebug;
 	File fileAction;
+	File fightFight;
 
     public Log(int botInstance, String name)  { 
     	this.botInstance = botInstance;
     	this.name = name;
     	this.fileAction = DisplayInfo.createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Actions.txt");
+    	this.fightFight = DisplayInfo.createOrGetFile(GameData.getPathDatBot() + "/Utils/BotsLogs/" + name + "_Fight.txt");
     }
     
 
@@ -37,7 +39,7 @@ public class Log {
 			e1.printStackTrace();
 		}
 	}
-	
+		
 	public void writeActionLogMessage(String method, String s){
 		PrintWriter writer = null;
 		try {
@@ -54,12 +56,23 @@ public class Log {
 	}
 	
 	
-    public static void writeLogDebugMessage (String msg)
+    public void writeLogDebugMessage (String s)
     {
-        System.out.println("--- "+ msg +" ---");
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(new FileOutputStream(new File(fightFight.getAbsolutePath()),
+				true));
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("File not found");
+			e.printStackTrace();
+		}
+		writer.append(LocalDateTime.now() + " : " + s + "\n");
+		writer.close();
+		System.out.println(LocalDateTime.now() + " : " + s);
     }
 
-    public static void writeLogErrorMessage (String msg)
+    public void writeLogErrorMessage (String msg)
     {
         System.out.println("!!!!!!!!!! "+ msg +" !!!!!!!!!!");
     }
