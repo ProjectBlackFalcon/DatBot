@@ -1028,6 +1028,9 @@ public class ModelConnexion {
 			case "exitBrak":
 				toSend = exitBrak(param);
 				break;
+			case "enterDDTerritory":
+				toSend = enterDDTerritory();
+				break;
 		}
 		return toSend;
 	}
@@ -1054,6 +1057,27 @@ public class ModelConnexion {
 		return toSend;
 	}
 	
+	private Object[] enterDDTerritory() throws Exception {
+		Object[] toSend;
+		log.writeActionLogMessage("enterDDTerritory", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
+			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), 510192, this.network.getInteractive().getSkill(406480, 184)));
+		if (this.network.getMap().getId() == 171706890 && this.network.getInfo().getCellId() == 387) {
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(510192, this.network.getInteractive().getSkill(510192, 184));
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter dd territory");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				stop(1);
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("enterDDTerritory error, server returned false", "ChangeMap error");
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
 
 	private Object[] equipItem(String param) throws Exception, InterruptedException {
 		Object[] toSend;
