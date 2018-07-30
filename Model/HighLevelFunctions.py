@@ -386,8 +386,7 @@ class HighLevelFunctions:
                 hunt.added_clue = False
                 destination = None
                 if 'Phorreur' in clue:
-                    n_steps = 0
-                    while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11 and not hunt.error:
+                    while not (self.bot.interface.check_for_phorror()[0] == clue) and not hunt.error:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
@@ -482,7 +481,7 @@ class HighLevelFunctions:
             clues_left = self.bot.interface.get_clues_left()[0]
             if step_valid:
                 clues_left = 0
-            if not hunt.error and not step_valid:
+            if (not hunt.error and not step_valid) or hunt.reason == 'Goto failed':
                 last_clue = self.bot.interface.get_hunt_clue()
                 if type(last_clue[0]) is str:
                     clue, direction = last_clue
@@ -512,6 +511,7 @@ class HighLevelFunctions:
                         new_clues_left = self.bot.interface.get_clues_left()[0]
                         if step_valid or (new_clues_left != clues_left and new_clues_left):
                             found = True
+                            hunt.error = False
                             hunt.added_clue = True
                             hunt.add_to_clue_list(clue, self.bot.position)
                             self.bot.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
