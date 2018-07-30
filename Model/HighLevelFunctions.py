@@ -399,7 +399,7 @@ class HighLevelFunctions:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write('Could not go to {} from {} to find {}'.format(destination, self.bot.position, clue))
                             hunt.error = True
-                            hunt.reason = 'Goto failed'
+                            hunt.reason = 'phorror goto failed'
                     if not hunt.error:
                         hunt.current_clue().guessed_pos = self.bot.position[0]
                 else:
@@ -481,7 +481,7 @@ class HighLevelFunctions:
             clues_left = self.bot.interface.get_clues_left()[0]
             if step_valid:
                 clues_left = 0
-            if (not hunt.error and not step_valid) or hunt.reason == 'Goto failed':
+            if (not hunt.error and not step_valid) or hunt.reason == 'phorror goto failed':
                 last_clue = self.bot.interface.get_hunt_clue()
                 if type(last_clue[0]) is str:
                     clue, direction = last_clue
