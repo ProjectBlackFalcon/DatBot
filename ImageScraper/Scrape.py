@@ -52,8 +52,8 @@ if __name__ == '__main__':
                 if not row[2]:
                     print("Getting images for " + row[0])
                     link = s.get_images_link(row[0], row[1])
-                    json_format = json.dumps({'Body': link[0], 'Head': link[1]})
                     if link is not None:
+                        json_format = json.dumps({'Body': link[0], 'Head': link[1]})
                         links.append((row[0], json_format))
 
             for link in links:
