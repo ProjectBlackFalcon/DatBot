@@ -31,7 +31,7 @@ public class Test {
 		Thread.sleep(5000);
 		communication.getReturn("0;0;i;cmd;disconnect;[]");
 		Thread.sleep(5000);
-		communication.getReturn("1;0;i;cmd;connect;['Esmai23','jesuisunmdp1','Tsuuaf','Julith']");
+		communication.getReturn("1;0;i;cmd;connect;['Esmai23','jesuisunmdp1','Tsuaaf','Julith']");
 		Thread.sleep(60000);
 		communication.getReturn("1;0;i;cmd;abandonHunt;[None]");
 		Thread.sleep(5000);
