@@ -30,18 +30,18 @@ public class Test {
 		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");
 		Thread.sleep(5000);
 		communication.getReturn("0;0;i;cmd;disconnect;[]");
-		
-		communication.getReturn("0;0;i;cmd;connect;['Esmai23','jesuisunmdp1','Tsuuaf','Julith']");
-		Thread.sleep(60000);
-		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");
 		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;disconnect;[]");
-		
-		communication.getReturn("0;0;i;cmd;connect;['computationexist','downriverpig0','downriverpig0','Julith']");
+		communication.getReturn("1;0;i;cmd;connect;['Esmai23','jesuisunmdp1','Tsuuaf','Julith']");
 		Thread.sleep(60000);
-		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");
+		communication.getReturn("1;0;i;cmd;abandonHunt;[None]");
 		Thread.sleep(5000);
-		communication.getReturn("0;0;i;cmd;disconnect;[]");
+		communication.getReturn("1;0;i;cmd;disconnect;[]");
+		Thread.sleep(5000);
+		communication.getReturn("2;0;i;cmd;connect;['computationexist','downriverpig0','downriverpig0','Julith']");
+		Thread.sleep(60000);
+		communication.getReturn("2;0;i;cmd;abandonHunt;[None]");
+		Thread.sleep(5000);
+		communication.getReturn("2;0;i;cmd;disconnect;[]");
 //		communication.getReturn("0;0;i;cmd;connect;['blushinglocus','bulldistribution0','Hyrisson','Julith']");
 
 //		Thread.sleep(5000);
