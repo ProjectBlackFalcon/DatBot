@@ -589,10 +589,11 @@ class Interface:
             return ret_val
 
     def get_hdv_item_stats(self, item_id):
+        # TODO Adapt for equipement
         """
         Gathers data about the item given
         :param item_id: item id
-        :return: False / [price1, price 10, price 100, average price]
+        :return: False / [price1, price 10, price 100, average price] if resource / [[itemStats1, itemStats10, itemStats100], ...]
         """
         return self.execute_command('getHdvItemStats', [item_id])
 
@@ -631,6 +632,58 @@ class Interface:
         ret_val = self.execute_command('withdrawItem', [item_id, batch_size, batch_number])
         self.get_player_stats()
         return ret_val
+
+    def buy_resource(self, item_id, batch_size, batch_number):
+        # TODO
+        """
+        Buys a resource or group of resources
+        :param item_id: item ID
+        :param batch_size: which batch size to withdraw (1, 10, 100)
+        :param batch_number: Number of batches to withdraw
+        :return: Boolean
+        """
+        return self.execute_command('buyResource', [item_id, batch_size, batch_number])
+
+    def enter_fm(self):
+        # TODO
+        """
+        Enters FM workshop (will be on the right spot)
+        :return: Boolean
+        """
+        return self.execute_command('enterFM')
+
+    def exit_fm(self):
+        # TODO
+        """
+        Exits FM workshop
+        :return: Boolean
+        """
+        return self.execute_command('exitFM')
+
+    def open_item_breaker(self):
+        # TODO
+        """
+        Opens the item breaker GUI
+        :return: Boolean
+        """
+        return self.execute_command('openItemBreaker')
+
+    def close_item_breaker(self):
+        # TODO
+        """
+        Closes the item breaker GUI
+        :return: Boolean
+        """
+        return self.execute_command('closeItemBreaker')
+
+    def break_items(self, item_inv_id_list):
+        # TODO
+        """
+        Breaks the items
+        :param item_inv_id_list: List of items to break
+        :return: False / Stats on the runes obtained
+        """
+        return self.execute_command('breakItems', item_inv_id_list)
 
     def enter_bwork(self):
         """
