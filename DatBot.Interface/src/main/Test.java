@@ -26,9 +26,24 @@ public class Test {
 //		communication.getReturn("2;0;i;cmd;connect;[wublel9,notabot0,Sayerses,Julith]");
 //		communication.getReturn("3;0;i;cmd;connect;['wublel6','32407c62d2f','Pot-ator','Julith']");
 		communication.getReturn("0;0;i;cmd;connect;['Suleimana','daniel1deux','Jedine','Julith']");
+		Thread.sleep(60000);
+		communication.getReturn("0;0;i;cmd;abandonHunt;[None]");
+		Thread.sleep(5000);
+		communication.getReturn("0;0;i;cmd;disconnect;[]");
+		Thread.sleep(5000);
+		communication.getReturn("1;0;i;cmd;connect;['Esmai23','jesuisunmdp1','Tsuaaf','Julith']");
+		Thread.sleep(60000);
+		communication.getReturn("1;0;i;cmd;abandonHunt;[None]");
+		Thread.sleep(5000);
+		communication.getReturn("1;0;i;cmd;disconnect;[]");
+		Thread.sleep(5000);
+		communication.getReturn("2;0;i;cmd;connect;['computationexist','downriverpig0','downriverpig0','Julith']");
+		Thread.sleep(60000);
+		communication.getReturn("2;0;i;cmd;abandonHunt;[None]");
+		Thread.sleep(5000);
+		communication.getReturn("2;0;i;cmd;disconnect;[]");
 //		communication.getReturn("0;0;i;cmd;connect;['blushinglocus','bulldistribution0','Hyrisson','Julith']");
-		Thread.sleep(30000);
-		communication.getReturn("0;0;i;cmd;enterDDTerritory;[None]");
+
 //		Thread.sleep(5000);
 //		communication.getReturn("0;0;i;cmd;exitBrak;[]");
 //		Thread.sleep(5000);
