@@ -59,9 +59,5 @@ public class GameEntitiesDispositionMessage extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString() {
-		return "GameEntitiesDispositionMessage [dispositions=" + dispositions + "]";
-	}
 
 }

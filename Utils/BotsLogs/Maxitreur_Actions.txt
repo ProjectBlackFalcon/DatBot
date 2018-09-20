@@ -1,0 +1,7 @@
+2018-07-05T03:06:41.917 : [connect] : nameAccount : democraticamnesiac, password : loltacru, name : Maxitreur, server : Julith
+2018-07-05T03:06:48.113 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-05T03:06:48.125 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5 via l'adresse IP %6] : 2018 07 05 03 03 51.68.45.189 
+2018-07-05T03:06:48.142 : [TextInformationMessage : Votre adresse IP actuelle est %1.] : 176.189.10.164 
+2018-07-05T03:07:38.228 : [connect] : nameAccount : democraticamnesiac, password : loltacru, name : Maxitreur, server : Julith
+2018-07-05T03:07:45.232 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-05T03:07:45.243 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 05 03 06 

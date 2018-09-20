@@ -34,7 +34,6 @@ public class CharacterBaseCharacteristic extends NetworkMessage {
 	public void setContextModif(int contextModif) { this.contextModif = contextModif; };
 	public int getTotal() { return this.base + this.additionnal + this.objectsAndMountBonus + this.alignGiftBonus + this.contextModif; };
 
-	
 	public CharacterBaseCharacteristic(){
 	}
 
@@ -70,10 +69,6 @@ public class CharacterBaseCharacteristic extends NetworkMessage {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-	}
-	@Override
-	public String toString() {
-		return "CharacterBaseCharacteristic [base=" + base + ", additionnal=" + additionnal + ", objectsAndMountBonus=" + objectsAndMountBonus + ", alignGiftBonus=" + alignGiftBonus + ", contextModif=" + contextModif + "]";
 	}
 
 }

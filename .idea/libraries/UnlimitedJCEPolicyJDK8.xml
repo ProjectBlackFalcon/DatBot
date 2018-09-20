@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="UnlimitedJCEPolicyJDK8">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/DatBot.Interface/utils/UnlimitedJCEPolicyJDK8/local_policy.jar!/" />
+      <root url="jar://$PROJECT_DIR$/DatBot.Interface/utils/UnlimitedJCEPolicyJDK8/US_export_policy.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

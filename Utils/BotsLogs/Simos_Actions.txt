@@ -1,0 +1,14 @@
+2018-07-14T20:12:26.207 : [connect] : nameAccount : disrupterjoypop, password : loltacru, name : Simos, server : Julith
+2018-07-14T20:12:35.362 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-14T20:12:35.386 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5 via l'adresse IP %6] : 2018 07 14 19 49 51.68.45.189 
+2018-07-14T20:12:35.412 : [TextInformationMessage : Votre adresse IP actuelle est %1.] : 176.189.10.164 
+2018-07-15T03:03:08.608 : [connect] : nameAccount : disrupterjoypop, password : loltacru, name : Simos, server : Julith
+2018-07-15T03:03:18.914 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-15T03:03:18.930 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 14 22 56 
+2018-07-15T03:03:38.478 : [getBankList] : bankOpened : false, param : 
+2018-07-17T23:48:40.212 : [connect] : nameAccount : disrupterjoypop, password : loltacru, name : Simos, server : Julith
+2018-07-17T23:48:47.662 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-17T23:48:47.673 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5 via l'adresse IP %6] : 2018 07 17 17 21 37.173.247.106 
+2018-07-17T23:48:47.684 : [TextInformationMessage : Votre adresse IP actuelle est %1.] : 176.189.10.164 
+2018-07-17T23:48:48.713 : [CurrentMapMessage] : Sending map request
+2018-07-17T23:49:10.049 : [getBankList] : bankOpened : false, param : 

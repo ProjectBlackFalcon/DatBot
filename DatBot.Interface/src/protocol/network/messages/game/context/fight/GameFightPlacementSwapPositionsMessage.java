@@ -46,7 +46,7 @@ public class GameFightPlacementSwapPositionsMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			int _loc2_  = 0;
-			this.dispositions = new ArrayList<>();
+			this.dispositions = new ArrayList<IdentifiedEntityDispositionInformations>();
 			while( _loc2_ < 2){
 				this.dispositions.add(new IdentifiedEntityDispositionInformations());
 				this.dispositions.get( _loc2_).Deserialize(reader);

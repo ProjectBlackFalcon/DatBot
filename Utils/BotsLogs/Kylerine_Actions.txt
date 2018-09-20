@@ -1,0 +1,14 @@
+2018-09-20T20:33:47.082 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T20:35:31.927 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T20:40:32.467 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T22:32:13.291 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T22:32:48.083 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T22:33:01.372 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T22:35:25.831 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T22:35:36.956 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-09-20T22:35:36.970 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 09 20 22 33 
+2018-09-20T22:35:38.143 : [CurrentMapMessage] : Sending map request
+2018-09-20T22:38:00.393 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-09-20T22:38:08.826 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-09-20T22:38:08.838 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 09 20 22 37 
+2018-09-20T22:38:09.906 : [CurrentMapMessage] : Sending map request

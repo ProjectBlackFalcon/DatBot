@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="utils">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/DatBot.Interface/utils/json-simple-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/DatBot.Interface/utils/mina-core-2.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/DatBot.Interface/utils/netty-all-4.1.15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

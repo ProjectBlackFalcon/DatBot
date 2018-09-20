@@ -1,0 +1,67 @@
+package protocol.network.messages.game.inventory.exchanges;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import protocol.utils.ProtocolTypeManager;
+import protocol.network.util.types.BooleanByteWrapper;
+
+import protocol.network.NetworkMessage;
+import protocol.network.util.DofusDataReader;
+import protocol.network.util.DofusDataWriter;
+import protocol.network.Network;
+import protocol.network.NetworkMessage;
+
+@SuppressWarnings("unused")
+public class ExchangeHandleMountsMessage extends NetworkMessage {
+	public static final int ProtocolId = 6752;
+
+	private int actionType;
+	private List<Integer> ridesId;
+
+	public int getActionType() { return this.actionType; }
+	public void setActionType(int actionType) { this.actionType = actionType; };
+	public List<Integer> getRidesId() { return this.ridesId; }
+	public void setRidesId(List<Integer> ridesId) { this.ridesId = ridesId; };
+
+	public ExchangeHandleMountsMessage(){
+	}
+
+	public ExchangeHandleMountsMessage(int actionType, List<Integer> ridesId){
+		this.actionType = actionType;
+		this.ridesId = ridesId;
+	}
+
+	@Override
+	public void Serialize(DofusDataWriter writer) {
+		try {
+			writer.writeByte(this.actionType);
+			writer.writeShort(this.ridesId.size());
+			int _loc2_ = 0;
+			while( _loc2_ < this.ridesId.size()){
+				writer.writeVarInt(this.ridesId.get(_loc2_));
+				_loc2_++;
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void Deserialize(DofusDataReader reader) {
+		try {
+			this.actionType = reader.readByte();
+			int _loc2_  = reader.readShort();
+			int _loc3_  = 0;
+			this.ridesId = new ArrayList<Integer>();
+			while( _loc3_ <  _loc2_){
+				int _loc15_ = reader.readVarInt();
+				this.ridesId.add(_loc15_);
+				_loc3_++;
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

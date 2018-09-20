@@ -19,6 +19,8 @@ public class FriendInformations extends AbstractContactInformations {
 	private int playerState;
 	private int lastConnection;
 	private int achievementPoints;
+	private int leagueId;
+	private int ladderPosition;
 
 	public int getPlayerState() { return this.playerState; }
 	public void setPlayerState(int playerState) { this.playerState = playerState; };
@@ -26,14 +28,20 @@ public class FriendInformations extends AbstractContactInformations {
 	public void setLastConnection(int lastConnection) { this.lastConnection = lastConnection; };
 	public int getAchievementPoints() { return this.achievementPoints; }
 	public void setAchievementPoints(int achievementPoints) { this.achievementPoints = achievementPoints; };
+	public int getLeagueId() { return this.leagueId; }
+	public void setLeagueId(int leagueId) { this.leagueId = leagueId; };
+	public int getLadderPosition() { return this.ladderPosition; }
+	public void setLadderPosition(int ladderPosition) { this.ladderPosition = ladderPosition; };
 
 	public FriendInformations(){
 	}
 
-	public FriendInformations(int playerState, int lastConnection, int achievementPoints){
+	public FriendInformations(int playerState, int lastConnection, int achievementPoints, int leagueId, int ladderPosition){
 		this.playerState = playerState;
 		this.lastConnection = lastConnection;
 		this.achievementPoints = achievementPoints;
+		this.leagueId = leagueId;
+		this.ladderPosition = ladderPosition;
 	}
 
 	@Override
@@ -43,6 +51,8 @@ public class FriendInformations extends AbstractContactInformations {
 			writer.writeByte(this.playerState);
 			writer.writeVarShort(this.lastConnection);
 			writer.writeInt(this.achievementPoints);
+			writer.writeVarShort(this.leagueId);
+			writer.writeInt(this.ladderPosition);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -55,6 +65,8 @@ public class FriendInformations extends AbstractContactInformations {
 			this.playerState = reader.readByte();
 			this.lastConnection = reader.readVarShort();
 			this.achievementPoints = reader.readInt();
+			this.leagueId = reader.readVarShort();
+			this.ladderPosition = reader.readInt();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

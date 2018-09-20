@@ -1,0 +1,12 @@
+
+hsquid:UselessImportCheck"?Remove this unused import 'protocol.utils.ProtocolTypeManager'.(ƒò¬’ûÿÿÿÿ
+^squid:UselessImportCheck"5Remove this unused import 'protocol.network.Network'.(á“—úÿÿÿÿ
+Asquid:UselessImportCheck"Remove this duplicated import.(ÅÙ÷m
+tsquid:UselessImportCheck"KRemove this unused import 'protocol.network.util.types.BooleanByteWrapper'.(¹›Áşÿÿÿÿ
+Tsquid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+?squid:S1148%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+?squid:S1148/"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Ysquid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ
+Fsquid:EmptyStatementUsageCheck"Remove this empty statement.(ûı˜‰
+rsquid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÆŸ‡Ÿ
+Tsquid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
