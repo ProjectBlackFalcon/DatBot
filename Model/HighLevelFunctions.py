@@ -90,6 +90,17 @@ class HighLevelFunctions:
                 self.bot.interface.exit_brak_north()
             current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
+        if list(current_map) in self.bot.resources.west_dd_territory_maps and list(target_coord) in self.bot.resources.dd_territory_maps:
+            # Bot needs to enter dd territory from west
+            self.goto((-23, -1), target_cell=387)
+            self.bot.interface.enter_dd_territory()
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+        if list(current_map) in self.bot.resources.dd_territory_maps and list(target_coord) in self.bot.resources.west_dd_territory_maps:
+            # Bot needs to exit dd territory to the west
+            self.goto((-22, -1))
+            self.bot.interface.change_map(294, 'w')
+            current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
+
         if list(current_map) not in self.bot.resources.castle_maps and list(target_coord) in self.bot.resources.castle_maps:
             # Bot needs to enter the castle
             disc_zaaps = self.bot.llf.get_discovered_zaaps(self.bot.credentials['name'])
@@ -375,8 +386,7 @@ class HighLevelFunctions:
                 hunt.added_clue = False
                 destination = None
                 if 'Phorreur' in clue:
-                    n_steps = 0
-                    while not (self.bot.interface.check_for_phorror()[0] == clue) and n_steps <= 11 and not hunt.error:
+                    while not (self.bot.interface.check_for_phorror()[0] == clue) and not hunt.error:
                         direction_coords = [(0, -1), (0, 1), (-1, 0), (1, 0)][['n', 's', 'w', 'e'].index(direction)]
                         try:
                             destination = [sum(x) for x in zip(self.bot.position[0], direction_coords)]
@@ -389,7 +399,7 @@ class HighLevelFunctions:
                                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                                 f.write('Could not go to {} from {} to find {}'.format(destination, self.bot.position, clue))
                             hunt.error = True
-                            hunt.reason = 'Goto failed'
+                            hunt.reason = 'phorror goto failed'
                     if not hunt.error:
                         hunt.current_clue().guessed_pos = self.bot.position[0]
                 else:
@@ -471,7 +481,7 @@ class HighLevelFunctions:
             clues_left = self.bot.interface.get_clues_left()[0]
             if step_valid:
                 clues_left = 0
-            if not hunt.error and not step_valid:
+            if (not hunt.error and not step_valid) or hunt.reason == 'phorror goto failed':
                 last_clue = self.bot.interface.get_hunt_clue()
                 if type(last_clue[0]) is str:
                     clue, direction = last_clue
@@ -501,6 +511,7 @@ class HighLevelFunctions:
                         new_clues_left = self.bot.interface.get_clues_left()[0]
                         if step_valid or (new_clues_left != clues_left and new_clues_left):
                             found = True
+                            hunt.error = False
                             hunt.added_clue = True
                             hunt.add_to_clue_list(clue, self.bot.position)
                             self.bot.llf.log(self.bot, '[Treasure Hunt {}] Discovered clue'.format(self.bot.id))
@@ -660,13 +671,13 @@ class HighLevelFunctions:
             items = self.bot.inventory.items
             items_to_sell = items_to_sell[hdv_type]
             # print('[SELL HDV] Items : {},\n[SELL HDV] Items to sell {}'.format(items, items_to_sell))
+            value = 0
             for item in items:
                 # item looks like ['name', item_id, inv_id, number, inv_slot]
 
                 if str(item[1]) in items_to_sell.keys() and item[3] >= items_to_sell[str(item[1])]["quantity"]:
                     # print('[SELL HDV] Item going to be sold : {}'.format(item))
                     hdv_list = []
-                    value = 0
                     for key in self.bot.resources.hdv_pos.keys():
                         hdv_list += self.bot.resources.hdv_pos[key]
                     if self.bot.position[1] == 1 and self.bot.position[0] in hdv_list:
@@ -681,12 +692,13 @@ class HighLevelFunctions:
                             player_lvl = self.bot.characteristics.level
                             if hdv_position is None and price > 0:
                                 self.bot.llf.log(self.bot, '[Sell HDV {}] Selling {} batches of {} {} for {}'.format(self.bot.id, min(item[3] // batch_size, player_lvl-len(selling)), batch_size, item[0], price))
-                                value = min(item[3] // batch_size, player_lvl-len(selling)) * price
+                                value += min(item[3] // batch_size, player_lvl-len(selling)) * price
                                 self.bot.interface.sell_item(item[2], batch_size, min(item[3] // batch_size, player_lvl-len(selling)), price)
                     elif hdv_position is not None:
-                        return value
+                        return True
             if hdv_position is None:
                 self.bot.interface.close_hdv()
+            return value
         else:
             return False
 

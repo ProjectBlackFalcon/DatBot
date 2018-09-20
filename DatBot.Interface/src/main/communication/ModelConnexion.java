@@ -1414,7 +1414,7 @@ public class ModelConnexion {
 				if (!this.getNetwork().getNpc().isSelling(uid.get(i))) {
 					continue;
 				}
-				stop(2);
+				stop(0.4);
 				ExchangeObjectModifyPricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectModifyPricedMessage();
 				exchangeObjectMovePricedMessage.setObjectUID(uid.get(i));
 				exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems1[1]));
