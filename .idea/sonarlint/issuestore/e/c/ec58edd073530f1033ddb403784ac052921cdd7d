@@ -1,6 +1,0 @@
-
-nsquid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(Ò™«½þÿÿÿÿ8¤÷ýâÂ,
-¤squid:S1186 "€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‡þÿƒþÿÿÿÿ8¤÷ýâÂ,
-\"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(Ò™«½þÿÿÿÿ8£÷ýâÂ,
-Usquid:S1135"2Complete the task associated to this TODO comment.(ÉÃ¢±ÿÿÿÿÿ8¤÷ýâÂ,
-Msquid:S00108")Either remove or fill this block of code.(Ò™«½þÿÿÿÿ8¤÷ýâÂ,
