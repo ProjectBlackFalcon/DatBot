@@ -59,7 +59,8 @@ public class Item {
 	public Vector<Integer> recipeIds;
 	public boolean bonusIsSecret;
 	public Vector<EffectInstance> possibleEffects;
-	public Vector<Integer> favoriteSubAreas;
+	public Vector<Integer> favoriteSubAreas;	
+	public Vector<Integer> evolutiveEffectIds;
 	public int favoriteSubAreasBonus;
 	public int craftXpRatio;
 	public boolean needUseConfirm;
