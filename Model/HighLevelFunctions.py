@@ -997,6 +997,7 @@ class HighLevelFunctions:
         for rune, rune_id in self.bot.resources.rune_ids.items():
             runes_prices[rune] = self.bot.interface.get_hdv_item_stats(rune_id)[-1]
         self.bot.interface.close_hdv()
+        return runes_prices
 
 
 __author__ = 'Alexis'

@@ -43,5 +43,5 @@ class Resources:
             self.west_dd_territory_maps = json.load(f)
         with open('../Utils/NamedRecipes.json', 'r') as f:
             self.recipes = json.load(f)
-        with open('../Utils/RunesIds.json', 'r') as f:
+        with open('../Utils/RuneIds.json', 'r') as f:
             self.rune_ids = json.load(f)
