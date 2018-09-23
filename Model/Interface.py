@@ -589,13 +589,23 @@ class Interface:
             return ret_val
 
     def get_hdv_item_stats(self, item_id):
-        # TODO Adapt for equipement
         """
         Gathers data about the item given
         :param item_id: item id
-        :return: False / [price1, price 10, price 100, average price] if resource / [[itemStats1, itemStats10, itemStats100], ...]
+        :return: False / [itemStats, ...] itemStats is a json formatted string with
+            name,
+            prices as [price1, price 10, price 100, average price] (-1 if not for sale),
+            stats as [[statName1, value1], [statName2, value2], ...] (statsNames are from RuneStats.json)
         """
         return self.execute_command('getHdvItemStats', [item_id])
+
+    def get_hdv_resource_stats(self, item_id):
+        """
+        Gathers data about the item given
+        :param item_id: item id
+        :return: False / [price1, price 10, price 100, average price]
+        """
+        return self.execute_command('getHdvResourceStats', [item_id])
 
     def sell_item(self, item_id, batch_size, batch_number, price):
         """
