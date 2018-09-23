@@ -21,6 +21,7 @@ public class HouseToSellFilterMessage extends NetworkMessage {
 	private int atLeastNbChest;
 	private int skillRequested;
 	private long maxPrice;
+	private int orderBy;
 
 	public int getAreaId() { return this.areaId; }
 	public void setAreaId(int areaId) { this.areaId = areaId; };
@@ -32,16 +33,19 @@ public class HouseToSellFilterMessage extends NetworkMessage {
 	public void setSkillRequested(int skillRequested) { this.skillRequested = skillRequested; };
 	public long getMaxPrice() { return this.maxPrice; }
 	public void setMaxPrice(long maxPrice) { this.maxPrice = maxPrice; };
+	public int getOrderBy() { return this.orderBy; }
+	public void setOrderBy(int orderBy) { this.orderBy = orderBy; };
 
 	public HouseToSellFilterMessage(){
 	}
 
-	public HouseToSellFilterMessage(int areaId, int atLeastNbRoom, int atLeastNbChest, int skillRequested, long maxPrice){
+	public HouseToSellFilterMessage(int areaId, int atLeastNbRoom, int atLeastNbChest, int skillRequested, long maxPrice, int orderBy){
 		this.areaId = areaId;
 		this.atLeastNbRoom = atLeastNbRoom;
 		this.atLeastNbChest = atLeastNbChest;
 		this.skillRequested = skillRequested;
 		this.maxPrice = maxPrice;
+		this.orderBy = orderBy;
 	}
 
 	@Override
@@ -52,6 +56,7 @@ public class HouseToSellFilterMessage extends NetworkMessage {
 			writer.writeByte(this.atLeastNbChest);
 			writer.writeVarShort(this.skillRequested);
 			writer.writeVarLong(this.maxPrice);
+			writer.writeByte(this.orderBy);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -65,6 +70,7 @@ public class HouseToSellFilterMessage extends NetworkMessage {
 			this.atLeastNbChest = reader.readByte();
 			this.skillRequested = reader.readVarShort();
 			this.maxPrice = reader.readVarLong();
+			this.orderBy = reader.readByte();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

@@ -1,0 +1,49 @@
+2018-07-27T22:00:37.206 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-27T22:00:46.794 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-27T22:00:46.803 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 27 21 59 
+2018-07-27T22:00:47.899 : [CurrentMapMessage] : Sending map request
+2018-07-27T22:01:07.443 : [changeMap] : actual map : 75499008 - [-17,-3], actual cell : 23, direction : s, cellChangeMap : 555
+2018-07-27T22:01:12.313 : [ChangeMapMessage] : Changing map
+2018-07-27T22:01:12.680 : [CurrentMapMessage] : Sending map request
+2018-07-28T17:41:01.071 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-28T17:41:09.813 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-28T17:41:09.826 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 28 17 36 
+2018-07-28T17:41:10.942 : [CurrentMapMessage] : Sending map request
+2018-07-28T17:42:43.920 : [CurrentMapMessage] : Sending map request
+2018-07-28T17:45:26.076 : [CurrentMapMessage] : Sending map request
+2018-07-28T17:49:03.507 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-28T17:49:14.962 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-28T17:49:14.973 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 28 17 41 
+2018-07-28T17:49:16.047 : [CurrentMapMessage] : Sending map request
+2018-07-28T17:49:54.077 : [CurrentMapMessage] : Sending map request
+2018-07-28T17:51:11.397 : [CurrentMapMessage] : Sending map request
+2018-07-28T17:58:39.007 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-28T17:58:45.387 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-28T17:58:45.397 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 28 17 49 
+2018-07-28T17:58:46.494 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:01:04.421 : [TextInformationMessage : {player,%1,%2} a désactivé le mode 'spectateur'.] : Tank-stp 1915215 
+2018-07-28T18:01:17.762 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:01:33.383 : [TextInformationMessage : Contrat rempli ! Retournez auprès de votre commanditaire.] : 
+2018-07-28T18:01:58.217 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:02:31.099 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-28T18:02:37.008 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-28T18:02:37.020 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 28 17 58 
+2018-07-28T18:02:38.135 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:03:00.053 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:03:25.427 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:05:11.546 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-28T18:05:20.709 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-28T18:05:20.723 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 28 18 02 
+2018-07-28T18:05:21.849 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:06:10.023 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-28T18:06:15.962 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:06:15.990 : [TextInformationMessage : Vous avez placé la monture %1 dans l'enclos de son propriétaire.] : Jedine 
+2018-07-28T18:06:29.006 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:06:52.851 : [CurrentMapMessage] : Sending map request
+2018-07-28T18:07:10.154 : [CurrentMapMessage] : Sending map request
+2018-07-28T22:05:21.423 : [connect] : nameAccount : Suleimana, password : loltacru, name : Jedine, server : Julith
+2018-07-28T22:05:28.840 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-07-28T22:05:28.851 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 07 28 22 01 
+2018-07-28T22:05:29.993 : [CurrentMapMessage] : Sending map request
+2018-07-28T22:05:51.522 : [enterDDTerritory] : map : [-23,-1], mapid : 171706890, cellid : 387, interactive : 510192, skillid : -1
+2018-07-28T22:05:51.965 : [CurrentMapMessage] : Sending map request

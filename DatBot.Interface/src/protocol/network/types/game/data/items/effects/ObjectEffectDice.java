@@ -40,9 +40,9 @@ public class ObjectEffectDice extends ObjectEffect {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			super.Serialize(writer);
-			writer.writeVarShort(this.diceNum);
-			writer.writeVarShort(this.diceSide);
-			writer.writeVarShort(this.diceConst);
+			writer.writeVarInt(this.diceNum);
+			writer.writeVarInt(this.diceSide);
+			writer.writeVarInt(this.diceConst);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -52,9 +52,9 @@ public class ObjectEffectDice extends ObjectEffect {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			super.Deserialize(reader);
-			this.diceNum = reader.readVarShort();
-			this.diceSide = reader.readVarShort();
-			this.diceConst = reader.readVarShort();
+			this.diceNum = reader.readVarInt();
+			this.diceSide = reader.readVarInt();
+			this.diceConst = reader.readVarInt();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

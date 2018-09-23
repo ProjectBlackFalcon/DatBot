@@ -17,20 +17,20 @@ public class GameRolePlayArenaFighterStatusMessage extends NetworkMessage {
 	public static final int ProtocolId = 6281;
 
 	private int fightId;
-	private int playerId;
+	private double playerId;
 	private boolean accepted;
 
 	public int getFightId() { return this.fightId; }
 	public void setFightId(int fightId) { this.fightId = fightId; };
-	public int getPlayerId() { return this.playerId; }
-	public void setPlayerId(int playerId) { this.playerId = playerId; };
+	public double getPlayerId() { return this.playerId; }
+	public void setPlayerId(double playerId) { this.playerId = playerId; };
 	public boolean isAccepted() { return this.accepted; }
 	public void setAccepted(boolean accepted) { this.accepted = accepted; };
 
 	public GameRolePlayArenaFighterStatusMessage(){
 	}
 
-	public GameRolePlayArenaFighterStatusMessage(int fightId, int playerId, boolean accepted){
+	public GameRolePlayArenaFighterStatusMessage(int fightId, double playerId, boolean accepted){
 		this.fightId = fightId;
 		this.playerId = playerId;
 		this.accepted = accepted;
@@ -40,7 +40,7 @@ public class GameRolePlayArenaFighterStatusMessage extends NetworkMessage {
 	public void Serialize(DofusDataWriter writer) {
 		try {
 			writer.writeVarShort(this.fightId);
-			writer.writeInt(this.playerId);
+			writer.writeDouble(this.playerId);
 			writer.writeBoolean(this.accepted);
 		} catch (Exception e){
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class GameRolePlayArenaFighterStatusMessage extends NetworkMessage {
 	public void Deserialize(DofusDataReader reader) {
 		try {
 			this.fightId = reader.readVarShort();
-			this.playerId = reader.readInt();
+			this.playerId = reader.readDouble();
 			this.accepted = reader.readBoolean();
 		} catch (Exception e){
 			e.printStackTrace();

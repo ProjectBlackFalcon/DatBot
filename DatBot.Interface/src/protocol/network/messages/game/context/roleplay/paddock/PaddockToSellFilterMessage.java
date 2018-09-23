@@ -20,6 +20,7 @@ public class PaddockToSellFilterMessage extends NetworkMessage {
 	private int atLeastNbMount;
 	private int atLeastNbMachine;
 	private long maxPrice;
+	private int orderBy;
 
 	public int getAreaId() { return this.areaId; }
 	public void setAreaId(int areaId) { this.areaId = areaId; };
@@ -29,15 +30,18 @@ public class PaddockToSellFilterMessage extends NetworkMessage {
 	public void setAtLeastNbMachine(int atLeastNbMachine) { this.atLeastNbMachine = atLeastNbMachine; };
 	public long getMaxPrice() { return this.maxPrice; }
 	public void setMaxPrice(long maxPrice) { this.maxPrice = maxPrice; };
+	public int getOrderBy() { return this.orderBy; }
+	public void setOrderBy(int orderBy) { this.orderBy = orderBy; };
 
 	public PaddockToSellFilterMessage(){
 	}
 
-	public PaddockToSellFilterMessage(int areaId, int atLeastNbMount, int atLeastNbMachine, long maxPrice){
+	public PaddockToSellFilterMessage(int areaId, int atLeastNbMount, int atLeastNbMachine, long maxPrice, int orderBy){
 		this.areaId = areaId;
 		this.atLeastNbMount = atLeastNbMount;
 		this.atLeastNbMachine = atLeastNbMachine;
 		this.maxPrice = maxPrice;
+		this.orderBy = orderBy;
 	}
 
 	@Override
@@ -47,6 +51,7 @@ public class PaddockToSellFilterMessage extends NetworkMessage {
 			writer.writeByte(this.atLeastNbMount);
 			writer.writeByte(this.atLeastNbMachine);
 			writer.writeVarLong(this.maxPrice);
+			writer.writeByte(this.orderBy);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -59,6 +64,7 @@ public class PaddockToSellFilterMessage extends NetworkMessage {
 			this.atLeastNbMount = reader.readByte();
 			this.atLeastNbMachine = reader.readByte();
 			this.maxPrice = reader.readVarLong();
+			this.orderBy = reader.readByte();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

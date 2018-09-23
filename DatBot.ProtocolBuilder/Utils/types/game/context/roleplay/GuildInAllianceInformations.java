@@ -17,15 +17,19 @@ public class GuildInAllianceInformations extends GuildInformations {
 	public static final int ProtocolId = 420;
 
 	private int nbMembers;
+	private int joinDate;
 
 	public int getNbMembers() { return this.nbMembers; }
 	public void setNbMembers(int nbMembers) { this.nbMembers = nbMembers; };
+	public int getJoinDate() { return this.joinDate; }
+	public void setJoinDate(int joinDate) { this.joinDate = joinDate; };
 
 	public GuildInAllianceInformations(){
 	}
 
-	public GuildInAllianceInformations(int nbMembers){
+	public GuildInAllianceInformations(int nbMembers, int joinDate){
 		this.nbMembers = nbMembers;
+		this.joinDate = joinDate;
 	}
 
 	@Override
@@ -33,6 +37,7 @@ public class GuildInAllianceInformations extends GuildInformations {
 		try {
 			super.Serialize(writer);
 			writer.writeByte(this.nbMembers);
+			writer.writeInt(this.joinDate);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -43,6 +48,7 @@ public class GuildInAllianceInformations extends GuildInformations {
 		try {
 			super.Deserialize(reader);
 			this.nbMembers = reader.readByte();
+			this.joinDate = reader.readInt();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

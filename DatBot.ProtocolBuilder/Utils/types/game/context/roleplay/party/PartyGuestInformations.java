@@ -13,7 +13,7 @@ import protocol.network.Network;
 import protocol.network.NetworkMessage;
 import protocol.network.types.game.look.EntityLook;
 import protocol.network.types.game.character.status.PlayerStatus;
-import protocol.network.types.game.context.roleplay.party.companion.PartyCompanionBaseInformations;
+import protocol.network.types.game.context.roleplay.party.entity.PartyEntityBaseInformation;
 
 @SuppressWarnings("unused")
 public class PartyGuestInformations extends NetworkMessage {
@@ -26,7 +26,7 @@ public class PartyGuestInformations extends NetworkMessage {
 	private int breed;
 	private boolean sex;
 	private PlayerStatus status;
-	private List<PartyCompanionBaseInformations> companions;
+	private List<PartyEntityBaseInformation> entities;
 
 	public long getGuestId() { return this.guestId; }
 	public void setGuestId(long guestId) { this.guestId = guestId; };
@@ -42,13 +42,13 @@ public class PartyGuestInformations extends NetworkMessage {
 	public void setSex(boolean sex) { this.sex = sex; };
 	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
-	public List<PartyCompanionBaseInformations> getCompanions() { return this.companions; }
-	public void setCompanions(List<PartyCompanionBaseInformations> companions) { this.companions = companions; };
+	public List<PartyEntityBaseInformation> getEntities() { return this.entities; }
+	public void setEntities(List<PartyEntityBaseInformation> entities) { this.entities = entities; };
 
 	public PartyGuestInformations(){
 	}
 
-	public PartyGuestInformations(long guestId, long hostId, String name, EntityLook guestLook, int breed, boolean sex, PlayerStatus status, List<PartyCompanionBaseInformations> companions){
+	public PartyGuestInformations(long guestId, long hostId, String name, EntityLook guestLook, int breed, boolean sex, PlayerStatus status, List<PartyEntityBaseInformation> entities){
 		this.guestId = guestId;
 		this.hostId = hostId;
 		this.name = name;
@@ -56,7 +56,7 @@ public class PartyGuestInformations extends NetworkMessage {
 		this.breed = breed;
 		this.sex = sex;
 		this.status = status;
-		this.companions = companions;
+		this.entities = entities;
 	}
 
 	@Override
@@ -69,10 +69,10 @@ public class PartyGuestInformations extends NetworkMessage {
 			writer.writeByte(this.breed);
 			writer.writeBoolean(this.sex);
 			writer.writeShort(PlayerStatus.ProtocolId);
-			writer.writeShort(this.companions.size());
+			writer.writeShort(this.entities.size());
 			int _loc2_ = 0;
-			while( _loc2_ < this.companions.size()){
-				this.companions.get(_loc2_).Serialize(writer);
+			while( _loc2_ < this.entities.size()){
+				this.entities.get(_loc2_).Serialize(writer);
 				_loc2_++;
 			}
 		} catch (Exception e){
@@ -94,11 +94,11 @@ public class PartyGuestInformations extends NetworkMessage {
 			this.status.Deserialize(reader);
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
-			this.companions = new ArrayList<PartyCompanionBaseInformations>();
+			this.entities = new ArrayList<PartyEntityBaseInformation>();
 			while( _loc3_ <  _loc2_){
-				PartyCompanionBaseInformations _loc15_ = new PartyCompanionBaseInformations();
+				PartyEntityBaseInformation _loc15_ = new PartyEntityBaseInformation();
 				_loc15_.Deserialize(reader);
-				this.companions.add(_loc15_);
+				this.entities.add(_loc15_);
 				_loc3_++;
 			}
 		} catch (Exception e){

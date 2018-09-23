@@ -11,47 +11,49 @@ import protocol.network.util.DofusDataReader;
 import protocol.network.util.DofusDataWriter;
 import protocol.network.Network;
 import protocol.network.NetworkMessage;
+import protocol.network.types.game.context.roleplay.fight.arena.ArenaRanking;
+import protocol.network.types.game.context.roleplay.fight.arena.ArenaLeagueRanking;
 
 @SuppressWarnings("unused")
 public class ArenaRankInfos extends NetworkMessage {
 	public static final int ProtocolId = 499;
 
-	private int rank;
-	private int bestRank;
+	private ArenaRanking ranking;
+	private ArenaLeagueRanking leagueRanking;
 	private int victoryCount;
 	private int fightcount;
-	private boolean validForLadder;
+	private int numFightNeededForLadder;
 
-	public int getRank() { return this.rank; }
-	public void setRank(int rank) { this.rank = rank; };
-	public int getBestRank() { return this.bestRank; }
-	public void setBestRank(int bestRank) { this.bestRank = bestRank; };
+	public ArenaRanking getRanking() { return this.ranking; }
+	public void setRanking(ArenaRanking ranking) { this.ranking = ranking; };
+	public ArenaLeagueRanking getLeagueRanking() { return this.leagueRanking; }
+	public void setLeagueRanking(ArenaLeagueRanking leagueRanking) { this.leagueRanking = leagueRanking; };
 	public int getVictoryCount() { return this.victoryCount; }
 	public void setVictoryCount(int victoryCount) { this.victoryCount = victoryCount; };
 	public int getFightcount() { return this.fightcount; }
 	public void setFightcount(int fightcount) { this.fightcount = fightcount; };
-	public boolean isValidForLadder() { return this.validForLadder; }
-	public void setValidForLadder(boolean validForLadder) { this.validForLadder = validForLadder; };
+	public int getNumFightNeededForLadder() { return this.numFightNeededForLadder; }
+	public void setNumFightNeededForLadder(int numFightNeededForLadder) { this.numFightNeededForLadder = numFightNeededForLadder; };
 
 	public ArenaRankInfos(){
 	}
 
-	public ArenaRankInfos(int rank, int bestRank, int victoryCount, int fightcount, boolean validForLadder){
-		this.rank = rank;
-		this.bestRank = bestRank;
+	public ArenaRankInfos(ArenaRanking ranking, ArenaLeagueRanking leagueRanking, int victoryCount, int fightcount, int numFightNeededForLadder){
+		this.ranking = ranking;
+		this.leagueRanking = leagueRanking;
 		this.victoryCount = victoryCount;
 		this.fightcount = fightcount;
-		this.validForLadder = validForLadder;
+		this.numFightNeededForLadder = numFightNeededForLadder;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeVarShort(this.rank);
-			writer.writeVarShort(this.bestRank);
+			ranking.Serialize(writer);
+			leagueRanking.Serialize(writer);
 			writer.writeVarShort(this.victoryCount);
 			writer.writeVarShort(this.fightcount);
-			writer.writeBoolean(this.validForLadder);
+			writer.writeShort(this.numFightNeededForLadder);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -60,11 +62,13 @@ public class ArenaRankInfos extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.rank = reader.readVarShort();
-			this.bestRank = reader.readVarShort();
+			this.ranking = new ArenaRanking();
+			this.ranking.Deserialize(reader);
+			this.leagueRanking = new ArenaLeagueRanking();
+			this.leagueRanking.Deserialize(reader);
 			this.victoryCount = reader.readVarShort();
 			this.fightcount = reader.readVarShort();
-			this.validForLadder = reader.readBoolean();
+			this.numFightNeededForLadder = reader.readShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

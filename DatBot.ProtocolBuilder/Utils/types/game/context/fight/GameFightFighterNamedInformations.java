@@ -19,18 +19,30 @@ public class GameFightFighterNamedInformations extends GameFightFighterInformati
 
 	private String name;
 	private PlayerStatus status;
+	private int leagueId;
+	private int ladderPosition;
+	private boolean hiddenInPrefight;
 
 	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; };
 	public PlayerStatus getStatus() { return this.status; }
 	public void setStatus(PlayerStatus status) { this.status = status; };
+	public int getLeagueId() { return this.leagueId; }
+	public void setLeagueId(int leagueId) { this.leagueId = leagueId; };
+	public int getLadderPosition() { return this.ladderPosition; }
+	public void setLadderPosition(int ladderPosition) { this.ladderPosition = ladderPosition; };
+	public boolean isHiddenInPrefight() { return this.hiddenInPrefight; }
+	public void setHiddenInPrefight(boolean hiddenInPrefight) { this.hiddenInPrefight = hiddenInPrefight; };
 
 	public GameFightFighterNamedInformations(){
 	}
 
-	public GameFightFighterNamedInformations(String name, PlayerStatus status){
+	public GameFightFighterNamedInformations(String name, PlayerStatus status, int leagueId, int ladderPosition, boolean hiddenInPrefight){
 		this.name = name;
 		this.status = status;
+		this.leagueId = leagueId;
+		this.ladderPosition = ladderPosition;
+		this.hiddenInPrefight = hiddenInPrefight;
 	}
 
 	@Override
@@ -39,6 +51,9 @@ public class GameFightFighterNamedInformations extends GameFightFighterInformati
 			super.Serialize(writer);
 			writer.writeUTF(this.name);
 			status.Serialize(writer);
+			writer.writeVarShort(this.leagueId);
+			writer.writeInt(this.ladderPosition);
+			writer.writeBoolean(this.hiddenInPrefight);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -51,6 +66,9 @@ public class GameFightFighterNamedInformations extends GameFightFighterInformati
 			this.name = reader.readUTF();
 			this.status = new PlayerStatus();
 			this.status.Deserialize(reader);
+			this.leagueId = reader.readVarShort();
+			this.ladderPosition = reader.readInt();
+			this.hiddenInPrefight = reader.readBoolean();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

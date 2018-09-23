@@ -218,7 +218,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private Info info;
 	private Interactive interactive;
 
-	public String ip = "213.248.126.39";
+	public String ip = "52.17.231.202";
 	private Map map;
 	private Message message;
 	private LatencyFrame latencyFrame;
@@ -586,7 +586,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 47, 16, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 48, 8, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -802,7 +802,10 @@ public class Network extends DisplayInfo implements Runnable {
 		selectServer.Deserialize(dataReader);
 		Ticket = selectServer.getTicket();
 		this.socket.close();
-		this.socket = new Socket(selectServer.getAddress(), selectServer.getPort());
+		for (Integer integer : selectServer.getPorts()) {
+			System.out.println(integer);
+		}
+		this.socket = new Socket(selectServer.getAddress(), selectServer.getPorts().get(0));
 	}
 
 	private void handleSequenceEndMessage(DofusDataReader dataReader) throws Exception {

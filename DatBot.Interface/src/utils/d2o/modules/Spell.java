@@ -38,6 +38,7 @@ public class Spell {
 	private String _name;
 	private String _description;
 	private SpellLevel[] _spellLevels;
+	private boolean bypassSummoningLimit;
 	
 	public static Spell getSpellById(int id){
 		return (Spell) GameData.getObject(MODULE, id);

@@ -1,0 +1,672 @@
+2018-07-28T17:41:45.308 : Entity updating
+2018-07-28T17:41:45.374 : Entity updating
+2018-07-28T17:41:45.535 : Same cell, not moving
+2018-07-28T17:41:45.545 : Finding best position from init
+2018-07-28T17:41:45.965 : Setting rdy
+2018-07-28T17:41:47.983 : Finding best position from gameEntitiesDispositions
+2018-07-28T17:41:47.988 : Cell found : 329
+2018-07-28T17:41:48.666 : Setting rdy
+2018-07-28T17:41:48.709 : Setting rdy
+2018-07-28T17:41:50.338 : Finding best position from gameEntitiesDispositions
+2018-07-28T17:41:50.344 : Cell found : 300
+2018-07-28T17:41:50.840 : Setting rdy
+2018-07-28T17:41:50.877 : Setting rdy
+2018-07-28T17:41:51.296 : Finding best position from gameEntitiesDispositions
+2018-07-28T17:41:51.301 : Same cell, not moving
+2018-07-28T17:41:52.127 : Finding best position from gameEntitiesDispositions
+2018-07-28T17:41:52.136 : Cell found : 329
+2018-07-28T17:41:52.627 : Setting rdy
+2018-07-28T17:41:52.674 : Setting rdy
+2018-07-28T17:41:53.099 : Finding best position from gameEntitiesDispositions
+2018-07-28T17:41:53.112 : Cell found : 300
+2018-07-28T17:41:54.270 : Setting rdy
+2018-07-28T17:41:54.333 : Setting rdy
+2018-07-28T17:41:54.362 : Finding best position from gameEntitiesDispositions
+2018-07-28T17:41:54.368 : Cell found : 315
+2018-07-28T17:41:55.519 : Setting rdy
+2018-07-28T17:41:55.554 : Setting rdy
+2018-07-28T17:42:01.462 : -----Start turn-----
+2018-07-28T17:42:01.466 : Spells are null, getting spells
+2018-07-28T17:42:01.469 : Refresh cooldown
+2018-07-28T17:42:01.989 : Getting best turn
+2018-07-28T17:42:01.993 : Entity size : 2
+2018-07-28T17:42:02 : Getting optimal mvt
+2018-07-28T17:42:02.005 : Getting optimal spell
+2018-07-28T17:42:02.009 : Getting best spell
+2018-07-28T17:42:02.013 : Optimal pos : null
+2018-07-28T17:42:02.016 : Optimal spell : [I@4b597707
+2018-07-28T17:42:02.020 : Casting spell : 166 to 315
+2018-07-28T17:42:03.832 : Entity size : 2
+2018-07-28T17:42:03.836 : Getting optimal mvt
+2018-07-28T17:42:03.841 : Getting optimal spell
+2018-07-28T17:42:03.845 : Getting best spell
+2018-07-28T17:42:03.849 : Optimal pos : null
+2018-07-28T17:42:03.853 : Optimal spell : [I@2c683738
+2018-07-28T17:42:03.857 : Casting spell : 161 to 301
+2018-07-28T17:42:05.517 : Entity size : 2
+2018-07-28T17:42:05.520 : Getting optimal mvt
+2018-07-28T17:42:05.524 : Getting optimal spell
+2018-07-28T17:42:05.528 : Getting best spell
+2018-07-28T17:42:05.532 : Optimal pos : null
+2018-07-28T17:42:05.538 : Optimal spell : null
+2018-07-28T17:42:05.541 : Ending turn
+2018-07-28T17:42:22.929 : -----Start turn-----
+2018-07-28T17:42:22.942 : Refresh cooldown
+2018-07-28T17:42:23.919 : Getting best turn
+2018-07-28T17:42:23.923 : Entity size : 2
+2018-07-28T17:42:23.927 : Getting optimal mvt
+2018-07-28T17:42:23.931 : Getting optimal spell
+2018-07-28T17:42:23.935 : Getting best spell
+2018-07-28T17:42:23.947 : Optimal pos : null
+2018-07-28T17:42:23.951 : Optimal spell : [I@2b6c9b97
+2018-07-28T17:42:23.954 : Casting spell : 161 to 301
+2018-07-28T17:42:26.194 : Entity size : 2
+2018-07-28T17:42:26.198 : Getting optimal mvt
+2018-07-28T17:42:26.202 : Getting optimal spell
+2018-07-28T17:42:26.206 : Getting best spell
+2018-07-28T17:42:26.210 : Optimal pos : null
+2018-07-28T17:42:26.215 : Optimal spell : [I@634013ab
+2018-07-28T17:42:26.219 : Casting spell : 161 to 301
+2018-07-28T17:42:27.914 : Entity size : 2
+2018-07-28T17:42:27.918 : Getting optimal mvt
+2018-07-28T17:42:27.921 : Getting optimal spell
+2018-07-28T17:42:27.925 : Getting best spell
+2018-07-28T17:42:27.929 : Optimal pos : null
+2018-07-28T17:42:27.933 : Optimal spell : null
+2018-07-28T17:42:27.937 : Ending turn
+2018-07-28T17:42:36.067 : -----Start turn-----
+2018-07-28T17:42:36.072 : Refresh cooldown
+2018-07-28T17:42:37.089 : Getting best turn
+2018-07-28T17:42:37.102 : Entity size : 2
+2018-07-28T17:42:37.115 : Getting optimal mvt
+2018-07-28T17:42:37.126 : Getting optimal spell
+2018-07-28T17:42:37.133 : Getting best spell
+2018-07-28T17:42:37.145 : Optimal pos : null
+2018-07-28T17:42:37.151 : Optimal spell : [I@63a1b18b
+2018-07-28T17:42:37.155 : Casting spell : 161 to 301
+2018-07-28T17:42:40.307 : Entity size : 2
+2018-07-28T17:42:40.312 : Getting optimal mvt
+2018-07-28T17:42:40.316 : Getting optimal spell
+2018-07-28T17:42:40.321 : Getting best spell
+2018-07-28T17:42:40.327 : Optimal pos : null
+2018-07-28T17:42:40.332 : Optimal spell : [I@e1d9b30
+2018-07-28T17:42:40.337 : Casting spell : 161 to 301
+2018-07-28T17:42:42.317 : Entity size : 2
+2018-07-28T17:42:42.324 : Getting optimal mvt
+2018-07-28T17:42:42.331 : Getting optimal spell
+2018-07-28T17:42:42.338 : Getting best spell
+2018-07-28T17:42:42.345 : Optimal pos : null
+2018-07-28T17:42:42.352 : Optimal spell : null
+2018-07-28T17:42:42.360 : Ending turn
+2018-07-28T17:44:11.737 : Entity updating
+2018-07-28T17:44:11.787 : Entity updating
+2018-07-28T17:44:12.094 : Same cell, not moving
+2018-07-28T17:44:12.098 : Finding best position from init
+2018-07-28T17:44:12.516 : Setting rdy
+2018-07-28T17:44:14.046 : -----Start turn-----
+2018-07-28T17:44:14.053 : Spells are null, getting spells
+2018-07-28T17:44:14.058 : Refresh cooldown
+2018-07-28T17:44:14.887 : Getting best turn
+2018-07-28T17:44:14.897 : Entity size : 2
+2018-07-28T17:44:14.909 : Getting optimal mvt
+2018-07-28T17:44:14.921 : Getting optimal spell
+2018-07-28T17:44:14.928 : Getting best spell
+2018-07-28T17:44:14.936 : Optimal pos : null
+2018-07-28T17:44:14.943 : Optimal spell : [I@41620947
+2018-07-28T17:44:14.951 : Casting spell : 161 to 301
+2018-07-28T17:44:17.376 : Entity size : 2
+2018-07-28T17:44:17.380 : Getting optimal mvt
+2018-07-28T17:44:17.405 : Getting optimal spell
+2018-07-28T17:44:17.410 : Getting best spell
+2018-07-28T17:44:17.415 : Optimal pos : null
+2018-07-28T17:44:17.418 : Optimal spell : [I@22dc878b
+2018-07-28T17:44:17.423 : Casting spell : 161 to 301
+2018-07-28T17:44:19.455 : Entity size : 2
+2018-07-28T17:44:19.464 : Getting optimal mvt
+2018-07-28T17:44:19.472 : Getting optimal spell
+2018-07-28T17:44:19.481 : Getting best spell
+2018-07-28T17:44:19.486 : Optimal pos : null
+2018-07-28T17:44:19.492 : Optimal spell : null
+2018-07-28T17:44:19.497 : Ending turn
+2018-07-28T17:44:25.704 : -----Start turn-----
+2018-07-28T17:44:25.709 : Refresh cooldown
+2018-07-28T17:44:26.220 : Getting best turn
+2018-07-28T17:44:26.232 : Entity size : 2
+2018-07-28T17:44:26.243 : Getting optimal mvt
+2018-07-28T17:44:26.255 : Getting optimal spell
+2018-07-28T17:44:26.264 : Getting best spell
+2018-07-28T17:44:26.272 : Optimal pos : null
+2018-07-28T17:44:26.279 : Optimal spell : [I@4c9f57b2
+2018-07-28T17:44:26.287 : Casting spell : 161 to 301
+2018-07-28T17:44:28.428 : Entity size : 2
+2018-07-28T17:44:28.432 : Getting optimal mvt
+2018-07-28T17:44:28.436 : Getting optimal spell
+2018-07-28T17:44:28.440 : Getting best spell
+2018-07-28T17:44:28.444 : Optimal pos : null
+2018-07-28T17:44:28.448 : Optimal spell : [I@2eb9910a
+2018-07-28T17:44:28.451 : Casting spell : 161 to 301
+2018-07-28T17:44:30.325 : Entity size : 2
+2018-07-28T17:44:30.329 : Getting optimal mvt
+2018-07-28T17:44:30.332 : Getting optimal spell
+2018-07-28T17:44:30.336 : Getting best spell
+2018-07-28T17:44:30.341 : Optimal pos : null
+2018-07-28T17:44:30.344 : Optimal spell : null
+2018-07-28T17:44:30.348 : Ending turn
+2018-07-28T17:44:38.295 : -----Start turn-----
+2018-07-28T17:44:38.303 : Refresh cooldown
+2018-07-28T17:44:38.562 : Getting best turn
+2018-07-28T17:44:38.572 : Entity size : 2
+2018-07-28T17:44:38.583 : Getting optimal mvt
+2018-07-28T17:44:38.592 : Getting optimal spell
+2018-07-28T17:44:38.598 : Getting best spell
+2018-07-28T17:44:38.605 : Optimal pos : null
+2018-07-28T17:44:38.611 : Optimal spell : [I@7f408dab
+2018-07-28T17:44:38.617 : Casting spell : 161 to 301
+2018-07-28T17:44:41.142 : Entity size : 2
+2018-07-28T17:44:41.151 : Getting optimal mvt
+2018-07-28T17:44:41.160 : Getting optimal spell
+2018-07-28T17:44:41.168 : Getting best spell
+2018-07-28T17:44:41.177 : Optimal pos : null
+2018-07-28T17:44:41.186 : Optimal spell : [I@39e6ad17
+2018-07-28T17:44:41.194 : Casting spell : 161 to 301
+2018-07-28T17:44:42.785 : Entity size : 2
+2018-07-28T17:44:42.789 : Getting optimal mvt
+2018-07-28T17:44:42.793 : Getting optimal spell
+2018-07-28T17:44:42.798 : Getting best spell
+2018-07-28T17:44:42.802 : Optimal pos : null
+2018-07-28T17:44:42.806 : Optimal spell : null
+2018-07-28T17:44:42.809 : Ending turn
+2018-07-28T17:44:50.186 : -----Start turn-----
+2018-07-28T17:44:50.194 : Refresh cooldown
+2018-07-28T17:44:50.420 : Getting best turn
+2018-07-28T17:44:50.430 : Entity size : 2
+2018-07-28T17:44:50.441 : Getting optimal mvt
+2018-07-28T17:44:50.452 : Getting optimal spell
+2018-07-28T17:44:50.463 : Getting best spell
+2018-07-28T17:44:50.472 : Optimal pos : null
+2018-07-28T17:44:50.478 : Optimal spell : [I@ff25f5e
+2018-07-28T17:44:50.485 : Casting spell : 166 to 315
+2018-07-28T17:44:52.318 : Entity size : 2
+2018-07-28T17:44:52.328 : Getting optimal mvt
+2018-07-28T17:44:52.333 : Getting optimal spell
+2018-07-28T17:44:52.337 : Getting best spell
+2018-07-28T17:44:52.341 : Optimal pos : null
+2018-07-28T17:44:52.345 : Optimal spell : [I@6d21be6b
+2018-07-28T17:44:52.349 : Casting spell : 161 to 301
+2018-07-28T17:44:55.430 : Entity size : 2
+2018-07-28T17:44:55.436 : Getting optimal mvt
+2018-07-28T17:44:55.443 : Getting optimal spell
+2018-07-28T17:44:55.448 : Getting best spell
+2018-07-28T17:44:55.453 : Optimal pos : null
+2018-07-28T17:44:55.458 : Optimal spell : null
+2018-07-28T17:44:55.463 : Ending turn
+2018-07-28T17:45:03.121 : -----Start turn-----
+2018-07-28T17:45:03.125 : Refresh cooldown
+2018-07-28T17:45:03.207 : Getting best turn
+2018-07-28T17:45:03.215 : Entity size : 2
+2018-07-28T17:45:03.223 : Getting optimal mvt
+2018-07-28T17:45:03.231 : Getting optimal spell
+2018-07-28T17:45:03.240 : Getting best spell
+2018-07-28T17:45:03.248 : Optimal pos : null
+2018-07-28T17:45:03.254 : Optimal spell : [I@16f74bb1
+2018-07-28T17:45:03.259 : Casting spell : 161 to 301
+2018-07-28T17:45:05.312 : Entity size : 2
+2018-07-28T17:45:05.316 : Getting optimal mvt
+2018-07-28T17:45:05.320 : Getting optimal spell
+2018-07-28T17:45:05.324 : Getting best spell
+2018-07-28T17:45:05.328 : Optimal pos : null
+2018-07-28T17:45:05.332 : Optimal spell : [I@1af5c26d
+2018-07-28T17:45:05.336 : Casting spell : 161 to 301
+2018-07-28T17:45:07.420 : Entity size : 2
+2018-07-28T17:45:07.424 : Getting optimal mvt
+2018-07-28T17:45:07.428 : Getting optimal spell
+2018-07-28T17:45:07.432 : Getting best spell
+2018-07-28T17:45:07.436 : Optimal pos : null
+2018-07-28T17:45:07.440 : Optimal spell : null
+2018-07-28T17:45:07.444 : Ending turn
+2018-07-28T17:49:44.731 : Entity updating
+2018-07-28T17:49:44.791 : Entity updating
+2018-07-28T17:49:45.281 : Same cell, not moving
+2018-07-28T17:49:45.286 : Finding best position from init
+2018-07-28T17:49:45.705 : Setting rdy
+2018-07-28T17:49:47.252 : -----Start turn-----
+2018-07-28T17:49:47.260 : Spells are null, getting spells
+2018-07-28T17:49:47.265 : Refresh cooldown
+2018-07-28T17:49:47.504 : Getting best turn
+2018-07-28T17:49:47.509 : Entity size : 2
+2018-07-28T17:49:47.513 : Getting optimal mvt
+2018-07-28T17:49:47.520 : Getting optimal spell
+2018-07-28T17:49:47.524 : Getting best spell
+2018-07-28T17:49:47.529 : Optimal pos : null
+2018-07-28T17:49:47.535 : Optimal spell : [I@78cd80c8
+2018-07-28T17:49:47.539 : Casting spell : 166 to 356
+2018-07-28T17:49:49.451 : Entity size : 2
+2018-07-28T17:49:49.457 : Getting optimal mvt
+2018-07-28T17:49:49.462 : Getting optimal spell
+2018-07-28T17:49:49.467 : Getting best spell
+2018-07-28T17:49:49.471 : Optimal pos : null
+2018-07-28T17:49:49.476 : Optimal spell : [I@7229a7f2
+2018-07-28T17:49:49.480 : Casting spell : 161 to 343
+2018-07-28T17:49:52.298 : Entity size : 2
+2018-07-28T17:49:52.302 : Getting optimal mvt
+2018-07-28T17:49:52.308 : Getting optimal spell
+2018-07-28T17:49:52.312 : Getting best spell
+2018-07-28T17:49:52.316 : Optimal pos : null
+2018-07-28T17:49:52.320 : Optimal spell : null
+2018-07-28T17:49:52.324 : Ending turn
+2018-07-28T17:49:59.865 : Entity updating
+2018-07-28T17:49:59.918 : Entity updating
+2018-07-28T17:49:59.960 : Same cell, not moving
+2018-07-28T17:49:59.964 : Finding best position from init
+2018-07-28T17:50:00.375 : Setting rdy
+2018-07-28T17:50:02.289 : -----Start turn-----
+2018-07-28T17:50:02.299 : Spells are null, getting spells
+2018-07-28T17:50:02.303 : Refresh cooldown
+2018-07-28T17:50:02.755 : Getting best turn
+2018-07-28T17:50:02.758 : Entity size : 2
+2018-07-28T17:50:02.763 : Getting optimal mvt
+2018-07-28T17:50:02.768 : Getting optimal spell
+2018-07-28T17:50:02.772 : Getting best spell
+2018-07-28T17:50:02.776 : Optimal pos : null
+2018-07-28T17:50:02.780 : Optimal spell : [I@5f4ba80
+2018-07-28T17:50:02.784 : Casting spell : 161 to 301
+2018-07-28T17:50:04.781 : Entity size : 2
+2018-07-28T17:50:04.786 : Getting optimal mvt
+2018-07-28T17:50:04.791 : Getting optimal spell
+2018-07-28T17:50:04.796 : Getting best spell
+2018-07-28T17:50:04.801 : Optimal pos : null
+2018-07-28T17:50:04.805 : Optimal spell : [I@11abb136
+2018-07-28T17:50:04.809 : Casting spell : 161 to 301
+2018-07-28T17:50:07.379 : Entity size : 2
+2018-07-28T17:50:07.385 : Getting optimal mvt
+2018-07-28T17:50:07.390 : Getting optimal spell
+2018-07-28T17:50:07.395 : Getting best spell
+2018-07-28T17:50:07.399 : Optimal pos : null
+2018-07-28T17:50:07.404 : Optimal spell : null
+2018-07-28T17:50:07.409 : Ending turn
+2018-07-28T17:50:13.276 : -----Start turn-----
+2018-07-28T17:50:13.281 : Refresh cooldown
+2018-07-28T17:50:13.333 : Getting best turn
+2018-07-28T17:50:13.337 : Entity size : 2
+2018-07-28T17:50:13.342 : Getting optimal mvt
+2018-07-28T17:50:13.347 : Getting optimal spell
+2018-07-28T17:50:13.352 : Getting best spell
+2018-07-28T17:50:13.358 : Optimal pos : null
+2018-07-28T17:50:13.362 : Optimal spell : [I@2e0282c6
+2018-07-28T17:50:13.367 : Casting spell : 161 to 301
+2018-07-28T17:50:15.760 : Entity size : 2
+2018-07-28T17:50:15.768 : Getting optimal mvt
+2018-07-28T17:50:15.777 : Getting optimal spell
+2018-07-28T17:50:15.785 : Getting best spell
+2018-07-28T17:50:15.794 : Optimal pos : null
+2018-07-28T17:50:15.802 : Optimal spell : [I@148e0f3
+2018-07-28T17:50:15.812 : Casting spell : 161 to 301
+2018-07-28T17:50:17.444 : Entity size : 2
+2018-07-28T17:50:17.450 : Getting optimal mvt
+2018-07-28T17:50:17.455 : Getting optimal spell
+2018-07-28T17:50:17.460 : Getting best spell
+2018-07-28T17:50:17.464 : Optimal pos : null
+2018-07-28T17:50:17.469 : Optimal spell : null
+2018-07-28T17:50:17.473 : Ending turn
+2018-07-28T17:50:35.004 : -----Start turn-----
+2018-07-28T17:50:35.014 : Refresh cooldown
+2018-07-28T17:50:35.377 : Getting best turn
+2018-07-28T17:50:35.382 : Entity size : 2
+2018-07-28T17:50:35.386 : Getting optimal mvt
+2018-07-28T17:50:35.391 : Getting optimal spell
+2018-07-28T17:50:35.395 : Getting best spell
+2018-07-28T17:50:35.400 : Optimal pos : null
+2018-07-28T17:50:35.404 : Optimal spell : [I@21c87ae0
+2018-07-28T17:50:35.408 : Casting spell : 161 to 301
+2018-07-28T17:50:37.269 : Entity size : 2
+2018-07-28T17:50:37.274 : Getting optimal mvt
+2018-07-28T17:50:37.280 : Getting optimal spell
+2018-07-28T17:50:37.286 : Getting best spell
+2018-07-28T17:50:37.293 : Optimal pos : null
+2018-07-28T17:50:37.298 : Optimal spell : [I@6d264dee
+2018-07-28T17:50:37.303 : Casting spell : 161 to 301
+2018-07-28T17:50:39.144 : Entity size : 2
+2018-07-28T17:50:39.152 : Getting optimal mvt
+2018-07-28T17:50:39.159 : Getting optimal spell
+2018-07-28T17:50:39.167 : Getting best spell
+2018-07-28T17:50:39.174 : Optimal pos : null
+2018-07-28T17:50:39.182 : Optimal spell : null
+2018-07-28T17:50:39.189 : Ending turn
+2018-07-28T17:50:45.351 : -----Start turn-----
+2018-07-28T17:50:45.357 : Refresh cooldown
+2018-07-28T17:50:47.248 : Getting best turn
+2018-07-28T17:50:47.255 : Entity size : 2
+2018-07-28T17:50:47.260 : Getting optimal mvt
+2018-07-28T17:50:47.266 : Getting optimal spell
+2018-07-28T17:50:47.272 : Getting best spell
+2018-07-28T17:50:47.278 : Optimal pos : null
+2018-07-28T17:50:47.285 : Optimal spell : [I@5708e63e
+2018-07-28T17:50:47.291 : Casting spell : 161 to 301
+2018-07-28T17:50:49.187 : Entity size : 2
+2018-07-28T17:50:49.192 : Getting optimal mvt
+2018-07-28T17:50:49.197 : Getting optimal spell
+2018-07-28T17:50:49.202 : Getting best spell
+2018-07-28T17:50:49.206 : Optimal pos : null
+2018-07-28T17:50:49.211 : Optimal spell : [I@1101db54
+2018-07-28T17:50:49.216 : Casting spell : 161 to 301
+2018-07-28T17:50:51.483 : Entity size : 2
+2018-07-28T17:50:51.493 : Getting optimal mvt
+2018-07-28T17:50:51.501 : Getting optimal spell
+2018-07-28T17:50:51.510 : Getting best spell
+2018-07-28T17:50:51.518 : Optimal pos : null
+2018-07-28T17:50:51.524 : Optimal spell : null
+2018-07-28T17:50:51.529 : Ending turn
+2018-07-28T17:50:57.587 : -----Start turn-----
+2018-07-28T17:50:57.593 : Refresh cooldown
+2018-07-28T17:50:58.027 : Getting best turn
+2018-07-28T17:50:58.031 : Entity size : 2
+2018-07-28T17:50:58.035 : Getting optimal mvt
+2018-07-28T17:50:58.040 : Getting optimal spell
+2018-07-28T17:50:58.045 : Getting best spell
+2018-07-28T17:50:58.050 : Optimal pos : null
+2018-07-28T17:50:58.055 : Optimal spell : [I@73fcbcee
+2018-07-28T17:50:58.060 : Casting spell : 161 to 301
+2018-07-28T17:51:00.193 : Entity size : 2
+2018-07-28T17:51:00.198 : Getting optimal mvt
+2018-07-28T17:51:00.204 : Getting optimal spell
+2018-07-28T17:51:00.209 : Getting best spell
+2018-07-28T17:51:00.215 : Optimal pos : null
+2018-07-28T17:51:00.220 : Optimal spell : [I@2cead642
+2018-07-28T17:51:00.224 : Casting spell : 161 to 301
+2018-07-28T17:51:02.124 : Entity size : 2
+2018-07-28T17:51:02.130 : Getting optimal mvt
+2018-07-28T17:51:02.135 : Getting optimal spell
+2018-07-28T17:51:02.139 : Getting best spell
+2018-07-28T17:51:02.144 : Optimal pos : null
+2018-07-28T17:51:02.150 : Optimal spell : null
+2018-07-28T17:51:02.154 : Ending turn
+2018-07-28T17:51:04.883 : -----Start turn-----
+2018-07-28T17:51:04.891 : Refresh cooldown
+2018-07-28T17:51:05.066 : Getting best turn
+2018-07-28T17:51:05.071 : Entity size : 2
+2018-07-28T17:51:05.076 : Getting optimal mvt
+2018-07-28T17:51:05.082 : Getting optimal spell
+2018-07-28T17:51:05.087 : Getting best spell
+2018-07-28T17:51:05.091 : Optimal pos : null
+2018-07-28T17:51:05.095 : Optimal spell : [I@3cc3ecf7
+2018-07-28T17:51:05.100 : Casting spell : 166 to 315
+2018-07-28T17:51:07.536 : Entity size : 2
+2018-07-28T17:51:07.542 : Getting optimal mvt
+2018-07-28T17:51:07.548 : Getting optimal spell
+2018-07-28T17:51:07.555 : Getting best spell
+2018-07-28T17:51:07.561 : Optimal pos : null
+2018-07-28T17:51:07.568 : Optimal spell : [I@23075b40
+2018-07-28T17:51:07.573 : Casting spell : 161 to 301
+2018-07-28T17:51:09.448 : Entity size : 2
+2018-07-28T17:51:09.454 : Getting optimal mvt
+2018-07-28T17:51:09.458 : Getting optimal spell
+2018-07-28T17:51:09.463 : Getting best spell
+2018-07-28T17:51:09.467 : Optimal pos : null
+2018-07-28T17:51:09.472 : Optimal spell : null
+2018-07-28T17:51:09.476 : Ending turn
+2018-07-28T18:01:00.717 : Entity updating
+2018-07-28T18:01:00.776 : Entity updating
+2018-07-28T18:01:00.826 : Same cell, not moving
+2018-07-28T18:01:00.831 : Finding best position from init
+2018-07-28T18:01:01.242 : Setting rdy
+2018-07-28T18:01:03.170 : -----Start turn-----
+2018-07-28T18:01:03.176 : Refresh cooldown
+2018-07-28T18:01:03.885 : Getting best turn
+2018-07-28T18:01:03.889 : Entity size : 2
+2018-07-28T18:01:03.893 : Getting optimal mvt
+2018-07-28T18:01:03.899 : Getting optimal spell
+2018-07-28T18:01:03.903 : Getting best spell
+2018-07-28T18:01:03.908 : Optimal pos : null
+2018-07-28T18:01:03.912 : Optimal spell : [I@6be63044
+2018-07-28T18:01:03.916 : Casting spell : 166 to 315
+2018-07-28T18:01:06.226 : Entity size : 2
+2018-07-28T18:01:06.232 : Getting optimal mvt
+2018-07-28T18:01:06.240 : Getting optimal spell
+2018-07-28T18:01:06.247 : Getting best spell
+2018-07-28T18:01:06.253 : Optimal pos : null
+2018-07-28T18:01:06.257 : Optimal spell : [I@168d6f58
+2018-07-28T18:01:06.262 : Casting spell : 161 to 301
+2018-07-28T18:01:08.344 : Entity size : 2
+2018-07-28T18:01:08.348 : Getting optimal mvt
+2018-07-28T18:01:08.354 : Getting optimal spell
+2018-07-28T18:01:08.357 : Getting best spell
+2018-07-28T18:01:08.362 : Optimal pos : null
+2018-07-28T18:01:08.367 : Optimal spell : null
+2018-07-28T18:01:08.371 : Ending turn
+2018-07-28T18:01:21.115 : Entity updating
+2018-07-28T18:01:21.169 : Entity updating
+2018-07-28T18:01:21.347 : Same cell, not moving
+2018-07-28T18:01:21.356 : Finding best position from init
+2018-07-28T18:01:21.772 : Setting rdy
+2018-07-28T18:01:23.304 : -----Start turn-----
+2018-07-28T18:01:23.314 : Refresh cooldown
+2018-07-28T18:01:23.595 : Getting best turn
+2018-07-28T18:01:23.599 : Entity size : 2
+2018-07-28T18:01:23.604 : Getting optimal mvt
+2018-07-28T18:01:23.609 : Getting optimal spell
+2018-07-28T18:01:23.613 : Getting best spell
+2018-07-28T18:01:23.618 : Optimal pos : null
+2018-07-28T18:01:23.622 : Optimal spell : [I@3da85843
+2018-07-28T18:01:23.626 : Casting spell : 166 to 315
+2018-07-28T18:01:25.339 : Entity size : 2
+2018-07-28T18:01:25.343 : Getting optimal mvt
+2018-07-28T18:01:25.350 : Getting optimal spell
+2018-07-28T18:01:25.354 : Getting best spell
+2018-07-28T18:01:25.358 : Optimal pos : null
+2018-07-28T18:01:25.363 : Optimal spell : [I@a26b267
+2018-07-28T18:01:25.367 : Casting spell : 161 to 301
+2018-07-28T18:01:26.998 : Entity size : 2
+2018-07-28T18:01:27.003 : Getting optimal mvt
+2018-07-28T18:01:27.009 : Getting optimal spell
+2018-07-28T18:01:27.014 : Getting best spell
+2018-07-28T18:01:27.018 : Optimal pos : null
+2018-07-28T18:01:27.023 : Optimal spell : null
+2018-07-28T18:01:27.027 : Ending turn
+2018-07-28T18:01:32.450 : -----Start turn-----
+2018-07-28T18:01:32.459 : Refresh cooldown
+2018-07-28T18:01:32.604 : Getting best turn
+2018-07-28T18:01:32.608 : Entity size : 2
+2018-07-28T18:01:32.612 : Getting optimal mvt
+2018-07-28T18:01:32.617 : Getting optimal spell
+2018-07-28T18:01:32.621 : Getting best spell
+2018-07-28T18:01:32.625 : Optimal pos : null
+2018-07-28T18:01:32.629 : Optimal spell : [I@5098c777
+2018-07-28T18:01:32.634 : Casting spell : 166 to 315
+2018-07-28T18:02:48.346 : Entity updating
+2018-07-28T18:02:48.407 : Entity updating
+2018-07-28T18:02:48.821 : Same cell, not moving
+2018-07-28T18:02:48.825 : Finding best position from init
+2018-07-28T18:02:49.242 : Setting rdy
+2018-07-28T18:02:51.608 : -----Start turn-----
+2018-07-28T18:02:51.614 : Spells are null, getting spells
+2018-07-28T18:02:51.618 : Refresh cooldown
+2018-07-28T18:02:52 : Getting best turn
+2018-07-28T18:02:52.010 : Entity size : 2
+2018-07-28T18:02:52.020 : Getting optimal mvt
+2018-07-28T18:02:52.031 : Getting optimal spell
+2018-07-28T18:02:52.037 : Getting best spell
+2018-07-28T18:02:52.043 : Optimal pos : null
+2018-07-28T18:02:52.048 : Optimal spell : [I@2b18c8b2
+2018-07-28T18:02:52.054 : Casting spell : 166 to 329
+2018-07-28T18:02:53.959 : Entity size : 2
+2018-07-28T18:02:53.970 : Getting optimal mvt
+2018-07-28T18:02:53.980 : Getting optimal spell
+2018-07-28T18:02:53.985 : Getting best spell
+2018-07-28T18:02:53.989 : Optimal pos : null
+2018-07-28T18:02:53.995 : Optimal spell : [I@19387ecb
+2018-07-28T18:02:53.999 : Casting spell : 161 to 316
+2018-07-28T18:02:56.253 : Entity size : 2
+2018-07-28T18:02:56.258 : Getting optimal mvt
+2018-07-28T18:02:56.264 : Getting optimal spell
+2018-07-28T18:02:56.268 : Getting best spell
+2018-07-28T18:02:56.272 : Optimal pos : null
+2018-07-28T18:02:56.277 : Optimal spell : null
+2018-07-28T18:02:56.281 : Ending turn
+2018-07-28T18:03:03.850 : Entity updating
+2018-07-28T18:03:03.899 : Entity updating
+2018-07-28T18:03:04.046 : Same cell, not moving
+2018-07-28T18:03:04.055 : Finding best position from init
+2018-07-28T18:03:04.473 : Setting rdy
+2018-07-28T18:03:12.036 : -----Start turn-----
+2018-07-28T18:03:12.042 : Spells are null, getting spells
+2018-07-28T18:03:12.047 : Refresh cooldown
+2018-07-28T18:03:13.198 : Getting best turn
+2018-07-28T18:03:13.211 : Entity size : 2
+2018-07-28T18:03:13.223 : Getting optimal mvt
+2018-07-28T18:03:13.238 : Getting optimal spell
+2018-07-28T18:03:13.247 : Getting best spell
+2018-07-28T18:03:13.253 : Optimal pos : null
+2018-07-28T18:03:13.263 : Optimal spell : [I@6f3dd7e1
+2018-07-28T18:03:13.270 : Casting spell : 161 to 301
+2018-07-28T18:03:15.918 : Entity size : 2
+2018-07-28T18:03:15.922 : Getting optimal mvt
+2018-07-28T18:03:15.928 : Getting optimal spell
+2018-07-28T18:03:15.933 : Getting best spell
+2018-07-28T18:03:15.937 : Optimal pos : null
+2018-07-28T18:03:15.942 : Optimal spell : [I@1443025c
+2018-07-28T18:03:15.947 : Casting spell : 161 to 301
+2018-07-28T18:03:18.408 : Entity size : 2
+2018-07-28T18:03:18.413 : Getting optimal mvt
+2018-07-28T18:03:18.418 : Getting optimal spell
+2018-07-28T18:03:18.422 : Getting best spell
+2018-07-28T18:03:18.426 : Optimal pos : null
+2018-07-28T18:03:18.431 : Optimal spell : null
+2018-07-28T18:03:18.436 : Ending turn
+2018-07-28T18:05:43.258 : Entity updating
+2018-07-28T18:05:43.320 : Entity updating
+2018-07-28T18:05:43.547 : Same cell, not moving
+2018-07-28T18:05:43.558 : Finding best position from init
+2018-07-28T18:05:43.984 : Setting rdy
+2018-07-28T18:05:47.940 : -----Start turn-----
+2018-07-28T18:05:47.946 : Spells are null, getting spells
+2018-07-28T18:05:47.950 : Refresh cooldown
+2018-07-28T18:05:48.117 : Getting best turn
+2018-07-28T18:05:48.122 : Entity size : 2
+2018-07-28T18:05:48.127 : Getting optimal mvt
+2018-07-28T18:05:48.133 : Getting optimal spell
+2018-07-28T18:05:48.138 : Getting best spell
+2018-07-28T18:05:48.143 : Optimal pos : null
+2018-07-28T18:05:48.148 : Optimal spell : [I@3c8dcbee
+2018-07-28T18:05:48.153 : Casting spell : 166 to 329
+2018-07-28T18:05:50.994 : Entity size : 2
+2018-07-28T18:05:50.999 : Getting optimal mvt
+2018-07-28T18:05:51.004 : Getting optimal spell
+2018-07-28T18:05:51.009 : Getting best spell
+2018-07-28T18:05:51.013 : Optimal pos : null
+2018-07-28T18:05:51.017 : Optimal spell : [I@47adbb25
+2018-07-28T18:05:51.022 : Casting spell : 161 to 316
+2018-07-28T18:05:53.220 : Entity size : 2
+2018-07-28T18:05:53.225 : Getting optimal mvt
+2018-07-28T18:05:53.230 : Getting optimal spell
+2018-07-28T18:05:53.235 : Getting best spell
+2018-07-28T18:05:53.239 : Optimal pos : null
+2018-07-28T18:05:53.244 : Optimal spell : null
+2018-07-28T18:05:53.248 : Ending turn
+2018-07-28T18:06:16.470 : Entity updating
+2018-07-28T18:06:16.483 : Entity updating
+2018-07-28T18:06:17.167 : Entity size : 2
+2018-07-28T18:06:17.174 : Getting optimal mvt
+2018-07-28T18:06:17.182 : Getting optimal spell
+2018-07-28T18:06:17.186 : Getting best spell
+2018-07-28T18:06:17.206 : Reset spell
+2018-07-28T18:06:32.807 : Entity updating
+2018-07-28T18:06:32.858 : Entity updating
+2018-07-28T18:06:33.071 : Same cell, not moving
+2018-07-28T18:06:33.075 : Finding best position from init
+2018-07-28T18:06:33.486 : Setting rdy
+2018-07-28T18:06:33.943 : Reset spell
+2018-07-28T18:06:35.018 : -----Start turn-----
+2018-07-28T18:06:35.024 : Refresh cooldown
+2018-07-28T18:06:35.324 : Getting best turn
+2018-07-28T18:06:35.334 : Entity size : 2
+2018-07-28T18:06:35.345 : Getting optimal mvt
+2018-07-28T18:06:35.359 : Getting optimal spell
+2018-07-28T18:06:35.370 : Getting best spell
+2018-07-28T18:06:35.381 : Optimal pos : null
+2018-07-28T18:06:35.388 : Optimal spell : [I@61318119
+2018-07-28T18:06:35.395 : Casting spell : 166 to 300
+2018-07-28T18:06:37.092 : Entity size : 2
+2018-07-28T18:06:37.101 : Getting optimal mvt
+2018-07-28T18:06:37.111 : Getting optimal spell
+2018-07-28T18:06:37.119 : Getting best spell
+2018-07-28T18:06:37.123 : Optimal pos : null
+2018-07-28T18:06:37.127 : Optimal spell : [I@15f46ecc
+2018-07-28T18:06:37.133 : Casting spell : 161 to 287
+2018-07-28T18:06:39.484 : Entity size : 2
+2018-07-28T18:06:39.489 : Getting optimal mvt
+2018-07-28T18:06:39.495 : Getting optimal spell
+2018-07-28T18:06:39.499 : Getting best spell
+2018-07-28T18:06:39.504 : Optimal pos : null
+2018-07-28T18:06:39.509 : Optimal spell : null
+2018-07-28T18:06:39.513 : Ending turn
+2018-07-28T18:06:44.777 : -----Start turn-----
+2018-07-28T18:06:44.783 : Refresh cooldown
+2018-07-28T18:06:45.716 : Getting best turn
+2018-07-28T18:06:45.733 : Entity size : 2
+2018-07-28T18:06:45.748 : Getting optimal mvt
+2018-07-28T18:06:45.765 : Getting optimal spell
+2018-07-28T18:06:45.774 : Getting best spell
+2018-07-28T18:06:45.782 : Optimal pos : null
+2018-07-28T18:06:45.791 : Optimal spell : [I@46f7eb12
+2018-07-28T18:06:45.796 : Casting spell : 161 to 287
+2018-07-28T18:06:48.532 : Entity size : 2
+2018-07-28T18:06:48.548 : Getting optimal mvt
+2018-07-28T18:06:48.574 : Getting optimal spell
+2018-07-28T18:06:48.585 : Getting best spell
+2018-07-28T18:06:48.594 : Optimal pos : null
+2018-07-28T18:06:48.602 : Optimal spell : [I@79168ea8
+2018-07-28T18:06:48.610 : Casting spell : 161 to 287
+2018-07-28T18:06:50.240 : Entity size : 2
+2018-07-28T18:06:50.245 : Getting optimal mvt
+2018-07-28T18:06:50.251 : Getting optimal spell
+2018-07-28T18:06:50.257 : Getting best spell
+2018-07-28T18:06:50.261 : Optimal pos : null
+2018-07-28T18:06:50.265 : Optimal spell : null
+2018-07-28T18:06:50.270 : Ending turn
+2018-07-28T18:06:55.811 : Entity updating
+2018-07-28T18:06:55.865 : Entity updating
+2018-07-28T18:06:55.933 : Same cell, not moving
+2018-07-28T18:06:55.937 : Finding best position from init
+2018-07-28T18:06:56.347 : Setting rdy
+2018-07-28T18:06:56.805 : Reset spell
+2018-07-28T18:06:57.865 : -----Start turn-----
+2018-07-28T18:06:57.871 : Refresh cooldown
+2018-07-28T18:06:58.167 : Getting best turn
+2018-07-28T18:06:58.185 : Entity size : 2
+2018-07-28T18:06:58.206 : Getting optimal mvt
+2018-07-28T18:06:58.217 : Getting optimal spell
+2018-07-28T18:06:58.225 : Getting best spell
+2018-07-28T18:06:58.233 : Optimal pos : null
+2018-07-28T18:06:58.240 : Optimal spell : [I@14c2f1da
+2018-07-28T18:06:58.245 : Casting spell : 166 to 329
+2018-07-28T18:06:59.924 : Entity size : 2
+2018-07-28T18:06:59.928 : Getting optimal mvt
+2018-07-28T18:06:59.933 : Getting optimal spell
+2018-07-28T18:06:59.940 : Getting best spell
+2018-07-28T18:06:59.944 : Optimal pos : null
+2018-07-28T18:06:59.948 : Optimal spell : [I@22f66f80
+2018-07-28T18:06:59.953 : Casting spell : 161 to 316
+2018-07-28T18:07:01.467 : Entity size : 2
+2018-07-28T18:07:01.471 : Getting optimal mvt
+2018-07-28T18:07:01.475 : Getting optimal spell
+2018-07-28T18:07:01.479 : Getting best spell
+2018-07-28T18:07:01.484 : Optimal pos : null
+2018-07-28T18:07:01.489 : Optimal spell : null
+2018-07-28T18:07:01.493 : Ending turn
+2018-07-28T18:07:05.100 : -----Start turn-----
+2018-07-28T18:07:05.109 : Refresh cooldown
+2018-07-28T18:07:05.601 : Getting best turn
+2018-07-28T18:07:05.605 : Entity size : 2
+2018-07-28T18:07:05.610 : Getting optimal mvt
+2018-07-28T18:07:05.614 : Getting optimal spell
+2018-07-28T18:07:05.618 : Getting best spell
+2018-07-28T18:07:05.623 : Optimal pos : null
+2018-07-28T18:07:05.627 : Optimal spell : [I@5ba0bfb7
+2018-07-28T18:07:05.632 : Casting spell : 161 to 316
+2018-07-28T18:07:07.934 : Entity size : 2
+2018-07-28T18:07:07.939 : Getting optimal mvt
+2018-07-28T18:07:07.943 : Getting optimal spell
+2018-07-28T18:07:07.947 : Getting best spell
+2018-07-28T18:07:07.950 : Optimal pos : null
+2018-07-28T18:07:07.955 : Optimal spell : [I@160e09a5
+2018-07-28T18:07:07.959 : Casting spell : 161 to 316

@@ -297,16 +297,5 @@ public class GameFightMinimalStats extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString() {
-		return "GameFightMinimalStats [lifePoints=" + lifePoints + ", maxLifePoints=" + maxLifePoints + ", baseMaxLifePoints=" + baseMaxLifePoints + ", permanentDamagePercent=" + permanentDamagePercent + ", shieldPoints=" + shieldPoints + ", actionPoints=" + actionPoints + ", maxActionPoints=" + maxActionPoints + ", movementPoints="
-			+ movementPoints + ", maxMovementPoints=" + maxMovementPoints + ", summoner=" + summoner + ", summoned=" + summoned + ", neutralElementResistPercent=" + neutralElementResistPercent + ", earthElementResistPercent=" + earthElementResistPercent + ", waterElementResistPercent=" + waterElementResistPercent + ", airElementResistPercent="
-			+ airElementResistPercent + ", fireElementResistPercent=" + fireElementResistPercent + ", neutralElementReduction=" + neutralElementReduction + ", earthElementReduction=" + earthElementReduction + ", waterElementReduction=" + waterElementReduction + ", airElementReduction=" + airElementReduction + ", fireElementReduction="
-			+ fireElementReduction + ", criticalDamageFixedResist=" + criticalDamageFixedResist + ", pushDamageFixedResist=" + pushDamageFixedResist + ", pvpNeutralElementResistPercent=" + pvpNeutralElementResistPercent + ", pvpEarthElementResistPercent=" + pvpEarthElementResistPercent + ", pvpWaterElementResistPercent="
-			+ pvpWaterElementResistPercent + ", pvpAirElementResistPercent=" + pvpAirElementResistPercent + ", pvpFireElementResistPercent=" + pvpFireElementResistPercent + ", pvpNeutralElementReduction=" + pvpNeutralElementReduction + ", pvpEarthElementReduction=" + pvpEarthElementReduction + ", pvpWaterElementReduction="
-			+ pvpWaterElementReduction + ", pvpAirElementReduction=" + pvpAirElementReduction + ", pvpFireElementReduction=" + pvpFireElementReduction + ", dodgePALostProbability=" + dodgePALostProbability + ", dodgePMLostProbability=" + dodgePMLostProbability + ", tackleBlock=" + tackleBlock + ", tackleEvade=" + tackleEvade
-			+ ", fixedDamageReflection=" + fixedDamageReflection + ", invisibilityState=" + invisibilityState + ", meleeDamageReceivedPercent=" + meleeDamageReceivedPercent + ", rangedDamageReceivedPercent=" + rangedDamageReceivedPercent + ", weaponDamageReceivedPercent=" + weaponDamageReceivedPercent + ", spellDamageReceivedPercent="
-			+ spellDamageReceivedPercent + "]";
-	}
 
 }

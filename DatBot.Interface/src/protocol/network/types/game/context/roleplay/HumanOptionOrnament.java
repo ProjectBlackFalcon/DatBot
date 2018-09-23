@@ -18,18 +18,26 @@ public class HumanOptionOrnament extends HumanOption {
 
 	private int ornamentId;
 	private int level;
+	private int leagueId;
+	private int ladderPosition;
 
 	public int getOrnamentId() { return this.ornamentId; }
 	public void setOrnamentId(int ornamentId) { this.ornamentId = ornamentId; };
 	public int getLevel() { return this.level; }
 	public void setLevel(int level) { this.level = level; };
+	public int getLeagueId() { return this.leagueId; }
+	public void setLeagueId(int leagueId) { this.leagueId = leagueId; };
+	public int getLadderPosition() { return this.ladderPosition; }
+	public void setLadderPosition(int ladderPosition) { this.ladderPosition = ladderPosition; };
 
 	public HumanOptionOrnament(){
 	}
 
-	public HumanOptionOrnament(int ornamentId, int level){
+	public HumanOptionOrnament(int ornamentId, int level, int leagueId, int ladderPosition){
 		this.ornamentId = ornamentId;
 		this.level = level;
+		this.leagueId = leagueId;
+		this.ladderPosition = ladderPosition;
 	}
 
 	@Override
@@ -38,6 +46,8 @@ public class HumanOptionOrnament extends HumanOption {
 			super.Serialize(writer);
 			writer.writeVarShort(this.ornamentId);
 			writer.writeVarShort(this.level);
+			writer.writeVarShort(this.leagueId);
+			writer.writeInt(this.ladderPosition);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -49,6 +59,8 @@ public class HumanOptionOrnament extends HumanOption {
 			super.Deserialize(reader);
 			this.ornamentId = reader.readVarShort();
 			this.level = reader.readVarShort();
+			this.leagueId = reader.readVarShort();
+			this.ladderPosition = reader.readInt();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
