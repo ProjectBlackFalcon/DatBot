@@ -990,5 +990,13 @@ class HighLevelFunctions:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
 
+    def get_runes_prices(self):
+        self.goto((-28, 36))
+        self.bot.interface.open_hdv()
+        runes_prices = {}
+        for rune, rune_id in self.bot.resources.rune_ids.items():
+            runes_prices[rune] = self.bot.interface.get_hdv_item_stats(rune_id)[-1]
+        self.bot.interface.close_hdv()
+
 
 __author__ = 'Alexis'

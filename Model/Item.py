@@ -25,7 +25,13 @@ class Item:
         local_focus_weights = self.get_local_focus_weights()
         total_weight = sum([value * self.runes_stats[stat][0] for stat, value in self.stats.items()])
 
-        return {stat: round(((value+(total_weight-value)/2)/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55, 1) for stat, value in local_focus_weights.items()}
+        with_focus = {stat: ((value+(total_weight-value)/2)/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55 for stat, value in local_focus_weights.items()}
+        with_focus = {stat: int(value) if stat in ['PA', 'PM', 'PO'] else round(value, 1) for stat, value in with_focus.items()}
+
+        no_focus = {stat: round((value/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55, 1) for stat, value in local_focus_weights.items()}
+        no_focus = {stat: int(value) if stat in ['PA', 'PM', 'PO'] else round(value, 1) for stat, value in no_focus.items()}
+
+        return with_focus, no_focus
 
 
 if __name__ == '__main__':
