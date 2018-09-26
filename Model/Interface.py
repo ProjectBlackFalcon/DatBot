@@ -597,7 +597,8 @@ class Interface:
             prices as [price1, price 10, price 100, average price] (-1 if not for sale),
             stats as [[statName1, value1], [statName2, value2], ...] (statsNames are from RuneStats.json)
         """
-        return self.execute_command('getHdvItemStats', [item_id])
+        type_id = self.bot.resources.id2type[str(item_id)]
+        return self.execute_command('getHdvItemStats', [item_id, type_id])
 
     def get_hdv_resource_stats(self, item_id):
         """
