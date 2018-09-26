@@ -991,16 +991,22 @@ class HighLevelFunctions:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
 
-    def get_runes_prices(self):
+    def get_hdv_prices(self, hdv):
         # TODO upload to DB
-        self.goto((-28, 36))
+        if hdv == 'Runes':
+            self.goto((-28, 36))
+        elif hdv == 'Equipements':
+            self.goto((-27, 39))
         self.bot.interface.open_hdv()
-        runes_prices = {}
-        for rune_id in self.bot.resources.hdv2id['Runes']:
-            rune = self.bot.resources.id2names[str(rune_id)]
-            runes_prices[rune] = self.bot.interface.get_hdv_resource_stats(rune_id)[-1]
+        start = time.time()
+        items_ids = self.bot.resources.hdv2id[hdv]
+        self.bot.interface.get_hdv_item_stats(items_ids)
+        print(time.time() - start, len(self.bot.resources.hdv2id[hdv]))
         self.bot.interface.close_hdv()
-        return runes_prices
+
+        # runes_prices = {}
+        # runes_prices[rune] = self.bot.interface.get_hdv_resource_stats(rune_id)[-1]
+        # return runes_prices
 
     def estimate_craft_cost(self, item_id_list):
         recipes = []

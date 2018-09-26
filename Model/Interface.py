@@ -588,25 +588,35 @@ class Interface:
                 self.hdv_opended = False
             return ret_val
 
-    def get_hdv_item_stats(self, item_id):
+    def get_hdv_item_stats(self, item_id_list):
         """
         Gathers data about the item given
-        :param item_id: item id
+        :param item_id_list: {type_id1: [id1, id2, ...], ...}
         :return: False / [itemStats, ...] itemStats is a json formatted string with
-            name,
+            id,
             prices as [price1, price 10, price 100, average price] (-1 if not for sale),
             stats as [[statName1, value1], [statName2, value2], ...] (statsNames are from RuneStats.json)
         """
-        type_id = self.bot.resources.id2type[str(item_id)]
-        return self.execute_command('getHdvItemStats', [item_id, type_id])
+        if type(item_id_list) is not list:
+            item_id_list = [item_id_list]
+        data_sent = {}
+        for item_id in item_id_list:
+            type_id = self.bot.resources.id2type[str(item_id)]
+            if type_id in data_sent.keys():
+                data_sent[type_id].append(item_id)
+            else:
+                data_sent[type_id] = [item_id]
+        return self.execute_command('getHdvItemStats', data_sent)
 
-    def get_hdv_resource_stats(self, item_id):
+    def get_hdv_resource_stats(self, item_id_list):
         """
         Gathers data about the item given
-        :param item_id: item id
-        :return: False / [price1, price 10, price 100, average price]
+        :param item_id_list: item id list
+        :return: False / list of [price1, price 10, price 100, average price]
         """
-        return self.execute_command('getHdvResourceStats', [item_id])
+        if type(item_id_list) is not list:
+            item_id_list = [item_id_list]
+        return self.execute_command('getHdvResourceStats', item_id_list)
 
     def sell_item(self, item_id, batch_size, batch_number, price):
         """
