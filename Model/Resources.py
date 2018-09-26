@@ -3,6 +3,7 @@ import json
 
 class Resources:
     def __init__(self):
+        self.resources_prices = {}  # 'id': [prices], timestamp
         with open('../Utils/zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
         with open('../Utils/CaracLevel.json', 'r') as f:
@@ -43,5 +44,11 @@ class Resources:
             self.west_dd_territory_maps = json.load(f)
         with open('../Utils/NamedRecipes.json', 'r') as f:
             self.recipes = json.load(f)
-        with open('../Utils/RuneIds.json', 'r') as f:
-            self.rune_ids = json.load(f)
+        with open('../Utils/Hdv2Id.json', 'r') as f:
+            self.hdv2id = json.load(f)
+        with open('../Utils/Id2Hdv.json', 'r') as f:
+            self.id2hdv = json.load(f)
+        with open('../Utils/Id2Names.json', 'r', encoding='latin-1') as f:
+            self.id2names = json.load(f)
+        with open('../Utils/Id2Type.json', 'r', encoding='latin-1') as f:
+            self.id2type = json.load(f)
