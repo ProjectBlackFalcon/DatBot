@@ -2,11 +2,10 @@ import json
 
 
 class Item:
-    def __init__(self, item_stats, level, creation_price, rune_prices):
+    def __init__(self, item_stats, level, creation_price):
         self.stats = item_stats
         self.level = level
         self.creation_price = creation_price
-        self.rune_prices = rune_prices
         with open('../Utils/RunesStats.json', 'r') as f:
             self.runes_stats = json.load(f)
         self.coeff = 100
@@ -17,15 +16,31 @@ class Item:
     def get_local_focus_weights(self):
         return {stat: value * self.runes_stats[stat][0] for stat, value in self.stats.items() if value}
 
-    def get_min_coeff(self):
-        pass
+    def get_min_coeff(self, rune_prices):
+        with_focus, no_focus = self.get_runes_obtained()
+        max_value = sum([price[3]*no_focus[rune] for rune, price in rune_prices.items()])
+        focus = 'No focus'
+
+        for rune, number in with_focus.items():
+            if rune_prices[rune][3] * number > max_value:
+                focus = rune
+                max_value = rune_prices[rune][3] * number
+
+        min_coeff = self.creation_price / max_value
+        return min_coeff, focus
 
     def get_runes_obtained(self):
         weights = self.get_rune_weights()
         local_focus_weights = self.get_local_focus_weights()
         total_weight = sum([value * self.runes_stats[stat][0] for stat, value in self.stats.items()])
 
-        return {stat: round(((value+(total_weight-value)/2)/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55, 1) for stat, value in local_focus_weights.items()}
+        with_focus = {stat: ((value+(total_weight-value)/2)/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55 for stat, value in local_focus_weights.items()}
+        with_focus = {stat: int(value) if stat in ['PA', 'PM', 'PO'] else round(value, 1) for stat, value in with_focus.items()}
+
+        no_focus = {stat: round((value/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55, 1) for stat, value in local_focus_weights.items()}
+        no_focus = {stat: int(value) if stat in ['PA', 'PM', 'PO'] else round(value, 1) for stat, value in no_focus.items()}
+
+        return with_focus, no_focus
 
 
 if __name__ == '__main__':

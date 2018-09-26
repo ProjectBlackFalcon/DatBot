@@ -37,10 +37,7 @@ random.shuffle(colors)
 
 
 credentials = [
-    {'username': 'wublel2', 'password': 'notabot0', 'name': 'Gradopr', 'server': 'Julith'},
-    {'username': 'Suleimana', 'password': 'daniel1deux', 'name': 'Jedine', 'server': 'Julith'},
-    {'username': 'Esmai23', 'password': 'jesuisunmdp1', 'name': 'Tsuaaf', 'server': 'Julith'},
-    {'username': 'computationexist', 'password': 'downriverpig0', 'name': 'Bachote', 'server': 'Julith'}
+    {'username': 'randomname0', 'password': 'notabot0', 'name': 'Romaru', 'server': 'Julith'},
 ]
 
 bots = []

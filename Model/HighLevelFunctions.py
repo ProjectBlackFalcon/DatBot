@@ -636,7 +636,7 @@ class HighLevelFunctions:
                     items_for_sale.append(batch)
 
         for item in items_for_sale:
-            item_hdv_stats = self.bot.interface.get_hdv_item_stats(item[1])
+            item_hdv_stats = self.bot.interface.get_hdv_resource_stats(item[1])
             item_hdv_stats = False if not item_hdv_stats[0] else item_hdv_stats[0]
             if item_hdv_stats:
                 batch_size_index = [1, 10, 100].index(item[2])
@@ -682,7 +682,7 @@ class HighLevelFunctions:
                         hdv_list += self.bot.resources.hdv_pos[key]
                     if self.bot.position[1] == 1 and self.bot.position[0] in hdv_list:
                         self.bot.interface.open_hdv()
-                        item_hdv_stats = self.bot.interface.get_hdv_item_stats(item[1])
+                        item_hdv_stats = self.bot.interface.get_hdv_resource_stats(item[1])
                         item_hdv_stats = False if item_hdv_stats[0] == [0, 0, 0] else item_hdv_stats[0]
                         # TODO What to do when item not for sale
                         if item_hdv_stats:
@@ -989,6 +989,15 @@ class HighLevelFunctions:
             with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
+
+    def get_runes_prices(self):
+        self.goto((-28, 36))
+        self.bot.interface.open_hdv()
+        runes_prices = {}
+        for rune, rune_id in self.bot.resources.rune_ids.items():
+            runes_prices[rune] = self.bot.interface.get_hdv_resource_stats(rune_id)[-1]
+        self.bot.interface.close_hdv()
+        return runes_prices
 
 
 __author__ = 'Alexis'
