@@ -59,7 +59,7 @@ class HighLevelFunctions:
         if closest_zaap is not None and not forbid_zaaps:
             distance_zaap_target = self.bot.llf.distance_coords(closest_zaap, tuple(target_coord))
             if worldmap == current_worldmap and self.bot.llf.distance_coords(current_map, tuple(target_coord)) > distance_zaap_target+5:
-                if self.bot.interface.enter_heavenbag()[0]:
+                if self.bot.characteristics.level > 10 or self.bot.interface.enter_heavenbag()[0]:
                     self.bot.interface.use_zaap(closest_zaap)
                     current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
                     while tuple(current_map) != tuple(closest_zaap):
@@ -70,7 +70,9 @@ class HighLevelFunctions:
                 else:
                     closest_zaap_2 = self.bot.llf.get_closest_known_zaap(self.bot.credentials['name'], self.bot.position[0])
                     self.goto(closest_zaap_2, forbid_zaaps=True)
-                    self.bot.interface.enter_heavenbag()
+                    if self.bot.characteristics.level < 10 or not self.bot.interface.enter_heavenbag()[0]:
+                        zaap_cell = self.bot.interface.get_zaap_cell()[0]
+                        self.bot.interface.move(self.bot.llf.get_closest_walkable_neighbour_cell(zaap_cell, current_cell, self.bot.position[0], self.bot.position[1]))
                     self.bot.interface.use_zaap(closest_zaap)
                     current_map, current_cell, current_worldmap, map_id = self.bot.interface.get_map()
 
@@ -962,8 +964,7 @@ class HighLevelFunctions:
         occupation = "Unknown" if self.bot.occupation is None else self.bot.occupation
         position = ((0, 0), 0) if self.bot.position is None else self.bot.position
         try:
-            self.bot.llf.log(self.bot,
-                         '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], kamas, level, occupation, position[0], position[1]))
+            self.bot.llf.log(self.bot, '[Database {}] Uploading {}, {}, {}, {}, {}, {}, {}, {}'.format(self.bot.id, self.bot.id, self.bot.credentials['server'], self.bot.credentials['name'], kamas, level, occupation, position[0], position[1]))
             self.bot.llf.update_db(
                 self.bot.id,
                 self.bot.credentials['server'],
@@ -991,13 +992,48 @@ class HighLevelFunctions:
                 f.write(traceback.format_exc())
 
     def get_runes_prices(self):
+        # TODO upload to DB
         self.goto((-28, 36))
         self.bot.interface.open_hdv()
         runes_prices = {}
-        for rune, rune_id in self.bot.resources.rune_ids.items():
+        for rune_id in self.bot.resources.hdv2id['Runes']:
+            rune = self.bot.resources.id2names[str(rune_id)]
             runes_prices[rune] = self.bot.interface.get_hdv_resource_stats(rune_id)[-1]
         self.bot.interface.close_hdv()
         return runes_prices
+
+    def estimate_craft_cost(self, item_id_list):
+        recipes = []
+        ingredients = {}
+        for recipe in self.bot.resources.recipes:
+            if recipe['resultId'] in item_id_list:
+                recipes.append(recipe)
+                for ingredient, quantity in recipe['Ingredients']:
+                    if ingredient in ingredients.keys():
+                        ingredients[ingredient] = [ingredients[ingredient][0] + quantity, -1]
+                    else:
+                        ingredients[ingredient] = [quantity, -1]
+
+        ingredients_to_check = []
+        for ingredient in ingredients.keys():
+            if ingredient in self.bot.resources.resources_prices.keys() and time.time() - self.bot.resources.resources_prices[ingredient][1] < 5*3600:
+                ingredients[ingredient][1] = self.bot.resources.resources_prices[ingredient][0][3]  # prices -> avg prices
+            else:
+                ingredients_to_check.append(ingredient)
+
+        self.goto((-30, -53))
+        self.bot.interface.open_hdv()
+        for ingredient in ingredients_to_check:
+            prices = self.bot.interface.get_hdv_item_stats(int(ingredient))[0]
+            self.bot.resources.resources_prices[ingredient] = [prices, time.time()]
+            ingredients[ingredient][1] = self.bot.resources.resources_prices[ingredient][0][3]
+
+        total_cost = sum([qty * val for qty, val in ingredients.values()])
+        for recipe in recipes:
+            recipe['Cost'] = 0
+            for ingredient, quantity in recipe['Ingredients']:
+                recipe['Cost'] += ingredients[ingredient][1] * quantity
+        print(total_cost, recipes)
 
 
 __author__ = 'Alexis'
