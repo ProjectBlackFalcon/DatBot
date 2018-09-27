@@ -1,14 +1,37 @@
 import json
+import zlib
 
 
 class Item:
-    def __init__(self, item_stats, level, creation_price):
-        self.stats = item_stats
+    def __init__(self, item_stats, level=-1, creation_price=-1, resource_prices=None):
+        self.all_stats = ['Dommage air', 'PM', 'Resistance terre', 'Renvoi dommage', 'Dommage neutre', 'Invocation', 'Tacle',
+                     'Resistance critique', 'Rune de chasse', 'Resistance % neutre', 'Resistance PA',
+                     'Dommage critique', 'Pods', 'Resistance neutre', 'Resistance % terre', 'Force', 'Resistance PM',
+                     'Resistance % eau', 'Dommage terre', 'Dommage poussee', 'Portee', 'Resistance air', 'Initiative',
+                     'Vitalite', 'Resistance poussee', 'Sagesse', 'Fuite', 'Retrait PM', 'Resistance % feu',
+                     'Intelligence', 'Dommage piege', 'Puissance', 'Resistance feu', 'Chance', 'Soin',
+                     'Resistance % air', 'PA', 'Dommage % piege', 'Prospection', 'Critique', 'Retrait PA',
+                     'Resistance eau', 'Agilite', 'Dommage', 'Dommage eau', 'Dommage feu']
+        self.stats = item_stats if type(item_stats) == dict else self.stats2dict(item_stats)
         self.level = level
         self.creation_price = creation_price
+        self.resource_prices = resource_prices
         with open('../Utils/RunesStats.json', 'r') as f:
             self.runes_stats = json.load(f)
         self.coeff = 100
+
+    def __str__(self):
+        return ''.join(['{} : {} | '.format(stat, self.stats[stat]) for stat in self.all_stats])
+
+    def __hash__(self):
+        return zlib.adler32(bytes(self.__str__(), 'utf-8'))
+
+    def stats2dict(self, stats):
+        output = {stat: value for stat, value in stats}
+        for stat in self.all_stats:
+            if stat not in output.keys():
+                output[stat] = 0
+        return output
 
     def get_rune_weights(self):
         return {stat: self.runes_stats[stat][0] if stat not in ['Vitalite', 'Pods', 'Initiative'] else 1 for stat, value in self.stats.items() if self.stats[stat]}
@@ -62,5 +85,6 @@ if __name__ == '__main__':
      'Dommage neutre': 0, 'Resistance % feu': 0, 'PA': 0, 'Force': 0, 'Initiative': 79, 'Prospection': 149,
      'Resistance % terre': 1080, 'Resistance air': 0, 'Resistance terre': 190, 'Agilite': 0, 'Pods': 0}
 
-    item = Item(item_stats, 84, 1300000, rune_prices)
-    print(item.get_runes_obtained())
+    item = Item(item_stats, 84)
+    print(str(item))
+    print(hash(item))

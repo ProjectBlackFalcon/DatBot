@@ -992,15 +992,21 @@ class HighLevelFunctions:
                 f.write(traceback.format_exc())
 
     def get_hdv_prices(self, hdv):
-        # TODO upload to DB
-        if hdv == 'Runes':
-            self.goto((-28, 36))
-        elif hdv == 'Equipements':
-            self.goto((-27, 39))
+        hdv_pos = self.bot.llf.closest_cell(self.bot.position[0], self.bot.resources.hdv_pos[hdv])
+        self.goto(hdv_pos)
         self.bot.interface.open_hdv()
+
         start = time.time()
         items_ids = self.bot.resources.hdv2id[hdv]
-        self.bot.interface.get_hdv_item_stats(items_ids)
+        if hdv == 'Equipements':
+            stats = self.bot.interface.get_hdv_item_stats(items_ids, self.estimate_craft_cost(items_ids))
+            self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Item')
+        if hdv in ['Resources', 'Runes', 'Consumables']:
+            prices = self.bot.interface.get_hdv_resource_stats(items_ids)
+            for item_id, price1, price10, price100, priceavg in prices:
+                stats = self.bot.resources.resources_prices[item_id] = [[price1, price10, price100, priceavg], time.time()]
+                self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Resource')
+
         print(time.time() - start, len(self.bot.resources.hdv2id[hdv]))
         self.bot.interface.close_hdv()
 
@@ -1027,6 +1033,7 @@ class HighLevelFunctions:
             else:
                 ingredients_to_check.append(ingredient)
 
+        # TODO Ingredient price to check : all hdvs
         self.goto((-30, -53))
         self.bot.interface.open_hdv()
         for ingredient in ingredients_to_check:
@@ -1039,7 +1046,7 @@ class HighLevelFunctions:
             recipe['Cost'] = 0
             for ingredient, quantity in recipe['Ingredients']:
                 recipe['Cost'] += ingredients[ingredient][1] * quantity
-        print(total_cost, recipes)
+        return [recipe['Cost'] for recipe in recipes]
 
 
 __author__ = 'Alexis'

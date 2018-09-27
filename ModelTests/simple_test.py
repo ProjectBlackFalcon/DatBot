@@ -11,5 +11,6 @@ pipe = PipeToJava(headless=True)
 bot = Bot(pipe, 0, test_account_credentials, llf, resources)
 
 bot.interface.connect()
+bot.hf.get_hdv_prices('Equipements')
 bot.interface.disconnect()
 pipe.p.terminate()

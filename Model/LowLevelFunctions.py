@@ -7,6 +7,7 @@ import Database_credentials as dc
 import os
 import traceback
 import bz2
+from Item import Item
 
 
 class LowLevelFunctions:
@@ -415,6 +416,22 @@ class LowLevelFunctions:
                 f.write(traceback.format_exc())
         with open('../Utils/HuntLogs.txt', 'w') as f:
             f.write(log)
+
+    def resource_item_to_db(self, bot, item_stats_list, item_type):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                       database=dc.database)
+        cursor = conn.cursor()
+        if item_type == 'Resources':
+            for item_id, price1, price10, price100, priceavg in item_stats_list:
+                cursor.execute("""INSERT INTO ResourcePrices (ItemId, Server, Price1, Price10, Price100, Priceavg) VALUES ({},{},{},{},{},{})""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg))
+        elif item_type == 'Item':
+            for item_id, price1, price10, price100, priceavg, stats in item_stats_list:
+                craft_cost = bot.hf.estimate_craft_cost(item_id)
+                item_hash = hash(Item(stats))
+                cursor.execute("""INSERT INTO ItemPrices (ItemId, Server, Price1, Price10, Price100, Priceavg, CraftCost, Stats, Hash) VALUES ({},{},{},{},{},{},{},{})""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg, craft_cost, stats, item_hash))
+
+        conn.commit()
+        conn.close()
 
     def fetch_harvest_path(self, bot_name):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
