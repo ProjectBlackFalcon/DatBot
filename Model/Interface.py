@@ -594,7 +594,10 @@ class Interface:
         :param item_id_list: {type_id1: [id1, id2, ...], ...}
         :return: False / [itemStats, ...] itemStats is a json formatted string with
             id,
-            prices as [price1, price 10, price 100, average price] (-1 if not for sale),
+            price1 (-1 if not for sale),
+            price 10 (-1 if not for sale),
+            price 100 (-1 if not for sale),
+            average price (-1 if not for sale),
             stats as [[statName1, value1], [statName2, value2], ...] (statsNames are from RuneStats.json)
         """
         if type(item_id_list) is not list:
@@ -612,7 +615,7 @@ class Interface:
         """
         Gathers data about the item given
         :param item_id_list: item id list
-        :return: False / list of [price1, price 10, price 100, average price]
+        :return: False / list of [id, price1, price 10, price 100, average price]
         """
         if type(item_id_list) is not list:
             item_id_list = [item_id_list]
