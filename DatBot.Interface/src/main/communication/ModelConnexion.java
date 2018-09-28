@@ -715,7 +715,12 @@ public class ModelConnexion {
 	}
 
 	private Object[] getHdvResourceStats(String param) throws Exception {
-		Object[] toSend;
+		Object[] toSend = new Object[] { "False" };
+		String[] paramSplit = param.split(",");
+		List<Integer> params = new ArrayList<>();
+		for (String string : paramSplit) {
+			params.add(Integer.parseInt(string));
+		}
 		log.writeActionLogMessage("getHdvResourceStats", String.format("inExchange : %s, id : %s", this.network.getInfo().isInExchange(), param));
 		if (Integer.parseInt(param) > 0 && this.network.getInfo().isInExchange()) {
 
@@ -731,15 +736,17 @@ public class ModelConnexion {
 					return new Object[] { "False" };
 				}
 			}
-
-			ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
-			getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
-			if (this.waitToSendHdv()) {
-				toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
-			}
-			else {
-				DisplayInfo.appendDebugLog("getHdvResourceStats error, server returned false", param);
-				toSend = new Object[] { "False" };
+			
+			for (Integer i : params) {
+				ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
+				getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
+				if (this.waitToSendHdv()) {
+					toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
+				}
+				else {
+					DisplayInfo.appendDebugLog("getHdvResourceStats error, server returned false", param);
+					toSend = new Object[] { "False" };
+				}
 			}
 		}
 		else {
@@ -777,12 +784,13 @@ public class ModelConnexion {
 			//Go into buy mod
 			if (this.network.getInfo().isSellingHdv()) {
 				NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 6, this.getNetwork().getMap().getId());
-				getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request buyer6");
+				getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request buyer");
 				if (this.waitToSendHdv()) {
 					stop(0.15);
 					this.network.getInfo().setSellingHdv(false);
 					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(this.network.getHdv().getTypes().get(0));
-					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Request type sell");
+					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Request type sell " + this.network.getHdv().getTypes().get(0));
+					this.network.getHdv().setCurrentType(this.network.getHdv().getTypes().get(0));
 					if (!this.waitToSendHdv()) {
 						DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
 						return new Object[] { "False" };
@@ -807,6 +815,7 @@ public class ModelConnexion {
 				if (this.network.getHdv().getCurrentType() != e.getKey()) {
 					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(e.getKey());
 					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Change to type " + e.getKey());
+					this.network.getHdv().setCurrentType(e.getKey());
 					if (!this.waitToSendHdv()) {
 						DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
 						return new Object[] { "False" };
