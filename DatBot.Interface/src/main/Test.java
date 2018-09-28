@@ -23,6 +23,10 @@ public class Test {
 		Thread communication2 = new Thread(communication);
 		communication2.start();
 		communication.getReturn("0;0;i;cmd;connect;[trevored ,azerty123uiop,Kylerine,Julith]");
+		Thread.sleep(15000);
+		communication.getReturn("0;0;i;cmd;openHdv;[None]");
+		Thread.sleep(5000);
+		communication.getReturn("0;0;i;cmd;getHdvItemStats;[{3:[1131,469,333],17:[778,957,555555],7:[5249,235,1404,1067,6513,13092,342,1079,1403,5130,16527,6785,271,1383,5239,5243,1071,5284,9961]}]");
 
 		// TESTS FOR INPUTS
 

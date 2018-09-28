@@ -1,23 +1,23 @@
 package Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import utils.d2o.modules.Monster;
-import utils.d2p.MapManager;
-import utils.d2p.map.Map;
+import main.communication.DisplayInfo;
 
 public class testMap {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		Map map = MapManager.FromId(191102980);
-		System.out.println(map.getCells().get(171));
-		System.out.println(Monster.getMonsterById(2271).isMiniBoss);
-		System.out.println(Monster.getMonsterById(2271).getName());
-		System.out.println("œ".replaceAll("œ", "oe"));
-
-		long time = System.currentTimeMillis();
-		Thread.sleep(3000);
-		System.out.println((System.currentTimeMillis() - time) / 1000);
+		String param = "[1131,469,333]";
+				
+		String[] paramSplit = param.replaceAll("[\\[\\]]", "").split(",");
+		for (String string : paramSplit) {
+			System.out.println(string);
+		}
 	}
+	
+	
+
 
 }

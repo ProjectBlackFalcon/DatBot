@@ -2,8 +2,12 @@ package main.communication;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
+
+import org.json.simple.JSONArray;
 
 import game.Info;
 import game.map.MapMovement;
@@ -27,6 +31,7 @@ import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHunt
 import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseListMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHousePriceMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeHandleMountsMessage;
@@ -95,7 +100,7 @@ public class ModelConnexion {
 				}
 			}
 		}
-		log.writeActionLogMessage("attackMonster", String.format("id : %s, cellid player : %s, canAttack : %s", id, this.network.getInfo().getCellId(),  canAtk));
+		log.writeActionLogMessage("attackMonster", String.format("id : %s, cellid player : %s, canAttack : %s", id, this.network.getInfo().getCellId(), canAtk));
 		if (canAtk) {
 			GameRolePlayAttackMonsterRequestMessage gameRolePlayAttackMonsterRequestMessage = new GameRolePlayAttackMonsterRequestMessage(id);
 			getNetwork().sendToServer(gameRolePlayAttackMonsterRequestMessage, GameRolePlayAttackMonsterRequestMessage.ProtocolId, "Attack monster " + id);
@@ -136,8 +141,7 @@ public class ModelConnexion {
 		Object[] toSend;
 		String[] infoMov = param.split(",");
 		int oldMapId = this.getNetwork().getMap().getId();
-		log.writeActionLogMessage("changeMap", String.format("actual map : %s - %s, actual cell : %s, direction : %s, cellChangeMap : %s", 
-					this.network.getMap().getId(), GameData.getCoordMapString(this.network.getMap().getId()), this.network.getInfo().getCellId(), infoMov[1], infoMov[0]));
+		log.writeActionLogMessage("changeMap", String.format("actual map : %s - %s, actual cell : %s, direction : %s, cellChangeMap : %s", this.network.getMap().getId(), GameData.getCoordMapString(this.network.getMap().getId()), this.network.getInfo().getCellId(), infoMov[1], infoMov[0]));
 		MapMovement mapMovement = this.network.getMovement().ChangeMap(Integer.parseInt(infoMov[0]), infoMov[1]);
 		if (mapMovement == null) {
 			toSend = new Object[] { "False" };
@@ -191,7 +195,7 @@ public class ModelConnexion {
 
 	private Object[] closeBank() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("closeBank", String.format("bankOpened : %s, actual map : %s", bankOpened,  GameData.getCoordMapString(this.getNetwork().getMap().getId())));
+		log.writeActionLogMessage("closeBank", String.format("bankOpened : %s, actual map : %s", bankOpened, GameData.getCoordMapString(this.getNetwork().getMap().getId())));
 		if (bankOpened) {
 			getNetwork().sendToServer(new LeaveDialogRequestMessage(), LeaveDialogRequestMessage.ProtocolId, "Close bank");
 			if (this.waitToSendLeaveExchange()) {
@@ -232,8 +236,7 @@ public class ModelConnexion {
 
 	private Object[] closeHdv() throws Exception {
 		Object[] toSend;
-		if(!hdvOpened)
-			return new Object[] { "True" };
+		if (!hdvOpened) return new Object[] { "True" };
 		log.writeActionLogMessage("closeHdv", String.format("isInExchange : %s, map : %s", this.network.getInfo().isInExchange(), GameData.getCoordMapString(this.getNetwork().getMap().getId())));
 		if (this.network.getInfo().isInExchange()) {
 			LeaveDialogRequestMessage leaveDialogRequestMessage = new LeaveDialogRequestMessage();
@@ -354,9 +357,7 @@ public class ModelConnexion {
 	private Object[] dropBankAll() throws Exception {
 		Object[] toSend;
 		log.writeActionLogMessage("dropBankAll", String.format("map : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId())));
-		if(this.network.getStats().getInventoryContentMessage().getObjects().size() <= 1){
-			return new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
-		}
+		if (this.network.getStats().getInventoryContentMessage().getObjects().size() <= 1) { return new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() }; }
 		if (bankOpened) {
 			ExchangeObjectTransfertAllFromInvMessage exchangeObjectTransfertAllFromInvMessage = new ExchangeObjectTransfertAllFromInvMessage();
 			getNetwork().sendToServer(exchangeObjectTransfertAllFromInvMessage, ExchangeObjectTransfertAllFromInvMessage.ProtocolId, "Drop all items in this.network.getBank()");
@@ -378,8 +379,7 @@ public class ModelConnexion {
 
 	private Object[] dropBankKamas(String param) throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("dropBankKamas", String.format("map : %s, bankOpened : %s, kamasToDrop : %s, kamasInInventory : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId())
-			, bankOpened, param, this.network.getStats().getInventoryContentMessage().getKamas()));
+		log.writeActionLogMessage("dropBankKamas", String.format("map : %s, bankOpened : %s, kamasToDrop : %s, kamasInInventory : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), bankOpened, param, this.network.getStats().getInventoryContentMessage().getKamas()));
 		if (bankOpened) {
 			ExchangeObjectMoveKamaMessage exchangeObjectMoveKamaMessage1 = new ExchangeObjectMoveKamaMessage(Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeObjectMoveKamaMessage1, ExchangeObjectMoveKamaMessage.ProtocolId, "Drop kamas in this.network.getBank()");
@@ -444,8 +444,7 @@ public class ModelConnexion {
 
 	private Object[] enterBwork() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("enterBwork", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), 473020, this.network.getInteractive().getSkill(473020, 184)));
+		log.writeActionLogMessage("enterBwork", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), 473020, this.network.getInteractive().getSkill(473020, 184)));
 		if (this.network.getMap().getId() == 88212751 && this.network.getInfo().getCellId() == 383) {
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(473020, this.network.getInteractive().getSkill(473020, 184));
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter bwork");
@@ -483,8 +482,7 @@ public class ModelConnexion {
 
 	private Object[] exitBwork() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("enterBwork", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), 477555, this.network.getInteractive().getSkill(473020, 184)));
+		log.writeActionLogMessage("enterBwork", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), 477555, this.network.getInteractive().getSkill(473020, 184)));
 		if (this.network.getMap().getId() == 104073218 && this.network.getInfo().getCellId() == 260) {
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(477555, this.network.getInteractive().getSkill(477555, 184));
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit bwork");
@@ -505,19 +503,16 @@ public class ModelConnexion {
 
 	private Object[] exitHuntingHall() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("exitHuntingHall", String.format("map : %s, mapid : %s, cellid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+		log.writeActionLogMessage("exitHuntingHall", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 		if (this.network.getMap().getId() == 128452097) {
 			move(504);
-			log.writeActionLogMessage("exitHuntingHall_1", String.format("map : %s, mapid : %s, cellid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+			log.writeActionLogMessage("exitHuntingHall_1", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 			sleepShort();
 		}
 		if (this.network.getMap().getId() == 128451073) {
 			move(536);
 			int[] interactive2 = this.network.getInteractive().getInteractive(184);
-			log.writeActionLogMessage("exitHuntingHall_2", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive2[1], interactive2[2]));
+			log.writeActionLogMessage("exitHuntingHall_2", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), interactive2[1], interactive2[2]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exiting hunting hall");
 			if (this.waitToSendMap(this.network.getMap().getId())) {
@@ -600,7 +595,7 @@ public class ModelConnexion {
 
 	private Object[] getBankDoor() {
 		Object[] toSend;
-		log.writeActionLogMessage("getBankDoor", String.format("map : %s, mapid : %s",  GameData.getCoordMapString(this.getNetwork().getMap().getId()),this.getNetwork().getMap().getId() ));	
+		log.writeActionLogMessage("getBankDoor", String.format("map : %s, mapid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.getNetwork().getMap().getId()));
 		if (this.network.getMap().getId() == 144931) {
 			toSend = new Object[] { this.network.getBank().cellIdBrakmarIN, this.network.getBank().cellIdBrakmarOUT };
 		}
@@ -642,7 +637,7 @@ public class ModelConnexion {
 		Object[] toSend;
 		log.writeActionLogMessage("getBankList", String.format("bankOpened : %s, param : %s", bankOpened, param));
 		if (bankOpened) {
-			if(param == null || param.isEmpty()){
+			if (param == null || param.isEmpty()) {
 				log.writeActionLogMessage("getBankList_empty", String.format("bankOpened : %s, param : %s", bankOpened, param));
 				return new Object[] { this.network.getStats().getStatsBot(), this.network.getBank() };
 			}
@@ -671,8 +666,8 @@ public class ModelConnexion {
 
 	private Object[] getClue() {
 		Object[] toSend;
-		log.writeActionLogMessage("getClue", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s, currentClue : %s, direction : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps()
-			,this.network.getHunt().getCurrentClue(),Hunt.getDirection(this.network.getHunt().getCurrentDir())));
+		log.writeActionLogMessage("getClue",
+			String.format("inHunt : %s, currentStep : %s, numberOfStep : %s, currentClue : %s, direction : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps(), this.network.getHunt().getCurrentClue(), Hunt.getDirection(this.network.getHunt().getCurrentDir())));
 		if (this.network.getInfo().isInHunt() && this.getNetwork().getHunt().getCurrentStep() != this.getNetwork().getHunt().getNumberOfSteps() - 1) {
 			toSend = new Object[] { "\"" + this.network.getHunt().getCurrentClue() + "\", \"" + Hunt.getDirection(this.network.getHunt().getCurrentDir()) + "\"" };
 		}
@@ -687,8 +682,7 @@ public class ModelConnexion {
 
 	private Object[] getCluesLeft() {
 		Object[] toSend;
-		log.writeActionLogMessage("getCluesLeft", String.format("inHunt : %s, getNumberOfIndex : %s, getCurrentIndex : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getNumberOfIndex()
-			,this.network.getHunt().getCurrentIndex()));
+		log.writeActionLogMessage("getCluesLeft", String.format("inHunt : %s, getNumberOfIndex : %s, getCurrentIndex : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getNumberOfIndex(), this.network.getHunt().getCurrentIndex()));
 		if (this.network.getInfo().isInHunt()) {
 			toSend = new Object[] { (this.getNetwork().getHunt().getNumberOfIndex() - this.getNetwork().getHunt().getCurrentIndex()) };
 		}
@@ -720,20 +714,135 @@ public class ModelConnexion {
 		return toSend;
 	}
 
-	private Object[] getHdvItemStats(String param) throws Exception {
+	private Object[] getHdvResourceStats(String param) throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("getHdvItemStats", String.format("inExchange : %s, id : %s", this.network.getInfo().isInExchange(), param));
+		log.writeActionLogMessage("getHdvResourceStats", String.format("inExchange : %s, id : %s", this.network.getInfo().isInExchange(), param));
 		if (Integer.parseInt(param) > 0 && this.network.getInfo().isInExchange()) {
+
+			if (!this.network.getInfo().isSellingHdv()) {
+				NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 5, this.getNetwork().getMap().getId());
+				getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
+				if (this.waitToSendHdv()) {
+					stop(0.25);
+					this.network.getInfo().setSellingHdv(true);
+				}
+				else {
+					DisplayInfo.appendDebugLog("getHdvResourceStats error, cannot swap hdv", param);
+					return new Object[] { "False" };
+				}
+			}
+
 			ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(Integer.parseInt(param));
 			getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
 			if (this.waitToSendHdv()) {
-				stop(0.25);
 				toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
 			}
 			else {
-				DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
+				DisplayInfo.appendDebugLog("getHdvResourceStats error, server returned false", param);
 				toSend = new Object[] { "False" };
 			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+
+	@SuppressWarnings("unchecked")
+	private Object[] getHdvItemStats(String param) throws Exception {
+		Object[] toSend = new Object[] { "False" };
+		//Split param
+		param = param.substring(1, param.length()-1);
+		String[] paramSplit = DisplayInfo.split(param);
+		//Split all items id
+		HashMap<Integer, List<Integer>> idsItem = new HashMap<>();
+
+		for (String string : paramSplit) {
+			//Split each type
+			String[] paramSplit2 = string.split(":");
+			
+			//Split all ids in the type into a list
+			String[] itemsId = paramSplit2[1].replaceAll("[\\[\\]]", "").split(",");
+			List<Integer> ids = new ArrayList<>();
+			for (String s : itemsId) {
+				ids.add(Integer.parseInt(s));
+			}
+			//Put everything in hashmap
+			idsItem.put(Integer.parseInt(paramSplit2[0]), ids);
+		}
+
+		log.writeActionLogMessage("getHdvItemStats", String.format("inExchange : %s, id : %s", this.network.getInfo().isInExchange(), param));
+		if (this.network.getInfo().isInExchange()) {
+
+			//Go into buy mod
+			if (this.network.getInfo().isSellingHdv()) {
+				NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 6, this.getNetwork().getMap().getId());
+				getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request buyer6");
+				if (this.waitToSendHdv()) {
+					stop(0.15);
+					this.network.getInfo().setSellingHdv(false);
+					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(this.network.getHdv().getTypes().get(0));
+					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Request type sell");
+					if (!this.waitToSendHdv()) {
+						DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
+						return new Object[] { "False" };
+					}
+				}
+				else {
+					DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
+					return new Object[] { "False" };
+				}
+			}
+
+			JSONArray array = new JSONArray();
+			
+			//Get all entry, go to the type and get all item price
+			for (Entry<Integer, List<Integer>> e : idsItem.entrySet()) {
+				//Check if type is available
+				if (!this.network.getHdv().getTypes().contains(e.getKey())) {
+					DisplayInfo.appendDebugLog("getHdvItemStats error, type not found", String.valueOf(e.getKey()));
+					return new Object[] { "False" };
+				}
+				//If type is available and not already good, change type
+				if (this.network.getHdv().getCurrentType() != e.getKey()) {
+					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(e.getKey());
+					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Change to type " + e.getKey());
+					if (!this.waitToSendHdv()) {
+						DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
+						return new Object[] { "False" };
+					}
+				}
+
+				
+				//Get the list of item and get the prices
+				for (Integer i : e.getValue()) {
+					//Check if the item is available
+					if (!this.network.getHdv().getTypesInTypes().contains(i)) {
+						array.add(this.network.getHdv().getItemNX(i));
+						continue;
+					}
+
+					//Get list prices
+					ExchangeBidHouseListMessage exchangeBidHouseListMessage = new ExchangeBidHouseListMessage(i);
+					getNetwork().sendToServer(exchangeBidHouseListMessage, ExchangeBidHouseListMessage.ProtocolId, "Request list prices item " +i);
+					if (this.waitToSendHdv()) {
+						// Must send the average price request
+						ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
+						getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item " +i);
+						if (this.waitToSendHdv()) {
+							array.add(this.network.getHdv().getItemsPrices());
+						} else {
+							DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
+							return toSend;
+						}
+					}
+					else {
+						DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
+						return toSend;
+					}
+				}
+			}
+			toSend = new Object[] { array.toJSONString() };
 		}
 		else {
 			toSend = new Object[] { "False" };
@@ -795,8 +904,7 @@ public class ModelConnexion {
 
 		Object[] toSend = null;
 
-		if(this.network != null)
-			this.log = this.network.getLog();
+		if (this.network != null) this.log = this.network.getLog();
 
 		param = param.substring(1, param.length() - 1);
 		param = param.replaceAll("'", "");
@@ -937,8 +1045,8 @@ public class ModelConnexion {
 			case "openHdv":
 				toSend = openHdv();
 				break;
-			case "getHdvItemStats":
-				toSend = getHdvItemStats(param);
+			case "getHdvResourceStats":
+				toSend = getHdvResourceStats(param);
 				break;
 			case "sellItem":
 				toSend = sellItem(param);
@@ -1014,9 +1122,10 @@ public class ModelConnexion {
 				break;
 			case "getSubTime":
 				long time = this.getNetwork().getInfo().getTimeLeftSub() - ((System.currentTimeMillis() - this.getNetwork().getInfo().getCurrentTime()) / 1000);
-				if(time > 0){
+				if (time > 0) {
 					return new Object[] { time };
-				} else {
+				}
+				else {
 					return new Object[] { 0 };
 				}
 			case "equipItem":
@@ -1031,14 +1140,16 @@ public class ModelConnexion {
 			case "enterDDTerritory":
 				toSend = enterDDTerritory();
 				break;
+			case "getHdvItemStats":
+				toSend = getHdvItemStats(param);
+				break;
 		}
 		return toSend;
 	}
-	
+
 	private Object[] exitBrak(String param) throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("exitBrak", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), 406480, this.network.getInteractive().getSkill(406480, 184)));
+		log.writeActionLogMessage("exitBrak", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), 406480, this.network.getInteractive().getSkill(406480, 184)));
 		if (this.network.getMap().getId() == 144415 && this.network.getInfo().getCellId() == 110) {
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(406480, this.network.getInteractive().getSkill(406480, 184));
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exit brak");
@@ -1056,11 +1167,10 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
-	
+
 	private Object[] enterDDTerritory() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("enterDDTerritory", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), 510192, this.network.getInteractive().getSkill(406480, 184)));
+		log.writeActionLogMessage("enterDDTerritory", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), 510192, this.network.getInteractive().getSkill(406480, 184)));
 		if (this.network.getMap().getId() == 171706890 && this.network.getInfo().getCellId() == 387) {
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(510192, this.network.getInteractive().getSkill(510192, 184));
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter dd territory");
@@ -1081,11 +1191,10 @@ public class ModelConnexion {
 
 	private Object[] equipItem(String param) throws Exception, InterruptedException {
 		Object[] toSend;
-		String[] infoItem  = param.split(",");
-		log.writeActionLogMessage("equipItem", String.format("id : %s, position : %s",
-			infoItem[0], infoItem[1]));
+		String[] infoItem = param.split(",");
+		log.writeActionLogMessage("equipItem", String.format("id : %s, position : %s", infoItem[0], infoItem[1]));
 		ObjectSetPositionMessage objectSetPositionMessage = new ObjectSetPositionMessage(Integer.parseInt(infoItem[0]), Integer.parseInt(infoItem[1]), 1);
-		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position "  + infoItem[1]);
+		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position " + infoItem[1]);
 		if (this.waitToSendMovObject()) {
 			toSend = new Object[] { "True" };
 		}
@@ -1094,14 +1203,13 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
-	
+
 	private Object[] deEquipItem(String param) throws Exception, InterruptedException {
 		Object[] toSend;
-		String[] infoItem  = param.split(",");
-		log.writeActionLogMessage("deEquipItem", String.format("id : %s",
-			infoItem[0]));
+		String[] infoItem = param.split(",");
+		log.writeActionLogMessage("deEquipItem", String.format("id : %s", infoItem[0]));
 		ObjectSetPositionMessage objectSetPositionMessage = new ObjectSetPositionMessage(Integer.parseInt(infoItem[0]), 63, 1);
-		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position "  + 63);
+		getNetwork().sendToServer(objectSetPositionMessage, ObjectSetPositionMessage.ProtocolId, "Equip item " + infoItem[0] + " position " + 63);
 		if (this.waitToSendMovObject()) {
 			toSend = new Object[] { "True" };
 		}
@@ -1126,8 +1234,7 @@ public class ModelConnexion {
 				move(397);
 			}
 			int[] interactive2 = this.network.getInteractive().getInteractive(184);
-			log.writeActionLogMessage("enterGate_2", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive2[1], interactive2[2]));
+			log.writeActionLogMessage("enterGate_2", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), interactive2[1], interactive2[2]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
 			if (this.waitToSendMap(this.network.getMap().getId())) {
@@ -1146,7 +1253,7 @@ public class ModelConnexion {
 	}
 
 	public void getReturn(String[] message) throws InterruptedException {
-		Thread.sleep(100);
+		long time = System.currentTimeMillis();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -1158,6 +1265,7 @@ public class ModelConnexion {
 						Communication.isConnecting = true;
 					}
 					Communication.sendToModel(message[0], message[1], "m", "rtn", message[4], getReturn(message[4], message[5]));
+					log.writeActionLogMessage("Executed in ", String.valueOf((System.currentTimeMillis() - time)));
 				}
 				catch (NumberFormatException e) {
 					e.printStackTrace();
@@ -1209,14 +1317,12 @@ public class ModelConnexion {
 
 	private Object[] goAstrub() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("goAstrub", String.format("map : %s, mapid : %s, cellid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+		log.writeActionLogMessage("goAstrub", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 		if (this.network.getMap().getId() == 153880835) {
 			if (this.network.getInfo().getCellId() != 300) {
 				move(300);
 			}
-			log.writeActionLogMessage("goAstrub_2", String.format("map : %s, mapid : %s, cellid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+			log.writeActionLogMessage("goAstrub_2", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-100000, 3, 153880835);
 			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request gate to go to Astrub");
 			if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
@@ -1236,9 +1342,8 @@ public class ModelConnexion {
 	}
 
 	private Object[] goBank(String param) throws Exception {
-		Object[] toSend;			
-		log.writeActionLogMessage("goAstrub_2", String.format("map : %s, mapid : %s, cellid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+		Object[] toSend;
+		log.writeActionLogMessage("goAstrub_2", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 		if (this.network.getMap().getId() == 144931) { // Brakmar
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(this.network.getBank().interactiveBrakmarIN, this.network.getInteractive().getSkill(this.network.getBank().interactiveBrakmarIN, 184));
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using bank door");
@@ -1286,8 +1391,7 @@ public class ModelConnexion {
 		Object[] toSend;
 		if (this.network.getMap().getId() == 142088718 && this.network.getInfo().getCellId() == 356) {
 			int[] interactive2 = this.network.getInteractive().getInteractive(184);
-			log.writeActionLogMessage("goHuntingHall", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive2[1], interactive2[2]));
+			log.writeActionLogMessage("goHuntingHall", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), interactive2[1], interactive2[2]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive2[1], interactive2[2]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Entering hunting hall");
 			if (this.waitToSendMap(this.network.getMap().getId())) {
@@ -1306,12 +1410,10 @@ public class ModelConnexion {
 
 	private Object[] goIncarnam() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("goIncarnam", String.format("map : %s, mapid : %s, cellid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+		log.writeActionLogMessage("goIncarnam", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 		if (!onMapAndCell(191106048, 397)) { return new Object[] { "False" }; }
 		if (useInteractive(184)[0].equals("False")) return new Object[] { "False" };
-		log.writeActionLogMessage("goIncarnam", String.format("map : %s, mapid : %s, cellid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+		log.writeActionLogMessage("goIncarnam", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 		if (this.network.getMap().getId() == 192416776) {
 			if (this.network.getInfo().getCellId() != 468) {
 				move(468);
@@ -1329,8 +1431,7 @@ public class ModelConnexion {
 		Object[] toSend;
 		int[] harvestCell = this.network.getInteractive().getHarvestCell(Integer.parseInt(param));
 		if (harvestCell != null) {
-			log.writeActionLogMessage("harvest", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), harvestCell[0], harvestCell[1]));
+			log.writeActionLogMessage("harvest", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), harvestCell[0], harvestCell[1]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(harvestCell[0], harvestCell[1]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Harvesting " + param);
 			if (this.waitToSendHarvest(Integer.parseInt(param))) {
@@ -1360,8 +1461,7 @@ public class ModelConnexion {
 
 	private Object[] huntFight() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("huntFight", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps()
-			));
+		log.writeActionLogMessage("huntFight", String.format("inHunt : %s, currentStep : %s, numberOfStep : %s", this.network.getInfo().isInHunt(), this.getNetwork().getHunt().getCurrentStep(), this.getNetwork().getHunt().getNumberOfSteps()));
 		if (this.network.getInfo().isInHunt() && (this.getNetwork().getHunt().getCurrentStep() == this.getNetwork().getHunt().getNumberOfSteps() - 1)) {
 			TreasureHuntDigRequestMessage treasureHuntdigRequestMessage = new TreasureHuntDigRequestMessage(0);
 			getNetwork().sendToServer(treasureHuntdigRequestMessage, TreasureHuntDigRequestMessage.ProtocolId, "Starting hunt fight");
@@ -1408,6 +1508,20 @@ public class ModelConnexion {
 	private Object[] modifyPrice(String param) throws Exception {
 		Object[] toSend;
 		if (this.network.getInfo().isInExchange()) {
+
+			if (!this.network.getInfo().isSellingHdv()) {
+				NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 5, this.getNetwork().getMap().getId());
+				getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
+				if (this.waitToSendHdv()) {
+					stop(1);
+					this.network.getInfo().setSellingHdv(true);
+				}
+				else {
+					DisplayInfo.appendDebugLog("getHdvResourceStats error, cannot swap hdv", param);
+					return new Object[] { "False" };
+				}
+			}
+
 			String[] paramItems1 = param.split(",");
 			List<Integer> uid = this.getNetwork().getNpc().getUidFromSeller(Integer.parseInt(paramItems1[0]), Integer.parseInt(paramItems1[1]));
 			for (int i = 0; i < uid.size(); i++) {
@@ -1467,8 +1581,7 @@ public class ModelConnexion {
 	private Object[] move(int param) {
 		CellMovement mov;
 		Object[] toSend = null;
-		log.writeActionLogMessage("move", String.format("map : %s, mapid : %s, cellid : %s, celltogo : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), param));
+		log.writeActionLogMessage("move", String.format("map : %s, mapid : %s, cellid : %s, celltogo : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), param));
 		try {
 			mov = this.network.getMovement().MoveToCell(param);
 			if (mov == null || mov.path == null) {
@@ -1526,8 +1639,7 @@ public class ModelConnexion {
 				move(304);
 			}
 			int[] interactiveHunt = Hunt.getHuntFromLvl(Integer.parseInt(param), this.network.getInteractive());
-			log.writeActionLogMessage("newHunt", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactiveHunt[0], interactiveHunt[1]));
+			log.writeActionLogMessage("newHunt", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), interactiveHunt[0], interactiveHunt[1]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveHunt[0], interactiveHunt[1]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Getting new hunt");
 			if (this.waitToSendHunt()) {
@@ -1540,8 +1652,7 @@ public class ModelConnexion {
 			}
 		}
 		else {
-			log.writeActionLogMessage("newHunt_failed", String.format("map : %s, mapid : %s, cellid : %s,  inHunt : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), this.network.getInfo().isInHunt()));
+			log.writeActionLogMessage("newHunt_failed", String.format("map : %s, mapid : %s, cellid : %s,  inHunt : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), this.network.getInfo().isInHunt()));
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
@@ -1549,8 +1660,7 @@ public class ModelConnexion {
 
 	private Object[] openBank() throws Exception {
 		Object[] toSend;
-		log.writeActionLogMessage("openBank", String.format("map : %s, mapid : %s, cellid : %s",
-			GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId()));
+		log.writeActionLogMessage("openBank", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
 		if (this.network.getMap().getId() == 83887104 || this.network.getMap().getId() == 2884617 || this.network.getMap().getId() == 8912911 || this.network.getMap().getId() == 192415750) {
 			NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage((int) this.network.getNpc().getNpc().get(0).getContextualId(), 3, this.network.getMap().getId());
 			getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Open bank");
@@ -1594,13 +1704,11 @@ public class ModelConnexion {
 
 	private Object[] openHdv() throws Exception {
 		Object[] toSend;
-		if(hdvOpened)
-			return toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
+		if (hdvOpened) return toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
 		this.network.getInfo().setInExchange(true);
 		int[] interactive1 = this.network.getInteractive().getInteractive(355);
 		if (interactive1 != null) {
-			log.writeActionLogMessage("openHdv", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-				GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive1[1], interactive1[2]));
+			log.writeActionLogMessage("openHdv", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), interactive1[1], interactive1[2]));
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive1[1], interactive1[2]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Open hdv");
 			if (this.waitToSendHdv()) {
@@ -1612,6 +1720,7 @@ public class ModelConnexion {
 					getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
 					if (this.waitToSendHdv()) {
 						stop(1);
+						this.network.getInfo().setSellingHdv(true);
 						hdvOpened = true;
 						toSend = new Object[] { this.getNetwork().getNpc().getToSell() };
 					}
@@ -1637,6 +1746,20 @@ public class ModelConnexion {
 	private Object[] sellItem(String param) throws Exception {
 		Object[] toSend;
 		if (this.network.getInfo().isInExchange()) {
+
+			if (!this.network.getInfo().isSellingHdv()) {
+				NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 5, this.getNetwork().getMap().getId());
+				getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request seller");
+				if (this.waitToSendHdv()) {
+					stop(1);
+					this.network.getInfo().setSellingHdv(true);
+				}
+				else {
+					DisplayInfo.appendDebugLog("getHdvResourceStats error, cannot swap hdv", param);
+					return new Object[] { "False" };
+				}
+			}
+
 			String[] paramItems = param.split(",");
 			for (int i = 0; i < Integer.parseInt(paramItems[2]); i++) {
 				stop(0.5);
@@ -1715,7 +1838,7 @@ public class ModelConnexion {
 	private Object[] useItem(String param) throws Exception {
 		Object[] toSend;
 		int id = Integer.parseInt(param);
-		log.writeActionLogMessage("useItem", String.format("item : %s",param));
+		log.writeActionLogMessage("useItem", String.format("item : %s", param));
 		ObjectUseMessage objectUseMessage = new ObjectUseMessage(id);
 		getNetwork().sendToServer(objectUseMessage, ObjectUseMessage.ProtocolId, "Using item " + id);
 		if (this.waitToSendObjectUse()) {
@@ -1736,16 +1859,14 @@ public class ModelConnexion {
 				String newParam = param.replaceAll("\\(", "");
 				newParam = newParam.replaceAll("\\)", "");
 				String[] paramZaap = newParam.split(",");
-				log.writeActionLogMessage("useZaap", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-					GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactive[1], interactive[2]));
+				log.writeActionLogMessage("useZaap", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), interactive[1], interactive[2]));
 				InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive[1], interactive[2]);
 				getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaap");
 				if (this.waitToInteractive()) {
 					stop(1.5);
 					double mapId = this.network.getInteractive().getMapIdZaap(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
 					if (mapId != -1) {
-						log.writeActionLogMessage("useZaap", String.format("maptogo : %s, mapIdtogo : %s",
-							GameData.getCoordMapString((int)mapId), mapId));
+						log.writeActionLogMessage("useZaap", String.format("maptogo : %s, mapIdtogo : %s", GameData.getCoordMapString((int) mapId), mapId));
 						TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(0, mapId);
 						getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
 						if (this.waitToSendMap(this.network.getMap().getId())) {
@@ -1786,16 +1907,14 @@ public class ModelConnexion {
 		if (interactiveZaapi != null) {
 			if (isCloseToCell(this.network.getInfo().getCellId(), interactiveZaapi[0])) {
 				String[] paramZaap = param.split(",");
-				log.writeActionLogMessage("useZaapi", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s",
-					GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(),this.network.getInfo().getCellId(), interactiveZaapi[1], interactiveZaapi[2]));
+				log.writeActionLogMessage("useZaapi", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), interactiveZaapi[1], interactiveZaapi[2]));
 				InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactiveZaapi[1], interactiveZaapi[2]);
 				getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Using zaapi");
 				if (this.waitToInteractive()) {
 					stop(1.5);
 					double mapId = this.network.getInteractive().getMapIdZaapi(Integer.parseInt(paramZaap[0]), Integer.parseInt(paramZaap[1]));
 					if (mapId != -1) {
-						log.writeActionLogMessage("useZaapi", String.format("maptogo : %s, mapIdtogo : %s",
-							GameData.getCoordMapString((int)mapId), mapId));
+						log.writeActionLogMessage("useZaapi", String.format("maptogo : %s, mapIdtogo : %s", GameData.getCoordMapString((int) mapId), mapId));
 						TeleportRequestMessage teleportRequestMessage = new TeleportRequestMessage(1, mapId);
 						getNetwork().sendToServer(teleportRequestMessage, TeleportRequestMessage.ProtocolId, "Teleport to " + param);
 						if (this.waitToSendMap(this.network.getMap().getId())) {
@@ -1982,15 +2101,11 @@ public class ModelConnexion {
 	}
 
 	public boolean waitToSendMap(int actualMapId) throws InterruptedException {
-		if(this.network.getMap().getId() != actualMapId){
-			return true;
-		}
+		if (this.network.getMap().getId() != actualMapId) { return true; }
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isNewMap()) {
 			Thread.sleep(50);
-			if (System.currentTimeMillis() - index > 10000) {
-				return this.network.getMap().getId() != actualMapId;
-			}
+			if (System.currentTimeMillis() - index > 10000) { return this.network.getMap().getId() != actualMapId; }
 		}
 		return this.network.getMap().getId() != actualMapId;
 	}
@@ -2036,7 +2151,7 @@ public class ModelConnexion {
 		}
 		return true;
 	}
-	
+
 	public boolean waitToSendMovObject() throws InterruptedException {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isMovObject()) {

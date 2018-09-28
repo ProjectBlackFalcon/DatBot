@@ -88,7 +88,8 @@ public class Info {
 	private boolean textMessage = false;
 	private boolean caracsAffected = false;
 	private boolean movObject = false;
-
+	
+	private boolean sellingHdv = false;
 
 	public void setBooleanToFalse()
 	{
@@ -661,4 +662,14 @@ public class Info {
 	public void setCurrentTime(long currentTime) {
 		this.currentTime = currentTime;
 	}
+
+	public boolean isSellingHdv() {
+		return sellingHdv;
+	}
+
+	public void setSellingHdv(boolean sellingHdv) {
+		this.sellingHdv = sellingHdv;
+	}
+
+
 }

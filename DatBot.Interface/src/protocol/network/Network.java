@@ -18,6 +18,7 @@ import game.Info;
 import game.movement.Movement;
 import game.plugin.Bank;
 import game.plugin.Dragodinde;
+import game.plugin.Hdv;
 import game.plugin.Hunt;
 import game.plugin.Interactive;
 import game.plugin.Monsters;
@@ -155,10 +156,15 @@ import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemAddOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountWithOutPaddockMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidBuyerMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartedBidSellerMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeTypesExchangerDescriptionForUserMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeTypesItemsExchangerDescriptionForUserMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentAndPresetMessage;
 import protocol.network.messages.game.inventory.items.InventoryContentMessage;
 import protocol.network.messages.game.inventory.items.InventoryWeightMessage;
@@ -224,6 +230,7 @@ public class Network extends DisplayInfo implements Runnable {
 	private LatencyFrame latencyFrame;
 	private Monsters monsters;
 	private Movement movement;
+	private Hdv hdv;
 	private Npc npc;
 	private Dragodinde dragodinde;
 	private IntelligencePacketHandler iaPacket;
@@ -241,6 +248,7 @@ public class Network extends DisplayInfo implements Runnable {
 		this.stats = new Stats(this);
 		this.interactive = new Interactive(this);
 		this.bank = new Bank();
+		this.hdv = new Hdv();
 		this.movement = new Movement(this);
 		this.monsters = new Monsters();
 		this.hunt = new Hunt();
@@ -586,7 +594,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 48, 8, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 48, 11, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<Integer>();
 		for (byte b : credentials) {
@@ -1443,9 +1451,28 @@ public class Network extends DisplayInfo implements Runnable {
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5765:
+					ExchangeTypesExchangerDescriptionForUserMessage exchangeTypesExchangerDescriptionForUserMessage = new ExchangeTypesExchangerDescriptionForUserMessage();
+					exchangeTypesExchangerDescriptionForUserMessage.Deserialize(dataReader);
+					this.hdv.setTypesInTypes(exchangeTypesExchangerDescriptionForUserMessage.getTypeDescription());
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 5752:
+					ExchangeTypesItemsExchangerDescriptionForUserMessage descriptionForUserMessage = new ExchangeTypesItemsExchangerDescriptionForUserMessage();
+					descriptionForUserMessage.Deserialize(dataReader);
+					this.hdv.setItems(descriptionForUserMessage.getItemTypeDescriptions());
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5904:
+					ExchangeStartedBidBuyerMessage exchangeStartedBidBuyerMessage = new ExchangeStartedBidBuyerMessage();
+					exchangeStartedBidBuyerMessage.Deserialize(dataReader);
+					this.hdv.setTypes(exchangeStartedBidBuyerMessage.getBuyerDescriptor().getTypes());
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 5755:
+					ExchangeBidPriceMessage exchangeBidPriceMessage = new ExchangeBidPriceMessage();
+					exchangeBidPriceMessage.Deserialize(dataReader);
+					this.hdv.setAveragePrice(exchangeBidPriceMessage.getAveragePrice());
+					this.hdv.setId(exchangeBidPriceMessage.getGenericId());
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5946:
@@ -1906,5 +1933,13 @@ public class Network extends DisplayInfo implements Runnable {
 
 	public void setIntelligence(Intelligence intelligence) {
 		this.intelligence = intelligence;
+	}
+
+	public Hdv getHdv() {
+		return hdv;
+	}
+
+	public void setHdv(Hdv hdv) {
+		this.hdv = hdv;
 	}
 }
