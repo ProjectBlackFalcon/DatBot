@@ -1,1 +1,0 @@
-2018-07-27T22:00:12.679 : [connect] : nameAccount : Jikiwa221, password : loltacru, name : Faoy, server : Julith
