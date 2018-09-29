@@ -52,3 +52,5 @@ class Resources:
             self.id2names = json.load(f)
         with open('../Utils/Id2Type.json', 'r', encoding='latin-1') as f:
             self.id2type = json.load(f)
+        with open('../Utils/EffectId2Name.json', 'r', encoding='latin-1') as f:
+            self.effect_id2name = json.load(f)
