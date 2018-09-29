@@ -992,29 +992,24 @@ class HighLevelFunctions:
                 f.write(traceback.format_exc())
 
     def get_hdv_prices(self, hdv):
-        hdv_pos = self.bot.llf.closest_cell(self.bot.position[0], self.bot.resources.hdv_pos[hdv])
-        self.goto(hdv_pos)
-        self.bot.interface.open_hdv()
-
+        hdv_pos = self.bot.llf.closest_coord(self.bot.position[0], self.bot.resources.hdv_pos[hdv])
         start = time.time()
         items_ids = self.bot.resources.hdv2id[hdv]
+        self.goto(hdv_pos)
+        self.bot.interface.open_hdv()
+        self.bot.llf.log(self.bot, '[HDV Scraper {}] Starting scraping'.format(self.bot.id))
         if hdv == 'Equipements':
-            stats = self.bot.interface.get_hdv_item_stats(items_ids, self.estimate_craft_cost(items_ids))
-            self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Item')
-        if hdv in ['Resources', 'Runes', 'Consumables']:
-            prices = self.bot.interface.get_hdv_resource_stats(items_ids)
-            for item_id, price1, price10, price100, priceavg in prices:
-                stats = self.bot.resources.resources_prices[item_id] = [[price1, price10, price100, priceavg], time.time()]
-                self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Resource')
+            self.bot.interface.get_hdv_item_stats(items_ids)
+        if hdv in ['Ressources', 'Runes', 'Consommables']:
+            self.bot.interface.get_hdv_resource_stats(items_ids)
+            # self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Resource')
 
-        print(time.time() - start, len(self.bot.resources.hdv2id[hdv]))
+        self.bot.llf.log(self.bot, '[HDV Scraper {}] Done in {}m, {}s'.format(self.bot.id, round((time.time() - start) // 60, 0), round((time.time() - start) % 60, 0)))
         self.bot.interface.close_hdv()
 
-        # runes_prices = {}
-        # runes_prices[rune] = self.bot.interface.get_hdv_resource_stats(rune_id)[-1]
-        # return runes_prices
-
     def estimate_craft_cost(self, item_id_list):
+        if self.bot.interface.hdv_opended:
+            self.bot.interface.close_hdv()
         recipes = []
         ingredients = {}
         for recipe in self.bot.resources.recipes:

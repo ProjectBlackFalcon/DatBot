@@ -593,23 +593,44 @@ class Interface:
         Gathers data about the item given
         :param item_id_list: {type_id1: [id1, id2, ...], ...}
         :return: False / [itemStats, ...] itemStats is a json formatted string with
-            id,
+            {
+            id: [
             price1 (-1 if not for sale),
             price 10 (-1 if not for sale),
             price 100 (-1 if not for sale),
             average price (-1 if not for sale),
             stats as [[statName1, value1], [statName2, value2], ...] (statsNames are from RuneStats.json)
+            }
         """
+
+        # We're sending batches of 100 items max (there are 7150 items, so it would take 2 hours to do it in one request)
         if type(item_id_list) is not list:
             item_id_list = [item_id_list]
-        data_sent = {}
-        for item_id in item_id_list:
-            type_id = self.bot.resources.id2type[str(item_id)]
-            if type_id in data_sent.keys():
-                data_sent[type_id].append(item_id)
+        item_id_list1 = item_id_list[:len(item_id_list)//100*100]
+        item_id_list_rest = item_id_list[len(item_id_list) // 100 * 100:]
+        lists_to_send = [item_id_list[i*100:(i+1)*100] for i in range(len(item_id_list1)//100)]
+        if len(lists_to_send) and len(item_id_list_rest):
+            lists_to_send.append(item_id_list_rest)
+        elif len(item_id_list_rest):
+            lists_to_send = [item_id_list_rest]
+        ret_val = {}
+        for lst in lists_to_send:
+            self.bot.llf.log(self.bot, '[Interface {}] Fetching batch {}/{}...'.format(self.bot.id, lists_to_send.index(lst)+1, len(lists_to_send)))
+            data_sent = {}
+            for item_id in lst:
+                type_id = self.bot.resources.id2type[str(item_id)]
+                if type_id in data_sent.keys():
+                    data_sent[type_id].append(item_id)
+                else:
+                    data_sent[type_id] = [item_id]
+            ret = self.execute_command('getHdvItemStats', [data_sent])[0]
+            self.bot.llf.log(self.bot, '[Interface {}] Done'.format(self.bot.id))
+            if lst != lists_to_send[-1]:
+                Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Items')).start()
             else:
-                data_sent[type_id] = [item_id]
-        return self.execute_command('getHdvItemStats', data_sent)
+                self.bot.llf.resource_item_to_db(self.bot, ret, 'Items')
+            ret_val.update(ret)
+        return ret_val
 
     def get_hdv_resource_stats(self, item_id_list):
         """
@@ -619,7 +640,24 @@ class Interface:
         """
         if type(item_id_list) is not list:
             item_id_list = [item_id_list]
-        return self.execute_command('getHdvResourceStats', item_id_list)
+        item_id_list1 = item_id_list[:len(item_id_list) // 100 * 100]
+        item_id_list_rest = item_id_list[len(item_id_list) // 100 * 100:]
+        lists_to_send = [item_id_list[i * 100:(i + 1) * 100] for i in range(len(item_id_list1) // 100)]
+        if len(lists_to_send) and len(item_id_list_rest):
+            lists_to_send.append(item_id_list_rest)
+        elif len(item_id_list_rest):
+            lists_to_send = [item_id_list_rest]
+        ret_val = []
+        for lst in lists_to_send:
+            self.bot.llf.log(self.bot, '[Interface {}] Fetching batch {}/{}...'.format(self.bot.id, lists_to_send.index(lst) + 1, len(lists_to_send)))
+            ret = self.execute_command('getHdvResourceStats', lst)[0]
+            self.bot.llf.log(self.bot, '[Interface {}] Done'.format(self.bot.id))
+            if lst != lists_to_send[-1]:
+                Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Resources')).start()
+            else:
+                self.bot.llf.resource_item_to_db(self.bot, ret, 'Resources')
+            ret_val += ret
+        return ret_val
 
     def sell_item(self, item_id, batch_size, batch_number, price):
         """
