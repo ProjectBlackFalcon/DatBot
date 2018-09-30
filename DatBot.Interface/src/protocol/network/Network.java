@@ -1447,6 +1447,9 @@ public class Network extends DisplayInfo implements Runnable {
 					this.hdv.setId(exchangeBidPriceForSellerMessage.getGenericId());
 					this.info.setExchangeBidSeller(true);
 					break;
+				case 6567:
+					this.info.setInExchange(true);
+					break;
 				case 5945:
 					ExchangeBidHouseItemAddOkMessage exchangeBidHouseItemAddOkMessage = new ExchangeBidHouseItemAddOkMessage();
 					exchangeBidHouseItemAddOkMessage.Deserialize(dataReader);
