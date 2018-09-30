@@ -3,15 +3,15 @@ import zlib
 
 
 class Item:
-    def __init__(self, bot, item_stats, item_price=-1, item_id=None, level=-1, creation_price=-1, resource_prices=None):
+    def __init__(self, resources, item_stats, item_price=-1, item_id=None, level=-1, creation_price=-1, resource_prices=None):
         self.all_stats = ['PM', 'Résistance Terre JCJ', 'Résistance Eau JCJ', 'Résistance Air JCJ', 'Résistance Feu JCJ', 'Résistance Neutre JCJ', 'Puissance', 'Sagesse', 'Dommages Neutre', 'Retrait PA', 'Retrait PM', 'Pods', 'Esquive PA', 'Esquive PM', 'Dommages Critiques', 'Résistance Critiques', 'Dommages Terre', 'Résistance Eau', 'Dommages Feu', 'Dommages', 'Dommages Eau', 'Dommages Air', 'Résistance Terre', 'Initiative', 'Vitalité', 'Prospection', 'Soins', '% Critique', 'Dommages Poussée', 'Invocations', '% Dommages distance', 'Résistance Poussée', '% Dommages mêlée', '% Résistance distance', 'Intelligence', '% Résistance Terre', '% Résistance Eau', '% Résistance Air', '% Résistance Feu', '% Résistance Neutre', '% Résistance mêlée', 'Dommages Pièges', 'Chance', '% Résistance Air JCJ', 'Vie', 'PA', 'Fuite', 'Tacle', 'Résistance Air', 'Résistance Feu', 'Résistance Neutre', 'Portée', 'Force', 'Agilité', "% Dommages d'armes", '% Résistance Terre JCJ', '% Résistance Eau JCJ', '% Dommages aux sorts', '% Résistance Feu JCJ', '% Résistance Neutre JCJ']
 
-        self.bot = bot
+        self.resources = resources
         self.stats = item_stats if type(item_stats) == dict else self.stats2dict(item_stats)
         self.level = level
         self.creation_price = creation_price
         self.resource_prices = resource_prices
-        self.item_name = bot.resources.id2names[item_id] if item_id is not None else ''
+        self.item_name = resources.id2names[item_id] if item_id is not None else ''
         self.price = item_price
         with open('../Utils/RunesStats.json', 'r') as f:
             self.runes_stats = json.load(f)
@@ -26,8 +26,8 @@ class Item:
     def stats2dict(self, stats):
         stats = [stat for stat in stats if len(stat) == 2 and stat[0] != 740]
         #                                                                         Look at this shit
-        output = {self.bot.resources.effect_id2name[str(stat)]: int(value*(-2*(('-' == self.bot.resources.effect_id2name[str(stat)][0])-0.5))) for stat, value in stats if type(value) is not list and len(self.bot.resources.effect_id2name[str(stat)])}
-        for stat in self.bot.resources.effect_id2name.values():
+        output = {self.resources.effect_id2name[str(stat)]: int(value*(-2*(('-' == self.resources.effect_id2name[str(stat)][0])-0.5))) for stat, value in stats if type(value) is not list and len(self.resources.effect_id2name[str(stat)])}
+        for stat in self.resources.effect_id2name.values():
             if stat not in output.keys():
                 output[stat] = 0
         return output

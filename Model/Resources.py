@@ -3,7 +3,6 @@ import json
 
 class Resources:
     def __init__(self):
-        self.resources_prices = {}  # 'id': [prices], timestamp
         with open('../Utils/zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
         with open('../Utils/CaracLevel.json', 'r') as f:
