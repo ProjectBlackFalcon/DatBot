@@ -59,9 +59,5 @@ public class ExchangeTypesItemsExchangerDescriptionForUserMessage extends Networ
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString() {
-		return "ExchangeTypesItemsExchangerDescriptionForUserMessage [itemTypeDescriptions=" + itemTypeDescriptions + "]";
-	}
 
 }

@@ -1261,6 +1261,47 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
+	
+	private Object[] enterFm() throws Exception {
+		Object[] toSend;
+		log.writeActionLogMessage("enterFm", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), 510192, this.network.getInteractive().getSkill(406480, 184)));
+		if (this.network.getMap().getId() == 147767 && this.network.getInfo().getCellId() == 287) {
+			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(415126, this.network.getInteractive().getSkill(415126, 184));
+			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Enter fm");
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				stop(1);
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("enterFm error, server returned false", "ChangeMap error");
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
+	
+	private Object[] exitFm() throws Exception {
+		Object[] toSend;
+		log.writeActionLogMessage("exitFm", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
+		if (this.network.getMap().getId() == 2883603) {
+			move(452);
+			if (this.waitToSendMap(this.network.getMap().getId())) {
+				stop(1);
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("exitFm error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+	}
 
 	private Object[] equipItem(String param) throws Exception, InterruptedException {
 		Object[] toSend;
@@ -2149,7 +2190,7 @@ public class ModelConnexion {
 	public boolean waitToSendHdv() throws InterruptedException {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isExchangeBidSeller()) {
-			Thread.sleep(50);
+			Thread.sleep(1);
 			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}
 		return true;
@@ -2316,5 +2357,9 @@ public class ModelConnexion {
 		long timeStoped = (long) (Math.abs(gauss * deviation) * 1000);
 		System.out.println("---- Sleeping : " + timeStoped + " ----");
 		Thread.sleep(timeStoped);
+	}
+	
+	public void parseParameters(String param){
+		
 	}
 }

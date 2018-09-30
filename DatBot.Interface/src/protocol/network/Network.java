@@ -1462,7 +1462,6 @@ public class Network extends DisplayInfo implements Runnable {
 				case 5752:
 					ExchangeTypesItemsExchangerDescriptionForUserMessage descriptionForUserMessage = new ExchangeTypesItemsExchangerDescriptionForUserMessage();
 					descriptionForUserMessage.Deserialize(dataReader);
-					System.out.println(descriptionForUserMessage);
 					this.hdv.setItems(descriptionForUserMessage.getItemTypeDescriptions());
 					this.info.setExchangeBidSeller(true);
 					break;

@@ -84,9 +84,5 @@ public class BidExchangerObjectInfo extends NetworkMessage {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public String toString() {
-		return "BidExchangerObjectInfo [objectUID=" + objectUID + ", effects=" + effects + ", prices=" + prices + "]";
-	}
 
 }
