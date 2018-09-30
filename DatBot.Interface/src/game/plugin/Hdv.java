@@ -83,7 +83,6 @@ public class Hdv {
 		array.add(-1);
 		array.add(-1);
 		array.add(-1);
-		array.add(-1);
 		array.add("None");
 		bigArray.add(array);
 		return bigArray;
