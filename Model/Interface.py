@@ -695,16 +695,18 @@ class Interface:
         self.get_player_stats()
         return ret_val
 
-    def buy_resource(self, item_id, batch_size, batch_number):
+    def buy_resource(self, item_id, batch_size, batch_number, max_batch_price):
         # TODO
         """
         Buys a resource or group of resources
         :param item_id: item ID
         :param batch_size: which batch size to withdraw (1, 10, 100)
         :param batch_number: Number of batches to withdraw
-        :return: Boolean
+        :param max_batch_price: Upper price limit
+        :return: [number of items bought, total money spent]
         """
-        return self.execute_command('buyResource', [item_id, batch_size, batch_number])
+        type_id = self.bot.resources.id2type[str(item_id)]
+        return self.execute_command('buyResource', [item_id, type_id, batch_size, batch_number, max_batch_price])
 
     def enter_fm(self):
         # TODO
