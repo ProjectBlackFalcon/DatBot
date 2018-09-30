@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import game.Info;
 import game.map.MapMovement;
@@ -714,6 +715,7 @@ public class ModelConnexion {
 		return toSend;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Object[] getHdvResourceStats(String param) throws Exception {
 		Object[] toSend = new Object[] { "False" };
 		String[] paramSplit = param.split(",");
@@ -721,8 +723,8 @@ public class ModelConnexion {
 		for (String string : paramSplit) {
 			params.add(Integer.parseInt(string));
 		}
-		log.writeActionLogMessage("getHdvResourceStats", String.format("inExchange : %s, id : %s", this.network.getInfo().isInExchange(), param));
-		if (Integer.parseInt(param) > 0 && this.network.getInfo().isInExchange()) {
+		log.writeActionLogMessage("getHdvResourceStats : Size : " + params.size(), String.format("inExchange : %s, id : %s", this.network.getInfo().isInExchange(), param));
+		if (this.network.getInfo().isInExchange()) {
 
 			if (!this.network.getInfo().isSellingHdv()) {
 				NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 5, this.getNetwork().getMap().getId());
@@ -737,17 +739,20 @@ public class ModelConnexion {
 				}
 			}
 			
+			JSONArray array = new JSONArray();
+			
 			for (Integer i : params) {
 				ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
 				getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
 				if (this.waitToSendHdv()) {
-					toSend = new Object[] { this.getNetwork().getNpc().getMinimalPrices() };
+					array.add(this.network.getHdv().getRessourcesPrices());
 				}
 				else {
 					DisplayInfo.appendDebugLog("getHdvResourceStats error, server returned false", param);
-					toSend = new Object[] { "False" };
+					return new Object[] { "False" };
 				}
 			}
+			toSend = new Object[] { array };	
 		}
 		else {
 			toSend = new Object[] { "False" };
@@ -802,7 +807,7 @@ public class ModelConnexion {
 				}
 			}
 
-			JSONArray array = new JSONArray();
+			JSONObject json = new JSONObject();
 			
 			//Get all entry, go to the type and get all item price
 			for (Entry<Integer, List<Integer>> e : idsItem.entrySet()) {
@@ -827,7 +832,7 @@ public class ModelConnexion {
 				for (Integer i : e.getValue()) {
 					//Check if the item is available
 					if (!this.network.getHdv().getTypesInTypes().contains(i)) {
-						array.add(this.network.getHdv().getItemNX(i));
+						json.put(i,this.network.getHdv().getItemNX(i));
 						continue;
 					}
 
@@ -835,15 +840,16 @@ public class ModelConnexion {
 					ExchangeBidHouseListMessage exchangeBidHouseListMessage = new ExchangeBidHouseListMessage(i);
 					getNetwork().sendToServer(exchangeBidHouseListMessage, ExchangeBidHouseListMessage.ProtocolId, "Request list prices item " +i);
 					if (this.waitToSendHdv()) {
+						json.put(i,this.network.getHdv().getItemsPrices());
 						// Must send the average price request
-						ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
-						getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item " +i);
-						if (this.waitToSendHdv()) {
-							array.add(this.network.getHdv().getItemsPrices());
-						} else {
-							DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
-							return toSend;
-						}
+//						ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
+//						getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item " +i);
+//						if (this.waitToSendHdv()) {
+//							json.put(i,this.network.getHdv().getItemsPrices());
+//						} else {
+//							DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
+//							return toSend;
+//						}
 					}
 					else {
 						DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
@@ -851,12 +857,70 @@ public class ModelConnexion {
 					}
 				}
 			}
-			toSend = new Object[] { array.toJSONString() };
+			toSend = new Object[] { json };
 		}
 		else {
 			toSend = new Object[] { "False" };
 		}
 		return toSend;
+	}
+	
+	//TODO 
+	private Object[] buyResource(String param) throws Exception{
+		Object[] toSend;
+		if (this.network.getInfo().isInExchange()) {
+
+			//Go into buy mod
+			if (this.network.getInfo().isSellingHdv()) {
+				NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-1, 6, this.getNetwork().getMap().getId());
+				getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request buyer");
+				if (this.waitToSendHdv()) {
+					stop(0.15);
+					this.network.getInfo().setSellingHdv(false);
+					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(this.network.getHdv().getTypes().get(0));
+					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Request type sell " + this.network.getHdv().getTypes().get(0));
+					this.network.getHdv().setCurrentType(this.network.getHdv().getTypes().get(0));
+					if (!this.waitToSendHdv()) {
+						DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
+						return new Object[] { "False" };
+					}
+				}
+				else {
+					DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
+					return new Object[] { "False" };
+				}
+			}
+			
+			//First get info on the ressource 
+			
+			
+
+
+			String[] paramItems = param.split(",");
+			for (int i = 0; i < Integer.parseInt(paramItems[2]); i++) {
+				stop(0.5);
+				ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[3]));
+				exchangeObjectMovePricedMessage.setObjectUID(Integer.parseInt(paramItems[0]));
+				exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems[1]));
+				getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
+				if (i != Integer.parseInt(paramItems[2]) - 1 && !this.waitToSendHdv()) {
+					DisplayInfo.appendDebugLog("sellItem error, server returned false", param);
+				}
+			}
+			if (this.waitToSendHdv()) {
+				stop(1);
+				toSend = new Object[] { "True" };
+			}
+			else {
+				DisplayInfo.appendDebugLog("sellItem error, server returned false", param);
+				toSend = new Object[] { "False" };
+			}
+		}
+		else {
+			toSend = new Object[] { "False" };
+		}
+		return toSend;
+		
 	}
 
 	private Object[] getHuntingHallDoorCell() {

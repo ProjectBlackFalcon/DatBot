@@ -3,7 +3,6 @@ package game.plugin;
 import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import protocol.network.types.game.data.items.BidExchangerObjectInfo;
 import protocol.network.types.game.data.items.effects.ObjectEffect;
@@ -15,26 +14,46 @@ public class Hdv {
 	private List<Integer> types;
 	private List<Integer> typesInTypes;
 	
+	private List<Long> minimalPrices;
+	
 	private List<BidExchangerObjectInfo> items; 
 	private Long averagePrice;
 	private Integer id;
 	
 	private int currentType;
 	
+	@SuppressWarnings("unchecked")
+	public JSONArray getRessourcesPrices(){
+		JSONArray array = new JSONArray();
+		array.add(id);
+		for (Long l : minimalPrices) {
+			if(l == 0){
+				array.add(-1);
+			} else {
+				array.add(l);
+			}
+		}
+		array.add(averagePrice);
+		return array;
+	}
+	
 	/**
 	 * Get formatted json of all the items for the typeIdItem
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public String getItemsPrices(){
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id", id);
+	public JSONArray getItemsPrices(){
 		JSONArray array = new JSONArray();
 		for (BidExchangerObjectInfo i : items) {
+			JSONArray bigArray = new JSONArray();
 			for (Long price : i.getPrices()) {
-				array.add(price);
+				if(price == 0){
+					bigArray.add(-1);
+				} else {
+					bigArray.add(price);
+				}
 			}
-			array.add(averagePrice);
+//			bigArray.add(averagePrice);
 			JSONArray arrayStats = new JSONArray();
 			for (ObjectEffect effect : i.getEffects()) {
 				JSONArray arraySuperStats = new JSONArray();
@@ -51,24 +70,23 @@ public class Hdv {
 				}
 				arrayStats.add(arraySuperStats);
 			}
-			array.add(arrayStats);
+			bigArray.add(arrayStats);	
+			array.add(bigArray);
 		}
-		jsonObject.put("Item", array);
-		return jsonObject.toJSONString();
+		return array;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String getItemNX(int id){
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("id", id);
+	public JSONArray getItemNX(int id){
+		JSONArray bigArray = new JSONArray();
 		JSONArray array = new JSONArray();
 		array.add(-1);
 		array.add(-1);
 		array.add(-1);
 		array.add(-1);
 		array.add("None");
-		jsonObject.put("Item", array);
-		return jsonObject.toJSONString();
+		bigArray.add(array);
+		return bigArray;
 	}
 
 	public List<Integer> getTypes() {
@@ -117,6 +135,14 @@ public class Hdv {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<Long> getMinimalPrices() {
+		return minimalPrices;
+	}
+
+	public void setMinimalPrices(List<Long> list) {
+		this.minimalPrices = list;
 	}
 	
 }

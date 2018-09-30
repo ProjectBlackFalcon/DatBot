@@ -1442,6 +1442,9 @@ public class Network extends DisplayInfo implements Runnable {
 					exchangeBidPriceForSellerMessage.Deserialize(dataReader);
 					this.npc.setCurrentPrice(exchangeBidPriceForSellerMessage.getMinimalPrices());
 					this.npc.setAveragePrice(exchangeBidPriceForSellerMessage.getAveragePrice());
+					this.hdv.setAveragePrice(exchangeBidPriceForSellerMessage.getAveragePrice());
+					this.hdv.setMinimalPrices(exchangeBidPriceForSellerMessage.getMinimalPrices());
+					this.hdv.setId(exchangeBidPriceForSellerMessage.getGenericId());
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5945:
@@ -1459,6 +1462,7 @@ public class Network extends DisplayInfo implements Runnable {
 				case 5752:
 					ExchangeTypesItemsExchangerDescriptionForUserMessage descriptionForUserMessage = new ExchangeTypesItemsExchangerDescriptionForUserMessage();
 					descriptionForUserMessage.Deserialize(dataReader);
+					System.out.println(descriptionForUserMessage);
 					this.hdv.setItems(descriptionForUserMessage.getItemTypeDescriptions());
 					this.info.setExchangeBidSeller(true);
 					break;
