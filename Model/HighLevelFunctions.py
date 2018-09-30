@@ -6,6 +6,7 @@ import json
 import time
 import datetime
 import traceback
+import pandas as pd
 
 
 class HighLevelFunctions:
@@ -1006,42 +1007,6 @@ class HighLevelFunctions:
 
         self.bot.llf.log(self.bot, '[HDV Scraper {}] Done in {}m, {}s'.format(self.bot.id, round((time.time() - start) // 60, 0), round((time.time() - start) % 60, 0)))
         self.bot.interface.close_hdv()
-
-    def estimate_craft_cost(self, item_id_list):
-        if self.bot.interface.hdv_opended:
-            self.bot.interface.close_hdv()
-        recipes = []
-        ingredients = {}
-        for recipe in self.bot.resources.recipes:
-            if recipe['resultId'] in item_id_list:
-                recipes.append(recipe)
-                for ingredient, quantity in recipe['Ingredients']:
-                    if ingredient in ingredients.keys():
-                        ingredients[ingredient] = [ingredients[ingredient][0] + quantity, -1]
-                    else:
-                        ingredients[ingredient] = [quantity, -1]
-
-        ingredients_to_check = []
-        for ingredient in ingredients.keys():
-            if ingredient in self.bot.resources.resources_prices.keys() and time.time() - self.bot.resources.resources_prices[ingredient][1] < 5*3600:
-                ingredients[ingredient][1] = self.bot.resources.resources_prices[ingredient][0][3]  # prices -> avg prices
-            else:
-                ingredients_to_check.append(ingredient)
-
-        # TODO Ingredient price to check : all hdvs
-        self.goto((-30, -53))
-        self.bot.interface.open_hdv()
-        for ingredient in ingredients_to_check:
-            prices = self.bot.interface.get_hdv_item_stats(int(ingredient))[0]
-            self.bot.resources.resources_prices[ingredient] = [prices, time.time()]
-            ingredients[ingredient][1] = self.bot.resources.resources_prices[ingredient][0][3]
-
-        total_cost = sum([qty * val for qty, val in ingredients.values()])
-        for recipe in recipes:
-            recipe['Cost'] = 0
-            for ingredient, quantity in recipe['Ingredients']:
-                recipe['Cost'] += ingredients[ingredient][1] * quantity
-        return [recipe['Cost'] for recipe in recipes]
 
 
 __author__ = 'Alexis'
