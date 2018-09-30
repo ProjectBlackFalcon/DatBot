@@ -8,6 +8,7 @@ import os
 import traceback
 import bz2
 from Item import Item
+import pandas as pd
 
 
 class LowLevelFunctions:
@@ -44,6 +45,13 @@ class LowLevelFunctions:
 
     def distance_coords(self, coord_1, coord_2):
         return ((coord_2[0]-coord_1[0])**2 + (coord_2[1]-coord_1[1])**2)**0.5
+
+    def closest_coord(self, coord, coord_list):
+        closest = coord_list[0], self.distance_coords(coord, coord_list[0])
+        for coord_close in coord_list:
+            if self.distance_coords(coord, coord_close) < closest[1]:
+                closest = coord_close, self.distance_coords(coord, coord_close)
+        return closest[0]
 
     def distance_cell(self, cell_1, cell_2):
         return self.distance_coords(self.cell2coord(cell_1), self.cell2coord(cell_2))
@@ -417,21 +425,42 @@ class LowLevelFunctions:
         with open('../Utils/HuntLogs.txt', 'w') as f:
             f.write(log)
 
-    def resource_item_to_db(self, bot, item_stats_list, item_type):
-        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
-                                       database=dc.database)
+    def resource_item_to_db(self, bot, item_stats_dict, item_type):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
         if item_type == 'Resources':
-            for item_id, price1, price10, price100, priceavg in item_stats_list:
-                cursor.execute("""INSERT INTO ResourcePrices (ItemId, Server, Price1, Price10, Price100, Priceavg) VALUES ({},{},{},{},{},{})""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg))
-        elif item_type == 'Item':
-            for item_id, price1, price10, price100, priceavg, stats in item_stats_list:
-                craft_cost = bot.hf.estimate_craft_cost(item_id)
-                item_hash = hash(Item(stats))
-                cursor.execute("""INSERT INTO ItemPrices (ItemId, Server, Price1, Price10, Price100, Priceavg, CraftCost, Stats, Hash) VALUES ({},{},{},{},{},{},{},{})""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg, craft_cost, stats, item_hash))
+            for item_id, price1, price10, price100, priceavg in item_stats_dict:
+                cursor.execute("""INSERT INTO ResourcePrices (ItemId, Server, Price1, Price10, Price100, Priceavg) VALUES ('{}','{}','{}','{}','{}','{}')""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg))
+        elif item_type == 'Items':
+            for item_id, item_list in item_stats_dict.items():
+                for price1, price10, price100, priceavg, stats in item_list:
+                    # craft_cost = bot.hf.estimate_craft_cost(item_id)  # TODO implement craft cost
+                    craft_cost = 0
+                    item_hash = hash(Item(self.resources, stats, item_id)) if stats != 'None' else 0
+                    cursor.execute("""INSERT INTO ItemPrices (ItemId, Server, Price1, Price10, Price100, Priceavg, CraftCost, Stats, Hash) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg, craft_cost, stats, item_hash))
 
         conn.commit()
         conn.close()
+
+    def resource_price_from_db(self, server, id_list):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""  
+            SELECT Time, ItemId, Price1, Price10, Price100, Priceavg
+            FROM ResourcePrices
+            WHERE Time IN (
+                SELECT MAX(Time)
+                FROM ResourcePrices
+                WHERE ItemId IN {} AND Server = '{}'
+                GROUP BY ItemId
+            ) AND ItemId IN {}
+        """.format(tuple(id_list), server, tuple(id_list)))
+
+        rows = cursor.fetchall()
+        output = pd.DataFrame(rows, columns=['Time', 'ItemId', 'Price1', 'Price10', 'Price100', 'PriceAvg'])
+        output['Name'] = output['ItemId'].apply(lambda itemid: self.resources.id2names[str(itemid)])
+        output.set_index('ItemId', drop=True, inplace=True)
+        return output
 
     def fetch_harvest_path(self, bot_name):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,

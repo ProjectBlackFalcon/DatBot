@@ -6,6 +6,7 @@ import json
 import time
 import datetime
 import traceback
+import pandas as pd
 
 
 class HighLevelFunctions:
@@ -992,61 +993,20 @@ class HighLevelFunctions:
                 f.write(traceback.format_exc())
 
     def get_hdv_prices(self, hdv):
-        hdv_pos = self.bot.llf.closest_cell(self.bot.position[0], self.bot.resources.hdv_pos[hdv])
-        self.goto(hdv_pos)
-        self.bot.interface.open_hdv()
-
+        hdv_pos = self.bot.llf.closest_coord(self.bot.position[0], self.bot.resources.hdv_pos[hdv])
         start = time.time()
         items_ids = self.bot.resources.hdv2id[hdv]
-        if hdv == 'Equipements':
-            stats = self.bot.interface.get_hdv_item_stats(items_ids, self.estimate_craft_cost(items_ids))
-            self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Item')
-        if hdv in ['Resources', 'Runes', 'Consumables']:
-            prices = self.bot.interface.get_hdv_resource_stats(items_ids)
-            for item_id, price1, price10, price100, priceavg in prices:
-                stats = self.bot.resources.resources_prices[item_id] = [[price1, price10, price100, priceavg], time.time()]
-                self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Resource')
-
-        print(time.time() - start, len(self.bot.resources.hdv2id[hdv]))
-        self.bot.interface.close_hdv()
-
-        # runes_prices = {}
-        # runes_prices[rune] = self.bot.interface.get_hdv_resource_stats(rune_id)[-1]
-        # return runes_prices
-
-    def estimate_craft_cost(self, item_id_list):
-        recipes = []
-        ingredients = {}
-        for recipe in self.bot.resources.recipes:
-            if recipe['resultId'] in item_id_list:
-                recipes.append(recipe)
-                for ingredient, quantity in recipe['Ingredients']:
-                    if ingredient in ingredients.keys():
-                        ingredients[ingredient] = [ingredients[ingredient][0] + quantity, -1]
-                    else:
-                        ingredients[ingredient] = [quantity, -1]
-
-        ingredients_to_check = []
-        for ingredient in ingredients.keys():
-            if ingredient in self.bot.resources.resources_prices.keys() and time.time() - self.bot.resources.resources_prices[ingredient][1] < 5*3600:
-                ingredients[ingredient][1] = self.bot.resources.resources_prices[ingredient][0][3]  # prices -> avg prices
-            else:
-                ingredients_to_check.append(ingredient)
-
-        # TODO Ingredient price to check : all hdvs
-        self.goto((-30, -53))
+        self.goto(hdv_pos)
         self.bot.interface.open_hdv()
-        for ingredient in ingredients_to_check:
-            prices = self.bot.interface.get_hdv_item_stats(int(ingredient))[0]
-            self.bot.resources.resources_prices[ingredient] = [prices, time.time()]
-            ingredients[ingredient][1] = self.bot.resources.resources_prices[ingredient][0][3]
+        self.bot.llf.log(self.bot, '[HDV Scraper {}] Starting scraping'.format(self.bot.id))
+        if hdv == 'Equipements':
+            self.bot.interface.get_hdv_item_stats(items_ids)
+        if hdv in ['Ressources', 'Runes', 'Consommables']:
+            self.bot.interface.get_hdv_resource_stats(items_ids)
+            # self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Resource')
 
-        total_cost = sum([qty * val for qty, val in ingredients.values()])
-        for recipe in recipes:
-            recipe['Cost'] = 0
-            for ingredient, quantity in recipe['Ingredients']:
-                recipe['Cost'] += ingredients[ingredient][1] * quantity
-        return [recipe['Cost'] for recipe in recipes]
+        self.bot.llf.log(self.bot, '[HDV Scraper {}] Done in {}m, {}s'.format(self.bot.id, round((time.time() - start) // 60, 0), round((time.time() - start) % 60, 0)))
+        self.bot.interface.close_hdv()
 
 
 __author__ = 'Alexis'

@@ -3,32 +3,31 @@ import zlib
 
 
 class Item:
-    def __init__(self, item_stats, level=-1, creation_price=-1, resource_prices=None):
-        self.all_stats = ['Dommage air', 'PM', 'Resistance terre', 'Renvoi dommage', 'Dommage neutre', 'Invocation', 'Tacle',
-                     'Resistance critique', 'Rune de chasse', 'Resistance % neutre', 'Resistance PA',
-                     'Dommage critique', 'Pods', 'Resistance neutre', 'Resistance % terre', 'Force', 'Resistance PM',
-                     'Resistance % eau', 'Dommage terre', 'Dommage poussee', 'Portee', 'Resistance air', 'Initiative',
-                     'Vitalite', 'Resistance poussee', 'Sagesse', 'Fuite', 'Retrait PM', 'Resistance % feu',
-                     'Intelligence', 'Dommage piege', 'Puissance', 'Resistance feu', 'Chance', 'Soin',
-                     'Resistance % air', 'PA', 'Dommage % piege', 'Prospection', 'Critique', 'Retrait PA',
-                     'Resistance eau', 'Agilite', 'Dommage', 'Dommage eau', 'Dommage feu']
+    def __init__(self, resources, item_stats, item_price=-1, item_id=None, level=-1, creation_price=-1, resource_prices=None):
+        self.all_stats = ['PM', 'Résistance Terre JCJ', 'Résistance Eau JCJ', 'Résistance Air JCJ', 'Résistance Feu JCJ', 'Résistance Neutre JCJ', 'Puissance', 'Sagesse', 'Dommages Neutre', 'Retrait PA', 'Retrait PM', 'Pods', 'Esquive PA', 'Esquive PM', 'Dommages Critiques', 'Résistance Critiques', 'Dommages Terre', 'Résistance Eau', 'Dommages Feu', 'Dommages', 'Dommages Eau', 'Dommages Air', 'Résistance Terre', 'Initiative', 'Vitalité', 'Prospection', 'Soins', '% Critique', 'Dommages Poussée', 'Invocations', '% Dommages distance', 'Résistance Poussée', '% Dommages mêlée', '% Résistance distance', 'Intelligence', '% Résistance Terre', '% Résistance Eau', '% Résistance Air', '% Résistance Feu', '% Résistance Neutre', '% Résistance mêlée', 'Dommages Pièges', 'Chance', '% Résistance Air JCJ', 'Vie', 'PA', 'Fuite', 'Tacle', 'Résistance Air', 'Résistance Feu', 'Résistance Neutre', 'Portée', 'Force', 'Agilité', "% Dommages d'armes", '% Résistance Terre JCJ', '% Résistance Eau JCJ', '% Dommages aux sorts', '% Résistance Feu JCJ', '% Résistance Neutre JCJ']
+
+        self.resources = resources
         self.stats = item_stats if type(item_stats) == dict else self.stats2dict(item_stats)
         self.level = level
         self.creation_price = creation_price
         self.resource_prices = resource_prices
+        self.item_name = resources.id2names[item_id] if item_id is not None else ''
+        self.price = item_price
         with open('../Utils/RunesStats.json', 'r') as f:
             self.runes_stats = json.load(f)
         self.coeff = 100
 
     def __str__(self):
-        return ''.join(['{} : {} | '.format(stat, self.stats[stat]) for stat in self.all_stats])
+        return '{} | {} |'.format(self.item_name, self.price).join(['{} : {} | '.format(stat, self.stats[stat]) for stat in self.all_stats])
 
     def __hash__(self):
         return zlib.adler32(bytes(self.__str__(), 'utf-8'))
 
     def stats2dict(self, stats):
-        output = {stat: value for stat, value in stats}
-        for stat in self.all_stats:
+        stats = [stat for stat in stats if len(stat) == 2 and stat[0] != 740]
+        #                                                                         Look at this shit
+        output = {self.resources.effect_id2name[str(stat)]: int(value*(-2*(('-' == self.resources.effect_id2name[str(stat)][0])-0.5))) for stat, value in stats if type(value) is not list and len(self.resources.effect_id2name[str(stat)])}
+        for stat in self.resources.effect_id2name.values():
             if stat not in output.keys():
                 output[stat] = 0
         return output
@@ -58,10 +57,10 @@ class Item:
         total_weight = sum([value * self.runes_stats[stat][0] for stat, value in self.stats.items()])
 
         with_focus = {stat: ((value+(total_weight-value)/2)/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55 for stat, value in local_focus_weights.items()}
-        with_focus = {stat: int(value) if stat in ['PA', 'PM', 'PO'] else round(value, 1) for stat, value in with_focus.items()}
+        with_focus = {stat: int(value) if stat in ['PA', 'PM', 'Portée'] else round(value, 1) for stat, value in with_focus.items()}
 
         no_focus = {stat: round((value/weights[stat])*(self.level*0.025)*(self.coeff/100)*0.55, 1) for stat, value in local_focus_weights.items()}
-        no_focus = {stat: int(value) if stat in ['PA', 'PM', 'PO'] else round(value, 1) for stat, value in no_focus.items()}
+        no_focus = {stat: int(value) if stat in ['PA', 'PM', 'Portée'] else round(value, 1) for stat, value in no_focus.items()}
 
         return with_focus, no_focus
 

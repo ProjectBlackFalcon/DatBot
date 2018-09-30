@@ -3,7 +3,6 @@ import json
 
 class Resources:
     def __init__(self):
-        self.resources_prices = {}  # 'id': [prices], timestamp
         with open('../Utils/zaapList.json', 'r') as f:
             self.zaaps = json.load(f)
         with open('../Utils/CaracLevel.json', 'r') as f:
@@ -52,3 +51,5 @@ class Resources:
             self.id2names = json.load(f)
         with open('../Utils/Id2Type.json', 'r', encoding='latin-1') as f:
             self.id2type = json.load(f)
+        with open('../Utils/EffectId2Name.json', 'r', encoding='latin-1') as f:
+            self.effect_id2name = json.load(f)
