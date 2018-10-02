@@ -740,14 +740,14 @@ class Interface:
         """
         return self.execute_command('closeItemBreaker')
 
-    def break_items(self, item_inv_id_list):
+    def break_items(self, item_inv_id_list_with_focus):
         # TODO
         """
         Breaks the items
-        :param item_inv_id_list: List of items to break
+        :param item_inv_id_list_with_focus: List of items to break [[inv_id1, focus1], [inv_id2, focus2], ...]
         :return: False / Stats on the runes obtained
         """
-        return self.execute_command('breakItems', item_inv_id_list)
+        return self.execute_command('breakItems', item_inv_id_list_with_focus)
 
     def enter_bwork(self):
         """
