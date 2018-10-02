@@ -433,11 +433,10 @@ class LowLevelFunctions:
                 cursor.execute("""INSERT INTO ResourcePrices (ItemId, Server, Price1, Price10, Price100, Priceavg) VALUES ('{}','{}','{}','{}','{}','{}')""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg))
         elif item_type == 'Items':
             for item_id, item_list in item_stats_dict.items():
-                for price1, price10, price100, priceavg, stats in item_list:
-                    # craft_cost = bot.hf.estimate_craft_cost(item_id)  # TODO implement craft cost
+                for price1, price10, price100, stats in item_list:
                     craft_cost = 0
                     item_hash = hash(Item(self.resources, stats, item_id)) if stats != 'None' else 0
-                    cursor.execute("""INSERT INTO ItemPrices (ItemId, Server, Price1, Price10, Price100, Priceavg, CraftCost, Stats, Hash) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg, craft_cost, stats, item_hash))
+                    cursor.execute("""INSERT INTO ItemPrices (ItemId, Server, Price1, Price10, Price100, CraftCost, Stats, Hash) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}')""".format(item_id, bot.credentials['server'], price1, price10, price100, craft_cost, stats, item_hash))
 
         conn.commit()
         conn.close()
