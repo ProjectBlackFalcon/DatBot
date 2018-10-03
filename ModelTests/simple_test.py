@@ -10,7 +10,9 @@ llf = LowLevelFunctions(resources)
 pipe = PipeToJava(headless=True)
 bot = Bot(pipe, 0, test_account_credentials, llf, resources)
 
-bot.interface.connect()
-bot.hf.scrape_hdvs()
-bot.interface.disconnect()
+while 1:
+    bot.interface.connect()
+    bot.hf.scrape_hdvs()
+    bot.interface.disconnect()
+    time.sleep(1800)
 pipe.p.terminate()
