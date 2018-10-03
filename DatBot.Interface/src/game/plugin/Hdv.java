@@ -20,7 +20,22 @@ public class Hdv {
 	private Long averagePrice;
 	private Integer id;
 	
-	private int currentType;
+	private int currentType;	
+	
+	public long getPriceFromId(int id){
+		if(id == 1){
+			return this.items.get(0).getPrices().get(0);
+		} else if (id == 10){
+			return this.items.get(0).getPrices().get(1);
+		} else if (id == 100){
+			return this.items.get(0).getPrices().get(2);
+		}
+		return -1;
+	}
+	
+	public long getItemUidRessource(){
+		return this.items.get(0).getObjectUID();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public JSONArray getRessourcesPrices(){

@@ -32,6 +32,7 @@ import protocol.network.messages.game.context.roleplay.treasureHunt.TreasureHunt
 import protocol.network.messages.game.dialog.LeaveDialogRequestMessage;
 import protocol.network.messages.game.interactive.InteractiveUseRequestMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportRequestMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseBuyMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseListMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHousePriceMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
@@ -48,9 +49,9 @@ import protocol.network.messages.game.inventory.items.ObjectUseMessage;
 import utils.GameData;
 
 public class ModelConnexion {
-	
-	private static final Object[] TRUE = new Object[] { "True"};
-	private static final Object[] FALSE = new Object[] { "False"};
+
+	private static final Object[] TRUE = new Object[] { "True" };
+	private static final Object[] FALSE = new Object[] { "False" };
 
 	private boolean bankOpened;
 	private boolean hdvOpened;
@@ -721,11 +722,7 @@ public class ModelConnexion {
 	@SuppressWarnings("unchecked")
 	private Object[] getHdvResourceStats(String param) throws Exception {
 		Object[] toSend = FALSE;
-		String[] paramSplit = param.split(",");
-		List<Integer> params = new ArrayList<>();
-		for (String string : paramSplit) {
-			params.add(Integer.parseInt(string));
-		}
+		List<Integer> params = splitList(param);
 		log.writeActionLogMessage("getHdvResourceStats : Size : " + params.size(), String.format("inExchange : %s, id : %s", this.network.getInfo().isInExchange(), param));
 		if (this.network.getInfo().isInExchange()) {
 
@@ -741,9 +738,9 @@ public class ModelConnexion {
 					return FALSE;
 				}
 			}
-			
+
 			JSONArray array = new JSONArray();
-			
+
 			for (Integer i : params) {
 				ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
 				getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item");
@@ -755,7 +752,7 @@ public class ModelConnexion {
 					return FALSE;
 				}
 			}
-			toSend = new Object[] { array };	
+			toSend = new Object[] { array };
 		}
 		else {
 			toSend = FALSE;
@@ -767,7 +764,7 @@ public class ModelConnexion {
 	private Object[] getHdvItemStats(String param) throws Exception {
 		Object[] toSend = FALSE;
 		//Split param
-		param = param.substring(1, param.length()-1);
+		param = param.substring(1, param.length() - 1);
 		String[] paramSplit = DisplayInfo.split(param);
 		//Split all items id
 		HashMap<Integer, List<Integer>> idsItem = new HashMap<>();
@@ -775,7 +772,7 @@ public class ModelConnexion {
 		for (String string : paramSplit) {
 			//Split each type
 			String[] paramSplit2 = string.split(":");
-			
+
 			//Split all ids in the type into a list
 			String[] itemsId = paramSplit2[1].replaceAll("[\\[\\]]", "").split(",");
 			List<Integer> ids = new ArrayList<>();
@@ -811,7 +808,7 @@ public class ModelConnexion {
 			}
 
 			JSONObject json = new JSONObject();
-			
+
 			//Get all entry, go to the type and get all item price
 			for (Entry<Integer, List<Integer>> e : idsItem.entrySet()) {
 				//Check if type is available
@@ -830,29 +827,28 @@ public class ModelConnexion {
 					}
 				}
 
-				
 				//Get the list of item and get the prices
 				for (Integer i : e.getValue()) {
 					//Check if the item is available
 					if (!this.network.getHdv().getTypesInTypes().contains(i)) {
-						json.put(i,this.network.getHdv().getItemNX(i));
+						json.put(i, this.network.getHdv().getItemNX(i));
 						continue;
 					}
 
 					//Get list prices
 					ExchangeBidHouseListMessage exchangeBidHouseListMessage = new ExchangeBidHouseListMessage(i);
-					getNetwork().sendToServer(exchangeBidHouseListMessage, ExchangeBidHouseListMessage.ProtocolId, "Request list prices item " +i);
+					getNetwork().sendToServer(exchangeBidHouseListMessage, ExchangeBidHouseListMessage.ProtocolId, "Request list prices item " + i);
 					if (this.waitToSendHdv()) {
-						json.put(i,this.network.getHdv().getItemsPrices());
+						json.put(i, this.network.getHdv().getItemsPrices());
 						// Must send the average price request
-//						ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
-//						getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item " +i);
-//						if (this.waitToSendHdv()) {
-//							json.put(i,this.network.getHdv().getItemsPrices());
-//						} else {
-//							DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
-//							return toSend;
-//						}
+						//						ExchangeBidHousePriceMessage exchangeBidHousePriceMessage = new ExchangeBidHousePriceMessage(i);
+						//						getNetwork().sendToServer(exchangeBidHousePriceMessage, ExchangeBidHousePriceMessage.ProtocolId, "Request price item " +i);
+						//						if (this.waitToSendHdv()) {
+						//							json.put(i,this.network.getHdv().getItemsPrices());
+						//						} else {
+						//							DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
+						//							return toSend;
+						//						}
 					}
 					else {
 						DisplayInfo.appendDebugLog("getHdvItemStats error, server returned false", param);
@@ -867,10 +863,18 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
-	
+
 	//TODO 
-	private Object[] buyResource(String param) throws Exception{
-		Object[] toSend;
+	private Object[] buyResource(String param) throws Exception {
+		Object[] toSend = FALSE;
+
+		String[] paramSplit = param.split(",");
+		int itemId = Integer.parseInt(paramSplit[0]);
+		int typeId = Integer.parseInt(paramSplit[1]);
+		int batchSize = Integer.parseInt(paramSplit[2]);
+		int batchNumber = Integer.parseInt(paramSplit[3]);
+		int batchMax = Integer.parseInt(paramSplit[4]);
+
 		if (this.network.getInfo().isInExchange()) {
 
 			//Go into buy mod
@@ -884,46 +888,87 @@ public class ModelConnexion {
 					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Request type sell " + this.network.getHdv().getTypes().get(0));
 					this.network.getHdv().setCurrentType(this.network.getHdv().getTypes().get(0));
 					if (!this.waitToSendHdv()) {
-						DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
+						DisplayInfo.appendDebugLog("buyResource error, cannot swap hdv", param);
 						return FALSE;
 					}
 				}
 				else {
-					DisplayInfo.appendDebugLog("getHdvItemStats error, cannot swap hdv", param);
+					DisplayInfo.appendDebugLog("buyResource error, cannot swap hdv", param);
 					return FALSE;
 				}
 			}
-			
+
 			//First get info on the ressource 
-			
-			
 
+			if (!this.network.getHdv().getTypes().contains(typeId)) {
+				DisplayInfo.appendDebugLog("buyResource error, type not found", String.valueOf(typeId));
+				return FALSE;
+			}
 
-			String[] paramItems = param.split(",");
-			for (int i = 0; i < Integer.parseInt(paramItems[2]); i++) {
-				stop(0.5);
-				ExchangeObjectMovePricedMessage exchangeObjectMovePricedMessage = new ExchangeObjectMovePricedMessage(Integer.parseInt(paramItems[3]));
-				exchangeObjectMovePricedMessage.setObjectUID(Integer.parseInt(paramItems[0]));
-				exchangeObjectMovePricedMessage.setQuantity(Integer.parseInt(paramItems[1]));
-				getNetwork().sendToServer(exchangeObjectMovePricedMessage, ExchangeObjectMovePricedMessage.ProtocolId, "Sell item");
-				if (i != Integer.parseInt(paramItems[2]) - 1 && !this.waitToSendHdv()) {
-					DisplayInfo.appendDebugLog("sellItem error, server returned false", param);
+			//If type is available and not already good, change type
+			if (this.network.getHdv().getCurrentType() != typeId) {
+				ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(typeId);
+				getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Change to type " + typeId);
+				this.network.getHdv().setCurrentType(typeId);
+				if (!this.waitToSendHdv()) {
+					DisplayInfo.appendDebugLog("buyResource error, cannot swap hdv", param);
+					return FALSE;
 				}
 			}
-			if (this.waitToSendHdv()) {
-				stop(1);
-				toSend = TRUE;
+
+			if (!this.network.getHdv().getTypesInTypes().contains(itemId)) {
+				DisplayInfo.appendDebugLog("buyResource error, itemId not found", String.valueOf(itemId));
+				return FALSE;
 			}
-			else {
-				DisplayInfo.appendDebugLog("sellItem error, server returned false", param);
-				toSend = FALSE;
+
+			ExchangeBidHouseListMessage exchangeBidHouseListMessage = new ExchangeBidHouseListMessage(itemId);
+			getNetwork().sendToServer(exchangeBidHouseListMessage, ExchangeBidHouseListMessage.ProtocolId, "Request list prices item " + itemId);
+			if (!this.waitToSendHdv()) {
+				DisplayInfo.appendDebugLog("buyResource error, server error", param);
+				return FALSE;
 			}
+			
+			int moneySpent = 0;
+			int itemBought = 0;
+			
+			
+			for (int i = 0; i < batchNumber; i++) {
+				//Get list prices
+				long price = this.network.getHdv().getPriceFromId(batchSize);
+				if (price == -1) {
+					DisplayInfo.appendDebugLog("buyResource error, server returned false", param);
+					return new Object[] { itemBought, moneySpent };
+				}
+				if (this.network.getStats().getStats().getStats().getKamas() >= price) {
+					if (batchMax > 0 && price <= batchMax) {
+						int uid = (int) this.network.getHdv().getItemUidRessource();
+						ExchangeBidHouseBuyMessage exchangeBidHouseBuyMessage = new ExchangeBidHouseBuyMessage(uid, batchSize, price);
+						getNetwork().sendToServer(exchangeBidHouseBuyMessage, ExchangeBidHouseBuyMessage.ProtocolId, "Buy resource : " + itemId);
+						if (this.waitToSendHdv()) {
+							moneySpent += price;
+							itemBought += batchSize;
+						} else {
+							DisplayInfo.appendDebugLog("buyResource error, server error buying", param);
+							return FALSE;
+						}
+					}
+					else {
+						DisplayInfo.appendDebugLog("buyResource error, too expensive", param);
+						return new Object[] { itemBought, moneySpent };
+					}
+				}
+				else {
+					DisplayInfo.appendDebugLog("buyResource error, not enough kamas", param);
+					return new Object[] { itemBought, moneySpent };
+				}
+			}
+			toSend = new Object[] { itemBought, moneySpent };
 		}
 		else {
 			toSend = FALSE;
 		}
 		return toSend;
-		
+
 	}
 
 	private Object[] getHuntingHallDoorCell() {
@@ -1264,7 +1309,7 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
-	
+
 	private Object[] enterFm() throws Exception {
 		Object[] toSend;
 		log.writeActionLogMessage("enterFm", String.format("map : %s, mapid : %s, cellid : %s, interactive : %s, skillid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), 510192, this.network.getInteractive().getSkill(406480, 184)));
@@ -1285,7 +1330,7 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
-	
+
 	private Object[] exitFm() throws Exception {
 		Object[] toSend;
 		log.writeActionLogMessage("exitFm", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
@@ -1818,7 +1863,7 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
-	
+
 	private Object[] openItemBreaker() throws Exception {
 		Object[] toSend;
 		InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(455640, 65717337);
@@ -1833,7 +1878,7 @@ public class ModelConnexion {
 		}
 		return toSend;
 	}
-	
+
 	private Object[] closeItemBreaker() throws Exception {
 		Object[] toSend;
 		if (this.network.getInfo().isInExchange()) {
@@ -1846,6 +1891,18 @@ public class ModelConnexion {
 				DisplayInfo.appendDebugLog("closeHdv error, server returned false", "No response");
 				toSend = FALSE;
 			}
+		}
+		else {
+			toSend = FALSE;
+		}
+		return toSend;
+	}
+
+	private Object[] breakItems(String param) throws Exception {
+		Object[] toSend = FALSE;
+		List<Integer> item_inv_id_list = splitList(param);
+		if (this.network.getInfo().isInExchange()) {
+
 		}
 		else {
 			toSend = FALSE;
@@ -2395,8 +2452,32 @@ public class ModelConnexion {
 		System.out.println("---- Sleeping : " + timeStoped + " ----");
 		Thread.sleep(timeStoped);
 	}
-	
-	public void parseParameters(String param){
-		
+
+	private List<Integer> splitList(String param) {
+		String[] paramSplit = param.split(",");
+		List<Integer> params = new ArrayList<>();
+		for (String string : paramSplit) {
+			params.add(Integer.parseInt(string));
+		}
+		return params;
+	}
+
+	private HashMap<Integer, Integer> splitMapBrisage(String param) {
+		//Split param
+		param = param.substring(1, param.length() - 1);
+		String[] paramSplit = DisplayInfo.split(param);
+		//Split all items id
+		HashMap<Integer, Integer> idsItem = new HashMap<>();
+
+		for (String string : paramSplit) {
+			//Split each type
+			String[] paramSplit2 = string.split(",");
+
+			//Split all ids in the type into a list
+			String itemsId = paramSplit2[1].replaceAll("[\\[\\]]", "");
+			//Put everything in hashmap
+			idsItem.put(Integer.parseInt(paramSplit2[0]), Integer.parseInt(paramSplit2[1])); //Set actionId Focus
+		}
+		return idsItem;
 	}
 }

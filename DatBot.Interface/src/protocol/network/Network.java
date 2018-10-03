@@ -154,6 +154,7 @@ import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportDestinationsListMessage;
 import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseInListUpdatedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemAddOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
@@ -594,9 +595,9 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 48, 11, 0, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 48, 12, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
-		List<Integer> credentialsArray = new ArrayList<Integer>();
+		List<Integer> credentialsArray = new ArrayList<>();
 		for (byte b : credentials) {
 			credentialsArray.add((int) b);
 		}
@@ -1447,6 +1448,9 @@ public class Network extends DisplayInfo implements Runnable {
 					this.hdv.setId(exchangeBidPriceForSellerMessage.getGenericId());
 					this.info.setExchangeBidSeller(true);
 					break;
+				case 5516:
+					this.info.setMovObject(true);
+					break;
 				case 6567:
 					this.info.setInExchange(true);
 					break;
@@ -1466,6 +1470,13 @@ public class Network extends DisplayInfo implements Runnable {
 					ExchangeTypesItemsExchangerDescriptionForUserMessage descriptionForUserMessage = new ExchangeTypesItemsExchangerDescriptionForUserMessage();
 					descriptionForUserMessage.Deserialize(dataReader);
 					this.hdv.setItems(descriptionForUserMessage.getItemTypeDescriptions());
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 6337:
+					ExchangeBidHouseInListUpdatedMessage bidHouseInListUpdatedMessage = new ExchangeBidHouseInListUpdatedMessage();
+					bidHouseInListUpdatedMessage.Deserialize(dataReader);
+					this.hdv.getItems().get(0).setPrices(bidHouseInListUpdatedMessage.getPrices());
+					this.hdv.getItems().get(0).setObjectUID(bidHouseInListUpdatedMessage.getItemUID());
 					this.info.setExchangeBidSeller(true);
 					break;
 				case 5904:
