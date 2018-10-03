@@ -469,8 +469,9 @@ class LowLevelFunctions:
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""
-            SELECT max(id)
+            SELECT SampleId
             FROM ItemPrices
+            WHERE id = max(id)
         """)
         return cursor.fetchall()[0][0]
 
