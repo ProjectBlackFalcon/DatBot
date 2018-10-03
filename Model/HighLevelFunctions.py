@@ -992,7 +992,7 @@ class HighLevelFunctions:
                 f.write('\n\n' + str(datetime.datetime.now()) + '\n')
                 f.write(traceback.format_exc())
 
-    def get_hdv_prices(self, hdv):
+    def get_hdv_prices(self, hdv, batch_id):
         hdv_pos = self.bot.llf.closest_coord(self.bot.position[0], self.bot.resources.hdv_pos[hdv])
         start = time.time()
         items_ids = self.bot.resources.hdv2id[hdv]
@@ -1000,13 +1000,20 @@ class HighLevelFunctions:
         self.bot.interface.open_hdv()
         self.bot.llf.log(self.bot, '[HDV Scraper {}] Starting scraping'.format(self.bot.id))
         if hdv == 'Equipements':
-            self.bot.interface.get_hdv_item_stats(items_ids)
+            self.bot.interface.get_hdv_item_stats(items_ids, batch_id)
         if hdv in ['Ressources', 'Runes', 'Consommables']:
-            self.bot.interface.get_hdv_resource_stats(items_ids)
+            self.bot.interface.get_hdv_resource_stats(items_ids, batch_id)
             # self.bot.llf.resource_item_to_db(self.bot, stats, item_type='Resource')
 
         self.bot.llf.log(self.bot, '[HDV Scraper {}] Done in {}m, {}s'.format(self.bot.id, round((time.time() - start) // 60, 0), round((time.time() - start) % 60, 0)))
         self.bot.interface.close_hdv()
+
+    def scrape_hdvs(self):
+        batch_id = self.bot.llf.last_batch_id()
+        self.get_hdv_prices('Equipements', batch_id)
+        self.get_hdv_prices('Ressources', batch_id)
+        self.get_hdv_prices('Runes', batch_id)
+        self.get_hdv_prices('Consommables', batch_id)
 
 
 __author__ = 'Alexis'

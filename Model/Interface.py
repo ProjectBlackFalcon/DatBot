@@ -588,7 +588,7 @@ class Interface:
                 self.hdv_opended = False
             return ret_val
 
-    def get_hdv_item_stats(self, item_id_list):
+    def get_hdv_item_stats(self, item_id_list, batch_id):
         """
         Gathers data about the item given
         :param item_id_list: {type_id1: [id1, id2, ...], ...}
@@ -626,13 +626,13 @@ class Interface:
             ret = self.execute_command('getHdvItemStats', [data_sent])[0]
             self.bot.llf.log(self.bot, '[Interface {}] Done'.format(self.bot.id))
             if lst != lists_to_send[-1]:
-                Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Items')).start()
+                Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Items', batch_id)).start()
             else:
                 self.bot.llf.resource_item_to_db(self.bot, ret, 'Items')
             ret_val.update(ret)
         return ret_val
 
-    def get_hdv_resource_stats(self, item_id_list):
+    def get_hdv_resource_stats(self, item_id_list, batch_id):
         """
         Gathers data about the item given
         :param item_id_list: item id list
@@ -653,7 +653,7 @@ class Interface:
             ret = self.execute_command('getHdvResourceStats', lst)[0]
             self.bot.llf.log(self.bot, '[Interface {}] Done'.format(self.bot.id))
             if lst != lists_to_send[-1]:
-                Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Resources')).start()
+                Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Resources', batch_id)).start()
             else:
                 self.bot.llf.resource_item_to_db(self.bot, ret, 'Resources')
             ret_val += ret
