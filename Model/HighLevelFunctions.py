@@ -1009,7 +1009,7 @@ class HighLevelFunctions:
         self.bot.interface.close_hdv()
 
     def scrape_hdvs(self):
-        batch_id = self.bot.llf.last_batch_id()
+        batch_id = self.bot.llf.last_batch_id() + 1
         self.get_hdv_prices('Equipements', batch_id)
         self.get_hdv_prices('Ressources', batch_id)
         self.get_hdv_prices('Runes', batch_id)
