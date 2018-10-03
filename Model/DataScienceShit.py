@@ -13,16 +13,19 @@ class Database:
     def resource_price_from_db(self, server, id_list):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
+        id_list = tuple(id_list) if len(id_list) > 1 else id_list
+        id_list = id_list[0] if type(id_list) is list else id_list
+        operator = 'IN' if type(id_list) is tuple else '='
         cursor.execute("""  
             SELECT Time, ItemId, Price1, Price10, Price100, Priceavg
             FROM ResourcePrices
             WHERE Time IN (
                 SELECT MAX(Time)
                 FROM ResourcePrices
-                WHERE ItemId IN {} AND Server = '{}'
+                WHERE ItemId {} {} AND Server = '{}'
                 GROUP BY ItemId
-            ) AND ItemId IN {}
-        """.format(tuple(id_list), server, tuple(id_list)))
+            ) AND ItemId {} {}
+        """.format(operator, id_list, server, operator, id_list))
 
         rows = cursor.fetchall()
         output = pd.DataFrame(rows, columns=['Time', 'ItemId', 'Price1', 'Price10', 'Price100', 'PriceAvg'])
@@ -31,18 +34,21 @@ class Database:
         output = output.loc[~output.index.duplicated(keep='first')]
         return output
 
-    def get_item_from_id(self, item_id, server):
+    def get_item_from_id(self, server, item_id_list):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
+        item_id_list = tuple(item_id_list) if len(item_id_list) > 1 else item_id_list
+        item_id_list = item_id_list[0] if type(item_id_list) is list and len(item_id_list) else item_id_list
+        item_id_list = 'NULL' if not len(item_id_list) else item_id_list
+        operator = 'IN' if type(item_id_list) is tuple else '='
         cursor.execute("""  
-                    SELECT TimeIn, ItemId, Price1, Stats, Hash
+                SELECT TimeIn, ItemId, Price1, Stats, Hash
+                FROM ItemPrices
+                WHERE Server = '{}' AND ItemId {} {} AND TimeIn IN (
+                    SELECT MAX(TimeIn)
                     FROM ItemPrices
-                    WHERE TimeIn IN (
-                        SELECT MAX(TimeIn)
-                        FROM ItemPrices
-                        WHERE ItemId = {} AND Server = '{}'
-                    ) AND ItemId = {}
-                """.format(item_id, server, item_id))
+                    GROUP BY ItemId
+                )""".format(server, operator, item_id_list))
         rows = cursor.fetchall()
         output = pd.DataFrame(rows, columns=['Time', 'ItemId', 'Price', 'Stats', 'Hash'])
         output['Name'] = output['ItemId'].apply(lambda itemid: self.resources.id2names[str(itemid)])
@@ -73,13 +79,10 @@ class DS:
 
         recipes = pd.DataFrame(recipes).set_index('resultId', drop=True)
         prices = self.database.resource_price_from_db(server, ingredients.keys())['PriceAvg']
-        items_in_recipe_with_price = {}
-        for item_id in ingredients.keys():
-            if str(item_id) in self.resources.equipments:
-                data = self.database.get_item_from_id(item_id, server).sort_values('Price')
-                if len(data):
-                    items_in_recipe_with_price[item_id] = data.Price.iloc[0]
-        prices = prices.append(pd.Series(items_in_recipe_with_price))
+        items_in_recipe_with_prices = [item_id for item_id in ingredients.keys() if str(item_id) in self.resources.equipments]
+        items = self.database.get_item_from_id(server, items_in_recipe_with_prices).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
+        items_in_recipe_with_prices = items.groupby('ItemId')['Price'].min()
+        prices = prices.append(pd.Series(items_in_recipe_with_prices))
 
         ingredients = recipes['Ingredients'].apply(lambda ingredients: pd.DataFrame(ingredients, columns=['ItemId', 'Quantity']).set_index('ItemId', drop=True).sort_index())
 
@@ -101,19 +104,21 @@ class DS:
         item_id_list = [item_id_list] if type(item_id_list) is not list else item_id_list
         runes_prices = ds.database.get_runes_prices(server)
         craft_costs = ds.estimate_craft_cost(item_id_list, 'Julith', rich_return=True)
+        items = self.database.get_item_from_id(server, item_id_list).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
+        items_in_recipe_with_prices = items.groupby('ItemId')['Price'].min()
+        hdv_value = dict(items_in_recipe_with_prices)
         report = []
         non_craftable = 0
         for item_id in item_id_list:
-            print('Running simulation for item {}/{}'.format(item_id_list.index(item_id) + 1, len(item_id_list)))
             try:
                 item = Item(self.resources, item_id=item_id, creation_price=craft_costs.loc[item_id]['Price'])
                 item.generate_random_instance()
                 min_coeff, focus = item.get_min_coeff(runes_prices)
-                report.append([item.item_name, int(item.level), int(craft_costs.loc[item_id]['Price']), int(min_coeff), focus])
+                report.append([item.item_name, int(item.level), int(craft_costs.loc[item_id]['Price']), int(hdv_value[item_id]), int(min_coeff), focus])
             except:
                 non_craftable += 1
                 print(self.resources.id2names[str(item_id)])
-        report = pd.DataFrame(report, columns=['Item Name', 'Level', 'Craft Price', 'Min coeff', 'Focus']).set_index('Item Name')
+        report = pd.DataFrame(report, columns=['Item Name', 'Level', 'Craft Price', 'Hdv price', 'Min coeff', 'Focus']).set_index('Item Name')
         print(non_craftable)
         return report
 
@@ -128,8 +133,6 @@ class DS:
 if __name__ == '__main__':
     ds = DS(Resources())
     start = time.time()
-    ids = ds.get_item_ids_from_level(151, 165)
-    print(ids)
-    report = ds.item_breaking_analysis(ids, 'Julith').sort_values(by=['Min coeff'], ascending=False)
-    report.to_csv('RuneReport.csv')
+    ids = ds.get_item_ids_from_level(199, 200)
+    ds.item_breaking_analysis(ids, 'Julith').sort_values(by=['Min coeff'], ascending=False).to_csv('RuneReport.csv')
     print(time.time() - start)
