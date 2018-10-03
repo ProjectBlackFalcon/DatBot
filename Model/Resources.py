@@ -41,15 +41,23 @@ class Resources:
             self.dd_territory_maps = json.load(f)
         with open('../Utils/WestDDTerr.json', 'r') as f:
             self.west_dd_territory_maps = json.load(f)
-        with open('../Utils/NamedRecipes.json', 'r') as f:
+        with open('../Utils/NamedRecipes.json', 'r', encoding='utf8') as f:
             self.recipes = json.load(f)
         with open('../Utils/Hdv2Id.json', 'r') as f:
             self.hdv2id = json.load(f)
         with open('../Utils/Id2Hdv.json', 'r') as f:
             self.id2hdv = json.load(f)
-        with open('../Utils/Id2Names.json', 'r', encoding='latin-1') as f:
+        with open('../Utils/Id2Names.json', 'r', encoding='utf8') as f:
             self.id2names = json.load(f)
         with open('../Utils/Id2Type.json', 'r', encoding='latin-1') as f:
             self.id2type = json.load(f)
         with open('../Utils/EffectId2Name.json', 'r', encoding='latin-1') as f:
             self.effect_id2name = json.load(f)
+        with open('../Utils/Equipements.json', 'r', encoding='utf8') as f:
+            self.equipments = json.load(f)
+        with open('../Utils/RunesStats.json', 'r', encoding='utf8') as f:
+            self.runes_stats = json.load(f)
+        with open('../Utils/RuneIds.json', 'r', encoding='utf8') as f:
+            self.runes_ids = json.load(f)
+        with open('../Utils/Fmable_stats.json', 'r', encoding='utf8') as f:
+            self.fmable_stats = json.load(f)

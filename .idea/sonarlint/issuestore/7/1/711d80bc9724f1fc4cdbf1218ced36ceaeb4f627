@@ -1,0 +1,133 @@
+
+Vsquid:S1155ˆ
+">Use isEmpty() to check whether the collection is empty or not.(ÜË‡
+osquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Í¾ÃÙıÿÿÿÿ8ÉÀÒôÂ,
+jsquid:S3776¢
+"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(“–ış
+„"squid:ClassVariableVisibilityCheck´"PMake port a static final constant or non-public and provide accessors if needed.(±àöˆıÿÿÿÿ
+?squid:S1872¸"'Use an "instanceof" comparison instead.(á€Í¾
+gsquid:S1192û"JDefine a constant instead of duplicating this literal "targetId" 11 times.(ıŞ¹Øıÿÿÿÿ
+P
+squid:S106À
+"9Replace this use of System.out or System.err by a logger.(‰ƒèú
+_squid:S00112ê"FDefine and throw a dedicated exception instead of using a generic one.(õÜì£
+?squid:S1872€"'Use an "instanceof" comparison instead.(²¸‚ò
+Dsquid:S1872“
+"'Use an "instanceof" comparison instead.(şÙ´öùÿÿÿÿ
+^squid:S00112Ñ"FDefine and throw a dedicated exception instead of using a generic one.(¦¼Z
+dsquid:S00112ÿ"FDefine and throw a dedicated exception instead of using a generic one.(ƒØ¯°ÿÿÿÿÿ
+Psquid:S1313¬"3Make this IP "213.248.126.39" address configurable.(Ñì­ûÿÿÿÿ
+@squid:S1148­"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Ä
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+U
+squid:S106“"9Replace this use of System.out or System.err by a logger.(¤ÔÓ®ûÿÿÿÿ
+U
+squid:S106›"9Replace this use of System.out or System.err by a logger.(Ë¶·†øÿÿÿÿ
+Rsquid:S1141³
+"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+‹"squid:ClassVariableVisibilityCheck¦"\Make connectionToKoli a static final constant or non-public and provide accessors if needed.(èååÀ
+lsquid:S00100Í"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­½¹×øÿÿÿÿ
+_squid:S00112ã"FDefine and throw a dedicated exception instead of using a generic one.(†‚Àª
+Q"squid:SwitchLastCaseIsDefaultCheck‹""Add a default case to this switch.(Ï¶¸Ú
+@squid:S1148º
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+hsquid:CommentedOutCodeLine›"<This block of commented-out lines of code should be removed.(ËïÿÄøÿÿÿÿ
+²%squid:RedundantThrowsDeclarationCheckœ"{Remove the declaration of thrown exception 'java.lang.ClassNotFoundException' which is a subclass of 'java.lang.Exception'.(Ğ¡šüøÿÿÿÿ
+qsquid:S2293©"YReplace the type specification in this constructor call with the diamond operator ("<>").(”±®”
+lsquid:S00100å"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô–óŠıÿÿÿÿ
+gsquid:S00100…"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³Îê´
+U
+squid:S106’"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ
+Dsquid:S1872¼"'Use an "instanceof" comparison instead.(şàö×ıÿÿÿÿ
+jsquid:S3776ì"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(Ø›¢’
+\squid:HiddenFieldCheckì":Rename "stats" which hides the field declared at line 184.(œº?
+Osquid:S1135¬"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+csquid:CommentedOutCodeLineÉ"<This block of commented-out lines of code should be removed.( Ü½“
+?squid:S1872
+"'Use an "instanceof" comparison instead.(È÷ì
+[squid:S1479‹"CReduce the number of non-empty switch cases from 103 to at most 30.(Ï¶¸Ú
+U
+squid:S106"9Replace this use of System.out or System.err by a logger.(¦˜Ÿ±ÿÿÿÿÿ
+dsquid:S00112	"FDefine and throw a dedicated exception instead of using a generic one.(—ê™úşÿÿÿÿ
+osquid:S00116¹"QRename this field "Ticket" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñƒ¥õÿÿÿÿÿ
+@squid:S1148š"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+gsquid:S00100ê"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õÜì£
+¥%squid:RedundantThrowsDeclarationCheck–"nRemove the declaration of thrown exception 'java.io.IOException' which is a subclass of 'java.lang.Exception'.(’¼·‰ùÿÿÿÿ
+P
+squid:S106…"9Replace this use of System.out or System.err by a logger.(˜Ïˆì
+Dsquid:S1872µ"'Use an "instanceof" comparison instead.(£¢¯ÿÿÿÿÿ
+‚"squid:ClassVariableVisibilityCheck¬"NMake ip a static final constant or non-public and provide accessors if needed.(Ñì­ûÿÿÿÿ
+P
+squid:S106¹
+"9Replace this use of System.out or System.err by a logger.(Î½°¹
+Dsquid:S1872ü"'Use an "instanceof" comparison instead.(š³¬óûÿÿÿÿ
+Lsquid:S1066µ"/Merge this if statement with the enclosing one.(Å¸–äıÿÿÿÿ
+U
+squid:S106œ"9Replace this use of System.out or System.err by a logger.(§Ãšüÿÿÿÿ
+Nsquid:S2696ğ"6Make the enclosing method "static" or remove this set.(¤»Û„
+¯%squid:RedundantThrowsDeclarationCheckÿ"xRemove the declaration of thrown exception 'java.net.UnknownHostException' which is a subclass of 'java.io.IOException'.(ü¡Ìõÿÿÿÿÿ
+²%squid:RedundantThrowsDeclarationCheckœ"{Remove the declaration of thrown exception 'java.lang.IllegalAccessException' which is a subclass of 'java.lang.Exception'.(Ğ¡šüøÿÿÿÿ
+¯%squid:RedundantThrowsDeclarationCheck‰"xRemove the declaration of thrown exception 'java.net.UnknownHostException' which is a subclass of 'java.io.IOException'.(¬Ö¹ıÿÿÿÿ
+gsquid:S00100á"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸õÌ
+Osquid:S1135¯"2Complete the task associated to this TODO comment.(À¤øüÿÿÿÿ
+Dsquid:S1872²"'Use an "instanceof" comparison instead.(©ñ×’ıÿÿÿÿ
+osquid:S00117ë"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ¤»ìıÿÿÿÿ
+U
+squid:S106Û
+"9Replace this use of System.out or System.err by a logger.(ŒŒüçûÿÿÿÿ
+Dsquid:S1872§"'Use an "instanceof" comparison instead.(•¯˜»øÿÿÿÿ
+gsquid:S1192ú"JDefine a constant instead of duplicating this literal "sourceId" 13 times.(Èáæûÿÿÿÿ
+ª%squid:RedundantThrowsDeclarationCheckï"xRemove the declaration of thrown exception 'java.net.UnknownHostException' which is a subclass of 'java.io.IOException'.(‘¹ø×
+U
+squid:S106Í"9Replace this use of System.out or System.err by a logger.(¨¶ÑÍşÿÿÿÿ
+lsquid:S00100ı
+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªãïÛúÿÿÿÿ
+\
+squid:S106š"9Replace this use of System.out or System.err by a logger.(À³Ú’ıÿÿÿÿ8ÉÀÒôÂ,
+lsquid:S00100…"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â‚¾˜úÿÿÿÿ
+3squid:S3626–"Remove this redundant jump.(ûÁİ…
+Dsquid:S1872—"'Use an "instanceof" comparison instead.(Ñ×·Øúÿÿÿÿ
+U
+squid:S106¬
+"9Replace this use of System.out or System.err by a logger.(Íèï•ÿÿÿÿÿ
+^squid:S2259ï"AA "NullPointerException" could be thrown; "bot" is nullable here.(à¸ˆèıÿÿÿÿ
+Ssquid:S1854™"6Remove this useless assignment to local variable "id".(²ì¨Ôøÿÿÿÿ
+Hsquid:S1481Š"0Remove this unused "jsonObject2" local variable.(©¶ø
+°%squid:RedundantThrowsDeclarationCheckœ"yRemove the declaration of thrown exception 'java.lang.NoSuchFieldException' which is a subclass of 'java.lang.Exception'.(Ğ¡šüøÿÿÿÿ
+lsquid:S00100æ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬¤·›úÿÿÿÿ
+¥%squid:RedundantThrowsDeclarationCheckœ"nRemove the declaration of thrown exception 'java.io.IOException' which is a subclass of 'java.lang.Exception'.(Ğ¡šüøÿÿÿÿ
+ª%squid:RedundantThrowsDeclarationCheck÷"yRemove the declaration of thrown exception 'java.lang.InterruptedException' which is a subclass of 'java.lang.Exception'.(±ÀÕ
+U
+squid:S106Ô"9Replace this use of System.out or System.err by a logger.(ËıÖĞûÿÿÿÿ
+U
+squid:S106”"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ
+Dsquid:S1481™"'Remove this unused "id" local variable.(²ì¨Ôøÿÿÿÿ
+gsquid:S00100ë"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İù÷Ö
+P
+squid:S106Ü
+"9Replace this use of System.out or System.err by a logger.(©ÈÚÓ
+U
+squid:S106‘"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ
+Gsquid:S1066ª"/Merge this if statement with the enclosing one.(‹ğ€
+jsquid:S00117…"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³Îê´
+U
+squid:S106’"9Replace this use of System.out or System.err by a logger.(ìÜ¥èüÿÿÿÿ
+dsquid:S1192¯"GDefine a constant instead of duplicating this literal "amount" 3 times.(‘ºÒğøÿÿÿÿ
+Fsquid:S1481‰"/Remove this unused "jsonObject" local variable.(ğ¸~
+Ysquid:S1854”"BRemove this useless assignment to local variable "packet_content".(¥‡œo
+gsquid:S00100¼"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»–å¯
+?squid:S1872ù"'Use an "instanceof" comparison instead.(’òÇÍ
+[squid:S3034ş
+">Prevent "int" promotion by adding "& 0xff" to this expression.(™“¼”ûÿÿÿÿ
+osquid:CommentedOutCodeLine‰"<This block of commented-out lines of code should be removed.(òŒ³Áÿÿÿÿÿ8ÉÀÒôÂ,
+Osquid:S1135›"2Complete the task associated to this TODO comment.(òƒøÿÿÿÿ
+qsquid:S2293¥"YReplace the type specification in this constructor call with the diamond operator ("<>").(šŒë‚
+P
+squid:S106˜	"9Replace this use of System.out or System.err by a logger.(ÿˆÌ™
+U
+squid:S106"9Replace this use of System.out or System.err by a logger.(”¼Šéıÿÿÿÿ
+gsquid:S00100Ï"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ìæ‘¸
+jsquid:S3776…"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(³Îê´
+jsquid:S00117…"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³Îê´
+Osquid:S1135Å"2Complete the task associated to this TODO comment.(Šáˆ•ùÿÿÿÿ

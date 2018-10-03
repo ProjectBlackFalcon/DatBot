@@ -26,7 +26,6 @@ import game.plugin.Npc;
 import game.plugin.Stats;
 import ia.Intelligence;
 import ia.IntelligencePacketHandler;
-import main.Main;
 import main.communication.Communication;
 import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;

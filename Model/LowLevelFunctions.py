@@ -373,24 +373,27 @@ class LowLevelFunctions:
         conn.close()
 
     def push_log_file(self, file_path, logtype, compress=False):
-        with open(file_path, 'r') as f:
-            contents = ''.join(f.readlines())
-        if contents:
-            try:
-                if compress:
-                    contents = bz2.compress(contents)
-                conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
-                                               database=dc.database)
-                cursor = conn.cursor()
-                cursor.execute("""INSERT INTO {} (log) VALUES ('{}')""".format(logtype, contents))
-                conn.commit()
-                conn.close()
-                with open(file_path, 'w') as f:
-                    f.write('')
-            except Exception:
-                with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
-                    f.write('\n\n' + str(datetime.datetime.now()) + '\n')
-                    f.write(traceback.format_exc())
+        try:
+            with open(file_path, 'r') as f:
+                contents = ''.join(f.readlines())
+            if contents:
+                try:
+                    if compress:
+                        contents = bz2.compress(contents)
+                    conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
+                                                   database=dc.database)
+                    cursor = conn.cursor()
+                    cursor.execute("""INSERT INTO {} (log) VALUES ('{}')""".format(logtype, contents))
+                    conn.commit()
+                    conn.close()
+                    with open(file_path, 'w') as f:
+                        f.write('')
+                except Exception:
+                    with open('../Utils/DatabaseErrorLog.txt', 'a') as f:
+                        f.write('\n\n' + str(datetime.datetime.now()) + '\n')
+                        f.write(traceback.format_exc())
+        except:
+            pass  # Haha don't do that
 
     def dds_to_db(self, bot_name, dds):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
@@ -425,19 +428,19 @@ class LowLevelFunctions:
         with open('../Utils/HuntLogs.txt', 'w') as f:
             f.write(log)
 
-    def resource_item_to_db(self, bot, item_stats_dict, item_type):
+    def resource_item_to_db(self, bot, item_stats_dict, item_type, batch_id):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
+        timein = datetime.datetime.now()
         if item_type == 'Resources':
             for item_id, price1, price10, price100, priceavg in item_stats_dict:
-                cursor.execute("""INSERT INTO ResourcePrices (ItemId, Server, Price1, Price10, Price100, Priceavg) VALUES ('{}','{}','{}','{}','{}','{}')""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg))
+                cursor.execute("""INSERT INTO ResourcePrices (ItemId, Time, Server, Price1, Price10, Price100, Priceavg, SampleId) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}')""".format(item_id, timein, bot.credentials['server'], price1, price10, price100, priceavg, batch_id))
         elif item_type == 'Items':
             for item_id, item_list in item_stats_dict.items():
-                for price1, price10, price100, priceavg, stats in item_list:
-                    # craft_cost = bot.hf.estimate_craft_cost(item_id)  # TODO implement craft cost
+                for price1, price10, price100, stats in item_list:
                     craft_cost = 0
                     item_hash = hash(Item(self.resources, stats, item_id)) if stats != 'None' else 0
-                    cursor.execute("""INSERT INTO ItemPrices (ItemId, Server, Price1, Price10, Price100, Priceavg, CraftCost, Stats, Hash) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(item_id, bot.credentials['server'], price1, price10, price100, priceavg, craft_cost, stats, item_hash))
+                    cursor.execute("""INSERT INTO ItemPrices (ItemId, TimeIn, Server, Price1, Price10, Price100, CraftCost, Stats, Hash, SampleId) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(item_id, timein, bot.credentials['server'], price1, price10, price100, craft_cost, stats, item_hash, batch_id))
 
         conn.commit()
         conn.close()
@@ -461,6 +464,20 @@ class LowLevelFunctions:
         output['Name'] = output['ItemId'].apply(lambda itemid: self.resources.id2names[str(itemid)])
         output.set_index('ItemId', drop=True, inplace=True)
         return output
+
+    def last_batch_id(self):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT SampleId
+            FROM ItemPrices
+            WHERE id = (SELECT max(id) FROM ItemPrices)
+        """)
+        try:
+            ret_val = cursor.fetchall()[0][0]
+        except Exception:
+            ret_val = 0
+        return ret_val
 
     def fetch_harvest_path(self, bot_name):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,

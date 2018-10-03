@@ -1,0 +1,22 @@
+
+esquid:S2095Ç"HUse try-with-resources or close this "FileWriter" in a "finally" clause.(¿Ÿ­Ÿúÿÿÿÿ
+]
+squid:S899x"BDo something with the "boolean" value returned by "createNewFile".(Ğ’Íùÿÿÿÿ
+O
+squid:S106\"9Replace this use of System.out or System.err by a logger.(ı¢Ø¸
+@squid:S1148«"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+asquid:S2259‰"DA "NullPointerException" could be thrown; "writer" is nullable here.(èˆ„ÿÿÿÿÿ
+gsquid:CommentedOutCodeLine["<This block of commented-out lines of code should be removed.(ÍÓëáşÿÿÿÿ
+?squid:S1148_"#Use a logger to log this exception.(Âşÿâûÿÿÿÿ
+O
+squid:S106|"9Replace this use of System.out or System.err by a logger.(Ü•’‹
+@squid:S1148‡"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+esquid:S1192g"IDefine a constant instead of duplicating this literal "HH:mm:ss" 3 times.(Ô£†´ùÿÿÿÿ
+zsquid:S1488i"^Immediately return this expression instead of assigning it to the temporary variable "timing".(ñãÃŞıÿÿÿÿ
+?squid:S1148}"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+bsquid:CommentedOutCodeLineX"<This block of commented-out lines of code should be removed.(ı‚ªæ
+@squid:S1148Î"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+vsquid:S1450+"_Remove the "fileOutputStream" field and declare it as a local variable in the relevant methods.(Õúú
+"squid:ClassVariableVisibilityCheck/"QMake debug a static final constant or non-public and provide accessors if needed.(´á®Ö
+U
+squid:S106†"9Replace this use of System.out or System.err by a logger.(¨ØÎûÿÿÿÿ
