@@ -471,7 +471,7 @@ class LowLevelFunctions:
         cursor.execute("""
             SELECT SampleId
             FROM ItemPrices
-            WHERE id = max(id)
+            WHERE id = (SELECT max(id) FROM ItemPrices)
         """)
         return cursor.fetchall()[0][0]
 
