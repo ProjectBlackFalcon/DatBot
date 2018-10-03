@@ -940,7 +940,7 @@ public class ModelConnexion {
 					return new Object[] { itemBought, moneySpent };
 				}
 				if (this.network.getStats().getStats().getStats().getKamas() >= price) {
-					if (batchMax > 0 && price <= batchMax) {
+					if (batchMax < 0 || price > batchMax) {
 						int uid = (int) this.network.getHdv().getItemUidRessource();
 						ExchangeBidHouseBuyMessage exchangeBidHouseBuyMessage = new ExchangeBidHouseBuyMessage(uid, batchSize, price);
 						getNetwork().sendToServer(exchangeBidHouseBuyMessage, ExchangeBidHouseBuyMessage.ProtocolId, "Buy resource : " + itemId);
@@ -1264,6 +1264,16 @@ public class ModelConnexion {
 			case "getHdvItemStats":
 				toSend = getHdvItemStats(param);
 				break;
+			case "buyResource":
+				toSend = buyResource(param);
+				break;
+			case "openItemBreaker":
+				toSend = openItemBreaker();
+				break;
+			case "closeItemBreaker":
+				toSend = closeItemBreaker();
+				break;
+			
 		}
 		return toSend;
 	}
