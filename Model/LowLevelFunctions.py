@@ -473,7 +473,11 @@ class LowLevelFunctions:
             FROM ItemPrices
             WHERE id = (SELECT max(id) FROM ItemPrices)
         """)
-        return cursor.fetchall()[0][0]
+        try:
+            ret_val = cursor.fetchall()[0][0]
+        except Exception:
+            ret_val = 0
+        return ret_val
 
     def fetch_harvest_path(self, bot_name):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
