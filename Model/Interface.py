@@ -628,7 +628,7 @@ class Interface:
             if lst != lists_to_send[-1]:
                 Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Items', batch_id)).start()
             else:
-                self.bot.llf.resource_item_to_db(self.bot, ret, 'Items')
+                self.bot.llf.resource_item_to_db(self.bot, ret, 'Items', batch_id)
             ret_val.update(ret)
         return ret_val
 
@@ -655,7 +655,7 @@ class Interface:
             if lst != lists_to_send[-1]:
                 Thread(target=self.bot.llf.resource_item_to_db, args=(self.bot, ret, 'Resources', batch_id)).start()
             else:
-                self.bot.llf.resource_item_to_db(self.bot, ret, 'Resources')
+                self.bot.llf.resource_item_to_db(self.bot, ret, 'Resources', batch_id)
             ret_val += ret
         return ret_val
 
