@@ -1,12 +1,11 @@
-from Pathfinder import PathFinder
-from LowLevelFunctions import LowLevelFunctions
+import pyximport; pyximport.install()
+from cPathFinder import PathFinder
 from Hunt import Hunt
 from DD import DD
 import json
 import time
 import datetime
 import traceback
-import pandas as pd
 
 
 class HighLevelFunctions:

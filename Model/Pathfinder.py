@@ -3,7 +3,6 @@ from PIL import Image
 from heapq import *
 import time
 from random import randint
-from LowLevelFunctions import LowLevelFunctions
 
 
 class PathFinder:

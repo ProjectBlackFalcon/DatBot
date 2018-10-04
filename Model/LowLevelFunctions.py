@@ -9,6 +9,7 @@ import traceback
 import bz2
 from Item import Item
 import pandas as pd
+from threading import Thread
 
 
 class LowLevelFunctions:
@@ -348,6 +349,11 @@ class LowLevelFunctions:
         conn.close()
 
     def log(self, bot, message):
+        t = Thread(target=self.actual_log, args=(bot, message))
+        t.start()
+        t.join()
+
+    def actual_log(self, bot, message):
         name = bot.credentials['name']
         color = bot.interface.color
         print(color + message + '\033[0m')
