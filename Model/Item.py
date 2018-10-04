@@ -2,6 +2,7 @@ import json
 import zlib
 from random import randint
 
+
 class Item:
     def __init__(self, resources, item_stats=None, item_price=-1, item_id=None, level=None, creation_price=-1, resource_prices=None):
         self.all_stats = ['PM', 'Résistance Terre JCJ', 'Résistance Eau JCJ', 'Résistance Air JCJ', 'Résistance Feu JCJ', 'Résistance Neutre JCJ', 'Puissance', 'Sagesse', 'Dommages Neutre', 'Retrait PA', 'Retrait PM', 'Pods', 'Esquive PA', 'Esquive PM', 'Dommages Critiques', 'Résistance Critiques', 'Dommages Terre', 'Résistance Eau', 'Dommages Feu', 'Dommages', 'Dommages Eau', 'Dommages Air', 'Résistance Terre', 'Initiative', 'Vitalité', 'Prospection', 'Soins', '% Critique', 'Dommages Poussée', 'Invocations', '% Dommages distance', 'Résistance Poussée', '% Dommages mêlée', '% Résistance distance', 'Intelligence', '% Résistance Terre', '% Résistance Eau', '% Résistance Air', '% Résistance Feu', '% Résistance Neutre', '% Résistance mêlée', 'Dommages Pièges', 'Chance', '% Résistance Air JCJ', 'Vie', 'PA', 'Fuite', 'Tacle', 'Résistance Air', 'Résistance Feu', 'Résistance Neutre', 'Portée', 'Force', 'Agilité', "% Dommages d'armes", '% Résistance Terre JCJ', '% Résistance Eau JCJ', '% Dommages aux sorts', '% Résistance Feu JCJ', '% Résistance Neutre JCJ']
@@ -20,7 +21,7 @@ class Item:
         self.coeff = 100
 
     def __str__(self):
-        return '{} | {} |'.format(self.item_name, self.price).join(['{} : {} | '.format(stat, self.stats[stat]) for stat in self.all_stats])
+        return '{} | '.format(self.item_name) + ''.join(['{} : {} | '.format(stat, self.stats[stat]) for stat in self.all_stats])
 
     def __hash__(self):
         return zlib.adler32(bytes(self.__str__(), 'utf-8'))
@@ -86,24 +87,4 @@ class Item:
 
 
 if __name__ == '__main__':
-    item_stats = {'Intelligence': 24, 'Dommage air': 0, 'Retrait PA': 0, 'Resistance % neutre': 0, 'Resistance PA': 0, 'Sagesse': 21,
-     'Resistance % air': 0, 'PM': 0, 'Dommage eau': 0, 'Dommage poussee': 0, 'Puissance': 0, 'Resistance poussee': 0,
-     'Retrait PM': 0, 'Renvoi dommage': 0, 'Dommage feu': 0, 'Soin': 0, 'Dommage': 0, 'Vitalite': 32, 'Portee': 0,
-     'Tacle': 0, 'Resistance feu': 0, 'Fuite': 0, 'Resistance neutre': 0, 'Resistance critique': 0, 'Rune de chasse': 0,
-     'Resistance % eau': 0, 'Dommage critique': 0, 'Dommage piege': 0, 'Dommage % piege': 0,
-     'Dommage terre': 0, 'Resistance PM': 0, 'Critique': 0, 'Chance': 0, 'Invocation': 0, 'Resistance eau': 4,
-     'Dommage neutre': 0, 'Resistance % feu': 0, 'PA': 1, 'Force': 0, 'Initiative': 0, 'Prospection': 0,
-     'Resistance % terre': 0, 'Resistance air': 0, 'Resistance terre': 5, 'Agilite': 17, 'Pods': 0}
-
-    rune_prices = {'Intelligence': 68, 'Dommage air': 0, 'Retrait PA': 0, 'Resistance % neutre': 0, 'Resistance PA': 0, 'Sagesse': 79,
-     'Resistance % air': 0, 'PM': 0, 'Dommage eau': 0, 'Dommage poussee': 0, 'Puissance': 0, 'Resistance poussee': 0,
-     'Retrait PM': 0, 'Renvoi dommage': 0, 'Dommage feu': 0, 'Soin': 0, 'Dommage': 970, 'Vitalite': 167, 'Portee': 0,
-     'Tacle': 0, 'Resistance feu': 0, 'Fuite': 0, 'Resistance neutre': 0, 'Resistance critique': 0, 'Rune de chasse': 0,
-     'Resistance % eau': 0, 'Dommage critique': 0, 'Dommage piege': 0, 'Dommage % piege': 0,
-     'Dommage terre': 0, 'Resistance PM': 0, 'Critique': 2181, 'Chance': 92, 'Invocation': 0, 'Resistance eau': 0,
-     'Dommage neutre': 0, 'Resistance % feu': 0, 'PA': 0, 'Force': 0, 'Initiative': 79, 'Prospection': 149,
-     'Resistance % terre': 1080, 'Resistance air': 0, 'Resistance terre': 190, 'Agilite': 0, 'Pods': 0}
-
-    item = Item(item_stats, 84)
-    print(str(item))
-    print(hash(item))
+    pass
