@@ -4,13 +4,14 @@ import Database_credentials as dc
 import mysql.connector
 from Item import Item
 import time
+import datetime
 
 
 class Database:
     def __init__(self, resources: Resources):
         self.resources = resources
 
-    def resource_price_from_db(self, server, id_list):
+    def resources_from_id(self, server, id_list):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
         id_list = tuple(id_list) if len(id_list) > 1 else id_list
@@ -34,7 +35,7 @@ class Database:
         output = output.loc[~output.index.duplicated(keep='first')]
         return output
 
-    def get_item_from_id(self, server, item_id_list):
+    def items_from_id(self, server, item_id_list):
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
         item_id_list = tuple(item_id_list) if len(item_id_list) > 1 else item_id_list
@@ -55,8 +56,37 @@ class Database:
         output.set_index('ItemId', drop=True, inplace=True)
         return output
 
-    def get_runes_prices(self, server):
-        return self.resource_price_from_db(server, self.resources.runes_ids.values())
+    def runes_prices(self, server):
+        return self.resources_from_id(server, self.resources.runes_ids.values())
+
+    def sold_items_from_id(self, server, item_id_list, min_date=datetime.datetime.fromtimestamp(0)):
+        item_id_list = tuple(item_id_list) if len(item_id_list) > 1 else item_id_list
+        item_id_list = item_id_list[0] if type(item_id_list) is list and len(item_id_list) else item_id_list
+        item_id_list = 'NULL' if not len(item_id_list) else item_id_list
+        operator = 'IN' if type(item_id_list) is tuple else '='
+
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""
+                SELECT min(TimeIn), max(TimeIn), TIMESTAMPDIFF(HOUR, min(TimeIn), max(TimeIn)), ItemId, Stats, price1
+                FROM ItemPrices
+                WHERE ItemId {operator} {ids} AND Server = '{server}' AND TimeIn > '{min_date}' AND Hash NOT IN (
+                    SELECT Hash
+                    FROM ItemPrices
+                    WHERE ItemId {operator} {ids} AND Server = '{server}' AND TimeIn IN (
+                        SELECT max(TimeIn)
+                        FROM ItemPrices
+                        WHERE ItemId {operator} {ids} AND Server = '{server}'
+                        GROUP BY ItemId
+                    )
+                )
+                GROUP BY Hash
+                ORDER BY ItemId""".format(operator=operator, ids=item_id_list, server=server, min_date=min_date))
+        rows = cursor.fetchall()
+        output = pd.DataFrame(rows, columns=['TimeIn', 'TimeOut', 'TimeForSale', 'ItemId', 'Stats', 'Price'])
+        output['Name'] = output['ItemId'].apply(lambda itemid: self.resources.id2names[str(itemid)])
+        output.set_index('ItemId', drop=True, inplace=True)
+        return output
 
 
 class DS:
@@ -78,9 +108,9 @@ class DS:
                         ingredients[ingredient] = [quantity, -1]
 
         recipes = pd.DataFrame(recipes).set_index('resultId', drop=True)
-        prices = self.database.resource_price_from_db(server, ingredients.keys())['PriceAvg']
+        prices = self.database.resources_from_id(server, ingredients.keys())['PriceAvg']
         items_in_recipe_with_prices = [item_id for item_id in ingredients.keys() if str(item_id) in self.resources.equipments]
-        items = self.database.get_item_from_id(server, items_in_recipe_with_prices).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
+        items = self.database.items_from_id(server, items_in_recipe_with_prices).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
         items_in_recipe_with_prices = items.groupby('ItemId')['Price'].min()
         prices = prices.append(pd.Series(items_in_recipe_with_prices))
 
@@ -102,9 +132,9 @@ class DS:
 
     def item_breaking_analysis(self, item_id_list, server):
         item_id_list = [item_id_list] if type(item_id_list) is not list else item_id_list
-        runes_prices = ds.database.get_runes_prices(server)
+        runes_prices = ds.database.runes_prices(server)
         craft_costs = ds.estimate_craft_cost(item_id_list, 'Julith', rich_return=True)
-        items = self.database.get_item_from_id(server, item_id_list).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
+        items = self.database.items_from_id(server, item_id_list).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
         items_in_recipe_with_prices = items.groupby('ItemId')['Price'].min()
         hdv_value = dict(items_in_recipe_with_prices)
         report = []
@@ -122,17 +152,26 @@ class DS:
         print(non_craftable)
         return report
 
-    def get_item_ids_from_level(self, lvl_min, lvl_max):
+    def item_ids_from_level(self, lvl_min, lvl_max):
         item_ids = []
         for item_id, values in self.resources.equipments.items():
             if lvl_min <= values['Level'] <= lvl_max:
                 item_ids.append(int(item_id))
         return item_ids
 
+    def items_sold_last_period(self, server, hours, lvl_min=0, lvl_max=200):
+        min_date = datetime.datetime.fromtimestamp(time.time() - hours * 3600)
+        ids = self.item_ids_from_level(lvl_min, lvl_max)
+        return self.database.sold_items_from_id(server, ids, min_date)
+
 
 if __name__ == '__main__':
     ds = DS(Resources())
     start = time.time()
-    ids = ds.get_item_ids_from_level(199, 200)
-    ds.item_breaking_analysis(ids, 'Julith').sort_values(by=['Min coeff'], ascending=False).to_csv('RuneReport.csv')
+    ids = ds.item_ids_from_level(200, 200)
+    print(ds.items_sold_last_period(24))
     print(time.time() - start)
+
+# TODO items sold last day/week
+# TODO mean time for sale
+# TODO Générateur d'astuce kamas
