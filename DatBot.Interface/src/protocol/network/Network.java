@@ -88,7 +88,6 @@ import protocol.network.messages.game.character.stats.CharacterLevelUpMessage;
 import protocol.network.messages.game.character.stats.CharacterStatsListMessage;
 import protocol.network.messages.game.character.stats.FighterStatsListMessage;
 import protocol.network.messages.game.context.GameContextCreateRequestMessage;
-import protocol.network.messages.game.context.GameContextReadyMessage;
 import protocol.network.messages.game.context.GameContextRemoveElementMessage;
 import protocol.network.messages.game.context.GameEntitiesDispositionMessage;
 import protocol.network.messages.game.context.GameMapMovementMessage;
@@ -153,9 +152,10 @@ import protocol.network.messages.game.interactive.StatedElementUpdatedMessage;
 import protocol.network.messages.game.interactive.zaap.TeleportDestinationsListMessage;
 import protocol.network.messages.game.interactive.zaap.ZaapListMessage;
 import protocol.network.messages.game.inventory.KamasUpdateMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseBuyResultMessage;
+import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseInListUpdatedMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemAddOkMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseItemRemoveOkMessage;
-import protocol.network.messages.game.inventory.exchanges.ExchangeBidHouseTypeMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceForSellerMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeBidPriceMessage;
 import protocol.network.messages.game.inventory.exchanges.ExchangeStartOkMountMessage;
@@ -595,7 +595,7 @@ public class Network extends DisplayInfo implements Runnable {
 		}
 		VersionExtended versionExtended = new VersionExtended(2, 48, 12, 0, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
-		List<Integer> credentialsArray = new ArrayList<Integer>();
+		List<Integer> credentialsArray = new ArrayList<>();
 		for (byte b : credentials) {
 			credentialsArray.add((int) b);
 		}
@@ -1446,6 +1446,12 @@ public class Network extends DisplayInfo implements Runnable {
 					this.hdv.setId(exchangeBidPriceForSellerMessage.getGenericId());
 					this.info.setExchangeBidSeller(true);
 					break;
+				case 5516:
+					this.info.setMovObject(true);
+					break;
+				case 6567:
+					this.info.setInExchange(true);
+					break;
 				case 5945:
 					ExchangeBidHouseItemAddOkMessage exchangeBidHouseItemAddOkMessage = new ExchangeBidHouseItemAddOkMessage();
 					exchangeBidHouseItemAddOkMessage.Deserialize(dataReader);
@@ -1461,9 +1467,18 @@ public class Network extends DisplayInfo implements Runnable {
 				case 5752:
 					ExchangeTypesItemsExchangerDescriptionForUserMessage descriptionForUserMessage = new ExchangeTypesItemsExchangerDescriptionForUserMessage();
 					descriptionForUserMessage.Deserialize(dataReader);
-					System.out.println(descriptionForUserMessage);
 					this.hdv.setItems(descriptionForUserMessage.getItemTypeDescriptions());
 					this.info.setExchangeBidSeller(true);
+					break;
+				case 6337:
+					ExchangeBidHouseInListUpdatedMessage bidHouseInListUpdatedMessage = new ExchangeBidHouseInListUpdatedMessage();
+					bidHouseInListUpdatedMessage.Deserialize(dataReader);
+					this.hdv.getItems().get(0).setPrices(bidHouseInListUpdatedMessage.getPrices());
+					this.hdv.getItems().get(0).setObjectUID(bidHouseInListUpdatedMessage.getItemUID());
+					this.info.setExchangeBidSeller(true);
+					break;
+				case 6272:
+					this.info.setExchangeBidSeller(true);					
 					break;
 				case 5904:
 					ExchangeStartedBidBuyerMessage exchangeStartedBidBuyerMessage = new ExchangeStartedBidBuyerMessage();

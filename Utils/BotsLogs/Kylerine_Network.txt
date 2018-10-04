@@ -1,0 +1,2617 @@
+2018-09-30T20:57:54.741 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T20:57:54.758 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T20:57:55.031 : [4]	[Envoi] Identification...
+2018-09-30T20:57:55.440 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T20:57:55.458 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T20:57:55.868 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T20:57:55.874 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T20:57:55.882 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T20:57:55.896 : [40]	[Envoi] Selection du serveur...
+2018-09-30T20:57:56.306 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T20:57:56.754 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T20:57:56.763 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T20:57:56.784 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T20:58:10.137 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T20:58:10.148 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T20:58:10.413 : [4]	[Envoi] Identification...
+2018-09-30T20:58:10.821 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T20:58:10.828 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T20:58:10.834 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T20:58:10.841 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T20:58:10.850 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T20:58:10.866 : [40]	[Envoi] Selection du serveur...
+2018-09-30T20:58:11.276 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T20:58:11.723 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T20:58:11.730 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T20:58:11.751 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T20:58:12.559 : [6253]	Taille : 86703  -  RawDataMessage
+2018-09-30T20:58:12.572 : [6372]	[Envoi] Check Integrity Message...
+2018-09-30T20:58:12.985 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-09-30T20:58:12.996 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T20:58:13.004 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-09-30T20:58:13.011 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-09-30T20:58:13.019 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-09-30T20:58:13.026 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-09-30T20:58:13.035 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-09-30T20:58:13.042 : [150]	[Envoi] Character list request
+2018-09-30T20:58:13.050 : [6769]	Taille : 22  -  null
+2018-09-30T20:58:13.457 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:58:13.465 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:58:13.472 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:58:13.483 : [151]	Taille : 58  -  CharactersListMessage
+2018-09-30T20:58:19.014 : [152]	[Envoi] Selection du personnage...
+2018-09-30T20:58:19.426 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:58:19.436 : [6087]	Taille : 2  -  otificationListMessage
+2018-09-30T20:58:19.444 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-09-30T20:58:19.455 : [1200]	Taille : 27  -  SpellListMessage
+2018-09-30T20:58:19.661 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-09-30T20:58:19.670 : [3016]	Taille : 570  -  InventoryContentMessage
+2018-09-30T20:58:19.680 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-09-30T20:58:19.689 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-09-30T20:58:19.705 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-09-30T20:58:19.714 : [5689]	Taille : 3  -  EmoteListMessage
+2018-09-30T20:58:19.724 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-09-30T20:58:19.734 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-09-30T20:58:19.743 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-09-30T20:58:19.756 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-09-30T20:58:19.765 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-09-30T20:58:19.776 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-09-30T20:58:19.788 : [6682]	Taille : 2  -  DareWonListMessage
+2018-09-30T20:58:19.802 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-09-30T20:58:19.811 : [6440]	Taille : 13999  -  PrismsListMessage
+2018-09-30T20:58:19.826 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-09-30T20:58:19.845 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-09-30T20:58:19.860 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-09-30T20:58:19.870 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-09-30T20:58:19.879 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-09-30T20:58:19.888 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-09-30T20:58:19.900 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-09-30T20:58:19.908 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-09-30T20:58:19.921 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-09-30T20:58:19.928 : [6317]	[Envoi] Sequence number
+2018-09-30T20:58:19.954 : [780]	Taille : 4  -  TextInformationMessage
+2018-09-30T20:58:19.983 : [780]	Taille : 27  -  TextInformationMessage
+2018-09-30T20:58:19.997 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-09-30T20:58:20.007 : [6205]	Taille : 32  -  AchievementListMessage
+2018-09-30T20:58:20.014 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-09-30T20:58:20.021 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-09-30T20:58:20.029 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-09-30T20:58:20.037 : [6585]	Taille : 6  -  IdolListMessage
+2018-09-30T20:58:20.045 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-09-30T20:58:20.056 : [6275]	Taille : 2  -  MailStatusMessage
+2018-09-30T20:58:20.062 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-09-30T20:58:20.074 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-09-30T20:58:20.081 : [6769]	Taille : 13  -  null
+2018-09-30T20:58:20.089 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-09-30T20:58:20.098 : [4001]	[Envoi] Friend list request
+2018-09-30T20:58:20.105 : [5676]	[Envoi] Ignored list request
+2018-09-30T20:58:20.112 : [6355]	[Envoi] Spouse list request
+2018-09-30T20:58:20.528 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:20.549 : [4002]	Taille : 2  -  FriendsListMessage
+2018-09-30T20:58:20.580 : [5607]	[Envoi] Client key
+2018-09-30T20:58:20.588 : [250]	[Envoi] Game context create request
+2018-09-30T20:58:20.595 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:20.604 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-09-30T20:58:20.611 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:20.621 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:21.029 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:21.036 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-09-30T20:58:21.041 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-09-30T20:58:21.052 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-09-30T20:58:21.060 : [220]	Taille : 42  -  CurrentMapMessage
+2018-09-30T20:58:21.068 : [225]	[Envoi] Map info request
+2018-09-30T20:58:21.097 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T20:58:21.105 : [500]	Taille : 376  -  CharacterStatsListMessage
+2018-09-30T20:58:21.115 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:21.523 : [226]	Taille : 1733  -  MapComplementaryInformationsDataMessage
+2018-09-30T20:58:21.553 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T20:58:21.560 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:58:21.568 : [5734]	Taille : 74  -  HousePropertiesMessage
+2018-09-30T20:58:21.582 : [5734]	Taille : 59  -  HousePropertiesMessage
+2018-09-30T20:58:21.591 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:58:21.598 : [5734]	Taille : 28  -  HousePropertiesMessage
+2018-09-30T20:58:21.607 : [5734]	Taille : 33  -  HousePropertiesMessage
+2018-09-30T20:58:21.616 : [5734]	Taille : 26  -  HousePropertiesMessage
+2018-09-30T20:58:21.624 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-09-30T20:58:21.633 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:58:21.642 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T20:58:21.651 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:58:21.660 : [5734]	Taille : 73  -  HousePropertiesMessage
+2018-09-30T20:58:21.667 : [5734]	Taille : 48  -  HousePropertiesMessage
+2018-09-30T20:58:21.673 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T20:58:21.680 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T20:58:21.688 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:24.660 : [5001]	[Envoi] Open hdv
+2018-09-30T20:58:24.898 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T20:58:24.908 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T20:58:24.917 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:24.925 : [5803]	[Envoi] Set hdv type to 1
+2018-09-30T20:58:25.327 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:25.340 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:25.744 : [5898]	[Envoi] Request seller
+2018-09-30T20:58:26.150 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T20:58:26.159 : [5905]	Taille : 52  -  ExchangeStartedBidSellerMessage
+2018-09-30T20:58:26.168 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:26.982 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T20:58:30.158 : [5898]	[Envoi] Request buyer
+2018-09-30T20:58:30.598 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T20:58:30.603 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T20:58:30.620 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:30.734 : [5803]	[Envoi] Request type sell 1
+2018-09-30T20:58:31.029 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:31.037 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:31.045 : [5803]	[Envoi] Change to type 16
+2018-09-30T20:58:31.445 : [5765]	Taille : 246  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:31.451 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:31.471 : [5807]	[Envoi] Request list prices item 14967
+2018-09-30T20:58:31.870 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:31.884 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:31.904 : [5807]	[Envoi] Request list prices item 15015
+2018-09-30T20:58:32.305 : [5752]	Taille : 150  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:32.313 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:32.320 : [5803]	[Envoi] Change to type 1
+2018-09-30T20:58:32.722 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:32.728 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:32.737 : [5803]	[Envoi] Change to type 17
+2018-09-30T20:58:33.138 : [5765]	Taille : 170  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:33.143 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:33.150 : [5807]	[Envoi] Request list prices item 15016
+2018-09-30T20:58:33.550 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:33.557 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:33.564 : [5803]	[Envoi] Change to type 177
+2018-09-30T20:58:33.964 : [5765]	Taille : 741  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:33.972 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:33.981 : [5807]	[Envoi] Request list prices item 14634
+2018-09-30T20:58:33.987 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T20:58:34.392 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:34.399 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:34.406 : [5807]	[Envoi] Request list prices item 14641
+2018-09-30T20:58:34.807 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:34.814 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:34.820 : [5807]	[Envoi] Request list prices item 14642
+2018-09-30T20:58:35.220 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:35.229 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:35.236 : [5807]	[Envoi] Request list prices item 14643
+2018-09-30T20:58:35.636 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:35.643 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:35.655 : [5807]	[Envoi] Request list prices item 14796
+2018-09-30T20:58:36.057 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:36.064 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:36.074 : [5807]	[Envoi] Request list prices item 14797
+2018-09-30T20:58:36.475 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:36.482 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:36.488 : [5807]	[Envoi] Request list prices item 14799
+2018-09-30T20:58:36.889 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:36.897 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:36.902 : [5807]	[Envoi] Request list prices item 14800
+2018-09-30T20:58:37.302 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:37.311 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:37.319 : [5807]	[Envoi] Request list prices item 14802
+2018-09-30T20:58:37.721 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:37.729 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:37.736 : [5807]	[Envoi] Request list prices item 14804
+2018-09-30T20:58:38.136 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:38.141 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:38.148 : [5807]	[Envoi] Request list prices item 14805
+2018-09-30T20:58:38.547 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:38.557 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:38.564 : [5807]	[Envoi] Request list prices item 14807
+2018-09-30T20:58:38.965 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:38.971 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:38.977 : [5807]	[Envoi] Request list prices item 15097
+2018-09-30T20:58:39.378 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:39.387 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:39.393 : [5807]	[Envoi] Request list prices item 15098
+2018-09-30T20:58:39.795 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:39.803 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:39.811 : [5807]	[Envoi] Request list prices item 15116
+2018-09-30T20:58:40.211 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:40.218 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:40.224 : [5807]	[Envoi] Request list prices item 15122
+2018-09-30T20:58:40.624 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:40.629 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:40.641 : [5807]	[Envoi] Request list prices item 15123
+2018-09-30T20:58:41.043 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:41.050 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:41.057 : [5807]	[Envoi] Request list prices item 15124
+2018-09-30T20:58:41.062 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T20:58:41.468 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:41.475 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:41.475 : [5807]	[Envoi] Request list prices item 15125
+2018-09-30T20:58:41.481 : [5632]	Taille : 138  -  GameRolePlayShowActorMessage
+2018-09-30T20:58:41.888 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:41.896 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:41.904 : [5807]	[Envoi] Request list prices item 15158
+2018-09-30T20:58:42.305 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:42.312 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:42.319 : [5807]	[Envoi] Request list prices item 15159
+2018-09-30T20:58:42.327 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T20:58:42.333 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T20:58:42.742 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:42.756 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:42.766 : [5803]	[Envoi] Change to type 2
+2018-09-30T20:58:43.167 : [5765]	Taille : 55  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:43.180 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:43.189 : [5803]	[Envoi] Change to type 82
+2018-09-30T20:58:43.590 : [5765]	Taille : 46  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:43.599 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:43.612 : [5803]	[Envoi] Change to type 4
+2018-09-30T20:58:44.015 : [5765]	Taille : 102  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:44.034 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:44.047 : [5803]	[Envoi] Change to type 7
+2018-09-30T20:58:44.448 : [5765]	Taille : 85  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:44.453 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:44.467 : [5803]	[Envoi] Change to type 9
+2018-09-30T20:58:44.868 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T20:58:44.875 : [5765]	Taille : 306  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:44.880 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:44.887 : [5807]	[Envoi] Request list prices item 14806
+2018-09-30T20:58:45.289 : [5752]	Taille : 192  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:45.322 : [5803]	[Envoi] Change to type 169
+2018-09-30T20:58:45.322 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:45.732 : [5765]	Taille : 24  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:45.749 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:45.764 : [5807]	[Envoi] Request list prices item 14961
+2018-09-30T20:58:46.165 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:46.176 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:46.187 : [5807]	[Envoi] Request list prices item 14962
+2018-09-30T20:58:46.588 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:46.606 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:46.617 : [5807]	[Envoi] Request list prices item 14963
+2018-09-30T20:58:47.019 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:47.030 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:47.040 : [5807]	[Envoi] Request list prices item 14964
+2018-09-30T20:58:47.441 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:47.447 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:47.453 : [5807]	[Envoi] Request list prices item 14965
+2018-09-30T20:58:47.854 : [951]	Taille : 18  -  GameMapMovementMessage
+2018-09-30T20:58:47.869 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:47.880 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:47.880 : [5807]	[Envoi] Request list prices item 14966
+2018-09-30T20:58:48.291 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:48.306 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:48.307 : [5807]	[Envoi] Request list prices item 15018
+2018-09-30T20:58:48.715 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:48.721 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:48.728 : [5807]	[Envoi] Request list prices item 15160
+2018-09-30T20:58:48.733 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T20:58:49.141 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:49.155 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:49.163 : [5807]	[Envoi] Request list prices item 15161
+2018-09-30T20:58:49.562 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:49.572 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:49.580 : [5803]	[Envoi] Change to type 10
+2018-09-30T20:58:49.980 : [5765]	Taille : 307  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:49.992 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:49.999 : [5807]	[Envoi] Request list prices item 14644
+2018-09-30T20:58:50.400 : [5752]	Taille : 45  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:50.410 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:50.419 : [5807]	[Envoi] Request list prices item 14798
+2018-09-30T20:58:50.821 : [5752]	Taille : 42  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:50.834 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:50.843 : [5807]	[Envoi] Request list prices item 15099
+2018-09-30T20:58:51.242 : [5752]	Taille : 166  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:51.260 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:51.276 : [5803]	[Envoi] Change to type 11
+2018-09-30T20:58:51.677 : [5765]	Taille : 312  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:58:51.684 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:51.700 : [5807]	[Envoi] Request list prices item 14803
+2018-09-30T20:58:52.103 : [5752]	Taille : 322  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:52.126 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:52.141 : [5807]	[Envoi] Request list prices item 15017
+2018-09-30T20:58:52.542 : [5752]	Taille : 118  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:52.560 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:52.580 : [5807]	[Envoi] Request list prices item 15100
+2018-09-30T20:58:52.980 : [5752]	Taille : 512  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:58:52.987 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:58:54.208 : [5632]	Taille : 184  -  GameRolePlayShowActorMessage
+2018-09-30T20:58:55.016 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T20:58:55.438 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T20:58:55.444 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T20:59:31.173 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T20:59:31.183 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T20:59:31.470 : [4]	[Envoi] Identification...
+2018-09-30T20:59:31.880 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T20:59:31.893 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T20:59:31.908 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T20:59:31.918 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T20:59:31.928 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T20:59:31.945 : [40]	[Envoi] Selection du serveur...
+2018-09-30T20:59:32.356 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T20:59:32.806 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T20:59:32.822 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T20:59:32.849 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T20:59:33.661 : [6253]	Taille : 86703  -  RawDataMessage
+2018-09-30T20:59:33.670 : [6372]	[Envoi] Check Integrity Message...
+2018-09-30T20:59:34.082 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-09-30T20:59:34.100 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T20:59:34.122 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-09-30T20:59:34.134 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-09-30T20:59:34.143 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-09-30T20:59:34.151 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-09-30T20:59:34.159 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-09-30T20:59:34.167 : [150]	[Envoi] Character list request
+2018-09-30T20:59:34.175 : [6769]	Taille : 22  -  null
+2018-09-30T20:59:34.586 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:59:34.608 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:59:34.624 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:59:34.638 : [151]	Taille : 58  -  CharactersListMessage
+2018-09-30T20:59:37.641 : [152]	[Envoi] Selection du personnage...
+2018-09-30T20:59:38.056 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T20:59:38.065 : [6087]	Taille : 2  -  otificationListMessage
+2018-09-30T20:59:38.073 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-09-30T20:59:38.082 : [1200]	Taille : 27  -  SpellListMessage
+2018-09-30T20:59:38.247 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-09-30T20:59:38.255 : [3016]	Taille : 570  -  InventoryContentMessage
+2018-09-30T20:59:38.267 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-09-30T20:59:38.276 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-09-30T20:59:38.290 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-09-30T20:59:38.299 : [5689]	Taille : 3  -  EmoteListMessage
+2018-09-30T20:59:38.311 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-09-30T20:59:38.321 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-09-30T20:59:38.335 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-09-30T20:59:38.349 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-09-30T20:59:38.357 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-09-30T20:59:38.365 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-09-30T20:59:38.373 : [6682]	Taille : 2  -  DareWonListMessage
+2018-09-30T20:59:38.381 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-09-30T20:59:38.389 : [6440]	Taille : 13999  -  PrismsListMessage
+2018-09-30T20:59:38.397 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-09-30T20:59:38.404 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-09-30T20:59:38.412 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-09-30T20:59:38.421 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-09-30T20:59:38.431 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-09-30T20:59:38.438 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-09-30T20:59:38.445 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-09-30T20:59:38.459 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-09-30T20:59:38.469 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-09-30T20:59:38.477 : [6317]	[Envoi] Sequence number
+2018-09-30T20:59:38.485 : [780]	Taille : 4  -  TextInformationMessage
+2018-09-30T20:59:38.498 : [780]	Taille : 27  -  TextInformationMessage
+2018-09-30T20:59:38.508 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-09-30T20:59:38.516 : [6205]	Taille : 32  -  AchievementListMessage
+2018-09-30T20:59:38.524 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-09-30T20:59:38.532 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-09-30T20:59:38.541 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-09-30T20:59:38.548 : [6585]	Taille : 6  -  IdolListMessage
+2018-09-30T20:59:38.555 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-09-30T20:59:38.562 : [6275]	Taille : 2  -  MailStatusMessage
+2018-09-30T20:59:38.570 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-09-30T20:59:38.583 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-09-30T20:59:38.590 : [6769]	Taille : 13  -  null
+2018-09-30T20:59:38.602 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-09-30T20:59:38.617 : [4001]	[Envoi] Friend list request
+2018-09-30T20:59:38.635 : [5676]	[Envoi] Ignored list request
+2018-09-30T20:59:38.653 : [6355]	[Envoi] Spouse list request
+2018-09-30T20:59:39.063 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:39.069 : [4002]	Taille : 2  -  FriendsListMessage
+2018-09-30T20:59:39.088 : [5607]	[Envoi] Client key
+2018-09-30T20:59:39.095 : [250]	[Envoi] Game context create request
+2018-09-30T20:59:39.105 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:39.115 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-09-30T20:59:39.125 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:39.142 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:39.562 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:39.574 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-09-30T20:59:39.585 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-09-30T20:59:39.597 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-09-30T20:59:39.608 : [220]	Taille : 42  -  CurrentMapMessage
+2018-09-30T20:59:39.618 : [225]	[Envoi] Map info request
+2018-09-30T20:59:39.660 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T20:59:39.671 : [500]	Taille : 376  -  CharacterStatsListMessage
+2018-09-30T20:59:39.685 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:40.095 : [226]	Taille : 1788  -  MapComplementaryInformationsDataMessage
+2018-09-30T20:59:40.135 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T20:59:40.144 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:59:40.154 : [5734]	Taille : 74  -  HousePropertiesMessage
+2018-09-30T20:59:40.161 : [5734]	Taille : 59  -  HousePropertiesMessage
+2018-09-30T20:59:40.174 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:59:40.181 : [5734]	Taille : 28  -  HousePropertiesMessage
+2018-09-30T20:59:40.193 : [5734]	Taille : 33  -  HousePropertiesMessage
+2018-09-30T20:59:40.199 : [5734]	Taille : 26  -  HousePropertiesMessage
+2018-09-30T20:59:40.210 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-09-30T20:59:40.220 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:59:40.227 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T20:59:40.234 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T20:59:40.242 : [5734]	Taille : 73  -  HousePropertiesMessage
+2018-09-30T20:59:40.250 : [5734]	Taille : 48  -  HousePropertiesMessage
+2018-09-30T20:59:40.259 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T20:59:40.266 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T20:59:40.274 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:40.281 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T20:59:40.293 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T20:59:41.502 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T20:59:43.912 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T20:59:45.660 : [5001]	[Envoi] Open hdv
+2018-09-30T20:59:45.926 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T20:59:45.946 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T20:59:45.957 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:45.972 : [5803]	[Envoi] Set hdv type to 1
+2018-09-30T20:59:46.372 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:59:46.391 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:47.368 : [5898]	[Envoi] Request seller
+2018-09-30T20:59:47.604 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T20:59:47.612 : [5905]	Taille : 52  -  ExchangeStartedBidSellerMessage
+2018-09-30T20:59:47.622 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:50.837 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T20:59:51.161 : [5898]	[Envoi] Request buyer
+2018-09-30T20:59:51.245 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T20:59:51.255 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T20:59:51.268 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:51.431 : [5803]	[Envoi] Request type sell 1
+2018-09-30T20:59:51.677 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:59:51.690 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:51.707 : [5803]	[Envoi] Change to type 16
+2018-09-30T20:59:52.109 : [5765]	Taille : 246  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:59:52.121 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:52.172 : [5807]	[Envoi] Request list prices item 14967
+2018-09-30T20:59:52.530 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:52.536 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:52.588 : [5807]	[Envoi] Request list prices item 15015
+2018-09-30T20:59:52.943 : [5752]	Taille : 150  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:52.950 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:53.001 : [5803]	[Envoi] Change to type 1
+2018-09-30T20:59:53.360 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:59:53.370 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:53.419 : [5803]	[Envoi] Change to type 17
+2018-09-30T20:59:53.788 : [5765]	Taille : 170  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:59:53.794 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:53.833 : [5807]	[Envoi] Request list prices item 15016
+2018-09-30T20:59:54.200 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:54.224 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:54.246 : [5803]	[Envoi] Change to type 177
+2018-09-30T20:59:54.632 : [5765]	Taille : 741  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T20:59:54.642 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:54.661 : [5807]	[Envoi] Request list prices item 14634
+2018-09-30T20:59:55.053 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:55.061 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:55.077 : [5807]	[Envoi] Request list prices item 14641
+2018-09-30T20:59:55.468 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:55.480 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:55.492 : [5807]	[Envoi] Request list prices item 14642
+2018-09-30T20:59:55.888 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:55.898 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:55.906 : [5807]	[Envoi] Request list prices item 14643
+2018-09-30T20:59:56.306 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:56.313 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:56.319 : [5807]	[Envoi] Request list prices item 14796
+2018-09-30T20:59:56.720 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:56.730 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:56.742 : [5807]	[Envoi] Request list prices item 14797
+2018-09-30T20:59:57.143 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:57.150 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:57.157 : [5807]	[Envoi] Request list prices item 14799
+2018-09-30T20:59:57.555 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:57.571 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:57.587 : [5807]	[Envoi] Request list prices item 14800
+2018-09-30T20:59:57.989 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:58 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:58.007 : [5807]	[Envoi] Request list prices item 14802
+2018-09-30T20:59:58.016 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T20:59:58.422 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:58.433 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:58.473 : [5807]	[Envoi] Request list prices item 14804
+2018-09-30T20:59:58.841 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:58.846 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:58.891 : [5807]	[Envoi] Request list prices item 14805
+2018-09-30T20:59:59.265 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:59.275 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:59.317 : [5807]	[Envoi] Request list prices item 14807
+2018-09-30T20:59:59.682 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T20:59:59.715 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T20:59:59.734 : [5807]	[Envoi] Request list prices item 15097
+2018-09-30T21:00:00.125 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:00.133 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:00.149 : [5807]	[Envoi] Request list prices item 15098
+2018-09-30T21:00:00.539 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:00.545 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:00.561 : [5807]	[Envoi] Request list prices item 15116
+2018-09-30T21:00:00.951 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:00.957 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:00.974 : [5807]	[Envoi] Request list prices item 15122
+2018-09-30T21:00:01.362 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:01.367 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:01.388 : [5807]	[Envoi] Request list prices item 15123
+2018-09-30T21:00:01.775 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:01.781 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:01.802 : [5807]	[Envoi] Request list prices item 15124
+2018-09-30T21:00:02.187 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:02.194 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:02.215 : [5807]	[Envoi] Request list prices item 15125
+2018-09-30T21:00:02.600 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:02.606 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:02.613 : [5632]	Taille : 105  -  GameRolePlayShowActorMessage
+2018-09-30T21:00:02.629 : [5807]	[Envoi] Request list prices item 15158
+2018-09-30T21:00:03.022 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:03.029 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:03.042 : [5807]	[Envoi] Request list prices item 15159
+2018-09-30T21:00:03.436 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:03.441 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:03.453 : [5803]	[Envoi] Change to type 2
+2018-09-30T21:00:03.850 : [5765]	Taille : 55  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:03.855 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:03.861 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:00:03.867 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:00:03.874 : [5803]	[Envoi] Change to type 82
+2018-09-30T21:00:04.278 : [5765]	Taille : 46  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:04.286 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:04.296 : [5803]	[Envoi] Change to type 4
+2018-09-30T21:00:04.695 : [5765]	Taille : 102  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:04.702 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:04.716 : [5803]	[Envoi] Change to type 7
+2018-09-30T21:00:05.110 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:00:05.120 : [5765]	Taille : 85  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:05.127 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:05.135 : [5803]	[Envoi] Change to type 9
+2018-09-30T21:00:05.536 : [5765]	Taille : 306  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:05.542 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:05.548 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:00:05.548 : [5807]	[Envoi] Request list prices item 14806
+2018-09-30T21:00:05.956 : [5752]	Taille : 192  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:05.962 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:06.014 : [5803]	[Envoi] Change to type 169
+2018-09-30T21:00:06.376 : [5765]	Taille : 24  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:06.386 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:06.432 : [5807]	[Envoi] Request list prices item 14961
+2018-09-30T21:00:06.794 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:06.800 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:06.845 : [5807]	[Envoi] Request list prices item 14962
+2018-09-30T21:00:07.208 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:07.216 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:07.260 : [5807]	[Envoi] Request list prices item 14963
+2018-09-30T21:00:07.623 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:07.632 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:07.674 : [5807]	[Envoi] Request list prices item 14964
+2018-09-30T21:00:08.038 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:08.045 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:08.087 : [5807]	[Envoi] Request list prices item 14965
+2018-09-30T21:00:08.457 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:08.462 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:08.503 : [5807]	[Envoi] Request list prices item 14966
+2018-09-30T21:00:08.870 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:08.878 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:08.916 : [5807]	[Envoi] Request list prices item 15018
+2018-09-30T21:00:09.284 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:09.291 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:09.329 : [5807]	[Envoi] Request list prices item 15160
+2018-09-30T21:00:09.698 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:09.704 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:09.747 : [5807]	[Envoi] Request list prices item 15161
+2018-09-30T21:00:10.114 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:10.119 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:10.161 : [5803]	[Envoi] Change to type 10
+2018-09-30T21:00:10.525 : [5765]	Taille : 307  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:10.530 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:10.537 : [5816]	Taille : 0  -  BasicLatencyStatsRequestMessage
+2018-09-30T21:00:10.544 : [5663]	[Envoi] Latency message
+2018-09-30T21:00:10.573 : [5807]	[Envoi] Request list prices item 14644
+2018-09-30T21:00:10.951 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:10.957 : [5752]	Taille : 45  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:10.965 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:10.985 : [5807]	[Envoi] Request list prices item 14798
+2018-09-30T21:00:11.376 : [5752]	Taille : 42  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:11.385 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:11.399 : [5807]	[Envoi] Request list prices item 15099
+2018-09-30T21:00:11.794 : [5752]	Taille : 166  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:11.800 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:11.812 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:00:11.813 : [5803]	[Envoi] Change to type 11
+2018-09-30T21:00:12.220 : [5765]	Taille : 312  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:00:12.230 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:12.280 : [5807]	[Envoi] Request list prices item 14803
+2018-09-30T21:00:12.639 : [5752]	Taille : 322  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:12.647 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:12.695 : [5807]	[Envoi] Request list prices item 15017
+2018-09-30T21:00:13.063 : [5752]	Taille : 118  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:13.070 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:13.110 : [5807]	[Envoi] Request list prices item 15100
+2018-09-30T21:00:13.480 : [5752]	Taille : 512  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:00:13.486 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:00:17.104 : [951]	Taille : 46  -  GameMapMovementMessage
+2018-09-30T21:00:19.916 : [951]	Taille : 44  -  GameMapMovementMessage
+2018-09-30T21:00:20.728 : [951]	Taille : 20  -  GameMapMovementMessage
+2018-09-30T21:00:21.537 : [951]	Taille : 14  -  GameMapMovementMessage
+2018-09-30T21:00:21.544 : [951]	Taille : 24  -  GameMapMovementMessage
+2018-09-30T21:00:22.354 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:00:25.163 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:00:25.975 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:00:32.793 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:00:40.008 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:01:51.740 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T21:01:51.748 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T21:01:52.001 : [4]	[Envoi] Identification...
+2018-09-30T21:01:52.409 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:01:52.421 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T21:01:52.433 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:01:52.441 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:01:52.452 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T21:01:52.864 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T21:01:52.886 : [40]	[Envoi] Selection du serveur...
+2018-09-30T21:01:53.295 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T21:01:53.761 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T21:01:53.772 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T21:01:53.797 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T21:01:54.609 : [6253]	Taille : 86703  -  RawDataMessage
+2018-09-30T21:01:54.630 : [6372]	[Envoi] Check Integrity Message...
+2018-09-30T21:01:55.046 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-09-30T21:01:55.071 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T21:01:55.084 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-09-30T21:01:55.092 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-09-30T21:01:55.102 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-09-30T21:01:55.112 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-09-30T21:01:55.122 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-09-30T21:01:55.132 : [150]	[Envoi] Character list request
+2018-09-30T21:01:55.144 : [6769]	Taille : 22  -  null
+2018-09-30T21:01:55.555 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:01:55.573 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:01:55.584 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:01:55.593 : [151]	Taille : 58  -  CharactersListMessage
+2018-09-30T21:01:58.666 : [152]	[Envoi] Selection du personnage...
+2018-09-30T21:01:59.075 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:01:59.087 : [6087]	Taille : 2  -  otificationListMessage
+2018-09-30T21:01:59.098 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-09-30T21:01:59.107 : [1200]	Taille : 27  -  SpellListMessage
+2018-09-30T21:01:59.255 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-09-30T21:01:59.268 : [3016]	Taille : 570  -  InventoryContentMessage
+2018-09-30T21:01:59.278 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-09-30T21:01:59.314 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-09-30T21:01:59.329 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-09-30T21:01:59.341 : [5689]	Taille : 3  -  EmoteListMessage
+2018-09-30T21:01:59.354 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-09-30T21:01:59.367 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-09-30T21:01:59.383 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-09-30T21:01:59.393 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-09-30T21:01:59.404 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-09-30T21:01:59.416 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-09-30T21:01:59.425 : [6682]	Taille : 2  -  DareWonListMessage
+2018-09-30T21:01:59.435 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-09-30T21:01:59.443 : [6440]	Taille : 13999  -  PrismsListMessage
+2018-09-30T21:01:59.454 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-09-30T21:01:59.462 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-09-30T21:01:59.472 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-09-30T21:01:59.493 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-09-30T21:01:59.501 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-09-30T21:01:59.511 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-09-30T21:01:59.526 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-09-30T21:01:59.543 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-09-30T21:01:59.552 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-09-30T21:01:59.584 : [6317]	[Envoi] Sequence number
+2018-09-30T21:01:59.595 : [780]	Taille : 4  -  TextInformationMessage
+2018-09-30T21:01:59.662 : [780]	Taille : 27  -  TextInformationMessage
+2018-09-30T21:01:59.675 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-09-30T21:01:59.685 : [6205]	Taille : 32  -  AchievementListMessage
+2018-09-30T21:01:59.693 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-09-30T21:01:59.704 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-09-30T21:01:59.716 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-09-30T21:01:59.729 : [6585]	Taille : 6  -  IdolListMessage
+2018-09-30T21:01:59.747 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-09-30T21:01:59.755 : [6275]	Taille : 2  -  MailStatusMessage
+2018-09-30T21:01:59.762 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-09-30T21:01:59.769 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-09-30T21:01:59.776 : [6769]	Taille : 13  -  null
+2018-09-30T21:01:59.785 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-09-30T21:01:59.792 : [4001]	[Envoi] Friend list request
+2018-09-30T21:01:59.799 : [5676]	[Envoi] Ignored list request
+2018-09-30T21:01:59.805 : [6355]	[Envoi] Spouse list request
+2018-09-30T21:02:00.220 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:00.228 : [4002]	Taille : 2  -  FriendsListMessage
+2018-09-30T21:02:00.257 : [5607]	[Envoi] Client key
+2018-09-30T21:02:00.273 : [250]	[Envoi] Game context create request
+2018-09-30T21:02:00.288 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:00.312 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-09-30T21:02:00.322 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:00.329 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:00.741 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:00.751 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-09-30T21:02:00.761 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-09-30T21:02:00.780 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-09-30T21:02:00.787 : [220]	Taille : 42  -  CurrentMapMessage
+2018-09-30T21:02:00.795 : [225]	[Envoi] Map info request
+2018-09-30T21:02:00.818 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T21:02:00.825 : [500]	Taille : 376  -  CharacterStatsListMessage
+2018-09-30T21:02:00.836 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:01.245 : [226]	Taille : 1628  -  MapComplementaryInformationsDataMessage
+2018-09-30T21:02:01.270 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T21:02:01.281 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:02:01.288 : [5734]	Taille : 74  -  HousePropertiesMessage
+2018-09-30T21:02:01.295 : [5734]	Taille : 59  -  HousePropertiesMessage
+2018-09-30T21:02:01.302 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:02:01.310 : [5734]	Taille : 28  -  HousePropertiesMessage
+2018-09-30T21:02:01.318 : [5734]	Taille : 33  -  HousePropertiesMessage
+2018-09-30T21:02:01.325 : [5734]	Taille : 26  -  HousePropertiesMessage
+2018-09-30T21:02:01.331 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-09-30T21:02:01.339 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:02:01.345 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T21:02:01.352 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:02:01.359 : [5734]	Taille : 73  -  HousePropertiesMessage
+2018-09-30T21:02:01.365 : [5734]	Taille : 48  -  HousePropertiesMessage
+2018-09-30T21:02:01.373 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:02:01.381 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:02:01.387 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:01.793 : [5632]	Taille : 128  -  GameRolePlayShowActorMessage
+2018-09-30T21:02:04.205 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:02:05.415 : [5632]	Taille : 177  -  GameRolePlayShowActorMessage
+2018-09-30T21:02:06.172 : [5001]	[Envoi] Open hdv
+2018-09-30T21:02:06.624 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:02:06.631 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T21:02:06.640 : [5803]	[Envoi] Set hdv type to 1
+2018-09-30T21:02:06.646 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:06.653 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:02:06.661 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:02:07.068 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:07.079 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:09.761 : [5898]	[Envoi] Request seller
+2018-09-30T21:02:09.910 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T21:02:10.317 : [5905]	Taille : 52  -  ExchangeStartedBidSellerMessage
+2018-09-30T21:02:10.324 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:11.135 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:02:11.673 : [5898]	[Envoi] Request buyer
+2018-09-30T21:02:11.943 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T21:02:11.950 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T21:02:11.957 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:11.984 : [5803]	[Envoi] Request type sell 1
+2018-09-30T21:02:12.366 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:12.371 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:12.382 : [5803]	[Envoi] Change to type 16
+2018-09-30T21:02:12.782 : [5765]	Taille : 246  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:12.789 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:12.797 : [5807]	[Envoi] Request list prices item 14967
+2018-09-30T21:02:13.197 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:13.204 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:13.213 : [5807]	[Envoi] Request list prices item 15015
+2018-09-30T21:02:13.615 : [5752]	Taille : 150  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:13.621 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:13.628 : [5803]	[Envoi] Change to type 1
+2018-09-30T21:02:14.030 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:14.035 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:14.041 : [5803]	[Envoi] Change to type 17
+2018-09-30T21:02:14.442 : [5765]	Taille : 170  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:14.450 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:14.457 : [5807]	[Envoi] Request list prices item 15016
+2018-09-30T21:02:14.860 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:14.870 : [5803]	[Envoi] Change to type 177
+2018-09-30T21:02:14.879 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:15.289 : [5765]	Taille : 741  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:15.295 : [5807]	[Envoi] Request list prices item 14634
+2018-09-30T21:02:15.306 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:15.713 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:15.718 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:15.726 : [5807]	[Envoi] Request list prices item 14641
+2018-09-30T21:02:16.127 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:16.158 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:16.171 : [5807]	[Envoi] Request list prices item 14642
+2018-09-30T21:02:16.572 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:16.585 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:16.599 : [5807]	[Envoi] Request list prices item 14643
+2018-09-30T21:02:17 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:17.013 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:17.025 : [5807]	[Envoi] Request list prices item 14796
+2018-09-30T21:02:17.427 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:17.440 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:17.448 : [5807]	[Envoi] Request list prices item 14797
+2018-09-30T21:02:17.851 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:17.870 : [5807]	[Envoi] Request list prices item 14799
+2018-09-30T21:02:17.894 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:18.300 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:18.313 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:18.313 : [5807]	[Envoi] Request list prices item 14800
+2018-09-30T21:02:18.322 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:02:18.730 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:18.738 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:18.743 : [5807]	[Envoi] Request list prices item 14802
+2018-09-30T21:02:19.144 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:19.151 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:19.156 : [5807]	[Envoi] Request list prices item 14804
+2018-09-30T21:02:19.557 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:19.563 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:19.570 : [5807]	[Envoi] Request list prices item 14805
+2018-09-30T21:02:19.971 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:19.979 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:19.988 : [5807]	[Envoi] Request list prices item 14807
+2018-09-30T21:02:20.390 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:20.401 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:20.410 : [5807]	[Envoi] Request list prices item 15097
+2018-09-30T21:02:20.811 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:20.820 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:20.829 : [5807]	[Envoi] Request list prices item 15098
+2018-09-30T21:02:21.230 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:21.236 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:21.241 : [5807]	[Envoi] Request list prices item 15116
+2018-09-30T21:02:21.644 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:21.658 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:21.675 : [5807]	[Envoi] Request list prices item 15122
+2018-09-30T21:02:22.077 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:22.083 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:22.090 : [5807]	[Envoi] Request list prices item 15123
+2018-09-30T21:02:22.099 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:02:22.506 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:22.515 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:22.522 : [5807]	[Envoi] Request list prices item 15124
+2018-09-30T21:02:22.923 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:22.936 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:22.936 : [5807]	[Envoi] Request list prices item 15125
+2018-09-30T21:02:23.347 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:23.354 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:23.361 : [5807]	[Envoi] Request list prices item 15158
+2018-09-30T21:02:23.762 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:23.769 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:23.770 : [5807]	[Envoi] Request list prices item 15159
+2018-09-30T21:02:24.180 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:24.187 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:24.194 : [5803]	[Envoi] Change to type 2
+2018-09-30T21:02:24.594 : [5765]	Taille : 55  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:24.605 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:24.617 : [5803]	[Envoi] Change to type 82
+2018-09-30T21:02:25.021 : [5765]	Taille : 46  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:25.038 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:25.039 : [5803]	[Envoi] Change to type 4
+2018-09-30T21:02:25.047 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:02:25.459 : [5765]	Taille : 102  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:25.468 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:25.468 : [5803]	[Envoi] Change to type 7
+2018-09-30T21:02:25.878 : [5765]	Taille : 85  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:25.884 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:25.896 : [5803]	[Envoi] Change to type 9
+2018-09-30T21:02:26.307 : [5765]	Taille : 306  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:26.319 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:26.345 : [5807]	[Envoi] Request list prices item 14806
+2018-09-30T21:02:26.749 : [5752]	Taille : 192  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:26.762 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:26.780 : [5803]	[Envoi] Change to type 169
+2018-09-30T21:02:27.181 : [5765]	Taille : 24  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:27.211 : [5807]	[Envoi] Request list prices item 14961
+2018-09-30T21:02:27.230 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:27.642 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:27.657 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:27.675 : [5807]	[Envoi] Request list prices item 14962
+2018-09-30T21:02:28.079 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:28.087 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:28.102 : [5807]	[Envoi] Request list prices item 14963
+2018-09-30T21:02:28.504 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:28.515 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:28.527 : [5807]	[Envoi] Request list prices item 14964
+2018-09-30T21:02:28.930 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:28.944 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:28.954 : [5807]	[Envoi] Request list prices item 14965
+2018-09-30T21:02:29.355 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:29.364 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:29.372 : [5807]	[Envoi] Request list prices item 14966
+2018-09-30T21:02:29.776 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:29.782 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:29.788 : [5807]	[Envoi] Request list prices item 15018
+2018-09-30T21:02:30.188 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:30.198 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:30.206 : [5807]	[Envoi] Request list prices item 15160
+2018-09-30T21:02:30.605 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:30.613 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:30.620 : [5807]	[Envoi] Request list prices item 15161
+2018-09-30T21:02:31.021 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:31.028 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:31.028 : [5803]	[Envoi] Change to type 10
+2018-09-30T21:02:31.435 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:31.443 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:31.452 : [5807]	[Envoi] Request list prices item 14644
+2018-09-30T21:02:31.853 : [5752]	Taille : 45  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:31.859 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:31.864 : [5807]	[Envoi] Request list prices item 14798
+2018-09-30T21:02:32.266 : [5752]	Taille : 42  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:32.279 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:32.295 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:02:32.295 : [5807]	[Envoi] Request list prices item 15099
+2018-09-30T21:02:32.704 : [5752]	Taille : 166  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:32.713 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:32.726 : [5803]	[Envoi] Change to type 11
+2018-09-30T21:02:33.125 : [5765]	Taille : 312  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:02:33.132 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:33.140 : [5807]	[Envoi] Request list prices item 14803
+2018-09-30T21:02:33.539 : [5752]	Taille : 322  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:33.547 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:33.562 : [5807]	[Envoi] Request list prices item 15017
+2018-09-30T21:02:33.962 : [5752]	Taille : 118  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:33.971 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:33.980 : [5807]	[Envoi] Request list prices item 15100
+2018-09-30T21:02:34.381 : [5752]	Taille : 512  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:02:34.387 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:02:39.211 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:02:46.030 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:02:53.248 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:03:36.208 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T21:03:36.237 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T21:03:36.544 : [4]	[Envoi] Identification...
+2018-09-30T21:03:36.955 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:03:36.964 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T21:03:36.978 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:03:38.591 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:03:38.998 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:03:39.008 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T21:03:39.019 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T21:03:39.039 : [40]	[Envoi] Selection du serveur...
+2018-09-30T21:03:39.449 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T21:03:39.944 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T21:03:39.955 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T21:03:39.982 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T21:03:40.795 : [6253]	Taille : 86703  -  RawDataMessage
+2018-09-30T21:03:40.807 : [6372]	[Envoi] Check Integrity Message...
+2018-09-30T21:03:41.217 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-09-30T21:03:41.231 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T21:03:41.241 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-09-30T21:03:41.254 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-09-30T21:03:41.262 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-09-30T21:03:41.274 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-09-30T21:03:41.283 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-09-30T21:03:41.296 : [150]	[Envoi] Character list request
+2018-09-30T21:03:41.306 : [6769]	Taille : 22  -  null
+2018-09-30T21:03:41.717 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:03:41.729 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:03:41.748 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:03:41.765 : [151]	Taille : 58  -  CharactersListMessage
+2018-09-30T21:03:45.389 : [152]	[Envoi] Selection du personnage...
+2018-09-30T21:03:45.796 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:03:45.804 : [6087]	Taille : 2  -  otificationListMessage
+2018-09-30T21:03:45.814 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-09-30T21:03:45.827 : [1200]	Taille : 27  -  SpellListMessage
+2018-09-30T21:03:46.032 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-09-30T21:03:46.046 : [3016]	Taille : 570  -  InventoryContentMessage
+2018-09-30T21:03:46.063 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-09-30T21:03:46.074 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-09-30T21:03:46.099 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-09-30T21:03:46.110 : [5689]	Taille : 3  -  EmoteListMessage
+2018-09-30T21:03:46.118 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-09-30T21:03:46.129 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-09-30T21:03:46.142 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-09-30T21:03:46.156 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-09-30T21:03:46.163 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-09-30T21:03:46.171 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-09-30T21:03:46.180 : [6682]	Taille : 2  -  DareWonListMessage
+2018-09-30T21:03:46.191 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-09-30T21:03:46.200 : [6440]	Taille : 13999  -  PrismsListMessage
+2018-09-30T21:03:46.214 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-09-30T21:03:46.225 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-09-30T21:03:46.233 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-09-30T21:03:46.241 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-09-30T21:03:46.248 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-09-30T21:03:46.265 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-09-30T21:03:46.275 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-09-30T21:03:46.282 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-09-30T21:03:46.290 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-09-30T21:03:46.301 : [6317]	[Envoi] Sequence number
+2018-09-30T21:03:46.312 : [780]	Taille : 4  -  TextInformationMessage
+2018-09-30T21:03:46.338 : [780]	Taille : 27  -  TextInformationMessage
+2018-09-30T21:03:46.361 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-09-30T21:03:46.381 : [6205]	Taille : 32  -  AchievementListMessage
+2018-09-30T21:03:46.389 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-09-30T21:03:46.397 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-09-30T21:03:46.404 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-09-30T21:03:46.411 : [6585]	Taille : 6  -  IdolListMessage
+2018-09-30T21:03:46.420 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-09-30T21:03:46.427 : [6275]	Taille : 2  -  MailStatusMessage
+2018-09-30T21:03:46.435 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-09-30T21:03:46.443 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-09-30T21:03:46.451 : [6769]	Taille : 13  -  null
+2018-09-30T21:03:46.460 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-09-30T21:03:46.467 : [4001]	[Envoi] Friend list request
+2018-09-30T21:03:46.477 : [5676]	[Envoi] Ignored list request
+2018-09-30T21:03:46.485 : [6355]	[Envoi] Spouse list request
+2018-09-30T21:03:46.896 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:46.902 : [4002]	Taille : 2  -  FriendsListMessage
+2018-09-30T21:03:46.933 : [5607]	[Envoi] Client key
+2018-09-30T21:03:46.941 : [250]	[Envoi] Game context create request
+2018-09-30T21:03:46.954 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:46.980 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-09-30T21:03:46.992 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:47 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:47.410 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:47.418 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-09-30T21:03:47.426 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-09-30T21:03:47.433 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-09-30T21:03:47.441 : [220]	Taille : 42  -  CurrentMapMessage
+2018-09-30T21:03:47.448 : [225]	[Envoi] Map info request
+2018-09-30T21:03:47.473 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T21:03:47.479 : [500]	Taille : 376  -  CharacterStatsListMessage
+2018-09-30T21:03:47.489 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:47.900 : [226]	Taille : 1523  -  MapComplementaryInformationsDataMessage
+2018-09-30T21:03:47.927 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T21:03:47.937 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:03:47.945 : [5734]	Taille : 74  -  HousePropertiesMessage
+2018-09-30T21:03:47.953 : [5734]	Taille : 59  -  HousePropertiesMessage
+2018-09-30T21:03:47.962 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:03:47.971 : [5734]	Taille : 28  -  HousePropertiesMessage
+2018-09-30T21:03:47.982 : [5734]	Taille : 33  -  HousePropertiesMessage
+2018-09-30T21:03:47.996 : [5734]	Taille : 26  -  HousePropertiesMessage
+2018-09-30T21:03:48.009 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-09-30T21:03:48.023 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:03:48.030 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T21:03:48.037 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:03:48.044 : [5734]	Taille : 73  -  HousePropertiesMessage
+2018-09-30T21:03:48.051 : [5734]	Taille : 48  -  HousePropertiesMessage
+2018-09-30T21:03:48.057 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:03:48.064 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:03:48.069 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:49.279 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:03:50.636 : [5001]	[Envoi] Open hdv
+2018-09-30T21:03:50.888 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:03:50.898 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T21:03:50.905 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:50.916 : [5803]	[Envoi] Set hdv type to 1
+2018-09-30T21:03:51.317 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:03:51.325 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:51.914 : [5898]	[Envoi] Request seller
+2018-09-30T21:03:52.138 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T21:03:52.150 : [5905]	Taille : 52  -  ExchangeStartedBidSellerMessage
+2018-09-30T21:03:52.160 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:56.136 : [5898]	[Envoi] Request buyer
+2018-09-30T21:03:56.578 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:03:56.587 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T21:03:56.597 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T21:03:56.606 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:56.656 : [5803]	[Envoi] Request type sell 1
+2018-09-30T21:03:57.018 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:03:57.025 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:03:57.041 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:57.057 : [5803]	[Envoi] Change to type 16
+2018-09-30T21:03:57.457 : [5765]	Taille : 246  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:03:57.462 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:57.471 : [5807]	[Envoi] Request list prices item 14967
+2018-09-30T21:03:57.877 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:03:57.887 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:57.901 : [5807]	[Envoi] Request list prices item 15015
+2018-09-30T21:03:58.301 : [5752]	Taille : 150  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:03:58.306 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:58.313 : [5803]	[Envoi] Change to type 1
+2018-09-30T21:03:58.713 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:03:58.720 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:58.726 : [5803]	[Envoi] Change to type 17
+2018-09-30T21:03:59.125 : [5765]	Taille : 170  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:03:59.132 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:59.144 : [5807]	[Envoi] Request list prices item 15016
+2018-09-30T21:03:59.544 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:03:59.551 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:59.560 : [5803]	[Envoi] Change to type 177
+2018-09-30T21:03:59.961 : [5765]	Taille : 741  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:03:59.970 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:03:59.985 : [5807]	[Envoi] Request list prices item 14634
+2018-09-30T21:04:00.387 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:00.393 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:00.393 : [5807]	[Envoi] Request list prices item 14641
+2018-09-30T21:04:00.800 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:00.815 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:00.815 : [5807]	[Envoi] Request list prices item 14642
+2018-09-30T21:04:01.224 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:01.230 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:01.237 : [5807]	[Envoi] Request list prices item 14643
+2018-09-30T21:04:01.639 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:01.645 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:01.651 : [5807]	[Envoi] Request list prices item 14796
+2018-09-30T21:04:02.054 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:02.062 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:02.071 : [5807]	[Envoi] Request list prices item 14797
+2018-09-30T21:04:02.471 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:02.478 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:02.485 : [5807]	[Envoi] Request list prices item 14799
+2018-09-30T21:04:02.888 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:02.895 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:02.900 : [5807]	[Envoi] Request list prices item 14800
+2018-09-30T21:04:03.301 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:03.311 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:03.322 : [5632]	Taille : 110  -  GameRolePlayShowActorMessage
+2018-09-30T21:04:03.325 : [5807]	[Envoi] Request list prices item 14802
+2018-09-30T21:04:03.338 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:04:03.750 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:03.759 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:03.769 : [5807]	[Envoi] Request list prices item 14804
+2018-09-30T21:04:03.780 : [5632]	Taille : 101  -  GameRolePlayShowActorMessage
+2018-09-30T21:04:04.193 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:04.199 : [5807]	[Envoi] Request list prices item 14805
+2018-09-30T21:04:04.213 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:04.219 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:04:04.228 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:04:04.636 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:04.644 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:04.653 : [5807]	[Envoi] Request list prices item 14807
+2018-09-30T21:04:05.060 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:05.065 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:05.077 : [5807]	[Envoi] Request list prices item 15097
+2018-09-30T21:04:05.083 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:04:05.091 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:04:05.104 : [951]	Taille : 40  -  GameMapMovementMessage
+2018-09-30T21:04:05.518 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:05.530 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:05.541 : [5807]	[Envoi] Request list prices item 15098
+2018-09-30T21:04:05.942 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:05.948 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:05.958 : [5807]	[Envoi] Request list prices item 15116
+2018-09-30T21:04:06.358 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:06.364 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:06.364 : [5807]	[Envoi] Request list prices item 15122
+2018-09-30T21:04:06.771 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:06.781 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:06.788 : [5807]	[Envoi] Request list prices item 15123
+2018-09-30T21:04:06.796 : [951]	Taille : 42  -  GameMapMovementMessage
+2018-09-30T21:04:07.201 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:07.210 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:07.223 : [5807]	[Envoi] Request list prices item 15124
+2018-09-30T21:04:07.624 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:07.631 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:07.636 : [5807]	[Envoi] Request list prices item 15125
+2018-09-30T21:04:08.037 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:08.046 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:08.053 : [5807]	[Envoi] Request list prices item 15158
+2018-09-30T21:04:08.453 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:04:08.463 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:08.471 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:08.480 : [5807]	[Envoi] Request list prices item 15159
+2018-09-30T21:04:08.881 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:08.890 : [5803]	[Envoi] Change to type 2
+2018-09-30T21:04:08.899 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:09.304 : [5765]	Taille : 55  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:09.314 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:09.321 : [5803]	[Envoi] Change to type 82
+2018-09-30T21:04:09.722 : [5765]	Taille : 46  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:09.731 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:09.738 : [5803]	[Envoi] Change to type 4
+2018-09-30T21:04:09.745 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:04:10.151 : [5765]	Taille : 102  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:10.157 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:10.166 : [5803]	[Envoi] Change to type 7
+2018-09-30T21:04:10.567 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:04:10.573 : [5765]	Taille : 85  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:10.584 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:10.592 : [5803]	[Envoi] Change to type 9
+2018-09-30T21:04:10.598 : [5816]	Taille : 0  -  BasicLatencyStatsRequestMessage
+2018-09-30T21:04:10.605 : [5663]	[Envoi] Latency message
+2018-09-30T21:04:11.015 : [5765]	Taille : 306  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:11.020 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:11.026 : [5807]	[Envoi] Request list prices item 14806
+2018-09-30T21:04:11.033 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:11.439 : [5752]	Taille : 192  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:11.449 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:11.460 : [5803]	[Envoi] Change to type 169
+2018-09-30T21:04:11.861 : [5765]	Taille : 24  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:11.868 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:11.874 : [5807]	[Envoi] Request list prices item 14961
+2018-09-30T21:04:12.275 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:12.284 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:12.291 : [5807]	[Envoi] Request list prices item 14962
+2018-09-30T21:04:12.698 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:12.707 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:12.714 : [5807]	[Envoi] Request list prices item 14963
+2018-09-30T21:04:13.114 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:13.120 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:13.126 : [5807]	[Envoi] Request list prices item 14964
+2018-09-30T21:04:13.526 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:13.532 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:13.540 : [5807]	[Envoi] Request list prices item 14965
+2018-09-30T21:04:13.545 : [5632]	Taille : 182  -  GameRolePlayShowActorMessage
+2018-09-30T21:04:13.954 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:13.969 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:13.983 : [5807]	[Envoi] Request list prices item 14966
+2018-09-30T21:04:14.386 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:04:14.395 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:04:14.402 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:14.410 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:14.434 : [5807]	[Envoi] Request list prices item 15018
+2018-09-30T21:04:14.835 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:14.844 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:14.844 : [5807]	[Envoi] Request list prices item 15160
+2018-09-30T21:04:15.256 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:15.263 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:15.276 : [5807]	[Envoi] Request list prices item 15161
+2018-09-30T21:04:15.678 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:15.685 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:15.706 : [5803]	[Envoi] Change to type 10
+2018-09-30T21:04:16.114 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:16.120 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:16.125 : [5807]	[Envoi] Request list prices item 14644
+2018-09-30T21:04:16.525 : [5752]	Taille : 45  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:16.535 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:16.543 : [5807]	[Envoi] Request list prices item 14798
+2018-09-30T21:04:16.553 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:04:16.958 : [5752]	Taille : 42  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:16.964 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:16.972 : [5807]	[Envoi] Request list prices item 15099
+2018-09-30T21:04:17.373 : [5752]	Taille : 166  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:17.380 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:17.389 : [5803]	[Envoi] Change to type 11
+2018-09-30T21:04:17.394 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:04:17.800 : [5765]	Taille : 312  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:04:17.808 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:17.808 : [5807]	[Envoi] Request list prices item 14803
+2018-09-30T21:04:18.216 : [5752]	Taille : 322  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:18.223 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:18.230 : [5807]	[Envoi] Request list prices item 15017
+2018-09-30T21:04:18.631 : [5752]	Taille : 118  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:18.637 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:18.643 : [5807]	[Envoi] Request list prices item 15100
+2018-09-30T21:04:19.043 : [5752]	Taille : 512  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:04:19.053 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:04:24.676 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:06:59.588 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T21:06:59.597 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T21:06:59.896 : [4]	[Envoi] Identification...
+2018-09-30T21:07:00.308 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:07:00.323 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T21:07:00.737 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T21:07:00.744 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T21:07:00.753 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T21:07:00.774 : [40]	[Envoi] Selection du serveur...
+2018-09-30T21:07:01.184 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T21:07:01.669 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T21:07:01.677 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T21:07:01.702 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T21:07:02.516 : [6253]	Taille : 86703  -  RawDataMessage
+2018-09-30T21:07:02.526 : [6372]	[Envoi] Check Integrity Message...
+2018-09-30T21:07:02.938 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-09-30T21:07:02.950 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T21:07:02.961 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-09-30T21:07:02.970 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-09-30T21:07:02.982 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-09-30T21:07:02.995 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-09-30T21:07:03.009 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-09-30T21:07:03.026 : [150]	[Envoi] Character list request
+2018-09-30T21:07:03.038 : [6769]	Taille : 22  -  null
+2018-09-30T21:07:03.447 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:07:03.457 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:07:03.464 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:07:03.475 : [151]	Taille : 58  -  CharactersListMessage
+2018-09-30T21:07:03.645 : [152]	[Envoi] Selection du personnage...
+2018-09-30T21:07:04.057 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T21:07:04.064 : [6087]	Taille : 2  -  otificationListMessage
+2018-09-30T21:07:04.075 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-09-30T21:07:04.085 : [1200]	Taille : 27  -  SpellListMessage
+2018-09-30T21:07:04.306 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-09-30T21:07:04.319 : [3016]	Taille : 570  -  InventoryContentMessage
+2018-09-30T21:07:04.340 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-09-30T21:07:04.352 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-09-30T21:07:04.362 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-09-30T21:07:04.374 : [5689]	Taille : 3  -  EmoteListMessage
+2018-09-30T21:07:04.400 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-09-30T21:07:04.412 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-09-30T21:07:04.427 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-09-30T21:07:04.439 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-09-30T21:07:04.449 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-09-30T21:07:04.457 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-09-30T21:07:04.465 : [6682]	Taille : 2  -  DareWonListMessage
+2018-09-30T21:07:04.477 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-09-30T21:07:04.486 : [6440]	Taille : 13999  -  PrismsListMessage
+2018-09-30T21:07:04.499 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-09-30T21:07:04.507 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-09-30T21:07:04.516 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-09-30T21:07:04.529 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-09-30T21:07:04.538 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-09-30T21:07:04.551 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-09-30T21:07:04.560 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-09-30T21:07:04.568 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-09-30T21:07:04.583 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-09-30T21:07:04.594 : [6317]	[Envoi] Sequence number
+2018-09-30T21:07:04.603 : [780]	Taille : 4  -  TextInformationMessage
+2018-09-30T21:07:04.622 : [780]	Taille : 27  -  TextInformationMessage
+2018-09-30T21:07:04.637 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-09-30T21:07:04.646 : [6205]	Taille : 32  -  AchievementListMessage
+2018-09-30T21:07:04.657 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-09-30T21:07:04.665 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-09-30T21:07:04.673 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-09-30T21:07:04.680 : [6585]	Taille : 6  -  IdolListMessage
+2018-09-30T21:07:04.689 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-09-30T21:07:04.697 : [6275]	Taille : 2  -  MailStatusMessage
+2018-09-30T21:07:04.709 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-09-30T21:07:04.720 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-09-30T21:07:04.729 : [6769]	Taille : 13  -  null
+2018-09-30T21:07:04.739 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-09-30T21:07:04.748 : [4001]	[Envoi] Friend list request
+2018-09-30T21:07:04.757 : [5676]	[Envoi] Ignored list request
+2018-09-30T21:07:04.765 : [6355]	[Envoi] Spouse list request
+2018-09-30T21:07:05.177 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:05.198 : [4002]	Taille : 2  -  FriendsListMessage
+2018-09-30T21:07:05.222 : [5607]	[Envoi] Client key
+2018-09-30T21:07:05.232 : [250]	[Envoi] Game context create request
+2018-09-30T21:07:05.243 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:05.256 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-09-30T21:07:05.270 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:05.299 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:05.718 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:05.728 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-09-30T21:07:05.739 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-09-30T21:07:05.750 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-09-30T21:07:05.758 : [220]	Taille : 42  -  CurrentMapMessage
+2018-09-30T21:07:05.769 : [225]	[Envoi] Map info request
+2018-09-30T21:07:05.802 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T21:07:05.812 : [500]	Taille : 376  -  CharacterStatsListMessage
+2018-09-30T21:07:05.824 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:06.233 : [226]	Taille : 1800  -  MapComplementaryInformationsDataMessage
+2018-09-30T21:07:06.264 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T21:07:06.273 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:07:06.282 : [5734]	Taille : 74  -  HousePropertiesMessage
+2018-09-30T21:07:06.291 : [5734]	Taille : 59  -  HousePropertiesMessage
+2018-09-30T21:07:06.304 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:07:06.316 : [5734]	Taille : 28  -  HousePropertiesMessage
+2018-09-30T21:07:06.324 : [5734]	Taille : 33  -  HousePropertiesMessage
+2018-09-30T21:07:06.333 : [5734]	Taille : 26  -  HousePropertiesMessage
+2018-09-30T21:07:06.341 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-09-30T21:07:06.348 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:07:06.355 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T21:07:06.361 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T21:07:06.368 : [5734]	Taille : 73  -  HousePropertiesMessage
+2018-09-30T21:07:06.375 : [5734]	Taille : 48  -  HousePropertiesMessage
+2018-09-30T21:07:06.382 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:07:06.388 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:07:06.394 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:12.811 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:07:13.971 : [5001]	[Envoi] Open hdv
+2018-09-30T21:07:14.424 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:07:14.434 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T21:07:14.441 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:14.452 : [5803]	[Envoi] Set hdv type to 1
+2018-09-30T21:07:14.856 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:14.864 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:15.273 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:07:16.080 : [5898]	[Envoi] Request seller
+2018-09-30T21:07:16.486 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T21:07:16.494 : [5905]	Taille : 52  -  ExchangeStartedBidSellerMessage
+2018-09-30T21:07:16.503 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:19.468 : [5898]	[Envoi] Request buyer
+2018-09-30T21:07:19.721 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T21:07:19.735 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T21:07:19.752 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:20.027 : [5803]	[Envoi] Request type sell 1
+2018-09-30T21:07:20.160 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:07:20.177 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:20.189 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:20.198 : [5803]	[Envoi] Change to type 16
+2018-09-30T21:07:20.600 : [5765]	Taille : 246  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:20.607 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:20.617 : [5807]	[Envoi] Request list prices item 14967
+2018-09-30T21:07:21.019 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:21.027 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:21.034 : [5807]	[Envoi] Request list prices item 15015
+2018-09-30T21:07:21.436 : [5752]	Taille : 150  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:21.444 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:21.452 : [5803]	[Envoi] Change to type 1
+2018-09-30T21:07:21.854 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:21.861 : [5803]	[Envoi] Change to type 17
+2018-09-30T21:07:21.868 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:21.875 : [5637]	Taille : 46  -  GameContextRefreshEntityLookMessage
+2018-09-30T21:07:21.883 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:07:22.293 : [5765]	Taille : 170  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:22.303 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:22.311 : [5807]	[Envoi] Request list prices item 15016
+2018-09-30T21:07:22.713 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:22.725 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:22.732 : [5803]	[Envoi] Change to type 177
+2018-09-30T21:07:23.134 : [5765]	Taille : 741  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:23.142 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:23.146 : [5807]	[Envoi] Request list prices item 14634
+2018-09-30T21:07:23.547 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:23.554 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:23.559 : [5807]	[Envoi] Request list prices item 14641
+2018-09-30T21:07:23.960 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:23.966 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:23.975 : [5807]	[Envoi] Request list prices item 14642
+2018-09-30T21:07:24.376 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:24.383 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:24.395 : [5807]	[Envoi] Request list prices item 14643
+2018-09-30T21:07:24.799 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:24.814 : [5807]	[Envoi] Request list prices item 14796
+2018-09-30T21:07:24.826 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:25.232 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:25.245 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:25.275 : [5807]	[Envoi] Request list prices item 14797
+2018-09-30T21:07:25.677 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:25.683 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:25.683 : [5807]	[Envoi] Request list prices item 14799
+2018-09-30T21:07:26.093 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:26.103 : [5807]	[Envoi] Request list prices item 14800
+2018-09-30T21:07:26.103 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:26.514 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:26.520 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:26.520 : [5807]	[Envoi] Request list prices item 14802
+2018-09-30T21:07:26.926 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:26.934 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:26.944 : [5807]	[Envoi] Request list prices item 14804
+2018-09-30T21:07:26.951 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:07:27.359 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:27.365 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:27.373 : [5807]	[Envoi] Request list prices item 14805
+2018-09-30T21:07:27.775 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:27.782 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:27.788 : [5807]	[Envoi] Request list prices item 14807
+2018-09-30T21:07:28.190 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:28.198 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:28.219 : [5807]	[Envoi] Request list prices item 15097
+2018-09-30T21:07:28.630 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:28.640 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:28.647 : [5807]	[Envoi] Request list prices item 15098
+2018-09-30T21:07:29.048 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:29.055 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:29.063 : [5807]	[Envoi] Request list prices item 15116
+2018-09-30T21:07:29.465 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:29.472 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:29.478 : [5807]	[Envoi] Request list prices item 15122
+2018-09-30T21:07:29.879 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:29.890 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:29.901 : [5807]	[Envoi] Request list prices item 15123
+2018-09-30T21:07:30.303 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:30.311 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:30.319 : [5807]	[Envoi] Request list prices item 15124
+2018-09-30T21:07:30.721 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:30.735 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:30.741 : [5807]	[Envoi] Request list prices item 15125
+2018-09-30T21:07:31.144 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:31.158 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:31.166 : [5807]	[Envoi] Request list prices item 15158
+2018-09-30T21:07:31.567 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:31.581 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:31.589 : [5807]	[Envoi] Request list prices item 15159
+2018-09-30T21:07:31.991 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:32.001 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:32.012 : [5803]	[Envoi] Change to type 2
+2018-09-30T21:07:32.412 : [5765]	Taille : 55  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:32.420 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:32.426 : [5803]	[Envoi] Change to type 82
+2018-09-30T21:07:32.827 : [5765]	Taille : 46  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:32.838 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:32.844 : [5803]	[Envoi] Change to type 4
+2018-09-30T21:07:33.246 : [5765]	Taille : 102  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:33.253 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:33.262 : [5803]	[Envoi] Change to type 7
+2018-09-30T21:07:33.272 : [5637]	Taille : 46  -  GameContextRefreshEntityLookMessage
+2018-09-30T21:07:33.287 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:07:33.698 : [5765]	Taille : 85  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:33.704 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:33.710 : [5803]	[Envoi] Change to type 9
+2018-09-30T21:07:34.111 : [5765]	Taille : 306  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:34.119 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:34.125 : [5807]	[Envoi] Request list prices item 14806
+2018-09-30T21:07:34.132 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:07:34.538 : [5752]	Taille : 192  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:34.549 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:34.557 : [5803]	[Envoi] Change to type 169
+2018-09-30T21:07:34.957 : [5765]	Taille : 24  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:34.967 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:34.976 : [5807]	[Envoi] Request list prices item 14961
+2018-09-30T21:07:35.377 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:35.384 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:35.389 : [5807]	[Envoi] Request list prices item 14962
+2018-09-30T21:07:35.792 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:35.798 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:35.804 : [5807]	[Envoi] Request list prices item 14963
+2018-09-30T21:07:36.205 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:36.212 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:36.222 : [5807]	[Envoi] Request list prices item 14964
+2018-09-30T21:07:36.624 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:36.634 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:36.634 : [5807]	[Envoi] Request list prices item 14965
+2018-09-30T21:07:37.043 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:37.060 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:37.067 : [5807]	[Envoi] Request list prices item 14966
+2018-09-30T21:07:37.469 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:37.475 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:37.482 : [5807]	[Envoi] Request list prices item 15018
+2018-09-30T21:07:37.884 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:37.891 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:37.898 : [5807]	[Envoi] Request list prices item 15160
+2018-09-30T21:07:38.311 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:38.331 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:38.344 : [5807]	[Envoi] Request list prices item 15161
+2018-09-30T21:07:38.745 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:38.757 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:38.767 : [5803]	[Envoi] Change to type 10
+2018-09-30T21:07:39.168 : [5765]	Taille : 305  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:39.174 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:39.181 : [5807]	[Envoi] Request list prices item 14644
+2018-09-30T21:07:39.582 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:07:39.590 : [5752]	Taille : 45  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:39.596 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:39.607 : [5807]	[Envoi] Request list prices item 14798
+2018-09-30T21:07:40.007 : [5752]	Taille : 42  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:40.013 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:40.021 : [5807]	[Envoi] Request list prices item 15099
+2018-09-30T21:07:40.422 : [5752]	Taille : 166  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:40.429 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:40.437 : [5803]	[Envoi] Change to type 11
+2018-09-30T21:07:40.838 : [5765]	Taille : 312  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T21:07:40.844 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:40.851 : [5807]	[Envoi] Request list prices item 14803
+2018-09-30T21:07:41.250 : [5752]	Taille : 322  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:41.258 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:41.263 : [5807]	[Envoi] Request list prices item 15017
+2018-09-30T21:07:41.269 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:07:41.683 : [5752]	Taille : 118  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:41.694 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:41.699 : [5807]	[Envoi] Request list prices item 15100
+2018-09-30T21:07:42.100 : [5752]	Taille : 512  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T21:07:42.106 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:07:48.130 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:07:48.139 : [5637]	Taille : 46  -  GameContextRefreshEntityLookMessage
+2018-09-30T21:07:48.547 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:07:54.964 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:02.191 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:09.011 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:09.419 : [5632]	Taille : 192  -  GameRolePlayShowActorMessage
+2018-09-30T21:08:09.425 : [5632]	Taille : 215  -  GameRolePlayShowActorMessage
+2018-09-30T21:08:09.832 : [951]	Taille : 18  -  GameMapMovementMessage
+2018-09-30T21:08:10.640 : [5816]	Taille : 0  -  BasicLatencyStatsRequestMessage
+2018-09-30T21:08:10.647 : [5663]	[Envoi] Latency message
+2018-09-30T21:08:10.655 : [951]	Taille : 14  -  GameMapMovementMessage
+2018-09-30T21:08:10.663 : [951]	Taille : 18  -  GameMapMovementMessage
+2018-09-30T21:08:11.070 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T21:08:11.079 : [6454]	Taille : 10  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:08:11.086 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:08:11.896 : [951]	Taille : 18  -  GameMapMovementMessage
+2018-09-30T21:08:14.308 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:08:15.918 : [5632]	Taille : 192  -  GameRolePlayShowActorMessage
+2018-09-30T21:08:15.926 : [951]	Taille : 38  -  GameMapMovementMessage
+2018-09-30T21:08:17.939 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:08:22.754 : [5632]	Taille : 101  -  GameRolePlayShowActorMessage
+2018-09-30T21:08:23.164 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:23.173 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:08:23.584 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:08:25.205 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T21:08:30.422 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:37.240 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:39.653 : [5632]	Taille : 105  -  GameRolePlayShowActorMessage
+2018-09-30T21:08:40.464 : [6454]	Taille : 10  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:08:40.473 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:08:41.685 : [5745]	Taille : 12  -  InteractiveUsedMessage
+2018-09-30T21:08:44.098 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:50.117 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:08:50.525 : [951]	Taille : 42  -  GameMapMovementMessage
+2018-09-30T21:08:50.932 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:08:53.345 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:08:58.161 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:09:02.978 : [5632]	Taille : 96  -  GameRolePlayShowActorMessage
+2018-09-30T21:09:03.794 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:09:03.802 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:09:05.016 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:09:06.225 : [951]	Taille : 18  -  GameMapMovementMessage
+2018-09-30T21:09:07.434 : [5709]	Taille : 8  -  StatedElementUpdatedMessage
+2018-09-30T21:09:07.441 : [5708]	Taille : 20  -  InteractiveElementUpdatedMessage
+2018-09-30T21:09:07.849 : [5745]	Taille : 12  -  InteractiveUsedMessage
+2018-09-30T21:09:09.862 : [951]	Taille : 34  -  GameMapMovementMessage
+2018-09-30T21:09:10.669 : [5709]	Taille : 8  -  StatedElementUpdatedMessage
+2018-09-30T21:09:10.675 : [5708]	Taille : 20  -  InteractiveElementUpdatedMessage
+2018-09-30T21:09:10.683 : [951]	Taille : 36  -  GameMapMovementMessage
+2018-09-30T21:09:12.693 : [5632]	Taille : 180  -  GameRolePlayShowActorMessage
+2018-09-30T21:09:12.701 : [5632]	Taille : 180  -  GameRolePlayShowActorMessage
+2018-09-30T21:09:12.709 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:09:12.717 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:09:13.523 : [5709]	Taille : 8  -  StatedElementUpdatedMessage
+2018-09-30T21:09:13.529 : [5708]	Taille : 20  -  InteractiveElementUpdatedMessage
+2018-09-30T21:09:13.539 : [5745]	Taille : 12  -  InteractiveUsedMessage
+2018-09-30T21:09:15.147 : [951]	Taille : 40  -  GameMapMovementMessage
+2018-09-30T21:09:16.754 : [5709]	Taille : 8  -  StatedElementUpdatedMessage
+2018-09-30T21:09:16.761 : [5708]	Taille : 20  -  InteractiveElementUpdatedMessage
+2018-09-30T21:09:17.568 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:09:19.177 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T21:09:22.792 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T21:09:23.199 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T21:09:23.205 : [951]	Taille : 36  -  GameMapMovementMessage
+2018-09-30T21:09:24.815 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-09-30T21:09:26.427 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:06:16.460 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T23:06:16.473 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T23:06:16.894 : [4]	[Envoi] Identification...
+2018-09-30T23:06:17.305 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T23:06:17.313 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T23:06:17.323 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T23:06:17.330 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T23:06:17.339 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T23:06:17.419 : [40]	[Envoi] Selection du serveur...
+2018-09-30T23:06:17.827 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T23:06:18.266 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T23:06:18.275 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T23:06:18.297 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T23:06:19.109 : [6253]	Taille : 86703  -  RawDataMessage
+2018-09-30T23:06:19.118 : [6372]	[Envoi] Check Integrity Message...
+2018-09-30T23:06:19.528 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-09-30T23:06:19.538 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T23:06:19.549 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-09-30T23:06:19.562 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-09-30T23:06:19.569 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-09-30T23:06:19.577 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-09-30T23:06:19.584 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-09-30T23:06:19.595 : [150]	[Envoi] Character list request
+2018-09-30T23:06:19.603 : [6769]	Taille : 22  -  null
+2018-09-30T23:06:20.014 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T23:06:20.021 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T23:06:20.028 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T23:06:20.038 : [151]	Taille : 58  -  CharactersListMessage
+2018-09-30T23:06:23.796 : [152]	[Envoi] Selection du personnage...
+2018-09-30T23:06:24.205 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T23:06:24.214 : [6087]	Taille : 2  -  otificationListMessage
+2018-09-30T23:06:24.221 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-09-30T23:06:24.229 : [1200]	Taille : 27  -  SpellListMessage
+2018-09-30T23:06:24.427 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-09-30T23:06:24.434 : [3016]	Taille : 570  -  InventoryContentMessage
+2018-09-30T23:06:24.442 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-09-30T23:06:24.450 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-09-30T23:06:24.467 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-09-30T23:06:24.480 : [5689]	Taille : 3  -  EmoteListMessage
+2018-09-30T23:06:24.492 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-09-30T23:06:24.507 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-09-30T23:06:24.645 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-09-30T23:06:24.654 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-09-30T23:06:24.674 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-09-30T23:06:24.696 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-09-30T23:06:24.710 : [6682]	Taille : 2  -  DareWonListMessage
+2018-09-30T23:06:24.721 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-09-30T23:06:24.739 : [6440]	Taille : 14000  -  PrismsListMessage
+2018-09-30T23:06:24.748 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-09-30T23:06:24.760 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-09-30T23:06:24.780 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-09-30T23:06:24.788 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-09-30T23:06:24.797 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-09-30T23:06:24.806 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-09-30T23:06:24.848 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-09-30T23:06:24.856 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-09-30T23:06:24.916 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-09-30T23:06:24.924 : [6317]	[Envoi] Sequence number
+2018-09-30T23:06:24.933 : [780]	Taille : 4  -  TextInformationMessage
+2018-09-30T23:06:24.958 : [780]	Taille : 27  -  TextInformationMessage
+2018-09-30T23:06:24.976 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-09-30T23:06:24.985 : [6205]	Taille : 32  -  AchievementListMessage
+2018-09-30T23:06:24.999 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-09-30T23:06:25.012 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-09-30T23:06:25.036 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-09-30T23:06:25.047 : [6585]	Taille : 6  -  IdolListMessage
+2018-09-30T23:06:25.056 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-09-30T23:06:25.064 : [6275]	Taille : 2  -  MailStatusMessage
+2018-09-30T23:06:25.072 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-09-30T23:06:25.150 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-09-30T23:06:25.164 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-09-30T23:06:25.175 : [4001]	[Envoi] Friend list request
+2018-09-30T23:06:25.184 : [5676]	[Envoi] Ignored list request
+2018-09-30T23:06:25.199 : [6355]	[Envoi] Spouse list request
+2018-09-30T23:06:25.206 : [6769]	Taille : 13  -  null
+2018-09-30T23:06:25.654 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:25.661 : [4002]	Taille : 2  -  FriendsListMessage
+2018-09-30T23:06:25.689 : [5607]	[Envoi] Client key
+2018-09-30T23:06:25.697 : [250]	[Envoi] Game context create request
+2018-09-30T23:06:25.705 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:25.713 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-09-30T23:06:25.721 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:25.729 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:26.136 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:26.143 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-09-30T23:06:26.151 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-09-30T23:06:26.158 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-09-30T23:06:26.166 : [220]	Taille : 42  -  CurrentMapMessage
+2018-09-30T23:06:26.174 : [225]	[Envoi] Map info request
+2018-09-30T23:06:26.268 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T23:06:26.275 : [500]	Taille : 376  -  CharacterStatsListMessage
+2018-09-30T23:06:26.310 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:26.718 : [226]	Taille : 1030  -  MapComplementaryInformationsDataMessage
+2018-09-30T23:06:26.819 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T23:06:26.828 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T23:06:26.835 : [5734]	Taille : 74  -  HousePropertiesMessage
+2018-09-30T23:06:26.844 : [5734]	Taille : 59  -  HousePropertiesMessage
+2018-09-30T23:06:26.853 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T23:06:26.863 : [5734]	Taille : 28  -  HousePropertiesMessage
+2018-09-30T23:06:26.872 : [5734]	Taille : 33  -  HousePropertiesMessage
+2018-09-30T23:06:26.880 : [5734]	Taille : 26  -  HousePropertiesMessage
+2018-09-30T23:06:26.888 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-09-30T23:06:26.897 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T23:06:26.904 : [5734]	Taille : 54  -  HousePropertiesMessage
+2018-09-30T23:06:26.909 : [5734]	Taille : 29  -  HousePropertiesMessage
+2018-09-30T23:06:26.918 : [5734]	Taille : 73  -  HousePropertiesMessage
+2018-09-30T23:06:26.925 : [5734]	Taille : 48  -  HousePropertiesMessage
+2018-09-30T23:06:26.932 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-09-30T23:06:26.939 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-09-30T23:06:26.946 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:28.957 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:06:29.767 : [5001]	[Envoi] Open hdv
+2018-09-30T23:06:30.169 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T23:06:30.176 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T23:06:30.185 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:30.185 : [5803]	[Envoi] Set hdv type to 1
+2018-09-30T23:06:30.597 : [5765]	Taille : 303  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:30.605 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:31.474 : [5898]	[Envoi] Request seller
+2018-09-30T23:06:31.813 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T23:06:31.821 : [5905]	Taille : 52  -  ExchangeStartedBidSellerMessage
+2018-09-30T23:06:31.832 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:35.275 : [5898]	[Envoi] Request buyer
+2018-09-30T23:06:35.450 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-09-30T23:06:35.462 : [5904]	Taille : 50  -   ExchangeStartedBidBuyerMessage
+2018-09-30T23:06:35.473 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:35.590 : [5803]	[Envoi] Request type sell 1
+2018-09-30T23:06:35.880 : [5765]	Taille : 303  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:35.898 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:35.909 : [5803]	[Envoi] Change to type 16
+2018-09-30T23:06:35.916 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:06:36.325 : [5765]	Taille : 248  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:36.343 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:36.353 : [5807]	[Envoi] Request list prices item 14967
+2018-09-30T23:06:36.754 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:36.780 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:36.781 : [5807]	[Envoi] Request list prices item 15015
+2018-09-30T23:06:37.201 : [5752]	Taille : 150  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:37.217 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:37.231 : [5803]	[Envoi] Change to type 1
+2018-09-30T23:06:37.634 : [5765]	Taille : 303  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:37.650 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:37.665 : [5803]	[Envoi] Change to type 17
+2018-09-30T23:06:38.066 : [5765]	Taille : 170  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:38.088 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:38.097 : [5807]	[Envoi] Request list prices item 15016
+2018-09-30T23:06:38.499 : [5752]	Taille : 69  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:38.518 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:38.531 : [5803]	[Envoi] Change to type 177
+2018-09-30T23:06:38.932 : [5765]	Taille : 741  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:38.949 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:38.949 : [5807]	[Envoi] Request list prices item 14634
+2018-09-30T23:06:39.364 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:39.373 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:39.380 : [5807]	[Envoi] Request list prices item 14641
+2018-09-30T23:06:39.779 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:39.788 : [5807]	[Envoi] Request list prices item 14642
+2018-09-30T23:06:39.788 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:40.196 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:40.206 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:40.213 : [5807]	[Envoi] Request list prices item 14643
+2018-09-30T23:06:40.613 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:40.623 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:40.630 : [5807]	[Envoi] Request list prices item 14796
+2018-09-30T23:06:41.031 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:41.039 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:41.039 : [5807]	[Envoi] Request list prices item 14797
+2018-09-30T23:06:41.450 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:41.458 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:41.463 : [5807]	[Envoi] Request list prices item 14799
+2018-09-30T23:06:41.863 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:41.870 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:41.876 : [5807]	[Envoi] Request list prices item 14800
+2018-09-30T23:06:42.277 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:42.286 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:42.298 : [5807]	[Envoi] Request list prices item 14802
+2018-09-30T23:06:42.698 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:42.705 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:42.712 : [5807]	[Envoi] Request list prices item 14804
+2018-09-30T23:06:43.112 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:43.119 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:43.125 : [5807]	[Envoi] Request list prices item 14805
+2018-09-30T23:06:43.527 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:43.534 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:43.539 : [5807]	[Envoi] Request list prices item 14807
+2018-09-30T23:06:43.939 : [5752]	Taille : 18  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:43.948 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:43.955 : [5807]	[Envoi] Request list prices item 15097
+2018-09-30T23:06:44.357 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:44.370 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:44.387 : [5807]	[Envoi] Request list prices item 15098
+2018-09-30T23:06:44.788 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:44.811 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:44.811 : [5807]	[Envoi] Request list prices item 15116
+2018-09-30T23:06:45.221 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:45.228 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:45.235 : [5807]	[Envoi] Request list prices item 15122
+2018-09-30T23:06:45.635 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:45.645 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:45.650 : [5807]	[Envoi] Request list prices item 15123
+2018-09-30T23:06:46.052 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:46.059 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:46.066 : [5807]	[Envoi] Request list prices item 15124
+2018-09-30T23:06:46.466 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:46.476 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:46.492 : [5807]	[Envoi] Request list prices item 15125
+2018-09-30T23:06:46.894 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:46.910 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:46.910 : [5807]	[Envoi] Request list prices item 15158
+2018-09-30T23:06:47.318 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:47.333 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:47.345 : [5807]	[Envoi] Request list prices item 15159
+2018-09-30T23:06:47.747 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:47.758 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:47.766 : [5803]	[Envoi] Change to type 2
+2018-09-30T23:06:48.166 : [5765]	Taille : 55  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:48.175 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:48.182 : [5803]	[Envoi] Change to type 82
+2018-09-30T23:06:48.581 : [5765]	Taille : 46  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:48.589 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:48.589 : [5803]	[Envoi] Change to type 4
+2018-09-30T23:06:48.994 : [5765]	Taille : 102  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:49.003 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:49.010 : [5803]	[Envoi] Change to type 7
+2018-09-30T23:06:49.414 : [5765]	Taille : 83  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:49.435 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:49.446 : [5803]	[Envoi] Change to type 9
+2018-09-30T23:06:49.849 : [5765]	Taille : 306  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:49.876 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:49.876 : [5807]	[Envoi] Request list prices item 14806
+2018-09-30T23:06:49.890 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:06:50.301 : [5752]	Taille : 192  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:50.310 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:50.311 : [5803]	[Envoi] Change to type 169
+2018-09-30T23:06:50.722 : [5765]	Taille : 24  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:50.734 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:50.741 : [5807]	[Envoi] Request list prices item 14961
+2018-09-30T23:06:51.140 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:51.146 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:51.151 : [5807]	[Envoi] Request list prices item 14962
+2018-09-30T23:06:51.553 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:51.565 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:51.566 : [5807]	[Envoi] Request list prices item 14963
+2018-09-30T23:06:51.977 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:51.986 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:51.993 : [5807]	[Envoi] Request list prices item 14964
+2018-09-30T23:06:52.394 : [5752]	Taille : 17  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:52.419 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:52.434 : [5807]	[Envoi] Request list prices item 14965
+2018-09-30T23:06:52.835 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:52.853 : [5807]	[Envoi] Request list prices item 14966
+2018-09-30T23:06:53.255 : [5752]	Taille : 19  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:53.267 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:53.276 : [5807]	[Envoi] Request list prices item 15018
+2018-09-30T23:06:53.677 : [5752]	Taille : 20  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:53.683 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:53.683 : [5807]	[Envoi] Request list prices item 15160
+2018-09-30T23:06:54.091 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:54.100 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:54.109 : [5807]	[Envoi] Request list prices item 15161
+2018-09-30T23:06:54.511 : [5752]	Taille : 21  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:54.527 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:54.528 : [5803]	[Envoi] Change to type 10
+2018-09-30T23:06:54.937 : [5765]	Taille : 303  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:54.945 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:54.945 : [5807]	[Envoi] Request list prices item 14644
+2018-09-30T23:06:55.352 : [5752]	Taille : 107  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:55.369 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:55.382 : [5807]	[Envoi] Request list prices item 14798
+2018-09-30T23:06:55.783 : [5752]	Taille : 42  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:55.793 : [5807]	[Envoi] Request list prices item 15099
+2018-09-30T23:06:55.793 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:56.199 : [5752]	Taille : 166  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:56.206 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:56.214 : [5803]	[Envoi] Change to type 11
+2018-09-30T23:06:56.615 : [5765]	Taille : 310  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-09-30T23:06:56.632 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:56.632 : [5807]	[Envoi] Request list prices item 14803
+2018-09-30T23:06:57.047 : [5752]	Taille : 322  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:57.059 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:57.075 : [5807]	[Envoi] Request list prices item 15017
+2018-09-30T23:06:57.084 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:06:57.491 : [5752]	Taille : 118  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:57.500 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:57.500 : [5807]	[Envoi] Request list prices item 15100
+2018-09-30T23:06:57.909 : [5752]	Taille : 512  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-09-30T23:06:57.916 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-09-30T23:06:59.531 : [5709]	Taille : 8  -  StatedElementUpdatedMessage
+2018-09-30T23:06:59.541 : [5708]	Taille : 20  -  InteractiveElementUpdatedMessage
+2018-09-30T23:07:03.155 : [5632]	Taille : 109  -  GameRolePlayShowActorMessage
+2018-09-30T23:07:11.181 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:07:18.013 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:07:19.227 : [951]	Taille : 30  -  GameMapMovementMessage
+2018-09-30T23:07:20.851 : [5709]	Taille : 8  -  StatedElementUpdatedMessage
+2018-09-30T23:07:20.868 : [5708]	Taille : 20  -  InteractiveElementUpdatedMessage
+2018-09-30T23:07:20.882 : [5745]	Taille : 12  -  InteractiveUsedMessage
+2018-09-30T23:07:23.702 : [5709]	Taille : 8  -  StatedElementUpdatedMessage
+2018-09-30T23:07:23.720 : [5708]	Taille : 20  -  InteractiveElementUpdatedMessage
+2018-09-30T23:07:24.130 : [951]	Taille : 30  -  GameMapMovementMessage
+2018-09-30T23:07:26.546 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-09-30T23:07:26.960 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-09-30T23:07:31.938 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T23:07:31.946 : [3]	Taille : 341  -  HelloConnectMessage
+2018-09-30T23:07:32.315 : [4]	[Envoi] Identification...
+2018-09-30T23:07:32.724 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T23:07:32.735 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-09-30T23:07:32.744 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-09-30T23:07:32.755 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-09-30T23:07:32.767 : [30]	Taille : 304  -  ServersListMessage
+2018-09-30T23:07:32.835 : [40]	[Envoi] Selection du serveur...
+2018-09-30T23:07:33.244 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-09-30T23:07:33.683 : [1]	Taille : 8  -  ProtocolRequired
+2018-09-30T23:07:33.692 : [101]	Taille : 0  -  HelloGameMessage
+2018-09-30T23:07:33.716 : [110]	[Envoi] Authentification du ticket...
+2018-09-30T23:07:34.523 : [6253]	Taille : 86703  -  RawDataMessage
+2018-09-30T23:07:34.533 : [6372]	[Envoi] Check Integrity Message...
+2018-09-30T23:07:34.941 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-09-30T23:07:34.954 : [175]	Taille : 10  -  BasicTimeMessage
+2018-09-30T23:07:34.965 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-09-30T23:07:34.976 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-09-30T23:07:34.984 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-09-30T23:07:34.992 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-09-30T23:07:35.003 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-09-30T23:07:35.011 : [150]	[Envoi] Character list request
+2018-09-30T23:07:35.019 : [6769]	Taille : 22  -  null
+2018-09-30T23:07:35.431 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T23:07:35.440 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T23:07:35.448 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-09-30T23:07:35.457 : [151]	Taille : 58  -  CharactersListMessage
+2018-10-03T23:47:14.902 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:47:14.951 : [3]	Taille : 341  -  HelloConnectMessage
+2018-10-03T23:47:15.399 : [4]	[Envoi] Identification...
+2018-10-03T23:47:15.815 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:47:15.828 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-10-03T23:47:15.844 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:47:15.866 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-10-03T23:47:15.882 : [30]	Taille : 272  -  ServersListMessage
+2018-10-03T23:47:15.922 : [40]	[Envoi] Selection du serveur...
+2018-10-03T23:47:16.333 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-10-03T23:47:16.776 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:47:16.787 : [101]	Taille : 0  -  HelloGameMessage
+2018-10-03T23:47:16.820 : [110]	[Envoi] Authentification du ticket...
+2018-10-03T23:47:17.646 : [6253]	Taille : 88859  -  RawDataMessage
+2018-10-03T23:47:17.668 : [6372]	[Envoi] Check Integrity Message...
+2018-10-03T23:47:18.100 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-10-03T23:47:18.121 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:47:18.147 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-10-03T23:47:18.165 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-10-03T23:47:18.178 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-10-03T23:47:18.195 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-10-03T23:47:18.205 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-10-03T23:47:18.231 : [150]	[Envoi] Character list request
+2018-10-03T23:47:18.260 : [6769]	Taille : 22  -  null
+2018-10-03T23:47:18.686 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:47:18.704 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:47:18.721 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:47:18.737 : [151]	Taille : 58  -  CharactersListMessage
+2018-10-03T23:47:24.010 : [152]	[Envoi] Selection du personnage...
+2018-10-03T23:47:24.440 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:47:24.452 : [6087]	Taille : 2  -  otificationListMessage
+2018-10-03T23:47:24.466 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-10-03T23:47:24.479 : [1200]	Taille : 27  -  SpellListMessage
+2018-10-03T23:47:24.707 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-10-03T23:47:24.746 : [3016]	Taille : 571  -  InventoryContentMessage
+2018-10-03T23:47:24.774 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-10-03T23:47:24.797 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-10-03T23:47:24.852 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-10-03T23:47:24.892 : [5689]	Taille : 3  -  EmoteListMessage
+2018-10-03T23:47:24.942 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-10-03T23:47:25.011 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-10-03T23:47:25.096 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-10-03T23:47:25.198 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-10-03T23:47:25.224 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-10-03T23:47:25.273 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-10-03T23:47:25.339 : [6682]	Taille : 2  -  DareWonListMessage
+2018-10-03T23:47:25.389 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-10-03T23:47:25.444 : [6440]	Taille : 14008  -  PrismsListMessage
+2018-10-03T23:47:25.501 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-10-03T23:47:25.534 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-10-03T23:47:25.571 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-10-03T23:47:25.604 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-10-03T23:47:25.624 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-10-03T23:47:25.654 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-10-03T23:47:25.743 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-10-03T23:47:25.848 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-10-03T23:47:25.900 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-10-03T23:47:25.936 : [6317]	[Envoi] Sequence number
+2018-10-03T23:47:25.965 : [780]	Taille : 4  -  TextInformationMessage
+2018-10-03T23:47:26.030 : [780]	Taille : 27  -  TextInformationMessage
+2018-10-03T23:47:26.058 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-10-03T23:47:26.108 : [6205]	Taille : 32  -  AchievementListMessage
+2018-10-03T23:47:26.124 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-10-03T23:47:26.143 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-10-03T23:47:26.168 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-10-03T23:47:26.248 : [6585]	Taille : 6  -  IdolListMessage
+2018-10-03T23:47:26.269 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-10-03T23:47:26.283 : [6275]	Taille : 2  -  MailStatusMessage
+2018-10-03T23:47:26.301 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-10-03T23:47:26.320 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-10-03T23:47:26.344 : [6769]	Taille : 13  -  null
+2018-10-03T23:47:26.377 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-10-03T23:47:26.418 : [4001]	[Envoi] Friend list request
+2018-10-03T23:47:26.461 : [5676]	[Envoi] Ignored list request
+2018-10-03T23:47:26.475 : [6355]	[Envoi] Spouse list request
+2018-10-03T23:47:26.911 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:47:26.928 : [4002]	Taille : 2  -  FriendsListMessage
+2018-10-03T23:47:26.967 : [5607]	[Envoi] Client key
+2018-10-03T23:47:26.985 : [250]	[Envoi] Game context create request
+2018-10-03T23:47:27.017 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:47:27.072 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-10-03T23:47:27.085 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:47:27.106 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:47:27.526 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:47:27.536 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-10-03T23:47:27.552 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-10-03T23:47:27.566 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-10-03T23:47:27.583 : [220]	Taille : 42  -  CurrentMapMessage
+2018-10-03T23:47:27.590 : [225]	[Envoi] Map info request
+2018-10-03T23:47:27.637 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:47:27.649 : [500]	Taille : 377  -  CharacterStatsListMessage
+2018-10-03T23:47:27.668 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:47:28.077 : [226]	Taille : 984  -  MapComplementaryInformationsDataMessage
+2018-10-03T23:47:28.309 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:47:28.430 : [5734]	Taille : 37  -  HousePropertiesMessage
+2018-10-03T23:47:28.441 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:47:28.457 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:47:28.468 : [5734]	Taille : 70  -  HousePropertiesMessage
+2018-10-03T23:47:28.491 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-10-03T23:47:28.511 : [5734]	Taille : 31  -  HousePropertiesMessage
+2018-10-03T23:47:28.525 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:47:28.547 : [5734]	Taille : 30  -  HousePropertiesMessage
+2018-10-03T23:47:28.573 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:47:28.585 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:47:28.596 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:47:30.224 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:47:37.502 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:47:44.331 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:47:59.969 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:47:59.996 : [3]	Taille : 341  -  HelloConnectMessage
+2018-10-03T23:48:00.502 : [4]	[Envoi] Identification...
+2018-10-03T23:48:00.925 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:48:00.939 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-10-03T23:48:00.950 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:48:00.970 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:48:01.036 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-10-03T23:48:01.076 : [30]	Taille : 272  -  ServersListMessage
+2018-10-03T23:48:01.120 : [40]	[Envoi] Selection du serveur...
+2018-10-03T23:48:01.546 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-10-03T23:48:01.996 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:48:02.038 : [101]	Taille : 0  -  HelloGameMessage
+2018-10-03T23:48:02.171 : [110]	[Envoi] Authentification du ticket...
+2018-10-03T23:48:03.021 : [6253]	Taille : 88859  -  RawDataMessage
+2018-10-03T23:48:03.053 : [6372]	[Envoi] Check Integrity Message...
+2018-10-03T23:48:03.493 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-10-03T23:48:03.576 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:48:03.616 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-10-03T23:48:03.641 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-10-03T23:48:03.698 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-10-03T23:48:03.735 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-10-03T23:48:03.760 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-10-03T23:48:03.784 : [150]	[Envoi] Character list request
+2018-10-03T23:48:03.798 : [6769]	Taille : 22  -  null
+2018-10-03T23:48:04.210 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:48:04.231 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:48:04.248 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:48:04.342 : [151]	Taille : 58  -  CharactersListMessage
+2018-10-03T23:48:05.571 : [152]	[Envoi] Selection du personnage...
+2018-10-03T23:48:06.011 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:48:06.044 : [6087]	Taille : 2  -  otificationListMessage
+2018-10-03T23:48:06.058 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-10-03T23:48:06.088 : [1200]	Taille : 27  -  SpellListMessage
+2018-10-03T23:48:06.400 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-10-03T23:48:06.425 : [3016]	Taille : 571  -  InventoryContentMessage
+2018-10-03T23:48:06.451 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-10-03T23:48:06.470 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-10-03T23:48:06.508 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-10-03T23:48:06.534 : [5689]	Taille : 3  -  EmoteListMessage
+2018-10-03T23:48:06.546 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-10-03T23:48:06.578 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-10-03T23:48:06.607 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-10-03T23:48:06.632 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-10-03T23:48:06.650 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-10-03T23:48:06.661 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-10-03T23:48:06.678 : [6682]	Taille : 2  -  DareWonListMessage
+2018-10-03T23:48:06.692 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-10-03T23:48:06.741 : [6440]	Taille : 14008  -  PrismsListMessage
+2018-10-03T23:48:06.850 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-10-03T23:48:06.870 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-10-03T23:48:06.905 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-10-03T23:48:06.928 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-10-03T23:48:06.949 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-10-03T23:48:07.003 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-10-03T23:48:07.028 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-10-03T23:48:07.089 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-10-03T23:48:07.117 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-10-03T23:48:07.147 : [6317]	[Envoi] Sequence number
+2018-10-03T23:48:07.170 : [780]	Taille : 4  -  TextInformationMessage
+2018-10-03T23:48:07.225 : [780]	Taille : 27  -  TextInformationMessage
+2018-10-03T23:48:07.290 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-10-03T23:48:07.333 : [6205]	Taille : 32  -  AchievementListMessage
+2018-10-03T23:48:07.373 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-10-03T23:48:07.412 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-10-03T23:48:07.444 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-10-03T23:48:07.468 : [6585]	Taille : 6  -  IdolListMessage
+2018-10-03T23:48:07.500 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-10-03T23:48:07.545 : [6275]	Taille : 2  -  MailStatusMessage
+2018-10-03T23:48:07.573 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-10-03T23:48:07.584 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-10-03T23:48:07.605 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-10-03T23:48:07.621 : [4001]	[Envoi] Friend list request
+2018-10-03T23:48:07.650 : [5676]	[Envoi] Ignored list request
+2018-10-03T23:48:07.671 : [6355]	[Envoi] Spouse list request
+2018-10-03T23:48:07.705 : [6769]	Taille : 13  -  null
+2018-10-03T23:48:08.130 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:08.146 : [4002]	Taille : 2  -  FriendsListMessage
+2018-10-03T23:48:08.186 : [5607]	[Envoi] Client key
+2018-10-03T23:48:08.257 : [250]	[Envoi] Game context create request
+2018-10-03T23:48:08.277 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:08.314 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-10-03T23:48:08.329 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:08.350 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:08.863 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:08.889 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-10-03T23:48:08.978 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-10-03T23:48:09.015 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-10-03T23:48:09.120 : [220]	Taille : 42  -  CurrentMapMessage
+2018-10-03T23:48:09.132 : [225]	[Envoi] Map info request
+2018-10-03T23:48:09.276 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:48:09.284 : [500]	Taille : 377  -  CharacterStatsListMessage
+2018-10-03T23:48:09.352 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:09.809 : [226]	Taille : 984  -  MapComplementaryInformationsDataMessage
+2018-10-03T23:48:09.877 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:48:09.914 : [5734]	Taille : 37  -  HousePropertiesMessage
+2018-10-03T23:48:09.940 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:48:09.961 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:48:10.025 : [5734]	Taille : 70  -  HousePropertiesMessage
+2018-10-03T23:48:10.056 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-10-03T23:48:10.112 : [5734]	Taille : 31  -  HousePropertiesMessage
+2018-10-03T23:48:10.188 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:48:10.231 : [5734]	Taille : 30  -  HousePropertiesMessage
+2018-10-03T23:48:10.286 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:48:10.299 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:48:10.328 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:12.426 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:48:18.314 : [5001]	[Envoi] Open hdv
+2018-10-03T23:48:18.584 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-10-03T23:48:18.661 : [5904]	Taille : 85  -   ExchangeStartedBidBuyerMessage
+2018-10-03T23:48:18.709 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:18.818 : [5803]	[Envoi] Set hdv type to 1
+2018-10-03T23:48:19.266 : [5765]	Taille : 2  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:48:19.296 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:19.485 : [5898]	[Envoi] Request seller
+2018-10-03T23:48:19.725 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:48:19.758 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-10-03T23:48:19.784 : [5905]	Taille : 87  -  ExchangeStartedBidSellerMessage
+2018-10-03T23:48:19.805 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:48:26.659 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:49:31.115 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:49:31.159 : [3]	Taille : 341  -  HelloConnectMessage
+2018-10-03T23:49:32.023 : [4]	[Envoi] Identification...
+2018-10-03T23:49:32.451 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:49:32.475 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-10-03T23:49:32.492 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:49:32.508 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:49:32.522 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-10-03T23:49:32.540 : [30]	Taille : 272  -  ServersListMessage
+2018-10-03T23:49:32.571 : [40]	[Envoi] Selection du serveur...
+2018-10-03T23:49:32.999 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-10-03T23:49:33.458 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:49:33.488 : [101]	Taille : 0  -  HelloGameMessage
+2018-10-03T23:49:33.566 : [110]	[Envoi] Authentification du ticket...
+2018-10-03T23:49:34.420 : [6253]	Taille : 88859  -  RawDataMessage
+2018-10-03T23:49:34.460 : [6372]	[Envoi] Check Integrity Message...
+2018-10-03T23:49:34.879 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-10-03T23:49:34.897 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:49:34.923 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-10-03T23:49:34.947 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-10-03T23:49:34.973 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-10-03T23:49:34.994 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-10-03T23:49:35.014 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-10-03T23:49:35.024 : [150]	[Envoi] Character list request
+2018-10-03T23:49:35.045 : [6769]	Taille : 22  -  null
+2018-10-03T23:49:35.520 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:49:35.550 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:49:35.562 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:49:35.575 : [151]	Taille : 58  -  CharactersListMessage
+2018-10-03T23:49:38.244 : [152]	[Envoi] Selection du personnage...
+2018-10-03T23:49:38.661 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:49:38.677 : [6087]	Taille : 2  -  otificationListMessage
+2018-10-03T23:49:38.690 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-10-03T23:49:38.703 : [1200]	Taille : 27  -  SpellListMessage
+2018-10-03T23:49:38.750 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-10-03T23:49:38.766 : [3016]	Taille : 571  -  InventoryContentMessage
+2018-10-03T23:49:38.787 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-10-03T23:49:38.798 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-10-03T23:49:38.830 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-10-03T23:49:38.852 : [5689]	Taille : 3  -  EmoteListMessage
+2018-10-03T23:49:38.873 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-10-03T23:49:38.895 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-10-03T23:49:38.915 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-10-03T23:49:38.928 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-10-03T23:49:38.951 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-10-03T23:49:38.966 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-10-03T23:49:38.978 : [6682]	Taille : 2  -  DareWonListMessage
+2018-10-03T23:49:39.005 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-10-03T23:49:39.017 : [6440]	Taille : 14008  -  PrismsListMessage
+2018-10-03T23:49:39.055 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-10-03T23:49:39.115 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-10-03T23:49:39.143 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-10-03T23:49:39.166 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-10-03T23:49:39.189 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-10-03T23:49:39.203 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-10-03T23:49:39.215 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-10-03T23:49:39.227 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-10-03T23:49:39.236 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-10-03T23:49:39.247 : [6317]	[Envoi] Sequence number
+2018-10-03T23:49:39.257 : [780]	Taille : 4  -  TextInformationMessage
+2018-10-03T23:49:39.287 : [780]	Taille : 27  -  TextInformationMessage
+2018-10-03T23:49:39.306 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-10-03T23:49:39.319 : [6205]	Taille : 32  -  AchievementListMessage
+2018-10-03T23:49:39.348 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-10-03T23:49:39.366 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-10-03T23:49:39.378 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-10-03T23:49:39.413 : [6585]	Taille : 6  -  IdolListMessage
+2018-10-03T23:49:39.449 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-10-03T23:49:39.467 : [6275]	Taille : 2  -  MailStatusMessage
+2018-10-03T23:49:39.479 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-10-03T23:49:39.498 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-10-03T23:49:39.515 : [6769]	Taille : 13  -  null
+2018-10-03T23:49:39.546 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-10-03T23:49:39.563 : [4001]	[Envoi] Friend list request
+2018-10-03T23:49:39.584 : [5676]	[Envoi] Ignored list request
+2018-10-03T23:49:39.611 : [6355]	[Envoi] Spouse list request
+2018-10-03T23:49:40.028 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:40.048 : [4002]	Taille : 2  -  FriendsListMessage
+2018-10-03T23:49:40.075 : [5607]	[Envoi] Client key
+2018-10-03T23:49:40.090 : [250]	[Envoi] Game context create request
+2018-10-03T23:49:40.106 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:40.119 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-10-03T23:49:40.129 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:40.151 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:40.678 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:40.697 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-10-03T23:49:40.707 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-10-03T23:49:40.719 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-10-03T23:49:40.729 : [220]	Taille : 42  -  CurrentMapMessage
+2018-10-03T23:49:40.746 : [225]	[Envoi] Map info request
+2018-10-03T23:49:40.845 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:49:40.911 : [500]	Taille : 377  -  CharacterStatsListMessage
+2018-10-03T23:49:40.946 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:41.372 : [226]	Taille : 1153  -  MapComplementaryInformationsDataMessage
+2018-10-03T23:49:41.448 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:49:41.471 : [5734]	Taille : 37  -  HousePropertiesMessage
+2018-10-03T23:49:41.488 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:49:41.501 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:49:41.512 : [5734]	Taille : 70  -  HousePropertiesMessage
+2018-10-03T23:49:41.524 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-10-03T23:49:41.536 : [5734]	Taille : 31  -  HousePropertiesMessage
+2018-10-03T23:49:41.547 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:49:41.561 : [5734]	Taille : 30  -  HousePropertiesMessage
+2018-10-03T23:49:41.572 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:49:41.585 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:49:41.592 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:43.621 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:49:48.163 : [5632]	Taille : 129  -  GameRolePlayShowActorMessage
+2018-10-03T23:49:49.612 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:49:49.627 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:49:50.091 : [5001]	[Envoi] Open hdv
+2018-10-03T23:49:50.469 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-10-03T23:49:50.674 : [5904]	Taille : 85  -   ExchangeStartedBidBuyerMessage
+2018-10-03T23:49:50.703 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:50.716 : [5803]	[Envoi] Set hdv type to 1
+2018-10-03T23:49:51.208 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:49:51.417 : [5765]	Taille : 2  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:49:51.564 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:52.014 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-10-03T23:49:52.715 : [5898]	[Envoi] Request seller
+2018-10-03T23:49:52.833 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-10-03T23:49:52.859 : [5905]	Taille : 87  -  ExchangeStartedBidSellerMessage
+2018-10-03T23:49:52.885 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:55.544 : [5898]	[Envoi] Request buyer
+2018-10-03T23:49:55.723 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-10-03T23:49:55.733 : [5904]	Taille : 85  -   ExchangeStartedBidBuyerMessage
+2018-10-03T23:49:55.747 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:55.807 : [5803]	[Envoi] Request type sell 46
+2018-10-03T23:49:56.168 : [5765]	Taille : 22  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:49:56.244 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:56.465 : [5803]	[Envoi] Change to type 38
+2018-10-03T23:49:56.925 : [5765]	Taille : 27  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:49:56.936 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:56.947 : [5807]	[Envoi] Request list prices item 473
+2018-10-03T23:49:57.348 : [5752]	Taille : 13  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-10-03T23:49:57.363 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:49:57.787 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:50:00.631 : [5632]	Taille : 135  -  GameRolePlayShowActorMessage
+2018-10-03T23:50:02.325 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:50:02.367 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:50:04.844 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:50:06.461 : [5632]	Taille : 107  -  GameRolePlayShowActorMessage
+2018-10-03T23:50:06.477 : [5632]	Taille : 107  -  GameRolePlayShowActorMessage
+2018-10-03T23:50:06.501 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:50:06.519 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:50:11.747 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:50:13.016 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:50:13.097 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:50:14.709 : [951]	Taille : 64  -  GameMapMovementMessage
+2018-10-03T23:51:56.227 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:51:56.245 : [3]	Taille : 341  -  HelloConnectMessage
+2018-10-03T23:51:56.534 : [4]	[Envoi] Identification...
+2018-10-03T23:51:56.945 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:51:56.954 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-10-03T23:51:56.965 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:51:56.975 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-10-03T23:51:56.984 : [30]	Taille : 272  -  ServersListMessage
+2018-10-03T23:51:57.004 : [40]	[Envoi] Selection du serveur...
+2018-10-03T23:51:57.414 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-10-03T23:51:57.853 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:51:57.861 : [101]	Taille : 0  -  HelloGameMessage
+2018-10-03T23:51:57.884 : [110]	[Envoi] Authentification du ticket...
+2018-10-03T23:51:58.702 : [6253]	Taille : 88859  -  RawDataMessage
+2018-10-03T23:51:58.712 : [6372]	[Envoi] Check Integrity Message...
+2018-10-03T23:51:59.124 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-10-03T23:51:59.134 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:51:59.145 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-10-03T23:51:59.154 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-10-03T23:51:59.165 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-10-03T23:51:59.172 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-10-03T23:51:59.183 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-10-03T23:51:59.190 : [150]	[Envoi] Character list request
+2018-10-03T23:51:59.222 : [6769]	Taille : 22  -  null
+2018-10-03T23:51:59.632 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:51:59.641 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:51:59.651 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:51:59.660 : [151]	Taille : 58  -  CharactersListMessage
+2018-10-03T23:52:02.143 : [152]	[Envoi] Selection du personnage...
+2018-10-03T23:52:02.550 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:52:02.566 : [6087]	Taille : 2  -  otificationListMessage
+2018-10-03T23:52:02.579 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-10-03T23:52:02.589 : [1200]	Taille : 27  -  SpellListMessage
+2018-10-03T23:52:02.825 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-10-03T23:52:02.834 : [3016]	Taille : 571  -  InventoryContentMessage
+2018-10-03T23:52:02.844 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-10-03T23:52:02.855 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-10-03T23:52:02.863 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-10-03T23:52:02.872 : [5689]	Taille : 3  -  EmoteListMessage
+2018-10-03T23:52:02.885 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-10-03T23:52:02.896 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-10-03T23:52:02.914 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-10-03T23:52:02.932 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-10-03T23:52:02.944 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-10-03T23:52:02.961 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-10-03T23:52:02.990 : [6682]	Taille : 2  -  DareWonListMessage
+2018-10-03T23:52:02.999 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-10-03T23:52:03.009 : [6440]	Taille : 14008  -  PrismsListMessage
+2018-10-03T23:52:03.021 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-10-03T23:52:03.028 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-10-03T23:52:03.039 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-10-03T23:52:03.056 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-10-03T23:52:03.065 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-10-03T23:52:03.072 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-10-03T23:52:03.093 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-10-03T23:52:03.108 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-10-03T23:52:03.117 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-10-03T23:52:03.124 : [6317]	[Envoi] Sequence number
+2018-10-03T23:52:03.133 : [780]	Taille : 4  -  TextInformationMessage
+2018-10-03T23:52:03.152 : [780]	Taille : 27  -  TextInformationMessage
+2018-10-03T23:52:03.181 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-10-03T23:52:03.189 : [6205]	Taille : 32  -  AchievementListMessage
+2018-10-03T23:52:03.203 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-10-03T23:52:03.251 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-10-03T23:52:03.258 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-10-03T23:52:03.267 : [6585]	Taille : 6  -  IdolListMessage
+2018-10-03T23:52:03.276 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-10-03T23:52:03.286 : [6275]	Taille : 2  -  MailStatusMessage
+2018-10-03T23:52:03.294 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-10-03T23:52:03.302 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-10-03T23:52:03.310 : [6769]	Taille : 13  -  null
+2018-10-03T23:52:03.321 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-10-03T23:52:03.337 : [4001]	[Envoi] Friend list request
+2018-10-03T23:52:03.344 : [5676]	[Envoi] Ignored list request
+2018-10-03T23:52:03.350 : [6355]	[Envoi] Spouse list request
+2018-10-03T23:52:03.757 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:03.766 : [4002]	Taille : 2  -  FriendsListMessage
+2018-10-03T23:52:03.785 : [5607]	[Envoi] Client key
+2018-10-03T23:52:03.797 : [250]	[Envoi] Game context create request
+2018-10-03T23:52:03.808 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:03.823 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-10-03T23:52:03.845 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:04.287 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:04.293 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:04.302 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-10-03T23:52:04.310 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-10-03T23:52:04.318 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-10-03T23:52:04.330 : [220]	Taille : 42  -  CurrentMapMessage
+2018-10-03T23:52:04.338 : [225]	[Envoi] Map info request
+2018-10-03T23:52:04.363 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:52:04.371 : [500]	Taille : 377  -  CharacterStatsListMessage
+2018-10-03T23:52:04.384 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:04.791 : [226]	Taille : 1115  -  MapComplementaryInformationsDataMessage
+2018-10-03T23:52:04.821 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:52:04.833 : [5734]	Taille : 37  -  HousePropertiesMessage
+2018-10-03T23:52:04.841 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:52:04.849 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:52:04.869 : [5734]	Taille : 70  -  HousePropertiesMessage
+2018-10-03T23:52:04.881 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-10-03T23:52:04.900 : [5734]	Taille : 31  -  HousePropertiesMessage
+2018-10-03T23:52:04.912 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:52:04.920 : [5734]	Taille : 30  -  HousePropertiesMessage
+2018-10-03T23:52:04.928 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:52:04.939 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:52:04.951 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:04.960 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:52:04.969 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:52:06.180 : [951]	Taille : 32  -  GameMapMovementMessage
+2018-10-03T23:52:07.416 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-10-03T23:52:09.827 : [5632]	Taille : 115  -  GameRolePlayShowActorMessage
+2018-10-03T23:52:10.644 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:52:11.051 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:52:11.060 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:52:11.867 : [951]	Taille : 48  -  GameMapMovementMessage
+2018-10-03T23:52:12.275 : [951]	Taille : 14  -  GameMapMovementMessage
+2018-10-03T23:52:12.318 : [951]	Taille : 42  -  GameMapMovementMessage
+2018-10-03T23:52:15.557 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-10-03T23:52:15.737 : [5001]	[Envoi] Open hdv
+2018-10-03T23:52:15.971 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-10-03T23:52:15.981 : [5904]	Taille : 85  -   ExchangeStartedBidBuyerMessage
+2018-10-03T23:52:15.992 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:16.008 : [5803]	[Envoi] Set hdv type to 1
+2018-10-03T23:52:16.408 : [5765]	Taille : 2  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:52:16.418 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:17.626 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:52:19.264 : [5898]	[Envoi] Request seller
+2018-10-03T23:52:19.649 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-10-03T23:52:19.655 : [5905]	Taille : 87  -  ExchangeStartedBidSellerMessage
+2018-10-03T23:52:19.664 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:21.231 : [5898]	[Envoi] Request buyer
+2018-10-03T23:52:21.274 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-10-03T23:52:21.683 : [5904]	Taille : 85  -   ExchangeStartedBidBuyerMessage
+2018-10-03T23:52:21.690 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:21.852 : [5803]	[Envoi] Request type sell 46
+2018-10-03T23:52:22.098 : [5765]	Taille : 22  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:52:22.108 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:22.118 : [5803]	[Envoi] Change to type 38
+2018-10-03T23:52:22.519 : [5765]	Taille : 27  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:52:22.539 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:22.548 : [5807]	[Envoi] Request list prices item 473
+2018-10-03T23:52:22.948 : [5752]	Taille : 13  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-10-03T23:52:22.960 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:22.969 : [5804]	[Envoi] Buy resource : 473
+2018-10-03T23:52:23.374 : [5537]	Taille : 2  -  KamasUpdateMessage
+2018-10-03T23:52:23.382 : [3025]	Taille : 12  -  ObjectAddedMessage
+2018-10-03T23:52:23.390 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-10-03T23:52:23.399 : [780]	Taille : 26  -  TextInformationMessage
+2018-10-03T23:52:23.411 : [6272]	Taille : 4  -  ExchangeBidHouseBuyResultMessage
+2018-10-03T23:52:23.423 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:24.630 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:52:31.847 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:52:34.259 : [5816]	Taille : 0  -  BasicLatencyStatsRequestMessage
+2018-10-03T23:52:34.266 : [5663]	[Envoi] Latency message
+2018-10-03T23:52:34.677 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:52:38.691 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:52:45.910 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:52:48.328 : [5632]	Taille : 92  -  GameRolePlayShowActorMessage
+2018-10-03T23:52:48.734 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:52:49.142 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:52:49.549 : [951]	Taille : 40  -  GameMapMovementMessage
+2018-10-03T23:52:49.956 : [951]	Taille : 14  -  GameMapMovementMessage
+2018-10-03T23:52:50.363 : [951]	Taille : 30  -  GameMapMovementMessage
+2018-10-03T23:52:51.972 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-10-03T23:52:52.785 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:52:58.412 : [5632]	Taille : 129  -  GameRolePlayShowActorMessage
+2018-10-03T23:52:59.620 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:52:59.630 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:52:59.641 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:53:00.862 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-10-03T23:59:12.680 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:59:12.705 : [3]	Taille : 341  -  HelloConnectMessage
+2018-10-03T23:59:12.997 : [4]	[Envoi] Identification...
+2018-10-03T23:59:13.406 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:59:13.417 : [6314]	Taille : 0  -  CredentialsAcknowledgementMessage
+2018-10-03T23:59:13.427 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:59:13.435 : [10]	Taille : 4  -  LoginQueueStatusMessage
+2018-10-03T23:59:13.445 : [22]	Taille : 57  -  IdentificationSuccessMessage
+2018-10-03T23:59:13.456 : [30]	Taille : 272  -  ServersListMessage
+2018-10-03T23:59:13.475 : [40]	[Envoi] Selection du serveur...
+2018-10-03T23:59:13.885 : [42]	Taille : 62  -  SelectedServerDataMessage
+2018-10-03T23:59:14.322 : [1]	Taille : 8  -  ProtocolRequired
+2018-10-03T23:59:14.334 : [101]	Taille : 0  -  HelloGameMessage
+2018-10-03T23:59:14.365 : [110]	[Envoi] Authentification du ticket...
+2018-10-03T23:59:15.177 : [6253]	Taille : 88859  -  RawDataMessage
+2018-10-03T23:59:15.190 : [6372]	[Envoi] Check Integrity Message...
+2018-10-03T23:59:15.607 : [111]	Taille : 0  -  AuthenticationTicketAcceptedMessage
+2018-10-03T23:59:15.621 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:59:15.631 : [6340]	Taille : 12  -  ServerSettingsMessage
+2018-10-03T23:59:15.640 : [6305]	Taille : 7  -  ServerOptionalFeaturesMessage
+2018-10-03T23:59:15.649 : [6434]	Taille : 67  -  ServerSessionConstantsMessage
+2018-10-03T23:59:15.656 : [6216]	Taille : 20  -  AccountCapabilitiesMessage
+2018-10-03T23:59:15.668 : [6267]	Taille : 1  -  TrustStatusMessage
+2018-10-03T23:59:15.684 : [150]	[Envoi] Character list request
+2018-10-03T23:59:15.693 : [6769]	Taille : 22  -  null
+2018-10-03T23:59:16.103 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:59:16.113 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:59:16.126 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:59:16.134 : [151]	Taille : 58  -  CharactersListMessage
+2018-10-03T23:59:21.222 : [152]	[Envoi] Selection du personnage...
+2018-10-03T23:59:21.630 : [6100]	Taille : 4  -  QueueStatusMessage
+2018-10-03T23:59:21.637 : [6087]	Taille : 2  -  otificationListMessage
+2018-10-03T23:59:21.644 : [153]	Taille : 54  -  CharacterSelectedSuccessMessage
+2018-10-03T23:59:21.656 : [1200]	Taille : 27  -  SpellListMessage
+2018-10-03T23:59:21.869 : [6231]	Taille : 22  -  ShortcutBarContentMessage
+2018-10-03T23:59:21.881 : [3016]	Taille : 582  -  InventoryContentMessage
+2018-10-03T23:59:21.893 : [6231]	Taille : 3  -  ShortcutBarContentMessage
+2018-10-03T23:59:21.904 : [6630]	Taille : 1  -  RoomAvailableUpdateMessage
+2018-10-03T23:59:21.920 : [6620]	Taille : 4  -  HavenBagPackListMessage
+2018-10-03T23:59:21.935 : [5689]	Taille : 3  -  EmoteListMessage
+2018-10-03T23:59:21.948 : [5655]	Taille : 239  -  JobDescriptionMessage
+2018-10-03T23:59:21.959 : [5809]	Taille : 97  -  JobExperienceMultiUpdateMessage
+2018-10-03T23:59:21.975 : [5652]	Taille : 62  -  JobCrafterDirectorySettingsMessage
+2018-10-03T23:59:21.985 : [6058]	Taille : 2  -  AlignmentRankUpdateMessage
+2018-10-03T23:59:21.992 : [6663]	Taille : 4  -  DareCreatedListMessage
+2018-10-03T23:59:22.002 : [6658]	Taille : 4  -  DareSubscribedListMessage
+2018-10-03T23:59:22.012 : [6682]	Taille : 2  -  DareWonListMessage
+2018-10-03T23:59:22.025 : [6677]	Taille : 2  -  DareRewardsListMessage
+2018-10-03T23:59:22.040 : [6440]	Taille : 14008  -  PrismsListMessage
+2018-10-03T23:59:22.051 : [892]	Taille : 17  -  EnabledChannelsMessage
+2018-10-03T23:59:22.061 : [6730]	Taille : 2  -  ChatCommunityChannelCommunityMessage
+2018-10-03T23:59:22.074 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-10-03T23:59:22.088 : [5630]	Taille : 1  -   FriendWarnOnConnectionStateMessage
+2018-10-03T23:59:22.109 : [6078]	Taille : 1  -   FriendWarnOnLevelGainStateMessage
+2018-10-03T23:59:22.144 : [6383]	Taille : 1  -  FriendGuildWarnOnAchievementCompleteStateMessage
+2018-10-03T23:59:22.182 : [6513]	Taille : 1  -  WarnOnPermaDeathStateMessage
+2018-10-03T23:59:22.196 : [6160]	Taille : 1  -  GuildMemberWarnOnConnectionStateMessage
+2018-10-03T23:59:22.211 : [6316]	Taille : 0  -  SequenceNumberRequestMessage
+2018-10-03T23:59:22.229 : [6317]	[Envoi] Sequence number
+2018-10-03T23:59:22.238 : [780]	Taille : 4  -  TextInformationMessage
+2018-10-03T23:59:22.256 : [780]	Taille : 27  -  TextInformationMessage
+2018-10-03T23:59:22.270 : [6265]	Taille : 1  -  SpouseStatusMessage
+2018-10-03T23:59:22.286 : [6205]	Taille : 32  -  AchievementListMessage
+2018-10-03T23:59:22.298 : [6728]	Taille : 20  -  GameRolePlayArenaUpdatePlayerInfosAllQueuesMessage
+2018-10-03T23:59:22.306 : [6339]	Taille : 2  -  CharacterCapabilitiesMessage
+2018-10-03T23:59:22.324 : [6341]	Taille : 4  -  AlmanachCalendarDateMessage
+2018-10-03T23:59:22.334 : [6585]	Taille : 6  -  IdolListMessage
+2018-10-03T23:59:22.344 : [6321]	Taille : 4  -  CharacterExperienceGainMessage
+2018-10-03T23:59:22.357 : [6275]	Taille : 2  -  MailStatusMessage
+2018-10-03T23:59:22.367 : [6315]	Taille : 2  -  AccountHouseMessage
+2018-10-03T23:59:22.377 : [6471]	Taille : 0  -  CharacterLoadingCompleteMessage
+2018-10-03T23:59:22.391 : [1301]	Taille : 2  -  StartupActionsListMessage
+2018-10-03T23:59:22.401 : [4001]	[Envoi] Friend list request
+2018-10-03T23:59:22.411 : [5676]	[Envoi] Ignored list request
+2018-10-03T23:59:22.419 : [6355]	[Envoi] Spouse list request
+2018-10-03T23:59:22.441 : [6769]	Taille : 13  -  null
+2018-10-03T23:59:22.853 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:22.862 : [4002]	Taille : 2  -  FriendsListMessage
+2018-10-03T23:59:22.883 : [5607]	[Envoi] Client key
+2018-10-03T23:59:22.890 : [250]	[Envoi] Game context create request
+2018-10-03T23:59:22.898 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:22.906 : [5674]	Taille : 2  -  IgnoredListMessage
+2018-10-03T23:59:22.914 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:22.922 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:23.331 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:23.339 : [201]	Taille : 0  -  GameContextDestroyMessage
+2018-10-03T23:59:23.347 : [200]	Taille : 1  -  GameContextCreateMessage
+2018-10-03T23:59:23.357 : [5684]	Taille : 1  -  LifePointsRegenBeginMessage
+2018-10-03T23:59:23.364 : [220]	Taille : 42  -  CurrentMapMessage
+2018-10-03T23:59:23.372 : [225]	[Envoi] Map info request
+2018-10-03T23:59:23.401 : [175]	Taille : 10  -  BasicTimeMessage
+2018-10-03T23:59:23.410 : [500]	Taille : 377  -  CharacterStatsListMessage
+2018-10-03T23:59:23.424 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:23.831 : [226]	Taille : 1013  -  MapComplementaryInformationsDataMessage
+2018-10-03T23:59:23.866 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:59:23.876 : [5734]	Taille : 37  -  HousePropertiesMessage
+2018-10-03T23:59:23.886 : [5734]	Taille : 32  -  HousePropertiesMessage
+2018-10-03T23:59:23.894 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:59:23.901 : [5734]	Taille : 70  -  HousePropertiesMessage
+2018-10-03T23:59:23.911 : [5734]	Taille : 55  -  HousePropertiesMessage
+2018-10-03T23:59:23.918 : [5734]	Taille : 31  -  HousePropertiesMessage
+2018-10-03T23:59:23.925 : [5734]	Taille : 25  -  HousePropertiesMessage
+2018-10-03T23:59:23.933 : [5734]	Taille : 30  -  HousePropertiesMessage
+2018-10-03T23:59:23.940 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:59:23.947 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:59:23.954 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:25.164 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:59:27.175 : [5632]	Taille : 216  -  GameRolePlayShowActorMessage
+2018-10-03T23:59:30.388 : [6454]	Taille : 11  -  UpdateMapPlayersAgressableStatusMessage
+2018-10-03T23:59:30.394 : [170]	Taille : 11  -  SetCharacterRestrictionsMessage
+2018-10-03T23:59:31.604 : [951]	Taille : 54  -  GameMapMovementMessage
+2018-10-03T23:59:32.190 : [5001]	[Envoi] Open hdv
+2018-10-03T23:59:32.410 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-10-03T23:59:32.418 : [5904]	Taille : 85  -   ExchangeStartedBidBuyerMessage
+2018-10-03T23:59:32.431 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:32.437 : [5803]	[Envoi] Set hdv type to 1
+2018-10-03T23:59:32.840 : [5765]	Taille : 2  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:59:32.851 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:32.863 : [951]	Taille : 40  -  GameMapMovementMessage
+2018-10-03T23:59:33.185 : [5898]	[Envoi] Request seller
+2018-10-03T23:59:33.276 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-10-03T23:59:33.283 : [5905]	Taille : 87  -  ExchangeStartedBidSellerMessage
+2018-10-03T23:59:33.299 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:34.116 : [951]	Taille : 14  -  GameMapMovementMessage
+2018-10-03T23:59:34.126 : [951]	Taille : 26  -  GameMapMovementMessage
+2018-10-03T23:59:34.942 : [951]	Taille : 14  -  GameMapMovementMessage
+2018-10-03T23:59:34.950 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:59:35.366 : [5745]	Taille : 13  -  InteractiveUsedMessage
+2018-10-03T23:59:36.177 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-10-03T23:59:36.983 : [951]	Taille : 18  -  GameMapMovementMessage
+2018-10-03T23:59:37.682 : [5898]	[Envoi] Request buyer
+2018-10-03T23:59:37.791 : [5628]	Taille : 2  -  ExchangeLeaveMessage
+2018-10-03T23:59:37.808 : [5904]	Taille : 85  -   ExchangeStartedBidBuyerMessage
+2018-10-03T23:59:37.820 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:37.938 : [5803]	[Envoi] Request type sell 46
+2018-10-03T23:59:38.229 : [5765]	Taille : 22  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:59:38.235 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:38.243 : [5803]	[Envoi] Change to type 38
+2018-10-03T23:59:38.249 : [251]	Taille : 8  -  GameContextRemoveElementMessage
+2018-10-03T23:59:38.656 : [5765]	Taille : 27  -  ExchangeTypesExchangerDescriptionForUserMessage
+2018-10-03T23:59:38.665 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:38.671 : [5807]	[Envoi] Request list prices item 473
+2018-10-03T23:59:39.071 : [5752]	Taille : 13  -  ExchangeTypesItemsExchangerDescriptionForUserMessage
+2018-10-03T23:59:39.081 : [5804]	[Envoi] Buy resource : 473
+2018-10-03T23:59:39.091 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:39.098 : [951]	Taille : 16  -  GameMapMovementMessage
+2018-10-03T23:59:39.507 : [5537]	Taille : 2  -  KamasUpdateMessage
+2018-10-03T23:59:39.514 : [3023]	Taille : 6  -  ObjectQuantityMessage
+2018-10-03T23:59:39.525 : [3009]	Taille : 3  -  InventoryWeightMessage
+2018-10-03T23:59:39.533 : [780]	Taille : 26  -  TextInformationMessage
+2018-10-03T23:59:39.546 : [6272]	Taille : 4  -  ExchangeBidHouseBuyResultMessage
+2018-10-03T23:59:39.553 : [176]	Taille : 0  -  BasicNoOperationMessage
+2018-10-03T23:59:45.968 : [951]	Taille : 16  -  GameMapMovementMessage
