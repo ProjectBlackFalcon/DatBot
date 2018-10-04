@@ -1,5 +1,5 @@
 import pyximport; pyximport.install()
-from cPathFinder import PathFinder
+from cPathfinder import PathFinder
 from Hunt import Hunt
 from DD import DD
 import json
