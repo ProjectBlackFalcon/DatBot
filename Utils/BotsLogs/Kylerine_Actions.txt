@@ -48,3 +48,37 @@
 2018-09-30T23:06:35.260 : [getHdvItemStats] : inExchange : true, id : 1:[14810,14878,14884,14929,15064,15189,15195],2:[15014],11:[14803,14881,14931,14933,15010,15017,15100,15188,15191,15194,15196],4:[14640],17:[14885,14937,15013,15016,15061,15184],9:[14639,14806,14879,14882,14932,15011,15059,15187,15190,15193],10:[14638,14644,14798,14930,15009,15060,15063,15099,15185],7:[14886],16:[14637,14809,14877,14880,14883,14934,14967,15012,15015,15062,15157,15183,15186,15192],177:[14634,14641,14642,14643,14796,14797,14799,14800,14801,14802,14804,14805,14807,15097,15098,15116,15117,15122,15123,15124,15125,15158,15159],82:[14636],169:[14961,14962,14963,14964,14965,14966,14984,14985,14986,14987,14988,14989,15018,15094,15160,15161]
 2018-09-30T23:06:57.921 : [Executed in ] : 22665
 2018-09-30T23:07:31.037 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-10-03T23:47:14.256 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-10-03T23:47:26.020 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-10-03T23:47:26.048 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 10 03 23 41 
+2018-10-03T23:47:27.599 : [CurrentMapMessage] : Sending map request
+2018-10-03T23:47:29.157 : [Executed in ] : 16719
+2018-10-03T23:47:59.299 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-10-03T23:48:07.209 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-10-03T23:48:07.271 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 10 03 23 47 
+2018-10-03T23:48:09.175 : [CurrentMapMessage] : Sending map request
+2018-10-03T23:48:18.288 : [openHdv] : map : [4,-17], mapid : 191104004, cellid : 195, interactive : 515220, skillid : 65744904
+2018-10-03T23:48:20.147 : [Executed in ] : 1862
+2018-10-03T23:49:30.328 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-10-03T23:49:39.267 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-10-03T23:49:39.296 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 10 03 23 48 
+2018-10-03T23:49:40.762 : [CurrentMapMessage] : Sending map request
+2018-10-03T23:49:50.051 : [openHdv] : map : [4,-17], mapid : 191104004, cellid : 195, interactive : 515220, skillid : 65744904
+2018-10-03T23:49:54.159 : [Executed in ] : 4118
+2018-10-03T23:49:57.370 : [Executed in ] : 1827
+2018-10-03T23:51:55.683 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-10-03T23:52:03.142 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-10-03T23:52:03.166 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 10 03 23 49 
+2018-10-03T23:52:04.343 : [CurrentMapMessage] : Sending map request
+2018-10-03T23:52:15.730 : [openHdv] : map : [4,-17], mapid : 191104004, cellid : 195, interactive : 515220, skillid : 65744904
+2018-10-03T23:52:20.489 : [Executed in ] : 4760
+2018-10-03T23:52:23.405 : [TextInformationMessage : %3 x {item,%1,%2} ($quantity%4 kamas)] : 473 58631449 1 2 
+2018-10-03T23:52:32.979 : [Executed in ] : 11748
+2018-10-03T23:59:12.137 : [connect] : nameAccount : trevored, password : loltacru, name : Kylerine, server : Julith
+2018-10-03T23:59:22.249 : [TextInformationMessage : Vos alliés attaquent en ce moment la zone $area%1. Ils ont certainement besoin de votre aide.] : 
+2018-10-03T23:59:22.263 : [TextInformationMessage : Précédente connexion sur ce compte : %3/%2/%1 à %4:%5] : 2018 10 03 23 52 
+2018-10-03T23:59:23.380 : [CurrentMapMessage] : Sending map request
+2018-10-03T23:59:32.182 : [openHdv] : map : [4,-17], mapid : 191104004, cellid : 195, interactive : 515220, skillid : 65744904
+2018-10-03T23:59:33.779 : [Executed in ] : 1599
+2018-10-03T23:59:39.539 : [TextInformationMessage : %3 x {item,%1,%2} ($quantity%4 kamas)] : 473 58829780 1 2 
+2018-10-03T23:59:39.554 : [Executed in ] : 1873
