@@ -170,12 +170,13 @@ class DS:
                 item_ids.append(int(item_id))
         return item_ids
 
-    def items_sold_last_period(self, server, hours, lvl_min=0, lvl_max=200):
+    def items_sold_last_period(self, server, hours, item_id_list=None, lvl_min=0, lvl_max=200):
         min_date = datetime.datetime.fromtimestamp(time.time() - hours * 3600)
-        ids = self.item_ids_from_level(lvl_min, lvl_max)
+        ids = self.item_ids_from_level(lvl_min, lvl_max) if item_id_list is None else item_id_list
         return self.database.sold_items_from_id(server, ids, min_date)
 
     def estimate_item_cost(self, server, item_id_list, item=None):
+        # TODO
         items = self.database.items_from_id(server, item_id_list)[['Price', 'Stats']]
         items.Stats = items.Stats.apply(lambda row: {stat[0]: stat[1] for stat in ast.literal_eval(row) if len(stat) == 2 and stat[0] not in (1151, 1152)})
         prices = items.Price.reset_index(drop=True)
@@ -192,11 +193,18 @@ class DS:
         cvres = np.sqrt(-cvres)
         print(cvres, cvres.mean(), cvres.std())
 
+    def items_turnover(self, server, period_in_hours, item_id_list=None, lvl_min=0, lvl_max=200):
+        ids = self.item_ids_from_level(lvl_min, lvl_max) if item_id_list is None else item_id_list
+        values = self.items_sold_last_period(server, period_in_hours, ids).groupby('ItemId').count().Price.sort_values(ascending=False) / (period_in_hours / 24)
+        values = pd.DataFrame(values)
+        values['Name'] = pd.Series({item_id: self.resources.id2names[str(item_id)] for item_id in ids})
+        return values
+
 
 if __name__ == '__main__':
     ds = DS(Resources())
     start = time.time()
-    ds.estimate_item_cost('Julith', 8876)
+    print(ds.items_turnover('Julith', 48, lvl_min=200, lvl_max=200).iloc[:10])
     print(time.time() - start)
 
 # TODO items sold last day/week
