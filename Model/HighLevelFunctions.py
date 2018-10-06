@@ -1,11 +1,13 @@
 import pyximport; pyximport.install()
-from cPathfinder import PathFinder
+from Pathfinder import PathFinder
 from Hunt import Hunt
 from DD import DD
 import json
 import time
 import datetime
 import traceback
+import pandas as pd
+from math import ceil
 
 
 class HighLevelFunctions:
@@ -1014,5 +1016,51 @@ class HighLevelFunctions:
         self.get_hdv_prices('Runes', batch_id)
         self.get_hdv_prices('Consommables', batch_id)
 
+    def buy_ingredients(self, item_id_list):
+        item_id_list = [item_id_list] if type(item_id_list) is int else item_id_list
+        recipes = []
+        ingredients = {}
+        for item_id in item_id_list:
+            for recipe in self.bot.resources.recipes:
+                if item_id == recipe['resultId']:
+                    recipes.append(recipe)
+                    for ingredient, quantity in recipe['Ingredients']:
+                        if ingredient in ingredients.keys():
+                            ingredients[ingredient] += quantity
+                        else:
+                            ingredients[ingredient] = quantity
+
+        grocery_list = pd.DataFrame()
+        grocery_list['Ingredients'] = pd.Series(ingredients)
+
+        grocery_list['Hdv'] = [self.bot.resources.id2hdv[str(ingredient_id)] for ingredient_id in list(grocery_list.index)]
+        ingredient_items = grocery_list[grocery_list.Hdv == 'Equipements'].index.tolist()
+        items = self.bot.ds.database.items_from_id(self.bot.credentials['server'], ingredient_items).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
+        grocery_list['Price'] = items.groupby('ItemId')['Price'].min().append(self.bot.ds.database.resources_from_id(self.bot.credentials['server'], grocery_list['Ingredients'].index.tolist()).Price1)
+
+        grocery_list['Batch1'] = grocery_list.Ingredients.apply(lambda ingredient: ingredient if ingredient < 5 else 0)
+        grocery_list['Batch10'] = grocery_list.Ingredients.apply(lambda ingredient: ceil(ingredient / 10) - 10 * int(ingredient / 100) if ingredient >= 5 else 0)
+        grocery_list['Batch100'] = grocery_list.Ingredients.apply(lambda ingredient: ingredient // 100)
+
+        stores = set(grocery_list['Hdv'].tolist())
+        items_bought = {}
+        for store in stores:
+            self.goto(self.bot.llf.closest_coord(self.bot.position[0], self.bot.resources.hdv_pos[store]))
+            self.bot.interface.open_hdv()
+            for item in grocery_list[grocery_list.Hdv == store].iterrows():
+                item_id = item[0]
+                for batch in ['Batch1', 'Batch10', 'Batch100']:
+                    if item[1][batch]:
+                        number_bought, money_spent = self.bot.interface.buy_resource(item_id, int(batch.replace('Batch', '')), item[1][batch], int(item[1].Price * 1.5))
+                        if item_id in items_bought.keys():
+                            items_bought[item_id] = [items_bought[item_id][0] + number_bought, items_bought[item_id][1] + money_spent]
+                        else:
+                            items_bought[item_id] = [number_bought, money_spent]
+            self.bot.interface.close_hdv()
+        items_bought = pd.DataFrame(items_bought)
+
+        # TODO determining which items are actually craftable, and for which price
+        # TODO Eventually sell remaining resources
+        # print(grocery_list)
 
 __author__ = 'Alexis'
