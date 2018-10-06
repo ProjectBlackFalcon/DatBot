@@ -3,6 +3,7 @@ from HighLevelFunctions import HighLevelFunctions
 from LowLevelFunctions import LowLevelFunctions
 from Inventory import Inventory
 from Characteristics import Characteristics
+from DataScienceShit import DS
 
 
 class Bot:
@@ -14,6 +15,7 @@ class Bot:
         self.llf = llf  # type: LowLevelFunctions
         self.resources = resources
         self.hf = HighLevelFunctions(self)
+        self.ds = DS(self.resources)
         self.occupation = None
         self.position = None
         self.connected = False
