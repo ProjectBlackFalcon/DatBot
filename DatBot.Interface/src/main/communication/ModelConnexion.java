@@ -947,7 +947,7 @@ public class ModelConnexion {
 						int uid = (int) this.network.getHdv().getItemUidRessource();
 						ExchangeBidHouseBuyMessage exchangeBidHouseBuyMessage = new ExchangeBidHouseBuyMessage(uid, batchSize, price);
 						getNetwork().sendToServer(exchangeBidHouseBuyMessage, ExchangeBidHouseBuyMessage.ProtocolId, "Buy resource : " + itemId);
-						if (this.waitToSendHdv()) {
+						if (this.waitKamasSpent()) {
 							moneySpent += price;
 							itemBought += batchSize;
 						} else {
@@ -2297,6 +2297,15 @@ public class ModelConnexion {
 	public boolean waitToSendHdv() throws InterruptedException {
 		long index = System.currentTimeMillis();
 		while (!this.network.getInfo().isExchangeBidSeller()) {
+			Thread.sleep(1);
+			if (System.currentTimeMillis() - index > 10000) { return false; }
+		}
+		return true;
+	}
+	
+	public boolean waitKamasSpent() throws InterruptedException {
+		long index = System.currentTimeMillis();
+		while (!this.network.getInfo().isKamasChanged()) {
 			Thread.sleep(1);
 			if (System.currentTimeMillis() - index > 10000) { return false; }
 		}

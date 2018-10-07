@@ -651,6 +651,7 @@ public class Network extends DisplayInfo implements Runnable {
 		kamasUpdateMessage.Deserialize(dataReader);
 		this.stats.getInventoryContentMessage().setKamas(kamasUpdateMessage.getKamasTotal());
 		info.setStorageUpdate(true);
+		info.setKamasChanged(true);
 	}
 
 	private void HandleLatencyMessage() throws Exception {

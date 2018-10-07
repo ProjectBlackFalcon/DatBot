@@ -88,6 +88,7 @@ public class Info {
 	private boolean textMessage = false;
 	private boolean caracsAffected = false;
 	private boolean movObject = false;
+	private boolean kamasChanged = false;
 	
 	private boolean sellingHdv = false;
 
@@ -119,6 +120,7 @@ public class Info {
 		movObject = false;
 		currentMapTrigger = false;
 		archiOnMap = false;
+		kamasChanged = false;
 	}
 	
 	public boolean threadDone = true;
@@ -669,6 +671,14 @@ public class Info {
 
 	public void setSellingHdv(boolean sellingHdv) {
 		this.sellingHdv = sellingHdv;
+	}
+
+	public boolean isKamasChanged() {
+		return kamasChanged;
+	}
+
+	public void setKamasChanged(boolean kamasChanged) {
+		this.kamasChanged = kamasChanged;
 	}
 
 
