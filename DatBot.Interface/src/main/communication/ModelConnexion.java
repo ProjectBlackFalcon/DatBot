@@ -943,6 +943,7 @@ public class ModelConnexion {
 				}
 				if (this.network.getStats().getStats().getStats().getKamas() >= price) {
 					if (price <= batchMax) {
+						stop(0.5);
 						int uid = (int) this.network.getHdv().getItemUidRessource();
 						ExchangeBidHouseBuyMessage exchangeBidHouseBuyMessage = new ExchangeBidHouseBuyMessage(uid, batchSize, price);
 						getNetwork().sendToServer(exchangeBidHouseBuyMessage, ExchangeBidHouseBuyMessage.ProtocolId, "Buy resource : " + itemId);
