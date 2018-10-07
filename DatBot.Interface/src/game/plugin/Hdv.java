@@ -21,6 +21,7 @@ public class Hdv {
 	private Integer id;
 	
 	private int currentType;	
+	private int currentObject = -1;
 	
 	public long getPriceFromId(int id){
 		if(id == 1){
@@ -157,6 +158,14 @@ public class Hdv {
 
 	public void setMinimalPrices(List<Long> list) {
 		this.minimalPrices = list;
+	}
+
+	public int getCurrentObject() {
+		return currentObject;
+	}
+
+	public void setCurrentObject(int currentObject) {
+		this.currentObject = currentObject;
 	}
 	
 }

@@ -920,27 +920,29 @@ public class ModelConnexion {
 				DisplayInfo.appendDebugLog("buyResource error, itemId not found", String.valueOf(itemId));
 				return FALSE;
 			}
-
-			ExchangeBidHouseListMessage exchangeBidHouseListMessage = new ExchangeBidHouseListMessage(itemId);
-			getNetwork().sendToServer(exchangeBidHouseListMessage, ExchangeBidHouseListMessage.ProtocolId, "Request list prices item " + itemId);
-			if (!this.waitToSendHdv()) {
-				DisplayInfo.appendDebugLog("buyResource error, server error", param);
-				return FALSE;
+			
+			if(this.network.getHdv().getCurrentObject() != itemId){
+				ExchangeBidHouseListMessage exchangeBidHouseListMessage = new ExchangeBidHouseListMessage(itemId);
+				getNetwork().sendToServer(exchangeBidHouseListMessage, ExchangeBidHouseListMessage.ProtocolId, "Request list prices item " + itemId);
+				this.network.getHdv().setCurrentObject(itemId);
+				if (!this.waitToSendHdv()) {
+					DisplayInfo.appendDebugLog("buyResource error, server error", param);
+					return FALSE;
+				}
 			}
 			
 			int moneySpent = 0;
 			int itemBought = 0;
 			
-			
 			for (int i = 0; i < batchNumber; i++) {
 				//Get list prices
 				long price = this.network.getHdv().getPriceFromId(batchSize);
-				if (price == -1) {
-					DisplayInfo.appendDebugLog("buyResource error, server returned false", param);
+				if (price == -1 || price == 0) {
+					DisplayInfo.appendDebugLog("buyResource error, batch not available", param);
 					return new Object[] { itemBought, moneySpent };
 				}
 				if (this.network.getStats().getStats().getStats().getKamas() >= price) {
-					if (batchMax < 0 || price > batchMax) {
+					if (price <= batchMax) {
 						int uid = (int) this.network.getHdv().getItemUidRessource();
 						ExchangeBidHouseBuyMessage exchangeBidHouseBuyMessage = new ExchangeBidHouseBuyMessage(uid, batchSize, price);
 						getNetwork().sendToServer(exchangeBidHouseBuyMessage, ExchangeBidHouseBuyMessage.ProtocolId, "Buy resource : " + itemId);
