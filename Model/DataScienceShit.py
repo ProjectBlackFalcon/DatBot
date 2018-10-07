@@ -1,21 +1,30 @@
 import pandas as pd
+import numpy as np
 from Resources import Resources
 import Database_credentials as dc
 import mysql.connector
 from Item import Item
 import time
+import datetime
+import ast
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestRegressor
 
 
 class Database:
     def __init__(self, resources: Resources):
         self.resources = resources
 
-    def resource_price_from_db(self, server, id_list):
+    def resources_from_id(self, server, item_id_list):
+        item_id_list = [item_id_list] if type(item_id_list) is int else item_id_list
+        item_id_list = tuple(item_id_list) if len(item_id_list) > 1 else item_id_list
+        item_id_list = 'NULL' if type(item_id_list) is not tuple and not len(item_id_list) else item_id_list
+        item_id_list = item_id_list[0] if len(item_id_list) == 1 else item_id_list
+        operator = 'IN' if type(item_id_list) is tuple else '='
+
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
-        id_list = tuple(id_list) if len(id_list) > 1 else id_list
-        id_list = id_list[0] if type(id_list) is list else id_list
-        operator = 'IN' if type(id_list) is tuple else '='
         cursor.execute("""  
             SELECT Time, ItemId, Price1, Price10, Price100, Priceavg
             FROM ResourcePrices
@@ -25,7 +34,7 @@ class Database:
                 WHERE ItemId {} {} AND Server = '{}'
                 GROUP BY ItemId
             ) AND ItemId {} {}
-        """.format(operator, id_list, server, operator, id_list))
+        """.format(operator, item_id_list, server, operator, item_id_list))
 
         rows = cursor.fetchall()
         output = pd.DataFrame(rows, columns=['Time', 'ItemId', 'Price1', 'Price10', 'Price100', 'PriceAvg'])
@@ -34,13 +43,15 @@ class Database:
         output = output.loc[~output.index.duplicated(keep='first')]
         return output
 
-    def get_item_from_id(self, server, item_id_list):
+    def items_from_id(self, server, item_id_list):
+        item_id_list = [item_id_list] if type(item_id_list) is int else item_id_list
+        item_id_list = tuple(item_id_list) if len(item_id_list) > 1 else item_id_list
+        item_id_list = 'NULL' if type(item_id_list) is not tuple and not len(item_id_list) else item_id_list
+        item_id_list = item_id_list[0] if len(item_id_list) == 1 else item_id_list
+        operator = 'IN' if type(item_id_list) is tuple else '='
+
         conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
-        item_id_list = tuple(item_id_list) if len(item_id_list) > 1 else item_id_list
-        item_id_list = item_id_list[0] if type(item_id_list) is list and len(item_id_list) else item_id_list
-        item_id_list = 'NULL' if not len(item_id_list) else item_id_list
-        operator = 'IN' if type(item_id_list) is tuple else '='
         cursor.execute("""  
                 SELECT TimeIn, ItemId, Price1, Stats, Hash
                 FROM ItemPrices
@@ -55,8 +66,38 @@ class Database:
         output.set_index('ItemId', drop=True, inplace=True)
         return output
 
-    def get_runes_prices(self, server):
-        return self.resource_price_from_db(server, self.resources.runes_ids.values())
+    def runes_prices(self, server):
+        return self.resources_from_id(server, self.resources.runes_ids.values())
+
+    def sold_items_from_id(self, server, item_id_list, min_date=datetime.datetime.fromtimestamp(0)):
+        item_id_list = [item_id_list] if type(item_id_list) is int else item_id_list
+        item_id_list = tuple(item_id_list) if len(item_id_list) > 1 else item_id_list
+        item_id_list = 'NULL' if type(item_id_list) is not tuple and not len(item_id_list) else item_id_list
+        item_id_list = item_id_list[0] if len(item_id_list) == 1 else item_id_list
+        operator = 'IN' if type(item_id_list) is tuple else '='
+
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""
+                SELECT min(TimeIn), max(TimeIn), TIMESTAMPDIFF(HOUR, min(TimeIn), max(TimeIn)), ItemId, Stats, price1
+                FROM ItemPrices
+                WHERE ItemId {operator} {ids} AND Server = '{server}' AND TimeIn > '{min_date}' AND Hash NOT IN (
+                    SELECT Hash
+                    FROM ItemPrices
+                    WHERE ItemId {operator} {ids} AND Server = '{server}' AND TimeIn IN (
+                        SELECT max(TimeIn)
+                        FROM ItemPrices
+                        WHERE ItemId {operator} {ids} AND Server = '{server}'
+                        GROUP BY ItemId
+                    )
+                )
+                GROUP BY Hash
+                ORDER BY ItemId""".format(operator=operator, ids=item_id_list, server=server, min_date=min_date))
+        rows = cursor.fetchall()
+        output = pd.DataFrame(rows, columns=['TimeIn', 'TimeOut', 'TimeForSale', 'ItemId', 'Stats', 'Price'])
+        output['Name'] = output['ItemId'].apply(lambda itemid: self.resources.id2names[str(itemid)])
+        output.set_index('ItemId', drop=True, inplace=True)
+        return output
 
 
 class DS:
@@ -78,9 +119,9 @@ class DS:
                         ingredients[ingredient] = [quantity, -1]
 
         recipes = pd.DataFrame(recipes).set_index('resultId', drop=True)
-        prices = self.database.resource_price_from_db(server, ingredients.keys())['PriceAvg']
+        prices = self.database.resources_from_id(server, ingredients.keys())['PriceAvg']
         items_in_recipe_with_prices = [item_id for item_id in ingredients.keys() if str(item_id) in self.resources.equipments]
-        items = self.database.get_item_from_id(server, items_in_recipe_with_prices).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
+        items = self.database.items_from_id(server, items_in_recipe_with_prices).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
         items_in_recipe_with_prices = items.groupby('ItemId')['Price'].min()
         prices = prices.append(pd.Series(items_in_recipe_with_prices))
 
@@ -102,9 +143,9 @@ class DS:
 
     def item_breaking_analysis(self, item_id_list, server):
         item_id_list = [item_id_list] if type(item_id_list) is not list else item_id_list
-        runes_prices = ds.database.get_runes_prices(server)
+        runes_prices = ds.database.runes_prices(server)
         craft_costs = ds.estimate_craft_cost(item_id_list, 'Julith', rich_return=True)
-        items = self.database.get_item_from_id(server, item_id_list).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
+        items = self.database.items_from_id(server, item_id_list).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
         items_in_recipe_with_prices = items.groupby('ItemId')['Price'].min()
         hdv_value = dict(items_in_recipe_with_prices)
         report = []
@@ -122,17 +163,50 @@ class DS:
         print(non_craftable)
         return report
 
-    def get_item_ids_from_level(self, lvl_min, lvl_max):
+    def item_ids_from_level(self, lvl_min, lvl_max):
         item_ids = []
         for item_id, values in self.resources.equipments.items():
             if lvl_min <= values['Level'] <= lvl_max:
                 item_ids.append(int(item_id))
         return item_ids
 
+    def items_sold_last_period(self, server, hours, item_id_list=None, lvl_min=0, lvl_max=200):
+        min_date = datetime.datetime.fromtimestamp(time.time() - hours * 3600)
+        ids = self.item_ids_from_level(lvl_min, lvl_max) if item_id_list is None else item_id_list
+        return self.database.sold_items_from_id(server, ids, min_date)
+
+    def estimate_item_cost(self, server, item_id_list, item=None):
+        # TODO
+        items = self.database.items_from_id(server, item_id_list)[['Price', 'Stats']]
+        items.Stats = items.Stats.apply(lambda row: {stat[0]: stat[1] for stat in ast.literal_eval(row) if len(stat) == 2 and stat[0] not in (1151, 1152)})
+        prices = items.Price.reset_index(drop=True)
+        items = pd.DataFrame(items.Stats.values.tolist()).fillna(0)
+        items['Price'] = pd.Series(prices)
+        items = items.set_index('Price')
+
+        scaler = StandardScaler()
+        items[items.columns] = scaler.fit_transform(items)
+
+        model = RandomForestRegressor(n_estimators=30, min_samples_leaf=1, max_depth=4)
+        # model.fit(items.reset_index(drop=True), items.index)
+        cvres = cross_val_score(model, items.reset_index(drop=True), items.index, cv=5, scoring='neg_mean_squared_error')
+        cvres = np.sqrt(-cvres)
+        print(cvres, cvres.mean(), cvres.std())
+
+    def items_turnover(self, server, period_in_hours, item_id_list=None, lvl_min=0, lvl_max=200):
+        ids = self.item_ids_from_level(lvl_min, lvl_max) if item_id_list is None else item_id_list
+        values = self.items_sold_last_period(server, period_in_hours, ids).groupby('ItemId').count().Price.sort_values(ascending=False) / (period_in_hours / 24)
+        values = pd.DataFrame(values)
+        values['Name'] = pd.Series({item_id: self.resources.id2names[str(item_id)] for item_id in ids})
+        return values
+
 
 if __name__ == '__main__':
     ds = DS(Resources())
     start = time.time()
-    ids = ds.get_item_ids_from_level(199, 200)
-    ds.item_breaking_analysis(ids, 'Julith').sort_values(by=['Min coeff'], ascending=False).to_csv('RuneReport.csv')
+    print(ds.items_turnover('Julith', 48, lvl_min=200, lvl_max=200).iloc[:10])
     print(time.time() - start)
+
+# TODO items sold last day/week
+# TODO mean time for sale
+# TODO Générateur d'astuce kamas
