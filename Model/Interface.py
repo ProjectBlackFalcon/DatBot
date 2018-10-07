@@ -705,6 +705,8 @@ class Interface:
         :param max_batch_price: Upper price limit
         :return: [number of items bought, total money spent]
         """
+        if not self.hdv_opended:
+            self.open_hdv()
         type_id = self.bot.resources.id2type[str(item_id)]
         return self.execute_command('buyResource', [item_id, type_id, batch_size, batch_number, max_batch_price])
 

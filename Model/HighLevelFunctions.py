@@ -1038,8 +1038,8 @@ class HighLevelFunctions:
         items = self.bot.ds.database.items_from_id(self.bot.credentials['server'], ingredient_items).drop(columns=['Time', 'Name', 'Stats', 'Hash'])
         grocery_list['Price'] = items.groupby('ItemId')['Price'].min().append(self.bot.ds.database.resources_from_id(self.bot.credentials['server'], grocery_list['Ingredients'].index.tolist()).Price1)
 
-        grocery_list['Batch1'] = grocery_list.Ingredients.apply(lambda ingredient: ingredient if ingredient < 5 else 0)
-        grocery_list['Batch10'] = grocery_list.Ingredients.apply(lambda ingredient: ceil(ingredient / 10) - 10 * int(ingredient / 100) if ingredient >= 5 else 0)
+        grocery_list['Batch1'] = grocery_list.Ingredients.apply(lambda ingredient: (ingredient % 10) if (ingredient % 10) < 5 else 0)
+        grocery_list['Batch10'] = grocery_list.Ingredients.apply(lambda ingredient: ceil(ingredient / 10) - 10 * int(ingredient / 100) if (ingredient % 10) >= 5 else int(ingredient / 10) - 10 * int(ingredient / 100))
         grocery_list['Batch100'] = grocery_list.Ingredients.apply(lambda ingredient: ingredient // 100)
 
         stores = set(grocery_list['Hdv'].tolist())
@@ -1051,13 +1051,14 @@ class HighLevelFunctions:
                 item_id = item[0]
                 for batch in ['Batch1', 'Batch10', 'Batch100']:
                     if item[1][batch]:
-                        number_bought, money_spent = self.bot.interface.buy_resource(item_id, int(batch.replace('Batch', '')), item[1][batch], int(item[1].Price * 1.5))
+                        number_bought, money_spent = self.bot.interface.buy_resource(item_id, int(batch.replace('Batch', '')), item[1][batch], int(item[1].Price * int(batch.replace('Batch', '')) * 1.5))
                         if item_id in items_bought.keys():
                             items_bought[item_id] = [items_bought[item_id][0] + number_bought, items_bought[item_id][1] + money_spent]
                         else:
                             items_bought[item_id] = [number_bought, money_spent]
             self.bot.interface.close_hdv()
         items_bought = pd.DataFrame(items_bought)
+        print(items_bought)
 
         # TODO determining which items are actually craftable, and for which price
         # TODO Eventually sell remaining resources
