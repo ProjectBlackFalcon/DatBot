@@ -915,10 +915,13 @@ public class ModelConnexion {
 					return FALSE;
 				}
 			}
+			
+			int moneySpent = 0;
+			int itemBought = 0;
 
 			if (!this.network.getHdv().getTypesInTypes().contains(itemId)) {
 				DisplayInfo.appendDebugLog("buyResource error, itemId not found", String.valueOf(itemId));
-				return FALSE;
+				return new Object[] { itemBought, moneySpent };
 			}
 			
 			if(this.network.getHdv().getCurrentObject() != itemId){
@@ -931,8 +934,6 @@ public class ModelConnexion {
 				}
 			}
 			
-			int moneySpent = 0;
-			int itemBought = 0;
 			
 			for (int i = 0; i < batchNumber; i++) {
 				//Get list prices
