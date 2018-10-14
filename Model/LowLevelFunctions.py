@@ -531,5 +531,32 @@ class LowLevelFunctions:
         conn.commit()
         conn.close()
 
+    def resource_is_for_sale(self, item_id):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT Time, ItemId, Price1, Price10, Price100, Priceavg
+            FROM ResourcePrices WHERE ItemId = {itemid} AND Time = (
+                SELECT max(Time)
+                FROM ResourcePrices
+                WHERE ItemId = {itemid}
+            )""".format(itemid=item_id))
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return rows[2], rows[3], rows[4], rows[5]
+
+    def fetch_alerts(self):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT Author, ItemId, MinPrice, MaxPrice 
+            FROM ResourceAlerts
+        """)
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return rows
+
 
 __author__ = 'Alexis'
