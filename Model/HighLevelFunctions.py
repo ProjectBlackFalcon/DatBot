@@ -1016,7 +1016,7 @@ class HighLevelFunctions:
         self.get_hdv_prices('Runes', batch_id)
         self.get_hdv_prices('Consommables', batch_id)
 
-    def buy_ingredients(self, item_id_list):
+    def buy_ingredients(self, item_id_list, to_break=False):
         item_id_list = [item_id_list] if type(item_id_list) is int else item_id_list
         recipes = []
         ingredients = {}
@@ -1029,6 +1029,10 @@ class HighLevelFunctions:
                             ingredients[ingredient] += quantity
                         else:
                             ingredients[ingredient] = quantity
+
+        for item in self.bot.inventory.items:
+            if item[1] in ingredients.keys():
+                ingredients[item[1]] -= item[3]
 
         grocery_list = pd.DataFrame()
         grocery_list['Ingredients'] = pd.Series(ingredients)
@@ -1044,6 +1048,7 @@ class HighLevelFunctions:
 
         stores = set(grocery_list['Hdv'].tolist())
         items_bought = {}
+        items_not_bought = {}
         for store in stores:
             self.goto(self.bot.llf.closest_coord(self.bot.position[0], self.bot.resources.hdv_pos[store]))
             self.bot.interface.open_hdv()
@@ -1051,14 +1056,23 @@ class HighLevelFunctions:
                 item_id = item[0]
                 for batch in ['Batch1', 'Batch10', 'Batch100']:
                     if item[1][batch]:
-                        number_bought, money_spent = self.bot.interface.buy_resource(item_id, int(batch.replace('Batch', '')), item[1][batch], int(item[1].Price * int(batch.replace('Batch', '')) * 1.5))
+                        number_bought, money_spent = self.bot.interface.buy_resource(item_id, int(batch.replace('Batch', '')), item[1][batch], int((item[1].Price + 150) * int(batch.replace('Batch', '')) * 1.5))
                         if item_id in items_bought.keys():
                             items_bought[item_id] = [items_bought[item_id][0] + number_bought, items_bought[item_id][1] + money_spent]
+                            if number_bought != int(batch.replace('Batch', '')) * item[1][batch]:
+                                items_not_bought[item_id] = [self.bot.resources.id2names[str(item_id)], items_not_bought[item_id][1] + int(batch.replace('Batch', '')) * item[1][batch]]
                         else:
                             items_bought[item_id] = [number_bought, money_spent]
+                            if number_bought != int(batch.replace('Batch', '')) * item[1][batch]:
+                                items_not_bought[item_id] = [self.bot.resources.id2names[str(item_id)], int(batch.replace('Batch', '')) * item[1][batch]]
             self.bot.interface.close_hdv()
         items_bought = pd.DataFrame(items_bought)
-        print(items_bought)
+        items_not_bought = pd.DataFrame(items_not_bought)
+        print(items_not_bought.T)
+
+        if to_break:
+            for item_id in item_id_list:
+                self.bot.llf.broken_item_to_db(item_id)
 
         # TODO determining which items are actually craftable, and for which price
         # TODO Eventually sell remaining resources
