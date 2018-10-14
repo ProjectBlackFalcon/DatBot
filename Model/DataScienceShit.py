@@ -161,7 +161,7 @@ class DS:
             except:
                 non_craftable += 1
                 print(self.resources.id2names[str(item_id)])
-        report = pd.DataFrame(report, columns=['Item Name', 'ItemId', 'Level', 'Craft Price', 'Hdv price', 'Min coeff', 'Focus']).set_index('Item Name').sort_values('Min coeff')
+        report = pd.DataFrame(report, columns=['Item Name', 'ItemId', 'Level', 'Craft Price', 'Hdv price', 'Min coeff', 'Focus']).set_index('Item Name').sort_values('Level')
         print(non_craftable)
         return report
 
@@ -222,8 +222,8 @@ class DS:
             data['SoldJ-{}'.format(i + 1)].fillna('{}', inplace=True)
 
         conn = create_engine('mysql+mysqlconnector://{}:{}@{}/{}'.format(dc.user, dc.password, dc.host, dc.database), echo=False)
-        print(data.to_sql('{}Sales'.format(server), conn, if_exists='replace'))
-        # return sold_last_week
+        data.to_sql('{}Sales'.format(server), conn, if_exists='replace')
+        return data
 
 
 if __name__ == '__main__':
@@ -231,8 +231,6 @@ if __name__ == '__main__':
     start = time.time()
     ids = ds.item_ids_from_level(0, 200)
     print(ds.item_breaking_analysis('Julith', ids).to_csv('out.csv'))
+    # ds.generate_item_datamart('Julith').to_csv('datamart.csv')
     print(int(time.time() - start))
 
-# TODO items sold last day/week
-# TODO mean time for sale
-# TODO Générateur d'astuce kamas
