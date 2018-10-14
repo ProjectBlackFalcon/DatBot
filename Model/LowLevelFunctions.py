@@ -307,8 +307,7 @@ class LowLevelFunctions:
                 f.write(traceback.format_exc())
 
     def get_schedule(self, bot_name):
-        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password,
-                                       database=dc.database)
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
         cursor = conn.cursor()
         cursor.execute("""SELECT schedule FROM BotAccounts WHERE name='{}'""".format(bot_name))
         schedule = ''
@@ -519,6 +518,18 @@ class LowLevelFunctions:
             dec_index += 1
 
         return [(caracs_names[i], costs[i]) for i in range(len(costs)) if costs[i]]
+
+    def broken_item_to_db(self, item_id):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT 
+            INTO BrokenItems (ItemId, Name) 
+            VALUES ('{}', '{}')
+        """.format(item_id, self.resources.id2names[str(item_id)].replace("'", "\'")))
+        cursor.close()
+        conn.commit()
+        conn.close()
 
 
 __author__ = 'Alexis'
