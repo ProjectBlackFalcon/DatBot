@@ -21,7 +21,7 @@ public class Test {
 		Communication communication = new Communication(arg);
 		Thread communication2 = new Thread(communication);
 		communication2.start();
-		communication.getReturn("0;0;i;cmd;newBot;[shipykiposhaetamo,Y2PTZM4ZR2JA1R1$,Julith]");
+		communication.getReturn("0;0;i;cmd;connect;[wublel5,notabot0,Ilancelet,Julith]");
 		Thread.sleep(20000);
 //		communication.getReturn("0;0;i;cmd;openHdv;[None]");
 //		Thread.sleep(5000);

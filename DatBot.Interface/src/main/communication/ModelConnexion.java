@@ -264,7 +264,7 @@ public class ModelConnexion {
         int index = 0;
         while (!info.isConnected()) {
             if (this.network.getInfo().isBanned()){
-                return new Object[]{"Banned BOI RIP LOL"};
+                return new Object[]{"\"Banned\""};
             }
             index += 1;
             Thread.sleep(1000);
