@@ -513,8 +513,9 @@ public class Pathfinder {
             MovPath.Cells.add(path);
         }
 //        System.out.println("---------------NOT COMPRESSED------------------");
+//        System.out.println(MovPath.Cells.size());
 //        for (PathElement cells : MovPath.Cells) {
-//			this.network.append(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
+//            System.out.println(cells.Cell.CellId + " - Orientation : " + cells.Orientation);
 //		}
 //        System.out.println("\n\n---------------COMPRESSED------------------");
         MovPath.Compress();

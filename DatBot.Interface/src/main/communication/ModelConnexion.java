@@ -1692,7 +1692,7 @@ public class ModelConnexion {
         log.writeActionLogMessage("move", String.format("map : %s, mapid : %s, cellid : %s, celltogo : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId(), param));
         try {
             mov = this.network.getMovement().MoveToCell(param);
-            if (mov == null || mov.path == null) {
+            if (mov == null || mov.path == null || mov.path.Cells.isEmpty()) {
                 toSend = FALSE;
                 log.writeActionLogMessage("move_1", "Move is not possible");
                 DisplayInfo.appendDebugLog("Move error, this cell is not accessible", String.valueOf(param));

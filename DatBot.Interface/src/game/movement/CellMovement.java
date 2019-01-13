@@ -28,9 +28,8 @@ public class CellMovement {
 	public void performMovement() throws Exception
 	{
 		if (path == null) return;
-		
-		network.append("Moving to " + endCell + " from " + startCell);
 
+		network.append("Moving to " + endCell + " from " + startCell);
 
 		this.network.getInfo().setWaitForMov(false);
 		
