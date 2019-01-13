@@ -16,27 +16,32 @@ import protocol.network.NetworkMessage;
 public class MonsterInGroupLightInformations extends NetworkMessage {
 	public static final int ProtocolId = 395;
 
-	private int creatureGenericId;
+	private int genericId;
 	private int grade;
+	private int level;
 
-	public int getCreatureGenericId() { return this.creatureGenericId; }
-	public void setCreatureGenericId(int creatureGenericId) { this.creatureGenericId = creatureGenericId; };
+	public int getGenericId() { return this.genericId; }
+	public void setGenericId(int genericId) { this.genericId = genericId; };
 	public int getGrade() { return this.grade; }
 	public void setGrade(int grade) { this.grade = grade; };
+	public int getLevel() { return this.level; }
+	public void setLevel(int level) { this.level = level; };
 
 	public MonsterInGroupLightInformations(){
 	}
 
-	public MonsterInGroupLightInformations(int creatureGenericId, int grade){
-		this.creatureGenericId = creatureGenericId;
+	public MonsterInGroupLightInformations(int genericId, int grade, int level){
+		this.genericId = genericId;
 		this.grade = grade;
+		this.level = level;
 	}
 
 	@Override
 	public void Serialize(DofusDataWriter writer) {
 		try {
-			writer.writeInt(this.creatureGenericId);
+			writer.writeInt(this.genericId);
 			writer.writeByte(this.grade);
+			writer.writeShort(this.level);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -45,8 +50,9 @@ public class MonsterInGroupLightInformations extends NetworkMessage {
 	@Override
 	public void Deserialize(DofusDataReader reader) {
 		try {
-			this.creatureGenericId = reader.readInt();
+			this.genericId = reader.readInt();
 			this.grade = reader.readByte();
+			this.level = reader.readShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

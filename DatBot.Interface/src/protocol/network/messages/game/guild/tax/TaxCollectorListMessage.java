@@ -19,18 +19,22 @@ public class TaxCollectorListMessage extends AbstractTaxCollectorListMessage {
 
 	private int nbcollectorMax;
 	private List<TaxCollectorFightersInformation> fightersInformations;
+	private int infoType;
 
 	public int getNbcollectorMax() { return this.nbcollectorMax; }
 	public void setNbcollectorMax(int nbcollectorMax) { this.nbcollectorMax = nbcollectorMax; };
 	public List<TaxCollectorFightersInformation> getFightersInformations() { return this.fightersInformations; }
 	public void setFightersInformations(List<TaxCollectorFightersInformation> fightersInformations) { this.fightersInformations = fightersInformations; };
+	public int getInfoType() { return this.infoType; }
+	public void setInfoType(int infoType) { this.infoType = infoType; };
 
 	public TaxCollectorListMessage(){
 	}
 
-	public TaxCollectorListMessage(int nbcollectorMax, List<TaxCollectorFightersInformation> fightersInformations){
+	public TaxCollectorListMessage(int nbcollectorMax, List<TaxCollectorFightersInformation> fightersInformations, int infoType){
 		this.nbcollectorMax = nbcollectorMax;
 		this.fightersInformations = fightersInformations;
+		this.infoType = infoType;
 	}
 
 	@Override
@@ -44,6 +48,7 @@ public class TaxCollectorListMessage extends AbstractTaxCollectorListMessage {
 				this.fightersInformations.get(_loc2_).Serialize(writer);
 				_loc2_++;
 			}
+			writer.writeByte(this.infoType);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -63,6 +68,7 @@ public class TaxCollectorListMessage extends AbstractTaxCollectorListMessage {
 				this.fightersInformations.add(_loc15_);
 				_loc3_++;
 			}
+			this.infoType = reader.readByte();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

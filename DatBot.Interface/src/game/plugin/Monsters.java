@@ -17,9 +17,9 @@ public class Monsters {
 		String str = "";
 		for (int i = 0; i < this.getMonsters().size(); i++) {
 			if (i == this.getMonsters().size() - 1) {
-				str += "[" + this.getMonsters().get(i).getContextualId() + "," + this.getMonsters().get(i).getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId() + "," + this.getMonsters().get(i).getDisposition().getCellId() + "]";
+				str += "[" + this.getMonsters().get(i).getContextualId() + "," + this.getMonsters().get(i).getStaticInfos().getMainCreatureLightInfos().getGenericId() + "," + this.getMonsters().get(i).getDisposition().getCellId() + "]";
 			} else {
-				str += "[" + this.getMonsters().get(i).getContextualId() + "," + this.getMonsters().get(i).getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId() + "," + this.getMonsters().get(i).getDisposition().getCellId() + "],";
+				str += "[" + this.getMonsters().get(i).getContextualId() + "," + this.getMonsters().get(i).getStaticInfos().getMainCreatureLightInfos().getGenericId() + "," + this.getMonsters().get(i).getDisposition().getCellId() + "],";
 			}
 		}
 		return str;	

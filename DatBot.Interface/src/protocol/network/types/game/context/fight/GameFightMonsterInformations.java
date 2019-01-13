@@ -18,18 +18,22 @@ public class GameFightMonsterInformations extends GameFightAIInformations {
 
 	private int creatureGenericId;
 	private int creatureGrade;
+	private int creatureLevel;
 
 	public int getCreatureGenericId() { return this.creatureGenericId; }
 	public void setCreatureGenericId(int creatureGenericId) { this.creatureGenericId = creatureGenericId; };
 	public int getCreatureGrade() { return this.creatureGrade; }
 	public void setCreatureGrade(int creatureGrade) { this.creatureGrade = creatureGrade; };
+	public int getCreatureLevel() { return this.creatureLevel; }
+	public void setCreatureLevel(int creatureLevel) { this.creatureLevel = creatureLevel; };
 
 	public GameFightMonsterInformations(){
 	}
 
-	public GameFightMonsterInformations(int creatureGenericId, int creatureGrade){
+	public GameFightMonsterInformations(int creatureGenericId, int creatureGrade, int creatureLevel){
 		this.creatureGenericId = creatureGenericId;
 		this.creatureGrade = creatureGrade;
+		this.creatureLevel = creatureLevel;
 	}
 
 	@Override
@@ -38,6 +42,7 @@ public class GameFightMonsterInformations extends GameFightAIInformations {
 			super.Serialize(writer);
 			writer.writeVarShort(this.creatureGenericId);
 			writer.writeByte(this.creatureGrade);
+			writer.writeShort(this.creatureLevel);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -49,6 +54,7 @@ public class GameFightMonsterInformations extends GameFightAIInformations {
 			super.Deserialize(reader);
 			this.creatureGenericId = reader.readVarShort();
 			this.creatureGrade = reader.readByte();
+			this.creatureLevel = reader.readShort();
 		} catch (Exception e){
 			e.printStackTrace();
 		}

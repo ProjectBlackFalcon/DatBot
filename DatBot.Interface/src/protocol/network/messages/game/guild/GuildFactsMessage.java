@@ -12,7 +12,7 @@ import protocol.network.util.DofusDataWriter;
 import protocol.network.Network;
 import protocol.network.NetworkMessage;
 import protocol.network.types.game.social.GuildFactSheetInformations;
-import protocol.network.types.game.character.CharacterMinimalInformations;
+import protocol.network.types.game.character.CharacterMinimalGuildPublicInformations;
 
 @SuppressWarnings("unused")
 public class GuildFactsMessage extends NetworkMessage {
@@ -21,7 +21,7 @@ public class GuildFactsMessage extends NetworkMessage {
 	private GuildFactSheetInformations infos;
 	private int creationDate;
 	private int nbTaxCollectors;
-	private List<CharacterMinimalInformations> members;
+	private List<CharacterMinimalGuildPublicInformations> members;
 
 	public GuildFactSheetInformations getInfos() { return this.infos; }
 	public void setInfos(GuildFactSheetInformations infos) { this.infos = infos; };
@@ -29,13 +29,13 @@ public class GuildFactsMessage extends NetworkMessage {
 	public void setCreationDate(int creationDate) { this.creationDate = creationDate; };
 	public int getNbTaxCollectors() { return this.nbTaxCollectors; }
 	public void setNbTaxCollectors(int nbTaxCollectors) { this.nbTaxCollectors = nbTaxCollectors; };
-	public List<CharacterMinimalInformations> getMembers() { return this.members; }
-	public void setMembers(List<CharacterMinimalInformations> members) { this.members = members; };
+	public List<CharacterMinimalGuildPublicInformations> getMembers() { return this.members; }
+	public void setMembers(List<CharacterMinimalGuildPublicInformations> members) { this.members = members; };
 
 	public GuildFactsMessage(){
 	}
 
-	public GuildFactsMessage(GuildFactSheetInformations infos, int creationDate, int nbTaxCollectors, List<CharacterMinimalInformations> members){
+	public GuildFactsMessage(GuildFactSheetInformations infos, int creationDate, int nbTaxCollectors, List<CharacterMinimalGuildPublicInformations> members){
 		this.infos = infos;
 		this.creationDate = creationDate;
 		this.nbTaxCollectors = nbTaxCollectors;
@@ -68,9 +68,9 @@ public class GuildFactsMessage extends NetworkMessage {
 			this.nbTaxCollectors = reader.readVarShort();
 			int _loc2_  = reader.readShort();
 			int _loc3_  = 0;
-			this.members = new ArrayList<CharacterMinimalInformations>();
+			this.members = new ArrayList<CharacterMinimalGuildPublicInformations>();
 			while( _loc3_ <  _loc2_){
-				CharacterMinimalInformations _loc15_ = new CharacterMinimalInformations();
+				CharacterMinimalGuildPublicInformations _loc15_ = new CharacterMinimalGuildPublicInformations();
 				_loc15_.Deserialize(reader);
 				this.members.add(_loc15_);
 				_loc3_++;

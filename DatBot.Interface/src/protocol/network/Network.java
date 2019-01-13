@@ -593,7 +593,7 @@ public class Network extends DisplayInfo implements Runnable {
 		for (int i = 0; i < hello.getKey().size(); i++) {
 			key[i] = hello.getKey().get(i).byteValue();
 		}
-		VersionExtended versionExtended = new VersionExtended(2, 48, 15, 1, 0, 0, 1, 1);
+		VersionExtended versionExtended = new VersionExtended(2, 49, 7, 2, 0, 0, 1, 1);
 		byte[] credentials = Crypto.encrypt(key, info.getNameAccount(), info.getPassword(), hello.getSalt());
 		List<Integer> credentialsArray = new ArrayList<>();
 		for (byte b : credentials) {
@@ -685,19 +685,6 @@ public class Network extends DisplayInfo implements Runnable {
 				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayGroupMonsterInformations")) {
 					this.getMonsters().addMonsters((GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i));
 					GameRolePlayGroupMonsterInformations monster = (GameRolePlayGroupMonsterInformations) complementaryInformationsDataMessage.getActors().get(i);
-					if(GameData.isMonsterArchi(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId())){
-						this.info.setArchiOnMap(true);
-						this.info.setArchiName(GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
-						System.out.println(true + "," + GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
-					}
-					for (MonsterInGroupInformations mster : monster.getStaticInfos().getUnderlings()) {
-						if(GameData.isMonsterArchi(mster.getCreatureGenericId())){
-							this.info.setArchiOnMap(true);
-							this.info.setArchiName(GameData.getMonsterName(mster.getCreatureGenericId()));
-							System.out.println(true + "," + GameData.getMonsterName(monster.getStaticInfos().getMainCreatureLightInfos().getCreatureGenericId()));
-
-						}
-					}
 				}
 				else if (complementaryInformationsDataMessage.getActors().get(i).getClass().getSimpleName().equals("GameRolePlayTreasureHintInformations")) {
 					this.hunt.setPhorrorName(GameData.getNpcName(((GameRolePlayTreasureHintInformations) complementaryInformationsDataMessage.getActors().get(i)).getNpcId()));
@@ -710,6 +697,7 @@ public class Network extends DisplayInfo implements Runnable {
 			info.setWaitForMov(true);
 			info.setConnected(true);
 			info.setNewMap(true);
+			System.out.println(map.getSubAreaId());
 		}
 	}
 
@@ -1909,6 +1897,7 @@ public class Network extends DisplayInfo implements Runnable {
 		byte num = ComputeTypeLen(data.length);
 		int num1 = SubComputeStaticHeader(id, num);
 		writer.writeShort((short) num1);
+		System.out.println(MessageUtil.InstanceId);
 		writer.writeInt(MessageUtil.InstanceId++);
 		switch (num) {
 			case 0:

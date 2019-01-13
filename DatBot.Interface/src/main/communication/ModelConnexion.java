@@ -793,7 +793,7 @@ public class ModelConnexion {
 				if (this.waitToSendHdv()) {
 					stop(0.15);
 					this.network.getInfo().setSellingHdv(false);
-					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(this.network.getHdv().getTypes().get(0));
+					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(this.network.getHdv().getTypes().get(0), false);
 					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Request type sell " + this.network.getHdv().getTypes().get(0));
 					this.network.getHdv().setCurrentType(this.network.getHdv().getTypes().get(0));
 					if (!this.waitToSendHdv()) {
@@ -818,7 +818,7 @@ public class ModelConnexion {
 				}
 				//If type is available and not already good, change type
 				if (this.network.getHdv().getCurrentType() != e.getKey()) {
-					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(e.getKey());
+					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(e.getKey(), false);
 					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Change to type " + e.getKey());
 					this.network.getHdv().setCurrentType(e.getKey());
 					if (!this.waitToSendHdv()) {
@@ -884,7 +884,7 @@ public class ModelConnexion {
 				if (this.waitToSendHdv()) {
 					stop(0.15);
 					this.network.getInfo().setSellingHdv(false);
-					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(this.network.getHdv().getTypes().get(0));
+					ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(this.network.getHdv().getTypes().get(0), false);
 					getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Request type sell " + this.network.getHdv().getTypes().get(0));
 					this.network.getHdv().setCurrentType(this.network.getHdv().getTypes().get(0));
 					if (!this.waitToSendHdv()) {
@@ -907,7 +907,7 @@ public class ModelConnexion {
 
 			//If type is available and not already good, change type
 			if (this.network.getHdv().getCurrentType() != typeId) {
-				ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(typeId);
+				ExchangeBidHouseTypeMessage exchangeBidHouseTypeMessage = new ExchangeBidHouseTypeMessage(typeId, false);
 				getNetwork().sendToServer(exchangeBidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Change to type " + typeId);
 				this.network.getHdv().setCurrentType(typeId);
 				if (!this.waitToSendHdv()) {
@@ -1934,7 +1934,7 @@ public class ModelConnexion {
 			InteractiveUseRequestMessage interactiveUseRequestMessage = new InteractiveUseRequestMessage(interactive1[1], interactive1[2]);
 			getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Open hdv");
 			if (this.waitToSendHdv()) {
-				ExchangeBidHouseTypeMessage bidHouseTypeMessage = new ExchangeBidHouseTypeMessage(1);
+				ExchangeBidHouseTypeMessage bidHouseTypeMessage = new ExchangeBidHouseTypeMessage(1, false);
 				getNetwork().sendToServer(bidHouseTypeMessage, ExchangeBidHouseTypeMessage.ProtocolId, "Set hdv type to 1");
 				if (this.waitToSendHdv()) {
 					stop(1);
