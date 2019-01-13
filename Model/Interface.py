@@ -973,4 +973,14 @@ class Interface:
         """
         return self.execute_command('enterDDTerritory')
 
+    def new_bot(self, username, password, server):
+        """
+        Creates new bot character
+        :param username: account username
+        :param password: account password
+        :param server: charcter server
+        :return: Boolean
+        """
+        return self.execute_command('newBot', [username, password, server])
+
 __author__ = 'Alexis'
