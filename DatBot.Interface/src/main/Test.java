@@ -10,7 +10,6 @@ public class Test {
 
 		d2iManager.init(Main.D2I_PATH);
 		MapManager.init(Main.D2P_PATH);
-		
 
 		boolean arg = false;
 		if (args.length != 0) {
@@ -22,7 +21,7 @@ public class Test {
 		Communication communication = new Communication(arg);
 		Thread communication2 = new Thread(communication);
 		communication2.start();
-		communication.getReturn("0;0;i;cmd;connect;[flash-eowine ,mdppourlysandre2,Reiner,Julith]");
+		communication.getReturn("0;0;i;cmd;newBot;[shipykiposhaetamo,Y2PTZM4ZR2JA1R1$,Julith]");
 		Thread.sleep(20000);
 //		communication.getReturn("0;0;i;cmd;openHdv;[None]");
 //		Thread.sleep(5000);

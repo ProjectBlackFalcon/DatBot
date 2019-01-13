@@ -28,6 +28,18 @@ public class CharacterCreationRequestMessage extends NetworkMessage {
 	public void setBreed(int breed) { this.breed = breed; };
 	public boolean isSex() { return this.sex; }
 	public void setSex(boolean sex) { this.sex = sex; };
+
+	@Override
+	public String toString() {
+		return "CharacterCreationRequestMessage{" +
+			"name='" + name + '\'' +
+			", breed=" + breed +
+			", sex=" + sex +
+			", colors=" + colors +
+			", cosmeticId=" + cosmeticId +
+			'}';
+	}
+
 	public List<Integer> getColors() { return this.colors; }
 	public void setColors(List<Integer> colors) { this.colors = colors; };
 	public int getCosmeticId() { return this.cosmeticId; }

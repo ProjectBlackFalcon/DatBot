@@ -30,6 +30,7 @@ public class Info {
 	private String password = "";
 	private String name = "";
 	private String server = "";
+	private boolean firstSelection = false;
 	private long actorId = -1;
 	private boolean isConnected = false;
 	private boolean printDc = true;
@@ -681,5 +682,11 @@ public class Info {
 		this.kamasChanged = kamasChanged;
 	}
 
+    public boolean isFirstSelection() {
+        return firstSelection;
+    }
 
+    public void setFirstSelection(final boolean firstSelection) {
+        this.firstSelection = firstSelection;
+    }
 }
