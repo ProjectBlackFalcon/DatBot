@@ -34,6 +34,7 @@ import main.communication.Communication;
 import main.communication.DisplayInfo;
 import protocol.frames.LatencyFrame;
 import protocol.network.messages.connection.HelloConnectMessage;
+import protocol.network.messages.connection.IdentificationFailedMessage;
 import protocol.network.messages.connection.IdentificationMessage;
 import protocol.network.messages.connection.IdentificationSuccessMessage;
 import protocol.network.messages.connection.SelectedServerDataMessage;
@@ -1066,6 +1067,13 @@ public class Network extends DisplayInfo implements Runnable {
             switch (packet_id) {
                 case 3:
                     handleHelloConnectMessage(dataReader);
+                    break;
+                case 20:
+                    IdentificationFailedMessage identificationFailedMessage = new IdentificationFailedMessage();
+                    identificationFailedMessage.Deserialize(dataReader);
+                    if (identificationFailedMessage.getReason() == 3){
+                        this.info.setBanned(true);
+                    }
                     break;
                 case 5544:
                     CharacterNameSuggestionSuccessMessage characterNameSuggestionSuccessMessage = new CharacterNameSuggestionSuccessMessage();

@@ -30,6 +30,7 @@ public class Info {
 	private String password = "";
 	private String name = "";
 	private String server = "";
+	private boolean banned = false;
 	private boolean firstSelection = false;
 	private long actorId = -1;
 	private boolean isConnected = false;
@@ -688,5 +689,13 @@ public class Info {
 
     public void setFirstSelection(final boolean firstSelection) {
         this.firstSelection = firstSelection;
+    }
+
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public void setBanned(final boolean banned) {
+        this.banned = banned;
     }
 }
