@@ -38,11 +38,12 @@ public class Npc {
 				replyId = 25207;
 				break;
 			case 30637:
-				replyId = 36982;
+				replyId = 36979;
 				break;
-			case 30639:
-				replyId = 36980;
+			case 30638:
+				replyId = 36977;
 				break;
+
 		}
 		return replyId;
 	}

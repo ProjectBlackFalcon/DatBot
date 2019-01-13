@@ -146,11 +146,11 @@ public class Movement {
 			List<Integer> list = new ArrayList<>();
 			for (int i = 0; i < this.network.getMap().getCells().size(); i++)
 			{
-				System.out.println("Cell : " +i);
-				System.out.println(canChangeMap(i));
-				System.out.println(isDirection(i, direction));
-				System.out.println(isAvalaibleCorner(i));
-				System.out.println(canMoveTo(i));
+//				System.out.println("Cell : " +i);
+//				System.out.println(canChangeMap(i));
+//				System.out.println(isDirection(i, direction));
+//				System.out.println(isAvalaibleCorner(i));
+//				System.out.println(canMoveTo(i));
 				if (canChangeMap(i) && isDirection(i, direction) && isAvalaibleCorner(i) && canMoveTo(i))
 				{
 					list.add(i);
