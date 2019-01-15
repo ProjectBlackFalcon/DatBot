@@ -1,4 +1,3 @@
-import pyximport; pyximport.install()
 from Pathfinder import PathFinder
 from Hunt import Hunt
 from DD import DD
@@ -240,16 +239,23 @@ class HighLevelFunctions:
             if harvest_spots:
                 success = True
                 selected_cell = self.bot.llf.closest_cell(player_pos, [spot[0] for spot in harvest_spots])
-                if not self.bot.interface.move(selected_cell)[0]:
+                reachable = True
+                try:
+                    PathFinder(self.bot, self.bot.position[0], self.bot.position[0], self.bot.position[2], selected_cell, worldmap, max_enlargement=0).get_path()
+                except RuntimeError:
+                    reachable = False
+
+                if not reachable or not self.bot.interface.move(selected_cell)[0]:
                     success = False
                     # TODO
-                resource_cell = self.bot.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
-                resource_name = harvestable_match_res_name[harvestable.index(resource_cell)]
-                ret_val = self.bot.interface.harvest_resource(resource_cell)
-                if len(ret_val) == 1:
-                    success = False
                 else:
-                    ret_val = ret_val[0], resource_name, ret_val[1], ret_val[2], ret_val[3]
+                    resource_cell = self.bot.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
+                    resource_name = harvestable_match_res_name[harvestable.index(resource_cell)]
+                    ret_val = self.bot.interface.harvest_resource(resource_cell)
+                    if len(ret_val) == 1:
+                        success = False
+                    else:
+                        ret_val = ret_val[0], resource_name, ret_val[1], ret_val[2], ret_val[3]
 
                 if not success:
                     inacessible_res = self.bot.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
