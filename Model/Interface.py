@@ -200,7 +200,7 @@ class Interface:
         :return: coords, cell, worldmap, mapID
         """
         current_map, current_cell, current_worldmap, map_id = self.execute_command('getMap')
-        self.bot.position = (current_map, current_worldmap)
+        self.bot.position = (current_map, current_worldmap, current_cell)
         self.bot.llf.log(self.bot, '[Position {}] {}'.format(self.bot.id, current_map))
         return current_map, current_cell, current_worldmap, map_id
 
