@@ -1448,15 +1448,12 @@ public class ModelConnexion {
         Object[] toSend;
         log.writeActionLogMessage("goAstrub", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
         if (this.network.getMap().getId() == 153880835) {
-            if (this.network.getInfo().getCellId() != 300) {
-                move(300);
-            }
             log.writeActionLogMessage("goAstrub_2", String.format("map : %s, mapid : %s, cellid : %s", GameData.getCoordMapString(this.getNetwork().getMap().getId()), this.network.getMap().getId(), this.network.getInfo().getCellId()));
-            NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-100000, 3, 153880835);
+            NpcGenericActionRequestMessage npcGenericactionRequestMessage = new NpcGenericActionRequestMessage(-20000, 3, 153880835);
             getNetwork().sendToServer(npcGenericactionRequestMessage, NpcGenericActionRequestMessage.ProtocolId, "Request gate to go to Astrub");
             if (this.waitToSendMap(this.getNetwork().getMap().getId())) {
                 stop(1);
-                return changeMap("511,s");
+                return changeMap("533,s");
             } else {
                 DisplayInfo.appendDebugLog("Astrub change error, server returned false", "MapId : " + this.network.getMap().getId() + " cellId : " + this.network.getInfo().getCellId());
                 toSend = FALSE;

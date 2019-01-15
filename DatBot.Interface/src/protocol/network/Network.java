@@ -572,7 +572,7 @@ public class Network extends DisplayInfo implements Runnable {
         }
 
         Properties prop = new Properties();
-        prop.load(new FileInputStream("DatBot.Interface\\src\\utils\\config.properties"));
+        prop.load(new FileInputStream(GameData.getPathDatBot() + "/DatBot.Interface/src/utils/config.properties"));
 
         VersionExtended versionExtended = new VersionExtended(
             Integer.parseInt(prop.getProperty("major")),
