@@ -494,9 +494,9 @@ class LowLevelFunctions:
         default_path = None
         for row in cursor:
             if row[0] == 1:
-                default_path = ast.literal_eval(row[2])
-            if bot_name in row[3]:
-                assigned_path = ast.literal_eval(row[2])
+                default_path = ast.literal_eval(row[1])
+            if bot_name in row[2]:
+                assigned_path = ast.literal_eval(row[1])
         if assigned_path is None:
             assigned_path = default_path
 
@@ -557,6 +557,24 @@ class LowLevelFunctions:
         cursor.close()
         conn.close()
         return rows
+
+    def get_trader(self, server):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""
+                    SELECT Username, Password, Name 
+                    FROM Traders
+                    WHERE Server = {}
+                """.format(server))
+        rows = cursor.fetchall()
+        if len(rows):
+            return {
+                'username': rows[-1][1],
+                'password': rows[-1][2],
+                'name': rows[-1][3],
+                'server': server
+            }
+        return False
 
 
 __author__ = 'Alexis'
