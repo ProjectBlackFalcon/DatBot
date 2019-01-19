@@ -1249,6 +1249,9 @@ public class ModelConnexion {
             case "newBot":
                 toSend = newBot(param);
                 break;
+            case "moveHarvest":
+                toSend = moveAndHarvest(param);
+                break;
 
         }
         return toSend;
@@ -1563,6 +1566,14 @@ public class ModelConnexion {
         return toSend;
     }
 
+    private Object[] moveAndHarvest(String param) throws Exception {
+        String[] cells = param.split(",");
+        if (move(Integer.parseInt(cells[0])).equals(TRUE)) {
+            return harvest(cells[1]);
+        }
+        return FALSE;
+    }
+
     private Object[] huntActive() {
         Object[] toSend;
         if (this.getNetwork().getInfo().isInHunt()) {
@@ -1707,7 +1718,6 @@ public class ModelConnexion {
                             || (mapId == 128452097 && this.network.getInfo().getCellId() == 504)) {
                             log.writeActionLogMessage("move_3", "Changing map");
                             if (waitToSendMap(mapId)) {
-                                stop(1);
                                 toSend = TRUE;
                             } else {
                                 toSend = FALSE;
