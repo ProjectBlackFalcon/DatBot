@@ -953,7 +953,6 @@ public class Network extends DisplayInfo implements Runnable {
             if (socket == null) {
                 return;
             }
-            ExecutorService executor = Executors.newFixedThreadPool(2);
             while (!this.socket.isClosed()) {
                 Thread.sleep(400);
                 if (!this.socket.isClosed()) {
@@ -971,16 +970,8 @@ public class Network extends DisplayInfo implements Runnable {
                         try {
                             data.read(buffer, 0, available);
                             DofusDataReader reader = new DofusDataReader(new ByteArrayInputStream(buffer));
+                            buildMessage(reader);
 
-                            Runnable runnableTask = () -> {
-                                try {
-                                    buildMessage(reader);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            };
-
-                            executor.submit(runnableTask);
                         } catch (Exception e) {
                             System.out.println("Socket error");
                             e.printStackTrace();
