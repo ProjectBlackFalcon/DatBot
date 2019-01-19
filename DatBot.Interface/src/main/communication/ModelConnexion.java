@@ -303,7 +303,7 @@ public class ModelConnexion {
             getNetwork().sendToServer(interactiveUseRequestMessage, InteractiveUseRequestMessage.ProtocolId, "Exiting tuto");
             if (this.waitToSendMap(this.network.getMap().getId())) {
                 stop(1);
-                return Arrays.equals(changeMap("503,e"), TRUE) ? new Object[]{this.network.getInfo().getName()} : FALSE;
+                return Arrays.equals(changeMap("503,e"), TRUE) ? new Object[]{ "\" + this.network.getInfo().getName() \""} : FALSE;
             } else {
                 DisplayInfo.appendDebugLog("exitHuntingHall error, server returned false", "Map : " + GameData.getCoordMapString(this.network.getMap().getId()) + " cellId : " + this.network.getInfo().getCellId());
             }
