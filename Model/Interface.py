@@ -269,6 +269,17 @@ class Interface:
         self.get_player_stats()
         return ret_val
 
+    def move_harvest(self, cell_move, cell_resource):
+        """
+        Moves to cell_move and harvests the resource on cell_resource
+        :param cell_move:
+        :param cell_resource:
+        :return:
+        """
+        ret_val = self.execute_command('moveHarvest', [cell_move, cell_resource])
+        self.get_player_stats()
+        return ret_val
+
     def go_to_astrub(self):
         """
         Goes to Astrub and makes the player exit the building (should arrive at 6, -19, cell 397, worldmap 1)

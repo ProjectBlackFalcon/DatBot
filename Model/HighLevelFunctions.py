@@ -245,13 +245,12 @@ class HighLevelFunctions:
                 except RuntimeError:
                     reachable = False
 
-                if not reachable or not self.bot.interface.move(selected_cell)[0]:
+                if not reachable:
                     success = False
-                    # TODO
                 else:
                     resource_cell = self.bot.llf.closest_cell(selected_cell, [spot[1] for spot in harvest_spots])
                     resource_name = harvestable_match_res_name[harvestable.index(resource_cell)]
-                    ret_val = self.bot.interface.harvest_resource(resource_cell)
+                    ret_val = self.bot.interface.move_harvest(selected_cell, resource_cell)
                     if len(ret_val) == 1:
                         success = False
                     else:
