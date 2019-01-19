@@ -200,7 +200,7 @@ class Interface:
         :return: coords, cell, worldmap, mapID
         """
         current_map, current_cell, current_worldmap, map_id = self.execute_command('getMap')
-        self.bot.position = (current_map, current_worldmap)
+        self.bot.position = (current_map, current_worldmap, current_cell)
         self.bot.llf.log(self.bot, '[Position {}] {}'.format(self.bot.id, current_map))
         return current_map, current_cell, current_worldmap, map_id
 
@@ -266,6 +266,17 @@ class Interface:
         :return: [id, number_harvested, new_pods, max_pods], or combat or false
         """
         ret_val = self.execute_command('harvest', [cell])
+        self.get_player_stats()
+        return ret_val
+
+    def move_harvest(self, cell_move, cell_resource):
+        """
+        Moves to cell_move and harvests the resource on cell_resource
+        :param cell_move:
+        :param cell_resource:
+        :return:
+        """
+        ret_val = self.execute_command('moveHarvest', [cell_move, cell_resource])
         self.get_player_stats()
         return ret_val
 

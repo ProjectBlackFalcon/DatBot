@@ -6,7 +6,7 @@ from random import randint
 
 
 class PathFinder:
-    def __init__(self, bot, start_map, end_map, start_cell, end_cell, worldmap):
+    def __init__(self, bot, start_map, end_map, start_cell, end_cell, worldmap, max_enlargement=15):
         self.bot = bot
         self.llf = bot.llf
         self.start = start_map
@@ -32,6 +32,7 @@ class PathFinder:
         self.map_change_coords = []
         self.map_change_cells = []
         self.map_change_directions = []
+        self.max_enlargement = max_enlargement
         self.enlargement_n = 0
 
     def enlarge(self):
@@ -216,7 +217,7 @@ class PathFinder:
     def get_path(self):
         self.get_path_try()
         # print(self.path_cells)
-        while not self.path_cells and self.enlargement_n < 15:
+        while not self.path_cells and self.enlargement_n < self.max_enlargement:
             self.enlarge()
             self.get_path_try()
         if not self.path_cells:
