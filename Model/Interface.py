@@ -151,7 +151,6 @@ class Interface:
             tries += 1
             self.bot.connected = True if ret_val is True else False
             banned = True if ret_val == 'Banned' else False
-            print(self.bot.connected, banned)
             if self.bot.connected:
                 self.get_player_stats()
                 self.get_sub_left()

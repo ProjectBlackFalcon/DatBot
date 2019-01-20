@@ -630,6 +630,7 @@ class HighLevelFunctions:
             if mobs_on_map:
                 mob_id, mob_ref, cell = mobs_on_map
                 self.bot.interface.move(cell)
+                self.bot.llf.log(self.bot, '[Fight {}] Attacking : {}'.format(self.bot.id, mobs_on_map))
                 self.bot.interface.attack_monster(mob_id)
             else:
                 time.sleep(5)
