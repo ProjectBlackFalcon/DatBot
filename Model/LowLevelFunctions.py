@@ -576,5 +576,13 @@ class LowLevelFunctions:
             }
         return False
 
+    def set_banned(self, name):
+        conn = mysql.connector.connect(host=dc.host, user=dc.user, password=dc.password, database=dc.database)
+        cursor = conn.cursor()
+        cursor.execute("""UPDATE BotAccounts SET position='{}', banned='{}' WHERE name='{}'""".format('BANNED', 1, name))
+        conn.commit()
+        cursor.close()
+        conn.close()
+
 
 __author__ = 'Alexis'

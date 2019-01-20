@@ -143,13 +143,15 @@ class Interface:
             self.bot.credentials['name'],
             self.bot.credentials['server']
         ]
-        tries = 0
-        while not self.bot.connected and tries < max_tries:
+        tries, banned = 0, False
+        while not self.bot.connected and tries < max_tries and not banned:
             self.bot.occupation = 'Connecting'
             self.bot.hf.update_db()
-            success = self.execute_command('connect', connection_param)
+            ret_val = self.execute_command('connect', connection_param)[0]
             tries += 1
-            self.bot.connected = success[0]
+            self.bot.connected = True if ret_val is True else False
+            banned = True if ret_val == 'Banned' else False
+            print(self.bot.connected, banned)
             if self.bot.connected:
                 self.get_player_stats()
                 self.get_sub_left()
@@ -168,6 +170,8 @@ class Interface:
                     if self.bot.mount == 'resting':
                         self.bot.hf.fetch_bot_mobile()
                 return [True]
+            elif banned:
+                self.bot.llf.set_banned(self.bot.credentials['name'])
             else:
                 time.sleep(max(15, tries*30))
         return [False]
